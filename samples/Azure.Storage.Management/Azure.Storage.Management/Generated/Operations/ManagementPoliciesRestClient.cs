@@ -23,6 +23,7 @@ namespace Azure.Storage.Management
         private string ApiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of ManagementPoliciesRestClient. </summary>
         public ManagementPoliciesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-06-01")
         {
@@ -45,11 +46,12 @@ namespace Azure.Storage.Management
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetRequest(string resourceGroupName, string accountName)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/subscriptions/", false);
@@ -64,6 +66,7 @@ namespace Azure.Storage.Management
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Gets the managementpolicy associated with the specified storage account. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -103,6 +106,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> Gets the managementpolicy associated with the specified storage account. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -142,11 +146,12 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string accountName, ManagementPolicy properties)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/subscriptions/", false);
@@ -165,6 +170,7 @@ namespace Azure.Storage.Management
             request.Content = content;
             return message;
         }
+
         /// <summary> Sets the managementpolicy to the specified storage account. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -209,6 +215,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> Sets the managementpolicy to the specified storage account. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -253,11 +260,12 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string resourceGroupName, string accountName)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Delete;
+            request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/subscriptions/", false);
@@ -272,6 +280,7 @@ namespace Azure.Storage.Management
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Deletes the managementpolicy associated with the specified storage account. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -307,6 +316,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> Deletes the managementpolicy associated with the specified storage account. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>

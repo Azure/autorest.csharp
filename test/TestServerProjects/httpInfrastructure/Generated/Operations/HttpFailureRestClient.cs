@@ -20,6 +20,7 @@ namespace httpInfrastructure
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of HttpFailureRestClient. </summary>
         public HttpFailureRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -32,17 +33,19 @@ namespace httpInfrastructure
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetEmptyErrorRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/emptybody/error", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get empty error form server. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<bool>> GetEmptyErrorAsync(CancellationToken cancellationToken = default)
@@ -71,6 +74,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Get empty error form server. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<bool> GetEmptyError(CancellationToken cancellationToken = default)
@@ -99,17 +103,19 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateGetNoModelErrorRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/nomodel/error", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get empty error form server. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<bool>> GetNoModelErrorAsync(CancellationToken cancellationToken = default)
@@ -138,6 +144,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Get empty error form server. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<bool> GetNoModelError(CancellationToken cancellationToken = default)
@@ -166,17 +173,19 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateGetNoModelEmptyRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/nomodel/empty", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get empty response from server. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<bool>> GetNoModelEmptyAsync(CancellationToken cancellationToken = default)
@@ -205,6 +214,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Get empty response from server. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<bool> GetNoModelEmpty(CancellationToken cancellationToken = default)

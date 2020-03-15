@@ -37,6 +37,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static OperationDisplay DeserializeOperationDisplay(JsonElement element)
         {
             OperationDisplay result = new OperationDisplay();

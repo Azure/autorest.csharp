@@ -20,6 +20,7 @@ namespace custom_baseUrl_more_options
         private string dnsSuffix;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of PathsRestClient. </summary>
         public PathsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string dnsSuffix = "host")
         {
@@ -37,11 +38,12 @@ namespace custom_baseUrl_more_options
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetEmptyRequest(string vault, string secret, string keyName, string keyVersion)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(vault, false);
             uri.AppendRaw(secret, false);
@@ -57,6 +59,7 @@ namespace custom_baseUrl_more_options
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get a 200 to test a valid base uri. </summary>
         /// <param name="vault"> The vault name, e.g. https://myvault. </param>
         /// <param name="secret"> Secret value. </param>
@@ -98,6 +101,7 @@ namespace custom_baseUrl_more_options
                 throw;
             }
         }
+
         /// <summary> Get a 200 to test a valid base uri. </summary>
         /// <param name="vault"> The vault name, e.g. https://myvault. </param>
         /// <param name="secret"> Secret value. </param>

@@ -42,6 +42,7 @@ namespace CognitiveServices.TextAnalytics.Models
             }
             writer.WriteEndObject();
         }
+
         internal static TextAnalyticsError DeserializeTextAnalyticsError(JsonElement element)
         {
             TextAnalyticsError result = new TextAnalyticsError();

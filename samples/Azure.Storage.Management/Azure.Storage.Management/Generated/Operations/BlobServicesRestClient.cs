@@ -23,6 +23,7 @@ namespace Azure.Storage.Management
         private string ApiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of BlobServicesRestClient. </summary>
         public BlobServicesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-06-01")
         {
@@ -45,11 +46,12 @@ namespace Azure.Storage.Management
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateListRequest(string resourceGroupName, string accountName)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/subscriptions/", false);
@@ -63,6 +65,7 @@ namespace Azure.Storage.Management
             request.Uri = uri;
             return message;
         }
+
         /// <summary> List blob services of storage account. It returns a collection of one object named default. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -102,6 +105,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> List blob services of storage account. It returns a collection of one object named default. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -141,11 +145,12 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         internal HttpMessage CreateSetServicePropertiesRequest(string resourceGroupName, string accountName, BlobServiceProperties parameters)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/subscriptions/", false);
@@ -164,6 +169,7 @@ namespace Azure.Storage.Management
             request.Content = content;
             return message;
         }
+
         /// <summary> Sets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -208,6 +214,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> Sets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -252,11 +259,12 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         internal HttpMessage CreateGetServicePropertiesRequest(string resourceGroupName, string accountName)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/subscriptions/", false);
@@ -271,6 +279,7 @@ namespace Azure.Storage.Management
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Gets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -310,6 +319,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> Gets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -349,16 +359,18 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> List blob services of storage account. It returns a collection of one object named default. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -393,6 +405,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> List blob services of storage account. It returns a collection of one object named default. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

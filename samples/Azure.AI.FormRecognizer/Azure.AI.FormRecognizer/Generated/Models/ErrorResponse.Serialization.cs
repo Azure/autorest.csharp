@@ -19,6 +19,7 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteObjectValue(Error);
             writer.WriteEndObject();
         }
+
         internal static ErrorResponse DeserializeErrorResponse(JsonElement element)
         {
             ErrorResponse result = new ErrorResponse();

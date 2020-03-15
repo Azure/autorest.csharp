@@ -28,6 +28,7 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
+
         internal static DataTable DeserializeDataTable(JsonElement element)
         {
             DataTable result = new DataTable();

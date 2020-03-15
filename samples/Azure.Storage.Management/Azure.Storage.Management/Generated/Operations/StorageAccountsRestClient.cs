@@ -23,6 +23,7 @@ namespace Azure.Storage.Management
         private string ApiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of StorageAccountsRestClient. </summary>
         public StorageAccountsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-06-01")
         {
@@ -45,11 +46,12 @@ namespace Azure.Storage.Management
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateCheckNameAvailabilityRequest(StorageAccountCheckNameAvailabilityParameters accountName)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/subscriptions/", false);
@@ -63,6 +65,7 @@ namespace Azure.Storage.Management
             request.Content = content;
             return message;
         }
+
         /// <summary> Checks that the storage account name is valid and is not already in use. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -97,6 +100,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> Checks that the storage account name is valid and is not already in use. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -131,11 +135,12 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         internal HttpMessage CreateCreateRequest(string resourceGroupName, string accountName, StorageAccountCreateParameters parameters)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/subscriptions/", false);
@@ -152,6 +157,7 @@ namespace Azure.Storage.Management
             request.Content = content;
             return message;
         }
+
         /// <summary> Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -180,6 +186,7 @@ namespace Azure.Storage.Management
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
+                    case 202:
                     case 200:
                         return message.Response;
                     default:
@@ -192,6 +199,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -220,6 +228,7 @@ namespace Azure.Storage.Management
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
+                    case 202:
                     case 200:
                         return message.Response;
                     default:
@@ -232,11 +241,12 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string resourceGroupName, string accountName)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Delete;
+            request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/subscriptions/", false);
@@ -249,6 +259,7 @@ namespace Azure.Storage.Management
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Deletes a storage account in Microsoft Azure. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -284,6 +295,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> Deletes a storage account in Microsoft Azure. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -319,11 +331,12 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         internal HttpMessage CreateGetPropertiesRequest(string resourceGroupName, string accountName, StorageAccountExpand? expand)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/subscriptions/", false);
@@ -340,6 +353,7 @@ namespace Azure.Storage.Management
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -380,6 +394,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -420,11 +435,12 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         internal HttpMessage CreateUpdateRequest(string resourceGroupName, string accountName, StorageAccountUpdateParameters parameters)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Patch;
+            request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/subscriptions/", false);
@@ -441,6 +457,7 @@ namespace Azure.Storage.Management
             request.Content = content;
             return message;
         }
+
         /// <summary> The update operation can be used to update the SKU, encryption, access tier, or tags for a storage account. It can also be used to map the account to a custom domain. Only one custom domain is supported per storage account; the replacement/change of custom domain is not supported. In order to replace an old custom domain, the old value must be cleared/unregistered before a new value can be set. The update of multiple properties is supported. This call does not change the storage keys for the account. If you want to change the storage account keys, use the regenerate keys operation. The location and name of the storage account cannot be changed after creation. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -485,6 +502,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> The update operation can be used to update the SKU, encryption, access tier, or tags for a storage account. It can also be used to map the account to a custom domain. Only one custom domain is supported per storage account; the replacement/change of custom domain is not supported. In order to replace an old custom domain, the old value must be cleared/unregistered before a new value can be set. The update of multiple properties is supported. This call does not change the storage keys for the account. If you want to change the storage account keys, use the regenerate keys operation. The location and name of the storage account cannot be changed after creation. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -529,11 +547,12 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         internal HttpMessage CreateListRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/subscriptions/", false);
@@ -543,6 +562,7 @@ namespace Azure.Storage.Management
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<StorageAccountListResult>> ListAsync(CancellationToken cancellationToken = default)
@@ -571,6 +591,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<StorageAccountListResult> List(CancellationToken cancellationToken = default)
@@ -599,11 +620,12 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         internal HttpMessage CreateListByResourceGroupRequest(string resourceGroupName)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/subscriptions/", false);
@@ -615,6 +637,7 @@ namespace Azure.Storage.Management
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -649,6 +672,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -683,11 +707,12 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         internal HttpMessage CreateListKeysRequest(string resourceGroupName, string accountName)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/subscriptions/", false);
@@ -702,6 +727,7 @@ namespace Azure.Storage.Management
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -741,6 +767,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -780,11 +807,12 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         internal HttpMessage CreateRegenerateKeyRequest(string resourceGroupName, string accountName, StorageAccountRegenerateKeyParameters regenerateKey)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/subscriptions/", false);
@@ -802,6 +830,7 @@ namespace Azure.Storage.Management
             request.Content = content;
             return message;
         }
+
         /// <summary> Regenerates one of the access keys or Kerberos keys for the specified storage account. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -846,6 +875,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> Regenerates one of the access keys or Kerberos keys for the specified storage account. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -890,11 +920,12 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         internal HttpMessage CreateListAccountSASRequest(string resourceGroupName, string accountName, AccountSasParameters parameters)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/subscriptions/", false);
@@ -912,6 +943,7 @@ namespace Azure.Storage.Management
             request.Content = content;
             return message;
         }
+
         /// <summary> List SAS credentials of a storage account. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -956,6 +988,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> List SAS credentials of a storage account. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -1000,11 +1033,12 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         internal HttpMessage CreateListServiceSASRequest(string resourceGroupName, string accountName, ServiceSasParameters parameters)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/subscriptions/", false);
@@ -1022,6 +1056,7 @@ namespace Azure.Storage.Management
             request.Content = content;
             return message;
         }
+
         /// <summary> List service SAS credentials of a specific resource. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -1066,6 +1101,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> List service SAS credentials of a specific resource. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -1110,11 +1146,12 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         internal HttpMessage CreateFailoverRequest(string resourceGroupName, string accountName)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/subscriptions/", false);
@@ -1128,6 +1165,7 @@ namespace Azure.Storage.Management
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account&apos;s primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -1151,6 +1189,7 @@ namespace Azure.Storage.Management
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
+                    case 202:
                     case 200:
                         return message.Response;
                     default:
@@ -1163,6 +1202,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account&apos;s primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -1186,6 +1226,7 @@ namespace Azure.Storage.Management
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
+                    case 202:
                     case 200:
                         return message.Response;
                     default:
@@ -1198,11 +1239,12 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         internal HttpMessage CreateRestoreBlobRangesRequest(string resourceGroupName, string accountName, BlobRestoreParameters parameters)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/subscriptions/", false);
@@ -1220,6 +1262,7 @@ namespace Azure.Storage.Management
             request.Content = content;
             return message;
         }
+
         /// <summary> Restore blobs in the specified blob ranges. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -1248,6 +1291,7 @@ namespace Azure.Storage.Management
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
+                    case 202:
                     case 200:
                         return message.Response;
                     default:
@@ -1260,6 +1304,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> Restore blobs in the specified blob ranges. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -1288,6 +1333,7 @@ namespace Azure.Storage.Management
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
+                    case 202:
                     case 200:
                         return message.Response;
                     default:
@@ -1300,11 +1346,12 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         internal HttpMessage CreateRevokeUserDelegationKeysRequest(string resourceGroupName, string accountName)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/subscriptions/", false);
@@ -1318,6 +1365,7 @@ namespace Azure.Storage.Management
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Revoke user delegation keys. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -1353,6 +1401,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> Revoke user delegation keys. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -1388,16 +1437,18 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1432,6 +1483,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1466,16 +1518,18 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         internal HttpMessage CreateListByResourceGroupNextPageRequest(string nextLink)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1510,6 +1564,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

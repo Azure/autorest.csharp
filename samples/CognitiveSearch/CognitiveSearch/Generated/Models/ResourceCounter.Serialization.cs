@@ -27,6 +27,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static ResourceCounter DeserializeResourceCounter(JsonElement element)
         {
             ResourceCounter result = new ResourceCounter();

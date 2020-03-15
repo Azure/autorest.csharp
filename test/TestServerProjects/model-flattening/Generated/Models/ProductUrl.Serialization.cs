@@ -27,6 +27,7 @@ namespace model_flattening.Models
             }
             writer.WriteEndObject();
         }
+
         internal static ProductUrl DeserializeProductUrl(JsonElement element)
         {
             ProductUrl result = new ProductUrl();

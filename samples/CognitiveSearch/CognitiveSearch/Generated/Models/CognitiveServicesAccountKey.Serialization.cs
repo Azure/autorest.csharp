@@ -26,6 +26,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static CognitiveServicesAccountKey DeserializeCognitiveServicesAccountKey(JsonElement element)
         {
             CognitiveServicesAccountKey result = new CognitiveServicesAccountKey();

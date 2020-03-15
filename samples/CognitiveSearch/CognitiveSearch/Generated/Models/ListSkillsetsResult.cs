@@ -13,6 +13,6 @@ namespace CognitiveSearch.Models
     public partial class ListSkillsetsResult
     {
         /// <summary> The skillsets defined in the Search service. </summary>
-        public ICollection<Skillset> Skillsets { get; internal set; }
+        public IList<Skillset> Skillsets { get; internal set; }
     }
 }

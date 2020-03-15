@@ -36,6 +36,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static PatternTokenizer DeserializePatternTokenizer(JsonElement element)
         {
             PatternTokenizer result = new PatternTokenizer();

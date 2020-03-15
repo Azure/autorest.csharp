@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using TypeSchemaMapping.Models;
+using NamespaceForEnums;
 
 namespace CustomNamespace
 {
@@ -13,6 +13,6 @@ namespace CustomNamespace
     internal partial class CustomizedModel
     {
         /// <summary> Day of week. </summary>
-        public DaysOfWeek DaysOfWeek { get; set; }
+        public CustomDaysOfWeek DaysOfWeek { get; set; }
     }
 }

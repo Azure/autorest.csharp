@@ -23,6 +23,7 @@ namespace CognitiveSearch
         private string ApiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of IndexesRestClient. </summary>
         public IndexesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string searchDnsSuffix = "search.windows.net", string ApiVersion = "2019-05-06")
         {
@@ -45,11 +46,12 @@ namespace CognitiveSearch
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateCreateRequest(Guid? clientRequestId, Models.Index index)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("https://", false);
             uri.AppendRaw(searchServiceName, false);
@@ -68,6 +70,7 @@ namespace CognitiveSearch
             request.Content = content;
             return message;
         }
+
         /// <summary> Creates a new search index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="index"> The definition of the index to create. </param>
@@ -103,6 +106,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Creates a new search index. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="index"> The definition of the index to create. </param>
@@ -138,11 +142,12 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateListRequest(string select, Guid? clientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("https://", false);
             uri.AppendRaw(searchServiceName, false);
@@ -161,12 +166,14 @@ namespace CognitiveSearch
             }
             return message;
         }
+
         /// <summary> Lists all indexes available for a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ListIndexesResult>> ListAsync(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("IndexesClient.List");
             scope.Start();
             try
@@ -191,12 +198,14 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Lists all indexes available for a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ListIndexesResult> List(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("IndexesClient.List");
             scope.Start();
             try
@@ -221,11 +230,12 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string indexName, bool? allowIndexDowntime, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Models.Index index)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("https://", false);
             uri.AppendRaw(searchServiceName, false);
@@ -259,6 +269,7 @@ namespace CognitiveSearch
             request.Content = content;
             return message;
         }
+
         /// <summary> Creates a new search index or updates an index if it already exists. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
         /// <param name="allowIndexDowntime"> Allows new analyzers, tokenizers, token filters, or char filters to be added to an index by taking the index offline for at least a few seconds. This temporarily causes indexing and query requests to fail. Performance and write availability of the index can be impaired for several minutes after the index is updated, or longer for very large indexes. </param>
@@ -302,6 +313,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Creates a new search index or updates an index if it already exists. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
         /// <param name="allowIndexDowntime"> Allows new analyzers, tokenizers, token filters, or char filters to be added to an index by taking the index offline for at least a few seconds. This temporarily causes indexing and query requests to fail. Performance and write availability of the index can be impaired for several minutes after the index is updated, or longer for very large indexes. </param>
@@ -345,11 +357,12 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string indexName, Guid? clientRequestId, string ifMatch, string ifNoneMatch)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Delete;
+            request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("https://", false);
             uri.AppendRaw(searchServiceName, false);
@@ -374,6 +387,7 @@ namespace CognitiveSearch
             }
             return message;
         }
+
         /// <summary> Deletes a search index and all the documents it contains. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -407,6 +421,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Deletes a search index and all the documents it contains. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -440,11 +455,12 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateGetRequest(string indexName, Guid? clientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("https://", false);
             uri.AppendRaw(searchServiceName, false);
@@ -461,6 +477,7 @@ namespace CognitiveSearch
             }
             return message;
         }
+
         /// <summary> Retrieves an index definition. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -496,6 +513,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Retrieves an index definition. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -531,11 +549,12 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateGetStatisticsRequest(string indexName, Guid? clientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("https://", false);
             uri.AppendRaw(searchServiceName, false);
@@ -552,6 +571,7 @@ namespace CognitiveSearch
             }
             return message;
         }
+
         /// <summary> Returns statistics for the given index, including a document count and storage usage. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -587,6 +607,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Returns statistics for the given index, including a document count and storage usage. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -622,11 +643,12 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateAnalyzeRequest(string indexName, Guid? clientRequestId, AnalyzeRequest requestTodo)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("https://", false);
             uri.AppendRaw(searchServiceName, false);
@@ -647,6 +669,7 @@ namespace CognitiveSearch
             request.Content = content;
             return message;
         }
+
         /// <summary> Shows how an analyzer breaks text into tokens. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -687,6 +710,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Shows how an analyzer breaks text into tokens. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>

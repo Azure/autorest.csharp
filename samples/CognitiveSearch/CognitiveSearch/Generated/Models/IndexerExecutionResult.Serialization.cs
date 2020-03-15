@@ -78,6 +78,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static IndexerExecutionResult DeserializeIndexerExecutionResult(JsonElement element)
         {
             IndexerExecutionResult result = new IndexerExecutionResult();

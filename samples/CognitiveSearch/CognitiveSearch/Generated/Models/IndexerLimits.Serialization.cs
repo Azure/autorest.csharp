@@ -32,6 +32,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static IndexerLimits DeserializeIndexerLimits(JsonElement element)
         {
             IndexerLimits result = new IndexerLimits();

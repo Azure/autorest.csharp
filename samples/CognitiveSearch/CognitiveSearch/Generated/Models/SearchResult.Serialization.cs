@@ -44,6 +44,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static SearchResult DeserializeSearchResult(JsonElement element)
         {
             SearchResult result = new SearchResult();
@@ -64,10 +65,10 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Highlights = new Dictionary<string, ICollection<string>>();
+                    result.Highlights = new Dictionary<string, IList<string>>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        ICollection<string> value = new List<string>();
+                        IList<string> value = new List<string>();
                         foreach (var item in property0.Value.EnumerateArray())
                         {
                             value.Add(item.GetString());

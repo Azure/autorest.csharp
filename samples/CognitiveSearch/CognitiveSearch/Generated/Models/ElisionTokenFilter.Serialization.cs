@@ -32,6 +32,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static ElisionTokenFilter DeserializeElisionTokenFilter(JsonElement element)
         {
             ElisionTokenFilter result = new ElisionTokenFilter();

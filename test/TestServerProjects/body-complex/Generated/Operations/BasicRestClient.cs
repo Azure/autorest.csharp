@@ -22,6 +22,7 @@ namespace body_complex
         private string ApiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of BasicRestClient. </summary>
         public BasicRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", string ApiVersion = "2016-02-29")
         {
@@ -39,17 +40,19 @@ namespace body_complex
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/basic/valid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Basic>> GetValidAsync(CancellationToken cancellationToken = default)
@@ -78,6 +81,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Basic> GetValid(CancellationToken cancellationToken = default)
@@ -106,11 +110,12 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreatePutValidRequest(Basic complexBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/basic/valid", false);
@@ -122,6 +127,7 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+
         /// <summary> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </summary>
         /// <param name="complexBody"> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -152,6 +158,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </summary>
         /// <param name="complexBody"> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -182,17 +189,19 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreateGetInvalidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/basic/invalid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get a basic complex type that is invalid for the local strong type. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Basic>> GetInvalidAsync(CancellationToken cancellationToken = default)
@@ -221,6 +230,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get a basic complex type that is invalid for the local strong type. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Basic> GetInvalid(CancellationToken cancellationToken = default)
@@ -249,17 +259,19 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreateGetEmptyRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/basic/empty", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get a basic complex type that is empty. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Basic>> GetEmptyAsync(CancellationToken cancellationToken = default)
@@ -288,6 +300,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get a basic complex type that is empty. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Basic> GetEmpty(CancellationToken cancellationToken = default)
@@ -316,17 +329,19 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreateGetNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/basic/null", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get a basic complex type whose properties are null. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Basic>> GetNullAsync(CancellationToken cancellationToken = default)
@@ -355,6 +370,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get a basic complex type whose properties are null. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Basic> GetNull(CancellationToken cancellationToken = default)
@@ -383,17 +399,19 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreateGetNotProvidedRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/basic/notprovided", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Basic>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
@@ -422,6 +440,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Basic> GetNotProvided(CancellationToken cancellationToken = default)

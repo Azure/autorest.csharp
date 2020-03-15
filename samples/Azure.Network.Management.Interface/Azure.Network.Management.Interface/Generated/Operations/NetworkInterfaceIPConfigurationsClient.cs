@@ -20,6 +20,10 @@ namespace Azure.Network.Management.Interface
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal NetworkInterfaceIPConfigurationsRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of NetworkInterfaceIPConfigurationsClient for mocking. </summary>
+        protected NetworkInterfaceIPConfigurationsClient()
+        {
+        }
         /// <summary> Initializes a new instance of NetworkInterfaceIPConfigurationsClient. </summary>
         internal NetworkInterfaceIPConfigurationsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-11-01")
         {
@@ -27,15 +31,17 @@ namespace Azure.Network.Management.Interface
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Gets the specified network interface ip configuration. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="ipConfigurationName"> The name of the ip configuration name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<NetworkInterfaceIPConfiguration>> GetAsync(string resourceGroupName, string networkInterfaceName, string ipConfigurationName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<NetworkInterfaceIPConfiguration>> GetAsync(string resourceGroupName, string networkInterfaceName, string ipConfigurationName, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetAsync(resourceGroupName, networkInterfaceName, ipConfigurationName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Gets the specified network interface ip configuration. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -45,6 +51,7 @@ namespace Azure.Network.Management.Interface
         {
             return RestClient.Get(resourceGroupName, networkInterfaceName, ipConfigurationName, cancellationToken);
         }
+
         /// <summary> Get all ip configurations in a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -72,6 +79,7 @@ namespace Azure.Network.Management.Interface
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
+
         /// <summary> Get all ip configurations in a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>

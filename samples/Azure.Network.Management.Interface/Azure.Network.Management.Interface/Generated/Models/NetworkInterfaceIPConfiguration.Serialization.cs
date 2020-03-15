@@ -126,6 +126,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static NetworkInterfaceIPConfiguration DeserializeNetworkInterfaceIPConfiguration(JsonElement element)
         {
             NetworkInterfaceIPConfiguration result = new NetworkInterfaceIPConfiguration();

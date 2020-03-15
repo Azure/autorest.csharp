@@ -21,6 +21,6 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Inner error contains more specific information. </summary>
         public InnerError InnerError { get; set; }
         /// <summary> Details about specific errors that led to this reported error. </summary>
-        public ICollection<TextAnalyticsError> Details { get; set; }
+        public IList<TextAnalyticsError> Details { get; set; }
     }
 }

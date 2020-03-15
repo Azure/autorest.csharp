@@ -18,11 +18,11 @@ namespace CognitiveSearch.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown TextSplitMode value.")
         };
 
-        public static TextSplitMode ToTextSplitMode(this string value) => value switch
+        public static TextSplitMode ToTextSplitMode(this string value)
         {
-            "pages" => TextSplitMode.Pages,
-            "sentences" => TextSplitMode.Sentences,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown TextSplitMode value.")
-        };
+            if (string.Equals(value, "pages", StringComparison.InvariantCultureIgnoreCase)) return TextSplitMode.Pages;
+            if (string.Equals(value, "sentences", StringComparison.InvariantCultureIgnoreCase)) return TextSplitMode.Sentences;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown TextSplitMode value.");
+        }
     }
 }

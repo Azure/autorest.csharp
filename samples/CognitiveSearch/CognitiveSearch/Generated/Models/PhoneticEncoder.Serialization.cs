@@ -27,20 +27,20 @@ namespace CognitiveSearch.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown PhoneticEncoder value.")
         };
 
-        public static PhoneticEncoder ToPhoneticEncoder(this string value) => value switch
+        public static PhoneticEncoder ToPhoneticEncoder(this string value)
         {
-            "metaphone" => PhoneticEncoder.Metaphone,
-            "doubleMetaphone" => PhoneticEncoder.DoubleMetaphone,
-            "soundex" => PhoneticEncoder.Soundex,
-            "refinedSoundex" => PhoneticEncoder.RefinedSoundex,
-            "caverphone1" => PhoneticEncoder.Caverphone1,
-            "caverphone2" => PhoneticEncoder.Caverphone2,
-            "cologne" => PhoneticEncoder.Cologne,
-            "nysiis" => PhoneticEncoder.Nysiis,
-            "koelnerPhonetik" => PhoneticEncoder.KoelnerPhonetik,
-            "haasePhonetik" => PhoneticEncoder.HaasePhonetik,
-            "beiderMorse" => PhoneticEncoder.BeiderMorse,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown PhoneticEncoder value.")
-        };
+            if (string.Equals(value, "metaphone", StringComparison.InvariantCultureIgnoreCase)) return PhoneticEncoder.Metaphone;
+            if (string.Equals(value, "doubleMetaphone", StringComparison.InvariantCultureIgnoreCase)) return PhoneticEncoder.DoubleMetaphone;
+            if (string.Equals(value, "soundex", StringComparison.InvariantCultureIgnoreCase)) return PhoneticEncoder.Soundex;
+            if (string.Equals(value, "refinedSoundex", StringComparison.InvariantCultureIgnoreCase)) return PhoneticEncoder.RefinedSoundex;
+            if (string.Equals(value, "caverphone1", StringComparison.InvariantCultureIgnoreCase)) return PhoneticEncoder.Caverphone1;
+            if (string.Equals(value, "caverphone2", StringComparison.InvariantCultureIgnoreCase)) return PhoneticEncoder.Caverphone2;
+            if (string.Equals(value, "cologne", StringComparison.InvariantCultureIgnoreCase)) return PhoneticEncoder.Cologne;
+            if (string.Equals(value, "nysiis", StringComparison.InvariantCultureIgnoreCase)) return PhoneticEncoder.Nysiis;
+            if (string.Equals(value, "koelnerPhonetik", StringComparison.InvariantCultureIgnoreCase)) return PhoneticEncoder.KoelnerPhonetik;
+            if (string.Equals(value, "haasePhonetik", StringComparison.InvariantCultureIgnoreCase)) return PhoneticEncoder.HaasePhonetik;
+            if (string.Equals(value, "beiderMorse", StringComparison.InvariantCultureIgnoreCase)) return PhoneticEncoder.BeiderMorse;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown PhoneticEncoder value.");
+        }
     }
 }

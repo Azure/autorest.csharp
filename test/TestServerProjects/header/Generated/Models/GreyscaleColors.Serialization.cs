@@ -19,12 +19,12 @@ namespace header.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown GreyscaleColors value.")
         };
 
-        public static GreyscaleColors ToGreyscaleColors(this string value) => value switch
+        public static GreyscaleColors ToGreyscaleColors(this string value)
         {
-            "White" => GreyscaleColors.White,
-            "black" => GreyscaleColors.Black,
-            "GREY" => GreyscaleColors.Grey,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown GreyscaleColors value.")
-        };
+            if (string.Equals(value, "White", StringComparison.InvariantCultureIgnoreCase)) return GreyscaleColors.White;
+            if (string.Equals(value, "black", StringComparison.InvariantCultureIgnoreCase)) return GreyscaleColors.Black;
+            if (string.Equals(value, "GREY", StringComparison.InvariantCultureIgnoreCase)) return GreyscaleColors.Grey;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown GreyscaleColors value.");
+        }
     }
 }

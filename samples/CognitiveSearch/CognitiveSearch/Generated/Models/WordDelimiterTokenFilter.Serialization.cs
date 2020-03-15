@@ -77,6 +77,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static WordDelimiterTokenFilter DeserializeWordDelimiterTokenFilter(JsonElement element)
         {
             WordDelimiterTokenFilter result = new WordDelimiterTokenFilter();

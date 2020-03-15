@@ -18,6 +18,10 @@ namespace body_complex
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal PolymorphicrecursiveRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of PolymorphicrecursiveClient for mocking. </summary>
+        protected PolymorphicrecursiveClient()
+        {
+        }
         /// <summary> Initializes a new instance of PolymorphicrecursiveClient. </summary>
         internal PolymorphicrecursiveClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -25,18 +29,21 @@ namespace body_complex
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Get complex types that are polymorphic and have recursive references. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<Fish>> GetValidAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Fish>> GetValidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get complex types that are polymorphic and have recursive references. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Fish> GetValid(CancellationToken cancellationToken = default)
         {
             return RestClient.GetValid(cancellationToken);
         }
+
         /// <summary> Put complex types that are polymorphic and have recursive references. </summary>
         /// <param name="complexBody">
         /// Please put a salmon that looks like this:
@@ -74,10 +81,11 @@ namespace body_complex
         ///       };.
         /// </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutValidAsync(Fish complexBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutValidAsync(Fish complexBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutValidAsync(complexBody, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Put complex types that are polymorphic and have recursive references. </summary>
         /// <param name="complexBody">
         /// Please put a salmon that looks like this:

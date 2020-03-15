@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Reflection;
-using AnotherCustomNamespace;
+using NamespaceForEnums;
 using CustomNamespace;
 using NUnit.Framework;
 
@@ -25,12 +25,23 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
+        public void ExtensibleEnumTypesAreMappedToSchema()
+        {
+            var modelType = typeof(CustomDaysOfWeek);
+            Assert.AreEqual(false, modelType.IsPublic);
+            Assert.AreEqual("NamespaceForEnums", modelType.Namespace);
+            TypeAsserts.HasProperty(modelType, "FancyMonday", BindingFlags.Static | BindingFlags.Public);
+        }
+
+        [Test]
         public void EnumTypesAreMappedToSchema()
         {
             var modelType = typeof(CustomFruitEnum);
+
+            Assert.True(modelType.IsEnum);
             Assert.AreEqual(false, modelType.IsPublic);
-            Assert.AreEqual("AnotherCustomNamespace", modelType.Namespace);
-            TypeAsserts.HasProperty(modelType, "Apple", BindingFlags.Static | BindingFlags.Public);
+            Assert.AreEqual("NamespaceForEnums", modelType.Namespace);
+            TypeAsserts.HasField(modelType, "Apple2", BindingFlags.Static | BindingFlags.Public);
         }
     }
 }

@@ -20,6 +20,7 @@ namespace body_string
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of StringRestClient. </summary>
         public StringRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -32,17 +33,19 @@ namespace body_string
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/null", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get null string value value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<string>> GetNullAsync(CancellationToken cancellationToken = default)
@@ -71,6 +74,7 @@ namespace body_string
                 throw;
             }
         }
+
         /// <summary> Get null string value value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<string> GetNull(CancellationToken cancellationToken = default)
@@ -99,11 +103,12 @@ namespace body_string
                 throw;
             }
         }
+
         internal HttpMessage CreatePutNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/null", false);
@@ -114,6 +119,7 @@ namespace body_string
             request.Content = content;
             return message;
         }
+
         /// <summary> Set string value null. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutNullAsync(CancellationToken cancellationToken = default)
@@ -138,6 +144,7 @@ namespace body_string
                 throw;
             }
         }
+
         /// <summary> Set string value null. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutNull(CancellationToken cancellationToken = default)
@@ -162,17 +169,19 @@ namespace body_string
                 throw;
             }
         }
+
         internal HttpMessage CreateGetEmptyRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/empty", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get empty string value value &apos;&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<string>> GetEmptyAsync(CancellationToken cancellationToken = default)
@@ -201,6 +210,7 @@ namespace body_string
                 throw;
             }
         }
+
         /// <summary> Get empty string value value &apos;&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<string> GetEmpty(CancellationToken cancellationToken = default)
@@ -229,11 +239,12 @@ namespace body_string
                 throw;
             }
         }
+
         internal HttpMessage CreatePutEmptyRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/empty", false);
@@ -244,6 +255,7 @@ namespace body_string
             request.Content = content;
             return message;
         }
+
         /// <summary> Set string value empty &apos;&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutEmptyAsync(CancellationToken cancellationToken = default)
@@ -268,6 +280,7 @@ namespace body_string
                 throw;
             }
         }
+
         /// <summary> Set string value empty &apos;&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutEmpty(CancellationToken cancellationToken = default)
@@ -292,17 +305,19 @@ namespace body_string
                 throw;
             }
         }
+
         internal HttpMessage CreateGetMbcsRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/mbcs", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<string>> GetMbcsAsync(CancellationToken cancellationToken = default)
@@ -331,6 +346,7 @@ namespace body_string
                 throw;
             }
         }
+
         /// <summary> Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<string> GetMbcs(CancellationToken cancellationToken = default)
@@ -359,11 +375,12 @@ namespace body_string
                 throw;
             }
         }
+
         internal HttpMessage CreatePutMbcsRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/mbcs", false);
@@ -374,6 +391,7 @@ namespace body_string
             request.Content = content;
             return message;
         }
+
         /// <summary> Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMbcsAsync(CancellationToken cancellationToken = default)
@@ -398,6 +416,7 @@ namespace body_string
                 throw;
             }
         }
+
         /// <summary> Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutMbcs(CancellationToken cancellationToken = default)
@@ -422,17 +441,19 @@ namespace body_string
                 throw;
             }
         }
+
         internal HttpMessage CreateGetWhitespaceRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/whitespace", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get string value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<string>> GetWhitespaceAsync(CancellationToken cancellationToken = default)
@@ -461,6 +482,7 @@ namespace body_string
                 throw;
             }
         }
+
         /// <summary> Get string value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<string> GetWhitespace(CancellationToken cancellationToken = default)
@@ -489,11 +511,12 @@ namespace body_string
                 throw;
             }
         }
+
         internal HttpMessage CreatePutWhitespaceRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/whitespace", false);
@@ -504,6 +527,7 @@ namespace body_string
             request.Content = content;
             return message;
         }
+
         /// <summary> Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutWhitespaceAsync(CancellationToken cancellationToken = default)
@@ -528,6 +552,7 @@ namespace body_string
                 throw;
             }
         }
+
         /// <summary> Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutWhitespace(CancellationToken cancellationToken = default)
@@ -552,17 +577,19 @@ namespace body_string
                 throw;
             }
         }
+
         internal HttpMessage CreateGetNotProvidedRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/notProvided", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get String value when no string value is sent in response payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<string>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
@@ -591,6 +618,7 @@ namespace body_string
                 throw;
             }
         }
+
         /// <summary> Get String value when no string value is sent in response payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<string> GetNotProvided(CancellationToken cancellationToken = default)
@@ -619,17 +647,19 @@ namespace body_string
                 throw;
             }
         }
+
         internal HttpMessage CreateGetBase64EncodedRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/base64Encoding", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get value that is base64 encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<byte[]>> GetBase64EncodedAsync(CancellationToken cancellationToken = default)
@@ -658,6 +688,7 @@ namespace body_string
                 throw;
             }
         }
+
         /// <summary> Get value that is base64 encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<byte[]> GetBase64Encoded(CancellationToken cancellationToken = default)
@@ -686,17 +717,19 @@ namespace body_string
                 throw;
             }
         }
+
         internal HttpMessage CreateGetBase64UrlEncodedRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/base64UrlEncoding", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get value that is base64url encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<byte[]>> GetBase64UrlEncodedAsync(CancellationToken cancellationToken = default)
@@ -725,6 +758,7 @@ namespace body_string
                 throw;
             }
         }
+
         /// <summary> Get value that is base64url encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<byte[]> GetBase64UrlEncoded(CancellationToken cancellationToken = default)
@@ -753,11 +787,12 @@ namespace body_string
                 throw;
             }
         }
+
         internal HttpMessage CreatePutBase64UrlEncodedRequest(byte[] stringBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/base64UrlEncoding", false);
@@ -768,6 +803,7 @@ namespace body_string
             request.Content = content;
             return message;
         }
+
         /// <summary> Put value that is base64url encoded. </summary>
         /// <param name="stringBody"> The ByteArray to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -798,6 +834,7 @@ namespace body_string
                 throw;
             }
         }
+
         /// <summary> Put value that is base64url encoded. </summary>
         /// <param name="stringBody"> The ByteArray to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -828,17 +865,19 @@ namespace body_string
                 throw;
             }
         }
+
         internal HttpMessage CreateGetNullBase64UrlEncodedRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/string/nullBase64UrlEncoding", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get null value that is expected to be base64url encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<byte[]>> GetNullBase64UrlEncodedAsync(CancellationToken cancellationToken = default)
@@ -867,6 +906,7 @@ namespace body_string
                 throw;
             }
         }
+
         /// <summary> Get null value that is expected to be base64url encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<byte[]> GetNullBase64UrlEncoded(CancellationToken cancellationToken = default)

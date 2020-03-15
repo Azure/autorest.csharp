@@ -17,13 +17,13 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
         public string Etag { get; internal set; }
         /// <summary> The reference to Virtual Network Taps. </summary>
-        public ICollection<VirtualNetworkTap> VirtualNetworkTaps { get; set; }
+        public IList<VirtualNetworkTap> VirtualNetworkTaps { get; set; }
         /// <summary> The reference to ApplicationGatewayBackendAddressPool resource. </summary>
-        public ICollection<ApplicationGatewayBackendAddressPool> ApplicationGatewayBackendAddressPools { get; set; }
+        public IList<ApplicationGatewayBackendAddressPool> ApplicationGatewayBackendAddressPools { get; set; }
         /// <summary> The reference to LoadBalancerBackendAddressPool resource. </summary>
-        public ICollection<BackendAddressPool> LoadBalancerBackendAddressPools { get; set; }
+        public IList<BackendAddressPool> LoadBalancerBackendAddressPools { get; set; }
         /// <summary> A list of references of LoadBalancerInboundNatRules. </summary>
-        public ICollection<InboundNatRule> LoadBalancerInboundNatRules { get; set; }
+        public IList<InboundNatRule> LoadBalancerInboundNatRules { get; set; }
         /// <summary> Private IP address of the IP configuration. </summary>
         public string PrivateIPAddress { get; set; }
         /// <summary> The private IP address allocation method. </summary>
@@ -37,7 +37,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Public IP address bound to the IP configuration. </summary>
         public PublicIPAddress PublicIPAddress { get; set; }
         /// <summary> Application security groups in which the IP configuration is included. </summary>
-        public ICollection<ApplicationSecurityGroup> ApplicationSecurityGroups { get; set; }
+        public IList<ApplicationSecurityGroup> ApplicationSecurityGroups { get; set; }
         /// <summary> The provisioning state of the network interface IP configuration. </summary>
         public ProvisioningState? ProvisioningState { get; internal set; }
         /// <summary> PrivateLinkConnection properties for the network interface. </summary>

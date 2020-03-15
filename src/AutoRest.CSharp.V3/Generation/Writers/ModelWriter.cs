@@ -38,26 +38,38 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             using (writer.Namespace(schema.Declaration.Namespace))
             {
-                List<string> implementsTypes = new List<string>();
+                List<CSharpType> implementsTypes = new List<CSharpType>();
                 if (schema.Inherits != null)
                 {
-                    implementsTypes.Add(writer.Type(schema.Inherits));
+                    implementsTypes.Add(schema.Inherits);
                 }
 
                 if (schema.ImplementsDictionaryElementType != null)
                 {
                     var elementType = schema.ImplementsDictionaryElementType;
-                    implementsTypes.Add(
-                        writer.Type(new CSharpType(typeof(IDictionary<,>), new CSharpType(typeof(string)), elementType)));
+                    implementsTypes.Add(new CSharpType(typeof(IDictionary<,>), new CSharpType(typeof(string)), elementType));
                 }
 
                 writer.WriteXmlDocumentationSummary(schema.Description);
-                using (writer.Class(schema.Declaration.Accessibility, "partial", schema.Declaration.Name, implements: string.Join(", ", implementsTypes)))
+
+                writer.Append($"{schema.Declaration.Accessibility} partial class {schema.Declaration.Name}");
+                if (implementsTypes.Any())
                 {
-                    writer.WriteXmlDocumentationSummary($"Initializes a new instance of {schema.Declaration.Name}");
-                    using (writer.Method("public", null, schema.Declaration.Name))
+                    writer.AppendRaw(" : ");
+                    foreach (var type in implementsTypes)
                     {
-                        if (schema.Discriminator != null)
+                        writer.Append($"{type} ,");
+                    }
+                    writer.RemoveTrailingComma();
+                }
+
+                writer.Line();
+                using (writer.Scope())
+                {
+                    if (schema.Discriminator != null)
+                    {
+                        writer.WriteXmlDocumentationSummary($"Initializes a new instance of {schema.Declaration.Name}");
+                        using (writer.Scope($"public {schema.Declaration.Name}()"))
                         {
                             writer.Line($"{schema.Discriminator.Property} = {schema.Discriminator.Value:L};");
                         }
@@ -213,6 +225,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteSealedChoiceSchema(CodeWriter writer, EnumType schema)
         {
+            if (schema.Declaration.IsUserDefined)
+            {
+                return;
+            }
+
             using (writer.Namespace(schema.Declaration.Namespace))
             {
                 writer.WriteXmlDocumentationSummary(schema.Description);
@@ -221,8 +238,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     foreach (EnumTypeValue value in schema.Values)
                     {
+                        if (value.Declaration.IsUserDefined)
+                        {
+                            continue;
+                        }
                         writer.WriteXmlDocumentationSummary(value.Description);
-                        writer.Line($"{value.Name},");
+                        writer.Line($"{value.Declaration.Name},");
                     }
                     writer.RemoveTrailingComma();
                 }
@@ -252,14 +273,18 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (var choice in schema.Values)
                     {
-                        writer.Line($"private const string {choice.Name}Value = {choice.Value.Value:L};");
+                        writer.Line($"private const string {choice.Declaration.Name}Value = {choice.Value.Value:L};");
                     }
                     writer.Line();
 
                     foreach (var choice in schema.Values)
                     {
+                        if (choice.Declaration.IsUserDefined)
+                        {
+                            continue;
+                        }
                         writer.WriteXmlDocumentationSummary(choice.Description);
-                        writer.Append($"public static {cs} {choice.Name}").AppendRaw("{ get; }").Append($" = new {cs}({choice.Name}Value);").Line();
+                        writer.Append($"public static {cs} {choice.Declaration.Name}").AppendRaw("{ get; }").Append($" = new {cs}({choice.Declaration.Name}Value);").Line();
                     }
 
                     writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{name}\"/> values are the same.");

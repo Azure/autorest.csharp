@@ -23,6 +23,7 @@ namespace Azure.Storage.Management
         private string ApiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of SkusRestClient. </summary>
         public SkusRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-06-01")
         {
@@ -45,11 +46,12 @@ namespace Azure.Storage.Management
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateListRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/subscriptions/", false);
@@ -59,6 +61,7 @@ namespace Azure.Storage.Management
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Lists the available SKUs supported by Microsoft.Storage for given subscription. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<StorageSkuListResult>> ListAsync(CancellationToken cancellationToken = default)
@@ -87,6 +90,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> Lists the available SKUs supported by Microsoft.Storage for given subscription. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<StorageSkuListResult> List(CancellationToken cancellationToken = default)
@@ -115,16 +119,18 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Lists the available SKUs supported by Microsoft.Storage for given subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -159,6 +165,7 @@ namespace Azure.Storage.Management
                 throw;
             }
         }
+
         /// <summary> Lists the available SKUs supported by Microsoft.Storage for given subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

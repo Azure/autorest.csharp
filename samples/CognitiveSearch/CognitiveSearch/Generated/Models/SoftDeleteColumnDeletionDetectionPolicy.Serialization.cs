@@ -29,6 +29,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WriteEndObject();
         }
+
         internal static SoftDeleteColumnDeletionDetectionPolicy DeserializeSoftDeleteColumnDeletionDetectionPolicy(JsonElement element)
         {
             SoftDeleteColumnDeletionDetectionPolicy result = new SoftDeleteColumnDeletionDetectionPolicy();

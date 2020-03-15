@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Xml.Linq;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.V3.Output.Models.Types;
@@ -64,7 +65,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (XmlObjectAttributeSerialization property in objectSerialization.Attributes)
                     {
-                        using (property.Type.IsNullable ? writer.If($"{property.MemberName} != null") : default)
+                        using (property.Type.IsNullable ? writer.Scope($"if ({property.MemberName} != null)") : default)
                         {
                             writer.Line($"{writerName}.WriteStartAttribute({property.Name:L});");
                             writer.ToSerializeValueCall(
@@ -77,7 +78,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (XmlObjectElementSerialization property in objectSerialization.Elements)
                     {
-                        using (property.Type.IsNullable ? writer.If($"{property.MemberName} != null") : default)
+                        using (property.Type.IsNullable ? writer.Scope($"if ({property.MemberName} != null)") : default)
                         {
                             writer.ToSerializeCall(
                                 property.ValueSerialization,
@@ -87,7 +88,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (XmlObjectArraySerialization property in objectSerialization.EmbeddedArrays)
                     {
-                        using (property.ArraySerialization.Type.IsNullable ? writer.If($"{property.MemberName} != null") : default)
+                        using (property.ArraySerialization.Type.IsNullable ? writer.Scope($"if ({property.MemberName} != null)") : default)
                         {
                             writer.ToSerializeCall(
                                 property.ArraySerialization,
@@ -179,8 +180,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             string s = destination;
 
-            writer
-                .Line($"{type} {destination:D} = default;");
+            writer.Line($"{type} {destination:D} = default;");
 
             if (isElement)
             {
@@ -374,6 +374,17 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 default:
                     throw new NotSupportedException();
             }
+        }
+
+        public static void WriteDeserializationForMethods(this CodeWriter writer, XmlElementSerialization serialization,
+            ref string destination, string response, string document = "document")
+        {
+            writer.Line($"var {document:D} = {typeof(XDocument)}.Load({response}.ContentStream, LoadOptions.PreserveWhitespace);");
+            writer.ToDeserializeCall(
+                serialization,
+                w => w.Append($"{document}"),
+                ref destination
+            );
         }
     }
 }

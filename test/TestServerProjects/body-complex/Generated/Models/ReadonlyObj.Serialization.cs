@@ -27,6 +27,7 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
+
         internal static ReadonlyObj DeserializeReadonlyObj(JsonElement element)
         {
             ReadonlyObj result = new ReadonlyObj();

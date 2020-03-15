@@ -42,6 +42,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static TagProperty DeserializeTagProperty(JsonElement element)
         {
             TagProperty result = new TagProperty();

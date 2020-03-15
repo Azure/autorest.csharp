@@ -32,6 +32,7 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Dog DeserializeDog(JsonElement element)
         {
             Dog result = new Dog();

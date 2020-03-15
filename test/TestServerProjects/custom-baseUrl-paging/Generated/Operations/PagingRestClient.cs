@@ -21,6 +21,7 @@ namespace custom_baseUrl_paging
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of PagingRestClient. </summary>
         public PagingRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "host")
         {
@@ -33,11 +34,12 @@ namespace custom_baseUrl_paging
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetPagesPartialUrlRequest(string accountName)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("http://", false);
             uri.AppendRaw(accountName, false);
@@ -46,6 +48,7 @@ namespace custom_baseUrl_paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -80,6 +83,7 @@ namespace custom_baseUrl_paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -114,11 +118,12 @@ namespace custom_baseUrl_paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetPagesPartialUrlOperationRequest(string accountName)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("http://", false);
             uri.AppendRaw(accountName, false);
@@ -127,6 +132,7 @@ namespace custom_baseUrl_paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that combines custom url, paging and partial URL with next operation. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -161,6 +167,7 @@ namespace custom_baseUrl_paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that combines custom url, paging and partial URL with next operation. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -195,11 +202,12 @@ namespace custom_baseUrl_paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetPagesPartialUrlOperationNextRequest(string accountName, string nextLink)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("http://", false);
             uri.AppendRaw(accountName, false);
@@ -209,6 +217,7 @@ namespace custom_baseUrl_paging
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that combines custom url, paging and partial URL. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="nextLink"> Next link for the list operation. </param>
@@ -248,6 +257,7 @@ namespace custom_baseUrl_paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that combines custom url, paging and partial URL. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="nextLink"> Next link for the list operation. </param>
@@ -287,16 +297,18 @@ namespace custom_baseUrl_paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetPagesPartialUrlNextPageRequest(string nextLink)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -331,6 +343,7 @@ namespace custom_baseUrl_paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -365,16 +378,18 @@ namespace custom_baseUrl_paging
                 throw;
             }
         }
+
         internal HttpMessage CreateGetPagesPartialUrlOperationNextNextPageRequest(string nextLink)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A paging operation that combines custom url, paging and partial URL. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -409,6 +424,7 @@ namespace custom_baseUrl_paging
                 throw;
             }
         }
+
         /// <summary> A paging operation that combines custom url, paging and partial URL. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

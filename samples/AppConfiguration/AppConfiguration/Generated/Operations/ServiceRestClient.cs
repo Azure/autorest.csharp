@@ -23,6 +23,7 @@ namespace AppConfiguration
         private string ApiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of ServiceRestClient. </summary>
         public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string syncToken, string host = "", string ApiVersion = "1.0")
         {
@@ -41,11 +42,12 @@ namespace AppConfiguration
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetKeysRequest(string name, string after, string acceptDatetime)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/keys", false);
@@ -69,6 +71,7 @@ namespace AppConfiguration
             }
             return message;
         }
+
         /// <summary> Gets a list of keys. </summary>
         /// <param name="name"> A filter for the name of the returned keys. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
@@ -76,6 +79,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<KeyListResult, GetKeysHeaders>> GetKeysAsync(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeys");
             scope.Start();
             try
@@ -101,6 +105,7 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         /// <summary> Gets a list of keys. </summary>
         /// <param name="name"> A filter for the name of the returned keys. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
@@ -108,6 +113,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<KeyListResult, GetKeysHeaders> GetKeys(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeys");
             scope.Start();
             try
@@ -133,11 +139,12 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         internal HttpMessage CreateCheckKeysRequest(string name, string after, string acceptDatetime)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Head;
+            request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/keys", false);
@@ -161,6 +168,7 @@ namespace AppConfiguration
             }
             return message;
         }
+
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="name"> A filter for the name of the returned keys. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
@@ -168,6 +176,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<CheckKeysHeaders>> CheckKeysAsync(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckKeys");
             scope.Start();
             try
@@ -189,6 +198,7 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="name"> A filter for the name of the returned keys. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
@@ -196,6 +206,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<CheckKeysHeaders> CheckKeys(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckKeys");
             scope.Start();
             try
@@ -217,11 +228,12 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         internal HttpMessage CreateGetKeyValuesRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/kv", false);
@@ -253,6 +265,7 @@ namespace AppConfiguration
             }
             return message;
         }
+
         /// <summary> Gets a list of key-values. </summary>
         /// <param name="key"> A filter used to match keys. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -262,6 +275,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders>> GetKeyValuesAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
             scope.Start();
             try
@@ -287,6 +301,7 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         /// <summary> Gets a list of key-values. </summary>
         /// <param name="key"> A filter used to match keys. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -296,6 +311,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders> GetKeyValues(string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
             scope.Start();
             try
@@ -321,11 +337,12 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         internal HttpMessage CreateCheckKeyValuesRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Head6ItemsItem> select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Head;
+            request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/kv", false);
@@ -357,6 +374,7 @@ namespace AppConfiguration
             }
             return message;
         }
+
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="key"> A filter used to match keys. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -366,6 +384,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<CheckKeyValuesHeaders>> CheckKeyValuesAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Head6ItemsItem> select, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckKeyValues");
             scope.Start();
             try
@@ -387,6 +406,7 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="key"> A filter used to match keys. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -396,6 +416,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<CheckKeyValuesHeaders> CheckKeyValues(string key, string label, string after, string acceptDatetime, IEnumerable<Head6ItemsItem> select, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckKeyValues");
             scope.Start();
             try
@@ -417,11 +438,12 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         internal HttpMessage CreateGetKeyValueRequest(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Get7ItemsItem> select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/kv/", false);
@@ -454,6 +476,7 @@ namespace AppConfiguration
             }
             return message;
         }
+
         /// <summary> Gets a single key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -494,6 +517,7 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         /// <summary> Gets a single key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -534,11 +558,12 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         internal HttpMessage CreatePutKeyValueRequest(string key, string label, string ifMatch, string ifNoneMatch, KeyValue entity)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/kv/", false);
@@ -572,6 +597,7 @@ namespace AppConfiguration
             request.Content = content;
             return message;
         }
+
         /// <summary> Creates a key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -611,6 +637,7 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         /// <summary> Creates a key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -650,11 +677,12 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         internal HttpMessage CreateDeleteKeyValueRequest(string key, string label, string ifMatch)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Delete;
+            request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/kv/", false);
@@ -675,6 +703,7 @@ namespace AppConfiguration
             }
             return message;
         }
+
         /// <summary> Deletes a key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -712,6 +741,7 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         /// <summary> Deletes a key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -749,11 +779,12 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         internal HttpMessage CreateCheckKeyValueRequest(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Head7ItemsItem> select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Head;
+            request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/kv/", false);
@@ -786,6 +817,7 @@ namespace AppConfiguration
             }
             return message;
         }
+
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -822,6 +854,7 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -858,11 +891,12 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         internal HttpMessage CreateGetLabelsRequest(string name, string after, string acceptDatetime, IEnumerable<string> select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/labels", false);
@@ -890,6 +924,7 @@ namespace AppConfiguration
             }
             return message;
         }
+
         /// <summary> Gets a list of labels. </summary>
         /// <param name="name"> A filter for the name of the returned keys. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
@@ -898,6 +933,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<LabelListResult, GetLabelsHeaders>> GetLabelsAsync(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetLabels");
             scope.Start();
             try
@@ -923,6 +959,7 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         /// <summary> Gets a list of labels. </summary>
         /// <param name="name"> A filter for the name of the returned keys. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
@@ -931,6 +968,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<LabelListResult, GetLabelsHeaders> GetLabels(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetLabels");
             scope.Start();
             try
@@ -956,11 +994,12 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         internal HttpMessage CreateCheckLabelsRequest(string name, string after, string acceptDatetime, IEnumerable<string> select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Head;
+            request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/labels", false);
@@ -988,6 +1027,7 @@ namespace AppConfiguration
             }
             return message;
         }
+
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="name"> A filter for the name of the returned keys. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
@@ -996,6 +1036,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<CheckLabelsHeaders>> CheckLabelsAsync(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckLabels");
             scope.Start();
             try
@@ -1017,6 +1058,7 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="name"> A filter for the name of the returned keys. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
@@ -1025,6 +1067,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<CheckLabelsHeaders> CheckLabels(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckLabels");
             scope.Start();
             try
@@ -1046,11 +1089,12 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         internal HttpMessage CreatePutLockRequest(string key, string label, string ifMatch, string ifNoneMatch)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/locks/", false);
@@ -1075,6 +1119,7 @@ namespace AppConfiguration
             }
             return message;
         }
+
         /// <summary> Locks a key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -1113,6 +1158,7 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         /// <summary> Locks a key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -1151,11 +1197,12 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         internal HttpMessage CreateDeleteLockRequest(string key, string label, string ifMatch, string ifNoneMatch)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Delete;
+            request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/locks/", false);
@@ -1180,6 +1227,7 @@ namespace AppConfiguration
             }
             return message;
         }
+
         /// <summary> Unlocks a key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -1218,6 +1266,7 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         /// <summary> Unlocks a key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -1256,11 +1305,12 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         internal HttpMessage CreateGetRevisionsRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/revisions", false);
@@ -1292,6 +1342,7 @@ namespace AppConfiguration
             }
             return message;
         }
+
         /// <summary> Gets a list of key-value revisions. </summary>
         /// <param name="key"> A filter used to match keys. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -1301,6 +1352,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders>> GetRevisionsAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
             scope.Start();
             try
@@ -1326,6 +1378,7 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         /// <summary> Gets a list of key-value revisions. </summary>
         /// <param name="key"> A filter used to match keys. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -1335,6 +1388,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders> GetRevisions(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
             scope.Start();
             try
@@ -1360,11 +1414,12 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         internal HttpMessage CreateCheckRevisionsRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Head;
+            request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/revisions", false);
@@ -1396,6 +1451,7 @@ namespace AppConfiguration
             }
             return message;
         }
+
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="key"> A filter used to match keys. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -1405,6 +1461,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<CheckRevisionsHeaders>> CheckRevisionsAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckRevisions");
             scope.Start();
             try
@@ -1426,6 +1483,7 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="key"> A filter used to match keys. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -1435,6 +1493,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<CheckRevisionsHeaders> CheckRevisions(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckRevisions");
             scope.Start();
             try
@@ -1456,11 +1515,12 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         internal HttpMessage CreateGetKeysNextPageRequest(string acceptDatetime, string nextLink)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;
@@ -1474,6 +1534,7 @@ namespace AppConfiguration
             }
             return message;
         }
+
         /// <summary> Gets a list of keys. </summary>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
@@ -1510,6 +1571,7 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         /// <summary> Gets a list of keys. </summary>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
@@ -1546,11 +1608,12 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         internal HttpMessage CreateGetKeyValuesNextPageRequest(string acceptDatetime, string nextLink)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;
@@ -1564,6 +1627,7 @@ namespace AppConfiguration
             }
             return message;
         }
+
         /// <summary> Gets a list of key-values. </summary>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
@@ -1600,6 +1664,7 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         /// <summary> Gets a list of key-values. </summary>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
@@ -1636,11 +1701,12 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         internal HttpMessage CreateGetLabelsNextPageRequest(string acceptDatetime, string nextLink)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;
@@ -1654,6 +1720,7 @@ namespace AppConfiguration
             }
             return message;
         }
+
         /// <summary> Gets a list of labels. </summary>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
@@ -1690,6 +1757,7 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         /// <summary> Gets a list of labels. </summary>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
@@ -1726,11 +1794,12 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         internal HttpMessage CreateGetRevisionsNextPageRequest(string acceptDatetime, string nextLink)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;
@@ -1744,6 +1813,7 @@ namespace AppConfiguration
             }
             return message;
         }
+
         /// <summary> Gets a list of key-value revisions. </summary>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
@@ -1780,6 +1850,7 @@ namespace AppConfiguration
                 throw;
             }
         }
+
         /// <summary> Gets a list of key-value revisions. </summary>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>

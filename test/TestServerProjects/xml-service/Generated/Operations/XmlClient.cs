@@ -19,6 +19,10 @@ namespace xml_service
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal XmlRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of XmlClient for mocking. </summary>
+        protected XmlClient()
+        {
+        }
         /// <summary> Initializes a new instance of XmlClient. </summary>
         internal XmlClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -26,25 +30,29 @@ namespace xml_service
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Get a complex type that has a ref to a complex type with no XML node. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<RootWithRefAndNoMeta>> GetComplexTypeRefNoMetaAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RootWithRefAndNoMeta>> GetComplexTypeRefNoMetaAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetComplexTypeRefNoMetaAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get a complex type that has a ref to a complex type with no XML node. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<RootWithRefAndNoMeta> GetComplexTypeRefNoMeta(CancellationToken cancellationToken = default)
         {
             return RestClient.GetComplexTypeRefNoMeta(cancellationToken);
         }
+
         /// <summary> Puts a complex type that has a ref to a complex type with no XML node. </summary>
         /// <param name="model"> The RootWithRefAndNoMeta to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutComplexTypeRefNoMetaAsync(RootWithRefAndNoMeta model, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutComplexTypeRefNoMetaAsync(RootWithRefAndNoMeta model, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutComplexTypeRefNoMetaAsync(model, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Puts a complex type that has a ref to a complex type with no XML node. </summary>
         /// <param name="model"> The RootWithRefAndNoMeta to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -52,25 +60,29 @@ namespace xml_service
         {
             return RestClient.PutComplexTypeRefNoMeta(model, cancellationToken);
         }
+
         /// <summary> Get a complex type that has a ref to a complex type with XML node. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<RootWithRefAndMeta>> GetComplexTypeRefWithMetaAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RootWithRefAndMeta>> GetComplexTypeRefWithMetaAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetComplexTypeRefWithMetaAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get a complex type that has a ref to a complex type with XML node. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<RootWithRefAndMeta> GetComplexTypeRefWithMeta(CancellationToken cancellationToken = default)
         {
             return RestClient.GetComplexTypeRefWithMeta(cancellationToken);
         }
+
         /// <summary> Puts a complex type that has a ref to a complex type with XML node. </summary>
         /// <param name="model"> The RootWithRefAndMeta to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutComplexTypeRefWithMetaAsync(RootWithRefAndMeta model, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutComplexTypeRefWithMetaAsync(RootWithRefAndMeta model, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutComplexTypeRefWithMetaAsync(model, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Puts a complex type that has a ref to a complex type with XML node. </summary>
         /// <param name="model"> The RootWithRefAndMeta to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -78,25 +90,29 @@ namespace xml_service
         {
             return RestClient.PutComplexTypeRefWithMeta(model, cancellationToken);
         }
+
         /// <summary> Get a simple XML document. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<Slideshow>> GetSimpleAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Slideshow>> GetSimpleAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetSimpleAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get a simple XML document. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Slideshow> GetSimple(CancellationToken cancellationToken = default)
         {
             return RestClient.GetSimple(cancellationToken);
         }
+
         /// <summary> Put a simple XML document. </summary>
         /// <param name="slideshow"> The Slideshow to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutSimpleAsync(Slideshow slideshow, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutSimpleAsync(Slideshow slideshow, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutSimpleAsync(slideshow, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Put a simple XML document. </summary>
         /// <param name="slideshow"> The Slideshow to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -104,25 +120,29 @@ namespace xml_service
         {
             return RestClient.PutSimple(slideshow, cancellationToken);
         }
+
         /// <summary> Get an XML document with multiple wrapped lists. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<AppleBarrel>> GetWrappedListsAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AppleBarrel>> GetWrappedListsAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetWrappedListsAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get an XML document with multiple wrapped lists. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<AppleBarrel> GetWrappedLists(CancellationToken cancellationToken = default)
         {
             return RestClient.GetWrappedLists(cancellationToken);
         }
+
         /// <summary> Put an XML document with multiple wrapped lists. </summary>
         /// <param name="wrappedLists"> The AppleBarrel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutWrappedListsAsync(AppleBarrel wrappedLists, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutWrappedListsAsync(AppleBarrel wrappedLists, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutWrappedListsAsync(wrappedLists, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Put an XML document with multiple wrapped lists. </summary>
         /// <param name="wrappedLists"> The AppleBarrel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -130,37 +150,43 @@ namespace xml_service
         {
             return RestClient.PutWrappedLists(wrappedLists, cancellationToken);
         }
+
         /// <summary> Get strongly-typed response headers. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> GetHeadersAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetHeadersAsync(CancellationToken cancellationToken = default)
         {
             return (await RestClient.GetHeadersAsync(cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
+
         /// <summary> Get strongly-typed response headers. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetHeaders(CancellationToken cancellationToken = default)
         {
             return RestClient.GetHeaders(cancellationToken).GetRawResponse();
         }
+
         /// <summary> Get an empty list. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<Slideshow>> GetEmptyListAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Slideshow>> GetEmptyListAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetEmptyListAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get an empty list. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Slideshow> GetEmptyList(CancellationToken cancellationToken = default)
         {
             return RestClient.GetEmptyList(cancellationToken);
         }
+
         /// <summary> Puts an empty list. </summary>
         /// <param name="slideshow"> The Slideshow to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutEmptyListAsync(Slideshow slideshow, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutEmptyListAsync(Slideshow slideshow, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutEmptyListAsync(slideshow, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Puts an empty list. </summary>
         /// <param name="slideshow"> The Slideshow to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -168,25 +194,29 @@ namespace xml_service
         {
             return RestClient.PutEmptyList(slideshow, cancellationToken);
         }
+
         /// <summary> Gets some empty wrapped lists. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<AppleBarrel>> GetEmptyWrappedListsAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AppleBarrel>> GetEmptyWrappedListsAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetEmptyWrappedListsAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Gets some empty wrapped lists. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<AppleBarrel> GetEmptyWrappedLists(CancellationToken cancellationToken = default)
         {
             return RestClient.GetEmptyWrappedLists(cancellationToken);
         }
+
         /// <summary> Puts some empty wrapped lists. </summary>
         /// <param name="appleBarrel"> The AppleBarrel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutEmptyWrappedListsAsync(AppleBarrel appleBarrel, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutEmptyWrappedListsAsync(AppleBarrel appleBarrel, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutEmptyWrappedListsAsync(appleBarrel, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Puts some empty wrapped lists. </summary>
         /// <param name="appleBarrel"> The AppleBarrel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -194,25 +224,29 @@ namespace xml_service
         {
             return RestClient.PutEmptyWrappedLists(appleBarrel, cancellationToken);
         }
+
         /// <summary> Gets a list as the root element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<ICollection<Banana>>> GetRootListAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IList<Banana>>> GetRootListAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetRootListAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Gets a list as the root element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ICollection<Banana>> GetRootList(CancellationToken cancellationToken = default)
+        public virtual Response<IList<Banana>> GetRootList(CancellationToken cancellationToken = default)
         {
             return RestClient.GetRootList(cancellationToken);
         }
+
         /// <summary> Puts a list as the root element. </summary>
         /// <param name="bananas"> The ArrayOfBanana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutRootListAsync(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutRootListAsync(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutRootListAsync(bananas, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Puts a list as the root element. </summary>
         /// <param name="bananas"> The ArrayOfBanana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -220,25 +254,29 @@ namespace xml_service
         {
             return RestClient.PutRootList(bananas, cancellationToken);
         }
+
         /// <summary> Gets a list with a single item. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<ICollection<Banana>>> GetRootListSingleItemAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IList<Banana>>> GetRootListSingleItemAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetRootListSingleItemAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Gets a list with a single item. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ICollection<Banana>> GetRootListSingleItem(CancellationToken cancellationToken = default)
+        public virtual Response<IList<Banana>> GetRootListSingleItem(CancellationToken cancellationToken = default)
         {
             return RestClient.GetRootListSingleItem(cancellationToken);
         }
+
         /// <summary> Puts a list with a single item. </summary>
         /// <param name="bananas"> The ArrayOfBanana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutRootListSingleItemAsync(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutRootListSingleItemAsync(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutRootListSingleItemAsync(bananas, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Puts a list with a single item. </summary>
         /// <param name="bananas"> The ArrayOfBanana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -246,25 +284,29 @@ namespace xml_service
         {
             return RestClient.PutRootListSingleItem(bananas, cancellationToken);
         }
+
         /// <summary> Gets an empty list as the root element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<ICollection<Banana>>> GetEmptyRootListAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IList<Banana>>> GetEmptyRootListAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetEmptyRootListAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Gets an empty list as the root element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ICollection<Banana>> GetEmptyRootList(CancellationToken cancellationToken = default)
+        public virtual Response<IList<Banana>> GetEmptyRootList(CancellationToken cancellationToken = default)
         {
             return RestClient.GetEmptyRootList(cancellationToken);
         }
+
         /// <summary> Puts an empty list as the root element. </summary>
         /// <param name="bananas"> The ArrayOfBanana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutEmptyRootListAsync(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutEmptyRootListAsync(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutEmptyRootListAsync(bananas, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Puts an empty list as the root element. </summary>
         /// <param name="bananas"> The ArrayOfBanana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -272,25 +314,29 @@ namespace xml_service
         {
             return RestClient.PutEmptyRootList(bananas, cancellationToken);
         }
+
         /// <summary> Gets an XML document with an empty child element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<Banana>> GetEmptyChildElementAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Banana>> GetEmptyChildElementAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetEmptyChildElementAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Gets an XML document with an empty child element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Banana> GetEmptyChildElement(CancellationToken cancellationToken = default)
         {
             return RestClient.GetEmptyChildElement(cancellationToken);
         }
+
         /// <summary> Puts a value with an empty child element. </summary>
         /// <param name="banana"> The Banana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutEmptyChildElementAsync(Banana banana, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutEmptyChildElementAsync(Banana banana, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutEmptyChildElementAsync(banana, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Puts a value with an empty child element. </summary>
         /// <param name="banana"> The Banana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -298,37 +344,43 @@ namespace xml_service
         {
             return RestClient.PutEmptyChildElement(banana, cancellationToken);
         }
+
         /// <summary> Lists containers in a storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<ListContainersResponse>> ListContainersAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ListContainersResponse>> ListContainersAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.ListContainersAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Lists containers in a storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ListContainersResponse> ListContainers(CancellationToken cancellationToken = default)
         {
             return RestClient.ListContainers(cancellationToken);
         }
+
         /// <summary> Gets storage service properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<StorageServiceProperties>> GetServicePropertiesAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<StorageServiceProperties>> GetServicePropertiesAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetServicePropertiesAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Gets storage service properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<StorageServiceProperties> GetServiceProperties(CancellationToken cancellationToken = default)
         {
             return RestClient.GetServiceProperties(cancellationToken);
         }
+
         /// <summary> Puts storage service properties. </summary>
         /// <param name="properties"> The StorageServiceProperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutServicePropertiesAsync(StorageServiceProperties properties, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutServicePropertiesAsync(StorageServiceProperties properties, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutServicePropertiesAsync(properties, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Puts storage service properties. </summary>
         /// <param name="properties"> The StorageServiceProperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -336,25 +388,29 @@ namespace xml_service
         {
             return RestClient.PutServiceProperties(properties, cancellationToken);
         }
+
         /// <summary> Gets storage ACLs for a container. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<ICollection<SignedIdentifier>>> GetAclsAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IList<SignedIdentifier>>> GetAclsAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetAclsAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Gets storage ACLs for a container. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ICollection<SignedIdentifier>> GetAcls(CancellationToken cancellationToken = default)
+        public virtual Response<IList<SignedIdentifier>> GetAcls(CancellationToken cancellationToken = default)
         {
             return RestClient.GetAcls(cancellationToken);
         }
+
         /// <summary> Puts storage ACLs for a container. </summary>
         /// <param name="properties"> The SignedIdentifiers to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutAclsAsync(IEnumerable<SignedIdentifier> properties, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutAclsAsync(IEnumerable<SignedIdentifier> properties, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutAclsAsync(properties, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Puts storage ACLs for a container. </summary>
         /// <param name="properties"> The SignedIdentifiers to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -362,25 +418,29 @@ namespace xml_service
         {
             return RestClient.PutAcls(properties, cancellationToken);
         }
+
         /// <summary> Lists blobs in a storage container. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<ListBlobsResponse>> ListBlobsAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ListBlobsResponse>> ListBlobsAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.ListBlobsAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Lists blobs in a storage container. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ListBlobsResponse> ListBlobs(CancellationToken cancellationToken = default)
         {
             return RestClient.ListBlobs(cancellationToken);
         }
+
         /// <summary> A Swagger with XML that has one operation that takes JSON as input. You need to send the ID number 42. </summary>
         /// <param name="properties"> The JsonInput to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> JsonInputAsync(JsonInput properties, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> JsonInputAsync(JsonInput properties, CancellationToken cancellationToken = default)
         {
             return await RestClient.JsonInputAsync(properties, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> A Swagger with XML that has one operation that takes JSON as input. You need to send the ID number 42. </summary>
         /// <param name="properties"> The JsonInput to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -388,12 +448,14 @@ namespace xml_service
         {
             return RestClient.JsonInput(properties, cancellationToken);
         }
+
         /// <summary> A Swagger with XML that has one operation that returns JSON. ID number 42. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<JsonOutput>> JsonOutputAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<JsonOutput>> JsonOutputAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.JsonOutputAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> A Swagger with XML that has one operation that returns JSON. ID number 42. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<JsonOutput> JsonOutput(CancellationToken cancellationToken = default)

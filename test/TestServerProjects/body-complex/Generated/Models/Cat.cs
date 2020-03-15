@@ -23,6 +23,6 @@ namespace body_complex.Models
             Hates = hates;
         }
         public string Color { get; set; }
-        public ICollection<Dog> Hates { get; set; }
+        public IList<Dog> Hates { get; set; }
     }
 }

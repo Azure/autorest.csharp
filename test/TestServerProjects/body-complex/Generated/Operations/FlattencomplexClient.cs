@@ -18,6 +18,10 @@ namespace body_complex
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal FlattencomplexRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of FlattencomplexClient for mocking. </summary>
+        protected FlattencomplexClient()
+        {
+        }
         /// <summary> Initializes a new instance of FlattencomplexClient. </summary>
         internal FlattencomplexClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -25,11 +29,13 @@ namespace body_complex
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<MyBaseType>> GetValidAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<MyBaseType>> GetValidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<MyBaseType> GetValid(CancellationToken cancellationToken = default)
         {

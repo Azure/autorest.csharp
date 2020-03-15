@@ -19,12 +19,12 @@ namespace body_array.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown FooEnum value.")
         };
 
-        public static FooEnum ToFooEnum(this string value) => value switch
+        public static FooEnum ToFooEnum(this string value)
         {
-            "foo1" => FooEnum.Foo1,
-            "foo2" => FooEnum.Foo2,
-            "foo3" => FooEnum.Foo3,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown FooEnum value.")
-        };
+            if (string.Equals(value, "foo1", StringComparison.InvariantCultureIgnoreCase)) return FooEnum.Foo1;
+            if (string.Equals(value, "foo2", StringComparison.InvariantCultureIgnoreCase)) return FooEnum.Foo2;
+            if (string.Equals(value, "foo3", StringComparison.InvariantCultureIgnoreCase)) return FooEnum.Foo3;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown FooEnum value.");
+        }
     }
 }

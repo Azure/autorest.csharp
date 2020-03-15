@@ -20,6 +20,10 @@ namespace AppConfiguration
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal ServiceRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of ServiceClient for mocking. </summary>
+        protected ServiceClient()
+        {
+        }
         /// <summary> Initializes a new instance of ServiceClient. </summary>
         internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string syncToken, string host = "", string ApiVersion = "1.0")
         {
@@ -27,15 +31,17 @@ namespace AppConfiguration
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="name"> A filter for the name of the returned keys. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> CheckKeysAsync(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> CheckKeysAsync(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
             return (await RestClient.CheckKeysAsync(name, after, acceptDatetime, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
+
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="name"> A filter for the name of the returned keys. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
@@ -45,6 +51,7 @@ namespace AppConfiguration
         {
             return RestClient.CheckKeys(name, after, acceptDatetime, cancellationToken).GetRawResponse();
         }
+
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="key"> A filter used to match keys. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -52,10 +59,11 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> CheckKeyValuesAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Head6ItemsItem> select, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> CheckKeyValuesAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Head6ItemsItem> select, CancellationToken cancellationToken = default)
         {
             return (await RestClient.CheckKeyValuesAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
+
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="key"> A filter used to match keys. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -67,6 +75,7 @@ namespace AppConfiguration
         {
             return RestClient.CheckKeyValues(key, label, after, acceptDatetime, select, cancellationToken).GetRawResponse();
         }
+
         /// <summary> Gets a single key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -75,10 +84,11 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<KeyValue>> GetKeyValueAsync(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Get7ItemsItem> select, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<KeyValue>> GetKeyValueAsync(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Get7ItemsItem> select, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetKeyValueAsync(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Gets a single key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -91,6 +101,7 @@ namespace AppConfiguration
         {
             return RestClient.GetKeyValue(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken);
         }
+
         /// <summary> Creates a key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -98,10 +109,11 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="entity"> The key-value to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<KeyValue>> PutKeyValueAsync(string key, string label, string ifMatch, string ifNoneMatch, KeyValue entity, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<KeyValue>> PutKeyValueAsync(string key, string label, string ifMatch, string ifNoneMatch, KeyValue entity, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutKeyValueAsync(key, label, ifMatch, ifNoneMatch, entity, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Creates a key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -113,15 +125,17 @@ namespace AppConfiguration
         {
             return RestClient.PutKeyValue(key, label, ifMatch, ifNoneMatch, entity, cancellationToken);
         }
+
         /// <summary> Deletes a key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<KeyValue>> DeleteKeyValueAsync(string key, string label, string ifMatch, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<KeyValue>> DeleteKeyValueAsync(string key, string label, string ifMatch, CancellationToken cancellationToken = default)
         {
             return await RestClient.DeleteKeyValueAsync(key, label, ifMatch, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Deletes a key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -131,6 +145,7 @@ namespace AppConfiguration
         {
             return RestClient.DeleteKeyValue(key, label, ifMatch, cancellationToken);
         }
+
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -139,10 +154,11 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> CheckKeyValueAsync(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Head7ItemsItem> select, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> CheckKeyValueAsync(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Head7ItemsItem> select, CancellationToken cancellationToken = default)
         {
             return (await RestClient.CheckKeyValueAsync(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
+
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -155,16 +171,18 @@ namespace AppConfiguration
         {
             return RestClient.CheckKeyValue(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken).GetRawResponse();
         }
+
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="name"> A filter for the name of the returned keys. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> CheckLabelsAsync(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> CheckLabelsAsync(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
             return (await RestClient.CheckLabelsAsync(name, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
+
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="name"> A filter for the name of the returned keys. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
@@ -175,16 +193,18 @@ namespace AppConfiguration
         {
             return RestClient.CheckLabels(name, after, acceptDatetime, select, cancellationToken).GetRawResponse();
         }
+
         /// <summary> Locks a key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<KeyValue>> PutLockAsync(string key, string label, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<KeyValue>> PutLockAsync(string key, string label, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutLockAsync(key, label, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Locks a key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -195,16 +215,18 @@ namespace AppConfiguration
         {
             return RestClient.PutLock(key, label, ifMatch, ifNoneMatch, cancellationToken);
         }
+
         /// <summary> Unlocks a key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<KeyValue>> DeleteLockAsync(string key, string label, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<KeyValue>> DeleteLockAsync(string key, string label, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
             return await RestClient.DeleteLockAsync(key, label, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Unlocks a key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -215,6 +237,7 @@ namespace AppConfiguration
         {
             return RestClient.DeleteLock(key, label, ifMatch, ifNoneMatch, cancellationToken);
         }
+
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="key"> A filter used to match keys. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -222,10 +245,11 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> CheckRevisionsAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> CheckRevisionsAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
         {
             return (await RestClient.CheckRevisionsAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
+
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="key"> A filter used to match keys. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -237,6 +261,7 @@ namespace AppConfiguration
         {
             return RestClient.CheckRevisions(key, label, after, acceptDatetime, select, cancellationToken).GetRawResponse();
         }
+
         /// <summary> Gets a list of keys. </summary>
         /// <param name="name"> A filter for the name of the returned keys. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
@@ -244,6 +269,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<Key> GetKeysAsync(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
+
             async Task<Page<Key>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await RestClient.GetKeysAsync(name, after, acceptDatetime, cancellationToken).ConfigureAwait(false);
@@ -256,6 +282,7 @@ namespace AppConfiguration
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
+
         /// <summary> Gets a list of keys. </summary>
         /// <param name="name"> A filter for the name of the returned keys. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
@@ -263,6 +290,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<Key> GetKeys(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
+
             Page<Key> FirstPageFunc(int? pageSizeHint)
             {
                 var response = RestClient.GetKeys(name, after, acceptDatetime, cancellationToken);
@@ -275,6 +303,7 @@ namespace AppConfiguration
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
+
         /// <summary> Gets a list of key-values. </summary>
         /// <param name="key"> A filter used to match keys. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -284,6 +313,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<KeyValue> GetKeyValuesAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select, CancellationToken cancellationToken = default)
         {
+
             async Task<Page<KeyValue>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await RestClient.GetKeyValuesAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
@@ -296,6 +326,7 @@ namespace AppConfiguration
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
+
         /// <summary> Gets a list of key-values. </summary>
         /// <param name="key"> A filter used to match keys. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -305,6 +336,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<KeyValue> GetKeyValues(string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select, CancellationToken cancellationToken = default)
         {
+
             Page<KeyValue> FirstPageFunc(int? pageSizeHint)
             {
                 var response = RestClient.GetKeyValues(key, label, after, acceptDatetime, select, cancellationToken);
@@ -317,6 +349,7 @@ namespace AppConfiguration
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
+
         /// <summary> Gets a list of labels. </summary>
         /// <param name="name"> A filter for the name of the returned keys. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
@@ -325,6 +358,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<Label> GetLabelsAsync(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
+
             async Task<Page<Label>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await RestClient.GetLabelsAsync(name, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
@@ -337,6 +371,7 @@ namespace AppConfiguration
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
+
         /// <summary> Gets a list of labels. </summary>
         /// <param name="name"> A filter for the name of the returned keys. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
@@ -345,6 +380,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<Label> GetLabels(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
+
             Page<Label> FirstPageFunc(int? pageSizeHint)
             {
                 var response = RestClient.GetLabels(name, after, acceptDatetime, select, cancellationToken);
@@ -357,6 +393,7 @@ namespace AppConfiguration
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
+
         /// <summary> Gets a list of key-value revisions. </summary>
         /// <param name="key"> A filter used to match keys. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -366,6 +403,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<KeyValue> GetRevisionsAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
         {
+
             async Task<Page<KeyValue>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await RestClient.GetRevisionsAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
@@ -378,6 +416,7 @@ namespace AppConfiguration
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
+
         /// <summary> Gets a list of key-value revisions. </summary>
         /// <param name="key"> A filter used to match keys. </param>
         /// <param name="label"> A filter used to match labels. </param>
@@ -387,6 +426,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<KeyValue> GetRevisions(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
         {
+
             Page<KeyValue> FirstPageFunc(int? pageSizeHint)
             {
                 var response = RestClient.GetRevisions(key, label, after, acceptDatetime, select, cancellationToken);

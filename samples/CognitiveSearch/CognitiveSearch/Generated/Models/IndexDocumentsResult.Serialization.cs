@@ -28,6 +28,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static IndexDocumentsResult DeserializeIndexDocumentsResult(JsonElement element)
         {
             IndexDocumentsResult result = new IndexDocumentsResult();

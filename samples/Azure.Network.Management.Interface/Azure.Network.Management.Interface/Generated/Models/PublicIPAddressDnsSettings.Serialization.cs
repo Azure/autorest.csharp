@@ -32,6 +32,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WriteEndObject();
         }
+
         internal static PublicIPAddressDnsSettings DeserializePublicIPAddressDnsSettings(JsonElement element)
         {
             PublicIPAddressDnsSettings result = new PublicIPAddressDnsSettings();

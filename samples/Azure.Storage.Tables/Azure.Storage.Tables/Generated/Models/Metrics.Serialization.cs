@@ -37,6 +37,7 @@ namespace Azure.Storage.Tables.Models
             }
             writer.WriteEndElement();
         }
+
         internal static Metrics DeserializeMetrics(XElement element)
         {
             Metrics result = default;

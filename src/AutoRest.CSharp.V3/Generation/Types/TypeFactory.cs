@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Models.Types;
 
@@ -20,9 +21,9 @@ namespace AutoRest.CSharp.V3.Generation.Types
         public CSharpType CreateType(Schema schema, bool isNullable) => schema switch
         {
             ConstantSchema constantSchema => CreateType(constantSchema.ValueType, isNullable),
-            BinarySchema _ => new CSharpType(typeof(byte[]), isNullable),
+            BinarySchema _ => new CSharpType(typeof(Stream), isNullable),
             ByteArraySchema _ => new CSharpType(typeof(byte[]), isNullable),
-            ArraySchema array => new CSharpType(typeof(ICollection<>), isNullable, CreateType(array.ElementType, false)),
+            ArraySchema array => new CSharpType(typeof(IList<>), isNullable, CreateType(array.ElementType, false)),
             DictionarySchema dictionary => new CSharpType(typeof(IDictionary<,>), isNullable, new CSharpType(typeof(string)), CreateType(dictionary.ElementType, false)),
             NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
             _ when ToFrameworkType(schema.Type) is Type type => new CSharpType(type, isNullable),
@@ -38,7 +39,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
                 return definitionType;
             }
 
-            if (definitionType.FrameworkType == typeof(ICollection<>))
+            if (definitionType.FrameworkType == typeof(IList<>))
             {
                 return new CSharpType(typeof(List<>), definitionType.IsNullable, definitionType.Arguments);
             }
@@ -60,7 +61,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
                 return definitionType;
             }
 
-            if (definitionType.FrameworkType == typeof(ICollection<>))
+            if (definitionType.FrameworkType == typeof(IList<>))
             {
                 return new CSharpType(typeof(IEnumerable<>), definitionType.IsNullable, definitionType.Arguments);
             }

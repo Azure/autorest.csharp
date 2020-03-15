@@ -38,31 +38,31 @@ namespace CognitiveSearch.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown SnowballTokenFilterLanguage value.")
         };
 
-        public static SnowballTokenFilterLanguage ToSnowballTokenFilterLanguage(this string value) => value switch
+        public static SnowballTokenFilterLanguage ToSnowballTokenFilterLanguage(this string value)
         {
-            "armenian" => SnowballTokenFilterLanguage.Armenian,
-            "basque" => SnowballTokenFilterLanguage.Basque,
-            "catalan" => SnowballTokenFilterLanguage.Catalan,
-            "danish" => SnowballTokenFilterLanguage.Danish,
-            "dutch" => SnowballTokenFilterLanguage.Dutch,
-            "english" => SnowballTokenFilterLanguage.English,
-            "finnish" => SnowballTokenFilterLanguage.Finnish,
-            "french" => SnowballTokenFilterLanguage.French,
-            "german" => SnowballTokenFilterLanguage.German,
-            "german2" => SnowballTokenFilterLanguage.German2,
-            "hungarian" => SnowballTokenFilterLanguage.Hungarian,
-            "italian" => SnowballTokenFilterLanguage.Italian,
-            "kp" => SnowballTokenFilterLanguage.Kp,
-            "lovins" => SnowballTokenFilterLanguage.Lovins,
-            "norwegian" => SnowballTokenFilterLanguage.Norwegian,
-            "porter" => SnowballTokenFilterLanguage.Porter,
-            "portuguese" => SnowballTokenFilterLanguage.Portuguese,
-            "romanian" => SnowballTokenFilterLanguage.Romanian,
-            "russian" => SnowballTokenFilterLanguage.Russian,
-            "spanish" => SnowballTokenFilterLanguage.Spanish,
-            "swedish" => SnowballTokenFilterLanguage.Swedish,
-            "turkish" => SnowballTokenFilterLanguage.Turkish,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown SnowballTokenFilterLanguage value.")
-        };
+            if (string.Equals(value, "armenian", StringComparison.InvariantCultureIgnoreCase)) return SnowballTokenFilterLanguage.Armenian;
+            if (string.Equals(value, "basque", StringComparison.InvariantCultureIgnoreCase)) return SnowballTokenFilterLanguage.Basque;
+            if (string.Equals(value, "catalan", StringComparison.InvariantCultureIgnoreCase)) return SnowballTokenFilterLanguage.Catalan;
+            if (string.Equals(value, "danish", StringComparison.InvariantCultureIgnoreCase)) return SnowballTokenFilterLanguage.Danish;
+            if (string.Equals(value, "dutch", StringComparison.InvariantCultureIgnoreCase)) return SnowballTokenFilterLanguage.Dutch;
+            if (string.Equals(value, "english", StringComparison.InvariantCultureIgnoreCase)) return SnowballTokenFilterLanguage.English;
+            if (string.Equals(value, "finnish", StringComparison.InvariantCultureIgnoreCase)) return SnowballTokenFilterLanguage.Finnish;
+            if (string.Equals(value, "french", StringComparison.InvariantCultureIgnoreCase)) return SnowballTokenFilterLanguage.French;
+            if (string.Equals(value, "german", StringComparison.InvariantCultureIgnoreCase)) return SnowballTokenFilterLanguage.German;
+            if (string.Equals(value, "german2", StringComparison.InvariantCultureIgnoreCase)) return SnowballTokenFilterLanguage.German2;
+            if (string.Equals(value, "hungarian", StringComparison.InvariantCultureIgnoreCase)) return SnowballTokenFilterLanguage.Hungarian;
+            if (string.Equals(value, "italian", StringComparison.InvariantCultureIgnoreCase)) return SnowballTokenFilterLanguage.Italian;
+            if (string.Equals(value, "kp", StringComparison.InvariantCultureIgnoreCase)) return SnowballTokenFilterLanguage.Kp;
+            if (string.Equals(value, "lovins", StringComparison.InvariantCultureIgnoreCase)) return SnowballTokenFilterLanguage.Lovins;
+            if (string.Equals(value, "norwegian", StringComparison.InvariantCultureIgnoreCase)) return SnowballTokenFilterLanguage.Norwegian;
+            if (string.Equals(value, "porter", StringComparison.InvariantCultureIgnoreCase)) return SnowballTokenFilterLanguage.Porter;
+            if (string.Equals(value, "portuguese", StringComparison.InvariantCultureIgnoreCase)) return SnowballTokenFilterLanguage.Portuguese;
+            if (string.Equals(value, "romanian", StringComparison.InvariantCultureIgnoreCase)) return SnowballTokenFilterLanguage.Romanian;
+            if (string.Equals(value, "russian", StringComparison.InvariantCultureIgnoreCase)) return SnowballTokenFilterLanguage.Russian;
+            if (string.Equals(value, "spanish", StringComparison.InvariantCultureIgnoreCase)) return SnowballTokenFilterLanguage.Spanish;
+            if (string.Equals(value, "swedish", StringComparison.InvariantCultureIgnoreCase)) return SnowballTokenFilterLanguage.Swedish;
+            if (string.Equals(value, "turkish", StringComparison.InvariantCultureIgnoreCase)) return SnowballTokenFilterLanguage.Turkish;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown SnowballTokenFilterLanguage value.");
+        }
     }
 }

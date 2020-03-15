@@ -31,6 +31,7 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static KeysResult DeserializeKeysResult(JsonElement element)
         {
             KeysResult result = new KeysResult();
@@ -40,7 +41,7 @@ namespace Azure.AI.FormRecognizer.Models
                 {
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        ICollection<string> value = new List<string>();
+                        IList<string> value = new List<string>();
                         foreach (var item in property0.Value.EnumerateArray())
                         {
                             value.Add(item.GetString());

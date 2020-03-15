@@ -18,11 +18,11 @@ namespace CognitiveSearch.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown TextExtractionAlgorithm value.")
         };
 
-        public static TextExtractionAlgorithm ToTextExtractionAlgorithm(this string value) => value switch
+        public static TextExtractionAlgorithm ToTextExtractionAlgorithm(this string value)
         {
-            "printed" => TextExtractionAlgorithm.Printed,
-            "handwritten" => TextExtractionAlgorithm.Handwritten,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown TextExtractionAlgorithm value.")
-        };
+            if (string.Equals(value, "printed", StringComparison.InvariantCultureIgnoreCase)) return TextExtractionAlgorithm.Printed;
+            if (string.Equals(value, "handwritten", StringComparison.InvariantCultureIgnoreCase)) return TextExtractionAlgorithm.Handwritten;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown TextExtractionAlgorithm value.");
+        }
     }
 }

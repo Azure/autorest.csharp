@@ -17,7 +17,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
         public string Etag { get; internal set; }
         /// <summary> A list of availability zones denoting the IP allocated for the resource needs to come from. </summary>
-        public ICollection<string> Zones { get; set; }
+        public IList<string> Zones { get; set; }
         /// <summary> The public IP address allocation method. </summary>
         public IPAllocationMethod? PublicIPAllocationMethod { get; set; }
         /// <summary> The public IP address version. </summary>
@@ -29,7 +29,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The DDoS protection custom policy associated with the public IP address. </summary>
         public DdosSettings DdosSettings { get; set; }
         /// <summary> The list of tags associated with the public IP address. </summary>
-        public ICollection<IpTag> IpTags { get; set; }
+        public IList<IpTag> IpTags { get; set; }
         /// <summary> The IP address associated with the public IP address resource. </summary>
         public string IpAddress { get; set; }
         /// <summary> The Public IP Prefix this Public IP Address should be allocated from. </summary>

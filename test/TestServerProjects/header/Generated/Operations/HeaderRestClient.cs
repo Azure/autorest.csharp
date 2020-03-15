@@ -20,6 +20,7 @@ namespace header
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of HeaderRestClient. </summary>
         public HeaderRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -32,11 +33,12 @@ namespace header
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateParamExistingKeyRequest(string userAgent)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/param/existingkey", false);
@@ -44,6 +46,7 @@ namespace header
             request.Headers.Add("User-Agent", userAgent);
             return message;
         }
+
         /// <summary> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
         /// <param name="userAgent"> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -74,6 +77,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
         /// <param name="userAgent"> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -104,17 +108,19 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateResponseExistingKeyRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/response/existingkey", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get a response with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<ResponseExistingKeyHeaders>> ResponseExistingKeyAsync(CancellationToken cancellationToken = default)
@@ -140,6 +146,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Get a response with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<ResponseExistingKeyHeaders> ResponseExistingKey(CancellationToken cancellationToken = default)
@@ -165,11 +172,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateParamProtectedKeyRequest(string contentType)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/param/protectedkey", false);
@@ -177,6 +185,7 @@ namespace header
             request.Headers.Add("Content-Type", contentType);
             return message;
         }
+
         /// <summary> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
         /// <param name="contentType"> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -207,6 +216,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
         /// <param name="contentType"> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -237,17 +247,19 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateResponseProtectedKeyRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/response/protectedkey", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get a response with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<ResponseProtectedKeyHeaders>> ResponseProtectedKeyAsync(CancellationToken cancellationToken = default)
@@ -273,6 +285,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Get a response with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<ResponseProtectedKeyHeaders> ResponseProtectedKey(CancellationToken cancellationToken = default)
@@ -298,11 +311,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateParamIntegerRequest(string scenario, int value)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/param/prim/integer", false);
@@ -311,6 +325,7 @@ namespace header
             request.Headers.Add("value", value);
             return message;
         }
+
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 1 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 1 or -2. </param>
@@ -342,6 +357,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 1 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 1 or -2. </param>
@@ -373,11 +389,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateResponseIntegerRequest(string scenario)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/response/prim/integer", false);
@@ -385,6 +402,7 @@ namespace header
             request.Headers.Add("scenario", scenario);
             return message;
         }
+
         /// <summary> Get a response with header value &quot;value&quot;: 1 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -416,6 +434,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Get a response with header value &quot;value&quot;: 1 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -447,11 +466,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateParamLongRequest(string scenario, long value)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/param/prim/long", false);
@@ -460,6 +480,7 @@ namespace header
             request.Headers.Add("value", value);
             return message;
         }
+
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 105 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 105 or -2. </param>
@@ -491,6 +512,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 105 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 105 or -2. </param>
@@ -522,11 +544,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateResponseLongRequest(string scenario)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/response/prim/long", false);
@@ -534,6 +557,7 @@ namespace header
             request.Headers.Add("scenario", scenario);
             return message;
         }
+
         /// <summary> Get a response with header value &quot;value&quot;: 105 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -565,6 +589,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Get a response with header value &quot;value&quot;: 105 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -596,11 +621,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateParamFloatRequest(string scenario, float value)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/param/prim/float", false);
@@ -609,6 +635,7 @@ namespace header
             request.Headers.Add("value", value);
             return message;
         }
+
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 0.07 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
@@ -640,6 +667,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 0.07 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
@@ -671,11 +699,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateResponseFloatRequest(string scenario)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/response/prim/float", false);
@@ -683,6 +712,7 @@ namespace header
             request.Headers.Add("scenario", scenario);
             return message;
         }
+
         /// <summary> Get a response with header value &quot;value&quot;: 0.07 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -714,6 +744,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Get a response with header value &quot;value&quot;: 0.07 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -745,11 +776,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateParamDoubleRequest(string scenario, double value)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/param/prim/double", false);
@@ -758,6 +790,7 @@ namespace header
             request.Headers.Add("value", value);
             return message;
         }
+
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 7e120 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
@@ -789,6 +822,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 7e120 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
@@ -820,11 +854,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateResponseDoubleRequest(string scenario)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/response/prim/double", false);
@@ -832,6 +867,7 @@ namespace header
             request.Headers.Add("scenario", scenario);
             return message;
         }
+
         /// <summary> Get a response with header value &quot;value&quot;: 7e120 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -863,6 +899,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Get a response with header value &quot;value&quot;: 7e120 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -894,11 +931,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateParamBoolRequest(string scenario, bool value)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/param/prim/bool", false);
@@ -907,6 +945,7 @@ namespace header
             request.Headers.Add("value", value);
             return message;
         }
+
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;true&quot;, &quot;value&quot;: true or &quot;scenario&quot;: &quot;false&quot;, &quot;value&quot;: false. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values true or false. </param>
@@ -938,6 +977,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;true&quot;, &quot;value&quot;: true or &quot;scenario&quot;: &quot;false&quot;, &quot;value&quot;: false. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values true or false. </param>
@@ -969,11 +1009,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateResponseBoolRequest(string scenario)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/response/prim/bool", false);
@@ -981,6 +1022,7 @@ namespace header
             request.Headers.Add("scenario", scenario);
             return message;
         }
+
         /// <summary> Get a response with header value &quot;value&quot;: true or false. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1012,6 +1054,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Get a response with header value &quot;value&quot;: true or false. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1043,11 +1086,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateParamStringRequest(string scenario, string value)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/param/prim/string", false);
@@ -1059,6 +1103,7 @@ namespace header
             }
             return message;
         }
+
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;The quick brown fox jumps over the lazy dog&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null or &quot;scenario&quot;: &quot;empty&quot;, &quot;value&quot;: &quot;&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
@@ -1090,6 +1135,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;The quick brown fox jumps over the lazy dog&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null or &quot;scenario&quot;: &quot;empty&quot;, &quot;value&quot;: &quot;&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
@@ -1121,11 +1167,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateResponseStringRequest(string scenario)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/response/prim/string", false);
@@ -1133,6 +1180,7 @@ namespace header
             request.Headers.Add("scenario", scenario);
             return message;
         }
+
         /// <summary> Get a response with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1164,6 +1212,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Get a response with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1195,11 +1244,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateParamDateRequest(string scenario, DateTimeOffset value)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/param/prim/date", false);
@@ -1208,6 +1258,7 @@ namespace header
             request.Headers.Add("value", value, "D");
             return message;
         }
+
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
@@ -1239,6 +1290,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
@@ -1270,11 +1322,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateResponseDateRequest(string scenario)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/response/prim/date", false);
@@ -1282,6 +1335,7 @@ namespace header
             request.Headers.Add("scenario", scenario);
             return message;
         }
+
         /// <summary> Get a response with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1313,6 +1367,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Get a response with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1344,11 +1399,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateParamDatetimeRequest(string scenario, DateTimeOffset value)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/param/prim/datetime", false);
@@ -1357,6 +1413,7 @@ namespace header
             request.Headers.Add("value", value, "S");
             return message;
         }
+
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01T12:34:56Z&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01T00:00:00Z&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
@@ -1388,6 +1445,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01T12:34:56Z&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01T00:00:00Z&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
@@ -1419,11 +1477,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateResponseDatetimeRequest(string scenario)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/response/prim/datetime", false);
@@ -1431,6 +1490,7 @@ namespace header
             request.Headers.Add("scenario", scenario);
             return message;
         }
+
         /// <summary> Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1462,6 +1522,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1493,11 +1554,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateParamDatetimeRfc1123Request(string scenario, DateTimeOffset? value)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/param/prim/datetimerfc1123", false);
@@ -1509,6 +1571,7 @@ namespace header
             }
             return message;
         }
+
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
@@ -1540,6 +1603,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
@@ -1571,11 +1635,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateResponseDatetimeRfc1123Request(string scenario)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/response/prim/datetimerfc1123", false);
@@ -1583,6 +1648,7 @@ namespace header
             request.Headers.Add("scenario", scenario);
             return message;
         }
+
         /// <summary> Get a response with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1614,6 +1680,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Get a response with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1645,11 +1712,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateParamDurationRequest(string scenario, TimeSpan value)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/param/prim/duration", false);
@@ -1658,6 +1726,7 @@ namespace header
             request.Headers.Add("value", value, "P");
             return message;
         }
+
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;P123DT22H14M12.011S&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
@@ -1689,6 +1758,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;P123DT22H14M12.011S&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
@@ -1720,11 +1790,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateResponseDurationRequest(string scenario)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/response/prim/duration", false);
@@ -1732,6 +1803,7 @@ namespace header
             request.Headers.Add("scenario", scenario);
             return message;
         }
+
         /// <summary> Get a response with header values &quot;P123DT22H14M12.011S&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1763,6 +1835,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Get a response with header values &quot;P123DT22H14M12.011S&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1794,11 +1867,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateParamByteRequest(string scenario, byte[] value)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/param/prim/byte", false);
@@ -1807,6 +1881,7 @@ namespace header
             request.Headers.Add("value", value);
             return message;
         }
+
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
@@ -1842,6 +1917,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
@@ -1877,11 +1953,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateResponseByteRequest(string scenario)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/response/prim/byte", false);
@@ -1889,6 +1966,7 @@ namespace header
             request.Headers.Add("scenario", scenario);
             return message;
         }
+
         /// <summary> Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1920,6 +1998,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1951,11 +2030,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateParamEnumRequest(string scenario, GreyscaleColors? value)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/param/prim/enum", false);
@@ -1967,6 +2047,7 @@ namespace header
             }
             return message;
         }
+
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;GREY&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
@@ -1998,6 +2079,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;GREY&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
@@ -2029,11 +2111,12 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateResponseEnumRequest(string scenario)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/response/prim/enum", false);
@@ -2041,6 +2124,7 @@ namespace header
             request.Headers.Add("scenario", scenario);
             return message;
         }
+
         /// <summary> Get a response with header values &quot;GREY&quot; or null. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2072,6 +2156,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Get a response with header values &quot;GREY&quot; or null. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2103,17 +2188,19 @@ namespace header
                 throw;
             }
         }
+
         internal HttpMessage CreateCustomRequestIdRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> CustomRequestIdAsync(CancellationToken cancellationToken = default)
@@ -2138,6 +2225,7 @@ namespace header
                 throw;
             }
         }
+
         /// <summary> Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response CustomRequestId(CancellationToken cancellationToken = default)

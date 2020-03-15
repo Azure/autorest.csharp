@@ -20,6 +20,7 @@ namespace body_datetime
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of DatetimeRestClient. </summary>
         public DatetimeRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -32,17 +33,19 @@ namespace body_datetime
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetime/null", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get null datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
@@ -71,6 +74,7 @@ namespace body_datetime
                 throw;
             }
         }
+
         /// <summary> Get null datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetNull(CancellationToken cancellationToken = default)
@@ -99,17 +103,19 @@ namespace body_datetime
                 throw;
             }
         }
+
         internal HttpMessage CreateGetInvalidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetime/invalid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get invalid datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetInvalidAsync(CancellationToken cancellationToken = default)
@@ -138,6 +144,7 @@ namespace body_datetime
                 throw;
             }
         }
+
         /// <summary> Get invalid datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetInvalid(CancellationToken cancellationToken = default)
@@ -166,17 +173,19 @@ namespace body_datetime
                 throw;
             }
         }
+
         internal HttpMessage CreateGetOverflowRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetime/overflow", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get overflow datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetOverflowAsync(CancellationToken cancellationToken = default)
@@ -205,6 +214,7 @@ namespace body_datetime
                 throw;
             }
         }
+
         /// <summary> Get overflow datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetOverflow(CancellationToken cancellationToken = default)
@@ -233,17 +243,19 @@ namespace body_datetime
                 throw;
             }
         }
+
         internal HttpMessage CreateGetUnderflowRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetime/underflow", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get underflow datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUnderflowAsync(CancellationToken cancellationToken = default)
@@ -272,6 +284,7 @@ namespace body_datetime
                 throw;
             }
         }
+
         /// <summary> Get underflow datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUnderflow(CancellationToken cancellationToken = default)
@@ -300,11 +313,12 @@ namespace body_datetime
                 throw;
             }
         }
+
         internal HttpMessage CreatePutUtcMaxDateTimeRequest(DateTimeOffset datetimeBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetime/max/utc", false);
@@ -315,11 +329,13 @@ namespace body_datetime
             request.Content = content;
             return message;
         }
+
         /// <summary> Put max datetime value 9999-12-31T23:59:59.999Z. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUtcMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeClient.PutUtcMaxDateTime");
             scope.Start();
             try
@@ -340,11 +356,13 @@ namespace body_datetime
                 throw;
             }
         }
+
         /// <summary> Put max datetime value 9999-12-31T23:59:59.999Z. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUtcMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeClient.PutUtcMaxDateTime");
             scope.Start();
             try
@@ -365,11 +383,12 @@ namespace body_datetime
                 throw;
             }
         }
+
         internal HttpMessage CreatePutUtcMaxDateTime7DigitsRequest(DateTimeOffset datetimeBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetime/max/utc7ms", false);
@@ -380,11 +399,13 @@ namespace body_datetime
             request.Content = content;
             return message;
         }
+
         /// <summary> Put max datetime value 9999-12-31T23:59:59.9999999Z. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUtcMaxDateTime7DigitsAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeClient.PutUtcMaxDateTime7Digits");
             scope.Start();
             try
@@ -405,11 +426,13 @@ namespace body_datetime
                 throw;
             }
         }
+
         /// <summary> Put max datetime value 9999-12-31T23:59:59.9999999Z. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUtcMaxDateTime7Digits(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeClient.PutUtcMaxDateTime7Digits");
             scope.Start();
             try
@@ -430,17 +453,19 @@ namespace body_datetime
                 throw;
             }
         }
+
         internal HttpMessage CreateGetUtcLowercaseMaxDateTimeRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetime/max/utc/lowercase", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get max datetime value 9999-12-31t23:59:59.999z. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUtcLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
@@ -469,6 +494,7 @@ namespace body_datetime
                 throw;
             }
         }
+
         /// <summary> Get max datetime value 9999-12-31t23:59:59.999z. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUtcLowercaseMaxDateTime(CancellationToken cancellationToken = default)
@@ -497,17 +523,19 @@ namespace body_datetime
                 throw;
             }
         }
+
         internal HttpMessage CreateGetUtcUppercaseMaxDateTimeRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetime/max/utc/uppercase", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get max datetime value 9999-12-31T23:59:59.999Z. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUtcUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
@@ -536,6 +564,7 @@ namespace body_datetime
                 throw;
             }
         }
+
         /// <summary> Get max datetime value 9999-12-31T23:59:59.999Z. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUtcUppercaseMaxDateTime(CancellationToken cancellationToken = default)
@@ -564,17 +593,19 @@ namespace body_datetime
                 throw;
             }
         }
+
         internal HttpMessage CreateGetUtcUppercaseMaxDateTime7DigitsRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetime/max/utc7ms/uppercase", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get max datetime value 9999-12-31T23:59:59.9999999Z. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUtcUppercaseMaxDateTime7DigitsAsync(CancellationToken cancellationToken = default)
@@ -603,6 +634,7 @@ namespace body_datetime
                 throw;
             }
         }
+
         /// <summary> Get max datetime value 9999-12-31T23:59:59.9999999Z. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUtcUppercaseMaxDateTime7Digits(CancellationToken cancellationToken = default)
@@ -631,11 +663,12 @@ namespace body_datetime
                 throw;
             }
         }
+
         internal HttpMessage CreatePutLocalPositiveOffsetMaxDateTimeRequest(DateTimeOffset datetimeBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetime/max/localpositiveoffset", false);
@@ -646,11 +679,13 @@ namespace body_datetime
             request.Content = content;
             return message;
         }
+
         /// <summary> Put max datetime value with positive numoffset 9999-12-31t23:59:59.999+14:00. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutLocalPositiveOffsetMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeClient.PutLocalPositiveOffsetMaxDateTime");
             scope.Start();
             try
@@ -671,11 +706,13 @@ namespace body_datetime
                 throw;
             }
         }
+
         /// <summary> Put max datetime value with positive numoffset 9999-12-31t23:59:59.999+14:00. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutLocalPositiveOffsetMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeClient.PutLocalPositiveOffsetMaxDateTime");
             scope.Start();
             try
@@ -696,17 +733,19 @@ namespace body_datetime
                 throw;
             }
         }
+
         internal HttpMessage CreateGetLocalPositiveOffsetLowercaseMaxDateTimeRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetime/max/localpositiveoffset/lowercase", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetLocalPositiveOffsetLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
@@ -735,6 +774,7 @@ namespace body_datetime
                 throw;
             }
         }
+
         /// <summary> Get max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetLocalPositiveOffsetLowercaseMaxDateTime(CancellationToken cancellationToken = default)
@@ -763,17 +803,19 @@ namespace body_datetime
                 throw;
             }
         }
+
         internal HttpMessage CreateGetLocalPositiveOffsetUppercaseMaxDateTimeRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetime/max/localpositiveoffset/uppercase", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetLocalPositiveOffsetUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
@@ -802,6 +844,7 @@ namespace body_datetime
                 throw;
             }
         }
+
         /// <summary> Get max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetLocalPositiveOffsetUppercaseMaxDateTime(CancellationToken cancellationToken = default)
@@ -830,11 +873,12 @@ namespace body_datetime
                 throw;
             }
         }
+
         internal HttpMessage CreatePutLocalNegativeOffsetMaxDateTimeRequest(DateTimeOffset datetimeBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetime/max/localnegativeoffset", false);
@@ -845,11 +889,13 @@ namespace body_datetime
             request.Content = content;
             return message;
         }
+
         /// <summary> Put max datetime value with positive numoffset 9999-12-31t23:59:59.999-14:00. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutLocalNegativeOffsetMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeClient.PutLocalNegativeOffsetMaxDateTime");
             scope.Start();
             try
@@ -870,11 +916,13 @@ namespace body_datetime
                 throw;
             }
         }
+
         /// <summary> Put max datetime value with positive numoffset 9999-12-31t23:59:59.999-14:00. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutLocalNegativeOffsetMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeClient.PutLocalNegativeOffsetMaxDateTime");
             scope.Start();
             try
@@ -895,17 +943,19 @@ namespace body_datetime
                 throw;
             }
         }
+
         internal HttpMessage CreateGetLocalNegativeOffsetUppercaseMaxDateTimeRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetime/max/localnegativeoffset/uppercase", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetLocalNegativeOffsetUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
@@ -934,6 +984,7 @@ namespace body_datetime
                 throw;
             }
         }
+
         /// <summary> Get max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetLocalNegativeOffsetUppercaseMaxDateTime(CancellationToken cancellationToken = default)
@@ -962,17 +1013,19 @@ namespace body_datetime
                 throw;
             }
         }
+
         internal HttpMessage CreateGetLocalNegativeOffsetLowercaseMaxDateTimeRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetime/max/localnegativeoffset/lowercase", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetLocalNegativeOffsetLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
@@ -1001,6 +1054,7 @@ namespace body_datetime
                 throw;
             }
         }
+
         /// <summary> Get max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetLocalNegativeOffsetLowercaseMaxDateTime(CancellationToken cancellationToken = default)
@@ -1029,11 +1083,12 @@ namespace body_datetime
                 throw;
             }
         }
+
         internal HttpMessage CreatePutUtcMinDateTimeRequest(DateTimeOffset datetimeBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetime/min/utc", false);
@@ -1044,11 +1099,13 @@ namespace body_datetime
             request.Content = content;
             return message;
         }
+
         /// <summary> Put min datetime value 0001-01-01T00:00:00Z. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUtcMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeClient.PutUtcMinDateTime");
             scope.Start();
             try
@@ -1069,11 +1126,13 @@ namespace body_datetime
                 throw;
             }
         }
+
         /// <summary> Put min datetime value 0001-01-01T00:00:00Z. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUtcMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeClient.PutUtcMinDateTime");
             scope.Start();
             try
@@ -1094,17 +1153,19 @@ namespace body_datetime
                 throw;
             }
         }
+
         internal HttpMessage CreateGetUtcMinDateTimeRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetime/min/utc", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get min datetime value 0001-01-01T00:00:00Z. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUtcMinDateTimeAsync(CancellationToken cancellationToken = default)
@@ -1133,6 +1194,7 @@ namespace body_datetime
                 throw;
             }
         }
+
         /// <summary> Get min datetime value 0001-01-01T00:00:00Z. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUtcMinDateTime(CancellationToken cancellationToken = default)
@@ -1161,11 +1223,12 @@ namespace body_datetime
                 throw;
             }
         }
+
         internal HttpMessage CreatePutLocalPositiveOffsetMinDateTimeRequest(DateTimeOffset datetimeBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetime/min/localpositiveoffset", false);
@@ -1176,11 +1239,13 @@ namespace body_datetime
             request.Content = content;
             return message;
         }
+
         /// <summary> Put min datetime value 0001-01-01T00:00:00+14:00. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutLocalPositiveOffsetMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeClient.PutLocalPositiveOffsetMinDateTime");
             scope.Start();
             try
@@ -1201,11 +1266,13 @@ namespace body_datetime
                 throw;
             }
         }
+
         /// <summary> Put min datetime value 0001-01-01T00:00:00+14:00. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutLocalPositiveOffsetMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeClient.PutLocalPositiveOffsetMinDateTime");
             scope.Start();
             try
@@ -1226,17 +1293,19 @@ namespace body_datetime
                 throw;
             }
         }
+
         internal HttpMessage CreateGetLocalPositiveOffsetMinDateTimeRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetime/min/localpositiveoffset", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get min datetime value 0001-01-01T00:00:00+14:00. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetLocalPositiveOffsetMinDateTimeAsync(CancellationToken cancellationToken = default)
@@ -1265,6 +1334,7 @@ namespace body_datetime
                 throw;
             }
         }
+
         /// <summary> Get min datetime value 0001-01-01T00:00:00+14:00. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetLocalPositiveOffsetMinDateTime(CancellationToken cancellationToken = default)
@@ -1293,11 +1363,12 @@ namespace body_datetime
                 throw;
             }
         }
+
         internal HttpMessage CreatePutLocalNegativeOffsetMinDateTimeRequest(DateTimeOffset datetimeBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetime/min/localnegativeoffset", false);
@@ -1308,11 +1379,13 @@ namespace body_datetime
             request.Content = content;
             return message;
         }
+
         /// <summary> Put min datetime value 0001-01-01T00:00:00-14:00. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutLocalNegativeOffsetMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeClient.PutLocalNegativeOffsetMinDateTime");
             scope.Start();
             try
@@ -1333,11 +1406,13 @@ namespace body_datetime
                 throw;
             }
         }
+
         /// <summary> Put min datetime value 0001-01-01T00:00:00-14:00. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutLocalNegativeOffsetMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DatetimeClient.PutLocalNegativeOffsetMinDateTime");
             scope.Start();
             try
@@ -1358,17 +1433,19 @@ namespace body_datetime
                 throw;
             }
         }
+
         internal HttpMessage CreateGetLocalNegativeOffsetMinDateTimeRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetime/min/localnegativeoffset", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get min datetime value 0001-01-01T00:00:00-14:00. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetLocalNegativeOffsetMinDateTimeAsync(CancellationToken cancellationToken = default)
@@ -1397,6 +1474,7 @@ namespace body_datetime
                 throw;
             }
         }
+
         /// <summary> Get min datetime value 0001-01-01T00:00:00-14:00. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetLocalNegativeOffsetMinDateTime(CancellationToken cancellationToken = default)

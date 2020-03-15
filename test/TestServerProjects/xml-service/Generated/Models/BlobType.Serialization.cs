@@ -19,12 +19,12 @@ namespace xml_service.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown BlobType value.")
         };
 
-        public static BlobType ToBlobType(this string value) => value switch
+        public static BlobType ToBlobType(this string value)
         {
-            "BlockBlob" => BlobType.BlockBlob,
-            "PageBlob" => BlobType.PageBlob,
-            "AppendBlob" => BlobType.AppendBlob,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown BlobType value.")
-        };
+            if (string.Equals(value, "BlockBlob", StringComparison.InvariantCultureIgnoreCase)) return BlobType.BlockBlob;
+            if (string.Equals(value, "PageBlob", StringComparison.InvariantCultureIgnoreCase)) return BlobType.PageBlob;
+            if (string.Equals(value, "AppendBlob", StringComparison.InvariantCultureIgnoreCase)) return BlobType.AppendBlob;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown BlobType value.");
+        }
     }
 }

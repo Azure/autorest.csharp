@@ -23,6 +23,7 @@ namespace xml_service
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of XmlRestClient. </summary>
         public XmlRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -35,17 +36,19 @@ namespace xml_service
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetComplexTypeRefNoMetaRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/complex-type-ref-no-meta", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get a complex type that has a ref to a complex type with no XML node. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<RootWithRefAndNoMeta>> GetComplexTypeRefNoMetaAsync(CancellationToken cancellationToken = default)
@@ -79,6 +82,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Get a complex type that has a ref to a complex type with no XML node. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<RootWithRefAndNoMeta> GetComplexTypeRefNoMeta(CancellationToken cancellationToken = default)
@@ -112,11 +116,12 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreatePutComplexTypeRefNoMetaRequest(RootWithRefAndNoMeta model)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/complex-type-ref-no-meta", false);
@@ -127,6 +132,7 @@ namespace xml_service
             request.Content = content;
             return message;
         }
+
         /// <summary> Puts a complex type that has a ref to a complex type with no XML node. </summary>
         /// <param name="model"> The RootWithRefAndNoMeta to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -157,6 +163,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Puts a complex type that has a ref to a complex type with no XML node. </summary>
         /// <param name="model"> The RootWithRefAndNoMeta to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -187,17 +194,19 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreateGetComplexTypeRefWithMetaRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/complex-type-ref-with-meta", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get a complex type that has a ref to a complex type with XML node. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<RootWithRefAndMeta>> GetComplexTypeRefWithMetaAsync(CancellationToken cancellationToken = default)
@@ -231,6 +240,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Get a complex type that has a ref to a complex type with XML node. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<RootWithRefAndMeta> GetComplexTypeRefWithMeta(CancellationToken cancellationToken = default)
@@ -264,11 +274,12 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreatePutComplexTypeRefWithMetaRequest(RootWithRefAndMeta model)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/complex-type-ref-with-meta", false);
@@ -279,6 +290,7 @@ namespace xml_service
             request.Content = content;
             return message;
         }
+
         /// <summary> Puts a complex type that has a ref to a complex type with XML node. </summary>
         /// <param name="model"> The RootWithRefAndMeta to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -309,6 +321,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Puts a complex type that has a ref to a complex type with XML node. </summary>
         /// <param name="model"> The RootWithRefAndMeta to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -339,17 +352,19 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreateGetSimpleRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/simple", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get a simple XML document. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Slideshow>> GetSimpleAsync(CancellationToken cancellationToken = default)
@@ -383,6 +398,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Get a simple XML document. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Slideshow> GetSimple(CancellationToken cancellationToken = default)
@@ -416,11 +432,12 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreatePutSimpleRequest(Slideshow slideshow)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/simple", false);
@@ -431,6 +448,7 @@ namespace xml_service
             request.Content = content;
             return message;
         }
+
         /// <summary> Put a simple XML document. </summary>
         /// <param name="slideshow"> The Slideshow to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -461,6 +479,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Put a simple XML document. </summary>
         /// <param name="slideshow"> The Slideshow to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -491,17 +510,19 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreateGetWrappedListsRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/wrapped-lists", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an XML document with multiple wrapped lists. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<AppleBarrel>> GetWrappedListsAsync(CancellationToken cancellationToken = default)
@@ -535,6 +556,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Get an XML document with multiple wrapped lists. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<AppleBarrel> GetWrappedLists(CancellationToken cancellationToken = default)
@@ -568,11 +590,12 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreatePutWrappedListsRequest(AppleBarrel wrappedLists)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/wrapped-lists", false);
@@ -583,6 +606,7 @@ namespace xml_service
             request.Content = content;
             return message;
         }
+
         /// <summary> Put an XML document with multiple wrapped lists. </summary>
         /// <param name="wrappedLists"> The AppleBarrel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -613,6 +637,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Put an XML document with multiple wrapped lists. </summary>
         /// <param name="wrappedLists"> The AppleBarrel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -643,17 +668,19 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreateGetHeadersRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/headers", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get strongly-typed response headers. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<GetHeadersHeaders>> GetHeadersAsync(CancellationToken cancellationToken = default)
@@ -679,6 +706,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Get strongly-typed response headers. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<GetHeadersHeaders> GetHeaders(CancellationToken cancellationToken = default)
@@ -704,17 +732,19 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreateGetEmptyListRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/empty-list", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an empty list. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Slideshow>> GetEmptyListAsync(CancellationToken cancellationToken = default)
@@ -748,6 +778,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Get an empty list. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Slideshow> GetEmptyList(CancellationToken cancellationToken = default)
@@ -781,11 +812,12 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreatePutEmptyListRequest(Slideshow slideshow)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/empty-list", false);
@@ -796,6 +828,7 @@ namespace xml_service
             request.Content = content;
             return message;
         }
+
         /// <summary> Puts an empty list. </summary>
         /// <param name="slideshow"> The Slideshow to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -826,6 +859,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Puts an empty list. </summary>
         /// <param name="slideshow"> The Slideshow to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -856,17 +890,19 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreateGetEmptyWrappedListsRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/empty-wrapped-lists", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Gets some empty wrapped lists. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<AppleBarrel>> GetEmptyWrappedListsAsync(CancellationToken cancellationToken = default)
@@ -900,6 +936,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Gets some empty wrapped lists. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<AppleBarrel> GetEmptyWrappedLists(CancellationToken cancellationToken = default)
@@ -933,11 +970,12 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreatePutEmptyWrappedListsRequest(AppleBarrel appleBarrel)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/empty-wrapped-lists", false);
@@ -948,6 +986,7 @@ namespace xml_service
             request.Content = content;
             return message;
         }
+
         /// <summary> Puts some empty wrapped lists. </summary>
         /// <param name="appleBarrel"> The AppleBarrel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -978,6 +1017,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Puts some empty wrapped lists. </summary>
         /// <param name="appleBarrel"> The AppleBarrel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1008,20 +1048,22 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreateGetRootListRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/root-list", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Gets a list as the root element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<Banana>>> GetRootListAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<Banana>>> GetRootListAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetRootList");
             scope.Start();
@@ -1034,7 +1076,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<Banana> value = default;
+                            IList<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
                             {
@@ -1058,9 +1100,10 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Gets a list as the root element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<Banana>> GetRootList(CancellationToken cancellationToken = default)
+        public Response<IList<Banana>> GetRootList(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetRootList");
             scope.Start();
@@ -1073,7 +1116,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<Banana> value = default;
+                            IList<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
                             {
@@ -1097,11 +1140,12 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreatePutRootListRequest(IEnumerable<Banana> bananas)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/root-list", false);
@@ -1117,6 +1161,7 @@ namespace xml_service
             request.Content = content;
             return message;
         }
+
         /// <summary> Puts a list as the root element. </summary>
         /// <param name="bananas"> The ArrayOfBanana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1147,6 +1192,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Puts a list as the root element. </summary>
         /// <param name="bananas"> The ArrayOfBanana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1177,20 +1223,22 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreateGetRootListSingleItemRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/root-list-single-item", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Gets a list with a single item. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<Banana>>> GetRootListSingleItemAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<Banana>>> GetRootListSingleItemAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetRootListSingleItem");
             scope.Start();
@@ -1203,7 +1251,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<Banana> value = default;
+                            IList<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
                             {
@@ -1227,9 +1275,10 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Gets a list with a single item. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<Banana>> GetRootListSingleItem(CancellationToken cancellationToken = default)
+        public Response<IList<Banana>> GetRootListSingleItem(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetRootListSingleItem");
             scope.Start();
@@ -1242,7 +1291,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<Banana> value = default;
+                            IList<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
                             {
@@ -1266,11 +1315,12 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreatePutRootListSingleItemRequest(IEnumerable<Banana> bananas)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/root-list-single-item", false);
@@ -1286,6 +1336,7 @@ namespace xml_service
             request.Content = content;
             return message;
         }
+
         /// <summary> Puts a list with a single item. </summary>
         /// <param name="bananas"> The ArrayOfBanana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1316,6 +1367,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Puts a list with a single item. </summary>
         /// <param name="bananas"> The ArrayOfBanana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1346,20 +1398,22 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreateGetEmptyRootListRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/empty-root-list", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Gets an empty list as the root element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<Banana>>> GetEmptyRootListAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<Banana>>> GetEmptyRootListAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetEmptyRootList");
             scope.Start();
@@ -1372,7 +1426,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<Banana> value = default;
+                            IList<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
                             {
@@ -1396,9 +1450,10 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Gets an empty list as the root element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<Banana>> GetEmptyRootList(CancellationToken cancellationToken = default)
+        public Response<IList<Banana>> GetEmptyRootList(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetEmptyRootList");
             scope.Start();
@@ -1411,7 +1466,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<Banana> value = default;
+                            IList<Banana> value = default;
                             var bananas = document.Element("bananas");
                             if (bananas != null)
                             {
@@ -1435,11 +1490,12 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreatePutEmptyRootListRequest(IEnumerable<Banana> bananas)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/empty-root-list", false);
@@ -1455,6 +1511,7 @@ namespace xml_service
             request.Content = content;
             return message;
         }
+
         /// <summary> Puts an empty list as the root element. </summary>
         /// <param name="bananas"> The ArrayOfBanana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1485,6 +1542,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Puts an empty list as the root element. </summary>
         /// <param name="bananas"> The ArrayOfBanana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1515,17 +1573,19 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreateGetEmptyChildElementRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/empty-child-element", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Gets an XML document with an empty child element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Banana>> GetEmptyChildElementAsync(CancellationToken cancellationToken = default)
@@ -1559,6 +1619,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Gets an XML document with an empty child element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Banana> GetEmptyChildElement(CancellationToken cancellationToken = default)
@@ -1592,11 +1653,12 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreatePutEmptyChildElementRequest(Banana banana)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/empty-child-element", false);
@@ -1607,6 +1669,7 @@ namespace xml_service
             request.Content = content;
             return message;
         }
+
         /// <summary> Puts a value with an empty child element. </summary>
         /// <param name="banana"> The Banana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1637,6 +1700,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Puts a value with an empty child element. </summary>
         /// <param name="banana"> The Banana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1667,11 +1731,12 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreateListContainersRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/", false);
@@ -1679,6 +1744,7 @@ namespace xml_service
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Lists containers in a storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ListContainersResponse>> ListContainersAsync(CancellationToken cancellationToken = default)
@@ -1712,6 +1778,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Lists containers in a storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ListContainersResponse> ListContainers(CancellationToken cancellationToken = default)
@@ -1745,11 +1812,12 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreateGetServicePropertiesRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/", false);
@@ -1758,6 +1826,7 @@ namespace xml_service
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Gets storage service properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<StorageServiceProperties>> GetServicePropertiesAsync(CancellationToken cancellationToken = default)
@@ -1791,6 +1860,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Gets storage service properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<StorageServiceProperties> GetServiceProperties(CancellationToken cancellationToken = default)
@@ -1824,11 +1894,12 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreatePutServicePropertiesRequest(StorageServiceProperties properties)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/", false);
@@ -1841,6 +1912,7 @@ namespace xml_service
             request.Content = content;
             return message;
         }
+
         /// <summary> Puts storage service properties. </summary>
         /// <param name="properties"> The StorageServiceProperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1871,6 +1943,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Puts storage service properties. </summary>
         /// <param name="properties"> The StorageServiceProperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1901,11 +1974,12 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreateGetAclsRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/mycontainer", false);
@@ -1914,9 +1988,10 @@ namespace xml_service
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Gets storage ACLs for a container. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<SignedIdentifier>>> GetAclsAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<SignedIdentifier>>> GetAclsAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetAcls");
             scope.Start();
@@ -1929,7 +2004,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<SignedIdentifier> value = default;
+                            IList<SignedIdentifier> value = default;
                             var signedIdentifiers = document.Element("SignedIdentifiers");
                             if (signedIdentifiers != null)
                             {
@@ -1953,9 +2028,10 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Gets storage ACLs for a container. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<SignedIdentifier>> GetAcls(CancellationToken cancellationToken = default)
+        public Response<IList<SignedIdentifier>> GetAcls(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetAcls");
             scope.Start();
@@ -1968,7 +2044,7 @@ namespace xml_service
                     case 200:
                         {
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            ICollection<SignedIdentifier> value = default;
+                            IList<SignedIdentifier> value = default;
                             var signedIdentifiers = document.Element("SignedIdentifiers");
                             if (signedIdentifiers != null)
                             {
@@ -1992,11 +2068,12 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreatePutAclsRequest(IEnumerable<SignedIdentifier> properties)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/mycontainer", false);
@@ -2014,6 +2091,7 @@ namespace xml_service
             request.Content = content;
             return message;
         }
+
         /// <summary> Puts storage ACLs for a container. </summary>
         /// <param name="properties"> The SignedIdentifiers to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2044,6 +2122,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Puts storage ACLs for a container. </summary>
         /// <param name="properties"> The SignedIdentifiers to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2074,11 +2153,12 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreateListBlobsRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/mycontainer", false);
@@ -2087,6 +2167,7 @@ namespace xml_service
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Lists blobs in a storage container. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ListBlobsResponse>> ListBlobsAsync(CancellationToken cancellationToken = default)
@@ -2120,6 +2201,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> Lists blobs in a storage container. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ListBlobsResponse> ListBlobs(CancellationToken cancellationToken = default)
@@ -2153,11 +2235,12 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreateJsonInputRequest(JsonInput properties)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/jsoninput", false);
@@ -2168,6 +2251,7 @@ namespace xml_service
             request.Content = content;
             return message;
         }
+
         /// <summary> A Swagger with XML that has one operation that takes JSON as input. You need to send the ID number 42. </summary>
         /// <param name="properties"> The JsonInput to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2198,6 +2282,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> A Swagger with XML that has one operation that takes JSON as input. You need to send the ID number 42. </summary>
         /// <param name="properties"> The JsonInput to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2228,17 +2313,19 @@ namespace xml_service
                 throw;
             }
         }
+
         internal HttpMessage CreateJsonOutputRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/xml/jsonoutput", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> A Swagger with XML that has one operation that returns JSON. ID number 42. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<JsonOutput>> JsonOutputAsync(CancellationToken cancellationToken = default)
@@ -2267,6 +2354,7 @@ namespace xml_service
                 throw;
             }
         }
+
         /// <summary> A Swagger with XML that has one operation that returns JSON. ID number 42. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<JsonOutput> JsonOutput(CancellationToken cancellationToken = default)

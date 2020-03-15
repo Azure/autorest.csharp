@@ -58,6 +58,7 @@ namespace CognitiveSearch.Models
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
+
         internal static KeyPhraseExtractionSkill DeserializeKeyPhraseExtractionSkill(JsonElement element)
         {
             KeyPhraseExtractionSkill result = new KeyPhraseExtractionSkill();

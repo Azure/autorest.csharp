@@ -20,6 +20,7 @@ namespace body_integer
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of IntRestClient. </summary>
         public IntRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -32,17 +33,19 @@ namespace body_integer
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/int/null", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get null Int value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<int>> GetNullAsync(CancellationToken cancellationToken = default)
@@ -71,6 +74,7 @@ namespace body_integer
                 throw;
             }
         }
+
         /// <summary> Get null Int value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<int> GetNull(CancellationToken cancellationToken = default)
@@ -99,17 +103,19 @@ namespace body_integer
                 throw;
             }
         }
+
         internal HttpMessage CreateGetInvalidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/int/invalid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get invalid Int value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<int>> GetInvalidAsync(CancellationToken cancellationToken = default)
@@ -138,6 +144,7 @@ namespace body_integer
                 throw;
             }
         }
+
         /// <summary> Get invalid Int value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<int> GetInvalid(CancellationToken cancellationToken = default)
@@ -166,17 +173,19 @@ namespace body_integer
                 throw;
             }
         }
+
         internal HttpMessage CreateGetOverflowInt32Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/int/overflowint32", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get overflow Int32 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<int>> GetOverflowInt32Async(CancellationToken cancellationToken = default)
@@ -205,6 +214,7 @@ namespace body_integer
                 throw;
             }
         }
+
         /// <summary> Get overflow Int32 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<int> GetOverflowInt32(CancellationToken cancellationToken = default)
@@ -233,17 +243,19 @@ namespace body_integer
                 throw;
             }
         }
+
         internal HttpMessage CreateGetUnderflowInt32Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/int/underflowint32", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get underflow Int32 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<int>> GetUnderflowInt32Async(CancellationToken cancellationToken = default)
@@ -272,6 +284,7 @@ namespace body_integer
                 throw;
             }
         }
+
         /// <summary> Get underflow Int32 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<int> GetUnderflowInt32(CancellationToken cancellationToken = default)
@@ -300,17 +313,19 @@ namespace body_integer
                 throw;
             }
         }
+
         internal HttpMessage CreateGetOverflowInt64Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/int/overflowint64", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get overflow Int64 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<long>> GetOverflowInt64Async(CancellationToken cancellationToken = default)
@@ -339,6 +354,7 @@ namespace body_integer
                 throw;
             }
         }
+
         /// <summary> Get overflow Int64 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<long> GetOverflowInt64(CancellationToken cancellationToken = default)
@@ -367,17 +383,19 @@ namespace body_integer
                 throw;
             }
         }
+
         internal HttpMessage CreateGetUnderflowInt64Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/int/underflowint64", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get underflow Int64 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<long>> GetUnderflowInt64Async(CancellationToken cancellationToken = default)
@@ -406,6 +424,7 @@ namespace body_integer
                 throw;
             }
         }
+
         /// <summary> Get underflow Int64 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<long> GetUnderflowInt64(CancellationToken cancellationToken = default)
@@ -434,11 +453,12 @@ namespace body_integer
                 throw;
             }
         }
+
         internal HttpMessage CreatePutMax32Request(int intBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/int/max/32", false);
@@ -449,11 +469,13 @@ namespace body_integer
             request.Content = content;
             return message;
         }
+
         /// <summary> Put max int32 value. </summary>
         /// <param name="intBody"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMax32Async(int intBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("IntClient.PutMax32");
             scope.Start();
             try
@@ -474,11 +496,13 @@ namespace body_integer
                 throw;
             }
         }
+
         /// <summary> Put max int32 value. </summary>
         /// <param name="intBody"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutMax32(int intBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("IntClient.PutMax32");
             scope.Start();
             try
@@ -499,11 +523,12 @@ namespace body_integer
                 throw;
             }
         }
+
         internal HttpMessage CreatePutMax64Request(long intBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/int/max/64", false);
@@ -514,11 +539,13 @@ namespace body_integer
             request.Content = content;
             return message;
         }
+
         /// <summary> Put max int64 value. </summary>
         /// <param name="intBody"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMax64Async(long intBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("IntClient.PutMax64");
             scope.Start();
             try
@@ -539,11 +566,13 @@ namespace body_integer
                 throw;
             }
         }
+
         /// <summary> Put max int64 value. </summary>
         /// <param name="intBody"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutMax64(long intBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("IntClient.PutMax64");
             scope.Start();
             try
@@ -564,11 +593,12 @@ namespace body_integer
                 throw;
             }
         }
+
         internal HttpMessage CreatePutMin32Request(int intBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/int/min/32", false);
@@ -579,11 +609,13 @@ namespace body_integer
             request.Content = content;
             return message;
         }
+
         /// <summary> Put min int32 value. </summary>
         /// <param name="intBody"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMin32Async(int intBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("IntClient.PutMin32");
             scope.Start();
             try
@@ -604,11 +636,13 @@ namespace body_integer
                 throw;
             }
         }
+
         /// <summary> Put min int32 value. </summary>
         /// <param name="intBody"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutMin32(int intBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("IntClient.PutMin32");
             scope.Start();
             try
@@ -629,11 +663,12 @@ namespace body_integer
                 throw;
             }
         }
+
         internal HttpMessage CreatePutMin64Request(long intBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/int/min/64", false);
@@ -644,11 +679,13 @@ namespace body_integer
             request.Content = content;
             return message;
         }
+
         /// <summary> Put min int64 value. </summary>
         /// <param name="intBody"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMin64Async(long intBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("IntClient.PutMin64");
             scope.Start();
             try
@@ -669,11 +706,13 @@ namespace body_integer
                 throw;
             }
         }
+
         /// <summary> Put min int64 value. </summary>
         /// <param name="intBody"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutMin64(long intBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("IntClient.PutMin64");
             scope.Start();
             try
@@ -694,17 +733,19 @@ namespace body_integer
                 throw;
             }
         }
+
         internal HttpMessage CreateGetUnixTimeRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/int/unixtime", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get datetime encoded as Unix time value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUnixTimeAsync(CancellationToken cancellationToken = default)
@@ -733,6 +774,7 @@ namespace body_integer
                 throw;
             }
         }
+
         /// <summary> Get datetime encoded as Unix time value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUnixTime(CancellationToken cancellationToken = default)
@@ -761,11 +803,12 @@ namespace body_integer
                 throw;
             }
         }
+
         internal HttpMessage CreatePutUnixTimeDateRequest(DateTimeOffset intBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/int/unixtime", false);
@@ -776,11 +819,13 @@ namespace body_integer
             request.Content = content;
             return message;
         }
+
         /// <summary> Put datetime encoded as Unix time. </summary>
         /// <param name="intBody"> The Unixtime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUnixTimeDateAsync(DateTimeOffset intBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("IntClient.PutUnixTimeDate");
             scope.Start();
             try
@@ -801,11 +846,13 @@ namespace body_integer
                 throw;
             }
         }
+
         /// <summary> Put datetime encoded as Unix time. </summary>
         /// <param name="intBody"> The Unixtime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUnixTimeDate(DateTimeOffset intBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("IntClient.PutUnixTimeDate");
             scope.Start();
             try
@@ -826,17 +873,19 @@ namespace body_integer
                 throw;
             }
         }
+
         internal HttpMessage CreateGetInvalidUnixTimeRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/int/invalidunixtime", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get invalid Unix time value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetInvalidUnixTimeAsync(CancellationToken cancellationToken = default)
@@ -865,6 +914,7 @@ namespace body_integer
                 throw;
             }
         }
+
         /// <summary> Get invalid Unix time value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetInvalidUnixTime(CancellationToken cancellationToken = default)
@@ -893,17 +943,19 @@ namespace body_integer
                 throw;
             }
         }
+
         internal HttpMessage CreateGetNullUnixTimeRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/int/nullunixtime", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get null Unix time value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetNullUnixTimeAsync(CancellationToken cancellationToken = default)
@@ -932,6 +984,7 @@ namespace body_integer
                 throw;
             }
         }
+
         /// <summary> Get null Unix time value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetNullUnixTime(CancellationToken cancellationToken = default)

@@ -26,6 +26,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static MagnitudeScoringParameters DeserializeMagnitudeScoringParameters(JsonElement element)
         {
             MagnitudeScoringParameters result = new MagnitudeScoringParameters();

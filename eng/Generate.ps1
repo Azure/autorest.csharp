@@ -75,7 +75,7 @@ $testNames =
     'header',
     'httpInfrastructure',
     'lro',
-    #'media_types',
+    'media_types',
     'model-flattening',
     'paging',
     #'required-optional',
@@ -144,7 +144,7 @@ if ($updateLaunchSettings)
         $codeModel = Join-Path $outputPath 'CodeModel.yaml'
         $namespace = $definition.title.Replace('-', '_')
 
-        $settings.profiles[$key] = @{
+        $settings.profiles[$key] = [ordered]@{
             'commandName'='Project';
             'commandLineArgs'="--standalone --input-codemodel=$codeModel --plugin=csharpgen --output-folder=$outputPath --namespace=$namespace --shared-source-folder=$sharedSourceNormalized --save-code-model=true"
         }

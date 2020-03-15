@@ -22,6 +22,7 @@ namespace model_flattening
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of ServiceRestClient. </summary>
         public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -34,11 +35,12 @@ namespace model_flattening
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreatePutArrayRequest(IEnumerable<Resource> resourceArray)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/array", false);
@@ -54,11 +56,13 @@ namespace model_flattening
             request.Content = content;
             return message;
         }
+
         /// <summary> Put External Resource as an Array. </summary>
         /// <param name="resourceArray"> External Resource as an Array to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutArrayAsync(IEnumerable<Resource> resourceArray, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutArray");
             scope.Start();
             try
@@ -79,11 +83,13 @@ namespace model_flattening
                 throw;
             }
         }
+
         /// <summary> Put External Resource as an Array. </summary>
         /// <param name="resourceArray"> External Resource as an Array to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutArray(IEnumerable<Resource> resourceArray, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutArray");
             scope.Start();
             try
@@ -104,20 +110,22 @@ namespace model_flattening
                 throw;
             }
         }
+
         internal HttpMessage CreateGetArrayRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/array", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get External Resource as an Array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<FlattenedProduct>>> GetArrayAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<FlattenedProduct>>> GetArrayAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetArray");
             scope.Start();
@@ -130,7 +138,7 @@ namespace model_flattening
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<FlattenedProduct> value = new List<FlattenedProduct>();
+                            IList<FlattenedProduct> value = new List<FlattenedProduct>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
@@ -147,9 +155,10 @@ namespace model_flattening
                 throw;
             }
         }
+
         /// <summary> Get External Resource as an Array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<FlattenedProduct>> GetArray(CancellationToken cancellationToken = default)
+        public Response<IList<FlattenedProduct>> GetArray(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetArray");
             scope.Start();
@@ -162,7 +171,7 @@ namespace model_flattening
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<FlattenedProduct> value = new List<FlattenedProduct>();
+                            IList<FlattenedProduct> value = new List<FlattenedProduct>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
@@ -179,11 +188,12 @@ namespace model_flattening
                 throw;
             }
         }
+
         internal HttpMessage CreatePutWrappedArrayRequest(IEnumerable<WrappedProduct> resourceArray)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/wrappedarray", false);
@@ -199,11 +209,13 @@ namespace model_flattening
             request.Content = content;
             return message;
         }
+
         /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
         /// <param name="resourceArray"> External Resource as an Array to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutWrappedArrayAsync(IEnumerable<WrappedProduct> resourceArray, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutWrappedArray");
             scope.Start();
             try
@@ -224,11 +236,13 @@ namespace model_flattening
                 throw;
             }
         }
+
         /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
         /// <param name="resourceArray"> External Resource as an Array to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutWrappedArray(IEnumerable<WrappedProduct> resourceArray, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutWrappedArray");
             scope.Start();
             try
@@ -249,20 +263,22 @@ namespace model_flattening
                 throw;
             }
         }
+
         internal HttpMessage CreateGetWrappedArrayRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/wrappedarray", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<ProductWrapper>>> GetWrappedArrayAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<ProductWrapper>>> GetWrappedArrayAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetWrappedArray");
             scope.Start();
@@ -275,7 +291,7 @@ namespace model_flattening
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<ProductWrapper> value = new List<ProductWrapper>();
+                            IList<ProductWrapper> value = new List<ProductWrapper>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(ProductWrapper.DeserializeProductWrapper(item));
@@ -292,9 +308,10 @@ namespace model_flattening
                 throw;
             }
         }
+
         /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<ProductWrapper>> GetWrappedArray(CancellationToken cancellationToken = default)
+        public Response<IList<ProductWrapper>> GetWrappedArray(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetWrappedArray");
             scope.Start();
@@ -307,7 +324,7 @@ namespace model_flattening
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<ProductWrapper> value = new List<ProductWrapper>();
+                            IList<ProductWrapper> value = new List<ProductWrapper>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(ProductWrapper.DeserializeProductWrapper(item));
@@ -324,11 +341,12 @@ namespace model_flattening
                 throw;
             }
         }
+
         internal HttpMessage CreatePutDictionaryRequest(IDictionary<string, FlattenedProduct> resourceDictionary)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/dictionary", false);
@@ -345,11 +363,13 @@ namespace model_flattening
             request.Content = content;
             return message;
         }
+
         /// <summary> Put External Resource as a Dictionary. </summary>
         /// <param name="resourceDictionary"> External Resource as a Dictionary to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutDictionaryAsync(IDictionary<string, FlattenedProduct> resourceDictionary, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutDictionary");
             scope.Start();
             try
@@ -370,11 +390,13 @@ namespace model_flattening
                 throw;
             }
         }
+
         /// <summary> Put External Resource as a Dictionary. </summary>
         /// <param name="resourceDictionary"> External Resource as a Dictionary to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutDictionary(IDictionary<string, FlattenedProduct> resourceDictionary, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutDictionary");
             scope.Start();
             try
@@ -395,17 +417,19 @@ namespace model_flattening
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDictionaryRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/dictionary", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get External Resource as a Dictionary. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, FlattenedProduct>>> GetDictionaryAsync(CancellationToken cancellationToken = default)
@@ -438,6 +462,7 @@ namespace model_flattening
                 throw;
             }
         }
+
         /// <summary> Get External Resource as a Dictionary. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, FlattenedProduct>> GetDictionary(CancellationToken cancellationToken = default)
@@ -470,11 +495,12 @@ namespace model_flattening
                 throw;
             }
         }
+
         internal HttpMessage CreatePutResourceCollectionRequest(ResourceCollection resourceComplexObject)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/resourcecollection", false);
@@ -485,11 +511,13 @@ namespace model_flattening
             request.Content = content;
             return message;
         }
+
         /// <summary> Put External Resource as a ResourceCollection. </summary>
         /// <param name="resourceComplexObject"> External Resource as a ResourceCollection to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutResourceCollectionAsync(ResourceCollection resourceComplexObject, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutResourceCollection");
             scope.Start();
             try
@@ -510,11 +538,13 @@ namespace model_flattening
                 throw;
             }
         }
+
         /// <summary> Put External Resource as a ResourceCollection. </summary>
         /// <param name="resourceComplexObject"> External Resource as a ResourceCollection to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutResourceCollection(ResourceCollection resourceComplexObject, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutResourceCollection");
             scope.Start();
             try
@@ -535,17 +565,19 @@ namespace model_flattening
                 throw;
             }
         }
+
         internal HttpMessage CreateGetResourceCollectionRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/resourcecollection", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get External Resource as a ResourceCollection. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ResourceCollection>> GetResourceCollectionAsync(CancellationToken cancellationToken = default)
@@ -574,6 +606,7 @@ namespace model_flattening
                 throw;
             }
         }
+
         /// <summary> Get External Resource as a ResourceCollection. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ResourceCollection> GetResourceCollection(CancellationToken cancellationToken = default)
@@ -602,11 +635,12 @@ namespace model_flattening
                 throw;
             }
         }
+
         internal HttpMessage CreatePutSimpleProductRequest(SimpleProduct simpleBodyProduct)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/customFlattening", false);
@@ -617,11 +651,13 @@ namespace model_flattening
             request.Content = content;
             return message;
         }
+
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
         /// <param name="simpleBodyProduct"> Simple body product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<SimpleProduct>> PutSimpleProductAsync(SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutSimpleProduct");
             scope.Start();
             try
@@ -646,11 +682,13 @@ namespace model_flattening
                 throw;
             }
         }
+
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
         /// <param name="simpleBodyProduct"> Simple body product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<SimpleProduct> PutSimpleProduct(SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutSimpleProduct");
             scope.Start();
             try
@@ -675,11 +713,12 @@ namespace model_flattening
                 throw;
             }
         }
+
         internal HttpMessage CreatePostFlattenedSimpleProductRequest(SimpleProduct simpleBodyProduct)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/customFlattening", false);
@@ -690,11 +729,13 @@ namespace model_flattening
             request.Content = content;
             return message;
         }
+
         /// <summary> Put Flattened Simple Product with client flattening true on the parameter. </summary>
         /// <param name="simpleBodyProduct"> Simple body product to post. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PostFlattenedSimpleProduct");
             scope.Start();
             try
@@ -719,11 +760,13 @@ namespace model_flattening
                 throw;
             }
         }
+
         /// <summary> Put Flattened Simple Product with client flattening true on the parameter. </summary>
         /// <param name="simpleBodyProduct"> Simple body product to post. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<SimpleProduct> PostFlattenedSimpleProduct(SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PostFlattenedSimpleProduct");
             scope.Start();
             try
@@ -748,11 +791,12 @@ namespace model_flattening
                 throw;
             }
         }
+
         internal HttpMessage CreatePutSimpleProductWithGroupingRequest(string name, SimpleProduct simpleBodyProduct)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/customFlattening/parametergrouping/", false);
@@ -765,6 +809,7 @@ namespace model_flattening
             request.Content = content;
             return message;
         }
+
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
         /// <param name="name"> Product name with value &apos;groupproduct&apos;. </param>
         /// <param name="simpleBodyProduct"> Simple body product to put. </param>
@@ -800,6 +845,7 @@ namespace model_flattening
                 throw;
             }
         }
+
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
         /// <param name="name"> Product name with value &apos;groupproduct&apos;. </param>
         /// <param name="simpleBodyProduct"> Simple body product to put. </param>

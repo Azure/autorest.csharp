@@ -21,6 +21,10 @@ namespace lro
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal LRORetrysRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of LRORetrysClient for mocking. </summary>
+        protected LRORetrysClient()
+        {
+        }
         /// <summary> Initializes a new instance of LRORetrysClient. </summary>
         internal LRORetrysClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -28,10 +32,11 @@ namespace lro
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
         /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        public Operation<Product> CreatePut201CreatingSucceeded200Operation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        internal Operation<Product> CreatePut201CreatingSucceeded200(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
             if (originalResponse == null)
             {
@@ -56,26 +61,31 @@ namespace lro
                 return value;
             });
         }
+
         /// <summary> Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Operation<Product>> StartPut201CreatingSucceeded200OperationAsync(Product product, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Operation<Product>> StartPut201CreatingSucceeded200Async(Product product, CancellationToken cancellationToken = default)
         {
+
             var originalResponse = await RestClient.Put201CreatingSucceeded200Async(product, cancellationToken).ConfigureAwait(false);
-            return CreatePut201CreatingSucceeded200Operation(originalResponse, () => RestClient.CreatePut201CreatingSucceeded200Request(product));
+            return CreatePut201CreatingSucceeded200(originalResponse, () => RestClient.CreatePut201CreatingSucceeded200Request(product));
         }
+
         /// <summary> Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Operation<Product> StartPut201CreatingSucceeded200Operation(Product product, CancellationToken cancellationToken = default)
+        public virtual Operation<Product> StartPut201CreatingSucceeded200(Product product, CancellationToken cancellationToken = default)
         {
+
             var originalResponse = RestClient.Put201CreatingSucceeded200(product, cancellationToken);
-            return CreatePut201CreatingSucceeded200Operation(originalResponse, () => RestClient.CreatePut201CreatingSucceeded200Request(product));
+            return CreatePut201CreatingSucceeded200(originalResponse, () => RestClient.CreatePut201CreatingSucceeded200Request(product));
         }
+
         /// <summary> Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
         /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        public Operation<Product> CreatePutAsyncRelativeRetrySucceededOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        internal Operation<Product> CreatePutAsyncRelativeRetrySucceeded(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
             if (originalResponse == null)
             {
@@ -100,26 +110,31 @@ namespace lro
                 return value;
             });
         }
+
         /// <summary> Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Operation<Product>> StartPutAsyncRelativeRetrySucceededOperationAsync(Product product, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Operation<Product>> StartPutAsyncRelativeRetrySucceededAsync(Product product, CancellationToken cancellationToken = default)
         {
+
             var originalResponse = await RestClient.PutAsyncRelativeRetrySucceededAsync(product, cancellationToken).ConfigureAwait(false);
-            return CreatePutAsyncRelativeRetrySucceededOperation(originalResponse, () => RestClient.CreatePutAsyncRelativeRetrySucceededRequest(product));
+            return CreatePutAsyncRelativeRetrySucceeded(originalResponse, () => RestClient.CreatePutAsyncRelativeRetrySucceededRequest(product));
         }
+
         /// <summary> Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Operation<Product> StartPutAsyncRelativeRetrySucceededOperation(Product product, CancellationToken cancellationToken = default)
+        public virtual Operation<Product> StartPutAsyncRelativeRetrySucceeded(Product product, CancellationToken cancellationToken = default)
         {
+
             var originalResponse = RestClient.PutAsyncRelativeRetrySucceeded(product, cancellationToken);
-            return CreatePutAsyncRelativeRetrySucceededOperation(originalResponse, () => RestClient.CreatePutAsyncRelativeRetrySucceededRequest(product));
+            return CreatePutAsyncRelativeRetrySucceeded(originalResponse, () => RestClient.CreatePutAsyncRelativeRetrySucceededRequest(product));
         }
+
         /// <summary> Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
         /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        public Operation<Product> CreateDeleteProvisioning202Accepted200SucceededOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        internal Operation<Product> CreateDeleteProvisioning202Accepted200Succeeded(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
             if (originalResponse == null)
             {
@@ -144,24 +159,27 @@ namespace lro
                 return value;
             });
         }
+
         /// <summary> Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Operation<Product>> StartDeleteProvisioning202Accepted200SucceededOperationAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Operation<Product>> StartDeleteProvisioning202Accepted200SucceededAsync(CancellationToken cancellationToken = default)
         {
             var originalResponse = await RestClient.DeleteProvisioning202Accepted200SucceededAsync(cancellationToken).ConfigureAwait(false);
-            return CreateDeleteProvisioning202Accepted200SucceededOperation(originalResponse, () => RestClient.CreateDeleteProvisioning202Accepted200SucceededRequest());
+            return CreateDeleteProvisioning202Accepted200Succeeded(originalResponse, () => RestClient.CreateDeleteProvisioning202Accepted200SucceededRequest());
         }
+
         /// <summary> Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Operation<Product> StartDeleteProvisioning202Accepted200SucceededOperation(CancellationToken cancellationToken = default)
+        public virtual Operation<Product> StartDeleteProvisioning202Accepted200Succeeded(CancellationToken cancellationToken = default)
         {
             var originalResponse = RestClient.DeleteProvisioning202Accepted200Succeeded(cancellationToken);
-            return CreateDeleteProvisioning202Accepted200SucceededOperation(originalResponse, () => RestClient.CreateDeleteProvisioning202Accepted200SucceededRequest());
+            return CreateDeleteProvisioning202Accepted200Succeeded(originalResponse, () => RestClient.CreateDeleteProvisioning202Accepted200SucceededRequest());
         }
+
         /// <summary> Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
         /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        public Operation<Response> CreateDelete202Retry200Operation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        internal Operation<Response> CreateDelete202Retry200(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
             if (originalResponse == null)
             {
@@ -172,35 +190,29 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LRORetrysClient.Delete202Retry200", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                return response;
-            },
-            async (response, cancellationToken) =>
-            {
-                await Task.CompletedTask;
-                return response;
-            });
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LRORetrysClient.Delete202Retry200", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
+
         /// <summary> Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Operation<Response>> StartDelete202Retry200OperationAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Operation<Response>> StartDelete202Retry200Async(CancellationToken cancellationToken = default)
         {
             var originalResponse = await RestClient.Delete202Retry200Async(cancellationToken).ConfigureAwait(false);
-            return CreateDelete202Retry200Operation(originalResponse, () => RestClient.CreateDelete202Retry200Request());
+            return CreateDelete202Retry200(originalResponse, () => RestClient.CreateDelete202Retry200Request());
         }
+
         /// <summary> Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Operation<Response> StartDelete202Retry200Operation(CancellationToken cancellationToken = default)
+        public virtual Operation<Response> StartDelete202Retry200(CancellationToken cancellationToken = default)
         {
             var originalResponse = RestClient.Delete202Retry200(cancellationToken);
-            return CreateDelete202Retry200Operation(originalResponse, () => RestClient.CreateDelete202Retry200Request());
+            return CreateDelete202Retry200(originalResponse, () => RestClient.CreateDelete202Retry200Request());
         }
+
         /// <summary> Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
         /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        public Operation<Response> CreateDeleteAsyncRelativeRetrySucceededOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        internal Operation<Response> CreateDeleteAsyncRelativeRetrySucceeded(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
             if (originalResponse == null)
             {
@@ -211,35 +223,29 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LRORetrysClient.DeleteAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                return response;
-            },
-            async (response, cancellationToken) =>
-            {
-                await Task.CompletedTask;
-                return response;
-            });
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LRORetrysClient.DeleteAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
+
         /// <summary> Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Operation<Response>> StartDeleteAsyncRelativeRetrySucceededOperationAsync(CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Operation<Response>> StartDeleteAsyncRelativeRetrySucceededAsync(CancellationToken cancellationToken = default)
         {
             var originalResponse = await RestClient.DeleteAsyncRelativeRetrySucceededAsync(cancellationToken).ConfigureAwait(false);
-            return CreateDeleteAsyncRelativeRetrySucceededOperation(originalResponse, () => RestClient.CreateDeleteAsyncRelativeRetrySucceededRequest());
+            return CreateDeleteAsyncRelativeRetrySucceeded(originalResponse, () => RestClient.CreateDeleteAsyncRelativeRetrySucceededRequest());
         }
+
         /// <summary> Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Operation<Response> StartDeleteAsyncRelativeRetrySucceededOperation(CancellationToken cancellationToken = default)
+        public virtual Operation<Response> StartDeleteAsyncRelativeRetrySucceeded(CancellationToken cancellationToken = default)
         {
             var originalResponse = RestClient.DeleteAsyncRelativeRetrySucceeded(cancellationToken);
-            return CreateDeleteAsyncRelativeRetrySucceededOperation(originalResponse, () => RestClient.CreateDeleteAsyncRelativeRetrySucceededRequest());
+            return CreateDeleteAsyncRelativeRetrySucceeded(originalResponse, () => RestClient.CreateDeleteAsyncRelativeRetrySucceededRequest());
         }
+
         /// <summary> Long running post request, service returns a 500, then a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
         /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        public Operation<Response> CreatePost202Retry200Operation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        internal Operation<Response> CreatePost202Retry200(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
             if (originalResponse == null)
             {
@@ -250,37 +256,33 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LRORetrysClient.Post202Retry200", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                return response;
-            },
-            async (response, cancellationToken) =>
-            {
-                await Task.CompletedTask;
-                return response;
-            });
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LRORetrysClient.Post202Retry200", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
+
         /// <summary> Long running post request, service returns a 500, then a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Operation<Response>> StartPost202Retry200OperationAsync(Product product, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Operation<Response>> StartPost202Retry200Async(Product product, CancellationToken cancellationToken = default)
         {
+
             var originalResponse = await RestClient.Post202Retry200Async(product, cancellationToken).ConfigureAwait(false);
-            return CreatePost202Retry200Operation(originalResponse, () => RestClient.CreatePost202Retry200Request(product));
+            return CreatePost202Retry200(originalResponse, () => RestClient.CreatePost202Retry200Request(product));
         }
+
         /// <summary> Long running post request, service returns a 500, then a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Operation<Response> StartPost202Retry200Operation(Product product, CancellationToken cancellationToken = default)
+        public virtual Operation<Response> StartPost202Retry200(Product product, CancellationToken cancellationToken = default)
         {
+
             var originalResponse = RestClient.Post202Retry200(product, cancellationToken);
-            return CreatePost202Retry200Operation(originalResponse, () => RestClient.CreatePost202Retry200Request(product));
+            return CreatePost202Retry200(originalResponse, () => RestClient.CreatePost202Retry200Request(product));
         }
+
         /// <summary> Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
         /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        public Operation<Response> CreatePostAsyncRelativeRetrySucceededOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        internal Operation<Response> CreatePostAsyncRelativeRetrySucceeded(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
             if (originalResponse == null)
             {
@@ -291,32 +293,27 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LRORetrysClient.PostAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                return response;
-            },
-            async (response, cancellationToken) =>
-            {
-                await Task.CompletedTask;
-                return response;
-            });
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LRORetrysClient.PostAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
+
         /// <summary> Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Operation<Response>> StartPostAsyncRelativeRetrySucceededOperationAsync(Product product, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Operation<Response>> StartPostAsyncRelativeRetrySucceededAsync(Product product, CancellationToken cancellationToken = default)
         {
+
             var originalResponse = await RestClient.PostAsyncRelativeRetrySucceededAsync(product, cancellationToken).ConfigureAwait(false);
-            return CreatePostAsyncRelativeRetrySucceededOperation(originalResponse, () => RestClient.CreatePostAsyncRelativeRetrySucceededRequest(product));
+            return CreatePostAsyncRelativeRetrySucceeded(originalResponse, () => RestClient.CreatePostAsyncRelativeRetrySucceededRequest(product));
         }
+
         /// <summary> Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Operation<Response> StartPostAsyncRelativeRetrySucceededOperation(Product product, CancellationToken cancellationToken = default)
+        public virtual Operation<Response> StartPostAsyncRelativeRetrySucceeded(Product product, CancellationToken cancellationToken = default)
         {
+
             var originalResponse = RestClient.PostAsyncRelativeRetrySucceeded(product, cancellationToken);
-            return CreatePostAsyncRelativeRetrySucceededOperation(originalResponse, () => RestClient.CreatePostAsyncRelativeRetrySucceededRequest(product));
+            return CreatePostAsyncRelativeRetrySucceeded(originalResponse, () => RestClient.CreatePostAsyncRelativeRetrySucceededRequest(product));
         }
     }
 }

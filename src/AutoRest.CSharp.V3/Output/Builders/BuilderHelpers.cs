@@ -70,17 +70,18 @@ namespace AutoRest.CSharp.V3.Output.Builders
         public static string CSharpName(this Schema operation) =>
             operation.Language.Default.Name.ToCleanName();
 
-        public static TypeDeclarationOptions CreateTypeAttributes(string defaultName, string defaultNamespace, string defaultAccessibility, INamedTypeSymbol? existingType = null)
+        public static TypeDeclarationOptions CreateTypeAttributes(string defaultName, string defaultNamespace, string defaultAccessibility, INamedTypeSymbol? existingType = null, bool existingTypeOverrides = false)
         {
             if (existingType != null)
             {
                 return new TypeDeclarationOptions(existingType.Name,
                     existingType.ContainingNamespace.ToDisplayString(),
-                    SyntaxFacts.GetText(existingType.DeclaredAccessibility)
+                    SyntaxFacts.GetText(existingType.DeclaredAccessibility),
+                    existingTypeOverrides
                 );
             }
 
-            return new TypeDeclarationOptions(defaultName,defaultNamespace, defaultAccessibility);
+            return new TypeDeclarationOptions(defaultName,defaultNamespace, defaultAccessibility, false);
         }
 
         public static MemberDeclarationOptions CreateMemberDeclaration(string defaultName, CSharpType defaultType, string defaultAccessibility, ISymbol? existingMember)

@@ -56,6 +56,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static Delegation DeserializeDelegation(JsonElement element)
         {
             Delegation result = new Delegation();

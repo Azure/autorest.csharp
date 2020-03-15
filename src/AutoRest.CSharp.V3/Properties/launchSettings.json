@@ -8,6 +8,18 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\AppConfiguration\\AppConfiguration\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\AppConfiguration\\AppConfiguration --namespace=AppConfiguration --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
     },
+    "Azure.AI.FormRecognizer": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\Azure.AI.FormRecognizer\\Azure.AI.FormRecognizer\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\Azure.AI.FormRecognizer\\Azure.AI.FormRecognizer --namespace=Azure.AI.FormRecognizer --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "Azure.Network.Management.Interface": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\Azure.Network.Management.Interface\\Azure.Network.Management.Interface\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\Azure.Network.Management.Interface\\Azure.Network.Management.Interface --namespace=Azure.Network.Management.Interface --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "Azure.Storage.Management": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\Azure.Storage.Management\\Azure.Storage.Management\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\Azure.Storage.Management\\Azure.Storage.Management --namespace=Azure.Storage.Management --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
     "Azure.Storage.Tables": {
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\Azure.Storage.Tables\\Azure.Storage.Tables\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\Azure.Storage.Tables\\Azure.Storage.Tables --namespace=Azure.Storage.Tables --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
@@ -102,7 +114,11 @@
     },
     "lro": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\lro\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\lro --namespace=lro"
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\lro\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\lro --namespace=lro --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "media_types": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\media_types\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\media_types --namespace=media_types --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
     },
     "model-flattening": {
       "commandName": "Project",

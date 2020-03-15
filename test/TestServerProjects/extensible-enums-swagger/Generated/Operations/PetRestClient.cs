@@ -21,6 +21,7 @@ namespace extensible_enums_swagger
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of PetRestClient. </summary>
         public PetRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -33,11 +34,12 @@ namespace extensible_enums_swagger
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetByPetIdRequest(string petId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/extensibleenums/pet/", false);
@@ -45,6 +47,7 @@ namespace extensible_enums_swagger
             request.Uri = uri;
             return message;
         }
+
         /// <param name="petId"> Pet id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Pet>> GetByPetIdAsync(string petId, CancellationToken cancellationToken = default)
@@ -78,6 +81,7 @@ namespace extensible_enums_swagger
                 throw;
             }
         }
+
         /// <param name="petId"> Pet id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Pet> GetByPetId(string petId, CancellationToken cancellationToken = default)
@@ -111,11 +115,12 @@ namespace extensible_enums_swagger
                 throw;
             }
         }
+
         internal HttpMessage CreateAddPetRequest(Pet petParam)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/extensibleenums/pet/addPet", false);
@@ -126,10 +131,12 @@ namespace extensible_enums_swagger
             request.Content = content;
             return message;
         }
+
         /// <param name="petParam"> The Pet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Pet>> AddPetAsync(Pet petParam, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("PetClient.AddPet");
             scope.Start();
             try
@@ -154,10 +161,12 @@ namespace extensible_enums_swagger
                 throw;
             }
         }
+
         /// <param name="petParam"> The Pet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Pet> AddPet(Pet petParam, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("PetClient.AddPet");
             scope.Start();
             try

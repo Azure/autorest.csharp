@@ -32,6 +32,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteNumberValue(Score);
             writer.WriteEndObject();
         }
+
         internal static Entity DeserializeEntity(JsonElement element)
         {
             Entity result = new Entity();

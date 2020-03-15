@@ -15,9 +15,9 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
         public string Etag { get; internal set; }
         /// <summary> Collection of routes contained within a route table. </summary>
-        public ICollection<Route> Routes { get; set; }
+        public IList<Route> Routes { get; set; }
         /// <summary> A collection of references to subnets. </summary>
-        public ICollection<Subnet> Subnets { get; internal set; }
+        public IList<Subnet> Subnets { get; internal set; }
         /// <summary> Whether to disable the routes learned by BGP on that route table. True means disable. </summary>
         public bool? DisableBgpRoutePropagation { get; set; }
         /// <summary> The provisioning state of the route table resource. </summary>

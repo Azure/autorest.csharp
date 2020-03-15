@@ -21,6 +21,10 @@ namespace Azure.Network.Management.Interface
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal NetworkInterfacesRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of NetworkInterfacesClient for mocking. </summary>
+        protected NetworkInterfacesClient()
+        {
+        }
         /// <summary> Initializes a new instance of NetworkInterfacesClient. </summary>
         internal NetworkInterfacesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-11-01")
         {
@@ -28,15 +32,17 @@ namespace Azure.Network.Management.Interface
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Gets information about the specified network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="expand"> Expands referenced resources. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<NetworkInterface>> GetAsync(string resourceGroupName, string networkInterfaceName, string expand, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<NetworkInterface>> GetAsync(string resourceGroupName, string networkInterfaceName, string expand, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetAsync(resourceGroupName, networkInterfaceName, expand, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Gets information about the specified network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -46,15 +52,17 @@ namespace Azure.Network.Management.Interface
         {
             return RestClient.Get(resourceGroupName, networkInterfaceName, expand, cancellationToken);
         }
+
         /// <summary> Updates a network interface tags. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="parameters"> Parameters supplied to update network interface tags. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<NetworkInterface>> UpdateTagsAsync(string resourceGroupName, string networkInterfaceName, TagsObject parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<NetworkInterface>> UpdateTagsAsync(string resourceGroupName, string networkInterfaceName, TagsObject parameters, CancellationToken cancellationToken = default)
         {
             return await RestClient.UpdateTagsAsync(resourceGroupName, networkInterfaceName, parameters, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Updates a network interface tags. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -64,6 +72,7 @@ namespace Azure.Network.Management.Interface
         {
             return RestClient.UpdateTags(resourceGroupName, networkInterfaceName, parameters, cancellationToken);
         }
+
         /// <summary> Gets all network interfaces in a subscription. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<NetworkInterface> ListAllAsync(CancellationToken cancellationToken = default)
@@ -80,6 +89,7 @@ namespace Azure.Network.Management.Interface
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
+
         /// <summary> Gets all network interfaces in a subscription. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<NetworkInterface> ListAll(CancellationToken cancellationToken = default)
@@ -96,6 +106,7 @@ namespace Azure.Network.Management.Interface
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
+
         /// <summary> Gets all network interfaces in a resource group. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -118,6 +129,7 @@ namespace Azure.Network.Management.Interface
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
+
         /// <summary> Gets all network interfaces in a resource group. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -140,10 +152,11 @@ namespace Azure.Network.Management.Interface
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
+
         /// <summary> Deletes the specified network interface. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
         /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        public Operation<Response> CreateDeleteOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        internal Operation<Response> CreateDelete(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
             if (originalResponse == null)
             {
@@ -154,22 +167,14 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "NetworkInterfacesClient.Delete", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                return response;
-            },
-            async (response, cancellationToken) =>
-            {
-                await Task.CompletedTask;
-                return response;
-            });
+            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "NetworkInterfacesClient.Delete", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
+
         /// <summary> Deletes the specified network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Operation<Response>> StartDeleteOperationAsync(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Operation<Response>> StartDeleteAsync(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -181,13 +186,14 @@ namespace Azure.Network.Management.Interface
             }
 
             var originalResponse = await RestClient.DeleteAsync(resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
-            return CreateDeleteOperation(originalResponse, () => RestClient.CreateDeleteRequest(resourceGroupName, networkInterfaceName));
+            return CreateDelete(originalResponse, () => RestClient.CreateDeleteRequest(resourceGroupName, networkInterfaceName));
         }
+
         /// <summary> Deletes the specified network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Operation<Response> StartDeleteOperation(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
+        public virtual Operation<Response> StartDelete(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -199,12 +205,13 @@ namespace Azure.Network.Management.Interface
             }
 
             var originalResponse = RestClient.Delete(resourceGroupName, networkInterfaceName, cancellationToken);
-            return CreateDeleteOperation(originalResponse, () => RestClient.CreateDeleteRequest(resourceGroupName, networkInterfaceName));
+            return CreateDelete(originalResponse, () => RestClient.CreateDeleteRequest(resourceGroupName, networkInterfaceName));
         }
+
         /// <summary> Creates or updates a network interface. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
         /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        public Operation<NetworkInterface> CreateCreateOrUpdateOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        internal Operation<NetworkInterface> CreateCreateOrUpdate(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
             if (originalResponse == null)
             {
@@ -229,12 +236,13 @@ namespace Azure.Network.Management.Interface
                 return value;
             });
         }
+
         /// <summary> Creates or updates a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="parameters"> Parameters supplied to the create or update network interface operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Operation<NetworkInterface>> StartCreateOrUpdateOperationAsync(string resourceGroupName, string networkInterfaceName, NetworkInterface parameters, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Operation<NetworkInterface>> StartCreateOrUpdateAsync(string resourceGroupName, string networkInterfaceName, NetworkInterface parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -250,14 +258,15 @@ namespace Azure.Network.Management.Interface
             }
 
             var originalResponse = await RestClient.CreateOrUpdateAsync(resourceGroupName, networkInterfaceName, parameters, cancellationToken).ConfigureAwait(false);
-            return CreateCreateOrUpdateOperation(originalResponse, () => RestClient.CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, parameters));
+            return CreateCreateOrUpdate(originalResponse, () => RestClient.CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, parameters));
         }
+
         /// <summary> Creates or updates a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="parameters"> Parameters supplied to the create or update network interface operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Operation<NetworkInterface> StartCreateOrUpdateOperation(string resourceGroupName, string networkInterfaceName, NetworkInterface parameters, CancellationToken cancellationToken = default)
+        public virtual Operation<NetworkInterface> StartCreateOrUpdate(string resourceGroupName, string networkInterfaceName, NetworkInterface parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -273,12 +282,13 @@ namespace Azure.Network.Management.Interface
             }
 
             var originalResponse = RestClient.CreateOrUpdate(resourceGroupName, networkInterfaceName, parameters, cancellationToken);
-            return CreateCreateOrUpdateOperation(originalResponse, () => RestClient.CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, parameters));
+            return CreateCreateOrUpdate(originalResponse, () => RestClient.CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, parameters));
         }
+
         /// <summary> Gets all route tables applied to a network interface. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
         /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        public Operation<EffectiveRouteListResult> CreateGetEffectiveRouteTableOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        internal Operation<EffectiveRouteListResult> CreateGetEffectiveRouteTable(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
             if (originalResponse == null)
             {
@@ -303,11 +313,12 @@ namespace Azure.Network.Management.Interface
                 return value;
             });
         }
+
         /// <summary> Gets all route tables applied to a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Operation<EffectiveRouteListResult>> StartGetEffectiveRouteTableOperationAsync(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Operation<EffectiveRouteListResult>> StartGetEffectiveRouteTableAsync(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -319,13 +330,14 @@ namespace Azure.Network.Management.Interface
             }
 
             var originalResponse = await RestClient.GetEffectiveRouteTableAsync(resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
-            return CreateGetEffectiveRouteTableOperation(originalResponse, () => RestClient.CreateGetEffectiveRouteTableRequest(resourceGroupName, networkInterfaceName));
+            return CreateGetEffectiveRouteTable(originalResponse, () => RestClient.CreateGetEffectiveRouteTableRequest(resourceGroupName, networkInterfaceName));
         }
+
         /// <summary> Gets all route tables applied to a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Operation<EffectiveRouteListResult> StartGetEffectiveRouteTableOperation(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
+        public virtual Operation<EffectiveRouteListResult> StartGetEffectiveRouteTable(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -337,12 +349,13 @@ namespace Azure.Network.Management.Interface
             }
 
             var originalResponse = RestClient.GetEffectiveRouteTable(resourceGroupName, networkInterfaceName, cancellationToken);
-            return CreateGetEffectiveRouteTableOperation(originalResponse, () => RestClient.CreateGetEffectiveRouteTableRequest(resourceGroupName, networkInterfaceName));
+            return CreateGetEffectiveRouteTable(originalResponse, () => RestClient.CreateGetEffectiveRouteTableRequest(resourceGroupName, networkInterfaceName));
         }
+
         /// <summary> Gets all network security groups applied to a network interface. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
         /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        public Operation<EffectiveNetworkSecurityGroupListResult> CreateListEffectiveNetworkSecurityGroupsOperation(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        internal Operation<EffectiveNetworkSecurityGroupListResult> CreateListEffectiveNetworkSecurityGroups(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
         {
             if (originalResponse == null)
             {
@@ -367,11 +380,12 @@ namespace Azure.Network.Management.Interface
                 return value;
             });
         }
+
         /// <summary> Gets all network security groups applied to a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Operation<EffectiveNetworkSecurityGroupListResult>> StartListEffectiveNetworkSecurityGroupsOperationAsync(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Operation<EffectiveNetworkSecurityGroupListResult>> StartListEffectiveNetworkSecurityGroupsAsync(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -383,13 +397,14 @@ namespace Azure.Network.Management.Interface
             }
 
             var originalResponse = await RestClient.ListEffectiveNetworkSecurityGroupsAsync(resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
-            return CreateListEffectiveNetworkSecurityGroupsOperation(originalResponse, () => RestClient.CreateListEffectiveNetworkSecurityGroupsRequest(resourceGroupName, networkInterfaceName));
+            return CreateListEffectiveNetworkSecurityGroups(originalResponse, () => RestClient.CreateListEffectiveNetworkSecurityGroupsRequest(resourceGroupName, networkInterfaceName));
         }
+
         /// <summary> Gets all network security groups applied to a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Operation<EffectiveNetworkSecurityGroupListResult> StartListEffectiveNetworkSecurityGroupsOperation(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
+        public virtual Operation<EffectiveNetworkSecurityGroupListResult> StartListEffectiveNetworkSecurityGroups(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -401,7 +416,7 @@ namespace Azure.Network.Management.Interface
             }
 
             var originalResponse = RestClient.ListEffectiveNetworkSecurityGroups(resourceGroupName, networkInterfaceName, cancellationToken);
-            return CreateListEffectiveNetworkSecurityGroupsOperation(originalResponse, () => RestClient.CreateListEffectiveNetworkSecurityGroupsRequest(resourceGroupName, networkInterfaceName));
+            return CreateListEffectiveNetworkSecurityGroups(originalResponse, () => RestClient.CreateListEffectiveNetworkSecurityGroupsRequest(resourceGroupName, networkInterfaceName));
         }
     }
 }

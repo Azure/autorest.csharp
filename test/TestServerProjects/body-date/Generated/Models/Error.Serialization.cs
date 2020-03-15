@@ -27,6 +27,7 @@ namespace body_date.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Error DeserializeError(JsonElement element)
         {
             Error result = new Error();

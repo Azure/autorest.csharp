@@ -21,6 +21,7 @@ namespace body_complex
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of PrimitiveRestClient. </summary>
         public PrimitiveRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -33,17 +34,19 @@ namespace body_complex
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetIntRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/primitive/integer", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex types with integer properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IntWrapper>> GetIntAsync(CancellationToken cancellationToken = default)
@@ -72,6 +75,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex types with integer properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IntWrapper> GetInt(CancellationToken cancellationToken = default)
@@ -100,11 +104,12 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreatePutIntRequest(IntWrapper complexBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/primitive/integer", false);
@@ -115,6 +120,7 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+
         /// <summary> Put complex types with integer properties. </summary>
         /// <param name="complexBody"> Please put -1 and 2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -145,6 +151,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Put complex types with integer properties. </summary>
         /// <param name="complexBody"> Please put -1 and 2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -175,17 +182,19 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreateGetLongRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/primitive/long", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex types with long properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<LongWrapper>> GetLongAsync(CancellationToken cancellationToken = default)
@@ -214,6 +223,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex types with long properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<LongWrapper> GetLong(CancellationToken cancellationToken = default)
@@ -242,11 +252,12 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreatePutLongRequest(LongWrapper complexBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/primitive/long", false);
@@ -257,6 +268,7 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+
         /// <summary> Put complex types with long properties. </summary>
         /// <param name="complexBody"> Please put 1099511627775 and -999511627788. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -287,6 +299,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Put complex types with long properties. </summary>
         /// <param name="complexBody"> Please put 1099511627775 and -999511627788. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -317,17 +330,19 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreateGetFloatRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/primitive/float", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex types with float properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<FloatWrapper>> GetFloatAsync(CancellationToken cancellationToken = default)
@@ -356,6 +371,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex types with float properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<FloatWrapper> GetFloat(CancellationToken cancellationToken = default)
@@ -384,11 +400,12 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreatePutFloatRequest(FloatWrapper complexBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/primitive/float", false);
@@ -399,6 +416,7 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+
         /// <summary> Put complex types with float properties. </summary>
         /// <param name="complexBody"> Please put 1.05 and -0.003. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -429,6 +447,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Put complex types with float properties. </summary>
         /// <param name="complexBody"> Please put 1.05 and -0.003. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -459,17 +478,19 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDoubleRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/primitive/double", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex types with double properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DoubleWrapper>> GetDoubleAsync(CancellationToken cancellationToken = default)
@@ -498,6 +519,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex types with double properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DoubleWrapper> GetDouble(CancellationToken cancellationToken = default)
@@ -526,11 +548,12 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreatePutDoubleRequest(DoubleWrapper complexBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/primitive/double", false);
@@ -541,6 +564,7 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+
         /// <summary> Put complex types with double properties. </summary>
         /// <param name="complexBody"> Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -571,6 +595,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Put complex types with double properties. </summary>
         /// <param name="complexBody"> Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -601,17 +626,19 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreateGetBoolRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/primitive/bool", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex types with bool properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<BooleanWrapper>> GetBoolAsync(CancellationToken cancellationToken = default)
@@ -640,6 +667,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex types with bool properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<BooleanWrapper> GetBool(CancellationToken cancellationToken = default)
@@ -668,11 +696,12 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreatePutBoolRequest(BooleanWrapper complexBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/primitive/bool", false);
@@ -683,6 +712,7 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+
         /// <summary> Put complex types with bool properties. </summary>
         /// <param name="complexBody"> Please put true and false. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -713,6 +743,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Put complex types with bool properties. </summary>
         /// <param name="complexBody"> Please put true and false. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -743,17 +774,19 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreateGetStringRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/primitive/string", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex types with string properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<StringWrapper>> GetStringAsync(CancellationToken cancellationToken = default)
@@ -782,6 +815,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex types with string properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<StringWrapper> GetString(CancellationToken cancellationToken = default)
@@ -810,11 +844,12 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreatePutStringRequest(StringWrapper complexBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/primitive/string", false);
@@ -825,6 +860,7 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+
         /// <summary> Put complex types with string properties. </summary>
         /// <param name="complexBody"> Please put &apos;goodrequest&apos;, &apos;&apos;, and null. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -855,6 +891,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Put complex types with string properties. </summary>
         /// <param name="complexBody"> Please put &apos;goodrequest&apos;, &apos;&apos;, and null. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -885,17 +922,19 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDateRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/primitive/date", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex types with date properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateWrapper>> GetDateAsync(CancellationToken cancellationToken = default)
@@ -924,6 +963,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex types with date properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateWrapper> GetDate(CancellationToken cancellationToken = default)
@@ -952,11 +992,12 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreatePutDateRequest(DateWrapper complexBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/primitive/date", false);
@@ -967,6 +1008,7 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+
         /// <summary> Put complex types with date properties. </summary>
         /// <param name="complexBody"> Please put &apos;0001-01-01&apos; and &apos;2016-02-29&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -997,6 +1039,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Put complex types with date properties. </summary>
         /// <param name="complexBody"> Please put &apos;0001-01-01&apos; and &apos;2016-02-29&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1027,17 +1070,19 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDateTimeRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/primitive/datetime", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex types with datetime properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DatetimeWrapper>> GetDateTimeAsync(CancellationToken cancellationToken = default)
@@ -1066,6 +1111,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex types with datetime properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DatetimeWrapper> GetDateTime(CancellationToken cancellationToken = default)
@@ -1094,11 +1140,12 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreatePutDateTimeRequest(DatetimeWrapper complexBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/primitive/datetime", false);
@@ -1109,6 +1156,7 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+
         /// <summary> Put complex types with datetime properties. </summary>
         /// <param name="complexBody"> Please put &apos;0001-01-01T12:00:00-04:00&apos; and &apos;2015-05-18T11:38:00-08:00&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1139,6 +1187,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Put complex types with datetime properties. </summary>
         /// <param name="complexBody"> Please put &apos;0001-01-01T12:00:00-04:00&apos; and &apos;2015-05-18T11:38:00-08:00&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1169,17 +1218,19 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDateTimeRfc1123Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/primitive/datetimerfc1123", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex types with datetimeRfc1123 properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Datetimerfc1123Wrapper>> GetDateTimeRfc1123Async(CancellationToken cancellationToken = default)
@@ -1208,6 +1259,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex types with datetimeRfc1123 properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Datetimerfc1123Wrapper> GetDateTimeRfc1123(CancellationToken cancellationToken = default)
@@ -1236,11 +1288,12 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreatePutDateTimeRfc1123Request(Datetimerfc1123Wrapper complexBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/primitive/datetimerfc1123", false);
@@ -1251,6 +1304,7 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+
         /// <summary> Put complex types with datetimeRfc1123 properties. </summary>
         /// <param name="complexBody"> Please put &apos;Mon, 01 Jan 0001 12:00:00 GMT&apos; and &apos;Mon, 18 May 2015 11:38:00 GMT&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1281,6 +1335,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Put complex types with datetimeRfc1123 properties. </summary>
         /// <param name="complexBody"> Please put &apos;Mon, 01 Jan 0001 12:00:00 GMT&apos; and &apos;Mon, 18 May 2015 11:38:00 GMT&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1311,17 +1366,19 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDurationRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/primitive/duration", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex types with duration properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DurationWrapper>> GetDurationAsync(CancellationToken cancellationToken = default)
@@ -1350,6 +1407,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex types with duration properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DurationWrapper> GetDuration(CancellationToken cancellationToken = default)
@@ -1378,11 +1436,12 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreatePutDurationRequest(DurationWrapper complexBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/primitive/duration", false);
@@ -1393,6 +1452,7 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+
         /// <summary> Put complex types with duration properties. </summary>
         /// <param name="complexBody"> Please put &apos;P123DT22H14M12.011S&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1423,6 +1483,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Put complex types with duration properties. </summary>
         /// <param name="complexBody"> Please put &apos;P123DT22H14M12.011S&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1453,17 +1514,19 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreateGetByteRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/primitive/byte", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex types with byte properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ByteWrapper>> GetByteAsync(CancellationToken cancellationToken = default)
@@ -1492,6 +1555,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex types with byte properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ByteWrapper> GetByte(CancellationToken cancellationToken = default)
@@ -1520,11 +1584,12 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreatePutByteRequest(ByteWrapper complexBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/primitive/byte", false);
@@ -1535,6 +1600,7 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+
         /// <summary> Put complex types with byte properties. </summary>
         /// <param name="complexBody"> Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1565,6 +1631,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Put complex types with byte properties. </summary>
         /// <param name="complexBody"> Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

@@ -20,6 +20,10 @@ namespace Azure.Network.Management.Interface
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal NetworkInterfaceLoadBalancersRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of NetworkInterfaceLoadBalancersClient for mocking. </summary>
+        protected NetworkInterfaceLoadBalancersClient()
+        {
+        }
         /// <summary> Initializes a new instance of NetworkInterfaceLoadBalancersClient. </summary>
         internal NetworkInterfaceLoadBalancersClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-11-01")
         {
@@ -27,6 +31,7 @@ namespace Azure.Network.Management.Interface
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> List all load balancers in a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -54,6 +59,7 @@ namespace Azure.Network.Management.Interface
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
+
         /// <summary> List all load balancers in a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>

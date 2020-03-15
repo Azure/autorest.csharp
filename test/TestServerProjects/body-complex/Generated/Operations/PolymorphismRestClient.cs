@@ -21,6 +21,7 @@ namespace body_complex
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of PolymorphismRestClient. </summary>
         public PolymorphismRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -33,17 +34,19 @@ namespace body_complex
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/polymorphism/valid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex types that are polymorphic. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Fish>> GetValidAsync(CancellationToken cancellationToken = default)
@@ -72,6 +75,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex types that are polymorphic. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Fish> GetValid(CancellationToken cancellationToken = default)
@@ -100,11 +104,12 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreatePutValidRequest(Fish complexBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/polymorphism/valid", false);
@@ -115,6 +120,7 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+
         /// <summary> Put complex types that are polymorphic. </summary>
         /// <param name="complexBody">
         /// Please put a salmon that looks like this:
@@ -179,6 +185,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Put complex types that are polymorphic. </summary>
         /// <param name="complexBody">
         /// Please put a salmon that looks like this:
@@ -243,17 +250,19 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDotSyntaxRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/polymorphism/dotsyntax", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex types that are polymorphic, JSON key contains a dot. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DotFish>> GetDotSyntaxAsync(CancellationToken cancellationToken = default)
@@ -282,6 +291,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex types that are polymorphic, JSON key contains a dot. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DotFish> GetDotSyntax(CancellationToken cancellationToken = default)
@@ -310,17 +320,19 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreateGetComposedWithDiscriminatorRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/polymorphism/composedWithDiscriminator", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DotFishMarket>> GetComposedWithDiscriminatorAsync(CancellationToken cancellationToken = default)
@@ -349,6 +361,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DotFishMarket> GetComposedWithDiscriminator(CancellationToken cancellationToken = default)
@@ -377,17 +390,19 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreateGetComposedWithoutDiscriminatorRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/polymorphism/composedWithoutDiscriminator", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DotFishMarket>> GetComposedWithoutDiscriminatorAsync(CancellationToken cancellationToken = default)
@@ -416,6 +431,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DotFishMarket> GetComposedWithoutDiscriminator(CancellationToken cancellationToken = default)
@@ -444,17 +460,19 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreateGetComplicatedRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/polymorphism/complicated", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Salmon>> GetComplicatedAsync(CancellationToken cancellationToken = default)
@@ -483,6 +501,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Salmon> GetComplicated(CancellationToken cancellationToken = default)
@@ -511,11 +530,12 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreatePutComplicatedRequest(Salmon complexBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/polymorphism/complicated", false);
@@ -526,6 +546,7 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+
         /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="complexBody"> The Salmon to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -556,6 +577,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="complexBody"> The Salmon to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -586,11 +608,12 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreatePutMissingDiscriminatorRequest(Salmon complexBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/polymorphism/missingdiscriminator", false);
@@ -601,6 +624,7 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+
         /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
         /// <param name="complexBody"> The Salmon to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -635,6 +659,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
         /// <param name="complexBody"> The Salmon to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -669,11 +694,12 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreatePutValidMissingRequiredRequest(Fish complexBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/complex/polymorphism/missingrequired/invalid", false);
@@ -684,6 +710,7 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+
         /// <summary> Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client. </summary>
         /// <param name="complexBody">
         /// Please put a salmon that looks like this:
@@ -748,6 +775,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client. </summary>
         /// <param name="complexBody">
         /// Please put a salmon that looks like this:

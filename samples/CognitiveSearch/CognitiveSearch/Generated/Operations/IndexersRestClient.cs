@@ -23,6 +23,7 @@ namespace CognitiveSearch
         private string ApiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of IndexersRestClient. </summary>
         public IndexersRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string searchDnsSuffix = "search.windows.net", string ApiVersion = "2019-05-06")
         {
@@ -45,11 +46,12 @@ namespace CognitiveSearch
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateResetRequest(string indexerName, Guid? clientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("https://", false);
             uri.AppendRaw(searchServiceName, false);
@@ -66,6 +68,7 @@ namespace CognitiveSearch
             }
             return message;
         }
+
         /// <summary> Resets the change tracking state associated with an indexer. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -97,6 +100,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Resets the change tracking state associated with an indexer. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -128,11 +132,12 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateRunRequest(string indexerName, Guid? clientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("https://", false);
             uri.AppendRaw(searchServiceName, false);
@@ -149,6 +154,7 @@ namespace CognitiveSearch
             }
             return message;
         }
+
         /// <summary> Runs an indexer on-demand. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -180,6 +186,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Runs an indexer on-demand. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -211,11 +218,12 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string indexerName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Indexer indexer)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("https://", false);
             uri.AppendRaw(searchServiceName, false);
@@ -245,6 +253,7 @@ namespace CognitiveSearch
             request.Content = content;
             return message;
         }
+
         /// <summary> Creates a new indexer or updates an indexer if it already exists. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -287,6 +296,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Creates a new indexer or updates an indexer if it already exists. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -329,11 +339,12 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string indexerName, Guid? clientRequestId, string ifMatch, string ifNoneMatch)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Delete;
+            request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("https://", false);
             uri.AppendRaw(searchServiceName, false);
@@ -358,6 +369,7 @@ namespace CognitiveSearch
             }
             return message;
         }
+
         /// <summary> Deletes an indexer. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -391,6 +403,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Deletes an indexer. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -424,11 +437,12 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateGetRequest(string indexerName, Guid? clientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("https://", false);
             uri.AppendRaw(searchServiceName, false);
@@ -445,6 +459,7 @@ namespace CognitiveSearch
             }
             return message;
         }
+
         /// <summary> Retrieves an indexer definition. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -480,6 +495,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Retrieves an indexer definition. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -515,11 +531,12 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateListRequest(string select, Guid? clientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("https://", false);
             uri.AppendRaw(searchServiceName, false);
@@ -538,12 +555,14 @@ namespace CognitiveSearch
             }
             return message;
         }
+
         /// <summary> Lists all indexers available for a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ListIndexersResult>> ListAsync(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("IndexersClient.List");
             scope.Start();
             try
@@ -568,12 +587,14 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Lists all indexers available for a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ListIndexersResult> List(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("IndexersClient.List");
             scope.Start();
             try
@@ -598,11 +619,12 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateCreateRequest(Guid? clientRequestId, Indexer indexer)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("https://", false);
             uri.AppendRaw(searchServiceName, false);
@@ -621,6 +643,7 @@ namespace CognitiveSearch
             request.Content = content;
             return message;
         }
+
         /// <summary> Creates a new indexer. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="indexer"> The definition of the indexer to create or update. </param>
@@ -656,6 +679,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Creates a new indexer. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="indexer"> The definition of the indexer to create or update. </param>
@@ -691,11 +715,12 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         internal HttpMessage CreateGetStatusRequest(string indexerName, Guid? clientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("https://", false);
             uri.AppendRaw(searchServiceName, false);
@@ -712,6 +737,7 @@ namespace CognitiveSearch
             }
             return message;
         }
+
         /// <summary> Returns the current status and execution history of an indexer. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -747,6 +773,7 @@ namespace CognitiveSearch
                 throw;
             }
         }
+
         /// <summary> Returns the current status and execution history of an indexer. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>

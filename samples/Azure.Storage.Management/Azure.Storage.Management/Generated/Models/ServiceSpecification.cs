@@ -13,6 +13,6 @@ namespace Azure.Storage.Management.Models
     public partial class ServiceSpecification
     {
         /// <summary> Metric specifications of operation. </summary>
-        public ICollection<MetricSpecification> MetricSpecifications { get; set; }
+        public IList<MetricSpecification> MetricSpecifications { get; set; }
     }
 }

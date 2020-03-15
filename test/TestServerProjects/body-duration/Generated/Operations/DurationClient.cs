@@ -18,6 +18,10 @@ namespace body_duration
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal DurationRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of DurationClient for mocking. </summary>
+        protected DurationClient()
+        {
+        }
         /// <summary> Initializes a new instance of DurationClient. </summary>
         internal DurationClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -25,25 +29,29 @@ namespace body_duration
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Get null duration value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<TimeSpan>> GetNullAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TimeSpan>> GetNullAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get null duration value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<TimeSpan> GetNull(CancellationToken cancellationToken = default)
         {
             return RestClient.GetNull(cancellationToken);
         }
+
         /// <summary> Put a positive duration value. </summary>
         /// <param name="durationBody"> The Duration to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutPositiveDurationAsync(TimeSpan durationBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutPositiveDurationAsync(TimeSpan durationBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutPositiveDurationAsync(durationBody, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Put a positive duration value. </summary>
         /// <param name="durationBody"> The Duration to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -51,24 +59,28 @@ namespace body_duration
         {
             return RestClient.PutPositiveDuration(durationBody, cancellationToken);
         }
+
         /// <summary> Get a positive duration value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<TimeSpan>> GetPositiveDurationAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TimeSpan>> GetPositiveDurationAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetPositiveDurationAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get a positive duration value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<TimeSpan> GetPositiveDuration(CancellationToken cancellationToken = default)
         {
             return RestClient.GetPositiveDuration(cancellationToken);
         }
+
         /// <summary> Get an invalid duration value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<TimeSpan>> GetInvalidAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TimeSpan>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetInvalidAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get an invalid duration value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<TimeSpan> GetInvalid(CancellationToken cancellationToken = default)

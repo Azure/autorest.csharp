@@ -68,6 +68,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static MetricSpecification DeserializeMetricSpecification(JsonElement element)
         {
             MetricSpecification result = new MetricSpecification();

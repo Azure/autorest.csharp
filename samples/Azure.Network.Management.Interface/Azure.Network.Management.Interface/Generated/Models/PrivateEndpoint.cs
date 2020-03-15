@@ -17,12 +17,12 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The ID of the subnet from which the private IP will be allocated. </summary>
         public Subnet Subnet { get; set; }
         /// <summary> An array of references to the network interfaces created for this private endpoint. </summary>
-        public ICollection<NetworkInterface> NetworkInterfaces { get; internal set; }
+        public IList<NetworkInterface> NetworkInterfaces { get; internal set; }
         /// <summary> The provisioning state of the private endpoint resource. </summary>
         public ProvisioningState? ProvisioningState { get; internal set; }
         /// <summary> A grouping of information about the connection to the remote resource. </summary>
-        public ICollection<PrivateLinkServiceConnection> PrivateLinkServiceConnections { get; set; }
+        public IList<PrivateLinkServiceConnection> PrivateLinkServiceConnections { get; set; }
         /// <summary> A grouping of information about the connection to the remote resource. Used when the network admin does not have access to approve connections to the remote resource. </summary>
-        public ICollection<PrivateLinkServiceConnection> ManualPrivateLinkServiceConnections { get; set; }
+        public IList<PrivateLinkServiceConnection> ManualPrivateLinkServiceConnections { get; set; }
     }
 }

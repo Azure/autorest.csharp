@@ -19,6 +19,10 @@ namespace Azure.Storage.Management
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal OperationsRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of OperationsClient for mocking. </summary>
+        protected OperationsClient()
+        {
+        }
         /// <summary> Initializes a new instance of OperationsClient. </summary>
         internal OperationsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "https://management.azure.com", string ApiVersion = "2019-06-01")
         {
@@ -26,6 +30,7 @@ namespace Azure.Storage.Management
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Lists all of the available Storage Rest API operations. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<Operation> ListAsync(CancellationToken cancellationToken = default)
@@ -42,6 +47,7 @@ namespace Azure.Storage.Management
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
+
         /// <summary> Lists all of the available Storage Rest API operations. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<Operation> List(CancellationToken cancellationToken = default)

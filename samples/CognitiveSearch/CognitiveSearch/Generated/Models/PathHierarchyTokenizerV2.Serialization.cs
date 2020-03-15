@@ -46,6 +46,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static PathHierarchyTokenizerV2 DeserializePathHierarchyTokenizerV2(JsonElement element)
         {
             PathHierarchyTokenizerV2 result = new PathHierarchyTokenizerV2();

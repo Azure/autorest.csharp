@@ -36,6 +36,6 @@ namespace CognitiveSearch.Models
         /// <summary> A value indicating whether to remove trailing &quot;&apos;s&quot; for each subword. Default is true. </summary>
         public bool? StemEnglishPossessive { get; set; }
         /// <summary> A list of tokens to protect from being delimited. </summary>
-        public ICollection<string> ProtectedWords { get; set; }
+        public IList<string> ProtectedWords { get; set; }
     }
 }

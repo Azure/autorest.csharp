@@ -25,6 +25,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static PatternReplaceTokenFilter DeserializePatternReplaceTokenFilter(JsonElement element)
         {
             PatternReplaceTokenFilter result = new PatternReplaceTokenFilter();

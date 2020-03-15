@@ -85,6 +85,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static InboundNatRule DeserializeInboundNatRule(JsonElement element)
         {
             InboundNatRule result = new InboundNatRule();

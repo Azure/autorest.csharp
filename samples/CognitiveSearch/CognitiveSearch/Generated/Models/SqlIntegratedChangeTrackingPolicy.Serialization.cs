@@ -19,6 +19,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WriteEndObject();
         }
+
         internal static SqlIntegratedChangeTrackingPolicy DeserializeSqlIntegratedChangeTrackingPolicy(JsonElement element)
         {
             SqlIntegratedChangeTrackingPolicy result = new SqlIntegratedChangeTrackingPolicy();

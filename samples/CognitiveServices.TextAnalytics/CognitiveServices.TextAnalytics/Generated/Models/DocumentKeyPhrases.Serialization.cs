@@ -31,6 +31,7 @@ namespace CognitiveServices.TextAnalytics.Models
             }
             writer.WriteEndObject();
         }
+
         internal static DocumentKeyPhrases DeserializeDocumentKeyPhrases(JsonElement element)
         {
             DocumentKeyPhrases result = new DocumentKeyPhrases();

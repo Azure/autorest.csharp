@@ -19,6 +19,7 @@ namespace httpInfrastructure
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of HttpClientFailureRestClient. </summary>
         public HttpClientFailureRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -31,17 +32,19 @@ namespace httpInfrastructure
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateHead400Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Head;
+            request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Head400Async(CancellationToken cancellationToken = default)
@@ -64,6 +67,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Head400(CancellationToken cancellationToken = default)
@@ -86,17 +90,19 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateGet400Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Get400Async(CancellationToken cancellationToken = default)
@@ -119,6 +125,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Get400(CancellationToken cancellationToken = default)
@@ -141,17 +148,19 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateOptions400Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Options;
+            request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Options400Async(CancellationToken cancellationToken = default)
@@ -174,6 +183,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Options400(CancellationToken cancellationToken = default)
@@ -196,11 +206,12 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreatePut400Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/400", false);
@@ -211,6 +222,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Put400Async(CancellationToken cancellationToken = default)
@@ -233,6 +245,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put400(CancellationToken cancellationToken = default)
@@ -255,11 +268,12 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreatePatch400Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Patch;
+            request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/400", false);
@@ -270,6 +284,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Patch400Async(CancellationToken cancellationToken = default)
@@ -292,6 +307,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Patch400(CancellationToken cancellationToken = default)
@@ -314,11 +330,12 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreatePost400Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/400", false);
@@ -329,6 +346,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post400Async(CancellationToken cancellationToken = default)
@@ -351,6 +369,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post400(CancellationToken cancellationToken = default)
@@ -373,11 +392,12 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateDelete400Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Delete;
+            request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/400", false);
@@ -388,6 +408,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Delete400Async(CancellationToken cancellationToken = default)
@@ -410,6 +431,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete400(CancellationToken cancellationToken = default)
@@ -432,17 +454,19 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateHead401Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Head;
+            request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/401", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Return 401 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Head401Async(CancellationToken cancellationToken = default)
@@ -465,6 +489,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 401 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Head401(CancellationToken cancellationToken = default)
@@ -487,17 +512,19 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateGet402Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/402", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Return 402 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Get402Async(CancellationToken cancellationToken = default)
@@ -520,6 +547,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 402 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Get402(CancellationToken cancellationToken = default)
@@ -542,17 +570,19 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateOptions403Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Options;
+            request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/403", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Return 403 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Options403Async(CancellationToken cancellationToken = default)
@@ -575,6 +605,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 403 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Options403(CancellationToken cancellationToken = default)
@@ -597,17 +628,19 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateGet403Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/403", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Return 403 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Get403Async(CancellationToken cancellationToken = default)
@@ -630,6 +663,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 403 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Get403(CancellationToken cancellationToken = default)
@@ -652,11 +686,12 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreatePut404Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/404", false);
@@ -667,6 +702,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Return 404 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Put404Async(CancellationToken cancellationToken = default)
@@ -689,6 +725,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 404 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put404(CancellationToken cancellationToken = default)
@@ -711,11 +748,12 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreatePatch405Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Patch;
+            request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/405", false);
@@ -726,6 +764,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Return 405 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Patch405Async(CancellationToken cancellationToken = default)
@@ -748,6 +787,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 405 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Patch405(CancellationToken cancellationToken = default)
@@ -770,11 +810,12 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreatePost406Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/406", false);
@@ -785,6 +826,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Return 406 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post406Async(CancellationToken cancellationToken = default)
@@ -807,6 +849,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 406 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post406(CancellationToken cancellationToken = default)
@@ -829,11 +872,12 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateDelete407Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Delete;
+            request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/407", false);
@@ -844,6 +888,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Return 407 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Delete407Async(CancellationToken cancellationToken = default)
@@ -866,6 +911,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 407 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete407(CancellationToken cancellationToken = default)
@@ -888,11 +934,12 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreatePut409Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/409", false);
@@ -903,6 +950,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Return 409 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Put409Async(CancellationToken cancellationToken = default)
@@ -925,6 +973,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 409 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put409(CancellationToken cancellationToken = default)
@@ -947,17 +996,19 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateHead410Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Head;
+            request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/410", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Return 410 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Head410Async(CancellationToken cancellationToken = default)
@@ -980,6 +1031,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 410 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Head410(CancellationToken cancellationToken = default)
@@ -1002,17 +1054,19 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateGet411Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/411", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Return 411 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Get411Async(CancellationToken cancellationToken = default)
@@ -1035,6 +1089,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 411 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Get411(CancellationToken cancellationToken = default)
@@ -1057,17 +1112,19 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateOptions412Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Options;
+            request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/412", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Return 412 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Options412Async(CancellationToken cancellationToken = default)
@@ -1090,6 +1147,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 412 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Options412(CancellationToken cancellationToken = default)
@@ -1112,17 +1170,19 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateGet412Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/412", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Return 412 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Get412Async(CancellationToken cancellationToken = default)
@@ -1145,6 +1205,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 412 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Get412(CancellationToken cancellationToken = default)
@@ -1167,11 +1228,12 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreatePut413Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/413", false);
@@ -1182,6 +1244,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Return 413 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Put413Async(CancellationToken cancellationToken = default)
@@ -1204,6 +1267,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 413 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put413(CancellationToken cancellationToken = default)
@@ -1226,11 +1290,12 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreatePatch414Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Patch;
+            request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/414", false);
@@ -1241,6 +1306,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Return 414 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Patch414Async(CancellationToken cancellationToken = default)
@@ -1263,6 +1329,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 414 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Patch414(CancellationToken cancellationToken = default)
@@ -1285,11 +1352,12 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreatePost415Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Post;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/415", false);
@@ -1300,6 +1368,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Return 415 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post415Async(CancellationToken cancellationToken = default)
@@ -1322,6 +1391,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 415 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post415(CancellationToken cancellationToken = default)
@@ -1344,17 +1414,19 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateGet416Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/416", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Return 416 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Get416Async(CancellationToken cancellationToken = default)
@@ -1377,6 +1449,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 416 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Get416(CancellationToken cancellationToken = default)
@@ -1399,11 +1472,12 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateDelete417Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Delete;
+            request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/417", false);
@@ -1414,6 +1488,7 @@ namespace httpInfrastructure
             request.Content = content;
             return message;
         }
+
         /// <summary> Return 417 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Delete417Async(CancellationToken cancellationToken = default)
@@ -1436,6 +1511,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 417 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete417(CancellationToken cancellationToken = default)
@@ -1458,17 +1534,19 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         internal HttpMessage CreateHead429Request()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Head;
+            request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/http/failure/client/429", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Return 429 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Head429Async(CancellationToken cancellationToken = default)
@@ -1491,6 +1569,7 @@ namespace httpInfrastructure
                 throw;
             }
         }
+
         /// <summary> Return 429 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Head429(CancellationToken cancellationToken = default)

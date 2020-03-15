@@ -100,6 +100,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static LoadBalancingRule DeserializeLoadBalancingRule(JsonElement element)
         {
             LoadBalancingRule result = new LoadBalancingRule();

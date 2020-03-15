@@ -20,6 +20,7 @@ namespace body_file
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of FilesRestClient. </summary>
         public FilesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -32,17 +33,19 @@ namespace body_file
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetFileRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/files/stream/nonempty", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Stream>> GetFileAsync(CancellationToken cancellationToken = default)
@@ -70,6 +73,7 @@ namespace body_file
                 throw;
             }
         }
+
         /// <summary> Get file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Stream> GetFile(CancellationToken cancellationToken = default)
@@ -97,17 +101,19 @@ namespace body_file
                 throw;
             }
         }
+
         internal HttpMessage CreateGetFileLargeRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/files/stream/verylarge", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get a large file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Stream>> GetFileLargeAsync(CancellationToken cancellationToken = default)
@@ -135,6 +141,7 @@ namespace body_file
                 throw;
             }
         }
+
         /// <summary> Get a large file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Stream> GetFileLarge(CancellationToken cancellationToken = default)
@@ -162,17 +169,19 @@ namespace body_file
                 throw;
             }
         }
+
         internal HttpMessage CreateGetEmptyFileRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/files/stream/empty", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get empty file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Stream>> GetEmptyFileAsync(CancellationToken cancellationToken = default)
@@ -200,6 +209,7 @@ namespace body_file
                 throw;
             }
         }
+
         /// <summary> Get empty file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Stream> GetEmptyFile(CancellationToken cancellationToken = default)

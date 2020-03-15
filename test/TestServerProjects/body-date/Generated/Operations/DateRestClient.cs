@@ -20,6 +20,7 @@ namespace body_date
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of DateRestClient. </summary>
         public DateRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -32,17 +33,19 @@ namespace body_date
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/date/null", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get null date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
@@ -71,6 +74,7 @@ namespace body_date
                 throw;
             }
         }
+
         /// <summary> Get null date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetNull(CancellationToken cancellationToken = default)
@@ -99,17 +103,19 @@ namespace body_date
                 throw;
             }
         }
+
         internal HttpMessage CreateGetInvalidDateRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/date/invaliddate", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get invalid date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetInvalidDateAsync(CancellationToken cancellationToken = default)
@@ -138,6 +144,7 @@ namespace body_date
                 throw;
             }
         }
+
         /// <summary> Get invalid date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetInvalidDate(CancellationToken cancellationToken = default)
@@ -166,17 +173,19 @@ namespace body_date
                 throw;
             }
         }
+
         internal HttpMessage CreateGetOverflowDateRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/date/overflowdate", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get overflow date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetOverflowDateAsync(CancellationToken cancellationToken = default)
@@ -205,6 +214,7 @@ namespace body_date
                 throw;
             }
         }
+
         /// <summary> Get overflow date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetOverflowDate(CancellationToken cancellationToken = default)
@@ -233,17 +243,19 @@ namespace body_date
                 throw;
             }
         }
+
         internal HttpMessage CreateGetUnderflowDateRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/date/underflowdate", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get underflow date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUnderflowDateAsync(CancellationToken cancellationToken = default)
@@ -272,6 +284,7 @@ namespace body_date
                 throw;
             }
         }
+
         /// <summary> Get underflow date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUnderflowDate(CancellationToken cancellationToken = default)
@@ -300,11 +313,12 @@ namespace body_date
                 throw;
             }
         }
+
         internal HttpMessage CreatePutMaxDateRequest(DateTimeOffset dateBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/date/max", false);
@@ -315,11 +329,13 @@ namespace body_date
             request.Content = content;
             return message;
         }
+
         /// <summary> Put max date value 9999-12-31. </summary>
         /// <param name="dateBody"> The Date to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMaxDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DateClient.PutMaxDate");
             scope.Start();
             try
@@ -340,11 +356,13 @@ namespace body_date
                 throw;
             }
         }
+
         /// <summary> Put max date value 9999-12-31. </summary>
         /// <param name="dateBody"> The Date to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutMaxDate(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DateClient.PutMaxDate");
             scope.Start();
             try
@@ -365,17 +383,19 @@ namespace body_date
                 throw;
             }
         }
+
         internal HttpMessage CreateGetMaxDateRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/date/max", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get max date value 9999-12-31. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetMaxDateAsync(CancellationToken cancellationToken = default)
@@ -404,6 +424,7 @@ namespace body_date
                 throw;
             }
         }
+
         /// <summary> Get max date value 9999-12-31. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetMaxDate(CancellationToken cancellationToken = default)
@@ -432,11 +453,12 @@ namespace body_date
                 throw;
             }
         }
+
         internal HttpMessage CreatePutMinDateRequest(DateTimeOffset dateBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/date/min", false);
@@ -447,11 +469,13 @@ namespace body_date
             request.Content = content;
             return message;
         }
+
         /// <summary> Put min date value 0000-01-01. </summary>
         /// <param name="dateBody"> The Date to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMinDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DateClient.PutMinDate");
             scope.Start();
             try
@@ -472,11 +496,13 @@ namespace body_date
                 throw;
             }
         }
+
         /// <summary> Put min date value 0000-01-01. </summary>
         /// <param name="dateBody"> The Date to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutMinDate(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("DateClient.PutMinDate");
             scope.Start();
             try
@@ -497,17 +523,19 @@ namespace body_date
                 throw;
             }
         }
+
         internal HttpMessage CreateGetMinDateRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/date/min", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get min date value 0000-01-01. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetMinDateAsync(CancellationToken cancellationToken = default)
@@ -536,6 +564,7 @@ namespace body_date
                 throw;
             }
         }
+
         /// <summary> Get min date value 0000-01-01. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetMinDate(CancellationToken cancellationToken = default)

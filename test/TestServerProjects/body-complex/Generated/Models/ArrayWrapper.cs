@@ -12,6 +12,7 @@ namespace body_complex.Models
     /// <summary> The ArrayWrapper. </summary>
     public partial class ArrayWrapper
     {
+<<<<<<< HEAD
         /// <summary> Initializes a new instance of ArrayWrapper. </summary>
         public ArrayWrapper()
         {
@@ -22,5 +23,8 @@ namespace body_complex.Models
             Array = array;
         }
         public ICollection<string> Array { get; set; }
+=======
+        public IList<string> Array { get; set; }
+>>>>>>> feature/v3
     }
 }

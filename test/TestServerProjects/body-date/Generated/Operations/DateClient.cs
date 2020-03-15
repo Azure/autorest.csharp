@@ -18,6 +18,10 @@ namespace body_date
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal DateRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of DateClient for mocking. </summary>
+        protected DateClient()
+        {
+        }
         /// <summary> Initializes a new instance of DateClient. </summary>
         internal DateClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -25,61 +29,71 @@ namespace body_date
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Get null date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get null date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetNull(CancellationToken cancellationToken = default)
         {
             return RestClient.GetNull(cancellationToken);
         }
+
         /// <summary> Get invalid date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<DateTimeOffset>> GetInvalidDateAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DateTimeOffset>> GetInvalidDateAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetInvalidDateAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get invalid date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetInvalidDate(CancellationToken cancellationToken = default)
         {
             return RestClient.GetInvalidDate(cancellationToken);
         }
+
         /// <summary> Get overflow date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<DateTimeOffset>> GetOverflowDateAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DateTimeOffset>> GetOverflowDateAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetOverflowDateAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get overflow date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetOverflowDate(CancellationToken cancellationToken = default)
         {
             return RestClient.GetOverflowDate(cancellationToken);
         }
+
         /// <summary> Get underflow date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<DateTimeOffset>> GetUnderflowDateAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DateTimeOffset>> GetUnderflowDateAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetUnderflowDateAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get underflow date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetUnderflowDate(CancellationToken cancellationToken = default)
         {
             return RestClient.GetUnderflowDate(cancellationToken);
         }
+
         /// <summary> Put max date value 9999-12-31. </summary>
         /// <param name="dateBody"> The Date to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutMaxDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutMaxDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutMaxDateAsync(dateBody, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Put max date value 9999-12-31. </summary>
         /// <param name="dateBody"> The Date to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -87,25 +101,29 @@ namespace body_date
         {
             return RestClient.PutMaxDate(dateBody, cancellationToken);
         }
+
         /// <summary> Get max date value 9999-12-31. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<DateTimeOffset>> GetMaxDateAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DateTimeOffset>> GetMaxDateAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetMaxDateAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get max date value 9999-12-31. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetMaxDate(CancellationToken cancellationToken = default)
         {
             return RestClient.GetMaxDate(cancellationToken);
         }
+
         /// <summary> Put min date value 0000-01-01. </summary>
         /// <param name="dateBody"> The Date to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutMinDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutMinDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutMinDateAsync(dateBody, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Put min date value 0000-01-01. </summary>
         /// <param name="dateBody"> The Date to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -113,12 +131,14 @@ namespace body_date
         {
             return RestClient.PutMinDate(dateBody, cancellationToken);
         }
+
         /// <summary> Get min date value 0000-01-01. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<DateTimeOffset>> GetMinDateAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DateTimeOffset>> GetMinDateAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetMinDateAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get min date value 0000-01-01. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetMinDate(CancellationToken cancellationToken = default)

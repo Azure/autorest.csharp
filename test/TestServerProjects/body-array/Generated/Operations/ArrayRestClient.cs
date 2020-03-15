@@ -22,6 +22,7 @@ namespace body_array
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of ArrayRestClient. </summary>
         public ArrayRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -34,20 +35,22 @@ namespace body_array
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/null", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get null array value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<int>>> GetNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<int>>> GetNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetNull");
             scope.Start();
@@ -60,7 +63,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<int> value = new List<int>();
+                            IList<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
@@ -77,9 +80,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get null array value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<int>> GetNull(CancellationToken cancellationToken = default)
+        public Response<IList<int>> GetNull(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetNull");
             scope.Start();
@@ -92,7 +96,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<int> value = new List<int>();
+                            IList<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
@@ -109,20 +113,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetInvalidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/invalid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get invalid array [1, 2, 3. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<int>>> GetInvalidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<int>>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetInvalid");
             scope.Start();
@@ -135,7 +141,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<int> value = new List<int>();
+                            IList<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
@@ -152,9 +158,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get invalid array [1, 2, 3. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<int>> GetInvalid(CancellationToken cancellationToken = default)
+        public Response<IList<int>> GetInvalid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetInvalid");
             scope.Start();
@@ -167,7 +174,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<int> value = new List<int>();
+                            IList<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
@@ -184,20 +191,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetEmptyRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/empty", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get empty array value []. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<int>>> GetEmptyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<int>>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetEmpty");
             scope.Start();
@@ -210,7 +219,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<int> value = new List<int>();
+                            IList<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
@@ -227,9 +236,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get empty array value []. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<int>> GetEmpty(CancellationToken cancellationToken = default)
+        public Response<IList<int>> GetEmpty(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetEmpty");
             scope.Start();
@@ -242,7 +252,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<int> value = new List<int>();
+                            IList<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
@@ -259,11 +269,12 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreatePutEmptyRequest(IEnumerable<string> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/empty", false);
@@ -279,6 +290,7 @@ namespace body_array
             request.Content = content;
             return message;
         }
+
         /// <summary> Set array value empty []. </summary>
         /// <param name="arrayBody"> The ArrayOfPutContentSchemaItem to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -309,6 +321,7 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Set array value empty []. </summary>
         /// <param name="arrayBody"> The ArrayOfPutContentSchemaItem to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -339,20 +352,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetBooleanTfftRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/boolean/tfft", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get boolean array value [true, false, false, true]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<bool>>> GetBooleanTfftAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<bool>>> GetBooleanTfftAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetBooleanTfft");
             scope.Start();
@@ -365,7 +380,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<bool> value = new List<bool>();
+                            IList<bool> value = new List<bool>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBoolean());
@@ -382,9 +397,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get boolean array value [true, false, false, true]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<bool>> GetBooleanTfft(CancellationToken cancellationToken = default)
+        public Response<IList<bool>> GetBooleanTfft(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetBooleanTfft");
             scope.Start();
@@ -397,7 +413,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<bool> value = new List<bool>();
+                            IList<bool> value = new List<bool>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBoolean());
@@ -414,11 +430,12 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreatePutBooleanTfftRequest(IEnumerable<bool> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/boolean/tfft", false);
@@ -434,6 +451,7 @@ namespace body_array
             request.Content = content;
             return message;
         }
+
         /// <summary> Set array value empty [true, false, false, true]. </summary>
         /// <param name="arrayBody"> The ArrayOfBoolean to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -464,6 +482,7 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Set array value empty [true, false, false, true]. </summary>
         /// <param name="arrayBody"> The ArrayOfBoolean to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -494,20 +513,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetBooleanInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/boolean/true.null.false", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get boolean array value [true, null, false]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<bool>>> GetBooleanInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<bool>>> GetBooleanInvalidNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidNull");
             scope.Start();
@@ -520,7 +541,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<bool> value = new List<bool>();
+                            IList<bool> value = new List<bool>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBoolean());
@@ -537,9 +558,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get boolean array value [true, null, false]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<bool>> GetBooleanInvalidNull(CancellationToken cancellationToken = default)
+        public Response<IList<bool>> GetBooleanInvalidNull(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidNull");
             scope.Start();
@@ -552,7 +574,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<bool> value = new List<bool>();
+                            IList<bool> value = new List<bool>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBoolean());
@@ -569,20 +591,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetBooleanInvalidStringRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/boolean/true.boolean.false", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get boolean array value [true, &apos;boolean&apos;, false]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<bool>>> GetBooleanInvalidStringAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<bool>>> GetBooleanInvalidStringAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidString");
             scope.Start();
@@ -595,7 +619,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<bool> value = new List<bool>();
+                            IList<bool> value = new List<bool>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBoolean());
@@ -612,9 +636,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get boolean array value [true, &apos;boolean&apos;, false]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<bool>> GetBooleanInvalidString(CancellationToken cancellationToken = default)
+        public Response<IList<bool>> GetBooleanInvalidString(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidString");
             scope.Start();
@@ -627,7 +652,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<bool> value = new List<bool>();
+                            IList<bool> value = new List<bool>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBoolean());
@@ -644,20 +669,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetIntegerValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/integer/1.-1.3.300", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get integer array value [1, -1, 3, 300]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<int>>> GetIntegerValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<int>>> GetIntegerValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetIntegerValid");
             scope.Start();
@@ -670,7 +697,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<int> value = new List<int>();
+                            IList<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
@@ -687,9 +714,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get integer array value [1, -1, 3, 300]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<int>> GetIntegerValid(CancellationToken cancellationToken = default)
+        public Response<IList<int>> GetIntegerValid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetIntegerValid");
             scope.Start();
@@ -702,7 +730,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<int> value = new List<int>();
+                            IList<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
@@ -719,11 +747,12 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreatePutIntegerValidRequest(IEnumerable<int> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/integer/1.-1.3.300", false);
@@ -739,6 +768,7 @@ namespace body_array
             request.Content = content;
             return message;
         }
+
         /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
         /// <param name="arrayBody"> The ArrayOfInteger to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -769,6 +799,7 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
         /// <param name="arrayBody"> The ArrayOfInteger to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -799,20 +830,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetIntInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/integer/1.null.zero", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get integer array value [1, null, 0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<int>>> GetIntInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<int>>> GetIntInvalidNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidNull");
             scope.Start();
@@ -825,7 +858,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<int> value = new List<int>();
+                            IList<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
@@ -842,9 +875,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get integer array value [1, null, 0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<int>> GetIntInvalidNull(CancellationToken cancellationToken = default)
+        public Response<IList<int>> GetIntInvalidNull(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidNull");
             scope.Start();
@@ -857,7 +891,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<int> value = new List<int>();
+                            IList<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
@@ -874,20 +908,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetIntInvalidStringRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/integer/1.integer.0", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get integer array value [1, &apos;integer&apos;, 0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<int>>> GetIntInvalidStringAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<int>>> GetIntInvalidStringAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidString");
             scope.Start();
@@ -900,7 +936,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<int> value = new List<int>();
+                            IList<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
@@ -917,9 +953,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get integer array value [1, &apos;integer&apos;, 0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<int>> GetIntInvalidString(CancellationToken cancellationToken = default)
+        public Response<IList<int>> GetIntInvalidString(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidString");
             scope.Start();
@@ -932,7 +969,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<int> value = new List<int>();
+                            IList<int> value = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt32());
@@ -949,20 +986,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetLongValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/long/1.-1.3.300", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get integer array value [1, -1, 3, 300]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<long>>> GetLongValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<long>>> GetLongValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetLongValid");
             scope.Start();
@@ -975,7 +1014,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<long> value = new List<long>();
+                            IList<long> value = new List<long>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt64());
@@ -992,9 +1031,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get integer array value [1, -1, 3, 300]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<long>> GetLongValid(CancellationToken cancellationToken = default)
+        public Response<IList<long>> GetLongValid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetLongValid");
             scope.Start();
@@ -1007,7 +1047,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<long> value = new List<long>();
+                            IList<long> value = new List<long>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt64());
@@ -1024,11 +1064,12 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreatePutLongValidRequest(IEnumerable<long> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/long/1.-1.3.300", false);
@@ -1044,6 +1085,7 @@ namespace body_array
             request.Content = content;
             return message;
         }
+
         /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
         /// <param name="arrayBody"> The ArrayOfInteger to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1074,6 +1116,7 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
         /// <param name="arrayBody"> The ArrayOfInteger to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1104,20 +1147,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetLongInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/long/1.null.zero", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get long array value [1, null, 0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<long>>> GetLongInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<long>>> GetLongInvalidNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidNull");
             scope.Start();
@@ -1130,7 +1175,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<long> value = new List<long>();
+                            IList<long> value = new List<long>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt64());
@@ -1147,9 +1192,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get long array value [1, null, 0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<long>> GetLongInvalidNull(CancellationToken cancellationToken = default)
+        public Response<IList<long>> GetLongInvalidNull(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidNull");
             scope.Start();
@@ -1162,7 +1208,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<long> value = new List<long>();
+                            IList<long> value = new List<long>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt64());
@@ -1179,20 +1225,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetLongInvalidStringRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/long/1.integer.0", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get long array value [1, &apos;integer&apos;, 0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<long>>> GetLongInvalidStringAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<long>>> GetLongInvalidStringAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidString");
             scope.Start();
@@ -1205,7 +1253,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<long> value = new List<long>();
+                            IList<long> value = new List<long>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt64());
@@ -1222,9 +1270,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get long array value [1, &apos;integer&apos;, 0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<long>> GetLongInvalidString(CancellationToken cancellationToken = default)
+        public Response<IList<long>> GetLongInvalidString(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidString");
             scope.Start();
@@ -1237,7 +1286,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<long> value = new List<long>();
+                            IList<long> value = new List<long>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetInt64());
@@ -1254,20 +1303,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetFloatValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/float/0--0.01-1.2e20", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get float array value [0, -0.01, 1.2e20]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<float>>> GetFloatValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<float>>> GetFloatValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetFloatValid");
             scope.Start();
@@ -1280,7 +1331,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<float> value = new List<float>();
+                            IList<float> value = new List<float>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetSingle());
@@ -1297,9 +1348,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get float array value [0, -0.01, 1.2e20]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<float>> GetFloatValid(CancellationToken cancellationToken = default)
+        public Response<IList<float>> GetFloatValid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetFloatValid");
             scope.Start();
@@ -1312,7 +1364,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<float> value = new List<float>();
+                            IList<float> value = new List<float>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetSingle());
@@ -1329,11 +1381,12 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreatePutFloatValidRequest(IEnumerable<float> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/float/0--0.01-1.2e20", false);
@@ -1349,6 +1402,7 @@ namespace body_array
             request.Content = content;
             return message;
         }
+
         /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
         /// <param name="arrayBody"> The ArrayOfNumber to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1379,6 +1433,7 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
         /// <param name="arrayBody"> The ArrayOfNumber to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1409,20 +1464,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetFloatInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/float/0.0-null-1.2e20", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get float array value [0.0, null, -1.2e20]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<float>>> GetFloatInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<float>>> GetFloatInvalidNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidNull");
             scope.Start();
@@ -1435,7 +1492,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<float> value = new List<float>();
+                            IList<float> value = new List<float>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetSingle());
@@ -1452,9 +1509,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get float array value [0.0, null, -1.2e20]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<float>> GetFloatInvalidNull(CancellationToken cancellationToken = default)
+        public Response<IList<float>> GetFloatInvalidNull(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidNull");
             scope.Start();
@@ -1467,7 +1525,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<float> value = new List<float>();
+                            IList<float> value = new List<float>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetSingle());
@@ -1484,20 +1542,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetFloatInvalidStringRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/float/1.number.0", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<float>>> GetFloatInvalidStringAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<float>>> GetFloatInvalidStringAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidString");
             scope.Start();
@@ -1510,7 +1570,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<float> value = new List<float>();
+                            IList<float> value = new List<float>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetSingle());
@@ -1527,9 +1587,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<float>> GetFloatInvalidString(CancellationToken cancellationToken = default)
+        public Response<IList<float>> GetFloatInvalidString(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidString");
             scope.Start();
@@ -1542,7 +1603,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<float> value = new List<float>();
+                            IList<float> value = new List<float>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetSingle());
@@ -1559,20 +1620,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDoubleValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/double/0--0.01-1.2e20", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get float array value [0, -0.01, 1.2e20]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<double>>> GetDoubleValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<double>>> GetDoubleValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDoubleValid");
             scope.Start();
@@ -1585,7 +1648,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<double> value = new List<double>();
+                            IList<double> value = new List<double>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDouble());
@@ -1602,9 +1665,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get float array value [0, -0.01, 1.2e20]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<double>> GetDoubleValid(CancellationToken cancellationToken = default)
+        public Response<IList<double>> GetDoubleValid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDoubleValid");
             scope.Start();
@@ -1617,7 +1681,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<double> value = new List<double>();
+                            IList<double> value = new List<double>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDouble());
@@ -1634,11 +1698,12 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreatePutDoubleValidRequest(IEnumerable<double> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/double/0--0.01-1.2e20", false);
@@ -1654,6 +1719,7 @@ namespace body_array
             request.Content = content;
             return message;
         }
+
         /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
         /// <param name="arrayBody"> The ArrayOfNumber to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1684,6 +1750,7 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
         /// <param name="arrayBody"> The ArrayOfNumber to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1714,20 +1781,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDoubleInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/double/0.0-null-1.2e20", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get float array value [0.0, null, -1.2e20]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<double>>> GetDoubleInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<double>>> GetDoubleInvalidNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidNull");
             scope.Start();
@@ -1740,7 +1809,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<double> value = new List<double>();
+                            IList<double> value = new List<double>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDouble());
@@ -1757,9 +1826,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get float array value [0.0, null, -1.2e20]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<double>> GetDoubleInvalidNull(CancellationToken cancellationToken = default)
+        public Response<IList<double>> GetDoubleInvalidNull(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidNull");
             scope.Start();
@@ -1772,7 +1842,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<double> value = new List<double>();
+                            IList<double> value = new List<double>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDouble());
@@ -1789,20 +1859,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDoubleInvalidStringRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/double/1.number.0", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<double>>> GetDoubleInvalidStringAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<double>>> GetDoubleInvalidStringAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidString");
             scope.Start();
@@ -1815,7 +1887,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<double> value = new List<double>();
+                            IList<double> value = new List<double>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDouble());
@@ -1832,9 +1904,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<double>> GetDoubleInvalidString(CancellationToken cancellationToken = default)
+        public Response<IList<double>> GetDoubleInvalidString(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidString");
             scope.Start();
@@ -1847,7 +1920,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<double> value = new List<double>();
+                            IList<double> value = new List<double>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDouble());
@@ -1864,20 +1937,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetStringValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/string/foo1.foo2.foo3", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get string array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<string>>> GetStringValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<string>>> GetStringValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetStringValid");
             scope.Start();
@@ -1890,7 +1965,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<string> value = new List<string>();
+                            IList<string> value = new List<string>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetString());
@@ -1907,9 +1982,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get string array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<string>> GetStringValid(CancellationToken cancellationToken = default)
+        public Response<IList<string>> GetStringValid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetStringValid");
             scope.Start();
@@ -1922,7 +1998,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<string> value = new List<string>();
+                            IList<string> value = new List<string>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetString());
@@ -1939,11 +2015,12 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreatePutStringValidRequest(IEnumerable<string> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/string/foo1.foo2.foo3", false);
@@ -1959,6 +2036,7 @@ namespace body_array
             request.Content = content;
             return message;
         }
+
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1989,6 +2067,7 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2019,20 +2098,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetEnumValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/enum/foo1.foo2.foo3", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<FooEnum>>> GetEnumValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<FooEnum>>> GetEnumValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetEnumValid");
             scope.Start();
@@ -2045,7 +2126,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<FooEnum> value = new List<FooEnum>();
+                            IList<FooEnum> value = new List<FooEnum>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetString().ToFooEnum());
@@ -2062,9 +2143,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<FooEnum>> GetEnumValid(CancellationToken cancellationToken = default)
+        public Response<IList<FooEnum>> GetEnumValid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetEnumValid");
             scope.Start();
@@ -2077,7 +2159,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<FooEnum> value = new List<FooEnum>();
+                            IList<FooEnum> value = new List<FooEnum>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetString().ToFooEnum());
@@ -2094,11 +2176,12 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreatePutEnumValidRequest(IEnumerable<FooEnum> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/enum/foo1.foo2.foo3", false);
@@ -2114,6 +2197,7 @@ namespace body_array
             request.Content = content;
             return message;
         }
+
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfFooEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2144,6 +2228,7 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfFooEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2174,20 +2259,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetStringEnumValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/string-enum/foo1.foo2.foo3", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<Enum0>>> GetStringEnumValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<Enum0>>> GetStringEnumValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetStringEnumValid");
             scope.Start();
@@ -2200,7 +2287,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<Enum0> value = new List<Enum0>();
+                            IList<Enum0> value = new List<Enum0>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(new Enum0(item.GetString()));
@@ -2217,9 +2304,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<Enum0>> GetStringEnumValid(CancellationToken cancellationToken = default)
+        public Response<IList<Enum0>> GetStringEnumValid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetStringEnumValid");
             scope.Start();
@@ -2232,7 +2320,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<Enum0> value = new List<Enum0>();
+                            IList<Enum0> value = new List<Enum0>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(new Enum0(item.GetString()));
@@ -2249,11 +2337,12 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreatePutStringEnumValidRequest(IEnumerable<Enum0> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/string-enum/foo1.foo2.foo3", false);
@@ -2269,6 +2358,7 @@ namespace body_array
             request.Content = content;
             return message;
         }
+
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfEnum0 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2299,6 +2389,7 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfEnum0 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2329,20 +2420,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetStringWithNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/string/foo.null.foo2", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get string array value [&apos;foo&apos;, null, &apos;foo2&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<string>>> GetStringWithNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<string>>> GetStringWithNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetStringWithNull");
             scope.Start();
@@ -2355,7 +2448,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<string> value = new List<string>();
+                            IList<string> value = new List<string>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetString());
@@ -2372,9 +2465,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get string array value [&apos;foo&apos;, null, &apos;foo2&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<string>> GetStringWithNull(CancellationToken cancellationToken = default)
+        public Response<IList<string>> GetStringWithNull(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetStringWithNull");
             scope.Start();
@@ -2387,7 +2481,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<string> value = new List<string>();
+                            IList<string> value = new List<string>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetString());
@@ -2404,20 +2498,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetStringWithInvalidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/string/foo.123.foo2", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get string array value [&apos;foo&apos;, 123, &apos;foo2&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<string>>> GetStringWithInvalidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<string>>> GetStringWithInvalidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetStringWithInvalid");
             scope.Start();
@@ -2430,7 +2526,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<string> value = new List<string>();
+                            IList<string> value = new List<string>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetString());
@@ -2447,9 +2543,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get string array value [&apos;foo&apos;, 123, &apos;foo2&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<string>> GetStringWithInvalid(CancellationToken cancellationToken = default)
+        public Response<IList<string>> GetStringWithInvalid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetStringWithInvalid");
             scope.Start();
@@ -2462,7 +2559,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<string> value = new List<string>();
+                            IList<string> value = new List<string>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetString());
@@ -2479,20 +2576,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetUuidValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/uuid/valid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<Guid>>> GetUuidValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<Guid>>> GetUuidValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetUuidValid");
             scope.Start();
@@ -2505,7 +2604,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<Guid> value = new List<Guid>();
+                            IList<Guid> value = new List<Guid>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetGuid());
@@ -2522,9 +2621,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<Guid>> GetUuidValid(CancellationToken cancellationToken = default)
+        public Response<IList<Guid>> GetUuidValid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetUuidValid");
             scope.Start();
@@ -2537,7 +2637,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<Guid> value = new List<Guid>();
+                            IList<Guid> value = new List<Guid>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetGuid());
@@ -2554,11 +2654,12 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreatePutUuidValidRequest(IEnumerable<Guid> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/uuid/valid", false);
@@ -2574,6 +2675,7 @@ namespace body_array
             request.Content = content;
             return message;
         }
+
         /// <summary> Set array value  [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfUuid to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2604,6 +2706,7 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Set array value  [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfUuid to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2634,20 +2737,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetUuidInvalidCharsRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/uuid/invalidchars", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;foo&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<Guid>>> GetUuidInvalidCharsAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<Guid>>> GetUuidInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetUuidInvalidChars");
             scope.Start();
@@ -2660,7 +2765,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<Guid> value = new List<Guid>();
+                            IList<Guid> value = new List<Guid>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetGuid());
@@ -2677,9 +2782,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;foo&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<Guid>> GetUuidInvalidChars(CancellationToken cancellationToken = default)
+        public Response<IList<Guid>> GetUuidInvalidChars(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetUuidInvalidChars");
             scope.Start();
@@ -2692,7 +2798,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<Guid> value = new List<Guid>();
+                            IList<Guid> value = new List<Guid>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetGuid());
@@ -2709,20 +2815,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDateValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/date/valid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get integer array value [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<DateTimeOffset>>> GetDateValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateValid");
             scope.Start();
@@ -2735,7 +2843,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            IList<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("D"));
@@ -2752,9 +2860,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get integer array value [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<DateTimeOffset>> GetDateValid(CancellationToken cancellationToken = default)
+        public Response<IList<DateTimeOffset>> GetDateValid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateValid");
             scope.Start();
@@ -2767,7 +2876,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            IList<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("D"));
@@ -2784,11 +2893,12 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreatePutDateValidRequest(IEnumerable<DateTimeOffset> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/date/valid", false);
@@ -2804,6 +2914,7 @@ namespace body_array
             request.Content = content;
             return message;
         }
+
         /// <summary> Set array value  [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfDate to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2834,6 +2945,7 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Set array value  [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfDate to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2864,20 +2976,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDateInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/date/invalidnull", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get date array value [&apos;2012-01-01&apos;, null, &apos;1776-07-04&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<DateTimeOffset>>> GetDateInvalidNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidNull");
             scope.Start();
@@ -2890,7 +3004,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            IList<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("D"));
@@ -2907,9 +3021,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get date array value [&apos;2012-01-01&apos;, null, &apos;1776-07-04&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<DateTimeOffset>> GetDateInvalidNull(CancellationToken cancellationToken = default)
+        public Response<IList<DateTimeOffset>> GetDateInvalidNull(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidNull");
             scope.Start();
@@ -2922,7 +3037,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            IList<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("D"));
@@ -2939,20 +3054,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDateInvalidCharsRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/date/invalidchars", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get date array value [&apos;2011-03-22&apos;, &apos;date&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateInvalidCharsAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<DateTimeOffset>>> GetDateInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidChars");
             scope.Start();
@@ -2965,7 +3082,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            IList<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("D"));
@@ -2982,9 +3099,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get date array value [&apos;2011-03-22&apos;, &apos;date&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<DateTimeOffset>> GetDateInvalidChars(CancellationToken cancellationToken = default)
+        public Response<IList<DateTimeOffset>> GetDateInvalidChars(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidChars");
             scope.Start();
@@ -2997,7 +3115,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            IList<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("D"));
@@ -3014,20 +3132,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDateTimeValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/date-time/valid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get date-time array value [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateTimeValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<DateTimeOffset>>> GetDateTimeValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateTimeValid");
             scope.Start();
@@ -3040,7 +3160,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            IList<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("S"));
@@ -3057,9 +3177,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get date-time array value [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<DateTimeOffset>> GetDateTimeValid(CancellationToken cancellationToken = default)
+        public Response<IList<DateTimeOffset>> GetDateTimeValid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateTimeValid");
             scope.Start();
@@ -3072,7 +3193,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            IList<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("S"));
@@ -3089,11 +3210,12 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreatePutDateTimeValidRequest(IEnumerable<DateTimeOffset> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/date-time/valid", false);
@@ -3109,6 +3231,7 @@ namespace body_array
             request.Content = content;
             return message;
         }
+
         /// <summary> Set array value  [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfDateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -3139,6 +3262,7 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Set array value  [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfDateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -3169,20 +3293,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDateTimeInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/date-time/invalidnull", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, null]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateTimeInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<DateTimeOffset>>> GetDateTimeInvalidNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidNull");
             scope.Start();
@@ -3195,7 +3321,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            IList<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("S"));
@@ -3212,9 +3338,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, null]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<DateTimeOffset>> GetDateTimeInvalidNull(CancellationToken cancellationToken = default)
+        public Response<IList<DateTimeOffset>> GetDateTimeInvalidNull(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidNull");
             scope.Start();
@@ -3227,7 +3354,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            IList<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("S"));
@@ -3244,20 +3371,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDateTimeInvalidCharsRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/date-time/invalidchars", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, &apos;date-time&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateTimeInvalidCharsAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<DateTimeOffset>>> GetDateTimeInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidChars");
             scope.Start();
@@ -3270,7 +3399,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            IList<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("S"));
@@ -3287,9 +3416,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, &apos;date-time&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<DateTimeOffset>> GetDateTimeInvalidChars(CancellationToken cancellationToken = default)
+        public Response<IList<DateTimeOffset>> GetDateTimeInvalidChars(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidChars");
             scope.Start();
@@ -3302,7 +3432,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            IList<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("S"));
@@ -3319,20 +3449,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDateTimeRfc1123ValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/date-time-rfc1123/valid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get date-time array value [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<DateTimeOffset>>> GetDateTimeRfc1123ValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<DateTimeOffset>>> GetDateTimeRfc1123ValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateTimeRfc1123Valid");
             scope.Start();
@@ -3345,7 +3477,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            IList<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("R"));
@@ -3362,9 +3494,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get date-time array value [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<DateTimeOffset>> GetDateTimeRfc1123Valid(CancellationToken cancellationToken = default)
+        public Response<IList<DateTimeOffset>> GetDateTimeRfc1123Valid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateTimeRfc1123Valid");
             scope.Start();
@@ -3377,7 +3510,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<DateTimeOffset> value = new List<DateTimeOffset>();
+                            IList<DateTimeOffset> value = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetDateTimeOffset("R"));
@@ -3394,11 +3527,12 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreatePutDateTimeRfc1123ValidRequest(IEnumerable<DateTimeOffset> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/date-time-rfc1123/valid", false);
@@ -3414,6 +3548,7 @@ namespace body_array
             request.Content = content;
             return message;
         }
+
         /// <summary> Set array value  [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfDateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -3444,6 +3579,7 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Set array value  [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfDateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -3474,20 +3610,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDurationValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/duration/valid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get duration array value [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<TimeSpan>>> GetDurationValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<TimeSpan>>> GetDurationValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDurationValid");
             scope.Start();
@@ -3500,7 +3638,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<TimeSpan> value = new List<TimeSpan>();
+                            IList<TimeSpan> value = new List<TimeSpan>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetTimeSpan("P"));
@@ -3517,9 +3655,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get duration array value [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<TimeSpan>> GetDurationValid(CancellationToken cancellationToken = default)
+        public Response<IList<TimeSpan>> GetDurationValid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDurationValid");
             scope.Start();
@@ -3532,7 +3671,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<TimeSpan> value = new List<TimeSpan>();
+                            IList<TimeSpan> value = new List<TimeSpan>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetTimeSpan("P"));
@@ -3549,11 +3688,12 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreatePutDurationValidRequest(IEnumerable<TimeSpan> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/duration/valid", false);
@@ -3569,6 +3709,7 @@ namespace body_array
             request.Content = content;
             return message;
         }
+
         /// <summary> Set array value  [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfDuration to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -3599,6 +3740,7 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Set array value  [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfDuration to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -3629,20 +3771,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetByteValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/byte/valid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<byte[]>>> GetByteValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<byte[]>>> GetByteValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetByteValid");
             scope.Start();
@@ -3655,7 +3799,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<byte[]> value = new List<byte[]>();
+                            IList<byte[]> value = new List<byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBytesFromBase64());
@@ -3672,9 +3816,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<byte[]>> GetByteValid(CancellationToken cancellationToken = default)
+        public Response<IList<byte[]>> GetByteValid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetByteValid");
             scope.Start();
@@ -3687,7 +3832,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<byte[]> value = new List<byte[]>();
+                            IList<byte[]> value = new List<byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBytesFromBase64());
@@ -3704,11 +3849,12 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreatePutByteValidRequest(IEnumerable<byte[]> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/byte/valid", false);
@@ -3724,6 +3870,7 @@ namespace body_array
             request.Content = content;
             return message;
         }
+
         /// <summary> Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64. </summary>
         /// <param name="arrayBody"> The ArrayOfByteArray to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -3754,6 +3901,7 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64. </summary>
         /// <param name="arrayBody"> The ArrayOfByteArray to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -3784,20 +3932,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetByteInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/byte/invalidnull", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<byte[]>>> GetByteInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<byte[]>>> GetByteInvalidNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetByteInvalidNull");
             scope.Start();
@@ -3810,7 +3960,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<byte[]> value = new List<byte[]>();
+                            IList<byte[]> value = new List<byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBytesFromBase64());
@@ -3827,9 +3977,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<byte[]>> GetByteInvalidNull(CancellationToken cancellationToken = default)
+        public Response<IList<byte[]>> GetByteInvalidNull(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetByteInvalidNull");
             scope.Start();
@@ -3842,7 +3993,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<byte[]> value = new List<byte[]>();
+                            IList<byte[]> value = new List<byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBytesFromBase64());
@@ -3859,20 +4010,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetBase64UrlRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/prim/base64url/valid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get array value [&apos;a string that gets encoded with base64url&apos;, &apos;test string&apos; &apos;Lorem ipsum&apos;] with the items base64url encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<byte[]>>> GetBase64UrlAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<byte[]>>> GetBase64UrlAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetBase64Url");
             scope.Start();
@@ -3885,7 +4038,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<byte[]> value = new List<byte[]>();
+                            IList<byte[]> value = new List<byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBytesFromBase64("U"));
@@ -3902,9 +4055,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get array value [&apos;a string that gets encoded with base64url&apos;, &apos;test string&apos; &apos;Lorem ipsum&apos;] with the items base64url encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<byte[]>> GetBase64Url(CancellationToken cancellationToken = default)
+        public Response<IList<byte[]>> GetBase64Url(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetBase64Url");
             scope.Start();
@@ -3917,7 +4071,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<byte[]> value = new List<byte[]>();
+                            IList<byte[]> value = new List<byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(item.GetBytesFromBase64("U"));
@@ -3934,20 +4088,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetComplexNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/complex/null", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get array of complex type null value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<Product>>> GetComplexNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<Product>>> GetComplexNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetComplexNull");
             scope.Start();
@@ -3960,7 +4116,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<Product> value = new List<Product>();
+                            IList<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
@@ -3977,9 +4133,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get array of complex type null value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<Product>> GetComplexNull(CancellationToken cancellationToken = default)
+        public Response<IList<Product>> GetComplexNull(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetComplexNull");
             scope.Start();
@@ -3992,7 +4149,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<Product> value = new List<Product>();
+                            IList<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
@@ -4009,20 +4166,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetComplexEmptyRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/complex/empty", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get empty array of complex type []. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<Product>>> GetComplexEmptyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<Product>>> GetComplexEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetComplexEmpty");
             scope.Start();
@@ -4035,7 +4194,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<Product> value = new List<Product>();
+                            IList<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
@@ -4052,9 +4211,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get empty array of complex type []. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<Product>> GetComplexEmpty(CancellationToken cancellationToken = default)
+        public Response<IList<Product>> GetComplexEmpty(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetComplexEmpty");
             scope.Start();
@@ -4067,7 +4227,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<Product> value = new List<Product>();
+                            IList<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
@@ -4084,20 +4244,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetComplexItemNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/complex/itemnull", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get array of complex type with null item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, null, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<Product>>> GetComplexItemNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<Product>>> GetComplexItemNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetComplexItemNull");
             scope.Start();
@@ -4110,7 +4272,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<Product> value = new List<Product>();
+                            IList<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
@@ -4127,9 +4289,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get array of complex type with null item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, null, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<Product>> GetComplexItemNull(CancellationToken cancellationToken = default)
+        public Response<IList<Product>> GetComplexItemNull(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetComplexItemNull");
             scope.Start();
@@ -4142,7 +4305,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<Product> value = new List<Product>();
+                            IList<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
@@ -4159,20 +4322,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetComplexItemEmptyRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/complex/itemempty", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get array of complex type with empty item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<Product>>> GetComplexItemEmptyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<Product>>> GetComplexItemEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetComplexItemEmpty");
             scope.Start();
@@ -4185,7 +4350,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<Product> value = new List<Product>();
+                            IList<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
@@ -4202,9 +4367,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get array of complex type with empty item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<Product>> GetComplexItemEmpty(CancellationToken cancellationToken = default)
+        public Response<IList<Product>> GetComplexItemEmpty(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetComplexItemEmpty");
             scope.Start();
@@ -4217,7 +4383,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<Product> value = new List<Product>();
+                            IList<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
@@ -4234,20 +4400,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetComplexValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/complex/valid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get array of complex type with [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<Product>>> GetComplexValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<Product>>> GetComplexValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetComplexValid");
             scope.Start();
@@ -4260,7 +4428,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<Product> value = new List<Product>();
+                            IList<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
@@ -4277,9 +4445,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get array of complex type with [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<Product>> GetComplexValid(CancellationToken cancellationToken = default)
+        public Response<IList<Product>> GetComplexValid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetComplexValid");
             scope.Start();
@@ -4292,7 +4461,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<Product> value = new List<Product>();
+                            IList<Product> value = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 value.Add(Product.DeserializeProduct(item));
@@ -4309,11 +4478,12 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreatePutComplexValidRequest(IEnumerable<Product> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/complex/valid", false);
@@ -4329,6 +4499,7 @@ namespace body_array
             request.Content = content;
             return message;
         }
+
         /// <summary> Put an array of complex type with values [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
         /// <param name="arrayBody"> The ArrayOfProduct to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -4359,6 +4530,7 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Put an array of complex type with values [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
         /// <param name="arrayBody"> The ArrayOfProduct to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -4389,20 +4561,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetArrayNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/array/null", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get a null array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<ICollection<string>>>> GetArrayNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<IList<string>>>> GetArrayNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayNull");
             scope.Start();
@@ -4415,10 +4589,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            IList<IList<string>> value = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     value0.Add(item0.GetString());
@@ -4437,9 +4611,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get a null array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<ICollection<string>>> GetArrayNull(CancellationToken cancellationToken = default)
+        public Response<IList<IList<string>>> GetArrayNull(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayNull");
             scope.Start();
@@ -4452,10 +4627,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            IList<IList<string>> value = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     value0.Add(item0.GetString());
@@ -4474,20 +4649,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetArrayEmptyRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/array/empty", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an empty array []. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<ICollection<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<IList<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayEmpty");
             scope.Start();
@@ -4500,10 +4677,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            IList<IList<string>> value = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     value0.Add(item0.GetString());
@@ -4522,9 +4699,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get an empty array []. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<ICollection<string>>> GetArrayEmpty(CancellationToken cancellationToken = default)
+        public Response<IList<IList<string>>> GetArrayEmpty(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayEmpty");
             scope.Start();
@@ -4537,10 +4715,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            IList<IList<string>> value = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     value0.Add(item0.GetString());
@@ -4559,20 +4737,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetArrayItemNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/array/itemnull", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], null, [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<ICollection<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<IList<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayItemNull");
             scope.Start();
@@ -4585,10 +4765,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            IList<IList<string>> value = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     value0.Add(item0.GetString());
@@ -4607,9 +4787,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], null, [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<ICollection<string>>> GetArrayItemNull(CancellationToken cancellationToken = default)
+        public Response<IList<IList<string>>> GetArrayItemNull(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayItemNull");
             scope.Start();
@@ -4622,10 +4803,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            IList<IList<string>> value = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     value0.Add(item0.GetString());
@@ -4644,20 +4825,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetArrayItemEmptyRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/array/itemempty", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<ICollection<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<IList<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayItemEmpty");
             scope.Start();
@@ -4670,10 +4853,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            IList<IList<string>> value = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     value0.Add(item0.GetString());
@@ -4692,9 +4875,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<ICollection<string>>> GetArrayItemEmpty(CancellationToken cancellationToken = default)
+        public Response<IList<IList<string>>> GetArrayItemEmpty(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayItemEmpty");
             scope.Start();
@@ -4707,10 +4891,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            IList<IList<string>> value = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     value0.Add(item0.GetString());
@@ -4729,20 +4913,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetArrayValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/array/valid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<ICollection<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<IList<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayValid");
             scope.Start();
@@ -4755,10 +4941,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            IList<IList<string>> value = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     value0.Add(item0.GetString());
@@ -4777,9 +4963,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<ICollection<string>>> GetArrayValid(CancellationToken cancellationToken = default)
+        public Response<IList<IList<string>>> GetArrayValid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayValid");
             scope.Start();
@@ -4792,10 +4979,10 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<ICollection<string>> value = new List<ICollection<string>>();
+                            IList<IList<string>> value = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     value0.Add(item0.GetString());
@@ -4814,11 +5001,12 @@ namespace body_array
                 throw;
             }
         }
-        internal HttpMessage CreatePutArrayValidRequest(IEnumerable<ICollection<string>> arrayBody)
+
+        internal HttpMessage CreatePutArrayValidRequest(IEnumerable<IList<string>> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/array/valid", false);
@@ -4839,10 +5027,11 @@ namespace body_array
             request.Content = content;
             return message;
         }
+
         /// <summary> Put An array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="arrayBody"> The ArrayOfPutContentSchemaItemsItem to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutArrayValidAsync(IEnumerable<ICollection<string>> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutArrayValidAsync(IEnumerable<IList<string>> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -4869,10 +5058,11 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Put An array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="arrayBody"> The ArrayOfPutContentSchemaItemsItem to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutArrayValid(IEnumerable<ICollection<string>> arrayBody, CancellationToken cancellationToken = default)
+        public Response PutArrayValid(IEnumerable<IList<string>> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -4899,20 +5089,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDictionaryNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/dictionary/null", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an array of Dictionaries with value null. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<IDictionary<string, string>>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<IDictionary<string, string>>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryNull");
             scope.Start();
@@ -4925,7 +5117,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            IList<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 IDictionary<string, string> value0 = new Dictionary<string, string>();
@@ -4947,9 +5139,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get an array of Dictionaries with value null. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<IDictionary<string, string>>> GetDictionaryNull(CancellationToken cancellationToken = default)
+        public Response<IList<IDictionary<string, string>>> GetDictionaryNull(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryNull");
             scope.Start();
@@ -4962,7 +5155,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            IList<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 IDictionary<string, string> value0 = new Dictionary<string, string>();
@@ -4984,20 +5177,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDictionaryEmptyRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/dictionary/empty", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value []. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<IDictionary<string, string>>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<IDictionary<string, string>>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryEmpty");
             scope.Start();
@@ -5010,7 +5205,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            IList<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 IDictionary<string, string> value0 = new Dictionary<string, string>();
@@ -5032,9 +5227,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value []. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<IDictionary<string, string>>> GetDictionaryEmpty(CancellationToken cancellationToken = default)
+        public Response<IList<IDictionary<string, string>>> GetDictionaryEmpty(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryEmpty");
             scope.Start();
@@ -5047,7 +5243,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            IList<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 IDictionary<string, string> value0 = new Dictionary<string, string>();
@@ -5069,20 +5265,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDictionaryItemNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/dictionary/itemnull", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, null, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<IDictionary<string, string>>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<IDictionary<string, string>>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemNull");
             scope.Start();
@@ -5095,7 +5293,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            IList<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 IDictionary<string, string> value0 = new Dictionary<string, string>();
@@ -5117,9 +5315,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, null, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<IDictionary<string, string>>> GetDictionaryItemNull(CancellationToken cancellationToken = default)
+        public Response<IList<IDictionary<string, string>>> GetDictionaryItemNull(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemNull");
             scope.Start();
@@ -5132,7 +5331,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            IList<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 IDictionary<string, string> value0 = new Dictionary<string, string>();
@@ -5154,20 +5353,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDictionaryItemEmptyRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/dictionary/itemempty", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<IDictionary<string, string>>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<IDictionary<string, string>>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemEmpty");
             scope.Start();
@@ -5180,7 +5381,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            IList<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 IDictionary<string, string> value0 = new Dictionary<string, string>();
@@ -5202,9 +5403,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<IDictionary<string, string>>> GetDictionaryItemEmpty(CancellationToken cancellationToken = default)
+        public Response<IList<IDictionary<string, string>>> GetDictionaryItemEmpty(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemEmpty");
             scope.Start();
@@ -5217,7 +5419,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            IList<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 IDictionary<string, string> value0 = new Dictionary<string, string>();
@@ -5239,20 +5441,22 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDictionaryValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/dictionary/valid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ICollection<IDictionary<string, string>>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IList<IDictionary<string, string>>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryValid");
             scope.Start();
@@ -5265,7 +5469,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            IList<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 IDictionary<string, string> value0 = new Dictionary<string, string>();
@@ -5287,9 +5491,10 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ICollection<IDictionary<string, string>>> GetDictionaryValid(CancellationToken cancellationToken = default)
+        public Response<IList<IDictionary<string, string>>> GetDictionaryValid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryValid");
             scope.Start();
@@ -5302,7 +5507,7 @@ namespace body_array
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            ICollection<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
+                            IList<IDictionary<string, string>> value = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 IDictionary<string, string> value0 = new Dictionary<string, string>();
@@ -5324,11 +5529,12 @@ namespace body_array
                 throw;
             }
         }
+
         internal HttpMessage CreatePutDictionaryValidRequest(IEnumerable<IDictionary<string, string>> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/array/dictionary/valid", false);
@@ -5350,6 +5556,7 @@ namespace body_array
             request.Content = content;
             return message;
         }
+
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
         /// <param name="arrayBody"> The ArrayOfDictionaryOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -5380,6 +5587,7 @@ namespace body_array
                 throw;
             }
         }
+
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
         /// <param name="arrayBody"> The ArrayOfDictionaryOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

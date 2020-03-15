@@ -26,6 +26,7 @@ namespace CognitiveServices.TextAnalytics.Models
             }
             writer.WriteEndObject();
         }
+
         internal static LanguageInput DeserializeLanguageInput(JsonElement element)
         {
             LanguageInput result = new LanguageInput();

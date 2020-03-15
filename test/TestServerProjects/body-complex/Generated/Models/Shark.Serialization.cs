@@ -44,6 +44,7 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Shark DeserializeShark(JsonElement element)
         {
             if (element.TryGetProperty("fishtype", out JsonElement discriminator))

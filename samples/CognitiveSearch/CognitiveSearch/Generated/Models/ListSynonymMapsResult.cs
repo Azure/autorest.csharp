@@ -13,6 +13,6 @@ namespace CognitiveSearch.Models
     public partial class ListSynonymMapsResult
     {
         /// <summary> The synonym maps in the Search service. </summary>
-        public ICollection<SynonymMap> SynonymMaps { get; internal set; }
+        public IList<SynonymMap> SynonymMaps { get; internal set; }
     }
 }

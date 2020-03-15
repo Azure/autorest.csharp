@@ -23,6 +23,7 @@ namespace Azure.Network.Management.Interface
         private string ApiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of NetworkInterfaceLoadBalancersRestClient. </summary>
         public NetworkInterfaceLoadBalancersRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-11-01")
         {
@@ -45,11 +46,12 @@ namespace Azure.Network.Management.Interface
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateListRequest(string resourceGroupName, string networkInterfaceName)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/subscriptions/", false);
@@ -63,6 +65,7 @@ namespace Azure.Network.Management.Interface
             request.Uri = uri;
             return message;
         }
+
         /// <summary> List all load balancers in a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -102,6 +105,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
+
         /// <summary> List all load balancers in a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -141,16 +145,18 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> List all load balancers in a network interface. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -185,6 +191,7 @@ namespace Azure.Network.Management.Interface
                 throw;
             }
         }
+
         /// <summary> List all load balancers in a network interface. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

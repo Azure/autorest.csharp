@@ -19,6 +19,10 @@ namespace model_flattening
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal ServiceRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of ServiceClient for mocking. </summary>
+        protected ServiceClient()
+        {
+        }
         /// <summary> Initializes a new instance of ServiceClient. </summary>
         internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -26,13 +30,15 @@ namespace model_flattening
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Put External Resource as an Array. </summary>
         /// <param name="resourceArray"> External Resource as an Array to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutArrayAsync(IEnumerable<Resource> resourceArray, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutArrayAsync(IEnumerable<Resource> resourceArray, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutArrayAsync(resourceArray, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Put External Resource as an Array. </summary>
         /// <param name="resourceArray"> External Resource as an Array to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -40,25 +46,29 @@ namespace model_flattening
         {
             return RestClient.PutArray(resourceArray, cancellationToken);
         }
+
         /// <summary> Get External Resource as an Array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<ICollection<FlattenedProduct>>> GetArrayAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IList<FlattenedProduct>>> GetArrayAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetArrayAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get External Resource as an Array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ICollection<FlattenedProduct>> GetArray(CancellationToken cancellationToken = default)
+        public virtual Response<IList<FlattenedProduct>> GetArray(CancellationToken cancellationToken = default)
         {
             return RestClient.GetArray(cancellationToken);
         }
+
         /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
         /// <param name="resourceArray"> External Resource as an Array to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutWrappedArrayAsync(IEnumerable<WrappedProduct> resourceArray, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutWrappedArrayAsync(IEnumerable<WrappedProduct> resourceArray, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutWrappedArrayAsync(resourceArray, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
         /// <param name="resourceArray"> External Resource as an Array to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -66,25 +76,29 @@ namespace model_flattening
         {
             return RestClient.PutWrappedArray(resourceArray, cancellationToken);
         }
+
         /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<ICollection<ProductWrapper>>> GetWrappedArrayAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IList<ProductWrapper>>> GetWrappedArrayAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetWrappedArrayAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ICollection<ProductWrapper>> GetWrappedArray(CancellationToken cancellationToken = default)
+        public virtual Response<IList<ProductWrapper>> GetWrappedArray(CancellationToken cancellationToken = default)
         {
             return RestClient.GetWrappedArray(cancellationToken);
         }
+
         /// <summary> Put External Resource as a Dictionary. </summary>
         /// <param name="resourceDictionary"> External Resource as a Dictionary to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutDictionaryAsync(IDictionary<string, FlattenedProduct> resourceDictionary, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutDictionaryAsync(IDictionary<string, FlattenedProduct> resourceDictionary, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutDictionaryAsync(resourceDictionary, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Put External Resource as a Dictionary. </summary>
         /// <param name="resourceDictionary"> External Resource as a Dictionary to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -92,25 +106,29 @@ namespace model_flattening
         {
             return RestClient.PutDictionary(resourceDictionary, cancellationToken);
         }
+
         /// <summary> Get External Resource as a Dictionary. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<IDictionary<string, FlattenedProduct>>> GetDictionaryAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IDictionary<string, FlattenedProduct>>> GetDictionaryAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetDictionaryAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get External Resource as a Dictionary. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IDictionary<string, FlattenedProduct>> GetDictionary(CancellationToken cancellationToken = default)
         {
             return RestClient.GetDictionary(cancellationToken);
         }
+
         /// <summary> Put External Resource as a ResourceCollection. </summary>
         /// <param name="resourceComplexObject"> External Resource as a ResourceCollection to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> PutResourceCollectionAsync(ResourceCollection resourceComplexObject, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutResourceCollectionAsync(ResourceCollection resourceComplexObject, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutResourceCollectionAsync(resourceComplexObject, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Put External Resource as a ResourceCollection. </summary>
         /// <param name="resourceComplexObject"> External Resource as a ResourceCollection to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -118,25 +136,29 @@ namespace model_flattening
         {
             return RestClient.PutResourceCollection(resourceComplexObject, cancellationToken);
         }
+
         /// <summary> Get External Resource as a ResourceCollection. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<ResourceCollection>> GetResourceCollectionAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ResourceCollection>> GetResourceCollectionAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetResourceCollectionAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get External Resource as a ResourceCollection. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ResourceCollection> GetResourceCollection(CancellationToken cancellationToken = default)
         {
             return RestClient.GetResourceCollection(cancellationToken);
         }
+
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
         /// <param name="simpleBodyProduct"> Simple body product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<SimpleProduct>> PutSimpleProductAsync(SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SimpleProduct>> PutSimpleProductAsync(SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutSimpleProductAsync(simpleBodyProduct, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
         /// <param name="simpleBodyProduct"> Simple body product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -144,13 +166,15 @@ namespace model_flattening
         {
             return RestClient.PutSimpleProduct(simpleBodyProduct, cancellationToken);
         }
+
         /// <summary> Put Flattened Simple Product with client flattening true on the parameter. </summary>
         /// <param name="simpleBodyProduct"> Simple body product to post. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
         {
             return await RestClient.PostFlattenedSimpleProductAsync(simpleBodyProduct, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Put Flattened Simple Product with client flattening true on the parameter. </summary>
         /// <param name="simpleBodyProduct"> Simple body product to post. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -158,14 +182,16 @@ namespace model_flattening
         {
             return RestClient.PostFlattenedSimpleProduct(simpleBodyProduct, cancellationToken);
         }
+
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
         /// <param name="name"> Product name with value &apos;groupproduct&apos;. </param>
         /// <param name="simpleBodyProduct"> Simple body product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response<SimpleProduct>> PutSimpleProductWithGroupingAsync(string name, SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SimpleProduct>> PutSimpleProductWithGroupingAsync(string name, SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutSimpleProductWithGroupingAsync(name, simpleBodyProduct, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
         /// <param name="name"> Product name with value &apos;groupproduct&apos;. </param>
         /// <param name="simpleBodyProduct"> Simple body product to put. </param>

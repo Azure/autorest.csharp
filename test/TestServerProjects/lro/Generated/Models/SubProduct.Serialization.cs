@@ -35,6 +35,7 @@ namespace lro.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static SubProduct DeserializeSubProduct(JsonElement element)
         {
             SubProduct result = new SubProduct();

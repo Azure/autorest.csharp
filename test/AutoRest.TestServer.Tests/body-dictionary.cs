@@ -554,7 +554,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PutDictionaryArrayValid() => TestStatus(async (host, pipeline) =>
         {
-            var value = new Dictionary<string, ICollection<string>>
+            var value = new Dictionary<string, IList<string>>
             {
                 { "0", new[] { "1", "2", "3" } },
                 { "1", new[] { "4", "5", "6" } },

@@ -95,6 +95,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     null,
                     w => w.AppendRaw(namehint));
             }
+            writer.Line();
         }
 
         private void WriteXmlDeserialize(CodeWriter writer, ObjectType model, XmlElementSerialization serialization)
@@ -105,6 +106,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.ToDeserializeCall(serialization, w=> w.AppendRaw("element"), ref resultVariable, true);
                 writer.Line($"return {resultVariable};");
             }
+            writer.Line();
         }
 
         private void WriteJsonDeserialize(CodeWriter writer, ObjectType model, JsonSerialization jsonSerialization)
@@ -113,7 +115,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 if (model.Discriminator?.HasDescendants == true)
                 {
-                    using (writer.If($"element.TryGetProperty(\"{model.Discriminator.SerializedName}\", out {typeof(JsonElement)} discriminator)"))
+                    using (writer.Scope($"if (element.TryGetProperty({model.Discriminator.SerializedName:L}, out {typeof(JsonElement)} discriminator))"))
                     {
                         writer.Line($"switch (discriminator.GetString())");
                         using (writer.Scope())
@@ -133,6 +135,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.ToDeserializeCall(jsonSerialization, w=>w.AppendRaw("element"), ref resultVariable);
                 writer.Line($"return {resultVariable};");
             }
+            writer.Line();
         }
 
         private void WriteJsonSerialize(CodeWriter writer, JsonSerialization jsonSerialization)
@@ -142,6 +145,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 writer.ToSerializeCall(jsonSerialization, w => w.AppendRaw("this"));
             }
+            writer.Line();
         }
 
         private void WriteSealedChoiceSerialization(CodeWriter writer, EnumType schema)
@@ -156,22 +160,23 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     {
                         foreach (EnumTypeValue value in schema.Values)
                         {
-                            writer.Line($"{declaredTypeName}.{value.Name} => {value.Value.Value:L},");
+                            writer.Line($"{declaredTypeName}.{value.Declaration.Name} => {value.Value.Value:L},");
                         }
 
                         writer.Line($"_ => throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\")");
                     }
                     writer.Line();
 
-                    using (writer.Scope($"public static {declaredTypeName} To{declaredTypeName}(this string value) => value switch", end: "};"))
+                    using (writer.Scope($"public static {declaredTypeName} To{declaredTypeName}(this string value)"))
                     {
                         foreach (EnumTypeValue value in schema.Values)
                         {
-                            writer.Line($"{value.Value.Value:L} => {declaredTypeName}.{value.Name},");
+                            writer.Line($"if ({typeof(string)}.Equals(value, {value.Value.Value:L}, {typeof(StringComparison)}.InvariantCultureIgnoreCase)) return {declaredTypeName}.{value.Declaration.Name};");
                         }
 
-                        writer.Line($"_ => throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\")");
+                        writer.Line($"throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\");");
                     }
+                    writer.Line();
                 }
             }
         }

@@ -50,6 +50,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static NetworkInterfaceTapConfiguration DeserializeNetworkInterfaceTapConfiguration(JsonElement element)
         {
             NetworkInterfaceTapConfiguration result = new NetworkInterfaceTapConfiguration();

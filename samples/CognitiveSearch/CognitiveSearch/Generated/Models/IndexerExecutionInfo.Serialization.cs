@@ -43,6 +43,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static IndexerExecutionInfo DeserializeIndexerExecutionInfo(JsonElement element)
         {
             IndexerExecutionInfo result = new IndexerExecutionInfo();

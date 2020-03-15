@@ -22,15 +22,15 @@ namespace CognitiveSearch.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown VisualFeature value.")
         };
 
-        public static VisualFeature ToVisualFeature(this string value) => value switch
+        public static VisualFeature ToVisualFeature(this string value)
         {
-            "categories" => VisualFeature.Categories,
-            "tags" => VisualFeature.Tags,
-            "description" => VisualFeature.Description,
-            "faces" => VisualFeature.Faces,
-            "imageType" => VisualFeature.ImageType,
-            "color" => VisualFeature.Color,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown VisualFeature value.")
-        };
+            if (string.Equals(value, "categories", StringComparison.InvariantCultureIgnoreCase)) return VisualFeature.Categories;
+            if (string.Equals(value, "tags", StringComparison.InvariantCultureIgnoreCase)) return VisualFeature.Tags;
+            if (string.Equals(value, "description", StringComparison.InvariantCultureIgnoreCase)) return VisualFeature.Description;
+            if (string.Equals(value, "faces", StringComparison.InvariantCultureIgnoreCase)) return VisualFeature.Faces;
+            if (string.Equals(value, "imageType", StringComparison.InvariantCultureIgnoreCase)) return VisualFeature.ImageType;
+            if (string.Equals(value, "color", StringComparison.InvariantCultureIgnoreCase)) return VisualFeature.Color;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown VisualFeature value.");
+        }
     }
 }

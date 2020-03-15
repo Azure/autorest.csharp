@@ -19,12 +19,12 @@ namespace body_string.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown Colors value.")
         };
 
-        public static Colors ToColors(this string value) => value switch
+        public static Colors ToColors(this string value)
         {
-            "red color" => Colors.RedColor,
-            "green-color" => Colors.GreenColor,
-            "blue_color" => Colors.BlueColor,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown Colors value.")
-        };
+            if (string.Equals(value, "red color", StringComparison.InvariantCultureIgnoreCase)) return Colors.RedColor;
+            if (string.Equals(value, "green-color", StringComparison.InvariantCultureIgnoreCase)) return Colors.GreenColor;
+            if (string.Equals(value, "blue_color", StringComparison.InvariantCultureIgnoreCase)) return Colors.BlueColor;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown Colors value.");
+        }
     }
 }

@@ -37,6 +37,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteStringValue(DataSource);
             writer.WriteEndObject();
         }
+
         internal static LinkedEntity DeserializeLinkedEntity(JsonElement element)
         {
             LinkedEntity result = new LinkedEntity();

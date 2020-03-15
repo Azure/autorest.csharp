@@ -22,6 +22,7 @@ namespace body_dictionary
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of DictionaryRestClient. </summary>
         public DictionaryRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -34,17 +35,19 @@ namespace body_dictionary
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/null", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get null dictionary value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, int>>> GetNullAsync(CancellationToken cancellationToken = default)
@@ -77,6 +80,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get null dictionary value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, int>> GetNull(CancellationToken cancellationToken = default)
@@ -109,17 +113,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetEmptyRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/empty", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get empty dictionary value {}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, int>>> GetEmptyAsync(CancellationToken cancellationToken = default)
@@ -152,6 +158,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get empty dictionary value {}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, int>> GetEmpty(CancellationToken cancellationToken = default)
@@ -184,11 +191,12 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreatePutEmptyRequest(IDictionary<string, string> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/empty", false);
@@ -205,6 +213,7 @@ namespace body_dictionary
             request.Content = content;
             return message;
         }
+
         /// <summary> Set dictionary value empty {}. </summary>
         /// <param name="arrayBody"> The DictionaryOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -235,6 +244,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Set dictionary value empty {}. </summary>
         /// <param name="arrayBody"> The DictionaryOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -265,17 +275,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetNullValueRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/nullvalue", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get Dictionary with null value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, string>>> GetNullValueAsync(CancellationToken cancellationToken = default)
@@ -308,6 +320,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get Dictionary with null value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, string>> GetNullValue(CancellationToken cancellationToken = default)
@@ -340,17 +353,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetNullKeyRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/nullkey", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get Dictionary with null key. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, string>>> GetNullKeyAsync(CancellationToken cancellationToken = default)
@@ -383,6 +398,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get Dictionary with null key. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, string>> GetNullKey(CancellationToken cancellationToken = default)
@@ -415,17 +431,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetEmptyStringKeyRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/keyemptystring", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get Dictionary with key as empty string. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, string>>> GetEmptyStringKeyAsync(CancellationToken cancellationToken = default)
@@ -458,6 +476,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get Dictionary with key as empty string. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, string>> GetEmptyStringKey(CancellationToken cancellationToken = default)
@@ -490,17 +509,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetInvalidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/invalid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get invalid Dictionary value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, string>>> GetInvalidAsync(CancellationToken cancellationToken = default)
@@ -533,6 +554,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get invalid Dictionary value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, string>> GetInvalid(CancellationToken cancellationToken = default)
@@ -565,17 +587,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetBooleanTfftRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/boolean/tfft", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get boolean dictionary value {&quot;0&quot;: true, &quot;1&quot;: false, &quot;2&quot;: false, &quot;3&quot;: true }. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, bool>>> GetBooleanTfftAsync(CancellationToken cancellationToken = default)
@@ -608,6 +632,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get boolean dictionary value {&quot;0&quot;: true, &quot;1&quot;: false, &quot;2&quot;: false, &quot;3&quot;: true }. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, bool>> GetBooleanTfft(CancellationToken cancellationToken = default)
@@ -640,11 +665,12 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreatePutBooleanTfftRequest(IDictionary<string, bool> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/boolean/tfft", false);
@@ -661,6 +687,7 @@ namespace body_dictionary
             request.Content = content;
             return message;
         }
+
         /// <summary> Set dictionary value empty {&quot;0&quot;: true, &quot;1&quot;: false, &quot;2&quot;: false, &quot;3&quot;: true }. </summary>
         /// <param name="arrayBody"> The DictionaryOfBoolean to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -691,6 +718,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Set dictionary value empty {&quot;0&quot;: true, &quot;1&quot;: false, &quot;2&quot;: false, &quot;3&quot;: true }. </summary>
         /// <param name="arrayBody"> The DictionaryOfBoolean to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -721,17 +749,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetBooleanInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/boolean/true.null.false", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get boolean dictionary value {&quot;0&quot;: true, &quot;1&quot;: null, &quot;2&quot;: false }. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, bool>>> GetBooleanInvalidNullAsync(CancellationToken cancellationToken = default)
@@ -764,6 +794,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get boolean dictionary value {&quot;0&quot;: true, &quot;1&quot;: null, &quot;2&quot;: false }. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, bool>> GetBooleanInvalidNull(CancellationToken cancellationToken = default)
@@ -796,17 +827,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetBooleanInvalidStringRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/boolean/true.boolean.false", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get boolean dictionary value &apos;{&quot;0&quot;: true, &quot;1&quot;: &quot;boolean&quot;, &quot;2&quot;: false}&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, bool>>> GetBooleanInvalidStringAsync(CancellationToken cancellationToken = default)
@@ -839,6 +872,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get boolean dictionary value &apos;{&quot;0&quot;: true, &quot;1&quot;: &quot;boolean&quot;, &quot;2&quot;: false}&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, bool>> GetBooleanInvalidString(CancellationToken cancellationToken = default)
@@ -871,17 +905,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetIntegerValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/integer/1.-1.3.300", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, int>>> GetIntegerValidAsync(CancellationToken cancellationToken = default)
@@ -914,6 +950,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, int>> GetIntegerValid(CancellationToken cancellationToken = default)
@@ -946,11 +983,12 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreatePutIntegerValidRequest(IDictionary<string, int> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/integer/1.-1.3.300", false);
@@ -967,6 +1005,7 @@ namespace body_dictionary
             request.Content = content;
             return message;
         }
+
         /// <summary> Set dictionary value empty {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
         /// <param name="arrayBody"> The DictionaryOfInteger to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -997,6 +1036,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Set dictionary value empty {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
         /// <param name="arrayBody"> The DictionaryOfInteger to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1027,17 +1067,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetIntInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/integer/1.null.zero", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: null, &quot;2&quot;: 0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, int>>> GetIntInvalidNullAsync(CancellationToken cancellationToken = default)
@@ -1070,6 +1112,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: null, &quot;2&quot;: 0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, int>> GetIntInvalidNull(CancellationToken cancellationToken = default)
@@ -1102,17 +1145,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetIntInvalidStringRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/integer/1.integer.0", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: &quot;integer&quot;, &quot;2&quot;: 0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, int>>> GetIntInvalidStringAsync(CancellationToken cancellationToken = default)
@@ -1145,6 +1190,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: &quot;integer&quot;, &quot;2&quot;: 0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, int>> GetIntInvalidString(CancellationToken cancellationToken = default)
@@ -1177,17 +1223,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetLongValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/long/1.-1.3.300", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, long>>> GetLongValidAsync(CancellationToken cancellationToken = default)
@@ -1220,6 +1268,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, long>> GetLongValid(CancellationToken cancellationToken = default)
@@ -1252,11 +1301,12 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreatePutLongValidRequest(IDictionary<string, long> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/long/1.-1.3.300", false);
@@ -1273,6 +1323,7 @@ namespace body_dictionary
             request.Content = content;
             return message;
         }
+
         /// <summary> Set dictionary value empty {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
         /// <param name="arrayBody"> The DictionaryOfInteger to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1303,6 +1354,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Set dictionary value empty {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
         /// <param name="arrayBody"> The DictionaryOfInteger to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1333,17 +1385,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetLongInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/long/1.null.zero", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get long dictionary value {&quot;0&quot;: 1, &quot;1&quot;: null, &quot;2&quot;: 0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, long>>> GetLongInvalidNullAsync(CancellationToken cancellationToken = default)
@@ -1376,6 +1430,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get long dictionary value {&quot;0&quot;: 1, &quot;1&quot;: null, &quot;2&quot;: 0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, long>> GetLongInvalidNull(CancellationToken cancellationToken = default)
@@ -1408,17 +1463,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetLongInvalidStringRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/long/1.integer.0", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get long dictionary value {&quot;0&quot;: 1, &quot;1&quot;: &quot;integer&quot;, &quot;2&quot;: 0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, long>>> GetLongInvalidStringAsync(CancellationToken cancellationToken = default)
@@ -1451,6 +1508,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get long dictionary value {&quot;0&quot;: 1, &quot;1&quot;: &quot;integer&quot;, &quot;2&quot;: 0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, long>> GetLongInvalidString(CancellationToken cancellationToken = default)
@@ -1483,17 +1541,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetFloatValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/float/0--0.01-1.2e20", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get float dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, float>>> GetFloatValidAsync(CancellationToken cancellationToken = default)
@@ -1526,6 +1586,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get float dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, float>> GetFloatValid(CancellationToken cancellationToken = default)
@@ -1558,11 +1619,12 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreatePutFloatValidRequest(IDictionary<string, float> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/float/0--0.01-1.2e20", false);
@@ -1579,6 +1641,7 @@ namespace body_dictionary
             request.Content = content;
             return message;
         }
+
         /// <summary> Set dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
         /// <param name="arrayBody"> The DictionaryOfNumber to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1609,6 +1672,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Set dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
         /// <param name="arrayBody"> The DictionaryOfNumber to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1639,17 +1703,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetFloatInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/float/0.0-null-1.2e20", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get float dictionary value {&quot;0&quot;: 0.0, &quot;1&quot;: null, &quot;2&quot;: 1.2e20}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, float>>> GetFloatInvalidNullAsync(CancellationToken cancellationToken = default)
@@ -1682,6 +1748,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get float dictionary value {&quot;0&quot;: 0.0, &quot;1&quot;: null, &quot;2&quot;: 1.2e20}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, float>> GetFloatInvalidNull(CancellationToken cancellationToken = default)
@@ -1714,17 +1781,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetFloatInvalidStringRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/float/1.number.0", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get boolean dictionary value {&quot;0&quot;: 1.0, &quot;1&quot;: &quot;number&quot;, &quot;2&quot;: 0.0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, float>>> GetFloatInvalidStringAsync(CancellationToken cancellationToken = default)
@@ -1757,6 +1826,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get boolean dictionary value {&quot;0&quot;: 1.0, &quot;1&quot;: &quot;number&quot;, &quot;2&quot;: 0.0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, float>> GetFloatInvalidString(CancellationToken cancellationToken = default)
@@ -1789,17 +1859,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDoubleValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/double/0--0.01-1.2e20", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get float dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, double>>> GetDoubleValidAsync(CancellationToken cancellationToken = default)
@@ -1832,6 +1904,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get float dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, double>> GetDoubleValid(CancellationToken cancellationToken = default)
@@ -1864,11 +1937,12 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreatePutDoubleValidRequest(IDictionary<string, double> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/double/0--0.01-1.2e20", false);
@@ -1885,6 +1959,7 @@ namespace body_dictionary
             request.Content = content;
             return message;
         }
+
         /// <summary> Set dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
         /// <param name="arrayBody"> The DictionaryOfNumber to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1915,6 +1990,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Set dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
         /// <param name="arrayBody"> The DictionaryOfNumber to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1945,17 +2021,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDoubleInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/double/0.0-null-1.2e20", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get float dictionary value {&quot;0&quot;: 0.0, &quot;1&quot;: null, &quot;2&quot;: 1.2e20}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, double>>> GetDoubleInvalidNullAsync(CancellationToken cancellationToken = default)
@@ -1988,6 +2066,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get float dictionary value {&quot;0&quot;: 0.0, &quot;1&quot;: null, &quot;2&quot;: 1.2e20}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, double>> GetDoubleInvalidNull(CancellationToken cancellationToken = default)
@@ -2020,17 +2099,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDoubleInvalidStringRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/double/1.number.0", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get boolean dictionary value {&quot;0&quot;: 1.0, &quot;1&quot;: &quot;number&quot;, &quot;2&quot;: 0.0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, double>>> GetDoubleInvalidStringAsync(CancellationToken cancellationToken = default)
@@ -2063,6 +2144,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get boolean dictionary value {&quot;0&quot;: 1.0, &quot;1&quot;: &quot;number&quot;, &quot;2&quot;: 0.0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, double>> GetDoubleInvalidString(CancellationToken cancellationToken = default)
@@ -2095,17 +2177,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetStringValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/string/foo1.foo2.foo3", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get string dictionary value {&quot;0&quot;: &quot;foo1&quot;, &quot;1&quot;: &quot;foo2&quot;, &quot;2&quot;: &quot;foo3&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, string>>> GetStringValidAsync(CancellationToken cancellationToken = default)
@@ -2138,6 +2222,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get string dictionary value {&quot;0&quot;: &quot;foo1&quot;, &quot;1&quot;: &quot;foo2&quot;, &quot;2&quot;: &quot;foo3&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, string>> GetStringValid(CancellationToken cancellationToken = default)
@@ -2170,11 +2255,12 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreatePutStringValidRequest(IDictionary<string, string> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/string/foo1.foo2.foo3", false);
@@ -2191,6 +2277,7 @@ namespace body_dictionary
             request.Content = content;
             return message;
         }
+
         /// <summary> Set dictionary value {&quot;0&quot;: &quot;foo1&quot;, &quot;1&quot;: &quot;foo2&quot;, &quot;2&quot;: &quot;foo3&quot;}. </summary>
         /// <param name="arrayBody"> The DictionaryOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2221,6 +2308,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Set dictionary value {&quot;0&quot;: &quot;foo1&quot;, &quot;1&quot;: &quot;foo2&quot;, &quot;2&quot;: &quot;foo3&quot;}. </summary>
         /// <param name="arrayBody"> The DictionaryOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2251,17 +2339,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetStringWithNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/string/foo.null.foo2", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get string dictionary value {&quot;0&quot;: &quot;foo&quot;, &quot;1&quot;: null, &quot;2&quot;: &quot;foo2&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, string>>> GetStringWithNullAsync(CancellationToken cancellationToken = default)
@@ -2294,6 +2384,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get string dictionary value {&quot;0&quot;: &quot;foo&quot;, &quot;1&quot;: null, &quot;2&quot;: &quot;foo2&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, string>> GetStringWithNull(CancellationToken cancellationToken = default)
@@ -2326,17 +2417,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetStringWithInvalidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/string/foo.123.foo2", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get string dictionary value {&quot;0&quot;: &quot;foo&quot;, &quot;1&quot;: 123, &quot;2&quot;: &quot;foo2&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, string>>> GetStringWithInvalidAsync(CancellationToken cancellationToken = default)
@@ -2369,6 +2462,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get string dictionary value {&quot;0&quot;: &quot;foo&quot;, &quot;1&quot;: 123, &quot;2&quot;: &quot;foo2&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, string>> GetStringWithInvalid(CancellationToken cancellationToken = default)
@@ -2401,17 +2495,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDateValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/date/valid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get integer dictionary value {&quot;0&quot;: &quot;2000-12-01&quot;, &quot;1&quot;: &quot;1980-01-02&quot;, &quot;2&quot;: &quot;1492-10-12&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateValidAsync(CancellationToken cancellationToken = default)
@@ -2444,6 +2540,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get integer dictionary value {&quot;0&quot;: &quot;2000-12-01&quot;, &quot;1&quot;: &quot;1980-01-02&quot;, &quot;2&quot;: &quot;1492-10-12&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, DateTimeOffset>> GetDateValid(CancellationToken cancellationToken = default)
@@ -2476,11 +2573,12 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreatePutDateValidRequest(IDictionary<string, DateTimeOffset> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/date/valid", false);
@@ -2497,6 +2595,7 @@ namespace body_dictionary
             request.Content = content;
             return message;
         }
+
         /// <summary> Set dictionary value  {&quot;0&quot;: &quot;2000-12-01&quot;, &quot;1&quot;: &quot;1980-01-02&quot;, &quot;2&quot;: &quot;1492-10-12&quot;}. </summary>
         /// <param name="arrayBody"> The DictionaryOfDate to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2527,6 +2626,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Set dictionary value  {&quot;0&quot;: &quot;2000-12-01&quot;, &quot;1&quot;: &quot;1980-01-02&quot;, &quot;2&quot;: &quot;1492-10-12&quot;}. </summary>
         /// <param name="arrayBody"> The DictionaryOfDate to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2557,17 +2657,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDateInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/date/invalidnull", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2012-01-01&quot;, &quot;1&quot;: null, &quot;2&quot;: &quot;1776-07-04&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateInvalidNullAsync(CancellationToken cancellationToken = default)
@@ -2600,6 +2702,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2012-01-01&quot;, &quot;1&quot;: null, &quot;2&quot;: &quot;1776-07-04&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, DateTimeOffset>> GetDateInvalidNull(CancellationToken cancellationToken = default)
@@ -2632,17 +2735,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDateInvalidCharsRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/date/invalidchars", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2011-03-22&quot;, &quot;1&quot;: &quot;date&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateInvalidCharsAsync(CancellationToken cancellationToken = default)
@@ -2675,6 +2780,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2011-03-22&quot;, &quot;1&quot;: &quot;date&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, DateTimeOffset>> GetDateInvalidChars(CancellationToken cancellationToken = default)
@@ -2707,17 +2813,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDateTimeValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/date-time/valid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get date-time dictionary value {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: &quot;1980-01-02T00:11:35+01:00&quot;, &quot;2&quot;: &quot;1492-10-12T10:15:01-08:00&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeValidAsync(CancellationToken cancellationToken = default)
@@ -2750,6 +2858,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get date-time dictionary value {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: &quot;1980-01-02T00:11:35+01:00&quot;, &quot;2&quot;: &quot;1492-10-12T10:15:01-08:00&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, DateTimeOffset>> GetDateTimeValid(CancellationToken cancellationToken = default)
@@ -2782,11 +2891,12 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreatePutDateTimeValidRequest(IDictionary<string, DateTimeOffset> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/date-time/valid", false);
@@ -2803,6 +2913,7 @@ namespace body_dictionary
             request.Content = content;
             return message;
         }
+
         /// <summary> Set dictionary value  {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: &quot;1980-01-02T00:11:35+01:00&quot;, &quot;2&quot;: &quot;1492-10-12T10:15:01-08:00&quot;}. </summary>
         /// <param name="arrayBody"> The DictionaryOfDateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2833,6 +2944,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Set dictionary value  {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: &quot;1980-01-02T00:11:35+01:00&quot;, &quot;2&quot;: &quot;1492-10-12T10:15:01-08:00&quot;}. </summary>
         /// <param name="arrayBody"> The DictionaryOfDateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2863,17 +2975,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDateTimeInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/date-time/invalidnull", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: null}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeInvalidNullAsync(CancellationToken cancellationToken = default)
@@ -2906,6 +3020,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: null}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, DateTimeOffset>> GetDateTimeInvalidNull(CancellationToken cancellationToken = default)
@@ -2938,17 +3053,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDateTimeInvalidCharsRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/date-time/invalidchars", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: &quot;date-time&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeInvalidCharsAsync(CancellationToken cancellationToken = default)
@@ -2981,6 +3098,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: &quot;date-time&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, DateTimeOffset>> GetDateTimeInvalidChars(CancellationToken cancellationToken = default)
@@ -3013,17 +3131,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDateTimeRfc1123ValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/date-time-rfc1123/valid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get date-time-rfc1123 dictionary value {&quot;0&quot;: &quot;Fri, 01 Dec 2000 00:00:01 GMT&quot;, &quot;1&quot;: &quot;Wed, 02 Jan 1980 00:11:35 GMT&quot;, &quot;2&quot;: &quot;Wed, 12 Oct 1492 10:15:01 GMT&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, DateTimeOffset>>> GetDateTimeRfc1123ValidAsync(CancellationToken cancellationToken = default)
@@ -3056,6 +3176,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get date-time-rfc1123 dictionary value {&quot;0&quot;: &quot;Fri, 01 Dec 2000 00:00:01 GMT&quot;, &quot;1&quot;: &quot;Wed, 02 Jan 1980 00:11:35 GMT&quot;, &quot;2&quot;: &quot;Wed, 12 Oct 1492 10:15:01 GMT&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, DateTimeOffset>> GetDateTimeRfc1123Valid(CancellationToken cancellationToken = default)
@@ -3088,11 +3209,12 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreatePutDateTimeRfc1123ValidRequest(IDictionary<string, DateTimeOffset> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/date-time-rfc1123/valid", false);
@@ -3109,6 +3231,7 @@ namespace body_dictionary
             request.Content = content;
             return message;
         }
+
         /// <summary> Set dictionary value empty {&quot;0&quot;: &quot;Fri, 01 Dec 2000 00:00:01 GMT&quot;, &quot;1&quot;: &quot;Wed, 02 Jan 1980 00:11:35 GMT&quot;, &quot;2&quot;: &quot;Wed, 12 Oct 1492 10:15:01 GMT&quot;}. </summary>
         /// <param name="arrayBody"> The DictionaryOfDateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -3139,6 +3262,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Set dictionary value empty {&quot;0&quot;: &quot;Fri, 01 Dec 2000 00:00:01 GMT&quot;, &quot;1&quot;: &quot;Wed, 02 Jan 1980 00:11:35 GMT&quot;, &quot;2&quot;: &quot;Wed, 12 Oct 1492 10:15:01 GMT&quot;}. </summary>
         /// <param name="arrayBody"> The DictionaryOfDateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -3169,17 +3293,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDurationValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/duration/valid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get duration dictionary value {&quot;0&quot;: &quot;P123DT22H14M12.011S&quot;, &quot;1&quot;: &quot;P5DT1H0M0S&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, TimeSpan>>> GetDurationValidAsync(CancellationToken cancellationToken = default)
@@ -3212,6 +3338,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get duration dictionary value {&quot;0&quot;: &quot;P123DT22H14M12.011S&quot;, &quot;1&quot;: &quot;P5DT1H0M0S&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, TimeSpan>> GetDurationValid(CancellationToken cancellationToken = default)
@@ -3244,11 +3371,12 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreatePutDurationValidRequest(IDictionary<string, TimeSpan> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/duration/valid", false);
@@ -3265,6 +3393,7 @@ namespace body_dictionary
             request.Content = content;
             return message;
         }
+
         /// <summary> Set dictionary value  {&quot;0&quot;: &quot;P123DT22H14M12.011S&quot;, &quot;1&quot;: &quot;P5DT1H0M0S&quot;}. </summary>
         /// <param name="arrayBody"> The DictionaryOfDuration to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -3295,6 +3424,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Set dictionary value  {&quot;0&quot;: &quot;P123DT22H14M12.011S&quot;, &quot;1&quot;: &quot;P5DT1H0M0S&quot;}. </summary>
         /// <param name="arrayBody"> The DictionaryOfDuration to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -3325,17 +3455,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetByteValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/byte/valid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get byte dictionary value {&quot;0&quot;: hex(FF FF FF FA), &quot;1&quot;: hex(01 02 03), &quot;2&quot;: hex (25, 29, 43)} with each item encoded in base64. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, byte[]>>> GetByteValidAsync(CancellationToken cancellationToken = default)
@@ -3368,6 +3500,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get byte dictionary value {&quot;0&quot;: hex(FF FF FF FA), &quot;1&quot;: hex(01 02 03), &quot;2&quot;: hex (25, 29, 43)} with each item encoded in base64. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, byte[]>> GetByteValid(CancellationToken cancellationToken = default)
@@ -3400,11 +3533,12 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreatePutByteValidRequest(IDictionary<string, byte[]> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/byte/valid", false);
@@ -3421,6 +3555,7 @@ namespace body_dictionary
             request.Content = content;
             return message;
         }
+
         /// <summary> Put the dictionary value {&quot;0&quot;: hex(FF FF FF FA), &quot;1&quot;: hex(01 02 03), &quot;2&quot;: hex (25, 29, 43)} with each elementencoded in base 64. </summary>
         /// <param name="arrayBody"> The DictionaryOfByteArray to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -3451,6 +3586,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Put the dictionary value {&quot;0&quot;: hex(FF FF FF FA), &quot;1&quot;: hex(01 02 03), &quot;2&quot;: hex (25, 29, 43)} with each elementencoded in base 64. </summary>
         /// <param name="arrayBody"> The DictionaryOfByteArray to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -3481,17 +3617,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetByteInvalidNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/byte/invalidnull", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get byte dictionary value {&quot;0&quot;: hex(FF FF FF FA), &quot;1&quot;: null} with the first item base64 encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, byte[]>>> GetByteInvalidNullAsync(CancellationToken cancellationToken = default)
@@ -3524,6 +3662,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get byte dictionary value {&quot;0&quot;: hex(FF FF FF FA), &quot;1&quot;: null} with the first item base64 encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, byte[]>> GetByteInvalidNull(CancellationToken cancellationToken = default)
@@ -3556,17 +3695,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetBase64UrlRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/prim/base64url/valid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get base64url dictionary value {&quot;0&quot;: &quot;a string that gets encoded with base64url&quot;, &quot;1&quot;: &quot;test string&quot;, &quot;2&quot;: &quot;Lorem ipsum&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, byte[]>>> GetBase64UrlAsync(CancellationToken cancellationToken = default)
@@ -3599,6 +3740,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get base64url dictionary value {&quot;0&quot;: &quot;a string that gets encoded with base64url&quot;, &quot;1&quot;: &quot;test string&quot;, &quot;2&quot;: &quot;Lorem ipsum&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, byte[]>> GetBase64Url(CancellationToken cancellationToken = default)
@@ -3631,17 +3773,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetComplexNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/complex/null", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get dictionary of complex type null value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexNullAsync(CancellationToken cancellationToken = default)
@@ -3674,6 +3818,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get dictionary of complex type null value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, Widget>> GetComplexNull(CancellationToken cancellationToken = default)
@@ -3706,17 +3851,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetComplexEmptyRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/complex/empty", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get empty dictionary of complex type {}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexEmptyAsync(CancellationToken cancellationToken = default)
@@ -3749,6 +3896,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get empty dictionary of complex type {}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, Widget>> GetComplexEmpty(CancellationToken cancellationToken = default)
@@ -3781,17 +3929,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetComplexItemNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/complex/itemnull", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get dictionary of complex type with null item {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1&quot;: null, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexItemNullAsync(CancellationToken cancellationToken = default)
@@ -3824,6 +3974,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get dictionary of complex type with null item {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1&quot;: null, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, Widget>> GetComplexItemNull(CancellationToken cancellationToken = default)
@@ -3856,17 +4007,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetComplexItemEmptyRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/complex/itemempty", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get dictionary of complex type with empty item {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1:&quot; {}, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexItemEmptyAsync(CancellationToken cancellationToken = default)
@@ -3899,6 +4052,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get dictionary of complex type with empty item {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1:&quot; {}, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, Widget>> GetComplexItemEmpty(CancellationToken cancellationToken = default)
@@ -3931,17 +4085,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetComplexValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/complex/valid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get dictionary of complex type with {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1&quot;: {&quot;integer&quot;: 3, &quot;string&quot;: &quot;4&quot;}, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, Widget>>> GetComplexValidAsync(CancellationToken cancellationToken = default)
@@ -3974,6 +4130,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get dictionary of complex type with {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1&quot;: {&quot;integer&quot;: 3, &quot;string&quot;: &quot;4&quot;}, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, Widget>> GetComplexValid(CancellationToken cancellationToken = default)
@@ -4006,11 +4163,12 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreatePutComplexValidRequest(IDictionary<string, Widget> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/complex/valid", false);
@@ -4027,6 +4185,7 @@ namespace body_dictionary
             request.Content = content;
             return message;
         }
+
         /// <summary> Put an dictionary of complex type with values {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1&quot;: {&quot;integer&quot;: 3, &quot;string&quot;: &quot;4&quot;}, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
         /// <param name="arrayBody"> The DictionaryOfWidget to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -4057,6 +4216,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Put an dictionary of complex type with values {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1&quot;: {&quot;integer&quot;: 3, &quot;string&quot;: &quot;4&quot;}, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
         /// <param name="arrayBody"> The DictionaryOfWidget to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -4087,20 +4247,22 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetArrayNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/array/null", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get a null array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, IList<string>>>> GetArrayNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayNull");
             scope.Start();
@@ -4113,10 +4275,10 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            IDictionary<string, IList<string>> value = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
                                     value0.Add(item.GetString());
@@ -4135,9 +4297,10 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get a null array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IDictionary<string, ICollection<string>>> GetArrayNull(CancellationToken cancellationToken = default)
+        public Response<IDictionary<string, IList<string>>> GetArrayNull(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayNull");
             scope.Start();
@@ -4150,10 +4313,10 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            IDictionary<string, IList<string>> value = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
                                     value0.Add(item.GetString());
@@ -4172,20 +4335,22 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetArrayEmptyRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/array/empty", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an empty dictionary {}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, IList<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayEmpty");
             scope.Start();
@@ -4198,10 +4363,10 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            IDictionary<string, IList<string>> value = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
                                     value0.Add(item.GetString());
@@ -4220,9 +4385,10 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get an empty dictionary {}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IDictionary<string, ICollection<string>>> GetArrayEmpty(CancellationToken cancellationToken = default)
+        public Response<IDictionary<string, IList<string>>> GetArrayEmpty(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayEmpty");
             scope.Start();
@@ -4235,10 +4401,10 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            IDictionary<string, IList<string>> value = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
                                     value0.Add(item.GetString());
@@ -4257,20 +4423,22 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetArrayItemNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/array/itemnull", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an dictionary of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: null, &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, IList<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayItemNull");
             scope.Start();
@@ -4283,10 +4451,10 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            IDictionary<string, IList<string>> value = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
                                     value0.Add(item.GetString());
@@ -4305,9 +4473,10 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get an dictionary of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: null, &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IDictionary<string, ICollection<string>>> GetArrayItemNull(CancellationToken cancellationToken = default)
+        public Response<IDictionary<string, IList<string>>> GetArrayItemNull(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayItemNull");
             scope.Start();
@@ -4320,10 +4489,10 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            IDictionary<string, IList<string>> value = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
                                     value0.Add(item.GetString());
@@ -4342,20 +4511,22 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetArrayItemEmptyRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/array/itemempty", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an array of array of strings [{&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, IList<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayItemEmpty");
             scope.Start();
@@ -4368,10 +4539,10 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            IDictionary<string, IList<string>> value = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
                                     value0.Add(item.GetString());
@@ -4390,9 +4561,10 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get an array of array of strings [{&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IDictionary<string, ICollection<string>>> GetArrayItemEmpty(CancellationToken cancellationToken = default)
+        public Response<IDictionary<string, IList<string>>> GetArrayItemEmpty(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayItemEmpty");
             scope.Start();
@@ -4405,10 +4577,10 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            IDictionary<string, IList<string>> value = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
                                     value0.Add(item.GetString());
@@ -4427,20 +4599,22 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetArrayValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/array/valid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IDictionary<string, ICollection<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IDictionary<string, IList<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayValid");
             scope.Start();
@@ -4453,10 +4627,10 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            IDictionary<string, IList<string>> value = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
                                     value0.Add(item.GetString());
@@ -4475,9 +4649,10 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get an array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IDictionary<string, ICollection<string>>> GetArrayValid(CancellationToken cancellationToken = default)
+        public Response<IDictionary<string, IList<string>>> GetArrayValid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayValid");
             scope.Start();
@@ -4490,10 +4665,10 @@ namespace body_dictionary
                     case 200:
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, ICollection<string>> value = new Dictionary<string, ICollection<string>>();
+                            IDictionary<string, IList<string>> value = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                ICollection<string> value0 = new List<string>();
+                                IList<string> value0 = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
                                     value0.Add(item.GetString());
@@ -4512,11 +4687,12 @@ namespace body_dictionary
                 throw;
             }
         }
-        internal HttpMessage CreatePutArrayValidRequest(IDictionary<string, ICollection<string>> arrayBody)
+
+        internal HttpMessage CreatePutArrayValidRequest(IDictionary<string, IList<string>> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/array/valid", false);
@@ -4538,10 +4714,11 @@ namespace body_dictionary
             request.Content = content;
             return message;
         }
+
         /// <summary> Put An array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="arrayBody"> The DictionaryOfpaths1Dxz488DictionaryArrayValidPutRequestbodyContentApplicationJsonSchemaAdditionalproperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutArrayValidAsync(IDictionary<string, ICollection<string>> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutArrayValidAsync(IDictionary<string, IList<string>> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -4568,10 +4745,11 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Put An array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="arrayBody"> The DictionaryOfpaths1Dxz488DictionaryArrayValidPutRequestbodyContentApplicationJsonSchemaAdditionalproperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutArrayValid(IDictionary<string, ICollection<string>> arrayBody, CancellationToken cancellationToken = default)
+        public Response PutArrayValid(IDictionary<string, IList<string>> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -4598,17 +4776,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDictionaryNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/dictionary/null", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an dictionaries of dictionaries with value null. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default)
@@ -4641,6 +4821,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get an dictionaries of dictionaries with value null. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, object>> GetDictionaryNull(CancellationToken cancellationToken = default)
@@ -4673,17 +4854,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDictionaryEmptyRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/dictionary/empty", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default)
@@ -4716,6 +4899,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, object>> GetDictionaryEmpty(CancellationToken cancellationToken = default)
@@ -4748,17 +4932,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDictionaryItemNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/dictionary/itemnull", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: null, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
@@ -4791,6 +4977,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: null, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, object>> GetDictionaryItemNull(CancellationToken cancellationToken = default)
@@ -4823,17 +5010,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDictionaryItemEmptyRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/dictionary/itemempty", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
@@ -4866,6 +5055,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, object>> GetDictionaryItemEmpty(CancellationToken cancellationToken = default)
@@ -4898,17 +5088,19 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreateGetDictionaryValidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/dictionary/valid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {&quot;4&quot;: &quot;four&quot;, &quot;5&quot;: &quot;five&quot;, &quot;6&quot;: &quot;six&quot;}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IDictionary<string, object>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
@@ -4941,6 +5133,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {&quot;4&quot;: &quot;four&quot;, &quot;5&quot;: &quot;five&quot;, &quot;6&quot;: &quot;six&quot;}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IDictionary<string, object>> GetDictionaryValid(CancellationToken cancellationToken = default)
@@ -4973,11 +5166,12 @@ namespace body_dictionary
                 throw;
             }
         }
+
         internal HttpMessage CreatePutDictionaryValidRequest(IDictionary<string, object> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/dictionary/dictionary/valid", false);
@@ -4994,6 +5188,7 @@ namespace body_dictionary
             request.Content = content;
             return message;
         }
+
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {&quot;4&quot;: &quot;four&quot;, &quot;5&quot;: &quot;five&quot;, &quot;6&quot;: &quot;six&quot;}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="arrayBody"> The DictionaryOfany to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -5024,6 +5219,7 @@ namespace body_dictionary
                 throw;
             }
         }
+
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {&quot;4&quot;: &quot;four&quot;, &quot;5&quot;: &quot;five&quot;, &quot;6&quot;: &quot;six&quot;}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="arrayBody"> The DictionaryOfany to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

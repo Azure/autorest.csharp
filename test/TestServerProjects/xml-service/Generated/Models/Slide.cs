@@ -14,6 +14,6 @@ namespace xml_service.Models
     {
         public string Type { get; set; }
         public string Title { get; set; }
-        public ICollection<string> Items { get; set; }
+        public IList<string> Items { get; set; }
     }
 }

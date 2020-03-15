@@ -17,6 +17,10 @@ namespace custom_baseUrl
         private readonly ClientDiagnostics clientDiagnostics;
         private readonly HttpPipeline pipeline;
         internal PathsRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of PathsClient for mocking. </summary>
+        protected PathsClient()
+        {
+        }
         /// <summary> Initializes a new instance of PathsClient. </summary>
         internal PathsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "host")
         {
@@ -24,13 +28,15 @@ namespace custom_baseUrl
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Get a 200 to test a valid base uri. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Response> GetEmptyAsync(string accountName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetEmptyAsync(string accountName, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetEmptyAsync(accountName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get a 200 to test a valid base uri. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

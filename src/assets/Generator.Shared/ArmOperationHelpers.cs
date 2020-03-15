@@ -17,38 +17,11 @@ namespace Azure.Core
     /// </summary>
     internal static class ArmOperationHelpers
     {
-        /// <summary>
-        /// Waits for the long-running operation to complete.
-        /// </summary>
-        /// <typeparam name="TResult">The response type</typeparam>
-        /// <param name="operation">The operation to wait upon</param>
-        /// <param name="cancellationToken">A cancellation token for the operation</param>
-        /// <returns></returns>
-        public static Response<TResult> WaitForCompletion<TResult>(this Operation<TResult> operation, CancellationToken cancellationToken = default) where TResult : notnull
+        internal static Operation<Response> Create(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, Response originalResponse, RequestMethod requestMethod, string scopeName, OperationFinalStateVia finalStateVia, Func<HttpMessage> createOriginalHttpMessage)
         {
-            return operation.WaitForCompletion(OperationHelpers.DefaultPollingInterval, cancellationToken);
-        }
-
-        /// <summary>
-        /// Waits for the long-running operation to complete, including a specified polling internal.
-        /// </summary>
-        /// <typeparam name="TResult">The response type</typeparam>
-        /// <param name="operation">The operation to wait upon</param>
-        /// <param name="pollingInterval">The duration to wait in-between each poll</param>
-        /// <param name="cancellationToken">A cancellation token for the operation</param>
-        /// <returns></returns>
-        public static Response<TResult> WaitForCompletion<TResult>(this Operation<TResult> operation, TimeSpan pollingInterval, CancellationToken cancellationToken = default) where TResult : notnull
-        {
-            while (true)
-            {
-                operation.UpdateStatus(cancellationToken);
-                if (operation.HasCompleted)
-                {
-                    return Response.FromValue(operation.Value, operation.GetRawResponse());
-                }
-
-                Thread.Sleep(pollingInterval);
-            }
+            return Create(pipeline, clientDiagnostics, originalResponse, requestMethod, scopeName, finalStateVia, createOriginalHttpMessage,
+                (response, token) => response,
+                (response, token) => new ValueTask<Response>(response));
         }
 
         internal static Operation<T> Create<T>(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, Response originalResponse, RequestMethod requestMethod, string scopeName, OperationFinalStateVia finalStateVia,
@@ -118,7 +91,7 @@ namespace Azure.Core
             public override ValueTask<Response<T>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken) =>
                 this.DefaultWaitForCompletionAsync(pollingInterval, cancellationToken);
 
-            private async ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken, bool async)
+            private async ValueTask<Response> UpdateStatusAsync(bool async, CancellationToken cancellationToken)
             {
                 if (_hasCompleted)
                 {
@@ -169,9 +142,9 @@ namespace Azure.Core
                 return GetRawResponse();
             }
 
-            public override async ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => await UpdateStatusAsync(cancellationToken, async: true);
+            public override async ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => await UpdateStatusAsync(async: true, cancellationToken).ConfigureAwait(false);
 
-            public override Response UpdateStatus(CancellationToken cancellationToken = default) => UpdateStatusAsync(cancellationToken, async: false).ConfigureAwait(false).GetAwaiter().GetResult();
+            public override Response UpdateStatus(CancellationToken cancellationToken = default) => UpdateStatusAsync(async: false, cancellationToken).EnsureCompleted();
 
             //TODO: This is currently unused.
             public override string Id { get; } = Guid.NewGuid().ToString();
@@ -195,7 +168,7 @@ namespace Azure.Core
             {
                 HttpMessage message = _pipeline.CreateMessage();
                 Request request = message.Request;
-                request.Method = RequestMethodAdditional.Get;
+                request.Method = RequestMethod.Get;
                 request.Uri.Reset(new Uri(link));
                 return message;
             }

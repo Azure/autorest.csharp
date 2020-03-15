@@ -32,6 +32,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static KeyVaultProperties DeserializeKeyVaultProperties(JsonElement element)
         {
             KeyVaultProperties result = new KeyVaultProperties();

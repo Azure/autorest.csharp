@@ -32,6 +32,7 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
+
         internal static StringWrapper DeserializeStringWrapper(JsonElement element)
         {
             StringWrapper result = new StringWrapper();

@@ -4,7 +4,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
+using AutoRest.CSharp.V3.Utilities;
 using YamlDotNet.Serialization;
 
 #pragma warning disable SA1649
@@ -13,11 +16,63 @@ using YamlDotNet.Serialization;
 // ReSharper disable once CheckNamespace
 namespace AutoRest.CSharp.V3.Input
 {
-    // TODO: Temporary workaround for https://github.com/Azure/autorest.modelerfour/issues/197
-    internal partial class HttpWithBodyRequest
+    internal partial class Operation
     {
-        [YamlMember(Alias = "binary")]
-        public bool? Binary { get; set; }
+        // For some reason, booleans in dictionaries are deserialized as string instead of bool.
+        public bool IsLongRunning => Convert.ToBoolean(Extensions.GetValue<string>("x-ms-long-running-operation") ?? "false");
+        public string? LongRunningFinalStateVia => Extensions.GetValue<IDictionary<object, object>>("x-ms-long-running-operation-options")?.GetValue<string>("final-state-via");
+
+        public ServiceResponse LongRunningInitialResponse
+        {
+            get
+            {
+                Debug.Assert(IsLongRunning);
+
+
+                foreach (var operationResponse in Responses)
+                {
+                    if (operationResponse.Protocol.Http is HttpResponse operationHttpResponse &&
+                        !operationHttpResponse.StatusCodes.Contains(StatusCodes._200) &&
+                        !operationHttpResponse.StatusCodes.Contains(StatusCodes._204))
+                    {
+                        return operationResponse;
+                    }
+                }
+
+                return Responses.First();
+            }
+        }
+        public ServiceResponse LongRunningFinalResponse
+        {
+            get
+            {
+                Debug.Assert(IsLongRunning);
+
+                foreach (var operationResponse in Responses)
+                {
+                    if (operationResponse.Protocol.Http is HttpResponse operationHttpResponse &&
+                        (operationHttpResponse.StatusCodes.Contains(StatusCodes._200) ||
+                         operationHttpResponse.StatusCodes.Contains(StatusCodes._204)))
+                    {
+                        return operationResponse;
+                    }
+                }
+
+                return Responses.First();
+            }
+        }
+    }
+
+    internal partial class ServiceResponse
+    {
+        public HttpResponse HttpResponse => Protocol.Http as HttpResponse ?? throw new InvalidOperationException($"Expected an HTTP response");
+    }
+
+    internal partial class HttpResponse
+    {
+        public int[] IntStatusCodes => StatusCodes.Select(ToStatusCode).ToArray();
+
+        private static int ToStatusCode(StatusCodes arg) => int.Parse(arg.ToString().Trim('_'));
     }
 
     internal partial class Value

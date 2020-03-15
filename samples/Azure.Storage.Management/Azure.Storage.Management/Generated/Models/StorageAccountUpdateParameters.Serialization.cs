@@ -87,6 +87,7 @@ namespace Azure.Storage.Management.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static StorageAccountUpdateParameters DeserializeStorageAccountUpdateParameters(JsonElement element)
         {
             StorageAccountUpdateParameters result = new StorageAccountUpdateParameters();

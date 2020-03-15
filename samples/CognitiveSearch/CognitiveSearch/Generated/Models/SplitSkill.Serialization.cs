@@ -63,6 +63,7 @@ namespace CognitiveSearch.Models
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
+
         internal static SplitSkill DeserializeSplitSkill(JsonElement element)
         {
             SplitSkill result = new SplitSkill();

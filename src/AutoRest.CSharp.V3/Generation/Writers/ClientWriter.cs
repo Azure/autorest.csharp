@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,10 +31,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             using (writer.Namespace(@namespace))
             {
                 writer.WriteXmlDocumentationSummary(client.Description);
-                using (writer.Class(client.DeclaredType.Accessibility, "partial", cs.Name))
+                using (writer.Scope($"{client.DeclaredType.Accessibility} partial class {cs.Name}"))
                 {
                     WriteClientFields(writer, client);
-                    WriteClientCtor(writer, client);
+                    WriteClientCtors(writer, client);
 
                     foreach (var clientMethod in client.Methods)
                     {
@@ -65,7 +66,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 new CSharpType(typeof(Response<>), bodyType) :
                 new CSharpType(typeof(Response));
 
-            responseType = async ? new CSharpType(typeof(ValueTask<>), responseType) : responseType;
+            responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
 
             var parameters = clientMethod.RestClientMethod.Parameters;
             writer.WriteXmlDocumentationSummary(clientMethod.Description);
@@ -116,6 +117,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 writer.Line($";");
             }
+
+            writer.Line();
         }
 
         private string CreateRequestMethodName(string name) => $"Create{name}Request";
@@ -133,8 +136,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Append($"internal {client.RestClient.Type} RestClient").LineRaw(" { get; }");
         }
 
-        private void WriteClientCtor(CodeWriter writer, Client client)
+        private void WriteClientCtors(CodeWriter writer, Client client)
         {
+            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name} for mocking.");
+            using (writer.Scope($"protected {client.Type.Name:D}()"))
+            {
+            }
+
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
             writer.Append($"internal {client.Type.Name:D}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline,");
             foreach (Parameter parameter in client.RestClient.Parameters)
@@ -157,6 +165,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.Line($"this.clientDiagnostics = clientDiagnostics;");
                 writer.Line($"this.pipeline = pipeline;");
             }
+            writer.Line();
         }
 
         private void WritePagingOperation(CodeWriter writer, PagingInfo pagingMethod, bool async)
@@ -218,12 +227,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 }
                 writer.Line($"return {typeof(PageableHelpers)}.Create{(async ? "Async" : string.Empty)}Enumerable(FirstPageFunc, NextPageFunc);");
             }
+            writer.Line();
         }
 
         private void WriteCreateOperationOperation(CodeWriter writer, LongRunningOperation lroMethod)
         {
             RestClientMethod originalMethod = lroMethod.OriginalMethod;
-            CSharpType responseType = new CSharpType(typeof(Operation<>), lroMethod.OriginalResponse.ResponseBody?.Type ?? new CSharpType(typeof(Response)));
+            CSharpType? responseBodyType = lroMethod.OriginalResponse.ResponseBody?.Type;
+            CSharpType responseType = new CSharpType(typeof(Operation<>), responseBodyType ?? new CSharpType(typeof(Response)));
             Parameter[] parameters = lroMethod.CreateParameters;
 
             writer.WriteXmlDocumentationSummary(originalMethod.Description);
@@ -233,7 +244,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
             }
 
-            writer.Append($"public {responseType} {CreateCreateOperationName(lroMethod.Name)}(");
+            writer.Append($"internal {responseType} {CreateCreateOperationName(lroMethod.Name)}(");
             foreach (Parameter parameter in parameters)
             {
                 writer.WriteParameter(parameter);
@@ -246,71 +257,38 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.WriteParameterNullChecks(parameters);
 
                 writer.Append($"return {typeof(ArmOperationHelpers)}.Create(");
-                writer.Line($"pipeline, clientDiagnostics, originalResponse, {typeof(RequestMethod)}.{originalMethod.Request.HttpMethod.ToRequestMethodName()}, {originalMethod.Diagnostics.ScopeName:L}, {typeof(OperationFinalStateVia)}.{lroMethod.FinalStateVia}, createOriginalHttpMessage,");
+                writer.Append($"pipeline, clientDiagnostics, originalResponse, {typeof(RequestMethod)}.{originalMethod.Request.HttpMethod.ToRequestMethodName()}, {originalMethod.Diagnostics.ScopeName:L}, {typeof(OperationFinalStateVia)}.{lroMethod.FinalStateVia}, createOriginalHttpMessage");
 
-                string valueVariable = "value";
-                const string document = "document";
-                ObjectSerialization? serialization = (lroMethod.OriginalResponse.ResponseBody as ObjectResponseBody)?.Serialization;
-                using (writer.Scope($"(response, cancellationToken) =>", "{", "},"))
+                if (responseBodyType != null)
                 {
-                    switch (serialization)
+                    writer.Line($", ");
+                    string valueVariable = "value";
+                    string responseVariable = "response";
+                    if (lroMethod.OriginalResponse.ResponseBody is ObjectResponseBody objectResponseBody)
                     {
-                        case JsonSerialization jsonSerialization:
-                            writer.Append($"using var {document:D} = ");
-                            writer.Line($"{typeof(JsonDocument)}.Parse(response.ContentStream);");
-                            writer.ToDeserializeCall(
-                                jsonSerialization,
-                                w => w.Append($"document.RootElement"),
-                                ref valueVariable
-                            );
+                        ObjectSerialization serialization = objectResponseBody.Serialization;
+                        using (writer.Scope($"({responseVariable:D}, cancellationToken) =>", "{", "},"))
+                        {
+                            writer.WriteDeserializationForMethods(objectResponseBody.Serialization, async: false, ref valueVariable, responseVariable);
                             writer.Line($"return {valueVariable};");
-                            break;
-                        case XmlElementSerialization xmlSerialization:
-                            writer.Line($"var {document:D} = {typeof(XDocument)}.Load(response.ContentStream, LoadOptions.PreserveWhitespace);");
-                            writer.ToDeserializeCall(
-                                xmlSerialization,
-                                w => w.Append($"document"),
-                                ref valueVariable
-                            );
+                        }
+
+                        using (writer.Scope($"async ({responseVariable:D}, cancellationToken) =>", newLine: false))
+                        {
+                            writer.WriteDeserializationForMethods(objectResponseBody.Serialization, async: true, ref valueVariable, responseVariable);
                             writer.Line($"return {valueVariable};");
-                            break;
-                        default:
-                            writer.Line($"return response;");
-                            break;
+                        }
+                    }
+                    else if (lroMethod.OriginalResponse.ResponseBody is StreamResponseBody)
+                    {
+                        //TODO: https://github.com/Azure/autorest.csharp/issues/523
+                        throw new NotSupportedException("Binary is not supported as message (not response) is required for ExtractResponseContent() call.");
                     }
                 }
 
-                using (writer.Scope($"async (response, cancellationToken) =>", "{", "});"))
-                {
-                    switch (serialization)
-                    {
-                        case JsonSerialization jsonSerialization:
-                            writer.Append($"using var {document:D} = ");
-                            writer.Line($"await {typeof(JsonDocument)}.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
-                            writer.ToDeserializeCall(
-                                jsonSerialization,
-                                w => w.Append($"document.RootElement"),
-                                ref valueVariable
-                            );
-                            writer.Line($"return {valueVariable};");
-                            break;
-                        case XmlElementSerialization xmlSerialization:
-                            writer.Line($"var {document:D} = {typeof(XDocument)}.Load(response.ContentStream, LoadOptions.PreserveWhitespace);");
-                            writer.ToDeserializeCall(
-                                xmlSerialization,
-                                w => w.Append($"document"),
-                                ref valueVariable
-                            );
-                            writer.Line($"return {valueVariable};");
-                            break;
-                        default:
-                            //TODO: Need this await or it won't compile since we didn't use an await in async lambda.
-                            writer.Line($"await Task.CompletedTask;");
-                            writer.Line($"return response;");
-                            break;
-                    }
-                }
+                writer.Line($");");
             }
+            writer.Line();
         }
 
         private void WriteStartOperationOperation(CodeWriter writer, LongRunningOperation lroMethod, bool async)
@@ -357,6 +335,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.RemoveTrailingComma();
                 writer.Line($"));");
             }
+            writer.Line();
         }
     }
 }

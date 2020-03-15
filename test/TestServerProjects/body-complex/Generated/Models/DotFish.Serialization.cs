@@ -24,6 +24,7 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
+
         internal static DotFish DeserializeDotFish(JsonElement element)
         {
             if (element.TryGetProperty("fish.type", out JsonElement discriminator))

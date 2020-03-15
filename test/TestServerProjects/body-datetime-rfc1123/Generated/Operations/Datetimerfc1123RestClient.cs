@@ -20,6 +20,7 @@ namespace body_datetime_rfc1123
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of Datetimerfc1123RestClient. </summary>
         public Datetimerfc1123RestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -32,17 +33,19 @@ namespace body_datetime_rfc1123
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetNullRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetimerfc1123/null", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get null datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
@@ -71,6 +74,7 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
+
         /// <summary> Get null datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetNull(CancellationToken cancellationToken = default)
@@ -99,17 +103,19 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
+
         internal HttpMessage CreateGetInvalidRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetimerfc1123/invalid", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get invalid datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetInvalidAsync(CancellationToken cancellationToken = default)
@@ -138,6 +144,7 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
+
         /// <summary> Get invalid datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetInvalid(CancellationToken cancellationToken = default)
@@ -166,17 +173,19 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
+
         internal HttpMessage CreateGetOverflowRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetimerfc1123/overflow", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get overflow datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetOverflowAsync(CancellationToken cancellationToken = default)
@@ -205,6 +214,7 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
+
         /// <summary> Get overflow datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetOverflow(CancellationToken cancellationToken = default)
@@ -233,17 +243,19 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
+
         internal HttpMessage CreateGetUnderflowRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetimerfc1123/underflow", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get underflow datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUnderflowAsync(CancellationToken cancellationToken = default)
@@ -272,6 +284,7 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
+
         /// <summary> Get underflow datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUnderflow(CancellationToken cancellationToken = default)
@@ -300,11 +313,12 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
+
         internal HttpMessage CreatePutUtcMaxDateTimeRequest(DateTimeOffset datetimeBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetimerfc1123/max", false);
@@ -315,11 +329,13 @@ namespace body_datetime_rfc1123
             request.Content = content;
             return message;
         }
+
         /// <summary> Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUtcMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Client.PutUtcMaxDateTime");
             scope.Start();
             try
@@ -340,11 +356,13 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
+
         /// <summary> Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUtcMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Client.PutUtcMaxDateTime");
             scope.Start();
             try
@@ -365,17 +383,19 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
+
         internal HttpMessage CreateGetUtcLowercaseMaxDateTimeRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetimerfc1123/max/lowercase", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get max datetime value fri, 31 dec 9999 23:59:59 gmt. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUtcLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
@@ -404,6 +424,7 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
+
         /// <summary> Get max datetime value fri, 31 dec 9999 23:59:59 gmt. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUtcLowercaseMaxDateTime(CancellationToken cancellationToken = default)
@@ -432,17 +453,19 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
+
         internal HttpMessage CreateGetUtcUppercaseMaxDateTimeRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetimerfc1123/max/uppercase", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUtcUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
@@ -471,6 +494,7 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
+
         /// <summary> Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUtcUppercaseMaxDateTime(CancellationToken cancellationToken = default)
@@ -499,11 +523,12 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
+
         internal HttpMessage CreatePutUtcMinDateTimeRequest(DateTimeOffset datetimeBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetimerfc1123/min", false);
@@ -514,11 +539,13 @@ namespace body_datetime_rfc1123
             request.Content = content;
             return message;
         }
+
         /// <summary> Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUtcMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Client.PutUtcMinDateTime");
             scope.Start();
             try
@@ -539,11 +566,13 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
+
         /// <summary> Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUtcMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Client.PutUtcMinDateTime");
             scope.Start();
             try
@@ -564,17 +593,19 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
+
         internal HttpMessage CreateGetUtcMinDateTimeRequest()
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Get;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/datetimerfc1123/min", false);
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUtcMinDateTimeAsync(CancellationToken cancellationToken = default)
@@ -603,6 +634,7 @@ namespace body_datetime_rfc1123
                 throw;
             }
         }
+
         /// <summary> Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUtcMinDateTime(CancellationToken cancellationToken = default)

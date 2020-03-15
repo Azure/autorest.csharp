@@ -21,6 +21,7 @@ namespace additionalProperties
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of PetsRestClient. </summary>
         public PetsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -33,11 +34,12 @@ namespace additionalProperties
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateCreateAPTrueRequest(PetAPTrue createParameters)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/additionalProperties/true", false);
@@ -48,6 +50,7 @@ namespace additionalProperties
             request.Content = content;
             return message;
         }
+
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPTrue to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -82,6 +85,7 @@ namespace additionalProperties
                 throw;
             }
         }
+
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPTrue to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -116,11 +120,12 @@ namespace additionalProperties
                 throw;
             }
         }
+
         internal HttpMessage CreateCreateCatAPTrueRequest(CatAPTrue createParameters)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/additionalProperties/true-subclass", false);
@@ -131,6 +136,7 @@ namespace additionalProperties
             request.Content = content;
             return message;
         }
+
         /// <summary> Create a CatAPTrue which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The CatAPTrue to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -165,6 +171,7 @@ namespace additionalProperties
                 throw;
             }
         }
+
         /// <summary> Create a CatAPTrue which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The CatAPTrue to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -199,11 +206,12 @@ namespace additionalProperties
                 throw;
             }
         }
+
         internal HttpMessage CreateCreateAPObjectRequest(PetAPObject createParameters)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/additionalProperties/type/object", false);
@@ -214,6 +222,7 @@ namespace additionalProperties
             request.Content = content;
             return message;
         }
+
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPObject to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -248,6 +257,7 @@ namespace additionalProperties
                 throw;
             }
         }
+
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPObject to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -282,11 +292,12 @@ namespace additionalProperties
                 throw;
             }
         }
+
         internal HttpMessage CreateCreateAPStringRequest(PetAPString createParameters)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/additionalProperties/type/string", false);
@@ -297,6 +308,7 @@ namespace additionalProperties
             request.Content = content;
             return message;
         }
+
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -331,6 +343,7 @@ namespace additionalProperties
                 throw;
             }
         }
+
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -365,11 +378,12 @@ namespace additionalProperties
                 throw;
             }
         }
+
         internal HttpMessage CreateCreateAPInPropertiesRequest(PetAPInProperties createParameters)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/additionalProperties/in/properties", false);
@@ -380,6 +394,7 @@ namespace additionalProperties
             request.Content = content;
             return message;
         }
+
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPInProperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -414,6 +429,7 @@ namespace additionalProperties
                 throw;
             }
         }
+
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPInProperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -448,11 +464,12 @@ namespace additionalProperties
                 throw;
             }
         }
+
         internal HttpMessage CreateCreateAPInPropertiesWithAPStringRequest(PetAPInPropertiesWithAPString createParameters)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethodAdditional.Put;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/additionalProperties/in/properties/with/additionalProperties/string", false);
@@ -463,6 +480,7 @@ namespace additionalProperties
             request.Content = content;
             return message;
         }
+
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPInPropertiesWithAPString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -497,6 +515,7 @@ namespace additionalProperties
                 throw;
             }
         }
+
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPInPropertiesWithAPString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

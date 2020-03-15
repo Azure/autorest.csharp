@@ -35,6 +35,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
+
         internal static DocumentSentiment DeserializeDocumentSentiment(JsonElement element)
         {
             DocumentSentiment result = new DocumentSentiment();

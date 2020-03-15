@@ -27,6 +27,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static ServiceStatistics DeserializeServiceStatistics(JsonElement element)
         {
             ServiceStatistics result = new ServiceStatistics();

@@ -166,6 +166,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static Subnet DeserializeSubnet(JsonElement element)
         {
             Subnet result = new Subnet();

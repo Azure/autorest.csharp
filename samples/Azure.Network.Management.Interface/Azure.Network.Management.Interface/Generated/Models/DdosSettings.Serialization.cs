@@ -32,6 +32,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WriteEndObject();
         }
+
         internal static DdosSettings DeserializeDdosSettings(JsonElement element)
         {
             DdosSettings result = new DdosSettings();

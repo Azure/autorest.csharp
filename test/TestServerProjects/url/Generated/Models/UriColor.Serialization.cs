@@ -19,12 +19,12 @@ namespace url.Models
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown UriColor value.")
         };
 
-        public static UriColor ToUriColor(this string value) => value switch
+        public static UriColor ToUriColor(this string value)
         {
-            "red color" => UriColor.RedColor,
-            "green color" => UriColor.GreenColor,
-            "blue color" => UriColor.BlueColor,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown UriColor value.")
-        };
+            if (string.Equals(value, "red color", StringComparison.InvariantCultureIgnoreCase)) return UriColor.RedColor;
+            if (string.Equals(value, "green color", StringComparison.InvariantCultureIgnoreCase)) return UriColor.GreenColor;
+            if (string.Equals(value, "blue color", StringComparison.InvariantCultureIgnoreCase)) return UriColor.BlueColor;
+            throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown UriColor value.");
+        }
     }
 }

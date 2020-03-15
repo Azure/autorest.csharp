@@ -33,6 +33,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WriteEndObject();
         }
+
         internal static EffectiveNetworkSecurityGroupListResult DeserializeEffectiveNetworkSecurityGroupListResult(JsonElement element)
         {
             EffectiveNetworkSecurityGroupListResult result = new EffectiveNetworkSecurityGroupListResult();

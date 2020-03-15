@@ -81,6 +81,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static Probe DeserializeProbe(JsonElement element)
         {
             Probe result = new Probe();

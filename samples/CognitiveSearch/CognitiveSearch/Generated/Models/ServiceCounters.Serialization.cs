@@ -47,6 +47,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static ServiceCounters DeserializeServiceCounters(JsonElement element)
         {
             ServiceCounters result = new ServiceCounters();

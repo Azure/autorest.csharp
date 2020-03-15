@@ -28,6 +28,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static StorageSkuListResult DeserializeStorageSkuListResult(JsonElement element)
         {
             StorageSkuListResult result = new StorageSkuListResult();
