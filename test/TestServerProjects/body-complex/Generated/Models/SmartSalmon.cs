@@ -14,12 +14,11 @@ namespace body_complex.Models
     public partial class SmartSalmon : Salmon, IDictionary<string, object>
     {
         /// <summary> Initializes a new instance of SmartSalmon. </summary>
-        public SmartSalmon()
+        internal SmartSalmon()
         {
-            Fishtype = "smart_salmon";
         }
         /// <summary> Initializes a new instance of SmartSalmon. </summary>
-        internal SmartSalmon(string collegeDegree, string location, bool? iswild, string fishtype, string species, float length, ICollection<Fish> siblings) : base(location, iswild, fishtype, species, length, siblings)
+        internal SmartSalmon(string collegeDegree, string location, bool? iswild, string fishtype, string species, float length, IList<Fish> siblings) : base(location, iswild, fishtype, species, length, siblings)
         {
             CollegeDegree = collegeDegree;
         }

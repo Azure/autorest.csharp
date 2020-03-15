@@ -13,7 +13,7 @@ namespace body_complex.Models
     public partial class ByteWrapper
     {
         /// <summary> Initializes a new instance of ByteWrapper. </summary>
-        public ByteWrapper()
+        internal ByteWrapper()
         {
         }
         /// <summary> Initializes a new instance of ByteWrapper. </summary>

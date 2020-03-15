@@ -13,11 +13,11 @@ namespace body_complex.Models
     public partial class Cat : Pet
     {
         /// <summary> Initializes a new instance of Cat. </summary>
-        public Cat()
+        internal Cat()
         {
         }
         /// <summary> Initializes a new instance of Cat. </summary>
-        internal Cat(string color, ICollection<Dog> hates, int? id, string name) : base(id, name)
+        internal Cat(string color, IList<Dog> hates, int? id, string name) : base(id, name)
         {
             Color = color;
             Hates = hates;

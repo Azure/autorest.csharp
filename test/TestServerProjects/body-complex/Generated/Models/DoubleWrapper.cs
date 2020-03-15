@@ -11,7 +11,7 @@ namespace body_complex.Models
     public partial class DoubleWrapper
     {
         /// <summary> Initializes a new instance of DoubleWrapper. </summary>
-        public DoubleWrapper()
+        internal DoubleWrapper()
         {
         }
         /// <summary> Initializes a new instance of DoubleWrapper. </summary>

@@ -11,7 +11,7 @@ namespace body_complex.Models
     public partial class FloatWrapper
     {
         /// <summary> Initializes a new instance of FloatWrapper. </summary>
-        public FloatWrapper()
+        internal FloatWrapper()
         {
         }
         /// <summary> Initializes a new instance of FloatWrapper. </summary>

@@ -13,7 +13,7 @@ namespace body_complex.Models
     public partial class DateWrapper
     {
         /// <summary> Initializes a new instance of DateWrapper. </summary>
-        public DateWrapper()
+        internal DateWrapper()
         {
         }
         /// <summary> Initializes a new instance of DateWrapper. </summary>

@@ -11,9 +11,8 @@ namespace body_complex.Models
     public partial class DotSalmon : DotFish
     {
         /// <summary> Initializes a new instance of DotSalmon. </summary>
-        public DotSalmon()
+        internal DotSalmon()
         {
-            FishType = "DotSalmon";
         }
         /// <summary> Initializes a new instance of DotSalmon. </summary>
         internal DotSalmon(string location, bool? iswild, string fishType, string species) : base(fishType, species)

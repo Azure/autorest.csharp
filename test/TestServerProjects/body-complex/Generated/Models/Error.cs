@@ -11,7 +11,7 @@ namespace body_complex.Models
     public partial class Error
     {
         /// <summary> Initializes a new instance of Error. </summary>
-        public Error()
+        internal Error()
         {
         }
         /// <summary> Initializes a new instance of Error. </summary>

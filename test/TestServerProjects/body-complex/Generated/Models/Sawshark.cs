@@ -14,12 +14,11 @@ namespace body_complex.Models
     public partial class Sawshark : Shark
     {
         /// <summary> Initializes a new instance of Sawshark. </summary>
-        public Sawshark()
+        internal Sawshark()
         {
-            Fishtype = "sawshark";
         }
         /// <summary> Initializes a new instance of Sawshark. </summary>
-        internal Sawshark(byte[] picture, int? age, DateTimeOffset birthday, string fishtype, string species, float length, ICollection<Fish> siblings) : base(age, birthday, fishtype, species, length, siblings)
+        internal Sawshark(byte[] picture, int? age, DateTimeOffset birthday, string fishtype, string species, float length, IList<Fish> siblings) : base(age, birthday, fishtype, species, length, siblings)
         {
             Picture = picture;
         }

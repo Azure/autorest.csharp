@@ -11,7 +11,7 @@ namespace body_complex.Models
     public partial class ReadonlyObj
     {
         /// <summary> Initializes a new instance of ReadonlyObj. </summary>
-        public ReadonlyObj()
+        internal ReadonlyObj()
         {
         }
         /// <summary> Initializes a new instance of ReadonlyObj. </summary>

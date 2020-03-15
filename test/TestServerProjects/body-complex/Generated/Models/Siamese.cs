@@ -13,11 +13,11 @@ namespace body_complex.Models
     public partial class Siamese : Cat
     {
         /// <summary> Initializes a new instance of Siamese. </summary>
-        public Siamese()
+        internal Siamese()
         {
         }
         /// <summary> Initializes a new instance of Siamese. </summary>
-        internal Siamese(string breed, string color, ICollection<Dog> hates, int? id, string name) : base(color, hates, id, name)
+        internal Siamese(string breed, string color, IList<Dog> hates, int? id, string name) : base(color, hates, id, name)
         {
             Breed = breed;
         }

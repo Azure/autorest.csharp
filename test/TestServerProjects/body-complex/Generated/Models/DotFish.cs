@@ -11,9 +11,8 @@ namespace body_complex.Models
     public partial class DotFish
     {
         /// <summary> Initializes a new instance of DotFish. </summary>
-        public DotFish()
+        internal DotFish()
         {
-            FishType = null;
         }
         /// <summary> Initializes a new instance of DotFish. </summary>
         internal DotFish(string fishType, string species)

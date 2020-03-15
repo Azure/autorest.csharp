@@ -13,12 +13,11 @@ namespace body_complex.Models
     public partial class Fish
     {
         /// <summary> Initializes a new instance of Fish. </summary>
-        public Fish()
+        internal Fish()
         {
-            Fishtype = null;
         }
         /// <summary> Initializes a new instance of Fish. </summary>
-        internal Fish(string fishtype, string species, float length, ICollection<Fish> siblings)
+        internal Fish(string fishtype, string species, float length, IList<Fish> siblings)
         {
             Fishtype = fishtype;
             Species = species;

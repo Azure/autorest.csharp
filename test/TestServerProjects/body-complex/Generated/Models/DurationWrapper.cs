@@ -13,7 +13,7 @@ namespace body_complex.Models
     public partial class DurationWrapper
     {
         /// <summary> Initializes a new instance of DurationWrapper. </summary>
-        public DurationWrapper()
+        internal DurationWrapper()
         {
         }
         /// <summary> Initializes a new instance of DurationWrapper. </summary>

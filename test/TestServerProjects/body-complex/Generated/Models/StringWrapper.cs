@@ -11,7 +11,7 @@ namespace body_complex.Models
     public partial class StringWrapper
     {
         /// <summary> Initializes a new instance of StringWrapper. </summary>
-        public StringWrapper()
+        internal StringWrapper()
         {
         }
         /// <summary> Initializes a new instance of StringWrapper. </summary>

@@ -11,9 +11,8 @@ namespace body_complex.Models
     public partial class MyDerivedType : MyBaseType
     {
         /// <summary> Initializes a new instance of MyDerivedType. </summary>
-        public MyDerivedType()
+        internal MyDerivedType()
         {
-            Kind = "Kind1";
         }
         /// <summary> Initializes a new instance of MyDerivedType. </summary>
         internal MyDerivedType(string propD1, string kind, string propB1, string propBH1) : base(kind, propB1, propBH1)

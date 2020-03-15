@@ -11,7 +11,7 @@ namespace body_complex.Models
     public partial class Pet
     {
         /// <summary> Initializes a new instance of Pet. </summary>
-        public Pet()
+        internal Pet()
         {
         }
         /// <summary> Initializes a new instance of Pet. </summary>

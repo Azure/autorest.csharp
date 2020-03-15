@@ -66,15 +66,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.Line();
                 using (writer.Scope())
                 {
-                    if (schema.Discriminator != null)
-                    {
-                        writer.WriteXmlDocumentationSummary($"Initializes a new instance of {schema.Declaration.Name}");
-                        using (writer.Scope($"public {schema.Declaration.Name}()"))
-                        {
-                            writer.Line($"{schema.Discriminator.Property} = {schema.Discriminator.Value:L};");
-                        }
-                    }
-
                     WriteConstructor(writer, schema);
 
                     foreach (var property in schema.Properties)
@@ -168,57 +159,51 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private static void WriteConstructor(CodeWriter writer, ObjectType schema)
         {
-            if (!schema.Properties.Any()) return;
-
-            var ownPropertyMap = new List<(ObjectTypeProperty, string)>();
-            var basePropertyMap = new List<(ObjectTypeProperty, string)>();
-
-            foreach (var property in schema.Properties)
+            foreach (var constructor in schema.Constructors)
             {
-                ownPropertyMap.Add((
-                    property,
-                    property.Declaration.Name.ToVariableName()));
-            }
+                if (constructor.Declaration.IsUserDefined) continue;
 
-            var baseType = schema.Inherits;
-
-            while (baseType?.Implementation is ObjectType objectType)
-            {
-                foreach (var baseTypeProperty in objectType.Properties)
+                writer.WriteXmlDocumentationSummary($"Initializes a new instance of {schema.Declaration.Name}");
+                foreach (var parameter in constructor.Parameters)
                 {
-                    basePropertyMap.Add((
-                        baseTypeProperty,
-                        baseTypeProperty.Declaration.Name.ToVariableName()));
+                    writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
                 }
 
-                baseType = objectType.Inherits;
-            }
-
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {schema.Declaration.Name}");
-            writer.Append($"internal {schema.Type.Name}(");
-            foreach ((ObjectTypeProperty property, string parameter) in ownPropertyMap.Concat(basePropertyMap))
-            {
-                writer.Append($"{property.Declaration.Type} {parameter},");
-            }
-            writer.RemoveTrailingComma();
-            writer.Append($")");
-
-            if (basePropertyMap.Any())
-            {
-                writer.Append($": base(");
-                foreach ((_, string parameter) in basePropertyMap)
+                writer.Append($"{constructor.Declaration.Accessibility} {constructor.Declaration.Name}(");
+                foreach (var parameter in constructor.Parameters)
                 {
-                    writer.Append($"{parameter},");
+                    writer.Append($"{parameter.Type} {parameter.Name},");
                 }
                 writer.RemoveTrailingComma();
                 writer.Append($")");
-            }
 
-            using (writer.Scope())
-            {
-                foreach ((ObjectTypeProperty property, string parameter) in ownPropertyMap)
+                if (constructor.BaseConstructor != null)
                 {
-                    writer.Line($"{property.Declaration.Name} = {parameter};");
+                    writer.Append($": base(");
+                    foreach (var baseConstructorParameter in constructor.BaseConstructor.Parameters)
+                    {
+                        writer.Append($"{baseConstructorParameter.Name},");
+                    }
+                    writer.RemoveTrailingComma();
+                    writer.Append($")");
+                }
+
+                using (writer.Scope())
+                {
+                    foreach (var initializer in constructor.Initializers)
+                    {
+                        writer.Append($"{initializer.Property.Declaration.Name} = ");
+                        if (initializer.Value.IsConstant)
+                        {
+                            writer.WriteConstant(initializer.Value.Constant);
+                        }
+                        else
+                        {
+                            writer.AppendRaw(initializer.Value.Parameter.Name);
+                        }
+
+                        writer.Line($";");
+                    }
                 }
             }
         }

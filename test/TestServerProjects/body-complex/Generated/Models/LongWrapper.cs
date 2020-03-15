@@ -11,7 +11,7 @@ namespace body_complex.Models
     public partial class LongWrapper
     {
         /// <summary> Initializes a new instance of LongWrapper. </summary>
-        public LongWrapper()
+        internal LongWrapper()
         {
         }
         /// <summary> Initializes a new instance of LongWrapper. </summary>
