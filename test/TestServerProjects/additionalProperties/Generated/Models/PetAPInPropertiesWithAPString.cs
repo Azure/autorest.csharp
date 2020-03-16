@@ -13,6 +13,26 @@ namespace additionalProperties.Models
     /// <summary> The PetAPInPropertiesWithAPString. </summary>
     public partial class PetAPInPropertiesWithAPString : IDictionary<string, string>
     {
+        /// <summary> Initializes a new instance of PetAPInPropertiesWithAPString. </summary>
+        public PetAPInPropertiesWithAPString()
+        {
+        }
+
+        /// <summary> Initializes a new instance of PetAPInPropertiesWithAPString. </summary>
+        /// <param name="id"> . </param>
+        /// <param name="name"> . </param>
+        /// <param name="status"> . </param>
+        /// <param name="odataLocation"> . </param>
+        /// <param name="additionalProperties"> Dictionary of &lt;number&gt;. </param>
+        internal PetAPInPropertiesWithAPString(int id, string name, bool? status, string odataLocation, IDictionary<string, float> additionalProperties)
+        {
+            Id = id;
+            Name = name;
+            Status = status;
+            OdataLocation = odataLocation;
+            AdditionalProperties = additionalProperties;
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public bool? Status { get; internal set; }

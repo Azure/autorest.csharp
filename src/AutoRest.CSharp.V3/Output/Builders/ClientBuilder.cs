@@ -402,7 +402,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             if (itemProperty.SchemaProperty.Schema is ArraySchema arraySchema)
             {
                 CSharpType itemType = _typeFactory.CreateType(arraySchema.ElementType, false);
-                return new PagingInfo(method, nextPageMethod, method.Name, nextLinkProperty?.DeclarationOptions.Name, itemProperty.DeclarationOptions.Name, itemType);
+                return new PagingInfo(method, nextPageMethod, method.Name, nextLinkProperty?.Declaration.Name, itemProperty.Declaration.Name, itemType);
             }
 
             throw new InvalidOperationException($"{itemName} property has to be an array schema, actual {itemProperty.SchemaProperty}");

@@ -12,6 +12,33 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Pool of backend IP addresses. </summary>
     public partial class BackendAddressPool : SubResource
     {
+        /// <summary> Initializes a new instance of BackendAddressPool. </summary>
+        public BackendAddressPool()
+        {
+        }
+
+        /// <summary> Initializes a new instance of BackendAddressPool. </summary>
+        /// <param name="name"> The name of the resource that is unique within the set of backend address pools used by the load balancer. This name can be used to access the resource. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="type"> Type of the resource. </param>
+        /// <param name="backendIPConfigurations"> An array of references to IP addresses defined in network interfaces. </param>
+        /// <param name="loadBalancingRules"> An array of references to load balancing rules that use this backend address pool. </param>
+        /// <param name="outboundRule"> A reference to an outbound rule that uses this backend address pool. </param>
+        /// <param name="outboundRules"> An array of references to outbound rules that use this backend address pool. </param>
+        /// <param name="provisioningState"> The provisioning state of the backend address pool resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        internal BackendAddressPool(string name, string etag, string type, IList<NetworkInterfaceIPConfiguration> backendIPConfigurations, IList<SubResource> loadBalancingRules, SubResource outboundRule, IList<SubResource> outboundRules, ProvisioningState? provisioningState, string id) : base(id)
+        {
+            Name = name;
+            Etag = etag;
+            Type = type;
+            BackendIPConfigurations = backendIPConfigurations;
+            LoadBalancingRules = loadBalancingRules;
+            OutboundRule = outboundRule;
+            OutboundRules = outboundRules;
+            ProvisioningState = provisioningState;
+        }
+
         /// <summary> The name of the resource that is unique within the set of backend address pools used by the load balancer. This name can be used to access the resource. </summary>
         public string Name { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>

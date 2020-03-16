@@ -17,6 +17,19 @@ namespace CognitiveSearch.Models
         {
             OdataType = "#Microsoft.Azure.Search.StandardAnalyzer";
         }
+
+        /// <summary> Initializes a new instance of StandardAnalyzer. </summary>
+        /// <param name="maxTokenLength"> The maximum token length. Default is 255. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters. </param>
+        /// <param name="stopwords"> A list of stopwords. </param>
+        /// <param name="odataType"> . </param>
+        /// <param name="name"> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        internal StandardAnalyzer(int? maxTokenLength, IList<string> stopwords, string odataType, string name) : base(odataType, name)
+        {
+            MaxTokenLength = maxTokenLength;
+            Stopwords = stopwords;
+            OdataType = "#Microsoft.Azure.Search.StandardAnalyzer";
+        }
+
         /// <summary> The maximum token length. Default is 255. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters. </summary>
         public int? MaxTokenLength { get; set; }
         /// <summary> A list of stopwords. </summary>

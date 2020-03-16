@@ -10,6 +10,18 @@ namespace xml_service.Models
     /// <summary> I am a complex type with no XML node. </summary>
     public partial class ComplexTypeNoMeta
     {
+        /// <summary> Initializes a new instance of ComplexTypeNoMeta. </summary>
+        public ComplexTypeNoMeta()
+        {
+        }
+
+        /// <summary> Initializes a new instance of ComplexTypeNoMeta. </summary>
+        /// <param name="iD"> The id of the res. </param>
+        internal ComplexTypeNoMeta(string iD)
+        {
+            ID = iD;
+        }
+
         /// <summary> The id of the res. </summary>
         public string ID { get; set; }
     }

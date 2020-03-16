@@ -12,6 +12,47 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> IPConfiguration in a network interface. </summary>
     public partial class NetworkInterfaceIPConfiguration : SubResource
     {
+        /// <summary> Initializes a new instance of NetworkInterfaceIPConfiguration. </summary>
+        public NetworkInterfaceIPConfiguration()
+        {
+        }
+
+        /// <summary> Initializes a new instance of NetworkInterfaceIPConfiguration. </summary>
+        /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="virtualNetworkTaps"> The reference to Virtual Network Taps. </param>
+        /// <param name="applicationGatewayBackendAddressPools"> The reference to ApplicationGatewayBackendAddressPool resource. </param>
+        /// <param name="loadBalancerBackendAddressPools"> The reference to LoadBalancerBackendAddressPool resource. </param>
+        /// <param name="loadBalancerInboundNatRules"> A list of references of LoadBalancerInboundNatRules. </param>
+        /// <param name="privateIPAddress"> Private IP address of the IP configuration. </param>
+        /// <param name="privateIPAllocationMethod"> The private IP address allocation method. </param>
+        /// <param name="privateIPAddressVersion"> Whether the specific IP configuration is IPv4 or IPv6. Default is IPv4. </param>
+        /// <param name="subnet"> Subnet bound to the IP configuration. </param>
+        /// <param name="primary"> Whether this is a primary customer address on the network interface. </param>
+        /// <param name="publicIPAddress"> Public IP address bound to the IP configuration. </param>
+        /// <param name="applicationSecurityGroups"> Application security groups in which the IP configuration is included. </param>
+        /// <param name="provisioningState"> The provisioning state of the network interface IP configuration. </param>
+        /// <param name="privateLinkConnectionProperties"> PrivateLinkConnection properties for the network interface. </param>
+        /// <param name="id"> Resource ID. </param>
+        internal NetworkInterfaceIPConfiguration(string name, string etag, IList<VirtualNetworkTap> virtualNetworkTaps, IList<ApplicationGatewayBackendAddressPool> applicationGatewayBackendAddressPools, IList<BackendAddressPool> loadBalancerBackendAddressPools, IList<InboundNatRule> loadBalancerInboundNatRules, string privateIPAddress, IPAllocationMethod? privateIPAllocationMethod, IPVersion? privateIPAddressVersion, Subnet subnet, bool? primary, PublicIPAddress publicIPAddress, IList<ApplicationSecurityGroup> applicationSecurityGroups, ProvisioningState? provisioningState, NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties privateLinkConnectionProperties, string id) : base(id)
+        {
+            Name = name;
+            Etag = etag;
+            VirtualNetworkTaps = virtualNetworkTaps;
+            ApplicationGatewayBackendAddressPools = applicationGatewayBackendAddressPools;
+            LoadBalancerBackendAddressPools = loadBalancerBackendAddressPools;
+            LoadBalancerInboundNatRules = loadBalancerInboundNatRules;
+            PrivateIPAddress = privateIPAddress;
+            PrivateIPAllocationMethod = privateIPAllocationMethod;
+            PrivateIPAddressVersion = privateIPAddressVersion;
+            Subnet = subnet;
+            Primary = primary;
+            PublicIPAddress = publicIPAddress;
+            ApplicationSecurityGroups = applicationSecurityGroups;
+            ProvisioningState = provisioningState;
+            PrivateLinkConnectionProperties = privateLinkConnectionProperties;
+        }
+
         /// <summary> The name of the resource that is unique within a resource group. This name can be used to access the resource. </summary>
         public string Name { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>

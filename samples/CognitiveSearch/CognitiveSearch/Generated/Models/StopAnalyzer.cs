@@ -17,6 +17,17 @@ namespace CognitiveSearch.Models
         {
             OdataType = "#Microsoft.Azure.Search.StopAnalyzer";
         }
+
+        /// <summary> Initializes a new instance of StopAnalyzer. </summary>
+        /// <param name="stopwords"> A list of stopwords. </param>
+        /// <param name="odataType"> . </param>
+        /// <param name="name"> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        internal StopAnalyzer(IList<string> stopwords, string odataType, string name) : base(odataType, name)
+        {
+            Stopwords = stopwords;
+            OdataType = "#Microsoft.Azure.Search.StopAnalyzer";
+        }
+
         /// <summary> A list of stopwords. </summary>
         public IList<string> Stopwords { get; set; }
     }

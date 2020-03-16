@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace body_complex.Models
 {
     /// <summary> The Goblinshark. </summary>
@@ -15,6 +18,23 @@ namespace body_complex.Models
         {
             Fishtype = "goblin";
         }
+
+        /// <summary> Initializes a new instance of Goblinshark. </summary>
+        /// <param name="jawsize"> . </param>
+        /// <param name="color"> Colors possible. </param>
+        /// <param name="age"> . </param>
+        /// <param name="birthday"> . </param>
+        /// <param name="fishtype"> . </param>
+        /// <param name="species"> . </param>
+        /// <param name="length"> . </param>
+        /// <param name="siblings"> . </param>
+        internal Goblinshark(int? jawsize, GoblinSharkColor? color, int? age, DateTimeOffset birthday, string fishtype, string species, float length, IList<Fish> siblings) : base(age, birthday, fishtype, species, length, siblings)
+        {
+            Jawsize = jawsize;
+            Color = color;
+            Fishtype = "goblin";
+        }
+
         public int? Jawsize { get; set; }
         /// <summary> Colors possible. </summary>
         public GoblinSharkColor? Color { get; set; }

@@ -10,6 +10,22 @@ namespace CognitiveSearch.Models
     /// <summary> Provides parameter values to a magnitude scoring function. </summary>
     public partial class MagnitudeScoringParameters
     {
+        /// <summary> Initializes a new instance of MagnitudeScoringParameters. </summary>
+        public MagnitudeScoringParameters()
+        {
+        }
+
+        /// <summary> Initializes a new instance of MagnitudeScoringParameters. </summary>
+        /// <param name="boostingRangeStart"> The field value at which boosting starts. </param>
+        /// <param name="boostingRangeEnd"> The field value at which boosting ends. </param>
+        /// <param name="shouldBoostBeyondRangeByConstant"> A value indicating whether to apply a constant boost for field values beyond the range end value; default is false. </param>
+        internal MagnitudeScoringParameters(double boostingRangeStart, double boostingRangeEnd, bool? shouldBoostBeyondRangeByConstant)
+        {
+            BoostingRangeStart = boostingRangeStart;
+            BoostingRangeEnd = boostingRangeEnd;
+            ShouldBoostBeyondRangeByConstant = shouldBoostBeyondRangeByConstant;
+        }
+
         /// <summary> The field value at which boosting starts. </summary>
         public double BoostingRangeStart { get; set; }
         /// <summary> The field value at which boosting ends. </summary>

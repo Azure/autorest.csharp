@@ -57,6 +57,40 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
+
+        public static void WriteConstant(this CodeWriter writer, Constant constant)
+        {
+            if (constant.Value == null)
+            {
+                // Cast helps the overload resolution
+                writer.Append($"({constant.Type}){null:L}");
+                return;
+            }
+
+            Type frameworkType = constant.Type.FrameworkType;
+            if (frameworkType == typeof(DateTimeOffset))
+            {
+                var d = (DateTimeOffset) constant.Value;
+                d = d.ToUniversalTime();
+                writer.Append($"new {typeof(DateTimeOffset)}({d.Year:L}, {d.Month:L}, {d.Day:L} ,{d.Hour:L}, {d.Minute:L}, {d.Second:L}, {d.Millisecond:L}, {typeof(TimeSpan)}.{nameof(TimeSpan.Zero)})");
+            }
+            else if (frameworkType == typeof(byte[]))
+            {
+                var value = (byte[]) constant.Value;
+                writer.Append($"new byte[] {{");
+                foreach (byte b in value)
+                {
+                    writer.Append($"{b}, ");
+                }
+
+                writer.Append($"}}");
+            }
+            else
+            {
+                writer.Literal(constant.Value);
+            }
+        }
+
         public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async,
             ref string valueVariable, string responseVariable)
         {

@@ -15,6 +15,16 @@ namespace CognitiveSearch.Models
         {
             OdataType = "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy";
         }
+
+        /// <summary> Initializes a new instance of HighWaterMarkChangeDetectionPolicy. </summary>
+        /// <param name="highWaterMarkColumnName"> The name of the high water mark column. </param>
+        /// <param name="odataType"> . </param>
+        internal HighWaterMarkChangeDetectionPolicy(string highWaterMarkColumnName, string odataType) : base(odataType)
+        {
+            HighWaterMarkColumnName = highWaterMarkColumnName;
+            OdataType = "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy";
+        }
+
         /// <summary> The name of the high water mark column. </summary>
         public string HighWaterMarkColumnName { get; set; }
     }

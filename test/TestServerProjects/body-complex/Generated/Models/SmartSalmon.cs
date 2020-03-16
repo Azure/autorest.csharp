@@ -18,6 +18,21 @@ namespace body_complex.Models
         {
             Fishtype = "smart_salmon";
         }
+
+        /// <summary> Initializes a new instance of SmartSalmon. </summary>
+        /// <param name="collegeDegree"> . </param>
+        /// <param name="location"> . </param>
+        /// <param name="iswild"> . </param>
+        /// <param name="fishtype"> . </param>
+        /// <param name="species"> . </param>
+        /// <param name="length"> . </param>
+        /// <param name="siblings"> . </param>
+        internal SmartSalmon(string collegeDegree, string location, bool? iswild, string fishtype, string species, float length, IList<Fish> siblings) : base(location, iswild, fishtype, species, length, siblings)
+        {
+            CollegeDegree = collegeDegree;
+            Fishtype = "smart_salmon";
+        }
+
         public string CollegeDegree { get; set; }
         private readonly IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
         /// <inheritdoc />

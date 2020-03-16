@@ -10,6 +10,20 @@ namespace xml_service.Models
     /// <summary> signed identifier. </summary>
     public partial class SignedIdentifier
     {
+        /// <summary> Initializes a new instance of SignedIdentifier. </summary>
+        public SignedIdentifier()
+        {
+        }
+
+        /// <summary> Initializes a new instance of SignedIdentifier. </summary>
+        /// <param name="id"> a unique id. </param>
+        /// <param name="accessPolicy"> The access policy. </param>
+        internal SignedIdentifier(string id, AccessPolicy accessPolicy)
+        {
+            Id = id;
+            AccessPolicy = accessPolicy;
+        }
+
         /// <summary> a unique id. </summary>
         public string Id { get; set; }
         /// <summary> The access policy. </summary>

@@ -12,6 +12,26 @@ namespace lro.Models
     /// <summary> The Resource. </summary>
     public partial class Resource
     {
+        /// <summary> Initializes a new instance of Resource. </summary>
+        public Resource()
+        {
+        }
+
+        /// <summary> Initializes a new instance of Resource. </summary>
+        /// <param name="id"> Resource Id. </param>
+        /// <param name="type"> Resource Type. </param>
+        /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
+        /// <param name="location"> Resource Location. </param>
+        /// <param name="name"> Resource Name. </param>
+        internal Resource(string id, string type, IDictionary<string, string> tags, string location, string name)
+        {
+            Id = id;
+            Type = type;
+            Tags = tags;
+            Location = location;
+            Name = name;
+        }
+
         /// <summary> Resource Id. </summary>
         public string Id { get; internal set; }
         /// <summary> Resource Type. </summary>

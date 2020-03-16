@@ -12,6 +12,20 @@ namespace ExtensionClientName.Models
     /// <summary> The RenamedSchema. </summary>
     public partial class RenamedSchema
     {
+        /// <summary> Initializes a new instance of RenamedSchema. </summary>
+        public RenamedSchema()
+        {
+        }
+
+        /// <summary> Initializes a new instance of RenamedSchema. </summary>
+        /// <param name="renamedProperty"> A description about the set of tags. </param>
+        /// <param name="renamedPropertyString"> A description about the set of tags. </param>
+        internal RenamedSchema(IDictionary<string, string> renamedProperty, string renamedPropertyString)
+        {
+            RenamedProperty = renamedProperty;
+            RenamedPropertyString = renamedPropertyString;
+        }
+
         /// <summary> A description about the set of tags. </summary>
         public IDictionary<string, string> RenamedProperty { get; set; }
         /// <summary> A description about the set of tags. </summary>

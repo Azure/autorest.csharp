@@ -15,6 +15,15 @@ namespace CognitiveSearch.Models
         {
             OdataType = null;
         }
+
+        /// <summary> Initializes a new instance of DataDeletionDetectionPolicy. </summary>
+        /// <param name="odataType"> . </param>
+        internal DataDeletionDetectionPolicy(string odataType)
+        {
+            OdataType = odataType;
+            OdataType = null;
+        }
+
         public string OdataType { get; internal set; }
     }
 }

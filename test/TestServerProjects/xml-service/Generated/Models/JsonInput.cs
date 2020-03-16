@@ -10,6 +10,18 @@ namespace xml_service.Models
     /// <summary> The JsonInput. </summary>
     public partial class JsonInput
     {
+        /// <summary> Initializes a new instance of JsonInput. </summary>
+        public JsonInput()
+        {
+        }
+
+        /// <summary> Initializes a new instance of JsonInput. </summary>
+        /// <param name="id"> . </param>
+        internal JsonInput(int? id)
+        {
+            Id = id;
+        }
+
         public int? Id { get; set; }
     }
 }

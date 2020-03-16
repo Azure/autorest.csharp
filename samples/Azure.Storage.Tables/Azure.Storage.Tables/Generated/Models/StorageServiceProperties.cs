@@ -12,6 +12,24 @@ namespace Azure.Storage.Tables.Models
     /// <summary> Storage Service Properties. </summary>
     public partial class StorageServiceProperties
     {
+        /// <summary> Initializes a new instance of StorageServiceProperties. </summary>
+        public StorageServiceProperties()
+        {
+        }
+
+        /// <summary> Initializes a new instance of StorageServiceProperties. </summary>
+        /// <param name="logging"> Azure Analytics Logging settings. </param>
+        /// <param name="hourMetrics"> A summary of request statistics grouped by API in hourly aggregates for queues. </param>
+        /// <param name="minuteMetrics"> a summary of request statistics grouped by API in minute aggregates for queues. </param>
+        /// <param name="cors"> The set of CORS rules. </param>
+        internal StorageServiceProperties(Logging logging, Metrics hourMetrics, Metrics minuteMetrics, IList<CorsRule> cors)
+        {
+            Logging = logging;
+            HourMetrics = hourMetrics;
+            MinuteMetrics = minuteMetrics;
+            Cors = cors;
+        }
+
         /// <summary> Azure Analytics Logging settings. </summary>
         public Logging Logging { get; set; }
         /// <summary> A summary of request statistics grouped by API in hourly aggregates for queues. </summary>

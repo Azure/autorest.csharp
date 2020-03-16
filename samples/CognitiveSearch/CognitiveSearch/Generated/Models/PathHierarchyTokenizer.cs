@@ -15,6 +15,25 @@ namespace CognitiveSearch.Models
         {
             OdataType = "#Microsoft.Azure.Search.PathHierarchyTokenizer";
         }
+
+        /// <summary> Initializes a new instance of PathHierarchyTokenizer. </summary>
+        /// <param name="delimiter"> The delimiter character to use. Default is &quot;/&quot;. </param>
+        /// <param name="replacement"> A value that, if set, replaces the delimiter character. Default is &quot;/&quot;. </param>
+        /// <param name="bufferSize"> The buffer size. Default is 1024. </param>
+        /// <param name="reverseTokenOrder"> A value indicating whether to generate tokens in reverse order. Default is false. </param>
+        /// <param name="numberOfTokensToSkip"> The number of initial tokens to skip. Default is 0. </param>
+        /// <param name="odataType"> . </param>
+        /// <param name="name"> The name of the tokenizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        internal PathHierarchyTokenizer(char? delimiter, char? replacement, int? bufferSize, bool? reverseTokenOrder, int? numberOfTokensToSkip, string odataType, string name) : base(odataType, name)
+        {
+            Delimiter = delimiter;
+            Replacement = replacement;
+            BufferSize = bufferSize;
+            ReverseTokenOrder = reverseTokenOrder;
+            NumberOfTokensToSkip = numberOfTokensToSkip;
+            OdataType = "#Microsoft.Azure.Search.PathHierarchyTokenizer";
+        }
+
         /// <summary> The delimiter character to use. Default is &quot;/&quot;. </summary>
         public char? Delimiter { get; set; }
         /// <summary> A value that, if set, replaces the delimiter character. Default is &quot;/&quot;. </summary>

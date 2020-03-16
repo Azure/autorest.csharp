@@ -10,6 +10,26 @@ namespace AppConfiguration.Models
     /// <summary> Azure App Configuration error object. </summary>
     public partial class Error
     {
+        /// <summary> Initializes a new instance of Error. </summary>
+        internal Error()
+        {
+        }
+
+        /// <summary> Initializes a new instance of Error. </summary>
+        /// <param name="type"> The type of the error. </param>
+        /// <param name="title"> A brief summary of the error. </param>
+        /// <param name="name"> The name of the parameter that resulted in the error. </param>
+        /// <param name="detail"> A detailed description of the error. </param>
+        /// <param name="status"> The HTTP status code that the error maps to. </param>
+        internal Error(string type, string title, string name, string detail, int? status)
+        {
+            Type = type;
+            Title = title;
+            Name = name;
+            Detail = detail;
+            Status = status;
+        }
+
         /// <summary> The type of the error. </summary>
         public string Type { get; internal set; }
         /// <summary> A brief summary of the error. </summary>
