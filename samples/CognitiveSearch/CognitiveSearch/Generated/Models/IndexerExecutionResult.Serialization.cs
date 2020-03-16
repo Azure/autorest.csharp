@@ -11,74 +11,8 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class IndexerExecutionResult : IUtf8JsonSerializable
+    public partial class IndexerExecutionResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Status != null)
-            {
-                writer.WritePropertyName("status");
-                writer.WriteStringValue(Status.Value.ToSerialString());
-            }
-            if (ErrorMessage != null)
-            {
-                writer.WritePropertyName("errorMessage");
-                writer.WriteStringValue(ErrorMessage);
-            }
-            if (StartTime != null)
-            {
-                writer.WritePropertyName("startTime");
-                writer.WriteStringValue(StartTime.Value, "S");
-            }
-            if (EndTime != null)
-            {
-                writer.WritePropertyName("endTime");
-                writer.WriteStringValue(EndTime.Value, "S");
-            }
-            if (Errors != null)
-            {
-                writer.WritePropertyName("errors");
-                writer.WriteStartArray();
-                foreach (var item in Errors)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (Warnings != null)
-            {
-                writer.WritePropertyName("warnings");
-                writer.WriteStartArray();
-                foreach (var item in Warnings)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (ItemCount != null)
-            {
-                writer.WritePropertyName("itemsProcessed");
-                writer.WriteNumberValue(ItemCount.Value);
-            }
-            if (FailedItemCount != null)
-            {
-                writer.WritePropertyName("itemsFailed");
-                writer.WriteNumberValue(FailedItemCount.Value);
-            }
-            if (InitialTrackingState != null)
-            {
-                writer.WritePropertyName("initialTrackingState");
-                writer.WriteStringValue(InitialTrackingState);
-            }
-            if (FinalTrackingState != null)
-            {
-                writer.WritePropertyName("finalTrackingState");
-                writer.WriteStringValue(FinalTrackingState);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static IndexerExecutionResult DeserializeIndexerExecutionResult(JsonElement element)
         {
             IndexerExecutionResult result = new IndexerExecutionResult();

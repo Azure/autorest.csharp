@@ -31,12 +31,12 @@ namespace Azure.AI.FormRecognizer.Models
         }
 
         /// <summary> Model identifier. </summary>
-        public Guid ModelId { get; set; }
+        public Guid ModelId { get; internal set; }
         /// <summary> Status of the model. </summary>
-        public ModelStatus Status { get; set; }
+        public ModelStatus Status { get; internal set; }
         /// <summary> Date and time (UTC) when the model was created. </summary>
-        public DateTimeOffset CreatedDateTime { get; set; }
+        public DateTimeOffset CreatedDateTime { get; internal set; }
         /// <summary> Date and time (UTC) when the status was last updated. </summary>
-        public DateTimeOffset LastUpdatedDateTime { get; set; }
+        public DateTimeOffset LastUpdatedDateTime { get; internal set; }
     }
 }

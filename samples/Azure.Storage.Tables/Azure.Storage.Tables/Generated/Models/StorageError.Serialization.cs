@@ -6,25 +6,13 @@
 #nullable disable
 
 using System.Text.Json;
-using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class StorageError : IUtf8JsonSerializable, IXmlSerializable
+    public partial class StorageError
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Message != null)
-            {
-                writer.WritePropertyName("Message");
-                writer.WriteStringValue(Message);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static StorageError DeserializeStorageError(JsonElement element)
         {
             StorageError result = new StorageError();
@@ -41,18 +29,6 @@ namespace Azure.Storage.Tables.Models
                 }
             }
             return result;
-        }
-
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
-        {
-            writer.WriteStartElement(nameHint ?? "StorageError");
-            if (Message != null)
-            {
-                writer.WriteStartElement("Message");
-                writer.WriteValue(Message);
-                writer.WriteEndElement();
-            }
-            writer.WriteEndElement();
         }
 
         internal static StorageError DeserializeStorageError(XElement element)

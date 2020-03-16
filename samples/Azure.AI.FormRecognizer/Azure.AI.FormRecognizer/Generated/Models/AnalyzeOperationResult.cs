@@ -31,12 +31,12 @@ namespace Azure.AI.FormRecognizer.Models
         }
 
         /// <summary> Operation status. </summary>
-        public OperationStatus Status { get; set; }
+        public OperationStatus Status { get; internal set; }
         /// <summary> Date and time (UTC) when the analyze operation was submitted. </summary>
-        public DateTimeOffset CreatedDateTime { get; set; }
+        public DateTimeOffset CreatedDateTime { get; internal set; }
         /// <summary> Date and time (UTC) when the status was last updated. </summary>
-        public DateTimeOffset LastUpdatedDateTime { get; set; }
+        public DateTimeOffset LastUpdatedDateTime { get; internal set; }
         /// <summary> Results of the analyze operation. </summary>
-        public AnalyzeResult AnalyzeResult { get; set; }
+        public AnalyzeResult AnalyzeResult { get; internal set; }
     }
 }

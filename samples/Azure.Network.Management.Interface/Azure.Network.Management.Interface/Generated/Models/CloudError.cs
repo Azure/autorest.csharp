@@ -23,6 +23,6 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> Cloud error body. </summary>
-        public CloudErrorBody Error { get; set; }
+        public CloudErrorBody Error { get; internal set; }
     }
 }

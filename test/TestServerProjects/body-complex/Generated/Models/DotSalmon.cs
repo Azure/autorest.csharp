@@ -28,7 +28,7 @@ namespace body_complex.Models
             FishType = "DotSalmon";
         }
 
-        public string Location { get; set; }
-        public bool? Iswild { get; set; }
+        public string Location { get; internal set; }
+        public bool? Iswild { get; internal set; }
     }
 }

@@ -51,32 +51,32 @@ namespace Azure.AI.FormRecognizer.Models
         }
 
         /// <summary> Type of field value. </summary>
-        public FieldValueType Type { get; set; }
+        public FieldValueType Type { get; internal set; }
         /// <summary> String value. </summary>
-        public string ValueString { get; set; }
+        public string ValueString { get; internal set; }
         /// <summary> Date value. </summary>
-        public string ValueDate { get; set; }
+        public string ValueDate { get; internal set; }
         /// <summary> Time value. </summary>
-        public string ValueTime { get; set; }
+        public string ValueTime { get; internal set; }
         /// <summary> Phone number value. </summary>
-        public string ValuePhoneNumber { get; set; }
+        public string ValuePhoneNumber { get; internal set; }
         /// <summary> Floating point value. </summary>
-        public float? ValueNumber { get; set; }
+        public float? ValueNumber { get; internal set; }
         /// <summary> Integer value. </summary>
-        public int? ValueInteger { get; set; }
+        public int? ValueInteger { get; internal set; }
         /// <summary> Array of field values. </summary>
-        public IList<FieldValue> ValueArray { get; set; }
+        public IList<FieldValue> ValueArray { get; internal set; }
         /// <summary> Dictionary of named field values. </summary>
-        public IDictionary<string, FieldValue> ValueObject { get; set; }
+        public IDictionary<string, FieldValue> ValueObject { get; internal set; }
         /// <summary> Text content of the extracted field. </summary>
-        public string Text { get; set; }
+        public string Text { get; internal set; }
         /// <summary> Bounding box of the field value, if appropriate. </summary>
-        public IList<float> BoundingBox { get; set; }
+        public IList<float> BoundingBox { get; internal set; }
         /// <summary> Confidence score. </summary>
-        public float? Confidence { get; set; }
+        public float? Confidence { get; internal set; }
         /// <summary> When includeTextDetails is set to true, a list of references to the text elements constituting this field. </summary>
-        public IList<string> Elements { get; set; }
+        public IList<string> Elements { get; internal set; }
         /// <summary> The 1-based page number in the input document. </summary>
-        public int? Page { get; set; }
+        public int? Page { get; internal set; }
     }
 }

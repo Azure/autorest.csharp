@@ -7,6 +7,7 @@ using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
+using Azure.Core;
 
 namespace AutoRest.CSharp.V3.Generation.Writers
 {
@@ -126,6 +127,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private static void ToSerializeValueCall(this CodeWriter writer, CodeWriterDelegate name, CodeWriterDelegate writerName, XmlValueSerialization valueSerialization)
         {
+            writer.UseNamespace(typeof(XmlWriterExtensions).Namespace!);
             CSharpType implementationType = valueSerialization.Type;
 
             if (!implementationType.IsFrameworkType)
@@ -138,7 +140,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     case EnumType clientEnum:
                         writer.Append($"{writerName}.WriteValue({name}")
                             .AppendNullableValue(implementationType)
-                            .AppendRaw(clientEnum.IsStringBased ? ".ToString()" : ".ToSerialString()")
+                            .AppendEnumToString(clientEnum)
                             .Line($");");
                         return;
                 }
@@ -309,6 +311,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private static void ToDeserializeValueCall(this CodeWriter writer, XmlValueSerialization serialization, CodeWriterDelegate element)
         {
+            writer.UseNamespace(typeof(XElementExtensions).Namespace!);
+
             var type = serialization.Type;
 
             if (type.IsFrameworkType)

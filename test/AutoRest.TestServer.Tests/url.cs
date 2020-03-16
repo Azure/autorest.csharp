@@ -20,7 +20,6 @@ namespace AutoRest.TestServer.Tests
         public Task UrlPathsStringEmpty() => TestStatus(async (host, pipeline) => await new PathsClient(ClientDiagnostics, pipeline, host).StringEmptyAsync());
 
         [Test]
-        [Ignore("Not implemented https://github.com/Azure/autorest.csharp/issues/325")]
         public Task UrlPathsEnumValid() => TestStatus(async (host, pipeline) => await new PathsClient(ClientDiagnostics, pipeline, host).EnumValidAsync( UriColor.GreenColor));
 
         [Test]

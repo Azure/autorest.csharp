@@ -2043,7 +2043,7 @@ namespace header
             request.Headers.Add("scenario", scenario);
             if (value != null)
             {
-                request.Headers.Add("value", value.Value);
+                request.Headers.Add("value", value.Value.ToSerialString());
             }
             return message;
         }

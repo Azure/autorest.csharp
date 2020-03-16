@@ -10,29 +10,8 @@ using Azure.Core;
 
 namespace validation.Models
 {
-    public partial class Error : IUtf8JsonSerializable
+    public partial class Error
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Code != null)
-            {
-                writer.WritePropertyName("code");
-                writer.WriteNumberValue(Code.Value);
-            }
-            if (Message != null)
-            {
-                writer.WritePropertyName("message");
-                writer.WriteStringValue(Message);
-            }
-            if (Fields != null)
-            {
-                writer.WritePropertyName("fields");
-                writer.WriteStringValue(Fields);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static Error DeserializeError(JsonElement element)
         {
             Error result = new Error();

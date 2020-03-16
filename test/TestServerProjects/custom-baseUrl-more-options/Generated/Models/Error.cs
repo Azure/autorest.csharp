@@ -24,7 +24,7 @@ namespace custom_baseUrl_more_options.Models
             Message = message;
         }
 
-        public int? Status { get; set; }
-        public string Message { get; set; }
+        public int? Status { get; internal set; }
+        public string Message { get; internal set; }
     }
 }

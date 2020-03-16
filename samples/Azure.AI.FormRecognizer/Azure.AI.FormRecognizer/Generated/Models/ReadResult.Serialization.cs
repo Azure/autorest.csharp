@@ -11,39 +11,8 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class ReadResult : IUtf8JsonSerializable
+    public partial class ReadResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("page");
-            writer.WriteNumberValue(Page);
-            writer.WritePropertyName("angle");
-            writer.WriteNumberValue(Angle);
-            writer.WritePropertyName("width");
-            writer.WriteNumberValue(Width);
-            writer.WritePropertyName("height");
-            writer.WriteNumberValue(Height);
-            writer.WritePropertyName("unit");
-            writer.WriteStringValue(Unit.ToSerialString());
-            if (Language != null)
-            {
-                writer.WritePropertyName("language");
-                writer.WriteStringValue(Language.Value.ToString());
-            }
-            if (Lines != null)
-            {
-                writer.WritePropertyName("lines");
-                writer.WriteStartArray();
-                foreach (var item in Lines)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            writer.WriteEndObject();
-        }
-
         internal static ReadResult DeserializeReadResult(JsonElement element)
         {
             ReadResult result = new ReadResult();

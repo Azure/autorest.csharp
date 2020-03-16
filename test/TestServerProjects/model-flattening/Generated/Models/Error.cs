@@ -26,8 +26,8 @@ namespace model_flattening.Models
             ParentError = parentError;
         }
 
-        public int? Status { get; set; }
-        public string Message { get; set; }
-        public Error ParentError { get; set; }
+        public int? Status { get; internal set; }
+        public string Message { get; internal set; }
+        public Error ParentError { get; internal set; }
     }
 }

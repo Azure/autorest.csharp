@@ -6,47 +6,13 @@
 #nullable disable
 
 using System.Collections.Generic;
-using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class ListContainersResponse : IXmlSerializable
+    public partial class ListContainersResponse
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
-        {
-            writer.WriteStartElement(nameHint ?? "EnumerationResults");
-            writer.WriteStartAttribute("ServiceEndpoint");
-            writer.WriteValue(ServiceEndpoint);
-            writer.WriteEndAttribute();
-            writer.WriteStartElement("Prefix");
-            writer.WriteValue(Prefix);
-            writer.WriteEndElement();
-            if (Marker != null)
-            {
-                writer.WriteStartElement("Marker");
-                writer.WriteValue(Marker);
-                writer.WriteEndElement();
-            }
-            writer.WriteStartElement("MaxResults");
-            writer.WriteValue(MaxResults);
-            writer.WriteEndElement();
-            writer.WriteStartElement("NextMarker");
-            writer.WriteValue(NextMarker);
-            writer.WriteEndElement();
-            if (Containers != null)
-            {
-                writer.WriteStartElement("Containers");
-                foreach (var item in Containers)
-                {
-                    writer.WriteObjectValue(item, "Container");
-                }
-                writer.WriteEndElement();
-            }
-            writer.WriteEndElement();
-        }
-
         internal static ListContainersResponse DeserializeListContainersResponse(XElement element)
         {
             ListContainersResponse result = default;

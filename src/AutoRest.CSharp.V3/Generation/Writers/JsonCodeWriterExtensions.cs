@@ -88,6 +88,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     return;
 
                 case JsonValueSerialization valueSerialization:
+                    writer.UseNamespace(typeof(Utf8JsonWriterExtensions).Namespace!);
+
                     if (valueSerialization.Type.IsFrameworkType)
                     {
                         var frameworkType = valueSerialization.Type.FrameworkType;
@@ -151,7 +153,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         case EnumType clientEnum:
                             writer.Append($"{writerName}.WriteStringValue({name}")
                                 .AppendNullableValue(valueSerialization.Type)
-                                .AppendRaw(clientEnum.IsStringBased ? ".ToString()" : ".ToSerialString()")
+                                .AppendEnumToString(clientEnum)
                                 .Line($");");
                             return;
                     }
@@ -353,6 +355,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private static void DeserializeValue(this CodeWriter writer, JsonValueSerialization serialization, CodeWriterDelegate element)
         {
+            writer.UseNamespace(typeof(JsonElementExtensions).Namespace!);
+
             if (serialization.Type.IsFrameworkType)
             {
                 var frameworkType = serialization.Type.FrameworkType;

@@ -31,12 +31,12 @@ namespace Azure.AI.FormRecognizer.Models
         }
 
         /// <summary> Page number. </summary>
-        public int Page { get; set; }
+        public int Page { get; internal set; }
         /// <summary> Cluster identifier. </summary>
-        public int? ClusterId { get; set; }
+        public int? ClusterId { get; internal set; }
         /// <summary> List of key-value pairs extracted from the page. </summary>
-        public IList<KeyValuePair> KeyValuePairs { get; set; }
+        public IList<KeyValuePair> KeyValuePairs { get; internal set; }
         /// <summary> List of data tables extracted from the page. </summary>
-        public IList<DataTable> Tables { get; set; }
+        public IList<DataTable> Tables { get; internal set; }
     }
 }
