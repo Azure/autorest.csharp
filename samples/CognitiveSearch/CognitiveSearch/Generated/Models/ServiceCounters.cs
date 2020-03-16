@@ -11,16 +11,16 @@ namespace CognitiveSearch.Models
     public partial class ServiceCounters
     {
         /// <summary> Total number of documents across all indexes in the service. </summary>
-        public ResourceCounter DocumentCounter { get; set; }
+        public ResourceCounter DocumentCounter { get; internal set; }
         /// <summary> Total number of indexes. </summary>
-        public ResourceCounter IndexCounter { get; set; }
+        public ResourceCounter IndexCounter { get; internal set; }
         /// <summary> Total number of indexers. </summary>
-        public ResourceCounter IndexerCounter { get; set; }
+        public ResourceCounter IndexerCounter { get; internal set; }
         /// <summary> Total number of data sources. </summary>
-        public ResourceCounter DataSourceCounter { get; set; }
+        public ResourceCounter DataSourceCounter { get; internal set; }
         /// <summary> Total size of used storage in bytes. </summary>
-        public ResourceCounter StorageSizeCounter { get; set; }
+        public ResourceCounter StorageSizeCounter { get; internal set; }
         /// <summary> Total number of synonym maps. </summary>
-        public ResourceCounter SynonymMapCounter { get; set; }
+        public ResourceCounter SynonymMapCounter { get; internal set; }
     }
 }

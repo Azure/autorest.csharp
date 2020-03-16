@@ -11,39 +11,8 @@ using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class EffectiveNetworkSecurityGroup : IUtf8JsonSerializable
+    public partial class EffectiveNetworkSecurityGroup
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (NetworkSecurityGroup != null)
-            {
-                writer.WritePropertyName("networkSecurityGroup");
-                writer.WriteObjectValue(NetworkSecurityGroup);
-            }
-            if (Association != null)
-            {
-                writer.WritePropertyName("association");
-                writer.WriteObjectValue(Association);
-            }
-            if (EffectiveSecurityRules != null)
-            {
-                writer.WritePropertyName("effectiveSecurityRules");
-                writer.WriteStartArray();
-                foreach (var item in EffectiveSecurityRules)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (TagMap != null)
-            {
-                writer.WritePropertyName("tagMap");
-                writer.WriteStringValue(TagMap);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static EffectiveNetworkSecurityGroup DeserializeEffectiveNetworkSecurityGroup(JsonElement element)
         {
             EffectiveNetworkSecurityGroup result = new EffectiveNetworkSecurityGroup();

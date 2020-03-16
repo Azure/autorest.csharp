@@ -90,6 +90,9 @@ namespace AutoRest.CSharp.V3.Input
             Parents = new Relations();
             Children = new Relations();
         }
+
+        public bool IsInput => Usage.Contains(SchemaContext.Input);
+        public bool IsOutput => Usage.Contains(SchemaContext.Output);
     }
 
     internal partial class Schema

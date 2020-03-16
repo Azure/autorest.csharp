@@ -11,8 +11,8 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class DocumentStatistics
     {
         /// <summary> Number of text elements recognized in the document. </summary>
-        public int CharactersCount { get; set; }
+        public int CharactersCount { get; internal set; }
         /// <summary> Number of transactions for the document. </summary>
-        public int TransactionsCount { get; set; }
+        public int TransactionsCount { get; internal set; }
     }
 }

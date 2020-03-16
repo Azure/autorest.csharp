@@ -11,8 +11,8 @@ namespace Azure.Storage.Management.Models
     public partial class ErrorResponse
     {
         /// <summary> An identifier for the error. Codes are invariant and are intended to be consumed programmatically. </summary>
-        public string Code { get; set; }
+        public string Code { get; internal set; }
         /// <summary> A message describing the error, intended to be suitable for display in a user interface. </summary>
-        public string Message { get; set; }
+        public string Message { get; internal set; }
     }
 }

@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class NetworkInterfaceLoadBalancerListResult
     {
         /// <summary> A list of load balancers. </summary>
-        public IList<LoadBalancer> Value { get; set; }
+        public IList<LoadBalancer> Value { get; internal set; }
         /// <summary> The URL to get the next set of results. </summary>
         public string NextLink { get; internal set; }
     }

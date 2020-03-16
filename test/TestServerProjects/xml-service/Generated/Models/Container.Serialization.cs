@@ -6,33 +6,13 @@
 #nullable disable
 
 using System.Collections.Generic;
-using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class Container : IXmlSerializable
+    public partial class Container
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
-        {
-            writer.WriteStartElement(nameHint ?? "Container");
-            writer.WriteStartElement("Name");
-            writer.WriteValue(Name);
-            writer.WriteEndElement();
-            writer.WriteObjectValue(Properties, "Properties");
-            if (Metadata != null)
-            {
-                foreach (var pair in Metadata)
-                {
-                    writer.WriteStartElement("!dictionary-item");
-                    writer.WriteValue(pair.Value);
-                    writer.WriteEndElement();
-                }
-            }
-            writer.WriteEndElement();
-        }
-
         internal static Container DeserializeContainer(XElement element)
         {
             Container result = default;

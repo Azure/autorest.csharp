@@ -13,10 +13,10 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class DataTable
     {
         /// <summary> Number of rows. </summary>
-        public int Rows { get; set; }
+        public int Rows { get; internal set; }
         /// <summary> Number of columns. </summary>
-        public int Columns { get; set; }
+        public int Columns { get; internal set; }
         /// <summary> List of cells contained in the table. </summary>
-        public IList<DataTableCell> Cells { get; set; } = new List<DataTableCell>();
+        public IList<DataTableCell> Cells { get; internal set; } = new List<DataTableCell>();
     }
 }

@@ -22,23 +22,5 @@ namespace xml_service.Models
             }
             writer.WriteEndObject();
         }
-
-        internal static JsonInput DeserializeJsonInput(JsonElement element)
-        {
-            JsonInput result = new JsonInput();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("id"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.Id = property.Value.GetInt32();
-                    continue;
-                }
-            }
-            return result;
-        }
     }
 }

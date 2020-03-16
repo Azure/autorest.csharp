@@ -11,7 +11,7 @@ namespace lro.Models
     public partial class OperationResult
     {
         /// <summary> The status of the request. </summary>
-        public OperationResultStatus? Status { get; set; }
-        public OperationResultError Error { get; set; }
+        public OperationResultStatus? Status { get; internal set; }
+        public OperationResultError Error { get; internal set; }
     }
 }

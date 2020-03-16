@@ -10,22 +10,8 @@ using Azure.Core;
 
 namespace model_flattening.Models
 {
-    public partial class ProductWrapper : IUtf8JsonSerializable
+    public partial class ProductWrapper
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("property");
-            writer.WriteStartObject();
-            if (Value != null)
-            {
-                writer.WritePropertyName("value");
-                writer.WriteStringValue(Value);
-            }
-            writer.WriteEndObject();
-            writer.WriteEndObject();
-        }
-
         internal static ProductWrapper DeserializeProductWrapper(JsonElement element)
         {
             ProductWrapper result = new ProductWrapper();

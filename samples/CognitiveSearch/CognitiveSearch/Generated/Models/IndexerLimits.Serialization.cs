@@ -10,29 +10,8 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class IndexerLimits : IUtf8JsonSerializable
+    public partial class IndexerLimits
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (MaxRunTime != null)
-            {
-                writer.WritePropertyName("maxRunTime");
-                writer.WriteStringValue(MaxRunTime.Value, "P");
-            }
-            if (MaxDocumentExtractionSize != null)
-            {
-                writer.WritePropertyName("maxDocumentExtractionSize");
-                writer.WriteNumberValue(MaxDocumentExtractionSize.Value);
-            }
-            if (MaxDocumentContentCharactersToExtract != null)
-            {
-                writer.WritePropertyName("maxDocumentContentCharactersToExtract");
-                writer.WriteNumberValue(MaxDocumentContentCharactersToExtract.Value);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static IndexerLimits DeserializeIndexerLimits(JsonElement element)
         {
             IndexerLimits result = new IndexerLimits();

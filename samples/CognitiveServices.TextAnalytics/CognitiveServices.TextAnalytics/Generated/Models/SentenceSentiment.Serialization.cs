@@ -11,32 +11,8 @@ using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    public partial class SentenceSentiment : IUtf8JsonSerializable
+    public partial class SentenceSentiment
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("sentiment");
-            writer.WriteStringValue(Sentiment.ToSerialString());
-            writer.WritePropertyName("sentenceScores");
-            writer.WriteObjectValue(SentenceScores);
-            writer.WritePropertyName("offset");
-            writer.WriteNumberValue(Offset);
-            writer.WritePropertyName("length");
-            writer.WriteNumberValue(Length);
-            if (Warnings != null)
-            {
-                writer.WritePropertyName("warnings");
-                writer.WriteStartArray();
-                foreach (var item in Warnings)
-                {
-                    writer.WriteStringValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            writer.WriteEndObject();
-        }
-
         internal static SentenceSentiment DeserializeSentenceSentiment(JsonElement element)
         {
             SentenceSentiment result = new SentenceSentiment();

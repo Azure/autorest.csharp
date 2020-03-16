@@ -11,8 +11,8 @@ namespace CognitiveSearch.Models
     public partial class ServiceStatistics
     {
         /// <summary> Service level resource counters. </summary>
-        public ServiceCounters Counters { get; set; }
+        public ServiceCounters Counters { get; internal set; }
         /// <summary> Service level general limits. </summary>
-        public ServiceLimits Limits { get; set; }
+        public ServiceLimits Limits { get; internal set; }
     }
 }

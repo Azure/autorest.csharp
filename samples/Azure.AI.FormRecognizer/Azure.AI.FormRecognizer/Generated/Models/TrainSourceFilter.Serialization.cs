@@ -27,32 +27,5 @@ namespace Azure.AI.FormRecognizer.Models
             }
             writer.WriteEndObject();
         }
-
-        internal static TrainSourceFilter DeserializeTrainSourceFilter(JsonElement element)
-        {
-            TrainSourceFilter result = new TrainSourceFilter();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("prefix"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.Prefix = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("includeSubFolders"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.IncludeSubFolders = property.Value.GetBoolean();
-                    continue;
-                }
-            }
-            return result;
-        }
     }
 }

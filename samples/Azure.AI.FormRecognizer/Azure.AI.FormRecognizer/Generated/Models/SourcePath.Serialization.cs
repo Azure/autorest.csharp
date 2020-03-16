@@ -22,23 +22,5 @@ namespace Azure.AI.FormRecognizer.Models
             }
             writer.WriteEndObject();
         }
-
-        internal static SourcePath DeserializeSourcePath(JsonElement element)
-        {
-            SourcePath result = new SourcePath();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("source"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.Source = property.Value.GetString();
-                    continue;
-                }
-            }
-            return result;
-        }
     }
 }

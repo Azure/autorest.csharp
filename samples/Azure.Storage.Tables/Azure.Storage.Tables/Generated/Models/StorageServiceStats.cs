@@ -11,6 +11,6 @@ namespace Azure.Storage.Tables.Models
     public partial class StorageServiceStats
     {
         /// <summary> Geo-Replication information for the Secondary Storage Service. </summary>
-        public GeoReplication GeoReplication { get; set; }
+        public GeoReplication GeoReplication { get; internal set; }
     }
 }

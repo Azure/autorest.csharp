@@ -11,12 +11,12 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class KeyValuePair
     {
         /// <summary> A user defined label for the key/value pair entry. </summary>
-        public string Label { get; set; }
+        public string Label { get; internal set; }
         /// <summary> Information about the extracted key in a key-value pair. </summary>
-        public KeyValueElement Key { get; set; } = new KeyValueElement();
+        public KeyValueElement Key { get; internal set; } = new KeyValueElement();
         /// <summary> Information about the extracted value in a key-value pair. </summary>
-        public KeyValueElement Value { get; set; } = new KeyValueElement();
+        public KeyValueElement Value { get; internal set; } = new KeyValueElement();
         /// <summary> Confidence value. </summary>
-        public float Confidence { get; set; }
+        public float Confidence { get; internal set; }
     }
 }

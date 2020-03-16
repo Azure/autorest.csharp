@@ -11,8 +11,8 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class FormFieldsReport
     {
         /// <summary> Training field name. </summary>
-        public string FieldName { get; set; }
+        public string FieldName { get; internal set; }
         /// <summary> Estimated extraction accuracy for this field. </summary>
-        public float Accuracy { get; set; }
+        public float Accuracy { get; internal set; }
     }
 }

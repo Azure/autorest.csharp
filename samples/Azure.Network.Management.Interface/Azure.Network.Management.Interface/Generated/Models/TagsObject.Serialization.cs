@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -28,28 +27,6 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteEndObject();
             }
             writer.WriteEndObject();
-        }
-
-        internal static TagsObject DeserializeTagsObject(JsonElement element)
-        {
-            TagsObject result = new TagsObject();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("tags"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.Tags = new Dictionary<string, string>();
-                    foreach (var property0 in property.Value.EnumerateObject())
-                    {
-                        result.Tags.Add(property0.Name, property0.Value.GetString());
-                    }
-                    continue;
-                }
-            }
-            return result;
         }
     }
 }

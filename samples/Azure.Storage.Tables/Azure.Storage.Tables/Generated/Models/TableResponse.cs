@@ -11,6 +11,6 @@ namespace Azure.Storage.Tables.Models
     public partial class TableResponse : TableResponseProperties
     {
         /// <summary> The metadata response of the table. </summary>
-        public string OdataMetadata { get; set; }
+        public string OdataMetadata { get; internal set; }
     }
 }

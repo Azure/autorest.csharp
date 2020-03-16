@@ -10,34 +10,8 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class IndexingResult : IUtf8JsonSerializable
+    public partial class IndexingResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Key != null)
-            {
-                writer.WritePropertyName("key");
-                writer.WriteStringValue(Key);
-            }
-            if (ErrorMessage != null)
-            {
-                writer.WritePropertyName("errorMessage");
-                writer.WriteStringValue(ErrorMessage);
-            }
-            if (Succeeded != null)
-            {
-                writer.WritePropertyName("status");
-                writer.WriteBooleanValue(Succeeded.Value);
-            }
-            if (StatusCode != null)
-            {
-                writer.WritePropertyName("statusCode");
-                writer.WriteNumberValue(StatusCode.Value);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static IndexingResult DeserializeIndexingResult(JsonElement element)
         {
             IndexingResult result = new IndexingResult();

@@ -11,46 +11,8 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class TrainResult : IUtf8JsonSerializable
+    public partial class TrainResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("trainingDocuments");
-            writer.WriteStartArray();
-            foreach (var item in TrainingDocuments)
-            {
-                writer.WriteObjectValue(item);
-            }
-            writer.WriteEndArray();
-            if (Fields != null)
-            {
-                writer.WritePropertyName("fields");
-                writer.WriteStartArray();
-                foreach (var item0 in Fields)
-                {
-                    writer.WriteObjectValue(item0);
-                }
-                writer.WriteEndArray();
-            }
-            if (AverageModelAccuracy != null)
-            {
-                writer.WritePropertyName("averageModelAccuracy");
-                writer.WriteNumberValue(AverageModelAccuracy.Value);
-            }
-            if (Errors != null)
-            {
-                writer.WritePropertyName("errors");
-                writer.WriteStartArray();
-                foreach (var item0 in Errors)
-                {
-                    writer.WriteObjectValue(item0);
-                }
-                writer.WriteEndArray();
-            }
-            writer.WriteEndObject();
-        }
-
         internal static TrainResult DeserializeTrainResult(JsonElement element)
         {
             TrainResult result = new TrainResult();

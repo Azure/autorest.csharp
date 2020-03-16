@@ -26,33 +26,5 @@ namespace CognitiveServices.TextAnalytics.Models
             }
             writer.WriteEndObject();
         }
-
-        internal static LanguageInput DeserializeLanguageInput(JsonElement element)
-        {
-            LanguageInput result = new LanguageInput();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("id"))
-                {
-                    result.Id = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("text"))
-                {
-                    result.Text = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("countryHint"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.CountryHint = property.Value.GetString();
-                    continue;
-                }
-            }
-            return result;
-        }
     }
 }

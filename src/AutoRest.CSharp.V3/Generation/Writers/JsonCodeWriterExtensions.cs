@@ -9,6 +9,8 @@ using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Serialization;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Json;
 using AutoRest.CSharp.V3.Output.Models.Types;
+using Azure.Core;
+
 namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal static class JsonCodeWriterExtensions
@@ -68,6 +70,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     return;
 
                 case JsonValueSerialization valueSerialization:
+                    writer.UseNamespace(typeof(Utf8JsonWriterExtensions).Namespace!);
+
                     if (valueSerialization.Type.IsFrameworkType)
                     {
                         var frameworkType = valueSerialization.Type.FrameworkType;
@@ -293,6 +297,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private static void ToDeserializeCall(this CodeWriter writer, JsonValueSerialization serialization, CodeWriterDelegate element)
         {
+            writer.UseNamespace(typeof(JsonElementExtensions).Namespace!);
+
             if (serialization.Type.IsFrameworkType)
             {
                 var frameworkType = serialization.Type.FrameworkType;

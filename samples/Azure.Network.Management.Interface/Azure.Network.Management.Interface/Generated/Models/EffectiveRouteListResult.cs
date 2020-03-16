@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class EffectiveRouteListResult
     {
         /// <summary> A list of effective routes. </summary>
-        public IList<EffectiveRoute> Value { get; set; }
+        public IList<EffectiveRoute> Value { get; internal set; }
         /// <summary> The URL to get the next set of results. </summary>
         public string NextLink { get; internal set; }
     }
