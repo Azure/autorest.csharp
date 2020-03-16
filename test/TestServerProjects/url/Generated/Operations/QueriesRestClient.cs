@@ -1284,7 +1284,7 @@ namespace url
             uri.AppendPath("/queries/enum/green%20color", false);
             if (enumQuery != null)
             {
-                uri.AppendQuery("enumQuery", enumQuery.Value, true);
+                uri.AppendQuery("enumQuery", enumQuery.Value.ToSerialString(), true);
             }
             request.Uri = uri;
             return message;
@@ -1354,7 +1354,7 @@ namespace url
             uri.AppendPath("/queries/enum/null", false);
             if (enumQuery != null)
             {
-                uri.AppendQuery("enumQuery", enumQuery.Value, true);
+                uri.AppendQuery("enumQuery", enumQuery.Value.ToSerialString(), true);
             }
             request.Uri = uri;
             return message;
