@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal LengthTokenFilter()
         {
         }
+
         /// <summary> Initializes a new instance of LengthTokenFilter. </summary>
         /// <param name="min"> The minimum length in characters. Default is 0. Maximum is 300. Must be less than the value of max. </param>
         /// <param name="max"> The maximum length in characters. Default and maximum is 300. </param>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
             Min = min;
             Max = max;
         }
+
         /// <summary> The minimum length in characters. Default is 0. Maximum is 300. Must be less than the value of max. </summary>
         public int? Min { get; set; }
         /// <summary> The maximum length in characters. Default and maximum is 300. </summary>

@@ -16,6 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         internal EffectiveNetworkSecurityGroupListResult()
         {
         }
+
         /// <summary> Initializes a new instance of EffectiveNetworkSecurityGroupListResult. </summary>
         /// <param name="value"> A list of effective network security groups. </param>
         /// <param name="nextLink"> The URL to get the next set of results. </param>
@@ -24,6 +25,7 @@ namespace Azure.Network.Management.Interface.Models
             Value = value;
             NextLink = nextLink;
         }
+
         /// <summary> A list of effective network security groups. </summary>
         public IList<EffectiveNetworkSecurityGroup> Value { get; set; }
         /// <summary> The URL to get the next set of results. </summary>

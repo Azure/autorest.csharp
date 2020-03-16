@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal Index()
         {
         }
+
         /// <summary> Initializes a new instance of Index. </summary>
         /// <param name="name"> The name of the index. </param>
         /// <param name="fields"> The fields of the index. </param>
@@ -42,6 +43,7 @@ namespace CognitiveSearch.Models
             CharFilters = charFilters;
             ETag = eTag;
         }
+
         /// <summary> The name of the index. </summary>
         public string Name { get; set; }
         /// <summary> The fields of the index. </summary>

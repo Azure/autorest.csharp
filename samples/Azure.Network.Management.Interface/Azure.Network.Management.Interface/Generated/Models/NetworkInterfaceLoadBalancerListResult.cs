@@ -16,6 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         internal NetworkInterfaceLoadBalancerListResult()
         {
         }
+
         /// <summary> Initializes a new instance of NetworkInterfaceLoadBalancerListResult. </summary>
         /// <param name="value"> A list of load balancers. </param>
         /// <param name="nextLink"> The URL to get the next set of results. </param>
@@ -24,6 +25,7 @@ namespace Azure.Network.Management.Interface.Models
             Value = value;
             NextLink = nextLink;
         }
+
         /// <summary> A list of load balancers. </summary>
         public IList<LoadBalancer> Value { get; set; }
         /// <summary> The URL to get the next set of results. </summary>

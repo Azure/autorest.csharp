@@ -14,6 +14,7 @@ namespace body_string.Models
         internal RefColorConstant()
         {
         }
+
         /// <summary> Initializes a new instance of RefColorConstant. </summary>
         /// <param name="colorConstant"> Referenced Color Constant Description. </param>
         /// <param name="field1"> Sample string. </param>
@@ -22,6 +23,7 @@ namespace body_string.Models
             ColorConstant = colorConstant;
             Field1 = field1;
         }
+
         /// <summary> Referenced Color Constant Description. </summary>
         public string ColorConstant { get; set; } = "green-color";
         /// <summary> Sample string. </summary>

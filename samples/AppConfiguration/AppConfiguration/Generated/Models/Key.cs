@@ -14,12 +14,14 @@ namespace AppConfiguration.Models
         internal Key()
         {
         }
+
         /// <summary> Initializes a new instance of Key. </summary>
         /// <param name="name"> . </param>
         internal Key(string name)
         {
             Name = name;
         }
+
         public string Name { get; internal set; }
     }
 }

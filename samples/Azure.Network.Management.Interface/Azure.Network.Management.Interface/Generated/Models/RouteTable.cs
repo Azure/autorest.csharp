@@ -16,6 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         internal RouteTable()
         {
         }
+
         /// <summary> Initializes a new instance of RouteTable. </summary>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="routes"> Collection of routes contained within a route table. </param>
@@ -35,6 +36,7 @@ namespace Azure.Network.Management.Interface.Models
             DisableBgpRoutePropagation = disableBgpRoutePropagation;
             ProvisioningState = provisioningState;
         }
+
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
         public string Etag { get; internal set; }
         /// <summary> Collection of routes contained within a route table. </summary>

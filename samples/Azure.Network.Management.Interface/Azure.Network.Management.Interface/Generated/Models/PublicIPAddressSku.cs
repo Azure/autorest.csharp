@@ -14,12 +14,14 @@ namespace Azure.Network.Management.Interface.Models
         internal PublicIPAddressSku()
         {
         }
+
         /// <summary> Initializes a new instance of PublicIPAddressSku. </summary>
         /// <param name="name"> Name of a public IP address SKU. </param>
         internal PublicIPAddressSku(PublicIPAddressSkuName? name)
         {
             Name = name;
         }
+
         /// <summary> Name of a public IP address SKU. </summary>
         public PublicIPAddressSkuName? Name { get; set; }
     }

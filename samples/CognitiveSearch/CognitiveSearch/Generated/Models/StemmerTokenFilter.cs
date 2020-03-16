@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal StemmerTokenFilter()
         {
         }
+
         /// <summary> Initializes a new instance of StemmerTokenFilter. </summary>
         /// <param name="language"> The language to use. </param>
         /// <param name="odataType"> . </param>
@@ -22,6 +23,7 @@ namespace CognitiveSearch.Models
         {
             Language = language;
         }
+
         /// <summary> The language to use. </summary>
         public StemmerTokenFilterLanguage Language { get; set; }
     }

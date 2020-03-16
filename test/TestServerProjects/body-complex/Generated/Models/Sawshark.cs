@@ -17,6 +17,7 @@ namespace body_complex.Models
         internal Sawshark()
         {
         }
+
         /// <summary> Initializes a new instance of Sawshark. </summary>
         /// <param name="picture"> . </param>
         /// <param name="age"> . </param>
@@ -29,6 +30,7 @@ namespace body_complex.Models
         {
             Picture = picture;
         }
+
         public byte[] Picture { get; set; }
     }
 }

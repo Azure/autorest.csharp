@@ -14,6 +14,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal DocumentError()
         {
         }
+
         /// <summary> Initializes a new instance of DocumentError. </summary>
         /// <param name="id"> Document Id. </param>
         /// <param name="error"> Document Error. </param>
@@ -22,6 +23,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Id = id;
             Error = error;
         }
+
         /// <summary> Document Id. </summary>
         public string Id { get; set; }
         /// <summary> Document Error. </summary>

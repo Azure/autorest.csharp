@@ -16,6 +16,7 @@ namespace body_complex.Models
         internal Salmon()
         {
         }
+
         /// <summary> Initializes a new instance of Salmon. </summary>
         /// <param name="location"> . </param>
         /// <param name="iswild"> . </param>
@@ -28,6 +29,7 @@ namespace body_complex.Models
             Location = location;
             Iswild = iswild;
         }
+
         public string Location { get; set; }
         public bool? Iswild { get; set; }
     }

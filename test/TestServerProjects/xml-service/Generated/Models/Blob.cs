@@ -16,6 +16,7 @@ namespace xml_service.Models
         internal Blob()
         {
         }
+
         /// <summary> Initializes a new instance of Blob. </summary>
         /// <param name="name"> . </param>
         /// <param name="deleted"> . </param>
@@ -30,6 +31,7 @@ namespace xml_service.Models
             Properties = properties;
             Metadata = metadata;
         }
+
         public string Name { get; set; }
         public bool Deleted { get; set; }
         public string Snapshot { get; set; }

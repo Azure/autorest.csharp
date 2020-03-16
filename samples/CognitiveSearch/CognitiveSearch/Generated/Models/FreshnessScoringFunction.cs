@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal FreshnessScoringFunction()
         {
         }
+
         /// <summary> Initializes a new instance of FreshnessScoringFunction. </summary>
         /// <param name="parameters"> Parameter values for the freshness scoring function. </param>
         /// <param name="type"> . </param>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
         {
             Parameters = parameters;
         }
+
         /// <summary> Parameter values for the freshness scoring function. </summary>
         public FreshnessScoringParameters Parameters { get; set; } = new FreshnessScoringParameters();
     }

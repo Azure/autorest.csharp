@@ -16,6 +16,7 @@ namespace xml_service.Models
         internal StorageServiceProperties()
         {
         }
+
         /// <summary> Initializes a new instance of StorageServiceProperties. </summary>
         /// <param name="logging"> Azure Analytics Logging settings. </param>
         /// <param name="hourMetrics"> A summary of request statistics grouped by API in hourly aggregates for blobs. </param>
@@ -32,6 +33,7 @@ namespace xml_service.Models
             DefaultServiceVersion = defaultServiceVersion;
             DeleteRetentionPolicy = deleteRetentionPolicy;
         }
+
         /// <summary> Azure Analytics Logging settings. </summary>
         public Logging Logging { get; set; }
         /// <summary> A summary of request statistics grouped by API in hourly aggregates for blobs. </summary>

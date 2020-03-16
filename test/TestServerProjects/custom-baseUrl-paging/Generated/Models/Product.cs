@@ -14,12 +14,14 @@ namespace custom_baseUrl_paging.Models
         internal Product()
         {
         }
+
         /// <summary> Initializes a new instance of Product. </summary>
         /// <param name="properties"> . </param>
         internal Product(ProductProperties properties)
         {
             Properties = properties;
         }
+
         public ProductProperties Properties { get; set; }
     }
 }

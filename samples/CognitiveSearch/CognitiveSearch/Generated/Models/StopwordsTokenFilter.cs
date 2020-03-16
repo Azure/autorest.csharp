@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal StopwordsTokenFilter()
         {
         }
+
         /// <summary> Initializes a new instance of StopwordsTokenFilter. </summary>
         /// <param name="stopwords"> The list of stopwords. This property and the stopwords list property cannot both be set. </param>
         /// <param name="stopwordsList"> A predefined list of stopwords to use. This property and the stopwords property cannot both be set. Default is English. </param>
@@ -30,6 +31,7 @@ namespace CognitiveSearch.Models
             IgnoreCase = ignoreCase;
             RemoveTrailingStopWords = removeTrailingStopWords;
         }
+
         /// <summary> The list of stopwords. This property and the stopwords list property cannot both be set. </summary>
         public IList<string> Stopwords { get; set; }
         /// <summary> A predefined list of stopwords to use. This property and the stopwords property cannot both be set. Default is English. </summary>

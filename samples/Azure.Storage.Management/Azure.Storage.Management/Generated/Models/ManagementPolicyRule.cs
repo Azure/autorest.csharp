@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal ManagementPolicyRule()
         {
         }
+
         /// <summary> Initializes a new instance of ManagementPolicyRule. </summary>
         /// <param name="enabled"> Rule is enabled if set to true. </param>
         /// <param name="name"> A rule name can contain any combination of alpha numeric characters. Rule name is case-sensitive. It must be unique within a policy. </param>
@@ -26,6 +27,7 @@ namespace Azure.Storage.Management.Models
             Type = type;
             Definition = definition;
         }
+
         /// <summary> Rule is enabled if set to true. </summary>
         public bool? Enabled { get; set; }
         /// <summary> A rule name can contain any combination of alpha numeric characters. Rule name is case-sensitive. It must be unique within a policy. </summary>

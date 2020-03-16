@@ -14,6 +14,7 @@ namespace body_complex.Models
         internal DoubleWrapper()
         {
         }
+
         /// <summary> Initializes a new instance of DoubleWrapper. </summary>
         /// <param name="field1"> . </param>
         /// <param name="field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose"> . </param>
@@ -22,6 +23,7 @@ namespace body_complex.Models
             Field1 = field1;
             Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
         }
+
         public double? Field1 { get; set; }
         public double? Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose { get; set; }
     }

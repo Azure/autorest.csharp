@@ -16,6 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
         internal Models()
         {
         }
+
         /// <summary> Initializes a new instance of Models. </summary>
         /// <param name="summary"> Summary of all trained custom models. </param>
         /// <param name="modelList"> Collection of trained custom models. </param>
@@ -26,6 +27,7 @@ namespace Azure.AI.FormRecognizer.Models
             ModelList = modelList;
             NextLink = nextLink;
         }
+
         /// <summary> Summary of all trained custom models. </summary>
         public ModelsSummary Summary { get; set; }
         /// <summary> Collection of trained custom models. </summary>

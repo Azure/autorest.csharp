@@ -14,6 +14,7 @@ namespace model_flattening.Models
         internal SimpleProduct()
         {
         }
+
         /// <summary> Initializes a new instance of SimpleProduct. </summary>
         /// <param name="maxProductDisplayName"> Display name of product. </param>
         /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
@@ -28,6 +29,7 @@ namespace model_flattening.Models
             GenericValue = genericValue;
             OdataValue = odataValue;
         }
+
         /// <summary> Display name of product. </summary>
         public string MaxProductDisplayName { get; set; }
         /// <summary> Capacity of product. For example, 4 people. </summary>

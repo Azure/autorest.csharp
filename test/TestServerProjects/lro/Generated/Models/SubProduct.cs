@@ -14,6 +14,7 @@ namespace lro.Models
         internal SubProduct()
         {
         }
+
         /// <summary> Initializes a new instance of SubProduct. </summary>
         /// <param name="provisioningState"> . </param>
         /// <param name="provisioningStateValues"> . </param>
@@ -23,6 +24,7 @@ namespace lro.Models
             ProvisioningState = provisioningState;
             ProvisioningStateValues = provisioningStateValues;
         }
+
         public string ProvisioningState { get; set; }
         public SubProductPropertiesProvisioningStateValues? ProvisioningStateValues { get; internal set; }
     }

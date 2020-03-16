@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal PatternReplaceTokenFilter()
         {
         }
+
         /// <summary> Initializes a new instance of PatternReplaceTokenFilter. </summary>
         /// <param name="pattern"> A regular expression pattern. </param>
         /// <param name="replacement"> The replacement text. </param>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
             Pattern = pattern;
             Replacement = replacement;
         }
+
         /// <summary> A regular expression pattern. </summary>
         public string Pattern { get; set; }
         /// <summary> The replacement text. </summary>

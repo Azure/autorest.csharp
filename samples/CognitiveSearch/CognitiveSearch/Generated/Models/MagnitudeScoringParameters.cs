@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal MagnitudeScoringParameters()
         {
         }
+
         /// <summary> Initializes a new instance of MagnitudeScoringParameters. </summary>
         /// <param name="boostingRangeStart"> The field value at which boosting starts. </param>
         /// <param name="boostingRangeEnd"> The field value at which boosting ends. </param>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
             BoostingRangeEnd = boostingRangeEnd;
             ShouldBoostBeyondRangeByConstant = shouldBoostBeyondRangeByConstant;
         }
+
         /// <summary> The field value at which boosting starts. </summary>
         public double BoostingRangeStart { get; set; }
         /// <summary> The field value at which boosting ends. </summary>

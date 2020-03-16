@@ -14,12 +14,14 @@ namespace lro.Models
         internal SubResource()
         {
         }
+
         /// <summary> Initializes a new instance of SubResource. </summary>
         /// <param name="id"> Sub Resource Id. </param>
         internal SubResource(string id)
         {
             Id = id;
         }
+
         /// <summary> Sub Resource Id. </summary>
         public string Id { get; internal set; }
     }

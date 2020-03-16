@@ -16,6 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
         internal TextWord()
         {
         }
+
         /// <summary> Initializes a new instance of TextWord. </summary>
         /// <param name="text"> The text content of the word. </param>
         /// <param name="boundingBox"> Bounding box of an extracted word. </param>
@@ -26,6 +27,7 @@ namespace Azure.AI.FormRecognizer.Models
             BoundingBox = boundingBox;
             Confidence = confidence;
         }
+
         /// <summary> The text content of the word. </summary>
         public string Text { get; set; }
         /// <summary> Bounding box of an extracted word. </summary>

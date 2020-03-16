@@ -16,6 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         internal FrontendIPConfiguration()
         {
         }
+
         /// <summary> Initializes a new instance of FrontendIPConfiguration. </summary>
         /// <param name="name"> The name of the resource that is unique within the set of frontend IP configurations used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -51,6 +52,7 @@ namespace Azure.Network.Management.Interface.Models
             PublicIPPrefix = publicIPPrefix;
             ProvisioningState = provisioningState;
         }
+
         /// <summary> The name of the resource that is unique within the set of frontend IP configurations used by the load balancer. This name can be used to access the resource. </summary>
         public string Name { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>

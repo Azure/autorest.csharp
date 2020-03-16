@@ -16,6 +16,7 @@ namespace Azure.Storage.Management.Models
         internal EncryptionScope()
         {
         }
+
         /// <summary> Initializes a new instance of EncryptionScope. </summary>
         /// <param name="source"> The provider for the encryption scope. Possible values (case-insensitive):  Microsoft.Storage, Microsoft.KeyVault. </param>
         /// <param name="state"> The state of the encryption scope. Possible values (case-insensitive):  Enabled, Disabled. </param>
@@ -33,6 +34,7 @@ namespace Azure.Storage.Management.Models
             LastModifiedTime = lastModifiedTime;
             KeyVaultProperties = keyVaultProperties;
         }
+
         /// <summary> The provider for the encryption scope. Possible values (case-insensitive):  Microsoft.Storage, Microsoft.KeyVault. </summary>
         public EncryptionScopeSource? Source { get; set; }
         /// <summary> The state of the encryption scope. Possible values (case-insensitive):  Enabled, Disabled. </summary>

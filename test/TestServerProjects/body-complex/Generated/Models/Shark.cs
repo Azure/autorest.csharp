@@ -17,6 +17,7 @@ namespace body_complex.Models
         internal Shark()
         {
         }
+
         /// <summary> Initializes a new instance of Shark. </summary>
         /// <param name="age"> . </param>
         /// <param name="birthday"> . </param>
@@ -29,6 +30,7 @@ namespace body_complex.Models
             Age = age;
             Birthday = birthday;
         }
+
         public int? Age { get; set; }
         public DateTimeOffset Birthday { get; set; }
     }

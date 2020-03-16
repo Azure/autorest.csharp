@@ -16,6 +16,7 @@ namespace xml_service.Models
         internal ContainerProperties()
         {
         }
+
         /// <summary> Initializes a new instance of ContainerProperties. </summary>
         /// <param name="lastModified"> . </param>
         /// <param name="etag"> . </param>
@@ -32,6 +33,7 @@ namespace xml_service.Models
             LeaseDuration = leaseDuration;
             PublicAccess = publicAccess;
         }
+
         public DateTimeOffset LastModified { get; set; }
         public string Etag { get; set; }
         public LeaseStatusType? LeaseStatus { get; set; }

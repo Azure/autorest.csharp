@@ -16,6 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal SentenceSentiment()
         {
         }
+
         /// <summary> Initializes a new instance of SentenceSentiment. </summary>
         /// <param name="sentiment"> The predicted Sentiment for the sentence. </param>
         /// <param name="sentenceScores"> The sentiment confidence score between 0 and 1 for the sentence for all classes. </param>
@@ -30,6 +31,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Length = length;
             Warnings = warnings;
         }
+
         /// <summary> The predicted Sentiment for the sentence. </summary>
         public SentenceSentimentValue Sentiment { get; set; }
         /// <summary> The sentiment confidence score between 0 and 1 for the sentence for all classes. </summary>

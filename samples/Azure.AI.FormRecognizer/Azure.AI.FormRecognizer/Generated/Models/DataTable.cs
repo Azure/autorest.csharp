@@ -16,6 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
         internal DataTable()
         {
         }
+
         /// <summary> Initializes a new instance of DataTable. </summary>
         /// <param name="rows"> Number of rows. </param>
         /// <param name="columns"> Number of columns. </param>
@@ -26,6 +27,7 @@ namespace Azure.AI.FormRecognizer.Models
             Columns = columns;
             Cells = cells;
         }
+
         /// <summary> Number of rows. </summary>
         public int Rows { get; set; }
         /// <summary> Number of columns. </summary>

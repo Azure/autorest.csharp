@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal StemmerOverrideTokenFilter()
         {
         }
+
         /// <summary> Initializes a new instance of StemmerOverrideTokenFilter. </summary>
         /// <param name="rules"> A list of stemming rules in the following format: &quot;word =&gt; stem&quot;, for example: &quot;ran =&gt; run&quot;. </param>
         /// <param name="odataType"> . </param>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
         {
             Rules = rules;
         }
+
         /// <summary> A list of stemming rules in the following format: &quot;word =&gt; stem&quot;, for example: &quot;ran =&gt; run&quot;. </summary>
         public IList<string> Rules { get; set; } = new List<string>();
     }

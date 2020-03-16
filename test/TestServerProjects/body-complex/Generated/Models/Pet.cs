@@ -14,6 +14,7 @@ namespace body_complex.Models
         internal Pet()
         {
         }
+
         /// <summary> Initializes a new instance of Pet. </summary>
         /// <param name="id"> . </param>
         /// <param name="name"> . </param>
@@ -22,6 +23,7 @@ namespace body_complex.Models
             Id = id;
             Name = name;
         }
+
         public int? Id { get; set; }
         public string Name { get; set; }
     }

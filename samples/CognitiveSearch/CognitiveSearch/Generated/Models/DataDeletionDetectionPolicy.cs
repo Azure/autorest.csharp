@@ -14,12 +14,14 @@ namespace CognitiveSearch.Models
         internal DataDeletionDetectionPolicy()
         {
         }
+
         /// <summary> Initializes a new instance of DataDeletionDetectionPolicy. </summary>
         /// <param name="odataType"> . </param>
         internal DataDeletionDetectionPolicy(string odataType)
         {
             OdataType = odataType;
         }
+
         public string OdataType { get; internal set; }
     }
 }

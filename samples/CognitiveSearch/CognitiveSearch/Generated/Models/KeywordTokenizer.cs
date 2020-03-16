@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal KeywordTokenizer()
         {
         }
+
         /// <summary> Initializes a new instance of KeywordTokenizer. </summary>
         /// <param name="bufferSize"> The read buffer size in bytes. Default is 256. </param>
         /// <param name="odataType"> . </param>
@@ -22,6 +23,7 @@ namespace CognitiveSearch.Models
         {
             BufferSize = bufferSize;
         }
+
         /// <summary> The read buffer size in bytes. Default is 256. </summary>
         public int? BufferSize { get; set; }
     }

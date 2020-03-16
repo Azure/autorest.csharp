@@ -14,6 +14,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal Entity()
         {
         }
+
         /// <summary> Initializes a new instance of Entity. </summary>
         /// <param name="text"> Entity text as appears in the request. </param>
         /// <param name="type"> Entity type, such as Person/Location/Org/SSN etc. </param>
@@ -30,6 +31,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Length = length;
             Score = score;
         }
+
         /// <summary> Entity text as appears in the request. </summary>
         public string Text { get; set; }
         /// <summary> Entity type, such as Person/Location/Org/SSN etc. </summary>

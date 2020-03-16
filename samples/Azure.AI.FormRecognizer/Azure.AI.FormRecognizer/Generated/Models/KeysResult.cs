@@ -16,12 +16,14 @@ namespace Azure.AI.FormRecognizer.Models
         internal KeysResult()
         {
         }
+
         /// <summary> Initializes a new instance of KeysResult. </summary>
         /// <param name="clusters"> Object mapping clusterIds to a list of keys. </param>
         internal KeysResult(IDictionary<string, IList<string>> clusters)
         {
             Clusters = clusters;
         }
+
         /// <summary> Object mapping clusterIds to a list of keys. </summary>
         public IDictionary<string, IList<string>> Clusters { get; set; } = new Dictionary<string, IList<string>>();
     }

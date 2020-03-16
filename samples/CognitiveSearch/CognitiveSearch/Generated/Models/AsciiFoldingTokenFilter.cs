@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal AsciiFoldingTokenFilter()
         {
         }
+
         /// <summary> Initializes a new instance of AsciiFoldingTokenFilter. </summary>
         /// <param name="preserveOriginal"> A value indicating whether the original token will be kept. Default is false. </param>
         /// <param name="odataType"> . </param>
@@ -22,6 +23,7 @@ namespace CognitiveSearch.Models
         {
             PreserveOriginal = preserveOriginal;
         }
+
         /// <summary> A value indicating whether the original token will be kept. Default is false. </summary>
         public bool? PreserveOriginal { get; set; }
     }

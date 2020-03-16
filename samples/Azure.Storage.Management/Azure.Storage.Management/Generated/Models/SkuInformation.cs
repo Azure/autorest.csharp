@@ -16,6 +16,7 @@ namespace Azure.Storage.Management.Models
         internal SkuInformation()
         {
         }
+
         /// <summary> Initializes a new instance of SkuInformation. </summary>
         /// <param name="name"> The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType. </param>
         /// <param name="tier"> The SKU tier. This is based on the SKU name. </param>
@@ -34,6 +35,7 @@ namespace Azure.Storage.Management.Models
             Capabilities = capabilities;
             Restrictions = restrictions;
         }
+
         /// <summary> The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType. </summary>
         public SkuName Name { get; set; }
         /// <summary> The SKU tier. This is based on the SKU name. </summary>

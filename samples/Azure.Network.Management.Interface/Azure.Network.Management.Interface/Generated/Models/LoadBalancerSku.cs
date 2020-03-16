@@ -14,12 +14,14 @@ namespace Azure.Network.Management.Interface.Models
         internal LoadBalancerSku()
         {
         }
+
         /// <summary> Initializes a new instance of LoadBalancerSku. </summary>
         /// <param name="name"> Name of a load balancer SKU. </param>
         internal LoadBalancerSku(LoadBalancerSkuName? name)
         {
             Name = name;
         }
+
         /// <summary> Name of a load balancer SKU. </summary>
         public LoadBalancerSkuName? Name { get; set; }
     }

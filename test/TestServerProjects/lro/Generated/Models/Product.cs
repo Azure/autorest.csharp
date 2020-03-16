@@ -16,6 +16,7 @@ namespace lro.Models
         internal Product()
         {
         }
+
         /// <summary> Initializes a new instance of Product. </summary>
         /// <param name="provisioningState"> . </param>
         /// <param name="provisioningStateValues"> . </param>
@@ -29,6 +30,7 @@ namespace lro.Models
             ProvisioningState = provisioningState;
             ProvisioningStateValues = provisioningStateValues;
         }
+
         public string ProvisioningState { get; set; }
         public ProductPropertiesProvisioningStateValues? ProvisioningStateValues { get; internal set; }
     }

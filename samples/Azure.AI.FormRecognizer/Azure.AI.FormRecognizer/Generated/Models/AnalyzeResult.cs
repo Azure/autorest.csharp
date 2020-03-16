@@ -16,6 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
         internal AnalyzeResult()
         {
         }
+
         /// <summary> Initializes a new instance of AnalyzeResult. </summary>
         /// <param name="version"> Version of schema used for this result. </param>
         /// <param name="readResults"> Text extracted from the input. </param>
@@ -30,6 +31,7 @@ namespace Azure.AI.FormRecognizer.Models
             DocumentResults = documentResults;
             Errors = errors;
         }
+
         /// <summary> Version of schema used for this result. </summary>
         public string Version { get; set; }
         /// <summary> Text extracted from the input. </summary>

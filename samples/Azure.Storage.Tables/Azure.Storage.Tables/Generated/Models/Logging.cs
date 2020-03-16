@@ -14,6 +14,7 @@ namespace Azure.Storage.Tables.Models
         internal Logging()
         {
         }
+
         /// <summary> Initializes a new instance of Logging. </summary>
         /// <param name="version"> The version of Storage Analytics to configure. </param>
         /// <param name="delete"> Indicates whether all delete requests should be logged. </param>
@@ -28,6 +29,7 @@ namespace Azure.Storage.Tables.Models
             Write = write;
             RetentionPolicy = retentionPolicy;
         }
+
         /// <summary> The version of Storage Analytics to configure. </summary>
         public string Version { get; set; }
         /// <summary> Indicates whether all delete requests should be logged. </summary>

@@ -16,6 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
         internal TrainResult()
         {
         }
+
         /// <summary> Initializes a new instance of TrainResult. </summary>
         /// <param name="trainingDocuments"> List of the documents used to train the model and any errors reported in each document. </param>
         /// <param name="fields"> List of fields used to train the model and the train operation error reported by each. </param>
@@ -28,6 +29,7 @@ namespace Azure.AI.FormRecognizer.Models
             AverageModelAccuracy = averageModelAccuracy;
             Errors = errors;
         }
+
         /// <summary> List of the documents used to train the model and any errors reported in each document. </summary>
         public IList<TrainingDocumentInfo> TrainingDocuments { get; set; } = new List<TrainingDocumentInfo>();
         /// <summary> List of fields used to train the model and the train operation error reported by each. </summary>

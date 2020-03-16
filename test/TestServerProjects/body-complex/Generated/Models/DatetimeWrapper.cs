@@ -16,6 +16,7 @@ namespace body_complex.Models
         internal DatetimeWrapper()
         {
         }
+
         /// <summary> Initializes a new instance of DatetimeWrapper. </summary>
         /// <param name="field"> . </param>
         /// <param name="now"> . </param>
@@ -24,6 +25,7 @@ namespace body_complex.Models
             Field = field;
             Now = now;
         }
+
         public DateTimeOffset? Field { get; set; }
         public DateTimeOffset? Now { get; set; }
     }

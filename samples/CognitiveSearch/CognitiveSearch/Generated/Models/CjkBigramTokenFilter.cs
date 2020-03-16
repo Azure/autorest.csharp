@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal CjkBigramTokenFilter()
         {
         }
+
         /// <summary> Initializes a new instance of CjkBigramTokenFilter. </summary>
         /// <param name="ignoreScripts"> The scripts to ignore. </param>
         /// <param name="outputUnigrams"> A value indicating whether to output both unigrams and bigrams (if true), or just bigrams (if false). Default is false. </param>
@@ -26,6 +27,7 @@ namespace CognitiveSearch.Models
             IgnoreScripts = ignoreScripts;
             OutputUnigrams = outputUnigrams;
         }
+
         /// <summary> The scripts to ignore. </summary>
         public IList<CjkBigramTokenFilterScripts> IgnoreScripts { get; set; }
         /// <summary> A value indicating whether to output both unigrams and bigrams (if true), or just bigrams (if false). Default is false. </summary>

@@ -22,6 +22,7 @@ namespace CustomNamespace
             CustomizedFancyField = customizedFancyField;
             DaysOfWeek = daysOfWeek;
         }
+
         /// <summary> Day of week. </summary>
         public CustomDaysOfWeek DaysOfWeek { get; set; }
     }

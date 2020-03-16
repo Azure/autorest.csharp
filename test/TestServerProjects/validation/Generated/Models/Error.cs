@@ -14,6 +14,7 @@ namespace validation.Models
         internal Error()
         {
         }
+
         /// <summary> Initializes a new instance of Error. </summary>
         /// <param name="code"> . </param>
         /// <param name="message"> . </param>
@@ -24,6 +25,7 @@ namespace validation.Models
             Message = message;
             Fields = fields;
         }
+
         public int? Code { get; set; }
         public string Message { get; set; }
         public string Fields { get; set; }

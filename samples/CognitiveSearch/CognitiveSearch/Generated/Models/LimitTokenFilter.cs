@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal LimitTokenFilter()
         {
         }
+
         /// <summary> Initializes a new instance of LimitTokenFilter. </summary>
         /// <param name="maxTokenCount"> The maximum number of tokens to produce. Default is 1. </param>
         /// <param name="consumeAllTokens"> A value indicating whether all tokens from the input must be consumed even if maxTokenCount is reached. Default is false. </param>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
             MaxTokenCount = maxTokenCount;
             ConsumeAllTokens = consumeAllTokens;
         }
+
         /// <summary> The maximum number of tokens to produce. Default is 1. </summary>
         public int? MaxTokenCount { get; set; }
         /// <summary> A value indicating whether all tokens from the input must be consumed even if maxTokenCount is reached. Default is false. </summary>

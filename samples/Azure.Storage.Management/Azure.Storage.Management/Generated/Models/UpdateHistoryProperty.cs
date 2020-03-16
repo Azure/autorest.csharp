@@ -16,6 +16,7 @@ namespace Azure.Storage.Management.Models
         internal UpdateHistoryProperty()
         {
         }
+
         /// <summary> Initializes a new instance of UpdateHistoryProperty. </summary>
         /// <param name="update"> The ImmutabilityPolicy update type of a blob container, possible values include: put, lock and extend. </param>
         /// <param name="immutabilityPeriodSinceCreationInDays"> The immutability period for the blobs in the container since the policy creation, in days. </param>
@@ -32,6 +33,7 @@ namespace Azure.Storage.Management.Models
             TenantId = tenantId;
             Upn = upn;
         }
+
         /// <summary> The ImmutabilityPolicy update type of a blob container, possible values include: put, lock and extend. </summary>
         public ImmutabilityPolicyUpdateType? Update { get; internal set; }
         /// <summary> The immutability period for the blobs in the container since the policy creation, in days. </summary>

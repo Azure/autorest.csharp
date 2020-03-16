@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal TruncateTokenFilter()
         {
         }
+
         /// <summary> Initializes a new instance of TruncateTokenFilter. </summary>
         /// <param name="length"> The length at which terms will be truncated. Default and maximum is 300. </param>
         /// <param name="odataType"> . </param>
@@ -22,6 +23,7 @@ namespace CognitiveSearch.Models
         {
             Length = length;
         }
+
         /// <summary> The length at which terms will be truncated. Default and maximum is 300. </summary>
         public int? Length { get; set; }
     }

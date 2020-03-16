@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal StorageAccountMicrosoftEndpoints()
         {
         }
+
         /// <summary> Initializes a new instance of StorageAccountMicrosoftEndpoints. </summary>
         /// <param name="blob"> Gets the blob endpoint. </param>
         /// <param name="queue"> Gets the queue endpoint. </param>
@@ -30,6 +31,7 @@ namespace Azure.Storage.Management.Models
             Web = web;
             Dfs = dfs;
         }
+
         /// <summary> Gets the blob endpoint. </summary>
         public string Blob { get; internal set; }
         /// <summary> Gets the queue endpoint. </summary>

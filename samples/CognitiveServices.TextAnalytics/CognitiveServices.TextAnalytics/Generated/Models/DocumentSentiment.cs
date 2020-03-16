@@ -16,6 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal DocumentSentiment()
         {
         }
+
         /// <summary> Initializes a new instance of DocumentSentiment. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="sentiment"> Predicted sentiment for document (Negative, Neutral, Positive, or Mixed). </param>
@@ -30,6 +31,7 @@ namespace CognitiveServices.TextAnalytics.Models
             DocumentScores = documentScores;
             Sentences = sentences;
         }
+
         /// <summary> Unique, non-empty document identifier. </summary>
         public string Id { get; set; }
         /// <summary> Predicted sentiment for document (Negative, Neutral, Positive, or Mixed). </summary>

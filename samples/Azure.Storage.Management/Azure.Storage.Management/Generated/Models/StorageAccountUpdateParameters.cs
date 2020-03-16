@@ -16,6 +16,7 @@ namespace Azure.Storage.Management.Models
         internal StorageAccountUpdateParameters()
         {
         }
+
         /// <summary> Initializes a new instance of StorageAccountUpdateParameters. </summary>
         /// <param name="sku"> Gets or sets the SKU name. Note that the SKU name cannot be updated to Standard_ZRS, Premium_LRS or Premium_ZRS, nor can accounts of those SKU names be updated to any other value. </param>
         /// <param name="tags"> Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater in length than 128 characters and a value no greater in length than 256 characters. </param>
@@ -44,6 +45,7 @@ namespace Azure.Storage.Management.Models
             LargeFileSharesState = largeFileSharesState;
             RoutingPreference = routingPreference;
         }
+
         /// <summary> Gets or sets the SKU name. Note that the SKU name cannot be updated to Standard_ZRS, Premium_LRS or Premium_ZRS, nor can accounts of those SKU names be updated to any other value. </summary>
         public Sku Sku { get; set; }
         /// <summary> Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater in length than 128 characters and a value no greater in length than 256 characters. </summary>

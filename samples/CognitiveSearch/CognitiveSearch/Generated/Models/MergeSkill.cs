@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal MergeSkill()
         {
         }
+
         /// <summary> Initializes a new instance of MergeSkill. </summary>
         /// <param name="insertPreTag"> The tag indicates the start of the merged text. By default, the tag is an empty space. </param>
         /// <param name="insertPostTag"> The tag indicates the end of the merged text. By default, the tag is an empty space. </param>
@@ -30,6 +31,7 @@ namespace CognitiveSearch.Models
             InsertPreTag = insertPreTag;
             InsertPostTag = insertPostTag;
         }
+
         /// <summary> The tag indicates the start of the merged text. By default, the tag is an empty space. </summary>
         public string InsertPreTag { get; set; }
         /// <summary> The tag indicates the end of the merged text. By default, the tag is an empty space. </summary>

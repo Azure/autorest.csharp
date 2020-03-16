@@ -16,6 +16,7 @@ namespace xml_service.Models
         internal Slide()
         {
         }
+
         /// <summary> Initializes a new instance of Slide. </summary>
         /// <param name="type"> . </param>
         /// <param name="title"> . </param>
@@ -26,6 +27,7 @@ namespace xml_service.Models
             Title = title;
             Items = items;
         }
+
         public string Type { get; set; }
         public string Title { get; set; }
         public IList<string> Items { get; set; }

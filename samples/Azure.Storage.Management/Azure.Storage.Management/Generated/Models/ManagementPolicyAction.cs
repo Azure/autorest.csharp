@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal ManagementPolicyAction()
         {
         }
+
         /// <summary> Initializes a new instance of ManagementPolicyAction. </summary>
         /// <param name="baseBlob"> The management policy action for base blob. </param>
         /// <param name="snapshot"> The management policy action for snapshot. </param>
@@ -22,6 +23,7 @@ namespace Azure.Storage.Management.Models
             BaseBlob = baseBlob;
             Snapshot = snapshot;
         }
+
         /// <summary> The management policy action for base blob. </summary>
         public ManagementPolicyBaseBlob BaseBlob { get; set; }
         /// <summary> The management policy action for snapshot. </summary>

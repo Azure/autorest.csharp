@@ -14,12 +14,14 @@ namespace Azure.Storage.Management.Models
         internal DateAfterModification()
         {
         }
+
         /// <summary> Initializes a new instance of DateAfterModification. </summary>
         /// <param name="daysAfterModificationGreaterThan"> Value indicating the age in days after last modification. </param>
         internal DateAfterModification(float daysAfterModificationGreaterThan)
         {
             DaysAfterModificationGreaterThan = daysAfterModificationGreaterThan;
         }
+
         /// <summary> Value indicating the age in days after last modification. </summary>
         public float DaysAfterModificationGreaterThan { get; set; }
     }

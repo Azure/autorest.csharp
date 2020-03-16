@@ -16,6 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal LinkedEntity()
         {
         }
+
         /// <summary> Initializes a new instance of LinkedEntity. </summary>
         /// <param name="name"> Entity Linking formal name. </param>
         /// <param name="matches"> List of instances this entity appears in the text. </param>
@@ -32,6 +33,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Url = url;
             DataSource = dataSource;
         }
+
         /// <summary> Entity Linking formal name. </summary>
         public string Name { get; set; }
         /// <summary> List of instances this entity appears in the text. </summary>

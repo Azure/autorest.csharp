@@ -16,6 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         internal ServiceEndpointPolicy()
         {
         }
+
         /// <summary> Initializes a new instance of ServiceEndpointPolicy. </summary>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="serviceEndpointPolicyDefinitions"> A collection of service endpoint policy definitions of the service endpoint policy. </param>
@@ -35,6 +36,7 @@ namespace Azure.Network.Management.Interface.Models
             ResourceGuid = resourceGuid;
             ProvisioningState = provisioningState;
         }
+
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
         public string Etag { get; internal set; }
         /// <summary> A collection of service endpoint policy definitions of the service endpoint policy. </summary>

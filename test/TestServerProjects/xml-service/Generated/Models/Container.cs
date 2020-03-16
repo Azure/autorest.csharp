@@ -16,6 +16,7 @@ namespace xml_service.Models
         internal Container()
         {
         }
+
         /// <summary> Initializes a new instance of Container. </summary>
         /// <param name="name"> . </param>
         /// <param name="properties"> Properties of a container. </param>
@@ -26,6 +27,7 @@ namespace xml_service.Models
             Properties = properties;
             Metadata = metadata;
         }
+
         public string Name { get; set; }
         /// <summary> Properties of a container. </summary>
         public ContainerProperties Properties { get; set; } = new ContainerProperties();

@@ -14,6 +14,7 @@ namespace Azure.Network.Management.Interface.Models
         internal IPConfigurationProfile()
         {
         }
+
         /// <summary> Initializes a new instance of IPConfigurationProfile. </summary>
         /// <param name="name"> The name of the resource. This name can be used to access the resource. </param>
         /// <param name="type"> Sub Resource type. </param>
@@ -29,6 +30,7 @@ namespace Azure.Network.Management.Interface.Models
             Subnet = subnet;
             ProvisioningState = provisioningState;
         }
+
         /// <summary> The name of the resource. This name can be used to access the resource. </summary>
         public string Name { get; set; }
         /// <summary> Sub Resource type. </summary>

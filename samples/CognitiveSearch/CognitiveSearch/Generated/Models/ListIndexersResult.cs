@@ -16,12 +16,14 @@ namespace CognitiveSearch.Models
         internal ListIndexersResult()
         {
         }
+
         /// <summary> Initializes a new instance of ListIndexersResult. </summary>
         /// <param name="indexers"> The indexers in the Search service. </param>
         internal ListIndexersResult(IList<Indexer> indexers)
         {
             Indexers = indexers;
         }
+
         /// <summary> The indexers in the Search service. </summary>
         public IList<Indexer> Indexers { get; internal set; }
     }

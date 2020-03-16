@@ -14,6 +14,7 @@ namespace xml_service.Models
         internal RootWithRefAndNoMeta()
         {
         }
+
         /// <summary> Initializes a new instance of RootWithRefAndNoMeta. </summary>
         /// <param name="refToModel"> XML will use RefToModel. </param>
         /// <param name="something"> Something else (just to avoid flattening). </param>
@@ -22,6 +23,7 @@ namespace xml_service.Models
             RefToModel = refToModel;
             Something = something;
         }
+
         /// <summary> XML will use RefToModel. </summary>
         public ComplexTypeNoMeta RefToModel { get; set; }
         /// <summary> Something else (just to avoid flattening). </summary>

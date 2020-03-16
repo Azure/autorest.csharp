@@ -14,12 +14,14 @@ namespace AppConfiguration.Models
         internal Label()
         {
         }
+
         /// <summary> Initializes a new instance of Label. </summary>
         /// <param name="name"> . </param>
         internal Label(string name)
         {
             Name = name;
         }
+
         public string Name { get; internal set; }
     }
 }

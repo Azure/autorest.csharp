@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal Analyzer()
         {
         }
+
         /// <summary> Initializes a new instance of Analyzer. </summary>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
@@ -22,6 +23,7 @@ namespace CognitiveSearch.Models
             OdataType = odataType;
             Name = name;
         }
+
         public string OdataType { get; internal set; }
         /// <summary> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </summary>
         public string Name { get; set; }

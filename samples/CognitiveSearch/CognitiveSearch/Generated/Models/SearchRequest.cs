@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal SearchRequest()
         {
         }
+
         /// <summary> Initializes a new instance of SearchRequest. </summary>
         /// <param name="includeTotalResultCount"> A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation. </param>
         /// <param name="facets"> The list of facet expressions to apply to the search query. Each facet expression contains a field name, optionally followed by a comma-separated list of name:value pairs. </param>
@@ -54,6 +55,7 @@ namespace CognitiveSearch.Models
             Skip = skip;
             Top = top;
         }
+
         /// <summary> A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation. </summary>
         public bool? IncludeTotalResultCount { get; set; }
         /// <summary> The list of facet expressions to apply to the search query. Each facet expression contains a field name, optionally followed by a comma-separated list of name:value pairs. </summary>

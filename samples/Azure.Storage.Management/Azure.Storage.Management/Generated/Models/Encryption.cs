@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal Encryption()
         {
         }
+
         /// <summary> Initializes a new instance of Encryption. </summary>
         /// <param name="services"> List of services which support encryption. </param>
         /// <param name="keySource"> The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Storage, Microsoft.Keyvault. </param>
@@ -24,6 +25,7 @@ namespace Azure.Storage.Management.Models
             KeySource = keySource;
             KeyVaultProperties = keyVaultProperties;
         }
+
         /// <summary> List of services which support encryption. </summary>
         public EncryptionServices Services { get; set; }
         /// <summary> The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Storage, Microsoft.Keyvault. </summary>

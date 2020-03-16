@@ -16,12 +16,14 @@ namespace body_complex.Models
         internal ArrayWrapper()
         {
         }
+
         /// <summary> Initializes a new instance of ArrayWrapper. </summary>
         /// <param name="array"> . </param>
         internal ArrayWrapper(IList<string> array)
         {
             Array = array;
         }
+
         public IList<string> Array { get; set; }
     }
 }

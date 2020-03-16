@@ -14,6 +14,7 @@ namespace Azure.Network.Management.Interface.Models
         internal PublicIPAddressDnsSettings()
         {
         }
+
         /// <summary> Initializes a new instance of PublicIPAddressDnsSettings. </summary>
         /// <param name="domainNameLabel"> The domain name label. The concatenation of the domain name label and the regionalized DNS zone make up the fully qualified domain name associated with the public IP address. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system. </param>
         /// <param name="fqdn"> The Fully Qualified Domain Name of the A DNS record associated with the public IP. This is the concatenation of the domainNameLabel and the regionalized DNS zone. </param>
@@ -24,6 +25,7 @@ namespace Azure.Network.Management.Interface.Models
             Fqdn = fqdn;
             ReverseFqdn = reverseFqdn;
         }
+
         /// <summary> The domain name label. The concatenation of the domain name label and the regionalized DNS zone make up the fully qualified domain name associated with the public IP address. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system. </summary>
         public string DomainNameLabel { get; set; }
         /// <summary> The Fully Qualified Domain Name of the A DNS record associated with the public IP. This is the concatenation of the domainNameLabel and the regionalized DNS zone. </summary>

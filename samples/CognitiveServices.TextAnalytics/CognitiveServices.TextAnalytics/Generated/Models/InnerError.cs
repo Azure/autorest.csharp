@@ -16,6 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal InnerError()
         {
         }
+
         /// <summary> Initializes a new instance of InnerError. </summary>
         /// <param name="code"> Error code. </param>
         /// <param name="message"> Error message. </param>
@@ -30,6 +31,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Target = target;
             Inner = inner;
         }
+
         /// <summary> Error code. </summary>
         public InnerErrorCodeValue Code { get; set; }
         /// <summary> Error message. </summary>

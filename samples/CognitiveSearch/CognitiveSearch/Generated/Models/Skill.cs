@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal Skill()
         {
         }
+
         /// <summary> Initializes a new instance of Skill. </summary>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the skill which uniquely identifies it within the skillset. A skill with no name defined will be given a default name of its 1-based index in the skills array, prefixed with the character &apos;#&apos;. </param>
@@ -32,6 +33,7 @@ namespace CognitiveSearch.Models
             Inputs = inputs;
             Outputs = outputs;
         }
+
         public string OdataType { get; internal set; }
         /// <summary> The name of the skill which uniquely identifies it within the skillset. A skill with no name defined will be given a default name of its 1-based index in the skills array, prefixed with the character &apos;#&apos;. </summary>
         public string Name { get; set; }

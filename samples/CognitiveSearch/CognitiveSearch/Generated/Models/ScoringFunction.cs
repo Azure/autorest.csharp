@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal ScoringFunction()
         {
         }
+
         /// <summary> Initializes a new instance of ScoringFunction. </summary>
         /// <param name="type"> . </param>
         /// <param name="fieldName"> The name of the field used as input to the scoring function. </param>
@@ -26,6 +27,7 @@ namespace CognitiveSearch.Models
             Boost = boost;
             Interpolation = interpolation;
         }
+
         public string Type { get; internal set; }
         /// <summary> The name of the field used as input to the scoring function. </summary>
         public string FieldName { get; set; }

@@ -14,6 +14,7 @@ namespace Azure.Network.Management.Interface.Models
         internal ResourceNavigationLink()
         {
         }
+
         /// <summary> Initializes a new instance of ResourceNavigationLink. </summary>
         /// <param name="name"> Name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="resourceNavigationLinkId"> Resource navigation link identifier. </param>
@@ -33,6 +34,7 @@ namespace Azure.Network.Management.Interface.Models
             Link = link;
             ProvisioningState = provisioningState;
         }
+
         /// <summary> Name of the resource that is unique within a resource group. This name can be used to access the resource. </summary>
         public string Name { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>

@@ -16,6 +16,7 @@ namespace additionalProperties.Models
         internal PetAPInProperties()
         {
         }
+
         /// <summary> Initializes a new instance of PetAPInProperties. </summary>
         /// <param name="id"> . </param>
         /// <param name="name"> . </param>
@@ -28,6 +29,7 @@ namespace additionalProperties.Models
             Status = status;
             AdditionalProperties = additionalProperties;
         }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public bool? Status { get; internal set; }

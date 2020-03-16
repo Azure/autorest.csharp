@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal EdgeNGramTokenizer()
         {
         }
+
         /// <summary> Initializes a new instance of EdgeNGramTokenizer. </summary>
         /// <param name="minGram"> The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram. </param>
         /// <param name="maxGram"> The maximum n-gram length. Default is 2. Maximum is 300. </param>
@@ -28,6 +29,7 @@ namespace CognitiveSearch.Models
             MaxGram = maxGram;
             TokenChars = tokenChars;
         }
+
         /// <summary> The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram. </summary>
         public int? MinGram { get; set; }
         /// <summary> The maximum n-gram length. Default is 2. Maximum is 300. </summary>

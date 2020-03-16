@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal PrivateEndpointConnection()
         {
         }
+
         /// <summary> Initializes a new instance of PrivateEndpointConnection. </summary>
         /// <param name="privateEndpoint"> The resource of private end point. </param>
         /// <param name="privateLinkServiceConnectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
@@ -27,6 +28,7 @@ namespace Azure.Storage.Management.Models
             PrivateLinkServiceConnectionState = privateLinkServiceConnectionState;
             ProvisioningState = provisioningState;
         }
+
         /// <summary> The resource of private end point. </summary>
         public PrivateEndpoint PrivateEndpoint { get; set; }
         /// <summary> A collection of information about the state of the connection between service consumer and provider. </summary>

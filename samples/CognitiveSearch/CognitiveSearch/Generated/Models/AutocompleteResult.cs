@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal AutocompleteResult()
         {
         }
+
         /// <summary> Initializes a new instance of AutocompleteResult. </summary>
         /// <param name="coverage"> A value indicating the percentage of the index that was considered by the autocomplete request, or null if minimumCoverage was not specified in the request. </param>
         /// <param name="results"> The list of returned Autocompleted items. </param>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
             Coverage = coverage;
             Results = results;
         }
+
         /// <summary> A value indicating the percentage of the index that was considered by the autocomplete request, or null if minimumCoverage was not specified in the request. </summary>
         public double? Coverage { get; internal set; }
         /// <summary> The list of returned Autocompleted items. </summary>

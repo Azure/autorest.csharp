@@ -16,6 +16,7 @@ namespace Azure.Storage.Management.Models
         internal StorageAccountCreateParameters()
         {
         }
+
         /// <summary> Initializes a new instance of StorageAccountCreateParameters. </summary>
         /// <param name="sku"> Required. Gets or sets the SKU name. </param>
         /// <param name="kind"> Required. Indicates the type of storage account. </param>
@@ -48,6 +49,7 @@ namespace Azure.Storage.Management.Models
             LargeFileSharesState = largeFileSharesState;
             RoutingPreference = routingPreference;
         }
+
         /// <summary> Required. Gets or sets the SKU name. </summary>
         public Sku Sku { get; set; } = new Sku();
         /// <summary> Required. Indicates the type of storage account. </summary>

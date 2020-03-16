@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal StorageAccountInternetEndpoints()
         {
         }
+
         /// <summary> Initializes a new instance of StorageAccountInternetEndpoints. </summary>
         /// <param name="blob"> Gets the blob endpoint. </param>
         /// <param name="file"> Gets the file endpoint. </param>
@@ -26,6 +27,7 @@ namespace Azure.Storage.Management.Models
             Web = web;
             Dfs = dfs;
         }
+
         /// <summary> Gets the blob endpoint. </summary>
         public string Blob { get; internal set; }
         /// <summary> Gets the file endpoint. </summary>

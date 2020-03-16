@@ -16,6 +16,7 @@ namespace Azure.Storage.Management.Models
         internal MetricSpecification()
         {
         }
+
         /// <summary> Initializes a new instance of MetricSpecification. </summary>
         /// <param name="name"> Name of metric specification. </param>
         /// <param name="displayName"> Display name of metric specification. </param>
@@ -38,6 +39,7 @@ namespace Azure.Storage.Management.Models
             Category = category;
             ResourceIdDimensionNameOverride = resourceIdDimensionNameOverride;
         }
+
         /// <summary> Name of metric specification. </summary>
         public string Name { get; set; }
         /// <summary> Display name of metric specification. </summary>

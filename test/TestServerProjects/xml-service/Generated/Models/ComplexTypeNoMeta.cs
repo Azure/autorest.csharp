@@ -14,12 +14,14 @@ namespace xml_service.Models
         internal ComplexTypeNoMeta()
         {
         }
+
         /// <summary> Initializes a new instance of ComplexTypeNoMeta. </summary>
         /// <param name="iD"> The id of the res. </param>
         internal ComplexTypeNoMeta(string iD)
         {
             ID = iD;
         }
+
         /// <summary> The id of the res. </summary>
         public string ID { get; set; }
     }

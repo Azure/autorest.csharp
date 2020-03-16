@@ -14,6 +14,7 @@ namespace Azure.Network.Management.Interface.Models
         internal ApplicationGatewayBackendAddress()
         {
         }
+
         /// <summary> Initializes a new instance of ApplicationGatewayBackendAddress. </summary>
         /// <param name="fqdn"> Fully qualified domain name (FQDN). </param>
         /// <param name="ipAddress"> IP address. </param>
@@ -22,6 +23,7 @@ namespace Azure.Network.Management.Interface.Models
             Fqdn = fqdn;
             IpAddress = ipAddress;
         }
+
         /// <summary> Fully qualified domain name (FQDN). </summary>
         public string Fqdn { get; set; }
         /// <summary> IP address. </summary>

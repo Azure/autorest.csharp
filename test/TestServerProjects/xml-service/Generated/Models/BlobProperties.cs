@@ -16,6 +16,7 @@ namespace xml_service.Models
         internal BlobProperties()
         {
         }
+
         /// <summary> Initializes a new instance of BlobProperties. </summary>
         /// <param name="lastModified"> . </param>
         /// <param name="etag"> . </param>
@@ -76,6 +77,7 @@ namespace xml_service.Models
             AccessTierInferred = accessTierInferred;
             ArchiveStatus = archiveStatus;
         }
+
         public DateTimeOffset LastModified { get; set; }
         public string Etag { get; set; }
         /// <summary> Size in bytes. </summary>

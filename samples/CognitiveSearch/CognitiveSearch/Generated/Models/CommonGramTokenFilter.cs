@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal CommonGramTokenFilter()
         {
         }
+
         /// <summary> Initializes a new instance of CommonGramTokenFilter. </summary>
         /// <param name="commonWords"> The set of common words. </param>
         /// <param name="ignoreCase"> A value indicating whether common words matching will be case insensitive. Default is false. </param>
@@ -28,6 +29,7 @@ namespace CognitiveSearch.Models
             IgnoreCase = ignoreCase;
             UseQueryMode = useQueryMode;
         }
+
         /// <summary> The set of common words. </summary>
         public IList<string> CommonWords { get; set; } = new List<string>();
         /// <summary> A value indicating whether common words matching will be case insensitive. Default is false. </summary>

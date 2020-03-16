@@ -16,6 +16,7 @@ namespace Azure.Storage.Management.Models
         internal PrivateLinkResource()
         {
         }
+
         /// <summary> Initializes a new instance of PrivateLinkResource. </summary>
         /// <param name="groupId"> The private link resource group id. </param>
         /// <param name="requiredMembers"> The private link resource required member names. </param>
@@ -29,6 +30,7 @@ namespace Azure.Storage.Management.Models
             RequiredMembers = requiredMembers;
             RequiredZoneNames = requiredZoneNames;
         }
+
         /// <summary> The private link resource group id. </summary>
         public string GroupId { get; internal set; }
         /// <summary> The private link resource required member names. </summary>

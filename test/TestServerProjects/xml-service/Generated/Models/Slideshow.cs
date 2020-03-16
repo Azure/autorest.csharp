@@ -16,6 +16,7 @@ namespace xml_service.Models
         internal Slideshow()
         {
         }
+
         /// <summary> Initializes a new instance of Slideshow. </summary>
         /// <param name="title"> . </param>
         /// <param name="date"> . </param>
@@ -28,6 +29,7 @@ namespace xml_service.Models
             Author = author;
             Slides = slides;
         }
+
         public string Title { get; set; }
         public string Date { get; set; }
         public string Author { get; set; }

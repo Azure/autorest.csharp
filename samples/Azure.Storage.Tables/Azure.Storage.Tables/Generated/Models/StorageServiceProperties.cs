@@ -16,6 +16,7 @@ namespace Azure.Storage.Tables.Models
         internal StorageServiceProperties()
         {
         }
+
         /// <summary> Initializes a new instance of StorageServiceProperties. </summary>
         /// <param name="logging"> Azure Analytics Logging settings. </param>
         /// <param name="hourMetrics"> A summary of request statistics grouped by API in hourly aggregates for queues. </param>
@@ -28,6 +29,7 @@ namespace Azure.Storage.Tables.Models
             MinuteMetrics = minuteMetrics;
             Cors = cors;
         }
+
         /// <summary> Azure Analytics Logging settings. </summary>
         public Logging Logging { get; set; }
         /// <summary> A summary of request statistics grouped by API in hourly aggregates for queues. </summary>

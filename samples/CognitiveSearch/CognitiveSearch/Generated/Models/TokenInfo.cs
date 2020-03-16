@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal TokenInfo()
         {
         }
+
         /// <summary> Initializes a new instance of TokenInfo. </summary>
         /// <param name="token"> The token returned by the analyzer. </param>
         /// <param name="startOffset"> The index of the first character of the token in the input text. </param>
@@ -26,6 +27,7 @@ namespace CognitiveSearch.Models
             EndOffset = endOffset;
             Position = position;
         }
+
         /// <summary> The token returned by the analyzer. </summary>
         public string Token { get; internal set; }
         /// <summary> The index of the first character of the token in the input text. </summary>

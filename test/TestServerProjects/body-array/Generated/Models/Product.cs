@@ -14,6 +14,7 @@ namespace body_array.Models
         internal Product()
         {
         }
+
         /// <summary> Initializes a new instance of Product. </summary>
         /// <param name="integer"> . </param>
         /// <param name="string"> . </param>
@@ -22,6 +23,7 @@ namespace body_array.Models
             Integer = integer;
             String = @string;
         }
+
         public int? Integer { get; set; }
         public string String { get; set; }
     }

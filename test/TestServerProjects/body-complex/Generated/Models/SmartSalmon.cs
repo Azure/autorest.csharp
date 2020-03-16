@@ -17,6 +17,7 @@ namespace body_complex.Models
         internal SmartSalmon()
         {
         }
+
         /// <summary> Initializes a new instance of SmartSalmon. </summary>
         /// <param name="collegeDegree"> . </param>
         /// <param name="location"> . </param>
@@ -29,6 +30,7 @@ namespace body_complex.Models
         {
             CollegeDegree = collegeDegree;
         }
+
         public string CollegeDegree { get; set; }
         private readonly IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
         /// <inheritdoc />

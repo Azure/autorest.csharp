@@ -17,6 +17,7 @@ namespace body_complex.Models
         internal Cookiecuttershark()
         {
         }
+
         /// <summary> Initializes a new instance of Cookiecuttershark. </summary>
         /// <param name="age"> . </param>
         /// <param name="birthday"> . </param>

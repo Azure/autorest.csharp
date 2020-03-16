@@ -14,12 +14,14 @@ namespace Azure.Storage.Management.Models
         internal ManagementPolicySnapShot()
         {
         }
+
         /// <summary> Initializes a new instance of ManagementPolicySnapShot. </summary>
         /// <param name="delete"> The function to delete the blob snapshot. </param>
         internal ManagementPolicySnapShot(DateAfterCreation delete)
         {
             Delete = delete;
         }
+
         /// <summary> The function to delete the blob snapshot. </summary>
         public DateAfterCreation Delete { get; set; }
     }

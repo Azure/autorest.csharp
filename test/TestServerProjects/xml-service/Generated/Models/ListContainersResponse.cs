@@ -16,6 +16,7 @@ namespace xml_service.Models
         internal ListContainersResponse()
         {
         }
+
         /// <summary> Initializes a new instance of ListContainersResponse. </summary>
         /// <param name="serviceEndpoint"> . </param>
         /// <param name="prefix"> . </param>
@@ -32,6 +33,7 @@ namespace xml_service.Models
             Containers = containers;
             NextMarker = nextMarker;
         }
+
         public string ServiceEndpoint { get; set; }
         public string Prefix { get; set; }
         public string Marker { get; set; }

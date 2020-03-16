@@ -14,6 +14,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal DetectedLanguage()
         {
         }
+
         /// <summary> Initializes a new instance of DetectedLanguage. </summary>
         /// <param name="name"> Long name of a detected language (e.g. English, French). </param>
         /// <param name="iso6391Name"> A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr). </param>
@@ -24,6 +25,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Iso6391Name = iso6391Name;
             Score = score;
         }
+
         /// <summary> Long name of a detected language (e.g. English, French). </summary>
         public string Name { get; set; }
         /// <summary> A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr). </summary>

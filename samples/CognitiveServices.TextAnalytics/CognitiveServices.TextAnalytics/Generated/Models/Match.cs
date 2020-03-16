@@ -14,6 +14,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal Match()
         {
         }
+
         /// <summary> Initializes a new instance of Match. </summary>
         /// <param name="score"> If a well-known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned. </param>
         /// <param name="text"> Entity text as appears in the request. </param>
@@ -26,6 +27,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Offset = offset;
             Length = length;
         }
+
         /// <summary> If a well-known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned. </summary>
         public double Score { get; set; }
         /// <summary> Entity text as appears in the request. </summary>

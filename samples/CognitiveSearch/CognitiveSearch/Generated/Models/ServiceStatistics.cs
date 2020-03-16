@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal ServiceStatistics()
         {
         }
+
         /// <summary> Initializes a new instance of ServiceStatistics. </summary>
         /// <param name="counters"> Service level resource counters. </param>
         /// <param name="limits"> Service level general limits. </param>
@@ -22,6 +23,7 @@ namespace CognitiveSearch.Models
             Counters = counters;
             Limits = limits;
         }
+
         /// <summary> Service level resource counters. </summary>
         public ServiceCounters Counters { get; set; }
         /// <summary> Service level general limits. </summary>

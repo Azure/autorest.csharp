@@ -14,12 +14,14 @@ namespace Azure.Storage.Management.Models
         internal ListAccountSasResponse()
         {
         }
+
         /// <summary> Initializes a new instance of ListAccountSasResponse. </summary>
         /// <param name="accountSasToken"> List SAS credentials of storage account. </param>
         internal ListAccountSasResponse(string accountSasToken)
         {
             AccountSasToken = accountSasToken;
         }
+
         /// <summary> List SAS credentials of storage account. </summary>
         public string AccountSasToken { get; internal set; }
     }

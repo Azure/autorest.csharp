@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal UsageName()
         {
         }
+
         /// <summary> Initializes a new instance of UsageName. </summary>
         /// <param name="value"> Gets a string describing the resource name. </param>
         /// <param name="localizedValue"> Gets a localized string describing the resource name. </param>
@@ -22,6 +23,7 @@ namespace Azure.Storage.Management.Models
             Value = value;
             LocalizedValue = localizedValue;
         }
+
         /// <summary> Gets a string describing the resource name. </summary>
         public string Value { get; internal set; }
         /// <summary> Gets a localized string describing the resource name. </summary>

@@ -16,6 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         internal PrivateEndpoint()
         {
         }
+
         /// <summary> Initializes a new instance of PrivateEndpoint. </summary>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="subnet"> The ID of the subnet from which the private IP will be allocated. </param>
@@ -37,6 +38,7 @@ namespace Azure.Network.Management.Interface.Models
             PrivateLinkServiceConnections = privateLinkServiceConnections;
             ManualPrivateLinkServiceConnections = manualPrivateLinkServiceConnections;
         }
+
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
         public string Etag { get; internal set; }
         /// <summary> The ID of the subnet from which the private IP will be allocated. </summary>

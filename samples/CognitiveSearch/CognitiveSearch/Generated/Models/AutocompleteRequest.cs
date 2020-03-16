@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal AutocompleteRequest()
         {
         }
+
         /// <summary> Initializes a new instance of AutocompleteRequest. </summary>
         /// <param name="searchText"> The search text on which to base autocomplete results. </param>
         /// <param name="autocompleteMode"> Specifies the mode for Autocomplete. The default is &apos;oneTerm&apos;. Use &apos;twoTerms&apos; to get shingles and &apos;oneTermWithContext&apos; to use the current context while producing auto-completed terms. </param>
@@ -38,6 +39,7 @@ namespace CognitiveSearch.Models
             SuggesterName = suggesterName;
             Top = top;
         }
+
         /// <summary> The search text on which to base autocomplete results. </summary>
         public string SearchText { get; set; }
         /// <summary> Specifies the mode for Autocomplete. The default is &apos;oneTerm&apos;. Use &apos;twoTerms&apos; to get shingles and &apos;oneTermWithContext&apos; to use the current context while producing auto-completed terms. </summary>

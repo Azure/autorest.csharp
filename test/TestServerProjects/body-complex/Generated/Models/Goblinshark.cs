@@ -17,6 +17,7 @@ namespace body_complex.Models
         internal Goblinshark()
         {
         }
+
         /// <summary> Initializes a new instance of Goblinshark. </summary>
         /// <param name="jawsize"> . </param>
         /// <param name="color"> Colors possible. </param>
@@ -31,6 +32,7 @@ namespace body_complex.Models
             Jawsize = jawsize;
             Color = color;
         }
+
         public int? Jawsize { get; set; }
         /// <summary> Colors possible. </summary>
         public GoblinSharkColor? Color { get; set; }

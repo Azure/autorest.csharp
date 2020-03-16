@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal Resource()
         {
         }
+
         /// <summary> Initializes a new instance of Resource. </summary>
         /// <param name="id"> Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </param>
         /// <param name="name"> The name of the resource. </param>
@@ -24,6 +25,7 @@ namespace Azure.Storage.Management.Models
             Name = name;
             Type = type;
         }
+
         /// <summary> Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </summary>
         public string Id { get; internal set; }
         /// <summary> The name of the resource. </summary>

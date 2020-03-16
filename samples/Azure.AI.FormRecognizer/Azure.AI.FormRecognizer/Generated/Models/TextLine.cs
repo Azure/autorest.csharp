@@ -16,6 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
         internal TextLine()
         {
         }
+
         /// <summary> Initializes a new instance of TextLine. </summary>
         /// <param name="text"> The text content of the line. </param>
         /// <param name="boundingBox"> Bounding box of an extracted line. </param>
@@ -28,6 +29,7 @@ namespace Azure.AI.FormRecognizer.Models
             Language = language;
             Words = words;
         }
+
         /// <summary> The text content of the line. </summary>
         public string Text { get; set; }
         /// <summary> Bounding box of an extracted line. </summary>

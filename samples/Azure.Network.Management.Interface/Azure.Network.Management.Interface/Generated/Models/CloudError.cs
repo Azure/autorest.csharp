@@ -14,12 +14,14 @@ namespace Azure.Network.Management.Interface.Models
         internal CloudError()
         {
         }
+
         /// <summary> Initializes a new instance of CloudError. </summary>
         /// <param name="error"> Cloud error body. </param>
         internal CloudError(CloudErrorBody error)
         {
             Error = error;
         }
+
         /// <summary> Cloud error body. </summary>
         public CloudErrorBody Error { get; set; }
     }

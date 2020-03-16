@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal SplitSkill()
         {
         }
+
         /// <summary> Initializes a new instance of SplitSkill. </summary>
         /// <param name="defaultLanguageCode"> A value indicating which language code to use. Default is en. </param>
         /// <param name="textSplitMode"> A value indicating which split mode to perform. </param>
@@ -32,6 +33,7 @@ namespace CognitiveSearch.Models
             TextSplitMode = textSplitMode;
             MaximumPageLength = maximumPageLength;
         }
+
         /// <summary> A value indicating which language code to use. Default is en. </summary>
         public SplitSkillLanguage? DefaultLanguageCode { get; set; }
         /// <summary> A value indicating which split mode to perform. </summary>

@@ -16,6 +16,7 @@ namespace Azure.Storage.Management.Models
         internal ManagementPolicy()
         {
         }
+
         /// <summary> Initializes a new instance of ManagementPolicy. </summary>
         /// <param name="lastModifiedTime"> Returns the date and time the ManagementPolicies was last modified. </param>
         /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
@@ -27,6 +28,7 @@ namespace Azure.Storage.Management.Models
             LastModifiedTime = lastModifiedTime;
             Policy = policy;
         }
+
         /// <summary> Returns the date and time the ManagementPolicies was last modified. </summary>
         public DateTimeOffset? LastModifiedTime { get; internal set; }
         /// <summary> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </summary>

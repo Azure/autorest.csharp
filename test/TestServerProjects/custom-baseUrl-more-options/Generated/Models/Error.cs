@@ -14,6 +14,7 @@ namespace custom_baseUrl_more_options.Models
         internal Error()
         {
         }
+
         /// <summary> Initializes a new instance of Error. </summary>
         /// <param name="status"> . </param>
         /// <param name="message"> . </param>
@@ -22,6 +23,7 @@ namespace custom_baseUrl_more_options.Models
             Status = status;
             Message = message;
         }
+
         public int? Status { get; set; }
         public string Message { get; set; }
     }

@@ -17,6 +17,7 @@ namespace Azure.Storage.Management.Models
         internal StorageAccount()
         {
         }
+
         /// <summary> Initializes a new instance of StorageAccount. </summary>
         /// <param name="sku"> Gets the SKU. </param>
         /// <param name="kind"> Gets the Kind. </param>
@@ -76,6 +77,7 @@ namespace Azure.Storage.Management.Models
             RoutingPreference = routingPreference;
             BlobRestoreStatus = blobRestoreStatus;
         }
+
         /// <summary> Gets the SKU. </summary>
         public Sku Sku { get; internal set; }
         /// <summary> Gets the Kind. </summary>

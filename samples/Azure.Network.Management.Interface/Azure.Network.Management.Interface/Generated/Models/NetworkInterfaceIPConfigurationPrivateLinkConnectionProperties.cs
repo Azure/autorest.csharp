@@ -16,6 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         internal NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties()
         {
         }
+
         /// <summary> Initializes a new instance of NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties. </summary>
         /// <param name="groupId"> The group ID for current private link connection. </param>
         /// <param name="requiredMemberName"> The required member name for current private link connection. </param>
@@ -26,6 +27,7 @@ namespace Azure.Network.Management.Interface.Models
             RequiredMemberName = requiredMemberName;
             Fqdns = fqdns;
         }
+
         /// <summary> The group ID for current private link connection. </summary>
         public string GroupId { get; internal set; }
         /// <summary> The required member name for current private link connection. </summary>

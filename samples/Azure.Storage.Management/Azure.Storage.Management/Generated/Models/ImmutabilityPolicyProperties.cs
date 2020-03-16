@@ -16,6 +16,7 @@ namespace Azure.Storage.Management.Models
         internal ImmutabilityPolicyProperties()
         {
         }
+
         /// <summary> Initializes a new instance of ImmutabilityPolicyProperties. </summary>
         /// <param name="etag"> ImmutabilityPolicy Etag. </param>
         /// <param name="updateHistory"> The ImmutabilityPolicy update history of the blob container. </param>
@@ -30,6 +31,7 @@ namespace Azure.Storage.Management.Models
             State = state;
             AllowProtectedAppendWrites = allowProtectedAppendWrites;
         }
+
         /// <summary> ImmutabilityPolicy Etag. </summary>
         public string Etag { get; internal set; }
         /// <summary> The ImmutabilityPolicy update history of the blob container. </summary>

@@ -16,6 +16,7 @@ namespace Azure.Storage.Management.Models
         internal Restriction()
         {
         }
+
         /// <summary> Initializes a new instance of Restriction. </summary>
         /// <param name="type"> The type of restrictions. As of now only possible value for this is location. </param>
         /// <param name="values"> The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted. </param>
@@ -26,6 +27,7 @@ namespace Azure.Storage.Management.Models
             Values = values;
             ReasonCode = reasonCode;
         }
+
         /// <summary> The type of restrictions. As of now only possible value for this is location. </summary>
         public string Type { get; internal set; }
         /// <summary> The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted. </summary>

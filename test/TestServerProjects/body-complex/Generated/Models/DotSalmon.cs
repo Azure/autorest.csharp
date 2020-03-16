@@ -14,6 +14,7 @@ namespace body_complex.Models
         internal DotSalmon()
         {
         }
+
         /// <summary> Initializes a new instance of DotSalmon. </summary>
         /// <param name="location"> . </param>
         /// <param name="iswild"> . </param>
@@ -24,6 +25,7 @@ namespace body_complex.Models
             Location = location;
             Iswild = iswild;
         }
+
         public string Location { get; set; }
         public bool? Iswild { get; set; }
     }

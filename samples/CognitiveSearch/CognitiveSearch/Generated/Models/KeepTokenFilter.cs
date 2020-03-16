@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal KeepTokenFilter()
         {
         }
+
         /// <summary> Initializes a new instance of KeepTokenFilter. </summary>
         /// <param name="keepWords"> The list of words to keep. </param>
         /// <param name="lowerCaseKeepWords"> A value indicating whether to lower case all words first. Default is false. </param>
@@ -26,6 +27,7 @@ namespace CognitiveSearch.Models
             KeepWords = keepWords;
             LowerCaseKeepWords = lowerCaseKeepWords;
         }
+
         /// <summary> The list of words to keep. </summary>
         public IList<string> KeepWords { get; set; } = new List<string>();
         /// <summary> A value indicating whether to lower case all words first. Default is false. </summary>

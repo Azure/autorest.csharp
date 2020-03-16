@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal ServiceLimits()
         {
         }
+
         /// <summary> Initializes a new instance of ServiceLimits. </summary>
         /// <param name="maxFieldsPerIndex"> The maximum allowed fields per index. </param>
         /// <param name="maxFieldNestingDepthPerIndex"> The maximum depth which you can nest sub-fields in an index, including the top-level complex field. For example, a/b/c has a nesting depth of 3. </param>
@@ -26,6 +27,7 @@ namespace CognitiveSearch.Models
             MaxComplexCollectionFieldsPerIndex = maxComplexCollectionFieldsPerIndex;
             MaxComplexObjectsInCollectionsPerDocument = maxComplexObjectsInCollectionsPerDocument;
         }
+
         /// <summary> The maximum allowed fields per index. </summary>
         public int? MaxFieldsPerIndex { get; set; }
         /// <summary> The maximum depth which you can nest sub-fields in an index, including the top-level complex field. For example, a/b/c has a nesting depth of 3. </summary>

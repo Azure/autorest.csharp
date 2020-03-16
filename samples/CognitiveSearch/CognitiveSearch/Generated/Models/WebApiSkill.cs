@@ -17,6 +17,7 @@ namespace CognitiveSearch.Models
         internal WebApiSkill()
         {
         }
+
         /// <summary> Initializes a new instance of WebApiSkill. </summary>
         /// <param name="uri"> The url for the Web API. </param>
         /// <param name="httpHeaders"> The headers required to make the http request. </param>
@@ -39,6 +40,7 @@ namespace CognitiveSearch.Models
             BatchSize = batchSize;
             DegreeOfParallelism = degreeOfParallelism;
         }
+
         /// <summary> The url for the Web API. </summary>
         public string Uri { get; set; }
         /// <summary> The headers required to make the http request. </summary>

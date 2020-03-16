@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal Usage()
         {
         }
+
         /// <summary> Initializes a new instance of Usage. </summary>
         /// <param name="unit"> Gets the unit of measurement. </param>
         /// <param name="currentValue"> Gets the current count of the allocated resources in the subscription. </param>
@@ -26,6 +27,7 @@ namespace Azure.Storage.Management.Models
             Limit = limit;
             Name = name;
         }
+
         /// <summary> Gets the unit of measurement. </summary>
         public UsageUnit? Unit { get; internal set; }
         /// <summary> Gets the current count of the allocated resources in the subscription. </summary>

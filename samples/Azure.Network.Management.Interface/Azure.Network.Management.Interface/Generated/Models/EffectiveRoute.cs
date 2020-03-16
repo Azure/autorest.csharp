@@ -16,6 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         internal EffectiveRoute()
         {
         }
+
         /// <summary> Initializes a new instance of EffectiveRoute. </summary>
         /// <param name="name"> The name of the user defined route. This is optional. </param>
         /// <param name="disableBgpRoutePropagation"> If true, on-premises routes are not propagated to the network interfaces in the subnet. </param>
@@ -34,6 +35,7 @@ namespace Azure.Network.Management.Interface.Models
             NextHopIpAddress = nextHopIpAddress;
             NextHopType = nextHopType;
         }
+
         /// <summary> The name of the user defined route. This is optional. </summary>
         public string Name { get; set; }
         /// <summary> If true, on-premises routes are not propagated to the network interfaces in the subnet. </summary>

@@ -14,6 +14,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal DocumentStatistics()
         {
         }
+
         /// <summary> Initializes a new instance of DocumentStatistics. </summary>
         /// <param name="charactersCount"> Number of text elements recognized in the document. </param>
         /// <param name="transactionsCount"> Number of transactions for the document. </param>
@@ -22,6 +23,7 @@ namespace CognitiveServices.TextAnalytics.Models
             CharactersCount = charactersCount;
             TransactionsCount = transactionsCount;
         }
+
         /// <summary> Number of text elements recognized in the document. </summary>
         public int CharactersCount { get; set; }
         /// <summary> Number of transactions for the document. </summary>

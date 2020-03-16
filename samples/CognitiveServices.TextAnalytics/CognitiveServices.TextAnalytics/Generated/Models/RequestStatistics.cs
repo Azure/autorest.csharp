@@ -14,6 +14,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal RequestStatistics()
         {
         }
+
         /// <summary> Initializes a new instance of RequestStatistics. </summary>
         /// <param name="documentsCount"> Number of documents submitted in the request. </param>
         /// <param name="validDocumentsCount"> Number of valid documents. This excludes empty, over-size limit or non-supported languages documents. </param>
@@ -26,6 +27,7 @@ namespace CognitiveServices.TextAnalytics.Models
             ErroneousDocumentsCount = erroneousDocumentsCount;
             TransactionsCount = transactionsCount;
         }
+
         /// <summary> Number of documents submitted in the request. </summary>
         public int DocumentsCount { get; set; }
         /// <summary> Number of valid documents. This excludes empty, over-size limit or non-supported languages documents. </summary>

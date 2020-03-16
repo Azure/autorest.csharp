@@ -16,6 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         internal NetworkInterface()
         {
         }
+
         /// <summary> Initializes a new instance of NetworkInterface. </summary>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="virtualMachine"> The reference to a virtual machine. </param>
@@ -53,6 +54,7 @@ namespace Azure.Network.Management.Interface.Models
             ResourceGuid = resourceGuid;
             ProvisioningState = provisioningState;
         }
+
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
         public string Etag { get; internal set; }
         /// <summary> The reference to a virtual machine. </summary>

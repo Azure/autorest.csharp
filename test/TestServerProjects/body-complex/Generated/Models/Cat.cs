@@ -16,6 +16,7 @@ namespace body_complex.Models
         internal Cat()
         {
         }
+
         /// <summary> Initializes a new instance of Cat. </summary>
         /// <param name="color"> . </param>
         /// <param name="hates"> . </param>
@@ -26,6 +27,7 @@ namespace body_complex.Models
             Color = color;
             Hates = hates;
         }
+
         public string Color { get; set; }
         public IList<Dog> Hates { get; set; }
     }

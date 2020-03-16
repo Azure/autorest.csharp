@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal PrivateLinkServiceConnectionState()
         {
         }
+
         /// <summary> Initializes a new instance of PrivateLinkServiceConnectionState. </summary>
         /// <param name="status"> Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. </param>
         /// <param name="description"> The reason for approval/rejection of the connection. </param>
@@ -24,6 +25,7 @@ namespace Azure.Storage.Management.Models
             Description = description;
             ActionRequired = actionRequired;
         }
+
         /// <summary> Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. </summary>
         public PrivateEndpointServiceConnectionStatus? Status { get; set; }
         /// <summary> The reason for approval/rejection of the connection. </summary>

@@ -16,6 +16,7 @@ namespace Azure.Storage.Management.Models
         internal ListContainerItems()
         {
         }
+
         /// <summary> Initializes a new instance of ListContainerItems. </summary>
         /// <param name="value"> List of blobs containers returned. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of containers. Returned when total number of requested containers exceed maximum page size. </param>
@@ -24,6 +25,7 @@ namespace Azure.Storage.Management.Models
             Value = value;
             NextLink = nextLink;
         }
+
         /// <summary> List of blobs containers returned. </summary>
         public IList<ListContainerItem> Value { get; internal set; }
         /// <summary> Request URL that can be used to query next page of containers. Returned when total number of requested containers exceed maximum page size. </summary>

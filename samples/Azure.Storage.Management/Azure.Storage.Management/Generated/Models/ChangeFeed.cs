@@ -14,12 +14,14 @@ namespace Azure.Storage.Management.Models
         internal ChangeFeed()
         {
         }
+
         /// <summary> Initializes a new instance of ChangeFeed. </summary>
         /// <param name="enabled"> Indicates whether change feed event logging is enabled for the Blob service. </param>
         internal ChangeFeed(bool? enabled)
         {
             Enabled = enabled;
         }
+
         /// <summary> Indicates whether change feed event logging is enabled for the Blob service. </summary>
         public bool? Enabled { get; set; }
     }

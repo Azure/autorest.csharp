@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal DistanceScoringFunction()
         {
         }
+
         /// <summary> Initializes a new instance of DistanceScoringFunction. </summary>
         /// <param name="parameters"> Parameter values for the distance scoring function. </param>
         /// <param name="type"> . </param>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
         {
             Parameters = parameters;
         }
+
         /// <summary> Parameter values for the distance scoring function. </summary>
         public DistanceScoringParameters Parameters { get; set; } = new DistanceScoringParameters();
     }

@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal CheckNameAvailabilityResult()
         {
         }
+
         /// <summary> Initializes a new instance of CheckNameAvailabilityResult. </summary>
         /// <param name="nameAvailable"> Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used. </param>
         /// <param name="reason"> Gets the reason that a storage account name could not be used. The Reason element is only returned if NameAvailable is false. </param>
@@ -24,6 +25,7 @@ namespace Azure.Storage.Management.Models
             Reason = reason;
             Message = message;
         }
+
         /// <summary> Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used. </summary>
         public bool? NameAvailable { get; internal set; }
         /// <summary> Gets the reason that a storage account name could not be used. The Reason element is only returned if NameAvailable is false. </summary>

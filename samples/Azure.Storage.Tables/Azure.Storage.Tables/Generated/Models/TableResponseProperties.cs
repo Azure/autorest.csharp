@@ -14,6 +14,7 @@ namespace Azure.Storage.Tables.Models
         internal TableResponseProperties()
         {
         }
+
         /// <summary> Initializes a new instance of TableResponseProperties. </summary>
         /// <param name="tableName"> The name of the table. </param>
         /// <param name="odataType"> The odata type of the table. </param>
@@ -26,6 +27,7 @@ namespace Azure.Storage.Tables.Models
             OdataId = odataId;
             OdataEditLink = odataEditLink;
         }
+
         /// <summary> The name of the table. </summary>
         public string TableName { get; set; }
         /// <summary> The odata type of the table. </summary>

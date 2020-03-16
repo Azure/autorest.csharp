@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal MagnitudeScoringFunction()
         {
         }
+
         /// <summary> Initializes a new instance of MagnitudeScoringFunction. </summary>
         /// <param name="parameters"> Parameter values for the magnitude scoring function. </param>
         /// <param name="type"> . </param>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
         {
             Parameters = parameters;
         }
+
         /// <summary> Parameter values for the magnitude scoring function. </summary>
         public MagnitudeScoringParameters Parameters { get; set; } = new MagnitudeScoringParameters();
     }

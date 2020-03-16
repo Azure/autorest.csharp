@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal IndexingSchedule()
         {
         }
+
         /// <summary> Initializes a new instance of IndexingSchedule. </summary>
         /// <param name="interval"> The interval of time between indexer executions. </param>
         /// <param name="startTime"> The time when an indexer should start running. </param>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
             Interval = interval;
             StartTime = startTime;
         }
+
         /// <summary> The interval of time between indexer executions. </summary>
         public TimeSpan Interval { get; set; }
         /// <summary> The time when an indexer should start running. </summary>

@@ -16,6 +16,7 @@ namespace Azure.Storage.Management.Models
         internal ServiceSasParameters()
         {
         }
+
         /// <summary> Initializes a new instance of ServiceSasParameters. </summary>
         /// <param name="canonicalizedResource"> The canonical path to the signed resource. </param>
         /// <param name="resource"> The signed services accessible with the service SAS. Possible values include: Blob (b), Container (c), File (f), Share (s). </param>
@@ -56,6 +57,7 @@ namespace Azure.Storage.Management.Models
             ContentLanguage = contentLanguage;
             ContentType = contentType;
         }
+
         /// <summary> The canonical path to the signed resource. </summary>
         public string CanonicalizedResource { get; set; }
         /// <summary> The signed services accessible with the service SAS. Possible values include: Blob (b), Container (c), File (f), Share (s). </summary>

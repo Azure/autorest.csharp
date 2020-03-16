@@ -16,6 +16,7 @@ namespace Azure.Storage.Management.Models
         internal NetworkRuleSet()
         {
         }
+
         /// <summary> Initializes a new instance of NetworkRuleSet. </summary>
         /// <param name="bypass"> Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, &quot;Logging, Metrics&quot;), or None to bypass none of those traffics. </param>
         /// <param name="virtualNetworkRules"> Sets the virtual network rules. </param>
@@ -28,6 +29,7 @@ namespace Azure.Storage.Management.Models
             IpRules = ipRules;
             DefaultAction = defaultAction;
         }
+
         /// <summary> Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, &quot;Logging, Metrics&quot;), or None to bypass none of those traffics. </summary>
         public Bypass? Bypass { get; set; }
         /// <summary> Sets the virtual network rules. </summary>

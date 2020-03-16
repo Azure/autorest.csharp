@@ -16,6 +16,7 @@ namespace Azure.Storage.Management.Models
         internal TagProperty()
         {
         }
+
         /// <summary> Initializes a new instance of TagProperty. </summary>
         /// <param name="tag"> The tag value. </param>
         /// <param name="timestamp"> Returns the date and time the tag was added. </param>
@@ -30,6 +31,7 @@ namespace Azure.Storage.Management.Models
             TenantId = tenantId;
             Upn = upn;
         }
+
         /// <summary> The tag value. </summary>
         public string Tag { get; internal set; }
         /// <summary> Returns the date and time the tag was added. </summary>

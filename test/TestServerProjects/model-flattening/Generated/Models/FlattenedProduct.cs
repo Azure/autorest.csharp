@@ -16,6 +16,7 @@ namespace model_flattening.Models
         internal FlattenedProduct()
         {
         }
+
         /// <summary> Initializes a new instance of FlattenedProduct. </summary>
         /// <param name="pName"> . </param>
         /// <param name="typePropertiesType"> . </param>
@@ -33,6 +34,7 @@ namespace model_flattening.Models
             ProvisioningStateValues = provisioningStateValues;
             ProvisioningState = provisioningState;
         }
+
         public string PName { get; set; }
         public string TypePropertiesType { get; set; }
         public FlattenedProductPropertiesProvisioningStateValues? ProvisioningStateValues { get; internal set; }

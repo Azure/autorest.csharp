@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal Indexer()
         {
         }
+
         /// <summary> Initializes a new instance of Indexer. </summary>
         /// <param name="name"> The name of the indexer. </param>
         /// <param name="description"> The description of the indexer. </param>
@@ -42,6 +43,7 @@ namespace CognitiveSearch.Models
             IsDisabled = isDisabled;
             ETag = eTag;
         }
+
         /// <summary> The name of the indexer. </summary>
         public string Name { get; set; }
         /// <summary> The description of the indexer. </summary>

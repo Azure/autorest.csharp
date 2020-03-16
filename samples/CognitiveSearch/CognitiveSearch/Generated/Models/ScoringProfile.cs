@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal ScoringProfile()
         {
         }
+
         /// <summary> Initializes a new instance of ScoringProfile. </summary>
         /// <param name="name"> The name of the scoring profile. </param>
         /// <param name="textWeights"> Parameters that boost scoring based on text matches in certain index fields. </param>
@@ -28,6 +29,7 @@ namespace CognitiveSearch.Models
             Functions = functions;
             FunctionAggregation = functionAggregation;
         }
+
         /// <summary> The name of the scoring profile. </summary>
         public string Name { get; set; }
         /// <summary> Parameters that boost scoring based on text matches in certain index fields. </summary>

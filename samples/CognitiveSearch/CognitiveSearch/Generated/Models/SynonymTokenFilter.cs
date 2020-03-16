@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal SynonymTokenFilter()
         {
         }
+
         /// <summary> Initializes a new instance of SynonymTokenFilter. </summary>
         /// <param name="synonyms"> A list of synonyms in following one of two formats: 1. incredible, unbelievable, fabulous =&gt; amazing - all terms on the left side of =&gt; symbol will be replaced with all terms on its right side; 2. incredible, unbelievable, fabulous, amazing - comma separated list of equivalent words. Set the expand option to change how this list is interpreted. </param>
         /// <param name="ignoreCase"> A value indicating whether to case-fold input for matching. Default is false. </param>
@@ -28,6 +29,7 @@ namespace CognitiveSearch.Models
             IgnoreCase = ignoreCase;
             Expand = expand;
         }
+
         /// <summary> A list of synonyms in following one of two formats: 1. incredible, unbelievable, fabulous =&gt; amazing - all terms on the left side of =&gt; symbol will be replaced with all terms on its right side; 2. incredible, unbelievable, fabulous, amazing - comma separated list of equivalent words. Set the expand option to change how this list is interpreted. </summary>
         public IList<string> Synonyms { get; set; } = new List<string>();
         /// <summary> A value indicating whether to case-fold input for matching. Default is false. </summary>

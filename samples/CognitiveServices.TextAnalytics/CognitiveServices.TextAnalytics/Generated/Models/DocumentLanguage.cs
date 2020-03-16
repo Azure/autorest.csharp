@@ -16,6 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal DocumentLanguage()
         {
         }
+
         /// <summary> Initializes a new instance of DocumentLanguage. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="detectedLanguages"> A list of extracted languages. </param>
@@ -26,6 +27,7 @@ namespace CognitiveServices.TextAnalytics.Models
             DetectedLanguages = detectedLanguages;
             Statistics = statistics;
         }
+
         /// <summary> Unique, non-empty document identifier. </summary>
         public string Id { get; set; }
         /// <summary> A list of extracted languages. </summary>

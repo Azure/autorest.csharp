@@ -16,6 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal DocumentEntities()
         {
         }
+
         /// <summary> Initializes a new instance of DocumentEntities. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="entities"> Recognized entities in the document. </param>
@@ -26,6 +27,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Entities = entities;
             Statistics = statistics;
         }
+
         /// <summary> Unique, non-empty document identifier. </summary>
         public string Id { get; set; }
         /// <summary> Recognized entities in the document. </summary>

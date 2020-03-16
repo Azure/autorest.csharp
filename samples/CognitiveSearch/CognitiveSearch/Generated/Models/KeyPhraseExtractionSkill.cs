@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal KeyPhraseExtractionSkill()
         {
         }
+
         /// <summary> Initializes a new instance of KeyPhraseExtractionSkill. </summary>
         /// <param name="defaultLanguageCode"> A value indicating which language code to use. Default is en. </param>
         /// <param name="maxKeyPhraseCount"> A number indicating how many key phrases to return. If absent, all identified key phrases will be returned. </param>
@@ -30,6 +31,7 @@ namespace CognitiveSearch.Models
             DefaultLanguageCode = defaultLanguageCode;
             MaxKeyPhraseCount = maxKeyPhraseCount;
         }
+
         /// <summary> A value indicating which language code to use. Default is en. </summary>
         public KeyPhraseExtractionSkillLanguage? DefaultLanguageCode { get; set; }
         /// <summary> A number indicating how many key phrases to return. If absent, all identified key phrases will be returned. </summary>

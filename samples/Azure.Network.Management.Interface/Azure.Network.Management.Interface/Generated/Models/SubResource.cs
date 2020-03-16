@@ -14,12 +14,14 @@ namespace Azure.Network.Management.Interface.Models
         internal SubResource()
         {
         }
+
         /// <summary> Initializes a new instance of SubResource. </summary>
         /// <param name="id"> Resource ID. </param>
         internal SubResource(string id)
         {
             Id = id;
         }
+
         /// <summary> Resource ID. </summary>
         public string Id { get; set; }
     }

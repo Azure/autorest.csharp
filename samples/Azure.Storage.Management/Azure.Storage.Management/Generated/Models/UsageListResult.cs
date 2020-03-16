@@ -16,12 +16,14 @@ namespace Azure.Storage.Management.Models
         internal UsageListResult()
         {
         }
+
         /// <summary> Initializes a new instance of UsageListResult. </summary>
         /// <param name="value"> Gets or sets the list of Storage Resource Usages. </param>
         internal UsageListResult(IList<Usage> value)
         {
             Value = value;
         }
+
         /// <summary> Gets or sets the list of Storage Resource Usages. </summary>
         public IList<Usage> Value { get; set; }
     }

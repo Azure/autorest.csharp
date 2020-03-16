@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal SuggestRequest()
         {
         }
+
         /// <summary> Initializes a new instance of SuggestRequest. </summary>
         /// <param name="filter"> An OData expression that filters the documents considered for suggestions. </param>
         /// <param name="useFuzzyMatching"> A value indicating whether to use fuzzy matching for the suggestion query. Default is false. When set to true, the query will find suggestions even if there&apos;s a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy suggestion searches are slower and consume more resources. </param>
@@ -40,6 +41,7 @@ namespace CognitiveSearch.Models
             SuggesterName = suggesterName;
             Top = top;
         }
+
         /// <summary> An OData expression that filters the documents considered for suggestions. </summary>
         public string Filter { get; set; }
         /// <summary> A value indicating whether to use fuzzy matching for the suggestion query. Default is false. When set to true, the query will find suggestions even if there&apos;s a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy suggestion searches are slower and consume more resources. </summary>

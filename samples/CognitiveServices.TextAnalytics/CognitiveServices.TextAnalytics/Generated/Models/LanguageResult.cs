@@ -16,6 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal LanguageResult()
         {
         }
+
         /// <summary> Initializes a new instance of LanguageResult. </summary>
         /// <param name="documents"> Response by document. </param>
         /// <param name="errors"> Errors by document id. </param>
@@ -28,6 +29,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Statistics = statistics;
             ModelVersion = modelVersion;
         }
+
         /// <summary> Response by document. </summary>
         public IList<DocumentLanguage> Documents { get; set; } = new List<DocumentLanguage>();
         /// <summary> Errors by document id. </summary>

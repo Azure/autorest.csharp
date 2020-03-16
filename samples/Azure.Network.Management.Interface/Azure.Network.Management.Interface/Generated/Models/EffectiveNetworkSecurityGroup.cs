@@ -16,6 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         internal EffectiveNetworkSecurityGroup()
         {
         }
+
         /// <summary> Initializes a new instance of EffectiveNetworkSecurityGroup. </summary>
         /// <param name="networkSecurityGroup"> The ID of network security group that is applied. </param>
         /// <param name="association"> Associated resources. </param>
@@ -28,6 +29,7 @@ namespace Azure.Network.Management.Interface.Models
             EffectiveSecurityRules = effectiveSecurityRules;
             TagMap = tagMap;
         }
+
         /// <summary> The ID of network security group that is applied. </summary>
         public SubResource NetworkSecurityGroup { get; set; }
         /// <summary> Associated resources. </summary>

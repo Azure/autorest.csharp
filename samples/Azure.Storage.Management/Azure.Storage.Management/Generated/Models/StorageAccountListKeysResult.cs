@@ -16,12 +16,14 @@ namespace Azure.Storage.Management.Models
         internal StorageAccountListKeysResult()
         {
         }
+
         /// <summary> Initializes a new instance of StorageAccountListKeysResult. </summary>
         /// <param name="keys"> Gets the list of storage account keys and their properties for the specified storage account. </param>
         internal StorageAccountListKeysResult(IList<StorageAccountKey> keys)
         {
             Keys = keys;
         }
+
         /// <summary> Gets the list of storage account keys and their properties for the specified storage account. </summary>
         public IList<StorageAccountKey> Keys { get; internal set; }
     }

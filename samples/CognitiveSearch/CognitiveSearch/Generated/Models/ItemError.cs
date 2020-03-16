@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal ItemError()
         {
         }
+
         /// <summary> Initializes a new instance of ItemError. </summary>
         /// <param name="key"> The key of the item for which indexing failed. </param>
         /// <param name="errorMessage"> The message describing the error that occurred while processing the item. </param>
@@ -30,6 +31,7 @@ namespace CognitiveSearch.Models
             Details = details;
             DocumentationLink = documentationLink;
         }
+
         /// <summary> The key of the item for which indexing failed. </summary>
         public string Key { get; internal set; }
         /// <summary> The message describing the error that occurred while processing the item. </summary>

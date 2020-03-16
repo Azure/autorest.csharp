@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal PhoneticTokenFilter()
         {
         }
+
         /// <summary> Initializes a new instance of PhoneticTokenFilter. </summary>
         /// <param name="encoder"> The phonetic encoder to use. Default is &quot;metaphone&quot;. </param>
         /// <param name="replaceOriginalTokens"> A value indicating whether encoded tokens should replace original tokens. If false, encoded tokens are added as synonyms. Default is true. </param>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
             Encoder = encoder;
             ReplaceOriginalTokens = replaceOriginalTokens;
         }
+
         /// <summary> The phonetic encoder to use. Default is &quot;metaphone&quot;. </summary>
         public PhoneticEncoder? Encoder { get; set; }
         /// <summary> A value indicating whether encoded tokens should replace original tokens. If false, encoded tokens are added as synonyms. Default is true. </summary>

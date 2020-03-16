@@ -17,6 +17,7 @@ namespace AppConfiguration.Models
         internal KeyValue()
         {
         }
+
         /// <summary> Initializes a new instance of KeyValue. </summary>
         /// <param name="key"> . </param>
         /// <param name="label"> . </param>
@@ -37,6 +38,7 @@ namespace AppConfiguration.Models
             Locked = locked;
             Etag = etag;
         }
+
         public string Key { get; set; }
         public string Label { get; set; }
         public string ContentType { get; set; }

@@ -14,6 +14,7 @@ namespace additionalProperties.Models
         internal CatAPTrue()
         {
         }
+
         /// <summary> Initializes a new instance of CatAPTrue. </summary>
         /// <param name="friendly"> . </param>
         /// <param name="id"> . </param>
@@ -23,6 +24,7 @@ namespace additionalProperties.Models
         {
             Friendly = friendly;
         }
+
         public bool? Friendly { get; set; }
     }
 }

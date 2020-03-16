@@ -20,8 +20,8 @@ namespace AutoRest.CSharp.V3.Input.Source
             SchemaName = schemaName;
             ExistingType = existingType;
             PropertyMappings = propertyMappings;
-            // Find a parameterless ctor
-            DefaultConstructor = existingType.Constructors.SingleOrDefault(c => !c.IsStatic && c.Parameters.IsEmpty);
+            // Find a parameterless ctor that's not auto-generated
+            DefaultConstructor = existingType.Constructors.SingleOrDefault(c => !c.IsStatic && c.Parameters.IsEmpty && c.DeclaringSyntaxReferences.Any());
         }
 
         public SourceMemberMapping? GetMemberForSchema(string name)

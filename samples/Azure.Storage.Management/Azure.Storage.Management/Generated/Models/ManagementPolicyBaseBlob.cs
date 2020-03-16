@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal ManagementPolicyBaseBlob()
         {
         }
+
         /// <summary> Initializes a new instance of ManagementPolicyBaseBlob. </summary>
         /// <param name="tierToCool"> The function to tier blobs to cool storage. Support blobs currently at Hot tier. </param>
         /// <param name="tierToArchive"> The function to tier blobs to archive storage. Support blobs currently at Hot or Cool tier. </param>
@@ -24,6 +25,7 @@ namespace Azure.Storage.Management.Models
             TierToArchive = tierToArchive;
             Delete = delete;
         }
+
         /// <summary> The function to tier blobs to cool storage. Support blobs currently at Hot tier. </summary>
         public DateAfterModification TierToCool { get; set; }
         /// <summary> The function to tier blobs to archive storage. Support blobs currently at Hot or Cool tier. </summary>

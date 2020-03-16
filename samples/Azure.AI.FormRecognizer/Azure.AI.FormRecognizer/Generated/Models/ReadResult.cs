@@ -16,6 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
         internal ReadResult()
         {
         }
+
         /// <summary> Initializes a new instance of ReadResult. </summary>
         /// <param name="page"> The 1-based page number in the input document. </param>
         /// <param name="angle"> The general orientation of the text in clockwise direction, measured in degrees between (-180, 180]. </param>
@@ -34,6 +35,7 @@ namespace Azure.AI.FormRecognizer.Models
             Language = language;
             Lines = lines;
         }
+
         /// <summary> The 1-based page number in the input document. </summary>
         public int Page { get; set; }
         /// <summary> The general orientation of the text in clockwise direction, measured in degrees between (-180, 180]. </summary>

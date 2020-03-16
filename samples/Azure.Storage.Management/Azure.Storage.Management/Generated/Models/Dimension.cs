@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal Dimension()
         {
         }
+
         /// <summary> Initializes a new instance of Dimension. </summary>
         /// <param name="name"> Display name of dimension. </param>
         /// <param name="displayName"> Display name of dimension. </param>
@@ -22,6 +23,7 @@ namespace Azure.Storage.Management.Models
             Name = name;
             DisplayName = displayName;
         }
+
         /// <summary> Display name of dimension. </summary>
         public string Name { get; set; }
         /// <summary> Display name of dimension. </summary>

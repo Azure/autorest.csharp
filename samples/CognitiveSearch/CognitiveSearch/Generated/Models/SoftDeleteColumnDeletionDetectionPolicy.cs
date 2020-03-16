@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal SoftDeleteColumnDeletionDetectionPolicy()
         {
         }
+
         /// <summary> Initializes a new instance of SoftDeleteColumnDeletionDetectionPolicy. </summary>
         /// <param name="softDeleteColumnName"> The name of the column to use for soft-deletion detection. </param>
         /// <param name="softDeleteMarkerValue"> The marker value that identifies an item as deleted. </param>
@@ -23,6 +24,7 @@ namespace CognitiveSearch.Models
             SoftDeleteColumnName = softDeleteColumnName;
             SoftDeleteMarkerValue = softDeleteMarkerValue;
         }
+
         /// <summary> The name of the column to use for soft-deletion detection. </summary>
         public string SoftDeleteColumnName { get; set; }
         /// <summary> The marker value that identifies an item as deleted. </summary>

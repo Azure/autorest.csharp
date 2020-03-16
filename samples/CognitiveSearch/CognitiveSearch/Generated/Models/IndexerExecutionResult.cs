@@ -17,6 +17,7 @@ namespace CognitiveSearch.Models
         internal IndexerExecutionResult()
         {
         }
+
         /// <summary> Initializes a new instance of IndexerExecutionResult. </summary>
         /// <param name="status"> The outcome of this indexer execution. </param>
         /// <param name="errorMessage"> The error message indicating the top-level error, if any. </param>
@@ -41,6 +42,7 @@ namespace CognitiveSearch.Models
             InitialTrackingState = initialTrackingState;
             FinalTrackingState = finalTrackingState;
         }
+
         /// <summary> The outcome of this indexer execution. </summary>
         public IndexerExecutionStatus? Status { get; internal set; }
         /// <summary> The error message indicating the top-level error, if any. </summary>

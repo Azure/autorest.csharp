@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal BlobRestoreStatus()
         {
         }
+
         /// <summary> Initializes a new instance of BlobRestoreStatus. </summary>
         /// <param name="status"> The status of blob restore progress. Possible values are: - InProgress: Indicates that blob restore is ongoing. - Complete: Indicates that blob restore has been completed successfully. - Failed: Indicates that blob restore is failed. </param>
         /// <param name="failureReason"> Failure reason when blob restore is failed. </param>
@@ -26,6 +27,7 @@ namespace Azure.Storage.Management.Models
             RestoreId = restoreId;
             Parameters = parameters;
         }
+
         /// <summary> The status of blob restore progress. Possible values are: - InProgress: Indicates that blob restore is ongoing. - Complete: Indicates that blob restore has been completed successfully. - Failed: Indicates that blob restore is failed. </summary>
         public BlobRestoreProgressStatus? Status { get; internal set; }
         /// <summary> Failure reason when blob restore is failed. </summary>

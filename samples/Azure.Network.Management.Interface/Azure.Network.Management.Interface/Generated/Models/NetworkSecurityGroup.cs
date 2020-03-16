@@ -16,6 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         internal NetworkSecurityGroup()
         {
         }
+
         /// <summary> Initializes a new instance of NetworkSecurityGroup. </summary>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="securityRules"> A collection of security rules of the network security group. </param>
@@ -39,6 +40,7 @@ namespace Azure.Network.Management.Interface.Models
             ResourceGuid = resourceGuid;
             ProvisioningState = provisioningState;
         }
+
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
         public string Etag { get; internal set; }
         /// <summary> A collection of security rules of the network security group. </summary>

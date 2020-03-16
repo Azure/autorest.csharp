@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal ItemWarning()
         {
         }
+
         /// <summary> Initializes a new instance of ItemWarning. </summary>
         /// <param name="key"> The key of the item which generated a warning. </param>
         /// <param name="message"> The message describing the warning that occurred while processing the item. </param>
@@ -28,6 +29,7 @@ namespace CognitiveSearch.Models
             Details = details;
             DocumentationLink = documentationLink;
         }
+
         /// <summary> The key of the item which generated a warning. </summary>
         public string Key { get; internal set; }
         /// <summary> The message describing the warning that occurred while processing the item. </summary>

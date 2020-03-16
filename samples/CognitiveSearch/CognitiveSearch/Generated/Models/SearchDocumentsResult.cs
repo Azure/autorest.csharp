@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal SearchDocumentsResult()
         {
         }
+
         /// <summary> Initializes a new instance of SearchDocumentsResult. </summary>
         /// <param name="count"> The total count of results found by the search operation, or null if the count was not requested. If present, the count may be greater than the number of results in this response. This can happen if you use the $top or $skip parameters, or if Azure Cognitive Search can&apos;t return all the requested documents in a single Search response. </param>
         /// <param name="coverage"> A value indicating the percentage of the index that was included in the query, or null if minimumCoverage was not specified in the request. </param>
@@ -32,6 +33,7 @@ namespace CognitiveSearch.Models
             Results = results;
             NextLink = nextLink;
         }
+
         /// <summary> The total count of results found by the search operation, or null if the count was not requested. If present, the count may be greater than the number of results in this response. This can happen if you use the $top or $skip parameters, or if Azure Cognitive Search can&apos;t return all the requested documents in a single Search response. </summary>
         public long? Count { get; internal set; }
         /// <summary> A value indicating the percentage of the index that was included in the query, or null if minimumCoverage was not specified in the request. </summary>

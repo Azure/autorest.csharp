@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal ImageAnalysisSkill()
         {
         }
+
         /// <summary> Initializes a new instance of ImageAnalysisSkill. </summary>
         /// <param name="defaultLanguageCode"> A value indicating which language code to use. Default is en. </param>
         /// <param name="visualFeatures"> A list of visual features. </param>
@@ -32,6 +33,7 @@ namespace CognitiveSearch.Models
             VisualFeatures = visualFeatures;
             Details = details;
         }
+
         /// <summary> A value indicating which language code to use. Default is en. </summary>
         public ImageAnalysisSkillLanguage? DefaultLanguageCode { get; set; }
         /// <summary> A list of visual features. </summary>

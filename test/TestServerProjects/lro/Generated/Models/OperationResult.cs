@@ -14,6 +14,7 @@ namespace lro.Models
         internal OperationResult()
         {
         }
+
         /// <summary> Initializes a new instance of OperationResult. </summary>
         /// <param name="status"> The status of the request. </param>
         /// <param name="error"> . </param>
@@ -22,6 +23,7 @@ namespace lro.Models
             Status = status;
             Error = error;
         }
+
         /// <summary> The status of the request. </summary>
         public OperationResultStatus? Status { get; set; }
         public OperationResultError Error { get; set; }

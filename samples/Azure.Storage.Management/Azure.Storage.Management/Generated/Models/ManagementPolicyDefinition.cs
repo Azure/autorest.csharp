@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal ManagementPolicyDefinition()
         {
         }
+
         /// <summary> Initializes a new instance of ManagementPolicyDefinition. </summary>
         /// <param name="actions"> An object that defines the action set. </param>
         /// <param name="filters"> An object that defines the filter set. </param>
@@ -22,6 +23,7 @@ namespace Azure.Storage.Management.Models
             Actions = actions;
             Filters = filters;
         }
+
         /// <summary> An object that defines the action set. </summary>
         public ManagementPolicyAction Actions { get; set; } = new ManagementPolicyAction();
         /// <summary> An object that defines the filter set. </summary>

@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal IndexerExecutionInfo()
         {
         }
+
         /// <summary> Initializes a new instance of IndexerExecutionInfo. </summary>
         /// <param name="status"> Overall indexer status. </param>
         /// <param name="lastResult"> The result of the most recent or an in-progress indexer execution. </param>
@@ -28,6 +29,7 @@ namespace CognitiveSearch.Models
             ExecutionHistory = executionHistory;
             Limits = limits;
         }
+
         /// <summary> Overall indexer status. </summary>
         public IndexerStatus? Status { get; internal set; }
         /// <summary> The result of the most recent or an in-progress indexer execution. </summary>

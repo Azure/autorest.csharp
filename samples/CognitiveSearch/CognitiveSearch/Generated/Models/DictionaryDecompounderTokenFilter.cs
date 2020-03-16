@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal DictionaryDecompounderTokenFilter()
         {
         }
+
         /// <summary> Initializes a new instance of DictionaryDecompounderTokenFilter. </summary>
         /// <param name="wordList"> The list of words to match against. </param>
         /// <param name="minWordSize"> The minimum word size. Only words longer than this get processed. Default is 5. Maximum is 300. </param>
@@ -32,6 +33,7 @@ namespace CognitiveSearch.Models
             MaxSubwordSize = maxSubwordSize;
             OnlyLongestMatch = onlyLongestMatch;
         }
+
         /// <summary> The list of words to match against. </summary>
         public IList<string> WordList { get; set; } = new List<string>();
         /// <summary> The minimum word size. Only words longer than this get processed. Default is 5. Maximum is 300. </summary>

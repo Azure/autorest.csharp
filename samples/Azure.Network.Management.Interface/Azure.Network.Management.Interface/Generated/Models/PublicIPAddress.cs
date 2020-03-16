@@ -16,6 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         internal PublicIPAddress()
         {
         }
+
         /// <summary> Initializes a new instance of PublicIPAddress. </summary>
         /// <param name="sku"> The public IP address SKU. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -53,6 +54,7 @@ namespace Azure.Network.Management.Interface.Models
             ResourceGuid = resourceGuid;
             ProvisioningState = provisioningState;
         }
+
         /// <summary> The public IP address SKU. </summary>
         public PublicIPAddressSku Sku { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>

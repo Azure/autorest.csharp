@@ -14,6 +14,7 @@ namespace httpInfrastructure.Models
         internal B()
         {
         }
+
         /// <summary> Initializes a new instance of B. </summary>
         /// <param name="textStatusCode"> . </param>
         /// <param name="statusCode"> . </param>
@@ -21,6 +22,7 @@ namespace httpInfrastructure.Models
         {
             TextStatusCode = textStatusCode;
         }
+
         public string TextStatusCode { get; set; }
     }
 }

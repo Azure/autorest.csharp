@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal CustomDomain()
         {
         }
+
         /// <summary> Initializes a new instance of CustomDomain. </summary>
         /// <param name="name"> Gets or sets the custom domain name assigned to the storage account. Name is the CNAME source. </param>
         /// <param name="useSubDomainName"> Indicates whether indirect CName validation is enabled. Default value is false. This should only be set on updates. </param>
@@ -22,6 +23,7 @@ namespace Azure.Storage.Management.Models
             Name = name;
             UseSubDomainName = useSubDomainName;
         }
+
         /// <summary> Gets or sets the custom domain name assigned to the storage account. Name is the CNAME source. </summary>
         public string Name { get; set; }
         /// <summary> Indicates whether indirect CName validation is enabled. Default value is false. This should only be set on updates. </summary>

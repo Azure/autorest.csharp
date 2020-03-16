@@ -14,6 +14,7 @@ namespace xml_service.Models
         internal ListBlobsResponse()
         {
         }
+
         /// <summary> Initializes a new instance of ListBlobsResponse. </summary>
         /// <param name="serviceEndpoint"> . </param>
         /// <param name="containerName"> . </param>
@@ -34,6 +35,7 @@ namespace xml_service.Models
             Blobs = blobs;
             NextMarker = nextMarker;
         }
+
         public string ServiceEndpoint { get; set; }
         public string ContainerName { get; set; }
         public string Prefix { get; set; }

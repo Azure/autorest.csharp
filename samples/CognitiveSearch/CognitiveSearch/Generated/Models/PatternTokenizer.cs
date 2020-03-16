@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal PatternTokenizer()
         {
         }
+
         /// <summary> Initializes a new instance of PatternTokenizer. </summary>
         /// <param name="pattern"> A regular expression pattern to match token separators. Default is an expression that matches one or more whitespace characters. </param>
         /// <param name="flags"> Regular expression flags. </param>
@@ -26,6 +27,7 @@ namespace CognitiveSearch.Models
             Flags = flags;
             Group = group;
         }
+
         /// <summary> A regular expression pattern to match token separators. Default is an expression that matches one or more whitespace characters. </summary>
         public string Pattern { get; set; }
         /// <summary> Regular expression flags. </summary>

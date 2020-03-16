@@ -16,6 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         internal Probe()
         {
         }
+
         /// <summary> Initializes a new instance of Probe. </summary>
         /// <param name="name"> The name of the resource that is unique within the set of probes used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -41,6 +42,7 @@ namespace Azure.Network.Management.Interface.Models
             RequestPath = requestPath;
             ProvisioningState = provisioningState;
         }
+
         /// <summary> The name of the resource that is unique within the set of probes used by the load balancer. This name can be used to access the resource. </summary>
         public string Name { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>

@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal UniqueTokenFilter()
         {
         }
+
         /// <summary> Initializes a new instance of UniqueTokenFilter. </summary>
         /// <param name="onlyOnSamePosition"> A value indicating whether to remove duplicates only at the same position. Default is false. </param>
         /// <param name="odataType"> . </param>
@@ -22,6 +23,7 @@ namespace CognitiveSearch.Models
         {
             OnlyOnSamePosition = onlyOnSamePosition;
         }
+
         /// <summary> A value indicating whether to remove duplicates only at the same position. Default is false. </summary>
         public bool? OnlyOnSamePosition { get; set; }
     }

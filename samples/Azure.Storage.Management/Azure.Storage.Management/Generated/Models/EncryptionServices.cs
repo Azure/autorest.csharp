@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal EncryptionServices()
         {
         }
+
         /// <summary> Initializes a new instance of EncryptionServices. </summary>
         /// <param name="blob"> The encryption function of the blob storage service. </param>
         /// <param name="file"> The encryption function of the file storage service. </param>
@@ -26,6 +27,7 @@ namespace Azure.Storage.Management.Models
             Table = table;
             Queue = queue;
         }
+
         /// <summary> The encryption function of the blob storage service. </summary>
         public EncryptionService Blob { get; set; }
         /// <summary> The encryption function of the file storage service. </summary>

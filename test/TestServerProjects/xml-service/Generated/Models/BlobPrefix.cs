@@ -14,12 +14,14 @@ namespace xml_service.Models
         internal BlobPrefix()
         {
         }
+
         /// <summary> Initializes a new instance of BlobPrefix. </summary>
         /// <param name="name"> . </param>
         internal BlobPrefix(string name)
         {
             Name = name;
         }
+
         public string Name { get; set; }
     }
 }

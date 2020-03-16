@@ -16,6 +16,7 @@ namespace validation.Models
         internal Product()
         {
         }
+
         /// <summary> Initializes a new instance of Product. </summary>
         /// <param name="displayNames"> Non required array of unique items from 0 to 6 elements. </param>
         /// <param name="capacity"> Non required int betwen 0 and 100 exclusive. </param>
@@ -36,6 +37,7 @@ namespace validation.Models
             ConstString = constString;
             ConstStringAsEnum = constStringAsEnum;
         }
+
         /// <summary> Non required array of unique items from 0 to 6 elements. </summary>
         public IList<string> DisplayNames { get; set; }
         /// <summary> Non required int betwen 0 and 100 exclusive. </summary>

@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal StopAnalyzer()
         {
         }
+
         /// <summary> Initializes a new instance of StopAnalyzer. </summary>
         /// <param name="stopwords"> A list of stopwords. </param>
         /// <param name="odataType"> . </param>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
         {
             Stopwords = stopwords;
         }
+
         /// <summary> A list of stopwords. </summary>
         public IList<string> Stopwords { get; set; }
     }

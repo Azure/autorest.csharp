@@ -16,12 +16,14 @@ namespace Azure.Network.Management.Interface.Models
         internal TagsObject()
         {
         }
+
         /// <summary> Initializes a new instance of TagsObject. </summary>
         /// <param name="tags"> Resource tags. </param>
         internal TagsObject(IDictionary<string, string> tags)
         {
             Tags = tags;
         }
+
         /// <summary> Resource tags. </summary>
         public IDictionary<string, string> Tags { get; set; }
     }

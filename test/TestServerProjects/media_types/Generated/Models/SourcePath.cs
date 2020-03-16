@@ -14,12 +14,14 @@ namespace media_types.Models
         internal SourcePath()
         {
         }
+
         /// <summary> Initializes a new instance of SourcePath. </summary>
         /// <param name="source"> File source path. </param>
         internal SourcePath(string source)
         {
             Source = source;
         }
+
         /// <summary> File source path. </summary>
         public string Source { get; set; }
     }

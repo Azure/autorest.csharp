@@ -16,6 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
         internal ModelsSummary()
         {
         }
+
         /// <summary> Initializes a new instance of ModelsSummary. </summary>
         /// <param name="count"> Current count of trained custom models. </param>
         /// <param name="limit"> Max number of models that can be trained for this subscription. </param>
@@ -26,6 +27,7 @@ namespace Azure.AI.FormRecognizer.Models
             Limit = limit;
             LastUpdatedDateTime = lastUpdatedDateTime;
         }
+
         /// <summary> Current count of trained custom models. </summary>
         public int Count { get; set; }
         /// <summary> Max number of models that can be trained for this subscription. </summary>

@@ -16,6 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal DocumentKeyPhrases()
         {
         }
+
         /// <summary> Initializes a new instance of DocumentKeyPhrases. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="keyPhrases"> A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document. </param>
@@ -26,6 +27,7 @@ namespace CognitiveServices.TextAnalytics.Models
             KeyPhrases = keyPhrases;
             Statistics = statistics;
         }
+
         /// <summary> Unique, non-empty document identifier. </summary>
         public string Id { get; set; }
         /// <summary> A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document. </summary>

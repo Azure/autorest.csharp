@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal VirtualNetworkRule()
         {
         }
+
         /// <summary> Initializes a new instance of VirtualNetworkRule. </summary>
         /// <param name="virtualNetworkResourceId"> Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}. </param>
         /// <param name="action"> The action of virtual network rule. </param>
@@ -24,6 +25,7 @@ namespace Azure.Storage.Management.Models
             Action = action;
             State = state;
         }
+
         /// <summary> Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}. </summary>
         public string VirtualNetworkResourceId { get; set; }
         /// <summary> The action of virtual network rule. </summary>

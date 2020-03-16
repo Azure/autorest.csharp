@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal HighWaterMarkChangeDetectionPolicy()
         {
         }
+
         /// <summary> Initializes a new instance of HighWaterMarkChangeDetectionPolicy. </summary>
         /// <param name="highWaterMarkColumnName"> The name of the high water mark column. </param>
         /// <param name="odataType"> . </param>
@@ -21,6 +22,7 @@ namespace CognitiveSearch.Models
         {
             HighWaterMarkColumnName = highWaterMarkColumnName;
         }
+
         /// <summary> The name of the high water mark column. </summary>
         public string HighWaterMarkColumnName { get; set; }
     }

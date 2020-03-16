@@ -14,6 +14,7 @@ namespace lro.Models
         internal OperationResultError()
         {
         }
+
         /// <summary> Initializes a new instance of OperationResultError. </summary>
         /// <param name="code"> The error code for an operation failure. </param>
         /// <param name="message"> The detailed arror message. </param>
@@ -22,6 +23,7 @@ namespace lro.Models
             Code = code;
             Message = message;
         }
+
         /// <summary> The error code for an operation failure. </summary>
         public int? Code { get; set; }
         /// <summary> The detailed arror message. </summary>

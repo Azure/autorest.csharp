@@ -14,6 +14,7 @@ namespace body_complex.Models
         internal Basic()
         {
         }
+
         /// <summary> Initializes a new instance of Basic. </summary>
         /// <param name="id"> Basic Id. </param>
         /// <param name="name"> Name property with a very long description that does not fit on a single line and a line break. </param>
@@ -24,6 +25,7 @@ namespace body_complex.Models
             Name = name;
             Color = color;
         }
+
         /// <summary> Basic Id. </summary>
         public int? Id { get; set; }
         /// <summary> Name property with a very long description that does not fit on a single line and a line break. </summary>

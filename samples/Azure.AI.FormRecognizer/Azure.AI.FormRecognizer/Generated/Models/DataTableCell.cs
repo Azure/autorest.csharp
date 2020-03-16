@@ -16,6 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
         internal DataTableCell()
         {
         }
+
         /// <summary> Initializes a new instance of DataTableCell. </summary>
         /// <param name="rowIndex"> Row index of the cell. </param>
         /// <param name="columnIndex"> Column index of the cell. </param>
@@ -40,6 +41,7 @@ namespace Azure.AI.FormRecognizer.Models
             IsHeader = isHeader;
             IsFooter = isFooter;
         }
+
         /// <summary> Row index of the cell. </summary>
         public int RowIndex { get; set; }
         /// <summary> Column index of the cell. </summary>

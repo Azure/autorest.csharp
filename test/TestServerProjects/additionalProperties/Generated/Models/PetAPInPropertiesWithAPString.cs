@@ -17,6 +17,7 @@ namespace additionalProperties.Models
         internal PetAPInPropertiesWithAPString()
         {
         }
+
         /// <summary> Initializes a new instance of PetAPInPropertiesWithAPString. </summary>
         /// <param name="id"> . </param>
         /// <param name="name"> . </param>
@@ -31,6 +32,7 @@ namespace additionalProperties.Models
             OdataLocation = odataLocation;
             AdditionalProperties = additionalProperties;
         }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public bool? Status { get; internal set; }

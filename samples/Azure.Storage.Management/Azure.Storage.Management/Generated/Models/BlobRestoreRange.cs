@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal BlobRestoreRange()
         {
         }
+
         /// <summary> Initializes a new instance of BlobRestoreRange. </summary>
         /// <param name="startRange"> Blob start range. Empty means account start. </param>
         /// <param name="endRange"> Blob end range. Empty means account end. </param>
@@ -22,6 +23,7 @@ namespace Azure.Storage.Management.Models
             StartRange = startRange;
             EndRange = endRange;
         }
+
         /// <summary> Blob start range. Empty means account start. </summary>
         public string StartRange { get; set; }
         /// <summary> Blob end range. Empty means account end. </summary>

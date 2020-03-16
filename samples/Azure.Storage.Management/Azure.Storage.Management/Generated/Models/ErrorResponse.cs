@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal ErrorResponse()
         {
         }
+
         /// <summary> Initializes a new instance of ErrorResponse. </summary>
         /// <param name="code"> An identifier for the error. Codes are invariant and are intended to be consumed programmatically. </param>
         /// <param name="message"> A message describing the error, intended to be suitable for display in a user interface. </param>
@@ -22,6 +23,7 @@ namespace Azure.Storage.Management.Models
             Code = code;
             Message = message;
         }
+
         /// <summary> An identifier for the error. Codes are invariant and are intended to be consumed programmatically. </summary>
         public string Code { get; set; }
         /// <summary> A message describing the error, intended to be suitable for display in a user interface. </summary>

@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal LeaseContainerRequest()
         {
         }
+
         /// <summary> Initializes a new instance of LeaseContainerRequest. </summary>
         /// <param name="action"> Specifies the lease action. Can be one of the available actions. </param>
         /// <param name="leaseId"> Identifies the lease. Can be specified in any valid GUID string format. </param>
@@ -28,6 +29,7 @@ namespace Azure.Storage.Management.Models
             LeaseDuration = leaseDuration;
             ProposedLeaseId = proposedLeaseId;
         }
+
         /// <summary> Specifies the lease action. Can be one of the available actions. </summary>
         public LeaseContainerRequestAction Action { get; set; }
         /// <summary> Identifies the lease. Can be specified in any valid GUID string format. </summary>

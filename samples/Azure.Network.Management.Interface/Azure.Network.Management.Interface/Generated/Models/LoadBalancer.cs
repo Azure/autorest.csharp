@@ -16,6 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         internal LoadBalancer()
         {
         }
+
         /// <summary> Initializes a new instance of LoadBalancer. </summary>
         /// <param name="sku"> The load balancer SKU. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -47,6 +48,7 @@ namespace Azure.Network.Management.Interface.Models
             ResourceGuid = resourceGuid;
             ProvisioningState = provisioningState;
         }
+
         /// <summary> The load balancer SKU. </summary>
         public LoadBalancerSku Sku { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>

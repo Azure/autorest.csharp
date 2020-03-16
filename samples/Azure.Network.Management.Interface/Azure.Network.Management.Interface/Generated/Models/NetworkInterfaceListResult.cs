@@ -16,6 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         internal NetworkInterfaceListResult()
         {
         }
+
         /// <summary> Initializes a new instance of NetworkInterfaceListResult. </summary>
         /// <param name="value"> A list of network interfaces in a resource group. </param>
         /// <param name="nextLink"> The URL to get the next set of results. </param>
@@ -24,6 +25,7 @@ namespace Azure.Network.Management.Interface.Models
             Value = value;
             NextLink = nextLink;
         }
+
         /// <summary> A list of network interfaces in a resource group. </summary>
         public IList<NetworkInterface> Value { get; set; }
         /// <summary> The URL to get the next set of results. </summary>

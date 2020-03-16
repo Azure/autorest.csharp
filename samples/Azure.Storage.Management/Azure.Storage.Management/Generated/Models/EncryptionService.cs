@@ -16,6 +16,7 @@ namespace Azure.Storage.Management.Models
         internal EncryptionService()
         {
         }
+
         /// <summary> Initializes a new instance of EncryptionService. </summary>
         /// <param name="enabled"> A boolean indicating whether or not the service encrypts the data as it is stored. </param>
         /// <param name="lastEnabledTime"> Gets a rough estimate of the date/time when the encryption was last enabled by the user. Only returned when encryption is enabled. There might be some unencrypted blobs which were written after this time, as it is just a rough estimate. </param>
@@ -26,6 +27,7 @@ namespace Azure.Storage.Management.Models
             LastEnabledTime = lastEnabledTime;
             KeyType = keyType;
         }
+
         /// <summary> A boolean indicating whether or not the service encrypts the data as it is stored. </summary>
         public bool? Enabled { get; set; }
         /// <summary> Gets a rough estimate of the date/time when the encryption was last enabled by the user. Only returned when encryption is enabled. There might be some unencrypted blobs which were written after this time, as it is just a rough estimate. </summary>

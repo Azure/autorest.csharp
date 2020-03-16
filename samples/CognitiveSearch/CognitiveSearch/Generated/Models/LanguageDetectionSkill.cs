@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal LanguageDetectionSkill()
         {
         }
+
         /// <summary> Initializes a new instance of LanguageDetectionSkill. </summary>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the skill which uniquely identifies it within the skillset. A skill with no name defined will be given a default name of its 1-based index in the skills array, prefixed with the character &apos;#&apos;. </param>

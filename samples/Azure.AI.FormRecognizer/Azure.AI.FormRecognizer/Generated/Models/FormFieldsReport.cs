@@ -14,6 +14,7 @@ namespace Azure.AI.FormRecognizer.Models
         internal FormFieldsReport()
         {
         }
+
         /// <summary> Initializes a new instance of FormFieldsReport. </summary>
         /// <param name="fieldName"> Training field name. </param>
         /// <param name="accuracy"> Estimated extraction accuracy for this field. </param>
@@ -22,6 +23,7 @@ namespace Azure.AI.FormRecognizer.Models
             FieldName = fieldName;
             Accuracy = accuracy;
         }
+
         /// <summary> Training field name. </summary>
         public string FieldName { get; set; }
         /// <summary> Estimated extraction accuracy for this field. </summary>

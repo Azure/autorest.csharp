@@ -16,6 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
         internal KeyValueElement()
         {
         }
+
         /// <summary> Initializes a new instance of KeyValueElement. </summary>
         /// <param name="text"> The text content of the key or value. </param>
         /// <param name="boundingBox"> Bounding box of the key or value. </param>
@@ -26,6 +27,7 @@ namespace Azure.AI.FormRecognizer.Models
             BoundingBox = boundingBox;
             Elements = elements;
         }
+
         /// <summary> The text content of the key or value. </summary>
         public string Text { get; set; }
         /// <summary> Bounding box of the key or value. </summary>

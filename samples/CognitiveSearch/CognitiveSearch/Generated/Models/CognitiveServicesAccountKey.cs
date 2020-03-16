@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal CognitiveServicesAccountKey()
         {
         }
+
         /// <summary> Initializes a new instance of CognitiveServicesAccountKey. </summary>
         /// <param name="key"> . </param>
         /// <param name="odataType"> . </param>
@@ -22,6 +23,7 @@ namespace CognitiveSearch.Models
         {
             Key = key;
         }
+
         public string Key { get; set; }
     }
 }

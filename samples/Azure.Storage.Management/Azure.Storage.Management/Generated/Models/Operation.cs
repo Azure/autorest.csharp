@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal Operation()
         {
         }
+
         /// <summary> Initializes a new instance of Operation. </summary>
         /// <param name="name"> Operation name: {provider}/{resource}/{operation}. </param>
         /// <param name="display"> Display metadata associated with the operation. </param>
@@ -26,6 +27,7 @@ namespace Azure.Storage.Management.Models
             Origin = origin;
             ServiceSpecification = serviceSpecification;
         }
+
         /// <summary> Operation name: {provider}/{resource}/{operation}. </summary>
         public string Name { get; set; }
         /// <summary> Display metadata associated with the operation. </summary>

@@ -16,6 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
         internal DocumentResult()
         {
         }
+
         /// <summary> Initializes a new instance of DocumentResult. </summary>
         /// <param name="docType"> Document type. </param>
         /// <param name="pageRange"> First and last page number where the document is found. </param>
@@ -26,6 +27,7 @@ namespace Azure.AI.FormRecognizer.Models
             PageRange = pageRange;
             Fields = fields;
         }
+
         /// <summary> Document type. </summary>
         public string DocType { get; set; }
         /// <summary> First and last page number where the document is found. </summary>

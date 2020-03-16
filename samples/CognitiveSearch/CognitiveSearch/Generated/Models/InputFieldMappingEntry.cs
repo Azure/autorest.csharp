@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal InputFieldMappingEntry()
         {
         }
+
         /// <summary> Initializes a new instance of InputFieldMappingEntry. </summary>
         /// <param name="name"> The name of the input. </param>
         /// <param name="source"> The source of the input. </param>
@@ -28,6 +29,7 @@ namespace CognitiveSearch.Models
             SourceContext = sourceContext;
             Inputs = inputs;
         }
+
         /// <summary> The name of the input. </summary>
         public string Name { get; set; }
         /// <summary> The source of the input. </summary>

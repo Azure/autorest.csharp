@@ -14,6 +14,7 @@ namespace Azure.Storage.Tables.Models
         internal Metrics()
         {
         }
+
         /// <summary> Initializes a new instance of Metrics. </summary>
         /// <param name="version"> The version of Storage Analytics to configure. </param>
         /// <param name="enabled"> Indicates whether metrics are enabled for the Queue service. </param>
@@ -26,6 +27,7 @@ namespace Azure.Storage.Tables.Models
             IncludeAPIs = includeAPIs;
             RetentionPolicy = retentionPolicy;
         }
+
         /// <summary> The version of Storage Analytics to configure. </summary>
         public string Version { get; set; }
         /// <summary> Indicates whether metrics are enabled for the Queue service. </summary>

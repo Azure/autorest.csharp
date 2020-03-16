@@ -205,6 +205,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         writer.Line($";");
                     }
                 }
+
+                writer.Line();
             }
         }
 

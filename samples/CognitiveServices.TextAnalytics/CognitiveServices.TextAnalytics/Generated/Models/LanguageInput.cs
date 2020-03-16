@@ -14,6 +14,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal LanguageInput()
         {
         }
+
         /// <summary> Initializes a new instance of LanguageInput. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="text"> . </param>
@@ -24,6 +25,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Text = text;
             CountryHint = countryHint;
         }
+
         /// <summary> Unique, non-empty document identifier. </summary>
         public string Id { get; set; }
         public string Text { get; set; }

@@ -16,6 +16,7 @@ namespace Azure.Storage.Management.Models
         internal CorsRule()
         {
         }
+
         /// <summary> Initializes a new instance of CorsRule. </summary>
         /// <param name="allowedOrigins"> Required if CorsRule element is present. A list of origin domains that will be allowed via CORS, or &quot;*&quot; to allow all domains. </param>
         /// <param name="allowedMethods"> Required if CorsRule element is present. A list of HTTP methods that are allowed to be executed by the origin. </param>
@@ -30,6 +31,7 @@ namespace Azure.Storage.Management.Models
             ExposedHeaders = exposedHeaders;
             AllowedHeaders = allowedHeaders;
         }
+
         /// <summary> Required if CorsRule element is present. A list of origin domains that will be allowed via CORS, or &quot;*&quot; to allow all domains. </summary>
         public IList<string> AllowedOrigins { get; set; } = new List<string>();
         /// <summary> Required if CorsRule element is present. A list of HTTP methods that are allowed to be executed by the origin. </summary>

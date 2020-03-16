@@ -14,6 +14,7 @@ namespace body_complex.Models
         internal BooleanWrapper()
         {
         }
+
         /// <summary> Initializes a new instance of BooleanWrapper. </summary>
         /// <param name="fieldTrue"> . </param>
         /// <param name="fieldFalse"> . </param>
@@ -22,6 +23,7 @@ namespace body_complex.Models
             FieldTrue = fieldTrue;
             FieldFalse = fieldFalse;
         }
+
         public bool? FieldTrue { get; set; }
         public bool? FieldFalse { get; set; }
     }

@@ -16,6 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
         internal PageResult()
         {
         }
+
         /// <summary> Initializes a new instance of PageResult. </summary>
         /// <param name="page"> Page number. </param>
         /// <param name="clusterId"> Cluster identifier. </param>
@@ -28,6 +29,7 @@ namespace Azure.AI.FormRecognizer.Models
             KeyValuePairs = keyValuePairs;
             Tables = tables;
         }
+
         /// <summary> Page number. </summary>
         public int Page { get; set; }
         /// <summary> Cluster identifier. </summary>

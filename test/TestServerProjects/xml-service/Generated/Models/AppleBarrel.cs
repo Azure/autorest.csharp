@@ -16,6 +16,7 @@ namespace xml_service.Models
         internal AppleBarrel()
         {
         }
+
         /// <summary> Initializes a new instance of AppleBarrel. </summary>
         /// <param name="goodApples"> . </param>
         /// <param name="badApples"> . </param>
@@ -24,6 +25,7 @@ namespace xml_service.Models
             GoodApples = goodApples;
             BadApples = badApples;
         }
+
         public IList<string> GoodApples { get; set; }
         public IList<string> BadApples { get; set; }
     }

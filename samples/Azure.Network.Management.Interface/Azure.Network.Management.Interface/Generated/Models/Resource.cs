@@ -16,6 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         internal Resource()
         {
         }
+
         /// <summary> Initializes a new instance of Resource. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
@@ -30,6 +31,7 @@ namespace Azure.Network.Management.Interface.Models
             Location = location;
             Tags = tags;
         }
+
         /// <summary> Resource ID. </summary>
         public string Id { get; set; }
         /// <summary> Resource name. </summary>

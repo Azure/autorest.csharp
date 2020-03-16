@@ -14,12 +14,14 @@ namespace Azure.Storage.Tables.Models
         internal StorageServiceStats()
         {
         }
+
         /// <summary> Initializes a new instance of StorageServiceStats. </summary>
         /// <param name="geoReplication"> Geo-Replication information for the Secondary Storage Service. </param>
         internal StorageServiceStats(GeoReplication geoReplication)
         {
             GeoReplication = geoReplication;
         }
+
         /// <summary> Geo-Replication information for the Secondary Storage Service. </summary>
         public GeoReplication GeoReplication { get; set; }
     }

@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal WordDelimiterTokenFilter()
         {
         }
+
         /// <summary> Initializes a new instance of WordDelimiterTokenFilter. </summary>
         /// <param name="generateWordParts"> A value indicating whether to generate part words. If set, causes parts of words to be generated; for example &quot;AzureSearch&quot; becomes &quot;Azure&quot; &quot;Search&quot;. Default is true. </param>
         /// <param name="generateNumberParts"> A value indicating whether to generate number subwords. Default is true. </param>
@@ -42,6 +43,7 @@ namespace CognitiveSearch.Models
             StemEnglishPossessive = stemEnglishPossessive;
             ProtectedWords = protectedWords;
         }
+
         /// <summary> A value indicating whether to generate part words. If set, causes parts of words to be generated; for example &quot;AzureSearch&quot; becomes &quot;Azure&quot; &quot;Search&quot;. Default is true. </summary>
         public bool? GenerateWordParts { get; set; }
         /// <summary> A value indicating whether to generate number subwords. Default is true. </summary>

@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal ClassicTokenizer()
         {
         }
+
         /// <summary> Initializes a new instance of ClassicTokenizer. </summary>
         /// <param name="maxTokenLength"> The maximum token length. Default is 255. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters. </param>
         /// <param name="odataType"> . </param>
@@ -22,6 +23,7 @@ namespace CognitiveSearch.Models
         {
             MaxTokenLength = maxTokenLength;
         }
+
         /// <summary> The maximum token length. Default is 255. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters. </summary>
         public int? MaxTokenLength { get; set; }
     }

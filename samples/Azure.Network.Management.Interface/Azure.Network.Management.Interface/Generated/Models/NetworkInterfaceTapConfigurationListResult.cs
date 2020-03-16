@@ -16,6 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         internal NetworkInterfaceTapConfigurationListResult()
         {
         }
+
         /// <summary> Initializes a new instance of NetworkInterfaceTapConfigurationListResult. </summary>
         /// <param name="value"> A list of tap configurations. </param>
         /// <param name="nextLink"> The URL to get the next set of results. </param>
@@ -24,6 +25,7 @@ namespace Azure.Network.Management.Interface.Models
             Value = value;
             NextLink = nextLink;
         }
+
         /// <summary> A list of tap configurations. </summary>
         public IList<NetworkInterfaceTapConfiguration> Value { get; set; }
         /// <summary> The URL to get the next set of results. </summary>

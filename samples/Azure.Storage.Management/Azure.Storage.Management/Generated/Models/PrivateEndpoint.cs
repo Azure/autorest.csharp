@@ -14,12 +14,14 @@ namespace Azure.Storage.Management.Models
         internal PrivateEndpoint()
         {
         }
+
         /// <summary> Initializes a new instance of PrivateEndpoint. </summary>
         /// <param name="id"> The ARM identifier for Private Endpoint. </param>
         internal PrivateEndpoint(string id)
         {
             Id = id;
         }
+
         /// <summary> The ARM identifier for Private Endpoint. </summary>
         public string Id { get; internal set; }
     }

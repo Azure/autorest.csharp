@@ -14,6 +14,7 @@ namespace Azure.Network.Management.Interface.Models
         internal PrivateLinkServiceConnectionState()
         {
         }
+
         /// <summary> Initializes a new instance of PrivateLinkServiceConnectionState. </summary>
         /// <param name="status"> Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. </param>
         /// <param name="description"> The reason for approval/rejection of the connection. </param>
@@ -24,6 +25,7 @@ namespace Azure.Network.Management.Interface.Models
             Description = description;
             ActionsRequired = actionsRequired;
         }
+
         /// <summary> Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. </summary>
         public string Status { get; set; }
         /// <summary> The reason for approval/rejection of the connection. </summary>

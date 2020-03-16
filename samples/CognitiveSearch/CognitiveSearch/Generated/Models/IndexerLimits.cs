@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal IndexerLimits()
         {
         }
+
         /// <summary> Initializes a new instance of IndexerLimits. </summary>
         /// <param name="maxRunTime"> The maximum duration that the indexer is permitted to run for one execution. </param>
         /// <param name="maxDocumentExtractionSize"> The maximum size of a document, in bytes, which will be considered valid for indexing. </param>
@@ -26,6 +27,7 @@ namespace CognitiveSearch.Models
             MaxDocumentExtractionSize = maxDocumentExtractionSize;
             MaxDocumentContentCharactersToExtract = maxDocumentContentCharactersToExtract;
         }
+
         /// <summary> The maximum duration that the indexer is permitted to run for one execution. </summary>
         public TimeSpan? MaxRunTime { get; internal set; }
         /// <summary> The maximum size of a document, in bytes, which will be considered valid for indexing. </summary>

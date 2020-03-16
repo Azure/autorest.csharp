@@ -14,6 +14,7 @@ namespace body_complex.Models
         internal Dog()
         {
         }
+
         /// <summary> Initializes a new instance of Dog. </summary>
         /// <param name="food"> . </param>
         /// <param name="id"> . </param>
@@ -22,6 +23,7 @@ namespace body_complex.Models
         {
             Food = food;
         }
+
         public string Food { get; set; }
     }
 }

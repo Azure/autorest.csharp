@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal Identity()
         {
         }
+
         /// <summary> Initializes a new instance of Identity. </summary>
         /// <param name="principalId"> The principal ID of resource identity. </param>
         /// <param name="tenantId"> The tenant ID of resource. </param>
@@ -24,6 +25,7 @@ namespace Azure.Storage.Management.Models
             TenantId = tenantId;
             Type = type;
         }
+
         /// <summary> The principal ID of resource identity. </summary>
         public string PrincipalId { get; internal set; }
         /// <summary> The tenant ID of resource. </summary>

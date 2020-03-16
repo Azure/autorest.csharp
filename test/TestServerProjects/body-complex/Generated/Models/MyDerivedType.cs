@@ -14,6 +14,7 @@ namespace body_complex.Models
         internal MyDerivedType()
         {
         }
+
         /// <summary> Initializes a new instance of MyDerivedType. </summary>
         /// <param name="propD1"> . </param>
         /// <param name="kind"> . </param>
@@ -23,6 +24,7 @@ namespace body_complex.Models
         {
             PropD1 = propD1;
         }
+
         public string PropD1 { get; set; }
     }
 }

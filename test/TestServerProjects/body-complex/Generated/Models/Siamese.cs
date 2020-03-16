@@ -16,6 +16,7 @@ namespace body_complex.Models
         internal Siamese()
         {
         }
+
         /// <summary> Initializes a new instance of Siamese. </summary>
         /// <param name="breed"> . </param>
         /// <param name="color"> . </param>
@@ -26,6 +27,7 @@ namespace body_complex.Models
         {
             Breed = breed;
         }
+
         public string Breed { get; set; }
     }
 }

@@ -16,6 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         internal VirtualNetworkTap()
         {
         }
+
         /// <summary> Initializes a new instance of VirtualNetworkTap. </summary>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="networkInterfaceTapConfigurations"> Specifies the list of resource IDs for the network interface IP configuration that needs to be tapped. </param>
@@ -39,6 +40,7 @@ namespace Azure.Network.Management.Interface.Models
             DestinationLoadBalancerFrontEndIPConfiguration = destinationLoadBalancerFrontEndIPConfiguration;
             DestinationPort = destinationPort;
         }
+
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
         public string Etag { get; internal set; }
         /// <summary> Specifies the list of resource IDs for the network interface IP configuration that needs to be tapped. </summary>

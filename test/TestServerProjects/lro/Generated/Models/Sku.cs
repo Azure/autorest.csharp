@@ -14,6 +14,7 @@ namespace lro.Models
         internal Sku()
         {
         }
+
         /// <summary> Initializes a new instance of Sku. </summary>
         /// <param name="name"> . </param>
         /// <param name="id"> . </param>
@@ -22,6 +23,7 @@ namespace lro.Models
             Name = name;
             Id = id;
         }
+
         public string Name { get; set; }
         public string Id { get; set; }
     }

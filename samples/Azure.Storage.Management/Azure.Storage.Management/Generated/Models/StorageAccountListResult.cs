@@ -16,6 +16,7 @@ namespace Azure.Storage.Management.Models
         internal StorageAccountListResult()
         {
         }
+
         /// <summary> Initializes a new instance of StorageAccountListResult. </summary>
         /// <param name="value"> Gets the list of storage accounts and their properties. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </param>
@@ -24,6 +25,7 @@ namespace Azure.Storage.Management.Models
             Value = value;
             NextLink = nextLink;
         }
+
         /// <summary> Gets the list of storage accounts and their properties. </summary>
         public IList<StorageAccount> Value { get; internal set; }
         /// <summary> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </summary>

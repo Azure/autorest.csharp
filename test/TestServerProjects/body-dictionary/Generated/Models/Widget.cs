@@ -14,6 +14,7 @@ namespace body_dictionary.Models
         internal Widget()
         {
         }
+
         /// <summary> Initializes a new instance of Widget. </summary>
         /// <param name="integer"> . </param>
         /// <param name="string"> . </param>
@@ -22,6 +23,7 @@ namespace body_dictionary.Models
             Integer = integer;
             String = @string;
         }
+
         public int? Integer { get; set; }
         public string String { get; set; }
     }

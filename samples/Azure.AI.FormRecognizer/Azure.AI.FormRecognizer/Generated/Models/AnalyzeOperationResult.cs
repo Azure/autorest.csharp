@@ -16,6 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
         internal AnalyzeOperationResult()
         {
         }
+
         /// <summary> Initializes a new instance of AnalyzeOperationResult. </summary>
         /// <param name="status"> Operation status. </param>
         /// <param name="createdDateTime"> Date and time (UTC) when the analyze operation was submitted. </param>
@@ -28,6 +29,7 @@ namespace Azure.AI.FormRecognizer.Models
             LastUpdatedDateTime = lastUpdatedDateTime;
             AnalyzeResult = analyzeResult;
         }
+
         /// <summary> Operation status. </summary>
         public OperationStatus Status { get; set; }
         /// <summary> Date and time (UTC) when the analyze operation was submitted. </summary>

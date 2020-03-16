@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal StorageAccountCheckNameAvailabilityParameters()
         {
         }
+
         /// <summary> Initializes a new instance of StorageAccountCheckNameAvailabilityParameters. </summary>
         /// <param name="name"> The storage account name. </param>
         /// <param name="type"> The type of resource, Microsoft.Storage/storageAccounts. </param>
@@ -22,6 +23,7 @@ namespace Azure.Storage.Management.Models
             Name = name;
             Type = type;
         }
+
         /// <summary> The storage account name. </summary>
         public string Name { get; set; }
         /// <summary> The type of resource, Microsoft.Storage/storageAccounts. </summary>

@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal MappingCharFilter()
         {
         }
+
         /// <summary> Initializes a new instance of MappingCharFilter. </summary>
         /// <param name="mappings"> A list of mappings of the following format: &quot;a=&gt;b&quot; (all occurrences of the character &quot;a&quot; will be replaced with character &quot;b&quot;). </param>
         /// <param name="odataType"> . </param>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
         {
             Mappings = mappings;
         }
+
         /// <summary> A list of mappings of the following format: &quot;a=&gt;b&quot; (all occurrences of the character &quot;a&quot; will be replaced with character &quot;b&quot;). </summary>
         public IList<string> Mappings { get; set; } = new List<string>();
     }

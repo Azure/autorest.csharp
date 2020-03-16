@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal KeywordMarkerTokenFilter()
         {
         }
+
         /// <summary> Initializes a new instance of KeywordMarkerTokenFilter. </summary>
         /// <param name="keywords"> A list of words to mark as keywords. </param>
         /// <param name="ignoreCase"> A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false. </param>
@@ -26,6 +27,7 @@ namespace CognitiveSearch.Models
             Keywords = keywords;
             IgnoreCase = ignoreCase;
         }
+
         /// <summary> A list of words to mark as keywords. </summary>
         public IList<string> Keywords { get; set; } = new List<string>();
         /// <summary> A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false. </summary>

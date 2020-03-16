@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal IndexingResult()
         {
         }
+
         /// <summary> Initializes a new instance of IndexingResult. </summary>
         /// <param name="key"> The key of a document that was in the indexing request. </param>
         /// <param name="errorMessage"> The error message explaining why the indexing operation failed for the document identified by the key; null if indexing succeeded. </param>
@@ -26,6 +27,7 @@ namespace CognitiveSearch.Models
             Succeeded = succeeded;
             StatusCode = statusCode;
         }
+
         /// <summary> The key of a document that was in the indexing request. </summary>
         public string Key { get; internal set; }
         /// <summary> The error message explaining why the indexing operation failed for the document identified by the key; null if indexing succeeded. </summary>

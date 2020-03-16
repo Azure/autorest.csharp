@@ -17,6 +17,7 @@ namespace Azure.Storage.Management.Models
         internal BlobContainer()
         {
         }
+
         /// <summary> Initializes a new instance of BlobContainer. </summary>
         /// <param name="publicAccess"> Specifies whether data in the container may be accessed publicly and the level of access. </param>
         /// <param name="lastModifiedTime"> Returns the date and time the container was last modified. </param>
@@ -45,6 +46,7 @@ namespace Azure.Storage.Management.Models
             HasLegalHold = hasLegalHold;
             HasImmutabilityPolicy = hasImmutabilityPolicy;
         }
+
         /// <summary> Specifies whether data in the container may be accessed publicly and the level of access. </summary>
         public PublicAccess? PublicAccess { get; set; }
         /// <summary> Returns the date and time the container was last modified. </summary>

@@ -16,6 +16,7 @@ namespace model_flattening.Models
         internal ResourceCollection()
         {
         }
+
         /// <summary> Initializes a new instance of ResourceCollection. </summary>
         /// <param name="productresource"> Flattened product. </param>
         /// <param name="arrayofresources"> . </param>
@@ -26,6 +27,7 @@ namespace model_flattening.Models
             Arrayofresources = arrayofresources;
             Dictionaryofresources = dictionaryofresources;
         }
+
         /// <summary> Flattened product. </summary>
         public FlattenedProduct Productresource { get; set; }
         public IList<FlattenedProduct> Arrayofresources { get; set; }

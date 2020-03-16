@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal Endpoints()
         {
         }
+
         /// <summary> Initializes a new instance of Endpoints. </summary>
         /// <param name="blob"> Gets the blob endpoint. </param>
         /// <param name="queue"> Gets the queue endpoint. </param>
@@ -34,6 +35,7 @@ namespace Azure.Storage.Management.Models
             MicrosoftEndpoints = microsoftEndpoints;
             InternetEndpoints = internetEndpoints;
         }
+
         /// <summary> Gets the blob endpoint. </summary>
         public string Blob { get; internal set; }
         /// <summary> Gets the queue endpoint. </summary>

@@ -16,6 +16,7 @@ namespace lro.Models
         internal Resource()
         {
         }
+
         /// <summary> Initializes a new instance of Resource. </summary>
         /// <param name="id"> Resource Id. </param>
         /// <param name="type"> Resource Type. </param>
@@ -30,6 +31,7 @@ namespace lro.Models
             Location = location;
             Name = name;
         }
+
         /// <summary> Resource Id. </summary>
         public string Id { get; internal set; }
         /// <summary> Resource Type. </summary>

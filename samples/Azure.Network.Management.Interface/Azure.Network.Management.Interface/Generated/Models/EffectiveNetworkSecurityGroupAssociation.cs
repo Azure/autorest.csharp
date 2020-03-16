@@ -14,6 +14,7 @@ namespace Azure.Network.Management.Interface.Models
         internal EffectiveNetworkSecurityGroupAssociation()
         {
         }
+
         /// <summary> Initializes a new instance of EffectiveNetworkSecurityGroupAssociation. </summary>
         /// <param name="subnet"> The ID of the subnet if assigned. </param>
         /// <param name="networkInterface"> The ID of the network interface if assigned. </param>
@@ -22,6 +23,7 @@ namespace Azure.Network.Management.Interface.Models
             Subnet = subnet;
             NetworkInterface = networkInterface;
         }
+
         /// <summary> The ID of the subnet if assigned. </summary>
         public SubResource Subnet { get; set; }
         /// <summary> The ID of the network interface if assigned. </summary>

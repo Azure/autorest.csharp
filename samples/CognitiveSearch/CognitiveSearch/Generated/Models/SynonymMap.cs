@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal SynonymMap()
         {
         }
+
         /// <summary> Initializes a new instance of SynonymMap. </summary>
         /// <param name="name"> The name of the synonym map. </param>
         /// <param name="format"> The format of the synonym map. Only the &apos;solr&apos; format is currently supported. </param>
@@ -26,6 +27,7 @@ namespace CognitiveSearch.Models
             Synonyms = synonyms;
             ETag = eTag;
         }
+
         /// <summary> The name of the synonym map. </summary>
         public string Name { get; set; }
         /// <summary> The format of the synonym map. Only the &apos;solr&apos; format is currently supported. </summary>

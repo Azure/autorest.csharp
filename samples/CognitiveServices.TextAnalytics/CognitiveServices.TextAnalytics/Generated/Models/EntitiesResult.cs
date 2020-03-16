@@ -16,6 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal EntitiesResult()
         {
         }
+
         /// <summary> Initializes a new instance of EntitiesResult. </summary>
         /// <param name="documents"> Response by document. </param>
         /// <param name="errors"> Errors by document id. </param>
@@ -28,6 +29,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Statistics = statistics;
             ModelVersion = modelVersion;
         }
+
         /// <summary> Response by document. </summary>
         public IList<DocumentEntities> Documents { get; set; } = new List<DocumentEntities>();
         /// <summary> Errors by document id. </summary>

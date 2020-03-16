@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal EntityRecognitionSkill()
         {
         }
+
         /// <summary> Initializes a new instance of EntityRecognitionSkill. </summary>
         /// <param name="categories"> A list of entity categories that should be extracted. </param>
         /// <param name="defaultLanguageCode"> A value indicating which language code to use. Default is en. </param>
@@ -34,6 +35,7 @@ namespace CognitiveSearch.Models
             IncludeTypelessEntities = includeTypelessEntities;
             MinimumPrecision = minimumPrecision;
         }
+
         /// <summary> A list of entity categories that should be extracted. </summary>
         public IList<EntityCategory> Categories { get; set; }
         /// <summary> A value indicating which language code to use. Default is en. </summary>

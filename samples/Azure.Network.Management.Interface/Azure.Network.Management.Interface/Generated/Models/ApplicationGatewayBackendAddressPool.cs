@@ -16,6 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         internal ApplicationGatewayBackendAddressPool()
         {
         }
+
         /// <summary> Initializes a new instance of ApplicationGatewayBackendAddressPool. </summary>
         /// <param name="name"> Name of the backend address pool that is unique within an Application Gateway. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -33,6 +34,7 @@ namespace Azure.Network.Management.Interface.Models
             BackendAddresses = backendAddresses;
             ProvisioningState = provisioningState;
         }
+
         /// <summary> Name of the backend address pool that is unique within an Application Gateway. </summary>
         public string Name { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>

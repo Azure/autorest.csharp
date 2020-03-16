@@ -14,6 +14,7 @@ namespace Azure.Network.Management.Interface.Models
         internal IpTag()
         {
         }
+
         /// <summary> Initializes a new instance of IpTag. </summary>
         /// <param name="ipTagType"> The IP tag type. Example: FirstPartyUsage. </param>
         /// <param name="tag"> The value of the IP tag associated with the public IP. Example: SQL. </param>
@@ -22,6 +23,7 @@ namespace Azure.Network.Management.Interface.Models
             IpTagType = ipTagType;
             Tag = tag;
         }
+
         /// <summary> The IP tag type. Example: FirstPartyUsage. </summary>
         public string IpTagType { get; set; }
         /// <summary> The value of the IP tag associated with the public IP. Example: SQL. </summary>

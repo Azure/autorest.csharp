@@ -16,6 +16,7 @@ namespace Azure.Storage.Management.Models
         internal TrackedResource()
         {
         }
+
         /// <summary> Initializes a new instance of TrackedResource. </summary>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="location"> The geo-location where the resource lives. </param>
@@ -27,6 +28,7 @@ namespace Azure.Storage.Management.Models
             Tags = tags;
             Location = location;
         }
+
         /// <summary> Resource tags. </summary>
         public IDictionary<string, string> Tags { get; set; }
         /// <summary> The geo-location where the resource lives. </summary>

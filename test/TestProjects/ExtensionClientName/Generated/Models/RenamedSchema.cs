@@ -16,6 +16,7 @@ namespace ExtensionClientName.Models
         internal RenamedSchema()
         {
         }
+
         /// <summary> Initializes a new instance of RenamedSchema. </summary>
         /// <param name="renamedProperty"> A description about the set of tags. </param>
         /// <param name="renamedPropertyString"> A description about the set of tags. </param>
@@ -24,6 +25,7 @@ namespace ExtensionClientName.Models
             RenamedProperty = renamedProperty;
             RenamedPropertyString = renamedPropertyString;
         }
+
         /// <summary> A description about the set of tags. </summary>
         public IDictionary<string, string> RenamedProperty { get; set; }
         /// <summary> A description about the set of tags. </summary>

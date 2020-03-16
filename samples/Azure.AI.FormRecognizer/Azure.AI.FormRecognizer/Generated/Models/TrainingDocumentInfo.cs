@@ -16,6 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
         internal TrainingDocumentInfo()
         {
         }
+
         /// <summary> Initializes a new instance of TrainingDocumentInfo. </summary>
         /// <param name="documentName"> Training document name. </param>
         /// <param name="pages"> Total number of pages trained. </param>
@@ -28,6 +29,7 @@ namespace Azure.AI.FormRecognizer.Models
             Errors = errors;
             Status = status;
         }
+
         /// <summary> Training document name. </summary>
         public string DocumentName { get; set; }
         /// <summary> Total number of pages trained. </summary>

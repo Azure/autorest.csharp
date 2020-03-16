@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal ElisionTokenFilter()
         {
         }
+
         /// <summary> Initializes a new instance of ElisionTokenFilter. </summary>
         /// <param name="articles"> The set of articles to remove. </param>
         /// <param name="odataType"> . </param>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
         {
             Articles = articles;
         }
+
         /// <summary> The set of articles to remove. </summary>
         public IList<string> Articles { get; set; }
     }

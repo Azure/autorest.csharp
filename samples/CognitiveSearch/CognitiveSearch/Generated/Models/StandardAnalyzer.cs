@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal StandardAnalyzer()
         {
         }
+
         /// <summary> Initializes a new instance of StandardAnalyzer. </summary>
         /// <param name="maxTokenLength"> The maximum token length. Default is 255. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters. </param>
         /// <param name="stopwords"> A list of stopwords. </param>
@@ -26,6 +27,7 @@ namespace CognitiveSearch.Models
             MaxTokenLength = maxTokenLength;
             Stopwords = stopwords;
         }
+
         /// <summary> The maximum token length. Default is 255. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters. </summary>
         public int? MaxTokenLength { get; set; }
         /// <summary> A list of stopwords. </summary>

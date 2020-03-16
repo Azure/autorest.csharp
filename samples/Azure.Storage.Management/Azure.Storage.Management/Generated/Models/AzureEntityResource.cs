@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal AzureEntityResource()
         {
         }
+
         /// <summary> Initializes a new instance of AzureEntityResource. </summary>
         /// <param name="etag"> Resource Etag. </param>
         /// <param name="id"> Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </param>
@@ -23,6 +24,7 @@ namespace Azure.Storage.Management.Models
         {
             Etag = etag;
         }
+
         /// <summary> Resource Etag. </summary>
         public string Etag { get; internal set; }
     }

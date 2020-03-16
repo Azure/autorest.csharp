@@ -14,12 +14,14 @@ namespace Azure.Storage.Tables.Models
         internal TableProperties()
         {
         }
+
         /// <summary> Initializes a new instance of TableProperties. </summary>
         /// <param name="tableName"> The name of the table to create. </param>
         internal TableProperties(string tableName)
         {
             TableName = tableName;
         }
+
         /// <summary> The name of the table to create. </summary>
         public string TableName { get; set; }
     }

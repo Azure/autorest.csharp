@@ -17,6 +17,7 @@ namespace additionalProperties.Models
         internal PetAPObject()
         {
         }
+
         /// <summary> Initializes a new instance of PetAPObject. </summary>
         /// <param name="id"> . </param>
         /// <param name="name"> . </param>
@@ -27,6 +28,7 @@ namespace additionalProperties.Models
             Name = name;
             Status = status;
         }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public bool? Status { get; internal set; }

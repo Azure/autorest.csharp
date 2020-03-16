@@ -14,6 +14,7 @@ namespace model_flattening.Models
         internal Error()
         {
         }
+
         /// <summary> Initializes a new instance of Error. </summary>
         /// <param name="status"> . </param>
         /// <param name="message"> . </param>
@@ -24,6 +25,7 @@ namespace model_flattening.Models
             Message = message;
             ParentError = parentError;
         }
+
         public int? Status { get; set; }
         public string Message { get; set; }
         public Error ParentError { get; set; }

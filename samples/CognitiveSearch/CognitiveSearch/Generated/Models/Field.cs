@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal Field()
         {
         }
+
         /// <summary> Initializes a new instance of Field. </summary>
         /// <param name="name"> The name of the field, which must be unique within the fields collection of the index or parent field. </param>
         /// <param name="type"> The data type of the field. </param>
@@ -46,6 +47,7 @@ namespace CognitiveSearch.Models
             SynonymMaps = synonymMaps;
             Fields = fields;
         }
+
         /// <summary> The name of the field, which must be unique within the fields collection of the index or parent field. </summary>
         public string Name { get; set; }
         /// <summary> The data type of the field. </summary>

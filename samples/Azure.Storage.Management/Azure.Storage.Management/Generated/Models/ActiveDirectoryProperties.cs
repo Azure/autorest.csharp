@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal ActiveDirectoryProperties()
         {
         }
+
         /// <summary> Initializes a new instance of ActiveDirectoryProperties. </summary>
         /// <param name="domainName"> Specifies the primary domain that the AD DNS server is authoritative for. </param>
         /// <param name="netBiosDomainName"> Specifies the NetBIOS domain name. </param>
@@ -30,6 +31,7 @@ namespace Azure.Storage.Management.Models
             DomainSid = domainSid;
             AzureStorageSid = azureStorageSid;
         }
+
         /// <summary> Specifies the primary domain that the AD DNS server is authoritative for. </summary>
         public string DomainName { get; set; }
         /// <summary> Specifies the NetBIOS domain name. </summary>

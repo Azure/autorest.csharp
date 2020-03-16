@@ -14,6 +14,7 @@ namespace AppConfiguration.Models
         internal Error()
         {
         }
+
         /// <summary> Initializes a new instance of Error. </summary>
         /// <param name="type"> The type of the error. </param>
         /// <param name="title"> A brief summary of the error. </param>
@@ -28,6 +29,7 @@ namespace AppConfiguration.Models
             Detail = detail;
             Status = status;
         }
+
         /// <summary> The type of the error. </summary>
         public string Type { get; set; }
         /// <summary> A brief summary of the error. </summary>

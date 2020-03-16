@@ -14,6 +14,7 @@ namespace Azure.AI.FormRecognizer.Models
         internal KeyValuePair()
         {
         }
+
         /// <summary> Initializes a new instance of KeyValuePair. </summary>
         /// <param name="label"> A user defined label for the key/value pair entry. </param>
         /// <param name="key"> Information about the extracted key in a key-value pair. </param>
@@ -26,6 +27,7 @@ namespace Azure.AI.FormRecognizer.Models
             Value = value;
             Confidence = confidence;
         }
+
         /// <summary> A user defined label for the key/value pair entry. </summary>
         public string Label { get; set; }
         /// <summary> Information about the extracted key in a key-value pair. </summary>

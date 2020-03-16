@@ -14,6 +14,7 @@ namespace Azure.Network.Management.Interface.Models
         internal DdosSettings()
         {
         }
+
         /// <summary> Initializes a new instance of DdosSettings. </summary>
         /// <param name="ddosCustomPolicy"> The DDoS custom policy associated with the public IP. </param>
         /// <param name="protectionCoverage"> The DDoS protection policy customizability of the public IP. Only standard coverage will have the ability to be customized. </param>
@@ -24,6 +25,7 @@ namespace Azure.Network.Management.Interface.Models
             ProtectionCoverage = protectionCoverage;
             ProtectedIP = protectedIP;
         }
+
         /// <summary> The DDoS custom policy associated with the public IP. </summary>
         public SubResource DdosCustomPolicy { get; set; }
         /// <summary> The DDoS protection policy customizability of the public IP. Only standard coverage will have the ability to be customized. </summary>

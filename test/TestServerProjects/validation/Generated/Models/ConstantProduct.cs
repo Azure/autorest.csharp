@@ -14,6 +14,7 @@ namespace validation.Models
         internal ConstantProduct()
         {
         }
+
         /// <summary> Initializes a new instance of ConstantProduct. </summary>
         /// <param name="constProperty"> Constant string. </param>
         /// <param name="constProperty2"> Constant string2. </param>
@@ -22,6 +23,7 @@ namespace validation.Models
             ConstProperty = constProperty;
             ConstProperty2 = constProperty2;
         }
+
         /// <summary> Constant string. </summary>
         public string ConstProperty { get; set; } = "constant";
         /// <summary> Constant string2. </summary>

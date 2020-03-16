@@ -14,6 +14,7 @@ namespace Azure.Storage.Tables.Models
         internal TableResponse()
         {
         }
+
         /// <summary> Initializes a new instance of TableResponse. </summary>
         /// <param name="odataMetadata"> The metadata response of the table. </param>
         /// <param name="tableName"> The name of the table. </param>
@@ -24,6 +25,7 @@ namespace Azure.Storage.Tables.Models
         {
             OdataMetadata = odataMetadata;
         }
+
         /// <summary> The metadata response of the table. </summary>
         public string OdataMetadata { get; set; }
     }

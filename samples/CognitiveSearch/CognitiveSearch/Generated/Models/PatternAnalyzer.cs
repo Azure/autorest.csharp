@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal PatternAnalyzer()
         {
         }
+
         /// <summary> Initializes a new instance of PatternAnalyzer. </summary>
         /// <param name="lowerCaseTerms"> A value indicating whether terms should be lower-cased. Default is true. </param>
         /// <param name="pattern"> A regular expression pattern to match token separators. Default is an expression that matches one or more whitespace characters. </param>
@@ -30,6 +31,7 @@ namespace CognitiveSearch.Models
             Flags = flags;
             Stopwords = stopwords;
         }
+
         /// <summary> A value indicating whether terms should be lower-cased. Default is true. </summary>
         public bool? LowerCaseTerms { get; set; }
         /// <summary> A regular expression pattern to match token separators. Default is an expression that matches one or more whitespace characters. </summary>

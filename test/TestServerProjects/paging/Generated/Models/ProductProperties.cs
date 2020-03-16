@@ -14,6 +14,7 @@ namespace paging.Models
         internal ProductProperties()
         {
         }
+
         /// <summary> Initializes a new instance of ProductProperties. </summary>
         /// <param name="id"> . </param>
         /// <param name="name"> . </param>
@@ -22,6 +23,7 @@ namespace paging.Models
             Id = id;
             Name = name;
         }
+
         public int? Id { get; set; }
         public string Name { get; set; }
     }

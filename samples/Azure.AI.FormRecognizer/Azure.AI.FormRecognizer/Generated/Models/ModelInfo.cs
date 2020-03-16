@@ -16,6 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
         internal ModelInfo()
         {
         }
+
         /// <summary> Initializes a new instance of ModelInfo. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="status"> Status of the model. </param>
@@ -28,6 +29,7 @@ namespace Azure.AI.FormRecognizer.Models
             CreatedDateTime = createdDateTime;
             LastUpdatedDateTime = lastUpdatedDateTime;
         }
+
         /// <summary> Model identifier. </summary>
         public Guid ModelId { get; set; }
         /// <summary> Status of the model. </summary>

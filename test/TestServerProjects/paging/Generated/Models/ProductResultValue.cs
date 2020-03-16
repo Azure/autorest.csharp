@@ -16,6 +16,7 @@ namespace paging.Models
         internal ProductResultValue()
         {
         }
+
         /// <summary> Initializes a new instance of ProductResultValue. </summary>
         /// <param name="value"> . </param>
         /// <param name="nextLink"> . </param>
@@ -24,6 +25,7 @@ namespace paging.Models
             Value = value;
             NextLink = nextLink;
         }
+
         public IList<Product> Value { get; set; }
         public string NextLink { get; set; }
     }

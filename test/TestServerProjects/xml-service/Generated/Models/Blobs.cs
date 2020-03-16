@@ -16,6 +16,7 @@ namespace xml_service.Models
         internal Blobs()
         {
         }
+
         /// <summary> Initializes a new instance of Blobs. </summary>
         /// <param name="blobPrefix"> . </param>
         /// <param name="blob"> . </param>
@@ -24,6 +25,7 @@ namespace xml_service.Models
             BlobPrefix = blobPrefix;
             Blob = blob;
         }
+
         public IList<BlobPrefix> BlobPrefix { get; set; }
         public IList<Blob> Blob { get; set; }
     }

@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal SentimentSkill()
         {
         }
+
         /// <summary> Initializes a new instance of SentimentSkill. </summary>
         /// <param name="defaultLanguageCode"> A value indicating which language code to use. Default is en. </param>
         /// <param name="odataType"> . </param>
@@ -28,6 +29,7 @@ namespace CognitiveSearch.Models
         {
             DefaultLanguageCode = defaultLanguageCode;
         }
+
         /// <summary> A value indicating which language code to use. Default is en. </summary>
         public SentimentSkillLanguage? DefaultLanguageCode { get; set; }
     }

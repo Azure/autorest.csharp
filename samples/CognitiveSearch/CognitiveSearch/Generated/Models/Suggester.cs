@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal Suggester()
         {
         }
+
         /// <summary> Initializes a new instance of Suggester. </summary>
         /// <param name="name"> The name of the suggester. </param>
         /// <param name="searchMode"> A value indicating the capabilities of the suggester. </param>
@@ -26,6 +27,7 @@ namespace CognitiveSearch.Models
             SearchMode = searchMode;
             SourceFields = sourceFields;
         }
+
         /// <summary> The name of the suggester. </summary>
         public string Name { get; set; }
         /// <summary> A value indicating the capabilities of the suggester. </summary>

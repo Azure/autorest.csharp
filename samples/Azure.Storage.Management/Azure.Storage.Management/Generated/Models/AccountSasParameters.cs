@@ -16,6 +16,7 @@ namespace Azure.Storage.Management.Models
         internal AccountSasParameters()
         {
         }
+
         /// <summary> Initializes a new instance of AccountSasParameters. </summary>
         /// <param name="services"> The signed services accessible with the account SAS. Possible values include: Blob (b), Queue (q), Table (t), File (f). </param>
         /// <param name="resourceTypes"> The signed resource types that are accessible with the account SAS. Service (s): Access to service-level APIs; Container (c): Access to container-level APIs; Object (o): Access to object-level APIs for blobs, queue messages, table entities, and files. </param>
@@ -36,6 +37,7 @@ namespace Azure.Storage.Management.Models
             SharedAccessExpiryTime = sharedAccessExpiryTime;
             KeyToSign = keyToSign;
         }
+
         /// <summary> The signed services accessible with the account SAS. Possible values include: Blob (b), Queue (q), Table (t), File (f). </summary>
         public Services Services { get; set; }
         /// <summary> The signed resource types that are accessible with the account SAS. Service (s): Access to service-level APIs; Container (c): Access to container-level APIs; Object (o): Access to object-level APIs for blobs, queue messages, table entities, and files. </summary>

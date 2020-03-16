@@ -17,6 +17,7 @@ namespace Azure.Storage.Management.Models
         internal FileShareItem()
         {
         }
+
         /// <summary> Initializes a new instance of FileShareItem. </summary>
         /// <param name="lastModifiedTime"> Returns the date and time the share was last modified. </param>
         /// <param name="metadata"> A name-value pair to associate with the share as metadata. </param>
@@ -31,6 +32,7 @@ namespace Azure.Storage.Management.Models
             Metadata = metadata;
             ShareQuota = shareQuota;
         }
+
         /// <summary> Returns the date and time the share was last modified. </summary>
         public DateTimeOffset? LastModifiedTime { get; internal set; }
         /// <summary> A name-value pair to associate with the share as metadata. </summary>

@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal LeaseContainerResponse()
         {
         }
+
         /// <summary> Initializes a new instance of LeaseContainerResponse. </summary>
         /// <param name="leaseId"> Returned unique lease ID that must be included with any request to delete the container, or to renew, change, or release the lease. </param>
         /// <param name="leaseTimeSeconds"> Approximate time remaining in the lease period, in seconds. </param>
@@ -22,6 +23,7 @@ namespace Azure.Storage.Management.Models
             LeaseId = leaseId;
             LeaseTimeSeconds = leaseTimeSeconds;
         }
+
         /// <summary> Returned unique lease ID that must be included with any request to delete the container, or to renew, change, or release the lease. </summary>
         public string LeaseId { get; set; }
         /// <summary> Approximate time remaining in the lease period, in seconds. </summary>

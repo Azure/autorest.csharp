@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal StorageAccountKey()
         {
         }
+
         /// <summary> Initializes a new instance of StorageAccountKey. </summary>
         /// <param name="keyName"> Name of the key. </param>
         /// <param name="value"> Base 64-encoded value of the key. </param>
@@ -24,6 +25,7 @@ namespace Azure.Storage.Management.Models
             Value = value;
             Permissions = permissions;
         }
+
         /// <summary> Name of the key. </summary>
         public string KeyName { get; internal set; }
         /// <summary> Base 64-encoded value of the key. </summary>

@@ -14,12 +14,14 @@ namespace Azure.Storage.Management.Models
         internal EncryptionScopeKeyVaultProperties()
         {
         }
+
         /// <summary> Initializes a new instance of EncryptionScopeKeyVaultProperties. </summary>
         /// <param name="keyUri"> The object identifier for a key vault key object. When applied, the encryption scope will use the key referenced by the identifier to enable customer-managed key support on this encryption scope. </param>
         internal EncryptionScopeKeyVaultProperties(string keyUri)
         {
             KeyUri = keyUri;
         }
+
         /// <summary> The object identifier for a key vault key object. When applied, the encryption scope will use the key referenced by the identifier to enable customer-managed key support on this encryption scope. </summary>
         public string KeyUri { get; set; }
     }

@@ -14,6 +14,7 @@ namespace body_complex.Models
         internal DotFish()
         {
         }
+
         /// <summary> Initializes a new instance of DotFish. </summary>
         /// <param name="fishType"> . </param>
         /// <param name="species"> . </param>
@@ -22,6 +23,7 @@ namespace body_complex.Models
             FishType = fishType;
             Species = species;
         }
+
         public string FishType { get; internal set; }
         public string Species { get; set; }
     }

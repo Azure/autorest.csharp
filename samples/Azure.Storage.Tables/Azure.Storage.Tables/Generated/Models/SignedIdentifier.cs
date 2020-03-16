@@ -14,6 +14,7 @@ namespace Azure.Storage.Tables.Models
         internal SignedIdentifier()
         {
         }
+
         /// <summary> Initializes a new instance of SignedIdentifier. </summary>
         /// <param name="id"> a unique id. </param>
         /// <param name="accessPolicy"> The access policy. </param>
@@ -22,6 +23,7 @@ namespace Azure.Storage.Tables.Models
             Id = id;
             AccessPolicy = accessPolicy;
         }
+
         /// <summary> a unique id. </summary>
         public string Id { get; set; }
         /// <summary> The access policy. </summary>

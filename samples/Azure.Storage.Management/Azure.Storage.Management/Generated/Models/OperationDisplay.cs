@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal OperationDisplay()
         {
         }
+
         /// <summary> Initializes a new instance of OperationDisplay. </summary>
         /// <param name="provider"> Service provider: Microsoft Storage. </param>
         /// <param name="resource"> Resource on which the operation is performed etc. </param>
@@ -26,6 +27,7 @@ namespace Azure.Storage.Management.Models
             Operation = operation;
             Description = description;
         }
+
         /// <summary> Service provider: Microsoft Storage. </summary>
         public string Provider { get; set; }
         /// <summary> Resource on which the operation is performed etc. </summary>

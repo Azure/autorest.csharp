@@ -17,12 +17,14 @@ namespace CognitiveSearch.Models
         internal FacetResult()
         {
         }
+
         /// <summary> Initializes a new instance of FacetResult. </summary>
         /// <param name="count"> The approximate count of documents falling within the bucket described by this facet. </param>
         internal FacetResult(long? count)
         {
             Count = count;
         }
+
         /// <summary> The approximate count of documents falling within the bucket described by this facet. </summary>
         public long? Count { get; internal set; }
         private readonly IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();

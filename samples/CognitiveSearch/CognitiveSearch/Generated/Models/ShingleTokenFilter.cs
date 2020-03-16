@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal ShingleTokenFilter()
         {
         }
+
         /// <summary> Initializes a new instance of ShingleTokenFilter. </summary>
         /// <param name="maxShingleSize"> The maximum shingle size. Default and minimum value is 2. </param>
         /// <param name="minShingleSize"> The minimum shingle size. Default and minimum value is 2. Must be less than the value of maxShingleSize. </param>
@@ -32,6 +33,7 @@ namespace CognitiveSearch.Models
             TokenSeparator = tokenSeparator;
             FilterToken = filterToken;
         }
+
         /// <summary> The maximum shingle size. Default and minimum value is 2. </summary>
         public int? MaxShingleSize { get; set; }
         /// <summary> The minimum shingle size. Default and minimum value is 2. Must be less than the value of maxShingleSize. </summary>

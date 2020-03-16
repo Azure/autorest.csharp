@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal DataSource()
         {
         }
+
         /// <summary> Initializes a new instance of DataSource. </summary>
         /// <param name="name"> The name of the datasource. </param>
         /// <param name="description"> The description of the datasource. </param>
@@ -34,6 +35,7 @@ namespace CognitiveSearch.Models
             DataDeletionDetectionPolicy = dataDeletionDetectionPolicy;
             ETag = eTag;
         }
+
         /// <summary> The name of the datasource. </summary>
         public string Name { get; set; }
         /// <summary> The description of the datasource. </summary>

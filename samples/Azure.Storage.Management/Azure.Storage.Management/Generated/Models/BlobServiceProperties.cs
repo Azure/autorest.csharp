@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal BlobServiceProperties()
         {
         }
+
         /// <summary> Initializes a new instance of BlobServiceProperties. </summary>
         /// <param name="sku"> Sku name and tier. </param>
         /// <param name="cors"> Specifies CORS rules for the Blob service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the Blob service. </param>
@@ -39,6 +40,7 @@ namespace Azure.Storage.Management.Models
             RestorePolicy = restorePolicy;
             ContainerDeleteRetentionPolicy = containerDeleteRetentionPolicy;
         }
+
         /// <summary> Sku name and tier. </summary>
         public Sku Sku { get; internal set; }
         /// <summary> Specifies CORS rules for the Blob service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the Blob service. </summary>

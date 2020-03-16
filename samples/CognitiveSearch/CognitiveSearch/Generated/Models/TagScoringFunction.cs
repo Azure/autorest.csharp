@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal TagScoringFunction()
         {
         }
+
         /// <summary> Initializes a new instance of TagScoringFunction. </summary>
         /// <param name="parameters"> Parameter values for the tag scoring function. </param>
         /// <param name="type"> . </param>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
         {
             Parameters = parameters;
         }
+
         /// <summary> Parameter values for the tag scoring function. </summary>
         public TagScoringParameters Parameters { get; set; } = new TagScoringParameters();
     }

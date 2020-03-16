@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal DefaultCognitiveServicesAccount()
         {
         }
+
         /// <summary> Initializes a new instance of DefaultCognitiveServicesAccount. </summary>
         /// <param name="odataType"> . </param>
         /// <param name="description"> . </param>

@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal OutputFieldMappingEntry()
         {
         }
+
         /// <summary> Initializes a new instance of OutputFieldMappingEntry. </summary>
         /// <param name="name"> The name of the output defined by the skill. </param>
         /// <param name="targetName"> The target name of the output. It is optional and default to name. </param>
@@ -22,6 +23,7 @@ namespace CognitiveSearch.Models
             Name = name;
             TargetName = targetName;
         }
+
         /// <summary> The name of the output defined by the skill. </summary>
         public string Name { get; set; }
         /// <summary> The target name of the output. It is optional and default to name. </summary>

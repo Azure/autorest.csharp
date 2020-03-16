@@ -16,6 +16,7 @@ namespace xml_service.Models
         internal AccessPolicy()
         {
         }
+
         /// <summary> Initializes a new instance of AccessPolicy. </summary>
         /// <param name="start"> the date-time the policy is active. </param>
         /// <param name="expiry"> the date-time the policy expires. </param>
@@ -26,6 +27,7 @@ namespace xml_service.Models
             Expiry = expiry;
             Permission = permission;
         }
+
         /// <summary> the date-time the policy is active. </summary>
         public DateTimeOffset Start { get; set; }
         /// <summary> the date-time the policy expires. </summary>

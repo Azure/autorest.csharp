@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal SqlIntegratedChangeTrackingPolicy()
         {
         }
+
         /// <summary> Initializes a new instance of SqlIntegratedChangeTrackingPolicy. </summary>
         /// <param name="odataType"> . </param>
         internal SqlIntegratedChangeTrackingPolicy(string odataType) : base(odataType)

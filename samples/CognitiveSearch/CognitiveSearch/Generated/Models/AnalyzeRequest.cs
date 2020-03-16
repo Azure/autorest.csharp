@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal AnalyzeRequest()
         {
         }
+
         /// <summary> Initializes a new instance of AnalyzeRequest. </summary>
         /// <param name="text"> The text to break into tokens. </param>
         /// <param name="analyzer"> The name of the analyzer to use to break the given text. If this parameter is not specified, you must specify a tokenizer instead. The tokenizer and analyzer parameters are mutually exclusive. </param>
@@ -30,6 +31,7 @@ namespace CognitiveSearch.Models
             TokenFilters = tokenFilters;
             CharFilters = charFilters;
         }
+
         /// <summary> The text to break into tokens. </summary>
         public string Text { get; set; }
         /// <summary> The name of the analyzer to use to break the given text. If this parameter is not specified, you must specify a tokenizer instead. The tokenizer and analyzer parameters are mutually exclusive. </summary>

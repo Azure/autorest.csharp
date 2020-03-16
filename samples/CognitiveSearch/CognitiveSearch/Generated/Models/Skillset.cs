@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal Skillset()
         {
         }
+
         /// <summary> Initializes a new instance of Skillset. </summary>
         /// <param name="name"> The name of the skillset. </param>
         /// <param name="description"> The description of the skillset. </param>
@@ -30,6 +31,7 @@ namespace CognitiveSearch.Models
             CognitiveServicesAccount = cognitiveServicesAccount;
             ETag = eTag;
         }
+
         /// <summary> The name of the skillset. </summary>
         public string Name { get; set; }
         /// <summary> The description of the skillset. </summary>

@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal AzureFilesIdentityBasedAuthentication()
         {
         }
+
         /// <summary> Initializes a new instance of AzureFilesIdentityBasedAuthentication. </summary>
         /// <param name="directoryServiceOptions"> Indicates the directory service used. </param>
         /// <param name="activeDirectoryProperties"> Required if choose AD. </param>
@@ -22,6 +23,7 @@ namespace Azure.Storage.Management.Models
             DirectoryServiceOptions = directoryServiceOptions;
             ActiveDirectoryProperties = activeDirectoryProperties;
         }
+
         /// <summary> Indicates the directory service used. </summary>
         public DirectoryServiceOptions DirectoryServiceOptions { get; set; }
         /// <summary> Required if choose AD. </summary>

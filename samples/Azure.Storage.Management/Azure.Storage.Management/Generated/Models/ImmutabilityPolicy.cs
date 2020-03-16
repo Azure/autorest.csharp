@@ -14,6 +14,7 @@ namespace Azure.Storage.Management.Models
         internal ImmutabilityPolicy()
         {
         }
+
         /// <summary> Initializes a new instance of ImmutabilityPolicy. </summary>
         /// <param name="immutabilityPeriodSinceCreationInDays"> The immutability period for the blobs in the container since the policy creation, in days. </param>
         /// <param name="state"> The ImmutabilityPolicy state of a blob container, possible values include: Locked and Unlocked. </param>
@@ -28,6 +29,7 @@ namespace Azure.Storage.Management.Models
             State = state;
             AllowProtectedAppendWrites = allowProtectedAppendWrites;
         }
+
         /// <summary> The immutability period for the blobs in the container since the policy creation, in days. </summary>
         public int? ImmutabilityPeriodSinceCreationInDays { get; set; }
         /// <summary> The ImmutabilityPolicy state of a blob container, possible values include: Locked and Unlocked. </summary>

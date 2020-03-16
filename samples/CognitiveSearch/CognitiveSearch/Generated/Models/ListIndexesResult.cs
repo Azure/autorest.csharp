@@ -16,12 +16,14 @@ namespace CognitiveSearch.Models
         internal ListIndexesResult()
         {
         }
+
         /// <summary> Initializes a new instance of ListIndexesResult. </summary>
         /// <param name="indexes"> The indexes in the Search service. </param>
         internal ListIndexesResult(IList<Index> indexes)
         {
             Indexes = indexes;
         }
+
         /// <summary> The indexes in the Search service. </summary>
         public IList<Index> Indexes { get; internal set; }
     }

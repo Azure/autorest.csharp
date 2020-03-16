@@ -14,6 +14,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal MultiLanguageInput()
         {
         }
+
         /// <summary> Initializes a new instance of MultiLanguageInput. </summary>
         /// <param name="id"> A unique, non-empty document identifier. </param>
         /// <param name="text"> The input text to process. </param>
@@ -24,6 +25,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Text = text;
             Language = language;
         }
+
         /// <summary> A unique, non-empty document identifier. </summary>
         public string Id { get; set; }
         /// <summary> The input text to process. </summary>

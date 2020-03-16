@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal PatternCaptureTokenFilter()
         {
         }
+
         /// <summary> Initializes a new instance of PatternCaptureTokenFilter. </summary>
         /// <param name="patterns"> A list of patterns to match against each token. </param>
         /// <param name="preserveOriginal"> A value indicating whether to return the original token even if one of the patterns matches. Default is true. </param>
@@ -26,6 +27,7 @@ namespace CognitiveSearch.Models
             Patterns = patterns;
             PreserveOriginal = preserveOriginal;
         }
+
         /// <summary> A list of patterns to match against each token. </summary>
         public IList<string> Patterns { get; set; } = new List<string>();
         /// <summary> A value indicating whether to return the original token even if one of the patterns matches. Default is true. </summary>

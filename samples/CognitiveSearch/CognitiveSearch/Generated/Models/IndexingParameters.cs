@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         internal IndexingParameters()
         {
         }
+
         /// <summary> Initializes a new instance of IndexingParameters. </summary>
         /// <param name="batchSize"> The number of items that are read from the data source and indexed as a single batch in order to improve performance. The default depends on the data source type. </param>
         /// <param name="maxFailedItems"> The maximum number of items that can fail indexing for indexer execution to still be considered successful. -1 means no limit. Default is 0. </param>
@@ -30,6 +31,7 @@ namespace CognitiveSearch.Models
             Base64EncodeKeys = base64EncodeKeys;
             Configuration = configuration;
         }
+
         /// <summary> The number of items that are read from the data source and indexed as a single batch in order to improve performance. The default depends on the data source type. </summary>
         public int? BatchSize { get; set; }
         /// <summary> The maximum number of items that can fail indexing for indexer execution to still be considered successful. -1 means no limit. Default is 0. </summary>

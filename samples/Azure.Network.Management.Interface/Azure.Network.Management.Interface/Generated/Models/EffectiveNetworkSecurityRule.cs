@@ -16,6 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         internal EffectiveNetworkSecurityRule()
         {
         }
+
         /// <summary> Initializes a new instance of EffectiveNetworkSecurityRule. </summary>
         /// <param name="name"> The name of the security rule specified by the user (if created by the user). </param>
         /// <param name="protocol"> The network protocol this rule applies to. </param>
@@ -50,6 +51,7 @@ namespace Azure.Network.Management.Interface.Models
             Priority = priority;
             Direction = direction;
         }
+
         /// <summary> The name of the security rule specified by the user (if created by the user). </summary>
         public string Name { get; set; }
         /// <summary> The network protocol this rule applies to. </summary>

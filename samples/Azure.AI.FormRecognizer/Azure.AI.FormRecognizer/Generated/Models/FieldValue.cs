@@ -16,6 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
         internal FieldValue()
         {
         }
+
         /// <summary> Initializes a new instance of FieldValue. </summary>
         /// <param name="type"> Type of field value. </param>
         /// <param name="valueString"> String value. </param>
@@ -48,6 +49,7 @@ namespace Azure.AI.FormRecognizer.Models
             Elements = elements;
             Page = page;
         }
+
         /// <summary> Type of field value. </summary>
         public FieldValueType Type { get; set; }
         /// <summary> String value. </summary>

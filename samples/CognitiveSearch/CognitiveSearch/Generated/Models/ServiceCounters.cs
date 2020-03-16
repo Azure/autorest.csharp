@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal ServiceCounters()
         {
         }
+
         /// <summary> Initializes a new instance of ServiceCounters. </summary>
         /// <param name="documentCounter"> Total number of documents across all indexes in the service. </param>
         /// <param name="indexCounter"> Total number of indexes. </param>
@@ -30,6 +31,7 @@ namespace CognitiveSearch.Models
             StorageSizeCounter = storageSizeCounter;
             SynonymMapCounter = synonymMapCounter;
         }
+
         /// <summary> Total number of documents across all indexes in the service. </summary>
         public ResourceCounter DocumentCounter { get; set; }
         /// <summary> Total number of indexes. </summary>

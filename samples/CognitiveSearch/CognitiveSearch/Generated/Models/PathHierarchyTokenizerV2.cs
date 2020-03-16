@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal PathHierarchyTokenizerV2()
         {
         }
+
         /// <summary> Initializes a new instance of PathHierarchyTokenizerV2. </summary>
         /// <param name="delimiter"> The delimiter character to use. Default is &quot;/&quot;. </param>
         /// <param name="replacement"> A value that, if set, replaces the delimiter character. Default is &quot;/&quot;. </param>
@@ -30,6 +31,7 @@ namespace CognitiveSearch.Models
             ReverseTokenOrder = reverseTokenOrder;
             NumberOfTokensToSkip = numberOfTokensToSkip;
         }
+
         /// <summary> The delimiter character to use. Default is &quot;/&quot;. </summary>
         public char? Delimiter { get; set; }
         /// <summary> A value that, if set, replaces the delimiter character. Default is &quot;/&quot;. </summary>

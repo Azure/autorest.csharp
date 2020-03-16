@@ -17,6 +17,7 @@ namespace CognitiveSearch.Models
         internal SearchResult()
         {
         }
+
         /// <summary> Initializes a new instance of SearchResult. </summary>
         /// <param name="score"> The relevance score of the document compared to other documents returned by the query. </param>
         /// <param name="highlights"> Text fragments from the document that indicate the matching search terms, organized by each applicable field; null if hit highlighting was not enabled for the query. </param>
@@ -25,6 +26,7 @@ namespace CognitiveSearch.Models
             Score = score;
             Highlights = highlights;
         }
+
         /// <summary> The relevance score of the document compared to other documents returned by the query. </summary>
         public double? Score { get; internal set; }
         /// <summary> Text fragments from the document that indicate the matching search terms, organized by each applicable field; null if hit highlighting was not enabled for the query. </summary>

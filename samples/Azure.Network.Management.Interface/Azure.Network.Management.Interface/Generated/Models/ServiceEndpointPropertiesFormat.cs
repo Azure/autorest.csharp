@@ -16,6 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         internal ServiceEndpointPropertiesFormat()
         {
         }
+
         /// <summary> Initializes a new instance of ServiceEndpointPropertiesFormat. </summary>
         /// <param name="service"> The type of the endpoint service. </param>
         /// <param name="locations"> A list of locations. </param>
@@ -26,6 +27,7 @@ namespace Azure.Network.Management.Interface.Models
             Locations = locations;
             ProvisioningState = provisioningState;
         }
+
         /// <summary> The type of the endpoint service. </summary>
         public string Service { get; set; }
         /// <summary> A list of locations. </summary>

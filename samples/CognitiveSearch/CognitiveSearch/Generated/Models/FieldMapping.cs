@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
         internal FieldMapping()
         {
         }
+
         /// <summary> Initializes a new instance of FieldMapping. </summary>
         /// <param name="sourceFieldName"> The name of the field in the data source. </param>
         /// <param name="targetFieldName"> The name of the target field in the index. Same as the source field name by default. </param>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
             TargetFieldName = targetFieldName;
             MappingFunction = mappingFunction;
         }
+
         /// <summary> The name of the field in the data source. </summary>
         public string SourceFieldName { get; set; }
         /// <summary> The name of the target field in the index. Same as the source field name by default. </summary>

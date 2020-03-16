@@ -14,6 +14,7 @@ namespace validation.Models
         internal ChildProduct()
         {
         }
+
         /// <summary> Initializes a new instance of ChildProduct. </summary>
         /// <param name="constProperty"> Constant string. </param>
         /// <param name="count"> Count. </param>
@@ -22,6 +23,7 @@ namespace validation.Models
             ConstProperty = constProperty;
             Count = count;
         }
+
         /// <summary> Constant string. </summary>
         public string ConstProperty { get; set; } = "constant";
         /// <summary> Count. </summary>
