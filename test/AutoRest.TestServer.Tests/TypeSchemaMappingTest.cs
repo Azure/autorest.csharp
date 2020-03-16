@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Linq;
 using System.Reflection;
 using NamespaceForEnums;
 using CustomNamespace;
@@ -42,6 +43,13 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(false, modelType.IsPublic);
             Assert.AreEqual("NamespaceForEnums", modelType.Namespace);
             TypeAsserts.HasField(modelType, "Apple2", BindingFlags.Static | BindingFlags.Public);
+        }
+
+        [Test]
+        public void UserDefinedDefaultCtorsOverrideDefault()
+        {
+            var modelType = typeof(CustomizedModel);
+            Assert.NotNull(modelType.GetConstructors().SingleOrDefault(c => !c.IsStatic && !c.GetParameters().Any()));
         }
     }
 }

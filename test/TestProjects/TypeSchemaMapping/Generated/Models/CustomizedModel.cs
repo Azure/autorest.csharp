@@ -13,10 +13,6 @@ namespace CustomNamespace
     internal partial class CustomizedModel
     {
         /// <summary> Initializes a new instance of CustomizedModel. </summary>
-        internal CustomizedModel()
-        {
-        }
-        /// <summary> Initializes a new instance of CustomizedModel. </summary>
         /// <param name="customizedStringProperty"> A description about the set of tags. </param>
         /// <param name="customizedFancyField"> Fruit. </param>
         /// <param name="daysOfWeek"> Day of week. </param>

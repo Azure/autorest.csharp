@@ -12,6 +12,7 @@ namespace AutoRest.CSharp.V3.Input.Source
         public string SchemaName { get; }
         public INamedTypeSymbol ExistingType { get; }
 
+        public IMethodSymbol? DefaultConstructor { get; }
         public SourceMemberMapping[] PropertyMappings { get; }
 
         public ModelTypeMapping(string schemaName, INamedTypeSymbol existingType, SourceMemberMapping[] propertyMappings)
@@ -19,6 +20,8 @@ namespace AutoRest.CSharp.V3.Input.Source
             SchemaName = schemaName;
             ExistingType = existingType;
             PropertyMappings = propertyMappings;
+            // Find a parameterless ctor
+            DefaultConstructor = existingType.Constructors.SingleOrDefault(c => !c.IsStatic && c.Parameters.IsEmpty);
         }
 
         public SourceMemberMapping? GetMemberForSchema(string name)

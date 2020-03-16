@@ -97,15 +97,13 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 initializers.Append(new ObjectPropertyInitializer(Discriminator.Property, BuilderHelpers.StringConstant(Discriminator.Value)));
             }
 
-            var declaration = BuilderHelpers.CreateMemberDeclaration(Type.Name, Type, "internal", null);
-
             yield return new ObjectTypeConstructor(
-                declaration,
+                BuilderHelpers.CreateMemberDeclaration(Type.Name, Type, "internal", _sourceTypeMapping?.DefaultConstructor),
                 Array.Empty<Parameter>(),
                 Array.Empty<ObjectPropertyInitializer>());
 
             yield return new ObjectTypeConstructor(
-                declaration,
+                BuilderHelpers.CreateMemberDeclaration(Type.Name, Type, "internal", null),
                 constructorParameters.ToArray(),
                 initializers.ToArray(),
                 baseCtor
