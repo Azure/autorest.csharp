@@ -2,7 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Buffers;
 using System.Diagnostics;
+using System.Linq;
 using AutoRest.CSharp.V3.Output.Models.Types;
 
 namespace AutoRest.CSharp.V3.Generation.Types
@@ -11,6 +13,12 @@ namespace AutoRest.CSharp.V3.Generation.Types
     {
         private readonly ITypeProvider? _implementation;
         private readonly Type? _type;
+
+        public CSharpType(Type type) : this(
+            type.IsGenericType ? type.GetGenericTypeDefinition() : type,
+            type.IsGenericType ? type.GetGenericArguments().Select(p => new CSharpType(p)).ToArray() : Array.Empty<CSharpType>())
+        {
+        }
 
         public CSharpType(Type type, params CSharpType[] arguments) : this(type, false, arguments)
         {
@@ -49,5 +57,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
         public CSharpType WithNullable(bool isNullable) => IsFrameworkType
             ? new CSharpType(FrameworkType, isNullable, Arguments)
             : new CSharpType(Implementation, Namespace, Name, IsValueType, isNullable);
+
+        public static implicit operator CSharpType(Type type) => new CSharpType(type);
     }
 }
