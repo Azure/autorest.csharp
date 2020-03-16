@@ -10,19 +10,8 @@ using Azure.Core;
 
 namespace httpInfrastructure.Models
 {
-    public partial class MyException : IUtf8JsonSerializable
+    public partial class MyException
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (StatusCode != null)
-            {
-                writer.WritePropertyName("statusCode");
-                writer.WriteStringValue(StatusCode);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static MyException DeserializeMyException(JsonElement element)
         {
             MyException result = new MyException();

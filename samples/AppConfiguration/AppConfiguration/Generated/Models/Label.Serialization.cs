@@ -10,19 +10,8 @@ using Azure.Core;
 
 namespace AppConfiguration.Models
 {
-    public partial class Label : IUtf8JsonSerializable
+    public partial class Label
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Name != null)
-            {
-                writer.WritePropertyName("name");
-                writer.WriteStringValue(Name);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static Label DeserializeLabel(JsonElement element)
         {
             Label result = new Label();

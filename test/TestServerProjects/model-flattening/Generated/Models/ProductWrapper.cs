@@ -23,6 +23,6 @@ namespace model_flattening.Models
         }
 
         /// <summary> the product value. </summary>
-        public string Value { get; set; }
+        public string Value { get; internal set; }
     }
 }

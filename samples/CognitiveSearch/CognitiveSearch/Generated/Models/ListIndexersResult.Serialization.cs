@@ -11,24 +11,8 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class ListIndexersResult : IUtf8JsonSerializable
+    public partial class ListIndexersResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Indexers != null)
-            {
-                writer.WritePropertyName("value");
-                writer.WriteStartArray();
-                foreach (var item in Indexers)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            writer.WriteEndObject();
-        }
-
         internal static ListIndexersResult DeserializeListIndexersResult(JsonElement element)
         {
             ListIndexersResult result = new ListIndexersResult();

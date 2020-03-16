@@ -23,6 +23,6 @@ namespace paging.Models
         }
 
         /// <summary> The status of the request. </summary>
-        public OperationResultStatus? Status { get; set; }
+        public OperationResultStatus? Status { get; internal set; }
     }
 }

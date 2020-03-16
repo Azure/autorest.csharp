@@ -10,39 +10,8 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class ItemWarning : IUtf8JsonSerializable
+    public partial class ItemWarning
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Key != null)
-            {
-                writer.WritePropertyName("key");
-                writer.WriteStringValue(Key);
-            }
-            if (Message != null)
-            {
-                writer.WritePropertyName("message");
-                writer.WriteStringValue(Message);
-            }
-            if (Name != null)
-            {
-                writer.WritePropertyName("name");
-                writer.WriteStringValue(Name);
-            }
-            if (Details != null)
-            {
-                writer.WritePropertyName("details");
-                writer.WriteStringValue(Details);
-            }
-            if (DocumentationLink != null)
-            {
-                writer.WritePropertyName("documentationLink");
-                writer.WriteStringValue(DocumentationLink);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static ItemWarning DeserializeItemWarning(JsonElement element)
         {
             ItemWarning result = new ItemWarning();

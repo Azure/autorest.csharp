@@ -33,16 +33,16 @@ namespace CognitiveServices.TextAnalytics.Models
         }
 
         /// <summary> Entity text as appears in the request. </summary>
-        public string Text { get; set; }
+        public string Text { get; internal set; }
         /// <summary> Entity type, such as Person/Location/Org/SSN etc. </summary>
-        public string Type { get; set; }
+        public string Type { get; internal set; }
         /// <summary> Entity sub type, such as Age/Year/TimeRange etc. </summary>
-        public string Subtype { get; set; }
+        public string Subtype { get; internal set; }
         /// <summary> Start position (in Unicode characters) for the entity text. </summary>
-        public int Offset { get; set; }
+        public int Offset { get; internal set; }
         /// <summary> Length (in Unicode characters) for the entity text. </summary>
-        public int Length { get; set; }
+        public int Length { get; internal set; }
         /// <summary> Confidence score between 0 and 1 of the extracted entity. </summary>
-        public double Score { get; set; }
+        public double Score { get; internal set; }
     }
 }

@@ -31,12 +31,12 @@ namespace Azure.AI.FormRecognizer.Models
         }
 
         /// <summary> Training document name. </summary>
-        public string DocumentName { get; set; }
+        public string DocumentName { get; internal set; }
         /// <summary> Total number of pages trained. </summary>
-        public int Pages { get; set; }
+        public int Pages { get; internal set; }
         /// <summary> List of errors. </summary>
-        public IList<ErrorInformation> Errors { get; set; } = new List<ErrorInformation>();
+        public IList<ErrorInformation> Errors { get; internal set; } = new List<ErrorInformation>();
         /// <summary> Status of the training operation. </summary>
-        public TrainStatus Status { get; set; }
+        public TrainStatus Status { get; internal set; }
     }
 }

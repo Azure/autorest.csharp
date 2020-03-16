@@ -22,6 +22,6 @@ namespace httpInfrastructure.Models
             HttpCode = httpCode;
         }
 
-        public string HttpCode { get; set; }
+        public string HttpCode { get; internal set; }
     }
 }

@@ -27,10 +27,10 @@ namespace CognitiveServices.TextAnalytics.Models
         }
 
         /// <summary> Long name of a detected language (e.g. English, French). </summary>
-        public string Name { get; set; }
+        public string Name { get; internal set; }
         /// <summary> A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr). </summary>
-        public string Iso6391Name { get; set; }
+        public string Iso6391Name { get; internal set; }
         /// <summary> A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. </summary>
-        public double Score { get; set; }
+        public double Score { get; internal set; }
     }
 }

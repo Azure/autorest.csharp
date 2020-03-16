@@ -7,6 +7,7 @@ using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
+using Azure.Core;
 
 namespace AutoRest.CSharp.V3.Generation.Writers
 {
@@ -25,7 +26,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         writer.Line($"{writerName}.WriteStartElement({array.Name:L});");
                     }
 
-                    var itemVariable = writer.GetTemporaryVariable("item");
+                    var itemVariable = new CodeWriterDeclaration("item");
 
                     using (writer.Scope($"foreach (var {itemVariable:D} in {name})"))
                     {
@@ -42,7 +43,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     break;
                 case XmlDictionarySerialization dictionarySerialization:
-                    var pairVariable = writer.GetTemporaryVariable("pair");
+                    var pairVariable = new CodeWriterDeclaration("pair");
                     using (writer.Scope($"foreach (var {pairVariable:D} in {name})"))
                     {
                         writer.ToSerializeCall(
@@ -126,6 +127,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private static void ToSerializeValueCall(this CodeWriter writer, CodeWriterDelegate name, CodeWriterDelegate writerName, XmlValueSerialization valueSerialization)
         {
+            writer.UseNamespace(typeof(XmlWriterExtensions).Namespace!);
             CSharpType implementationType = valueSerialization.Type;
 
             if (!implementationType.IsFrameworkType)
@@ -138,7 +140,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     case EnumType clientEnum:
                         writer.Append($"{writerName}.WriteValue({name}")
                             .AppendNullableValue(implementationType)
-                            .AppendRaw(clientEnum.IsStringBased ? ".ToString()" : ".ToSerialString()")
+                            .AppendEnumToString(clientEnum)
                             .Line($");");
                         return;
                 }
@@ -176,19 +178,19 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             var type = serialization.Type;
 
-            destination = writer.GetTemporaryVariable(destination);
+            var destinationDeclaration = new CodeWriterDeclaration(destination);
 
-            string s = destination;
+            writer.Line($"{type} {destinationDeclaration:D} = default;");
 
-            writer.Line($"{type} {destination:D} = default;");
+            destination = destinationDeclaration.ActualName;
 
             if (isElement)
             {
-                writer.ToDeserializeElementCall(serialization, w=> w.AppendRaw(s), element);
+                writer.ToDeserializeElementCall(serialization, w=> w.Append(destinationDeclaration), element);
             }
             else
             {
-                writer.ToDeserializeCall(serialization, w => w.AppendRaw(s), element);
+                writer.ToDeserializeCall(serialization, w => w.Append(destinationDeclaration), element);
             }
         }
 
@@ -200,11 +202,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 return;
             }
 
-            string elementVariable = writer.GetTemporaryVariable(serialization.Name.ToVariableName());
+            var elementVariable = new CodeWriterDeclaration(serialization.Name.ToVariableName());
 
             writer.Line($"var {elementVariable:D} = {element}.Element({serialization.Name:L});");
 
-            element = w => w.AppendRaw(elementVariable);
+            element = w => w.Append(elementVariable);
 
             using (writer.Scope($"if ({elementVariable} != null)"))
             {
@@ -218,16 +220,16 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 case XmlArraySerialization arraySerialization:
                 {
-                    string childElementVariable = writer.GetTemporaryVariable("e");
+                    var childElementVariable = new CodeWriterDeclaration("e");
 
                     writer.Line($"{destination} = new {arraySerialization.ImplementationType}();");
 
                     using (writer.Scope($"foreach (var {childElementVariable:D} in {element}.Elements({arraySerialization.ValueSerialization.Name:L}))"))
                     {
-                        var itemVariableName = writer.GetTemporaryVariable("value");
+                        var itemVariableName = "value";
                         writer.ToDeserializeCall(
                             arraySerialization.ValueSerialization,
-                            w => w.AppendRaw(childElementVariable),
+                            w => w.Append(childElementVariable),
                             ref itemVariableName,
                             true);
 
@@ -240,8 +242,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     writer.Append($"{destination} = new {dictionarySerialization.ImplementationType}();");
 
-                    string elementsVariable = writer.GetTemporaryVariable("elements");
-                    string elementVariable = writer.GetTemporaryVariable("e");
+                    var elementsVariable = new CodeWriterDeclaration("elements");
+                    var elementVariable = new CodeWriterDeclaration("e");
 
                     writer.Line($"var {elementsVariable:D} = {element}.Elements();");
                     using (writer.Scope($"foreach (var {elementVariable:D} in {elementsVariable})"))
@@ -249,7 +251,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         var itemVariableName = "value";
                         writer.ToDeserializeCall(
                             dictionarySerialization.ValueSerialization,
-                            w => w.AppendRaw(elementVariable),
+                            w => w.Append(elementVariable),
                             ref itemVariableName,
                             true);
 
@@ -263,13 +265,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (XmlObjectAttributeSerialization attribute in elementSerialization.Attributes)
                     {
-                        string elementVariable = writer.GetTemporaryVariable(attribute.MemberName.ToVariableName());
+                        var elementVariable = new CodeWriterDeclaration(attribute.MemberName.ToVariableName());
 
                         writer.Line($"var {elementVariable:D} = {element}.Attribute({attribute.Name:L});");
                         using (writer.Scope($"if ({elementVariable} != null)"))
                         {
                             writer.Append($"{destination}.{attribute.MemberName} = ");
-                            writer.ToDeserializeValueCall(attribute.ValueSerialization, w => w.AppendRaw(elementVariable));
+                            writer.ToDeserializeValueCall(attribute.ValueSerialization, w => w.Append(elementVariable));
                             writer.Line($";");
                         }
                     }
@@ -309,6 +311,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private static void ToDeserializeValueCall(this CodeWriter writer, XmlValueSerialization serialization, CodeWriterDelegate element)
         {
+            writer.UseNamespace(typeof(XElementExtensions).Namespace!);
+
             var type = serialization.Type;
 
             if (type.IsFrameworkType)

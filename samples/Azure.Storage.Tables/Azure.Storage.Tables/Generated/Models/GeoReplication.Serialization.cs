@@ -6,26 +6,13 @@
 #nullable disable
 
 using System;
-using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class GeoReplication : IXmlSerializable
+    public partial class GeoReplication
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
-        {
-            writer.WriteStartElement(nameHint ?? "GeoReplication");
-            writer.WriteStartElement("Status");
-            writer.WriteValue(Status.ToString());
-            writer.WriteEndElement();
-            writer.WriteStartElement("LastSyncTime");
-            writer.WriteValue(LastSyncTime, "R");
-            writer.WriteEndElement();
-            writer.WriteEndElement();
-        }
-
         internal static GeoReplication DeserializeGeoReplication(XElement element)
         {
             GeoReplication result = default;

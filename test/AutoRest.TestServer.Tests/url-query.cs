@@ -77,7 +77,6 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesStringNull() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).StringNullAsync( null));
 
         [Test]
-        [Ignore("Not implemented https://github.com/Azure/autorest.csharp/issues/325")]
         public Task UrlQueriesEnumValid() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).EnumValidAsync( UriColor.GreenColor));
 
         [Test]

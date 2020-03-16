@@ -10,20 +10,8 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class ModelsSummary : IUtf8JsonSerializable
+    public partial class ModelsSummary
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("count");
-            writer.WriteNumberValue(Count);
-            writer.WritePropertyName("limit");
-            writer.WriteNumberValue(Limit);
-            writer.WritePropertyName("lastUpdatedDateTime");
-            writer.WriteStringValue(LastUpdatedDateTime, "S");
-            writer.WriteEndObject();
-        }
-
         internal static ModelsSummary DeserializeModelsSummary(JsonElement element)
         {
             ModelsSummary result = new ModelsSummary();

@@ -10,31 +10,8 @@ using Azure.Core;
 
 namespace body_complex.Models
 {
-    public partial class DotSalmon : IUtf8JsonSerializable
+    public partial class DotSalmon
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Location != null)
-            {
-                writer.WritePropertyName("location");
-                writer.WriteStringValue(Location);
-            }
-            if (Iswild != null)
-            {
-                writer.WritePropertyName("iswild");
-                writer.WriteBooleanValue(Iswild.Value);
-            }
-            writer.WritePropertyName("fish.type");
-            writer.WriteStringValue(FishType);
-            if (Species != null)
-            {
-                writer.WritePropertyName("species");
-                writer.WriteStringValue(Species);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static DotSalmon DeserializeDotSalmon(JsonElement element)
         {
             DotSalmon result = new DotSalmon();

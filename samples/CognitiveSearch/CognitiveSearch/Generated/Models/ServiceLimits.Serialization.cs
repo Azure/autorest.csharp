@@ -10,34 +10,8 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class ServiceLimits : IUtf8JsonSerializable
+    public partial class ServiceLimits
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (MaxFieldsPerIndex != null)
-            {
-                writer.WritePropertyName("maxFieldsPerIndex");
-                writer.WriteNumberValue(MaxFieldsPerIndex.Value);
-            }
-            if (MaxFieldNestingDepthPerIndex != null)
-            {
-                writer.WritePropertyName("maxFieldNestingDepthPerIndex");
-                writer.WriteNumberValue(MaxFieldNestingDepthPerIndex.Value);
-            }
-            if (MaxComplexCollectionFieldsPerIndex != null)
-            {
-                writer.WritePropertyName("maxComplexCollectionFieldsPerIndex");
-                writer.WriteNumberValue(MaxComplexCollectionFieldsPerIndex.Value);
-            }
-            if (MaxComplexObjectsInCollectionsPerDocument != null)
-            {
-                writer.WritePropertyName("maxComplexObjectsInCollectionsPerDocument");
-                writer.WriteNumberValue(MaxComplexObjectsInCollectionsPerDocument.Value);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static ServiceLimits DeserializeServiceLimits(JsonElement element)
         {
             ServiceLimits result = new ServiceLimits();

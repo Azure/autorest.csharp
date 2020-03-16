@@ -27,6 +27,6 @@ namespace body_complex.Models
         }
 
         public string FishType { get; internal set; }
-        public string Species { get; set; }
+        public string Species { get; internal set; }
     }
 }

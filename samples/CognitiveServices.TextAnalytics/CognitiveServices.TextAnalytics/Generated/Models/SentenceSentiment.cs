@@ -33,14 +33,14 @@ namespace CognitiveServices.TextAnalytics.Models
         }
 
         /// <summary> The predicted Sentiment for the sentence. </summary>
-        public SentenceSentimentValue Sentiment { get; set; }
+        public SentenceSentimentValue Sentiment { get; internal set; }
         /// <summary> The sentiment confidence score between 0 and 1 for the sentence for all classes. </summary>
-        public SentimentConfidenceScorePerLabel SentenceScores { get; set; } = new SentimentConfidenceScorePerLabel();
+        public SentimentConfidenceScorePerLabel SentenceScores { get; internal set; } = new SentimentConfidenceScorePerLabel();
         /// <summary> The sentence offset from the start of the document. </summary>
-        public int Offset { get; set; }
+        public int Offset { get; internal set; }
         /// <summary> The length of the sentence by Unicode standard. </summary>
-        public int Length { get; set; }
+        public int Length { get; internal set; }
         /// <summary> The warnings generated for the sentence. </summary>
-        public IList<string> Warnings { get; set; }
+        public IList<string> Warnings { get; internal set; }
     }
 }

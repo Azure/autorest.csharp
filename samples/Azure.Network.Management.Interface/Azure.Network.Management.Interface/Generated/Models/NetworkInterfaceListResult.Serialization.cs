@@ -11,29 +11,8 @@ using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class NetworkInterfaceListResult : IUtf8JsonSerializable
+    public partial class NetworkInterfaceListResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Value != null)
-            {
-                writer.WritePropertyName("value");
-                writer.WriteStartArray();
-                foreach (var item in Value)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (NextLink != null)
-            {
-                writer.WritePropertyName("nextLink");
-                writer.WriteStringValue(NextLink);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static NetworkInterfaceListResult DeserializeNetworkInterfaceListResult(JsonElement element)
         {
             NetworkInterfaceListResult result = new NetworkInterfaceListResult();

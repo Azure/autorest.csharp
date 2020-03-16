@@ -9,6 +9,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Responses
 {
     internal class StreamResponseBody : ResponseBody
     {
-        public override CSharpType Type { get; } = new CSharpType(typeof(Stream));
+        public override CSharpType Type { get; } = typeof(Stream);
     }
 }

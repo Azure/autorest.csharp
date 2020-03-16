@@ -10,28 +10,8 @@ using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    public partial class DocumentLinkedEntities : IUtf8JsonSerializable
+    public partial class DocumentLinkedEntities
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("id");
-            writer.WriteStringValue(Id);
-            writer.WritePropertyName("entities");
-            writer.WriteStartArray();
-            foreach (var item in Entities)
-            {
-                writer.WriteObjectValue(item);
-            }
-            writer.WriteEndArray();
-            if (Statistics != null)
-            {
-                writer.WritePropertyName("statistics");
-                writer.WriteObjectValue(Statistics);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static DocumentLinkedEntities DeserializeDocumentLinkedEntities(JsonElement element)
         {
             DocumentLinkedEntities result = new DocumentLinkedEntities();

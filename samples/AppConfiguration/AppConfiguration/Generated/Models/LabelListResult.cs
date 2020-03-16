@@ -27,8 +27,8 @@ namespace AppConfiguration.Models
         }
 
         /// <summary> The collection value. </summary>
-        public IList<Label> Items { get; set; }
+        public IList<Label> Items { get; internal set; }
         /// <summary> The URI that can be used to request the next set of paged results. </summary>
-        public string NextLink { get; set; }
+        public string NextLink { get; internal set; }
     }
 }

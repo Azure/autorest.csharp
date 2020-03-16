@@ -29,10 +29,10 @@ namespace Azure.AI.FormRecognizer.Models
         }
 
         /// <summary> Document type. </summary>
-        public string DocType { get; set; }
+        public string DocType { get; internal set; }
         /// <summary> First and last page number where the document is found. </summary>
-        public IList<int> PageRange { get; set; } = new List<int>();
+        public IList<int> PageRange { get; internal set; } = new List<int>();
         /// <summary> Dictionary of named field values. </summary>
-        public IDictionary<string, FieldValue> Fields { get; set; } = new Dictionary<string, FieldValue>();
+        public IDictionary<string, FieldValue> Fields { get; internal set; } = new Dictionary<string, FieldValue>();
     }
 }

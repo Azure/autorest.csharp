@@ -10,24 +10,8 @@ using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class EffectiveNetworkSecurityGroupAssociation : IUtf8JsonSerializable
+    public partial class EffectiveNetworkSecurityGroupAssociation
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Subnet != null)
-            {
-                writer.WritePropertyName("subnet");
-                writer.WriteObjectValue(Subnet);
-            }
-            if (NetworkInterface != null)
-            {
-                writer.WritePropertyName("networkInterface");
-                writer.WriteObjectValue(NetworkInterface);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static EffectiveNetworkSecurityGroupAssociation DeserializeEffectiveNetworkSecurityGroupAssociation(JsonElement element)
         {
             EffectiveNetworkSecurityGroupAssociation result = new EffectiveNetworkSecurityGroupAssociation();

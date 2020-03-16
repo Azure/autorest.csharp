@@ -27,10 +27,10 @@ namespace Azure.AI.FormRecognizer.Models
         }
 
         /// <summary> Basic custom model information. </summary>
-        public ModelInfo ModelInfo { get; set; } = new ModelInfo();
+        public ModelInfo ModelInfo { get; internal set; } = new ModelInfo();
         /// <summary> Keys extracted by the custom model. </summary>
-        public KeysResult Keys { get; set; }
+        public KeysResult Keys { get; internal set; }
         /// <summary> Custom model training result. </summary>
-        public TrainResult TrainResult { get; set; }
+        public TrainResult TrainResult { get; internal set; }
     }
 }

@@ -22,6 +22,6 @@ namespace xml_service.Models
             Name = name;
         }
 
-        public string Name { get; set; }
+        public string Name { get; internal set; }
     }
 }

@@ -119,6 +119,9 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         public CSharpType Type { get; }
 
+        public bool IncludeSerializer => _objectSchema.IsInput;
+        public bool IncludeDeserializer => _objectSchema.IsOutput;
+
         public ObjectTypeProperty GetPropertyForSchemaProperty(Property property, bool includeParents = false)
         {
             if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty == property, out ObjectTypeProperty? objectProperty, includeParents))
@@ -218,7 +221,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             foreach (Property property in _objectSchema.Properties!)
             {
                 SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetMemberForSchema(property.SerializedName);
-                bool isReadOnly = property.IsDiscriminator == true || property.ReadOnly == true;
+                bool isReadOnly = property.IsDiscriminator == true || property.ReadOnly == true || !_objectSchema.IsInput;
 
                 Constant? defaultValue = null;
 

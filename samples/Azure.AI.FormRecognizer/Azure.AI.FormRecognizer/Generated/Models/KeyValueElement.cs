@@ -29,10 +29,10 @@ namespace Azure.AI.FormRecognizer.Models
         }
 
         /// <summary> The text content of the key or value. </summary>
-        public string Text { get; set; }
+        public string Text { get; internal set; }
         /// <summary> Bounding box of the key or value. </summary>
-        public IList<float> BoundingBox { get; set; }
+        public IList<float> BoundingBox { get; internal set; }
         /// <summary> When includeTextDetails is set to true, a list of references to the text elements constituting this key or value. </summary>
-        public IList<string> Elements { get; set; }
+        public IList<string> Elements { get; internal set; }
     }
 }

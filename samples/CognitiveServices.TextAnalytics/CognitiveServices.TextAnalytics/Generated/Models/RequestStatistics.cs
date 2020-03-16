@@ -29,12 +29,12 @@ namespace CognitiveServices.TextAnalytics.Models
         }
 
         /// <summary> Number of documents submitted in the request. </summary>
-        public int DocumentsCount { get; set; }
+        public int DocumentsCount { get; internal set; }
         /// <summary> Number of valid documents. This excludes empty, over-size limit or non-supported languages documents. </summary>
-        public int ValidDocumentsCount { get; set; }
+        public int ValidDocumentsCount { get; internal set; }
         /// <summary> Number of invalid documents. This includes empty, over-size limit or non-supported languages documents. </summary>
-        public int ErroneousDocumentsCount { get; set; }
+        public int ErroneousDocumentsCount { get; internal set; }
         /// <summary> Number of transactions for the request. </summary>
-        public long TransactionsCount { get; set; }
+        public long TransactionsCount { get; internal set; }
     }
 }

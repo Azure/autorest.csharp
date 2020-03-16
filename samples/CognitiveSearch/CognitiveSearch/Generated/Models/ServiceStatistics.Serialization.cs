@@ -10,24 +10,8 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class ServiceStatistics : IUtf8JsonSerializable
+    public partial class ServiceStatistics
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Counters != null)
-            {
-                writer.WritePropertyName("counters");
-                writer.WriteObjectValue(Counters);
-            }
-            if (Limits != null)
-            {
-                writer.WritePropertyName("limits");
-                writer.WriteObjectValue(Limits);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static ServiceStatistics DeserializeServiceStatistics(JsonElement element)
         {
             ServiceStatistics result = new ServiceStatistics();

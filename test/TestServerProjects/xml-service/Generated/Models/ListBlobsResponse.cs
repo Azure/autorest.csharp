@@ -36,13 +36,13 @@ namespace xml_service.Models
             NextMarker = nextMarker;
         }
 
-        public string ServiceEndpoint { get; set; }
-        public string ContainerName { get; set; }
-        public string Prefix { get; set; }
-        public string Marker { get; set; }
-        public int MaxResults { get; set; }
-        public string Delimiter { get; set; }
-        public Blobs Blobs { get; set; } = new Blobs();
-        public string NextMarker { get; set; }
+        public string ServiceEndpoint { get; internal set; }
+        public string ContainerName { get; internal set; }
+        public string Prefix { get; internal set; }
+        public string Marker { get; internal set; }
+        public int MaxResults { get; internal set; }
+        public string Delimiter { get; internal set; }
+        public Blobs Blobs { get; internal set; } = new Blobs();
+        public string NextMarker { get; internal set; }
     }
 }

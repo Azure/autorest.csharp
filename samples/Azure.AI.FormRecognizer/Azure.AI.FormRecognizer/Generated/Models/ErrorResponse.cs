@@ -22,6 +22,6 @@ namespace Azure.AI.FormRecognizer.Models
             Error = error;
         }
 
-        public ErrorInformation Error { get; set; } = new ErrorInformation();
+        public ErrorInformation Error { get; internal set; } = new ErrorInformation();
     }
 }

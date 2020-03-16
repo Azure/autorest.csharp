@@ -24,7 +24,7 @@ namespace paging.Models
             Name = name;
         }
 
-        public int? Id { get; set; }
-        public string Name { get; set; }
+        public int? Id { get; internal set; }
+        public string Name { get; internal set; }
     }
 }

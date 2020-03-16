@@ -10,24 +10,8 @@ using Azure.Core;
 
 namespace body_duration.Models
 {
-    public partial class Error : IUtf8JsonSerializable
+    public partial class Error
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Status != null)
-            {
-                writer.WritePropertyName("status");
-                writer.WriteNumberValue(Status.Value);
-            }
-            if (Message != null)
-            {
-                writer.WritePropertyName("message");
-                writer.WriteStringValue(Message);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static Error DeserializeError(JsonElement element)
         {
             Error result = new Error();

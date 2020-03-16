@@ -24,7 +24,7 @@ namespace url_multi_collectionFormat.Models
             Message = message;
         }
 
-        public int? Status { get; set; }
-        public string Message { get; set; }
+        public int? Status { get; internal set; }
+        public string Message { get; internal set; }
     }
 }

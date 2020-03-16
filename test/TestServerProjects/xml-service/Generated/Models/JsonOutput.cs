@@ -22,6 +22,6 @@ namespace xml_service.Models
             Id = id;
         }
 
-        public int? Id { get; set; }
+        public int? Id { get; internal set; }
     }
 }

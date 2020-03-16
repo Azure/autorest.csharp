@@ -27,6 +27,6 @@ namespace body_complex.Models
             Kind = "Kind1";
         }
 
-        public string PropD1 { get; set; }
+        public string PropD1 { get; internal set; }
     }
 }

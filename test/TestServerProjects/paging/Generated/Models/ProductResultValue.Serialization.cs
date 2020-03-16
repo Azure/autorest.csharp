@@ -11,29 +11,8 @@ using Azure.Core;
 
 namespace paging.Models
 {
-    public partial class ProductResultValue : IUtf8JsonSerializable
+    public partial class ProductResultValue
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Value != null)
-            {
-                writer.WritePropertyName("value");
-                writer.WriteStartArray();
-                foreach (var item in Value)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (NextLink != null)
-            {
-                writer.WritePropertyName("nextLink");
-                writer.WriteStringValue(NextLink);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static ProductResultValue DeserializeProductResultValue(JsonElement element)
         {
             ProductResultValue result = new ProductResultValue();

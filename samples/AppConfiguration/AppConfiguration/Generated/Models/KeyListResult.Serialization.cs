@@ -11,29 +11,8 @@ using Azure.Core;
 
 namespace AppConfiguration.Models
 {
-    public partial class KeyListResult : IUtf8JsonSerializable
+    public partial class KeyListResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Items != null)
-            {
-                writer.WritePropertyName("items");
-                writer.WriteStartArray();
-                foreach (var item in Items)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (NextLink != null)
-            {
-                writer.WritePropertyName("@nextLink");
-                writer.WriteStringValue(NextLink);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static KeyListResult DeserializeKeyListResult(JsonElement element)
         {
             KeyListResult result = new KeyListResult();

@@ -26,7 +26,7 @@ namespace custom_baseUrl_paging.Models
             NextLink = nextLink;
         }
 
-        public IList<Product> Values { get; set; }
-        public string NextLink { get; set; }
+        public IList<Product> Values { get; internal set; }
+        public string NextLink { get; internal set; }
     }
 }

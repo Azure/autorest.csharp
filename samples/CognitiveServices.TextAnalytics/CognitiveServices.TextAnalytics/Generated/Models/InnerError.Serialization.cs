@@ -11,39 +11,8 @@ using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    public partial class InnerError : IUtf8JsonSerializable
+    public partial class InnerError
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("code");
-            writer.WriteStringValue(Code.ToSerialString());
-            writer.WritePropertyName("message");
-            writer.WriteStringValue(Message);
-            if (Details != null)
-            {
-                writer.WritePropertyName("details");
-                writer.WriteStartObject();
-                foreach (var item in Details)
-                {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteStringValue(item.Value);
-                }
-                writer.WriteEndObject();
-            }
-            if (Target != null)
-            {
-                writer.WritePropertyName("target");
-                writer.WriteStringValue(Target);
-            }
-            if (Inner != null)
-            {
-                writer.WritePropertyName("innerError");
-                writer.WriteObjectValue(Inner);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static InnerError DeserializeInnerError(JsonElement element)
         {
             InnerError result = new InnerError();

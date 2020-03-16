@@ -26,7 +26,7 @@ namespace xml_service.Models
             Blob = blob;
         }
 
-        public IList<BlobPrefix> BlobPrefix { get; set; }
-        public IList<Blob> Blob { get; set; }
+        public IList<BlobPrefix> BlobPrefix { get; internal set; }
+        public IList<Blob> Blob { get; internal set; }
     }
 }

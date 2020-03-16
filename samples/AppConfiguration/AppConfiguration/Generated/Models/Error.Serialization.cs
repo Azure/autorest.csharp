@@ -10,39 +10,8 @@ using Azure.Core;
 
 namespace AppConfiguration.Models
 {
-    public partial class Error : IUtf8JsonSerializable
+    public partial class Error
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Type != null)
-            {
-                writer.WritePropertyName("type");
-                writer.WriteStringValue(Type);
-            }
-            if (Title != null)
-            {
-                writer.WritePropertyName("title");
-                writer.WriteStringValue(Title);
-            }
-            if (Name != null)
-            {
-                writer.WritePropertyName("name");
-                writer.WriteStringValue(Name);
-            }
-            if (Detail != null)
-            {
-                writer.WritePropertyName("detail");
-                writer.WriteStringValue(Detail);
-            }
-            if (Status != null)
-            {
-                writer.WritePropertyName("status");
-                writer.WriteNumberValue(Status.Value);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static Error DeserializeError(JsonElement element)
         {
             Error result = new Error();
