@@ -209,7 +209,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             ReadProperty(writer, itemVariable, destination, property);
                         }
 
-                        if (dictionary.AdditionalProperties is JsonDynamicPropertiesSerialization additionalProperties)
+                        if (dictionary.AdditionalProperties is JsonDictionarySerialization additionalProperties)
                         {
                             if (additionalProperties.ValueSerialization is JsonValueSerialization valueSerialization)
                             {

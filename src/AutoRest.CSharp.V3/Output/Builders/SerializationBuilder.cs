@@ -98,11 +98,9 @@ namespace AutoRest.CSharp.V3.Output.Builders
                         BuildSerialization(arraySchema.ElementType, false),
                         _typeFactory.CreateImplementationType(arraySchema, isNullable));
                 case DictionarySchema dictionarySchema:
-                    return new JsonObjectSerialization(
-                        _typeFactory.CreateType(dictionarySchema, isNullable),
-                        Array.Empty<JsonPropertySerialization>(),
-                        new JsonDynamicPropertiesSerialization(BuildSerialization(dictionarySchema.ElementType, false)),
-                        _typeFactory.CreateImplementationType(dictionarySchema, isNullable)
+                    return new JsonDictionarySerialization(
+                        _typeFactory.CreateImplementationType(dictionarySchema, isNullable),
+                        BuildSerialization(dictionarySchema.ElementType, false)
                         );
                 default:
                     return new JsonValueSerialization(
@@ -236,7 +234,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
         }
 
-        private JsonDynamicPropertiesSerialization? CreateAdditionalProperties(ObjectSchema objectSchema)
+        private JsonDictionarySerialization? CreateAdditionalProperties(ObjectSchema objectSchema)
         {
             var inheritedDictionarySchema = objectSchema.Parents!.All.OfType<DictionarySchema>().FirstOrDefault();
 
@@ -245,8 +243,12 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 return null;
             }
 
-            return new JsonDynamicPropertiesSerialization(
-                BuildSerialization(inheritedDictionarySchema.ElementType, false)
+            var valueSerialization = BuildSerialization(inheritedDictionarySchema.ElementType, false);
+            var itemType = _typeFactory.CreateType(inheritedDictionarySchema.ElementType, isNullable: false);
+
+            return new JsonDictionarySerialization(
+                new CSharpType(typeof(Dictionary<,>), new CSharpType(typeof(string)), itemType),
+                valueSerialization
             );
         }
     }
