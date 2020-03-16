@@ -48,16 +48,11 @@ namespace AutoRest.CSharp.V3.Output.Builders
         {
             var clientName = GetClientName(operationGroup, "Client");
 
-            var allClientParameters = operationGroup.Operations
+            var clientParameters = operationGroup.Operations
                 .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
                 .Where(p => p.Implementation == ImplementationLocation.Client)
-                .Distinct();
-
-            Dictionary<string, Parameter> clientParameters = new Dictionary<string, Parameter>();
-            foreach (RequestParameter clientParameter in allClientParameters)
-            {
-                clientParameters[clientParameter.Language.Default.Name] = BuildParameter(clientParameter);
-            }
+                .Distinct()
+                .ToDictionary(p => p.Language.Default.Name, BuildParameter);
 
             List<OperationMethod> operationMethods = new List<OperationMethod>();
             foreach (Operation operation in operationGroup.Operations)
