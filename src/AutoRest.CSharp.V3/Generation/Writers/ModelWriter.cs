@@ -99,15 +99,15 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         var implementation = new CSharpType(typeof(Dictionary<,>), new CSharpType(typeof(string)), itemType);
 
                         Debug.Assert(dictionaryType.Arguments.Length == 2);
-                        var keyType = new CSharpType(typeof(string));
+                        var keyType = typeof(string);
 
                         var keyValuePairType = new CSharpType(typeof(KeyValuePair<,>), keyType, itemType);
                         var iEnumeratorKeyValuePairType = new CSharpType(typeof(IEnumerator<>), keyValuePairType);
                         var iCollectionKeyValuePairType = new CSharpType(typeof(ICollection<>), keyValuePairType);
                         var iCollectionKeyType = new CSharpType(typeof(ICollection<>), keyType);
                         var iCollectionItemType = new CSharpType(typeof(ICollection<>), itemType);
-                        var iEnumerator = new CSharpType(typeof(IEnumerator));
-                        var iEnumerable = new CSharpType(typeof(IEnumerable));
+                        var iEnumerator = typeof(IEnumerator);
+                        var iEnumerable = typeof(IEnumerable);
 
                         string additionalProperties = "_additionalProperties";
                         writer.Line($"private readonly {dictionaryType} {additionalProperties} = new {implementation}();");

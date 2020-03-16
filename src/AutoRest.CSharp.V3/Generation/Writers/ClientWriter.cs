@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             CSharpType? bodyType = responseBody?.Type;
             CSharpType responseType = bodyType != null ?
                 new CSharpType(typeof(Response<>), bodyType) :
-                new CSharpType(typeof(Response));
+                typeof(Response);
 
             responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
 
@@ -294,7 +294,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         private void WriteStartOperationOperation(CodeWriter writer, LongRunningOperation lroMethod, bool async)
         {
             RestClientMethod originalMethod = lroMethod.OriginalMethod;
-            CSharpType responseType = new CSharpType(typeof(Operation<>), lroMethod.OriginalResponse.ResponseBody?.Type ?? new CSharpType(typeof(Response)));
+            CSharpType responseType = new CSharpType(typeof(Operation<>), lroMethod.OriginalResponse.ResponseBody?.Type ?? typeof(Response));
             responseType = async ? new CSharpType(typeof(ValueTask<>), responseType) : responseType;
             Parameter[] parameters = originalMethod.Parameters;
 

@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         public static void WriteParameter(this CodeWriter writer, Parameter clientParameter)
         {
-            writer.Append($"{clientParameter.Type} {clientParameter.Name}");
+            writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
             if (clientParameter.DefaultValue != null)
             {
                 writer.Append($" = {clientParameter.DefaultValue.Value.Value:L}");
