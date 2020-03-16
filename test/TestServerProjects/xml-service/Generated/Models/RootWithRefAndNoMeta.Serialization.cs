@@ -28,6 +28,7 @@ namespace xml_service.Models
             }
             writer.WriteEndElement();
         }
+
         internal static RootWithRefAndNoMeta DeserializeRootWithRefAndNoMeta(XElement element)
         {
             RootWithRefAndNoMeta result = default;

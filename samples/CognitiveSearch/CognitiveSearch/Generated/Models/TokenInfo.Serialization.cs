@@ -37,6 +37,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static TokenInfo DeserializeTokenInfo(JsonElement element)
         {
             TokenInfo result = new TokenInfo();

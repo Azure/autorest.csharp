@@ -49,6 +49,7 @@ namespace lro.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Resource DeserializeResource(JsonElement element)
         {
             Resource result = new Resource();

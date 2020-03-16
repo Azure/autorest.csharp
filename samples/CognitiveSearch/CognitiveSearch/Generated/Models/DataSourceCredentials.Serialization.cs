@@ -22,6 +22,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static DataSourceCredentials DeserializeDataSourceCredentials(JsonElement element)
         {
             DataSourceCredentials result = new DataSourceCredentials();

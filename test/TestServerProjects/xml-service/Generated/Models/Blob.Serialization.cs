@@ -38,6 +38,7 @@ namespace xml_service.Models
             }
             writer.WriteEndElement();
         }
+
         internal static Blob DeserializeBlob(XElement element)
         {
             Blob result = default;

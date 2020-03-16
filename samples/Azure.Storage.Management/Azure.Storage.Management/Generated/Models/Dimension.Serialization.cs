@@ -27,6 +27,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Dimension DeserializeDimension(JsonElement element)
         {
             Dimension result = new Dimension();

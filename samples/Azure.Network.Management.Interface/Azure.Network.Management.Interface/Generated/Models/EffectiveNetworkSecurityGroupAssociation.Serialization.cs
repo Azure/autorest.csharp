@@ -27,6 +27,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WriteEndObject();
         }
+
         internal static EffectiveNetworkSecurityGroupAssociation DeserializeEffectiveNetworkSecurityGroupAssociation(JsonElement element)
         {
             EffectiveNetworkSecurityGroupAssociation result = new EffectiveNetworkSecurityGroupAssociation();

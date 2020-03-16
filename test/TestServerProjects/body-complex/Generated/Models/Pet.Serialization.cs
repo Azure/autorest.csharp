@@ -27,6 +27,7 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Pet DeserializePet(JsonElement element)
         {
             Pet result = new Pet();

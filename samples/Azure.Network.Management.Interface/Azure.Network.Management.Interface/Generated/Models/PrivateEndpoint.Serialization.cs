@@ -97,6 +97,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static PrivateEndpoint DeserializePrivateEndpoint(JsonElement element)
         {
             PrivateEndpoint result = new PrivateEndpoint();

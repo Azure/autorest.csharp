@@ -21,6 +21,7 @@ namespace body_complex
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of PolymorphicrecursiveRestClient. </summary>
         public PolymorphicrecursiveRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -33,6 +34,7 @@ namespace body_complex
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -44,6 +46,7 @@ namespace body_complex
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex types that are polymorphic and have recursive references. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Fish>> GetValidAsync(CancellationToken cancellationToken = default)
@@ -72,6 +75,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex types that are polymorphic and have recursive references. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Fish> GetValid(CancellationToken cancellationToken = default)
@@ -100,6 +104,7 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreatePutValidRequest(Fish complexBody)
         {
             var message = pipeline.CreateMessage();
@@ -115,6 +120,7 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+
         /// <summary> Put complex types that are polymorphic and have recursive references. </summary>
         /// <param name="complexBody">
         /// Please put a salmon that looks like this:
@@ -179,6 +185,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Put complex types that are polymorphic and have recursive references. </summary>
         /// <param name="complexBody">
         /// Please put a salmon that looks like this:

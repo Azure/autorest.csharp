@@ -27,6 +27,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static SuggestResult DeserializeSuggestResult(JsonElement element)
         {
             SuggestResult result = new SuggestResult();

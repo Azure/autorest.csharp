@@ -27,6 +27,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static FacetResult DeserializeFacetResult(JsonElement element)
         {
             FacetResult result = new FacetResult();

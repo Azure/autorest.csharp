@@ -123,6 +123,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WriteEndObject();
         }
+
         internal static EffectiveNetworkSecurityRule DeserializeEffectiveNetworkSecurityRule(JsonElement element)
         {
             EffectiveNetworkSecurityRule result = new EffectiveNetworkSecurityRule();

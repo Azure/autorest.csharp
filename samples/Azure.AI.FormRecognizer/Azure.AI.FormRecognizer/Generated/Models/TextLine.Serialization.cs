@@ -38,6 +38,7 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
+
         internal static TextLine DeserializeTextLine(JsonElement element)
         {
             TextLine result = new TextLine();

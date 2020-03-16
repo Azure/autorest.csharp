@@ -37,6 +37,7 @@ namespace body_complex.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static MyDerivedType DeserializeMyDerivedType(JsonElement element)
         {
             MyDerivedType result = new MyDerivedType();

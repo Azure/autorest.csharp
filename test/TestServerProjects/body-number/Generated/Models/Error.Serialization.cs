@@ -27,6 +27,7 @@ namespace body_number.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Error DeserializeError(JsonElement element)
         {
             Error result = new Error();

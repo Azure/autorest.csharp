@@ -21,6 +21,7 @@ namespace body_complex
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of FlattencomplexRestClient. </summary>
         public FlattencomplexRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -33,6 +34,7 @@ namespace body_complex
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -44,6 +46,7 @@ namespace body_complex
             request.Uri = uri;
             return message;
         }
+
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<MyBaseType>> GetValidAsync(CancellationToken cancellationToken = default)
         {
@@ -71,6 +74,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<MyBaseType> GetValid(CancellationToken cancellationToken = default)
         {

@@ -58,6 +58,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             writer.Line($"private {typeof(ClientDiagnostics)} clientDiagnostics;");
             writer.Line($"private {typeof(HttpPipeline)} pipeline;");
+            writer.Line();
         }
 
         private void WriteClientCtor(CodeWriter writer, RestClient restClient, CSharpType cs)
@@ -83,6 +84,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.Line($"this.clientDiagnostics = clientDiagnostics;");
                 writer.Line($"this.pipeline = pipeline;");
             }
+            writer.Line();
         }
 
         private string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
@@ -91,49 +93,55 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteRequestCreation(CodeWriter writer, RestClientMethod operation)
         {
+            using var methodScope = writer.AmbientScope();
+
             var methodName = CreateRequestMethodName(operation.Name);
             writer.Append($"internal {typeof(HttpMessage)} {methodName}(");
             var parameters = operation.Parameters;
             foreach (Parameter clientParameter in parameters)
             {
-                writer.Append($"{clientParameter.Type} {clientParameter.Name},");
+                writer.Append($"{clientParameter.Type} {clientParameter.Name:D},");
             }
             writer.RemoveTrailingComma();
             writer.Line($")");
             using (writer.Scope())
             {
-                writer.Line($"var message = pipeline.CreateMessage();");
-                writer.Line($"var request = message.Request;");
+                var message = new CodeWriterDeclaration("message");
+                var request = new CodeWriterDeclaration("request");
+                var uri = new CodeWriterDeclaration("uri");
+
+                writer.Line($"var {message:D} = pipeline.CreateMessage();");
+                writer.Line($"var {request:D} = {message}.Request;");
                 var method = operation.Request.HttpMethod;
-                writer.Line($"request.Method = {typeof(RequestMethod)}.{method.ToRequestMethodName()};");
+                writer.Line($"{request}.Method = {typeof(RequestMethod)}.{method.ToRequestMethodName()};");
 
                 //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
                 //TODO: Need proper logic to convert the values to strings. Right now, everything is just using default ToString().
                 //TODO: Need logic to trim duplicate slashes (/) so when combined, you don't end  up with multiple // together
 
-                writer.Line($"var uri = new RawRequestUriBuilder();");
+                writer.Line($"var {uri:D} = new RawRequestUriBuilder();");
                 foreach (var segment in operation.Request.HostSegments)
                 {
-                    WriteUriFragment(writer, segment);
+                    WriteUriFragment(writer, uri, segment);
                 }
                 writer.RemoveTrailingComma();
 
                 foreach (var segment in operation.Request.PathSegments)
                 {
-                    WritePathSegment(writer, segment);
+                    WritePathSegment(writer, uri, segment);
                 }
 
                 //TODO: Duplicate code between query and header parameter processing logic
                 foreach (var queryParameter in operation.Request.Query)
                 {
-                    WriteQueryParameter(writer, queryParameter);
+                    WriteQueryParameter(writer, uri, queryParameter);
                 }
 
-                writer.Line($"request.Uri = uri;");
+                writer.Line($"{request}.Uri = {uri};");
 
                 foreach (var header in operation.Request.Headers)
                 {
-                    WriteHeader(writer, header);
+                    WriteHeader(writer, request, header);
                 }
 
                 if (operation.Request.Body is SchemaRequestBody body)
@@ -142,39 +150,48 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     switch (body.Serialization)
                     {
                         case JsonSerialization jsonSerialization:
-                            writer.Line($"using var content = new {typeof(Utf8JsonRequestContent)}();");
+                        {
+                            var content = new CodeWriterDeclaration("content");
+
+                            writer.Line($"using var {content:D} = new {typeof(Utf8JsonRequestContent)}();");
                             writer.ToSerializeCall(
                                 jsonSerialization,
                                 writer => WriteConstantOrParameter(writer, value, ignoreNullability: true),
-                                writerName: w => w.Append($"content.{nameof(Utf8JsonRequestContent.JsonWriter)}"));
-                            writer.Line($"request.Content = content;");
+                                writerName: w => w.Append($"{content}.{nameof(Utf8JsonRequestContent.JsonWriter)}"));
+                            writer.Line($"{request}.Content = {content};");
                             break;
+                        }
                         case XmlElementSerialization xmlSerialization:
-                            writer.Line($"using var content = new {typeof(XmlWriterContent)}();");
+                        {
+                            var content = new CodeWriterDeclaration("content");
+
+                            writer.Line($"using var {content:D} = new {typeof(XmlWriterContent)}();");
                             writer.ToSerializeCall(
                                 xmlSerialization,
                                 writer => WriteConstantOrParameter(writer, value, ignoreNullability: true),
-                                writerName: w => w.Append($"content.{nameof(XmlWriterContent.XmlWriter)}"));
-                            writer.Line($"request.Content = content;");
+                                writerName: w => w.Append($"{content}.{nameof(XmlWriterContent.XmlWriter)}"));
+                            writer.Line($"{request}.Content = {content};");
                             break;
+                        }
                         default:
                             throw new NotImplementedException(body.Serialization.ToString());
                     }
                 }
                 else if (operation.Request.Body is BinaryRequestBody binaryBody)
                 {
-                    writer.Append($"request.Content = {typeof(RequestContent)}.Create(");
+                    writer.Append($"{request}.Content = {typeof(RequestContent)}.Create(");
                     WriteConstantOrParameter(writer, binaryBody.Value);
                     writer.Line($");");
                 }
 
-                writer.Line($"return message;");
+                writer.Line($"return {message};");
             }
+            writer.Line();
         }
 
-        private void WriteUriFragment(CodeWriter writer, PathSegment segment)
+        private void WriteUriFragment(CodeWriter writer, CodeWriterDeclaration uri, PathSegment segment)
         {
-            writer.Append($"uri.AppendRaw(");
+            writer.Append($"{uri}.AppendRaw(");
             WriteConstantOrParameter(writer, segment.Value);
             WriteSerializationFormat(writer, segment.Format);
             writer.Line($", {segment.Escape:L});");
@@ -182,6 +199,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteOperation(CodeWriter writer, RestClientMethod operation, bool async)
         {
+            using var methodScope = writer.AmbientScope();
+
             //TODO: Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413
             var responseBody = operation.Response.ResponseBody;
             CSharpType? bodyType = responseBody?.Type;
@@ -218,19 +237,21 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 writer.WriteParameterNullChecks(parameters);
 
-                writer.Line($"using var scope = clientDiagnostics.CreateScope({operation.Diagnostics.ScopeName:L});");
+                var scopeVariable = new CodeWriterDeclaration("scope");
+                writer.Line($"using var {scopeVariable:D} = clientDiagnostics.CreateScope({operation.Diagnostics.ScopeName:L});");
                 foreach (DiagnosticAttribute diagnosticScopeAttributes in operation.Diagnostics.Attributes)
                 {
-                    writer.Append($"scope.AddAttribute({diagnosticScopeAttributes.Name:L},");
+                    writer.Append($"{scopeVariable}.AddAttribute({diagnosticScopeAttributes.Name:L},");
                     WriteConstantOrParameter(writer, diagnosticScopeAttributes.Value);
                     writer.Line($");");
                 }
-                writer.Line($"scope.Start();");
+                writer.Line($"{scopeVariable}.Start();");
 
                 using (writer.Scope($"try"))
                 {
+                    var messageVariable = new CodeWriterDeclaration("message");
                     var requestMethodName = CreateRequestMethodName(operation.Name);
-                    writer.Append($"using var message = {requestMethodName}(");
+                    writer.Append($"using var {messageVariable:D} = {requestMethodName}(");
 
                     foreach (Parameter parameter in parameters)
                     {
@@ -242,22 +263,23 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     if (async)
                     {
-                        writer.Line($"await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);");
+                        writer.Line($"await pipeline.SendAsync({messageVariable}, cancellationToken).ConfigureAwait(false);");
                     }
                     else
                     {
-                        writer.Line($"pipeline.Send(message, cancellationToken);");
+                        writer.Line($"pipeline.Send({messageVariable}, cancellationToken);");
                     }
 
-                    WriteStatusCodeSwitch(writer, responseBody, headerModelType, operation, async);
+                    WriteStatusCodeSwitch(writer, messageVariable, responseBody, headerModelType, operation, async);
                 }
 
                 using (writer.Scope($"catch ({typeof(Exception)} e)"))
                 {
-                    writer.Line($"scope.Failed(e);");
+                    writer.Line($"{scopeVariable}.Failed(e);");
                     writer.Line($"throw;");
                 }
             }
+            writer.Line();
         }
 
         private void WriteConstantOrParameter(CodeWriter writer, ParameterOrConstant constantOrParameter, bool ignoreNullability = false, bool enumAsString = false)
@@ -316,19 +338,19 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        private void WritePathSegment(CodeWriter writer, PathSegment segment)
+        private void WritePathSegment(CodeWriter writer, CodeWriterDeclaration uri, PathSegment segment)
         {
-            writer.Append($"uri.AppendPath(");
+            writer.Append($"{uri}.AppendPath(");
             WriteConstantOrParameter(writer, segment.Value, enumAsString: true);
             WriteSerializationFormat(writer, segment.Format);
             writer.Line($", {segment.Escape:L});");
         }
 
-        private void WriteHeader(CodeWriter writer, RequestHeader header)
+        private void WriteHeader(CodeWriter writer, CodeWriterDeclaration request, RequestHeader header)
         {
             using (WriteValueNullCheck(writer, header.Value))
             {
-                writer.Append($"request.Headers.Add({header.Name:L}, ");
+                writer.Append($"{request}.Headers.Add({header.Name:L}, ");
                 WriteConstantOrParameter(writer, header.Value, enumAsString: true);
                 WriteSerializationFormat(writer, header.Format);
                 writer.Line($");");
@@ -364,7 +386,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        private void WriteQueryParameter(CodeWriter writer, QueryParameter queryParameter)
+        private void WriteQueryParameter(CodeWriter writer, CodeWriterDeclaration uri, QueryParameter queryParameter)
         {
             string method;
             string? delimiter = null;
@@ -394,7 +416,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             ParameterOrConstant value = queryParameter.Value;
             using (WriteValueNullCheck(writer, value))
             {
-                writer.Append($"uri.{method}({queryParameter.Name:L}, ");
+                writer.Append($"{uri}.{method}({queryParameter.Name:L}, ");
                 WriteConstantOrParameter(writer, value, enumAsString: true);
                 if (delimiter != null)
                 {
@@ -406,10 +428,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         }
 
         //TODO: Do multiple status codes
-        private void WriteStatusCodeSwitch(CodeWriter writer, ResponseBody? responseBody, CSharpType? headersModelType, RestClientMethod operation, bool async)
+        private void WriteStatusCodeSwitch(CodeWriter writer, CodeWriterDeclaration message, ResponseBody? responseBody, CSharpType? headersModelType, RestClientMethod operation, bool async)
         {
-            string messageVariable = "message";
-            string responseVariable = $"{messageVariable}.Response";
+            string responseVariable = $"{message.ActualName}.Response";
             using (writer.Scope($"switch ({responseVariable}.Status)"))
             {
                 var statusCodes = operation.Response.SuccessfulStatusCodes;
@@ -427,7 +448,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     }
                     else if (responseBody is StreamResponseBody _)
                     {
-                        writer.Line($"var {valueVariable:D} = {messageVariable}.ExtractResponseContent();");
+                        writer.Line($"var {valueVariable:D} = {message}.ExtractResponseContent();");
                     }
 
                     if (headersModelType != null)

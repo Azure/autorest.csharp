@@ -95,6 +95,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     null,
                     w => w.AppendRaw(namehint));
             }
+            writer.Line();
         }
 
         private void WriteXmlDeserialize(CodeWriter writer, ObjectType model, XmlElementSerialization serialization)
@@ -105,6 +106,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.ToDeserializeCall(serialization, w=> w.AppendRaw("element"), ref resultVariable, true);
                 writer.Line($"return {resultVariable};");
             }
+            writer.Line();
         }
 
         private void WriteJsonDeserialize(CodeWriter writer, ObjectType model, JsonSerialization jsonSerialization)
@@ -133,6 +135,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.ToDeserializeCall(jsonSerialization, w=>w.AppendRaw("element"), ref resultVariable);
                 writer.Line($"return {resultVariable};");
             }
+            writer.Line();
         }
 
         private void WriteJsonSerialize(CodeWriter writer, JsonSerialization jsonSerialization)
@@ -142,6 +145,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 writer.ToSerializeCall(jsonSerialization, w => w.AppendRaw("this"));
             }
+            writer.Line();
         }
 
         private void WriteSealedChoiceSerialization(CodeWriter writer, EnumType schema)
@@ -172,6 +176,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                         writer.Line($"throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\");");
                     }
+                    writer.Line();
                 }
             }
         }

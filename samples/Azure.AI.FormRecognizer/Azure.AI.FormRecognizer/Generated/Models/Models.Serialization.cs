@@ -38,6 +38,7 @@ namespace Azure.AI.FormRecognizer.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Models DeserializeModels(JsonElement element)
         {
             Models result = new Models();

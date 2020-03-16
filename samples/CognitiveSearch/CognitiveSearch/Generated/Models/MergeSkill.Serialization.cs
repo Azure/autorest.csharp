@@ -58,6 +58,7 @@ namespace CognitiveSearch.Models
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
+
         internal static MergeSkill DeserializeMergeSkill(JsonElement element)
         {
             MergeSkill result = new MergeSkill();

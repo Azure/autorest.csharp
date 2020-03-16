@@ -49,6 +49,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static IndexingParameters DeserializeIndexingParameters(JsonElement element)
         {
             IndexingParameters result = new IndexingParameters();

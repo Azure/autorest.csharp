@@ -23,6 +23,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static SnowballTokenFilter DeserializeSnowballTokenFilter(JsonElement element)
         {
             SnowballTokenFilter result = new SnowballTokenFilter();

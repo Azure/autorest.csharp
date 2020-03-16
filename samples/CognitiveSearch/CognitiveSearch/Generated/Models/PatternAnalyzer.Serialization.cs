@@ -47,6 +47,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static PatternAnalyzer DeserializePatternAnalyzer(JsonElement element)
         {
             PatternAnalyzer result = new PatternAnalyzer();

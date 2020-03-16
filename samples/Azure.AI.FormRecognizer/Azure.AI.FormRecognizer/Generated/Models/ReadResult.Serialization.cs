@@ -43,6 +43,7 @@ namespace Azure.AI.FormRecognizer.Models
             }
             writer.WriteEndObject();
         }
+
         internal static ReadResult DeserializeReadResult(JsonElement element)
         {
             ReadResult result = new ReadResult();

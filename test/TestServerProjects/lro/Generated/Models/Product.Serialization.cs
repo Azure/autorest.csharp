@@ -62,6 +62,7 @@ namespace lro.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static Product DeserializeProduct(JsonElement element)
         {
             Product result = new Product();

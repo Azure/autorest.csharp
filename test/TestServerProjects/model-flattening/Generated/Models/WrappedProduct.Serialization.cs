@@ -22,6 +22,7 @@ namespace model_flattening.Models
             }
             writer.WriteEndObject();
         }
+
         internal static WrappedProduct DeserializeWrappedProduct(JsonElement element)
         {
             WrappedProduct result = new WrappedProduct();

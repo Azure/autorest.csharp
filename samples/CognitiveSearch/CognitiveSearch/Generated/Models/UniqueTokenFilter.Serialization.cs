@@ -26,6 +26,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static UniqueTokenFilter DeserializeUniqueTokenFilter(JsonElement element)
         {
             UniqueTokenFilter result = new UniqueTokenFilter();

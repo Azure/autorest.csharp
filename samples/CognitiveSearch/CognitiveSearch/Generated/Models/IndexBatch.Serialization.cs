@@ -24,6 +24,7 @@ namespace CognitiveSearch.Models
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
+
         internal static IndexBatch DeserializeIndexBatch(JsonElement element)
         {
             IndexBatch result = new IndexBatch();

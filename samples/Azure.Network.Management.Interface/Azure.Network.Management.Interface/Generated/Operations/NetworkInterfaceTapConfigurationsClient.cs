@@ -32,6 +32,7 @@ namespace Azure.Network.Management.Interface
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Get the specified tap configuration on a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -41,6 +42,7 @@ namespace Azure.Network.Management.Interface
         {
             return await RestClient.GetAsync(resourceGroupName, networkInterfaceName, tapConfigurationName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get the specified tap configuration on a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -50,6 +52,7 @@ namespace Azure.Network.Management.Interface
         {
             return RestClient.Get(resourceGroupName, networkInterfaceName, tapConfigurationName, cancellationToken);
         }
+
         /// <summary> Get all Tap configurations in a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -77,6 +80,7 @@ namespace Azure.Network.Management.Interface
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
+
         /// <summary> Get all Tap configurations in a network interface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -104,6 +108,7 @@ namespace Azure.Network.Management.Interface
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
+
         /// <summary> Deletes the specified tap configuration from the NetworkInterface. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
         /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
@@ -120,6 +125,7 @@ namespace Azure.Network.Management.Interface
 
             return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "NetworkInterfaceTapConfigurationsClient.Delete", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
+
         /// <summary> Deletes the specified tap configuration from the NetworkInterface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -143,6 +149,7 @@ namespace Azure.Network.Management.Interface
             var originalResponse = await RestClient.DeleteAsync(resourceGroupName, networkInterfaceName, tapConfigurationName, cancellationToken).ConfigureAwait(false);
             return CreateDelete(originalResponse, () => RestClient.CreateDeleteRequest(resourceGroupName, networkInterfaceName, tapConfigurationName));
         }
+
         /// <summary> Deletes the specified tap configuration from the NetworkInterface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -166,6 +173,7 @@ namespace Azure.Network.Management.Interface
             var originalResponse = RestClient.Delete(resourceGroupName, networkInterfaceName, tapConfigurationName, cancellationToken);
             return CreateDelete(originalResponse, () => RestClient.CreateDeleteRequest(resourceGroupName, networkInterfaceName, tapConfigurationName));
         }
+
         /// <summary> Creates or updates a Tap configuration in the specified NetworkInterface. </summary>
         /// <param name="originalResponse"> The original response from starting the operation. </param>
         /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
@@ -194,6 +202,7 @@ namespace Azure.Network.Management.Interface
                 return value;
             });
         }
+
         /// <summary> Creates or updates a Tap configuration in the specified NetworkInterface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
@@ -222,6 +231,7 @@ namespace Azure.Network.Management.Interface
             var originalResponse = await RestClient.CreateOrUpdateAsync(resourceGroupName, networkInterfaceName, tapConfigurationName, tapConfigurationParameters, cancellationToken).ConfigureAwait(false);
             return CreateCreateOrUpdate(originalResponse, () => RestClient.CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, tapConfigurationName, tapConfigurationParameters));
         }
+
         /// <summary> Creates or updates a Tap configuration in the specified NetworkInterface. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>

@@ -31,6 +31,7 @@ namespace xml_service.Models
             writer.WriteObjectValue(RetentionPolicy, "RetentionPolicy");
             writer.WriteEndElement();
         }
+
         internal static Logging DeserializeLogging(XElement element)
         {
             Logging result = default;

@@ -106,6 +106,7 @@ namespace Azure.AI.FormRecognizer.Models
             }
             writer.WriteEndObject();
         }
+
         internal static FieldValue DeserializeFieldValue(JsonElement element)
         {
             FieldValue result = new FieldValue();

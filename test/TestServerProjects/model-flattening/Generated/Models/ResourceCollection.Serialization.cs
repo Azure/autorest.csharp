@@ -44,6 +44,7 @@ namespace model_flattening.Models
             }
             writer.WriteEndObject();
         }
+
         internal static ResourceCollection DeserializeResourceCollection(JsonElement element)
         {
             ResourceCollection result = new ResourceCollection();

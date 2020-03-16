@@ -24,6 +24,7 @@ namespace Azure.Storage.Tables.Models
             }
             writer.WriteEndObject();
         }
+
         internal static StorageError DeserializeStorageError(JsonElement element)
         {
             StorageError result = new StorageError();
@@ -41,6 +42,7 @@ namespace Azure.Storage.Tables.Models
             }
             return result;
         }
+
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "StorageError");
@@ -52,6 +54,7 @@ namespace Azure.Storage.Tables.Models
             }
             writer.WriteEndElement();
         }
+
         internal static StorageError DeserializeStorageError(XElement element)
         {
             StorageError result = default;

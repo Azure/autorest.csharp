@@ -30,6 +30,7 @@ namespace Azure.Storage.Management
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Lists the available SKUs supported by Microsoft.Storage for given subscription. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<SkuInformation> ListAsync(CancellationToken cancellationToken = default)
@@ -46,6 +47,7 @@ namespace Azure.Storage.Management
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
+
         /// <summary> Lists the available SKUs supported by Microsoft.Storage for given subscription. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<SkuInformation> List(CancellationToken cancellationToken = default)

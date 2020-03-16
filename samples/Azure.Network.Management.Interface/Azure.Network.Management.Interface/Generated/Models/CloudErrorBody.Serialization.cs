@@ -43,6 +43,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WriteEndObject();
         }
+
         internal static CloudErrorBody DeserializeCloudErrorBody(JsonElement element)
         {
             CloudErrorBody result = new CloudErrorBody();

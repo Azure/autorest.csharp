@@ -26,6 +26,7 @@ namespace Azure.Storage.Management.Models
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
+
         internal static BlobRestoreParameters DeserializeBlobRestoreParameters(JsonElement element)
         {
             BlobRestoreParameters result = new BlobRestoreParameters();

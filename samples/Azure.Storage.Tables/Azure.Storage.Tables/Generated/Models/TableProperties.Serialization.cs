@@ -22,6 +22,7 @@ namespace Azure.Storage.Tables.Models
             }
             writer.WriteEndObject();
         }
+
         internal static TableProperties DeserializeTableProperties(JsonElement element)
         {
             TableProperties result = new TableProperties();

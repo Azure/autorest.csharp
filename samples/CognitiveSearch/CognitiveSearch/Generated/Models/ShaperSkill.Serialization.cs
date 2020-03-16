@@ -48,6 +48,7 @@ namespace CognitiveSearch.Models
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
+
         internal static ShaperSkill DeserializeShaperSkill(JsonElement element)
         {
             ShaperSkill result = new ShaperSkill();

@@ -28,6 +28,7 @@ namespace xml_service.Models
             writer.WriteEndElement();
             writer.WriteEndElement();
         }
+
         internal static AccessPolicy DeserializeAccessPolicy(XElement element)
         {
             AccessPolicy result = default;

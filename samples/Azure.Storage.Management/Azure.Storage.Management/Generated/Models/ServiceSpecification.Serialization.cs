@@ -28,6 +28,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static ServiceSpecification DeserializeServiceSpecification(JsonElement element)
         {
             ServiceSpecification result = new ServiceSpecification();

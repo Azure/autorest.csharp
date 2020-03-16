@@ -27,6 +27,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static UsageName DeserializeUsageName(JsonElement element)
         {
             UsageName result = new UsageName();

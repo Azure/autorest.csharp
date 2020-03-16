@@ -26,6 +26,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static AsciiFoldingTokenFilter DeserializeAsciiFoldingTokenFilter(JsonElement element)
         {
             AsciiFoldingTokenFilter result = new AsciiFoldingTokenFilter();

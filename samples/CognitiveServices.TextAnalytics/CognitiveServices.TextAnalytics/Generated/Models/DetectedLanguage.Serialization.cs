@@ -23,6 +23,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteNumberValue(Score);
             writer.WriteEndObject();
         }
+
         internal static DetectedLanguage DeserializeDetectedLanguage(JsonElement element)
         {
             DetectedLanguage result = new DetectedLanguage();

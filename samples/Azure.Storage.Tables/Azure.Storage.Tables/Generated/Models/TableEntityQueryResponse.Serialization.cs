@@ -39,6 +39,7 @@ namespace Azure.Storage.Tables.Models
             }
             writer.WriteEndObject();
         }
+
         internal static TableEntityQueryResponse DeserializeTableEntityQueryResponse(JsonElement element)
         {
             TableEntityQueryResponse result = new TableEntityQueryResponse();

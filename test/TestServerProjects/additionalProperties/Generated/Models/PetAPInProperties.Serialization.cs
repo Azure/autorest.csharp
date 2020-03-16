@@ -41,6 +41,7 @@ namespace additionalProperties.Models
             }
             writer.WriteEndObject();
         }
+
         internal static PetAPInProperties DeserializePetAPInProperties(JsonElement element)
         {
             PetAPInProperties result = new PetAPInProperties();

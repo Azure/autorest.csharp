@@ -38,6 +38,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Restriction DeserializeRestriction(JsonElement element)
         {
             Restriction result = new Restriction();

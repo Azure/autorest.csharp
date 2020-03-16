@@ -27,6 +27,7 @@ namespace httpInfrastructure.Models
             }
             writer.WriteEndObject();
         }
+
         internal static B DeserializeB(JsonElement element)
         {
             B result = new B();

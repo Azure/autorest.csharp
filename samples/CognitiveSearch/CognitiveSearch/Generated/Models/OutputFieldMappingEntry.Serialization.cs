@@ -24,6 +24,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static OutputFieldMappingEntry DeserializeOutputFieldMappingEntry(JsonElement element)
         {
             OutputFieldMappingEntry result = new OutputFieldMappingEntry();

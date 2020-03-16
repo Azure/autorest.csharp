@@ -22,6 +22,7 @@ namespace media_types.Models
             }
             writer.WriteEndObject();
         }
+
         internal static SourcePath DeserializeSourcePath(JsonElement element)
         {
             SourcePath result = new SourcePath();

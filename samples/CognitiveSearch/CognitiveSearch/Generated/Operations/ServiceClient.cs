@@ -30,6 +30,7 @@ namespace CognitiveSearch
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Gets service level statistics for a search service. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -37,6 +38,7 @@ namespace CognitiveSearch
         {
             return await RestClient.GetServiceStatisticsAsync(clientRequestId, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Gets service level statistics for a search service. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

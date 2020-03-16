@@ -22,6 +22,7 @@ namespace AppConfiguration.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Key DeserializeKey(JsonElement element)
         {
             Key result = new Key();

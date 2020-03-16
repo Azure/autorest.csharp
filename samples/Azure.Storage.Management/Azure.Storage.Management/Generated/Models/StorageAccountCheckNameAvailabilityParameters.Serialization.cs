@@ -21,6 +21,7 @@ namespace Azure.Storage.Management.Models
             writer.WriteStringValue(Type);
             writer.WriteEndObject();
         }
+
         internal static StorageAccountCheckNameAvailabilityParameters DeserializeStorageAccountCheckNameAvailabilityParameters(JsonElement element)
         {
             StorageAccountCheckNameAvailabilityParameters result = new StorageAccountCheckNameAvailabilityParameters();

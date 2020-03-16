@@ -60,6 +60,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static ResourceNavigationLink DeserializeResourceNavigationLink(JsonElement element)
         {
             ResourceNavigationLink result = new ResourceNavigationLink();

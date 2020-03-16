@@ -27,6 +27,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WriteEndObject();
         }
+
         internal static ApplicationGatewayBackendAddress DeserializeApplicationGatewayBackendAddress(JsonElement element)
         {
             ApplicationGatewayBackendAddress result = new ApplicationGatewayBackendAddress();

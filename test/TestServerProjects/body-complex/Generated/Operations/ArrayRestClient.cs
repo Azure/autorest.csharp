@@ -21,6 +21,7 @@ namespace body_complex
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of ArrayRestClient. </summary>
         public ArrayRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -33,6 +34,7 @@ namespace body_complex
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -44,6 +46,7 @@ namespace body_complex
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex types with array property. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ArrayWrapper>> GetValidAsync(CancellationToken cancellationToken = default)
@@ -72,6 +75,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex types with array property. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ArrayWrapper> GetValid(CancellationToken cancellationToken = default)
@@ -100,6 +104,7 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreatePutValidRequest(ArrayWrapper complexBody)
         {
             var message = pipeline.CreateMessage();
@@ -115,6 +120,7 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+
         /// <summary> Put complex types with array property. </summary>
         /// <param name="complexBody"> Please put an array with 4 items: &quot;1, 2, 3, 4&quot;, &quot;&quot;, null, &quot;&amp;S#$(*Y&quot;, &quot;The quick brown fox jumps over the lazy dog&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -145,6 +151,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Put complex types with array property. </summary>
         /// <param name="complexBody"> Please put an array with 4 items: &quot;1, 2, 3, 4&quot;, &quot;&quot;, null, &quot;&amp;S#$(*Y&quot;, &quot;The quick brown fox jumps over the lazy dog&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -175,6 +182,7 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreateGetEmptyRequest()
         {
             var message = pipeline.CreateMessage();
@@ -186,6 +194,7 @@ namespace body_complex
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex types with array property which is empty. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ArrayWrapper>> GetEmptyAsync(CancellationToken cancellationToken = default)
@@ -214,6 +223,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex types with array property which is empty. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ArrayWrapper> GetEmpty(CancellationToken cancellationToken = default)
@@ -242,6 +252,7 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreatePutEmptyRequest(ArrayWrapper complexBody)
         {
             var message = pipeline.CreateMessage();
@@ -257,6 +268,7 @@ namespace body_complex
             request.Content = content;
             return message;
         }
+
         /// <summary> Put complex types with array property which is empty. </summary>
         /// <param name="complexBody"> Please put an array with 4 items: &quot;1, 2, 3, 4&quot;, &quot;&quot;, null, &quot;&amp;S#$(*Y&quot;, &quot;The quick brown fox jumps over the lazy dog&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -287,6 +299,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Put complex types with array property which is empty. </summary>
         /// <param name="complexBody"> Please put an array with 4 items: &quot;1, 2, 3, 4&quot;, &quot;&quot;, null, &quot;&amp;S#$(*Y&quot;, &quot;The quick brown fox jumps over the lazy dog&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -317,6 +330,7 @@ namespace body_complex
                 throw;
             }
         }
+
         internal HttpMessage CreateGetNotProvidedRequest()
         {
             var message = pipeline.CreateMessage();
@@ -328,6 +342,7 @@ namespace body_complex
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get complex types with array property while server doesn&apos;t provide a response payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ArrayWrapper>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
@@ -356,6 +371,7 @@ namespace body_complex
                 throw;
             }
         }
+
         /// <summary> Get complex types with array property while server doesn&apos;t provide a response payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ArrayWrapper> GetNotProvided(CancellationToken cancellationToken = default)

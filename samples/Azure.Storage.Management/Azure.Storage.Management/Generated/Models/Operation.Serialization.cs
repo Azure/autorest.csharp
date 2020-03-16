@@ -40,6 +40,7 @@ namespace Azure.Storage.Management.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static Operation DeserializeOperation(JsonElement element)
         {
             Operation result = new Operation();

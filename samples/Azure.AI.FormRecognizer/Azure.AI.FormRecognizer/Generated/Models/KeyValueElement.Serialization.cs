@@ -40,6 +40,7 @@ namespace Azure.AI.FormRecognizer.Models
             }
             writer.WriteEndObject();
         }
+
         internal static KeyValueElement DeserializeKeyValueElement(JsonElement element)
         {
             KeyValueElement result = new KeyValueElement();

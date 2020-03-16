@@ -32,6 +32,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static CheckNameAvailabilityResult DeserializeCheckNameAvailabilityResult(JsonElement element)
         {
             CheckNameAvailabilityResult result = new CheckNameAvailabilityResult();

@@ -28,6 +28,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static UsageListResult DeserializeUsageListResult(JsonElement element)
         {
             UsageListResult result = new UsageListResult();

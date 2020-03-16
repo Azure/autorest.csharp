@@ -47,6 +47,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static ItemError DeserializeItemError(JsonElement element)
         {
             ItemError result = new ItemError();

@@ -33,6 +33,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static KeepTokenFilter DeserializeKeepTokenFilter(JsonElement element)
         {
             KeepTokenFilter result = new KeepTokenFilter();

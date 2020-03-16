@@ -40,6 +40,7 @@ namespace xml_service.Models
             writer.WriteEndElement();
             writer.WriteEndElement();
         }
+
         internal static ListBlobsResponse DeserializeListBlobsResponse(XElement element)
         {
             ListBlobsResponse result = default;

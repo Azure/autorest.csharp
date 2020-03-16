@@ -21,13 +21,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 case JsonArraySerialization array:
                     writer.Line($"{writerName}.WriteStartArray();");
-                    string collectionItemVariable = writer.GetTemporaryVariable("item");
+                    var collectionItemVariable = new CodeWriterDeclaration("item");
                     writer.Line($"foreach (var {collectionItemVariable:D} in {name})");
                     using (writer.Scope())
                     {
                         writer.ToSerializeCall(
                             array.ValueSerialization,
-                            w => w.AppendRaw(collectionItemVariable),
+                            w => w.Append(collectionItemVariable),
                             writerName);
                     }
 
@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 case JsonObjectSerialization dictionary:
                     writer.Line($"{writerName}.WriteStartObject();");
-                    string itemVariable = writer.GetTemporaryVariable("item");
+                    var itemVariable = new CodeWriterDeclaration("item");
 
                     foreach (JsonPropertySerialization property in dictionary.Properties)
                     {
@@ -145,18 +145,16 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         public static void ToDeserializeCall(this CodeWriter writer, JsonSerialization serialization, CodeWriterDelegate element, ref string destination)
         {
-            destination = writer.GetTemporaryVariable(destination);
+            var destinationDeclaration = new CodeWriterDeclaration(destination);
 
             if (serialization is JsonValueSerialization valueSerialization)
             {
-                writer.Append($"var {destination:D} =")
+                writer.Append($"var {destinationDeclaration:D} =")
                     .ToDeserializeCall(valueSerialization, element);
                 writer.LineRaw(";");
             }
             else
             {
-                string s = destination;
-
                 var type = serialization.Type;
                 TryGetInitializerType(serialization, out CSharpType? implementationType);
 
@@ -164,9 +162,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 Debug.Assert(implementationType != null);
 
                 writer
-                    .Line($"{type} {destination:D} = new {implementationType}();")
-                    .ToDeserializeCall(serialization, w => w.AppendRaw(s), element);
+                    .Line($"{type} {destinationDeclaration:D} = new {implementationType}();")
+                    .ToDeserializeCall(serialization, w => w.Append(destinationDeclaration), element);
             }
+
+            destination = destinationDeclaration.ActualName;
         }
 
         private static void ToDeserializeCall(this CodeWriter writer, JsonSerialization serialization, CodeWriterDelegate destination, CodeWriterDelegate element)
@@ -174,7 +174,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             switch (serialization)
             {
                 case JsonArraySerialization array:
-                    string collectionItemVariable = writer.GetTemporaryVariable("item");
+                    var collectionItemVariable = new CodeWriterDeclaration("item");
                     writer.Line($"foreach (var {collectionItemVariable:D} in {element}.EnumerateArray())");
                     using (writer.Scope())
                     {
@@ -183,7 +183,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             writer.Append($"{destination}.Add(");
                             writer.ToDeserializeCall(
                                 valueSerialization,
-                                w => w.AppendRaw(collectionItemVariable));
+                                w => w.Append(collectionItemVariable));
                             writer.Line($");");
                         }
                         else
@@ -191,7 +191,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             var itemVariableName = "value";
                             writer.ToDeserializeCall(
                                 array.ValueSerialization,
-                                w => w.AppendRaw(collectionItemVariable),
+                                w => w.Append(collectionItemVariable),
                                 ref itemVariableName);
 
                             writer.Append($"{destination}.Add({itemVariableName});");
@@ -200,13 +200,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     return;
                 case JsonObjectSerialization dictionary:
-                    string itemVariable = writer.GetTemporaryVariable("property");
+                    var itemVariable = new CodeWriterDeclaration("property");
                     writer.Line($"foreach (var {itemVariable:D} in {element}.EnumerateObject())");
                     using (writer.Scope())
                     {
                         foreach (JsonPropertySerialization property in dictionary.Properties)
                         {
-                            ReadProperty(writer, itemVariable, destination, property);
+                            ReadProperty(writer, itemVariable.ActualName, destination, property);
                         }
 
                         if (dictionary.AdditionalProperties is JsonDynamicPropertiesSerialization additionalProperties)

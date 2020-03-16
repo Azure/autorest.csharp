@@ -22,6 +22,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WriteEndObject();
         }
+
         internal static LoadBalancerSku DeserializeLoadBalancerSku(JsonElement element)
         {
             LoadBalancerSku result = new LoadBalancerSku();

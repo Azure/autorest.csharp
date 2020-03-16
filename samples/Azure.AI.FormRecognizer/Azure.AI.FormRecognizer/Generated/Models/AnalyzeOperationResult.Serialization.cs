@@ -28,6 +28,7 @@ namespace Azure.AI.FormRecognizer.Models
             }
             writer.WriteEndObject();
         }
+
         internal static AnalyzeOperationResult DeserializeAnalyzeOperationResult(JsonElement element)
         {
             AnalyzeOperationResult result = new AnalyzeOperationResult();

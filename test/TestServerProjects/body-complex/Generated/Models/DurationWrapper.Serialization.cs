@@ -22,6 +22,7 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
+
         internal static DurationWrapper DeserializeDurationWrapper(JsonElement element)
         {
             DurationWrapper result = new DurationWrapper();

@@ -34,6 +34,7 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static DocumentResult DeserializeDocumentResult(JsonElement element)
         {
             DocumentResult result = new DocumentResult();

@@ -27,6 +27,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static GetIndexStatisticsResult DeserializeGetIndexStatisticsResult(JsonElement element)
         {
             GetIndexStatisticsResult result = new GetIndexStatisticsResult();

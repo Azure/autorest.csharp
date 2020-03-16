@@ -30,6 +30,7 @@ namespace media_types
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="input"> Input parameter. </param>
@@ -38,6 +39,7 @@ namespace media_types
         {
             return await RestClient.AnalyzeBodyAsync(contentType, input, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="input"> Input parameter. </param>
@@ -46,6 +48,7 @@ namespace media_types
         {
             return RestClient.AnalyzeBody(contentType, input, cancellationToken);
         }
+
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -53,6 +56,7 @@ namespace media_types
         {
             return await RestClient.AnalyzeBodyAsync(input, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

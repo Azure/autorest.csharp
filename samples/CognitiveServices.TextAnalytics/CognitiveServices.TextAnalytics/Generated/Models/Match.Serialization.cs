@@ -25,6 +25,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteNumberValue(Length);
             writer.WriteEndObject();
         }
+
         internal static Match DeserializeMatch(JsonElement element)
         {
             Match result = new Match();

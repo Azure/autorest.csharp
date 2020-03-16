@@ -22,6 +22,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static ListServiceSasResponse DeserializeListServiceSasResponse(JsonElement element)
         {
             ListServiceSasResponse result = new ListServiceSasResponse();

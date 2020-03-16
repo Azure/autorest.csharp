@@ -23,6 +23,7 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteStringValue(LastUpdatedDateTime, "S");
             writer.WriteEndObject();
         }
+
         internal static ModelsSummary DeserializeModelsSummary(JsonElement element)
         {
             ModelsSummary result = new ModelsSummary();

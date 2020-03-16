@@ -28,6 +28,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static MappingCharFilter DeserializeMappingCharFilter(JsonElement element)
         {
             MappingCharFilter result = new MappingCharFilter();

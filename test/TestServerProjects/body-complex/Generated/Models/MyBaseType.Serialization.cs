@@ -32,6 +32,7 @@ namespace body_complex.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static MyBaseType DeserializeMyBaseType(JsonElement element)
         {
             if (element.TryGetProperty("kind", out JsonElement discriminator))
