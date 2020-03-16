@@ -415,12 +415,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     _writer.PopScope(this);
                     if (_end != null)
-					{
-						_writer.TrimNewLines();
-						_writer.AppendRaw(_end);
-					}
+                    {
+                        _writer.TrimNewLines();
+                        _writer.AppendRaw(_end);
+                    }
 
-		            if (_newLine)
+                    if (_newLine)
                     {
                         _writer.Line();
                     }
