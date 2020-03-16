@@ -13,7 +13,7 @@ namespace body_complex.Models
     public partial class Datetimerfc1123Wrapper
     {
         /// <summary> Initializes a new instance of Datetimerfc1123Wrapper. </summary>
-        internal Datetimerfc1123Wrapper()
+        public Datetimerfc1123Wrapper()
         {
         }
 

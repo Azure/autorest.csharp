@@ -101,7 +101,12 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             }
 
             yield return new ObjectTypeConstructor(
-                BuilderHelpers.CreateMemberDeclaration(Type.Name, Type, "internal", _sourceTypeMapping?.DefaultConstructor),
+                BuilderHelpers.CreateMemberDeclaration(
+                    Type.Name,
+                    Type,
+                    // inputs have public ctor by default
+                    _objectSchema.IsInput ? "public" : "internal",
+                    _sourceTypeMapping?.DefaultConstructor),
                 Array.Empty<Parameter>(),
                 defaultCtorInitializers.ToArray());
 

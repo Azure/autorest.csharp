@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class SynonymTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of SynonymTokenFilter. </summary>
-        internal SynonymTokenFilter()
+        public SynonymTokenFilter()
         {
             OdataType = "#Microsoft.Azure.Search.SynonymTokenFilter";
         }

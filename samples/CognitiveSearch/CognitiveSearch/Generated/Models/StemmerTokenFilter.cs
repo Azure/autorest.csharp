@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class StemmerTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of StemmerTokenFilter. </summary>
-        internal StemmerTokenFilter()
+        public StemmerTokenFilter()
         {
             OdataType = "#Microsoft.Azure.Search.StemmerTokenFilter";
         }

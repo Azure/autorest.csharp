@@ -11,7 +11,7 @@ namespace xml_service.Models
     public partial class Logging
     {
         /// <summary> Initializes a new instance of Logging. </summary>
-        internal Logging()
+        public Logging()
         {
         }
 

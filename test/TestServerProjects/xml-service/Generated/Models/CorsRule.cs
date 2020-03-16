@@ -11,7 +11,7 @@ namespace xml_service.Models
     public partial class CorsRule
     {
         /// <summary> Initializes a new instance of CorsRule. </summary>
-        internal CorsRule()
+        public CorsRule()
         {
         }
 

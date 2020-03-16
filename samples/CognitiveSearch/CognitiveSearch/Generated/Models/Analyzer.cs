@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class Analyzer
     {
         /// <summary> Initializes a new instance of Analyzer. </summary>
-        internal Analyzer()
+        public Analyzer()
         {
             OdataType = null;
         }

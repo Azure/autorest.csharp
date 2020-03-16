@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class VirtualNetworkRule
     {
         /// <summary> Initializes a new instance of VirtualNetworkRule. </summary>
-        internal VirtualNetworkRule()
+        public VirtualNetworkRule()
         {
         }
 

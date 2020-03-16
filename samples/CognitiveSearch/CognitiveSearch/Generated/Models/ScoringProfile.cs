@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class ScoringProfile
     {
         /// <summary> Initializes a new instance of ScoringProfile. </summary>
-        internal ScoringProfile()
+        public ScoringProfile()
         {
         }
 

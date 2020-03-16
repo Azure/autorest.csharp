@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class TokenFilter
     {
         /// <summary> Initializes a new instance of TokenFilter. </summary>
-        internal TokenFilter()
+        public TokenFilter()
         {
             OdataType = null;
         }

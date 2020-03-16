@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class ConditionalSkill : Skill
     {
         /// <summary> Initializes a new instance of ConditionalSkill. </summary>
-        internal ConditionalSkill()
+        public ConditionalSkill()
         {
             OdataType = "#Microsoft.Skills.Util.ConditionalSkill";
         }

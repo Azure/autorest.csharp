@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class AnalyzeRequest
     {
         /// <summary> Initializes a new instance of AnalyzeRequest. </summary>
-        internal AnalyzeRequest()
+        public AnalyzeRequest()
         {
         }
 

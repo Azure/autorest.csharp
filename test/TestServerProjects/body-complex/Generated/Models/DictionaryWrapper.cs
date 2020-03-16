@@ -13,7 +13,7 @@ namespace body_complex.Models
     public partial class DictionaryWrapper
     {
         /// <summary> Initializes a new instance of DictionaryWrapper. </summary>
-        internal DictionaryWrapper()
+        public DictionaryWrapper()
         {
         }
 

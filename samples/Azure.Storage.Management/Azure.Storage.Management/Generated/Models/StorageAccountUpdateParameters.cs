@@ -13,7 +13,7 @@ namespace Azure.Storage.Management.Models
     public partial class StorageAccountUpdateParameters
     {
         /// <summary> Initializes a new instance of StorageAccountUpdateParameters. </summary>
-        internal StorageAccountUpdateParameters()
+        public StorageAccountUpdateParameters()
         {
         }
 

@@ -11,7 +11,7 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class LanguageInput
     {
         /// <summary> Initializes a new instance of LanguageInput. </summary>
-        internal LanguageInput()
+        public LanguageInput()
         {
         }
 

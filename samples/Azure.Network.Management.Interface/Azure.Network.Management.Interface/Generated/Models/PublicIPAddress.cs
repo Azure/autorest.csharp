@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class PublicIPAddress : Resource
     {
         /// <summary> Initializes a new instance of PublicIPAddress. </summary>
-        internal PublicIPAddress()
+        public PublicIPAddress()
         {
         }
 

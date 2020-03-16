@@ -13,7 +13,7 @@ namespace body_complex.Models
     public partial class Salmon : Fish
     {
         /// <summary> Initializes a new instance of Salmon. </summary>
-        internal Salmon()
+        public Salmon()
         {
             Fishtype = "salmon";
         }

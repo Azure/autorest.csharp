@@ -14,7 +14,7 @@ namespace Azure.Storage.Management.Models
     public partial class ListContainerItem : AzureEntityResource
     {
         /// <summary> Initializes a new instance of ListContainerItem. </summary>
-        internal ListContainerItem()
+        public ListContainerItem()
         {
         }
 

@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class PrivateEndpoint
     {
         /// <summary> Initializes a new instance of PrivateEndpoint. </summary>
-        internal PrivateEndpoint()
+        public PrivateEndpoint()
         {
         }
 

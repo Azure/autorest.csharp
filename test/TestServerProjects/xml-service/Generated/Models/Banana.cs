@@ -13,7 +13,7 @@ namespace xml_service.Models
     public partial class Banana
     {
         /// <summary> Initializes a new instance of Banana. </summary>
-        internal Banana()
+        public Banana()
         {
         }
 

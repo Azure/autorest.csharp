@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class FieldMapping
     {
         /// <summary> Initializes a new instance of FieldMapping. </summary>
-        internal FieldMapping()
+        public FieldMapping()
         {
         }
 

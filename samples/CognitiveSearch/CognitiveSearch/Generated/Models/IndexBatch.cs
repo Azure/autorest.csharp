@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class IndexBatch
     {
         /// <summary> Initializes a new instance of IndexBatch. </summary>
-        internal IndexBatch()
+        public IndexBatch()
         {
         }
 

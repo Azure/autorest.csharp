@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class MagnitudeScoringParameters
     {
         /// <summary> Initializes a new instance of MagnitudeScoringParameters. </summary>
-        internal MagnitudeScoringParameters()
+        public MagnitudeScoringParameters()
         {
         }
 

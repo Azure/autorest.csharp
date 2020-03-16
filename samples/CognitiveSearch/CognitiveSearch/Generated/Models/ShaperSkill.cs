@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class ShaperSkill : Skill
     {
         /// <summary> Initializes a new instance of ShaperSkill. </summary>
-        internal ShaperSkill()
+        public ShaperSkill()
         {
             OdataType = "#Microsoft.Skills.Util.ShaperSkill";
         }

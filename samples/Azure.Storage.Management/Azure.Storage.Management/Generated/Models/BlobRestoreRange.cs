@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class BlobRestoreRange
     {
         /// <summary> Initializes a new instance of BlobRestoreRange. </summary>
-        internal BlobRestoreRange()
+        public BlobRestoreRange()
         {
         }
 

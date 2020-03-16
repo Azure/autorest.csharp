@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class KeyVaultProperties
     {
         /// <summary> Initializes a new instance of KeyVaultProperties. </summary>
-        internal KeyVaultProperties()
+        public KeyVaultProperties()
         {
         }
 

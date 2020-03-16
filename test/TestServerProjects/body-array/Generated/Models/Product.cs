@@ -11,7 +11,7 @@ namespace body_array.Models
     public partial class Product
     {
         /// <summary> Initializes a new instance of Product. </summary>
-        internal Product()
+        public Product()
         {
         }
 

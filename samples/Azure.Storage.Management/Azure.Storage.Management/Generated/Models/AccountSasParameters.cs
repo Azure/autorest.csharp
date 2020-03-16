@@ -13,7 +13,7 @@ namespace Azure.Storage.Management.Models
     public partial class AccountSasParameters
     {
         /// <summary> Initializes a new instance of AccountSasParameters. </summary>
-        internal AccountSasParameters()
+        public AccountSasParameters()
         {
         }
 

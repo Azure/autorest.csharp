@@ -14,7 +14,7 @@ namespace Azure.Storage.Management.Models
     public partial class StorageAccount : TrackedResource
     {
         /// <summary> Initializes a new instance of StorageAccount. </summary>
-        internal StorageAccount()
+        public StorageAccount()
         {
         }
 

@@ -11,7 +11,7 @@ namespace lro.Models
     public partial class SubProduct : SubResource
     {
         /// <summary> Initializes a new instance of SubProduct. </summary>
-        internal SubProduct()
+        public SubProduct()
         {
         }
 

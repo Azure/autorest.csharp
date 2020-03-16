@@ -11,7 +11,7 @@ namespace model_flattening.Models
     public partial class ProductUrl : GenericUrl
     {
         /// <summary> Initializes a new instance of ProductUrl. </summary>
-        internal ProductUrl()
+        public ProductUrl()
         {
         }
 

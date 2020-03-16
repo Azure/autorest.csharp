@@ -11,7 +11,7 @@ namespace xml_service.Models
     public partial class JsonInput
     {
         /// <summary> Initializes a new instance of JsonInput. </summary>
-        internal JsonInput()
+        public JsonInput()
         {
         }
 

@@ -11,7 +11,7 @@ namespace body_complex.Models
     public partial class BooleanWrapper
     {
         /// <summary> Initializes a new instance of BooleanWrapper. </summary>
-        internal BooleanWrapper()
+        public BooleanWrapper()
         {
         }
 

@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class BackendAddressPool : SubResource
     {
         /// <summary> Initializes a new instance of BackendAddressPool. </summary>
-        internal BackendAddressPool()
+        public BackendAddressPool()
         {
         }
 

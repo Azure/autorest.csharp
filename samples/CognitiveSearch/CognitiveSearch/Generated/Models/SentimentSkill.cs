@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class SentimentSkill : Skill
     {
         /// <summary> Initializes a new instance of SentimentSkill. </summary>
-        internal SentimentSkill()
+        public SentimentSkill()
         {
             OdataType = "#Microsoft.Skills.Text.SentimentSkill";
         }

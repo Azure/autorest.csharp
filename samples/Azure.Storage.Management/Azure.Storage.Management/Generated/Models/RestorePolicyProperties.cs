@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class RestorePolicyProperties
     {
         /// <summary> Initializes a new instance of RestorePolicyProperties. </summary>
-        internal RestorePolicyProperties()
+        public RestorePolicyProperties()
         {
         }
 

@@ -11,7 +11,7 @@ namespace model_flattening.Models
     public partial class WrappedProduct
     {
         /// <summary> Initializes a new instance of WrappedProduct. </summary>
-        internal WrappedProduct()
+        public WrappedProduct()
         {
         }
 

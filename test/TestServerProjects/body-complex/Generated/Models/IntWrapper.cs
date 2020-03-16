@@ -11,7 +11,7 @@ namespace body_complex.Models
     public partial class IntWrapper
     {
         /// <summary> Initializes a new instance of IntWrapper. </summary>
-        internal IntWrapper()
+        public IntWrapper()
         {
         }
 

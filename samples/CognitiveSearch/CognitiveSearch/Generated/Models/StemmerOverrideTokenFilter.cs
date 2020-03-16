@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class StemmerOverrideTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of StemmerOverrideTokenFilter. </summary>
-        internal StemmerOverrideTokenFilter()
+        public StemmerOverrideTokenFilter()
         {
             OdataType = "#Microsoft.Azure.Search.StemmerOverrideTokenFilter";
         }

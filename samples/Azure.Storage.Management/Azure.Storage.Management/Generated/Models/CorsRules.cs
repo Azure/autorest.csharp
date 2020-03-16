@@ -13,7 +13,7 @@ namespace Azure.Storage.Management.Models
     public partial class CorsRules
     {
         /// <summary> Initializes a new instance of CorsRules. </summary>
-        internal CorsRules()
+        public CorsRules()
         {
         }
 

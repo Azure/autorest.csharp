@@ -13,7 +13,7 @@ namespace xml_service.Models
     public partial class AccessPolicy
     {
         /// <summary> Initializes a new instance of AccessPolicy. </summary>
-        internal AccessPolicy()
+        public AccessPolicy()
         {
         }
 

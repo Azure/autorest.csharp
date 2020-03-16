@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class PhoneticTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of PhoneticTokenFilter. </summary>
-        internal PhoneticTokenFilter()
+        public PhoneticTokenFilter()
         {
             OdataType = "#Microsoft.Azure.Search.PhoneticTokenFilter";
         }

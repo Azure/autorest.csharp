@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class Resource
     {
         /// <summary> Initializes a new instance of Resource. </summary>
-        internal Resource()
+        public Resource()
         {
         }
 

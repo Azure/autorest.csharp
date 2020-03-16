@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class IPRule
     {
         /// <summary> Initializes a new instance of IPRule. </summary>
-        internal IPRule()
+        public IPRule()
         {
         }
 

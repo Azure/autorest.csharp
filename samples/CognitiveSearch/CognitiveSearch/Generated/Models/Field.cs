@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class Field
     {
         /// <summary> Initializes a new instance of Field. </summary>
-        internal Field()
+        public Field()
         {
         }
 

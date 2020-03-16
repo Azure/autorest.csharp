@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class UaxUrlEmailTokenizer : Tokenizer
     {
         /// <summary> Initializes a new instance of UaxUrlEmailTokenizer. </summary>
-        internal UaxUrlEmailTokenizer()
+        public UaxUrlEmailTokenizer()
         {
             OdataType = "#Microsoft.Azure.Search.UaxUrlEmailTokenizer";
         }

@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class LanguageDetectionSkill : Skill
     {
         /// <summary> Initializes a new instance of LanguageDetectionSkill. </summary>
-        internal LanguageDetectionSkill()
+        public LanguageDetectionSkill()
         {
             OdataType = "#Microsoft.Skills.Text.LanguageDetectionSkill";
         }

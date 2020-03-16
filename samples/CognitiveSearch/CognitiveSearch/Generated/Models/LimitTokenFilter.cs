@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class LimitTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of LimitTokenFilter. </summary>
-        internal LimitTokenFilter()
+        public LimitTokenFilter()
         {
             OdataType = "#Microsoft.Azure.Search.LimitTokenFilter";
         }

@@ -11,7 +11,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class IPConfiguration : SubResource
     {
         /// <summary> Initializes a new instance of IPConfiguration. </summary>
-        internal IPConfiguration()
+        public IPConfiguration()
         {
         }
 

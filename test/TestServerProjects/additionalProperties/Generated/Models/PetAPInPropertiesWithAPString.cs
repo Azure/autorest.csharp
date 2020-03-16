@@ -14,7 +14,7 @@ namespace additionalProperties.Models
     public partial class PetAPInPropertiesWithAPString : IDictionary<string, string>
     {
         /// <summary> Initializes a new instance of PetAPInPropertiesWithAPString. </summary>
-        internal PetAPInPropertiesWithAPString()
+        public PetAPInPropertiesWithAPString()
         {
         }
 

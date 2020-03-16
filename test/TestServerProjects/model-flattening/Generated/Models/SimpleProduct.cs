@@ -11,7 +11,7 @@ namespace model_flattening.Models
     public partial class SimpleProduct : BaseProduct
     {
         /// <summary> Initializes a new instance of SimpleProduct. </summary>
-        internal SimpleProduct()
+        public SimpleProduct()
         {
         }
 

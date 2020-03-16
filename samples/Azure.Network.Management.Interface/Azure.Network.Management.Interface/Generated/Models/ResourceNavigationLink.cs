@@ -11,7 +11,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class ResourceNavigationLink : SubResource
     {
         /// <summary> Initializes a new instance of ResourceNavigationLink. </summary>
-        internal ResourceNavigationLink()
+        public ResourceNavigationLink()
         {
         }
 

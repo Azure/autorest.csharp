@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class Identity
     {
         /// <summary> Initializes a new instance of Identity. </summary>
-        internal Identity()
+        public Identity()
         {
         }
 

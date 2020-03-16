@@ -11,7 +11,7 @@ namespace body_complex.Models
     public partial class Basic
     {
         /// <summary> Initializes a new instance of Basic. </summary>
-        internal Basic()
+        public Basic()
         {
         }
 

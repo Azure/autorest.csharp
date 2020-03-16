@@ -11,7 +11,7 @@ namespace Azure.Storage.Tables.Models
     public partial class SignedIdentifier
     {
         /// <summary> Initializes a new instance of SignedIdentifier. </summary>
-        internal SignedIdentifier()
+        public SignedIdentifier()
         {
         }
 

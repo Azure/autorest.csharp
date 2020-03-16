@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class TagsObject
     {
         /// <summary> Initializes a new instance of TagsObject. </summary>
-        internal TagsObject()
+        public TagsObject()
         {
         }
 

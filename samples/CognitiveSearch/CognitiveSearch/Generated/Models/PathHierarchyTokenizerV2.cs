@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class PathHierarchyTokenizerV2 : Tokenizer
     {
         /// <summary> Initializes a new instance of PathHierarchyTokenizerV2. </summary>
-        internal PathHierarchyTokenizerV2()
+        public PathHierarchyTokenizerV2()
         {
             OdataType = "#Microsoft.Azure.Search.PathHierarchyTokenizerV2";
         }

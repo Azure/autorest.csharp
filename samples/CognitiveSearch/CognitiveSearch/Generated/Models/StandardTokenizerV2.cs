@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class StandardTokenizerV2 : Tokenizer
     {
         /// <summary> Initializes a new instance of StandardTokenizerV2. </summary>
-        internal StandardTokenizerV2()
+        public StandardTokenizerV2()
         {
             OdataType = "#Microsoft.Azure.Search.StandardTokenizerV2";
         }

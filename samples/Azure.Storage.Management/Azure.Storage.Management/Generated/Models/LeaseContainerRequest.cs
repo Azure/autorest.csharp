@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class LeaseContainerRequest
     {
         /// <summary> Initializes a new instance of LeaseContainerRequest. </summary>
-        internal LeaseContainerRequest()
+        public LeaseContainerRequest()
         {
         }
 

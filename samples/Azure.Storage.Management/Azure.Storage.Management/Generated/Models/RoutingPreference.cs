@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class RoutingPreference
     {
         /// <summary> Initializes a new instance of RoutingPreference. </summary>
-        internal RoutingPreference()
+        public RoutingPreference()
         {
         }
 

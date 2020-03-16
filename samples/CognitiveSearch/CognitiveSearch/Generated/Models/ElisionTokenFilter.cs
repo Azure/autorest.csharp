@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class ElisionTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of ElisionTokenFilter. </summary>
-        internal ElisionTokenFilter()
+        public ElisionTokenFilter()
         {
             OdataType = "#Microsoft.Azure.Search.ElisionTokenFilter";
         }

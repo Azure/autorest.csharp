@@ -11,7 +11,7 @@ namespace xml_service.Models
     public partial class Metrics
     {
         /// <summary> Initializes a new instance of Metrics. </summary>
-        internal Metrics()
+        public Metrics()
         {
         }
 

@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class HighWaterMarkChangeDetectionPolicy : DataChangeDetectionPolicy
     {
         /// <summary> Initializes a new instance of HighWaterMarkChangeDetectionPolicy. </summary>
-        internal HighWaterMarkChangeDetectionPolicy()
+        public HighWaterMarkChangeDetectionPolicy()
         {
             OdataType = "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy";
         }

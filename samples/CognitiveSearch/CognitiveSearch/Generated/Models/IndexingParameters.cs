@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class IndexingParameters
     {
         /// <summary> Initializes a new instance of IndexingParameters. </summary>
-        internal IndexingParameters()
+        public IndexingParameters()
         {
         }
 

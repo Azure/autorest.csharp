@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class Suggester
     {
         /// <summary> Initializes a new instance of Suggester. </summary>
-        internal Suggester()
+        public Suggester()
         {
         }
 

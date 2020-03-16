@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class FreshnessScoringFunction : ScoringFunction
     {
         /// <summary> Initializes a new instance of FreshnessScoringFunction. </summary>
-        internal FreshnessScoringFunction()
+        public FreshnessScoringFunction()
         {
             Type = "freshness";
         }

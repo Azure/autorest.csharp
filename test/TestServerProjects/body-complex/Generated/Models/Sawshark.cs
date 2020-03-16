@@ -14,7 +14,7 @@ namespace body_complex.Models
     public partial class Sawshark : Shark
     {
         /// <summary> Initializes a new instance of Sawshark. </summary>
-        internal Sawshark()
+        public Sawshark()
         {
             Fishtype = "sawshark";
         }

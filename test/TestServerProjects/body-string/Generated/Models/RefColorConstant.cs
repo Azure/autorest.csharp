@@ -11,7 +11,7 @@ namespace body_string.Models
     public partial class RefColorConstant
     {
         /// <summary> Initializes a new instance of RefColorConstant. </summary>
-        internal RefColorConstant()
+        public RefColorConstant()
         {
         }
 

@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class ShingleTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of ShingleTokenFilter. </summary>
-        internal ShingleTokenFilter()
+        public ShingleTokenFilter()
         {
             OdataType = "#Microsoft.Azure.Search.ShingleTokenFilter";
         }

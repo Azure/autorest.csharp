@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class PatternAnalyzer : Analyzer
     {
         /// <summary> Initializes a new instance of PatternAnalyzer. </summary>
-        internal PatternAnalyzer()
+        public PatternAnalyzer()
         {
             OdataType = "#Microsoft.Azure.Search.PatternAnalyzer";
         }

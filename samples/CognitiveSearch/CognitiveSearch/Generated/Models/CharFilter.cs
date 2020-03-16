@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class CharFilter
     {
         /// <summary> Initializes a new instance of CharFilter. </summary>
-        internal CharFilter()
+        public CharFilter()
         {
             OdataType = null;
         }

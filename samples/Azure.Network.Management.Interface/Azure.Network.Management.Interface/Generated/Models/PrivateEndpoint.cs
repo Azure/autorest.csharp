@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class PrivateEndpoint : Resource
     {
         /// <summary> Initializes a new instance of PrivateEndpoint. </summary>
-        internal PrivateEndpoint()
+        public PrivateEndpoint()
         {
         }
 

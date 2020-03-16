@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class Delegation : SubResource
     {
         /// <summary> Initializes a new instance of Delegation. </summary>
-        internal Delegation()
+        public Delegation()
         {
         }
 

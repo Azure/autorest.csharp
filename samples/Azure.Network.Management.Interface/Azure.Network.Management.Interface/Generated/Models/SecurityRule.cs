@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class SecurityRule : SubResource
     {
         /// <summary> Initializes a new instance of SecurityRule. </summary>
-        internal SecurityRule()
+        public SecurityRule()
         {
         }
 

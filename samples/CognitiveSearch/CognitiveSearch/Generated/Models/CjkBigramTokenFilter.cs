@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class CjkBigramTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of CjkBigramTokenFilter. </summary>
-        internal CjkBigramTokenFilter()
+        public CjkBigramTokenFilter()
         {
             OdataType = "#Microsoft.Azure.Search.CjkBigramTokenFilter";
         }

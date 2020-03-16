@@ -14,7 +14,7 @@ namespace CognitiveSearch.Models
     public partial class IndexAction : IDictionary<string, object>
     {
         /// <summary> Initializes a new instance of IndexAction. </summary>
-        internal IndexAction()
+        public IndexAction()
         {
         }
 

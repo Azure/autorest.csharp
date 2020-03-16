@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class ServiceEndpointPropertiesFormat
     {
         /// <summary> Initializes a new instance of ServiceEndpointPropertiesFormat. </summary>
-        internal ServiceEndpointPropertiesFormat()
+        public ServiceEndpointPropertiesFormat()
         {
         }
 

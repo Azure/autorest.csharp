@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class OcrSkill : Skill
     {
         /// <summary> Initializes a new instance of OcrSkill. </summary>
-        internal OcrSkill()
+        public OcrSkill()
         {
             OdataType = "#Microsoft.Skills.Vision.OcrSkill";
         }
