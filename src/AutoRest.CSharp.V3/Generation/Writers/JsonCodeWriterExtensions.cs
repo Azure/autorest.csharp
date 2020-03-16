@@ -11,6 +11,8 @@ using AutoRest.CSharp.V3.Output.Models.Serialization;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Json;
 using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
+using Azure.Core;
+using JsonElementExtensions = Azure.Core.JsonElementExtensions;
 
 namespace AutoRest.CSharp.V3.Generation.Writers
 {
@@ -54,31 +56,31 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Line($"{writerName}.WriteEndObject();");
                     return;
 
-                case JsonObjectSerialization dictionary:
+                case JsonObjectSerialization obj:
                     writer.Line($"{writerName}.WriteStartObject();");
                     var itemVariable = new CodeWriterDeclaration("item");
 
-                    foreach (JsonPropertySerialization property in dictionary.Properties)
+                    foreach (JsonPropertySerialization property in obj.Properties)
                     {
                         CSharpType? serializationType = property.ValueSerialization.Type;
                         bool hasNullableType = serializationType != null && serializationType.IsNullable;
-                        using (hasNullableType ? writer.Scope($"if ({property.MemberName} != null)") : default)
+                        using (hasNullableType ? writer.Scope($"if ({property.ObjectProperty.Declaration.Name} != null)") : default)
                         {
                             writer.Line($"{writerName}.WritePropertyName({property.Name:L});");
                             writer.ToSerializeCall(
                                 property.ValueSerialization,
-                                w => w.Append($"{property.MemberName}"));
+                                w => w.Append($"{property.ObjectProperty.Declaration.Name}"));
                         }
                     }
 
-                    if (dictionary.AdditionalProperties != null)
+                    if (obj.AdditionalProperties != null)
                     {
                         writer.Line($"foreach (var {itemVariable:D} in {name})");
                         using (writer.Scope())
                         {
                             writer.Line($"{writerName}.WritePropertyName({itemVariable}.Key);");
                             writer.ToSerializeCall(
-                                dictionary.AdditionalProperties.ValueSerialization,
+                                obj.AdditionalProperties.ValueSerialization,
                                 w => w.Append($"{itemVariable}.Value"),
                                 writerName);
                         }
@@ -220,7 +222,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         }
                     }
 
-                    writer.Append($"{destination} = {arrayVariable}");
+                    writer.Line($"{destination} = {arrayVariable};");
                     return;
                 case JsonDictionarySerialization dictionary:
                     var dictionaryVariable = new CodeWriterDeclaration("array");
@@ -250,7 +252,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         }
                     }
 
-                    writer.Append($"{destination} = {dictionaryVariable}");
+                    writer.Line($"{destination} = {dictionaryVariable};");
 
                     return;
                 case JsonObjectSerialization obj:
@@ -262,7 +264,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         var propertyDeclaration = new CodeWriterDeclaration(property.Name.ToVariableName());
                         propertyVariables.Add(property, propertyDeclaration);
 
-                        writer.Line($"{property.ValueSerialization.Type} {propertyDeclaration:D} = default;");
+                        var valueSerializationType = property.ValueSerialization.Type ?? typeof(object);
+
+                        writer.Line($"{valueSerializationType} {propertyDeclaration:D} = default;");
                     }
 
                     writer.Line($"foreach (var {itemVariable:D} in {element}.EnumerateObject())");
@@ -296,15 +300,18 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         }
                     }
 
-                    // This just happens to work, we need a better binding mechanism
-                    writer.Append($"{destination} = new {obj.ImplementationType}(");
-                    foreach (JsonPropertySerialization property in obj.Properties)
+                    if (obj.ImplementationType != null)
                     {
-                        writer.Append($"{propertyVariables[property]}, ");
-                    }
+                        // This just happens to work, we need a better binding mechanism
+                        writer.Append($"{destination} = new {obj.ImplementationType}(");
+                        foreach (JsonPropertySerialization property in obj.Properties)
+                        {
+                            writer.Append($"{propertyVariables[property]}, ");
+                        }
 
-                    writer.RemoveTrailingComma();
-                    writer.Line($");");
+                        writer.RemoveTrailingComma();
+                        writer.Line($");");
+                    }
 
                     return;
             }
@@ -339,18 +346,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.DeserializeIntoVariable(property.ValueSerialization, destination, w => w.Append($"{itemVariable}.Value"));
                 writer.Line($"continue;");
             }
-        }
-
-        private static bool TryGetInitializerType(JsonSerialization jsonSerialization, [NotNullWhen(true)] out CSharpType? type)
-        {
-            type = jsonSerialization switch
-            {
-                JsonObjectSerialization objectSerialization => objectSerialization.ImplementationType,
-                JsonArraySerialization arraySerialization => arraySerialization.ImplementationType,
-                _ => null
-            };
-
-            return type != null;
         }
 
         private static void DeserializeValue(this CodeWriter writer, JsonValueSerialization serialization, CodeWriterDelegate element)

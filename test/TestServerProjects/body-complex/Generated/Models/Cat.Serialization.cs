@@ -46,7 +46,11 @@ namespace body_complex.Models
 
         internal static Cat DeserializeCat(JsonElement element)
         {
-            Cat result = new Cat();
+            Cat result;
+            string color = default;
+            IList<Dog> hates = default;
+            int? id = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("color"))
@@ -55,7 +59,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.Color = property.Value.GetString();
+                    color = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("hates"))
@@ -64,11 +68,12 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.Hates = new List<Dog>();
+                    List<Dog> array = new List<Dog>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Hates.Add(Dog.DeserializeDog(item));
+                        array.Add(Dog.DeserializeDog(item));
                     }
+                    hates = array;
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -77,7 +82,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetInt32();
+                    id = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -86,10 +91,11 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
+            result = new Cat(color, hates, id, name);
             return result;
         }
     }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -25,7 +26,8 @@ namespace body_complex.Models
 
         internal static DurationWrapper DeserializeDurationWrapper(JsonElement element)
         {
-            DurationWrapper result = new DurationWrapper();
+            DurationWrapper result;
+            TimeSpan? field = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field"))
@@ -34,10 +36,11 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.Field = property.Value.GetTimeSpan("P");
+                    field = property.Value.GetTimeSpan("P");
                     continue;
                 }
             }
+            result = new DurationWrapper(field);
             return result;
         }
     }

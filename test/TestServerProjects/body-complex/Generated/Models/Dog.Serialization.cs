@@ -35,7 +35,10 @@ namespace body_complex.Models
 
         internal static Dog DeserializeDog(JsonElement element)
         {
-            Dog result = new Dog();
+            Dog result;
+            string food = default;
+            int? id = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("food"))
@@ -44,7 +47,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.Food = property.Value.GetString();
+                    food = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -53,7 +56,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetInt32();
+                    id = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -62,10 +65,11 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
+            result = new Dog(food, id, name);
             return result;
         }
     }

@@ -165,11 +165,11 @@ namespace AutoRest.CSharp.V3.Output.Builders
         {
             foreach (Property property in propertyBag.Properties)
             {
-                string propertyName = objectType.GetPropertyForSchemaProperty(property, includeParents: true).Declaration.Name;
+                var objectProperty = objectType.GetPropertyForSchemaProperty(property, includeParents: true);
 
                 yield return new JsonPropertySerialization(
                     property.SerializedName,
-                    propertyName,
+                    objectProperty,
                     BuildSerialization(property.Schema, property.IsNullable())
                     );
             }

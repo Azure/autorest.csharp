@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -47,7 +48,13 @@ namespace body_complex.Models
 
         internal static Cookiecuttershark DeserializeCookiecuttershark(JsonElement element)
         {
-            Cookiecuttershark result = new Cookiecuttershark();
+            Cookiecuttershark result;
+            int? age = default;
+            DateTimeOffset birthday = default;
+            string fishtype = default;
+            string species = default;
+            float length = default;
+            IList<Fish> siblings = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("age"))
@@ -56,17 +63,17 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.Age = property.Value.GetInt32();
+                    age = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("birthday"))
                 {
-                    result.Birthday = property.Value.GetDateTimeOffset("S");
+                    birthday = property.Value.GetDateTimeOffset("S");
                     continue;
                 }
                 if (property.NameEquals("fishtype"))
                 {
-                    result.Fishtype = property.Value.GetString();
+                    fishtype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("species"))
@@ -75,12 +82,12 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.Species = property.Value.GetString();
+                    species = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("length"))
                 {
-                    result.Length = property.Value.GetSingle();
+                    length = property.Value.GetSingle();
                     continue;
                 }
                 if (property.NameEquals("siblings"))
@@ -89,14 +96,16 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.Siblings = new List<Fish>();
+                    List<Fish> array = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Siblings.Add(DeserializeFish(item));
+                        array.Add(DeserializeFish(item));
                     }
+                    siblings = array;
                     continue;
                 }
             }
+            result = new Cookiecuttershark(age, birthday, fishtype, species, length, siblings);
             return result;
         }
     }
