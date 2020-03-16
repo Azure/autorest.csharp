@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of ImageAnalysisSkill. </summary>
         internal ImageAnalysisSkill()
         {
+            OdataType = "#Microsoft.Skills.Vision.ImageAnalysisSkill";
         }
 
         /// <summary> Initializes a new instance of ImageAnalysisSkill. </summary>
@@ -32,6 +33,7 @@ namespace CognitiveSearch.Models
             DefaultLanguageCode = defaultLanguageCode;
             VisualFeatures = visualFeatures;
             Details = details;
+            OdataType = "#Microsoft.Skills.Vision.ImageAnalysisSkill";
         }
 
         /// <summary> A value indicating which language code to use. Default is en. </summary>

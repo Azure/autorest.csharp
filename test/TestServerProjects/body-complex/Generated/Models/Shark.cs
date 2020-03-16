@@ -16,6 +16,7 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of Shark. </summary>
         internal Shark()
         {
+            Fishtype = "shark";
         }
 
         /// <summary> Initializes a new instance of Shark. </summary>
@@ -29,6 +30,7 @@ namespace body_complex.Models
         {
             Age = age;
             Birthday = birthday;
+            Fishtype = "shark";
         }
 
         public int? Age { get; set; }

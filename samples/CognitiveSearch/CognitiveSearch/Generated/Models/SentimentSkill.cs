@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of SentimentSkill. </summary>
         internal SentimentSkill()
         {
+            OdataType = "#Microsoft.Skills.Text.SentimentSkill";
         }
 
         /// <summary> Initializes a new instance of SentimentSkill. </summary>
@@ -28,6 +29,7 @@ namespace CognitiveSearch.Models
         internal SentimentSkill(SentimentSkillLanguage? defaultLanguageCode, string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs) : base(odataType, name, description, context, inputs, outputs)
         {
             DefaultLanguageCode = defaultLanguageCode;
+            OdataType = "#Microsoft.Skills.Text.SentimentSkill";
         }
 
         /// <summary> A value indicating which language code to use. Default is en. </summary>

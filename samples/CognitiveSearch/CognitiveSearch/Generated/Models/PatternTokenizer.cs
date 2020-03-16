@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of PatternTokenizer. </summary>
         internal PatternTokenizer()
         {
+            OdataType = "#Microsoft.Azure.Search.PatternTokenizer";
         }
 
         /// <summary> Initializes a new instance of PatternTokenizer. </summary>
@@ -26,6 +27,7 @@ namespace CognitiveSearch.Models
             Pattern = pattern;
             Flags = flags;
             Group = group;
+            OdataType = "#Microsoft.Azure.Search.PatternTokenizer";
         }
 
         /// <summary> A regular expression pattern to match token separators. Default is an expression that matches one or more whitespace characters. </summary>

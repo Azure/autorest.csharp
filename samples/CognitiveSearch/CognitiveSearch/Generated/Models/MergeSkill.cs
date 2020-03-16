@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of MergeSkill. </summary>
         internal MergeSkill()
         {
+            OdataType = "#Microsoft.Skills.Text.MergeSkill";
         }
 
         /// <summary> Initializes a new instance of MergeSkill. </summary>
@@ -30,6 +31,7 @@ namespace CognitiveSearch.Models
         {
             InsertPreTag = insertPreTag;
             InsertPostTag = insertPostTag;
+            OdataType = "#Microsoft.Skills.Text.MergeSkill";
         }
 
         /// <summary> The tag indicates the start of the merged text. By default, the tag is an empty space. </summary>

@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of AsciiFoldingTokenFilter. </summary>
         internal AsciiFoldingTokenFilter()
         {
+            OdataType = "#Microsoft.Azure.Search.AsciiFoldingTokenFilter";
         }
 
         /// <summary> Initializes a new instance of AsciiFoldingTokenFilter. </summary>
@@ -22,6 +23,7 @@ namespace CognitiveSearch.Models
         internal AsciiFoldingTokenFilter(bool? preserveOriginal, string odataType, string name) : base(odataType, name)
         {
             PreserveOriginal = preserveOriginal;
+            OdataType = "#Microsoft.Azure.Search.AsciiFoldingTokenFilter";
         }
 
         /// <summary> A value indicating whether the original token will be kept. Default is false. </summary>

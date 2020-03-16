@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of TextTranslationSkill. </summary>
         internal TextTranslationSkill()
         {
+            OdataType = "#Microsoft.Skills.Text.TranslationSkill";
         }
 
         /// <summary> Initializes a new instance of TextTranslationSkill. </summary>
@@ -32,6 +33,7 @@ namespace CognitiveSearch.Models
             DefaultToLanguageCode = defaultToLanguageCode;
             DefaultFromLanguageCode = defaultFromLanguageCode;
             SuggestedFrom = suggestedFrom;
+            OdataType = "#Microsoft.Skills.Text.TranslationSkill";
         }
 
         /// <summary> The language code to translate documents into for documents that don&apos;t specify the to language explicitly. </summary>

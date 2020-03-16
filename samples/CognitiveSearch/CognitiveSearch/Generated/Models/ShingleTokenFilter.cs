@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of ShingleTokenFilter. </summary>
         internal ShingleTokenFilter()
         {
+            OdataType = "#Microsoft.Azure.Search.ShingleTokenFilter";
         }
 
         /// <summary> Initializes a new instance of ShingleTokenFilter. </summary>
@@ -32,6 +33,7 @@ namespace CognitiveSearch.Models
             OutputUnigramsIfNoShingles = outputUnigramsIfNoShingles;
             TokenSeparator = tokenSeparator;
             FilterToken = filterToken;
+            OdataType = "#Microsoft.Azure.Search.ShingleTokenFilter";
         }
 
         /// <summary> The maximum shingle size. Default and minimum value is 2. </summary>

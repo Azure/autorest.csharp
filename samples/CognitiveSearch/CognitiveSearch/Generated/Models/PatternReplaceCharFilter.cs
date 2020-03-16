@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of PatternReplaceCharFilter. </summary>
         internal PatternReplaceCharFilter()
         {
+            OdataType = "#Microsoft.Azure.Search.PatternReplaceCharFilter";
         }
 
         /// <summary> Initializes a new instance of PatternReplaceCharFilter. </summary>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
         {
             Pattern = pattern;
             Replacement = replacement;
+            OdataType = "#Microsoft.Azure.Search.PatternReplaceCharFilter";
         }
 
         /// <summary> A regular expression pattern. </summary>

@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of EntityRecognitionSkill. </summary>
         internal EntityRecognitionSkill()
         {
+            OdataType = "#Microsoft.Skills.Text.EntityRecognitionSkill";
         }
 
         /// <summary> Initializes a new instance of EntityRecognitionSkill. </summary>
@@ -34,6 +35,7 @@ namespace CognitiveSearch.Models
             DefaultLanguageCode = defaultLanguageCode;
             IncludeTypelessEntities = includeTypelessEntities;
             MinimumPrecision = minimumPrecision;
+            OdataType = "#Microsoft.Skills.Text.EntityRecognitionSkill";
         }
 
         /// <summary> A list of entity categories that should be extracted. </summary>

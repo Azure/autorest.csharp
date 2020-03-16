@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of DictionaryDecompounderTokenFilter. </summary>
         internal DictionaryDecompounderTokenFilter()
         {
+            OdataType = "#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter";
         }
 
         /// <summary> Initializes a new instance of DictionaryDecompounderTokenFilter. </summary>
@@ -32,6 +33,7 @@ namespace CognitiveSearch.Models
             MinSubwordSize = minSubwordSize;
             MaxSubwordSize = maxSubwordSize;
             OnlyLongestMatch = onlyLongestMatch;
+            OdataType = "#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter";
         }
 
         /// <summary> The list of words to match against. </summary>

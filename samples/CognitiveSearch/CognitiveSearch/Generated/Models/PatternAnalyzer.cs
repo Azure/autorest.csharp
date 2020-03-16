@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of PatternAnalyzer. </summary>
         internal PatternAnalyzer()
         {
+            OdataType = "#Microsoft.Azure.Search.PatternAnalyzer";
         }
 
         /// <summary> Initializes a new instance of PatternAnalyzer. </summary>
@@ -30,6 +31,7 @@ namespace CognitiveSearch.Models
             Pattern = pattern;
             Flags = flags;
             Stopwords = stopwords;
+            OdataType = "#Microsoft.Azure.Search.PatternAnalyzer";
         }
 
         /// <summary> A value indicating whether terms should be lower-cased. Default is true. </summary>

@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of OcrSkill. </summary>
         internal OcrSkill()
         {
+            OdataType = "#Microsoft.Skills.Vision.OcrSkill";
         }
 
         /// <summary> Initializes a new instance of OcrSkill. </summary>
@@ -32,6 +33,7 @@ namespace CognitiveSearch.Models
             TextExtractionAlgorithm = textExtractionAlgorithm;
             DefaultLanguageCode = defaultLanguageCode;
             ShouldDetectOrientation = shouldDetectOrientation;
+            OdataType = "#Microsoft.Skills.Vision.OcrSkill";
         }
 
         /// <summary> A value indicating which algorithm to use for extracting text. Default is printed. </summary>

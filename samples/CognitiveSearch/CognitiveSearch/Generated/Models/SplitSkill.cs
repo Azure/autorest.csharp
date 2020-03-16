@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of SplitSkill. </summary>
         internal SplitSkill()
         {
+            OdataType = "#Microsoft.Skills.Text.SplitSkill";
         }
 
         /// <summary> Initializes a new instance of SplitSkill. </summary>
@@ -32,6 +33,7 @@ namespace CognitiveSearch.Models
             DefaultLanguageCode = defaultLanguageCode;
             TextSplitMode = textSplitMode;
             MaximumPageLength = maximumPageLength;
+            OdataType = "#Microsoft.Skills.Text.SplitSkill";
         }
 
         /// <summary> A value indicating which language code to use. Default is en. </summary>

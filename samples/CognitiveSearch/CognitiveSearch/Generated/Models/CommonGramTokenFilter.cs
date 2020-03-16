@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of CommonGramTokenFilter. </summary>
         internal CommonGramTokenFilter()
         {
+            OdataType = "#Microsoft.Azure.Search.CommonGramTokenFilter";
         }
 
         /// <summary> Initializes a new instance of CommonGramTokenFilter. </summary>
@@ -28,6 +29,7 @@ namespace CognitiveSearch.Models
             CommonWords = commonWords;
             IgnoreCase = ignoreCase;
             UseQueryMode = useQueryMode;
+            OdataType = "#Microsoft.Azure.Search.CommonGramTokenFilter";
         }
 
         /// <summary> The set of common words. </summary>

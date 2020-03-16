@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of StemmerOverrideTokenFilter. </summary>
         internal StemmerOverrideTokenFilter()
         {
+            OdataType = "#Microsoft.Azure.Search.StemmerOverrideTokenFilter";
         }
 
         /// <summary> Initializes a new instance of StemmerOverrideTokenFilter. </summary>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
         internal StemmerOverrideTokenFilter(IList<string> rules, string odataType, string name) : base(odataType, name)
         {
             Rules = rules;
+            OdataType = "#Microsoft.Azure.Search.StemmerOverrideTokenFilter";
         }
 
         /// <summary> A list of stemming rules in the following format: &quot;word =&gt; stem&quot;, for example: &quot;ran =&gt; run&quot;. </summary>

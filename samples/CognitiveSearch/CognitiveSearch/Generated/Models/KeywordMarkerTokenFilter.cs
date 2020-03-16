@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of KeywordMarkerTokenFilter. </summary>
         internal KeywordMarkerTokenFilter()
         {
+            OdataType = "#Microsoft.Azure.Search.KeywordMarkerTokenFilter";
         }
 
         /// <summary> Initializes a new instance of KeywordMarkerTokenFilter. </summary>
@@ -26,6 +27,7 @@ namespace CognitiveSearch.Models
         {
             Keywords = keywords;
             IgnoreCase = ignoreCase;
+            OdataType = "#Microsoft.Azure.Search.KeywordMarkerTokenFilter";
         }
 
         /// <summary> A list of words to mark as keywords. </summary>

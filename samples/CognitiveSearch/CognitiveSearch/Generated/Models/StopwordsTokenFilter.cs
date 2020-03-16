@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of StopwordsTokenFilter. </summary>
         internal StopwordsTokenFilter()
         {
+            OdataType = "#Microsoft.Azure.Search.StopwordsTokenFilter";
         }
 
         /// <summary> Initializes a new instance of StopwordsTokenFilter. </summary>
@@ -30,6 +31,7 @@ namespace CognitiveSearch.Models
             StopwordsList = stopwordsList;
             IgnoreCase = ignoreCase;
             RemoveTrailingStopWords = removeTrailingStopWords;
+            OdataType = "#Microsoft.Azure.Search.StopwordsTokenFilter";
         }
 
         /// <summary> The list of stopwords. This property and the stopwords list property cannot both be set. </summary>

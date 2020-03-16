@@ -16,6 +16,7 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of SmartSalmon. </summary>
         internal SmartSalmon()
         {
+            Fishtype = "smart_salmon";
         }
 
         /// <summary> Initializes a new instance of SmartSalmon. </summary>
@@ -29,6 +30,7 @@ namespace body_complex.Models
         internal SmartSalmon(string collegeDegree, string location, bool? iswild, string fishtype, string species, float length, IList<Fish> siblings) : base(location, iswild, fishtype, species, length, siblings)
         {
             CollegeDegree = collegeDegree;
+            Fishtype = "smart_salmon";
         }
 
         public string CollegeDegree { get; set; }

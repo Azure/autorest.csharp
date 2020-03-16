@@ -15,6 +15,7 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of Salmon. </summary>
         internal Salmon()
         {
+            Fishtype = "salmon";
         }
 
         /// <summary> Initializes a new instance of Salmon. </summary>
@@ -28,6 +29,7 @@ namespace body_complex.Models
         {
             Location = location;
             Iswild = iswild;
+            Fishtype = "salmon";
         }
 
         public string Location { get; set; }

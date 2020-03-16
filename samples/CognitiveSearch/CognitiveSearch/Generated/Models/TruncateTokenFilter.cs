@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of TruncateTokenFilter. </summary>
         internal TruncateTokenFilter()
         {
+            OdataType = "#Microsoft.Azure.Search.TruncateTokenFilter";
         }
 
         /// <summary> Initializes a new instance of TruncateTokenFilter. </summary>
@@ -22,6 +23,7 @@ namespace CognitiveSearch.Models
         internal TruncateTokenFilter(int? length, string odataType, string name) : base(odataType, name)
         {
             Length = length;
+            OdataType = "#Microsoft.Azure.Search.TruncateTokenFilter";
         }
 
         /// <summary> The length at which terms will be truncated. Default and maximum is 300. </summary>

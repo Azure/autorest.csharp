@@ -16,6 +16,7 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of Cookiecuttershark. </summary>
         internal Cookiecuttershark()
         {
+            Fishtype = "cookiecuttershark";
         }
 
         /// <summary> Initializes a new instance of Cookiecuttershark. </summary>
@@ -27,6 +28,7 @@ namespace body_complex.Models
         /// <param name="siblings"> . </param>
         internal Cookiecuttershark(int? age, DateTimeOffset birthday, string fishtype, string species, float length, IList<Fish> siblings) : base(age, birthday, fishtype, species, length, siblings)
         {
+            Fishtype = "cookiecuttershark";
         }
     }
 }

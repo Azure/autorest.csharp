@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of StandardAnalyzer. </summary>
         internal StandardAnalyzer()
         {
+            OdataType = "#Microsoft.Azure.Search.StandardAnalyzer";
         }
 
         /// <summary> Initializes a new instance of StandardAnalyzer. </summary>
@@ -26,6 +27,7 @@ namespace CognitiveSearch.Models
         {
             MaxTokenLength = maxTokenLength;
             Stopwords = stopwords;
+            OdataType = "#Microsoft.Azure.Search.StandardAnalyzer";
         }
 
         /// <summary> The maximum token length. Default is 255. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters. </summary>

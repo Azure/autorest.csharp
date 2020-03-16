@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of DistanceScoringFunction. </summary>
         internal DistanceScoringFunction()
         {
+            Type = "distance";
         }
 
         /// <summary> Initializes a new instance of DistanceScoringFunction. </summary>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
         internal DistanceScoringFunction(DistanceScoringParameters parameters, string type, string fieldName, double boost, ScoringFunctionInterpolation? interpolation) : base(type, fieldName, boost, interpolation)
         {
             Parameters = parameters;
+            Type = "distance";
         }
 
         /// <summary> Parameter values for the distance scoring function. </summary>

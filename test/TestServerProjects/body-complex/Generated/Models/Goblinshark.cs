@@ -16,6 +16,7 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of Goblinshark. </summary>
         internal Goblinshark()
         {
+            Fishtype = "goblin";
         }
 
         /// <summary> Initializes a new instance of Goblinshark. </summary>
@@ -31,6 +32,7 @@ namespace body_complex.Models
         {
             Jawsize = jawsize;
             Color = color;
+            Fishtype = "goblin";
         }
 
         public int? Jawsize { get; set; }

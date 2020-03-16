@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of KeywordTokenizerV2. </summary>
         internal KeywordTokenizerV2()
         {
+            OdataType = "#Microsoft.Azure.Search.KeywordTokenizerV2";
         }
 
         /// <summary> Initializes a new instance of KeywordTokenizerV2. </summary>
@@ -22,6 +23,7 @@ namespace CognitiveSearch.Models
         internal KeywordTokenizerV2(int? maxTokenLength, string odataType, string name) : base(odataType, name)
         {
             MaxTokenLength = maxTokenLength;
+            OdataType = "#Microsoft.Azure.Search.KeywordTokenizerV2";
         }
 
         /// <summary> The maximum token length. Default is 256. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters. </summary>

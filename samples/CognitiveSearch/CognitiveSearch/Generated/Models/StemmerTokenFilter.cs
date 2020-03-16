@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of StemmerTokenFilter. </summary>
         internal StemmerTokenFilter()
         {
+            OdataType = "#Microsoft.Azure.Search.StemmerTokenFilter";
         }
 
         /// <summary> Initializes a new instance of StemmerTokenFilter. </summary>
@@ -22,6 +23,7 @@ namespace CognitiveSearch.Models
         internal StemmerTokenFilter(StemmerTokenFilterLanguage language, string odataType, string name) : base(odataType, name)
         {
             Language = language;
+            OdataType = "#Microsoft.Azure.Search.StemmerTokenFilter";
         }
 
         /// <summary> The language to use. </summary>

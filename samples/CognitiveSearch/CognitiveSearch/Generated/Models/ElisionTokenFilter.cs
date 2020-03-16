@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of ElisionTokenFilter. </summary>
         internal ElisionTokenFilter()
         {
+            OdataType = "#Microsoft.Azure.Search.ElisionTokenFilter";
         }
 
         /// <summary> Initializes a new instance of ElisionTokenFilter. </summary>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
         internal ElisionTokenFilter(IList<string> articles, string odataType, string name) : base(odataType, name)
         {
             Articles = articles;
+            OdataType = "#Microsoft.Azure.Search.ElisionTokenFilter";
         }
 
         /// <summary> The set of articles to remove. </summary>

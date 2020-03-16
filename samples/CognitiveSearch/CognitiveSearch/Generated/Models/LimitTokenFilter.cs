@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of LimitTokenFilter. </summary>
         internal LimitTokenFilter()
         {
+            OdataType = "#Microsoft.Azure.Search.LimitTokenFilter";
         }
 
         /// <summary> Initializes a new instance of LimitTokenFilter. </summary>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
         {
             MaxTokenCount = maxTokenCount;
             ConsumeAllTokens = consumeAllTokens;
+            OdataType = "#Microsoft.Azure.Search.LimitTokenFilter";
         }
 
         /// <summary> The maximum number of tokens to produce. Default is 1. </summary>

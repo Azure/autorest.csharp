@@ -69,6 +69,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         {
             List<Parameter> constructorParameters = new List<Parameter>();
             List<ObjectPropertyInitializer> initializers = new List<ObjectPropertyInitializer>();
+            List<ObjectPropertyInitializer> defaultCtorInitializers = new List<ObjectPropertyInitializer>();
 
             foreach (var property in Properties)
             {
@@ -94,13 +95,15 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
             if (Discriminator != null)
             {
-                initializers.Append(new ObjectPropertyInitializer(Discriminator.Property, BuilderHelpers.StringConstant(Discriminator.Value)));
+                var discriminatorInitializer = new ObjectPropertyInitializer(Discriminator.Property, BuilderHelpers.StringConstant(Discriminator.Value));
+                initializers.Add(discriminatorInitializer);
+                defaultCtorInitializers.Add(discriminatorInitializer);
             }
 
             yield return new ObjectTypeConstructor(
                 BuilderHelpers.CreateMemberDeclaration(Type.Name, Type, "internal", _sourceTypeMapping?.DefaultConstructor),
                 Array.Empty<Parameter>(),
-                Array.Empty<ObjectPropertyInitializer>());
+                defaultCtorInitializers.ToArray());
 
             yield return new ObjectTypeConstructor(
                 BuilderHelpers.CreateMemberDeclaration(Type.Name, Type, "internal", null),

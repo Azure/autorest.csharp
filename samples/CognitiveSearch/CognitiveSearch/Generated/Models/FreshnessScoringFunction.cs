@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of FreshnessScoringFunction. </summary>
         internal FreshnessScoringFunction()
         {
+            Type = "freshness";
         }
 
         /// <summary> Initializes a new instance of FreshnessScoringFunction. </summary>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
         internal FreshnessScoringFunction(FreshnessScoringParameters parameters, string type, string fieldName, double boost, ScoringFunctionInterpolation? interpolation) : base(type, fieldName, boost, interpolation)
         {
             Parameters = parameters;
+            Type = "freshness";
         }
 
         /// <summary> Parameter values for the freshness scoring function. </summary>

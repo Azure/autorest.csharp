@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of MagnitudeScoringFunction. </summary>
         internal MagnitudeScoringFunction()
         {
+            Type = "magnitude";
         }
 
         /// <summary> Initializes a new instance of MagnitudeScoringFunction. </summary>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
         internal MagnitudeScoringFunction(MagnitudeScoringParameters parameters, string type, string fieldName, double boost, ScoringFunctionInterpolation? interpolation) : base(type, fieldName, boost, interpolation)
         {
             Parameters = parameters;
+            Type = "magnitude";
         }
 
         /// <summary> Parameter values for the magnitude scoring function. </summary>

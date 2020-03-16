@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of TagScoringFunction. </summary>
         internal TagScoringFunction()
         {
+            Type = "tag";
         }
 
         /// <summary> Initializes a new instance of TagScoringFunction. </summary>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
         internal TagScoringFunction(TagScoringParameters parameters, string type, string fieldName, double boost, ScoringFunctionInterpolation? interpolation) : base(type, fieldName, boost, interpolation)
         {
             Parameters = parameters;
+            Type = "tag";
         }
 
         /// <summary> Parameter values for the tag scoring function. </summary>

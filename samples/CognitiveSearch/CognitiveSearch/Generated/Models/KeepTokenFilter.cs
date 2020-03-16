@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of KeepTokenFilter. </summary>
         internal KeepTokenFilter()
         {
+            OdataType = "#Microsoft.Azure.Search.KeepTokenFilter";
         }
 
         /// <summary> Initializes a new instance of KeepTokenFilter. </summary>
@@ -26,6 +27,7 @@ namespace CognitiveSearch.Models
         {
             KeepWords = keepWords;
             LowerCaseKeepWords = lowerCaseKeepWords;
+            OdataType = "#Microsoft.Azure.Search.KeepTokenFilter";
         }
 
         /// <summary> The list of words to keep. </summary>

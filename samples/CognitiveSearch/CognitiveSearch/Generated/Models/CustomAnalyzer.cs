@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of CustomAnalyzer. </summary>
         internal CustomAnalyzer()
         {
+            OdataType = "#Microsoft.Azure.Search.CustomAnalyzer";
         }
 
         /// <summary> Initializes a new instance of CustomAnalyzer. </summary>
@@ -28,6 +29,7 @@ namespace CognitiveSearch.Models
             Tokenizer = tokenizer;
             TokenFilters = tokenFilters;
             CharFilters = charFilters;
+            OdataType = "#Microsoft.Azure.Search.CustomAnalyzer";
         }
 
         /// <summary> The name of the tokenizer to use to divide continuous text into a sequence of tokens, such as breaking a sentence into words. </summary>

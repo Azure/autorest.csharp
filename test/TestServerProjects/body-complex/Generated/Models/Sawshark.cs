@@ -16,6 +16,7 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of Sawshark. </summary>
         internal Sawshark()
         {
+            Fishtype = "sawshark";
         }
 
         /// <summary> Initializes a new instance of Sawshark. </summary>
@@ -29,6 +30,7 @@ namespace body_complex.Models
         internal Sawshark(byte[] picture, int? age, DateTimeOffset birthday, string fishtype, string species, float length, IList<Fish> siblings) : base(age, birthday, fishtype, species, length, siblings)
         {
             Picture = picture;
+            Fishtype = "sawshark";
         }
 
         public byte[] Picture { get; set; }

@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of NGramTokenFilter. </summary>
         internal NGramTokenFilter()
         {
+            OdataType = "#Microsoft.Azure.Search.NGramTokenFilter";
         }
 
         /// <summary> Initializes a new instance of NGramTokenFilter. </summary>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
         {
             MinGram = minGram;
             MaxGram = maxGram;
+            OdataType = "#Microsoft.Azure.Search.NGramTokenFilter";
         }
 
         /// <summary> The minimum n-gram length. Default is 1. Must be less than the value of maxGram. </summary>

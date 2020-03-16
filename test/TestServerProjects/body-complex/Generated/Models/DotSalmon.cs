@@ -13,6 +13,7 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of DotSalmon. </summary>
         internal DotSalmon()
         {
+            FishType = "DotSalmon";
         }
 
         /// <summary> Initializes a new instance of DotSalmon. </summary>
@@ -24,6 +25,7 @@ namespace body_complex.Models
         {
             Location = location;
             Iswild = iswild;
+            FishType = "DotSalmon";
         }
 
         public string Location { get; set; }

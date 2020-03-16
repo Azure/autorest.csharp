@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of StopAnalyzer. </summary>
         internal StopAnalyzer()
         {
+            OdataType = "#Microsoft.Azure.Search.StopAnalyzer";
         }
 
         /// <summary> Initializes a new instance of StopAnalyzer. </summary>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
         internal StopAnalyzer(IList<string> stopwords, string odataType, string name) : base(odataType, name)
         {
             Stopwords = stopwords;
+            OdataType = "#Microsoft.Azure.Search.StopAnalyzer";
         }
 
         /// <summary> A list of stopwords. </summary>

@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of CjkBigramTokenFilter. </summary>
         internal CjkBigramTokenFilter()
         {
+            OdataType = "#Microsoft.Azure.Search.CjkBigramTokenFilter";
         }
 
         /// <summary> Initializes a new instance of CjkBigramTokenFilter. </summary>
@@ -26,6 +27,7 @@ namespace CognitiveSearch.Models
         {
             IgnoreScripts = ignoreScripts;
             OutputUnigrams = outputUnigrams;
+            OdataType = "#Microsoft.Azure.Search.CjkBigramTokenFilter";
         }
 
         /// <summary> The scripts to ignore. </summary>

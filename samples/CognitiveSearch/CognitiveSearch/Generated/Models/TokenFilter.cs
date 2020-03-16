@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of TokenFilter. </summary>
         internal TokenFilter()
         {
+            OdataType = null;
         }
 
         /// <summary> Initializes a new instance of TokenFilter. </summary>
@@ -22,6 +23,7 @@ namespace CognitiveSearch.Models
         {
             OdataType = odataType;
             Name = name;
+            OdataType = null;
         }
 
         public string OdataType { get; internal set; }

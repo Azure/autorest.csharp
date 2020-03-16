@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of ScoringFunction. </summary>
         internal ScoringFunction()
         {
+            Type = null;
         }
 
         /// <summary> Initializes a new instance of ScoringFunction. </summary>
@@ -26,6 +27,7 @@ namespace CognitiveSearch.Models
             FieldName = fieldName;
             Boost = boost;
             Interpolation = interpolation;
+            Type = null;
         }
 
         public string Type { get; internal set; }

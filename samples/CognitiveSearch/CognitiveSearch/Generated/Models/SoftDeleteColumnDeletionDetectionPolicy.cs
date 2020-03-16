@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of SoftDeleteColumnDeletionDetectionPolicy. </summary>
         internal SoftDeleteColumnDeletionDetectionPolicy()
         {
+            OdataType = "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy";
         }
 
         /// <summary> Initializes a new instance of SoftDeleteColumnDeletionDetectionPolicy. </summary>
@@ -23,6 +24,7 @@ namespace CognitiveSearch.Models
         {
             SoftDeleteColumnName = softDeleteColumnName;
             SoftDeleteMarkerValue = softDeleteMarkerValue;
+            OdataType = "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy";
         }
 
         /// <summary> The name of the column to use for soft-deletion detection. </summary>

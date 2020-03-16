@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of PhoneticTokenFilter. </summary>
         internal PhoneticTokenFilter()
         {
+            OdataType = "#Microsoft.Azure.Search.PhoneticTokenFilter";
         }
 
         /// <summary> Initializes a new instance of PhoneticTokenFilter. </summary>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
         {
             Encoder = encoder;
             ReplaceOriginalTokens = replaceOriginalTokens;
+            OdataType = "#Microsoft.Azure.Search.PhoneticTokenFilter";
         }
 
         /// <summary> The phonetic encoder to use. Default is &quot;metaphone&quot;. </summary>

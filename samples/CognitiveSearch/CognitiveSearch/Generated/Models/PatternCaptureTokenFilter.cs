@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of PatternCaptureTokenFilter. </summary>
         internal PatternCaptureTokenFilter()
         {
+            OdataType = "#Microsoft.Azure.Search.PatternCaptureTokenFilter";
         }
 
         /// <summary> Initializes a new instance of PatternCaptureTokenFilter. </summary>
@@ -26,6 +27,7 @@ namespace CognitiveSearch.Models
         {
             Patterns = patterns;
             PreserveOriginal = preserveOriginal;
+            OdataType = "#Microsoft.Azure.Search.PatternCaptureTokenFilter";
         }
 
         /// <summary> A list of patterns to match against each token. </summary>

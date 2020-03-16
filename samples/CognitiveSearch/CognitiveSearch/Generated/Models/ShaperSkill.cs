@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of ShaperSkill. </summary>
         internal ShaperSkill()
         {
+            OdataType = "#Microsoft.Skills.Util.ShaperSkill";
         }
 
         /// <summary> Initializes a new instance of ShaperSkill. </summary>
@@ -26,6 +27,7 @@ namespace CognitiveSearch.Models
         /// <param name="outputs"> The output of a skill is either a field in a search index, or a value that can be consumed as an input by another skill. </param>
         internal ShaperSkill(string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs) : base(odataType, name, description, context, inputs, outputs)
         {
+            OdataType = "#Microsoft.Skills.Util.ShaperSkill";
         }
     }
 }

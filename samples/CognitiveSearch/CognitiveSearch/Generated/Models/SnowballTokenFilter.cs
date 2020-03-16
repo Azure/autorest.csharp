@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of SnowballTokenFilter. </summary>
         internal SnowballTokenFilter()
         {
+            OdataType = "#Microsoft.Azure.Search.SnowballTokenFilter";
         }
 
         /// <summary> Initializes a new instance of SnowballTokenFilter. </summary>
@@ -22,6 +23,7 @@ namespace CognitiveSearch.Models
         internal SnowballTokenFilter(SnowballTokenFilterLanguage language, string odataType, string name) : base(odataType, name)
         {
             Language = language;
+            OdataType = "#Microsoft.Azure.Search.SnowballTokenFilter";
         }
 
         /// <summary> The language to use. </summary>

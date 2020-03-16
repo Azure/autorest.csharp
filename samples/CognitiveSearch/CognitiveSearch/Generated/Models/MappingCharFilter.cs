@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of MappingCharFilter. </summary>
         internal MappingCharFilter()
         {
+            OdataType = "#Microsoft.Azure.Search.MappingCharFilter";
         }
 
         /// <summary> Initializes a new instance of MappingCharFilter. </summary>
@@ -24,6 +25,7 @@ namespace CognitiveSearch.Models
         internal MappingCharFilter(IList<string> mappings, string odataType, string name) : base(odataType, name)
         {
             Mappings = mappings;
+            OdataType = "#Microsoft.Azure.Search.MappingCharFilter";
         }
 
         /// <summary> A list of mappings of the following format: &quot;a=&gt;b&quot; (all occurrences of the character &quot;a&quot; will be replaced with character &quot;b&quot;). </summary>

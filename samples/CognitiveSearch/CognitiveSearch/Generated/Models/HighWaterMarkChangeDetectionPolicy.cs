@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of HighWaterMarkChangeDetectionPolicy. </summary>
         internal HighWaterMarkChangeDetectionPolicy()
         {
+            OdataType = "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy";
         }
 
         /// <summary> Initializes a new instance of HighWaterMarkChangeDetectionPolicy. </summary>
@@ -21,6 +22,7 @@ namespace CognitiveSearch.Models
         internal HighWaterMarkChangeDetectionPolicy(string highWaterMarkColumnName, string odataType) : base(odataType)
         {
             HighWaterMarkColumnName = highWaterMarkColumnName;
+            OdataType = "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy";
         }
 
         /// <summary> The name of the high water mark column. </summary>

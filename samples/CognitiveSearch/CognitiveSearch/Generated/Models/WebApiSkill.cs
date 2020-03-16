@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of WebApiSkill. </summary>
         internal WebApiSkill()
         {
+            OdataType = "#Microsoft.Skills.Custom.WebApiSkill";
         }
 
         /// <summary> Initializes a new instance of WebApiSkill. </summary>
@@ -39,6 +40,7 @@ namespace CognitiveSearch.Models
             Timeout = timeout;
             BatchSize = batchSize;
             DegreeOfParallelism = degreeOfParallelism;
+            OdataType = "#Microsoft.Skills.Custom.WebApiSkill";
         }
 
         /// <summary> The url for the Web API. </summary>

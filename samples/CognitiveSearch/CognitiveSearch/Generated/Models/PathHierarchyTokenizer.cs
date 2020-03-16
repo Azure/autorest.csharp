@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of PathHierarchyTokenizer. </summary>
         internal PathHierarchyTokenizer()
         {
+            OdataType = "#Microsoft.Azure.Search.PathHierarchyTokenizer";
         }
 
         /// <summary> Initializes a new instance of PathHierarchyTokenizer. </summary>
@@ -30,6 +31,7 @@ namespace CognitiveSearch.Models
             BufferSize = bufferSize;
             ReverseTokenOrder = reverseTokenOrder;
             NumberOfTokensToSkip = numberOfTokensToSkip;
+            OdataType = "#Microsoft.Azure.Search.PathHierarchyTokenizer";
         }
 
         /// <summary> The delimiter character to use. Default is &quot;/&quot;. </summary>
