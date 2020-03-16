@@ -12,6 +12,31 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Private endpoint resource. </summary>
     public partial class PrivateEndpoint : Resource
     {
+        /// <summary> Initializes a new instance of PrivateEndpoint. </summary>
+        internal PrivateEndpoint()
+        {
+        }
+        /// <summary> Initializes a new instance of PrivateEndpoint. </summary>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="subnet"> The ID of the subnet from which the private IP will be allocated. </param>
+        /// <param name="networkInterfaces"> An array of references to the network interfaces created for this private endpoint. </param>
+        /// <param name="provisioningState"> The provisioning state of the private endpoint resource. </param>
+        /// <param name="privateLinkServiceConnections"> A grouping of information about the connection to the remote resource. </param>
+        /// <param name="manualPrivateLinkServiceConnections"> A grouping of information about the connection to the remote resource. Used when the network admin does not have access to approve connections to the remote resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> Resource name. </param>
+        /// <param name="type"> Resource type. </param>
+        /// <param name="location"> Resource location. </param>
+        /// <param name="tags"> Resource tags. </param>
+        internal PrivateEndpoint(string etag, Subnet subnet, IList<NetworkInterface> networkInterfaces, ProvisioningState? provisioningState, IList<PrivateLinkServiceConnection> privateLinkServiceConnections, IList<PrivateLinkServiceConnection> manualPrivateLinkServiceConnections, string id, string name, string type, string location, IDictionary<string, string> tags) : base(id, name, type, location, tags)
+        {
+            Etag = etag;
+            Subnet = subnet;
+            NetworkInterfaces = networkInterfaces;
+            ProvisioningState = provisioningState;
+            PrivateLinkServiceConnections = privateLinkServiceConnections;
+            ManualPrivateLinkServiceConnections = manualPrivateLinkServiceConnections;
+        }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
         public string Etag { get; internal set; }
         /// <summary> The ID of the subnet from which the private IP will be allocated. </summary>

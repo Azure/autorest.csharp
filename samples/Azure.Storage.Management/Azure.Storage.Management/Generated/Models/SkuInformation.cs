@@ -12,6 +12,28 @@ namespace Azure.Storage.Management.Models
     /// <summary> Storage SKU and its properties. </summary>
     public partial class SkuInformation
     {
+        /// <summary> Initializes a new instance of SkuInformation. </summary>
+        internal SkuInformation()
+        {
+        }
+        /// <summary> Initializes a new instance of SkuInformation. </summary>
+        /// <param name="name"> The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType. </param>
+        /// <param name="tier"> The SKU tier. This is based on the SKU name. </param>
+        /// <param name="resourceType"> The type of the resource, usually it is &apos;storageAccounts&apos;. </param>
+        /// <param name="kind"> Indicates the type of storage account. </param>
+        /// <param name="locations"> The set of locations that the SKU is available. This will be supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). </param>
+        /// <param name="capabilities"> The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc. </param>
+        /// <param name="restrictions"> The restrictions because of which SKU cannot be used. This is empty if there are no restrictions. </param>
+        internal SkuInformation(SkuName name, SkuTier? tier, string resourceType, Kind? kind, IList<string> locations, IList<SKUCapability> capabilities, IList<Restriction> restrictions)
+        {
+            Name = name;
+            Tier = tier;
+            ResourceType = resourceType;
+            Kind = kind;
+            Locations = locations;
+            Capabilities = capabilities;
+            Restrictions = restrictions;
+        }
         /// <summary> The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType. </summary>
         public SkuName Name { get; set; }
         /// <summary> The SKU tier. This is based on the SKU name. </summary>

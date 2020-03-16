@@ -15,6 +15,8 @@ namespace body_complex.Models
         {
         }
         /// <summary> Initializes a new instance of IntWrapper. </summary>
+        /// <param name="field1"> . </param>
+        /// <param name="field2"> . </param>
         internal IntWrapper(int? field1, int? field2)
         {
             Field1 = field1;

@@ -12,6 +12,31 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> ServiceAssociationLink resource. </summary>
     public partial class ServiceAssociationLink : SubResource
     {
+        /// <summary> Initializes a new instance of ServiceAssociationLink. </summary>
+        internal ServiceAssociationLink()
+        {
+        }
+        /// <summary> Initializes a new instance of ServiceAssociationLink. </summary>
+        /// <param name="name"> Name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="type"> Resource type. </param>
+        /// <param name="linkedResourceType"> Resource type of the linked resource. </param>
+        /// <param name="link"> Link to the external resource. </param>
+        /// <param name="provisioningState"> The provisioning state of the service association link resource. </param>
+        /// <param name="allowDelete"> If true, the resource can be deleted. </param>
+        /// <param name="locations"> A list of locations. </param>
+        /// <param name="id"> Resource ID. </param>
+        internal ServiceAssociationLink(string name, string etag, string type, string linkedResourceType, string link, ProvisioningState? provisioningState, bool? allowDelete, IList<string> locations, string id) : base(id)
+        {
+            Name = name;
+            Etag = etag;
+            Type = type;
+            LinkedResourceType = linkedResourceType;
+            Link = link;
+            ProvisioningState = provisioningState;
+            AllowDelete = allowDelete;
+            Locations = locations;
+        }
         /// <summary> Name of the resource that is unique within a resource group. This name can be used to access the resource. </summary>
         public string Name { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>

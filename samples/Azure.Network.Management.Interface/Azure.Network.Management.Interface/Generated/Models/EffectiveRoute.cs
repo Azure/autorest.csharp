@@ -12,6 +12,28 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Effective Route. </summary>
     public partial class EffectiveRoute
     {
+        /// <summary> Initializes a new instance of EffectiveRoute. </summary>
+        internal EffectiveRoute()
+        {
+        }
+        /// <summary> Initializes a new instance of EffectiveRoute. </summary>
+        /// <param name="name"> The name of the user defined route. This is optional. </param>
+        /// <param name="disableBgpRoutePropagation"> If true, on-premises routes are not propagated to the network interfaces in the subnet. </param>
+        /// <param name="source"> Who created the route. </param>
+        /// <param name="state"> The value of effective route. </param>
+        /// <param name="addressPrefix"> The address prefixes of the effective routes in CIDR notation. </param>
+        /// <param name="nextHopIpAddress"> The IP address of the next hop of the effective route. </param>
+        /// <param name="nextHopType"> The type of Azure hop the packet should be sent to. </param>
+        internal EffectiveRoute(string name, bool? disableBgpRoutePropagation, EffectiveRouteSource? source, EffectiveRouteState? state, IList<string> addressPrefix, IList<string> nextHopIpAddress, RouteNextHopType? nextHopType)
+        {
+            Name = name;
+            DisableBgpRoutePropagation = disableBgpRoutePropagation;
+            Source = source;
+            State = state;
+            AddressPrefix = addressPrefix;
+            NextHopIpAddress = nextHopIpAddress;
+            NextHopType = nextHopType;
+        }
         /// <summary> The name of the user defined route. This is optional. </summary>
         public string Name { get; set; }
         /// <summary> If true, on-premises routes are not propagated to the network interfaces in the subnet. </summary>

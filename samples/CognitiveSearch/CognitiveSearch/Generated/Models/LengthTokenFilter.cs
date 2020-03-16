@@ -11,9 +11,18 @@ namespace CognitiveSearch.Models
     public partial class LengthTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of LengthTokenFilter. </summary>
-        public LengthTokenFilter()
+        internal LengthTokenFilter()
         {
-            OdataType = "#Microsoft.Azure.Search.LengthTokenFilter";
+        }
+        /// <summary> Initializes a new instance of LengthTokenFilter. </summary>
+        /// <param name="min"> The minimum length in characters. Default is 0. Maximum is 300. Must be less than the value of max. </param>
+        /// <param name="max"> The maximum length in characters. Default and maximum is 300. </param>
+        /// <param name="odataType"> . </param>
+        /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        internal LengthTokenFilter(int? min, int? max, string odataType, string name) : base(odataType, name)
+        {
+            Min = min;
+            Max = max;
         }
         /// <summary> The minimum length in characters. Default is 0. Maximum is 300. Must be less than the value of max. </summary>
         public int? Min { get; set; }

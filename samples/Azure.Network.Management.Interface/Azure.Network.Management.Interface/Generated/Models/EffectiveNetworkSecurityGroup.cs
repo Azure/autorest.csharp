@@ -12,6 +12,22 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Effective network security group. </summary>
     public partial class EffectiveNetworkSecurityGroup
     {
+        /// <summary> Initializes a new instance of EffectiveNetworkSecurityGroup. </summary>
+        internal EffectiveNetworkSecurityGroup()
+        {
+        }
+        /// <summary> Initializes a new instance of EffectiveNetworkSecurityGroup. </summary>
+        /// <param name="networkSecurityGroup"> The ID of network security group that is applied. </param>
+        /// <param name="association"> Associated resources. </param>
+        /// <param name="effectiveSecurityRules"> A collection of effective security rules. </param>
+        /// <param name="tagMap"> Mapping of tags to list of IP Addresses included within the tag. </param>
+        internal EffectiveNetworkSecurityGroup(SubResource networkSecurityGroup, EffectiveNetworkSecurityGroupAssociation association, IList<EffectiveNetworkSecurityRule> effectiveSecurityRules, string tagMap)
+        {
+            NetworkSecurityGroup = networkSecurityGroup;
+            Association = association;
+            EffectiveSecurityRules = effectiveSecurityRules;
+            TagMap = tagMap;
+        }
         /// <summary> The ID of network security group that is applied. </summary>
         public SubResource NetworkSecurityGroup { get; set; }
         /// <summary> Associated resources. </summary>

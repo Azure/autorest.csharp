@@ -12,6 +12,24 @@ namespace CognitiveSearch.Models
     /// <summary> A list of skills. </summary>
     public partial class Skillset
     {
+        /// <summary> Initializes a new instance of Skillset. </summary>
+        internal Skillset()
+        {
+        }
+        /// <summary> Initializes a new instance of Skillset. </summary>
+        /// <param name="name"> The name of the skillset. </param>
+        /// <param name="description"> The description of the skillset. </param>
+        /// <param name="skills"> A list of skills in the skillset. </param>
+        /// <param name="cognitiveServicesAccount"> Details about cognitive services to be used when running skills. </param>
+        /// <param name="eTag"> The ETag of the skillset. </param>
+        internal Skillset(string name, string description, IList<Skill> skills, CognitiveServicesAccount cognitiveServicesAccount, string eTag)
+        {
+            Name = name;
+            Description = description;
+            Skills = skills;
+            CognitiveServicesAccount = cognitiveServicesAccount;
+            ETag = eTag;
+        }
         /// <summary> The name of the skillset. </summary>
         public string Name { get; set; }
         /// <summary> The description of the skillset. </summary>

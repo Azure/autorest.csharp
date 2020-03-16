@@ -12,6 +12,22 @@ namespace CognitiveSearch.Models
     /// <summary> Represents the current status and execution history of an indexer. </summary>
     public partial class IndexerExecutionInfo
     {
+        /// <summary> Initializes a new instance of IndexerExecutionInfo. </summary>
+        internal IndexerExecutionInfo()
+        {
+        }
+        /// <summary> Initializes a new instance of IndexerExecutionInfo. </summary>
+        /// <param name="status"> Overall indexer status. </param>
+        /// <param name="lastResult"> The result of the most recent or an in-progress indexer execution. </param>
+        /// <param name="executionHistory"> History of the recent indexer executions, sorted in reverse chronological order. </param>
+        /// <param name="limits"> The execution limits for the indexer. </param>
+        internal IndexerExecutionInfo(IndexerStatus? status, IndexerExecutionResult lastResult, IList<IndexerExecutionResult> executionHistory, IndexerLimits limits)
+        {
+            Status = status;
+            LastResult = lastResult;
+            ExecutionHistory = executionHistory;
+            Limits = limits;
+        }
         /// <summary> Overall indexer status. </summary>
         public IndexerStatus? Status { get; internal set; }
         /// <summary> The result of the most recent or an in-progress indexer execution. </summary>

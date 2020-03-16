@@ -12,6 +12,22 @@ namespace CognitiveSearch.Models
     /// <summary> Defines parameters for a search index that influence scoring in search queries. </summary>
     public partial class ScoringProfile
     {
+        /// <summary> Initializes a new instance of ScoringProfile. </summary>
+        internal ScoringProfile()
+        {
+        }
+        /// <summary> Initializes a new instance of ScoringProfile. </summary>
+        /// <param name="name"> The name of the scoring profile. </param>
+        /// <param name="textWeights"> Parameters that boost scoring based on text matches in certain index fields. </param>
+        /// <param name="functions"> The collection of functions that influence the scoring of documents. </param>
+        /// <param name="functionAggregation"> A value indicating how the results of individual scoring functions should be combined. Defaults to &quot;Sum&quot;. Ignored if there are no scoring functions. </param>
+        internal ScoringProfile(string name, TextWeights textWeights, IList<ScoringFunction> functions, ScoringFunctionAggregation? functionAggregation)
+        {
+            Name = name;
+            TextWeights = textWeights;
+            Functions = functions;
+            FunctionAggregation = functionAggregation;
+        }
         /// <summary> The name of the scoring profile. </summary>
         public string Name { get; set; }
         /// <summary> Parameters that boost scoring based on text matches in certain index fields. </summary>

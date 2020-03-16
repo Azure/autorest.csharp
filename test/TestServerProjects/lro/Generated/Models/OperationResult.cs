@@ -10,6 +10,18 @@ namespace lro.Models
     /// <summary> The OperationResult. </summary>
     public partial class OperationResult
     {
+        /// <summary> Initializes a new instance of OperationResult. </summary>
+        internal OperationResult()
+        {
+        }
+        /// <summary> Initializes a new instance of OperationResult. </summary>
+        /// <param name="status"> The status of the request. </param>
+        /// <param name="error"> . </param>
+        internal OperationResult(OperationResultStatus? status, OperationResultError error)
+        {
+            Status = status;
+            Error = error;
+        }
         /// <summary> The status of the request. </summary>
         public OperationResultStatus? Status { get; set; }
         public OperationResultError Error { get; set; }

@@ -10,6 +10,16 @@ namespace Azure.Storage.Tables.Models
     /// <summary> The properties for creating a table. </summary>
     public partial class TableProperties
     {
+        /// <summary> Initializes a new instance of TableProperties. </summary>
+        internal TableProperties()
+        {
+        }
+        /// <summary> Initializes a new instance of TableProperties. </summary>
+        /// <param name="tableName"> The name of the table to create. </param>
+        internal TableProperties(string tableName)
+        {
+            TableName = tableName;
+        }
         /// <summary> The name of the table to create. </summary>
         public string TableName { get; set; }
     }

@@ -11,9 +11,14 @@ namespace CognitiveSearch.Models
     public partial class DataDeletionDetectionPolicy
     {
         /// <summary> Initializes a new instance of DataDeletionDetectionPolicy. </summary>
-        public DataDeletionDetectionPolicy()
+        internal DataDeletionDetectionPolicy()
         {
-            OdataType = null;
+        }
+        /// <summary> Initializes a new instance of DataDeletionDetectionPolicy. </summary>
+        /// <param name="odataType"> . </param>
+        internal DataDeletionDetectionPolicy(string odataType)
+        {
+            OdataType = odataType;
         }
         public string OdataType { get; internal set; }
     }

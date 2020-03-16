@@ -17,6 +17,11 @@ namespace body_complex.Models
         {
         }
         /// <summary> Initializes a new instance of Siamese. </summary>
+        /// <param name="breed"> . </param>
+        /// <param name="color"> . </param>
+        /// <param name="hates"> . </param>
+        /// <param name="id"> . </param>
+        /// <param name="name"> . </param>
         internal Siamese(string breed, string color, IList<Dog> hates, int? id, string name) : base(color, hates, id, name)
         {
             Breed = breed;

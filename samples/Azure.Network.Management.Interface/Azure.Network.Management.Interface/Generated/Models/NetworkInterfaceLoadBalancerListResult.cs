@@ -12,6 +12,18 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Response for list ip configurations API service call. </summary>
     public partial class NetworkInterfaceLoadBalancerListResult
     {
+        /// <summary> Initializes a new instance of NetworkInterfaceLoadBalancerListResult. </summary>
+        internal NetworkInterfaceLoadBalancerListResult()
+        {
+        }
+        /// <summary> Initializes a new instance of NetworkInterfaceLoadBalancerListResult. </summary>
+        /// <param name="value"> A list of load balancers. </param>
+        /// <param name="nextLink"> The URL to get the next set of results. </param>
+        internal NetworkInterfaceLoadBalancerListResult(IList<LoadBalancer> value, string nextLink)
+        {
+            Value = value;
+            NextLink = nextLink;
+        }
         /// <summary> A list of load balancers. </summary>
         public IList<LoadBalancer> Value { get; set; }
         /// <summary> The URL to get the next set of results. </summary>

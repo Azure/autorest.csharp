@@ -11,9 +11,14 @@ namespace CognitiveSearch.Models
     public partial class DefaultCognitiveServicesAccount : CognitiveServicesAccount
     {
         /// <summary> Initializes a new instance of DefaultCognitiveServicesAccount. </summary>
-        public DefaultCognitiveServicesAccount()
+        internal DefaultCognitiveServicesAccount()
         {
-            OdataType = "#Microsoft.Azure.Search.DefaultCognitiveServices";
+        }
+        /// <summary> Initializes a new instance of DefaultCognitiveServicesAccount. </summary>
+        /// <param name="odataType"> . </param>
+        /// <param name="description"> . </param>
+        internal DefaultCognitiveServicesAccount(string odataType, string description) : base(odataType, description)
+        {
         }
     }
 }

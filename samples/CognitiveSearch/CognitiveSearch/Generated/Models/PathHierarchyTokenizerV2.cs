@@ -11,9 +11,24 @@ namespace CognitiveSearch.Models
     public partial class PathHierarchyTokenizerV2 : Tokenizer
     {
         /// <summary> Initializes a new instance of PathHierarchyTokenizerV2. </summary>
-        public PathHierarchyTokenizerV2()
+        internal PathHierarchyTokenizerV2()
         {
-            OdataType = "#Microsoft.Azure.Search.PathHierarchyTokenizerV2";
+        }
+        /// <summary> Initializes a new instance of PathHierarchyTokenizerV2. </summary>
+        /// <param name="delimiter"> The delimiter character to use. Default is &quot;/&quot;. </param>
+        /// <param name="replacement"> A value that, if set, replaces the delimiter character. Default is &quot;/&quot;. </param>
+        /// <param name="maxTokenLength"> The maximum token length. Default and maximum is 300. </param>
+        /// <param name="reverseTokenOrder"> A value indicating whether to generate tokens in reverse order. Default is false. </param>
+        /// <param name="numberOfTokensToSkip"> The number of initial tokens to skip. Default is 0. </param>
+        /// <param name="odataType"> . </param>
+        /// <param name="name"> The name of the tokenizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        internal PathHierarchyTokenizerV2(char? delimiter, char? replacement, int? maxTokenLength, bool? reverseTokenOrder, int? numberOfTokensToSkip, string odataType, string name) : base(odataType, name)
+        {
+            Delimiter = delimiter;
+            Replacement = replacement;
+            MaxTokenLength = maxTokenLength;
+            ReverseTokenOrder = reverseTokenOrder;
+            NumberOfTokensToSkip = numberOfTokensToSkip;
         }
         /// <summary> The delimiter character to use. Default is &quot;/&quot;. </summary>
         public char? Delimiter { get; set; }

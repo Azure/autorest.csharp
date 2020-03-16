@@ -12,6 +12,24 @@ namespace xml_service.Models
     /// <summary> An Azure Storage blob. </summary>
     public partial class Blob
     {
+        /// <summary> Initializes a new instance of Blob. </summary>
+        internal Blob()
+        {
+        }
+        /// <summary> Initializes a new instance of Blob. </summary>
+        /// <param name="name"> . </param>
+        /// <param name="deleted"> . </param>
+        /// <param name="snapshot"> . </param>
+        /// <param name="properties"> Properties of a blob. </param>
+        /// <param name="metadata"> Dictionary of &lt;string&gt;. </param>
+        internal Blob(string name, bool deleted, string snapshot, BlobProperties properties, IDictionary<string, string> metadata)
+        {
+            Name = name;
+            Deleted = deleted;
+            Snapshot = snapshot;
+            Properties = properties;
+            Metadata = metadata;
+        }
         public string Name { get; set; }
         public bool Deleted { get; set; }
         public string Snapshot { get; set; }

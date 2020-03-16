@@ -11,9 +11,17 @@ namespace CognitiveSearch.Models
     public partial class SoftDeleteColumnDeletionDetectionPolicy : DataDeletionDetectionPolicy
     {
         /// <summary> Initializes a new instance of SoftDeleteColumnDeletionDetectionPolicy. </summary>
-        public SoftDeleteColumnDeletionDetectionPolicy()
+        internal SoftDeleteColumnDeletionDetectionPolicy()
         {
-            OdataType = "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy";
+        }
+        /// <summary> Initializes a new instance of SoftDeleteColumnDeletionDetectionPolicy. </summary>
+        /// <param name="softDeleteColumnName"> The name of the column to use for soft-deletion detection. </param>
+        /// <param name="softDeleteMarkerValue"> The marker value that identifies an item as deleted. </param>
+        /// <param name="odataType"> . </param>
+        internal SoftDeleteColumnDeletionDetectionPolicy(string softDeleteColumnName, string softDeleteMarkerValue, string odataType) : base(odataType)
+        {
+            SoftDeleteColumnName = softDeleteColumnName;
+            SoftDeleteMarkerValue = softDeleteMarkerValue;
         }
         /// <summary> The name of the column to use for soft-deletion detection. </summary>
         public string SoftDeleteColumnName { get; set; }

@@ -11,9 +11,26 @@ namespace CognitiveSearch.Models
     public partial class ShingleTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of ShingleTokenFilter. </summary>
-        public ShingleTokenFilter()
+        internal ShingleTokenFilter()
         {
-            OdataType = "#Microsoft.Azure.Search.ShingleTokenFilter";
+        }
+        /// <summary> Initializes a new instance of ShingleTokenFilter. </summary>
+        /// <param name="maxShingleSize"> The maximum shingle size. Default and minimum value is 2. </param>
+        /// <param name="minShingleSize"> The minimum shingle size. Default and minimum value is 2. Must be less than the value of maxShingleSize. </param>
+        /// <param name="outputUnigrams"> A value indicating whether the output stream will contain the input tokens (unigrams) as well as shingles. Default is true. </param>
+        /// <param name="outputUnigramsIfNoShingles"> A value indicating whether to output unigrams for those times when no shingles are available. This property takes precedence when outputUnigrams is set to false. Default is false. </param>
+        /// <param name="tokenSeparator"> The string to use when joining adjacent tokens to form a shingle. Default is a single space (&quot; &quot;). </param>
+        /// <param name="filterToken"> The string to insert for each position at which there is no token. Default is an underscore (&quot;_&quot;). </param>
+        /// <param name="odataType"> . </param>
+        /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        internal ShingleTokenFilter(int? maxShingleSize, int? minShingleSize, bool? outputUnigrams, bool? outputUnigramsIfNoShingles, string tokenSeparator, string filterToken, string odataType, string name) : base(odataType, name)
+        {
+            MaxShingleSize = maxShingleSize;
+            MinShingleSize = minShingleSize;
+            OutputUnigrams = outputUnigrams;
+            OutputUnigramsIfNoShingles = outputUnigramsIfNoShingles;
+            TokenSeparator = tokenSeparator;
+            FilterToken = filterToken;
         }
         /// <summary> The maximum shingle size. Default and minimum value is 2. </summary>
         public int? MaxShingleSize { get; set; }

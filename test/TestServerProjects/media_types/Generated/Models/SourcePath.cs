@@ -10,6 +10,16 @@ namespace media_types.Models
     /// <summary> Uri or local path to source data. </summary>
     public partial class SourcePath
     {
+        /// <summary> Initializes a new instance of SourcePath. </summary>
+        internal SourcePath()
+        {
+        }
+        /// <summary> Initializes a new instance of SourcePath. </summary>
+        /// <param name="source"> File source path. </param>
+        internal SourcePath(string source)
+        {
+            Source = source;
+        }
         /// <summary> File source path. </summary>
         public string Source { get; set; }
     }

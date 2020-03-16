@@ -10,6 +10,18 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The DocumentError. </summary>
     public partial class DocumentError
     {
+        /// <summary> Initializes a new instance of DocumentError. </summary>
+        internal DocumentError()
+        {
+        }
+        /// <summary> Initializes a new instance of DocumentError. </summary>
+        /// <param name="id"> Document Id. </param>
+        /// <param name="error"> Document Error. </param>
+        internal DocumentError(string id, TextAnalyticsError error)
+        {
+            Id = id;
+            Error = error;
+        }
         /// <summary> Document Id. </summary>
         public string Id { get; set; }
         /// <summary> Document Error. </summary>

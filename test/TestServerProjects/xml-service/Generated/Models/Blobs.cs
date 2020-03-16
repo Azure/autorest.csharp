@@ -12,6 +12,18 @@ namespace xml_service.Models
     /// <summary> The Blobs. </summary>
     public partial class Blobs
     {
+        /// <summary> Initializes a new instance of Blobs. </summary>
+        internal Blobs()
+        {
+        }
+        /// <summary> Initializes a new instance of Blobs. </summary>
+        /// <param name="blobPrefix"> . </param>
+        /// <param name="blob"> . </param>
+        internal Blobs(IList<BlobPrefix> blobPrefix, IList<Blob> blob)
+        {
+            BlobPrefix = blobPrefix;
+            Blob = blob;
+        }
         public IList<BlobPrefix> BlobPrefix { get; set; }
         public IList<Blob> Blob { get; set; }
     }

@@ -12,6 +12,42 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Recognized field value. </summary>
     public partial class FieldValue
     {
+        /// <summary> Initializes a new instance of FieldValue. </summary>
+        internal FieldValue()
+        {
+        }
+        /// <summary> Initializes a new instance of FieldValue. </summary>
+        /// <param name="type"> Type of field value. </param>
+        /// <param name="valueString"> String value. </param>
+        /// <param name="valueDate"> Date value. </param>
+        /// <param name="valueTime"> Time value. </param>
+        /// <param name="valuePhoneNumber"> Phone number value. </param>
+        /// <param name="valueNumber"> Floating point value. </param>
+        /// <param name="valueInteger"> Integer value. </param>
+        /// <param name="valueArray"> Array of field values. </param>
+        /// <param name="valueObject"> Dictionary of named field values. </param>
+        /// <param name="text"> Text content of the extracted field. </param>
+        /// <param name="boundingBox"> Bounding box of the field value, if appropriate. </param>
+        /// <param name="confidence"> Confidence score. </param>
+        /// <param name="elements"> When includeTextDetails is set to true, a list of references to the text elements constituting this field. </param>
+        /// <param name="page"> The 1-based page number in the input document. </param>
+        internal FieldValue(FieldValueType type, string valueString, string valueDate, string valueTime, string valuePhoneNumber, float? valueNumber, int? valueInteger, IList<FieldValue> valueArray, IDictionary<string, FieldValue> valueObject, string text, IList<float> boundingBox, float? confidence, IList<string> elements, int? page)
+        {
+            Type = type;
+            ValueString = valueString;
+            ValueDate = valueDate;
+            ValueTime = valueTime;
+            ValuePhoneNumber = valuePhoneNumber;
+            ValueNumber = valueNumber;
+            ValueInteger = valueInteger;
+            ValueArray = valueArray;
+            ValueObject = valueObject;
+            Text = text;
+            BoundingBox = boundingBox;
+            Confidence = confidence;
+            Elements = elements;
+            Page = page;
+        }
         /// <summary> Type of field value. </summary>
         public FieldValueType Type { get; set; }
         /// <summary> String value. </summary>

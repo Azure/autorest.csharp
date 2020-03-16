@@ -12,6 +12,22 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The SentimentResponse. </summary>
     public partial class SentimentResponse
     {
+        /// <summary> Initializes a new instance of SentimentResponse. </summary>
+        internal SentimentResponse()
+        {
+        }
+        /// <summary> Initializes a new instance of SentimentResponse. </summary>
+        /// <param name="documents"> Sentiment analysis per document. </param>
+        /// <param name="errors"> Errors by document id. </param>
+        /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the request payload. </param>
+        /// <param name="modelVersion"> This field indicates which model is used for scoring. </param>
+        internal SentimentResponse(IList<DocumentSentiment> documents, IList<DocumentError> errors, RequestStatistics statistics, string modelVersion)
+        {
+            Documents = documents;
+            Errors = errors;
+            Statistics = statistics;
+            ModelVersion = modelVersion;
+        }
         /// <summary> Sentiment analysis per document. </summary>
         public IList<DocumentSentiment> Documents { get; set; } = new List<DocumentSentiment>();
         /// <summary> Errors by document id. </summary>

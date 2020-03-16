@@ -10,6 +10,18 @@ namespace CognitiveSearch.Models
     /// <summary> The result of Autocomplete requests. </summary>
     public partial class AutocompleteItem
     {
+        /// <summary> Initializes a new instance of AutocompleteItem. </summary>
+        internal AutocompleteItem()
+        {
+        }
+        /// <summary> Initializes a new instance of AutocompleteItem. </summary>
+        /// <param name="text"> The completed term. </param>
+        /// <param name="queryPlusText"> The query along with the completed term. </param>
+        internal AutocompleteItem(string text, string queryPlusText)
+        {
+            Text = text;
+            QueryPlusText = queryPlusText;
+        }
         /// <summary> The completed term. </summary>
         public string Text { get; internal set; }
         /// <summary> The query along with the completed term. </summary>

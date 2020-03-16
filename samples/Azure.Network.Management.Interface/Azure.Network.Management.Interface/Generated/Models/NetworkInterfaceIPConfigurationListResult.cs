@@ -12,6 +12,18 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Response for list ip configurations API service call. </summary>
     public partial class NetworkInterfaceIPConfigurationListResult
     {
+        /// <summary> Initializes a new instance of NetworkInterfaceIPConfigurationListResult. </summary>
+        internal NetworkInterfaceIPConfigurationListResult()
+        {
+        }
+        /// <summary> Initializes a new instance of NetworkInterfaceIPConfigurationListResult. </summary>
+        /// <param name="value"> A list of ip configurations. </param>
+        /// <param name="nextLink"> The URL to get the next set of results. </param>
+        internal NetworkInterfaceIPConfigurationListResult(IList<NetworkInterfaceIPConfiguration> value, string nextLink)
+        {
+            Value = value;
+            NextLink = nextLink;
+        }
         /// <summary> A list of ip configurations. </summary>
         public IList<NetworkInterfaceIPConfiguration> Value { get; set; }
         /// <summary> The URL to get the next set of results. </summary>

@@ -13,6 +13,20 @@ namespace additionalProperties.Models
     /// <summary> The PetAPString. </summary>
     public partial class PetAPString : IDictionary<string, string>
     {
+        /// <summary> Initializes a new instance of PetAPString. </summary>
+        internal PetAPString()
+        {
+        }
+        /// <summary> Initializes a new instance of PetAPString. </summary>
+        /// <param name="id"> . </param>
+        /// <param name="name"> . </param>
+        /// <param name="status"> . </param>
+        internal PetAPString(int id, string name, bool? status)
+        {
+            Id = id;
+            Name = name;
+            Status = status;
+        }
         public int Id { get; set; }
         public string Name { get; set; }
         public bool? Status { get; internal set; }

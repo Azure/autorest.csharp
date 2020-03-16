@@ -11,9 +11,16 @@ namespace CognitiveSearch.Models
     public partial class CognitiveServicesAccountKey : CognitiveServicesAccount
     {
         /// <summary> Initializes a new instance of CognitiveServicesAccountKey. </summary>
-        public CognitiveServicesAccountKey()
+        internal CognitiveServicesAccountKey()
         {
-            OdataType = "#Microsoft.Azure.Search.CognitiveServicesByKey";
+        }
+        /// <summary> Initializes a new instance of CognitiveServicesAccountKey. </summary>
+        /// <param name="key"> . </param>
+        /// <param name="odataType"> . </param>
+        /// <param name="description"> . </param>
+        internal CognitiveServicesAccountKey(string key, string odataType, string description) : base(odataType, description)
+        {
+            Key = key;
         }
         public string Key { get; set; }
     }

@@ -13,9 +13,18 @@ namespace CognitiveSearch.Models
     public partial class KeepTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of KeepTokenFilter. </summary>
-        public KeepTokenFilter()
+        internal KeepTokenFilter()
         {
-            OdataType = "#Microsoft.Azure.Search.KeepTokenFilter";
+        }
+        /// <summary> Initializes a new instance of KeepTokenFilter. </summary>
+        /// <param name="keepWords"> The list of words to keep. </param>
+        /// <param name="lowerCaseKeepWords"> A value indicating whether to lower case all words first. Default is false. </param>
+        /// <param name="odataType"> . </param>
+        /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        internal KeepTokenFilter(IList<string> keepWords, bool? lowerCaseKeepWords, string odataType, string name) : base(odataType, name)
+        {
+            KeepWords = keepWords;
+            LowerCaseKeepWords = lowerCaseKeepWords;
         }
         /// <summary> The list of words to keep. </summary>
         public IList<string> KeepWords { get; set; } = new List<string>();

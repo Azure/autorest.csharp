@@ -10,6 +10,29 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> ResourceNavigationLink resource. </summary>
     public partial class ResourceNavigationLink : SubResource
     {
+        /// <summary> Initializes a new instance of ResourceNavigationLink. </summary>
+        internal ResourceNavigationLink()
+        {
+        }
+        /// <summary> Initializes a new instance of ResourceNavigationLink. </summary>
+        /// <param name="name"> Name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
+        /// <param name="resourceNavigationLinkId"> Resource navigation link identifier. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="type"> Resource type. </param>
+        /// <param name="linkedResourceType"> Resource type of the linked resource. </param>
+        /// <param name="link"> Link to the external resource. </param>
+        /// <param name="provisioningState"> The provisioning state of the resource navigation link resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        internal ResourceNavigationLink(string name, string resourceNavigationLinkId, string etag, string type, string linkedResourceType, string link, ProvisioningState? provisioningState, string id) : base(id)
+        {
+            Name = name;
+            ResourceNavigationLinkId = resourceNavigationLinkId;
+            Etag = etag;
+            Type = type;
+            LinkedResourceType = linkedResourceType;
+            Link = link;
+            ProvisioningState = provisioningState;
+        }
         /// <summary> Name of the resource that is unique within a resource group. This name can be used to access the resource. </summary>
         public string Name { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>

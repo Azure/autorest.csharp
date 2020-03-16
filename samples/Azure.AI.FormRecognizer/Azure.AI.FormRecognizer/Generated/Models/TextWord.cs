@@ -12,6 +12,20 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> An object representing a word. </summary>
     public partial class TextWord
     {
+        /// <summary> Initializes a new instance of TextWord. </summary>
+        internal TextWord()
+        {
+        }
+        /// <summary> Initializes a new instance of TextWord. </summary>
+        /// <param name="text"> The text content of the word. </param>
+        /// <param name="boundingBox"> Bounding box of an extracted word. </param>
+        /// <param name="confidence"> Confidence value. </param>
+        internal TextWord(string text, IList<float> boundingBox, float? confidence)
+        {
+            Text = text;
+            BoundingBox = boundingBox;
+            Confidence = confidence;
+        }
         /// <summary> The text content of the word. </summary>
         public string Text { get; set; }
         /// <summary> Bounding box of an extracted word. </summary>

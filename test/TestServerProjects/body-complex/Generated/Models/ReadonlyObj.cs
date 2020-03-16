@@ -15,6 +15,8 @@ namespace body_complex.Models
         {
         }
         /// <summary> Initializes a new instance of ReadonlyObj. </summary>
+        /// <param name="id"> . </param>
+        /// <param name="size"> . </param>
         internal ReadonlyObj(string id, int? size)
         {
             Id = id;

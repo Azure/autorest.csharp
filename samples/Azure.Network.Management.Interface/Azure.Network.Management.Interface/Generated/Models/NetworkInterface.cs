@@ -12,6 +12,47 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> A network interface in a resource group. </summary>
     public partial class NetworkInterface : Resource
     {
+        /// <summary> Initializes a new instance of NetworkInterface. </summary>
+        internal NetworkInterface()
+        {
+        }
+        /// <summary> Initializes a new instance of NetworkInterface. </summary>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="virtualMachine"> The reference to a virtual machine. </param>
+        /// <param name="networkSecurityGroup"> The reference to the NetworkSecurityGroup resource. </param>
+        /// <param name="privateEndpoint"> A reference to the private endpoint to which the network interface is linked. </param>
+        /// <param name="ipConfigurations"> A list of IPConfigurations of the network interface. </param>
+        /// <param name="tapConfigurations"> A list of TapConfigurations of the network interface. </param>
+        /// <param name="dnsSettings"> The DNS settings in network interface. </param>
+        /// <param name="macAddress"> The MAC address of the network interface. </param>
+        /// <param name="primary"> Whether this is a primary network interface on a virtual machine. </param>
+        /// <param name="enableAcceleratedNetworking"> If the network interface is accelerated networking enabled. </param>
+        /// <param name="enableIPForwarding"> Indicates whether IP forwarding is enabled on this network interface. </param>
+        /// <param name="hostedWorkloads"> A list of references to linked BareMetal resources. </param>
+        /// <param name="resourceGuid"> The resource GUID property of the network interface resource. </param>
+        /// <param name="provisioningState"> The provisioning state of the network interface resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> Resource name. </param>
+        /// <param name="type"> Resource type. </param>
+        /// <param name="location"> Resource location. </param>
+        /// <param name="tags"> Resource tags. </param>
+        internal NetworkInterface(string etag, SubResource virtualMachine, NetworkSecurityGroup networkSecurityGroup, PrivateEndpoint privateEndpoint, IList<NetworkInterfaceIPConfiguration> ipConfigurations, IList<NetworkInterfaceTapConfiguration> tapConfigurations, NetworkInterfaceDnsSettings dnsSettings, string macAddress, bool? primary, bool? enableAcceleratedNetworking, bool? enableIPForwarding, IList<string> hostedWorkloads, string resourceGuid, ProvisioningState? provisioningState, string id, string name, string type, string location, IDictionary<string, string> tags) : base(id, name, type, location, tags)
+        {
+            Etag = etag;
+            VirtualMachine = virtualMachine;
+            NetworkSecurityGroup = networkSecurityGroup;
+            PrivateEndpoint = privateEndpoint;
+            IpConfigurations = ipConfigurations;
+            TapConfigurations = tapConfigurations;
+            DnsSettings = dnsSettings;
+            MacAddress = macAddress;
+            Primary = primary;
+            EnableAcceleratedNetworking = enableAcceleratedNetworking;
+            EnableIPForwarding = enableIPForwarding;
+            HostedWorkloads = hostedWorkloads;
+            ResourceGuid = resourceGuid;
+            ProvisioningState = provisioningState;
+        }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
         public string Etag { get; internal set; }
         /// <summary> The reference to a virtual machine. </summary>

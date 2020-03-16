@@ -11,9 +11,18 @@ namespace CognitiveSearch.Models
     public partial class PatternReplaceTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of PatternReplaceTokenFilter. </summary>
-        public PatternReplaceTokenFilter()
+        internal PatternReplaceTokenFilter()
         {
-            OdataType = "#Microsoft.Azure.Search.PatternReplaceTokenFilter";
+        }
+        /// <summary> Initializes a new instance of PatternReplaceTokenFilter. </summary>
+        /// <param name="pattern"> A regular expression pattern. </param>
+        /// <param name="replacement"> The replacement text. </param>
+        /// <param name="odataType"> . </param>
+        /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        internal PatternReplaceTokenFilter(string pattern, string replacement, string odataType, string name) : base(odataType, name)
+        {
+            Pattern = pattern;
+            Replacement = replacement;
         }
         /// <summary> A regular expression pattern. </summary>
         public string Pattern { get; set; }

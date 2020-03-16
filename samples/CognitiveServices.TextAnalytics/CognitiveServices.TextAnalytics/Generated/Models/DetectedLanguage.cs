@@ -10,6 +10,20 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The DetectedLanguage. </summary>
     public partial class DetectedLanguage
     {
+        /// <summary> Initializes a new instance of DetectedLanguage. </summary>
+        internal DetectedLanguage()
+        {
+        }
+        /// <summary> Initializes a new instance of DetectedLanguage. </summary>
+        /// <param name="name"> Long name of a detected language (e.g. English, French). </param>
+        /// <param name="iso6391Name"> A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr). </param>
+        /// <param name="score"> A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. </param>
+        internal DetectedLanguage(string name, string iso6391Name, double score)
+        {
+            Name = name;
+            Iso6391Name = iso6391Name;
+            Score = score;
+        }
         /// <summary> Long name of a detected language (e.g. English, French). </summary>
         public string Name { get; set; }
         /// <summary> A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr). </summary>

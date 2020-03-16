@@ -17,6 +17,7 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of Basic. </summary>
         /// <param name="id"> Basic Id. </param>
         /// <param name="name"> Name property with a very long description that does not fit on a single line and a line break. </param>
+        /// <param name="color"> . </param>
         internal Basic(int? id, string name, CMYKColors? color)
         {
             Id = id;

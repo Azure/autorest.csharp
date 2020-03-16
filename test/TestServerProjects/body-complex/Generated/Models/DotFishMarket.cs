@@ -17,6 +17,10 @@ namespace body_complex.Models
         {
         }
         /// <summary> Initializes a new instance of DotFishMarket. </summary>
+        /// <param name="sampleSalmon"> . </param>
+        /// <param name="salmons"> . </param>
+        /// <param name="sampleFish"> . </param>
+        /// <param name="fishes"> . </param>
         internal DotFishMarket(DotSalmon sampleSalmon, IList<DotSalmon> salmons, DotFish sampleFish, IList<DotFish> fishes)
         {
             SampleSalmon = sampleSalmon;

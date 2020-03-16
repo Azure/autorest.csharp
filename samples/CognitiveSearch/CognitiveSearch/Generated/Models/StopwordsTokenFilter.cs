@@ -13,9 +13,22 @@ namespace CognitiveSearch.Models
     public partial class StopwordsTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of StopwordsTokenFilter. </summary>
-        public StopwordsTokenFilter()
+        internal StopwordsTokenFilter()
         {
-            OdataType = "#Microsoft.Azure.Search.StopwordsTokenFilter";
+        }
+        /// <summary> Initializes a new instance of StopwordsTokenFilter. </summary>
+        /// <param name="stopwords"> The list of stopwords. This property and the stopwords list property cannot both be set. </param>
+        /// <param name="stopwordsList"> A predefined list of stopwords to use. This property and the stopwords property cannot both be set. Default is English. </param>
+        /// <param name="ignoreCase"> A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false. </param>
+        /// <param name="removeTrailingStopWords"> A value indicating whether to ignore the last search term if it&apos;s a stop word. Default is true. </param>
+        /// <param name="odataType"> . </param>
+        /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        internal StopwordsTokenFilter(IList<string> stopwords, StopwordsList? stopwordsList, bool? ignoreCase, bool? removeTrailingStopWords, string odataType, string name) : base(odataType, name)
+        {
+            Stopwords = stopwords;
+            StopwordsList = stopwordsList;
+            IgnoreCase = ignoreCase;
+            RemoveTrailingStopWords = removeTrailingStopWords;
         }
         /// <summary> The list of stopwords. This property and the stopwords list property cannot both be set. </summary>
         public IList<string> Stopwords { get; set; }

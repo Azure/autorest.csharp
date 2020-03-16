@@ -10,6 +10,20 @@ namespace extensible_enums_swagger.Models
     /// <summary> The Pet. </summary>
     public partial class Pet
     {
+        /// <summary> Initializes a new instance of Pet. </summary>
+        internal Pet()
+        {
+        }
+        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <param name="name"> . </param>
+        /// <param name="daysOfWeek"> Type of Pet. </param>
+        /// <param name="intEnum"> . </param>
+        internal Pet(string name, DaysOfWeekExtensibleEnum? daysOfWeek, IntEnum intEnum)
+        {
+            Name = name;
+            DaysOfWeek = daysOfWeek;
+            IntEnum = intEnum;
+        }
         public string Name { get; set; }
         /// <summary> Type of Pet. </summary>
         public DaysOfWeekExtensibleEnum? DaysOfWeek { get; set; }

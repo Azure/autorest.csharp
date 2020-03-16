@@ -17,6 +17,8 @@ namespace body_complex.Models
         {
         }
         /// <summary> Initializes a new instance of DateWrapper. </summary>
+        /// <param name="field"> . </param>
+        /// <param name="leap"> . </param>
         internal DateWrapper(DateTimeOffset? field, DateTimeOffset? leap)
         {
             Field = field;

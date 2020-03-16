@@ -12,6 +12,26 @@ namespace xml_service.Models
     /// <summary> An enumeration of containers. </summary>
     public partial class ListContainersResponse
     {
+        /// <summary> Initializes a new instance of ListContainersResponse. </summary>
+        internal ListContainersResponse()
+        {
+        }
+        /// <summary> Initializes a new instance of ListContainersResponse. </summary>
+        /// <param name="serviceEndpoint"> . </param>
+        /// <param name="prefix"> . </param>
+        /// <param name="marker"> . </param>
+        /// <param name="maxResults"> . </param>
+        /// <param name="containers"> . </param>
+        /// <param name="nextMarker"> . </param>
+        internal ListContainersResponse(string serviceEndpoint, string prefix, string marker, int maxResults, IList<Container> containers, string nextMarker)
+        {
+            ServiceEndpoint = serviceEndpoint;
+            Prefix = prefix;
+            Marker = marker;
+            MaxResults = maxResults;
+            Containers = containers;
+            NextMarker = nextMarker;
+        }
         public string ServiceEndpoint { get; set; }
         public string Prefix { get; set; }
         public string Marker { get; set; }

@@ -15,6 +15,8 @@ namespace body_complex.Models
         {
         }
         /// <summary> Initializes a new instance of Error. </summary>
+        /// <param name="status"> . </param>
+        /// <param name="message"> . </param>
         internal Error(int? status, string message)
         {
             Status = status;

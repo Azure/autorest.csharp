@@ -13,9 +13,18 @@ namespace CognitiveSearch.Models
     public partial class KeywordMarkerTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of KeywordMarkerTokenFilter. </summary>
-        public KeywordMarkerTokenFilter()
+        internal KeywordMarkerTokenFilter()
         {
-            OdataType = "#Microsoft.Azure.Search.KeywordMarkerTokenFilter";
+        }
+        /// <summary> Initializes a new instance of KeywordMarkerTokenFilter. </summary>
+        /// <param name="keywords"> A list of words to mark as keywords. </param>
+        /// <param name="ignoreCase"> A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false. </param>
+        /// <param name="odataType"> . </param>
+        /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        internal KeywordMarkerTokenFilter(IList<string> keywords, bool? ignoreCase, string odataType, string name) : base(odataType, name)
+        {
+            Keywords = keywords;
+            IgnoreCase = ignoreCase;
         }
         /// <summary> A list of words to mark as keywords. </summary>
         public IList<string> Keywords { get; set; } = new List<string>();

@@ -17,6 +17,10 @@ namespace body_complex.Models
         {
         }
         /// <summary> Initializes a new instance of Fish. </summary>
+        /// <param name="fishtype"> . </param>
+        /// <param name="species"> . </param>
+        /// <param name="length"> . </param>
+        /// <param name="siblings"> . </param>
         internal Fish(string fishtype, string species, float length, IList<Fish> siblings)
         {
             Fishtype = fishtype;

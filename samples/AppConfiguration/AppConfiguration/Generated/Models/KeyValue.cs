@@ -13,6 +13,30 @@ namespace AppConfiguration.Models
     /// <summary> The KeyValue. </summary>
     public partial class KeyValue
     {
+        /// <summary> Initializes a new instance of KeyValue. </summary>
+        internal KeyValue()
+        {
+        }
+        /// <summary> Initializes a new instance of KeyValue. </summary>
+        /// <param name="key"> . </param>
+        /// <param name="label"> . </param>
+        /// <param name="contentType"> . </param>
+        /// <param name="value"> . </param>
+        /// <param name="lastModified"> . </param>
+        /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
+        /// <param name="locked"> . </param>
+        /// <param name="etag"> . </param>
+        internal KeyValue(string key, string label, string contentType, string value, DateTimeOffset? lastModified, IDictionary<string, string> tags, bool? locked, string etag)
+        {
+            Key = key;
+            Label = label;
+            ContentType = contentType;
+            Value = value;
+            LastModified = lastModified;
+            Tags = tags;
+            Locked = locked;
+            Etag = etag;
+        }
         public string Key { get; set; }
         public string Label { get; set; }
         public string ContentType { get; set; }

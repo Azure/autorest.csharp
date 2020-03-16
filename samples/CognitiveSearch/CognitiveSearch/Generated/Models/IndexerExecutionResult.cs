@@ -13,6 +13,34 @@ namespace CognitiveSearch.Models
     /// <summary> Represents the result of an individual indexer execution. </summary>
     public partial class IndexerExecutionResult
     {
+        /// <summary> Initializes a new instance of IndexerExecutionResult. </summary>
+        internal IndexerExecutionResult()
+        {
+        }
+        /// <summary> Initializes a new instance of IndexerExecutionResult. </summary>
+        /// <param name="status"> The outcome of this indexer execution. </param>
+        /// <param name="errorMessage"> The error message indicating the top-level error, if any. </param>
+        /// <param name="startTime"> The start time of this indexer execution. </param>
+        /// <param name="endTime"> The end time of this indexer execution, if the execution has already completed. </param>
+        /// <param name="errors"> The item-level indexing errors. </param>
+        /// <param name="warnings"> The item-level indexing warnings. </param>
+        /// <param name="itemCount"> The number of items that were processed during this indexer execution. This includes both successfully processed items and items where indexing was attempted but failed. </param>
+        /// <param name="failedItemCount"> The number of items that failed to be indexed during this indexer execution. </param>
+        /// <param name="initialTrackingState"> Change tracking state with which an indexer execution started. </param>
+        /// <param name="finalTrackingState"> Change tracking state with which an indexer execution finished. </param>
+        internal IndexerExecutionResult(IndexerExecutionStatus? status, string errorMessage, DateTimeOffset? startTime, DateTimeOffset? endTime, IList<ItemError> errors, IList<ItemWarning> warnings, int? itemCount, int? failedItemCount, string initialTrackingState, string finalTrackingState)
+        {
+            Status = status;
+            ErrorMessage = errorMessage;
+            StartTime = startTime;
+            EndTime = endTime;
+            Errors = errors;
+            Warnings = warnings;
+            ItemCount = itemCount;
+            FailedItemCount = failedItemCount;
+            InitialTrackingState = initialTrackingState;
+            FinalTrackingState = finalTrackingState;
+        }
         /// <summary> The outcome of this indexer execution. </summary>
         public IndexerExecutionStatus? Status { get; internal set; }
         /// <summary> The error message indicating the top-level error, if any. </summary>

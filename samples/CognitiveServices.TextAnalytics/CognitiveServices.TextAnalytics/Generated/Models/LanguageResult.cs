@@ -12,6 +12,22 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The LanguageResult. </summary>
     public partial class LanguageResult
     {
+        /// <summary> Initializes a new instance of LanguageResult. </summary>
+        internal LanguageResult()
+        {
+        }
+        /// <summary> Initializes a new instance of LanguageResult. </summary>
+        /// <param name="documents"> Response by document. </param>
+        /// <param name="errors"> Errors by document id. </param>
+        /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the request payload. </param>
+        /// <param name="modelVersion"> This field indicates which model is used for scoring. </param>
+        internal LanguageResult(IList<DocumentLanguage> documents, IList<DocumentError> errors, RequestStatistics statistics, string modelVersion)
+        {
+            Documents = documents;
+            Errors = errors;
+            Statistics = statistics;
+            ModelVersion = modelVersion;
+        }
         /// <summary> Response by document. </summary>
         public IList<DocumentLanguage> Documents { get; set; } = new List<DocumentLanguage>();
         /// <summary> Errors by document id. </summary>

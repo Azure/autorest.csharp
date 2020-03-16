@@ -12,6 +12,29 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Route table resource. </summary>
     public partial class RouteTable : Resource
     {
+        /// <summary> Initializes a new instance of RouteTable. </summary>
+        internal RouteTable()
+        {
+        }
+        /// <summary> Initializes a new instance of RouteTable. </summary>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="routes"> Collection of routes contained within a route table. </param>
+        /// <param name="subnets"> A collection of references to subnets. </param>
+        /// <param name="disableBgpRoutePropagation"> Whether to disable the routes learned by BGP on that route table. True means disable. </param>
+        /// <param name="provisioningState"> The provisioning state of the route table resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> Resource name. </param>
+        /// <param name="type"> Resource type. </param>
+        /// <param name="location"> Resource location. </param>
+        /// <param name="tags"> Resource tags. </param>
+        internal RouteTable(string etag, IList<Route> routes, IList<Subnet> subnets, bool? disableBgpRoutePropagation, ProvisioningState? provisioningState, string id, string name, string type, string location, IDictionary<string, string> tags) : base(id, name, type, location, tags)
+        {
+            Etag = etag;
+            Routes = routes;
+            Subnets = subnets;
+            DisableBgpRoutePropagation = disableBgpRoutePropagation;
+            ProvisioningState = provisioningState;
+        }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
         public string Etag { get; internal set; }
         /// <summary> Collection of routes contained within a route table. </summary>
