@@ -38,6 +38,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static SynonymTokenFilter DeserializeSynonymTokenFilter(JsonElement element)
         {
             SynonymTokenFilter result = new SynonymTokenFilter();

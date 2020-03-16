@@ -10,23 +10,8 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class ResourceCounter : IUtf8JsonSerializable
+    public partial class ResourceCounter
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Usage != null)
-            {
-                writer.WritePropertyName("usage");
-                writer.WriteNumberValue(Usage.Value);
-            }
-            if (Quota != null)
-            {
-                writer.WritePropertyName("quota");
-                writer.WriteNumberValue(Quota.Value);
-            }
-            writer.WriteEndObject();
-        }
         internal static ResourceCounter DeserializeResourceCounter(JsonElement element)
         {
             ResourceCounter result = new ResourceCounter();

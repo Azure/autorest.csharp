@@ -27,6 +27,7 @@ namespace Azure.Storage.Management.Models
             }
             writer.WriteEndObject();
         }
+
         internal static DeleteRetentionPolicy DeserializeDeleteRetentionPolicy(JsonElement element)
         {
             DeleteRetentionPolicy result = new DeleteRetentionPolicy();

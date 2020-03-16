@@ -6,49 +6,13 @@
 #nullable disable
 
 using System;
-using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class ContainerProperties : IXmlSerializable
+    public partial class ContainerProperties
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
-        {
-            writer.WriteStartElement(nameHint ?? "ContainerProperties");
-            writer.WriteStartElement("Last-Modified");
-            writer.WriteValue(LastModified, "R");
-            writer.WriteEndElement();
-            writer.WriteStartElement("Etag");
-            writer.WriteValue(Etag);
-            writer.WriteEndElement();
-            if (LeaseStatus != null)
-            {
-                writer.WriteStartElement("LeaseStatus");
-                writer.WriteValue(LeaseStatus.Value.ToSerialString());
-                writer.WriteEndElement();
-            }
-            if (LeaseState != null)
-            {
-                writer.WriteStartElement("LeaseState");
-                writer.WriteValue(LeaseState.Value.ToSerialString());
-                writer.WriteEndElement();
-            }
-            if (LeaseDuration != null)
-            {
-                writer.WriteStartElement("LeaseDuration");
-                writer.WriteValue(LeaseDuration.Value.ToSerialString());
-                writer.WriteEndElement();
-            }
-            if (PublicAccess != null)
-            {
-                writer.WriteStartElement("PublicAccess");
-                writer.WriteValue(PublicAccess.Value.ToString());
-                writer.WriteEndElement();
-            }
-            writer.WriteEndElement();
-        }
         internal static ContainerProperties DeserializeContainerProperties(XElement element)
         {
             ContainerProperties result = default;

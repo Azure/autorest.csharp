@@ -10,18 +10,8 @@ using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class JsonOutput : IUtf8JsonSerializable
+    public partial class JsonOutput
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Id != null)
-            {
-                writer.WritePropertyName("id");
-                writer.WriteNumberValue(Id.Value);
-            }
-            writer.WriteEndObject();
-        }
         internal static JsonOutput DeserializeJsonOutput(JsonElement element)
         {
             JsonOutput result = new JsonOutput();

@@ -10,27 +10,8 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class TextWord : IUtf8JsonSerializable
+    public partial class TextWord
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("text");
-            writer.WriteStringValue(Text);
-            writer.WritePropertyName("boundingBox");
-            writer.WriteStartArray();
-            foreach (var item in BoundingBox)
-            {
-                writer.WriteNumberValue(item);
-            }
-            writer.WriteEndArray();
-            if (Confidence != null)
-            {
-                writer.WritePropertyName("confidence");
-                writer.WriteNumberValue(Confidence.Value);
-            }
-            writer.WriteEndObject();
-        }
         internal static TextWord DeserializeTextWord(JsonElement element)
         {
             TextWord result = new TextWord();

@@ -11,23 +11,8 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class AnalyzeResult : IUtf8JsonSerializable
+    public partial class AnalyzeResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Tokens != null)
-            {
-                writer.WritePropertyName("tokens");
-                writer.WriteStartArray();
-                foreach (var item in Tokens)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            writer.WriteEndObject();
-        }
         internal static AnalyzeResult DeserializeAnalyzeResult(JsonElement element)
         {
             AnalyzeResult result = new AnalyzeResult();

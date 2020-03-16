@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -49,63 +48,6 @@ namespace CognitiveSearch.Models
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
-        }
-        internal static AnalyzeRequest DeserializeAnalyzeRequest(JsonElement element)
-        {
-            AnalyzeRequest result = new AnalyzeRequest();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("text"))
-                {
-                    result.Text = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("analyzer"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.Analyzer = new AnalyzerName(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("tokenizer"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.Tokenizer = new TokenizerName(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("tokenFilters"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.TokenFilters = new List<TokenFilterName>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        result.TokenFilters.Add(new TokenFilterName(item.GetString()));
-                    }
-                    continue;
-                }
-                if (property.NameEquals("charFilters"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.CharFilters = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        result.CharFilters.Add(item.GetString());
-                    }
-                    continue;
-                }
-            }
-            return result;
         }
     }
 }

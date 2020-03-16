@@ -53,6 +53,7 @@ namespace CognitiveSearch.Models
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
+
         internal static SentimentSkill DeserializeSentimentSkill(JsonElement element)
         {
             SentimentSkill result = new SentimentSkill();

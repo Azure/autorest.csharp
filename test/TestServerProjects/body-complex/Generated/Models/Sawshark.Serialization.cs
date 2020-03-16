@@ -49,6 +49,7 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Sawshark DeserializeSawshark(JsonElement element)
         {
             Sawshark result = new Sawshark();

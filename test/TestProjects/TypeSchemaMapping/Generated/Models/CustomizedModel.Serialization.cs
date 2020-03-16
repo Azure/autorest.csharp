@@ -27,6 +27,7 @@ namespace CustomNamespace
             writer.WriteStringValue(DaysOfWeek.ToString());
             writer.WriteEndObject();
         }
+
         internal static CustomizedModel DeserializeCustomizedModel(JsonElement element)
         {
             CustomizedModel result = new CustomizedModel();

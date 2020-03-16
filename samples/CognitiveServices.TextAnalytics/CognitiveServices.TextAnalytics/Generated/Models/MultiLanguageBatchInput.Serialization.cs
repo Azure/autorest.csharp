@@ -24,21 +24,5 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
-        internal static MultiLanguageBatchInput DeserializeMultiLanguageBatchInput(JsonElement element)
-        {
-            MultiLanguageBatchInput result = new MultiLanguageBatchInput();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("documents"))
-                {
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        result.Documents.Add(MultiLanguageInput.DeserializeMultiLanguageInput(item));
-                    }
-                    continue;
-                }
-            }
-            return result;
-        }
     }
 }

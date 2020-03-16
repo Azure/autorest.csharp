@@ -27,6 +27,7 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
+
         internal static BooleanWrapper DeserializeBooleanWrapper(JsonElement element)
         {
             BooleanWrapper result = new BooleanWrapper();

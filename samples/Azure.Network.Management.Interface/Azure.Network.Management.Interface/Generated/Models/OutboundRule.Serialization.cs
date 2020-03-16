@@ -81,6 +81,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static OutboundRule DeserializeOutboundRule(JsonElement element)
         {
             OutboundRule result = new OutboundRule();

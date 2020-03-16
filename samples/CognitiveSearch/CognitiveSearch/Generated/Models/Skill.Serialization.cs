@@ -48,6 +48,7 @@ namespace CognitiveSearch.Models
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
+
         internal static Skill DeserializeSkill(JsonElement element)
         {
             if (element.TryGetProperty("@odata.type", out JsonElement discriminator))

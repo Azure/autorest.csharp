@@ -29,18 +29,21 @@ namespace body_complex
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Get complex types that are polymorphic and have recursive references. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Fish>> GetValidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Get complex types that are polymorphic and have recursive references. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Fish> GetValid(CancellationToken cancellationToken = default)
         {
             return RestClient.GetValid(cancellationToken);
         }
+
         /// <summary> Put complex types that are polymorphic and have recursive references. </summary>
         /// <param name="complexBody">
         /// Please put a salmon that looks like this:
@@ -82,6 +85,7 @@ namespace body_complex
         {
             return await RestClient.PutValidAsync(complexBody, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Put complex types that are polymorphic and have recursive references. </summary>
         /// <param name="complexBody">
         /// Please put a salmon that looks like this:

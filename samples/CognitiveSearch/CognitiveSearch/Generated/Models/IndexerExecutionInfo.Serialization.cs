@@ -11,38 +11,8 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class IndexerExecutionInfo : IUtf8JsonSerializable
+    public partial class IndexerExecutionInfo
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Status != null)
-            {
-                writer.WritePropertyName("status");
-                writer.WriteStringValue(Status.Value.ToSerialString());
-            }
-            if (LastResult != null)
-            {
-                writer.WritePropertyName("lastResult");
-                writer.WriteObjectValue(LastResult);
-            }
-            if (ExecutionHistory != null)
-            {
-                writer.WritePropertyName("executionHistory");
-                writer.WriteStartArray();
-                foreach (var item in ExecutionHistory)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (Limits != null)
-            {
-                writer.WritePropertyName("limits");
-                writer.WriteObjectValue(Limits);
-            }
-            writer.WriteEndObject();
-        }
         internal static IndexerExecutionInfo DeserializeIndexerExecutionInfo(JsonElement element)
         {
             IndexerExecutionInfo result = new IndexerExecutionInfo();

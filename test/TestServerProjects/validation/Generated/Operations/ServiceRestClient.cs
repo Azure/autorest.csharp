@@ -23,6 +23,7 @@ namespace validation
         private string ApiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of ServiceRestClient. </summary>
         public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "http://localhost:3000", string ApiVersion = "1.0.0")
         {
@@ -45,6 +46,7 @@ namespace validation
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateValidationOfMethodParametersRequest(string resourceGroupName, int id)
         {
             var message = pipeline.CreateMessage();
@@ -62,6 +64,7 @@ namespace validation
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Validates input parameters on the method. See swagger for details. </summary>
         /// <param name="resourceGroupName"> Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+. </param>
         /// <param name="id"> Required int multiple of 10 from 100 to 1000. </param>
@@ -97,6 +100,7 @@ namespace validation
                 throw;
             }
         }
+
         /// <summary> Validates input parameters on the method. See swagger for details. </summary>
         /// <param name="resourceGroupName"> Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+. </param>
         /// <param name="id"> Required int multiple of 10 from 100 to 1000. </param>
@@ -132,6 +136,7 @@ namespace validation
                 throw;
             }
         }
+
         internal HttpMessage CreateValidationOfBodyRequest(string resourceGroupName, int id, Product body)
         {
             var message = pipeline.CreateMessage();
@@ -153,6 +158,7 @@ namespace validation
             request.Content = content;
             return message;
         }
+
         /// <summary> Validates body parameters on the method. See swagger for details. </summary>
         /// <param name="resourceGroupName"> Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+. </param>
         /// <param name="id"> Required int multiple of 10 from 100 to 1000. </param>
@@ -189,6 +195,7 @@ namespace validation
                 throw;
             }
         }
+
         /// <summary> Validates body parameters on the method. See swagger for details. </summary>
         /// <param name="resourceGroupName"> Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+. </param>
         /// <param name="id"> Required int multiple of 10 from 100 to 1000. </param>
@@ -225,6 +232,7 @@ namespace validation
                 throw;
             }
         }
+
         internal HttpMessage CreateGetWithConstantInPathRequest()
         {
             var message = pipeline.CreateMessage();
@@ -238,6 +246,7 @@ namespace validation
             request.Uri = uri;
             return message;
         }
+
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetWithConstantInPathAsync(CancellationToken cancellationToken = default)
         {
@@ -261,6 +270,7 @@ namespace validation
                 throw;
             }
         }
+
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetWithConstantInPath(CancellationToken cancellationToken = default)
         {
@@ -284,6 +294,7 @@ namespace validation
                 throw;
             }
         }
+
         internal HttpMessage CreatePostWithConstantInBodyRequest(Product body)
         {
             var message = pipeline.CreateMessage();
@@ -301,10 +312,12 @@ namespace validation
             request.Content = content;
             return message;
         }
+
         /// <param name="body"> The Product to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Product>> PostWithConstantInBodyAsync(Product body, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PostWithConstantInBody");
             scope.Start();
             try
@@ -329,10 +342,12 @@ namespace validation
                 throw;
             }
         }
+
         /// <param name="body"> The Product to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Product> PostWithConstantInBody(Product body, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PostWithConstantInBody");
             scope.Start();
             try

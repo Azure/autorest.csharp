@@ -24,6 +24,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static CognitiveServicesAccount DeserializeCognitiveServicesAccount(JsonElement element)
         {
             if (element.TryGetProperty("@odata.type", out JsonElement discriminator))

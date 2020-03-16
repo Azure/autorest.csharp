@@ -11,23 +11,8 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class ListSynonymMapsResult : IUtf8JsonSerializable
+    public partial class ListSynonymMapsResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (SynonymMaps != null)
-            {
-                writer.WritePropertyName("value");
-                writer.WriteStartArray();
-                foreach (var item in SynonymMaps)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            writer.WriteEndObject();
-        }
         internal static ListSynonymMapsResult DeserializeListSynonymMapsResult(JsonElement element)
         {
             ListSynonymMapsResult result = new ListSynonymMapsResult();

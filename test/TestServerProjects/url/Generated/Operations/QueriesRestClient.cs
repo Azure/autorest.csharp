@@ -21,6 +21,7 @@ namespace url
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of QueriesRestClient. </summary>
         public QueriesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
@@ -33,6 +34,7 @@ namespace url
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetBooleanTrueRequest()
         {
             var message = pipeline.CreateMessage();
@@ -45,6 +47,7 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get true Boolean value on path. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetBooleanTrueAsync(CancellationToken cancellationToken = default)
@@ -69,6 +72,7 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get true Boolean value on path. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetBooleanTrue(CancellationToken cancellationToken = default)
@@ -93,6 +97,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateGetBooleanFalseRequest()
         {
             var message = pipeline.CreateMessage();
@@ -105,6 +110,7 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get false Boolean value on path. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetBooleanFalseAsync(CancellationToken cancellationToken = default)
@@ -129,6 +135,7 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get false Boolean value on path. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetBooleanFalse(CancellationToken cancellationToken = default)
@@ -153,6 +160,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateGetBooleanNullRequest(bool? boolQuery)
         {
             var message = pipeline.CreateMessage();
@@ -168,11 +176,13 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get null Boolean value on query (query string should be absent). </summary>
         /// <param name="boolQuery"> null boolean value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetBooleanNullAsync(bool? boolQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
             scope.Start();
             try
@@ -193,11 +203,13 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get null Boolean value on query (query string should be absent). </summary>
         /// <param name="boolQuery"> null boolean value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetBooleanNull(bool? boolQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
             scope.Start();
             try
@@ -218,6 +230,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateGetIntOneMillionRequest()
         {
             var message = pipeline.CreateMessage();
@@ -230,6 +243,7 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetIntOneMillionAsync(CancellationToken cancellationToken = default)
@@ -254,6 +268,7 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetIntOneMillion(CancellationToken cancellationToken = default)
@@ -278,6 +293,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateGetIntNegativeOneMillionRequest()
         {
             var message = pipeline.CreateMessage();
@@ -290,6 +306,7 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetIntNegativeOneMillionAsync(CancellationToken cancellationToken = default)
@@ -314,6 +331,7 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetIntNegativeOneMillion(CancellationToken cancellationToken = default)
@@ -338,6 +356,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateGetIntNullRequest(int? intQuery)
         {
             var message = pipeline.CreateMessage();
@@ -353,11 +372,13 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get null integer value (no query parameter). </summary>
         /// <param name="intQuery"> null integer value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetIntNullAsync(int? intQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.GetIntNull");
             scope.Start();
             try
@@ -378,11 +399,13 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get null integer value (no query parameter). </summary>
         /// <param name="intQuery"> null integer value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetIntNull(int? intQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.GetIntNull");
             scope.Start();
             try
@@ -403,6 +426,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateGetTenBillionRequest()
         {
             var message = pipeline.CreateMessage();
@@ -415,6 +439,7 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetTenBillionAsync(CancellationToken cancellationToken = default)
@@ -439,6 +464,7 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetTenBillion(CancellationToken cancellationToken = default)
@@ -463,6 +489,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateGetNegativeTenBillionRequest()
         {
             var message = pipeline.CreateMessage();
@@ -475,6 +502,7 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetNegativeTenBillionAsync(CancellationToken cancellationToken = default)
@@ -499,6 +527,7 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetNegativeTenBillion(CancellationToken cancellationToken = default)
@@ -523,6 +552,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateGetLongNullRequest(long? longQuery)
         {
             var message = pipeline.CreateMessage();
@@ -538,11 +568,13 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get &apos;null 64 bit integer value (no query param in uri). </summary>
         /// <param name="longQuery"> null 64 bit integer value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetLongNullAsync(long? longQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.GetLongNull");
             scope.Start();
             try
@@ -563,11 +595,13 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get &apos;null 64 bit integer value (no query param in uri). </summary>
         /// <param name="longQuery"> null 64 bit integer value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetLongNull(long? longQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.GetLongNull");
             scope.Start();
             try
@@ -588,6 +622,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateFloatScientificPositiveRequest()
         {
             var message = pipeline.CreateMessage();
@@ -600,6 +635,7 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> FloatScientificPositiveAsync(CancellationToken cancellationToken = default)
@@ -624,6 +660,7 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response FloatScientificPositive(CancellationToken cancellationToken = default)
@@ -648,6 +685,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateFloatScientificNegativeRequest()
         {
             var message = pipeline.CreateMessage();
@@ -660,6 +698,7 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> FloatScientificNegativeAsync(CancellationToken cancellationToken = default)
@@ -684,6 +723,7 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response FloatScientificNegative(CancellationToken cancellationToken = default)
@@ -708,6 +748,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateFloatNullRequest(float? floatQuery)
         {
             var message = pipeline.CreateMessage();
@@ -723,11 +764,13 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get null numeric value (no query parameter). </summary>
         /// <param name="floatQuery"> null numeric value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> FloatNullAsync(float? floatQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.FloatNull");
             scope.Start();
             try
@@ -748,11 +791,13 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get null numeric value (no query parameter). </summary>
         /// <param name="floatQuery"> null numeric value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response FloatNull(float? floatQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.FloatNull");
             scope.Start();
             try
@@ -773,6 +818,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateDoubleDecimalPositiveRequest()
         {
             var message = pipeline.CreateMessage();
@@ -785,6 +831,7 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DoubleDecimalPositiveAsync(CancellationToken cancellationToken = default)
@@ -809,6 +856,7 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DoubleDecimalPositive(CancellationToken cancellationToken = default)
@@ -833,6 +881,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateDoubleDecimalNegativeRequest()
         {
             var message = pipeline.CreateMessage();
@@ -845,6 +894,7 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DoubleDecimalNegativeAsync(CancellationToken cancellationToken = default)
@@ -869,6 +919,7 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DoubleDecimalNegative(CancellationToken cancellationToken = default)
@@ -893,6 +944,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateDoubleNullRequest(double? doubleQuery)
         {
             var message = pipeline.CreateMessage();
@@ -908,11 +960,13 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get null numeric value (no query parameter). </summary>
         /// <param name="doubleQuery"> null numeric value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DoubleNullAsync(double? doubleQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.DoubleNull");
             scope.Start();
             try
@@ -933,11 +987,13 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get null numeric value (no query parameter). </summary>
         /// <param name="doubleQuery"> null numeric value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DoubleNull(double? doubleQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.DoubleNull");
             scope.Start();
             try
@@ -958,6 +1014,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateStringUnicodeRequest()
         {
             var message = pipeline.CreateMessage();
@@ -970,6 +1027,7 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> StringUnicodeAsync(CancellationToken cancellationToken = default)
@@ -994,6 +1052,7 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response StringUnicode(CancellationToken cancellationToken = default)
@@ -1018,6 +1077,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateStringUrlEncodedRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1030,6 +1090,7 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> StringUrlEncodedAsync(CancellationToken cancellationToken = default)
@@ -1054,6 +1115,7 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response StringUrlEncoded(CancellationToken cancellationToken = default)
@@ -1078,6 +1140,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateStringEmptyRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1090,6 +1153,7 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get &apos;&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> StringEmptyAsync(CancellationToken cancellationToken = default)
@@ -1114,6 +1178,7 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get &apos;&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response StringEmpty(CancellationToken cancellationToken = default)
@@ -1138,6 +1203,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateStringNullRequest(string stringQuery)
         {
             var message = pipeline.CreateMessage();
@@ -1153,11 +1219,13 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get null (no query parameter in url). </summary>
         /// <param name="stringQuery"> null string value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> StringNullAsync(string stringQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.StringNull");
             scope.Start();
             try
@@ -1178,11 +1246,13 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get null (no query parameter in url). </summary>
         /// <param name="stringQuery"> null string value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response StringNull(string stringQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.StringNull");
             scope.Start();
             try
@@ -1203,6 +1273,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateEnumValidRequest(UriColor? enumQuery)
         {
             var message = pipeline.CreateMessage();
@@ -1213,16 +1284,18 @@ namespace url
             uri.AppendPath("/queries/enum/green%20color", false);
             if (enumQuery != null)
             {
-                uri.AppendQuery("enumQuery", enumQuery.Value, true);
+                uri.AppendQuery("enumQuery", enumQuery.Value.ToSerialString(), true);
             }
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get using uri with query parameter &apos;green color&apos;. </summary>
         /// <param name="enumQuery"> &apos;green color&apos; enum value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> EnumValidAsync(UriColor? enumQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.EnumValid");
             scope.Start();
             try
@@ -1243,11 +1316,13 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get using uri with query parameter &apos;green color&apos;. </summary>
         /// <param name="enumQuery"> &apos;green color&apos; enum value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response EnumValid(UriColor? enumQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.EnumValid");
             scope.Start();
             try
@@ -1268,6 +1343,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateEnumNullRequest(UriColor? enumQuery)
         {
             var message = pipeline.CreateMessage();
@@ -1278,16 +1354,18 @@ namespace url
             uri.AppendPath("/queries/enum/null", false);
             if (enumQuery != null)
             {
-                uri.AppendQuery("enumQuery", enumQuery.Value, true);
+                uri.AppendQuery("enumQuery", enumQuery.Value.ToSerialString(), true);
             }
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get null (no query parameter in url). </summary>
         /// <param name="enumQuery"> &apos;green color&apos; enum value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> EnumNullAsync(UriColor? enumQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.EnumNull");
             scope.Start();
             try
@@ -1308,11 +1386,13 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get null (no query parameter in url). </summary>
         /// <param name="enumQuery"> &apos;green color&apos; enum value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response EnumNull(UriColor? enumQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.EnumNull");
             scope.Start();
             try
@@ -1333,6 +1413,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateByteMultiByteRequest(byte[] byteQuery)
         {
             var message = pipeline.CreateMessage();
@@ -1348,11 +1429,13 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
         /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ByteMultiByteAsync(byte[] byteQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
             scope.Start();
             try
@@ -1373,11 +1456,13 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
         /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ByteMultiByte(byte[] byteQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
             scope.Start();
             try
@@ -1398,6 +1483,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateByteEmptyRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1410,6 +1496,7 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get &apos;&apos; as byte array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ByteEmptyAsync(CancellationToken cancellationToken = default)
@@ -1434,6 +1521,7 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get &apos;&apos; as byte array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ByteEmpty(CancellationToken cancellationToken = default)
@@ -1458,6 +1546,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateByteNullRequest(byte[] byteQuery)
         {
             var message = pipeline.CreateMessage();
@@ -1473,11 +1562,13 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get null as byte array (no query parameters in uri). </summary>
         /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ByteNullAsync(byte[] byteQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ByteNull");
             scope.Start();
             try
@@ -1498,11 +1589,13 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get null as byte array (no query parameters in uri). </summary>
         /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ByteNull(byte[] byteQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ByteNull");
             scope.Start();
             try
@@ -1523,6 +1616,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateDateValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1535,6 +1629,7 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DateValidAsync(CancellationToken cancellationToken = default)
@@ -1559,6 +1654,7 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DateValid(CancellationToken cancellationToken = default)
@@ -1583,6 +1679,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateDateNullRequest(DateTimeOffset? dateQuery)
         {
             var message = pipeline.CreateMessage();
@@ -1598,11 +1695,13 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get null as date - this should result in no query parameters in uri. </summary>
         /// <param name="dateQuery"> null as date (no query parameters in uri). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DateNullAsync(DateTimeOffset? dateQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.DateNull");
             scope.Start();
             try
@@ -1623,11 +1722,13 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get null as date - this should result in no query parameters in uri. </summary>
         /// <param name="dateQuery"> null as date (no query parameters in uri). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DateNull(DateTimeOffset? dateQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.DateNull");
             scope.Start();
             try
@@ -1648,6 +1749,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateDateTimeValidRequest()
         {
             var message = pipeline.CreateMessage();
@@ -1660,6 +1762,7 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DateTimeValidAsync(CancellationToken cancellationToken = default)
@@ -1684,6 +1787,7 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DateTimeValid(CancellationToken cancellationToken = default)
@@ -1708,6 +1812,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateDateTimeNullRequest(DateTimeOffset? dateTimeQuery)
         {
             var message = pipeline.CreateMessage();
@@ -1723,11 +1828,13 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get null as date-time, should result in no query parameters in uri. </summary>
         /// <param name="dateTimeQuery"> null as date-time (no query parameters). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DateTimeNullAsync(DateTimeOffset? dateTimeQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
             scope.Start();
             try
@@ -1748,11 +1855,13 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get null as date-time, should result in no query parameters in uri. </summary>
         /// <param name="dateTimeQuery"> null as date-time (no query parameters). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DateTimeNull(DateTimeOffset? dateTimeQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
             scope.Start();
             try
@@ -1773,6 +1882,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateArrayStringCsvValidRequest(IEnumerable<string> arrayQuery)
         {
             var message = pipeline.CreateMessage();
@@ -1788,11 +1898,13 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringCsvValidAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
             scope.Start();
             try
@@ -1813,11 +1925,13 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringCsvValid(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
             scope.Start();
             try
@@ -1838,6 +1952,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateArrayStringCsvNullRequest(IEnumerable<string> arrayQuery)
         {
             var message = pipeline.CreateMessage();
@@ -1853,11 +1968,13 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get a null array of string using the csv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringCsvNullAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
             scope.Start();
             try
@@ -1878,11 +1995,13 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get a null array of string using the csv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringCsvNull(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
             scope.Start();
             try
@@ -1903,6 +2022,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateArrayStringCsvEmptyRequest(IEnumerable<string> arrayQuery)
         {
             var message = pipeline.CreateMessage();
@@ -1918,11 +2038,13 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an empty array [] of string using the csv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringCsvEmptyAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
             scope.Start();
             try
@@ -1943,11 +2065,13 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get an empty array [] of string using the csv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringCsvEmpty(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
             scope.Start();
             try
@@ -1968,6 +2092,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateArrayStringSsvValidRequest(IEnumerable<string> arrayQuery)
         {
             var message = pipeline.CreateMessage();
@@ -1983,11 +2108,13 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringSsvValidAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
             scope.Start();
             try
@@ -2008,11 +2135,13 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringSsvValid(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
             scope.Start();
             try
@@ -2033,6 +2162,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateArrayStringTsvValidRequest(IEnumerable<string> arrayQuery)
         {
             var message = pipeline.CreateMessage();
@@ -2048,11 +2178,13 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringTsvValidAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
             scope.Start();
             try
@@ -2073,11 +2205,13 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringTsvValid(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
             scope.Start();
             try
@@ -2098,6 +2232,7 @@ namespace url
                 throw;
             }
         }
+
         internal HttpMessage CreateArrayStringPipesValidRequest(IEnumerable<string> arrayQuery)
         {
             var message = pipeline.CreateMessage();
@@ -2113,11 +2248,13 @@ namespace url
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringPipesValidAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
             scope.Start();
             try
@@ -2138,11 +2275,13 @@ namespace url
                 throw;
             }
         }
+
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringPipesValid(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
+
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
             scope.Start();
             try

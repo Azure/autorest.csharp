@@ -21,6 +21,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static Analyzer DeserializeAnalyzer(JsonElement element)
         {
             if (element.TryGetProperty("@odata.type", out JsonElement discriminator))

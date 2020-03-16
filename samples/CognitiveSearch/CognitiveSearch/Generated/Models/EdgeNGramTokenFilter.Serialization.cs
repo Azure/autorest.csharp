@@ -36,6 +36,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static EdgeNGramTokenFilter DeserializeEdgeNGramTokenFilter(JsonElement element)
         {
             EdgeNGramTokenFilter result = new EdgeNGramTokenFilter();

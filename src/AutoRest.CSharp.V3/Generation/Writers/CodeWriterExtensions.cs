@@ -3,12 +3,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Composition;
 using System.Linq;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Serialization;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Json;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.V3.Output.Models.Shared;
+using AutoRest.CSharp.V3.Output.Models.Types;
 
 namespace AutoRest.CSharp.V3.Generation.Writers
 {
@@ -26,7 +28,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         public static void WriteParameter(this CodeWriter writer, Parameter clientParameter)
         {
-            writer.Append($"{clientParameter.Type} {clientParameter.Name}");
+            writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
             if (clientParameter.DefaultValue != null)
             {
                 writer.Append($" = {clientParameter.DefaultValue.Value.Value:L}");
@@ -56,7 +58,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         }
 
         public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async,
-            ref string valueVariable, string responseVariable, string document = "document")
+            ref string valueVariable, string responseVariable)
         {
             switch (serialization)
             {
@@ -69,6 +71,15 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 default:
                     throw new NotImplementedException(serialization.ToString());
             }
+        }
+
+        public static CodeWriter AppendEnumToString(this CodeWriter writer, EnumType enumType)
+        {
+            if (!enumType.IsStringBased)
+            {
+                writer.UseNamespace(enumType.Type.Namespace);
+            }
+            return writer.AppendRaw(enumType.IsStringBased ? ".ToString()" : ".ToSerialString()");
         }
     }
 }

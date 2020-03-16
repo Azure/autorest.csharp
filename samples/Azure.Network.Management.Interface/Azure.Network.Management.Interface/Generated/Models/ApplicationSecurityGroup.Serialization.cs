@@ -67,6 +67,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static ApplicationSecurityGroup DeserializeApplicationSecurityGroup(JsonElement element)
         {
             ApplicationSecurityGroup result = new ApplicationSecurityGroup();

@@ -48,16 +48,11 @@ namespace AutoRest.CSharp.V3.Output.Builders
         {
             var clientName = GetClientName(operationGroup, "Client");
 
-            var allClientParameters = operationGroup.Operations
+            var clientParameters = operationGroup.Operations
                 .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
                 .Where(p => p.Implementation == ImplementationLocation.Client)
-                .Distinct();
-
-            Dictionary<string, Parameter> clientParameters = new Dictionary<string, Parameter>();
-            foreach (RequestParameter clientParameter in allClientParameters)
-            {
-                clientParameters[clientParameter.Language.Default.Name] = BuildParameter(clientParameter);
-            }
+                .Distinct()
+                .ToDictionary(p => p.Language.Default.Name, BuildParameter);
 
             List<OperationMethod> operationMethods = new List<OperationMethod>();
             foreach (Operation operation in operationGroup.Operations)
@@ -457,7 +452,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             var nextPageUrlParameter = new Parameter(
                 "nextLink",
                 "The URL to the next page of results.",
-                new CSharpType(typeof(string)),
+                typeof(string),
                 null,
                 true);
             var headerParameterNames = method.Request.Headers.Where(h => !h.Value.IsConstant).Select(h => h.Value.Parameter.Name).ToArray();
@@ -507,13 +502,13 @@ namespace AutoRest.CSharp.V3.Output.Builders
             var originalResponseParameter = new Parameter(
                 "originalResponse",
                 "The original response from starting the operation.",
-                new CSharpType(typeof(AzureResponse)),
+                typeof(AzureResponse),
                 null,
                 true);
             var httpMessageParameter = new Parameter(
                 "createOriginalHttpMessage",
                 "Creates the HTTP message used for the original request.",
-                new CSharpType(typeof(Func<>), new CSharpType(typeof(HttpMessage))),
+                typeof(Func<HttpMessage>),
                 null,
                 true);
 

@@ -28,6 +28,7 @@ namespace Azure.Storage.Tables.Models
             writer.WriteEndElement();
             writer.WriteEndElement();
         }
+
         internal static AccessPolicy DeserializeAccessPolicy(XElement element)
         {
             AccessPolicy result = default;

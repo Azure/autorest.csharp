@@ -11,39 +11,8 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class SearchResult : IUtf8JsonSerializable
+    public partial class SearchResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Score != null)
-            {
-                writer.WritePropertyName("@search.score");
-                writer.WriteNumberValue(Score.Value);
-            }
-            if (Highlights != null)
-            {
-                writer.WritePropertyName("@search.highlights");
-                writer.WriteStartObject();
-                foreach (var item in Highlights)
-                {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteStartArray();
-                    foreach (var item0 in item.Value)
-                    {
-                        writer.WriteStringValue(item0);
-                    }
-                    writer.WriteEndArray();
-                }
-                writer.WriteEndObject();
-            }
-            foreach (var item in this)
-            {
-                writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue(item.Value);
-            }
-            writer.WriteEndObject();
-        }
         internal static SearchResult DeserializeSearchResult(JsonElement element)
         {
             SearchResult result = new SearchResult();

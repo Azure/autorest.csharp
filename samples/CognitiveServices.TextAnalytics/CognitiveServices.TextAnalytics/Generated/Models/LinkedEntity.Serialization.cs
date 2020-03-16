@@ -10,33 +10,8 @@ using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    public partial class LinkedEntity : IUtf8JsonSerializable
+    public partial class LinkedEntity
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("name");
-            writer.WriteStringValue(Name);
-            writer.WritePropertyName("matches");
-            writer.WriteStartArray();
-            foreach (var item in Matches)
-            {
-                writer.WriteObjectValue(item);
-            }
-            writer.WriteEndArray();
-            writer.WritePropertyName("language");
-            writer.WriteStringValue(Language);
-            if (Id != null)
-            {
-                writer.WritePropertyName("id");
-                writer.WriteStringValue(Id);
-            }
-            writer.WritePropertyName("url");
-            writer.WriteStringValue(Url);
-            writer.WritePropertyName("dataSource");
-            writer.WriteStringValue(DataSource);
-            writer.WriteEndObject();
-        }
         internal static LinkedEntity DeserializeLinkedEntity(JsonElement element)
         {
             LinkedEntity result = new LinkedEntity();

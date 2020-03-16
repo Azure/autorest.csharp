@@ -10,6 +10,6 @@ namespace httpInfrastructure.Models
     /// <summary> The D. </summary>
     public partial class D
     {
-        public string HttpStatusCode { get; set; }
+        public string HttpStatusCode { get; internal set; }
     }
 }

@@ -5,31 +5,13 @@
 
 #nullable disable
 
-using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class Error : IXmlSerializable
+    public partial class Error
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
-        {
-            writer.WriteStartElement(nameHint ?? "Error");
-            if (Status != null)
-            {
-                writer.WriteStartElement("status");
-                writer.WriteValue(Status.Value);
-                writer.WriteEndElement();
-            }
-            if (Message != null)
-            {
-                writer.WriteStartElement("message");
-                writer.WriteValue(Message);
-                writer.WriteEndElement();
-            }
-            writer.WriteEndElement();
-        }
         internal static Error DeserializeError(XElement element)
         {
             Error result = default;

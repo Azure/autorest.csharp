@@ -29,6 +29,7 @@ namespace Azure.Storage.Management.Models
             writer.WriteStringValue(AzureStorageSid);
             writer.WriteEndObject();
         }
+
         internal static ActiveDirectoryProperties DeserializeActiveDirectoryProperties(JsonElement element)
         {
             ActiveDirectoryProperties result = new ActiveDirectoryProperties();

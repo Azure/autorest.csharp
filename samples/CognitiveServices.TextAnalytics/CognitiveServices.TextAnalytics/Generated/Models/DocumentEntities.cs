@@ -13,10 +13,10 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class DocumentEntities
     {
         /// <summary> Unique, non-empty document identifier. </summary>
-        public string Id { get; set; }
+        public string Id { get; internal set; }
         /// <summary> Recognized entities in the document. </summary>
-        public IList<Entity> Entities { get; set; } = new List<Entity>();
+        public IList<Entity> Entities { get; internal set; } = new List<Entity>();
         /// <summary> if showStats=true was specified in the request this field will contain information about the document payload. </summary>
-        public DocumentStatistics Statistics { get; set; }
+        public DocumentStatistics Statistics { get; internal set; }
     }
 }

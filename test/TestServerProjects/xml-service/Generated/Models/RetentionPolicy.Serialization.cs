@@ -27,6 +27,7 @@ namespace xml_service.Models
             }
             writer.WriteEndElement();
         }
+
         internal static RetentionPolicy DeserializeRetentionPolicy(XElement element)
         {
             RetentionPolicy result = default;

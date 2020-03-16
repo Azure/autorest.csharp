@@ -11,26 +11,8 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class KeysResult : IUtf8JsonSerializable
+    public partial class KeysResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("clusters");
-            writer.WriteStartObject();
-            foreach (var item in Clusters)
-            {
-                writer.WritePropertyName(item.Key);
-                writer.WriteStartArray();
-                foreach (var item0 in item.Value)
-                {
-                    writer.WriteStringValue(item0);
-                }
-                writer.WriteEndArray();
-            }
-            writer.WriteEndObject();
-            writer.WriteEndObject();
-        }
         internal static KeysResult DeserializeKeysResult(JsonElement element)
         {
             KeysResult result = new KeysResult();

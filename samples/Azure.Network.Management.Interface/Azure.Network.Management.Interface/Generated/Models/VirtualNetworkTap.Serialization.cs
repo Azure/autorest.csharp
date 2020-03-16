@@ -92,6 +92,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static VirtualNetworkTap DeserializeVirtualNetworkTap(JsonElement element)
         {
             VirtualNetworkTap result = new VirtualNetworkTap();

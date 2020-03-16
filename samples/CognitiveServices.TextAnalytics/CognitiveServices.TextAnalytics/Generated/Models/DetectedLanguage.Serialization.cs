@@ -10,19 +10,8 @@ using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    public partial class DetectedLanguage : IUtf8JsonSerializable
+    public partial class DetectedLanguage
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("name");
-            writer.WriteStringValue(Name);
-            writer.WritePropertyName("iso6391Name");
-            writer.WriteStringValue(Iso6391Name);
-            writer.WritePropertyName("score");
-            writer.WriteNumberValue(Score);
-            writer.WriteEndObject();
-        }
         internal static DetectedLanguage DeserializeDetectedLanguage(JsonElement element)
         {
             DetectedLanguage result = new DetectedLanguage();

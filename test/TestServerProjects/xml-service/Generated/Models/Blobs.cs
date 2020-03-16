@@ -12,7 +12,7 @@ namespace xml_service.Models
     /// <summary> The Blobs. </summary>
     public partial class Blobs
     {
-        public IList<BlobPrefix> BlobPrefix { get; set; }
-        public IList<Blob> Blob { get; set; }
+        public IList<BlobPrefix> BlobPrefix { get; internal set; }
+        public IList<Blob> Blob { get; internal set; }
     }
 }

@@ -72,6 +72,7 @@ namespace model_flattening.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static FlattenedProduct DeserializeFlattenedProduct(JsonElement element)
         {
             FlattenedProduct result = new FlattenedProduct();

@@ -10,18 +10,8 @@ using Azure.Core;
 
 namespace paging.Models
 {
-    public partial class Product : IUtf8JsonSerializable
+    public partial class Product
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Properties != null)
-            {
-                writer.WritePropertyName("properties");
-                writer.WriteObjectValue(Properties);
-            }
-            writer.WriteEndObject();
-        }
         internal static Product DeserializeProduct(JsonElement element)
         {
             Product result = new Product();

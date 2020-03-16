@@ -50,6 +50,7 @@ namespace xml_service.Models
             }
             writer.WriteEndElement();
         }
+
         internal static StorageServiceProperties DeserializeStorageServiceProperties(XElement element)
         {
             StorageServiceProperties result = default;

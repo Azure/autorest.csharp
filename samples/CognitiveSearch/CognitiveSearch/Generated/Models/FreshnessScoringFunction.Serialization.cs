@@ -30,6 +30,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static FreshnessScoringFunction DeserializeFreshnessScoringFunction(JsonElement element)
         {
             FreshnessScoringFunction result = new FreshnessScoringFunction();

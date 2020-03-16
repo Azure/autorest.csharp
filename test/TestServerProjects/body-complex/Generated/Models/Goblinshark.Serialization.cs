@@ -54,6 +54,7 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Goblinshark DeserializeGoblinshark(JsonElement element)
         {
             Goblinshark result = new Goblinshark();

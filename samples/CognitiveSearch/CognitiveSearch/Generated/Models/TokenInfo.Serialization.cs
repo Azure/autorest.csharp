@@ -10,33 +10,8 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class TokenInfo : IUtf8JsonSerializable
+    public partial class TokenInfo
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Token != null)
-            {
-                writer.WritePropertyName("token");
-                writer.WriteStringValue(Token);
-            }
-            if (StartOffset != null)
-            {
-                writer.WritePropertyName("startOffset");
-                writer.WriteNumberValue(StartOffset.Value);
-            }
-            if (EndOffset != null)
-            {
-                writer.WritePropertyName("endOffset");
-                writer.WriteNumberValue(EndOffset.Value);
-            }
-            if (Position != null)
-            {
-                writer.WritePropertyName("position");
-                writer.WriteNumberValue(Position.Value);
-            }
-            writer.WriteEndObject();
-        }
         internal static TokenInfo DeserializeTokenInfo(JsonElement element)
         {
             TokenInfo result = new TokenInfo();

@@ -2,11 +2,13 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using AutoRest.CSharp.V3.Generation.Types;
+using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
 
@@ -14,13 +16,22 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal class CodeWriter
     {
+        private const int DefaultLength = 1024;
+        private const char NewLineChar = '\n';
+        private static readonly string _newLine = "\n";
+
         private readonly List<string> _usingNamespaces = new List<string>();
-        private readonly StringBuilder _builder = new StringBuilder();
+
         private readonly Stack<CodeWriterScope> _scopes;
         private string? _currentNamespace;
 
+        private char[] _builder;
+        private int _position;
+
         public CodeWriter()
         {
+            _builder = ArrayPool<char>.Shared.Rent(DefaultLength);
+
             _scopes = new Stack<CodeWriterScope>();
             _scopes.Push(new CodeWriterScope(this, "", false));
         }
@@ -88,6 +99,16 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     case CSharpType t:
                         AppendType(t);
                         break;
+                    case CodeWriterDeclaration declaration:
+                        if (isDeclaration)
+                        {
+                            Declaration(declaration);
+                        }
+                        else
+                        {
+                            AppendRaw(declaration.ActualName);
+                        }
+                        break;
                     default:
                         if (isLiteral)
                         {
@@ -101,7 +122,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         {
                             throw new ArgumentNullException(index.ToString());
                         }
-
 
                         if (isDeclaration)
                         {
@@ -120,10 +140,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         public void UseNamespace(string @namespace)
         {
-            _usingNamespaces.Add(@namespace);
+            if (_currentNamespace != @namespace)
+            {
+                _usingNamespaces.Add(@namespace);
+            }
         }
 
-        public string GetTemporaryVariable(string s)
+        private string GetTemporaryVariable(string s)
         {
             if (IsAvailable(s))
             {
@@ -159,10 +182,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             string? mappedName = type.IsFrameworkType ? GetKeywordMapping(type.FrameworkType) : null;
             if (mappedName == null)
             {
-                if (_currentNamespace != type.Namespace)
-                {
-                    UseNamespace(type.Namespace);
-                }
+                UseNamespace(type.Namespace);
 
                 AppendRaw(type.Namespace);
                 AppendRaw(".");
@@ -236,66 +256,96 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         }
 
         public CodeWriter Line()
-        {;
-            if (!PreviousLineIsOpenBrace())
-            {
-                LineRaw();
-            }
+        {
+            LineRaw(string.Empty);
 
             return this;
         }
 
-        private bool PreviousLineIsOpenBrace()
+        private Span<char> WrittenText => _builder.AsSpan(0, _position);
+        private Span<char> PreviousLine
         {
-            int? lastCharIndex = FindLastNonWhitespaceCharacterIndex();
-            if (!lastCharIndex.HasValue || _builder[lastCharIndex.Value] != '{')
+            get
             {
-                return false;
-            }
+                var writtenText = WrittenText;
 
-            for (int i = lastCharIndex.Value - 1; i >= 0; i--)
-            {
-                var c = _builder[i];
-                if (c == '\r' || c == '\n')
+                var indexOfNewLine = writtenText.LastIndexOf(_newLine);
+                if (indexOfNewLine == -1)
                 {
-                    return true;
+                    return Span<char>.Empty;
                 }
 
-                if (char.IsWhiteSpace(c))
+                var writtenTextBeforeLastLine = writtenText.Slice(0, indexOfNewLine);
+                var indexOfPreviousNewLine = writtenTextBeforeLastLine.LastIndexOf(_newLine);
+                if (indexOfPreviousNewLine == -1)
                 {
-                    continue;
+                    return writtenText.Slice(0, indexOfNewLine + 1);
                 }
 
-                return false;
+                return writtenText.Slice(indexOfPreviousNewLine + 1, indexOfNewLine - indexOfPreviousNewLine);
             }
-
-            return true;
-
         }
 
-        private CodeWriter LineRaw()
+        private Span<char> CurrentLine
         {
-            _builder.AppendLine();
-            return this;
+            get
+            {
+                var writtenText = WrittenText;
+
+                var indexOfNewLine = writtenText.LastIndexOf(_newLine);
+                if (indexOfNewLine == -1)
+                {
+                    return writtenText;
+                }
+
+                return writtenText.Slice(indexOfNewLine + 1);
+            }
+        }
+
+        private void EnsureSpace(int space)
+        {
+            if (_builder.Length - _position < space)
+            {
+                var newBuilder = ArrayPool<char>.Shared.Rent(_builder.Length * 2);
+                _builder.AsSpan().CopyTo(newBuilder);
+
+                ArrayPool<char>.Shared.Return(_builder);
+                _builder = newBuilder;
+            }
         }
 
         public CodeWriter LineRaw(string str)
         {
-            _builder.AppendLine(str);
+            AppendRaw(str);
+
+            if (!CurrentLine.IsEmpty ||
+                !PreviousLine.SequenceEqual(_newLine))
+            {
+                AppendRaw(_newLine);
+            }
+
             return this;
         }
 
         public CodeWriter AppendRaw(string str)
         {
-            _builder.Append(str);
+            EnsureSpace(str.Length);
+            str.AsSpan().CopyTo(_builder.AsSpan().Slice(_position));
+            _position += str.Length;
             return this;
         }
 
-        public CodeWriter Declaration(string name)
+        private CodeWriter Declaration(string declaration)
         {
-            _scopes.Peek().Identifiers.Add(name);
+            _scopes.Peek().Identifiers.Add(declaration);
 
-            return AppendRaw(name);
+            return AppendRaw(declaration);
+        }
+
+        public CodeWriter Declaration(CodeWriterDeclaration declaration)
+        {
+            declaration.SetActualName(GetTemporaryVariable(declaration.RequestedName));
+            return Declaration(declaration.ActualName);
         }
 
         public CodeWriter Append(CodeWriterDelegate writerDelegate)
@@ -306,7 +356,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         public string ToFormattedCode()
         {
-            if (_builder.Length == 0)
+            if (_position == 0)
             {
                 return string.Empty;
             }
@@ -336,7 +386,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 builder.AppendLine();
             }
 
-            builder.Append(_builder);
+            // Normalize newlines
+            builder.AppendLine(new string(_builder.AsSpan(0, _position).Trim()).Replace(_newLine, Environment.NewLine));
 
             return builder.ToString();
         }
@@ -346,12 +397,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         internal class CodeWriterScope : IDisposable
         {
             private readonly CodeWriter _writer;
-            private readonly string _end;
+            private readonly string? _end;
             private readonly bool _newLine;
 
             public List<string> Identifiers { get; } = new List<string>();
 
-            public CodeWriterScope(CodeWriter writer, string end, bool newLine)
+            public CodeWriterScope(CodeWriter writer, string? end, bool newLine)
             {
                 _writer = writer;
                 _end = end;
@@ -360,13 +411,29 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             public void Dispose()
             {
-                _writer.PopScope(this);
-                _writer?.AppendRaw(_end);
-
-                if (_newLine)
+                if (_writer != null)
                 {
-                    _writer?.LineRaw();
+                    _writer.PopScope(this);
+                    if (_end != null)
+                    {
+                        _writer.TrimNewLines();
+                        _writer.AppendRaw(_end);
+                    }
+
+                    if (_newLine)
+                    {
+                        _writer.Line();
+                    }
                 }
+            }
+        }
+
+        private void TrimNewLines()
+        {
+            while (PreviousLine.SequenceEqual(_newLine) &&
+                CurrentLine.IsEmpty)
+            {
+                _position--;
             }
         }
 
@@ -378,9 +445,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private int? FindLastNonWhitespaceCharacterIndex()
         {
-            for (int i = _builder.Length - 1; i >= 0; i--)
+            var text = WrittenText;
+            for (int i = text.Length - 1; i >= 0; i--)
             {
-                if (char.IsWhiteSpace(_builder[i]))
+                if (char.IsWhiteSpace(text[i]))
                 {
                     continue;
                 }
@@ -394,10 +462,22 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         public void RemoveTrailingComma()
         {
             int? lastCharIndex = FindLastNonWhitespaceCharacterIndex();
-            if (lastCharIndex.HasValue && _builder[lastCharIndex.Value] == ',')
+            if (lastCharIndex.HasValue && WrittenText[lastCharIndex.Value] == ',')
             {
-                _builder.Remove(lastCharIndex.Value, _builder.Length - lastCharIndex.Value);
+                _position = lastCharIndex.Value;
             }
+        }
+
+        public CodeWriterScope AmbientScope()
+        {
+            var codeWriterScope =new CodeWriterScope(this, null, false);
+            _scopes.Push(codeWriterScope);
+            return codeWriterScope;
+        }
+
+        public void Append(CodeWriterDeclaration declaration)
+        {
+            AppendRaw(declaration.ActualName);
         }
     }
 }

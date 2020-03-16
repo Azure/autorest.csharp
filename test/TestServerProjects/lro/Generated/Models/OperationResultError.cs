@@ -11,8 +11,8 @@ namespace lro.Models
     public partial class OperationResultError
     {
         /// <summary> The error code for an operation failure. </summary>
-        public int? Code { get; set; }
+        public int? Code { get; internal set; }
         /// <summary> The detailed arror message. </summary>
-        public string Message { get; set; }
+        public string Message { get; internal set; }
     }
 }

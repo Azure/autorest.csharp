@@ -1058,5 +1058,10 @@ namespace AutoRest.TestServer.Tests
             Assert.False(typeof(Shark).GetProperty(nameof(Shark.Fishtype)).SetMethod.IsPublic);
         }
 
+        [Test]
+        public void OutputSchemaPropertiesReadonly()
+        {
+            Assert.False(typeof(Error).GetProperty(nameof(Error.Message)).SetMethod.IsPublic);
+        }
     }
 }

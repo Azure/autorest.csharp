@@ -34,6 +34,7 @@ namespace additionalProperties.Models
             }
             writer.WriteEndObject();
         }
+
         internal static PetAPString DeserializePetAPString(JsonElement element)
         {
             PetAPString result = new PetAPString();

@@ -42,6 +42,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static NGramTokenizer DeserializeNGramTokenizer(JsonElement element)
         {
             NGramTokenizer result = new NGramTokenizer();

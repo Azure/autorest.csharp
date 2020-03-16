@@ -30,6 +30,7 @@ namespace CognitiveSearch
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         /// <summary> Creates a new skillset in a search service or updates the skillset if it already exists. </summary>
         /// <param name="skillsetName"> The name of the skillset to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -41,6 +42,7 @@ namespace CognitiveSearch
         {
             return await RestClient.CreateOrUpdateAsync(skillsetName, clientRequestId, ifMatch, ifNoneMatch, skillset, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Creates a new skillset in a search service or updates the skillset if it already exists. </summary>
         /// <param name="skillsetName"> The name of the skillset to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -52,6 +54,7 @@ namespace CognitiveSearch
         {
             return RestClient.CreateOrUpdate(skillsetName, clientRequestId, ifMatch, ifNoneMatch, skillset, cancellationToken);
         }
+
         /// <summary> Deletes a skillset in a search service. </summary>
         /// <param name="skillsetName"> The name of the skillset to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -62,6 +65,7 @@ namespace CognitiveSearch
         {
             return await RestClient.DeleteAsync(skillsetName, clientRequestId, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Deletes a skillset in a search service. </summary>
         /// <param name="skillsetName"> The name of the skillset to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -72,6 +76,7 @@ namespace CognitiveSearch
         {
             return RestClient.Delete(skillsetName, clientRequestId, ifMatch, ifNoneMatch, cancellationToken);
         }
+
         /// <summary> Retrieves a skillset in a search service. </summary>
         /// <param name="skillsetName"> The name of the skillset to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -80,6 +85,7 @@ namespace CognitiveSearch
         {
             return await RestClient.GetAsync(skillsetName, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Retrieves a skillset in a search service. </summary>
         /// <param name="skillsetName"> The name of the skillset to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -88,6 +94,7 @@ namespace CognitiveSearch
         {
             return RestClient.Get(skillsetName, clientRequestId, cancellationToken);
         }
+
         /// <summary> List all skillsets in a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -96,6 +103,7 @@ namespace CognitiveSearch
         {
             return await RestClient.ListAsync(select, clientRequestId, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> List all skillsets in a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
@@ -104,6 +112,7 @@ namespace CognitiveSearch
         {
             return RestClient.List(select, clientRequestId, cancellationToken);
         }
+
         /// <summary> Creates a new skillset in a search service. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="skillset"> The skillset containing one or more skills to create or update in a search service. </param>
@@ -112,6 +121,7 @@ namespace CognitiveSearch
         {
             return await RestClient.CreateAsync(clientRequestId, skillset, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary> Creates a new skillset in a search service. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="skillset"> The skillset containing one or more skills to create or update in a search service. </param>

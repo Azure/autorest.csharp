@@ -13,9 +13,9 @@ namespace Azure.Storage.Management.Models
     public partial class SkuInformation
     {
         /// <summary> The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType. </summary>
-        public SkuName Name { get; set; }
+        public SkuName Name { get; internal set; }
         /// <summary> The SKU tier. This is based on the SKU name. </summary>
-        public SkuTier? Tier { get; set; }
+        public SkuTier? Tier { get; internal set; }
         /// <summary> The type of the resource, usually it is &apos;storageAccounts&apos;. </summary>
         public string ResourceType { get; internal set; }
         /// <summary> Indicates the type of storage account. </summary>
@@ -25,6 +25,6 @@ namespace Azure.Storage.Management.Models
         /// <summary> The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc. </summary>
         public IList<SKUCapability> Capabilities { get; internal set; }
         /// <summary> The restrictions because of which SKU cannot be used. This is empty if there are no restrictions. </summary>
-        public IList<Restriction> Restrictions { get; set; }
+        public IList<Restriction> Restrictions { get; internal set; }
     }
 }

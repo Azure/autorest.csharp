@@ -10,24 +10,8 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class AnalyzeOperationResult : IUtf8JsonSerializable
+    public partial class AnalyzeOperationResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("status");
-            writer.WriteStringValue(Status.ToSerialString());
-            writer.WritePropertyName("createdDateTime");
-            writer.WriteStringValue(CreatedDateTime, "S");
-            writer.WritePropertyName("lastUpdatedDateTime");
-            writer.WriteStringValue(LastUpdatedDateTime, "S");
-            if (AnalyzeResult != null)
-            {
-                writer.WritePropertyName("analyzeResult");
-                writer.WriteObjectValue(AnalyzeResult);
-            }
-            writer.WriteEndObject();
-        }
         internal static AnalyzeOperationResult DeserializeAnalyzeOperationResult(JsonElement element)
         {
             AnalyzeOperationResult result = new AnalyzeOperationResult();

@@ -10,21 +10,8 @@ using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    public partial class Match : IUtf8JsonSerializable
+    public partial class Match
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("score");
-            writer.WriteNumberValue(Score);
-            writer.WritePropertyName("text");
-            writer.WriteStringValue(Text);
-            writer.WritePropertyName("offset");
-            writer.WriteNumberValue(Offset);
-            writer.WritePropertyName("length");
-            writer.WriteNumberValue(Length);
-            writer.WriteEndObject();
-        }
         internal static Match DeserializeMatch(JsonElement element)
         {
             Match result = new Match();

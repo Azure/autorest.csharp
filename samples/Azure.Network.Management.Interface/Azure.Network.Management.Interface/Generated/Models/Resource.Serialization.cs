@@ -49,6 +49,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WriteEndObject();
         }
+
         internal static Resource DeserializeResource(JsonElement element)
         {
             Resource result = new Resource();

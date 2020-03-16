@@ -47,6 +47,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static StopwordsTokenFilter DeserializeStopwordsTokenFilter(JsonElement element)
         {
             StopwordsTokenFilter result = new StopwordsTokenFilter();

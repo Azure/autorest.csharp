@@ -21,6 +21,7 @@ namespace Azure.Storage.Management.Models
             writer.WriteStringValue(EndRange);
             writer.WriteEndObject();
         }
+
         internal static BlobRestoreRange DeserializeBlobRestoreRange(JsonElement element)
         {
             BlobRestoreRange result = new BlobRestoreRange();

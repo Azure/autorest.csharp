@@ -27,6 +27,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WriteEndObject();
         }
+
         internal static IpTag DeserializeIpTag(JsonElement element)
         {
             IpTag result = new IpTag();

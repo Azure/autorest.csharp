@@ -66,6 +66,7 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static ApplicationGatewayBackendAddressPool DeserializeApplicationGatewayBackendAddressPool(JsonElement element)
         {
             ApplicationGatewayBackendAddressPool result = new ApplicationGatewayBackendAddressPool();

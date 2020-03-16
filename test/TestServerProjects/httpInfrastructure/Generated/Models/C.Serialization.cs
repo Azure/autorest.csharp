@@ -10,18 +10,8 @@ using Azure.Core;
 
 namespace httpInfrastructure.Models
 {
-    public partial class C : IUtf8JsonSerializable
+    public partial class C
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (HttpCode != null)
-            {
-                writer.WritePropertyName("httpCode");
-                writer.WriteStringValue(HttpCode);
-            }
-            writer.WriteEndObject();
-        }
         internal static C DeserializeC(JsonElement element)
         {
             C result = new C();

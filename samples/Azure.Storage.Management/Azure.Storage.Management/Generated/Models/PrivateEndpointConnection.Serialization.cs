@@ -50,6 +50,7 @@ namespace Azure.Storage.Management.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static PrivateEndpointConnection DeserializePrivateEndpointConnection(JsonElement element)
         {
             PrivateEndpointConnection result = new PrivateEndpointConnection();

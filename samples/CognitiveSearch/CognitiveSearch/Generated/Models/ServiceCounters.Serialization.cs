@@ -10,43 +10,8 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class ServiceCounters : IUtf8JsonSerializable
+    public partial class ServiceCounters
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (DocumentCounter != null)
-            {
-                writer.WritePropertyName("documentCount");
-                writer.WriteObjectValue(DocumentCounter);
-            }
-            if (IndexCounter != null)
-            {
-                writer.WritePropertyName("indexesCount");
-                writer.WriteObjectValue(IndexCounter);
-            }
-            if (IndexerCounter != null)
-            {
-                writer.WritePropertyName("indexersCount");
-                writer.WriteObjectValue(IndexerCounter);
-            }
-            if (DataSourceCounter != null)
-            {
-                writer.WritePropertyName("dataSourcesCount");
-                writer.WriteObjectValue(DataSourceCounter);
-            }
-            if (StorageSizeCounter != null)
-            {
-                writer.WritePropertyName("storageSize");
-                writer.WriteObjectValue(StorageSizeCounter);
-            }
-            if (SynonymMapCounter != null)
-            {
-                writer.WritePropertyName("synonymMaps");
-                writer.WriteObjectValue(SynonymMapCounter);
-            }
-            writer.WriteEndObject();
-        }
         internal static ServiceCounters DeserializeServiceCounters(JsonElement element)
         {
             ServiceCounters result = new ServiceCounters();

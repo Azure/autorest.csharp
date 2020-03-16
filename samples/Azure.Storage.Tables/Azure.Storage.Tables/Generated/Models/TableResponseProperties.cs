@@ -11,12 +11,12 @@ namespace Azure.Storage.Tables.Models
     public partial class TableResponseProperties
     {
         /// <summary> The name of the table. </summary>
-        public string TableName { get; set; }
+        public string TableName { get; internal set; }
         /// <summary> The odata type of the table. </summary>
-        public string OdataType { get; set; }
+        public string OdataType { get; internal set; }
         /// <summary> The id of the table. </summary>
-        public string OdataId { get; set; }
+        public string OdataId { get; internal set; }
         /// <summary> The edit link of the table. </summary>
-        public string OdataEditLink { get; set; }
+        public string OdataEditLink { get; internal set; }
     }
 }

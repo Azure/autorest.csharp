@@ -10,7 +10,7 @@ namespace custom_baseUrl_paging.Models
     /// <summary> The ProductProperties. </summary>
     public partial class ProductProperties
     {
-        public int? Id { get; set; }
-        public string Name { get; set; }
+        public int? Id { get; internal set; }
+        public string Name { get; internal set; }
     }
 }

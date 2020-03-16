@@ -11,6 +11,6 @@ namespace Azure.Network.Management.Interface.Models
     public partial class CloudError
     {
         /// <summary> Cloud error body. </summary>
-        public CloudErrorBody Error { get; set; }
+        public CloudErrorBody Error { get; internal set; }
     }
 }

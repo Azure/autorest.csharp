@@ -25,6 +25,7 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
+
         internal static TextWeights DeserializeTextWeights(JsonElement element)
         {
             TextWeights result = new TextWeights();

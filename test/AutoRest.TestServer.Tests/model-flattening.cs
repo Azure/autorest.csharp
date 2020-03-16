@@ -158,7 +158,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Flattening bug in M4: https://github.com/Azure/autorest.modelerfour/issues/140")]
         public Task PutModelFlattenCustomBase() => Test(async (host, pipeline) =>
         {
             var value = new SimpleProduct
@@ -168,7 +167,7 @@ namespace AutoRest.TestServer.Tests
                 MaxProductDisplayName = "max name",
                 Capacity = "Large",
                 OdataValue = "http://foo",
-                //GenericValue = "https://generic"
+                GenericValue = "https://generic"
             };
             var result = await new ServiceClient(ClientDiagnostics, pipeline, host).PutSimpleProductAsync(value);
             Assert.AreEqual("123", result.Value.ProductId);
@@ -176,7 +175,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("max name", result.Value.MaxProductDisplayName);
             Assert.AreEqual("Large", result.Value.Capacity);
             Assert.AreEqual("http://foo", result.Value.OdataValue);
-            //Assert.AreEqual("https://generic", result.Value.GenericValue);
+            Assert.AreEqual("https://generic", result.Value.GenericValue);
         });
 
         [Test]

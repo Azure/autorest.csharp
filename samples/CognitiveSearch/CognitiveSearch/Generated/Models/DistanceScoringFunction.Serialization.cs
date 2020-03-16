@@ -30,6 +30,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static DistanceScoringFunction DeserializeDistanceScoringFunction(JsonElement element)
         {
             DistanceScoringFunction result = new DistanceScoringFunction();

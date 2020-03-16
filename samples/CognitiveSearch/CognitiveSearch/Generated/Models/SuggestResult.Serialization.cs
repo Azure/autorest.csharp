@@ -10,23 +10,8 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class SuggestResult : IUtf8JsonSerializable
+    public partial class SuggestResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Text != null)
-            {
-                writer.WritePropertyName("@search.text");
-                writer.WriteStringValue(Text);
-            }
-            foreach (var item in this)
-            {
-                writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue(item.Value);
-            }
-            writer.WriteEndObject();
-        }
         internal static SuggestResult DeserializeSuggestResult(JsonElement element)
         {
             SuggestResult result = new SuggestResult();

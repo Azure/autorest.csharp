@@ -22,22 +22,5 @@ namespace Azure.Storage.Tables.Models
             }
             writer.WriteEndObject();
         }
-        internal static TableProperties DeserializeTableProperties(JsonElement element)
-        {
-            TableProperties result = new TableProperties();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("TableName"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    result.TableName = property.Value.GetString();
-                    continue;
-                }
-            }
-            return result;
-        }
     }
 }

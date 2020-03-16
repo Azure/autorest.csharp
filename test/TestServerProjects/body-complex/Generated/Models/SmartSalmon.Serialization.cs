@@ -57,6 +57,7 @@ namespace body_complex.Models
             }
             writer.WriteEndObject();
         }
+
         internal static SmartSalmon DeserializeSmartSalmon(JsonElement element)
         {
             SmartSalmon result = new SmartSalmon();

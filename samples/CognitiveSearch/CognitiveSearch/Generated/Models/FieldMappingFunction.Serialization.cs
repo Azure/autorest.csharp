@@ -31,6 +31,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static FieldMappingFunction DeserializeFieldMappingFunction(JsonElement element)
         {
             FieldMappingFunction result = new FieldMappingFunction();

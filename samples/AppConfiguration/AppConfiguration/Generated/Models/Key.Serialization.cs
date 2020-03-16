@@ -10,18 +10,8 @@ using Azure.Core;
 
 namespace AppConfiguration.Models
 {
-    public partial class Key : IUtf8JsonSerializable
+    public partial class Key
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Name != null)
-            {
-                writer.WritePropertyName("name");
-                writer.WriteStringValue(Name);
-            }
-            writer.WriteEndObject();
-        }
         internal static Key DeserializeKey(JsonElement element)
         {
             Key result = new Key();

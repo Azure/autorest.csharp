@@ -10,23 +10,8 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class AutocompleteItem : IUtf8JsonSerializable
+    public partial class AutocompleteItem
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Text != null)
-            {
-                writer.WritePropertyName("text");
-                writer.WriteStringValue(Text);
-            }
-            if (QueryPlusText != null)
-            {
-                writer.WritePropertyName("queryPlusText");
-                writer.WriteStringValue(QueryPlusText);
-            }
-            writer.WriteEndObject();
-        }
         internal static AutocompleteItem DeserializeAutocompleteItem(JsonElement element)
         {
             AutocompleteItem result = new AutocompleteItem();

@@ -31,6 +31,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static NGramTokenFilterV2 DeserializeNGramTokenFilterV2(JsonElement element)
         {
             NGramTokenFilterV2 result = new NGramTokenFilterV2();

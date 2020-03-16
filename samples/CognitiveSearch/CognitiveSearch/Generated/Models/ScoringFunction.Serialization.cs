@@ -28,6 +28,7 @@ namespace CognitiveSearch.Models
             }
             writer.WriteEndObject();
         }
+
         internal static ScoringFunction DeserializeScoringFunction(JsonElement element)
         {
             if (element.TryGetProperty("type", out JsonElement discriminator))

@@ -10,25 +10,8 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class Model : IUtf8JsonSerializable
+    public partial class Model
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("modelInfo");
-            writer.WriteObjectValue(ModelInfo);
-            if (Keys != null)
-            {
-                writer.WritePropertyName("keys");
-                writer.WriteObjectValue(Keys);
-            }
-            if (TrainResult != null)
-            {
-                writer.WritePropertyName("trainResult");
-                writer.WriteObjectValue(TrainResult);
-            }
-            writer.WriteEndObject();
-        }
         internal static Model DeserializeModel(JsonElement element)
         {
             Model result = new Model();

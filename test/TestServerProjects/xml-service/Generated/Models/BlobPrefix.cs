@@ -10,6 +10,6 @@ namespace xml_service.Models
     /// <summary> The BlobPrefix. </summary>
     public partial class BlobPrefix
     {
-        public string Name { get; set; }
+        public string Name { get; internal set; }
     }
 }

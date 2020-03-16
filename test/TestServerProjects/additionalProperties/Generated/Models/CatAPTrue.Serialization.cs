@@ -39,6 +39,7 @@ namespace additionalProperties.Models
             }
             writer.WriteEndObject();
         }
+
         internal static CatAPTrue DeserializeCatAPTrue(JsonElement element)
         {
             CatAPTrue result = new CatAPTrue();

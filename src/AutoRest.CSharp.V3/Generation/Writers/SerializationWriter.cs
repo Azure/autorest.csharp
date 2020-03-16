@@ -40,25 +40,29 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 writer.Append($"{model.Declaration.Accessibility} partial class {model.Declaration.Name}");
 
-                bool hasJson = model.Serializations.OfType<JsonSerialization>().Any();
-                bool hasXml = model.Serializations.OfType<XmlElementSerialization>().Any();
-                if (hasJson || hasXml)
-                {
-                    writer.Append($": ");
-                }
 
-                if (hasJson)
+                if (model.IncludeSerializer)
                 {
-                    writer.Append($"{typeof(IUtf8JsonSerializable)}");
-                }
+                    bool hasJson = model.Serializations.OfType<JsonSerialization>().Any();
+                    bool hasXml = model.Serializations.OfType<XmlElementSerialization>().Any();
+                    if (hasJson || hasXml)
+                    {
+                        writer.Append($": ");
+                    }
 
-                if (hasXml)
-                {
                     if (hasJson)
                     {
+                        writer.Append($"{typeof(IUtf8JsonSerializable)}");
                         writer.Append($", ");
                     }
-                    writer.Append($"{typeof(IXmlSerializable)}");
+
+                    if (hasXml)
+                    {
+                        writer.Append($"{typeof(IXmlSerializable)}");
+                        writer.Append($", ");
+                    }
+
+                    writer.RemoveTrailingComma();
                 }
 
                 using (writer.Scope())
@@ -68,12 +72,28 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         switch (serialization)
                         {
                             case JsonSerialization jsonSerialization:
-                                WriteJsonSerialize(writer, jsonSerialization);
-                                WriteJsonDeserialize(writer, model, jsonSerialization);
+                                if (model.IncludeSerializer)
+                                {
+                                    WriteJsonSerialize(writer, jsonSerialization);
+                                }
+
+                                if (model.IncludeDeserializer)
+                                {
+                                    WriteJsonDeserialize(writer, model, jsonSerialization);
+                                }
+
                                 break;
                             case XmlElementSerialization xmlSerialization:
-                                WriteXmlSerialize(writer, xmlSerialization);
-                                WriteXmlDeserialize(writer, model, xmlSerialization);
+                                if (model.IncludeSerializer)
+                                {
+                                    WriteXmlSerialize(writer, xmlSerialization);
+                                }
+
+                                if (model.IncludeDeserializer)
+                                {
+                                    WriteXmlDeserialize(writer, model, xmlSerialization);
+                                }
+
                                 break;
                             default:
                                 throw new NotImplementedException(serialization.ToString());
@@ -95,6 +115,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     null,
                     w => w.AppendRaw(namehint));
             }
+            writer.Line();
         }
 
         private void WriteXmlDeserialize(CodeWriter writer, ObjectType model, XmlElementSerialization serialization)
@@ -105,6 +126,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.ToDeserializeCall(serialization, w=> w.AppendRaw("element"), ref resultVariable, true);
                 writer.Line($"return {resultVariable};");
             }
+            writer.Line();
         }
 
         private void WriteJsonDeserialize(CodeWriter writer, ObjectType model, JsonSerialization jsonSerialization)
@@ -133,6 +155,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.ToDeserializeCall(jsonSerialization, w=>w.AppendRaw("element"), ref resultVariable);
                 writer.Line($"return {resultVariable};");
             }
+            writer.Line();
         }
 
         private void WriteJsonSerialize(CodeWriter writer, JsonSerialization jsonSerialization)
@@ -142,6 +165,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 writer.ToSerializeCall(jsonSerialization, w => w.AppendRaw("this"));
             }
+            writer.Line();
         }
 
         private void WriteSealedChoiceSerialization(CodeWriter writer, EnumType schema)
@@ -172,6 +196,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                         writer.Line($"throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\");");
                     }
+                    writer.Line();
                 }
             }
         }

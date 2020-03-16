@@ -11,28 +11,8 @@ using Azure.Core;
 
 namespace custom_baseUrl_paging.Models
 {
-    public partial class ProductResult : IUtf8JsonSerializable
+    public partial class ProductResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Values != null)
-            {
-                writer.WritePropertyName("values");
-                writer.WriteStartArray();
-                foreach (var item in Values)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (NextLink != null)
-            {
-                writer.WritePropertyName("nextLink");
-                writer.WriteStringValue(NextLink);
-            }
-            writer.WriteEndObject();
-        }
         internal static ProductResult DeserializeProductResult(JsonElement element)
         {
             ProductResult result = new ProductResult();

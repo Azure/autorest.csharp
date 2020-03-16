@@ -38,6 +38,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WriteEndObject();
         }
+
         internal static NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties DeserializeNetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(JsonElement element)
         {
             NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties result = new NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties();

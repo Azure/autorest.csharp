@@ -48,6 +48,7 @@ namespace CognitiveSearch.Models
             writer.WriteEndArray();
             writer.WriteEndObject();
         }
+
         internal static LanguageDetectionSkill DeserializeLanguageDetectionSkill(JsonElement element)
         {
             LanguageDetectionSkill result = new LanguageDetectionSkill();

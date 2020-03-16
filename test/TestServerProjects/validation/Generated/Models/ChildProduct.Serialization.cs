@@ -24,6 +24,7 @@ namespace validation.Models
             }
             writer.WriteEndObject();
         }
+
         internal static ChildProduct DeserializeChildProduct(JsonElement element)
         {
             ChildProduct result = new ChildProduct();

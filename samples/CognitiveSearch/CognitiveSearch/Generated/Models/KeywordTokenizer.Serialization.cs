@@ -26,6 +26,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static KeywordTokenizer DeserializeKeywordTokenizer(JsonElement element)
         {
             KeywordTokenizer result = new KeywordTokenizer();

@@ -11,6 +11,6 @@ namespace model_flattening.Models
     public partial class ProductWrapper
     {
         /// <summary> the product value. </summary>
-        public string Value { get; set; }
+        public string Value { get; internal set; }
     }
 }

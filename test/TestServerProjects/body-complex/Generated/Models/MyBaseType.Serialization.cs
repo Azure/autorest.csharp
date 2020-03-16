@@ -10,28 +10,8 @@ using Azure.Core;
 
 namespace body_complex.Models
 {
-    public partial class MyBaseType : IUtf8JsonSerializable
+    public partial class MyBaseType
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("kind");
-            writer.WriteStringValue(Kind);
-            if (PropB1 != null)
-            {
-                writer.WritePropertyName("propB1");
-                writer.WriteStringValue(PropB1);
-            }
-            writer.WritePropertyName("helper");
-            writer.WriteStartObject();
-            if (PropBH1 != null)
-            {
-                writer.WritePropertyName("propBH1");
-                writer.WriteStringValue(PropBH1);
-            }
-            writer.WriteEndObject();
-            writer.WriteEndObject();
-        }
         internal static MyBaseType DeserializeMyBaseType(JsonElement element)
         {
             if (element.TryGetProperty("kind", out JsonElement discriminator))

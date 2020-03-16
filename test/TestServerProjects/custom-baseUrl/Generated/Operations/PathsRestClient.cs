@@ -19,6 +19,7 @@ namespace custom_baseUrl
         private string host;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
+
         /// <summary> Initializes a new instance of PathsRestClient. </summary>
         public PathsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "host")
         {
@@ -31,6 +32,7 @@ namespace custom_baseUrl
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
+
         internal HttpMessage CreateGetEmptyRequest(string accountName)
         {
             var message = pipeline.CreateMessage();
@@ -44,6 +46,7 @@ namespace custom_baseUrl
             request.Uri = uri;
             return message;
         }
+
         /// <summary> Get a 200 to test a valid base uri. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -74,6 +77,7 @@ namespace custom_baseUrl
                 throw;
             }
         }
+
         /// <summary> Get a 200 to test a valid base uri. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

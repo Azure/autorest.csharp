@@ -38,6 +38,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WriteEndObject();
         }
+
         internal static ServiceEndpointPropertiesFormat DeserializeServiceEndpointPropertiesFormat(JsonElement element)
         {
             ServiceEndpointPropertiesFormat result = new ServiceEndpointPropertiesFormat();

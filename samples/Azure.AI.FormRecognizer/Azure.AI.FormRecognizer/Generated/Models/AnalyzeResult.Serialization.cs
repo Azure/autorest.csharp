@@ -11,52 +11,8 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class AnalyzeResult : IUtf8JsonSerializable
+    public partial class AnalyzeResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("version");
-            writer.WriteStringValue(Version);
-            writer.WritePropertyName("readResults");
-            writer.WriteStartArray();
-            foreach (var item in ReadResults)
-            {
-                writer.WriteObjectValue(item);
-            }
-            writer.WriteEndArray();
-            if (PageResults != null)
-            {
-                writer.WritePropertyName("pageResults");
-                writer.WriteStartArray();
-                foreach (var item0 in PageResults)
-                {
-                    writer.WriteObjectValue(item0);
-                }
-                writer.WriteEndArray();
-            }
-            if (DocumentResults != null)
-            {
-                writer.WritePropertyName("documentResults");
-                writer.WriteStartArray();
-                foreach (var item0 in DocumentResults)
-                {
-                    writer.WriteObjectValue(item0);
-                }
-                writer.WriteEndArray();
-            }
-            if (Errors != null)
-            {
-                writer.WritePropertyName("errors");
-                writer.WriteStartArray();
-                foreach (var item0 in Errors)
-                {
-                    writer.WriteObjectValue(item0);
-                }
-                writer.WriteEndArray();
-            }
-            writer.WriteEndObject();
-        }
         internal static AnalyzeResult DeserializeAnalyzeResult(JsonElement element)
         {
             AnalyzeResult result = new AnalyzeResult();

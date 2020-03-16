@@ -13,14 +13,14 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class DocumentSentiment
     {
         /// <summary> Unique, non-empty document identifier. </summary>
-        public string Id { get; set; }
+        public string Id { get; internal set; }
         /// <summary> Predicted sentiment for document (Negative, Neutral, Positive, or Mixed). </summary>
-        public DocumentSentimentValue Sentiment { get; set; }
+        public DocumentSentimentValue Sentiment { get; internal set; }
         /// <summary> if showStats=true was specified in the request this field will contain information about the document payload. </summary>
-        public DocumentStatistics Statistics { get; set; }
+        public DocumentStatistics Statistics { get; internal set; }
         /// <summary> Document level sentiment confidence scores between 0 and 1 for each sentiment class. </summary>
-        public SentimentConfidenceScorePerLabel DocumentScores { get; set; } = new SentimentConfidenceScorePerLabel();
+        public SentimentConfidenceScorePerLabel DocumentScores { get; internal set; } = new SentimentConfidenceScorePerLabel();
         /// <summary> Sentence level sentiment analysis. </summary>
-        public IList<SentenceSentiment> Sentences { get; set; } = new List<SentenceSentiment>();
+        public IList<SentenceSentiment> Sentences { get; internal set; } = new List<SentenceSentiment>();
     }
 }

@@ -10,23 +10,8 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class GetIndexStatisticsResult : IUtf8JsonSerializable
+    public partial class GetIndexStatisticsResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (DocumentCount != null)
-            {
-                writer.WritePropertyName("documentCount");
-                writer.WriteNumberValue(DocumentCount.Value);
-            }
-            if (StorageSize != null)
-            {
-                writer.WritePropertyName("storageSize");
-                writer.WriteNumberValue(StorageSize.Value);
-            }
-            writer.WriteEndObject();
-        }
         internal static GetIndexStatisticsResult DeserializeGetIndexStatisticsResult(JsonElement element)
         {
             GetIndexStatisticsResult result = new GetIndexStatisticsResult();

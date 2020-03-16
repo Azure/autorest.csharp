@@ -10,17 +10,8 @@ using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    public partial class DocumentStatistics : IUtf8JsonSerializable
+    public partial class DocumentStatistics
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("charactersCount");
-            writer.WriteNumberValue(CharactersCount);
-            writer.WritePropertyName("transactionsCount");
-            writer.WriteNumberValue(TransactionsCount);
-            writer.WriteEndObject();
-        }
         internal static DocumentStatistics DeserializeDocumentStatistics(JsonElement element)
         {
             DocumentStatistics result = new DocumentStatistics();

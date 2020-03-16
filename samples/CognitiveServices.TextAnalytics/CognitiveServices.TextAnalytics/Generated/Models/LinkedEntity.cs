@@ -13,16 +13,16 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class LinkedEntity
     {
         /// <summary> Entity Linking formal name. </summary>
-        public string Name { get; set; }
+        public string Name { get; internal set; }
         /// <summary> List of instances this entity appears in the text. </summary>
-        public IList<Match> Matches { get; set; } = new List<Match>();
+        public IList<Match> Matches { get; internal set; } = new List<Match>();
         /// <summary> Language used in the data source. </summary>
-        public string Language { get; set; }
+        public string Language { get; internal set; }
         /// <summary> Unique identifier of the recognized entity from the data source. </summary>
-        public string Id { get; set; }
+        public string Id { get; internal set; }
         /// <summary> URL for the entity&apos;s page from the data source. </summary>
-        public string Url { get; set; }
+        public string Url { get; internal set; }
         /// <summary> Data source used to extract entity linking, such as Wiki/Bing etc. </summary>
-        public string DataSource { get; set; }
+        public string DataSource { get; internal set; }
     }
 }

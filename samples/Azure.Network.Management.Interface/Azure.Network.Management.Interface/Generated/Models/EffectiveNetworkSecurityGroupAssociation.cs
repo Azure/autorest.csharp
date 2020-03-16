@@ -11,8 +11,8 @@ namespace Azure.Network.Management.Interface.Models
     public partial class EffectiveNetworkSecurityGroupAssociation
     {
         /// <summary> The ID of the subnet if assigned. </summary>
-        public SubResource Subnet { get; set; }
+        public SubResource Subnet { get; internal set; }
         /// <summary> The ID of the network interface if assigned. </summary>
-        public SubResource NetworkInterface { get; set; }
+        public SubResource NetworkInterface { get; internal set; }
     }
 }

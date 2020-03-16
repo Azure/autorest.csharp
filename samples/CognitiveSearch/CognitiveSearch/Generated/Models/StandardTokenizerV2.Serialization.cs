@@ -26,6 +26,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
+
         internal static StandardTokenizerV2 DeserializeStandardTokenizerV2(JsonElement element)
         {
             StandardTokenizerV2 result = new StandardTokenizerV2();

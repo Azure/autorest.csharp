@@ -5,23 +5,13 @@
 
 #nullable disable
 
-using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class StorageServiceStats : IXmlSerializable
+    public partial class StorageServiceStats
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
-        {
-            writer.WriteStartElement(nameHint ?? "StorageServiceStats");
-            if (GeoReplication != null)
-            {
-                writer.WriteObjectValue(GeoReplication, "GeoReplication");
-            }
-            writer.WriteEndElement();
-        }
         internal static StorageServiceStats DeserializeStorageServiceStats(XElement element)
         {
             StorageServiceStats result = default;
