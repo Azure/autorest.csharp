@@ -10,6 +10,20 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> The effective network security group association. </summary>
     public partial class EffectiveNetworkSecurityGroupAssociation
     {
+        /// <summary> Initializes a new instance of EffectiveNetworkSecurityGroupAssociation. </summary>
+        internal EffectiveNetworkSecurityGroupAssociation()
+        {
+        }
+
+        /// <summary> Initializes a new instance of EffectiveNetworkSecurityGroupAssociation. </summary>
+        /// <param name="subnet"> The ID of the subnet if assigned. </param>
+        /// <param name="networkInterface"> The ID of the network interface if assigned. </param>
+        internal EffectiveNetworkSecurityGroupAssociation(SubResource subnet, SubResource networkInterface)
+        {
+            Subnet = subnet;
+            NetworkInterface = networkInterface;
+        }
+
         /// <summary> The ID of the subnet if assigned. </summary>
         public SubResource Subnet { get; internal set; }
         /// <summary> The ID of the network interface if assigned. </summary>

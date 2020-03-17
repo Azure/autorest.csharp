@@ -10,6 +10,19 @@ namespace httpInfrastructure.Models
     /// <summary> The B. </summary>
     public partial class B : MyException
     {
+        /// <summary> Initializes a new instance of B. </summary>
+        internal B()
+        {
+        }
+
+        /// <summary> Initializes a new instance of B. </summary>
+        /// <param name="textStatusCode"> . </param>
+        /// <param name="statusCode"> . </param>
+        internal B(string textStatusCode, string statusCode) : base(statusCode)
+        {
+            TextStatusCode = textStatusCode;
+        }
+
         public string TextStatusCode { get; internal set; }
     }
 }

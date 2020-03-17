@@ -12,6 +12,18 @@ namespace body_complex.Models
     /// <summary> The DictionaryWrapper. </summary>
     public partial class DictionaryWrapper
     {
+        /// <summary> Initializes a new instance of DictionaryWrapper. </summary>
+        public DictionaryWrapper()
+        {
+        }
+
+        /// <summary> Initializes a new instance of DictionaryWrapper. </summary>
+        /// <param name="defaultProgram"> Dictionary of &lt;string&gt;. </param>
+        internal DictionaryWrapper(IDictionary<string, string> defaultProgram)
+        {
+            DefaultProgram = defaultProgram;
+        }
+
         /// <summary> Dictionary of &lt;string&gt;. </summary>
         public IDictionary<string, string> DefaultProgram { get; set; }
     }

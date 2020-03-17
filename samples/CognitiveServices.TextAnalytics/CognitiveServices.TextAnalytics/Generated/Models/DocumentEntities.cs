@@ -12,6 +12,22 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The DocumentEntities. </summary>
     public partial class DocumentEntities
     {
+        /// <summary> Initializes a new instance of DocumentEntities. </summary>
+        internal DocumentEntities()
+        {
+        }
+
+        /// <summary> Initializes a new instance of DocumentEntities. </summary>
+        /// <param name="id"> Unique, non-empty document identifier. </param>
+        /// <param name="entities"> Recognized entities in the document. </param>
+        /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the document payload. </param>
+        internal DocumentEntities(string id, IList<Entity> entities, DocumentStatistics statistics)
+        {
+            Id = id;
+            Entities = entities;
+            Statistics = statistics;
+        }
+
         /// <summary> Unique, non-empty document identifier. </summary>
         public string Id { get; internal set; }
         /// <summary> Recognized entities in the document. </summary>

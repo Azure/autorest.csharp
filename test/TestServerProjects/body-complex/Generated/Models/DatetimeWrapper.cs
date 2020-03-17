@@ -12,6 +12,20 @@ namespace body_complex.Models
     /// <summary> The DatetimeWrapper. </summary>
     public partial class DatetimeWrapper
     {
+        /// <summary> Initializes a new instance of DatetimeWrapper. </summary>
+        public DatetimeWrapper()
+        {
+        }
+
+        /// <summary> Initializes a new instance of DatetimeWrapper. </summary>
+        /// <param name="field"> . </param>
+        /// <param name="now"> . </param>
+        internal DatetimeWrapper(DateTimeOffset? field, DateTimeOffset? now)
+        {
+            Field = field;
+            Now = now;
+        }
+
         public DateTimeOffset? Field { get; set; }
         public DateTimeOffset? Now { get; set; }
     }

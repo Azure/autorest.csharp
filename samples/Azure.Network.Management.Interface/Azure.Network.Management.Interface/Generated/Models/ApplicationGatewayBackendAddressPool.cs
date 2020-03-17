@@ -12,6 +12,29 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Backend Address Pool of an application gateway. </summary>
     public partial class ApplicationGatewayBackendAddressPool : SubResource
     {
+        /// <summary> Initializes a new instance of ApplicationGatewayBackendAddressPool. </summary>
+        public ApplicationGatewayBackendAddressPool()
+        {
+        }
+
+        /// <summary> Initializes a new instance of ApplicationGatewayBackendAddressPool. </summary>
+        /// <param name="name"> Name of the backend address pool that is unique within an Application Gateway. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="type"> Type of the resource. </param>
+        /// <param name="backendIPConfigurations"> Collection of references to IPs defined in network interfaces. </param>
+        /// <param name="backendAddresses"> Backend addresses. </param>
+        /// <param name="provisioningState"> The provisioning state of the backend address pool resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        internal ApplicationGatewayBackendAddressPool(string name, string etag, string type, IList<NetworkInterfaceIPConfiguration> backendIPConfigurations, IList<ApplicationGatewayBackendAddress> backendAddresses, ProvisioningState? provisioningState, string id) : base(id)
+        {
+            Name = name;
+            Etag = etag;
+            Type = type;
+            BackendIPConfigurations = backendIPConfigurations;
+            BackendAddresses = backendAddresses;
+            ProvisioningState = provisioningState;
+        }
+
         /// <summary> Name of the backend address pool that is unique within an Application Gateway. </summary>
         public string Name { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>

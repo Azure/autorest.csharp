@@ -12,6 +12,38 @@ namespace CognitiveSearch.Models
     /// <summary> Represents an indexer. </summary>
     public partial class Indexer
     {
+        /// <summary> Initializes a new instance of Indexer. </summary>
+        public Indexer()
+        {
+        }
+
+        /// <summary> Initializes a new instance of Indexer. </summary>
+        /// <param name="name"> The name of the indexer. </param>
+        /// <param name="description"> The description of the indexer. </param>
+        /// <param name="dataSourceName"> The name of the datasource from which this indexer reads data. </param>
+        /// <param name="skillsetName"> The name of the skillset executing with this indexer. </param>
+        /// <param name="targetIndexName"> The name of the index to which this indexer writes data. </param>
+        /// <param name="schedule"> The schedule for this indexer. </param>
+        /// <param name="parameters"> Parameters for indexer execution. </param>
+        /// <param name="fieldMappings"> Defines mappings between fields in the data source and corresponding target fields in the index. </param>
+        /// <param name="outputFieldMappings"> Output field mappings are applied after enrichment and immediately before indexing. </param>
+        /// <param name="isDisabled"> A value indicating whether the indexer is disabled. Default is false. </param>
+        /// <param name="eTag"> The ETag of the Indexer. </param>
+        internal Indexer(string name, string description, string dataSourceName, string skillsetName, string targetIndexName, IndexingSchedule schedule, IndexingParameters parameters, IList<FieldMapping> fieldMappings, IList<FieldMapping> outputFieldMappings, bool? isDisabled, string eTag)
+        {
+            Name = name;
+            Description = description;
+            DataSourceName = dataSourceName;
+            SkillsetName = skillsetName;
+            TargetIndexName = targetIndexName;
+            Schedule = schedule;
+            Parameters = parameters;
+            FieldMappings = fieldMappings;
+            OutputFieldMappings = outputFieldMappings;
+            IsDisabled = isDisabled;
+            ETag = eTag;
+        }
+
         /// <summary> The name of the indexer. </summary>
         public string Name { get; set; }
         /// <summary> The description of the indexer. </summary>

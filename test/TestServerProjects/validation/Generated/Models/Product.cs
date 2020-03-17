@@ -12,6 +12,32 @@ namespace validation.Models
     /// <summary> The product documentation. </summary>
     public partial class Product
     {
+        /// <summary> Initializes a new instance of Product. </summary>
+        public Product()
+        {
+        }
+
+        /// <summary> Initializes a new instance of Product. </summary>
+        /// <param name="displayNames"> Non required array of unique items from 0 to 6 elements. </param>
+        /// <param name="capacity"> Non required int betwen 0 and 100 exclusive. </param>
+        /// <param name="image"> Image URL representing the product. </param>
+        /// <param name="child"> The product documentation. </param>
+        /// <param name="constChild"> The product documentation. </param>
+        /// <param name="constInt"> Constant int. </param>
+        /// <param name="constString"> Constant string. </param>
+        /// <param name="constStringAsEnum"> Constant string as Enum. </param>
+        internal Product(IList<string> displayNames, int? capacity, string image, ChildProduct child, ConstantProduct constChild, float constInt, string constString, string constStringAsEnum)
+        {
+            DisplayNames = displayNames;
+            Capacity = capacity;
+            Image = image;
+            Child = child;
+            ConstChild = constChild;
+            ConstInt = constInt;
+            ConstString = constString;
+            ConstStringAsEnum = constStringAsEnum;
+        }
+
         /// <summary> Non required array of unique items from 0 to 6 elements. </summary>
         public IList<string> DisplayNames { get; set; }
         /// <summary> Non required int betwen 0 and 100 exclusive. </summary>

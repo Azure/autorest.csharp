@@ -12,6 +12,24 @@ namespace CognitiveSearch.Models
     /// <summary> Input field mapping for a skill. </summary>
     public partial class InputFieldMappingEntry
     {
+        /// <summary> Initializes a new instance of InputFieldMappingEntry. </summary>
+        public InputFieldMappingEntry()
+        {
+        }
+
+        /// <summary> Initializes a new instance of InputFieldMappingEntry. </summary>
+        /// <param name="name"> The name of the input. </param>
+        /// <param name="source"> The source of the input. </param>
+        /// <param name="sourceContext"> The source context used for selecting recursive inputs. </param>
+        /// <param name="inputs"> The recursive inputs used when creating a complex type. </param>
+        internal InputFieldMappingEntry(string name, string source, string sourceContext, IList<InputFieldMappingEntry> inputs)
+        {
+            Name = name;
+            Source = source;
+            SourceContext = sourceContext;
+            Inputs = inputs;
+        }
+
         /// <summary> The name of the input. </summary>
         public string Name { get; set; }
         /// <summary> The source of the input. </summary>

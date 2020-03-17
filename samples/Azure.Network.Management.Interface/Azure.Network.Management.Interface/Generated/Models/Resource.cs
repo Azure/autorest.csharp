@@ -12,6 +12,26 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Common resource representation. </summary>
     public partial class Resource
     {
+        /// <summary> Initializes a new instance of Resource. </summary>
+        public Resource()
+        {
+        }
+
+        /// <summary> Initializes a new instance of Resource. </summary>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> Resource name. </param>
+        /// <param name="type"> Resource type. </param>
+        /// <param name="location"> Resource location. </param>
+        /// <param name="tags"> Resource tags. </param>
+        internal Resource(string id, string name, string type, string location, IDictionary<string, string> tags)
+        {
+            Id = id;
+            Name = name;
+            Type = type;
+            Location = location;
+            Tags = tags;
+        }
+
         /// <summary> Resource ID. </summary>
         public string Id { get; set; }
         /// <summary> Resource name. </summary>

@@ -7,15 +7,14 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 {
     internal class ObjectTypeDiscriminator
     {
-        // TODO: I'm not a fan of addressing the property by a string name, should be represented by property reference
-        public string Property { get; }
+        public ObjectTypeProperty Property { get; }
         public string SerializedName { get; }
 
         public string? Value { get; }
 
         public ObjectTypeDiscriminatorImplementation[] Implementations { get; }
 
-        public ObjectTypeDiscriminator(string property, string serializedName, ObjectTypeDiscriminatorImplementation[] implementations, string? value)
+        public ObjectTypeDiscriminator(ObjectTypeProperty property, string serializedName, ObjectTypeDiscriminatorImplementation[] implementations, string? value)
         {
             Property = property;
             Implementations = implementations;

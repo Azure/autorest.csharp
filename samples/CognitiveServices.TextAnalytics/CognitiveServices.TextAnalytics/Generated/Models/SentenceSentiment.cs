@@ -12,6 +12,26 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The SentenceSentiment. </summary>
     public partial class SentenceSentiment
     {
+        /// <summary> Initializes a new instance of SentenceSentiment. </summary>
+        internal SentenceSentiment()
+        {
+        }
+
+        /// <summary> Initializes a new instance of SentenceSentiment. </summary>
+        /// <param name="sentiment"> The predicted Sentiment for the sentence. </param>
+        /// <param name="sentenceScores"> The sentiment confidence score between 0 and 1 for the sentence for all classes. </param>
+        /// <param name="offset"> The sentence offset from the start of the document. </param>
+        /// <param name="length"> The length of the sentence by Unicode standard. </param>
+        /// <param name="warnings"> The warnings generated for the sentence. </param>
+        internal SentenceSentiment(SentenceSentimentValue sentiment, SentimentConfidenceScorePerLabel sentenceScores, int offset, int length, IList<string> warnings)
+        {
+            Sentiment = sentiment;
+            SentenceScores = sentenceScores;
+            Offset = offset;
+            Length = length;
+            Warnings = warnings;
+        }
+
         /// <summary> The predicted Sentiment for the sentence. </summary>
         public SentenceSentimentValue Sentiment { get; internal set; }
         /// <summary> The sentiment confidence score between 0 and 1 for the sentence for all classes. </summary>

@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
 {
     internal static class BuilderHelpers
     {
-        public static Constant StringConstant(string s) => ParseConstant(s, new CSharpType(typeof(string)));
+        public static Constant StringConstant(string? s) => ParseConstant(s, new CSharpType(typeof(string), s == null));
 
         public static Constant ParseConstant(object? value, CSharpType type)
         {

@@ -8,7 +8,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.V3.Generation.Types;
+using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Models.Types;
+using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.Generation.Writers
 {
@@ -64,26 +66,19 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.Line();
                 using (writer.Scope())
                 {
-                    if (schema.Discriminator != null)
-                    {
-                        writer.WriteXmlDocumentationSummary($"Initializes a new instance of {schema.Declaration.Name}");
-                        using (writer.Scope($"public {schema.Declaration.Name}()"))
-                        {
-                            writer.Line($"{schema.Discriminator.Property} = {schema.Discriminator.Value:L};");
-                        }
-                    }
+                    WriteConstructor(writer, schema);
 
                     foreach (var property in schema.Properties)
                     {
-                        if (property.DeclarationOptions.IsUserDefined)
+                        if (property.Declaration.IsUserDefined)
                         {
                             continue;
                         }
 
                         writer.WriteXmlDocumentationSummary(property.Description);
 
-                        CSharpType propertyType = property.DeclarationOptions.Type;
-                        writer.Append($"{property.DeclarationOptions.Accessibility} {propertyType} {property.DeclarationOptions.Name:D}");
+                        CSharpType propertyType = property.Declaration.Type;
+                        writer.Append($"{property.Declaration.Accessibility} {propertyType} {property.Declaration.Name:D}");
                         writer.AppendRaw(property.IsReadOnly ? "{ get; internal set; }" : "{ get; set; }");
 
                         if (property.DefaultValue != null)
@@ -159,6 +154,59 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         }
                     }
                 }
+            }
+        }
+
+        private static void WriteConstructor(CodeWriter writer, ObjectType schema)
+        {
+            foreach (var constructor in schema.Constructors)
+            {
+                if (constructor.Declaration.IsUserDefined) continue;
+
+                writer.WriteXmlDocumentationSummary($"Initializes a new instance of {schema.Declaration.Name}");
+                foreach (var parameter in constructor.Parameters)
+                {
+                    writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+                }
+
+                writer.Append($"{constructor.Declaration.Accessibility} {constructor.Declaration.Name}(");
+                foreach (var parameter in constructor.Parameters)
+                {
+                    writer.Append($"{parameter.Type} {parameter.Name},");
+                }
+                writer.RemoveTrailingComma();
+                writer.Append($")");
+
+                if (constructor.BaseConstructor != null)
+                {
+                    writer.Append($": base(");
+                    foreach (var baseConstructorParameter in constructor.BaseConstructor.Parameters)
+                    {
+                        writer.Append($"{baseConstructorParameter.Name},");
+                    }
+                    writer.RemoveTrailingComma();
+                    writer.Append($")");
+                }
+
+                using (writer.Scope())
+                {
+                    foreach (var initializer in constructor.Initializers)
+                    {
+                        writer.Append($"{initializer.Property.Declaration.Name} = ");
+                        if (initializer.Value.IsConstant)
+                        {
+                            writer.WriteConstant(initializer.Value.Constant);
+                        }
+                        else
+                        {
+                            writer.AppendRaw(initializer.Value.Parameter.Name);
+                        }
+
+                        writer.Line($";");
+                    }
+                }
+
+                writer.Line();
             }
         }
 

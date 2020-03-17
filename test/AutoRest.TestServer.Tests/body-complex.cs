@@ -1063,5 +1063,21 @@ namespace AutoRest.TestServer.Tests
         {
             Assert.False(typeof(Error).GetProperty(nameof(Error.Message)).SetMethod.IsPublic);
         }
+
+        [Test]
+        public void InputSchemaCtorIsPublic()
+        {
+            Assert.NotNull(typeof(Shark)
+                .GetConstructors(BindingFlags.Instance | BindingFlags.Public)
+                .SingleOrDefault(c => c.GetParameters().Length == 0));
+        }
+
+        [Test]
+        public void OutputSchemaCtorIsInternal()
+        {
+            Assert.NotNull(typeof(Error)
+                .GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic)
+                .SingleOrDefault(c => c.GetParameters().Length == 0));
+        }
     }
 }

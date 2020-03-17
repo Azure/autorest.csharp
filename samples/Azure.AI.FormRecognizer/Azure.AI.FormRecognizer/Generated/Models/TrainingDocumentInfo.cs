@@ -12,6 +12,24 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Report for a custom model training document. </summary>
     public partial class TrainingDocumentInfo
     {
+        /// <summary> Initializes a new instance of TrainingDocumentInfo. </summary>
+        internal TrainingDocumentInfo()
+        {
+        }
+
+        /// <summary> Initializes a new instance of TrainingDocumentInfo. </summary>
+        /// <param name="documentName"> Training document name. </param>
+        /// <param name="pages"> Total number of pages trained. </param>
+        /// <param name="errors"> List of errors. </param>
+        /// <param name="status"> Status of the training operation. </param>
+        internal TrainingDocumentInfo(string documentName, int pages, IList<ErrorInformation> errors, TrainStatus status)
+        {
+            DocumentName = documentName;
+            Pages = pages;
+            Errors = errors;
+            Status = status;
+        }
+
         /// <summary> Training document name. </summary>
         public string DocumentName { get; internal set; }
         /// <summary> Total number of pages trained. </summary>

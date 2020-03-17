@@ -10,6 +10,18 @@ namespace httpInfrastructure.Models
     /// <summary> The D. </summary>
     public partial class D
     {
+        /// <summary> Initializes a new instance of D. </summary>
+        internal D()
+        {
+        }
+
+        /// <summary> Initializes a new instance of D. </summary>
+        /// <param name="httpStatusCode"> . </param>
+        internal D(string httpStatusCode)
+        {
+            HttpStatusCode = httpStatusCode;
+        }
+
         public string HttpStatusCode { get; internal set; }
     }
 }

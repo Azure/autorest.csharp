@@ -12,6 +12,35 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Virtual Network Tap resource. </summary>
     public partial class VirtualNetworkTap : Resource
     {
+        /// <summary> Initializes a new instance of VirtualNetworkTap. </summary>
+        public VirtualNetworkTap()
+        {
+        }
+
+        /// <summary> Initializes a new instance of VirtualNetworkTap. </summary>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="networkInterfaceTapConfigurations"> Specifies the list of resource IDs for the network interface IP configuration that needs to be tapped. </param>
+        /// <param name="resourceGuid"> The resource GUID property of the virtual network tap resource. </param>
+        /// <param name="provisioningState"> The provisioning state of the virtual network tap resource. </param>
+        /// <param name="destinationNetworkInterfaceIPConfiguration"> The reference to the private IP Address of the collector nic that will receive the tap. </param>
+        /// <param name="destinationLoadBalancerFrontEndIPConfiguration"> The reference to the private IP address on the internal Load Balancer that will receive the tap. </param>
+        /// <param name="destinationPort"> The VXLAN destination port that will receive the tapped traffic. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> Resource name. </param>
+        /// <param name="type"> Resource type. </param>
+        /// <param name="location"> Resource location. </param>
+        /// <param name="tags"> Resource tags. </param>
+        internal VirtualNetworkTap(string etag, IList<NetworkInterfaceTapConfiguration> networkInterfaceTapConfigurations, string resourceGuid, ProvisioningState? provisioningState, NetworkInterfaceIPConfiguration destinationNetworkInterfaceIPConfiguration, FrontendIPConfiguration destinationLoadBalancerFrontEndIPConfiguration, int? destinationPort, string id, string name, string type, string location, IDictionary<string, string> tags) : base(id, name, type, location, tags)
+        {
+            Etag = etag;
+            NetworkInterfaceTapConfigurations = networkInterfaceTapConfigurations;
+            ResourceGuid = resourceGuid;
+            ProvisioningState = provisioningState;
+            DestinationNetworkInterfaceIPConfiguration = destinationNetworkInterfaceIPConfiguration;
+            DestinationLoadBalancerFrontEndIPConfiguration = destinationLoadBalancerFrontEndIPConfiguration;
+            DestinationPort = destinationPort;
+        }
+
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
         public string Etag { get; internal set; }
         /// <summary> Specifies the list of resource IDs for the network interface IP configuration that needs to be tapped. </summary>

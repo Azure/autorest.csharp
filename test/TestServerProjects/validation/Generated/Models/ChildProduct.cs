@@ -10,6 +10,20 @@ namespace validation.Models
     /// <summary> The product documentation. </summary>
     public partial class ChildProduct
     {
+        /// <summary> Initializes a new instance of ChildProduct. </summary>
+        public ChildProduct()
+        {
+        }
+
+        /// <summary> Initializes a new instance of ChildProduct. </summary>
+        /// <param name="constProperty"> Constant string. </param>
+        /// <param name="count"> Count. </param>
+        internal ChildProduct(string constProperty, int? count)
+        {
+            ConstProperty = constProperty;
+            Count = count;
+        }
+
         /// <summary> Constant string. </summary>
         public string ConstProperty { get; set; } = "constant";
         /// <summary> Count. </summary>

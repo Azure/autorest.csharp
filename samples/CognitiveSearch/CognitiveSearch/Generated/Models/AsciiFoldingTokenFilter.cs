@@ -15,6 +15,17 @@ namespace CognitiveSearch.Models
         {
             OdataType = "#Microsoft.Azure.Search.AsciiFoldingTokenFilter";
         }
+
+        /// <summary> Initializes a new instance of AsciiFoldingTokenFilter. </summary>
+        /// <param name="preserveOriginal"> A value indicating whether the original token will be kept. Default is false. </param>
+        /// <param name="odataType"> . </param>
+        /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        internal AsciiFoldingTokenFilter(bool? preserveOriginal, string odataType, string name) : base(odataType, name)
+        {
+            PreserveOriginal = preserveOriginal;
+            OdataType = "#Microsoft.Azure.Search.AsciiFoldingTokenFilter";
+        }
+
         /// <summary> A value indicating whether the original token will be kept. Default is false. </summary>
         public bool? PreserveOriginal { get; set; }
     }

@@ -15,6 +15,19 @@ namespace CognitiveSearch.Models
         {
             OdataType = "#Microsoft.Azure.Search.LimitTokenFilter";
         }
+
+        /// <summary> Initializes a new instance of LimitTokenFilter. </summary>
+        /// <param name="maxTokenCount"> The maximum number of tokens to produce. Default is 1. </param>
+        /// <param name="consumeAllTokens"> A value indicating whether all tokens from the input must be consumed even if maxTokenCount is reached. Default is false. </param>
+        /// <param name="odataType"> . </param>
+        /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        internal LimitTokenFilter(int? maxTokenCount, bool? consumeAllTokens, string odataType, string name) : base(odataType, name)
+        {
+            MaxTokenCount = maxTokenCount;
+            ConsumeAllTokens = consumeAllTokens;
+            OdataType = "#Microsoft.Azure.Search.LimitTokenFilter";
+        }
+
         /// <summary> The maximum number of tokens to produce. Default is 1. </summary>
         public int? MaxTokenCount { get; set; }
         /// <summary> A value indicating whether all tokens from the input must be consumed even if maxTokenCount is reached. Default is false. </summary>

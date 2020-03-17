@@ -10,6 +10,20 @@ namespace body_complex.Models
     /// <summary> The Pet. </summary>
     public partial class Pet
     {
+        /// <summary> Initializes a new instance of Pet. </summary>
+        public Pet()
+        {
+        }
+
+        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <param name="id"> . </param>
+        /// <param name="name"> . </param>
+        internal Pet(int? id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
+
         public int? Id { get; set; }
         public string Name { get; set; }
     }

@@ -11,10 +11,23 @@ namespace body_complex.Models
     public partial class MyBaseType
     {
         /// <summary> Initializes a new instance of MyBaseType. </summary>
-        public MyBaseType()
+        internal MyBaseType()
         {
             Kind = null;
         }
+
+        /// <summary> Initializes a new instance of MyBaseType. </summary>
+        /// <param name="kind"> . </param>
+        /// <param name="propB1"> . </param>
+        /// <param name="propBH1"> . </param>
+        internal MyBaseType(string kind, string propB1, string propBH1)
+        {
+            Kind = kind;
+            PropB1 = propB1;
+            PropBH1 = propBH1;
+            Kind = null;
+        }
+
         public string Kind { get; internal set; } = "Kind1";
         public string PropB1 { get; internal set; }
         public string PropBH1 { get; internal set; }

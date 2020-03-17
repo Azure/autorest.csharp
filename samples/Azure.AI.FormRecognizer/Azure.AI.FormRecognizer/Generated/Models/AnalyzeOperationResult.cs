@@ -12,6 +12,24 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Status and result of the queued analyze operation. </summary>
     public partial class AnalyzeOperationResult
     {
+        /// <summary> Initializes a new instance of AnalyzeOperationResult. </summary>
+        internal AnalyzeOperationResult()
+        {
+        }
+
+        /// <summary> Initializes a new instance of AnalyzeOperationResult. </summary>
+        /// <param name="status"> Operation status. </param>
+        /// <param name="createdDateTime"> Date and time (UTC) when the analyze operation was submitted. </param>
+        /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the status was last updated. </param>
+        /// <param name="analyzeResult"> Results of the analyze operation. </param>
+        internal AnalyzeOperationResult(OperationStatus status, DateTimeOffset createdDateTime, DateTimeOffset lastUpdatedDateTime, AnalyzeResult analyzeResult)
+        {
+            Status = status;
+            CreatedDateTime = createdDateTime;
+            LastUpdatedDateTime = lastUpdatedDateTime;
+            AnalyzeResult = analyzeResult;
+        }
+
         /// <summary> Operation status. </summary>
         public OperationStatus Status { get; internal set; }
         /// <summary> Date and time (UTC) when the analyze operation was submitted. </summary>

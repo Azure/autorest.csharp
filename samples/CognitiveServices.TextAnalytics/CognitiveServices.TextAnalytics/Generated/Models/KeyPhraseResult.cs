@@ -12,6 +12,24 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The KeyPhraseResult. </summary>
     public partial class KeyPhraseResult
     {
+        /// <summary> Initializes a new instance of KeyPhraseResult. </summary>
+        internal KeyPhraseResult()
+        {
+        }
+
+        /// <summary> Initializes a new instance of KeyPhraseResult. </summary>
+        /// <param name="documents"> Response by document. </param>
+        /// <param name="errors"> Errors by document id. </param>
+        /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the request payload. </param>
+        /// <param name="modelVersion"> This field indicates which model is used for scoring. </param>
+        internal KeyPhraseResult(IList<DocumentKeyPhrases> documents, IList<DocumentError> errors, RequestStatistics statistics, string modelVersion)
+        {
+            Documents = documents;
+            Errors = errors;
+            Statistics = statistics;
+            ModelVersion = modelVersion;
+        }
+
         /// <summary> Response by document. </summary>
         public IList<DocumentKeyPhrases> Documents { get; internal set; } = new List<DocumentKeyPhrases>();
         /// <summary> Errors by document id. </summary>

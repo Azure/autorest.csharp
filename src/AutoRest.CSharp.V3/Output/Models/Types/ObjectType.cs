@@ -12,6 +12,7 @@ using AutoRest.CSharp.V3.Input.Source;
 using AutoRest.CSharp.V3.Output.Builders;
 using AutoRest.CSharp.V3.Output.Models.Serialization;
 using AutoRest.CSharp.V3.Output.Models.Shared;
+using AutoRest.CSharp.V3.Utilities;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.V3.Output.Models.Types
@@ -29,6 +30,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         private CSharpType? _implementsDictionaryType;
         private ObjectSerialization[]? _serializations;
         private readonly ModelTypeMapping? _sourceTypeMapping;
+        private ObjectTypeConstructor[]? _constructors;
 
         public ObjectType(ObjectSchema objectSchema, BuildContext context)
         {
@@ -60,6 +62,61 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         public ObjectSerialization[] Serializations => _serializations ??= BuildSerializations();
 
         public ObjectTypeProperty[] Properties => _properties ??= BuildProperties().ToArray();
+
+        public ObjectTypeConstructor[] Constructors => _constructors ??= BuildConstructors().ToArray();
+
+        private IEnumerable<ObjectTypeConstructor> BuildConstructors()
+        {
+            List<Parameter> constructorParameters = new List<Parameter>();
+            List<ObjectPropertyInitializer> initializers = new List<ObjectPropertyInitializer>();
+            List<ObjectPropertyInitializer> defaultCtorInitializers = new List<ObjectPropertyInitializer>();
+
+            foreach (var property in Properties)
+            {
+                var parameter = new Parameter(
+                    property.Declaration.Name.ToVariableName(),
+                    property.Description,
+                    property.Declaration.Type,
+                    null,
+                    false
+                );
+
+                constructorParameters.Add(parameter);
+                initializers.Add(new ObjectPropertyInitializer(property, parameter));
+            }
+
+            ObjectTypeConstructor? baseCtor = null;
+            if (Inherits != null && !Inherits.IsFrameworkType && Inherits.Implementation is ObjectType objectType)
+            {
+                // pick ctor with parameters
+                baseCtor = objectType.Constructors.Single(c => c.Parameters.Any());
+                constructorParameters.AddRange(baseCtor.Parameters);
+            }
+
+            if (Discriminator != null)
+            {
+                var discriminatorInitializer = new ObjectPropertyInitializer(Discriminator.Property, BuilderHelpers.StringConstant(Discriminator.Value));
+                initializers.Add(discriminatorInitializer);
+                defaultCtorInitializers.Add(discriminatorInitializer);
+            }
+
+            yield return new ObjectTypeConstructor(
+                BuilderHelpers.CreateMemberDeclaration(
+                    Type.Name,
+                    Type,
+                    // inputs have public ctor by default
+                    _objectSchema.IsInput ? "public" : "internal",
+                    _sourceTypeMapping?.DefaultConstructor),
+                Array.Empty<Parameter>(),
+                defaultCtorInitializers.ToArray());
+
+            yield return new ObjectTypeConstructor(
+                BuilderHelpers.CreateMemberDeclaration(Type.Name, Type, "internal", null),
+                constructorParameters.ToArray(),
+                initializers.ToArray(),
+                baseCtor
+            );
+        }
 
         public ObjectTypeDiscriminator? Discriminator => _discriminator ??= BuildDiscriminator();
 
@@ -126,7 +183,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 Debug.Assert(schemaDiscriminator != null);
 
                 discriminator = new ObjectTypeDiscriminator(
-                    schemaDiscriminator.Property.CSharpName(),
+                    GetPropertyForSchemaProperty(schemaDiscriminator.Property, includeParents: true),
                     schemaDiscriminator.Property.SerializedName,
                     Array.Empty<ObjectTypeDiscriminatorImplementation>(),
                     _objectSchema.DiscriminatorValue
@@ -135,7 +192,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             else if (schemaDiscriminator != null)
             {
                 discriminator = new ObjectTypeDiscriminator(
-                    schemaDiscriminator.Property.CSharpName(),
+                    GetPropertyForSchemaProperty(schemaDiscriminator.Property, includeParents: true),
                     schemaDiscriminator.Property.SerializedName,
                     CreateDiscriminatorImplementations(schemaDiscriminator),
                     _objectSchema.DiscriminatorValue

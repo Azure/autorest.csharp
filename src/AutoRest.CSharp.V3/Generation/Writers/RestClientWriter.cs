@@ -286,7 +286,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             if (constantOrParameter.IsConstant)
             {
-                WriteConstant(writer, constantOrParameter.Constant);
+                writer.WriteConstant(constantOrParameter.Constant);
             }
             else
             {
@@ -302,39 +302,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 constantOrParameter.Type.Implementation is EnumType enumType)
             {
                 writer.AppendEnumToString(enumType);
-            }
-        }
-
-        private void WriteConstant(CodeWriter writer, Constant constant)
-        {
-            if (constant.Value == null)
-            {
-                // Cast helps the overload resolution
-                writer.Append($"({constant.Type}){null:L}");
-                return;
-            }
-
-            Type frameworkType = constant.Type.FrameworkType;
-            if (frameworkType == typeof(DateTimeOffset))
-            {
-                var d = (DateTimeOffset) constant.Value;
-                d = d.ToUniversalTime();
-                writer.Append($"new {typeof(DateTimeOffset)}({d.Year:L}, {d.Month:L}, {d.Day:L} ,{d.Hour:L}, {d.Minute:L}, {d.Second:L}, {d.Millisecond:L}, {typeof(TimeSpan)}.{nameof(TimeSpan.Zero)})");
-            }
-            else if (frameworkType == typeof(byte[]))
-            {
-                var value = (byte[]) constant.Value;
-                writer.Append($"new byte[] {{");
-                foreach (byte b in value)
-                {
-                    writer.Append($"{b}, ");
-                }
-
-                writer.Append($"}}");
-            }
-            else
-            {
-                writer.Literal(constant.Value);
             }
         }
 

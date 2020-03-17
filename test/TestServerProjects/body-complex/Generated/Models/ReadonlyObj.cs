@@ -10,6 +10,20 @@ namespace body_complex.Models
     /// <summary> The ReadonlyObj. </summary>
     public partial class ReadonlyObj
     {
+        /// <summary> Initializes a new instance of ReadonlyObj. </summary>
+        public ReadonlyObj()
+        {
+        }
+
+        /// <summary> Initializes a new instance of ReadonlyObj. </summary>
+        /// <param name="id"> . </param>
+        /// <param name="size"> . </param>
+        internal ReadonlyObj(string id, int? size)
+        {
+            Id = id;
+            Size = size;
+        }
+
         public string Id { get; internal set; }
         public int? Size { get; set; }
     }

@@ -10,6 +10,20 @@ namespace custom_baseUrl_paging.Models
     /// <summary> The ProductProperties. </summary>
     public partial class ProductProperties
     {
+        /// <summary> Initializes a new instance of ProductProperties. </summary>
+        internal ProductProperties()
+        {
+        }
+
+        /// <summary> Initializes a new instance of ProductProperties. </summary>
+        /// <param name="id"> . </param>
+        /// <param name="name"> . </param>
+        internal ProductProperties(int? id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
+
         public int? Id { get; internal set; }
         public string Name { get; internal set; }
     }
