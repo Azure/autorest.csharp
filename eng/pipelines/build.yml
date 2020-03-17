@@ -47,3 +47,6 @@ jobs:
           condition: succeeded()
           failOnStderr: false
           displayName: 'Publish to GitHub'
+        - pwsh: npm run coverage-push -- $(Build.Repository.Name) $(Build.SourceBranch) skip $(storage-coverage-user) $(storage-coverage-pass)
+          workingDirectory: node_modules/@microsoft.azure/autorest.testserver
+          displayName: 'Publish coverage report to storage account'

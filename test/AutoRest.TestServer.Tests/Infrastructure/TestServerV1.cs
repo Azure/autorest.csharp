@@ -95,16 +95,26 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         {
             ByteArrayContent emptyContent = new ByteArrayContent(Array.Empty<byte>());
 
-            using var response = await Client.PostAsync("/coverage/clear", emptyContent);
+            using var response = await Client.PostAsync("/report/clear", emptyContent);
             response.EnsureSuccessStatusCode();
         }
 
         public async Task<string[]> GetMatchedStubs()
         {
-            var coverageString = await Client.GetStringAsync("/coverage");
+            HashSet<string> results = new HashSet<string>();
+
+            await CollectCoverage(results, "/report");
+            await CollectCoverage(results, "/report/azure");
+            await CollectCoverage(results, "/report/optional");
+
+            return results.ToArray();
+        }
+
+        private async Task CollectCoverage(HashSet<string> results, string url)
+        {
+            var coverageString = await Client.GetStringAsync($"{url}?qualifier={Environment.TickCount64}");
             var coverageDocument = JsonDocument.Parse(coverageString);
 
-            List<string> results = new List<string>();
             foreach (var request in coverageDocument.RootElement.EnumerateObject())
             {
                 var mapping = request.Name;
@@ -115,13 +125,12 @@ namespace AutoRest.TestServer.Tests.Infrastructure
                 {
                     continue;
                 }
+
                 if (value != 0)
                 {
                     results.Add(mapping);
                 }
             }
-
-            return results.ToArray();
         }
 
         public void Stop()
