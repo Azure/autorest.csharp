@@ -724,6 +724,34 @@ namespace model_flattening
             uri.AppendPath("/model-flatten/customFlattening", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartObject();
+            content.JsonWriter.WritePropertyName("base_product_id");
+            content.JsonWriter.WriteStringValue(productId);
+            if (description != null)
+            {
+                content.JsonWriter.WritePropertyName("base_product_description");
+                content.JsonWriter.WriteStringValue(description);
+            }
+            if (maxProductDisplayName != null)
+            {
+                content.JsonWriter.WritePropertyName("max_product_display_name");
+                content.JsonWriter.WriteStringValue(maxProductDisplayName);
+            }
+            content.JsonWriter.WritePropertyName("max_product_capacity");
+            content.JsonWriter.WriteStringValue("Large");
+            if (genericValue != null)
+            {
+                content.JsonWriter.WritePropertyName("generic_value");
+                content.JsonWriter.WriteStringValue(genericValue);
+            }
+            if (odataValue != null)
+            {
+                content.JsonWriter.WritePropertyName("@odata.value");
+                content.JsonWriter.WriteStringValue(odataValue);
+            }
+            content.JsonWriter.WriteEndObject();
+            request.Content = content;
             return message;
         }
 
@@ -736,6 +764,10 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, CancellationToken cancellationToken = default)
         {
+            if (productId == null)
+            {
+                throw new ArgumentNullException(nameof(productId));
+            }
 
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PostFlattenedSimpleProduct");
             scope.Start();
@@ -771,6 +803,10 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<SimpleProduct> PostFlattenedSimpleProduct(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, CancellationToken cancellationToken = default)
         {
+            if (productId == null)
+            {
+                throw new ArgumentNullException(nameof(productId));
+            }
 
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PostFlattenedSimpleProduct");
             scope.Start();
@@ -809,6 +845,34 @@ namespace model_flattening
             uri.AppendPath("/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartObject();
+            content.JsonWriter.WritePropertyName("base_product_id");
+            content.JsonWriter.WriteStringValue(productId);
+            if (description != null)
+            {
+                content.JsonWriter.WritePropertyName("base_product_description");
+                content.JsonWriter.WriteStringValue(description);
+            }
+            if (maxProductDisplayName != null)
+            {
+                content.JsonWriter.WritePropertyName("max_product_display_name");
+                content.JsonWriter.WriteStringValue(maxProductDisplayName);
+            }
+            content.JsonWriter.WritePropertyName("max_product_capacity");
+            content.JsonWriter.WriteStringValue("Large");
+            if (genericValue != null)
+            {
+                content.JsonWriter.WritePropertyName("generic_value");
+                content.JsonWriter.WriteStringValue(genericValue);
+            }
+            if (odataValue != null)
+            {
+                content.JsonWriter.WritePropertyName("@odata.value");
+                content.JsonWriter.WriteStringValue(odataValue);
+            }
+            content.JsonWriter.WriteEndObject();
+            request.Content = content;
             return message;
         }
 

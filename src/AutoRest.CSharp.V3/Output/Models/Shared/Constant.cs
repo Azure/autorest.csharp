@@ -5,7 +5,6 @@ using System;
 using System.Diagnostics;
 using AutoRest.CSharp.V3.Generation.Types;
 
-
 namespace AutoRest.CSharp.V3.Output.Models.Shared
 {
     internal struct Constant

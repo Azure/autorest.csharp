@@ -21,14 +21,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             switch (serialization)
             {
-                case JsonArraySerialization array:
+                case JsonArraySerialization arraySerialization:
                     writer.Line($"{writerName}.WriteStartArray();");
                     var collectionItemVariable = new CodeWriterDeclaration("item");
                     writer.Line($"foreach (var {collectionItemVariable:D} in {name})");
                     using (writer.Scope())
                     {
                         writer.ToSerializeCall(
-                            array.ValueSerialization,
+                            arraySerialization.ValueSerialization,
                             w => w.Append(collectionItemVariable),
                             writerName);
                     }
@@ -36,11 +36,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Line($"{writerName}.WriteEndArray();");
                     return;
 
-                case JsonObjectSerialization dictionary:
+                case JsonObjectSerialization objectSerialization:
                     writer.Line($"{writerName}.WriteStartObject();");
                     var itemVariable = new CodeWriterDeclaration("item");
 
-                    foreach (JsonPropertySerialization property in dictionary.Properties)
+                    foreach (JsonPropertySerialization property in objectSerialization.Properties)
                     {
                         CSharpType? serializationType = property.ValueSerialization.Type;
                         bool hasNullableType = serializationType != null && serializationType.IsNullable;
@@ -49,18 +49,19 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             writer.Line($"{writerName}.WritePropertyName({property.Name:L});");
                             writer.ToSerializeCall(
                                 property.ValueSerialization,
-                                w => w.Append($"{property.MemberName}"));
+                                w => w.Append($"{property.MemberName}"),
+                                writerName);
                         }
                     }
 
-                    if (dictionary.AdditionalProperties != null)
+                    if (objectSerialization.AdditionalProperties != null)
                     {
                         writer.Line($"foreach (var {itemVariable:D} in {name})");
                         using (writer.Scope())
                         {
                             writer.Line($"{writerName}.WritePropertyName({itemVariable}.Key);");
                             writer.ToSerializeCall(
-                                dictionary.AdditionalProperties.ValueSerialization,
+                                objectSerialization.AdditionalProperties.ValueSerialization,
                                 w => w.Append($"{itemVariable}.Value"),
                                 writerName);
                         }
@@ -247,8 +248,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         private static void ReadProperty(CodeWriter writer, string itemVariable, CodeWriterDelegate destination, JsonPropertySerialization property)
         {
             CSharpType? type = property.ValueSerialization.Type;
-            string? name = property.MemberName;
-
             bool hasNullableType = type != null && type.IsNullable;
 
             void WriteNullCheck()
@@ -263,7 +262,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 if (hasNullableType && TryGetInitializerType(property.ValueSerialization, out CSharpType? initializerType))
                 {
-                    writer.Line($"{destination}.{name} = new {initializerType}();");
+                    writer.Line($"{destination}.{property.MemberName} = new {initializerType}();");
                 }
             }
 
@@ -277,7 +276,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 WriteInitialization();
 
-                CodeWriterDelegate nextDestination = name == null ? destination : w => w.Append($"{destination}.{name}");
+                CodeWriterDelegate nextDestination = property.MemberName == null ? destination : w => w.Append($"{destination}.{property.MemberName}");
                 writer.ToDeserializeCall(property.ValueSerialization, nextDestination, w => w.Append($"{itemVariable}.Value"));
                 writer.Line($"continue;");
             }

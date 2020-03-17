@@ -19,6 +19,9 @@ namespace AutoRest.CSharp.V3.Output.Builders
     {
         public static Constant StringConstant(string? s) => ParseConstant(s, new CSharpType(typeof(string), s == null));
 
+        public static Constant ParseConstant(ConstantSchema constant, TypeFactory typeFactory) =>
+            ParseConstant(constant.Value.Value, typeFactory.CreateType(constant.ValueType, constant.Value.Value == null));
+
         public static Constant ParseConstant(object? value, CSharpType type)
         {
             object? normalizedValue;
