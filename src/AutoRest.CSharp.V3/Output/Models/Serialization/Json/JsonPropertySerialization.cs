@@ -7,7 +7,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Serialization.Json
 {
     internal class JsonPropertySerialization
     {
-        public JsonPropertySerialization(string name, CodeWriterDelegate? memberName, JsonSerialization valueSerialization)
+        public JsonPropertySerialization(string name, string? memberName, JsonSerialization valueSerialization)
         {
             Name = name;
             MemberName = memberName;
@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Serialization.Json
         }
 
         public string Name { get; }
-        public CodeWriterDelegate? MemberName { get; }
+        public string? MemberName { get; }
         public JsonSerialization ValueSerialization { get; }
     }
 }

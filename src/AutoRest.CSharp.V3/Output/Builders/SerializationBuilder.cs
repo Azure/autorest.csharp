@@ -172,21 +172,20 @@ namespace AutoRest.CSharp.V3.Output.Builders
         {
             foreach (Property property in propertyBag.Properties)
             {
-                CodeWriterDelegate? propertyName = null;
+                string? propertyName = null;
                 if (flattenedParameters.Any())
                 {
                     VirtualParameter? virtualParameter = flattenedParameters.FirstOrDefault(fp => fp.TargetProperty == property);
                     if (virtualParameter != null)
                     {
                         //TODO: Using CSharpName here because constant virtual parameters use PascalCase instead of camelCase.
-                        propertyName = w => w.Append($"{virtualParameter.CSharpName()}");
+                        propertyName = virtualParameter.CSharpName();
                     }
                 }
 
                 if (propertyName == null)
                 {
-                    string nameString = objectType.GetPropertyForSchemaProperty(property, includeParents: true).Declaration.Name;
-                    propertyName = w => w.Append($"{nameString}");
+                    propertyName = objectType.GetPropertyForSchemaProperty(property, includeParents: true).Declaration.Name;
                 }
 
                 yield return new JsonPropertySerialization(
