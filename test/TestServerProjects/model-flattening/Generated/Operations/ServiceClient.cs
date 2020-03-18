@@ -173,10 +173,11 @@ namespace model_flattening
         /// <param name="maxProductDisplayName"> Display name of product. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
+        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity = "Large", CancellationToken cancellationToken = default)
         {
-            return await RestClient.PostFlattenedSimpleProductAsync(productId, description, maxProductDisplayName, genericValue, odataValue, cancellationToken).ConfigureAwait(false);
+            return await RestClient.PostFlattenedSimpleProductAsync(productId, description, maxProductDisplayName, genericValue, odataValue, capacity, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Put Flattened Simple Product with client flattening true on the parameter. </summary>
@@ -185,10 +186,11 @@ namespace model_flattening
         /// <param name="maxProductDisplayName"> Display name of product. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
+        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SimpleProduct> PostFlattenedSimpleProduct(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, CancellationToken cancellationToken = default)
+        public virtual Response<SimpleProduct> PostFlattenedSimpleProduct(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity = "Large", CancellationToken cancellationToken = default)
         {
-            return RestClient.PostFlattenedSimpleProduct(productId, description, maxProductDisplayName, genericValue, odataValue, cancellationToken);
+            return RestClient.PostFlattenedSimpleProduct(productId, description, maxProductDisplayName, genericValue, odataValue, capacity, cancellationToken);
         }
 
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
@@ -198,10 +200,11 @@ namespace model_flattening
         /// <param name="maxProductDisplayName"> Display name of product. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
+        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SimpleProduct>> PutSimpleProductWithGroupingAsync(string name, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SimpleProduct>> PutSimpleProductWithGroupingAsync(string name, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity = "Large", CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutSimpleProductWithGroupingAsync(name, productId, description, maxProductDisplayName, genericValue, odataValue, cancellationToken).ConfigureAwait(false);
+            return await RestClient.PutSimpleProductWithGroupingAsync(name, productId, description, maxProductDisplayName, genericValue, odataValue, capacity, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
@@ -211,10 +214,11 @@ namespace model_flattening
         /// <param name="maxProductDisplayName"> Display name of product. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
+        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SimpleProduct> PutSimpleProductWithGrouping(string name, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, CancellationToken cancellationToken = default)
+        public virtual Response<SimpleProduct> PutSimpleProductWithGrouping(string name, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity = "Large", CancellationToken cancellationToken = default)
         {
-            return RestClient.PutSimpleProductWithGrouping(name, productId, description, maxProductDisplayName, genericValue, odataValue, cancellationToken);
+            return RestClient.PutSimpleProductWithGrouping(name, productId, description, maxProductDisplayName, genericValue, odataValue, capacity, cancellationToken);
         }
     }
 }

@@ -25,9 +25,9 @@ namespace Azure.Storage.Management
         {
         }
         /// <summary> Initializes a new instance of BlobContainersClient. </summary>
-        internal BlobContainersClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-06-01")
+        internal BlobContainersClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
         {
-            RestClient = new BlobContainersRestClient(clientDiagnostics, pipeline, subscriptionId, host, ApiVersion);
+            RestClient = new BlobContainersRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }

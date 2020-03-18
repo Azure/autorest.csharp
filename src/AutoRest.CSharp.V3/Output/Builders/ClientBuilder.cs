@@ -219,6 +219,12 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     {
                         methodParameters.Add(constantOrParameter.Parameter);
                     }
+
+                    //TODO: Remove workaround. Generally, we should not create a parameter that represents as constant when using flattened parameters.
+                    if (constantOrParameter.IsConstant && requestParameter is VirtualParameter)
+                    {
+                        methodParameters.Add(BuildParameter(requestParameter));
+                    }
                 }
                 else
                 {

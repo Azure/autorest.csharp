@@ -714,7 +714,7 @@ namespace model_flattening
             }
         }
 
-        internal HttpMessage CreatePostFlattenedSimpleProductRequest(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue)
+        internal HttpMessage CreatePostFlattenedSimpleProductRequest(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -741,7 +741,7 @@ namespace model_flattening
                 content.JsonWriter.WriteStringValue(maxProductDisplayName);
             }
             content.JsonWriter.WritePropertyName("max_product_capacity");
-            content.JsonWriter.WriteStringValue("Large");
+            content.JsonWriter.WriteStringValue(capacity);
             content.JsonWriter.WritePropertyName("max_product_image");
             content.JsonWriter.WriteStartObject();
             if (genericValue != null)
@@ -767,8 +767,9 @@ namespace model_flattening
         /// <param name="maxProductDisplayName"> Display name of product. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
+        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity = "Large", CancellationToken cancellationToken = default)
         {
             if (productId == null)
             {
@@ -779,7 +780,7 @@ namespace model_flattening
             scope.Start();
             try
             {
-                using var message = CreatePostFlattenedSimpleProductRequest(productId, description, maxProductDisplayName, genericValue, odataValue);
+                using var message = CreatePostFlattenedSimpleProductRequest(productId, description, maxProductDisplayName, genericValue, odataValue, capacity);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -806,8 +807,9 @@ namespace model_flattening
         /// <param name="maxProductDisplayName"> Display name of product. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
+        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SimpleProduct> PostFlattenedSimpleProduct(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, CancellationToken cancellationToken = default)
+        public Response<SimpleProduct> PostFlattenedSimpleProduct(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity = "Large", CancellationToken cancellationToken = default)
         {
             if (productId == null)
             {
@@ -818,7 +820,7 @@ namespace model_flattening
             scope.Start();
             try
             {
-                using var message = CreatePostFlattenedSimpleProductRequest(productId, description, maxProductDisplayName, genericValue, odataValue);
+                using var message = CreatePostFlattenedSimpleProductRequest(productId, description, maxProductDisplayName, genericValue, odataValue, capacity);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -839,7 +841,7 @@ namespace model_flattening
             }
         }
 
-        internal HttpMessage CreatePutSimpleProductWithGroupingRequest(string name, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue)
+        internal HttpMessage CreatePutSimpleProductWithGroupingRequest(string name, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -868,7 +870,7 @@ namespace model_flattening
                 content.JsonWriter.WriteStringValue(maxProductDisplayName);
             }
             content.JsonWriter.WritePropertyName("max_product_capacity");
-            content.JsonWriter.WriteStringValue("Large");
+            content.JsonWriter.WriteStringValue(capacity);
             content.JsonWriter.WritePropertyName("max_product_image");
             content.JsonWriter.WriteStartObject();
             if (genericValue != null)
@@ -895,8 +897,9 @@ namespace model_flattening
         /// <param name="maxProductDisplayName"> Display name of product. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
+        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SimpleProduct>> PutSimpleProductWithGroupingAsync(string name, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SimpleProduct>> PutSimpleProductWithGroupingAsync(string name, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity = "Large", CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -911,7 +914,7 @@ namespace model_flattening
             scope.Start();
             try
             {
-                using var message = CreatePutSimpleProductWithGroupingRequest(name, productId, description, maxProductDisplayName, genericValue, odataValue);
+                using var message = CreatePutSimpleProductWithGroupingRequest(name, productId, description, maxProductDisplayName, genericValue, odataValue, capacity);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -939,8 +942,9 @@ namespace model_flattening
         /// <param name="maxProductDisplayName"> Display name of product. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
+        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SimpleProduct> PutSimpleProductWithGrouping(string name, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, CancellationToken cancellationToken = default)
+        public Response<SimpleProduct> PutSimpleProductWithGrouping(string name, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity = "Large", CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -955,7 +959,7 @@ namespace model_flattening
             scope.Start();
             try
             {
-                using var message = CreatePutSimpleProductWithGroupingRequest(name, productId, description, maxProductDisplayName, genericValue, odataValue);
+                using var message = CreatePutSimpleProductWithGroupingRequest(name, productId, description, maxProductDisplayName, genericValue, odataValue, capacity);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

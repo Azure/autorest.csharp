@@ -58,9 +58,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
         public static bool IsNullable(this RequestParameter parameter) => !(parameter.Required ?? false);
         public static bool IsNullable(this Property parameter) => !(parameter.Required ?? false);
 
-        public static string CSharpName(this RequestParameter parameter) => parameter.Schema is ConstantSchema ?
-            parameter.Language.Default.Name.ToCleanName() :
-            parameter.Language.Default.Name.ToVariableName();
+        public static string CSharpName(this RequestParameter parameter) => parameter.Language.Default.Name.ToVariableName();
 
         public static string CSharpName(this ChoiceValue choice) => choice.Language.Default.Name.ToCleanName();
 

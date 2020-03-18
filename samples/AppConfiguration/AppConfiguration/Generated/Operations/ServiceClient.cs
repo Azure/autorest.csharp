@@ -25,9 +25,9 @@ namespace AppConfiguration
         {
         }
         /// <summary> Initializes a new instance of ServiceClient. </summary>
-        internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string syncToken, string host = "", string ApiVersion = "1.0")
+        internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string syncToken, string host = "", string apiVersion = "1.0")
         {
-            RestClient = new ServiceRestClient(clientDiagnostics, pipeline, syncToken, host, ApiVersion);
+            RestClient = new ServiceRestClient(clientDiagnostics, pipeline, syncToken, host, apiVersion);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }

@@ -178,9 +178,8 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     VirtualParameter? virtualParameter = flattenedParameters.FirstOrDefault(fp => fp.TargetProperty == property);
                     if (virtualParameter != null)
                     {
-                        propertyName = virtualParameter.Schema is ConstantSchema constantSchema
-                            ? w => w.WriteConstant(BuilderHelpers.ParseConstant(constantSchema, _typeFactory))
-                            : (CodeWriterDelegate)(w => w.Append($"{virtualParameter.Language.Default.Name}"));
+                        //TODO: Using CSharpName here because constant virtual parameters use PascalCase instead of camelCase.
+                        propertyName = w => w.Append($"{virtualParameter.CSharpName()}");
                     }
                 }
 
