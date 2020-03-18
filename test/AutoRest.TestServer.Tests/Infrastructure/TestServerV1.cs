@@ -99,20 +99,20 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             response.EnsureSuccessStatusCode();
         }
 
-        public async Task<string[]> GetMatchedStubs()
+        public async Task<string[]> GetMatchedStubs(string testName)
         {
             HashSet<string> results = new HashSet<string>();
 
-            await CollectCoverage(results, "/report");
-            await CollectCoverage(results, "/report/azure");
-            await CollectCoverage(results, "/report/optional");
+            await CollectCoverage(results, "/report", testName);
+            await CollectCoverage(results, "/report/azure", testName);
+            await CollectCoverage(results, "/report/optional", testName);
 
             return results.ToArray();
         }
 
-        private async Task CollectCoverage(HashSet<string> results, string url)
+        private async Task CollectCoverage(HashSet<string> results, string url, string testName)
         {
-            var coverageString = await Client.GetStringAsync($"{url}?qualifier={Environment.TickCount64}");
+            var coverageString = await Client.GetStringAsync($"{url}?qualifier={testName}");
             var coverageDocument = JsonDocument.Parse(coverageString);
 
             foreach (var request in coverageDocument.RootElement.EnumerateObject())

@@ -95,7 +95,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         private async Task Test(string scenario, Func<string, HttpPipeline, Task> test, bool ignoreScenario = false, bool useSimplePipeline = false)
         {
             var scenarioParameter = ignoreScenario ? new string[0] : new[] {scenario};
-            var server = TestServerSession.Start(_version, scenarioParameter);
+            var server = TestServerSession.Start(scenario, _version, false, scenarioParameter);
 
             try
             {
