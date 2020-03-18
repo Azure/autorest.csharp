@@ -178,12 +178,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             switch (serialization)
             {
-                case JsonArraySerialization array:
+                case JsonArraySerialization arraySerialization:
                     var collectionItemVariable = new CodeWriterDeclaration("item");
                     writer.Line($"foreach (var {collectionItemVariable:D} in {element}.EnumerateArray())");
                     using (writer.Scope())
                     {
-                        if (array.ValueSerialization is JsonValueSerialization valueSerialization)
+                        if (arraySerialization.ValueSerialization is JsonValueSerialization valueSerialization)
                         {
                             writer.Append($"{destination}.Add(");
                             writer.ToDeserializeCall(
@@ -195,7 +195,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         {
                             var itemVariableName = "value";
                             writer.ToDeserializeCall(
-                                array.ValueSerialization,
+                                arraySerialization.ValueSerialization,
                                 w => w.Append(collectionItemVariable),
                                 ref itemVariableName);
 
@@ -204,17 +204,17 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     }
 
                     return;
-                case JsonObjectSerialization dictionary:
+                case JsonObjectSerialization objectSerialization:
                     var itemVariable = new CodeWriterDeclaration("property");
                     writer.Line($"foreach (var {itemVariable:D} in {element}.EnumerateObject())");
                     using (writer.Scope())
                     {
-                        foreach (JsonPropertySerialization property in dictionary.Properties)
+                        foreach (JsonPropertySerialization property in objectSerialization.Properties)
                         {
                             ReadProperty(writer, itemVariable.ActualName, destination, property);
                         }
 
-                        if (dictionary.AdditionalProperties is JsonDynamicPropertiesSerialization additionalProperties)
+                        if (objectSerialization.AdditionalProperties is JsonDynamicPropertiesSerialization additionalProperties)
                         {
                             if (additionalProperties.ValueSerialization is JsonValueSerialization valueSerialization)
                             {

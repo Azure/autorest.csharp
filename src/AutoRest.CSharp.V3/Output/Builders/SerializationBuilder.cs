@@ -17,10 +17,12 @@ namespace AutoRest.CSharp.V3.Output.Builders
     internal class SerializationBuilder
     {
         private readonly TypeFactory _typeFactory;
+        private readonly OutputLibrary _library;
 
-        public SerializationBuilder(TypeFactory typeFactory)
+        public SerializationBuilder(BuildContext context)
         {
-            _typeFactory = typeFactory;
+            _typeFactory = context.TypeFactory;
+            _library = context.Library;
         }
 
         public ObjectSerialization BuildObject(KnownMediaType mediaType, ObjectSchema objectSchema, ObjectType type)
@@ -28,7 +30,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             switch (mediaType)
             {
                 case KnownMediaType.Json:
-                    return BuildJsonObjectSerialization(objectSchema, type);
+                    return BuildJsonObjectSerialization(objectSchema, type, Array.Empty<VirtualParameter>());
                 case KnownMediaType.Xml:
                     return BuildXmlObjectSerialization(objectSchema, type);
                 default:
@@ -106,19 +108,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                         _typeFactory.CreateImplementationType(dictionarySchema, isNullable)
                         );
                 case ObjectSchema objectSchema when flattenedParameters.Any():
-                    return new JsonObjectSerialization(
-                        _typeFactory.CreateType(objectSchema, isNullable),
-                        flattenedParameters.Select(fp =>
-                            new JsonPropertySerialization(
-                                fp.TargetProperty.SerializedName,
-                                fp.Schema is ConstantSchema constantSchema
-                                    ? w => w.WriteConstant(BuilderHelpers.ParseConstant(constantSchema, _typeFactory))
-                                    : (CodeWriterDelegate)(w => w.Append($"{fp.CSharpName()}")),
-                                BuildSerialization(fp.TargetProperty.Schema, fp.TargetProperty.IsNullable(), Array.Empty<VirtualParameter>())))
-                            .ToArray(),
-                        null,
-                        _typeFactory.CreateImplementationType(objectSchema, isNullable)
-                    );
+                    return BuildJsonObjectSerialization(objectSchema, (ObjectType)_library.FindTypeForSchema(objectSchema), flattenedParameters);
                 default:
                     return new JsonValueSerialization(
                         _typeFactory.CreateType(schema, isNullable),
@@ -178,33 +168,54 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 );
         }
 
-        private IEnumerable<JsonPropertySerialization> GetPropertySerializationsFromBag(PropertyBag propertyBag, ObjectType objectType)
+        private IEnumerable<JsonPropertySerialization> GetPropertySerializationsFromBag(PropertyBag propertyBag, ObjectType objectType, VirtualParameter[] flattenedParameters)
         {
             foreach (Property property in propertyBag.Properties)
             {
-                string propertyName = objectType.GetPropertyForSchemaProperty(property, includeParents: true).Declaration.Name;
+                CodeWriterDelegate? propertyName = null;
+                if (flattenedParameters.Any())
+                {
+                    VirtualParameter? virtualParameter = flattenedParameters.FirstOrDefault(fp => fp.TargetProperty == property);
+                    if (virtualParameter != null)
+                    {
+                        propertyName = virtualParameter.Schema is ConstantSchema constantSchema
+                            ? w => w.WriteConstant(BuilderHelpers.ParseConstant(constantSchema, _typeFactory))
+                            : (CodeWriterDelegate)(w => w.Append($"{virtualParameter.Language.Default.Name}"));
+                    }
+                }
+
+                if (propertyName == null)
+                {
+                    string nameString = objectType.GetPropertyForSchemaProperty(property, includeParents: true).Declaration.Name;
+                    propertyName = w => w.Append($"{nameString}");
+                }
 
                 yield return new JsonPropertySerialization(
                     property.SerializedName,
-                    w => w.Append($"{propertyName}"),
+                    propertyName,
                     BuildSerialization(property.Schema, property.IsNullable(), Array.Empty<VirtualParameter>())
-                    );
+                );
             }
 
             foreach ((string name, PropertyBag innerBag) in propertyBag.Bag)
             {
-                JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag, objectType).ToArray();
+                JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag, objectType, flattenedParameters).ToArray();
                 JsonObjectSerialization objectSerialization = new JsonObjectSerialization(null, serializationProperties, null, null);
                 yield return new JsonPropertySerialization(name, null, objectSerialization);
             }
         }
 
-        private JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, ObjectType objectType)
+        private JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, ObjectType objectType, VirtualParameter[] flattenedParameters)
         {
             PropertyBag propertyBag = new PropertyBag();
             propertyBag.Properties.AddRange(EnumerateHierarchy(objectSchema).SelectMany(s => s.Properties!));
             PopulatePropertyBag(propertyBag, 0);
-            return new JsonObjectSerialization(objectType.Type, GetPropertySerializationsFromBag(propertyBag, objectType).ToArray(), CreateAdditionalProperties(objectSchema), objectType.Type);
+            return new JsonObjectSerialization(
+                objectType.Type,
+                GetPropertySerializationsFromBag(propertyBag, objectType, flattenedParameters).ToArray(),
+                CreateAdditionalProperties(objectSchema),
+                objectType.Type
+            );
         }
 
         private class PropertyBag

@@ -20,7 +20,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
     internal class ObjectType : ISchemaType
     {
         private readonly ObjectSchema _objectSchema;
-        private readonly BuildContext _context;
         private readonly SerializationBuilder _serializationBuilder;
         private readonly TypeFactory _typeFactory;
 
@@ -36,9 +35,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         {
             _objectSchema = objectSchema;
             _sourceTypeMapping = context.SourceInputModel.FindForSchema(_objectSchema.Name);
-            _context = context;
-            _typeFactory = _context.TypeFactory;
-            _serializationBuilder = new SerializationBuilder(_typeFactory);
+            _typeFactory = context.TypeFactory;
+            _serializationBuilder = new SerializationBuilder(context);
 
             Schema = objectSchema;
             Declaration = BuilderHelpers.CreateTypeAttributes(

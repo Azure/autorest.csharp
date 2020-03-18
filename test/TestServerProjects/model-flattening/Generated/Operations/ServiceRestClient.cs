@@ -733,6 +733,8 @@ namespace model_flattening
                 content.JsonWriter.WritePropertyName("base_product_description");
                 content.JsonWriter.WriteStringValue(description);
             }
+            content.JsonWriter.WritePropertyName("details");
+            content.JsonWriter.WriteStartObject();
             if (maxProductDisplayName != null)
             {
                 content.JsonWriter.WritePropertyName("max_product_display_name");
@@ -740,6 +742,8 @@ namespace model_flattening
             }
             content.JsonWriter.WritePropertyName("max_product_capacity");
             content.JsonWriter.WriteStringValue("Large");
+            content.JsonWriter.WritePropertyName("max_product_image");
+            content.JsonWriter.WriteStartObject();
             if (genericValue != null)
             {
                 content.JsonWriter.WritePropertyName("generic_value");
@@ -750,6 +754,8 @@ namespace model_flattening
                 content.JsonWriter.WritePropertyName("@odata.value");
                 content.JsonWriter.WriteStringValue(odataValue);
             }
+            content.JsonWriter.WriteEndObject();
+            content.JsonWriter.WriteEndObject();
             content.JsonWriter.WriteEndObject();
             request.Content = content;
             return message;
@@ -854,6 +860,8 @@ namespace model_flattening
                 content.JsonWriter.WritePropertyName("base_product_description");
                 content.JsonWriter.WriteStringValue(description);
             }
+            content.JsonWriter.WritePropertyName("details");
+            content.JsonWriter.WriteStartObject();
             if (maxProductDisplayName != null)
             {
                 content.JsonWriter.WritePropertyName("max_product_display_name");
@@ -861,6 +869,8 @@ namespace model_flattening
             }
             content.JsonWriter.WritePropertyName("max_product_capacity");
             content.JsonWriter.WriteStringValue("Large");
+            content.JsonWriter.WritePropertyName("max_product_image");
+            content.JsonWriter.WriteStartObject();
             if (genericValue != null)
             {
                 content.JsonWriter.WritePropertyName("generic_value");
@@ -871,6 +881,8 @@ namespace model_flattening
                 content.JsonWriter.WritePropertyName("@odata.value");
                 content.JsonWriter.WriteStringValue(odataValue);
             }
+            content.JsonWriter.WriteEndObject();
+            content.JsonWriter.WriteEndObject();
             content.JsonWriter.WriteEndObject();
             request.Content = content;
             return message;

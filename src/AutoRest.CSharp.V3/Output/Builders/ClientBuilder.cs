@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
         public ClientBuilder(BuildContext context)
         {
             _context = context;
-            _serializationBuilder = new SerializationBuilder(context.TypeFactory);
+            _serializationBuilder = new SerializationBuilder(context);
             _typeFactory = _context.TypeFactory;
         }
 
