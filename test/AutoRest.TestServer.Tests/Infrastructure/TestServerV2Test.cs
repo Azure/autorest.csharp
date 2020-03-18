@@ -13,7 +13,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         [Test]
         public async Task StartsAndReportsCoverage()
         {
-            await using var session = TestServerSession.Start(TestServerVersion.V2);
+            await using var session = TestServerSession.Start("StartsAndReportsCoverage", TestServerVersion.V2);
 
             var response = await (session.Server).Client.PutAsync("/string/null", new ByteArrayContent(Array.Empty<byte>()));
             response.EnsureSuccessStatusCode();
@@ -21,7 +21,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             var unmatchedRequests = await session.Server.GetRequests();
             Assert.IsEmpty(unmatchedRequests);
 
-            var matched = await session.Server.GetMatchedStubs();
+            var matched = await session.Server.GetMatchedStubs("StartsAndReportsCoverage");
 
             CollectionAssert.AreEqual(new string[]
             {
@@ -32,7 +32,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         [Test]
         public async Task VerifiesUnmatched()
         {
-            var session = TestServerSession.Start(TestServerVersion.V2);
+            var session = TestServerSession.Start("VerifiesUnmatched", TestServerVersion.V2);
 
             await (session.Server).Client.PutAsync("/string/nullaa", new ByteArrayContent(Array.Empty<byte>()));
 
@@ -42,7 +42,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         [Test]
         public async Task NormalUsage()
         {
-            await using var session = TestServerSession.Start(TestServerVersion.V2, "string_null");
+            await using var session = TestServerSession.Start("NormalUsage", TestServerVersion.V2, allowUnmatched:false, "string_null");
 
             var response = await (session.Server).Client.PutAsync("/string/null", new ByteArrayContent(Array.Empty<byte>()));
             response.EnsureSuccessStatusCode();

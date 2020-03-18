@@ -10,12 +10,12 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         [Test]
         public async Task StartsAndReportsCoverage()
         {
-            await using var session = TestServerSession.Start(TestServerVersion.V1);
+            await using var session = TestServerSession.Start("StartsAndReportsCoverage", TestServerVersion.V1);
 
             var response = await session.Server.Client.PutAsync("/string/null", new ByteArrayContent(Array.Empty<byte>()));
             response.EnsureSuccessStatusCode();
 
-            var matched = await session.Server.GetMatchedStubs();
+            var matched = await session.Server.GetMatchedStubs("StartsAndReportsCoverage");
 
             CollectionAssert.Contains(matched, "putStringNull");
         }
@@ -23,7 +23,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         [Test]
         public async Task VerifiesCoverage()
         {
-            var session = TestServerSession.Start(TestServerVersion.V1, "string_empty");
+            var session = TestServerSession.Start("VerifiesCoverage", TestServerVersion.V1, allowUnmatched:false, "string_empty");
 
             await session.Server.Client.PutAsync("/string/null", new ByteArrayContent(Array.Empty<byte>()));
 
@@ -33,7 +33,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         [Test]
         public async Task NormalUsage()
         {
-            await using var session = TestServerSession.Start(TestServerVersion.V1, "putStringNull");
+            await using var session = TestServerSession.Start("NormalUsage", TestServerVersion.V1, allowUnmatched:false,"putStringNull");
 
             var response = await session.Server.Client.PutAsync("/string/null", new ByteArrayContent(Array.Empty<byte>()));
             response.EnsureSuccessStatusCode();

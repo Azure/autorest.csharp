@@ -99,7 +99,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             response.EnsureSuccessStatusCode();
         }
 
-        public async Task<string[]> GetMatchedStubs()
+        public async Task<string[]> GetMatchedStubs(string testName)
         {
             var coverageString = await Client.GetStringAsync("/__admin/requests/");
             var coverageDocument = JsonDocument.Parse(coverageString);

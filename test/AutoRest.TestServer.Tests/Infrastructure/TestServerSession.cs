@@ -13,6 +13,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         private static ITestServer _serverV1Cache;
         private static ITestServer _serverV2Cache;
 
+        private readonly string _scenario;
         private readonly TestServerVersion _version;
         private readonly bool _allowUnmatched;
         private readonly string[] _expectedCoverage;
@@ -20,27 +21,23 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         public ITestServer Server { get; private set; }
         public string Host => Server.Host;
 
-        private TestServerSession(TestServerVersion version, bool allowUnmatched, string[] expectedCoverage)
+        private TestServerSession(string scenario, TestServerVersion version, bool allowUnmatched, string[] expectedCoverage)
         {
+            _scenario = scenario;
             _version = version;
             _allowUnmatched = allowUnmatched;
             _expectedCoverage = expectedCoverage;
             Server = GetServer();
         }
 
-        public static TestServerSession Start(TestServerVersion version, params string[] expectedCoverage)
-        {
-            return Start(version, false, expectedCoverage);
-        }
-
-        public static TestServerSession Start(TestServerVersion version, bool allowUnmatched, params string[] expectedCoverage)
+        public static TestServerSession Start(string scenario, TestServerVersion version, bool allowUnmatched = false, params string[] expectedCoverage)
         {
             if (version == TestServerVersion.V2)
             {
                 // we only use v1 for coverage
                 expectedCoverage = Array.Empty<string>();
             }
-            var server = new TestServerSession(version, allowUnmatched, expectedCoverage);
+            var server = new TestServerSession(scenario, version, allowUnmatched, expectedCoverage);
             return server;
         }
 
@@ -92,7 +89,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         {
             try
             {
-                var matched = await Server.GetMatchedStubs();
+                var matched = await Server.GetMatchedStubs(_scenario);
 
                 if (!ignoreChecks && !_allowUnmatched)
                 {
