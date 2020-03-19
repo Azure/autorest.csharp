@@ -62,7 +62,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new MyDerivedType(propD1, kind, propB1, propBH1);
+            result = new MyDerivedType(propD1, kind, propB1, helper);
             return result;
         }
     }

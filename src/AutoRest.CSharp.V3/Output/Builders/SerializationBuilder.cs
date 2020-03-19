@@ -169,7 +169,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
                 yield return new JsonPropertySerialization(
                     property.SerializedName,
-                    objectProperty,
+                    new SerializationData(w=>w.AppendRaw(objectProperty.Declaration.Name), objectProperty.Declaration.Type),
                     BuildSerialization(property.Schema, property.IsNullable())
                     );
             }
