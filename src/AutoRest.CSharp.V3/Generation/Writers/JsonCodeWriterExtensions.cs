@@ -276,7 +276,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             DeserializeValue(writer,
                                 additionalProperties.ValueSerialization,
                                 w => w.Append($"{itemVariable}.Value"),
-                                (w, returnValue) => writer.Append($"{destination}.Add({itemVariable}.Name, {returnValue})"));
+                                (w, returnValue) => writer.Append($"{destination}.Add({itemVariable}.Name, {returnValue});"));
                         }
                     }
 

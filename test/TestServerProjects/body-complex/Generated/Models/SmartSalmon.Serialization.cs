@@ -130,7 +130,8 @@ namespace body_complex.Models
                     siblings = array;
                     continue;
                 }
-                result.Add(property.Name, property.Value.GetObject())}
+                result.Add(property.Name, property.Value.GetObject());
+            }
             result = new SmartSalmon(collegeDegree, location, iswild, fishtype, species, length, siblings);
             return result;
         }
