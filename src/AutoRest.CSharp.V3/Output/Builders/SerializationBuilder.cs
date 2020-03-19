@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             switch (mediaType)
             {
                 case KnownMediaType.Json:
-                    return BuildSerialization(schema, isNullable, flattenedParameters);
+                    return BuildJsonSerialization(schema, isNullable, flattenedParameters);
                 case KnownMediaType.Xml:
                     return BuildXmlElementSerialization(schema, isNullable, schema.XmlName ?? schema.Name, true);
                 default:
@@ -89,22 +89,22 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     BuilderHelpers.GetSerializationFormat(schema));
         }
 
-        private JsonSerialization BuildSerialization(Schema schema, bool isNullable, VirtualParameter[] flattenedParameters)
+        private JsonSerialization BuildJsonSerialization(Schema schema, bool isNullable, VirtualParameter[] flattenedParameters)
         {
             switch (schema)
             {
                 case ConstantSchema constantSchema:
-                    return BuildSerialization(constantSchema.ValueType, constantSchema.Value.Value == null, Array.Empty<VirtualParameter>());
+                    return BuildJsonSerialization(constantSchema.ValueType, constantSchema.Value.Value == null, Array.Empty<VirtualParameter>());
                 case ArraySchema arraySchema:
                     return new JsonArraySerialization(
                         _typeFactory.CreateType(arraySchema, isNullable),
-                        BuildSerialization(arraySchema.ElementType, false, Array.Empty<VirtualParameter>()),
+                        BuildJsonSerialization(arraySchema.ElementType, false, Array.Empty<VirtualParameter>()),
                         _typeFactory.CreateImplementationType(arraySchema, isNullable));
                 case DictionarySchema dictionarySchema:
                     return new JsonObjectSerialization(
                         _typeFactory.CreateType(dictionarySchema, isNullable),
                         Array.Empty<JsonPropertySerialization>(),
-                        new JsonDynamicPropertiesSerialization(BuildSerialization(dictionarySchema.ElementType, false, Array.Empty<VirtualParameter>())),
+                        new JsonDynamicPropertiesSerialization(BuildJsonSerialization(dictionarySchema.ElementType, false, Array.Empty<VirtualParameter>())),
                         _typeFactory.CreateImplementationType(dictionarySchema, isNullable)
                         );
                 case ObjectSchema objectSchema when flattenedParameters.Any():
@@ -191,7 +191,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 yield return new JsonPropertySerialization(
                     property.SerializedName,
                     propertyName,
-                    BuildSerialization(property.Schema, property.IsNullable(), Array.Empty<VirtualParameter>())
+                    BuildJsonSerialization(property.Schema, property.IsNullable(), Array.Empty<VirtualParameter>())
                 );
             }
 
@@ -270,7 +270,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
 
             return new JsonDynamicPropertiesSerialization(
-                BuildSerialization(inheritedDictionarySchema.ElementType, false, Array.Empty<VirtualParameter>())
+                BuildJsonSerialization(inheritedDictionarySchema.ElementType, false, Array.Empty<VirtualParameter>())
             );
         }
     }
