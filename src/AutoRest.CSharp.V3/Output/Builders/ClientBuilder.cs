@@ -404,7 +404,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 nextLinkProperty = type.GetPropertyBySerializedName(nextLinkName);
             }
 
-            if (itemProperty.SchemaProperty.Schema is ArraySchema arraySchema)
+            if (itemProperty.SchemaProperty?.Schema is ArraySchema arraySchema)
             {
                 CSharpType itemType = _typeFactory.CreateType(arraySchema.ElementType, false);
                 return new PagingInfo(method, nextPageMethod, method.Name, nextLinkProperty?.Declaration.Name, itemProperty.Declaration.Name, itemType);

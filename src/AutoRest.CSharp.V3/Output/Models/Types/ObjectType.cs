@@ -31,6 +31,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         private ObjectSerialization[]? _serializations;
         private readonly ModelTypeMapping? _sourceTypeMapping;
         private ObjectTypeConstructor[]? _constructors;
+        private ObjectTypeProperty? _additionalPropertiesProperty;
 
         public ObjectType(ObjectSchema objectSchema, BuildContext context)
         {
@@ -62,6 +63,30 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         public ObjectSerialization[] Serializations => _serializations ??= BuildSerializations();
 
         public ObjectTypeProperty[] Properties => _properties ??= BuildProperties().ToArray();
+
+        public ObjectTypeProperty? AdditionalPropertiesProperty {
+            get
+            {
+                if (_additionalPropertiesProperty != null || ImplementsDictionaryElementType == null)
+                {
+                    return _additionalPropertiesProperty;
+                }
+
+                var dictionaryType = new CSharpType(typeof(IDictionary<,>), new CSharpType(typeof(string)), ImplementsDictionaryElementType);
+                var implementation = new CSharpType(typeof(Dictionary<,>), new CSharpType(typeof(string)), ImplementsDictionaryElementType);
+
+                SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetMemberForSchema("additionalProperties");
+
+                _additionalPropertiesProperty = new ObjectTypeProperty(
+                    BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", dictionaryType, "private", memberMapping?.ExistingMember),
+                    "",
+                    !_objectSchema.IsInput,
+                    implementation,
+                    null);
+
+                return _additionalPropertiesProperty;
+            }
+        }
 
         public ObjectTypeConstructor[] Constructors => _constructors ??= BuildConstructors().ToArray();
 
@@ -134,7 +159,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         public ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false)
         {
-            if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty.SerializedName == serializedName, out ObjectTypeProperty? objectProperty, includeParents))
+            if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty?.SerializedName == serializedName, out ObjectTypeProperty? objectProperty, includeParents))
             {
                 throw new InvalidOperationException($"Unable to find object property with serialized name {serializedName} in schema {Schema.Name}");
             }
@@ -202,11 +227,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             return _objectSchema.SerializationFormats.Select(type => _serializationBuilder.BuildObject(type, _objectSchema, this)).ToArray();
         }
 
-        private CSharpType CreateDictionaryElementType(DictionarySchema inheritedDictionarySchema)
-        {
-            return _typeFactory.CreateType(inheritedDictionarySchema.ElementType, false);
-        }
-
         private ObjectTypeDiscriminatorImplementation[] CreateDiscriminatorImplementations(Discriminator schemaDiscriminator)
         {
             return schemaDiscriminator.All.Select(implementation => new ObjectTypeDiscriminatorImplementation(
@@ -253,6 +273,11 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     property,
                     defaultValue);
             }
+
+            if (AdditionalPropertiesProperty is ObjectTypeProperty additionalPropertiesProperty)
+            {
+                yield return additionalPropertiesProperty;
+            }
         }
 
         private CSharpType? CreateInheritedType()
@@ -276,7 +301,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             {
                 if (complexSchema is DictionarySchema dictionarySchema)
                 {
-                    return CreateDictionaryElementType(dictionarySchema);
+                    return _typeFactory.CreateType(dictionarySchema.ElementType, false);
                 };
             }
 

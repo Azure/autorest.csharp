@@ -9,7 +9,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 {
     internal class ObjectTypeProperty
     {
-        public ObjectTypeProperty(MemberDeclarationOptions declaration, string description, bool isReadOnly, CSharpType? implementationType, Property schemaProperty, Constant? defaultValue = null)
+        public ObjectTypeProperty(MemberDeclarationOptions declaration, string description, bool isReadOnly, CSharpType? implementationType, Property? schemaProperty, Constant? defaultValue = null)
         {
             Description = description;
             IsReadOnly = isReadOnly;
@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         public string Description { get; }
         public Constant? DefaultValue { get; }
         public CSharpType? ImplementationType { get; }
-        public Property SchemaProperty { get; }
+        public Property? SchemaProperty { get; }
         public bool IsReadOnly { get; }
     }
 }
