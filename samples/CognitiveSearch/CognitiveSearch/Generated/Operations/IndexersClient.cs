@@ -24,9 +24,9 @@ namespace CognitiveSearch
         {
         }
         /// <summary> Initializes a new instance of IndexersClient. </summary>
-        internal IndexersClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string searchDnsSuffix = "search.windows.net", string ApiVersion = "2019-05-06")
+        internal IndexersClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string searchDnsSuffix = "search.windows.net", string apiVersion = "2019-05-06")
         {
-            RestClient = new IndexersRestClient(clientDiagnostics, pipeline, searchServiceName, searchDnsSuffix, ApiVersion);
+            RestClient = new IndexersRestClient(clientDiagnostics, pipeline, searchServiceName, searchDnsSuffix, apiVersion);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }

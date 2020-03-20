@@ -20,24 +20,24 @@ namespace Azure.Storage.Tables
     internal partial class TableRestClient
     {
         private string url;
-        private string Version;
+        private string version;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
 
         /// <summary> Initializes a new instance of TableRestClient. </summary>
-        public TableRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string url, string Version = "2018-10-10")
+        public TableRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string url, string version = "2018-10-10")
         {
             if (url == null)
             {
                 throw new ArgumentNullException(nameof(url));
             }
-            if (Version == null)
+            if (version == null)
             {
-                throw new ArgumentNullException(nameof(Version));
+                throw new ArgumentNullException(nameof(version));
             }
 
             this.url = url;
-            this.Version = Version;
+            this.version = version;
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
@@ -67,7 +67,7 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("$filter", filter, true);
             }
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", Version);
+            request.Headers.Add("x-ms-version", version);
             if (requestId != null)
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);
@@ -161,7 +161,7 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("$format", format.Value.ToString(), true);
             }
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", Version);
+            request.Headers.Add("x-ms-version", version);
             if (requestId != null)
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);
@@ -261,7 +261,7 @@ namespace Azure.Storage.Tables
             uri.AppendPath(table, true);
             uri.AppendPath("')", false);
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", Version);
+            request.Headers.Add("x-ms-version", version);
             if (requestId != null)
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);
@@ -366,7 +366,7 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("$filter", filter, true);
             }
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", Version);
+            request.Headers.Add("x-ms-version", version);
             if (requestId != null)
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);
@@ -490,7 +490,7 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("$filter", filter, true);
             }
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", Version);
+            request.Headers.Add("x-ms-version", version);
             if (requestId != null)
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);
@@ -624,7 +624,7 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("$format", format.Value.ToString(), true);
             }
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", Version);
+            request.Headers.Add("x-ms-version", version);
             if (requestId != null)
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);
@@ -758,7 +758,7 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("$format", format.Value.ToString(), true);
             }
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", Version);
+            request.Headers.Add("x-ms-version", version);
             if (requestId != null)
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);
@@ -875,7 +875,7 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("$format", format.Value.ToString(), true);
             }
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", Version);
+            request.Headers.Add("x-ms-version", version);
             if (requestId != null)
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);
@@ -997,7 +997,7 @@ namespace Azure.Storage.Tables
             }
             uri.AppendQuery("comp", "acl", true);
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", Version);
+            request.Headers.Add("x-ms-version", version);
             if (requestId != null)
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);
@@ -1118,7 +1118,7 @@ namespace Azure.Storage.Tables
             }
             uri.AppendQuery("comp", "acl", true);
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", Version);
+            request.Headers.Add("x-ms-version", version);
             if (requestId != null)
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);
