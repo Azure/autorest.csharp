@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class NGramTokenizer : Tokenizer
     {
         /// <summary> Initializes a new instance of NGramTokenizer. </summary>
-        internal NGramTokenizer()
+        public NGramTokenizer()
         {
             OdataType = "#Microsoft.Azure.Search.NGramTokenizer";
         }

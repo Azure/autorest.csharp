@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class ImageAnalysisSkill : Skill
     {
         /// <summary> Initializes a new instance of ImageAnalysisSkill. </summary>
-        internal ImageAnalysisSkill()
+        public ImageAnalysisSkill()
         {
             OdataType = "#Microsoft.Skills.Vision.ImageAnalysisSkill";
         }

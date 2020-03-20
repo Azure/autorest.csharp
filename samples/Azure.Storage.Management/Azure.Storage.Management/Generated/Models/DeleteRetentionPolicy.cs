@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class DeleteRetentionPolicy
     {
         /// <summary> Initializes a new instance of DeleteRetentionPolicy. </summary>
-        internal DeleteRetentionPolicy()
+        public DeleteRetentionPolicy()
         {
         }
 

@@ -11,7 +11,7 @@ namespace lro.Models
     public partial class Sku
     {
         /// <summary> Initializes a new instance of Sku. </summary>
-        internal Sku()
+        public Sku()
         {
         }
 

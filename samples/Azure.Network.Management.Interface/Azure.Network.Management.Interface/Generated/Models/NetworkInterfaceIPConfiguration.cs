@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class NetworkInterfaceIPConfiguration : SubResource
     {
         /// <summary> Initializes a new instance of NetworkInterfaceIPConfiguration. </summary>
-        internal NetworkInterfaceIPConfiguration()
+        public NetworkInterfaceIPConfiguration()
         {
         }
 

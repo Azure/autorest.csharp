@@ -35,10 +35,7 @@ namespace body_complex.Models
 
         internal static Basic DeserializeBasic(JsonElement element)
         {
-            Basic result;
-            int? id = default;
-            string name = default;
-            CMYKColors? color = default;
+            Basic result = new Basic();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -47,7 +44,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    id = property.Value.GetInt32();
+                    result.Id = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -56,7 +53,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    name = property.Value.GetString();
+                    result.Name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("color"))
@@ -65,11 +62,10 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    color = new CMYKColors(property.Value.GetString());
+                    result.Color = new CMYKColors(property.Value.GetString());
                     continue;
                 }
             }
-            result = new Basic(id, name, color);
             return result;
         }
     }

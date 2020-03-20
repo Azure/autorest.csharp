@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class EdgeNGramTokenizer : Tokenizer
     {
         /// <summary> Initializes a new instance of EdgeNGramTokenizer. </summary>
-        internal EdgeNGramTokenizer()
+        public EdgeNGramTokenizer()
         {
             OdataType = "#Microsoft.Azure.Search.EdgeNGramTokenizer";
         }

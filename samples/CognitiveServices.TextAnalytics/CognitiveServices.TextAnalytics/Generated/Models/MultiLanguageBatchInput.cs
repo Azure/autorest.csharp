@@ -13,7 +13,7 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class MultiLanguageBatchInput
     {
         /// <summary> Initializes a new instance of MultiLanguageBatchInput. </summary>
-        internal MultiLanguageBatchInput()
+        public MultiLanguageBatchInput()
         {
         }
 

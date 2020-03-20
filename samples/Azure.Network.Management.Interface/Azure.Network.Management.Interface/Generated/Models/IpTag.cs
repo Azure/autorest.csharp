@@ -11,7 +11,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class IpTag
     {
         /// <summary> Initializes a new instance of IpTag. </summary>
-        internal IpTag()
+        public IpTag()
         {
         }
 

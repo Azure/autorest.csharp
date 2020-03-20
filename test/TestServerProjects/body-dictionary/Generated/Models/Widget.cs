@@ -11,7 +11,7 @@ namespace body_dictionary.Models
     public partial class Widget
     {
         /// <summary> Initializes a new instance of Widget. </summary>
-        internal Widget()
+        public Widget()
         {
         }
 

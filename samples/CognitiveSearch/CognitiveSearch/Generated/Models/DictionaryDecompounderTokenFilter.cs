@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class DictionaryDecompounderTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of DictionaryDecompounderTokenFilter. </summary>
-        internal DictionaryDecompounderTokenFilter()
+        public DictionaryDecompounderTokenFilter()
         {
             OdataType = "#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter";
         }

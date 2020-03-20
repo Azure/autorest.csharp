@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class ServiceAssociationLink : SubResource
     {
         /// <summary> Initializes a new instance of ServiceAssociationLink. </summary>
-        internal ServiceAssociationLink()
+        public ServiceAssociationLink()
         {
         }
 

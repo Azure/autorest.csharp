@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class StorageAccountMicrosoftEndpoints
     {
         /// <summary> Initializes a new instance of StorageAccountMicrosoftEndpoints. </summary>
-        internal StorageAccountMicrosoftEndpoints()
+        public StorageAccountMicrosoftEndpoints()
         {
         }
 

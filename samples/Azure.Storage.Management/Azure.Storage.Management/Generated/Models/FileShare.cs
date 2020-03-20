@@ -14,7 +14,7 @@ namespace Azure.Storage.Management.Models
     public partial class FileShare : AzureEntityResource
     {
         /// <summary> Initializes a new instance of FileShare. </summary>
-        internal FileShare()
+        public FileShare()
         {
         }
 

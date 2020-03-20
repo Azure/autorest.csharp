@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class Subnet : SubResource
     {
         /// <summary> Initializes a new instance of Subnet. </summary>
-        internal Subnet()
+        public Subnet()
         {
         }
 

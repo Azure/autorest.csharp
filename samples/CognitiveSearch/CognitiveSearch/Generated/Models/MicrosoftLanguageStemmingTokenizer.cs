@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class MicrosoftLanguageStemmingTokenizer : Tokenizer
     {
         /// <summary> Initializes a new instance of MicrosoftLanguageStemmingTokenizer. </summary>
-        internal MicrosoftLanguageStemmingTokenizer()
+        public MicrosoftLanguageStemmingTokenizer()
         {
             OdataType = "#Microsoft.Azure.Search.MicrosoftLanguageStemmingTokenizer";
         }

@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class ScoringFunction
     {
         /// <summary> Initializes a new instance of ScoringFunction. </summary>
-        internal ScoringFunction()
+        public ScoringFunction()
         {
             Type = null;
         }

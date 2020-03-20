@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class AutocompleteRequest
     {
         /// <summary> Initializes a new instance of AutocompleteRequest. </summary>
-        internal AutocompleteRequest()
+        public AutocompleteRequest()
         {
         }
 

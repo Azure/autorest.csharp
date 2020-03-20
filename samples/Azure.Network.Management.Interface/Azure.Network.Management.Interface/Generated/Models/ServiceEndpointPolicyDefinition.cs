@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class ServiceEndpointPolicyDefinition : SubResource
     {
         /// <summary> Initializes a new instance of ServiceEndpointPolicyDefinition. </summary>
-        internal ServiceEndpointPolicyDefinition()
+        public ServiceEndpointPolicyDefinition()
         {
         }
 

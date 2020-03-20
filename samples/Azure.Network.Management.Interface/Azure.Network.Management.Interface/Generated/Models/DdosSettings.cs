@@ -11,7 +11,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class DdosSettings
     {
         /// <summary> Initializes a new instance of DdosSettings. </summary>
-        internal DdosSettings()
+        public DdosSettings()
         {
         }
 

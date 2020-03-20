@@ -31,8 +31,7 @@ namespace body_complex.Models
 
         internal static ArrayWrapper DeserializeArrayWrapper(JsonElement element)
         {
-            ArrayWrapper result;
-            IList<string> array = default;
+            ArrayWrapper result = new ArrayWrapper();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("array"))
@@ -41,16 +40,14 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    List<string> array0 = new List<string>();
+                    result.Array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array0.Add(item.GetString());
+                        result.Array.Add(item.GetString());
                     }
-                    array = array0;
                     continue;
                 }
             }
-            result = new ArrayWrapper(array);
             return result;
         }
     }

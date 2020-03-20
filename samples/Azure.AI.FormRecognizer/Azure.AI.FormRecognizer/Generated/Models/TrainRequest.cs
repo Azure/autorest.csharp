@@ -11,7 +11,7 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class TrainRequest
     {
         /// <summary> Initializes a new instance of TrainRequest. </summary>
-        internal TrainRequest()
+        public TrainRequest()
         {
         }
 

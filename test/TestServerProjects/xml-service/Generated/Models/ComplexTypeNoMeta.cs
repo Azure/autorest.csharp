@@ -11,7 +11,7 @@ namespace xml_service.Models
     public partial class ComplexTypeNoMeta
     {
         /// <summary> Initializes a new instance of ComplexTypeNoMeta. </summary>
-        internal ComplexTypeNoMeta()
+        public ComplexTypeNoMeta()
         {
         }
 

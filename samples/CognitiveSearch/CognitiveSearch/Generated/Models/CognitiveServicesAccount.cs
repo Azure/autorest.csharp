@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class CognitiveServicesAccount
     {
         /// <summary> Initializes a new instance of CognitiveServicesAccount. </summary>
-        internal CognitiveServicesAccount()
+        public CognitiveServicesAccount()
         {
             OdataType = null;
         }

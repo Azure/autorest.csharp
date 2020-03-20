@@ -13,7 +13,7 @@ namespace xml_service.Models
     public partial class AppleBarrel
     {
         /// <summary> Initializes a new instance of AppleBarrel. </summary>
-        internal AppleBarrel()
+        public AppleBarrel()
         {
         }
 

@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class StopwordsTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of StopwordsTokenFilter. </summary>
-        internal StopwordsTokenFilter()
+        public StopwordsTokenFilter()
         {
             OdataType = "#Microsoft.Azure.Search.StopwordsTokenFilter";
         }

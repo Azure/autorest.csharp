@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class CustomDomain
     {
         /// <summary> Initializes a new instance of CustomDomain. </summary>
-        internal CustomDomain()
+        public CustomDomain()
         {
         }
 

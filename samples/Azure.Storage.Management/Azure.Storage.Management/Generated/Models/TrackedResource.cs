@@ -13,7 +13,7 @@ namespace Azure.Storage.Management.Models
     public partial class TrackedResource : Resource
     {
         /// <summary> Initializes a new instance of TrackedResource. </summary>
-        internal TrackedResource()
+        public TrackedResource()
         {
         }
 

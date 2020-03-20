@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class NGramTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of NGramTokenFilter. </summary>
-        internal NGramTokenFilter()
+        public NGramTokenFilter()
         {
             OdataType = "#Microsoft.Azure.Search.NGramTokenFilter";
         }

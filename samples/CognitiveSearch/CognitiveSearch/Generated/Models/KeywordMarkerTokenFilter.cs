@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class KeywordMarkerTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of KeywordMarkerTokenFilter. </summary>
-        internal KeywordMarkerTokenFilter()
+        public KeywordMarkerTokenFilter()
         {
             OdataType = "#Microsoft.Azure.Search.KeywordMarkerTokenFilter";
         }

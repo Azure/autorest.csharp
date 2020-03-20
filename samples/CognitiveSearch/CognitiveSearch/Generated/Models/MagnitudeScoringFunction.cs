@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class MagnitudeScoringFunction : ScoringFunction
     {
         /// <summary> Initializes a new instance of MagnitudeScoringFunction. </summary>
-        internal MagnitudeScoringFunction()
+        public MagnitudeScoringFunction()
         {
             Type = "magnitude";
         }

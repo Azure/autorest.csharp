@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class PatternReplaceTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of PatternReplaceTokenFilter. </summary>
-        internal PatternReplaceTokenFilter()
+        public PatternReplaceTokenFilter()
         {
             OdataType = "#Microsoft.Azure.Search.PatternReplaceTokenFilter";
         }

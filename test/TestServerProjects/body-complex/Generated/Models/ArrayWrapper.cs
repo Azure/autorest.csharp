@@ -13,7 +13,7 @@ namespace body_complex.Models
     public partial class ArrayWrapper
     {
         /// <summary> Initializes a new instance of ArrayWrapper. </summary>
-        internal ArrayWrapper()
+        public ArrayWrapper()
         {
         }
 

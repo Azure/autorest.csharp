@@ -13,7 +13,7 @@ namespace Azure.Storage.Management.Models
     public partial class EncryptionService
     {
         /// <summary> Initializes a new instance of EncryptionService. </summary>
-        internal EncryptionService()
+        public EncryptionService()
         {
         }
 

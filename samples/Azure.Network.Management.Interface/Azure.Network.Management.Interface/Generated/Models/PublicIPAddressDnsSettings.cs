@@ -11,7 +11,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class PublicIPAddressDnsSettings
     {
         /// <summary> Initializes a new instance of PublicIPAddressDnsSettings. </summary>
-        internal PublicIPAddressDnsSettings()
+        public PublicIPAddressDnsSettings()
         {
         }
 

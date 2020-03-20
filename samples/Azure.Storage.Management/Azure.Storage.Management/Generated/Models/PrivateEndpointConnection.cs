@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class PrivateEndpointConnection : Resource
     {
         /// <summary> Initializes a new instance of PrivateEndpointConnection. </summary>
-        internal PrivateEndpointConnection()
+        public PrivateEndpointConnection()
         {
         }
 

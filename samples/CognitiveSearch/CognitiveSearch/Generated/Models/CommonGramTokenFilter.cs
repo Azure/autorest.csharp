@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class CommonGramTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of CommonGramTokenFilter. </summary>
-        internal CommonGramTokenFilter()
+        public CommonGramTokenFilter()
         {
             OdataType = "#Microsoft.Azure.Search.CommonGramTokenFilter";
         }

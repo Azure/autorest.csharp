@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class StopAnalyzer : Analyzer
     {
         /// <summary> Initializes a new instance of StopAnalyzer. </summary>
-        internal StopAnalyzer()
+        public StopAnalyzer()
         {
             OdataType = "#Microsoft.Azure.Search.StopAnalyzer";
         }

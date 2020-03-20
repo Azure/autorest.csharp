@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class ChangeFeed
     {
         /// <summary> Initializes a new instance of ChangeFeed. </summary>
-        internal ChangeFeed()
+        public ChangeFeed()
         {
         }
 

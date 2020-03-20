@@ -13,7 +13,7 @@ namespace Azure.Storage.Management.Models
     public partial class ManagementPolicyFilter
     {
         /// <summary> Initializes a new instance of ManagementPolicyFilter. </summary>
-        internal ManagementPolicyFilter()
+        public ManagementPolicyFilter()
         {
         }
 

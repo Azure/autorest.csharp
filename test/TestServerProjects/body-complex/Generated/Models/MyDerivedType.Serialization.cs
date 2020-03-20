@@ -14,11 +14,7 @@ namespace body_complex.Models
     {
         internal static MyDerivedType DeserializeMyDerivedType(JsonElement element)
         {
-            MyDerivedType result;
-            string propD1 = default;
-            string kind = default;
-            string propB1 = default;
-            object helper = default;
+            MyDerivedType result = new MyDerivedType();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("propD1"))
@@ -27,12 +23,12 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    propD1 = property.Value.GetString();
+                    result.PropD1 = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("kind"))
                 {
-                    kind = property.Value.GetString();
+                    result.Kind = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("propB1"))
@@ -41,12 +37,11 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    propB1 = property.Value.GetString();
+                    result.PropB1 = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("helper"))
                 {
-                    string propBH1 = default;
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         if (property0.NameEquals("propBH1"))
@@ -55,14 +50,13 @@ namespace body_complex.Models
                             {
                                 continue;
                             }
-                            propBH1 = property0.Value.GetString();
+                            result.PropBH1 = property0.Value.GetString();
                             continue;
                         }
                     }
                     continue;
                 }
             }
-            result = new MyDerivedType(propD1, kind, propB1, helper);
             return result;
         }
     }

@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class AzureEntityResource : Resource
     {
         /// <summary> Initializes a new instance of AzureEntityResource. </summary>
-        internal AzureEntityResource()
+        public AzureEntityResource()
         {
         }
 

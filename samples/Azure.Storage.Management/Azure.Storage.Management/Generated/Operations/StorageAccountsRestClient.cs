@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,12 +22,12 @@ namespace Azure.Storage.Management
     {
         private string subscriptionId;
         private string host;
-        private string ApiVersion;
+        private string apiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
 
         /// <summary> Initializes a new instance of StorageAccountsRestClient. </summary>
-        public StorageAccountsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-06-01")
+        public StorageAccountsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
         {
             if (subscriptionId == null)
             {
@@ -35,19 +37,19 @@ namespace Azure.Storage.Management
             {
                 throw new ArgumentNullException(nameof(host));
             }
-            if (ApiVersion == null)
+            if (apiVersion == null)
             {
-                throw new ArgumentNullException(nameof(ApiVersion));
+                throw new ArgumentNullException(nameof(apiVersion));
             }
 
             this.subscriptionId = subscriptionId;
             this.host = host;
-            this.ApiVersion = ApiVersion;
+            this.apiVersion = apiVersion;
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
 
-        internal HttpMessage CreateCheckNameAvailabilityRequest(StorageAccountCheckNameAvailabilityParameters accountName)
+        internal HttpMessage CreateCheckNameAvailabilityRequest(string name, string type)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -57,30 +59,40 @@ namespace Azure.Storage.Management
             uri.AppendPath("/subscriptions/", false);
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/providers/Microsoft.Storage/checkNameAvailability", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            var model = new StorageAccountCheckNameAvailabilityParameters()
+            {
+                Name = name,
+                Type = type
+            };
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(accountName);
+            content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
             return message;
         }
 
         /// <summary> Checks that the storage account name is valid and is not already in use. </summary>
-        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        /// <param name="name"> The storage account name. </param>
+        /// <param name="type"> The type of resource, Microsoft.Storage/storageAccounts. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityAsync(StorageAccountCheckNameAvailabilityParameters accountName, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityAsync(string name, string type = "Microsoft.Storage/storageAccounts", CancellationToken cancellationToken = default)
         {
-            if (accountName == null)
+            if (name == null)
             {
-                throw new ArgumentNullException(nameof(accountName));
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
             }
 
             using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.CheckNameAvailability");
             scope.Start();
             try
             {
-                using var message = CreateCheckNameAvailabilityRequest(accountName);
+                using var message = CreateCheckNameAvailabilityRequest(name, type);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -102,20 +114,25 @@ namespace Azure.Storage.Management
         }
 
         /// <summary> Checks that the storage account name is valid and is not already in use. </summary>
-        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        /// <param name="name"> The storage account name. </param>
+        /// <param name="type"> The type of resource, Microsoft.Storage/storageAccounts. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<CheckNameAvailabilityResult> CheckNameAvailability(StorageAccountCheckNameAvailabilityParameters accountName, CancellationToken cancellationToken = default)
+        public Response<CheckNameAvailabilityResult> CheckNameAvailability(string name, string type = "Microsoft.Storage/storageAccounts", CancellationToken cancellationToken = default)
         {
-            if (accountName == null)
+            if (name == null)
             {
-                throw new ArgumentNullException(nameof(accountName));
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
             }
 
             using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.CheckNameAvailability");
             scope.Start();
             try
             {
-                using var message = CreateCheckNameAvailabilityRequest(accountName);
+                using var message = CreateCheckNameAvailabilityRequest(name, type);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -149,7 +166,7 @@ namespace Azure.Storage.Management
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -255,7 +272,7 @@ namespace Azure.Storage.Management
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             return message;
         }
@@ -345,7 +362,7 @@ namespace Azure.Storage.Management
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             if (expand != null)
             {
                 uri.AppendQuery("$expand", expand.Value.ToSerialString(), true);
@@ -449,7 +466,7 @@ namespace Azure.Storage.Management
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -558,7 +575,7 @@ namespace Azure.Storage.Management
             uri.AppendPath("/subscriptions/", false);
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             return message;
         }
@@ -633,7 +650,7 @@ namespace Azure.Storage.Management
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             return message;
         }
@@ -722,7 +739,7 @@ namespace Azure.Storage.Management
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
             uri.AppendPath("/listKeys", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             uri.AppendQuery("$expand", "kerb", true);
             request.Uri = uri;
             return message;
@@ -808,7 +825,7 @@ namespace Azure.Storage.Management
             }
         }
 
-        internal HttpMessage CreateRegenerateKeyRequest(string resourceGroupName, string accountName, StorageAccountRegenerateKeyParameters regenerateKey)
+        internal HttpMessage CreateRegenerateKeyRequest(string resourceGroupName, string accountName, string keyName)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -822,11 +839,15 @@ namespace Azure.Storage.Management
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
             uri.AppendPath("/regenerateKey", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            var model = new StorageAccountRegenerateKeyParameters()
+            {
+                KeyName = keyName
+            };
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(regenerateKey);
+            content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
             return message;
         }
@@ -834,9 +855,9 @@ namespace Azure.Storage.Management
         /// <summary> Regenerates one of the access keys or Kerberos keys for the specified storage account. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
-        /// <param name="regenerateKey"> Specifies name of the key which should be regenerated -- key1, key2, kerb1, kerb2. </param>
+        /// <param name="keyName"> The name of storage keys that want to be regenerated, possible values are key1, key2, kerb1, kerb2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<StorageAccountListKeysResult>> RegenerateKeyAsync(string resourceGroupName, string accountName, StorageAccountRegenerateKeyParameters regenerateKey, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<StorageAccountListKeysResult>> RegenerateKeyAsync(string resourceGroupName, string accountName, string keyName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -846,16 +867,16 @@ namespace Azure.Storage.Management
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
-            if (regenerateKey == null)
+            if (keyName == null)
             {
-                throw new ArgumentNullException(nameof(regenerateKey));
+                throw new ArgumentNullException(nameof(keyName));
             }
 
             using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.RegenerateKey");
             scope.Start();
             try
             {
-                using var message = CreateRegenerateKeyRequest(resourceGroupName, accountName, regenerateKey);
+                using var message = CreateRegenerateKeyRequest(resourceGroupName, accountName, keyName);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -879,9 +900,9 @@ namespace Azure.Storage.Management
         /// <summary> Regenerates one of the access keys or Kerberos keys for the specified storage account. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
-        /// <param name="regenerateKey"> Specifies name of the key which should be regenerated -- key1, key2, kerb1, kerb2. </param>
+        /// <param name="keyName"> The name of storage keys that want to be regenerated, possible values are key1, key2, kerb1, kerb2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<StorageAccountListKeysResult> RegenerateKey(string resourceGroupName, string accountName, StorageAccountRegenerateKeyParameters regenerateKey, CancellationToken cancellationToken = default)
+        public Response<StorageAccountListKeysResult> RegenerateKey(string resourceGroupName, string accountName, string keyName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -891,16 +912,16 @@ namespace Azure.Storage.Management
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
-            if (regenerateKey == null)
+            if (keyName == null)
             {
-                throw new ArgumentNullException(nameof(regenerateKey));
+                throw new ArgumentNullException(nameof(keyName));
             }
 
             using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.RegenerateKey");
             scope.Start();
             try
             {
-                using var message = CreateRegenerateKeyRequest(resourceGroupName, accountName, regenerateKey);
+                using var message = CreateRegenerateKeyRequest(resourceGroupName, accountName, keyName);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -935,7 +956,7 @@ namespace Azure.Storage.Management
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
             uri.AppendPath("/ListAccountSas", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -1048,7 +1069,7 @@ namespace Azure.Storage.Management
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
             uri.AppendPath("/ListServiceSas", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -1161,7 +1182,7 @@ namespace Azure.Storage.Management
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
             uri.AppendPath("/failover", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             return message;
         }
@@ -1240,7 +1261,7 @@ namespace Azure.Storage.Management
             }
         }
 
-        internal HttpMessage CreateRestoreBlobRangesRequest(string resourceGroupName, string accountName, BlobRestoreParameters parameters)
+        internal HttpMessage CreateRestoreBlobRangesRequest(string resourceGroupName, string accountName, DateTimeOffset timeToRestore, IEnumerable<BlobRestoreRange> blobRanges)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1254,11 +1275,16 @@ namespace Azure.Storage.Management
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
             uri.AppendPath("/restoreBlobRanges", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            var model = new BlobRestoreParameters()
+            {
+                TimeToRestore = timeToRestore,
+                BlobRanges = blobRanges.ToArray()
+            };
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
+            content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
             return message;
         }
@@ -1266,9 +1292,10 @@ namespace Azure.Storage.Management
         /// <summary> Restore blobs in the specified blob ranges. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
-        /// <param name="parameters"> The parameters to provide for restore blob ranges. </param>
+        /// <param name="timeToRestore"> Restore blob to the specified time. </param>
+        /// <param name="blobRanges"> Blob ranges to restore. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> RestoreBlobRangesAsync(string resourceGroupName, string accountName, BlobRestoreParameters parameters, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> RestoreBlobRangesAsync(string resourceGroupName, string accountName, DateTimeOffset timeToRestore, IEnumerable<BlobRestoreRange> blobRanges, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -1278,16 +1305,16 @@ namespace Azure.Storage.Management
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
-            if (parameters == null)
+            if (blobRanges == null)
             {
-                throw new ArgumentNullException(nameof(parameters));
+                throw new ArgumentNullException(nameof(blobRanges));
             }
 
             using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.RestoreBlobRanges");
             scope.Start();
             try
             {
-                using var message = CreateRestoreBlobRangesRequest(resourceGroupName, accountName, parameters);
+                using var message = CreateRestoreBlobRangesRequest(resourceGroupName, accountName, timeToRestore, blobRanges);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1308,9 +1335,10 @@ namespace Azure.Storage.Management
         /// <summary> Restore blobs in the specified blob ranges. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
-        /// <param name="parameters"> The parameters to provide for restore blob ranges. </param>
+        /// <param name="timeToRestore"> Restore blob to the specified time. </param>
+        /// <param name="blobRanges"> Blob ranges to restore. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response RestoreBlobRanges(string resourceGroupName, string accountName, BlobRestoreParameters parameters, CancellationToken cancellationToken = default)
+        public Response RestoreBlobRanges(string resourceGroupName, string accountName, DateTimeOffset timeToRestore, IEnumerable<BlobRestoreRange> blobRanges, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -1320,16 +1348,16 @@ namespace Azure.Storage.Management
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
-            if (parameters == null)
+            if (blobRanges == null)
             {
-                throw new ArgumentNullException(nameof(parameters));
+                throw new ArgumentNullException(nameof(blobRanges));
             }
 
             using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.RestoreBlobRanges");
             scope.Start();
             try
             {
-                using var message = CreateRestoreBlobRangesRequest(resourceGroupName, accountName, parameters);
+                using var message = CreateRestoreBlobRangesRequest(resourceGroupName, accountName, timeToRestore, blobRanges);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -1361,7 +1389,7 @@ namespace Azure.Storage.Management
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
             uri.AppendPath("/revokeUserDelegationKeys", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             return message;
         }

@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class PatternReplaceCharFilter : CharFilter
     {
         /// <summary> Initializes a new instance of PatternReplaceCharFilter. </summary>
-        internal PatternReplaceCharFilter()
+        public PatternReplaceCharFilter()
         {
             OdataType = "#Microsoft.Azure.Search.PatternReplaceCharFilter";
         }

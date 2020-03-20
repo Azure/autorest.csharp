@@ -11,7 +11,7 @@ namespace Azure.Storage.Tables.Models
     public partial class RetentionPolicy
     {
         /// <summary> Initializes a new instance of RetentionPolicy. </summary>
-        internal RetentionPolicy()
+        public RetentionPolicy()
         {
         }
 

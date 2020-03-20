@@ -48,16 +48,11 @@ namespace AutoRest.CSharp.V3.Output.Builders
         {
             var clientName = GetClientName(operationGroup, "Client");
 
-            var allClientParameters = operationGroup.Operations
+            var clientParameters = operationGroup.Operations
                 .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
                 .Where(p => p.Implementation == ImplementationLocation.Client)
-                .Distinct();
-
-            Dictionary<string, Parameter> clientParameters = new Dictionary<string, Parameter>();
-            foreach (RequestParameter clientParameter in allClientParameters)
-            {
-                clientParameters[clientParameter.Language.Default.Name] = BuildParameter(clientParameter);
-            }
+                .Distinct()
+                .ToDictionary(p => p.Language.Default.Name, BuildParameter);
 
             List<OperationMethod> operationMethods = new List<OperationMethod>();
             foreach (Operation operation in operationGroup.Operations)
@@ -196,9 +191,10 @@ namespace AutoRest.CSharp.V3.Output.Builders
             Dictionary<string, PathSegment> pathParameters = new Dictionary<string, PathSegment>();
             List<QueryParameter> query = new List<QueryParameter>();
             List<RequestHeader> headers = new List<RequestHeader>();
-            List<Parameter> methodParameters = new List<Parameter>();
+            Dictionary<RequestParameter, Parameter> methodParameters = new Dictionary<RequestParameter, Parameter>();
 
             RequestBody? body = null;
+            (RequestParameter, ParameterOrConstant)? bodyParameter = null;
             RequestParameter[] parameters = operation.Parameters.Concat(requestParameters).ToArray();
             foreach (RequestParameter requestParameter in parameters)
             {
@@ -209,20 +205,21 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
                 if (requestParameter.Implementation == ImplementationLocation.Method)
                 {
-                    switch (requestParameter.Schema)
+                    // TODO: always generate virtual paramters
+                    if (!(requestParameter is VirtualParameter) &&
+                        requestParameter.Schema is ConstantSchema constant)
                     {
-                        case ConstantSchema constant:
-                            constantOrParameter = ParseConstant(constant);
-                            valueSchema = constant.ValueType;
-                            break;
-                        default:
-                            constantOrParameter = BuildParameter(requestParameter);
-                            break;
+                        constantOrParameter = ParseConstant(constant);
+                        valueSchema = constant.ValueType;
+                    }
+                    else
+                    {
+                        constantOrParameter = BuildParameter(requestParameter);
                     }
 
-                    if (!constantOrParameter.IsConstant)
+                    if (!constantOrParameter.IsConstant && requestParameter.Flattened != true)
                     {
-                        methodParameters.Add(constantOrParameter.Parameter);
+                        methodParameters.Add(requestParameter, constantOrParameter.Parameter);
                     }
                 }
                 else
@@ -246,16 +243,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                             pathParameters.Add(serializedName, new PathSegment(constantOrParameter, !skipEncoding, serializationFormat));
                             break;
                         case ParameterLocation.Body:
-                            Debug.Assert(httpRequestWithBody != null);
-                            if (httpRequestWithBody.KnownMediaType == KnownMediaType.Binary)
-                            {
-                                body = new BinaryRequestBody(constantOrParameter);
-                            }
-                            else
-                            {
-                                var serialization = _serializationBuilder.Build(httpRequestWithBody.KnownMediaType, requestParameter.Schema, requestParameter.IsNullable());
-                                body = new SchemaRequestBody(constantOrParameter, serialization);
-                            }
+                            bodyParameter = (requestParameter, constantOrParameter);
                             break;
                         case ParameterLocation.Uri:
                             if (defaultName == "$host")
@@ -268,8 +256,42 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 }
             }
 
-            if (httpRequestWithBody != null)
+
+            if (bodyParameter is var (bodyRequestParameter, bodyParameterValue))
             {
+                Debug.Assert(httpRequestWithBody != null);
+                if (httpRequestWithBody.KnownMediaType == KnownMediaType.Binary)
+                {
+                    body = new BinaryRequestBody(bodyParameterValue);
+                }
+                else
+                {
+                    var serialization = _serializationBuilder.Build(httpRequestWithBody.KnownMediaType, bodyRequestParameter.Schema, bodyRequestParameter.IsNullable());
+                    // This method has a flattened body
+                    if (bodyRequestParameter.Flattened == true)
+                    {
+                        var objectType = (ObjectType)_context.Library.FindTypeForSchema(bodyRequestParameter.Schema);
+                        var virtualParameters = requestParameters.OfType<VirtualParameter>().ToArray();
+
+                        List<ObjectPropertyInitializer> initializationMap = new List<ObjectPropertyInitializer>();
+                        foreach (var virtualParameter in virtualParameters)
+                        {
+                            var actualParameter = methodParameters[virtualParameter];
+
+                            initializationMap.Add(new ObjectPropertyInitializer(
+                                objectType.GetPropertyForSchemaProperty(virtualParameter.TargetProperty, true),
+                                actualParameter));
+                        }
+
+
+                        body = new FlattenedSchemaRequestBody(objectType, initializationMap.ToArray(), serialization);
+                    }
+                    else
+                    {
+                        body = new SchemaRequestBody(bodyParameterValue, serialization);
+                    }
+                }
+
                 headers.AddRange(httpRequestWithBody.MediaTypes.Select(mediaType => new RequestHeader("Content-Type", BuilderHelpers.StringConstant(mediaType))));
             }
 
@@ -337,7 +359,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 operationName,
                 BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
                 request,
-                OrderParameters(methodParameters),
+                OrderParameters(methodParameters.Values),
                 clientResponse,
                 new Diagnostic($"{clientName}.{operationName}", Array.Empty<DiagnosticAttribute>())
             );

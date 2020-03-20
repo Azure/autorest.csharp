@@ -11,7 +11,7 @@ namespace additionalProperties.Models
     public partial class CatAPTrue : PetAPTrue
     {
         /// <summary> Initializes a new instance of CatAPTrue. </summary>
-        internal CatAPTrue()
+        public CatAPTrue()
         {
         }
 

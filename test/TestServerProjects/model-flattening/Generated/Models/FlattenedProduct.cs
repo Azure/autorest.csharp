@@ -13,7 +13,7 @@ namespace model_flattening.Models
     public partial class FlattenedProduct : Resource
     {
         /// <summary> Initializes a new instance of FlattenedProduct. </summary>
-        internal FlattenedProduct()
+        public FlattenedProduct()
         {
         }
 

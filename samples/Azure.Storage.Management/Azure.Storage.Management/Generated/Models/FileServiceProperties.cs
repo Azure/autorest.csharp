@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class FileServiceProperties : Resource
     {
         /// <summary> Initializes a new instance of FileServiceProperties. </summary>
-        internal FileServiceProperties()
+        public FileServiceProperties()
         {
         }
 

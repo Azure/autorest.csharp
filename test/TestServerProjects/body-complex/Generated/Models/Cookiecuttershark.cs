@@ -14,7 +14,7 @@ namespace body_complex.Models
     public partial class Cookiecuttershark : Shark
     {
         /// <summary> Initializes a new instance of Cookiecuttershark. </summary>
-        internal Cookiecuttershark()
+        public Cookiecuttershark()
         {
             Fishtype = "cookiecuttershark";
         }

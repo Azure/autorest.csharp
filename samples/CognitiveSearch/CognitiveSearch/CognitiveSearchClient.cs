@@ -64,8 +64,8 @@ namespace Azure.CognitiveSearch
             Pipeline = options.Build(credential);
             ClientDiagnostics = new ClientDiagnostics(options);
             Version = options.Version;
-            AllOperations = new ServiceClient(ClientDiagnostics, Pipeline, ServiceName, ApiVersion: Version.ToVersionString());
-            IndexesOperations = new IndexesClient(ClientDiagnostics, Pipeline, ServiceName, ApiVersion: Version.ToVersionString());
+            AllOperations = new ServiceClient(ClientDiagnostics, Pipeline, ServiceName, apiVersion: Version.ToVersionString());
+            IndexesOperations = new IndexesClient(ClientDiagnostics, Pipeline, ServiceName, apiVersion: Version.ToVersionString());
         }
         public IndexClient GetIndexClient(string indexName) => new IndexClient(this, indexName);
     }
@@ -80,7 +80,7 @@ namespace Azure.CognitiveSearch
         {
             SearchClient = searchClient;
             IndexName = name;
-            Operations = new DocumentsClient(SearchClient.ClientDiagnostics, SearchClient.Pipeline, SearchClient.ServiceName, IndexName, ApiVersion: SearchClient.Version.ToVersionString());
+            Operations = new DocumentsClient(SearchClient.ClientDiagnostics, SearchClient.Pipeline, SearchClient.ServiceName, IndexName, apiVersion: SearchClient.Version.ToVersionString());
         }
 
         public virtual async Task<Response<SearchDocumentsResult>> SearchAsync(string searchText, string filter = null, CancellationToken cancellationToken = default) =>

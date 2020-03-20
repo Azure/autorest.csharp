@@ -13,7 +13,7 @@ namespace lro.Models
     public partial class Product : Resource
     {
         /// <summary> Initializes a new instance of Product. </summary>
-        internal Product()
+        public Product()
         {
         }
 

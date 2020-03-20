@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class Probe : SubResource
     {
         /// <summary> Initializes a new instance of Probe. </summary>
-        internal Probe()
+        public Probe()
         {
         }
 

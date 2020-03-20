@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class PrivateLinkServiceConnection : SubResource
     {
         /// <summary> Initializes a new instance of PrivateLinkServiceConnection. </summary>
-        internal PrivateLinkServiceConnection()
+        public PrivateLinkServiceConnection()
         {
         }
 

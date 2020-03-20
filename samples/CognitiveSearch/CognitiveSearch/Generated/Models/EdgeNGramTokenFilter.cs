@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class EdgeNGramTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of EdgeNGramTokenFilter. </summary>
-        internal EdgeNGramTokenFilter()
+        public EdgeNGramTokenFilter()
         {
             OdataType = "#Microsoft.Azure.Search.EdgeNGramTokenFilter";
         }

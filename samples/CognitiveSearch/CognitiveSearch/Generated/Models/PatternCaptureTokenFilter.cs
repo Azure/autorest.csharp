@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class PatternCaptureTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of PatternCaptureTokenFilter. </summary>
-        internal PatternCaptureTokenFilter()
+        public PatternCaptureTokenFilter()
         {
             OdataType = "#Microsoft.Azure.Search.PatternCaptureTokenFilter";
         }

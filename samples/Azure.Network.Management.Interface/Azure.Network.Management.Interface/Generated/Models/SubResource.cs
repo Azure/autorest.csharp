@@ -11,7 +11,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class SubResource
     {
         /// <summary> Initializes a new instance of SubResource. </summary>
-        internal SubResource()
+        public SubResource()
         {
         }
 

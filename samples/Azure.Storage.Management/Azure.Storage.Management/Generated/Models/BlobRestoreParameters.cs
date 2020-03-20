@@ -14,7 +14,7 @@ namespace Azure.Storage.Management.Models
     public partial class BlobRestoreParameters
     {
         /// <summary> Initializes a new instance of BlobRestoreParameters. </summary>
-        internal BlobRestoreParameters()
+        public BlobRestoreParameters()
         {
         }
 

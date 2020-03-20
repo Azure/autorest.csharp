@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class ManagementPolicySnapShot
     {
         /// <summary> Initializes a new instance of ManagementPolicySnapShot. </summary>
-        internal ManagementPolicySnapShot()
+        public ManagementPolicySnapShot()
         {
         }
 

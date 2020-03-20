@@ -27,14 +27,12 @@ namespace body_string.Models
 
         internal static RefColorConstant DeserializeRefColorConstant(JsonElement element)
         {
-            RefColorConstant result;
-            string colorConstant = default;
-            string field1 = default;
+            RefColorConstant result = new RefColorConstant();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ColorConstant"))
                 {
-                    colorConstant = property.Value.GetString();
+                    result.ColorConstant = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("field1"))
@@ -43,11 +41,10 @@ namespace body_string.Models
                     {
                         continue;
                     }
-                    field1 = property.Value.GetString();
+                    result.Field1 = property.Value.GetString();
                     continue;
                 }
             }
-            result = new RefColorConstant(colorConstant, field1);
             return result;
         }
     }

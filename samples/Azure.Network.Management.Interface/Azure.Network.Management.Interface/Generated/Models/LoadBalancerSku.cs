@@ -11,7 +11,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class LoadBalancerSku
     {
         /// <summary> Initializes a new instance of LoadBalancerSku. </summary>
-        internal LoadBalancerSku()
+        public LoadBalancerSku()
         {
         }
 

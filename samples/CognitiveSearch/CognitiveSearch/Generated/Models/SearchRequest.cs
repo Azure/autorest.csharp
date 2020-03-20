@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class SearchRequest
     {
         /// <summary> Initializes a new instance of SearchRequest. </summary>
-        internal SearchRequest()
+        public SearchRequest()
         {
         }
 

@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class SqlIntegratedChangeTrackingPolicy : DataChangeDetectionPolicy
     {
         /// <summary> Initializes a new instance of SqlIntegratedChangeTrackingPolicy. </summary>
-        internal SqlIntegratedChangeTrackingPolicy()
+        public SqlIntegratedChangeTrackingPolicy()
         {
             OdataType = "#Microsoft.Azure.Search.SqlIntegratedChangeTrackingPolicy";
         }

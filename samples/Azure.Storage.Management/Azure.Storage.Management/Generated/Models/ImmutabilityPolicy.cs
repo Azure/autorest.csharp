@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class ImmutabilityPolicy : AzureEntityResource
     {
         /// <summary> Initializes a new instance of ImmutabilityPolicy. </summary>
-        internal ImmutabilityPolicy()
+        public ImmutabilityPolicy()
         {
         }
 

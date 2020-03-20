@@ -14,7 +14,7 @@ namespace additionalProperties.Models
     public partial class PetAPObject : IDictionary<string, object>
     {
         /// <summary> Initializes a new instance of PetAPObject. </summary>
-        internal PetAPObject()
+        public PetAPObject()
         {
         }
 

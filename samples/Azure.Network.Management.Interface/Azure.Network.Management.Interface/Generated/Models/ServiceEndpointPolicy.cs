@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class ServiceEndpointPolicy : Resource
     {
         /// <summary> Initializes a new instance of ServiceEndpointPolicy. </summary>
-        internal ServiceEndpointPolicy()
+        public ServiceEndpointPolicy()
         {
         }
 

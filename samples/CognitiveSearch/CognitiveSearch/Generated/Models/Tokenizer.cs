@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class Tokenizer
     {
         /// <summary> Initializes a new instance of Tokenizer. </summary>
-        internal Tokenizer()
+        public Tokenizer()
         {
             OdataType = null;
         }

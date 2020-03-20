@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class TruncateTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of TruncateTokenFilter. </summary>
-        internal TruncateTokenFilter()
+        public TruncateTokenFilter()
         {
             OdataType = "#Microsoft.Azure.Search.TruncateTokenFilter";
         }

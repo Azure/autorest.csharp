@@ -13,7 +13,7 @@ namespace Azure.Storage.Management.Models
     public partial class TagProperty
     {
         /// <summary> Initializes a new instance of TagProperty. </summary>
-        internal TagProperty()
+        public TagProperty()
         {
         }
 

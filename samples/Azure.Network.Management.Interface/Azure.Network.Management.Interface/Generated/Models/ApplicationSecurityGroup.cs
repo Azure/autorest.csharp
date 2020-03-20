@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class ApplicationSecurityGroup : Resource
     {
         /// <summary> Initializes a new instance of ApplicationSecurityGroup. </summary>
-        internal ApplicationSecurityGroup()
+        public ApplicationSecurityGroup()
         {
         }
 

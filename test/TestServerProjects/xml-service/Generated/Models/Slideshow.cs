@@ -13,7 +13,7 @@ namespace xml_service.Models
     public partial class Slideshow
     {
         /// <summary> Initializes a new instance of Slideshow. </summary>
-        internal Slideshow()
+        public Slideshow()
         {
         }
 

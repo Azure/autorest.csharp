@@ -14,7 +14,7 @@ namespace CognitiveSearch.Models
     public partial class WebApiSkill : Skill
     {
         /// <summary> Initializes a new instance of WebApiSkill. </summary>
-        internal WebApiSkill()
+        public WebApiSkill()
         {
             OdataType = "#Microsoft.Skills.Custom.WebApiSkill";
         }

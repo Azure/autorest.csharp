@@ -11,7 +11,7 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class SourcePath
     {
         /// <summary> Initializes a new instance of SourcePath. </summary>
-        internal SourcePath()
+        public SourcePath()
         {
         }
 

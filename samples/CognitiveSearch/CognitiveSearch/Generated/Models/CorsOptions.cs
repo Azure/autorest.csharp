@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class CorsOptions
     {
         /// <summary> Initializes a new instance of CorsOptions. </summary>
-        internal CorsOptions()
+        public CorsOptions()
         {
         }
 

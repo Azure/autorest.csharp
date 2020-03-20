@@ -11,7 +11,7 @@ namespace extensible_enums_swagger.Models
     public partial class Pet
     {
         /// <summary> Initializes a new instance of Pet. </summary>
-        internal Pet()
+        public Pet()
         {
         }
 

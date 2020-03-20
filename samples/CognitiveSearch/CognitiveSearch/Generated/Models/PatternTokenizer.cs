@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class PatternTokenizer : Tokenizer
     {
         /// <summary> Initializes a new instance of PatternTokenizer. </summary>
-        internal PatternTokenizer()
+        public PatternTokenizer()
         {
             OdataType = "#Microsoft.Azure.Search.PatternTokenizer";
         }
