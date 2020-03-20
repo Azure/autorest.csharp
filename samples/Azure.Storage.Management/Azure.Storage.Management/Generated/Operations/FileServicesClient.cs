@@ -23,9 +23,9 @@ namespace Azure.Storage.Management
         {
         }
         /// <summary> Initializes a new instance of FileServicesClient. </summary>
-        internal FileServicesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-06-01")
+        internal FileServicesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
         {
-            RestClient = new FileServicesRestClient(clientDiagnostics, pipeline, subscriptionId, host, ApiVersion);
+            RestClient = new FileServicesRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }

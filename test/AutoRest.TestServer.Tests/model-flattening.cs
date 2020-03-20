@@ -119,7 +119,7 @@ namespace AutoRest.TestServer.Tests
                 description: "product description",
                 maxProductDisplayName: "max name",
                 null,
-                Capacity: "Large",
+                capacity: "Large",
                 odataValue: "http://foo");
             Assert.AreEqual("123", result.Value.ProductId);
             Assert.AreEqual("product description", result.Value.Description);
@@ -179,7 +179,7 @@ namespace AutoRest.TestServer.Tests
                 description: "product description",
                 maxProductDisplayName: "max name",
                 null,
-                Capacity: "Large",
+                capacity: "Large",
                 odataValue: "http://foo");
             Assert.AreEqual("123", result.Value.ProductId);
             Assert.AreEqual("product description", result.Value.Description);

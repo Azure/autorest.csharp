@@ -22,12 +22,12 @@ namespace Azure.Storage.Management
     {
         private string subscriptionId;
         private string host;
-        private string ApiVersion;
+        private string apiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
 
         /// <summary> Initializes a new instance of StorageAccountsRestClient. </summary>
-        public StorageAccountsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-06-01")
+        public StorageAccountsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
         {
             if (subscriptionId == null)
             {
@@ -37,19 +37,19 @@ namespace Azure.Storage.Management
             {
                 throw new ArgumentNullException(nameof(host));
             }
-            if (ApiVersion == null)
+            if (apiVersion == null)
             {
-                throw new ArgumentNullException(nameof(ApiVersion));
+                throw new ArgumentNullException(nameof(apiVersion));
             }
 
             this.subscriptionId = subscriptionId;
             this.host = host;
-            this.ApiVersion = ApiVersion;
+            this.apiVersion = apiVersion;
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
 
-        internal HttpMessage CreateCheckNameAvailabilityRequest(string name, string Type)
+        internal HttpMessage CreateCheckNameAvailabilityRequest(string name, string type)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -59,13 +59,13 @@ namespace Azure.Storage.Management
             uri.AppendPath("/subscriptions/", false);
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/providers/Microsoft.Storage/checkNameAvailability", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             var model = new StorageAccountCheckNameAvailabilityParameters()
             {
                 Name = name,
-                Type = Type
+                Type = type
             };
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
@@ -75,24 +75,24 @@ namespace Azure.Storage.Management
 
         /// <summary> Checks that the storage account name is valid and is not already in use. </summary>
         /// <param name="name"> The storage account name. </param>
-        /// <param name="Type"> The type of resource, Microsoft.Storage/storageAccounts. </param>
+        /// <param name="type"> The type of resource, Microsoft.Storage/storageAccounts. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityAsync(string name, string Type = "Microsoft.Storage/storageAccounts", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityAsync(string name, string type = "Microsoft.Storage/storageAccounts", CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
             }
-            if (Type == null)
+            if (type == null)
             {
-                throw new ArgumentNullException(nameof(Type));
+                throw new ArgumentNullException(nameof(type));
             }
 
             using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.CheckNameAvailability");
             scope.Start();
             try
             {
-                using var message = CreateCheckNameAvailabilityRequest(name, Type);
+                using var message = CreateCheckNameAvailabilityRequest(name, type);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -115,24 +115,24 @@ namespace Azure.Storage.Management
 
         /// <summary> Checks that the storage account name is valid and is not already in use. </summary>
         /// <param name="name"> The storage account name. </param>
-        /// <param name="Type"> The type of resource, Microsoft.Storage/storageAccounts. </param>
+        /// <param name="type"> The type of resource, Microsoft.Storage/storageAccounts. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<CheckNameAvailabilityResult> CheckNameAvailability(string name, string Type = "Microsoft.Storage/storageAccounts", CancellationToken cancellationToken = default)
+        public Response<CheckNameAvailabilityResult> CheckNameAvailability(string name, string type = "Microsoft.Storage/storageAccounts", CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
             }
-            if (Type == null)
+            if (type == null)
             {
-                throw new ArgumentNullException(nameof(Type));
+                throw new ArgumentNullException(nameof(type));
             }
 
             using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.CheckNameAvailability");
             scope.Start();
             try
             {
-                using var message = CreateCheckNameAvailabilityRequest(name, Type);
+                using var message = CreateCheckNameAvailabilityRequest(name, type);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -166,7 +166,7 @@ namespace Azure.Storage.Management
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -272,7 +272,7 @@ namespace Azure.Storage.Management
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             return message;
         }
@@ -362,7 +362,7 @@ namespace Azure.Storage.Management
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             if (expand != null)
             {
                 uri.AppendQuery("$expand", expand.Value.ToSerialString(), true);
@@ -466,7 +466,7 @@ namespace Azure.Storage.Management
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -575,7 +575,7 @@ namespace Azure.Storage.Management
             uri.AppendPath("/subscriptions/", false);
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             return message;
         }
@@ -650,7 +650,7 @@ namespace Azure.Storage.Management
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             return message;
         }
@@ -739,7 +739,7 @@ namespace Azure.Storage.Management
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
             uri.AppendPath("/listKeys", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             uri.AppendQuery("$expand", "kerb", true);
             request.Uri = uri;
             return message;
@@ -839,7 +839,7 @@ namespace Azure.Storage.Management
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
             uri.AppendPath("/regenerateKey", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             var model = new StorageAccountRegenerateKeyParameters()
@@ -956,7 +956,7 @@ namespace Azure.Storage.Management
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
             uri.AppendPath("/ListAccountSas", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -1069,7 +1069,7 @@ namespace Azure.Storage.Management
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
             uri.AppendPath("/ListServiceSas", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -1182,7 +1182,7 @@ namespace Azure.Storage.Management
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
             uri.AppendPath("/failover", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             return message;
         }
@@ -1275,7 +1275,7 @@ namespace Azure.Storage.Management
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
             uri.AppendPath("/restoreBlobRanges", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             var model = new BlobRestoreParameters()
@@ -1389,7 +1389,7 @@ namespace Azure.Storage.Management
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
             uri.AppendPath("/revokeUserDelegationKeys", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             return message;
         }
