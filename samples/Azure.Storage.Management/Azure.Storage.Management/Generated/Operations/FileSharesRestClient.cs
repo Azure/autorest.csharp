@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -158,7 +159,7 @@ namespace Azure.Storage.Management
             }
         }
 
-        internal HttpMessage CreateCreateRequest(string resourceGroupName, string accountName, string shareName, FileShare fileShare)
+        internal HttpMessage CreateCreateRequest(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata, int? shareQuota)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -176,8 +177,13 @@ namespace Azure.Storage.Management
             uri.AppendQuery("api-version", ApiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            var model = new FileShare()
+            {
+                Metadata = metadata,
+                ShareQuota = shareQuota
+            };
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(fileShare);
+            content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
             return message;
         }
@@ -186,9 +192,10 @@ namespace Azure.Storage.Management
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
-        /// <param name="fileShare"> Properties of the file share to create. </param>
+        /// <param name="metadata"> A name-value pair to associate with the share as metadata. </param>
+        /// <param name="shareQuota"> The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<FileShare>> CreateAsync(string resourceGroupName, string accountName, string shareName, FileShare fileShare, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<FileShare>> CreateAsync(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata, int? shareQuota, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -202,16 +209,12 @@ namespace Azure.Storage.Management
             {
                 throw new ArgumentNullException(nameof(shareName));
             }
-            if (fileShare == null)
-            {
-                throw new ArgumentNullException(nameof(fileShare));
-            }
 
             using var scope = clientDiagnostics.CreateScope("FileSharesClient.Create");
             scope.Start();
             try
             {
-                using var message = CreateCreateRequest(resourceGroupName, accountName, shareName, fileShare);
+                using var message = CreateCreateRequest(resourceGroupName, accountName, shareName, metadata, shareQuota);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -236,9 +239,10 @@ namespace Azure.Storage.Management
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
-        /// <param name="fileShare"> Properties of the file share to create. </param>
+        /// <param name="metadata"> A name-value pair to associate with the share as metadata. </param>
+        /// <param name="shareQuota"> The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<FileShare> Create(string resourceGroupName, string accountName, string shareName, FileShare fileShare, CancellationToken cancellationToken = default)
+        public Response<FileShare> Create(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata, int? shareQuota, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -252,16 +256,12 @@ namespace Azure.Storage.Management
             {
                 throw new ArgumentNullException(nameof(shareName));
             }
-            if (fileShare == null)
-            {
-                throw new ArgumentNullException(nameof(fileShare));
-            }
 
             using var scope = clientDiagnostics.CreateScope("FileSharesClient.Create");
             scope.Start();
             try
             {
-                using var message = CreateCreateRequest(resourceGroupName, accountName, shareName, fileShare);
+                using var message = CreateCreateRequest(resourceGroupName, accountName, shareName, metadata, shareQuota);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -282,7 +282,7 @@ namespace Azure.Storage.Management
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string resourceGroupName, string accountName, string shareName, FileShare fileShare)
+        internal HttpMessage CreateUpdateRequest(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata, int? shareQuota)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -300,8 +300,13 @@ namespace Azure.Storage.Management
             uri.AppendQuery("api-version", ApiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            var model = new FileShare()
+            {
+                Metadata = metadata,
+                ShareQuota = shareQuota
+            };
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(fileShare);
+            content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
             return message;
         }
@@ -310,9 +315,10 @@ namespace Azure.Storage.Management
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
-        /// <param name="fileShare"> Properties of the file share to create. </param>
+        /// <param name="metadata"> A name-value pair to associate with the share as metadata. </param>
+        /// <param name="shareQuota"> The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<FileShare>> UpdateAsync(string resourceGroupName, string accountName, string shareName, FileShare fileShare, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<FileShare>> UpdateAsync(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata, int? shareQuota, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -326,16 +332,12 @@ namespace Azure.Storage.Management
             {
                 throw new ArgumentNullException(nameof(shareName));
             }
-            if (fileShare == null)
-            {
-                throw new ArgumentNullException(nameof(fileShare));
-            }
 
             using var scope = clientDiagnostics.CreateScope("FileSharesClient.Update");
             scope.Start();
             try
             {
-                using var message = CreateUpdateRequest(resourceGroupName, accountName, shareName, fileShare);
+                using var message = CreateUpdateRequest(resourceGroupName, accountName, shareName, metadata, shareQuota);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -360,9 +362,10 @@ namespace Azure.Storage.Management
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
-        /// <param name="fileShare"> Properties of the file share to create. </param>
+        /// <param name="metadata"> A name-value pair to associate with the share as metadata. </param>
+        /// <param name="shareQuota"> The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<FileShare> Update(string resourceGroupName, string accountName, string shareName, FileShare fileShare, CancellationToken cancellationToken = default)
+        public Response<FileShare> Update(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata, int? shareQuota, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -376,16 +379,12 @@ namespace Azure.Storage.Management
             {
                 throw new ArgumentNullException(nameof(shareName));
             }
-            if (fileShare == null)
-            {
-                throw new ArgumentNullException(nameof(fileShare));
-            }
 
             using var scope = clientDiagnostics.CreateScope("FileSharesClient.Update");
             scope.Start();
             try
             {
-                using var message = CreateUpdateRequest(resourceGroupName, accountName, shareName, fileShare);
+                using var message = CreateUpdateRequest(resourceGroupName, accountName, shareName, metadata, shareQuota);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

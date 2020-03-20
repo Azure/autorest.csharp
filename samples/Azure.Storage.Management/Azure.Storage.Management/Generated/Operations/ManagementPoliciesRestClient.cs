@@ -147,7 +147,7 @@ namespace Azure.Storage.Management
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string accountName, ManagementPolicy properties)
+        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string accountName, ManagementPolicySchema policy)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -165,8 +165,12 @@ namespace Azure.Storage.Management
             uri.AppendQuery("api-version", ApiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            var model = new ManagementPolicy()
+            {
+                Policy = policy
+            };
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(properties);
+            content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
             return message;
         }
@@ -174,9 +178,9 @@ namespace Azure.Storage.Management
         /// <summary> Sets the managementpolicy to the specified storage account. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
-        /// <param name="properties"> The ManagementPolicy set to a storage account. </param>
+        /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ManagementPolicy>> CreateOrUpdateAsync(string resourceGroupName, string accountName, ManagementPolicy properties, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ManagementPolicy>> CreateOrUpdateAsync(string resourceGroupName, string accountName, ManagementPolicySchema policy, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -186,16 +190,12 @@ namespace Azure.Storage.Management
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
-            if (properties == null)
-            {
-                throw new ArgumentNullException(nameof(properties));
-            }
 
             using var scope = clientDiagnostics.CreateScope("ManagementPoliciesClient.CreateOrUpdate");
             scope.Start();
             try
             {
-                using var message = CreateCreateOrUpdateRequest(resourceGroupName, accountName, properties);
+                using var message = CreateCreateOrUpdateRequest(resourceGroupName, accountName, policy);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -219,9 +219,9 @@ namespace Azure.Storage.Management
         /// <summary> Sets the managementpolicy to the specified storage account. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
-        /// <param name="properties"> The ManagementPolicy set to a storage account. </param>
+        /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ManagementPolicy> CreateOrUpdate(string resourceGroupName, string accountName, ManagementPolicy properties, CancellationToken cancellationToken = default)
+        public Response<ManagementPolicy> CreateOrUpdate(string resourceGroupName, string accountName, ManagementPolicySchema policy, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -231,16 +231,12 @@ namespace Azure.Storage.Management
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
-            if (properties == null)
-            {
-                throw new ArgumentNullException(nameof(properties));
-            }
 
             using var scope = clientDiagnostics.CreateScope("ManagementPoliciesClient.CreateOrUpdate");
             scope.Start();
             try
             {
-                using var message = CreateCreateOrUpdateRequest(resourceGroupName, accountName, properties);
+                using var message = CreateCreateOrUpdateRequest(resourceGroupName, accountName, policy);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

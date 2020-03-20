@@ -714,7 +714,7 @@ namespace model_flattening
             }
         }
 
-        internal HttpMessage CreatePostFlattenedSimpleProductRequest(SimpleProduct simpleBodyProduct)
+        internal HttpMessage CreatePostFlattenedSimpleProductRequest(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string Capacity)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -724,23 +724,41 @@ namespace model_flattening
             uri.AppendPath("/model-flatten/customFlattening", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            var model = new SimpleProduct()
+            {
+                ProductId = productId,
+                Description = description,
+                MaxProductDisplayName = maxProductDisplayName,
+                Capacity = Capacity,
+                GenericValue = genericValue,
+                OdataValue = odataValue
+            };
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(simpleBodyProduct);
+            content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
             return message;
         }
 
         /// <summary> Put Flattened Simple Product with client flattening true on the parameter. </summary>
-        /// <param name="simpleBodyProduct"> Simple body product to post. </param>
+        /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
+        /// <param name="description"> Description of product. </param>
+        /// <param name="maxProductDisplayName"> Display name of product. </param>
+        /// <param name="genericValue"> Generic URL value. </param>
+        /// <param name="odataValue"> URL value. </param>
+        /// <param name="Capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string Capacity = "Large", CancellationToken cancellationToken = default)
         {
+            if (productId == null)
+            {
+                throw new ArgumentNullException(nameof(productId));
+            }
 
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PostFlattenedSimpleProduct");
             scope.Start();
             try
             {
-                using var message = CreatePostFlattenedSimpleProductRequest(simpleBodyProduct);
+                using var message = CreatePostFlattenedSimpleProductRequest(productId, description, maxProductDisplayName, genericValue, odataValue, Capacity);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -762,16 +780,25 @@ namespace model_flattening
         }
 
         /// <summary> Put Flattened Simple Product with client flattening true on the parameter. </summary>
-        /// <param name="simpleBodyProduct"> Simple body product to post. </param>
+        /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
+        /// <param name="description"> Description of product. </param>
+        /// <param name="maxProductDisplayName"> Display name of product. </param>
+        /// <param name="genericValue"> Generic URL value. </param>
+        /// <param name="odataValue"> URL value. </param>
+        /// <param name="Capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SimpleProduct> PostFlattenedSimpleProduct(SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
+        public Response<SimpleProduct> PostFlattenedSimpleProduct(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string Capacity = "Large", CancellationToken cancellationToken = default)
         {
+            if (productId == null)
+            {
+                throw new ArgumentNullException(nameof(productId));
+            }
 
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PostFlattenedSimpleProduct");
             scope.Start();
             try
             {
-                using var message = CreatePostFlattenedSimpleProductRequest(simpleBodyProduct);
+                using var message = CreatePostFlattenedSimpleProductRequest(productId, description, maxProductDisplayName, genericValue, odataValue, Capacity);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -792,7 +819,7 @@ namespace model_flattening
             }
         }
 
-        internal HttpMessage CreatePutSimpleProductWithGroupingRequest(string name, SimpleProduct simpleBodyProduct)
+        internal HttpMessage CreatePutSimpleProductWithGroupingRequest(string name, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string Capacity)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -804,28 +831,46 @@ namespace model_flattening
             uri.AppendPath("/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            var model = new SimpleProduct()
+            {
+                ProductId = productId,
+                Description = description,
+                MaxProductDisplayName = maxProductDisplayName,
+                Capacity = Capacity,
+                GenericValue = genericValue,
+                OdataValue = odataValue
+            };
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(simpleBodyProduct);
+            content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
             return message;
         }
 
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
         /// <param name="name"> Product name with value &apos;groupproduct&apos;. </param>
-        /// <param name="simpleBodyProduct"> Simple body product to put. </param>
+        /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
+        /// <param name="description"> Description of product. </param>
+        /// <param name="maxProductDisplayName"> Display name of product. </param>
+        /// <param name="genericValue"> Generic URL value. </param>
+        /// <param name="odataValue"> URL value. </param>
+        /// <param name="Capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SimpleProduct>> PutSimpleProductWithGroupingAsync(string name, SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SimpleProduct>> PutSimpleProductWithGroupingAsync(string name, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string Capacity = "Large", CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
+            }
+            if (productId == null)
+            {
+                throw new ArgumentNullException(nameof(productId));
             }
 
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutSimpleProductWithGrouping");
             scope.Start();
             try
             {
-                using var message = CreatePutSimpleProductWithGroupingRequest(name, simpleBodyProduct);
+                using var message = CreatePutSimpleProductWithGroupingRequest(name, productId, description, maxProductDisplayName, genericValue, odataValue, Capacity);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -848,20 +893,29 @@ namespace model_flattening
 
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
         /// <param name="name"> Product name with value &apos;groupproduct&apos;. </param>
-        /// <param name="simpleBodyProduct"> Simple body product to put. </param>
+        /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
+        /// <param name="description"> Description of product. </param>
+        /// <param name="maxProductDisplayName"> Display name of product. </param>
+        /// <param name="genericValue"> Generic URL value. </param>
+        /// <param name="odataValue"> URL value. </param>
+        /// <param name="Capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SimpleProduct> PutSimpleProductWithGrouping(string name, SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
+        public Response<SimpleProduct> PutSimpleProductWithGrouping(string name, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string Capacity = "Large", CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
+            }
+            if (productId == null)
+            {
+                throw new ArgumentNullException(nameof(productId));
             }
 
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutSimpleProductWithGrouping");
             scope.Start();
             try
             {
-                using var message = CreatePutSimpleProductWithGroupingRequest(name, simpleBodyProduct);
+                using var message = CreatePutSimpleProductWithGroupingRequest(name, productId, description, maxProductDisplayName, genericValue, odataValue, Capacity);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
