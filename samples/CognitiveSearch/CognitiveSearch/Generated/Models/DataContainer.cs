@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class DataContainer
     {
         /// <summary> Initializes a new instance of DataContainer. </summary>
-        internal DataContainer()
+        public DataContainer()
         {
         }
 

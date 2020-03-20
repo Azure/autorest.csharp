@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class StorageAccountCheckNameAvailabilityParameters
     {
         /// <summary> Initializes a new instance of StorageAccountCheckNameAvailabilityParameters. </summary>
-        internal StorageAccountCheckNameAvailabilityParameters()
+        public StorageAccountCheckNameAvailabilityParameters()
         {
         }
 

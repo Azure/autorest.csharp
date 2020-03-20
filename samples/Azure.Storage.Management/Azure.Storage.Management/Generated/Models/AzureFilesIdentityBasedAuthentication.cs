@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class AzureFilesIdentityBasedAuthentication
     {
         /// <summary> Initializes a new instance of AzureFilesIdentityBasedAuthentication. </summary>
-        internal AzureFilesIdentityBasedAuthentication()
+        public AzureFilesIdentityBasedAuthentication()
         {
         }
 

@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class LoadBalancer : Resource
     {
         /// <summary> Initializes a new instance of LoadBalancer. </summary>
-        internal LoadBalancer()
+        public LoadBalancer()
         {
         }
 

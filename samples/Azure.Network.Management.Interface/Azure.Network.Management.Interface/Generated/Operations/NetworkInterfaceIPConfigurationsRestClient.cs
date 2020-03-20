@@ -20,12 +20,12 @@ namespace Azure.Network.Management.Interface
     {
         private string subscriptionId;
         private string host;
-        private string ApiVersion;
+        private string apiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
 
         /// <summary> Initializes a new instance of NetworkInterfaceIPConfigurationsRestClient. </summary>
-        public NetworkInterfaceIPConfigurationsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-11-01")
+        public NetworkInterfaceIPConfigurationsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-11-01")
         {
             if (subscriptionId == null)
             {
@@ -35,14 +35,14 @@ namespace Azure.Network.Management.Interface
             {
                 throw new ArgumentNullException(nameof(host));
             }
-            if (ApiVersion == null)
+            if (apiVersion == null)
             {
-                throw new ArgumentNullException(nameof(ApiVersion));
+                throw new ArgumentNullException(nameof(apiVersion));
             }
 
             this.subscriptionId = subscriptionId;
             this.host = host;
-            this.ApiVersion = ApiVersion;
+            this.apiVersion = apiVersion;
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
@@ -61,7 +61,7 @@ namespace Azure.Network.Management.Interface
             uri.AppendPath("/providers/Microsoft.Network/networkInterfaces/", false);
             uri.AppendPath(networkInterfaceName, true);
             uri.AppendPath("/ipConfigurations", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             return message;
         }
@@ -161,7 +161,7 @@ namespace Azure.Network.Management.Interface
             uri.AppendPath(networkInterfaceName, true);
             uri.AppendPath("/ipConfigurations/", false);
             uri.AppendPath(ipConfigurationName, true);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             return message;
         }

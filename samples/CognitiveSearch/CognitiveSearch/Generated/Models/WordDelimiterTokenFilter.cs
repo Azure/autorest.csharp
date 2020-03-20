@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class WordDelimiterTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of WordDelimiterTokenFilter. </summary>
-        internal WordDelimiterTokenFilter()
+        public WordDelimiterTokenFilter()
         {
             OdataType = "#Microsoft.Azure.Search.WordDelimiterTokenFilter";
         }

@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class DataSource
     {
         /// <summary> Initializes a new instance of DataSource. </summary>
-        internal DataSource()
+        public DataSource()
         {
         }
 

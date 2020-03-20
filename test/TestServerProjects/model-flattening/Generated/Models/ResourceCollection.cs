@@ -13,7 +13,7 @@ namespace model_flattening.Models
     public partial class ResourceCollection
     {
         /// <summary> Initializes a new instance of ResourceCollection. </summary>
-        internal ResourceCollection()
+        public ResourceCollection()
         {
         }
 

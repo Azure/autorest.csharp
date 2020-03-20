@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class UniqueTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of UniqueTokenFilter. </summary>
-        internal UniqueTokenFilter()
+        public UniqueTokenFilter()
         {
             OdataType = "#Microsoft.Azure.Search.UniqueTokenFilter";
         }

@@ -192,17 +192,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     foreach (var initializer in constructor.Initializers)
                     {
-                        writer.Append($"{initializer.Property.Declaration.Name} = ");
-                        if (initializer.Value.IsConstant)
-                        {
-                            writer.WriteConstant(initializer.Value.Constant);
-                        }
-                        else
-                        {
-                            writer.AppendRaw(initializer.Value.Parameter.Name);
-                        }
-
-                        writer.Line($";");
+                        writer.Append($"{initializer.Property.Declaration.Name} = ")
+                            .WriteConstantOrParameter(initializer.Value)
+                            .Line($";");
                     }
                 }
 

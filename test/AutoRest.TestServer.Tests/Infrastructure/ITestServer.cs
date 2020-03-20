@@ -8,7 +8,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         HttpClient Client { get; }
         string Host { get; }
         Task<string[]> GetRequests();
-        Task<string[]> GetMatchedStubs();
+        Task<string[]> GetMatchedStubs(string testName);
         Task ResetAsync();
         void Dispose();
     }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Composition;
 using System.Linq;
 using AutoRest.CSharp.V3.Generation.Types;
+using AutoRest.CSharp.V3.Output.Models.Requests;
 using AutoRest.CSharp.V3.Output.Models.Serialization;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Json;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Xml;
@@ -114,6 +115,51 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.UseNamespace(enumType.Type.Namespace);
             }
             return writer.AppendRaw(enumType.IsStringBased ? ".ToString()" : ".ToSerialString()");
+        }
+
+        public static CodeWriter WriteConstantOrParameter(this CodeWriter writer, ParameterOrConstant value)
+        {
+            if (value.IsConstant)
+            {
+                writer.WriteConstant(value.Constant);
+            }
+            else
+            {
+                writer.AppendRaw(value.Parameter.Name);
+            }
+
+            return writer;
+        }
+
+        public static CodeWriter WriteInitialization(this CodeWriter writer, ObjectType objectType, IEnumerable<ObjectPropertyInitializer> initializers)
+        {
+            using (writer.Scope($"new {objectType.Type}()", newLine: false))
+            {
+                foreach (var propertyInitializer in initializers)
+                {
+                    writer.Append($"{propertyInitializer.Property.Declaration.Name} = ")
+                        .WriteConstantOrParameter(propertyInitializer.Value);
+
+                    var propertyType = propertyInitializer.Property.Declaration.Type;
+                    var valueType = propertyInitializer.Value.Type;
+
+                    if (propertyType.IsFrameworkType && valueType.IsFrameworkType)
+                    {
+                        if (propertyType.FrameworkType == typeof(IList<>) &&
+                            valueType.FrameworkType == typeof(IEnumerable<>))
+                        {
+                            writer.UseNamespace(typeof(Enumerable).Namespace!);
+                            writer.Append($".ToArray()");
+                        }
+                    }
+
+                    writer.Line($",");
+                }
+
+                writer.RemoveTrailingComma();
+            }
+
+            return writer;
         }
     }
 }

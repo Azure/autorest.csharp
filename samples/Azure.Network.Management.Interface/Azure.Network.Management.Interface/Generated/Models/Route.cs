@@ -11,7 +11,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class Route : SubResource
     {
         /// <summary> Initializes a new instance of Route. </summary>
-        internal Route()
+        public Route()
         {
         }
 

@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class DateAfterCreation
     {
         /// <summary> Initializes a new instance of DateAfterCreation. </summary>
-        internal DateAfterCreation()
+        public DateAfterCreation()
         {
         }
 

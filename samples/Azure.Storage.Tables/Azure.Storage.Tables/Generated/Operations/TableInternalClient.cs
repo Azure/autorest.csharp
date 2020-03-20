@@ -24,9 +24,9 @@ namespace Azure.Storage.Tables
         {
         }
         /// <summary> Initializes a new instance of TableInternalClient. </summary>
-        internal TableInternalClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string url, string Version = "2018-10-10")
+        internal TableInternalClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string url, string version = "2018-10-10")
         {
-            RestClient = new TableRestClient(clientDiagnostics, pipeline, url, Version);
+            RestClient = new TableRestClient(clientDiagnostics, pipeline, url, version);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }

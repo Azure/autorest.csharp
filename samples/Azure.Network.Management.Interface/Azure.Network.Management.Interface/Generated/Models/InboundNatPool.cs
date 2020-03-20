@@ -11,7 +11,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class InboundNatPool : SubResource
     {
         /// <summary> Initializes a new instance of InboundNatPool. </summary>
-        internal InboundNatPool()
+        public InboundNatPool()
         {
         }
 

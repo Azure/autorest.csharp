@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class DataSourceCredentials
     {
         /// <summary> Initializes a new instance of DataSourceCredentials. </summary>
-        internal DataSourceCredentials()
+        public DataSourceCredentials()
         {
         }
 

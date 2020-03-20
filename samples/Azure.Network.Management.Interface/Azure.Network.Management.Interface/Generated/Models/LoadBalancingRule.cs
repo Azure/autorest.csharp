@@ -11,7 +11,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class LoadBalancingRule : SubResource
     {
         /// <summary> Initializes a new instance of LoadBalancingRule. </summary>
-        internal LoadBalancingRule()
+        public LoadBalancingRule()
         {
         }
 

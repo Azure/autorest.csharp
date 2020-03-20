@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class KeepTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of KeepTokenFilter. </summary>
-        internal KeepTokenFilter()
+        public KeepTokenFilter()
         {
             OdataType = "#Microsoft.Azure.Search.KeepTokenFilter";
         }

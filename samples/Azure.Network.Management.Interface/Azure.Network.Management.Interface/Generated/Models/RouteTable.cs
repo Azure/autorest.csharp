@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class RouteTable : Resource
     {
         /// <summary> Initializes a new instance of RouteTable. </summary>
-        internal RouteTable()
+        public RouteTable()
         {
         }
 

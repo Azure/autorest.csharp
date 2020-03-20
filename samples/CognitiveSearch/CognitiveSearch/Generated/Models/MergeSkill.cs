@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class MergeSkill : Skill
     {
         /// <summary> Initializes a new instance of MergeSkill. </summary>
-        internal MergeSkill()
+        public MergeSkill()
         {
             OdataType = "#Microsoft.Skills.Text.MergeSkill";
         }

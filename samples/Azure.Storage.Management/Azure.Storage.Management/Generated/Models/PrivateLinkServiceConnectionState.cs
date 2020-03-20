@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class PrivateLinkServiceConnectionState
     {
         /// <summary> Initializes a new instance of PrivateLinkServiceConnectionState. </summary>
-        internal PrivateLinkServiceConnectionState()
+        public PrivateLinkServiceConnectionState()
         {
         }
 

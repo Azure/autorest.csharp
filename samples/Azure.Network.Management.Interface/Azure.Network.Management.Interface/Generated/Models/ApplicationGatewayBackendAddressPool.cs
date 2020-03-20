@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class ApplicationGatewayBackendAddressPool : SubResource
     {
         /// <summary> Initializes a new instance of ApplicationGatewayBackendAddressPool. </summary>
-        internal ApplicationGatewayBackendAddressPool()
+        public ApplicationGatewayBackendAddressPool()
         {
         }
 

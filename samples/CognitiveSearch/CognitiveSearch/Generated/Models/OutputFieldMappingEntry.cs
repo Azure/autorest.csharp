@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class OutputFieldMappingEntry
     {
         /// <summary> Initializes a new instance of OutputFieldMappingEntry. </summary>
-        internal OutputFieldMappingEntry()
+        public OutputFieldMappingEntry()
         {
         }
 

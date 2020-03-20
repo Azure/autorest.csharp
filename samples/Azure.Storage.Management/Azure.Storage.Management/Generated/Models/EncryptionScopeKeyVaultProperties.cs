@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class EncryptionScopeKeyVaultProperties
     {
         /// <summary> Initializes a new instance of EncryptionScopeKeyVaultProperties. </summary>
-        internal EncryptionScopeKeyVaultProperties()
+        public EncryptionScopeKeyVaultProperties()
         {
         }
 

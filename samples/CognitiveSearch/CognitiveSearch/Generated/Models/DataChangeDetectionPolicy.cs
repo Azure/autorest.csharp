@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class DataChangeDetectionPolicy
     {
         /// <summary> Initializes a new instance of DataChangeDetectionPolicy. </summary>
-        internal DataChangeDetectionPolicy()
+        public DataChangeDetectionPolicy()
         {
             OdataType = null;
         }

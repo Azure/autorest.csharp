@@ -13,7 +13,7 @@ namespace Azure.Storage.Management.Models
     public partial class EncryptionScope : Resource
     {
         /// <summary> Initializes a new instance of EncryptionScope. </summary>
-        internal EncryptionScope()
+        public EncryptionScope()
         {
         }
 

@@ -11,7 +11,7 @@ namespace validation.Models
     public partial class ConstantProduct
     {
         /// <summary> Initializes a new instance of ConstantProduct. </summary>
-        internal ConstantProduct()
+        public ConstantProduct()
         {
         }
 

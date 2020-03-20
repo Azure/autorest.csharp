@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class NetworkInterfaceDnsSettings
     {
         /// <summary> Initializes a new instance of NetworkInterfaceDnsSettings. </summary>
-        internal NetworkInterfaceDnsSettings()
+        public NetworkInterfaceDnsSettings()
         {
         }
 

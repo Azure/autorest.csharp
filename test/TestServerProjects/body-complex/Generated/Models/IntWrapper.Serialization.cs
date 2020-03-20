@@ -30,9 +30,7 @@ namespace body_complex.Models
 
         internal static IntWrapper DeserializeIntWrapper(JsonElement element)
         {
-            IntWrapper result;
-            int? field1 = default;
-            int? field2 = default;
+            IntWrapper result = new IntWrapper();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field1"))
@@ -41,7 +39,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    field1 = property.Value.GetInt32();
+                    result.Field1 = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("field2"))
@@ -50,11 +48,10 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    field2 = property.Value.GetInt32();
+                    result.Field2 = property.Value.GetInt32();
                     continue;
                 }
             }
-            result = new IntWrapper(field1, field2);
             return result;
         }
     }

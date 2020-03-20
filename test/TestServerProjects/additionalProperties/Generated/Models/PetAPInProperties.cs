@@ -13,7 +13,7 @@ namespace additionalProperties.Models
     public partial class PetAPInProperties
     {
         /// <summary> Initializes a new instance of PetAPInProperties. </summary>
-        internal PetAPInProperties()
+        public PetAPInProperties()
         {
         }
 

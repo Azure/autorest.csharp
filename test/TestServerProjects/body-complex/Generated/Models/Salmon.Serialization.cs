@@ -57,13 +57,7 @@ namespace body_complex.Models
                     case "smart_salmon": return SmartSalmon.DeserializeSmartSalmon(element);
                 }
             }
-            Salmon result;
-            string location = default;
-            bool? iswild = default;
-            string fishtype = default;
-            string species = default;
-            float length = default;
-            IList<Fish> siblings = default;
+            Salmon result = new Salmon();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("location"))
@@ -72,7 +66,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    location = property.Value.GetString();
+                    result.Location = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("iswild"))
@@ -81,12 +75,12 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    iswild = property.Value.GetBoolean();
+                    result.Iswild = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("fishtype"))
                 {
-                    fishtype = property.Value.GetString();
+                    result.Fishtype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("species"))
@@ -95,12 +89,12 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    species = property.Value.GetString();
+                    result.Species = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("length"))
                 {
-                    length = property.Value.GetSingle();
+                    result.Length = property.Value.GetSingle();
                     continue;
                 }
                 if (property.NameEquals("siblings"))
@@ -109,16 +103,14 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    List<Fish> array = new List<Fish>();
+                    result.Siblings = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeFish(item));
+                        result.Siblings.Add(DeserializeFish(item));
                     }
-                    siblings = array;
                     continue;
                 }
             }
-            result = new Salmon(location, iswild, fishtype, species, length, siblings);
             return result;
         }
     }

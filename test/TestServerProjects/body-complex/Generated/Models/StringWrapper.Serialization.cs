@@ -35,10 +35,7 @@ namespace body_complex.Models
 
         internal static StringWrapper DeserializeStringWrapper(JsonElement element)
         {
-            StringWrapper result;
-            string field = default;
-            string empty = default;
-            string @null = default;
+            StringWrapper result = new StringWrapper();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field"))
@@ -47,7 +44,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    field = property.Value.GetString();
+                    result.Field = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("empty"))
@@ -56,7 +53,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    empty = property.Value.GetString();
+                    result.Empty = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("null"))
@@ -65,11 +62,10 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    @null = property.Value.GetString();
+                    result.NullProperty = property.Value.GetString();
                     continue;
                 }
             }
-            result = new StringWrapper(field, empty, @null);
             return result;
         }
     }

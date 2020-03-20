@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class ManagementPolicyAction
     {
         /// <summary> Initializes a new instance of ManagementPolicyAction. </summary>
-        internal ManagementPolicyAction()
+        public ManagementPolicyAction()
         {
         }
 

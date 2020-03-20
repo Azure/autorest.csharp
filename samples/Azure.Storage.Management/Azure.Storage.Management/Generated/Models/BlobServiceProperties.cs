@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class BlobServiceProperties : Resource
     {
         /// <summary> Initializes a new instance of BlobServiceProperties. </summary>
-        internal BlobServiceProperties()
+        public BlobServiceProperties()
         {
         }
 

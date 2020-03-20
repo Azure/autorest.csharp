@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class CognitiveServicesAccountKey : CognitiveServicesAccount
     {
         /// <summary> Initializes a new instance of CognitiveServicesAccountKey. </summary>
-        internal CognitiveServicesAccountKey()
+        public CognitiveServicesAccountKey()
         {
             OdataType = "#Microsoft.Azure.Search.CognitiveServicesByKey";
         }

@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class FreshnessScoringParameters
     {
         /// <summary> Initializes a new instance of FreshnessScoringParameters. </summary>
-        internal FreshnessScoringParameters()
+        public FreshnessScoringParameters()
         {
         }
 

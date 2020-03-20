@@ -13,7 +13,7 @@ namespace Azure.Storage.Management.Models
     public partial class ManagementPolicy : Resource
     {
         /// <summary> Initializes a new instance of ManagementPolicy. </summary>
-        internal ManagementPolicy()
+        public ManagementPolicy()
         {
         }
 

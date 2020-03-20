@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class AsciiFoldingTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of AsciiFoldingTokenFilter. </summary>
-        internal AsciiFoldingTokenFilter()
+        public AsciiFoldingTokenFilter()
         {
             OdataType = "#Microsoft.Azure.Search.AsciiFoldingTokenFilter";
         }

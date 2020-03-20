@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class SuggestRequest
     {
         /// <summary> Initializes a new instance of SuggestRequest. </summary>
-        internal SuggestRequest()
+        public SuggestRequest()
         {
         }
 

@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class Skillset
     {
         /// <summary> Initializes a new instance of Skillset. </summary>
-        internal Skillset()
+        public Skillset()
         {
         }
 

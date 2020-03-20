@@ -11,7 +11,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class PublicIPAddressSku
     {
         /// <summary> Initializes a new instance of PublicIPAddressSku. </summary>
-        internal PublicIPAddressSku()
+        public PublicIPAddressSku()
         {
         }
 

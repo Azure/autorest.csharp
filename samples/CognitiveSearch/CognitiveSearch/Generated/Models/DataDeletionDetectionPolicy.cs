@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class DataDeletionDetectionPolicy
     {
         /// <summary> Initializes a new instance of DataDeletionDetectionPolicy. </summary>
-        internal DataDeletionDetectionPolicy()
+        public DataDeletionDetectionPolicy()
         {
             OdataType = null;
         }

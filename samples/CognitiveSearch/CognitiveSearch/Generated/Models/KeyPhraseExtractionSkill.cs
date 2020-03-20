@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class KeyPhraseExtractionSkill : Skill
     {
         /// <summary> Initializes a new instance of KeyPhraseExtractionSkill. </summary>
-        internal KeyPhraseExtractionSkill()
+        public KeyPhraseExtractionSkill()
         {
             OdataType = "#Microsoft.Skills.Text.KeyPhraseExtractionSkill";
         }

@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class SnowballTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of SnowballTokenFilter. </summary>
-        internal SnowballTokenFilter()
+        public SnowballTokenFilter()
         {
             OdataType = "#Microsoft.Azure.Search.SnowballTokenFilter";
         }

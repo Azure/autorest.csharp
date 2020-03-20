@@ -11,7 +11,7 @@ namespace validation.Models
     public partial class ChildProduct
     {
         /// <summary> Initializes a new instance of ChildProduct. </summary>
-        internal ChildProduct()
+        public ChildProduct()
         {
         }
 

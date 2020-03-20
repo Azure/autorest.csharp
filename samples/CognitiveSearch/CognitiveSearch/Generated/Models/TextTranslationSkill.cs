@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class TextTranslationSkill : Skill
     {
         /// <summary> Initializes a new instance of TextTranslationSkill. </summary>
-        internal TextTranslationSkill()
+        public TextTranslationSkill()
         {
             OdataType = "#Microsoft.Skills.Text.TranslationSkill";
         }

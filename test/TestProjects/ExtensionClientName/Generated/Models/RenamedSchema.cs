@@ -13,7 +13,7 @@ namespace ExtensionClientName.Models
     public partial class RenamedSchema
     {
         /// <summary> Initializes a new instance of RenamedSchema. </summary>
-        internal RenamedSchema()
+        public RenamedSchema()
         {
         }
 

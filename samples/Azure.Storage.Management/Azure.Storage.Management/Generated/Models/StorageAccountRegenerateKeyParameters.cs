@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class StorageAccountRegenerateKeyParameters
     {
         /// <summary> Initializes a new instance of StorageAccountRegenerateKeyParameters. </summary>
-        internal StorageAccountRegenerateKeyParameters()
+        public StorageAccountRegenerateKeyParameters()
         {
         }
 

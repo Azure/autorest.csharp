@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class OutboundRule : SubResource
     {
         /// <summary> Initializes a new instance of OutboundRule. </summary>
-        internal OutboundRule()
+        public OutboundRule()
         {
         }
 

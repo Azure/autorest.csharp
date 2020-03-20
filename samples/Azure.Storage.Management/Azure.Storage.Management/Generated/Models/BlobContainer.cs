@@ -14,7 +14,7 @@ namespace Azure.Storage.Management.Models
     public partial class BlobContainer : AzureEntityResource
     {
         /// <summary> Initializes a new instance of BlobContainer. </summary>
-        internal BlobContainer()
+        public BlobContainer()
         {
         }
 

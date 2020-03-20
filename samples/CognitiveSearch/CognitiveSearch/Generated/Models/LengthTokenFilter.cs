@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class LengthTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of LengthTokenFilter. </summary>
-        internal LengthTokenFilter()
+        public LengthTokenFilter()
         {
             OdataType = "#Microsoft.Azure.Search.LengthTokenFilter";
         }

@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class TagScoringParameters
     {
         /// <summary> Initializes a new instance of TagScoringParameters. </summary>
-        internal TagScoringParameters()
+        public TagScoringParameters()
         {
         }
 

@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class SynonymMap
     {
         /// <summary> Initializes a new instance of SynonymMap. </summary>
-        internal SynonymMap()
+        public SynonymMap()
         {
         }
 

@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class DistanceScoringParameters
     {
         /// <summary> Initializes a new instance of DistanceScoringParameters. </summary>
-        internal DistanceScoringParameters()
+        public DistanceScoringParameters()
         {
         }
 

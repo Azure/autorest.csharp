@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class DistanceScoringFunction : ScoringFunction
     {
         /// <summary> Initializes a new instance of DistanceScoringFunction. </summary>
-        internal DistanceScoringFunction()
+        public DistanceScoringFunction()
         {
             Type = "distance";
         }

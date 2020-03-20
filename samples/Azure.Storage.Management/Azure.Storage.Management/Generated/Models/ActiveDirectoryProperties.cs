@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class ActiveDirectoryProperties
     {
         /// <summary> Initializes a new instance of ActiveDirectoryProperties. </summary>
-        internal ActiveDirectoryProperties()
+        public ActiveDirectoryProperties()
         {
         }
 

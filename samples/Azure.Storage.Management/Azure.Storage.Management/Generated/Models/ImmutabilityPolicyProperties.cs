@@ -13,7 +13,7 @@ namespace Azure.Storage.Management.Models
     public partial class ImmutabilityPolicyProperties
     {
         /// <summary> Initializes a new instance of ImmutabilityPolicyProperties. </summary>
-        internal ImmutabilityPolicyProperties()
+        public ImmutabilityPolicyProperties()
         {
         }
 

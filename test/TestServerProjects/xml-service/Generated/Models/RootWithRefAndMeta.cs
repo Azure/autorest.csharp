@@ -11,7 +11,7 @@ namespace xml_service.Models
     public partial class RootWithRefAndMeta
     {
         /// <summary> Initializes a new instance of RootWithRefAndMeta. </summary>
-        internal RootWithRefAndMeta()
+        public RootWithRefAndMeta()
         {
         }
 

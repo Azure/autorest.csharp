@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class EntityRecognitionSkill : Skill
     {
         /// <summary> Initializes a new instance of EntityRecognitionSkill. </summary>
-        internal EntityRecognitionSkill()
+        public EntityRecognitionSkill()
         {
             OdataType = "#Microsoft.Skills.Text.EntityRecognitionSkill";
         }

@@ -13,7 +13,7 @@ namespace Azure.Storage.Management.Models
     public partial class NetworkRuleSet
     {
         /// <summary> Initializes a new instance of NetworkRuleSet. </summary>
-        internal NetworkRuleSet()
+        public NetworkRuleSet()
         {
         }
 

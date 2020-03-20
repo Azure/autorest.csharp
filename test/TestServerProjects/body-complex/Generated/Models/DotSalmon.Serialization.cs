@@ -14,11 +14,7 @@ namespace body_complex.Models
     {
         internal static DotSalmon DeserializeDotSalmon(JsonElement element)
         {
-            DotSalmon result;
-            string location = default;
-            bool? iswild = default;
-            string fishtype = default;
-            string species = default;
+            DotSalmon result = new DotSalmon();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("location"))
@@ -27,7 +23,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    location = property.Value.GetString();
+                    result.Location = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("iswild"))
@@ -36,12 +32,12 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    iswild = property.Value.GetBoolean();
+                    result.Iswild = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("fish.type"))
                 {
-                    fishtype = property.Value.GetString();
+                    result.FishType = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("species"))
@@ -50,11 +46,10 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    species = property.Value.GetString();
+                    result.Species = property.Value.GetString();
                     continue;
                 }
             }
-            result = new DotSalmon(location, iswild, fishtype, species);
             return result;
         }
     }

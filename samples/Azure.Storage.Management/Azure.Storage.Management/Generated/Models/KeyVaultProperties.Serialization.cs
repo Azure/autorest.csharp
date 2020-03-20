@@ -30,6 +30,16 @@ namespace Azure.Storage.Management.Models
                 writer.WritePropertyName("keyvaulturi");
                 writer.WriteStringValue(KeyVaultUri);
             }
+            if (CurrentVersionedKeyIdentifier != null)
+            {
+                writer.WritePropertyName("currentVersionedKeyIdentifier");
+                writer.WriteStringValue(CurrentVersionedKeyIdentifier);
+            }
+            if (LastKeyRotationTimestamp != null)
+            {
+                writer.WritePropertyName("lastKeyRotationTimestamp");
+                writer.WriteStringValue(LastKeyRotationTimestamp.Value, "S");
+            }
             writer.WriteEndObject();
         }
 
@@ -63,6 +73,24 @@ namespace Azure.Storage.Management.Models
                         continue;
                     }
                     result.KeyVaultUri = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("currentVersionedKeyIdentifier"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.CurrentVersionedKeyIdentifier = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("lastKeyRotationTimestamp"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    result.LastKeyRotationTimestamp = property.Value.GetDateTimeOffset("S");
                     continue;
                 }
             }

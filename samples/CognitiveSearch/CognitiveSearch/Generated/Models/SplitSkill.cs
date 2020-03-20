@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class SplitSkill : Skill
     {
         /// <summary> Initializes a new instance of SplitSkill. </summary>
-        internal SplitSkill()
+        public SplitSkill()
         {
             OdataType = "#Microsoft.Skills.Text.SplitSkill";
         }

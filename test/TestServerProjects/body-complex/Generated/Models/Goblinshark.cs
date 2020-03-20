@@ -14,7 +14,7 @@ namespace body_complex.Models
     public partial class Goblinshark : Shark
     {
         /// <summary> Initializes a new instance of Goblinshark. </summary>
-        internal Goblinshark()
+        public Goblinshark()
         {
             Fishtype = "goblin";
         }

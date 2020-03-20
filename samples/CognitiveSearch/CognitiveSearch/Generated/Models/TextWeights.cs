@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class TextWeights
     {
         /// <summary> Initializes a new instance of TextWeights. </summary>
-        internal TextWeights()
+        public TextWeights()
         {
         }
 

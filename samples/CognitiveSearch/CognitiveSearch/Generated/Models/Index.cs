@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class Index
     {
         /// <summary> Initializes a new instance of Index. </summary>
-        internal Index()
+        public Index()
         {
         }
 

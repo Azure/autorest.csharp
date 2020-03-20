@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class Skill
     {
         /// <summary> Initializes a new instance of Skill. </summary>
-        internal Skill()
+        public Skill()
         {
             OdataType = null;
         }

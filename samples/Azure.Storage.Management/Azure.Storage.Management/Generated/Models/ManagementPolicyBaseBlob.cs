@@ -11,7 +11,7 @@ namespace Azure.Storage.Management.Models
     public partial class ManagementPolicyBaseBlob
     {
         /// <summary> Initializes a new instance of ManagementPolicyBaseBlob. </summary>
-        internal ManagementPolicyBaseBlob()
+        public ManagementPolicyBaseBlob()
         {
         }
 

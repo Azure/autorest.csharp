@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class TagScoringFunction : ScoringFunction
     {
         /// <summary> Initializes a new instance of TagScoringFunction. </summary>
-        internal TagScoringFunction()
+        public TagScoringFunction()
         {
             Type = "tag";
         }

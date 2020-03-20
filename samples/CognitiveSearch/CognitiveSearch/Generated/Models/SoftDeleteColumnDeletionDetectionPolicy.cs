@@ -11,7 +11,7 @@ namespace CognitiveSearch.Models
     public partial class SoftDeleteColumnDeletionDetectionPolicy : DataDeletionDetectionPolicy
     {
         /// <summary> Initializes a new instance of SoftDeleteColumnDeletionDetectionPolicy. </summary>
-        internal SoftDeleteColumnDeletionDetectionPolicy()
+        public SoftDeleteColumnDeletionDetectionPolicy()
         {
             OdataType = "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy";
         }

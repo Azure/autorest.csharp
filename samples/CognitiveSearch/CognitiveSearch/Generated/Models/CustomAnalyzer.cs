@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class CustomAnalyzer : Analyzer
     {
         /// <summary> Initializes a new instance of CustomAnalyzer. </summary>
-        internal CustomAnalyzer()
+        public CustomAnalyzer()
         {
             OdataType = "#Microsoft.Azure.Search.CustomAnalyzer";
         }

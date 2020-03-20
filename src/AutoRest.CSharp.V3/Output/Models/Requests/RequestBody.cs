@@ -5,11 +5,5 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
 {
     internal class RequestBody
     {
-        public ParameterOrConstant Value { get; }
-
-        public RequestBody(ParameterOrConstant value)
-        {
-            Value = value;
-        }
     }
 }

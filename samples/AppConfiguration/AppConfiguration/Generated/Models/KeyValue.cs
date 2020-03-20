@@ -14,7 +14,7 @@ namespace AppConfiguration.Models
     public partial class KeyValue
     {
         /// <summary> Initializes a new instance of KeyValue. </summary>
-        internal KeyValue()
+        public KeyValue()
         {
         }
 

@@ -11,7 +11,7 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class TrainSourceFilter
     {
         /// <summary> Initializes a new instance of TrainSourceFilter. </summary>
-        internal TrainSourceFilter()
+        public TrainSourceFilter()
         {
         }
 

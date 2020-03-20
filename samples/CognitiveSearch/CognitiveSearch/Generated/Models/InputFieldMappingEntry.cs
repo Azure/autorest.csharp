@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class InputFieldMappingEntry
     {
         /// <summary> Initializes a new instance of InputFieldMappingEntry. </summary>
-        internal InputFieldMappingEntry()
+        public InputFieldMappingEntry()
         {
         }
 

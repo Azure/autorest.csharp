@@ -13,7 +13,7 @@ namespace xml_service.Models
     public partial class StorageServiceProperties
     {
         /// <summary> Initializes a new instance of StorageServiceProperties. </summary>
-        internal StorageServiceProperties()
+        public StorageServiceProperties()
         {
         }
 

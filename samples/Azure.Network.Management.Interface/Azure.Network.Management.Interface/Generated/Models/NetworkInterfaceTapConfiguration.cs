@@ -11,7 +11,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class NetworkInterfaceTapConfiguration : SubResource
     {
         /// <summary> Initializes a new instance of NetworkInterfaceTapConfiguration. </summary>
-        internal NetworkInterfaceTapConfiguration()
+        public NetworkInterfaceTapConfiguration()
         {
         }
 

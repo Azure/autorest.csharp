@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class Indexer
     {
         /// <summary> Initializes a new instance of Indexer. </summary>
-        internal Indexer()
+        public Indexer()
         {
         }
 

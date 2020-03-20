@@ -11,7 +11,7 @@ namespace xml_service.Models
     public partial class SignedIdentifier
     {
         /// <summary> Initializes a new instance of SignedIdentifier. </summary>
-        internal SignedIdentifier()
+        public SignedIdentifier()
         {
         }
 

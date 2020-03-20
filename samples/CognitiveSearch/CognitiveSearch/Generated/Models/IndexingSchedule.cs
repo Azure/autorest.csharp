@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class IndexingSchedule
     {
         /// <summary> Initializes a new instance of IndexingSchedule. </summary>
-        internal IndexingSchedule()
+        public IndexingSchedule()
         {
         }
 

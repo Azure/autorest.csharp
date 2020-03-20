@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     public partial class MappingCharFilter : CharFilter
     {
         /// <summary> Initializes a new instance of MappingCharFilter. </summary>
-        internal MappingCharFilter()
+        public MappingCharFilter()
         {
             OdataType = "#Microsoft.Azure.Search.MappingCharFilter";
         }

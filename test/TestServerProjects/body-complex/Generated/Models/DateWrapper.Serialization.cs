@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -31,9 +30,7 @@ namespace body_complex.Models
 
         internal static DateWrapper DeserializeDateWrapper(JsonElement element)
         {
-            DateWrapper result;
-            DateTimeOffset? field = default;
-            DateTimeOffset? leap = default;
+            DateWrapper result = new DateWrapper();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field"))
@@ -42,7 +39,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    field = property.Value.GetDateTimeOffset("D");
+                    result.Field = property.Value.GetDateTimeOffset("D");
                     continue;
                 }
                 if (property.NameEquals("leap"))
@@ -51,11 +48,10 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    leap = property.Value.GetDateTimeOffset("D");
+                    result.Leap = property.Value.GetDateTimeOffset("D");
                     continue;
                 }
             }
-            result = new DateWrapper(field, leap);
             return result;
         }
     }

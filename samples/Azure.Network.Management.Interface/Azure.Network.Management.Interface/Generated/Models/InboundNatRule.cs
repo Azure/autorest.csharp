@@ -11,7 +11,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class InboundNatRule : SubResource
     {
         /// <summary> Initializes a new instance of InboundNatRule. </summary>
-        internal InboundNatRule()
+        public InboundNatRule()
         {
         }
 

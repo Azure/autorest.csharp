@@ -13,7 +13,7 @@ namespace body_complex.Models
     public partial class Siamese : Cat
     {
         /// <summary> Initializes a new instance of Siamese. </summary>
-        internal Siamese()
+        public Siamese()
         {
         }
 

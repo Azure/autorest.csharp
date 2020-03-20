@@ -13,7 +13,7 @@ namespace Azure.Storage.Management.Models
     public partial class PrivateLinkResource : Resource
     {
         /// <summary> Initializes a new instance of PrivateLinkResource. </summary>
-        internal PrivateLinkResource()
+        public PrivateLinkResource()
         {
         }
 
