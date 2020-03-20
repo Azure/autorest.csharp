@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -144,49 +145,74 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     WriteHeader(writer, request, header);
                 }
 
-                if (operation.Request.Body is SchemaRequestBody body)
+                switch (operation.Request.Body)
                 {
-                    ParameterOrConstant value = body.Value;
-                    switch (body.Serialization)
-                    {
-                        case JsonSerialization jsonSerialization:
-                        {
-                            var content = new CodeWriterDeclaration("content");
+                    case SchemaRequestBody body:
+                        WriteSerializeContent(
+                            writer,
+                            request,
+                            body.Serialization,
+                            w => WriteConstantOrParameter(w, body.Value, ignoreNullability: true));
+                        break;
+                    case BinaryRequestBody binaryBody:
+                        writer.Append($"{request}.Content = {typeof(RequestContent)}.Create(");
+                        WriteConstantOrParameter(writer, binaryBody.Value);
+                        writer.Line($");");
+                        break;
+                    case FlattenedSchemaRequestBody flattenedSchemaRequestBody:
+                        var modelVariable = new CodeWriterDeclaration("model");
+                        writer.Append($"var {modelVariable:D} = ")
+                            .WriteInitialization(flattenedSchemaRequestBody.ObjectType, flattenedSchemaRequestBody.Initializers)
+                            .Line($";");
 
-                            writer.Line($"using var {content:D} = new {typeof(Utf8JsonRequestContent)}();");
-                            writer.ToSerializeCall(
-                                jsonSerialization,
-                                writer => WriteConstantOrParameter(writer, value, ignoreNullability: true),
-                                writerName: w => w.Append($"{content}.{nameof(Utf8JsonRequestContent.JsonWriter)}"));
-                            writer.Line($"{request}.Content = {content};");
-                            break;
-                        }
-                        case XmlElementSerialization xmlSerialization:
-                        {
-                            var content = new CodeWriterDeclaration("content");
-
-                            writer.Line($"using var {content:D} = new {typeof(XmlWriterContent)}();");
-                            writer.ToSerializeCall(
-                                xmlSerialization,
-                                writer => WriteConstantOrParameter(writer, value, ignoreNullability: true),
-                                writerName: w => w.Append($"{content}.{nameof(XmlWriterContent.XmlWriter)}"));
-                            writer.Line($"{request}.Content = {content};");
-                            break;
-                        }
-                        default:
-                            throw new NotImplementedException(body.Serialization.ToString());
-                    }
-                }
-                else if (operation.Request.Body is BinaryRequestBody binaryBody)
-                {
-                    writer.Append($"{request}.Content = {typeof(RequestContent)}.Create(");
-                    WriteConstantOrParameter(writer, binaryBody.Value);
-                    writer.Line($");");
+                        WriteSerializeContent(
+                            writer,
+                            request,
+                            flattenedSchemaRequestBody.Serialization,
+                            w => w.Append(modelVariable));
+                        break;
+                    case null:
+                        break;
+                    default:
+                        throw new NotImplementedException(operation.Request.Body?.GetType().FullName);
                 }
 
                 writer.Line($"return {message};");
             }
             writer.Line();
+        }
+
+        private static void WriteSerializeContent(CodeWriter writer, CodeWriterDeclaration request, ObjectSerialization bodySerialization, CodeWriterDelegate valueDelegate)
+        {
+            switch (bodySerialization)
+            {
+                case JsonSerialization jsonSerialization:
+                {
+                    var content = new CodeWriterDeclaration("content");
+
+                    writer.Line($"using var {content:D} = new {typeof(Utf8JsonRequestContent)}();");
+                    writer.ToSerializeCall(
+                        jsonSerialization,
+                        valueDelegate,
+                        writerName: w => w.Append($"{content}.{nameof(Utf8JsonRequestContent.JsonWriter)}"));
+                    writer.Line($"{request}.Content = {content};");
+                    break;
+                }
+                case XmlElementSerialization xmlSerialization:
+                {
+                    var content = new CodeWriterDeclaration("content");
+
+                    writer.Line($"using var {content:D} = new {typeof(XmlWriterContent)}();");
+                    writer.ToSerializeCall(
+                        xmlSerialization,
+                        valueDelegate,
+                        writerName: w => w.Append($"{content}.{nameof(XmlWriterContent.XmlWriter)}"));
+                    writer.Line($"{request}.Content = {content};");
+                    break;
+                }
+                default:
+                    throw new NotImplementedException(bodySerialization.ToString());
+            }
         }
 
         private void WriteUriFragment(CodeWriter writer, CodeWriterDeclaration uri, PathSegment segment)
