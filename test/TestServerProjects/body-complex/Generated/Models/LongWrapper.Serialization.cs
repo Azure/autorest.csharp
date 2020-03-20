@@ -30,7 +30,9 @@ namespace body_complex.Models
 
         internal static LongWrapper DeserializeLongWrapper(JsonElement element)
         {
-            LongWrapper result = new LongWrapper();
+            LongWrapper result;
+            long? field1 = default;
+            long? field2 = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field1"))
@@ -39,7 +41,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.Field1 = property.Value.GetInt64();
+                    field1 = property.Value.GetInt64();
                     continue;
                 }
                 if (property.NameEquals("field2"))
@@ -48,10 +50,11 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.Field2 = property.Value.GetInt64();
+                    field2 = property.Value.GetInt64();
                     continue;
                 }
             }
+            result = new LongWrapper(field1, field2);
             return result;
         }
     }

@@ -72,14 +72,14 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     return _additionalPropertiesProperty;
                 }
 
-                var dictionaryType = new CSharpType(typeof(IDictionary<,>), new CSharpType(typeof(string)), ImplementsDictionaryElementType);
+                var dictionaryType = new CSharpType(typeof(IDictionary<,>), isNullable: true, new CSharpType(typeof(string)), ImplementsDictionaryElementType);
                 var implementation = new CSharpType(typeof(Dictionary<,>), new CSharpType(typeof(string)), ImplementsDictionaryElementType);
 
                 SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetMemberForSchema("additionalProperties");
 
                 _additionalPropertiesProperty = new ObjectTypeProperty(
-                    BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", dictionaryType, "private", memberMapping?.ExistingMember),
-                    "",
+                    BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", dictionaryType, "internal", memberMapping?.ExistingMember),
+                    string.Empty,
                     !_objectSchema.IsInput,
                     implementation,
                     null);

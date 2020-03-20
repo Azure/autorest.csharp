@@ -169,7 +169,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
                 yield return new JsonPropertySerialization(
                     property.SerializedName,
-                    new SerializationData(w=>w.AppendRaw(objectProperty.Declaration.Name), objectProperty.Declaration.Type),
+                    objectProperty,
                     BuildSerialization(property.Schema, property.IsNullable())
                     );
             }
@@ -187,7 +187,11 @@ namespace AutoRest.CSharp.V3.Output.Builders
             PropertyBag propertyBag = new PropertyBag();
             propertyBag.Properties.AddRange(EnumerateHierarchy(objectSchema).SelectMany(s => s.Properties!));
             PopulatePropertyBag(propertyBag, 0);
-            return new JsonObjectSerialization(objectType.Type, GetPropertySerializationsFromBag(propertyBag, objectType).ToArray(), CreateAdditionalProperties(objectSchema), objectType.Type);
+            return new JsonObjectSerialization(
+                objectType.Type,
+                GetPropertySerializationsFromBag(propertyBag, objectType).ToArray(),
+                CreateAdditionalProperties(objectSchema, objectType),
+                objectType.Type);
         }
 
         private class PropertyBag
@@ -234,11 +238,13 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
         }
 
-        private JsonDictionarySerialization? CreateAdditionalProperties(ObjectSchema objectSchema)
+        private JsonAdditionalPropertiesSerialization? CreateAdditionalProperties(ObjectSchema objectSchema, ObjectType objectType)
         {
             var inheritedDictionarySchema = objectSchema.Parents!.All.OfType<DictionarySchema>().FirstOrDefault();
 
-            if (inheritedDictionarySchema == null)
+            var additionalPropertiesProperty = objectType.AdditionalPropertiesProperty;
+
+            if (inheritedDictionarySchema == null || additionalPropertiesProperty == null)
             {
                 return null;
             }
@@ -246,10 +252,13 @@ namespace AutoRest.CSharp.V3.Output.Builders
             var valueSerialization = BuildSerialization(inheritedDictionarySchema.ElementType, false);
             var itemType = _typeFactory.CreateType(inheritedDictionarySchema.ElementType, isNullable: false);
 
-            return new JsonDictionarySerialization(
-                new CSharpType(typeof(Dictionary<,>), new CSharpType(typeof(string)), itemType),
-                valueSerialization
-            );
+            return  new JsonAdditionalPropertiesSerialization(
+                    additionalPropertiesProperty,
+                    new JsonDictionarySerialization(
+                        new CSharpType(typeof(Dictionary<,>), new CSharpType(typeof(string)), itemType),
+                        valueSerialization
+                    ));
+
         }
     }
 }

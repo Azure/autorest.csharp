@@ -30,7 +30,9 @@ namespace body_complex.Models
 
         internal static DoubleWrapper DeserializeDoubleWrapper(JsonElement element)
         {
-            DoubleWrapper result = new DoubleWrapper();
+            DoubleWrapper result;
+            double? field1 = default;
+            double? field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field1"))
@@ -39,7 +41,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.Field1 = property.Value.GetDouble();
+                    field1 = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose"))
@@ -48,10 +50,11 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = property.Value.GetDouble();
+                    field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = property.Value.GetDouble();
                     continue;
                 }
             }
+            result = new DoubleWrapper(field1, field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose);
             return result;
         }
     }

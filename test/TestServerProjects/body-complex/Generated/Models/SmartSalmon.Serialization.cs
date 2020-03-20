@@ -50,17 +50,27 @@ namespace body_complex.Models
                 }
                 writer.WriteEndArray();
             }
-            foreach (var item in this)
+            writer.WriteStartObject();
+            foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
                 writer.WriteObjectValue(item.Value);
             }
             writer.WriteEndObject();
+            writer.WriteEndObject();
         }
 
         internal static SmartSalmon DeserializeSmartSalmon(JsonElement element)
         {
-            SmartSalmon result = new SmartSalmon();
+            SmartSalmon result;
+            string collegeDegree = default;
+            string location = default;
+            bool? iswild = default;
+            string fishtype = default;
+            string species = default;
+            float length = default;
+            IList<Fish> siblings = default;
+            IDictionary<string, object> additionalProperties = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("college_degree"))
@@ -69,7 +79,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.CollegeDegree = property.Value.GetString();
+                    collegeDegree = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("location"))
@@ -78,7 +88,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.Location = property.Value.GetString();
+                    location = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("iswild"))
@@ -87,12 +97,12 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.Iswild = property.Value.GetBoolean();
+                    iswild = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("fishtype"))
                 {
-                    result.Fishtype = property.Value.GetString();
+                    fishtype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("species"))
@@ -101,12 +111,12 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.Species = property.Value.GetString();
+                    species = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("length"))
                 {
-                    result.Length = property.Value.GetSingle();
+                    length = property.Value.GetSingle();
                     continue;
                 }
                 if (property.NameEquals("siblings"))
@@ -115,15 +125,28 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.Siblings = new List<Fish>();
+                    List<Fish> array = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Siblings.Add(DeserializeFish(item));
+                        array.Add(DeserializeFish(item));
                     }
+                    siblings = array;
                     continue;
                 }
-                result.Add(property.Name, property.Value.GetObject());
+                additionalProperties ??= new Dictionary<string, object>();
+                additionalProperties.Add(property.Name, property.Value.GetObject());
             }
+            result = new SmartSalmon()
+            {
+                CollegeDegree = collegeDegree,
+                Location = location,
+                Iswild = iswild,
+                Fishtype = fishtype,
+                Species = species,
+                Length = length,
+                Siblings = siblings,
+                AdditionalProperties = additionalProperties
+            };
             return result;
         }
     }

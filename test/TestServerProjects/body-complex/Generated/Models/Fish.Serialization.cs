@@ -52,12 +52,16 @@ namespace body_complex.Models
                     case "smart_salmon": return SmartSalmon.DeserializeSmartSalmon(element);
                 }
             }
-            Fish result = new Fish();
+            Fish result;
+            string fishtype = default;
+            string species = default;
+            float length = default;
+            IList<Fish> siblings = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("fishtype"))
                 {
-                    result.Fishtype = property.Value.GetString();
+                    fishtype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("species"))
@@ -66,12 +70,12 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.Species = property.Value.GetString();
+                    species = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("length"))
                 {
-                    result.Length = property.Value.GetSingle();
+                    length = property.Value.GetSingle();
                     continue;
                 }
                 if (property.NameEquals("siblings"))
@@ -80,14 +84,16 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.Siblings = new List<Fish>();
+                    List<Fish> array = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Siblings.Add(DeserializeFish(item));
+                        array.Add(DeserializeFish(item));
                     }
+                    siblings = array;
                     continue;
                 }
             }
+            result = new Fish(fishtype, species, length, siblings);
             return result;
         }
     }

@@ -4,11 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using AutoRest.CSharp.V3.Generation.Types;
+using AutoRest.CSharp.V3.Input;
+using AutoRest.CSharp.V3.Output.Models.Requests;
 using AutoRest.CSharp.V3.Output.Models.Serialization;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Json;
+using AutoRest.CSharp.V3.Output.Models.Shared;
 using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
 using Azure.Core;
@@ -62,27 +64,22 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (JsonPropertySerialization property in obj.Properties)
                     {
-                        bool hasNullableType = property.SerializationData != null && property.SerializationData.Type.IsNullable;
-                        using (hasNullableType ? writer.Scope($"if ({property.SerializationData!.Write} != null)") : default)
+                        bool hasNullableType = property.Property != null && property.Property.Declaration.Type.IsNullable;
+                        using (hasNullableType ? writer.Scope($"if ({property.Property!.Declaration.Name} != null)") : default)
                         {
                             writer.Line($"{writerName}.WritePropertyName({property.Name:L});");
                             writer.ToSerializeCall(
                                 property.ValueSerialization,
-                                w => w.Append($"{property.SerializationData?.Write}"));
+                                w => w.Append($"{property.Property?.Declaration.Name}"));
                         }
                     }
 
                     if (obj.AdditionalProperties != null)
                     {
-                        writer.Line($"foreach (var {itemVariable:D} in {name})");
-                        using (writer.Scope())
-                        {
-                            writer.Line($"{writerName}.WritePropertyName({itemVariable}.Key);");
-                            writer.ToSerializeCall(
-                                obj.AdditionalProperties.ValueSerialization,
-                                w => w.Append($"{itemVariable}.Value"),
-                                writerName);
-                        }
+                        writer.ToSerializeCall(
+                            obj.AdditionalProperties.Serialization,
+                            w => w.Append($"{obj.AdditionalProperties.Property.Declaration.Name}"),
+                            writerName);
                     }
 
                     writer.Line($"{writerName}.WriteEndObject();");
@@ -183,10 +180,144 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 writer
                     .Line($"{type} {destinationDeclaration:D};")
-                    .DeserializeIntoVariable(serialization, w => w.Append(destinationDeclaration), element);
+                    .DeserializeIntoVariableMayBeObject(serialization, w => w.Append(destinationDeclaration), element);
             }
 
             destination = destinationDeclaration.ActualName;
+        }
+
+        private static void DeserializeIntoVariableMayBeObject(this CodeWriter writer,
+            JsonSerialization serialization,
+            CodeWriterDelegate destination,
+            CodeWriterDelegate element,
+            Dictionary<ObjectTypeProperty, CodeWriterDeclaration>? propertyVariables = null)
+        {
+            if (serialization is JsonObjectSerialization obj)
+            {
+                var itemVariable = new CodeWriterDeclaration("property");
+
+                if (propertyVariables == null)
+                {
+                    // this is the first level of object hierarchy
+                    // collect all properties and initialize the dictionary
+                    propertyVariables = new Dictionary<ObjectTypeProperty, CodeWriterDeclaration>();
+
+                    CollectProperties(propertyVariables, obj);
+
+                    foreach (var variable in propertyVariables)
+                    {
+                        var objectTypeProperty = variable.Key;
+                        writer.Line($"{objectTypeProperty.Declaration.Type} {variable.Value:D} = default;");
+                    }
+                }
+
+                writer.Line($"foreach (var {itemVariable:D} in {element}.EnumerateObject())");
+                using (writer.Scope())
+                {
+                    foreach (JsonPropertySerialization property in obj.Properties)
+                    {
+                        CSharpType? type = property.ValueSerialization.Type;
+
+                        bool hasNullableType = type != null && type.IsNullable;
+
+                        void WriteNullCheck()
+                        {
+                            using (writer.Scope($"if ({itemVariable.ActualName}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
+                            {
+                                writer.Append($"continue;");
+                            }
+                        }
+
+                        writer.Append($"if({itemVariable.ActualName}.NameEquals({property.Name:L}))");
+                        using (writer.Scope())
+                        {
+                            if (hasNullableType)
+                            {
+                                WriteNullCheck();
+                            }
+
+                            if (property.Property != null)
+                            {
+                                // Reading a property value
+                                writer.DeserializeIntoVariable(
+                                    property.ValueSerialization,
+                                    w => w.Append(propertyVariables[property.Property]),
+                                    w => w.Append($"{itemVariable.ActualName}.Value"));
+                            }
+                            else
+                            {
+                                // Reading a nested object
+                                writer.DeserializeIntoVariableMayBeObject(
+                                    property.ValueSerialization,
+                                    w => { },
+                                    w => w.Append($"{itemVariable.ActualName}.Value"));
+                            }
+
+                            writer.Line($"continue;");
+                        }
+                    }
+
+                    var objAdditionalProperties = obj.AdditionalProperties;
+                    if (objAdditionalProperties != null)
+                    {
+                        var variable = propertyVariables[objAdditionalProperties.Property];
+
+                        writer.Line($"{variable} ??= new {objAdditionalProperties.Serialization.Type}();");
+
+                        DeserializeValue(writer,
+                            objAdditionalProperties.Serialization.ValueSerialization,
+                            w => w.Append($"{itemVariable}.Value"),
+                            (w, v) => w.Line($"{variable}.Add({itemVariable}.Name, {v});"));
+                    }
+                }
+
+                if (obj.ImplementationType != null)
+                {
+                    var initializers = new List<ObjectPropertyInitializer>();
+                    foreach (var variable in propertyVariables)
+                    {
+                        var property = variable.Key;
+
+                        initializers.Add(new ObjectPropertyInitializer(
+                            property,
+                            new Reference(variable.Value.ActualName, property.Declaration.Type)));
+                    }
+
+                    writer.Append($"{destination} = ")
+                        .WriteInitialization((ObjectType) obj.ImplementationType.Implementation, initializers)
+                        .Line($";");
+                }
+            }
+            else
+            {
+                DeserializeIntoVariable(writer, serialization, destination, element);
+            }
+        }
+
+        /// Collects a list of properties being read from all level of object hierarchy
+        private static void CollectProperties(Dictionary<ObjectTypeProperty, CodeWriterDeclaration> propertyVariables, JsonObjectSerialization obj)
+        {
+            foreach (JsonPropertySerialization jsonProperty in obj.Properties)
+            {
+                ObjectTypeProperty? objectProperty = jsonProperty.Property;
+
+                if (objectProperty != null)
+                {
+                    var propertyDeclaration = new CodeWriterDeclaration(jsonProperty.Name.ToVariableName());
+                    propertyVariables.Add(objectProperty, propertyDeclaration);
+                }
+                else if (jsonProperty.ValueSerialization is JsonObjectSerialization objectSerialization)
+                {
+                    CollectProperties(propertyVariables, objectSerialization);
+                }
+            }
+
+            var additionalPropertiesProperty = obj.AdditionalProperties?.Property;
+            if (additionalPropertiesProperty != null)
+            {
+                var propertyDeclaration = new CodeWriterDeclaration(additionalPropertiesProperty.Declaration.Name.ToVariableName());
+                propertyVariables.Add(additionalPropertiesProperty, propertyDeclaration);
+            }
         }
 
         private static void DeserializeIntoVariable(this CodeWriter writer, JsonSerialization serialization, CodeWriterDelegate destination, CodeWriterDelegate element)
@@ -224,74 +355,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     }
 
                     writer.Line($"{destination} = {dictionaryVariable};");
-
-                    return;
-                case JsonObjectSerialization obj:
-                    var itemVariable = new CodeWriterDeclaration("property");
-                    var propertyVariables = new Dictionary<JsonPropertySerialization, CodeWriterDeclaration>();
-
-                    foreach (JsonPropertySerialization property in obj.Properties)
-                    {
-                        var propertyDeclaration = new CodeWriterDeclaration(property.Name.ToVariableName());
-                        propertyVariables.Add(property, propertyDeclaration);
-
-                        var valueSerializationType = property.ValueSerialization.Type ?? typeof(object);
-
-                        writer.Line($"{valueSerializationType} {propertyDeclaration:D} = default;");
-                    }
-
-                    writer.Line($"foreach (var {itemVariable:D} in {element}.EnumerateObject())");
-                    using (writer.Scope())
-                    {
-                        foreach (JsonPropertySerialization property in obj.Properties)
-                        {
-                            CodeWriterDelegate destination1 = w => w.Append(propertyVariables[property]);
-                            CSharpType? type = property.ValueSerialization.Type;
-
-                            bool hasNullableType = type != null && type.IsNullable;
-
-                            void WriteNullCheck()
-                            {
-                                using (writer.Scope($"if ({itemVariable.ActualName}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
-                                {
-                                    writer.Append($"continue;");
-                                }
-                            }
-
-                            writer.Append($"if({itemVariable.ActualName}.NameEquals({property.Name:L}))");
-                            using (writer.Scope())
-                            {
-                                if (hasNullableType)
-                                {
-                                    WriteNullCheck();
-                                }
-
-                                writer.DeserializeIntoVariable(property.ValueSerialization, destination1, w1 => w1.Append($"{itemVariable.ActualName}.Value"));
-                                writer.Line($"continue;");
-                            }
-                        }
-
-                        if (obj.AdditionalProperties is JsonDictionarySerialization additionalProperties)
-                        {
-                            DeserializeValue(writer,
-                                additionalProperties.ValueSerialization,
-                                w => w.Append($"{itemVariable}.Value"),
-                                (w, returnValue) => writer.Append($"{destination}.Add({itemVariable}.Name, {returnValue});"));
-                        }
-                    }
-
-                    if (obj.ImplementationType != null)
-                    {
-                        // This just happens to work, we need a better binding mechanism
-                        writer.Append($"{destination} = new {obj.ImplementationType}(");
-                        foreach (JsonPropertySerialization property in obj.Properties)
-                        {
-                            writer.Append($"{propertyVariables[property]}, ");
-                        }
-
-                        writer.RemoveTrailingComma();
-                        writer.Line($");");
-                    }
 
                     return;
             }

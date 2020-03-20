@@ -194,37 +194,38 @@ namespace AutoRest.CSharp.V3.Output.Builders
             Dictionary<RequestParameter, Parameter> methodParameters = new Dictionary<RequestParameter, Parameter>();
 
             RequestBody? body = null;
-            (RequestParameter, ParameterOrConstant)? bodyParameter = null;
+            (RequestParameter, ReferenceOrConstant)? bodyParameter = null;
             RequestParameter[] parameters = operation.Parameters.Concat(requestParameters).ToArray();
             foreach (RequestParameter requestParameter in parameters)
             {
                 string defaultName = requestParameter.Language.Default.Name;
                 string serializedName = requestParameter.Language.Default.SerializedName ?? defaultName;
-                ParameterOrConstant constantOrParameter;
+                ReferenceOrConstant constantOrReference;
                 Schema valueSchema = requestParameter.Schema;
 
                 if (requestParameter.Implementation == ImplementationLocation.Method)
                 {
+                    Parameter? parameter = null;
                     // TODO: always generate virtual paramters
                     if (!(requestParameter is VirtualParameter) &&
                         requestParameter.Schema is ConstantSchema constant)
                     {
-                        constantOrParameter = ParseConstant(constant);
+                        constantOrReference = ParseConstant(constant);
                         valueSchema = constant.ValueType;
                     }
                     else
                     {
-                        constantOrParameter = BuildParameter(requestParameter);
+                        constantOrReference = parameter = BuildParameter(requestParameter);
                     }
 
-                    if (!constantOrParameter.IsConstant && requestParameter.Flattened != true)
+                    if (parameter != null && requestParameter.Flattened != true)
                     {
-                        methodParameters.Add(requestParameter, constantOrParameter.Parameter);
+                        methodParameters.Add(requestParameter, parameter);
                     }
                 }
                 else
                 {
-                    constantOrParameter = clientParameters[requestParameter.Language.Default.Name];
+                    constantOrReference = clientParameters[requestParameter.Language.Default.Name];
                 }
 
                 if (requestParameter.Protocol.Http is HttpParameter httpParameter)
@@ -234,23 +235,23 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     switch (httpParameter.In)
                     {
                         case ParameterLocation.Header:
-                            headers.Add(new RequestHeader(serializedName, constantOrParameter, serializationFormat));
+                            headers.Add(new RequestHeader(serializedName, constantOrReference, serializationFormat));
                             break;
                         case ParameterLocation.Query:
-                            query.Add(new QueryParameter(serializedName, constantOrParameter, GetSerializationStyle(httpParameter, valueSchema), !skipEncoding, serializationFormat));
+                            query.Add(new QueryParameter(serializedName, constantOrReference, GetSerializationStyle(httpParameter, valueSchema), !skipEncoding, serializationFormat));
                             break;
                         case ParameterLocation.Path:
-                            pathParameters.Add(serializedName, new PathSegment(constantOrParameter, !skipEncoding, serializationFormat));
+                            pathParameters.Add(serializedName, new PathSegment(constantOrReference, !skipEncoding, serializationFormat));
                             break;
                         case ParameterLocation.Body:
-                            bodyParameter = (requestParameter, constantOrParameter);
+                            bodyParameter = (requestParameter, constantOrReference);
                             break;
                         case ParameterLocation.Uri:
                             if (defaultName == "$host")
                             {
                                 skipEncoding = true;
                             }
-                            uriParameters[serializedName] = new PathSegment(constantOrParameter, !skipEncoding, serializationFormat);
+                            uriParameters[serializedName] = new PathSegment(constantOrReference, !skipEncoding, serializationFormat);
                             break;
                     }
                 }

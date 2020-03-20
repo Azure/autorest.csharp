@@ -7,14 +7,14 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
 {
     internal class PathSegment
     {
-        public PathSegment(ParameterOrConstant value, bool escape, SerializationFormat format)
+        public PathSegment(ReferenceOrConstant value, bool escape, SerializationFormat format)
         {
             Value = value;
             Escape = escape;
             Format = format;
         }
 
-        public ParameterOrConstant Value { get; }
+        public ReferenceOrConstant Value { get; }
         public bool Escape { get; }
         public SerializationFormat Format { get; }
     }

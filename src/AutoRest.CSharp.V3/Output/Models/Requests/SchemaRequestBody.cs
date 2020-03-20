@@ -9,9 +9,9 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
     internal class SchemaRequestBody : RequestBody
     {
         public ObjectSerialization Serialization { get; }
-        public ParameterOrConstant Value { get; }
+        public ReferenceOrConstant Value { get; }
 
-        public SchemaRequestBody(ParameterOrConstant value, ObjectSerialization serialization)
+        public SchemaRequestBody(ReferenceOrConstant value, ObjectSerialization serialization)
         {
             Value = value;
             Serialization = serialization;

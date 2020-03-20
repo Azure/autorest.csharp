@@ -7,13 +7,13 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 {
     internal class ObjectPropertyInitializer
     {
-        public ObjectPropertyInitializer(ObjectTypeProperty property, ParameterOrConstant value)
+        public ObjectPropertyInitializer(ObjectTypeProperty property, ReferenceOrConstant value)
         {
             Property = property;
             Value = value;
         }
 
         public ObjectTypeProperty Property { get; }
-        public ParameterOrConstant Value { get; }
+        public ReferenceOrConstant Value { get; }
     }
 }

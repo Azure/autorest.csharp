@@ -36,7 +36,7 @@ namespace body_complex.Models
         }
 
         public string CollegeDegree { get; set; }
-        private IDictionary<string, object> AdditionalProperties { get; set; } = new Dictionary<string, object>();
+        internal IDictionary<string, object> AdditionalProperties { get; set; } = new Dictionary<string, object>();
         /// <inheritdoc />
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator() => AdditionalProperties.GetEnumerator();
         /// <inheritdoc />
