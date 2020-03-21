@@ -40,7 +40,11 @@ namespace Azure.Storage.Management.Models
 
         internal static StorageAccountInternetEndpoints DeserializeStorageAccountInternetEndpoints(JsonElement element)
         {
-            StorageAccountInternetEndpoints result = new StorageAccountInternetEndpoints();
+            StorageAccountInternetEndpoints result;
+            string blob = default;
+            string file = default;
+            string web = default;
+            string dfs = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("blob"))
@@ -49,7 +53,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Blob = property.Value.GetString();
+                    blob = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("file"))
@@ -58,7 +62,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.File = property.Value.GetString();
+                    file = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("web"))
@@ -67,7 +71,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Web = property.Value.GetString();
+                    web = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("dfs"))
@@ -76,10 +80,11 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Dfs = property.Value.GetString();
+                    dfs = property.Value.GetString();
                     continue;
                 }
             }
+            result = new StorageAccountInternetEndpoints(blob, file, web, dfs);
             return result;
         }
     }

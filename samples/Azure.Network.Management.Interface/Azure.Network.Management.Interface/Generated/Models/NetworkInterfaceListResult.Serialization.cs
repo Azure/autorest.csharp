@@ -15,7 +15,9 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static NetworkInterfaceListResult DeserializeNetworkInterfaceListResult(JsonElement element)
         {
-            NetworkInterfaceListResult result = new NetworkInterfaceListResult();
+            NetworkInterfaceListResult result;
+            IList<NetworkInterface> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -24,11 +26,12 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Value = new List<NetworkInterface>();
+                    List<NetworkInterface> array = new List<NetworkInterface>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Value.Add(NetworkInterface.DeserializeNetworkInterface(item));
+                        array.Add(NetworkInterface.DeserializeNetworkInterface(item));
                     }
+                    value = array;
                     continue;
                 }
                 if (property.NameEquals("nextLink"))
@@ -37,10 +40,11 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.NextLink = property.Value.GetString();
+                    nextLink = property.Value.GetString();
                     continue;
                 }
             }
+            result = new NetworkInterfaceListResult(value, nextLink);
             return result;
         }
     }

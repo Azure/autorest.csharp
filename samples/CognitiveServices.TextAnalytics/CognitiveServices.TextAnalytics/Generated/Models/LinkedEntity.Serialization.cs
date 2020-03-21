@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -14,25 +15,33 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static LinkedEntity DeserializeLinkedEntity(JsonElement element)
         {
-            LinkedEntity result = new LinkedEntity();
+            LinkedEntity result;
+            string name = default;
+            IList<Match> matches = new List<Match>();
+            string language = default;
+            string id = default;
+            string url = default;
+            string dataSource = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("matches"))
                 {
+                    List<Match> array = new List<Match>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Matches.Add(Match.DeserializeMatch(item));
+                        array.Add(Match.DeserializeMatch(item));
                     }
+                    matches = array;
                     continue;
                 }
                 if (property.NameEquals("language"))
                 {
-                    result.Language = property.Value.GetString();
+                    language = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -41,20 +50,21 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("url"))
                 {
-                    result.Url = property.Value.GetString();
+                    url = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("dataSource"))
                 {
-                    result.DataSource = property.Value.GetString();
+                    dataSource = property.Value.GetString();
                     continue;
                 }
             }
+            result = new LinkedEntity(name, matches, language, id, url, dataSource);
             return result;
         }
     }

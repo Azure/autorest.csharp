@@ -14,7 +14,9 @@ namespace lro.Models
     {
         internal static CloudError DeserializeCloudError(JsonElement element)
         {
-            CloudError result = new CloudError();
+            CloudError result;
+            int? status = default;
+            string message = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"))
@@ -23,7 +25,7 @@ namespace lro.Models
                     {
                         continue;
                     }
-                    result.Status = property.Value.GetInt32();
+                    status = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("message"))
@@ -32,10 +34,11 @@ namespace lro.Models
                     {
                         continue;
                     }
-                    result.Message = property.Value.GetString();
+                    message = property.Value.GetString();
                     continue;
                 }
             }
+            result = new CloudError(status, message);
             return result;
         }
     }

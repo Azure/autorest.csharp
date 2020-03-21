@@ -27,12 +27,14 @@ namespace Azure.Storage.Management.Models
 
         internal static RestorePolicyProperties DeserializeRestorePolicyProperties(JsonElement element)
         {
-            RestorePolicyProperties result = new RestorePolicyProperties();
+            RestorePolicyProperties result;
+            bool enabled = default;
+            int? days = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("enabled"))
                 {
-                    result.Enabled = property.Value.GetBoolean();
+                    enabled = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("days"))
@@ -41,10 +43,11 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Days = property.Value.GetInt32();
+                    days = property.Value.GetInt32();
                     continue;
                 }
             }
+            result = new RestorePolicyProperties(enabled, days);
             return result;
         }
     }

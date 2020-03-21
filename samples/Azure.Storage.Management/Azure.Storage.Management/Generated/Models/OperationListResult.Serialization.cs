@@ -15,7 +15,8 @@ namespace Azure.Storage.Management.Models
     {
         internal static OperationListResult DeserializeOperationListResult(JsonElement element)
         {
-            OperationListResult result = new OperationListResult();
+            OperationListResult result;
+            IList<Operation> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -24,14 +25,16 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Value = new List<Operation>();
+                    List<Operation> array = new List<Operation>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Value.Add(Operation.DeserializeOperation(item));
+                        array.Add(Operation.DeserializeOperation(item));
                     }
+                    value = array;
                     continue;
                 }
             }
+            result = new OperationListResult(value);
             return result;
         }
     }

@@ -33,27 +33,32 @@ namespace CognitiveSearch.Models
 
         internal static FreshnessScoringFunction DeserializeFreshnessScoringFunction(JsonElement element)
         {
-            FreshnessScoringFunction result = new FreshnessScoringFunction();
+            FreshnessScoringFunction result;
+            FreshnessScoringParameters freshness = new FreshnessScoringParameters();
+            string type = default;
+            string fieldName = default;
+            double boost = default;
+            ScoringFunctionInterpolation? interpolation = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("freshness"))
                 {
-                    result.Parameters = FreshnessScoringParameters.DeserializeFreshnessScoringParameters(property.Value);
+                    freshness = FreshnessScoringParameters.DeserializeFreshnessScoringParameters(property.Value);
                     continue;
                 }
                 if (property.NameEquals("type"))
                 {
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("fieldName"))
                 {
-                    result.FieldName = property.Value.GetString();
+                    fieldName = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("boost"))
                 {
-                    result.Boost = property.Value.GetDouble();
+                    boost = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("interpolation"))
@@ -62,10 +67,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Interpolation = property.Value.GetString().ToScoringFunctionInterpolation();
+                    interpolation = property.Value.GetString().ToScoringFunctionInterpolation();
                     continue;
                 }
             }
+            result = new FreshnessScoringFunction(freshness, type, fieldName, boost, interpolation);
             return result;
         }
     }

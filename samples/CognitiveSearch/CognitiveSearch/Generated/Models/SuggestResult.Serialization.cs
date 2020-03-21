@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -14,7 +15,9 @@ namespace CognitiveSearch.Models
     {
         internal static SuggestResult DeserializeSuggestResult(JsonElement element)
         {
-            SuggestResult result = new SuggestResult();
+            SuggestResult result;
+            string searchtext = default;
+            IDictionary<string, object> additionalProperties = new Dictionary<string, object>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("@search.text"))
@@ -23,11 +26,12 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Text = property.Value.GetString();
+                    searchtext = property.Value.GetString();
                     continue;
                 }
-                result.Add(property.Name, property.Value.GetObject());
+                additionalProperties.Add(property.Name, property.Value.GetObject());
             }
+            result = new SuggestResult(searchtext, additionalProperties);
             return result;
         }
     }

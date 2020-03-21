@@ -38,7 +38,9 @@ namespace Azure.Storage.Management.Models
 
         internal static ManagementPolicyFilter DeserializeManagementPolicyFilter(JsonElement element)
         {
-            ManagementPolicyFilter result = new ManagementPolicyFilter();
+            ManagementPolicyFilter result;
+            IList<string> prefixMatch = default;
+            IList<string> blobTypes = new List<string>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("prefixMatch"))
@@ -47,22 +49,26 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.PrefixMatch = new List<string>();
+                    List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.PrefixMatch.Add(item.GetString());
+                        array.Add(item.GetString());
                     }
+                    prefixMatch = array;
                     continue;
                 }
                 if (property.NameEquals("blobTypes"))
                 {
+                    List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.BlobTypes.Add(item.GetString());
+                        array.Add(item.GetString());
                     }
+                    blobTypes = array;
                     continue;
                 }
             }
+            result = new ManagementPolicyFilter(prefixMatch, blobTypes);
             return result;
         }
     }

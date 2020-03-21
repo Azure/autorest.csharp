@@ -110,14 +110,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new Siamese()
-            {
-                Breed = breed,
-                Color = color,
-                Hates = hates,
-                Id = id,
-                Name = name
-            };
+            result = new Siamese(breed, color, hates, id, name);
             return result;
         }
     }

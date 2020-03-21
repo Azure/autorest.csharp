@@ -15,7 +15,9 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static EffectiveNetworkSecurityGroupListResult DeserializeEffectiveNetworkSecurityGroupListResult(JsonElement element)
         {
-            EffectiveNetworkSecurityGroupListResult result = new EffectiveNetworkSecurityGroupListResult();
+            EffectiveNetworkSecurityGroupListResult result;
+            IList<EffectiveNetworkSecurityGroup> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -24,11 +26,12 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Value = new List<EffectiveNetworkSecurityGroup>();
+                    List<EffectiveNetworkSecurityGroup> array = new List<EffectiveNetworkSecurityGroup>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Value.Add(EffectiveNetworkSecurityGroup.DeserializeEffectiveNetworkSecurityGroup(item));
+                        array.Add(EffectiveNetworkSecurityGroup.DeserializeEffectiveNetworkSecurityGroup(item));
                     }
+                    value = array;
                     continue;
                 }
                 if (property.NameEquals("nextLink"))
@@ -37,10 +40,11 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.NextLink = property.Value.GetString();
+                    nextLink = property.Value.GetString();
                     continue;
                 }
             }
+            result = new EffectiveNetworkSecurityGroupListResult(value, nextLink);
             return result;
         }
     }

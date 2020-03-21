@@ -50,13 +50,11 @@ namespace body_complex.Models
                 }
                 writer.WriteEndArray();
             }
-            writer.WriteStartObject();
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
                 writer.WriteObjectValue(item.Value);
             }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -70,7 +68,7 @@ namespace body_complex.Models
             string species = default;
             float length = default;
             IList<Fish> siblings = default;
-            IDictionary<string, object> additionalProperties = default;
+            IDictionary<string, object> additionalProperties = new Dictionary<string, object>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("college_degree"))
@@ -133,20 +131,9 @@ namespace body_complex.Models
                     siblings = array;
                     continue;
                 }
-                additionalProperties ??= new Dictionary<string, object>();
                 additionalProperties.Add(property.Name, property.Value.GetObject());
             }
-            result = new SmartSalmon()
-            {
-                CollegeDegree = collegeDegree,
-                Location = location,
-                Iswild = iswild,
-                Fishtype = fishtype,
-                Species = species,
-                Length = length,
-                Siblings = siblings,
-                AdditionalProperties = additionalProperties
-            };
+            result = new SmartSalmon(collegeDegree, additionalProperties, location, iswild, fishtype, species, length, siblings);
             return result;
         }
     }

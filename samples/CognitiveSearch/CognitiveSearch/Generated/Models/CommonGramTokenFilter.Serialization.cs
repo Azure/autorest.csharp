@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -41,15 +42,22 @@ namespace CognitiveSearch.Models
 
         internal static CommonGramTokenFilter DeserializeCommonGramTokenFilter(JsonElement element)
         {
-            CommonGramTokenFilter result = new CommonGramTokenFilter();
+            CommonGramTokenFilter result;
+            IList<string> commonWords = new List<string>();
+            bool? ignoreCase = default;
+            bool? queryMode = default;
+            string odatatype = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("commonWords"))
                 {
+                    List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.CommonWords.Add(item.GetString());
+                        array.Add(item.GetString());
                     }
+                    commonWords = array;
                     continue;
                 }
                 if (property.NameEquals("ignoreCase"))
@@ -58,7 +66,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.IgnoreCase = property.Value.GetBoolean();
+                    ignoreCase = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("queryMode"))
@@ -67,20 +75,21 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.UseQueryMode = property.Value.GetBoolean();
+                    queryMode = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
+            result = new CommonGramTokenFilter(commonWords, ignoreCase, queryMode, odatatype, name);
             return result;
         }
     }

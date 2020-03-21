@@ -129,7 +129,23 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static NetworkInterfaceIPConfiguration DeserializeNetworkInterfaceIPConfiguration(JsonElement element)
         {
-            NetworkInterfaceIPConfiguration result = new NetworkInterfaceIPConfiguration();
+            NetworkInterfaceIPConfiguration result;
+            string name = default;
+            string etag = default;
+            string id = default;
+            IList<VirtualNetworkTap> virtualNetworkTaps = default;
+            IList<ApplicationGatewayBackendAddressPool> applicationGatewayBackendAddressPools = default;
+            IList<BackendAddressPool> loadBalancerBackendAddressPools = default;
+            IList<InboundNatRule> loadBalancerInboundNatRules = default;
+            string privateIPAddress = default;
+            IPAllocationMethod? privateIPAllocationMethod = default;
+            IPVersion? privateIPAddressVersion = default;
+            Subnet subnet = default;
+            bool? primary = default;
+            PublicIPAddress publicIPAddress = default;
+            IList<ApplicationSecurityGroup> applicationSecurityGroups = default;
+            ProvisioningState? provisioningState = default;
+            NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties privateLinkConnectionProperties = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -138,7 +154,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("etag"))
@@ -147,7 +163,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Etag = property.Value.GetString();
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -156,7 +172,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -169,11 +185,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.VirtualNetworkTaps = new List<VirtualNetworkTap>();
+                            List<VirtualNetworkTap> array = new List<VirtualNetworkTap>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.VirtualNetworkTaps.Add(VirtualNetworkTap.DeserializeVirtualNetworkTap(item));
+                                array.Add(VirtualNetworkTap.DeserializeVirtualNetworkTap(item));
                             }
+                            virtualNetworkTaps = array;
                             continue;
                         }
                         if (property0.NameEquals("applicationGatewayBackendAddressPools"))
@@ -182,11 +199,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ApplicationGatewayBackendAddressPools = new List<ApplicationGatewayBackendAddressPool>();
+                            List<ApplicationGatewayBackendAddressPool> array = new List<ApplicationGatewayBackendAddressPool>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.ApplicationGatewayBackendAddressPools.Add(ApplicationGatewayBackendAddressPool.DeserializeApplicationGatewayBackendAddressPool(item));
+                                array.Add(ApplicationGatewayBackendAddressPool.DeserializeApplicationGatewayBackendAddressPool(item));
                             }
+                            applicationGatewayBackendAddressPools = array;
                             continue;
                         }
                         if (property0.NameEquals("loadBalancerBackendAddressPools"))
@@ -195,11 +213,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.LoadBalancerBackendAddressPools = new List<BackendAddressPool>();
+                            List<BackendAddressPool> array = new List<BackendAddressPool>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.LoadBalancerBackendAddressPools.Add(BackendAddressPool.DeserializeBackendAddressPool(item));
+                                array.Add(BackendAddressPool.DeserializeBackendAddressPool(item));
                             }
+                            loadBalancerBackendAddressPools = array;
                             continue;
                         }
                         if (property0.NameEquals("loadBalancerInboundNatRules"))
@@ -208,11 +227,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.LoadBalancerInboundNatRules = new List<InboundNatRule>();
+                            List<InboundNatRule> array = new List<InboundNatRule>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.LoadBalancerInboundNatRules.Add(InboundNatRule.DeserializeInboundNatRule(item));
+                                array.Add(InboundNatRule.DeserializeInboundNatRule(item));
                             }
+                            loadBalancerInboundNatRules = array;
                             continue;
                         }
                         if (property0.NameEquals("privateIPAddress"))
@@ -221,7 +241,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.PrivateIPAddress = property0.Value.GetString();
+                            privateIPAddress = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("privateIPAllocationMethod"))
@@ -230,7 +250,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.PrivateIPAllocationMethod = new IPAllocationMethod(property0.Value.GetString());
+                            privateIPAllocationMethod = new IPAllocationMethod(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("privateIPAddressVersion"))
@@ -239,7 +259,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.PrivateIPAddressVersion = new IPVersion(property0.Value.GetString());
+                            privateIPAddressVersion = new IPVersion(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("subnet"))
@@ -248,7 +268,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.Subnet = Subnet.DeserializeSubnet(property0.Value);
+                            subnet = Subnet.DeserializeSubnet(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("primary"))
@@ -257,7 +277,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.Primary = property0.Value.GetBoolean();
+                            primary = property0.Value.GetBoolean();
                             continue;
                         }
                         if (property0.NameEquals("publicIPAddress"))
@@ -266,7 +286,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.PublicIPAddress = PublicIPAddress.DeserializePublicIPAddress(property0.Value);
+                            publicIPAddress = PublicIPAddress.DeserializePublicIPAddress(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("applicationSecurityGroups"))
@@ -275,11 +295,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ApplicationSecurityGroups = new List<ApplicationSecurityGroup>();
+                            List<ApplicationSecurityGroup> array = new List<ApplicationSecurityGroup>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.ApplicationSecurityGroups.Add(ApplicationSecurityGroup.DeserializeApplicationSecurityGroup(item));
+                                array.Add(ApplicationSecurityGroup.DeserializeApplicationSecurityGroup(item));
                             }
+                            applicationSecurityGroups = array;
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -288,7 +309,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningState = new ProvisioningState(property0.Value.GetString());
+                            provisioningState = new ProvisioningState(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("privateLinkConnectionProperties"))
@@ -297,13 +318,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.PrivateLinkConnectionProperties = NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties.DeserializeNetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(property0.Value);
+                            privateLinkConnectionProperties = NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties.DeserializeNetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(property0.Value);
                             continue;
                         }
                     }
                     continue;
                 }
             }
+            result = new NetworkInterfaceIPConfiguration(name, etag, virtualNetworkTaps, applicationGatewayBackendAddressPools, loadBalancerBackendAddressPools, loadBalancerInboundNatRules, privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, primary, publicIPAddress, applicationSecurityGroups, provisioningState, privateLinkConnectionProperties, id);
             return result;
         }
     }

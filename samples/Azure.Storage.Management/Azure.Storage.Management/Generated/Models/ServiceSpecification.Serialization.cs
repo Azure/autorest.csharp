@@ -15,7 +15,8 @@ namespace Azure.Storage.Management.Models
     {
         internal static ServiceSpecification DeserializeServiceSpecification(JsonElement element)
         {
-            ServiceSpecification result = new ServiceSpecification();
+            ServiceSpecification result;
+            IList<MetricSpecification> metricSpecifications = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("metricSpecifications"))
@@ -24,14 +25,16 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.MetricSpecifications = new List<MetricSpecification>();
+                    List<MetricSpecification> array = new List<MetricSpecification>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.MetricSpecifications.Add(MetricSpecification.DeserializeMetricSpecification(item));
+                        array.Add(MetricSpecification.DeserializeMetricSpecification(item));
                     }
+                    metricSpecifications = array;
                     continue;
                 }
             }
+            result = new ServiceSpecification(metricSpecifications);
             return result;
         }
     }

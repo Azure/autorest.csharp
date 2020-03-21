@@ -52,7 +52,12 @@ namespace CognitiveSearch.Models
 
         internal static IndexingParameters DeserializeIndexingParameters(JsonElement element)
         {
-            IndexingParameters result = new IndexingParameters();
+            IndexingParameters result;
+            int? batchSize = default;
+            int? maxFailedItems = default;
+            int? maxFailedItemsPerBatch = default;
+            bool? base64EncodeKeys = default;
+            IDictionary<string, object> configuration = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("batchSize"))
@@ -61,7 +66,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.BatchSize = property.Value.GetInt32();
+                    batchSize = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("maxFailedItems"))
@@ -70,7 +75,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.MaxFailedItems = property.Value.GetInt32();
+                    maxFailedItems = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("maxFailedItemsPerBatch"))
@@ -79,7 +84,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.MaxFailedItemsPerBatch = property.Value.GetInt32();
+                    maxFailedItemsPerBatch = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("base64EncodeKeys"))
@@ -88,7 +93,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Base64EncodeKeys = property.Value.GetBoolean();
+                    base64EncodeKeys = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("configuration"))
@@ -97,14 +102,16 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Configuration = new Dictionary<string, object>();
+                    Dictionary<string, object> array = new Dictionary<string, object>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        result.Configuration.Add(property0.Name, property0.Value.GetObject());
+                        array.Add(property0.Name, property0.Value.GetObject());
                     }
+                    configuration = array;
                     continue;
                 }
             }
+            result = new IndexingParameters(batchSize, maxFailedItems, maxFailedItemsPerBatch, base64EncodeKeys, configuration);
             return result;
         }
     }

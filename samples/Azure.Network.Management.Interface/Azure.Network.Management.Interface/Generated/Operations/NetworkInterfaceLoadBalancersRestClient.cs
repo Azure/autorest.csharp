@@ -93,7 +93,7 @@ namespace Azure.Network.Management.Interface
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = NetworkInterfaceLoadBalancerListResult.DeserializeNetworkInterfaceLoadBalancerListResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<NetworkInterfaceLoadBalancerListResult>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -133,7 +133,7 @@ namespace Azure.Network.Management.Interface
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = NetworkInterfaceLoadBalancerListResult.DeserializeNetworkInterfaceLoadBalancerListResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<NetworkInterfaceLoadBalancerListResult>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -179,7 +179,7 @@ namespace Azure.Network.Management.Interface
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = NetworkInterfaceLoadBalancerListResult.DeserializeNetworkInterfaceLoadBalancerListResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<NetworkInterfaceLoadBalancerListResult>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -214,7 +214,7 @@ namespace Azure.Network.Management.Interface
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = NetworkInterfaceLoadBalancerListResult.DeserializeNetworkInterfaceLoadBalancerListResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<NetworkInterfaceLoadBalancerListResult>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

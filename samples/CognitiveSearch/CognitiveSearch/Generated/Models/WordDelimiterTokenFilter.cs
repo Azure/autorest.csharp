@@ -31,7 +31,7 @@ namespace CognitiveSearch.Models
         /// <param name="protectedWords"> A list of tokens to protect from being delimited. </param>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal WordDelimiterTokenFilter(bool? generateWordParts, bool? generateNumberParts, bool? catenateWords, bool? catenateNumbers, bool? catenateAll, bool? splitOnCaseChange, bool? preserveOriginal, bool? splitOnNumerics, bool? stemEnglishPossessive, IList<string> protectedWords, string odataType, string name) : base(odataType, name)
+        internal WordDelimiterTokenFilter(bool? generateWordParts, bool? generateNumberParts, bool? catenateWords, bool? catenateNumbers, bool? catenateAll, bool? splitOnCaseChange, bool? preserveOriginal, bool? splitOnNumerics, bool? stemEnglishPossessive, IList<string> protectedWords, string odataType, string name) : base(odataType ?? "#Microsoft.Azure.Search.WordDelimiterTokenFilter", name)
         {
             GenerateWordParts = generateWordParts;
             GenerateNumberParts = generateNumberParts;
@@ -43,7 +43,6 @@ namespace CognitiveSearch.Models
             SplitOnNumerics = splitOnNumerics;
             StemEnglishPossessive = stemEnglishPossessive;
             ProtectedWords = protectedWords;
-            OdataType = "#Microsoft.Azure.Search.WordDelimiterTokenFilter";
         }
 
         /// <summary> A value indicating whether to generate part words. If set, causes parts of words to be generated; for example &quot;AzureSearch&quot; becomes &quot;Azure&quot; &quot;Search&quot;. Default is true. </summary>

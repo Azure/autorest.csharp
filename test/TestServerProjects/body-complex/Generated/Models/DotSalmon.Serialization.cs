@@ -54,13 +54,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new DotSalmon()
-            {
-                Location = location,
-                Iswild = iswild,
-                FishType = fishtype,
-                Species = species
-            };
+            result = new DotSalmon(location, iswild, fishtype, species);
             return result;
         }
     }

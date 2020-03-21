@@ -32,7 +32,10 @@ namespace extensible_enums_swagger.Models
 
         internal static Pet DeserializePet(JsonElement element)
         {
-            Pet result = new Pet();
+            Pet result;
+            string name = default;
+            DaysOfWeekExtensibleEnum? daysOfWeek = default;
+            IntEnum intEnum = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -41,7 +44,7 @@ namespace extensible_enums_swagger.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("DaysOfWeek"))
@@ -50,15 +53,16 @@ namespace extensible_enums_swagger.Models
                     {
                         continue;
                     }
-                    result.DaysOfWeek = new DaysOfWeekExtensibleEnum(property.Value.GetString());
+                    daysOfWeek = new DaysOfWeekExtensibleEnum(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("IntEnum"))
                 {
-                    result.IntEnum = new IntEnum(property.Value.GetString());
+                    intEnum = new IntEnum(property.Value.GetString());
                     continue;
                 }
             }
+            result = new Pet(name, daysOfWeek, intEnum);
             return result;
         }
     }

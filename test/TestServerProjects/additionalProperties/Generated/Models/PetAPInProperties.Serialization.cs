@@ -44,12 +44,16 @@ namespace additionalProperties.Models
 
         internal static PetAPInProperties DeserializePetAPInProperties(JsonElement element)
         {
-            PetAPInProperties result = new PetAPInProperties();
+            PetAPInProperties result;
+            int id = default;
+            string name = default;
+            bool? status = default;
+            IDictionary<string, float> additionalProperties = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
                 {
-                    result.Id = property.Value.GetInt32();
+                    id = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -58,7 +62,7 @@ namespace additionalProperties.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("status"))
@@ -67,7 +71,7 @@ namespace additionalProperties.Models
                     {
                         continue;
                     }
-                    result.Status = property.Value.GetBoolean();
+                    status = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("additionalProperties"))
@@ -76,14 +80,16 @@ namespace additionalProperties.Models
                     {
                         continue;
                     }
-                    result.AdditionalProperties = new Dictionary<string, float>();
+                    Dictionary<string, float> array = new Dictionary<string, float>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        result.AdditionalProperties.Add(property0.Name, property0.Value.GetSingle());
+                        array.Add(property0.Name, property0.Value.GetSingle());
                     }
+                    additionalProperties = array;
                     continue;
                 }
             }
+            result = new PetAPInProperties(id, name, status, additionalProperties);
             return result;
         }
     }

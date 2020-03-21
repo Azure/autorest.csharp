@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -28,18 +29,22 @@ namespace CognitiveSearch.Models
 
         internal static TextWeights DeserializeTextWeights(JsonElement element)
         {
-            TextWeights result = new TextWeights();
+            TextWeights result;
+            IDictionary<string, double> weights = new Dictionary<string, double>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("weights"))
                 {
+                    Dictionary<string, double> array = new Dictionary<string, double>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        result.Weights.Add(property0.Name, property0.Value.GetDouble());
+                        array.Add(property0.Name, property0.Value.GetDouble());
                     }
+                    weights = array;
                     continue;
                 }
             }
+            result = new TextWeights(weights);
             return result;
         }
     }

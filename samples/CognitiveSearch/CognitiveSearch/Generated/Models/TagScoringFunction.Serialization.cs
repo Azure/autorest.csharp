@@ -33,27 +33,32 @@ namespace CognitiveSearch.Models
 
         internal static TagScoringFunction DeserializeTagScoringFunction(JsonElement element)
         {
-            TagScoringFunction result = new TagScoringFunction();
+            TagScoringFunction result;
+            TagScoringParameters tag = new TagScoringParameters();
+            string type = default;
+            string fieldName = default;
+            double boost = default;
+            ScoringFunctionInterpolation? interpolation = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tag"))
                 {
-                    result.Parameters = TagScoringParameters.DeserializeTagScoringParameters(property.Value);
+                    tag = TagScoringParameters.DeserializeTagScoringParameters(property.Value);
                     continue;
                 }
                 if (property.NameEquals("type"))
                 {
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("fieldName"))
                 {
-                    result.FieldName = property.Value.GetString();
+                    fieldName = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("boost"))
                 {
-                    result.Boost = property.Value.GetDouble();
+                    boost = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("interpolation"))
@@ -62,10 +67,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Interpolation = property.Value.GetString().ToScoringFunctionInterpolation();
+                    interpolation = property.Value.GetString().ToScoringFunctionInterpolation();
                     continue;
                 }
             }
+            result = new TagScoringFunction(tag, type, fieldName, boost, interpolation);
             return result;
         }
     }

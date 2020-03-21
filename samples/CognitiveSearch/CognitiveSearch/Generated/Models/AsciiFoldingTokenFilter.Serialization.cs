@@ -29,7 +29,10 @@ namespace CognitiveSearch.Models
 
         internal static AsciiFoldingTokenFilter DeserializeAsciiFoldingTokenFilter(JsonElement element)
         {
-            AsciiFoldingTokenFilter result = new AsciiFoldingTokenFilter();
+            AsciiFoldingTokenFilter result;
+            bool? preserveOriginal = default;
+            string odatatype = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("preserveOriginal"))
@@ -38,20 +41,21 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.PreserveOriginal = property.Value.GetBoolean();
+                    preserveOriginal = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
+            result = new AsciiFoldingTokenFilter(preserveOriginal, odatatype, name);
             return result;
         }
     }

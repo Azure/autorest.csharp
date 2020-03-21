@@ -89,7 +89,7 @@ namespace Azure.Storage.Tables
                 {
                     case 202:
                         var headers = new SetPropertiesHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return ResponseWithHeaders.FromValue<SetPropertiesHeaders>(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -123,7 +123,7 @@ namespace Azure.Storage.Tables
                 {
                     case 202:
                         var headers = new SetPropertiesHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return ResponseWithHeaders.FromValue<SetPropertiesHeaders>(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -183,7 +183,7 @@ namespace Azure.Storage.Tables
                                 value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServiceProperties);
                             }
                             var headers = new GetPropertiesHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue<StorageServiceProperties, GetPropertiesHeaders>(value, headers, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -221,7 +221,7 @@ namespace Azure.Storage.Tables
                                 value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServiceProperties);
                             }
                             var headers = new GetPropertiesHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue<StorageServiceProperties, GetPropertiesHeaders>(value, headers, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -282,7 +282,7 @@ namespace Azure.Storage.Tables
                                 value = StorageServiceStats.DeserializeStorageServiceStats(storageServiceStats);
                             }
                             var headers = new GetStatisticsHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue<StorageServiceStats, GetStatisticsHeaders>(value, headers, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -320,7 +320,7 @@ namespace Azure.Storage.Tables
                                 value = StorageServiceStats.DeserializeStorageServiceStats(storageServiceStats);
                             }
                             var headers = new GetStatisticsHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue<StorageServiceStats, GetStatisticsHeaders>(value, headers, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

@@ -79,15 +79,15 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                         CSharpType propertyType = property.Declaration.Type;
                         writer.Append($"{property.Declaration.Accessibility} {propertyType} {property.Declaration.Name:D}");
-                        writer.AppendRaw(property.IsReadOnly ? "{ get; internal set; }" : "{ get; set; }");
+                        writer.AppendRaw(property.IsReadOnly && property.Declaration.Accessibility != "internal" ? "{ get; internal set; }" : "{ get; set; }");
 
                         if (property.DefaultValue != null)
                         {
                             writer.Append($" = {property.DefaultValue.Value.Value:L};");
                         }
-                        else if (property.ImplementationType != null)
+                        else if (property.InitializeWithType != null)
                         {
-                            writer.Append($" = new {property.ImplementationType}();");
+                            writer.Append($" = new {property.InitializeWithType}();");
                         }
 
                         writer.Line();
@@ -178,7 +178,18 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Append($": base(");
                     foreach (var baseConstructorParameter in constructor.BaseConstructor.Parameters)
                     {
-                        writer.Append($"{baseConstructorParameter.Name},");
+                        writer.Append($"{baseConstructorParameter.Name}");
+                        if (schema.Discriminator != null)
+                        {
+                            // Check if the parameter is for discriminator and apply a default
+                            var property = constructor.FindPropertyInitializedByParameter(baseConstructorParameter);
+                            if (property == schema.Discriminator.Property)
+                            {
+                                writer.Append($"?? {schema.Discriminator.Value:L}");
+                            }
+                        }
+
+                        writer.Append($",");
                     }
                     writer.RemoveTrailingComma();
                     writer.Append($")");
@@ -189,8 +200,17 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     foreach (var initializer in constructor.Initializers)
                     {
                         writer.Append($"{initializer.Property.Declaration.Name} = ")
-                            .WriteConstantOrParameter(initializer.Value)
+                            .WriteReferenceOrConstant(initializer.Value)
                             .Line($";");
+                    }
+
+                    var discriminator = schema.Discriminator;
+                    if (discriminator != null && discriminator.Value != null)
+                    {
+                        if (constructor.Parameters.Length == 0)
+                        {
+                            writer.Line($"{discriminator.Property.Declaration.Name} = {discriminator.Value:L};");
+                        }
                     }
                 }
 

@@ -74,7 +74,16 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static PrivateLinkServiceConnection DeserializePrivateLinkServiceConnection(JsonElement element)
         {
-            PrivateLinkServiceConnection result = new PrivateLinkServiceConnection();
+            PrivateLinkServiceConnection result;
+            string name = default;
+            string type = default;
+            string etag = default;
+            string id = default;
+            ProvisioningState? provisioningState = default;
+            string privateLinkServiceId = default;
+            IList<string> groupIds = default;
+            string requestMessage = default;
+            PrivateLinkServiceConnectionState privateLinkServiceConnectionState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -83,7 +92,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -92,7 +101,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("etag"))
@@ -101,7 +110,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Etag = property.Value.GetString();
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -110,7 +119,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -123,7 +132,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningState = new ProvisioningState(property0.Value.GetString());
+                            provisioningState = new ProvisioningState(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("privateLinkServiceId"))
@@ -132,7 +141,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.PrivateLinkServiceId = property0.Value.GetString();
+                            privateLinkServiceId = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("groupIds"))
@@ -141,11 +150,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.GroupIds = new List<string>();
+                            List<string> array = new List<string>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.GroupIds.Add(item.GetString());
+                                array.Add(item.GetString());
                             }
+                            groupIds = array;
                             continue;
                         }
                         if (property0.NameEquals("requestMessage"))
@@ -154,7 +164,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.RequestMessage = property0.Value.GetString();
+                            requestMessage = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("privateLinkServiceConnectionState"))
@@ -163,13 +173,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.PrivateLinkServiceConnectionState = PrivateLinkServiceConnectionState.DeserializePrivateLinkServiceConnectionState(property0.Value);
+                            privateLinkServiceConnectionState = PrivateLinkServiceConnectionState.DeserializePrivateLinkServiceConnectionState(property0.Value);
                             continue;
                         }
                     }
                     continue;
                 }
             }
+            result = new PrivateLinkServiceConnection(name, type, etag, provisioningState, privateLinkServiceId, groupIds, requestMessage, privateLinkServiceConnectionState, id);
             return result;
         }
     }

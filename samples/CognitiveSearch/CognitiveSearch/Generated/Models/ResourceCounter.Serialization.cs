@@ -14,7 +14,9 @@ namespace CognitiveSearch.Models
     {
         internal static ResourceCounter DeserializeResourceCounter(JsonElement element)
         {
-            ResourceCounter result = new ResourceCounter();
+            ResourceCounter result;
+            long? usage = default;
+            long? quota = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("usage"))
@@ -23,7 +25,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Usage = property.Value.GetInt64();
+                    usage = property.Value.GetInt64();
                     continue;
                 }
                 if (property.NameEquals("quota"))
@@ -32,10 +34,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Quota = property.Value.GetInt64();
+                    quota = property.Value.GetInt64();
                     continue;
                 }
             }
+            result = new ResourceCounter(usage, quota);
             return result;
         }
     }

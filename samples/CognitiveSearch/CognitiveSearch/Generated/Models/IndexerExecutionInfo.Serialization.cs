@@ -15,7 +15,11 @@ namespace CognitiveSearch.Models
     {
         internal static IndexerExecutionInfo DeserializeIndexerExecutionInfo(JsonElement element)
         {
-            IndexerExecutionInfo result = new IndexerExecutionInfo();
+            IndexerExecutionInfo result;
+            IndexerStatus? status = default;
+            IndexerExecutionResult lastResult = default;
+            IList<IndexerExecutionResult> executionHistory = default;
+            IndexerLimits limits = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"))
@@ -24,7 +28,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Status = property.Value.GetString().ToIndexerStatus();
+                    status = property.Value.GetString().ToIndexerStatus();
                     continue;
                 }
                 if (property.NameEquals("lastResult"))
@@ -33,7 +37,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.LastResult = IndexerExecutionResult.DeserializeIndexerExecutionResult(property.Value);
+                    lastResult = IndexerExecutionResult.DeserializeIndexerExecutionResult(property.Value);
                     continue;
                 }
                 if (property.NameEquals("executionHistory"))
@@ -42,11 +46,12 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.ExecutionHistory = new List<IndexerExecutionResult>();
+                    List<IndexerExecutionResult> array = new List<IndexerExecutionResult>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.ExecutionHistory.Add(IndexerExecutionResult.DeserializeIndexerExecutionResult(item));
+                        array.Add(IndexerExecutionResult.DeserializeIndexerExecutionResult(item));
                     }
+                    executionHistory = array;
                     continue;
                 }
                 if (property.NameEquals("limits"))
@@ -55,10 +60,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Limits = IndexerLimits.DeserializeIndexerLimits(property.Value);
+                    limits = IndexerLimits.DeserializeIndexerLimits(property.Value);
                     continue;
                 }
             }
+            result = new IndexerExecutionInfo(status, lastResult, executionHistory, limits);
             return result;
         }
     }

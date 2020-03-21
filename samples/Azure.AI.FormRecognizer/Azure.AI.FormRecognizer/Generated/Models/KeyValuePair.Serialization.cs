@@ -14,7 +14,11 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static KeyValuePair DeserializeKeyValuePair(JsonElement element)
         {
-            KeyValuePair result = new KeyValuePair();
+            KeyValuePair result;
+            string label = default;
+            KeyValueElement key = new KeyValueElement();
+            KeyValueElement value = new KeyValueElement();
+            float confidence = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("label"))
@@ -23,25 +27,26 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.Label = property.Value.GetString();
+                    label = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("key"))
                 {
-                    result.Key = KeyValueElement.DeserializeKeyValueElement(property.Value);
+                    key = KeyValueElement.DeserializeKeyValueElement(property.Value);
                     continue;
                 }
                 if (property.NameEquals("value"))
                 {
-                    result.Value = KeyValueElement.DeserializeKeyValueElement(property.Value);
+                    value = KeyValueElement.DeserializeKeyValueElement(property.Value);
                     continue;
                 }
                 if (property.NameEquals("confidence"))
                 {
-                    result.Confidence = property.Value.GetSingle();
+                    confidence = property.Value.GetSingle();
                     continue;
                 }
             }
+            result = new KeyValuePair(label, key, value, confidence);
             return result;
         }
     }

@@ -15,7 +15,9 @@ namespace AppConfiguration.Models
     {
         internal static LabelListResult DeserializeLabelListResult(JsonElement element)
         {
-            LabelListResult result = new LabelListResult();
+            LabelListResult result;
+            IList<Label> items = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("items"))
@@ -24,11 +26,12 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    result.Items = new List<Label>();
+                    List<Label> array = new List<Label>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Items.Add(Label.DeserializeLabel(item));
+                        array.Add(Label.DeserializeLabel(item));
                     }
+                    items = array;
                     continue;
                 }
                 if (property.NameEquals("@nextLink"))
@@ -37,10 +40,11 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    result.NextLink = property.Value.GetString();
+                    nextLink = property.Value.GetString();
                     continue;
                 }
             }
+            result = new LabelListResult(items, nextLink);
             return result;
         }
     }

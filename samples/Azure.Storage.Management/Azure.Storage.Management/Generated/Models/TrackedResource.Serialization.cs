@@ -49,7 +49,12 @@ namespace Azure.Storage.Management.Models
 
         internal static TrackedResource DeserializeTrackedResource(JsonElement element)
         {
-            TrackedResource result = new TrackedResource();
+            TrackedResource result;
+            IDictionary<string, string> tags = default;
+            string location = default;
+            string id = default;
+            string name = default;
+            string type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tags"))
@@ -58,16 +63,17 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Tags = new Dictionary<string, string>();
+                    Dictionary<string, string> array = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        result.Tags.Add(property0.Name, property0.Value.GetString());
+                        array.Add(property0.Name, property0.Value.GetString());
                     }
+                    tags = array;
                     continue;
                 }
                 if (property.NameEquals("location"))
                 {
-                    result.Location = property.Value.GetString();
+                    location = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -76,7 +82,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -85,7 +91,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -94,10 +100,11 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
             }
+            result = new TrackedResource(tags, location, id, name, type);
             return result;
         }
     }

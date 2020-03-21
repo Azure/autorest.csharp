@@ -22,10 +22,9 @@ namespace CognitiveSearch.Models
         /// <param name="fieldName"> The name of the field used as input to the scoring function. </param>
         /// <param name="boost"> A multiplier for the raw score. Must be a positive number not equal to 1.0. </param>
         /// <param name="interpolation"> A value indicating how boosting will be interpolated across document scores; defaults to &quot;Linear&quot;. </param>
-        internal DistanceScoringFunction(DistanceScoringParameters parameters, string type, string fieldName, double boost, ScoringFunctionInterpolation? interpolation) : base(type, fieldName, boost, interpolation)
+        internal DistanceScoringFunction(DistanceScoringParameters parameters, string type, string fieldName, double boost, ScoringFunctionInterpolation? interpolation) : base(type ?? "distance", fieldName, boost, interpolation)
         {
             Parameters = parameters;
-            Type = "distance";
         }
 
         /// <summary> Parameter values for the distance scoring function. </summary>

@@ -27,12 +27,14 @@ namespace CognitiveSearch.Models
 
         internal static DefaultCognitiveServicesAccount DeserializeDefaultCognitiveServicesAccount(JsonElement element)
         {
-            DefaultCognitiveServicesAccount result = new DefaultCognitiveServicesAccount();
+            DefaultCognitiveServicesAccount result;
+            string odatatype = default;
+            string description = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("description"))
@@ -41,10 +43,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Description = property.Value.GetString();
+                    description = property.Value.GetString();
                     continue;
                 }
             }
+            result = new DefaultCognitiveServicesAccount(odatatype, description);
             return result;
         }
     }

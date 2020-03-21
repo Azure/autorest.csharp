@@ -311,7 +311,7 @@ namespace httpInfrastructure
                 {
                     case 301:
                         var headers = new Put301Headers(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return ResponseWithHeaders.FromValue<Put301Headers>(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -337,7 +337,7 @@ namespace httpInfrastructure
                 {
                     case 301:
                         var headers = new Put301Headers(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return ResponseWithHeaders.FromValue<Put301Headers>(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -503,7 +503,7 @@ namespace httpInfrastructure
                 {
                     case 302:
                         var headers = new Patch302Headers(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return ResponseWithHeaders.FromValue<Patch302Headers>(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -529,7 +529,7 @@ namespace httpInfrastructure
                 {
                     case 302:
                         var headers = new Patch302Headers(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return ResponseWithHeaders.FromValue<Patch302Headers>(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }

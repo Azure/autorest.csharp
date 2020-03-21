@@ -15,7 +15,9 @@ namespace Azure.Storage.Management.Models
     {
         internal static EncryptionScopeListResult DeserializeEncryptionScopeListResult(JsonElement element)
         {
-            EncryptionScopeListResult result = new EncryptionScopeListResult();
+            EncryptionScopeListResult result;
+            IList<EncryptionScope> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -24,11 +26,12 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Value = new List<EncryptionScope>();
+                    List<EncryptionScope> array = new List<EncryptionScope>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Value.Add(EncryptionScope.DeserializeEncryptionScope(item));
+                        array.Add(EncryptionScope.DeserializeEncryptionScope(item));
                     }
+                    value = array;
                     continue;
                 }
                 if (property.NameEquals("nextLink"))
@@ -37,10 +40,11 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.NextLink = property.Value.GetString();
+                    nextLink = property.Value.GetString();
                     continue;
                 }
             }
+            result = new EncryptionScopeListResult(value, nextLink);
             return result;
         }
     }

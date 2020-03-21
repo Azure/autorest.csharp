@@ -25,11 +25,10 @@ namespace body_complex.Models
         /// <param name="species"> . </param>
         /// <param name="length"> . </param>
         /// <param name="siblings"> . </param>
-        internal Salmon(string location, bool? iswild, string fishtype, string species, float length, IList<Fish> siblings) : base(fishtype, species, length, siblings)
+        internal Salmon(string location, bool? iswild, string fishtype, string species, float length, IList<Fish> siblings) : base(fishtype ?? "salmon", species, length, siblings)
         {
             Location = location;
             Iswild = iswild;
-            Fishtype = "salmon";
         }
 
         public string Location { get; set; }

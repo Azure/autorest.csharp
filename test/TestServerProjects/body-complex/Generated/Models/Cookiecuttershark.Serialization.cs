@@ -105,15 +105,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new Cookiecuttershark()
-            {
-                Age = age,
-                Birthday = birthday,
-                Fishtype = fishtype,
-                Species = species,
-                Length = length,
-                Siblings = siblings
-            };
+            result = new Cookiecuttershark(age, birthday, fishtype, species, length, siblings);
             return result;
         }
     }

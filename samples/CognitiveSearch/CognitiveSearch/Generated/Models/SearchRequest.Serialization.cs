@@ -116,7 +116,24 @@ namespace CognitiveSearch.Models
 
         internal static SearchRequest DeserializeSearchRequest(JsonElement element)
         {
-            SearchRequest result = new SearchRequest();
+            SearchRequest result;
+            bool? count = default;
+            IList<string> facets = default;
+            string filter = default;
+            string highlight = default;
+            string highlightPostTag = default;
+            string highlightPreTag = default;
+            double? minimumCoverage = default;
+            string orderby = default;
+            QueryType? queryType = default;
+            IList<string> scoringParameters = default;
+            string scoringProfile = default;
+            string search = default;
+            string searchFields = default;
+            SearchMode? searchMode = default;
+            string select = default;
+            int? skip = default;
+            int? top = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("count"))
@@ -125,7 +142,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.IncludeTotalResultCount = property.Value.GetBoolean();
+                    count = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("facets"))
@@ -134,11 +151,12 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Facets = new List<string>();
+                    List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Facets.Add(item.GetString());
+                        array.Add(item.GetString());
                     }
+                    facets = array;
                     continue;
                 }
                 if (property.NameEquals("filter"))
@@ -147,7 +165,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Filter = property.Value.GetString();
+                    filter = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("highlight"))
@@ -156,7 +174,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.HighlightFields = property.Value.GetString();
+                    highlight = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("highlightPostTag"))
@@ -165,7 +183,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.HighlightPostTag = property.Value.GetString();
+                    highlightPostTag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("highlightPreTag"))
@@ -174,7 +192,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.HighlightPreTag = property.Value.GetString();
+                    highlightPreTag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("minimumCoverage"))
@@ -183,7 +201,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.MinimumCoverage = property.Value.GetDouble();
+                    minimumCoverage = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("orderby"))
@@ -192,7 +210,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.OrderBy = property.Value.GetString();
+                    orderby = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("queryType"))
@@ -201,7 +219,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.QueryType = property.Value.GetString().ToQueryType();
+                    queryType = property.Value.GetString().ToQueryType();
                     continue;
                 }
                 if (property.NameEquals("scoringParameters"))
@@ -210,11 +228,12 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.ScoringParameters = new List<string>();
+                    List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.ScoringParameters.Add(item.GetString());
+                        array.Add(item.GetString());
                     }
+                    scoringParameters = array;
                     continue;
                 }
                 if (property.NameEquals("scoringProfile"))
@@ -223,7 +242,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.ScoringProfile = property.Value.GetString();
+                    scoringProfile = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("search"))
@@ -232,7 +251,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.SearchText = property.Value.GetString();
+                    search = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("searchFields"))
@@ -241,7 +260,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.SearchFields = property.Value.GetString();
+                    searchFields = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("searchMode"))
@@ -250,7 +269,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.SearchMode = property.Value.GetString().ToSearchMode();
+                    searchMode = property.Value.GetString().ToSearchMode();
                     continue;
                 }
                 if (property.NameEquals("select"))
@@ -259,7 +278,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Select = property.Value.GetString();
+                    select = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("skip"))
@@ -268,7 +287,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Skip = property.Value.GetInt32();
+                    skip = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("top"))
@@ -277,10 +296,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Top = property.Value.GetInt32();
+                    top = property.Value.GetInt32();
                     continue;
                 }
             }
+            result = new SearchRequest(count, facets, filter, highlight, highlightPostTag, highlightPreTag, minimumCoverage, orderby, queryType, scoringParameters, scoringProfile, search, searchFields, searchMode, select, skip, top);
             return result;
         }
     }

@@ -32,7 +32,10 @@ namespace Azure.Storage.Management.Models
 
         internal static Identity DeserializeIdentity(JsonElement element)
         {
-            Identity result = new Identity();
+            Identity result;
+            string principalId = default;
+            string tenantId = default;
+            string type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("principalId"))
@@ -41,7 +44,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.PrincipalId = property.Value.GetString();
+                    principalId = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("tenantId"))
@@ -50,15 +53,16 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.TenantId = property.Value.GetString();
+                    tenantId = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
                 {
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
             }
+            result = new Identity(principalId, tenantId, type);
             return result;
         }
     }

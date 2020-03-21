@@ -20,7 +20,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("@search.action");
                 writer.WriteStringValue(ActionType.Value.ToSerialString());
             }
-            foreach (var item in this)
+            foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
                 writer.WriteObjectValue(item.Value);

@@ -31,7 +31,11 @@ namespace Azure.Storage.Management.Models
 
         internal static ManagementPolicyRule DeserializeManagementPolicyRule(JsonElement element)
         {
-            ManagementPolicyRule result = new ManagementPolicyRule();
+            ManagementPolicyRule result;
+            bool? enabled = default;
+            string name = default;
+            string type = default;
+            ManagementPolicyDefinition definition = new ManagementPolicyDefinition();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("enabled"))
@@ -40,25 +44,26 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Enabled = property.Value.GetBoolean();
+                    enabled = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
                 {
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("definition"))
                 {
-                    result.Definition = ManagementPolicyDefinition.DeserializeManagementPolicyDefinition(property.Value);
+                    definition = ManagementPolicyDefinition.DeserializeManagementPolicyDefinition(property.Value);
                     continue;
                 }
             }
+            result = new ManagementPolicyRule(enabled, name, type, definition);
             return result;
         }
     }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -27,7 +28,7 @@ namespace additionalProperties.Models
                 writer.WritePropertyName("status");
                 writer.WriteBooleanValue(Status.Value);
             }
-            foreach (var item in this)
+            foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
                 writer.WriteObjectValue(item.Value);
@@ -37,12 +38,16 @@ namespace additionalProperties.Models
 
         internal static PetAPObject DeserializePetAPObject(JsonElement element)
         {
-            PetAPObject result = new PetAPObject();
+            PetAPObject result;
+            int id = default;
+            string name = default;
+            bool? status = default;
+            IDictionary<string, object> additionalProperties = new Dictionary<string, object>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
                 {
-                    result.Id = property.Value.GetInt32();
+                    id = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -51,7 +56,7 @@ namespace additionalProperties.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("status"))
@@ -60,11 +65,12 @@ namespace additionalProperties.Models
                     {
                         continue;
                     }
-                    result.Status = property.Value.GetBoolean();
+                    status = property.Value.GetBoolean();
                     continue;
                 }
-                result.Add(property.Name, property.Value.GetObject());
+                additionalProperties.Add(property.Name, property.Value.GetObject());
             }
+            result = new PetAPObject(id, name, status, additionalProperties);
             return result;
         }
     }

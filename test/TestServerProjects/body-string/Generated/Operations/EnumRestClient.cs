@@ -343,7 +343,7 @@ namespace body_string
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = RefColorConstant.DeserializeRefColorConstant(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<RefColorConstant>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -372,7 +372,7 @@ namespace body_string
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = RefColorConstant.DeserializeRefColorConstant(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<RefColorConstant>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

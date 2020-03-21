@@ -23,11 +23,10 @@ namespace CognitiveSearch.Models
         /// <param name="outputUnigrams"> A value indicating whether to output both unigrams and bigrams (if true), or just bigrams (if false). Default is false. </param>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal CjkBigramTokenFilter(IList<CjkBigramTokenFilterScripts> ignoreScripts, bool? outputUnigrams, string odataType, string name) : base(odataType, name)
+        internal CjkBigramTokenFilter(IList<CjkBigramTokenFilterScripts> ignoreScripts, bool? outputUnigrams, string odataType, string name) : base(odataType ?? "#Microsoft.Azure.Search.CjkBigramTokenFilter", name)
         {
             IgnoreScripts = ignoreScripts;
             OutputUnigrams = outputUnigrams;
-            OdataType = "#Microsoft.Azure.Search.CjkBigramTokenFilter";
         }
 
         /// <summary> The scripts to ignore. </summary>

@@ -39,7 +39,12 @@ namespace CognitiveSearch.Models
 
         internal static EdgeNGramTokenFilter DeserializeEdgeNGramTokenFilter(JsonElement element)
         {
-            EdgeNGramTokenFilter result = new EdgeNGramTokenFilter();
+            EdgeNGramTokenFilter result;
+            int? minGram = default;
+            int? maxGram = default;
+            EdgeNGramTokenFilterSide? side = default;
+            string odatatype = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("minGram"))
@@ -48,7 +53,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.MinGram = property.Value.GetInt32();
+                    minGram = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("maxGram"))
@@ -57,7 +62,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.MaxGram = property.Value.GetInt32();
+                    maxGram = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("side"))
@@ -66,20 +71,21 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Side = property.Value.GetString().ToEdgeNGramTokenFilterSide();
+                    side = property.Value.GetString().ToEdgeNGramTokenFilterSide();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
+            result = new EdgeNGramTokenFilter(minGram, maxGram, side, odatatype, name);
             return result;
         }
     }

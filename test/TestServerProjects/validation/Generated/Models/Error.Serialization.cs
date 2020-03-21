@@ -14,7 +14,10 @@ namespace validation.Models
     {
         internal static Error DeserializeError(JsonElement element)
         {
-            Error result = new Error();
+            Error result;
+            int? code = default;
+            string message = default;
+            string fields = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"))
@@ -23,7 +26,7 @@ namespace validation.Models
                     {
                         continue;
                     }
-                    result.Code = property.Value.GetInt32();
+                    code = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("message"))
@@ -32,7 +35,7 @@ namespace validation.Models
                     {
                         continue;
                     }
-                    result.Message = property.Value.GetString();
+                    message = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("fields"))
@@ -41,10 +44,11 @@ namespace validation.Models
                     {
                         continue;
                     }
-                    result.Fields = property.Value.GetString();
+                    fields = property.Value.GetString();
                     continue;
                 }
             }
+            result = new Error(code, message, fields);
             return result;
         }
     }

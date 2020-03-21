@@ -28,13 +28,13 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 var value = propertyInitializer.Value;
                 if (value.IsConstant) continue;
 
-                if (value.Parameter.Name == constructorParameter.Name)
+                if (value.Reference.Name == constructorParameter.Name)
                 {
                     return propertyInitializer.Property;
                 }
             }
 
-            return null;
+            return BaseConstructor?.FindPropertyInitializedByParameter(constructorParameter);
         }
     }
 }

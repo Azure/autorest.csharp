@@ -48,12 +48,20 @@ namespace CognitiveSearch.Models
 
         internal static DataSource DeserializeDataSource(JsonElement element)
         {
-            DataSource result = new DataSource();
+            DataSource result;
+            string name = default;
+            string description = default;
+            DataSourceType type = default;
+            DataSourceCredentials credentials = new DataSourceCredentials();
+            DataContainer container = new DataContainer();
+            DataChangeDetectionPolicy dataChangeDetectionPolicy = default;
+            DataDeletionDetectionPolicy dataDeletionDetectionPolicy = default;
+            string odataetag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("description"))
@@ -62,22 +70,22 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Description = property.Value.GetString();
+                    description = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
                 {
-                    result.Type = new DataSourceType(property.Value.GetString());
+                    type = new DataSourceType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("credentials"))
                 {
-                    result.Credentials = DataSourceCredentials.DeserializeDataSourceCredentials(property.Value);
+                    credentials = DataSourceCredentials.DeserializeDataSourceCredentials(property.Value);
                     continue;
                 }
                 if (property.NameEquals("container"))
                 {
-                    result.Container = DataContainer.DeserializeDataContainer(property.Value);
+                    container = DataContainer.DeserializeDataContainer(property.Value);
                     continue;
                 }
                 if (property.NameEquals("dataChangeDetectionPolicy"))
@@ -86,7 +94,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.DataChangeDetectionPolicy = DataChangeDetectionPolicy.DeserializeDataChangeDetectionPolicy(property.Value);
+                    dataChangeDetectionPolicy = DataChangeDetectionPolicy.DeserializeDataChangeDetectionPolicy(property.Value);
                     continue;
                 }
                 if (property.NameEquals("dataDeletionDetectionPolicy"))
@@ -95,7 +103,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.DataDeletionDetectionPolicy = DataDeletionDetectionPolicy.DeserializeDataDeletionDetectionPolicy(property.Value);
+                    dataDeletionDetectionPolicy = DataDeletionDetectionPolicy.DeserializeDataDeletionDetectionPolicy(property.Value);
                     continue;
                 }
                 if (property.NameEquals("@odata.etag"))
@@ -104,10 +112,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.ETag = property.Value.GetString();
+                    odataetag = property.Value.GetString();
                     continue;
                 }
             }
+            result = new DataSource(name, description, type, credentials, container, dataChangeDetectionPolicy, dataDeletionDetectionPolicy, odataetag);
             return result;
         }
     }

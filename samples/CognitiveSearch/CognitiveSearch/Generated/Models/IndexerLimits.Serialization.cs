@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -14,7 +15,10 @@ namespace CognitiveSearch.Models
     {
         internal static IndexerLimits DeserializeIndexerLimits(JsonElement element)
         {
-            IndexerLimits result = new IndexerLimits();
+            IndexerLimits result;
+            TimeSpan? maxRunTime = default;
+            long? maxDocumentExtractionSize = default;
+            long? maxDocumentContentCharactersToExtract = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("maxRunTime"))
@@ -23,7 +27,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.MaxRunTime = property.Value.GetTimeSpan("P");
+                    maxRunTime = property.Value.GetTimeSpan("P");
                     continue;
                 }
                 if (property.NameEquals("maxDocumentExtractionSize"))
@@ -32,7 +36,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.MaxDocumentExtractionSize = property.Value.GetInt64();
+                    maxDocumentExtractionSize = property.Value.GetInt64();
                     continue;
                 }
                 if (property.NameEquals("maxDocumentContentCharactersToExtract"))
@@ -41,10 +45,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.MaxDocumentContentCharactersToExtract = property.Value.GetInt64();
+                    maxDocumentContentCharactersToExtract = property.Value.GetInt64();
                     continue;
                 }
             }
+            result = new IndexerLimits(maxRunTime, maxDocumentExtractionSize, maxDocumentContentCharactersToExtract);
             return result;
         }
     }

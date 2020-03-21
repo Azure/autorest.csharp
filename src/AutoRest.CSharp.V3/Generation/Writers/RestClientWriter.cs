@@ -316,7 +316,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
             else
             {
-                writer.AppendRaw(constantOrReference.Parameter.Name);
+                writer.AppendRaw(constantOrReference.Reference.Name);
                 if (!ignoreNullability)
                 {
                     writer.AppendNullableValue(constantOrReference.Type);
@@ -358,7 +358,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             var type = value.Type;
             if (type.IsNullable)
             {
-                return writer.Scope($"if ({value.Parameter.Name} != null)");
+                return writer.Scope($"if ({value.Reference.Name} != null)");
             }
 
             return default;
@@ -452,13 +452,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     switch (responseBody)
                     {
                         case null when headersModelType != null:
-                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue(headers, {responseVariable});");
+                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue<{headersModelType}>(headers, {responseVariable});");
                             break;
                         case { } when headersModelType != null:
-                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue({valueVariable}, headers, {responseVariable});");
+                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue<{responseBody.Type}, {headersModelType}>({valueVariable}, headers, {responseVariable});");
                             break;
                         case { }:
-                            writer.Append($"return {typeof(Response)}.FromValue({valueVariable}, {responseVariable});");
+                            writer.Append($"return {typeof(Response)}.FromValue<{responseBody.Type}>({valueVariable}, {responseVariable});");
                             break;
                         case null when !statusCodes.Any():
                             break;

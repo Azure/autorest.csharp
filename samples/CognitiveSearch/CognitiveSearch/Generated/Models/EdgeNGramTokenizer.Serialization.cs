@@ -45,7 +45,12 @@ namespace CognitiveSearch.Models
 
         internal static EdgeNGramTokenizer DeserializeEdgeNGramTokenizer(JsonElement element)
         {
-            EdgeNGramTokenizer result = new EdgeNGramTokenizer();
+            EdgeNGramTokenizer result;
+            int? minGram = default;
+            int? maxGram = default;
+            IList<TokenCharacterKind> tokenChars = default;
+            string odatatype = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("minGram"))
@@ -54,7 +59,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.MinGram = property.Value.GetInt32();
+                    minGram = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("maxGram"))
@@ -63,7 +68,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.MaxGram = property.Value.GetInt32();
+                    maxGram = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("tokenChars"))
@@ -72,24 +77,26 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.TokenChars = new List<TokenCharacterKind>();
+                    List<TokenCharacterKind> array = new List<TokenCharacterKind>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.TokenChars.Add(item.GetString().ToTokenCharacterKind());
+                        array.Add(item.GetString().ToTokenCharacterKind());
                     }
+                    tokenChars = array;
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
+            result = new EdgeNGramTokenizer(minGram, maxGram, tokenChars, odatatype, name);
             return result;
         }
     }

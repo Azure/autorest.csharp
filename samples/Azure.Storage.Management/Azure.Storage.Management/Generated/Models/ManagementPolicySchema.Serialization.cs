@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -27,18 +28,22 @@ namespace Azure.Storage.Management.Models
 
         internal static ManagementPolicySchema DeserializeManagementPolicySchema(JsonElement element)
         {
-            ManagementPolicySchema result = new ManagementPolicySchema();
+            ManagementPolicySchema result;
+            IList<ManagementPolicyRule> rules = new List<ManagementPolicyRule>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("rules"))
                 {
+                    List<ManagementPolicyRule> array = new List<ManagementPolicyRule>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Rules.Add(ManagementPolicyRule.DeserializeManagementPolicyRule(item));
+                        array.Add(ManagementPolicyRule.DeserializeManagementPolicyRule(item));
                     }
+                    rules = array;
                     continue;
                 }
             }
+            result = new ManagementPolicySchema(rules);
             return result;
         }
     }

@@ -30,7 +30,9 @@ namespace Azure.Storage.Management.Models
 
         internal static DeleteRetentionPolicy DeserializeDeleteRetentionPolicy(JsonElement element)
         {
-            DeleteRetentionPolicy result = new DeleteRetentionPolicy();
+            DeleteRetentionPolicy result;
+            bool? enabled = default;
+            int? days = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("enabled"))
@@ -39,7 +41,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Enabled = property.Value.GetBoolean();
+                    enabled = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("days"))
@@ -48,10 +50,11 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Days = property.Value.GetInt32();
+                    days = property.Value.GetInt32();
                     continue;
                 }
             }
+            result = new DeleteRetentionPolicy(enabled, days);
             return result;
         }
     }

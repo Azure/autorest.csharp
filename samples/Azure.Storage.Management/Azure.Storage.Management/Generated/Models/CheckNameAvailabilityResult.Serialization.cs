@@ -14,7 +14,10 @@ namespace Azure.Storage.Management.Models
     {
         internal static CheckNameAvailabilityResult DeserializeCheckNameAvailabilityResult(JsonElement element)
         {
-            CheckNameAvailabilityResult result = new CheckNameAvailabilityResult();
+            CheckNameAvailabilityResult result;
+            bool? nameAvailable = default;
+            Reason? reason = default;
+            string message = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("nameAvailable"))
@@ -23,7 +26,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.NameAvailable = property.Value.GetBoolean();
+                    nameAvailable = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("reason"))
@@ -32,7 +35,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Reason = property.Value.GetString().ToReason();
+                    reason = property.Value.GetString().ToReason();
                     continue;
                 }
                 if (property.NameEquals("message"))
@@ -41,10 +44,11 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Message = property.Value.GetString();
+                    message = property.Value.GetString();
                     continue;
                 }
             }
+            result = new CheckNameAvailabilityResult(nameAvailable, reason, message);
             return result;
         }
     }

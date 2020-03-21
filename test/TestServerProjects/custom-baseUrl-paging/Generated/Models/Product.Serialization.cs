@@ -14,7 +14,8 @@ namespace custom_baseUrl_paging.Models
     {
         internal static Product DeserializeProduct(JsonElement element)
         {
-            Product result = new Product();
+            Product result;
+            ProductProperties properties = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"))
@@ -23,10 +24,11 @@ namespace custom_baseUrl_paging.Models
                     {
                         continue;
                     }
-                    result.Properties = ProductProperties.DeserializeProductProperties(property.Value);
+                    properties = ProductProperties.DeserializeProductProperties(property.Value);
                     continue;
                 }
             }
+            result = new Product(properties);
             return result;
         }
     }

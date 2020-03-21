@@ -29,7 +29,10 @@ namespace CognitiveSearch.Models
 
         internal static KeywordTokenizerV2 DeserializeKeywordTokenizerV2(JsonElement element)
         {
-            KeywordTokenizerV2 result = new KeywordTokenizerV2();
+            KeywordTokenizerV2 result;
+            int? maxTokenLength = default;
+            string odatatype = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("maxTokenLength"))
@@ -38,20 +41,21 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.MaxTokenLength = property.Value.GetInt32();
+                    maxTokenLength = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
+            result = new KeywordTokenizerV2(maxTokenLength, odatatype, name);
             return result;
         }
     }

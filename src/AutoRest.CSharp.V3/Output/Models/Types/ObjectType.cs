@@ -72,16 +72,16 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     return _additionalPropertiesProperty;
                 }
 
-                var dictionaryType = new CSharpType(typeof(IDictionary<,>), isNullable: true, new CSharpType(typeof(string)), ImplementsDictionaryElementType);
-                var implementation = new CSharpType(typeof(Dictionary<,>), new CSharpType(typeof(string)), ImplementsDictionaryElementType);
+                var dictionaryType = new CSharpType(typeof(IDictionary<,>), new CSharpType(typeof(string)), ImplementsDictionaryElementType);
+                var implType = new CSharpType(typeof(Dictionary<,>), new CSharpType(typeof(string)), ImplementsDictionaryElementType);
 
-                SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetMemberForSchema("additionalProperties");
+                SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetMemberForSchema("$AdditionalProperties");
 
                 _additionalPropertiesProperty = new ObjectTypeProperty(
                     BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", dictionaryType, "internal", memberMapping?.ExistingMember),
                     string.Empty,
                     !_objectSchema.IsInput,
-                    implementation,
+                    implType,
                     null);
 
                 return _additionalPropertiesProperty;
@@ -116,13 +116,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 // pick ctor with parameters
                 baseCtor = objectType.Constructors.Single(c => c.Parameters.Any());
                 constructorParameters.AddRange(baseCtor.Parameters);
-            }
-
-            if (Discriminator != null)
-            {
-                var discriminatorInitializer = new ObjectPropertyInitializer(Discriminator.Property, BuilderHelpers.StringConstant(Discriminator.Value));
-                initializers.Add(discriminatorInitializer);
-                defaultCtorInitializers.Add(discriminatorInitializer);
             }
 
             yield return new ObjectTypeConstructor(
@@ -175,25 +168,35 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         private bool TryGetPropertyForSchemaProperty(Func<ObjectTypeProperty, bool> propertySelector, [NotNullWhen(true)] out ObjectTypeProperty? objectProperty, bool includeParents = false)
         {
             objectProperty = null;
-            ObjectType? type = this;
 
-
-            while (type != null && objectProperty == null)
+            foreach (var type in EnumerateHierarchy())
             {
                 objectProperty = type.Properties.SingleOrDefault(propertySelector);
-                CSharpType? inheritsType = type.Inherits;
-                if (includeParents &&
-                    inheritsType != null &&
-                    !inheritsType.IsFrameworkType)
+                if (objectProperty != null || !includeParents)
                 {
-                    type = inheritsType.Implementation as ObjectType;
+                    break;
+                }
+            }
+
+            return objectProperty != null;
+        }
+
+        public IEnumerable<ObjectType> EnumerateHierarchy()
+        {
+            ObjectType? type = this;
+            while (type != null)
+            {
+                yield return type;
+
+                if (type.Inherits?.IsFrameworkType == false && type.Inherits.Implementation is ObjectType o)
+                {
+                    type = o;
                 }
                 else
                 {
                     type = null;
                 }
             }
-            return objectProperty != null;
         }
 
         private ObjectTypeDiscriminator? BuildDiscriminator()

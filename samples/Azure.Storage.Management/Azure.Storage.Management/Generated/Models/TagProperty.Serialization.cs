@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -45,7 +46,12 @@ namespace Azure.Storage.Management.Models
 
         internal static TagProperty DeserializeTagProperty(JsonElement element)
         {
-            TagProperty result = new TagProperty();
+            TagProperty result;
+            string tag = default;
+            DateTimeOffset? timestamp = default;
+            string objectIdentifier = default;
+            string tenantId = default;
+            string upn = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tag"))
@@ -54,7 +60,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Tag = property.Value.GetString();
+                    tag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("timestamp"))
@@ -63,7 +69,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Timestamp = property.Value.GetDateTimeOffset("S");
+                    timestamp = property.Value.GetDateTimeOffset("S");
                     continue;
                 }
                 if (property.NameEquals("objectIdentifier"))
@@ -72,7 +78,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.ObjectIdentifier = property.Value.GetString();
+                    objectIdentifier = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("tenantId"))
@@ -81,7 +87,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.TenantId = property.Value.GetString();
+                    tenantId = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("upn"))
@@ -90,10 +96,11 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Upn = property.Value.GetString();
+                    upn = property.Value.GetString();
                     continue;
                 }
             }
+            result = new TagProperty(tag, timestamp, objectIdentifier, tenantId, upn);
             return result;
         }
     }

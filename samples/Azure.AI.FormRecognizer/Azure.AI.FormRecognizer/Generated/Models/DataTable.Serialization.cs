@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -14,28 +15,34 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static DataTable DeserializeDataTable(JsonElement element)
         {
-            DataTable result = new DataTable();
+            DataTable result;
+            int rows = default;
+            int columns = default;
+            IList<DataTableCell> cells = new List<DataTableCell>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("rows"))
                 {
-                    result.Rows = property.Value.GetInt32();
+                    rows = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("columns"))
                 {
-                    result.Columns = property.Value.GetInt32();
+                    columns = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("cells"))
                 {
+                    List<DataTableCell> array = new List<DataTableCell>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Cells.Add(DataTableCell.DeserializeDataTableCell(item));
+                        array.Add(DataTableCell.DeserializeDataTableCell(item));
                     }
+                    cells = array;
                     continue;
                 }
             }
+            result = new DataTable(rows, columns, cells);
             return result;
         }
     }

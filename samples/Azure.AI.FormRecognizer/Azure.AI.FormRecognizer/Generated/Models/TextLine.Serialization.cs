@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -14,20 +15,26 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static TextLine DeserializeTextLine(JsonElement element)
         {
-            TextLine result = new TextLine();
+            TextLine result;
+            string text = default;
+            IList<float> boundingBox = new List<float>();
+            Language? language = default;
+            IList<TextWord> words = new List<TextWord>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("text"))
                 {
-                    result.Text = property.Value.GetString();
+                    text = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("boundingBox"))
                 {
+                    List<float> array = new List<float>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.BoundingBox.Add(item.GetSingle());
+                        array.Add(item.GetSingle());
                     }
+                    boundingBox = array;
                     continue;
                 }
                 if (property.NameEquals("language"))
@@ -36,18 +43,21 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.Language = new Language(property.Value.GetString());
+                    language = new Language(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("words"))
                 {
+                    List<TextWord> array = new List<TextWord>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Words.Add(TextWord.DeserializeTextWord(item));
+                        array.Add(TextWord.DeserializeTextWord(item));
                     }
+                    words = array;
                     continue;
                 }
             }
+            result = new TextLine(text, boundingBox, language, words);
             return result;
         }
     }

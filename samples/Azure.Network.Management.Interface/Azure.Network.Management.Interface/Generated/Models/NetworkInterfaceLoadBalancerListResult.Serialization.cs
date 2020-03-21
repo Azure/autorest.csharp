@@ -15,7 +15,9 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static NetworkInterfaceLoadBalancerListResult DeserializeNetworkInterfaceLoadBalancerListResult(JsonElement element)
         {
-            NetworkInterfaceLoadBalancerListResult result = new NetworkInterfaceLoadBalancerListResult();
+            NetworkInterfaceLoadBalancerListResult result;
+            IList<LoadBalancer> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -24,11 +26,12 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Value = new List<LoadBalancer>();
+                    List<LoadBalancer> array = new List<LoadBalancer>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Value.Add(LoadBalancer.DeserializeLoadBalancer(item));
+                        array.Add(LoadBalancer.DeserializeLoadBalancer(item));
                     }
+                    value = array;
                     continue;
                 }
                 if (property.NameEquals("nextLink"))
@@ -37,10 +40,11 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.NextLink = property.Value.GetString();
+                    nextLink = property.Value.GetString();
                     continue;
                 }
             }
+            result = new NetworkInterfaceLoadBalancerListResult(value, nextLink);
             return result;
         }
     }

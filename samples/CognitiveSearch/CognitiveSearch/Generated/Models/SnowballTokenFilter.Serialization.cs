@@ -26,25 +26,29 @@ namespace CognitiveSearch.Models
 
         internal static SnowballTokenFilter DeserializeSnowballTokenFilter(JsonElement element)
         {
-            SnowballTokenFilter result = new SnowballTokenFilter();
+            SnowballTokenFilter result;
+            SnowballTokenFilterLanguage language = default;
+            string odatatype = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("language"))
                 {
-                    result.Language = property.Value.GetString().ToSnowballTokenFilterLanguage();
+                    language = property.Value.GetString().ToSnowballTokenFilterLanguage();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
+            result = new SnowballTokenFilter(language, odatatype, name);
             return result;
         }
     }

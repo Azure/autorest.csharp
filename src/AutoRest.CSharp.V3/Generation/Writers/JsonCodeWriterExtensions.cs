@@ -60,7 +60,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 case JsonObjectSerialization obj:
                     writer.Line($"{writerName}.WriteStartObject();");
-                    var itemVariable = new CodeWriterDeclaration("item");
 
                     foreach (JsonPropertySerialization property in obj.Properties)
                     {
@@ -76,10 +75,17 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     if (obj.AdditionalProperties != null)
                     {
-                        writer.ToSerializeCall(
-                            obj.AdditionalProperties.Serialization,
-                            w => w.Append($"{obj.AdditionalProperties.Property.Declaration.Name}"),
-                            writerName);
+                        var itemVariable = new CodeWriterDeclaration("item");
+
+                        writer.Line($"foreach (var {itemVariable:D} in {obj.AdditionalProperties.Property.Declaration.Name})");
+                        using (writer.Scope())
+                        {
+                            writer.Line($"{writerName}.WritePropertyName({itemVariable}.Key);");
+                            writer.ToSerializeCall(
+                                obj.AdditionalProperties.ValueSerialization,
+                                w => w.Append($"{itemVariable}.Value"),
+                                writerName);
+                        }
                     }
 
                     writer.Line($"{writerName}.WriteEndObject();");
@@ -207,7 +213,16 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     foreach (var variable in propertyVariables)
                     {
                         var objectTypeProperty = variable.Key;
-                        writer.Line($"{objectTypeProperty.Declaration.Type} {variable.Value:D} = default;");
+                        writer.Append($"{objectTypeProperty.Declaration.Type} {variable.Value:D} = ");
+                        if (objectTypeProperty.InitializeWithType != null)
+                        {
+                            writer.Append($"new {objectTypeProperty.InitializeWithType}()");
+                        }
+                        else
+                        {
+                            writer.Append($"default");
+                        }
+                        writer.Line($";");
                     }
                 }
 
@@ -250,7 +265,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                 writer.DeserializeIntoVariableMayBeObject(
                                     property.ValueSerialization,
                                     w => { },
-                                    w => w.Append($"{itemVariable.ActualName}.Value"));
+                                    w => w.Append($"{itemVariable.ActualName}.Value"),
+                                    propertyVariables);
                             }
 
                             writer.Line($"continue;");
@@ -262,10 +278,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     {
                         var variable = propertyVariables[objAdditionalProperties.Property];
 
-                        writer.Line($"{variable} ??= new {objAdditionalProperties.Serialization.Type}();");
-
                         DeserializeValue(writer,
-                            objAdditionalProperties.Serialization.ValueSerialization,
+                            objAdditionalProperties.ValueSerialization,
                             w => w.Append($"{itemVariable}.Value"),
                             (w, v) => w.Line($"{variable}.Add({itemVariable}.Name, {v});"));
                     }

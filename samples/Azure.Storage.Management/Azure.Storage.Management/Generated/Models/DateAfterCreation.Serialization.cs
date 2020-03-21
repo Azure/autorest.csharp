@@ -22,15 +22,17 @@ namespace Azure.Storage.Management.Models
 
         internal static DateAfterCreation DeserializeDateAfterCreation(JsonElement element)
         {
-            DateAfterCreation result = new DateAfterCreation();
+            DateAfterCreation result;
+            float daysAfterCreationGreaterThan = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("daysAfterCreationGreaterThan"))
                 {
-                    result.DaysAfterCreationGreaterThan = property.Value.GetSingle();
+                    daysAfterCreationGreaterThan = property.Value.GetSingle();
                     continue;
                 }
             }
+            result = new DateAfterCreation(daysAfterCreationGreaterThan);
             return result;
         }
     }

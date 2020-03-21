@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
         public bool IsConstant => _constant.HasValue;
 
         public Constant Constant => _constant ?? throw new InvalidOperationException("Not a constant");
-        public Reference Parameter => _reference ?? throw new InvalidOperationException("Not a reference");
+        public Reference Reference => _reference ?? throw new InvalidOperationException("Not a reference");
 
         public static implicit operator ReferenceOrConstant(Constant constant) => new ReferenceOrConstant(constant);
         public static implicit operator ReferenceOrConstant(Reference reference) => new ReferenceOrConstant(reference);

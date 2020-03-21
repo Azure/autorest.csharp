@@ -26,25 +26,29 @@ namespace CognitiveSearch.Models
 
         internal static StemmerTokenFilter DeserializeStemmerTokenFilter(JsonElement element)
         {
-            StemmerTokenFilter result = new StemmerTokenFilter();
+            StemmerTokenFilter result;
+            StemmerTokenFilterLanguage language = default;
+            string odatatype = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("language"))
                 {
-                    result.Language = property.Value.GetString().ToStemmerTokenFilterLanguage();
+                    language = property.Value.GetString().ToStemmerTokenFilterLanguage();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
+            result = new StemmerTokenFilter(language, odatatype, name);
             return result;
         }
     }

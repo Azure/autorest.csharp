@@ -40,7 +40,11 @@ namespace Azure.Storage.Management.Models
 
         internal static EncryptionServices DeserializeEncryptionServices(JsonElement element)
         {
-            EncryptionServices result = new EncryptionServices();
+            EncryptionServices result;
+            EncryptionService blob = default;
+            EncryptionService file = default;
+            EncryptionService table = default;
+            EncryptionService queue = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("blob"))
@@ -49,7 +53,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Blob = EncryptionService.DeserializeEncryptionService(property.Value);
+                    blob = EncryptionService.DeserializeEncryptionService(property.Value);
                     continue;
                 }
                 if (property.NameEquals("file"))
@@ -58,7 +62,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.File = EncryptionService.DeserializeEncryptionService(property.Value);
+                    file = EncryptionService.DeserializeEncryptionService(property.Value);
                     continue;
                 }
                 if (property.NameEquals("table"))
@@ -67,7 +71,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Table = EncryptionService.DeserializeEncryptionService(property.Value);
+                    table = EncryptionService.DeserializeEncryptionService(property.Value);
                     continue;
                 }
                 if (property.NameEquals("queue"))
@@ -76,10 +80,11 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Queue = EncryptionService.DeserializeEncryptionService(property.Value);
+                    queue = EncryptionService.DeserializeEncryptionService(property.Value);
                     continue;
                 }
             }
+            result = new EncryptionServices(blob, file, table, queue);
             return result;
         }
     }

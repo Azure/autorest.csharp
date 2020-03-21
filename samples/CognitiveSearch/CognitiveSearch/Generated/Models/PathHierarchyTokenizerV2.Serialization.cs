@@ -49,7 +49,14 @@ namespace CognitiveSearch.Models
 
         internal static PathHierarchyTokenizerV2 DeserializePathHierarchyTokenizerV2(JsonElement element)
         {
-            PathHierarchyTokenizerV2 result = new PathHierarchyTokenizerV2();
+            PathHierarchyTokenizerV2 result;
+            char? delimiter = default;
+            char? replacement = default;
+            int? maxTokenLength = default;
+            bool? reverse = default;
+            int? skip = default;
+            string odatatype = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("delimiter"))
@@ -58,7 +65,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Delimiter = property.Value.GetChar();
+                    delimiter = property.Value.GetChar();
                     continue;
                 }
                 if (property.NameEquals("replacement"))
@@ -67,7 +74,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Replacement = property.Value.GetChar();
+                    replacement = property.Value.GetChar();
                     continue;
                 }
                 if (property.NameEquals("maxTokenLength"))
@@ -76,7 +83,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.MaxTokenLength = property.Value.GetInt32();
+                    maxTokenLength = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("reverse"))
@@ -85,7 +92,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.ReverseTokenOrder = property.Value.GetBoolean();
+                    reverse = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("skip"))
@@ -94,20 +101,21 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.NumberOfTokensToSkip = property.Value.GetInt32();
+                    skip = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
+            result = new PathHierarchyTokenizerV2(delimiter, replacement, maxTokenLength, reverse, skip, odatatype, name);
             return result;
         }
     }

@@ -15,7 +15,8 @@ namespace CognitiveSearch.Models
     {
         internal static AnalyzeResult DeserializeAnalyzeResult(JsonElement element)
         {
-            AnalyzeResult result = new AnalyzeResult();
+            AnalyzeResult result;
+            IList<TokenInfo> tokens = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tokens"))
@@ -24,14 +25,16 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Tokens = new List<TokenInfo>();
+                    List<TokenInfo> array = new List<TokenInfo>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Tokens.Add(TokenInfo.DeserializeTokenInfo(item));
+                        array.Add(TokenInfo.DeserializeTokenInfo(item));
                     }
+                    tokens = array;
                     continue;
                 }
             }
+            result = new AnalyzeResult(tokens);
             return result;
         }
     }

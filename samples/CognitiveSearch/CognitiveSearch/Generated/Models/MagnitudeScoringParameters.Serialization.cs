@@ -29,17 +29,20 @@ namespace CognitiveSearch.Models
 
         internal static MagnitudeScoringParameters DeserializeMagnitudeScoringParameters(JsonElement element)
         {
-            MagnitudeScoringParameters result = new MagnitudeScoringParameters();
+            MagnitudeScoringParameters result;
+            double boostingRangeStart = default;
+            double boostingRangeEnd = default;
+            bool? constantBoostBeyondRange = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("boostingRangeStart"))
                 {
-                    result.BoostingRangeStart = property.Value.GetDouble();
+                    boostingRangeStart = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("boostingRangeEnd"))
                 {
-                    result.BoostingRangeEnd = property.Value.GetDouble();
+                    boostingRangeEnd = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("constantBoostBeyondRange"))
@@ -48,10 +51,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.ShouldBoostBeyondRangeByConstant = property.Value.GetBoolean();
+                    constantBoostBeyondRange = property.Value.GetBoolean();
                     continue;
                 }
             }
+            result = new MagnitudeScoringParameters(boostingRangeStart, boostingRangeEnd, constantBoostBeyondRange);
             return result;
         }
     }

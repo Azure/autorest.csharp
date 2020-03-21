@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -22,15 +23,17 @@ namespace CognitiveSearch.Models
 
         internal static FreshnessScoringParameters DeserializeFreshnessScoringParameters(JsonElement element)
         {
-            FreshnessScoringParameters result = new FreshnessScoringParameters();
+            FreshnessScoringParameters result;
+            TimeSpan boostingDuration = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("boostingDuration"))
                 {
-                    result.BoostingDuration = property.Value.GetTimeSpan("P");
+                    boostingDuration = property.Value.GetTimeSpan("P");
                     continue;
                 }
             }
+            result = new FreshnessScoringParameters(boostingDuration);
             return result;
         }
     }

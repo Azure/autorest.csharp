@@ -84,7 +84,18 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static Probe DeserializeProbe(JsonElement element)
         {
-            Probe result = new Probe();
+            Probe result;
+            string name = default;
+            string etag = default;
+            string type = default;
+            string id = default;
+            IList<SubResource> loadBalancingRules = default;
+            ProbeProtocol? protocol = default;
+            int? port = default;
+            int? intervalInSeconds = default;
+            int? numberOfProbes = default;
+            string requestPath = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -93,7 +104,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("etag"))
@@ -102,7 +113,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Etag = property.Value.GetString();
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -111,7 +122,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -120,7 +131,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -133,11 +144,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.LoadBalancingRules = new List<SubResource>();
+                            List<SubResource> array = new List<SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.LoadBalancingRules.Add(DeserializeSubResource(item));
+                                array.Add(DeserializeSubResource(item));
                             }
+                            loadBalancingRules = array;
                             continue;
                         }
                         if (property0.NameEquals("protocol"))
@@ -146,7 +158,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.Protocol = new ProbeProtocol(property0.Value.GetString());
+                            protocol = new ProbeProtocol(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("port"))
@@ -155,7 +167,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.Port = property0.Value.GetInt32();
+                            port = property0.Value.GetInt32();
                             continue;
                         }
                         if (property0.NameEquals("intervalInSeconds"))
@@ -164,7 +176,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.IntervalInSeconds = property0.Value.GetInt32();
+                            intervalInSeconds = property0.Value.GetInt32();
                             continue;
                         }
                         if (property0.NameEquals("numberOfProbes"))
@@ -173,7 +185,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.NumberOfProbes = property0.Value.GetInt32();
+                            numberOfProbes = property0.Value.GetInt32();
                             continue;
                         }
                         if (property0.NameEquals("requestPath"))
@@ -182,7 +194,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.RequestPath = property0.Value.GetString();
+                            requestPath = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -191,13 +203,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningState = new ProvisioningState(property0.Value.GetString());
+                            provisioningState = new ProvisioningState(property0.Value.GetString());
                             continue;
                         }
                     }
                     continue;
                 }
             }
+            result = new Probe(name, etag, type, loadBalancingRules, protocol, port, intervalInSeconds, numberOfProbes, requestPath, provisioningState, id);
             return result;
         }
     }

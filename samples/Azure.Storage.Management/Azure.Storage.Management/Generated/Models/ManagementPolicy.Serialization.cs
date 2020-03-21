@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -48,7 +49,12 @@ namespace Azure.Storage.Management.Models
 
         internal static ManagementPolicy DeserializeManagementPolicy(JsonElement element)
         {
-            ManagementPolicy result = new ManagementPolicy();
+            ManagementPolicy result;
+            string id = default;
+            string name = default;
+            string type = default;
+            DateTimeOffset? lastModifiedTime = default;
+            ManagementPolicySchema policy = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -57,7 +63,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -66,7 +72,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -75,7 +81,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -88,7 +94,7 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            result.LastModifiedTime = property0.Value.GetDateTimeOffset("S");
+                            lastModifiedTime = property0.Value.GetDateTimeOffset("S");
                             continue;
                         }
                         if (property0.NameEquals("policy"))
@@ -97,13 +103,14 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            result.Policy = ManagementPolicySchema.DeserializeManagementPolicySchema(property0.Value);
+                            policy = ManagementPolicySchema.DeserializeManagementPolicySchema(property0.Value);
                             continue;
                         }
                     }
                     continue;
                 }
             }
+            result = new ManagementPolicy(lastModifiedTime, policy, id, name, type);
             return result;
         }
     }

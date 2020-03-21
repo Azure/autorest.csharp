@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -14,20 +15,25 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static TextWord DeserializeTextWord(JsonElement element)
         {
-            TextWord result = new TextWord();
+            TextWord result;
+            string text = default;
+            IList<float> boundingBox = new List<float>();
+            float? confidence = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("text"))
                 {
-                    result.Text = property.Value.GetString();
+                    text = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("boundingBox"))
                 {
+                    List<float> array = new List<float>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.BoundingBox.Add(item.GetSingle());
+                        array.Add(item.GetSingle());
                     }
+                    boundingBox = array;
                     continue;
                 }
                 if (property.NameEquals("confidence"))
@@ -36,10 +42,11 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.Confidence = property.Value.GetSingle();
+                    confidence = property.Value.GetSingle();
                     continue;
                 }
             }
+            result = new TextWord(text, boundingBox, confidence);
             return result;
         }
     }

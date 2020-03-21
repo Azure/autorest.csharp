@@ -69,7 +69,7 @@ namespace body_complex
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = Basic.DeserializeBasic(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Basic>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -98,7 +98,7 @@ namespace body_complex
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = Basic.DeserializeBasic(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Basic>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -218,7 +218,7 @@ namespace body_complex
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = Basic.DeserializeBasic(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Basic>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -247,7 +247,7 @@ namespace body_complex
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = Basic.DeserializeBasic(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Basic>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -288,7 +288,7 @@ namespace body_complex
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = Basic.DeserializeBasic(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Basic>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -317,7 +317,7 @@ namespace body_complex
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = Basic.DeserializeBasic(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Basic>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -358,7 +358,7 @@ namespace body_complex
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = Basic.DeserializeBasic(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Basic>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -387,7 +387,7 @@ namespace body_complex
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = Basic.DeserializeBasic(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Basic>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -428,7 +428,7 @@ namespace body_complex
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = Basic.DeserializeBasic(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Basic>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -457,7 +457,7 @@ namespace body_complex
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = Basic.DeserializeBasic(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Basic>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

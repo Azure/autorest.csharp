@@ -13,7 +13,6 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of Analyzer. </summary>
         public Analyzer()
         {
-            OdataType = null;
         }
 
         /// <summary> Initializes a new instance of Analyzer. </summary>
@@ -23,7 +22,6 @@ namespace CognitiveSearch.Models
         {
             OdataType = odataType;
             Name = name;
-            OdataType = null;
         }
 
         public string OdataType { get; internal set; }

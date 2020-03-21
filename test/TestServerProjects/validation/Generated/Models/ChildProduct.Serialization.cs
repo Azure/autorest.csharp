@@ -27,12 +27,14 @@ namespace validation.Models
 
         internal static ChildProduct DeserializeChildProduct(JsonElement element)
         {
-            ChildProduct result = new ChildProduct();
+            ChildProduct result;
+            string constProperty = default;
+            int? count = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("constProperty"))
                 {
-                    result.ConstProperty = property.Value.GetString();
+                    constProperty = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("count"))
@@ -41,10 +43,11 @@ namespace validation.Models
                     {
                         continue;
                     }
-                    result.Count = property.Value.GetInt32();
+                    count = property.Value.GetInt32();
                     continue;
                 }
             }
+            result = new ChildProduct(constProperty, count);
             return result;
         }
     }

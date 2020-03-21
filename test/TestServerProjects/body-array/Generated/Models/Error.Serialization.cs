@@ -14,7 +14,9 @@ namespace body_array.Models
     {
         internal static Error DeserializeError(JsonElement element)
         {
-            Error result = new Error();
+            Error result;
+            int? status = default;
+            string message = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"))
@@ -23,7 +25,7 @@ namespace body_array.Models
                     {
                         continue;
                     }
-                    result.Status = property.Value.GetInt32();
+                    status = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("message"))
@@ -32,10 +34,11 @@ namespace body_array.Models
                     {
                         continue;
                     }
-                    result.Message = property.Value.GetString();
+                    message = property.Value.GetString();
                     continue;
                 }
             }
+            result = new Error(status, message);
             return result;
         }
     }

@@ -14,17 +14,23 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static Entity DeserializeEntity(JsonElement element)
         {
-            Entity result = new Entity();
+            Entity result;
+            string text = default;
+            string type = default;
+            string subtype = default;
+            int offset = default;
+            int length = default;
+            double score = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("text"))
                 {
-                    result.Text = property.Value.GetString();
+                    text = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
                 {
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("subtype"))
@@ -33,25 +39,26 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    result.Subtype = property.Value.GetString();
+                    subtype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("offset"))
                 {
-                    result.Offset = property.Value.GetInt32();
+                    offset = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("length"))
                 {
-                    result.Length = property.Value.GetInt32();
+                    length = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("score"))
                 {
-                    result.Score = property.Value.GetDouble();
+                    score = property.Value.GetDouble();
                     continue;
                 }
             }
+            result = new Entity(text, type, subtype, offset, length, score);
             return result;
         }
     }

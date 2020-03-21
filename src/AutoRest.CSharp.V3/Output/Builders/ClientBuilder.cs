@@ -394,7 +394,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 typeof(string),
                 null,
                 true);
-            var headerParameterNames = method.Request.Headers.Where(h => !h.Value.IsConstant).Select(h => h.Value.Parameter.Name).ToArray();
+            var headerParameterNames = method.Request.Headers.Where(h => !h.Value.IsConstant).Select(h => h.Value.Reference.Name).ToArray();
             var parameters = method.Parameters.Where(p =>  headerParameterNames.Contains(p.Name)).Append(nextPageUrlParameter).ToArray();
             var request = new Request(
                 method.Request.HttpMethod,

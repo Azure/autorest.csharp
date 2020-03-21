@@ -28,30 +28,35 @@ namespace CognitiveSearch.Models
 
         internal static PatternReplaceTokenFilter DeserializePatternReplaceTokenFilter(JsonElement element)
         {
-            PatternReplaceTokenFilter result = new PatternReplaceTokenFilter();
+            PatternReplaceTokenFilter result;
+            string pattern = default;
+            string replacement = default;
+            string odatatype = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("pattern"))
                 {
-                    result.Pattern = property.Value.GetString();
+                    pattern = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("replacement"))
                 {
-                    result.Replacement = property.Value.GetString();
+                    replacement = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
+            result = new PatternReplaceTokenFilter(pattern, replacement, odatatype, name);
             return result;
         }
     }

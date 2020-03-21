@@ -63,7 +63,7 @@ namespace httpInfrastructure
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -92,7 +92,7 @@ namespace httpInfrastructure
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -133,7 +133,7 @@ namespace httpInfrastructure
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -162,7 +162,7 @@ namespace httpInfrastructure
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -203,7 +203,7 @@ namespace httpInfrastructure
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -232,7 +232,7 @@ namespace httpInfrastructure
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -273,7 +273,7 @@ namespace httpInfrastructure
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -302,7 +302,7 @@ namespace httpInfrastructure
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -343,7 +343,7 @@ namespace httpInfrastructure
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -372,7 +372,7 @@ namespace httpInfrastructure
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -413,7 +413,7 @@ namespace httpInfrastructure
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -442,7 +442,7 @@ namespace httpInfrastructure
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -483,7 +483,7 @@ namespace httpInfrastructure
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -512,7 +512,7 @@ namespace httpInfrastructure
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -553,7 +553,7 @@ namespace httpInfrastructure
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -582,7 +582,7 @@ namespace httpInfrastructure
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -623,7 +623,7 @@ namespace httpInfrastructure
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -652,7 +652,7 @@ namespace httpInfrastructure
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -693,7 +693,7 @@ namespace httpInfrastructure
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -722,7 +722,7 @@ namespace httpInfrastructure
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -763,7 +763,7 @@ namespace httpInfrastructure
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -792,7 +792,7 @@ namespace httpInfrastructure
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -833,7 +833,7 @@ namespace httpInfrastructure
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -862,7 +862,7 @@ namespace httpInfrastructure
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1337,7 +1337,7 @@ namespace httpInfrastructure
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1366,7 +1366,7 @@ namespace httpInfrastructure
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1407,7 +1407,7 @@ namespace httpInfrastructure
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1436,7 +1436,7 @@ namespace httpInfrastructure
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1849,7 +1849,7 @@ namespace httpInfrastructure
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1878,7 +1878,7 @@ namespace httpInfrastructure
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1919,7 +1919,7 @@ namespace httpInfrastructure
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1948,7 +1948,7 @@ namespace httpInfrastructure
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1989,7 +1989,7 @@ namespace httpInfrastructure
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2018,7 +2018,7 @@ namespace httpInfrastructure
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2059,7 +2059,7 @@ namespace httpInfrastructure
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2088,7 +2088,7 @@ namespace httpInfrastructure
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2129,7 +2129,7 @@ namespace httpInfrastructure
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2158,7 +2158,7 @@ namespace httpInfrastructure
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2199,7 +2199,7 @@ namespace httpInfrastructure
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2228,7 +2228,7 @@ namespace httpInfrastructure
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2269,7 +2269,7 @@ namespace httpInfrastructure
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2298,7 +2298,7 @@ namespace httpInfrastructure
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<MyException>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

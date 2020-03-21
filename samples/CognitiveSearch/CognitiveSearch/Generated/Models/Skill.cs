@@ -15,7 +15,6 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of Skill. </summary>
         public Skill()
         {
-            OdataType = null;
         }
 
         /// <summary> Initializes a new instance of Skill. </summary>
@@ -33,7 +32,6 @@ namespace CognitiveSearch.Models
             Context = context;
             Inputs = inputs;
             Outputs = outputs;
-            OdataType = null;
         }
 
         public string OdataType { get; internal set; }

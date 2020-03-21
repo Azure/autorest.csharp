@@ -72,7 +72,7 @@ namespace media_types
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetString();
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<string>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -104,7 +104,7 @@ namespace media_types
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = document.RootElement.GetString();
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<string>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -151,7 +151,7 @@ namespace media_types
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetString();
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<string>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -182,7 +182,7 @@ namespace media_types
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = document.RootElement.GetString();
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<string>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

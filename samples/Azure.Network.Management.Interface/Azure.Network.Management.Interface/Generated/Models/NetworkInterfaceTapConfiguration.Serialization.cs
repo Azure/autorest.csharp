@@ -53,7 +53,13 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static NetworkInterfaceTapConfiguration DeserializeNetworkInterfaceTapConfiguration(JsonElement element)
         {
-            NetworkInterfaceTapConfiguration result = new NetworkInterfaceTapConfiguration();
+            NetworkInterfaceTapConfiguration result;
+            string name = default;
+            string etag = default;
+            string type = default;
+            string id = default;
+            VirtualNetworkTap virtualNetworkTap = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -62,7 +68,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("etag"))
@@ -71,7 +77,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Etag = property.Value.GetString();
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -80,7 +86,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -89,7 +95,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -102,7 +108,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.VirtualNetworkTap = VirtualNetworkTap.DeserializeVirtualNetworkTap(property0.Value);
+                            virtualNetworkTap = VirtualNetworkTap.DeserializeVirtualNetworkTap(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -111,13 +117,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningState = new ProvisioningState(property0.Value.GetString());
+                            provisioningState = new ProvisioningState(property0.Value.GetString());
                             continue;
                         }
                     }
                     continue;
                 }
             }
+            result = new NetworkInterfaceTapConfiguration(name, etag, type, virtualNetworkTap, provisioningState, id);
             return result;
         }
     }

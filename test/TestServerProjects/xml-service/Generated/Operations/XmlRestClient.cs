@@ -70,7 +70,7 @@ namespace xml_service
                             {
                                 value = RootWithRefAndNoMeta.DeserializeRootWithRefAndNoMeta(rootWithRefAndNoMeta);
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<RootWithRefAndNoMeta>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -104,7 +104,7 @@ namespace xml_service
                             {
                                 value = RootWithRefAndNoMeta.DeserializeRootWithRefAndNoMeta(rootWithRefAndNoMeta);
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<RootWithRefAndNoMeta>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -228,7 +228,7 @@ namespace xml_service
                             {
                                 value = RootWithRefAndMeta.DeserializeRootWithRefAndMeta(rootWithRefAndMeta);
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<RootWithRefAndMeta>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -262,7 +262,7 @@ namespace xml_service
                             {
                                 value = RootWithRefAndMeta.DeserializeRootWithRefAndMeta(rootWithRefAndMeta);
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<RootWithRefAndMeta>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -386,7 +386,7 @@ namespace xml_service
                             {
                                 value = Slideshow.DeserializeSlideshow(slideshow);
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Slideshow>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -420,7 +420,7 @@ namespace xml_service
                             {
                                 value = Slideshow.DeserializeSlideshow(slideshow);
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Slideshow>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -544,7 +544,7 @@ namespace xml_service
                             {
                                 value = AppleBarrel.DeserializeAppleBarrel(appleBarrel);
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<AppleBarrel>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -578,7 +578,7 @@ namespace xml_service
                             {
                                 value = AppleBarrel.DeserializeAppleBarrel(appleBarrel);
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<AppleBarrel>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -695,7 +695,7 @@ namespace xml_service
                 {
                     case 200:
                         var headers = new GetHeadersHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return ResponseWithHeaders.FromValue<GetHeadersHeaders>(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -721,7 +721,7 @@ namespace xml_service
                 {
                     case 200:
                         var headers = new GetHeadersHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
+                        return ResponseWithHeaders.FromValue<GetHeadersHeaders>(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -766,7 +766,7 @@ namespace xml_service
                             {
                                 value = Slideshow.DeserializeSlideshow(slideshow);
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Slideshow>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -800,7 +800,7 @@ namespace xml_service
                             {
                                 value = Slideshow.DeserializeSlideshow(slideshow);
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Slideshow>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -924,7 +924,7 @@ namespace xml_service
                             {
                                 value = AppleBarrel.DeserializeAppleBarrel(appleBarrel);
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<AppleBarrel>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -958,7 +958,7 @@ namespace xml_service
                             {
                                 value = AppleBarrel.DeserializeAppleBarrel(appleBarrel);
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<AppleBarrel>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1088,7 +1088,7 @@ namespace xml_service
                                     value.Add(value0);
                                 }
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<IList<Banana>>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1128,7 +1128,7 @@ namespace xml_service
                                     value.Add(value0);
                                 }
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<IList<Banana>>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1263,7 +1263,7 @@ namespace xml_service
                                     value.Add(value0);
                                 }
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<IList<Banana>>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1303,7 +1303,7 @@ namespace xml_service
                                     value.Add(value0);
                                 }
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<IList<Banana>>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1438,7 +1438,7 @@ namespace xml_service
                                     value.Add(value0);
                                 }
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<IList<Banana>>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1478,7 +1478,7 @@ namespace xml_service
                                     value.Add(value0);
                                 }
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<IList<Banana>>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1607,7 +1607,7 @@ namespace xml_service
                             {
                                 value = Banana.DeserializeBanana(banana);
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Banana>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1641,7 +1641,7 @@ namespace xml_service
                             {
                                 value = Banana.DeserializeBanana(banana);
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Banana>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1766,7 +1766,7 @@ namespace xml_service
                             {
                                 value = ListContainersResponse.DeserializeListContainersResponse(enumerationResults);
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<ListContainersResponse>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1800,7 +1800,7 @@ namespace xml_service
                             {
                                 value = ListContainersResponse.DeserializeListContainersResponse(enumerationResults);
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<ListContainersResponse>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1848,7 +1848,7 @@ namespace xml_service
                             {
                                 value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServiceProperties);
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<StorageServiceProperties>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1882,7 +1882,7 @@ namespace xml_service
                             {
                                 value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServiceProperties);
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<StorageServiceProperties>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2016,7 +2016,7 @@ namespace xml_service
                                     value.Add(value0);
                                 }
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<IList<SignedIdentifier>>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2056,7 +2056,7 @@ namespace xml_service
                                     value.Add(value0);
                                 }
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<IList<SignedIdentifier>>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2189,7 +2189,7 @@ namespace xml_service
                             {
                                 value = ListBlobsResponse.DeserializeListBlobsResponse(enumerationResults);
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<ListBlobsResponse>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2223,7 +2223,7 @@ namespace xml_service
                             {
                                 value = ListBlobsResponse.DeserializeListBlobsResponse(enumerationResults);
                             }
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<ListBlobsResponse>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2342,7 +2342,7 @@ namespace xml_service
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = Models.JsonOutput.DeserializeJsonOutput(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<JsonOutput>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2371,7 +2371,7 @@ namespace xml_service
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = Models.JsonOutput.DeserializeJsonOutput(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<JsonOutput>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

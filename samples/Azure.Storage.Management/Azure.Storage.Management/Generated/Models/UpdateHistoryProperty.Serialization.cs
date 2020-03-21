@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -50,7 +51,13 @@ namespace Azure.Storage.Management.Models
 
         internal static UpdateHistoryProperty DeserializeUpdateHistoryProperty(JsonElement element)
         {
-            UpdateHistoryProperty result = new UpdateHistoryProperty();
+            UpdateHistoryProperty result;
+            ImmutabilityPolicyUpdateType? update = default;
+            int? immutabilityPeriodSinceCreationInDays = default;
+            DateTimeOffset? timestamp = default;
+            string objectIdentifier = default;
+            string tenantId = default;
+            string upn = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("update"))
@@ -59,7 +66,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Update = new ImmutabilityPolicyUpdateType(property.Value.GetString());
+                    update = new ImmutabilityPolicyUpdateType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("immutabilityPeriodSinceCreationInDays"))
@@ -68,7 +75,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.ImmutabilityPeriodSinceCreationInDays = property.Value.GetInt32();
+                    immutabilityPeriodSinceCreationInDays = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("timestamp"))
@@ -77,7 +84,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Timestamp = property.Value.GetDateTimeOffset("S");
+                    timestamp = property.Value.GetDateTimeOffset("S");
                     continue;
                 }
                 if (property.NameEquals("objectIdentifier"))
@@ -86,7 +93,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.ObjectIdentifier = property.Value.GetString();
+                    objectIdentifier = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("tenantId"))
@@ -95,7 +102,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.TenantId = property.Value.GetString();
+                    tenantId = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("upn"))
@@ -104,10 +111,11 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Upn = property.Value.GetString();
+                    upn = property.Value.GetString();
                     continue;
                 }
             }
+            result = new UpdateHistoryProperty(update, immutabilityPeriodSinceCreationInDays, timestamp, objectIdentifier, tenantId, upn);
             return result;
         }
     }

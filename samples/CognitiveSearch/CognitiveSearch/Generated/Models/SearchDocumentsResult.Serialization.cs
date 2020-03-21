@@ -15,7 +15,13 @@ namespace CognitiveSearch.Models
     {
         internal static SearchDocumentsResult DeserializeSearchDocumentsResult(JsonElement element)
         {
-            SearchDocumentsResult result = new SearchDocumentsResult();
+            SearchDocumentsResult result;
+            long? odatacount = default;
+            double? searchcoverage = default;
+            IDictionary<string, IList<FacetResult>> searchfacets = default;
+            SearchRequest searchnextPageParameters = default;
+            IList<SearchResult> value = default;
+            string odatanextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("@odata.count"))
@@ -24,7 +30,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Count = property.Value.GetInt64();
+                    odatacount = property.Value.GetInt64();
                     continue;
                 }
                 if (property.NameEquals("@search.coverage"))
@@ -33,7 +39,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Coverage = property.Value.GetDouble();
+                    searchcoverage = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("@search.facets"))
@@ -42,16 +48,19 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Facets = new Dictionary<string, IList<FacetResult>>();
+                    Dictionary<string, IList<FacetResult>> array = new Dictionary<string, IList<FacetResult>>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        IList<FacetResult> value = new List<FacetResult>();
+                        IList<FacetResult> value0;
+                        List<FacetResult> array0 = new List<FacetResult>();
                         foreach (var item in property0.Value.EnumerateArray())
                         {
-                            value.Add(FacetResult.DeserializeFacetResult(item));
+                            array0.Add(FacetResult.DeserializeFacetResult(item));
                         }
-                        result.Facets.Add(property0.Name, value);
+                        value0 = array0;
+                        array.Add(property0.Name, value0);
                     }
+                    searchfacets = array;
                     continue;
                 }
                 if (property.NameEquals("@search.nextPageParameters"))
@@ -60,7 +69,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.NextPageParameters = SearchRequest.DeserializeSearchRequest(property.Value);
+                    searchnextPageParameters = SearchRequest.DeserializeSearchRequest(property.Value);
                     continue;
                 }
                 if (property.NameEquals("value"))
@@ -69,11 +78,12 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Results = new List<SearchResult>();
+                    List<SearchResult> array = new List<SearchResult>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Results.Add(SearchResult.DeserializeSearchResult(item));
+                        array.Add(SearchResult.DeserializeSearchResult(item));
                     }
+                    value = array;
                     continue;
                 }
                 if (property.NameEquals("@odata.nextLink"))
@@ -82,10 +92,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.NextLink = property.Value.GetString();
+                    odatanextLink = property.Value.GetString();
                     continue;
                 }
             }
+            result = new SearchDocumentsResult(odatacount, searchcoverage, searchfacets, searchnextPageParameters, value, odatanextLink);
             return result;
         }
     }

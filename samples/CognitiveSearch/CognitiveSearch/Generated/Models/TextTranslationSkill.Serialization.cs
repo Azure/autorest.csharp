@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -63,12 +64,21 @@ namespace CognitiveSearch.Models
 
         internal static TextTranslationSkill DeserializeTextTranslationSkill(JsonElement element)
         {
-            TextTranslationSkill result = new TextTranslationSkill();
+            TextTranslationSkill result;
+            TextTranslationSkillLanguage defaultToLanguageCode = default;
+            TextTranslationSkillLanguage? defaultFromLanguageCode = default;
+            TextTranslationSkillLanguage? suggestedFrom = default;
+            string odatatype = default;
+            string name = default;
+            string description = default;
+            string context = default;
+            IList<InputFieldMappingEntry> inputs = new List<InputFieldMappingEntry>();
+            IList<OutputFieldMappingEntry> outputs = new List<OutputFieldMappingEntry>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("defaultToLanguageCode"))
                 {
-                    result.DefaultToLanguageCode = new TextTranslationSkillLanguage(property.Value.GetString());
+                    defaultToLanguageCode = new TextTranslationSkillLanguage(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("defaultFromLanguageCode"))
@@ -77,7 +87,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.DefaultFromLanguageCode = new TextTranslationSkillLanguage(property.Value.GetString());
+                    defaultFromLanguageCode = new TextTranslationSkillLanguage(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("suggestedFrom"))
@@ -86,12 +96,12 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.SuggestedFrom = new TextTranslationSkillLanguage(property.Value.GetString());
+                    suggestedFrom = new TextTranslationSkillLanguage(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -100,7 +110,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("description"))
@@ -109,7 +119,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Description = property.Value.GetString();
+                    description = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("context"))
@@ -118,26 +128,31 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Context = property.Value.GetString();
+                    context = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("inputs"))
                 {
+                    List<InputFieldMappingEntry> array = new List<InputFieldMappingEntry>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Inputs.Add(InputFieldMappingEntry.DeserializeInputFieldMappingEntry(item));
+                        array.Add(InputFieldMappingEntry.DeserializeInputFieldMappingEntry(item));
                     }
+                    inputs = array;
                     continue;
                 }
                 if (property.NameEquals("outputs"))
                 {
+                    List<OutputFieldMappingEntry> array = new List<OutputFieldMappingEntry>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Outputs.Add(OutputFieldMappingEntry.DeserializeOutputFieldMappingEntry(item));
+                        array.Add(OutputFieldMappingEntry.DeserializeOutputFieldMappingEntry(item));
                     }
+                    outputs = array;
                     continue;
                 }
             }
+            result = new TextTranslationSkill(defaultToLanguageCode, defaultFromLanguageCode, suggestedFrom, odatatype, name, description, context, inputs, outputs);
             return result;
         }
     }

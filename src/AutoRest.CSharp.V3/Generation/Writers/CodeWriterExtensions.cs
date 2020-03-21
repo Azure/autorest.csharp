@@ -118,7 +118,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             return writer.AppendRaw(enumType.IsStringBased ? ".ToString()" : ".ToSerialString()");
         }
 
-        public static CodeWriter WriteConstantOrParameter(this CodeWriter writer, ReferenceOrConstant value)
+        public static CodeWriter WriteReferenceOrConstant(this CodeWriter writer, ReferenceOrConstant value)
         {
             if (value.IsConstant)
             {
@@ -126,7 +126,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
             else
             {
-                writer.AppendRaw(value.Parameter.Name);
+                writer.AppendRaw(value.Reference.Name);
             }
 
             return writer;
@@ -185,11 +185,17 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             Debug.Assert(selectedCtorInitializers != null);
 
+            if (selectedCtorInitializers.Count == 0 && initializers.Any())
+            {
+
+            }
+
             writer.Append($"new {objectType.Type}(");
             foreach (var initializer in selectedCtorInitializers)
             {
-                writer.WriteConstantOrParameter(initializer.Value)
-                    .Append($", ");
+                writer.WriteReferenceOrConstant(initializer.Value);
+                WriteConversion(initializer);
+                writer.Append($", ");
             }
             writer.RemoveTrailingComma();
             writer.Append($")");
@@ -203,7 +209,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     foreach (var propertyInitializer in restOfInitializers)
                     {
                         writer.Append($"{propertyInitializer.Property.Declaration.Name} = ")
-                            .WriteConstantOrParameter(propertyInitializer.Value);
+                            .WriteReferenceOrConstant(propertyInitializer.Value);
 
                         WriteConversion(propertyInitializer);
 

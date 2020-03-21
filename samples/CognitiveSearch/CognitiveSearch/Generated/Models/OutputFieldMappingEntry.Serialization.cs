@@ -27,12 +27,14 @@ namespace CognitiveSearch.Models
 
         internal static OutputFieldMappingEntry DeserializeOutputFieldMappingEntry(JsonElement element)
         {
-            OutputFieldMappingEntry result = new OutputFieldMappingEntry();
+            OutputFieldMappingEntry result;
+            string name = default;
+            string targetName = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("targetName"))
@@ -41,10 +43,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.TargetName = property.Value.GetString();
+                    targetName = property.Value.GetString();
                     continue;
                 }
             }
+            result = new OutputFieldMappingEntry(name, targetName);
             return result;
         }
     }

@@ -27,12 +27,14 @@ namespace CognitiveSearch.Models
 
         internal static DataContainer DeserializeDataContainer(JsonElement element)
         {
-            DataContainer result = new DataContainer();
+            DataContainer result;
+            string name = default;
+            string query = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("query"))
@@ -41,10 +43,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Query = property.Value.GetString();
+                    query = property.Value.GetString();
                     continue;
                 }
             }
+            result = new DataContainer(name, query);
             return result;
         }
     }

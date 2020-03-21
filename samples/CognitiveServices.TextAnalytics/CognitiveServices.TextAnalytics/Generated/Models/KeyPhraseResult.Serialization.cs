@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -14,23 +15,31 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static KeyPhraseResult DeserializeKeyPhraseResult(JsonElement element)
         {
-            KeyPhraseResult result = new KeyPhraseResult();
+            KeyPhraseResult result;
+            IList<DocumentKeyPhrases> documents = new List<DocumentKeyPhrases>();
+            IList<DocumentError> errors = new List<DocumentError>();
+            RequestStatistics statistics = default;
+            string modelVersion = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("documents"))
                 {
+                    List<DocumentKeyPhrases> array = new List<DocumentKeyPhrases>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Documents.Add(DocumentKeyPhrases.DeserializeDocumentKeyPhrases(item));
+                        array.Add(DocumentKeyPhrases.DeserializeDocumentKeyPhrases(item));
                     }
+                    documents = array;
                     continue;
                 }
                 if (property.NameEquals("errors"))
                 {
+                    List<DocumentError> array = new List<DocumentError>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Errors.Add(DocumentError.DeserializeDocumentError(item));
+                        array.Add(DocumentError.DeserializeDocumentError(item));
                     }
+                    errors = array;
                     continue;
                 }
                 if (property.NameEquals("statistics"))
@@ -39,15 +48,16 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    result.Statistics = RequestStatistics.DeserializeRequestStatistics(property.Value);
+                    statistics = RequestStatistics.DeserializeRequestStatistics(property.Value);
                     continue;
                 }
                 if (property.NameEquals("modelVersion"))
                 {
-                    result.ModelVersion = property.Value.GetString();
+                    modelVersion = property.Value.GetString();
                     continue;
                 }
             }
+            result = new KeyPhraseResult(documents, errors, statistics, modelVersion);
             return result;
         }
     }

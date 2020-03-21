@@ -14,7 +14,12 @@ namespace CognitiveSearch.Models
     {
         internal static ItemWarning DeserializeItemWarning(JsonElement element)
         {
-            ItemWarning result = new ItemWarning();
+            ItemWarning result;
+            string key = default;
+            string message = default;
+            string name = default;
+            string details = default;
+            string documentationLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("key"))
@@ -23,7 +28,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Key = property.Value.GetString();
+                    key = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("message"))
@@ -32,7 +37,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Message = property.Value.GetString();
+                    message = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -41,7 +46,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("details"))
@@ -50,7 +55,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Details = property.Value.GetString();
+                    details = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("documentationLink"))
@@ -59,10 +64,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.DocumentationLink = property.Value.GetString();
+                    documentationLink = property.Value.GetString();
                     continue;
                 }
             }
+            result = new ItemWarning(key, message, name, details, documentationLink);
             return result;
         }
     }

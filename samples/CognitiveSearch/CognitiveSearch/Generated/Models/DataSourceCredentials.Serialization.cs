@@ -25,7 +25,8 @@ namespace CognitiveSearch.Models
 
         internal static DataSourceCredentials DeserializeDataSourceCredentials(JsonElement element)
         {
-            DataSourceCredentials result = new DataSourceCredentials();
+            DataSourceCredentials result;
+            string connectionString = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("connectionString"))
@@ -34,10 +35,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.ConnectionString = property.Value.GetString();
+                    connectionString = property.Value.GetString();
                     continue;
                 }
             }
+            result = new DataSourceCredentials(connectionString);
             return result;
         }
     }

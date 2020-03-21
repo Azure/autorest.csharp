@@ -27,12 +27,14 @@ namespace Azure.Storage.Management.Models
 
         internal static CustomDomain DeserializeCustomDomain(JsonElement element)
         {
-            CustomDomain result = new CustomDomain();
+            CustomDomain result;
+            string name = default;
+            bool? useSubDomainName = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("useSubDomainName"))
@@ -41,10 +43,11 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.UseSubDomainName = property.Value.GetBoolean();
+                    useSubDomainName = property.Value.GetBoolean();
                     continue;
                 }
             }
+            result = new CustomDomain(name, useSubDomainName);
             return result;
         }
     }

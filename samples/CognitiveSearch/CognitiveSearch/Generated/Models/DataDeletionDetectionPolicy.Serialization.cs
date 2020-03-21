@@ -29,15 +29,17 @@ namespace CognitiveSearch.Models
                     case "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy": return SoftDeleteColumnDeletionDetectionPolicy.DeserializeSoftDeleteColumnDeletionDetectionPolicy(element);
                 }
             }
-            DataDeletionDetectionPolicy result = new DataDeletionDetectionPolicy();
+            DataDeletionDetectionPolicy result;
+            string odatatype = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
             }
+            result = new DataDeletionDetectionPolicy(odatatype);
             return result;
         }
     }

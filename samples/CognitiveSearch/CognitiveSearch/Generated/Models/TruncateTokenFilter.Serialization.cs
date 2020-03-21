@@ -29,7 +29,10 @@ namespace CognitiveSearch.Models
 
         internal static TruncateTokenFilter DeserializeTruncateTokenFilter(JsonElement element)
         {
-            TruncateTokenFilter result = new TruncateTokenFilter();
+            TruncateTokenFilter result;
+            int? length = default;
+            string odatatype = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("length"))
@@ -38,20 +41,21 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Length = property.Value.GetInt32();
+                    length = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
+            result = new TruncateTokenFilter(length, odatatype, name);
             return result;
         }
     }

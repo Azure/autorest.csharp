@@ -34,7 +34,11 @@ namespace CognitiveSearch.Models
 
         internal static PhoneticTokenFilter DeserializePhoneticTokenFilter(JsonElement element)
         {
-            PhoneticTokenFilter result = new PhoneticTokenFilter();
+            PhoneticTokenFilter result;
+            PhoneticEncoder? encoder = default;
+            bool? replace = default;
+            string odatatype = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("encoder"))
@@ -43,7 +47,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Encoder = property.Value.GetString().ToPhoneticEncoder();
+                    encoder = property.Value.GetString().ToPhoneticEncoder();
                     continue;
                 }
                 if (property.NameEquals("replace"))
@@ -52,20 +56,21 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.ReplaceOriginalTokens = property.Value.GetBoolean();
+                    replace = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
+            result = new PhoneticTokenFilter(encoder, replace, odatatype, name);
             return result;
         }
     }

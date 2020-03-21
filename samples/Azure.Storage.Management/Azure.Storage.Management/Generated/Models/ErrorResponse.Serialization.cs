@@ -14,7 +14,9 @@ namespace Azure.Storage.Management.Models
     {
         internal static ErrorResponse DeserializeErrorResponse(JsonElement element)
         {
-            ErrorResponse result = new ErrorResponse();
+            ErrorResponse result;
+            string code = default;
+            string message = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"))
@@ -23,7 +25,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Code = property.Value.GetString();
+                    code = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("message"))
@@ -32,10 +34,11 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Message = property.Value.GetString();
+                    message = property.Value.GetString();
                     continue;
                 }
             }
+            result = new ErrorResponse(code, message);
             return result;
         }
     }

@@ -135,7 +135,26 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static PublicIPAddress DeserializePublicIPAddress(JsonElement element)
         {
-            PublicIPAddress result = new PublicIPAddress();
+            PublicIPAddress result;
+            PublicIPAddressSku sku = default;
+            string etag = default;
+            IList<string> zones = default;
+            string id = default;
+            string name = default;
+            string type = default;
+            string location = default;
+            IDictionary<string, string> tags = default;
+            IPAllocationMethod? publicIPAllocationMethod = default;
+            IPVersion? publicIPAddressVersion = default;
+            IPConfiguration ipConfiguration = default;
+            PublicIPAddressDnsSettings dnsSettings = default;
+            DdosSettings ddosSettings = default;
+            IList<IpTag> ipTags = default;
+            string ipAddress = default;
+            SubResource publicIPPrefix = default;
+            int? idleTimeoutInMinutes = default;
+            string resourceGuid = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"))
@@ -144,7 +163,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Sku = PublicIPAddressSku.DeserializePublicIPAddressSku(property.Value);
+                    sku = PublicIPAddressSku.DeserializePublicIPAddressSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("etag"))
@@ -153,7 +172,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Etag = property.Value.GetString();
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("zones"))
@@ -162,11 +181,12 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Zones = new List<string>();
+                    List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Zones.Add(item.GetString());
+                        array.Add(item.GetString());
                     }
+                    zones = array;
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -175,7 +195,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -184,7 +204,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -193,7 +213,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("location"))
@@ -202,7 +222,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Location = property.Value.GetString();
+                    location = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -211,11 +231,12 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Tags = new Dictionary<string, string>();
+                    Dictionary<string, string> array = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        result.Tags.Add(property0.Name, property0.Value.GetString());
+                        array.Add(property0.Name, property0.Value.GetString());
                     }
+                    tags = array;
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -228,7 +249,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.PublicIPAllocationMethod = new IPAllocationMethod(property0.Value.GetString());
+                            publicIPAllocationMethod = new IPAllocationMethod(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("publicIPAddressVersion"))
@@ -237,7 +258,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.PublicIPAddressVersion = new IPVersion(property0.Value.GetString());
+                            publicIPAddressVersion = new IPVersion(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("ipConfiguration"))
@@ -246,7 +267,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.IpConfiguration = IPConfiguration.DeserializeIPConfiguration(property0.Value);
+                            ipConfiguration = IPConfiguration.DeserializeIPConfiguration(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("dnsSettings"))
@@ -255,7 +276,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.DnsSettings = PublicIPAddressDnsSettings.DeserializePublicIPAddressDnsSettings(property0.Value);
+                            dnsSettings = PublicIPAddressDnsSettings.DeserializePublicIPAddressDnsSettings(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("ddosSettings"))
@@ -264,7 +285,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.DdosSettings = DdosSettings.DeserializeDdosSettings(property0.Value);
+                            ddosSettings = DdosSettings.DeserializeDdosSettings(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("ipTags"))
@@ -273,11 +294,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.IpTags = new List<IpTag>();
+                            List<IpTag> array = new List<IpTag>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.IpTags.Add(IpTag.DeserializeIpTag(item));
+                                array.Add(IpTag.DeserializeIpTag(item));
                             }
+                            ipTags = array;
                             continue;
                         }
                         if (property0.NameEquals("ipAddress"))
@@ -286,7 +308,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.IpAddress = property0.Value.GetString();
+                            ipAddress = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("publicIPPrefix"))
@@ -295,7 +317,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.PublicIPPrefix = SubResource.DeserializeSubResource(property0.Value);
+                            publicIPPrefix = SubResource.DeserializeSubResource(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("idleTimeoutInMinutes"))
@@ -304,7 +326,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.IdleTimeoutInMinutes = property0.Value.GetInt32();
+                            idleTimeoutInMinutes = property0.Value.GetInt32();
                             continue;
                         }
                         if (property0.NameEquals("resourceGuid"))
@@ -313,7 +335,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ResourceGuid = property0.Value.GetString();
+                            resourceGuid = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -322,13 +344,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningState = new ProvisioningState(property0.Value.GetString());
+                            provisioningState = new ProvisioningState(property0.Value.GetString());
                             continue;
                         }
                     }
                     continue;
                 }
             }
+            result = new PublicIPAddress(sku, etag, zones, publicIPAllocationMethod, publicIPAddressVersion, ipConfiguration, dnsSettings, ddosSettings, ipTags, ipAddress, publicIPPrefix, idleTimeoutInMinutes, resourceGuid, provisioningState, id, name, type, location, tags);
             return result;
         }
     }

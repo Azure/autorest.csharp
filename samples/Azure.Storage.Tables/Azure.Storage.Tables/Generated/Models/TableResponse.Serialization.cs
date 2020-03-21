@@ -14,7 +14,12 @@ namespace Azure.Storage.Tables.Models
     {
         internal static TableResponse DeserializeTableResponse(JsonElement element)
         {
-            TableResponse result = new TableResponse();
+            TableResponse result;
+            string odatametadata = default;
+            string tableName = default;
+            string odatatype = default;
+            string odataid = default;
+            string odataeditLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("odata.metadata"))
@@ -23,7 +28,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    result.OdataMetadata = property.Value.GetString();
+                    odatametadata = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("TableName"))
@@ -32,7 +37,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    result.TableName = property.Value.GetString();
+                    tableName = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("odata.type"))
@@ -41,7 +46,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("odata.id"))
@@ -50,7 +55,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    result.OdataId = property.Value.GetString();
+                    odataid = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("odata.editLink"))
@@ -59,10 +64,11 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    result.OdataEditLink = property.Value.GetString();
+                    odataeditLink = property.Value.GetString();
                     continue;
                 }
             }
+            result = new TableResponse(odatametadata, tableName, odatatype, odataid, odataeditLink);
             return result;
         }
     }

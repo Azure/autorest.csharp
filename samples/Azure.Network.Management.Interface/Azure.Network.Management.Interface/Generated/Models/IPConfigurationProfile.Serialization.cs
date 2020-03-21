@@ -53,7 +53,13 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static IPConfigurationProfile DeserializeIPConfigurationProfile(JsonElement element)
         {
-            IPConfigurationProfile result = new IPConfigurationProfile();
+            IPConfigurationProfile result;
+            string name = default;
+            string type = default;
+            string etag = default;
+            string id = default;
+            Subnet subnet = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -62,7 +68,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -71,7 +77,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("etag"))
@@ -80,7 +86,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Etag = property.Value.GetString();
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -89,7 +95,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -102,7 +108,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.Subnet = Subnet.DeserializeSubnet(property0.Value);
+                            subnet = Subnet.DeserializeSubnet(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -111,13 +117,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningState = new ProvisioningState(property0.Value.GetString());
+                            provisioningState = new ProvisioningState(property0.Value.GetString());
                             continue;
                         }
                     }
                     continue;
                 }
             }
+            result = new IPConfigurationProfile(name, type, etag, subnet, provisioningState, id);
             return result;
         }
     }

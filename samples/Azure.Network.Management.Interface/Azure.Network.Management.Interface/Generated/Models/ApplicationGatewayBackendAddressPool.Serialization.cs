@@ -69,7 +69,14 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static ApplicationGatewayBackendAddressPool DeserializeApplicationGatewayBackendAddressPool(JsonElement element)
         {
-            ApplicationGatewayBackendAddressPool result = new ApplicationGatewayBackendAddressPool();
+            ApplicationGatewayBackendAddressPool result;
+            string name = default;
+            string etag = default;
+            string type = default;
+            string id = default;
+            IList<NetworkInterfaceIPConfiguration> backendIPConfigurations = default;
+            IList<ApplicationGatewayBackendAddress> backendAddresses = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -78,7 +85,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("etag"))
@@ -87,7 +94,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Etag = property.Value.GetString();
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -96,7 +103,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -105,7 +112,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -118,11 +125,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.BackendIPConfigurations = new List<NetworkInterfaceIPConfiguration>();
+                            List<NetworkInterfaceIPConfiguration> array = new List<NetworkInterfaceIPConfiguration>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.BackendIPConfigurations.Add(NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(item));
+                                array.Add(NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(item));
                             }
+                            backendIPConfigurations = array;
                             continue;
                         }
                         if (property0.NameEquals("backendAddresses"))
@@ -131,11 +139,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.BackendAddresses = new List<ApplicationGatewayBackendAddress>();
+                            List<ApplicationGatewayBackendAddress> array = new List<ApplicationGatewayBackendAddress>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.BackendAddresses.Add(ApplicationGatewayBackendAddress.DeserializeApplicationGatewayBackendAddress(item));
+                                array.Add(ApplicationGatewayBackendAddress.DeserializeApplicationGatewayBackendAddress(item));
                             }
+                            backendAddresses = array;
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -144,13 +153,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningState = new ProvisioningState(property0.Value.GetString());
+                            provisioningState = new ProvisioningState(property0.Value.GetString());
                             continue;
                         }
                     }
                     continue;
                 }
             }
+            result = new ApplicationGatewayBackendAddressPool(name, etag, type, backendIPConfigurations, backendAddresses, provisioningState, id);
             return result;
         }
     }

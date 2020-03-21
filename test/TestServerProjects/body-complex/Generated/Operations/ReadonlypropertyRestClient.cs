@@ -63,7 +63,7 @@ namespace body_complex
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ReadonlyObj.DeserializeReadonlyObj(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<ReadonlyObj>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -92,7 +92,7 @@ namespace body_complex
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = ReadonlyObj.DeserializeReadonlyObj(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<ReadonlyObj>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

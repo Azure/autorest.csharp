@@ -15,7 +15,9 @@ namespace Azure.Storage.Management.Models
     {
         internal static ListContainerItems DeserializeListContainerItems(JsonElement element)
         {
-            ListContainerItems result = new ListContainerItems();
+            ListContainerItems result;
+            IList<ListContainerItem> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -24,11 +26,12 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Value = new List<ListContainerItem>();
+                    List<ListContainerItem> array = new List<ListContainerItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Value.Add(ListContainerItem.DeserializeListContainerItem(item));
+                        array.Add(ListContainerItem.DeserializeListContainerItem(item));
                     }
+                    value = array;
                     continue;
                 }
                 if (property.NameEquals("nextLink"))
@@ -37,10 +40,11 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.NextLink = property.Value.GetString();
+                    nextLink = property.Value.GetString();
                     continue;
                 }
             }
+            result = new ListContainerItems(value, nextLink);
             return result;
         }
     }

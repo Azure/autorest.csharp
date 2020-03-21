@@ -74,7 +74,16 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static ServiceAssociationLink DeserializeServiceAssociationLink(JsonElement element)
         {
-            ServiceAssociationLink result = new ServiceAssociationLink();
+            ServiceAssociationLink result;
+            string name = default;
+            string etag = default;
+            string type = default;
+            string id = default;
+            string linkedResourceType = default;
+            string link = default;
+            ProvisioningState? provisioningState = default;
+            bool? allowDelete = default;
+            IList<string> locations = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -83,7 +92,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("etag"))
@@ -92,7 +101,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Etag = property.Value.GetString();
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -101,7 +110,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -110,7 +119,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -123,7 +132,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.LinkedResourceType = property0.Value.GetString();
+                            linkedResourceType = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("link"))
@@ -132,7 +141,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.Link = property0.Value.GetString();
+                            link = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -141,7 +150,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningState = new ProvisioningState(property0.Value.GetString());
+                            provisioningState = new ProvisioningState(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("allowDelete"))
@@ -150,7 +159,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.AllowDelete = property0.Value.GetBoolean();
+                            allowDelete = property0.Value.GetBoolean();
                             continue;
                         }
                         if (property0.NameEquals("locations"))
@@ -159,17 +168,19 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.Locations = new List<string>();
+                            List<string> array = new List<string>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.Locations.Add(item.GetString());
+                                array.Add(item.GetString());
                             }
+                            locations = array;
                             continue;
                         }
                     }
                     continue;
                 }
             }
+            result = new ServiceAssociationLink(name, etag, type, linkedResourceType, link, provisioningState, allowDelete, locations, id);
             return result;
         }
     }

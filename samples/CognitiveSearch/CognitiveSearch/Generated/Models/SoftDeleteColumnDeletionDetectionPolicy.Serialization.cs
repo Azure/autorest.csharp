@@ -32,7 +32,10 @@ namespace CognitiveSearch.Models
 
         internal static SoftDeleteColumnDeletionDetectionPolicy DeserializeSoftDeleteColumnDeletionDetectionPolicy(JsonElement element)
         {
-            SoftDeleteColumnDeletionDetectionPolicy result = new SoftDeleteColumnDeletionDetectionPolicy();
+            SoftDeleteColumnDeletionDetectionPolicy result;
+            string softDeleteColumnName = default;
+            string softDeleteMarkerValue = default;
+            string odatatype = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("softDeleteColumnName"))
@@ -41,7 +44,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.SoftDeleteColumnName = property.Value.GetString();
+                    softDeleteColumnName = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("softDeleteMarkerValue"))
@@ -50,15 +53,16 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.SoftDeleteMarkerValue = property.Value.GetString();
+                    softDeleteMarkerValue = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
             }
+            result = new SoftDeleteColumnDeletionDetectionPolicy(softDeleteColumnName, softDeleteMarkerValue, odatatype);
             return result;
         }
     }

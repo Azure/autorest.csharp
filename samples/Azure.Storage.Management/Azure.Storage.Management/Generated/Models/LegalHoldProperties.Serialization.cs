@@ -36,7 +36,9 @@ namespace Azure.Storage.Management.Models
 
         internal static LegalHoldProperties DeserializeLegalHoldProperties(JsonElement element)
         {
-            LegalHoldProperties result = new LegalHoldProperties();
+            LegalHoldProperties result;
+            bool? hasLegalHold = default;
+            IList<TagProperty> tags = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("hasLegalHold"))
@@ -45,7 +47,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.HasLegalHold = property.Value.GetBoolean();
+                    hasLegalHold = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -54,14 +56,16 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Tags = new List<TagProperty>();
+                    List<TagProperty> array = new List<TagProperty>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Tags.Add(TagProperty.DeserializeTagProperty(item));
+                        array.Add(TagProperty.DeserializeTagProperty(item));
                     }
+                    tags = array;
                     continue;
                 }
             }
+            result = new LegalHoldProperties(hasLegalHold, tags);
             return result;
         }
     }

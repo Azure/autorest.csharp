@@ -14,25 +14,29 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static DetectedLanguage DeserializeDetectedLanguage(JsonElement element)
         {
-            DetectedLanguage result = new DetectedLanguage();
+            DetectedLanguage result;
+            string name = default;
+            string iso6391Name = default;
+            double score = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("iso6391Name"))
                 {
-                    result.Iso6391Name = property.Value.GetString();
+                    iso6391Name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("score"))
                 {
-                    result.Score = property.Value.GetDouble();
+                    score = property.Value.GetDouble();
                     continue;
                 }
             }
+            result = new DetectedLanguage(name, iso6391Name, score);
             return result;
         }
     }

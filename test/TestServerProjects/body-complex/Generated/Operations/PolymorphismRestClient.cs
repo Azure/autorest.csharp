@@ -63,7 +63,7 @@ namespace body_complex
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = Fish.DeserializeFish(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Fish>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -92,7 +92,7 @@ namespace body_complex
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = Fish.DeserializeFish(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Fish>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -279,7 +279,7 @@ namespace body_complex
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = DotFish.DeserializeDotFish(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<DotFish>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -308,7 +308,7 @@ namespace body_complex
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = DotFish.DeserializeDotFish(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<DotFish>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -349,7 +349,7 @@ namespace body_complex
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = DotFishMarket.DeserializeDotFishMarket(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<DotFishMarket>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -378,7 +378,7 @@ namespace body_complex
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = DotFishMarket.DeserializeDotFishMarket(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<DotFishMarket>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -419,7 +419,7 @@ namespace body_complex
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = DotFishMarket.DeserializeDotFishMarket(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<DotFishMarket>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -448,7 +448,7 @@ namespace body_complex
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = DotFishMarket.DeserializeDotFishMarket(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<DotFishMarket>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -489,7 +489,7 @@ namespace body_complex
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = Salmon.DeserializeSalmon(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Salmon>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -518,7 +518,7 @@ namespace body_complex
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = Salmon.DeserializeSalmon(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Salmon>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -647,7 +647,7 @@ namespace body_complex
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = Salmon.DeserializeSalmon(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Salmon>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -682,7 +682,7 @@ namespace body_complex
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = Salmon.DeserializeSalmon(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Salmon>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

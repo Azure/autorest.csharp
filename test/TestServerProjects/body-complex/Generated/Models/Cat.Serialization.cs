@@ -95,13 +95,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new Cat()
-            {
-                Color = color,
-                Hates = hates,
-                Id = id,
-                Name = name
-            };
+            result = new Cat(color, hates, id, name);
             return result;
         }
     }

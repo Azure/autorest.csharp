@@ -100,7 +100,18 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static PrivateEndpoint DeserializePrivateEndpoint(JsonElement element)
         {
-            PrivateEndpoint result = new PrivateEndpoint();
+            PrivateEndpoint result;
+            string etag = default;
+            string id = default;
+            string name = default;
+            string type = default;
+            string location = default;
+            IDictionary<string, string> tags = default;
+            Subnet subnet = default;
+            IList<NetworkInterface> networkInterfaces = default;
+            ProvisioningState? provisioningState = default;
+            IList<PrivateLinkServiceConnection> privateLinkServiceConnections = default;
+            IList<PrivateLinkServiceConnection> manualPrivateLinkServiceConnections = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"))
@@ -109,7 +120,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Etag = property.Value.GetString();
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -118,7 +129,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -127,7 +138,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -136,7 +147,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("location"))
@@ -145,7 +156,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Location = property.Value.GetString();
+                    location = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -154,11 +165,12 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Tags = new Dictionary<string, string>();
+                    Dictionary<string, string> array = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        result.Tags.Add(property0.Name, property0.Value.GetString());
+                        array.Add(property0.Name, property0.Value.GetString());
                     }
+                    tags = array;
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -171,7 +183,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.Subnet = Subnet.DeserializeSubnet(property0.Value);
+                            subnet = Subnet.DeserializeSubnet(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("networkInterfaces"))
@@ -180,11 +192,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.NetworkInterfaces = new List<NetworkInterface>();
+                            List<NetworkInterface> array = new List<NetworkInterface>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.NetworkInterfaces.Add(NetworkInterface.DeserializeNetworkInterface(item));
+                                array.Add(NetworkInterface.DeserializeNetworkInterface(item));
                             }
+                            networkInterfaces = array;
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -193,7 +206,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningState = new ProvisioningState(property0.Value.GetString());
+                            provisioningState = new ProvisioningState(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("privateLinkServiceConnections"))
@@ -202,11 +215,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.PrivateLinkServiceConnections = new List<PrivateLinkServiceConnection>();
+                            List<PrivateLinkServiceConnection> array = new List<PrivateLinkServiceConnection>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.PrivateLinkServiceConnections.Add(PrivateLinkServiceConnection.DeserializePrivateLinkServiceConnection(item));
+                                array.Add(PrivateLinkServiceConnection.DeserializePrivateLinkServiceConnection(item));
                             }
+                            privateLinkServiceConnections = array;
                             continue;
                         }
                         if (property0.NameEquals("manualPrivateLinkServiceConnections"))
@@ -215,17 +229,19 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ManualPrivateLinkServiceConnections = new List<PrivateLinkServiceConnection>();
+                            List<PrivateLinkServiceConnection> array = new List<PrivateLinkServiceConnection>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.ManualPrivateLinkServiceConnections.Add(PrivateLinkServiceConnection.DeserializePrivateLinkServiceConnection(item));
+                                array.Add(PrivateLinkServiceConnection.DeserializePrivateLinkServiceConnection(item));
                             }
+                            manualPrivateLinkServiceConnections = array;
                             continue;
                         }
                     }
                     continue;
                 }
             }
+            result = new PrivateEndpoint(etag, subnet, networkInterfaces, provisioningState, privateLinkServiceConnections, manualPrivateLinkServiceConnections, id, name, type, location, tags);
             return result;
         }
     }

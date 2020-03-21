@@ -30,7 +30,9 @@ namespace body_dictionary.Models
 
         internal static Widget DeserializeWidget(JsonElement element)
         {
-            Widget result = new Widget();
+            Widget result;
+            int? integer = default;
+            string @string = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("integer"))
@@ -39,7 +41,7 @@ namespace body_dictionary.Models
                     {
                         continue;
                     }
-                    result.Integer = property.Value.GetInt32();
+                    integer = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("string"))
@@ -48,10 +50,11 @@ namespace body_dictionary.Models
                     {
                         continue;
                     }
-                    result.String = property.Value.GetString();
+                    @string = property.Value.GetString();
                     continue;
                 }
             }
+            result = new Widget(integer, @string);
             return result;
         }
     }

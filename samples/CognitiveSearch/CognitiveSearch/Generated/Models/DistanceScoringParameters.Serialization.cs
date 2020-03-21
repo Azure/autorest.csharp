@@ -24,20 +24,23 @@ namespace CognitiveSearch.Models
 
         internal static DistanceScoringParameters DeserializeDistanceScoringParameters(JsonElement element)
         {
-            DistanceScoringParameters result = new DistanceScoringParameters();
+            DistanceScoringParameters result;
+            string referencePointParameter = default;
+            double boostingDistance = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("referencePointParameter"))
                 {
-                    result.ReferencePointParameter = property.Value.GetString();
+                    referencePointParameter = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("boostingDistance"))
                 {
-                    result.BoostingDistance = property.Value.GetDouble();
+                    boostingDistance = property.Value.GetDouble();
                     continue;
                 }
             }
+            result = new DistanceScoringParameters(referencePointParameter, boostingDistance);
             return result;
         }
     }

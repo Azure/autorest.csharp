@@ -15,32 +15,39 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static ReadResult DeserializeReadResult(JsonElement element)
         {
-            ReadResult result = new ReadResult();
+            ReadResult result;
+            int page = default;
+            float angle = default;
+            float width = default;
+            float height = default;
+            LengthUnit unit = default;
+            Language? language = default;
+            IList<TextLine> lines = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("page"))
                 {
-                    result.Page = property.Value.GetInt32();
+                    page = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("angle"))
                 {
-                    result.Angle = property.Value.GetSingle();
+                    angle = property.Value.GetSingle();
                     continue;
                 }
                 if (property.NameEquals("width"))
                 {
-                    result.Width = property.Value.GetSingle();
+                    width = property.Value.GetSingle();
                     continue;
                 }
                 if (property.NameEquals("height"))
                 {
-                    result.Height = property.Value.GetSingle();
+                    height = property.Value.GetSingle();
                     continue;
                 }
                 if (property.NameEquals("unit"))
                 {
-                    result.Unit = property.Value.GetString().ToLengthUnit();
+                    unit = property.Value.GetString().ToLengthUnit();
                     continue;
                 }
                 if (property.NameEquals("language"))
@@ -49,7 +56,7 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.Language = new Language(property.Value.GetString());
+                    language = new Language(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("lines"))
@@ -58,14 +65,16 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.Lines = new List<TextLine>();
+                    List<TextLine> array = new List<TextLine>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Lines.Add(TextLine.DeserializeTextLine(item));
+                        array.Add(TextLine.DeserializeTextLine(item));
                     }
+                    lines = array;
                     continue;
                 }
             }
+            result = new ReadResult(page, angle, width, height, unit, language, lines);
             return result;
         }
     }

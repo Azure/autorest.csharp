@@ -15,7 +15,9 @@ namespace Azure.Storage.Management.Models
     {
         internal static StorageAccountListResult DeserializeStorageAccountListResult(JsonElement element)
         {
-            StorageAccountListResult result = new StorageAccountListResult();
+            StorageAccountListResult result;
+            IList<StorageAccount> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -24,11 +26,12 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Value = new List<StorageAccount>();
+                    List<StorageAccount> array = new List<StorageAccount>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Value.Add(StorageAccount.DeserializeStorageAccount(item));
+                        array.Add(StorageAccount.DeserializeStorageAccount(item));
                     }
+                    value = array;
                     continue;
                 }
                 if (property.NameEquals("nextLink"))
@@ -37,10 +40,11 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.NextLink = property.Value.GetString();
+                    nextLink = property.Value.GetString();
                     continue;
                 }
             }
+            result = new StorageAccountListResult(value, nextLink);
             return result;
         }
     }

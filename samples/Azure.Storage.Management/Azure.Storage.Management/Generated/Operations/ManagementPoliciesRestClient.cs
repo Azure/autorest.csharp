@@ -94,7 +94,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ManagementPolicy.DeserializeManagementPolicy(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<ManagementPolicy>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -134,7 +134,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = ManagementPolicy.DeserializeManagementPolicy(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<ManagementPolicy>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -203,7 +203,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ManagementPolicy.DeserializeManagementPolicy(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<ManagementPolicy>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -244,7 +244,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = ManagementPolicy.DeserializeManagementPolicy(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<ManagementPolicy>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

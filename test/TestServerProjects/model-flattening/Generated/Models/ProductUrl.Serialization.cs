@@ -30,7 +30,9 @@ namespace model_flattening.Models
 
         internal static ProductUrl DeserializeProductUrl(JsonElement element)
         {
-            ProductUrl result = new ProductUrl();
+            ProductUrl result;
+            string odatavalue = default;
+            string genericValue = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("@odata.value"))
@@ -39,7 +41,7 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    result.OdataValue = property.Value.GetString();
+                    odatavalue = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("generic_value"))
@@ -48,10 +50,11 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    result.GenericValue = property.Value.GetString();
+                    genericValue = property.Value.GetString();
                     continue;
                 }
             }
+            result = new ProductUrl(odatavalue, genericValue);
             return result;
         }
     }

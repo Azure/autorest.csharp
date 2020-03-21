@@ -21,11 +21,10 @@ namespace CognitiveSearch.Models
         /// <param name="maxGram"> The maximum n-gram length. Default is 2. Maximum is 300. </param>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal NGramTokenFilterV2(int? minGram, int? maxGram, string odataType, string name) : base(odataType, name)
+        internal NGramTokenFilterV2(int? minGram, int? maxGram, string odataType, string name) : base(odataType ?? "#Microsoft.Azure.Search.NGramTokenFilterV2", name)
         {
             MinGram = minGram;
             MaxGram = maxGram;
-            OdataType = "#Microsoft.Azure.Search.NGramTokenFilterV2";
         }
 
         /// <summary> The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram. </summary>

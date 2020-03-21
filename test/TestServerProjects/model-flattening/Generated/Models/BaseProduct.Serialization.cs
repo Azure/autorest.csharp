@@ -27,12 +27,14 @@ namespace model_flattening.Models
 
         internal static BaseProduct DeserializeBaseProduct(JsonElement element)
         {
-            BaseProduct result = new BaseProduct();
+            BaseProduct result;
+            string baseProductId = default;
+            string baseProductDescription = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("base_product_id"))
                 {
-                    result.ProductId = property.Value.GetString();
+                    baseProductId = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("base_product_description"))
@@ -41,10 +43,11 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    result.Description = property.Value.GetString();
+                    baseProductDescription = property.Value.GetString();
                     continue;
                 }
             }
+            result = new BaseProduct(baseProductId, baseProductDescription);
             return result;
         }
     }

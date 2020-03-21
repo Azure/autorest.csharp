@@ -34,20 +34,23 @@ namespace CognitiveSearch.Models
                     case "#Microsoft.Azure.Search.StopAnalyzer": return StopAnalyzer.DeserializeStopAnalyzer(element);
                 }
             }
-            Analyzer result = new Analyzer();
+            Analyzer result;
+            string odatatype = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
+            result = new Analyzer(odatatype, name);
             return result;
         }
     }

@@ -114,15 +114,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new Shark()
-            {
-                Age = age,
-                Birthday = birthday,
-                Fishtype = fishtype,
-                Species = species,
-                Length = length,
-                Siblings = siblings
-            };
+            result = new Shark(age, birthday, fishtype, species, length, siblings);
             return result;
         }
     }

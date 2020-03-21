@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -31,28 +32,34 @@ namespace CognitiveSearch.Models
 
         internal static MappingCharFilter DeserializeMappingCharFilter(JsonElement element)
         {
-            MappingCharFilter result = new MappingCharFilter();
+            MappingCharFilter result;
+            IList<string> mappings = new List<string>();
+            string odatatype = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("mappings"))
                 {
+                    List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Mappings.Add(item.GetString());
+                        array.Add(item.GetString());
                     }
+                    mappings = array;
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
+            result = new MappingCharFilter(mappings, odatatype, name);
             return result;
         }
     }

@@ -65,7 +65,14 @@ namespace lro.Models
 
         internal static Product DeserializeProduct(JsonElement element)
         {
-            Product result = new Product();
+            Product result;
+            string id = default;
+            string type = default;
+            IDictionary<string, string> tags = default;
+            string location = default;
+            string name = default;
+            string provisioningState = default;
+            ProductPropertiesProvisioningStateValues? provisioningStateValues = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -74,7 +81,7 @@ namespace lro.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -83,7 +90,7 @@ namespace lro.Models
                     {
                         continue;
                     }
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -92,11 +99,12 @@ namespace lro.Models
                     {
                         continue;
                     }
-                    result.Tags = new Dictionary<string, string>();
+                    Dictionary<string, string> array = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        result.Tags.Add(property0.Name, property0.Value.GetString());
+                        array.Add(property0.Name, property0.Value.GetString());
                     }
+                    tags = array;
                     continue;
                 }
                 if (property.NameEquals("location"))
@@ -105,7 +113,7 @@ namespace lro.Models
                     {
                         continue;
                     }
-                    result.Location = property.Value.GetString();
+                    location = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -114,7 +122,7 @@ namespace lro.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -127,7 +135,7 @@ namespace lro.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningState = property0.Value.GetString();
+                            provisioningState = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("provisioningStateValues"))
@@ -136,13 +144,14 @@ namespace lro.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningStateValues = new ProductPropertiesProvisioningStateValues(property0.Value.GetString());
+                            provisioningStateValues = new ProductPropertiesProvisioningStateValues(property0.Value.GetString());
                             continue;
                         }
                     }
                     continue;
                 }
             }
+            result = new Product(provisioningState, provisioningStateValues, id, type, tags, location, name);
             return result;
         }
     }

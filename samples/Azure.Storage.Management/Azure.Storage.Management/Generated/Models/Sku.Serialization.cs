@@ -27,12 +27,14 @@ namespace Azure.Storage.Management.Models
 
         internal static Sku DeserializeSku(JsonElement element)
         {
-            Sku result = new Sku();
+            Sku result;
+            SkuName name = default;
+            SkuTier? tier = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
                 {
-                    result.Name = new SkuName(property.Value.GetString());
+                    name = new SkuName(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("tier"))
@@ -41,10 +43,11 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Tier = property.Value.GetString().ToSkuTier();
+                    tier = property.Value.GetString().ToSkuTier();
                     continue;
                 }
             }
+            result = new Sku(name, tier);
             return result;
         }
     }

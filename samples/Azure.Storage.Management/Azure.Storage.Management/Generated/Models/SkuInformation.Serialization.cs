@@ -15,12 +15,19 @@ namespace Azure.Storage.Management.Models
     {
         internal static SkuInformation DeserializeSkuInformation(JsonElement element)
         {
-            SkuInformation result = new SkuInformation();
+            SkuInformation result;
+            SkuName name = default;
+            SkuTier? tier = default;
+            string resourceType = default;
+            Kind? kind = default;
+            IList<string> locations = default;
+            IList<SKUCapability> capabilities = default;
+            IList<Restriction> restrictions = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
                 {
-                    result.Name = new SkuName(property.Value.GetString());
+                    name = new SkuName(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("tier"))
@@ -29,7 +36,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Tier = property.Value.GetString().ToSkuTier();
+                    tier = property.Value.GetString().ToSkuTier();
                     continue;
                 }
                 if (property.NameEquals("resourceType"))
@@ -38,7 +45,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.ResourceType = property.Value.GetString();
+                    resourceType = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("kind"))
@@ -47,7 +54,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Kind = new Kind(property.Value.GetString());
+                    kind = new Kind(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("locations"))
@@ -56,11 +63,12 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Locations = new List<string>();
+                    List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Locations.Add(item.GetString());
+                        array.Add(item.GetString());
                     }
+                    locations = array;
                     continue;
                 }
                 if (property.NameEquals("capabilities"))
@@ -69,11 +77,12 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Capabilities = new List<SKUCapability>();
+                    List<SKUCapability> array = new List<SKUCapability>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Capabilities.Add(SKUCapability.DeserializeSKUCapability(item));
+                        array.Add(SKUCapability.DeserializeSKUCapability(item));
                     }
+                    capabilities = array;
                     continue;
                 }
                 if (property.NameEquals("restrictions"))
@@ -82,14 +91,16 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Restrictions = new List<Restriction>();
+                    List<Restriction> array = new List<Restriction>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Restrictions.Add(Restriction.DeserializeRestriction(item));
+                        array.Add(Restriction.DeserializeRestriction(item));
                     }
+                    restrictions = array;
                     continue;
                 }
             }
+            result = new SkuInformation(name, tier, resourceType, kind, locations, capabilities, restrictions);
             return result;
         }
     }

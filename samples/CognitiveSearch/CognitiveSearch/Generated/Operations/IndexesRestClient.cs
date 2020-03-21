@@ -94,7 +94,7 @@ namespace CognitiveSearch
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = Models.Index.DeserializeIndex(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Models.Index>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -130,7 +130,7 @@ namespace CognitiveSearch
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = Models.Index.DeserializeIndex(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Models.Index>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -186,7 +186,7 @@ namespace CognitiveSearch
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ListIndexesResult.DeserializeListIndexesResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<ListIndexesResult>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -218,7 +218,7 @@ namespace CognitiveSearch
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = ListIndexesResult.DeserializeListIndexesResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<ListIndexesResult>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -301,7 +301,7 @@ namespace CognitiveSearch
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = Models.Index.DeserializeIndex(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Models.Index>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -345,7 +345,7 @@ namespace CognitiveSearch
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = Models.Index.DeserializeIndex(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Models.Index>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -501,7 +501,7 @@ namespace CognitiveSearch
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = Models.Index.DeserializeIndex(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Models.Index>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -537,7 +537,7 @@ namespace CognitiveSearch
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = Models.Index.DeserializeIndex(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<Models.Index>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -595,7 +595,7 @@ namespace CognitiveSearch
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = GetIndexStatisticsResult.DeserializeGetIndexStatisticsResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<GetIndexStatisticsResult>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -631,7 +631,7 @@ namespace CognitiveSearch
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = GetIndexStatisticsResult.DeserializeGetIndexStatisticsResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<GetIndexStatisticsResult>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -698,7 +698,7 @@ namespace CognitiveSearch
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = AnalyzeResult.DeserializeAnalyzeResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<AnalyzeResult>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -739,7 +739,7 @@ namespace CognitiveSearch
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = AnalyzeResult.DeserializeAnalyzeResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<AnalyzeResult>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

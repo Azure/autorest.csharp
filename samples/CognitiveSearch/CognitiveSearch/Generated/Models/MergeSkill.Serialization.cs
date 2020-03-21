@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -61,7 +62,15 @@ namespace CognitiveSearch.Models
 
         internal static MergeSkill DeserializeMergeSkill(JsonElement element)
         {
-            MergeSkill result = new MergeSkill();
+            MergeSkill result;
+            string insertPreTag = default;
+            string insertPostTag = default;
+            string odatatype = default;
+            string name = default;
+            string description = default;
+            string context = default;
+            IList<InputFieldMappingEntry> inputs = new List<InputFieldMappingEntry>();
+            IList<OutputFieldMappingEntry> outputs = new List<OutputFieldMappingEntry>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("insertPreTag"))
@@ -70,7 +79,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.InsertPreTag = property.Value.GetString();
+                    insertPreTag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("insertPostTag"))
@@ -79,12 +88,12 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.InsertPostTag = property.Value.GetString();
+                    insertPostTag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -93,7 +102,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("description"))
@@ -102,7 +111,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Description = property.Value.GetString();
+                    description = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("context"))
@@ -111,26 +120,31 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Context = property.Value.GetString();
+                    context = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("inputs"))
                 {
+                    List<InputFieldMappingEntry> array = new List<InputFieldMappingEntry>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Inputs.Add(InputFieldMappingEntry.DeserializeInputFieldMappingEntry(item));
+                        array.Add(InputFieldMappingEntry.DeserializeInputFieldMappingEntry(item));
                     }
+                    inputs = array;
                     continue;
                 }
                 if (property.NameEquals("outputs"))
                 {
+                    List<OutputFieldMappingEntry> array = new List<OutputFieldMappingEntry>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Outputs.Add(OutputFieldMappingEntry.DeserializeOutputFieldMappingEntry(item));
+                        array.Add(OutputFieldMappingEntry.DeserializeOutputFieldMappingEntry(item));
                     }
+                    outputs = array;
                     continue;
                 }
             }
+            result = new MergeSkill(insertPreTag, insertPostTag, odatatype, name, description, context, inputs, outputs);
             return result;
         }
     }

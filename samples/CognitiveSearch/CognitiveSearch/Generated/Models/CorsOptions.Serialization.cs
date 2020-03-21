@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -32,15 +33,19 @@ namespace CognitiveSearch.Models
 
         internal static CorsOptions DeserializeCorsOptions(JsonElement element)
         {
-            CorsOptions result = new CorsOptions();
+            CorsOptions result;
+            IList<string> allowedOrigins = new List<string>();
+            long? maxAgeInSeconds = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("allowedOrigins"))
                 {
+                    List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.AllowedOrigins.Add(item.GetString());
+                        array.Add(item.GetString());
                     }
+                    allowedOrigins = array;
                     continue;
                 }
                 if (property.NameEquals("maxAgeInSeconds"))
@@ -49,10 +54,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.MaxAgeInSeconds = property.Value.GetInt64();
+                    maxAgeInSeconds = property.Value.GetInt64();
                     continue;
                 }
             }
+            result = new CorsOptions(allowedOrigins, maxAgeInSeconds);
             return result;
         }
     }

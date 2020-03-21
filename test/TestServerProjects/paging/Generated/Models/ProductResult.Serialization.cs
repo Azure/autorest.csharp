@@ -15,7 +15,9 @@ namespace paging.Models
     {
         internal static ProductResult DeserializeProductResult(JsonElement element)
         {
-            ProductResult result = new ProductResult();
+            ProductResult result;
+            IList<Product> values = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("values"))
@@ -24,11 +26,12 @@ namespace paging.Models
                     {
                         continue;
                     }
-                    result.Values = new List<Product>();
+                    List<Product> array = new List<Product>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Values.Add(Product.DeserializeProduct(item));
+                        array.Add(Product.DeserializeProduct(item));
                     }
+                    values = array;
                     continue;
                 }
                 if (property.NameEquals("nextLink"))
@@ -37,10 +40,11 @@ namespace paging.Models
                     {
                         continue;
                     }
-                    result.NextLink = property.Value.GetString();
+                    nextLink = property.Value.GetString();
                     continue;
                 }
             }
+            result = new ProductResult(values, nextLink);
             return result;
         }
     }

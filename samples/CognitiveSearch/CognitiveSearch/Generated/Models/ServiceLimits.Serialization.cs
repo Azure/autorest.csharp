@@ -14,7 +14,11 @@ namespace CognitiveSearch.Models
     {
         internal static ServiceLimits DeserializeServiceLimits(JsonElement element)
         {
-            ServiceLimits result = new ServiceLimits();
+            ServiceLimits result;
+            int? maxFieldsPerIndex = default;
+            int? maxFieldNestingDepthPerIndex = default;
+            int? maxComplexCollectionFieldsPerIndex = default;
+            int? maxComplexObjectsInCollectionsPerDocument = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("maxFieldsPerIndex"))
@@ -23,7 +27,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.MaxFieldsPerIndex = property.Value.GetInt32();
+                    maxFieldsPerIndex = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("maxFieldNestingDepthPerIndex"))
@@ -32,7 +36,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.MaxFieldNestingDepthPerIndex = property.Value.GetInt32();
+                    maxFieldNestingDepthPerIndex = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("maxComplexCollectionFieldsPerIndex"))
@@ -41,7 +45,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.MaxComplexCollectionFieldsPerIndex = property.Value.GetInt32();
+                    maxComplexCollectionFieldsPerIndex = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("maxComplexObjectsInCollectionsPerDocument"))
@@ -50,10 +54,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.MaxComplexObjectsInCollectionsPerDocument = property.Value.GetInt32();
+                    maxComplexObjectsInCollectionsPerDocument = property.Value.GetInt32();
                     continue;
                 }
             }
+            result = new ServiceLimits(maxFieldsPerIndex, maxFieldNestingDepthPerIndex, maxComplexCollectionFieldsPerIndex, maxComplexObjectsInCollectionsPerDocument);
             return result;
         }
     }

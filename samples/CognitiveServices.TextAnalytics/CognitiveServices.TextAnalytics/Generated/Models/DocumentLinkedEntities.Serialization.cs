@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -14,20 +15,25 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static DocumentLinkedEntities DeserializeDocumentLinkedEntities(JsonElement element)
         {
-            DocumentLinkedEntities result = new DocumentLinkedEntities();
+            DocumentLinkedEntities result;
+            string id = default;
+            IList<LinkedEntity> entities = new List<LinkedEntity>();
+            DocumentStatistics statistics = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
                 {
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("entities"))
                 {
+                    List<LinkedEntity> array = new List<LinkedEntity>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Entities.Add(LinkedEntity.DeserializeLinkedEntity(item));
+                        array.Add(LinkedEntity.DeserializeLinkedEntity(item));
                     }
+                    entities = array;
                     continue;
                 }
                 if (property.NameEquals("statistics"))
@@ -36,10 +42,11 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    result.Statistics = DocumentStatistics.DeserializeDocumentStatistics(property.Value);
+                    statistics = DocumentStatistics.DeserializeDocumentStatistics(property.Value);
                     continue;
                 }
             }
+            result = new DocumentLinkedEntities(id, entities, statistics);
             return result;
         }
     }

@@ -242,7 +242,15 @@ namespace AutoRest.CSharp.V3.Output.Builders
         {
             var inheritedDictionarySchema = objectSchema.Parents!.All.OfType<DictionarySchema>().FirstOrDefault();
 
-            var additionalPropertiesProperty = objectType.AdditionalPropertiesProperty;
+            ObjectTypeProperty? additionalPropertiesProperty = null;
+            foreach (var obj in objectType.EnumerateHierarchy())
+            {
+                additionalPropertiesProperty = obj.AdditionalPropertiesProperty;
+                if (additionalPropertiesProperty != null)
+                {
+                    break;
+                }
+            }
 
             if (inheritedDictionarySchema == null || additionalPropertiesProperty == null)
             {
@@ -250,15 +258,10 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
 
             var valueSerialization = BuildSerialization(inheritedDictionarySchema.ElementType, false);
-            var itemType = _typeFactory.CreateType(inheritedDictionarySchema.ElementType, isNullable: false);
 
             return  new JsonAdditionalPropertiesSerialization(
                     additionalPropertiesProperty,
-                    new JsonDictionarySerialization(
-                        new CSharpType(typeof(Dictionary<,>), new CSharpType(typeof(string)), itemType),
-                        valueSerialization
-                    ));
-
+                    valueSerialization);
         }
     }
 }

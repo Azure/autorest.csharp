@@ -15,12 +15,15 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static KeyValueElement DeserializeKeyValueElement(JsonElement element)
         {
-            KeyValueElement result = new KeyValueElement();
+            KeyValueElement result;
+            string text = default;
+            IList<float> boundingBox = default;
+            IList<string> elements = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("text"))
                 {
-                    result.Text = property.Value.GetString();
+                    text = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("boundingBox"))
@@ -29,11 +32,12 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.BoundingBox = new List<float>();
+                    List<float> array = new List<float>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.BoundingBox.Add(item.GetSingle());
+                        array.Add(item.GetSingle());
                     }
+                    boundingBox = array;
                     continue;
                 }
                 if (property.NameEquals("elements"))
@@ -42,14 +46,16 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.Elements = new List<string>();
+                    List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Elements.Add(item.GetString());
+                        array.Add(item.GetString());
                     }
+                    elements = array;
                     continue;
                 }
             }
+            result = new KeyValueElement(text, boundingBox, elements);
             return result;
         }
     }

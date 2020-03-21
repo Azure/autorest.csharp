@@ -27,12 +27,14 @@ namespace Azure.Storage.Management.Models
 
         internal static AzureFilesIdentityBasedAuthentication DeserializeAzureFilesIdentityBasedAuthentication(JsonElement element)
         {
-            AzureFilesIdentityBasedAuthentication result = new AzureFilesIdentityBasedAuthentication();
+            AzureFilesIdentityBasedAuthentication result;
+            DirectoryServiceOptions directoryServiceOptions = default;
+            ActiveDirectoryProperties activeDirectoryProperties = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("directoryServiceOptions"))
                 {
-                    result.DirectoryServiceOptions = new DirectoryServiceOptions(property.Value.GetString());
+                    directoryServiceOptions = new DirectoryServiceOptions(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("activeDirectoryProperties"))
@@ -41,10 +43,11 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.ActiveDirectoryProperties = ActiveDirectoryProperties.DeserializeActiveDirectoryProperties(property.Value);
+                    activeDirectoryProperties = ActiveDirectoryProperties.DeserializeActiveDirectoryProperties(property.Value);
                     continue;
                 }
             }
+            result = new AzureFilesIdentityBasedAuthentication(directoryServiceOptions, activeDirectoryProperties);
             return result;
         }
     }

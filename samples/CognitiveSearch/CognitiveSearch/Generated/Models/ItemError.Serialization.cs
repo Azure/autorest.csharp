@@ -14,7 +14,13 @@ namespace CognitiveSearch.Models
     {
         internal static ItemError DeserializeItemError(JsonElement element)
         {
-            ItemError result = new ItemError();
+            ItemError result;
+            string key = default;
+            string errorMessage = default;
+            int? statusCode = default;
+            string name = default;
+            string details = default;
+            string documentationLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("key"))
@@ -23,7 +29,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Key = property.Value.GetString();
+                    key = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("errorMessage"))
@@ -32,7 +38,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.ErrorMessage = property.Value.GetString();
+                    errorMessage = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("statusCode"))
@@ -41,7 +47,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.StatusCode = property.Value.GetInt32();
+                    statusCode = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -50,7 +56,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("details"))
@@ -59,7 +65,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Details = property.Value.GetString();
+                    details = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("documentationLink"))
@@ -68,10 +74,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.DocumentationLink = property.Value.GetString();
+                    documentationLink = property.Value.GetString();
                     continue;
                 }
             }
+            result = new ItemError(key, errorMessage, statusCode, name, details, documentationLink);
             return result;
         }
     }

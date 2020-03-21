@@ -43,20 +43,23 @@ namespace CognitiveSearch.Models
                     case "#Microsoft.Azure.Search.UaxUrlEmailTokenizer": return UaxUrlEmailTokenizer.DeserializeUaxUrlEmailTokenizer(element);
                 }
             }
-            Tokenizer result = new Tokenizer();
+            Tokenizer result;
+            string odatatype = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
+            result = new Tokenizer(odatatype, name);
             return result;
         }
     }

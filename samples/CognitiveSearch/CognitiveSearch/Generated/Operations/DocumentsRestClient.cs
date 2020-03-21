@@ -265,7 +265,7 @@ namespace CognitiveSearch
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = SearchDocumentsResult.DeserializeSearchDocumentsResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<SearchDocumentsResult>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -313,7 +313,7 @@ namespace CognitiveSearch
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = SearchDocumentsResult.DeserializeSearchDocumentsResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<SearchDocumentsResult>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -376,7 +376,7 @@ namespace CognitiveSearch
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = SearchDocumentsResult.DeserializeSearchDocumentsResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<SearchDocumentsResult>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -412,7 +412,7 @@ namespace CognitiveSearch
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = SearchDocumentsResult.DeserializeSearchDocumentsResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<SearchDocumentsResult>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -478,7 +478,7 @@ namespace CognitiveSearch
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = document.RootElement.GetObject();
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<object>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -515,7 +515,7 @@ namespace CognitiveSearch
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = document.RootElement.GetObject();
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<object>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -626,7 +626,7 @@ namespace CognitiveSearch
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = SuggestDocumentsResult.DeserializeSuggestDocumentsResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<SuggestDocumentsResult>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -676,7 +676,7 @@ namespace CognitiveSearch
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = SuggestDocumentsResult.DeserializeSuggestDocumentsResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<SuggestDocumentsResult>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -739,7 +739,7 @@ namespace CognitiveSearch
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = SuggestDocumentsResult.DeserializeSuggestDocumentsResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<SuggestDocumentsResult>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -775,7 +775,7 @@ namespace CognitiveSearch
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = SuggestDocumentsResult.DeserializeSuggestDocumentsResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<SuggestDocumentsResult>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -838,7 +838,7 @@ namespace CognitiveSearch
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = IndexDocumentsResult.DeserializeIndexDocumentsResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<IndexDocumentsResult>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -874,7 +874,7 @@ namespace CognitiveSearch
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = IndexDocumentsResult.DeserializeIndexDocumentsResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<IndexDocumentsResult>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -980,7 +980,7 @@ namespace CognitiveSearch
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = AutocompleteResult.DeserializeAutocompleteResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<AutocompleteResult>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1029,7 +1029,7 @@ namespace CognitiveSearch
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = AutocompleteResult.DeserializeAutocompleteResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<AutocompleteResult>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1092,7 +1092,7 @@ namespace CognitiveSearch
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = AutocompleteResult.DeserializeAutocompleteResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<AutocompleteResult>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1128,7 +1128,7 @@ namespace CognitiveSearch
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = AutocompleteResult.DeserializeAutocompleteResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<AutocompleteResult>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

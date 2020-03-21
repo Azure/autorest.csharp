@@ -145,7 +145,23 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static LoadBalancer DeserializeLoadBalancer(JsonElement element)
         {
-            LoadBalancer result = new LoadBalancer();
+            LoadBalancer result;
+            LoadBalancerSku sku = default;
+            string etag = default;
+            string id = default;
+            string name = default;
+            string type = default;
+            string location = default;
+            IDictionary<string, string> tags = default;
+            IList<FrontendIPConfiguration> frontendIPConfigurations = default;
+            IList<BackendAddressPool> backendAddressPools = default;
+            IList<LoadBalancingRule> loadBalancingRules = default;
+            IList<Probe> probes = default;
+            IList<InboundNatRule> inboundNatRules = default;
+            IList<InboundNatPool> inboundNatPools = default;
+            IList<OutboundRule> outboundRules = default;
+            string resourceGuid = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"))
@@ -154,7 +170,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Sku = LoadBalancerSku.DeserializeLoadBalancerSku(property.Value);
+                    sku = LoadBalancerSku.DeserializeLoadBalancerSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("etag"))
@@ -163,7 +179,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Etag = property.Value.GetString();
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -172,7 +188,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -181,7 +197,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -190,7 +206,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("location"))
@@ -199,7 +215,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Location = property.Value.GetString();
+                    location = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -208,11 +224,12 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Tags = new Dictionary<string, string>();
+                    Dictionary<string, string> array = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        result.Tags.Add(property0.Name, property0.Value.GetString());
+                        array.Add(property0.Name, property0.Value.GetString());
                     }
+                    tags = array;
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -225,11 +242,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.FrontendIPConfigurations = new List<FrontendIPConfiguration>();
+                            List<FrontendIPConfiguration> array = new List<FrontendIPConfiguration>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.FrontendIPConfigurations.Add(FrontendIPConfiguration.DeserializeFrontendIPConfiguration(item));
+                                array.Add(FrontendIPConfiguration.DeserializeFrontendIPConfiguration(item));
                             }
+                            frontendIPConfigurations = array;
                             continue;
                         }
                         if (property0.NameEquals("backendAddressPools"))
@@ -238,11 +256,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.BackendAddressPools = new List<BackendAddressPool>();
+                            List<BackendAddressPool> array = new List<BackendAddressPool>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.BackendAddressPools.Add(BackendAddressPool.DeserializeBackendAddressPool(item));
+                                array.Add(BackendAddressPool.DeserializeBackendAddressPool(item));
                             }
+                            backendAddressPools = array;
                             continue;
                         }
                         if (property0.NameEquals("loadBalancingRules"))
@@ -251,11 +270,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.LoadBalancingRules = new List<LoadBalancingRule>();
+                            List<LoadBalancingRule> array = new List<LoadBalancingRule>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.LoadBalancingRules.Add(LoadBalancingRule.DeserializeLoadBalancingRule(item));
+                                array.Add(LoadBalancingRule.DeserializeLoadBalancingRule(item));
                             }
+                            loadBalancingRules = array;
                             continue;
                         }
                         if (property0.NameEquals("probes"))
@@ -264,11 +284,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.Probes = new List<Probe>();
+                            List<Probe> array = new List<Probe>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.Probes.Add(Probe.DeserializeProbe(item));
+                                array.Add(Probe.DeserializeProbe(item));
                             }
+                            probes = array;
                             continue;
                         }
                         if (property0.NameEquals("inboundNatRules"))
@@ -277,11 +298,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.InboundNatRules = new List<InboundNatRule>();
+                            List<InboundNatRule> array = new List<InboundNatRule>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.InboundNatRules.Add(InboundNatRule.DeserializeInboundNatRule(item));
+                                array.Add(InboundNatRule.DeserializeInboundNatRule(item));
                             }
+                            inboundNatRules = array;
                             continue;
                         }
                         if (property0.NameEquals("inboundNatPools"))
@@ -290,11 +312,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.InboundNatPools = new List<InboundNatPool>();
+                            List<InboundNatPool> array = new List<InboundNatPool>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.InboundNatPools.Add(InboundNatPool.DeserializeInboundNatPool(item));
+                                array.Add(InboundNatPool.DeserializeInboundNatPool(item));
                             }
+                            inboundNatPools = array;
                             continue;
                         }
                         if (property0.NameEquals("outboundRules"))
@@ -303,11 +326,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.OutboundRules = new List<OutboundRule>();
+                            List<OutboundRule> array = new List<OutboundRule>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.OutboundRules.Add(OutboundRule.DeserializeOutboundRule(item));
+                                array.Add(OutboundRule.DeserializeOutboundRule(item));
                             }
+                            outboundRules = array;
                             continue;
                         }
                         if (property0.NameEquals("resourceGuid"))
@@ -316,7 +340,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ResourceGuid = property0.Value.GetString();
+                            resourceGuid = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -325,13 +349,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningState = new ProvisioningState(property0.Value.GetString());
+                            provisioningState = new ProvisioningState(property0.Value.GetString());
                             continue;
                         }
                     }
                     continue;
                 }
             }
+            result = new LoadBalancer(sku, etag, frontendIPConfigurations, backendAddressPools, loadBalancingRules, probes, inboundNatRules, inboundNatPools, outboundRules, resourceGuid, provisioningState, id, name, type, location, tags);
             return result;
         }
     }

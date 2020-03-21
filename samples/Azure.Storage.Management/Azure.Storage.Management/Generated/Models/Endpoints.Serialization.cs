@@ -60,7 +60,15 @@ namespace Azure.Storage.Management.Models
 
         internal static Endpoints DeserializeEndpoints(JsonElement element)
         {
-            Endpoints result = new Endpoints();
+            Endpoints result;
+            string blob = default;
+            string queue = default;
+            string table = default;
+            string file = default;
+            string web = default;
+            string dfs = default;
+            StorageAccountMicrosoftEndpoints microsoftEndpoints = default;
+            StorageAccountInternetEndpoints internetEndpoints = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("blob"))
@@ -69,7 +77,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Blob = property.Value.GetString();
+                    blob = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("queue"))
@@ -78,7 +86,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Queue = property.Value.GetString();
+                    queue = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("table"))
@@ -87,7 +95,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Table = property.Value.GetString();
+                    table = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("file"))
@@ -96,7 +104,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.File = property.Value.GetString();
+                    file = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("web"))
@@ -105,7 +113,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Web = property.Value.GetString();
+                    web = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("dfs"))
@@ -114,7 +122,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Dfs = property.Value.GetString();
+                    dfs = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("microsoftEndpoints"))
@@ -123,7 +131,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.MicrosoftEndpoints = StorageAccountMicrosoftEndpoints.DeserializeStorageAccountMicrosoftEndpoints(property.Value);
+                    microsoftEndpoints = StorageAccountMicrosoftEndpoints.DeserializeStorageAccountMicrosoftEndpoints(property.Value);
                     continue;
                 }
                 if (property.NameEquals("internetEndpoints"))
@@ -132,10 +140,11 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.InternetEndpoints = StorageAccountInternetEndpoints.DeserializeStorageAccountInternetEndpoints(property.Value);
+                    internetEndpoints = StorageAccountInternetEndpoints.DeserializeStorageAccountInternetEndpoints(property.Value);
                     continue;
                 }
             }
+            result = new Endpoints(blob, queue, table, file, web, dfs, microsoftEndpoints, internetEndpoints);
             return result;
         }
     }

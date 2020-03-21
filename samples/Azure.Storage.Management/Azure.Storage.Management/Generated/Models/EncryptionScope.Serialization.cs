@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -63,7 +64,15 @@ namespace Azure.Storage.Management.Models
 
         internal static EncryptionScope DeserializeEncryptionScope(JsonElement element)
         {
-            EncryptionScope result = new EncryptionScope();
+            EncryptionScope result;
+            string id = default;
+            string name = default;
+            string type = default;
+            EncryptionScopeSource? source = default;
+            EncryptionScopeState? state = default;
+            DateTimeOffset? creationTime = default;
+            DateTimeOffset? lastModifiedTime = default;
+            EncryptionScopeKeyVaultProperties keyVaultProperties = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -72,7 +81,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -81,7 +90,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -90,7 +99,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -103,7 +112,7 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            result.Source = new EncryptionScopeSource(property0.Value.GetString());
+                            source = new EncryptionScopeSource(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("state"))
@@ -112,7 +121,7 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            result.State = new EncryptionScopeState(property0.Value.GetString());
+                            state = new EncryptionScopeState(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("creationTime"))
@@ -121,7 +130,7 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            result.CreationTime = property0.Value.GetDateTimeOffset("S");
+                            creationTime = property0.Value.GetDateTimeOffset("S");
                             continue;
                         }
                         if (property0.NameEquals("lastModifiedTime"))
@@ -130,7 +139,7 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            result.LastModifiedTime = property0.Value.GetDateTimeOffset("S");
+                            lastModifiedTime = property0.Value.GetDateTimeOffset("S");
                             continue;
                         }
                         if (property0.NameEquals("keyVaultProperties"))
@@ -139,13 +148,14 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            result.KeyVaultProperties = EncryptionScopeKeyVaultProperties.DeserializeEncryptionScopeKeyVaultProperties(property0.Value);
+                            keyVaultProperties = EncryptionScopeKeyVaultProperties.DeserializeEncryptionScopeKeyVaultProperties(property0.Value);
                             continue;
                         }
                     }
                     continue;
                 }
             }
+            result = new EncryptionScope(source, state, creationTime, lastModifiedTime, keyVaultProperties, id, name, type);
             return result;
         }
     }

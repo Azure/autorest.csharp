@@ -14,7 +14,11 @@ namespace Azure.Storage.Management.Models
     {
         internal static Operation DeserializeOperation(JsonElement element)
         {
-            Operation result = new Operation();
+            Operation result;
+            string name = default;
+            OperationDisplay display = default;
+            string origin = default;
+            ServiceSpecification serviceSpecification = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -23,7 +27,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("display"))
@@ -32,7 +36,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Display = OperationDisplay.DeserializeOperationDisplay(property.Value);
+                    display = OperationDisplay.DeserializeOperationDisplay(property.Value);
                     continue;
                 }
                 if (property.NameEquals("origin"))
@@ -41,7 +45,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Origin = property.Value.GetString();
+                    origin = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -54,13 +58,14 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            result.ServiceSpecification = ServiceSpecification.DeserializeServiceSpecification(property0.Value);
+                            serviceSpecification = ServiceSpecification.DeserializeServiceSpecification(property0.Value);
                             continue;
                         }
                     }
                     continue;
                 }
             }
+            result = new Operation(name, display, origin, serviceSpecification);
             return result;
         }
     }

@@ -118,15 +118,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new Salmon()
-            {
-                Location = location,
-                Iswild = iswild,
-                Fishtype = fishtype,
-                Species = species,
-                Length = length,
-                Siblings = siblings
-            };
+            result = new Salmon(location, iswild, fishtype, species, length, siblings);
             return result;
         }
     }

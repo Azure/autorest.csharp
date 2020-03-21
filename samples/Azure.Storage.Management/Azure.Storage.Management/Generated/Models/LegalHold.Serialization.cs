@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -32,7 +33,9 @@ namespace Azure.Storage.Management.Models
 
         internal static LegalHold DeserializeLegalHold(JsonElement element)
         {
-            LegalHold result = new LegalHold();
+            LegalHold result;
+            bool? hasLegalHold = default;
+            IList<string> tags = new List<string>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("hasLegalHold"))
@@ -41,18 +44,21 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.HasLegalHold = property.Value.GetBoolean();
+                    hasLegalHold = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("tags"))
                 {
+                    List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Tags.Add(item.GetString());
+                        array.Add(item.GetString());
                     }
+                    tags = array;
                     continue;
                 }
             }
+            result = new LegalHold(hasLegalHold, tags);
             return result;
         }
     }

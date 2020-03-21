@@ -15,7 +15,10 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static Models DeserializeModels(JsonElement element)
         {
-            Models result = new Models();
+            Models result;
+            ModelsSummary summary = default;
+            IList<ModelInfo> modelList = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("summary"))
@@ -24,7 +27,7 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.Summary = ModelsSummary.DeserializeModelsSummary(property.Value);
+                    summary = ModelsSummary.DeserializeModelsSummary(property.Value);
                     continue;
                 }
                 if (property.NameEquals("modelList"))
@@ -33,11 +36,12 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.ModelList = new List<ModelInfo>();
+                    List<ModelInfo> array = new List<ModelInfo>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.ModelList.Add(ModelInfo.DeserializeModelInfo(item));
+                        array.Add(ModelInfo.DeserializeModelInfo(item));
                     }
+                    modelList = array;
                     continue;
                 }
                 if (property.NameEquals("nextLink"))
@@ -46,10 +50,11 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.NextLink = property.Value.GetString();
+                    nextLink = property.Value.GetString();
                     continue;
                 }
             }
+            result = new Models(summary, modelList, nextLink);
             return result;
         }
     }

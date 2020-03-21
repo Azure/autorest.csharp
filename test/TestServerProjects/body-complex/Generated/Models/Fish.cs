@@ -15,7 +15,6 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of Fish. </summary>
         public Fish()
         {
-            Fishtype = null;
         }
 
         /// <summary> Initializes a new instance of Fish. </summary>
@@ -29,7 +28,6 @@ namespace body_complex.Models
             Species = species;
             Length = length;
             Siblings = siblings;
-            Fishtype = null;
         }
 
         public string Fishtype { get; internal set; }

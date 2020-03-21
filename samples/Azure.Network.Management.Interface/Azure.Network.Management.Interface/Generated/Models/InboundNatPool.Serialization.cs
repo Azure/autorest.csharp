@@ -88,7 +88,20 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static InboundNatPool DeserializeInboundNatPool(JsonElement element)
         {
-            InboundNatPool result = new InboundNatPool();
+            InboundNatPool result;
+            string name = default;
+            string etag = default;
+            string type = default;
+            string id = default;
+            SubResource frontendIPConfiguration = default;
+            TransportProtocol? protocol = default;
+            int? frontendPortRangeStart = default;
+            int? frontendPortRangeEnd = default;
+            int? backendPort = default;
+            int? idleTimeoutInMinutes = default;
+            bool? enableFloatingIP = default;
+            bool? enableTcpReset = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -97,7 +110,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("etag"))
@@ -106,7 +119,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Etag = property.Value.GetString();
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -115,7 +128,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -124,7 +137,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -137,7 +150,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.FrontendIPConfiguration = DeserializeSubResource(property0.Value);
+                            frontendIPConfiguration = DeserializeSubResource(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("protocol"))
@@ -146,7 +159,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.Protocol = new TransportProtocol(property0.Value.GetString());
+                            protocol = new TransportProtocol(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("frontendPortRangeStart"))
@@ -155,7 +168,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.FrontendPortRangeStart = property0.Value.GetInt32();
+                            frontendPortRangeStart = property0.Value.GetInt32();
                             continue;
                         }
                         if (property0.NameEquals("frontendPortRangeEnd"))
@@ -164,7 +177,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.FrontendPortRangeEnd = property0.Value.GetInt32();
+                            frontendPortRangeEnd = property0.Value.GetInt32();
                             continue;
                         }
                         if (property0.NameEquals("backendPort"))
@@ -173,7 +186,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.BackendPort = property0.Value.GetInt32();
+                            backendPort = property0.Value.GetInt32();
                             continue;
                         }
                         if (property0.NameEquals("idleTimeoutInMinutes"))
@@ -182,7 +195,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.IdleTimeoutInMinutes = property0.Value.GetInt32();
+                            idleTimeoutInMinutes = property0.Value.GetInt32();
                             continue;
                         }
                         if (property0.NameEquals("enableFloatingIP"))
@@ -191,7 +204,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.EnableFloatingIP = property0.Value.GetBoolean();
+                            enableFloatingIP = property0.Value.GetBoolean();
                             continue;
                         }
                         if (property0.NameEquals("enableTcpReset"))
@@ -200,7 +213,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.EnableTcpReset = property0.Value.GetBoolean();
+                            enableTcpReset = property0.Value.GetBoolean();
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -209,13 +222,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningState = new ProvisioningState(property0.Value.GetString());
+                            provisioningState = new ProvisioningState(property0.Value.GetString());
                             continue;
                         }
                     }
                     continue;
                 }
             }
+            result = new InboundNatPool(name, etag, type, frontendIPConfiguration, protocol, frontendPortRangeStart, frontendPortRangeEnd, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, provisioningState, id);
             return result;
         }
     }

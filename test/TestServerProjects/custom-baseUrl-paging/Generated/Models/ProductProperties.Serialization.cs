@@ -14,7 +14,9 @@ namespace custom_baseUrl_paging.Models
     {
         internal static ProductProperties DeserializeProductProperties(JsonElement element)
         {
-            ProductProperties result = new ProductProperties();
+            ProductProperties result;
+            int? id = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -23,7 +25,7 @@ namespace custom_baseUrl_paging.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetInt32();
+                    id = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -32,10 +34,11 @@ namespace custom_baseUrl_paging.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
+            result = new ProductProperties(id, name);
             return result;
         }
     }

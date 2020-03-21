@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -14,20 +15,25 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static DocumentKeyPhrases DeserializeDocumentKeyPhrases(JsonElement element)
         {
-            DocumentKeyPhrases result = new DocumentKeyPhrases();
+            DocumentKeyPhrases result;
+            string id = default;
+            IList<string> keyPhrases = new List<string>();
+            DocumentStatistics statistics = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
                 {
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("keyPhrases"))
                 {
+                    List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.KeyPhrases.Add(item.GetString());
+                        array.Add(item.GetString());
                     }
+                    keyPhrases = array;
                     continue;
                 }
                 if (property.NameEquals("statistics"))
@@ -36,10 +42,11 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    result.Statistics = DocumentStatistics.DeserializeDocumentStatistics(property.Value);
+                    statistics = DocumentStatistics.DeserializeDocumentStatistics(property.Value);
                     continue;
                 }
             }
+            result = new DocumentKeyPhrases(id, keyPhrases, statistics);
             return result;
         }
     }

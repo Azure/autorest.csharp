@@ -15,17 +15,22 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static InnerError DeserializeInnerError(JsonElement element)
         {
-            InnerError result = new InnerError();
+            InnerError result;
+            InnerErrorCodeValue code = default;
+            string message = default;
+            IDictionary<string, string> details = default;
+            string target = default;
+            InnerError innerError = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"))
                 {
-                    result.Code = property.Value.GetString().ToInnerErrorCodeValue();
+                    code = property.Value.GetString().ToInnerErrorCodeValue();
                     continue;
                 }
                 if (property.NameEquals("message"))
                 {
-                    result.Message = property.Value.GetString();
+                    message = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("details"))
@@ -34,11 +39,12 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    result.Details = new Dictionary<string, string>();
+                    Dictionary<string, string> array = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        result.Details.Add(property0.Name, property0.Value.GetString());
+                        array.Add(property0.Name, property0.Value.GetString());
                     }
+                    details = array;
                     continue;
                 }
                 if (property.NameEquals("target"))
@@ -47,7 +53,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    result.Target = property.Value.GetString();
+                    target = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("innerError"))
@@ -56,10 +62,11 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    result.Inner = DeserializeInnerError(property.Value);
+                    innerError = DeserializeInnerError(property.Value);
                     continue;
                 }
             }
+            result = new InnerError(code, message, details, target, innerError);
             return result;
         }
     }

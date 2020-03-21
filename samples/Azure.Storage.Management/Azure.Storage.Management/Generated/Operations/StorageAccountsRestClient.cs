@@ -62,11 +62,7 @@ namespace Azure.Storage.Management
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new StorageAccountCheckNameAvailabilityParameters()
-            {
-                Name = name,
-                Type = type
-            };
+            var model = new StorageAccountCheckNameAvailabilityParameters(name, type);
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
@@ -100,7 +96,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = CheckNameAvailabilityResult.DeserializeCheckNameAvailabilityResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<CheckNameAvailabilityResult>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -140,7 +136,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = CheckNameAvailabilityResult.DeserializeCheckNameAvailabilityResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<CheckNameAvailabilityResult>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -399,7 +395,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = StorageAccount.DeserializeStorageAccount(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<StorageAccount>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -440,7 +436,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = StorageAccount.DeserializeStorageAccount(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<StorageAccount>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -507,7 +503,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = StorageAccount.DeserializeStorageAccount(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<StorageAccount>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -552,7 +548,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = StorageAccount.DeserializeStorageAccount(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<StorageAccount>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -596,7 +592,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = StorageAccountListResult.DeserializeStorageAccountListResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<StorageAccountListResult>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -625,7 +621,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = StorageAccountListResult.DeserializeStorageAccountListResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<StorageAccountListResult>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -677,7 +673,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = StorageAccountListResult.DeserializeStorageAccountListResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<StorageAccountListResult>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -712,7 +708,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = StorageAccountListResult.DeserializeStorageAccountListResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<StorageAccountListResult>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -772,7 +768,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = StorageAccountListKeysResult.DeserializeStorageAccountListKeysResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<StorageAccountListKeysResult>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -812,7 +808,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = StorageAccountListKeysResult.DeserializeStorageAccountListKeysResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<StorageAccountListKeysResult>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -842,10 +838,7 @@ namespace Azure.Storage.Management
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new StorageAccountRegenerateKeyParameters()
-            {
-                KeyName = keyName
-            };
+            var model = new StorageAccountRegenerateKeyParameters(keyName);
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
@@ -884,7 +877,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = StorageAccountListKeysResult.DeserializeStorageAccountListKeysResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<StorageAccountListKeysResult>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -929,7 +922,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = StorageAccountListKeysResult.DeserializeStorageAccountListKeysResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<StorageAccountListKeysResult>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -997,7 +990,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ListAccountSasResponse.DeserializeListAccountSasResponse(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<ListAccountSasResponse>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1042,7 +1035,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = ListAccountSasResponse.DeserializeListAccountSasResponse(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<ListAccountSasResponse>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1110,7 +1103,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = ListServiceSasResponse.DeserializeListServiceSasResponse(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<ListServiceSasResponse>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1155,7 +1148,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = ListServiceSasResponse.DeserializeListServiceSasResponse(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<ListServiceSasResponse>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1278,11 +1271,7 @@ namespace Azure.Storage.Management
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new BlobRestoreParameters()
-            {
-                TimeToRestore = timeToRestore,
-                BlobRanges = blobRanges.ToArray()
-            };
+            var model = new BlobRestoreParameters(timeToRestore, blobRanges.ToArray());
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
@@ -1499,7 +1488,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = StorageAccountListResult.DeserializeStorageAccountListResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<StorageAccountListResult>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1534,7 +1523,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = StorageAccountListResult.DeserializeStorageAccountListResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<StorageAccountListResult>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1580,7 +1569,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = StorageAccountListResult.DeserializeStorageAccountListResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<StorageAccountListResult>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1615,7 +1604,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = StorageAccountListResult.DeserializeStorageAccountListResult(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<StorageAccountListResult>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

@@ -21,11 +21,10 @@ namespace CognitiveSearch.Models
         /// <param name="replaceOriginalTokens"> A value indicating whether encoded tokens should replace original tokens. If false, encoded tokens are added as synonyms. Default is true. </param>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal PhoneticTokenFilter(PhoneticEncoder? encoder, bool? replaceOriginalTokens, string odataType, string name) : base(odataType, name)
+        internal PhoneticTokenFilter(PhoneticEncoder? encoder, bool? replaceOriginalTokens, string odataType, string name) : base(odataType ?? "#Microsoft.Azure.Search.PhoneticTokenFilter", name)
         {
             Encoder = encoder;
             ReplaceOriginalTokens = replaceOriginalTokens;
-            OdataType = "#Microsoft.Azure.Search.PhoneticTokenFilter";
         }
 
         /// <summary> The phonetic encoder to use. Default is &quot;metaphone&quot;. </summary>

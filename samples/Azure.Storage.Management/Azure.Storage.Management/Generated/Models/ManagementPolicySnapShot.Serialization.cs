@@ -25,7 +25,8 @@ namespace Azure.Storage.Management.Models
 
         internal static ManagementPolicySnapShot DeserializeManagementPolicySnapShot(JsonElement element)
         {
-            ManagementPolicySnapShot result = new ManagementPolicySnapShot();
+            ManagementPolicySnapShot result;
+            DateAfterCreation delete = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("delete"))
@@ -34,10 +35,11 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Delete = DateAfterCreation.DeserializeDateAfterCreation(property.Value);
+                    delete = DateAfterCreation.DeserializeDateAfterCreation(property.Value);
                     continue;
                 }
             }
+            result = new ManagementPolicySnapShot(delete);
             return result;
         }
     }

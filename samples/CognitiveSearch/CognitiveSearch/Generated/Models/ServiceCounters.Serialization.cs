@@ -14,7 +14,13 @@ namespace CognitiveSearch.Models
     {
         internal static ServiceCounters DeserializeServiceCounters(JsonElement element)
         {
-            ServiceCounters result = new ServiceCounters();
+            ServiceCounters result;
+            ResourceCounter documentCount = default;
+            ResourceCounter indexesCount = default;
+            ResourceCounter indexersCount = default;
+            ResourceCounter dataSourcesCount = default;
+            ResourceCounter storageSize = default;
+            ResourceCounter synonymMaps = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("documentCount"))
@@ -23,7 +29,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.DocumentCounter = ResourceCounter.DeserializeResourceCounter(property.Value);
+                    documentCount = ResourceCounter.DeserializeResourceCounter(property.Value);
                     continue;
                 }
                 if (property.NameEquals("indexesCount"))
@@ -32,7 +38,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.IndexCounter = ResourceCounter.DeserializeResourceCounter(property.Value);
+                    indexesCount = ResourceCounter.DeserializeResourceCounter(property.Value);
                     continue;
                 }
                 if (property.NameEquals("indexersCount"))
@@ -41,7 +47,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.IndexerCounter = ResourceCounter.DeserializeResourceCounter(property.Value);
+                    indexersCount = ResourceCounter.DeserializeResourceCounter(property.Value);
                     continue;
                 }
                 if (property.NameEquals("dataSourcesCount"))
@@ -50,7 +56,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.DataSourceCounter = ResourceCounter.DeserializeResourceCounter(property.Value);
+                    dataSourcesCount = ResourceCounter.DeserializeResourceCounter(property.Value);
                     continue;
                 }
                 if (property.NameEquals("storageSize"))
@@ -59,7 +65,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.StorageSizeCounter = ResourceCounter.DeserializeResourceCounter(property.Value);
+                    storageSize = ResourceCounter.DeserializeResourceCounter(property.Value);
                     continue;
                 }
                 if (property.NameEquals("synonymMaps"))
@@ -68,10 +74,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.SynonymMapCounter = ResourceCounter.DeserializeResourceCounter(property.Value);
+                    synonymMaps = ResourceCounter.DeserializeResourceCounter(property.Value);
                     continue;
                 }
             }
+            result = new ServiceCounters(documentCount, indexesCount, indexersCount, dataSourcesCount, storageSize, synonymMaps);
             return result;
         }
     }

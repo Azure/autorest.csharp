@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -27,12 +28,14 @@ namespace CognitiveSearch.Models
 
         internal static IndexingSchedule DeserializeIndexingSchedule(JsonElement element)
         {
-            IndexingSchedule result = new IndexingSchedule();
+            IndexingSchedule result;
+            TimeSpan interval = default;
+            DateTimeOffset? startTime = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("interval"))
                 {
-                    result.Interval = property.Value.GetTimeSpan("P");
+                    interval = property.Value.GetTimeSpan("P");
                     continue;
                 }
                 if (property.NameEquals("startTime"))
@@ -41,10 +44,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.StartTime = property.Value.GetDateTimeOffset("S");
+                    startTime = property.Value.GetDateTimeOffset("S");
                     continue;
                 }
             }
+            result = new IndexingSchedule(interval, startTime);
             return result;
         }
     }

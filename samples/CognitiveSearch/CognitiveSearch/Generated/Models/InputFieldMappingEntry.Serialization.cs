@@ -43,12 +43,16 @@ namespace CognitiveSearch.Models
 
         internal static InputFieldMappingEntry DeserializeInputFieldMappingEntry(JsonElement element)
         {
-            InputFieldMappingEntry result = new InputFieldMappingEntry();
+            InputFieldMappingEntry result;
+            string name = default;
+            string source = default;
+            string sourceContext = default;
+            IList<InputFieldMappingEntry> inputs = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("source"))
@@ -57,7 +61,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Source = property.Value.GetString();
+                    source = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("sourceContext"))
@@ -66,7 +70,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.SourceContext = property.Value.GetString();
+                    sourceContext = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("inputs"))
@@ -75,14 +79,16 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Inputs = new List<InputFieldMappingEntry>();
+                    List<InputFieldMappingEntry> array = new List<InputFieldMappingEntry>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Inputs.Add(DeserializeInputFieldMappingEntry(item));
+                        array.Add(DeserializeInputFieldMappingEntry(item));
                     }
+                    inputs = array;
                     continue;
                 }
             }
+            result = new InputFieldMappingEntry(name, source, sourceContext, inputs);
             return result;
         }
     }

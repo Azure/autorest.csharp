@@ -34,7 +34,11 @@ namespace CognitiveSearch.Models
 
         internal static LimitTokenFilter DeserializeLimitTokenFilter(JsonElement element)
         {
-            LimitTokenFilter result = new LimitTokenFilter();
+            LimitTokenFilter result;
+            int? maxTokenCount = default;
+            bool? consumeAllTokens = default;
+            string odatatype = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("maxTokenCount"))
@@ -43,7 +47,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.MaxTokenCount = property.Value.GetInt32();
+                    maxTokenCount = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("consumeAllTokens"))
@@ -52,20 +56,21 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.ConsumeAllTokens = property.Value.GetBoolean();
+                    consumeAllTokens = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
+            result = new LimitTokenFilter(maxTokenCount, consumeAllTokens, odatatype, name);
             return result;
         }
     }

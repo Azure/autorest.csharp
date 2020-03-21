@@ -32,7 +32,10 @@ namespace Azure.Storage.Management.Models
 
         internal static Encryption DeserializeEncryption(JsonElement element)
         {
-            Encryption result = new Encryption();
+            Encryption result;
+            EncryptionServices services = default;
+            KeySource keySource = default;
+            KeyVaultProperties keyvaultproperties = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("services"))
@@ -41,12 +44,12 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Services = EncryptionServices.DeserializeEncryptionServices(property.Value);
+                    services = EncryptionServices.DeserializeEncryptionServices(property.Value);
                     continue;
                 }
                 if (property.NameEquals("keySource"))
                 {
-                    result.KeySource = new KeySource(property.Value.GetString());
+                    keySource = new KeySource(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("keyvaultproperties"))
@@ -55,10 +58,11 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.KeyVaultProperties = KeyVaultProperties.DeserializeKeyVaultProperties(property.Value);
+                    keyvaultproperties = KeyVaultProperties.DeserializeKeyVaultProperties(property.Value);
                     continue;
                 }
             }
+            result = new Encryption(services, keySource, keyvaultproperties);
             return result;
         }
     }

@@ -84,7 +84,7 @@ namespace ExtensionClientName
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = RenamedSchema.DeserializeRenamedSchema(document.RootElement);
                             var headers = new RenamedOperationHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue<RenamedSchema, RenamedOperationHeaders>(value, headers, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -129,7 +129,7 @@ namespace ExtensionClientName
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = RenamedSchema.DeserializeRenamedSchema(document.RootElement);
                             var headers = new RenamedOperationHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue<RenamedSchema, RenamedOperationHeaders>(value, headers, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

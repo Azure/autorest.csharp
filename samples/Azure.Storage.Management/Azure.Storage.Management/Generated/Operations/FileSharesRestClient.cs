@@ -104,7 +104,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = FileShareItems.DeserializeFileShareItems(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<FileShareItems>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -146,7 +146,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = FileShareItems.DeserializeFileShareItems(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<FileShareItems>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -222,7 +222,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = FileShare.DeserializeFileShare(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<FileShare>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -269,7 +269,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = FileShare.DeserializeFileShare(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<FileShare>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -345,7 +345,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = FileShare.DeserializeFileShare(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<FileShare>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -392,7 +392,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = FileShare.DeserializeFileShare(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<FileShare>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -457,7 +457,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = FileShare.DeserializeFileShare(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<FileShare>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -502,7 +502,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = FileShare.DeserializeFileShare(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<FileShare>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -650,7 +650,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             var value = FileShareItems.DeserializeFileShareItems(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<FileShareItems>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -685,7 +685,7 @@ namespace Azure.Storage.Management
                         {
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             var value = FileShareItems.DeserializeFileShareItems(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<FileShareItems>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

@@ -30,7 +30,9 @@ namespace Azure.Storage.Management.Models
 
         internal static ManagementPolicyAction DeserializeManagementPolicyAction(JsonElement element)
         {
-            ManagementPolicyAction result = new ManagementPolicyAction();
+            ManagementPolicyAction result;
+            ManagementPolicyBaseBlob baseBlob = default;
+            ManagementPolicySnapShot snapshot = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("baseBlob"))
@@ -39,7 +41,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.BaseBlob = ManagementPolicyBaseBlob.DeserializeManagementPolicyBaseBlob(property.Value);
+                    baseBlob = ManagementPolicyBaseBlob.DeserializeManagementPolicyBaseBlob(property.Value);
                     continue;
                 }
                 if (property.NameEquals("snapshot"))
@@ -48,10 +50,11 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Snapshot = ManagementPolicySnapShot.DeserializeManagementPolicySnapShot(property.Value);
+                    snapshot = ManagementPolicySnapShot.DeserializeManagementPolicySnapShot(property.Value);
                     continue;
                 }
             }
+            result = new ManagementPolicyAction(baseBlob, snapshot);
             return result;
         }
     }

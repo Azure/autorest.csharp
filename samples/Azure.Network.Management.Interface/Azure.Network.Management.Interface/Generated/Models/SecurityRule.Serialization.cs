@@ -149,7 +149,26 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static SecurityRule DeserializeSecurityRule(JsonElement element)
         {
-            SecurityRule result = new SecurityRule();
+            SecurityRule result;
+            string name = default;
+            string etag = default;
+            string id = default;
+            string description = default;
+            SecurityRuleProtocol? protocol = default;
+            string sourcePortRange = default;
+            string destinationPortRange = default;
+            string sourceAddressPrefix = default;
+            IList<string> sourceAddressPrefixes = default;
+            IList<ApplicationSecurityGroup> sourceApplicationSecurityGroups = default;
+            string destinationAddressPrefix = default;
+            IList<string> destinationAddressPrefixes = default;
+            IList<ApplicationSecurityGroup> destinationApplicationSecurityGroups = default;
+            IList<string> sourcePortRanges = default;
+            IList<string> destinationPortRanges = default;
+            SecurityRuleAccess? access = default;
+            int? priority = default;
+            SecurityRuleDirection? direction = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -158,7 +177,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("etag"))
@@ -167,7 +186,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Etag = property.Value.GetString();
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -176,7 +195,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -189,7 +208,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.Description = property0.Value.GetString();
+                            description = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("protocol"))
@@ -198,7 +217,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.Protocol = new SecurityRuleProtocol(property0.Value.GetString());
+                            protocol = new SecurityRuleProtocol(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("sourcePortRange"))
@@ -207,7 +226,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.SourcePortRange = property0.Value.GetString();
+                            sourcePortRange = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("destinationPortRange"))
@@ -216,7 +235,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.DestinationPortRange = property0.Value.GetString();
+                            destinationPortRange = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("sourceAddressPrefix"))
@@ -225,7 +244,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.SourceAddressPrefix = property0.Value.GetString();
+                            sourceAddressPrefix = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("sourceAddressPrefixes"))
@@ -234,11 +253,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.SourceAddressPrefixes = new List<string>();
+                            List<string> array = new List<string>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.SourceAddressPrefixes.Add(item.GetString());
+                                array.Add(item.GetString());
                             }
+                            sourceAddressPrefixes = array;
                             continue;
                         }
                         if (property0.NameEquals("sourceApplicationSecurityGroups"))
@@ -247,11 +267,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.SourceApplicationSecurityGroups = new List<ApplicationSecurityGroup>();
+                            List<ApplicationSecurityGroup> array = new List<ApplicationSecurityGroup>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.SourceApplicationSecurityGroups.Add(ApplicationSecurityGroup.DeserializeApplicationSecurityGroup(item));
+                                array.Add(ApplicationSecurityGroup.DeserializeApplicationSecurityGroup(item));
                             }
+                            sourceApplicationSecurityGroups = array;
                             continue;
                         }
                         if (property0.NameEquals("destinationAddressPrefix"))
@@ -260,7 +281,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.DestinationAddressPrefix = property0.Value.GetString();
+                            destinationAddressPrefix = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("destinationAddressPrefixes"))
@@ -269,11 +290,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.DestinationAddressPrefixes = new List<string>();
+                            List<string> array = new List<string>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.DestinationAddressPrefixes.Add(item.GetString());
+                                array.Add(item.GetString());
                             }
+                            destinationAddressPrefixes = array;
                             continue;
                         }
                         if (property0.NameEquals("destinationApplicationSecurityGroups"))
@@ -282,11 +304,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.DestinationApplicationSecurityGroups = new List<ApplicationSecurityGroup>();
+                            List<ApplicationSecurityGroup> array = new List<ApplicationSecurityGroup>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.DestinationApplicationSecurityGroups.Add(ApplicationSecurityGroup.DeserializeApplicationSecurityGroup(item));
+                                array.Add(ApplicationSecurityGroup.DeserializeApplicationSecurityGroup(item));
                             }
+                            destinationApplicationSecurityGroups = array;
                             continue;
                         }
                         if (property0.NameEquals("sourcePortRanges"))
@@ -295,11 +318,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.SourcePortRanges = new List<string>();
+                            List<string> array = new List<string>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.SourcePortRanges.Add(item.GetString());
+                                array.Add(item.GetString());
                             }
+                            sourcePortRanges = array;
                             continue;
                         }
                         if (property0.NameEquals("destinationPortRanges"))
@@ -308,11 +332,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.DestinationPortRanges = new List<string>();
+                            List<string> array = new List<string>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.DestinationPortRanges.Add(item.GetString());
+                                array.Add(item.GetString());
                             }
+                            destinationPortRanges = array;
                             continue;
                         }
                         if (property0.NameEquals("access"))
@@ -321,7 +346,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.Access = new SecurityRuleAccess(property0.Value.GetString());
+                            access = new SecurityRuleAccess(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("priority"))
@@ -330,7 +355,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.Priority = property0.Value.GetInt32();
+                            priority = property0.Value.GetInt32();
                             continue;
                         }
                         if (property0.NameEquals("direction"))
@@ -339,7 +364,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.Direction = new SecurityRuleDirection(property0.Value.GetString());
+                            direction = new SecurityRuleDirection(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -348,13 +373,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningState = new ProvisioningState(property0.Value.GetString());
+                            provisioningState = new ProvisioningState(property0.Value.GetString());
                             continue;
                         }
                     }
                     continue;
                 }
             }
+            result = new SecurityRule(name, etag, description, protocol, sourcePortRange, destinationPortRange, sourceAddressPrefix, sourceAddressPrefixes, sourceApplicationSecurityGroups, destinationAddressPrefix, destinationAddressPrefixes, destinationApplicationSecurityGroups, sourcePortRanges, destinationPortRanges, access, priority, direction, provisioningState, id);
             return result;
         }
     }

@@ -59,7 +59,13 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static Delegation DeserializeDelegation(JsonElement element)
         {
-            Delegation result = new Delegation();
+            Delegation result;
+            string name = default;
+            string etag = default;
+            string id = default;
+            string serviceName = default;
+            IList<string> actions = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -68,7 +74,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("etag"))
@@ -77,7 +83,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Etag = property.Value.GetString();
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -86,7 +92,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -99,7 +105,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ServiceName = property0.Value.GetString();
+                            serviceName = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("actions"))
@@ -108,11 +114,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.Actions = new List<string>();
+                            List<string> array = new List<string>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.Actions.Add(item.GetString());
+                                array.Add(item.GetString());
                             }
+                            actions = array;
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -121,13 +128,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningState = new ProvisioningState(property0.Value.GetString());
+                            provisioningState = new ProvisioningState(property0.Value.GetString());
                             continue;
                         }
                     }
                     continue;
                 }
             }
+            result = new Delegation(name, etag, serviceName, actions, provisioningState, id);
             return result;
         }
     }

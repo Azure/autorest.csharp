@@ -43,7 +43,6 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("helper"))
                 {
-                    string propBH10 = default;
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         if (property0.NameEquals("propBH1"))
@@ -52,7 +51,7 @@ namespace body_complex.Models
                             {
                                 continue;
                             }
-                            propBH10 = property0.Value.GetString();
+                            propBH1 = property0.Value.GetString();
                             continue;
                         }
                     }

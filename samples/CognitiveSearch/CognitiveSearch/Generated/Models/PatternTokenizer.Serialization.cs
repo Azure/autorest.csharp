@@ -39,7 +39,12 @@ namespace CognitiveSearch.Models
 
         internal static PatternTokenizer DeserializePatternTokenizer(JsonElement element)
         {
-            PatternTokenizer result = new PatternTokenizer();
+            PatternTokenizer result;
+            string pattern = default;
+            RegexFlags? flags = default;
+            int? group = default;
+            string odatatype = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("pattern"))
@@ -48,7 +53,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Pattern = property.Value.GetString();
+                    pattern = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("flags"))
@@ -57,7 +62,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Flags = new RegexFlags(property.Value.GetString());
+                    flags = new RegexFlags(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("group"))
@@ -66,20 +71,21 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Group = property.Value.GetInt32();
+                    group = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
+            result = new PatternTokenizer(pattern, flags, group, odatatype, name);
             return result;
         }
     }

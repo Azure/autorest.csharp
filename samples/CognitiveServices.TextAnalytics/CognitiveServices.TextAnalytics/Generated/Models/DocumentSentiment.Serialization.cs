@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -14,17 +15,22 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static DocumentSentiment DeserializeDocumentSentiment(JsonElement element)
         {
-            DocumentSentiment result = new DocumentSentiment();
+            DocumentSentiment result;
+            string id = default;
+            DocumentSentimentValue sentiment = default;
+            DocumentStatistics statistics = default;
+            SentimentConfidenceScorePerLabel documentScores = new SentimentConfidenceScorePerLabel();
+            IList<SentenceSentiment> sentences = new List<SentenceSentiment>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
                 {
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("sentiment"))
                 {
-                    result.Sentiment = property.Value.GetString().ToDocumentSentimentValue();
+                    sentiment = property.Value.GetString().ToDocumentSentimentValue();
                     continue;
                 }
                 if (property.NameEquals("statistics"))
@@ -33,23 +39,26 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    result.Statistics = DocumentStatistics.DeserializeDocumentStatistics(property.Value);
+                    statistics = DocumentStatistics.DeserializeDocumentStatistics(property.Value);
                     continue;
                 }
                 if (property.NameEquals("documentScores"))
                 {
-                    result.DocumentScores = SentimentConfidenceScorePerLabel.DeserializeSentimentConfidenceScorePerLabel(property.Value);
+                    documentScores = SentimentConfidenceScorePerLabel.DeserializeSentimentConfidenceScorePerLabel(property.Value);
                     continue;
                 }
                 if (property.NameEquals("sentences"))
                 {
+                    List<SentenceSentiment> array = new List<SentenceSentiment>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Sentences.Add(SentenceSentiment.DeserializeSentenceSentiment(item));
+                        array.Add(SentenceSentiment.DeserializeSentenceSentiment(item));
                     }
+                    sentences = array;
                     continue;
                 }
             }
+            result = new DocumentSentiment(id, sentiment, statistics, documentScores, sentences);
             return result;
         }
     }

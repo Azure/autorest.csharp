@@ -15,7 +15,9 @@ namespace Azure.Storage.Management.Models
     {
         internal static FileShareItems DeserializeFileShareItems(JsonElement element)
         {
-            FileShareItems result = new FileShareItems();
+            FileShareItems result;
+            IList<FileShareItem> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -24,11 +26,12 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Value = new List<FileShareItem>();
+                    List<FileShareItem> array = new List<FileShareItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Value.Add(FileShareItem.DeserializeFileShareItem(item));
+                        array.Add(FileShareItem.DeserializeFileShareItem(item));
                     }
+                    value = array;
                     continue;
                 }
                 if (property.NameEquals("nextLink"))
@@ -37,10 +40,11 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.NextLink = property.Value.GetString();
+                    nextLink = property.Value.GetString();
                     continue;
                 }
             }
+            result = new FileShareItems(value, nextLink);
             return result;
         }
     }

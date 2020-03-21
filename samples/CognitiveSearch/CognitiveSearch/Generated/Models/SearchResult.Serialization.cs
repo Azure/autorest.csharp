@@ -15,7 +15,10 @@ namespace CognitiveSearch.Models
     {
         internal static SearchResult DeserializeSearchResult(JsonElement element)
         {
-            SearchResult result = new SearchResult();
+            SearchResult result;
+            double? searchscore = default;
+            IDictionary<string, IList<string>> searchhighlights = default;
+            IDictionary<string, object> additionalProperties = new Dictionary<string, object>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("@search.score"))
@@ -24,7 +27,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Score = property.Value.GetDouble();
+                    searchscore = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("@search.highlights"))
@@ -33,20 +36,24 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Highlights = new Dictionary<string, IList<string>>();
+                    Dictionary<string, IList<string>> array = new Dictionary<string, IList<string>>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        IList<string> value = new List<string>();
+                        IList<string> value;
+                        List<string> array0 = new List<string>();
                         foreach (var item in property0.Value.EnumerateArray())
                         {
-                            value.Add(item.GetString());
+                            array0.Add(item.GetString());
                         }
-                        result.Highlights.Add(property0.Name, value);
+                        value = array0;
+                        array.Add(property0.Name, value);
                     }
+                    searchhighlights = array;
                     continue;
                 }
-                result.Add(property.Name, property.Value.GetObject());
+                additionalProperties.Add(property.Name, property.Value.GetObject());
             }
+            result = new SearchResult(searchscore, searchhighlights, additionalProperties);
             return result;
         }
     }

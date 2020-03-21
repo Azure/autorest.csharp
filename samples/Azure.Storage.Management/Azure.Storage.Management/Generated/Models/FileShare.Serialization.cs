@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -65,7 +66,14 @@ namespace Azure.Storage.Management.Models
 
         internal static FileShare DeserializeFileShare(JsonElement element)
         {
-            FileShare result = new FileShare();
+            FileShare result;
+            string etag = default;
+            string id = default;
+            string name = default;
+            string type = default;
+            DateTimeOffset? lastModifiedTime = default;
+            IDictionary<string, string> metadata = default;
+            int? shareQuota = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"))
@@ -74,7 +82,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Etag = property.Value.GetString();
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -83,7 +91,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -92,7 +100,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -101,7 +109,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -114,7 +122,7 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            result.LastModifiedTime = property0.Value.GetDateTimeOffset("S");
+                            lastModifiedTime = property0.Value.GetDateTimeOffset("S");
                             continue;
                         }
                         if (property0.NameEquals("metadata"))
@@ -123,11 +131,12 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            result.Metadata = new Dictionary<string, string>();
+                            Dictionary<string, string> array = new Dictionary<string, string>();
                             foreach (var property1 in property0.Value.EnumerateObject())
                             {
-                                result.Metadata.Add(property1.Name, property1.Value.GetString());
+                                array.Add(property1.Name, property1.Value.GetString());
                             }
+                            metadata = array;
                             continue;
                         }
                         if (property0.NameEquals("shareQuota"))
@@ -136,13 +145,14 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            result.ShareQuota = property0.Value.GetInt32();
+                            shareQuota = property0.Value.GetInt32();
                             continue;
                         }
                     }
                     continue;
                 }
             }
+            result = new FileShare(lastModifiedTime, metadata, shareQuota, etag, id, name, type);
             return result;
         }
     }

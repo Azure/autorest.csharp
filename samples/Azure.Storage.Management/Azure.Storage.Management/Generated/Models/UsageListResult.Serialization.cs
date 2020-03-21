@@ -15,7 +15,8 @@ namespace Azure.Storage.Management.Models
     {
         internal static UsageListResult DeserializeUsageListResult(JsonElement element)
         {
-            UsageListResult result = new UsageListResult();
+            UsageListResult result;
+            IList<Usage> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -24,14 +25,16 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Value = new List<Usage>();
+                    List<Usage> array = new List<Usage>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Value.Add(Usage.DeserializeUsage(item));
+                        array.Add(Usage.DeserializeUsage(item));
                     }
+                    value = array;
                     continue;
                 }
             }
+            result = new UsageListResult(value);
             return result;
         }
     }

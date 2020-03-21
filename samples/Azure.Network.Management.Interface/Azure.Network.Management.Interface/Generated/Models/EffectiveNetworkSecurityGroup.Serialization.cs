@@ -15,7 +15,11 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static EffectiveNetworkSecurityGroup DeserializeEffectiveNetworkSecurityGroup(JsonElement element)
         {
-            EffectiveNetworkSecurityGroup result = new EffectiveNetworkSecurityGroup();
+            EffectiveNetworkSecurityGroup result;
+            SubResource networkSecurityGroup = default;
+            EffectiveNetworkSecurityGroupAssociation association = default;
+            IList<EffectiveNetworkSecurityRule> effectiveSecurityRules = default;
+            string tagMap = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("networkSecurityGroup"))
@@ -24,7 +28,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.NetworkSecurityGroup = SubResource.DeserializeSubResource(property.Value);
+                    networkSecurityGroup = SubResource.DeserializeSubResource(property.Value);
                     continue;
                 }
                 if (property.NameEquals("association"))
@@ -33,7 +37,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Association = EffectiveNetworkSecurityGroupAssociation.DeserializeEffectiveNetworkSecurityGroupAssociation(property.Value);
+                    association = EffectiveNetworkSecurityGroupAssociation.DeserializeEffectiveNetworkSecurityGroupAssociation(property.Value);
                     continue;
                 }
                 if (property.NameEquals("effectiveSecurityRules"))
@@ -42,11 +46,12 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.EffectiveSecurityRules = new List<EffectiveNetworkSecurityRule>();
+                    List<EffectiveNetworkSecurityRule> array = new List<EffectiveNetworkSecurityRule>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.EffectiveSecurityRules.Add(EffectiveNetworkSecurityRule.DeserializeEffectiveNetworkSecurityRule(item));
+                        array.Add(EffectiveNetworkSecurityRule.DeserializeEffectiveNetworkSecurityRule(item));
                     }
+                    effectiveSecurityRules = array;
                     continue;
                 }
                 if (property.NameEquals("tagMap"))
@@ -55,10 +60,11 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.TagMap = property.Value.GetString();
+                    tagMap = property.Value.GetString();
                     continue;
                 }
             }
+            result = new EffectiveNetworkSecurityGroup(networkSecurityGroup, association, effectiveSecurityRules, tagMap);
             return result;
         }
     }

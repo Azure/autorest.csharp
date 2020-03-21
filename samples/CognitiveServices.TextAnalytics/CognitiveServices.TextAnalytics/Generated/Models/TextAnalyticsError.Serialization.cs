@@ -15,17 +15,22 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static TextAnalyticsError DeserializeTextAnalyticsError(JsonElement element)
         {
-            TextAnalyticsError result = new TextAnalyticsError();
+            TextAnalyticsError result;
+            ErrorCodeValue code = default;
+            string message = default;
+            string target = default;
+            InnerError innerError = default;
+            IList<TextAnalyticsError> details = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"))
                 {
-                    result.Code = property.Value.GetString().ToErrorCodeValue();
+                    code = property.Value.GetString().ToErrorCodeValue();
                     continue;
                 }
                 if (property.NameEquals("message"))
                 {
-                    result.Message = property.Value.GetString();
+                    message = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("target"))
@@ -34,7 +39,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    result.Target = property.Value.GetString();
+                    target = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("innerError"))
@@ -43,7 +48,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    result.InnerError = InnerError.DeserializeInnerError(property.Value);
+                    innerError = InnerError.DeserializeInnerError(property.Value);
                     continue;
                 }
                 if (property.NameEquals("details"))
@@ -52,14 +57,16 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    result.Details = new List<TextAnalyticsError>();
+                    List<TextAnalyticsError> array = new List<TextAnalyticsError>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Details.Add(DeserializeTextAnalyticsError(item));
+                        array.Add(DeserializeTextAnalyticsError(item));
                     }
+                    details = array;
                     continue;
                 }
             }
+            result = new TextAnalyticsError(code, message, target, innerError, details);
             return result;
         }
     }

@@ -14,7 +14,8 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static CloudError DeserializeCloudError(JsonElement element)
         {
-            CloudError result = new CloudError();
+            CloudError result;
+            CloudErrorBody error = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("error"))
@@ -23,10 +24,11 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Error = CloudErrorBody.DeserializeCloudErrorBody(property.Value);
+                    error = CloudErrorBody.DeserializeCloudErrorBody(property.Value);
                     continue;
                 }
             }
+            result = new CloudError(error);
             return result;
         }
     }

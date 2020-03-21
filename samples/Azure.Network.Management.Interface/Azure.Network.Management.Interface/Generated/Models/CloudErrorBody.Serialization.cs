@@ -15,7 +15,11 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static CloudErrorBody DeserializeCloudErrorBody(JsonElement element)
         {
-            CloudErrorBody result = new CloudErrorBody();
+            CloudErrorBody result;
+            string code = default;
+            string message = default;
+            string target = default;
+            IList<CloudErrorBody> details = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"))
@@ -24,7 +28,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Code = property.Value.GetString();
+                    code = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("message"))
@@ -33,7 +37,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Message = property.Value.GetString();
+                    message = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("target"))
@@ -42,7 +46,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Target = property.Value.GetString();
+                    target = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("details"))
@@ -51,14 +55,16 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Details = new List<CloudErrorBody>();
+                    List<CloudErrorBody> array = new List<CloudErrorBody>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Details.Add(DeserializeCloudErrorBody(item));
+                        array.Add(DeserializeCloudErrorBody(item));
                     }
+                    details = array;
                     continue;
                 }
             }
+            result = new CloudErrorBody(code, message, target, details);
             return result;
         }
     }

@@ -58,7 +58,14 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static Route DeserializeRoute(JsonElement element)
         {
-            Route result = new Route();
+            Route result;
+            string name = default;
+            string etag = default;
+            string id = default;
+            string addressPrefix = default;
+            RouteNextHopType? nextHopType = default;
+            string nextHopIpAddress = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -67,7 +74,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("etag"))
@@ -76,7 +83,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Etag = property.Value.GetString();
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -85,7 +92,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -98,7 +105,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.AddressPrefix = property0.Value.GetString();
+                            addressPrefix = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("nextHopType"))
@@ -107,7 +114,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.NextHopType = new RouteNextHopType(property0.Value.GetString());
+                            nextHopType = new RouteNextHopType(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("nextHopIpAddress"))
@@ -116,7 +123,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.NextHopIpAddress = property0.Value.GetString();
+                            nextHopIpAddress = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -125,13 +132,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningState = new ProvisioningState(property0.Value.GetString());
+                            provisioningState = new ProvisioningState(property0.Value.GetString());
                             continue;
                         }
                     }
                     continue;
                 }
             }
+            result = new Route(name, etag, addressPrefix, nextHopType, nextHopIpAddress, provisioningState, id);
             return result;
         }
     }

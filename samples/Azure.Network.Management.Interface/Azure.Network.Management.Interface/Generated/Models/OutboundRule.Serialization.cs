@@ -84,7 +84,18 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static OutboundRule DeserializeOutboundRule(JsonElement element)
         {
-            OutboundRule result = new OutboundRule();
+            OutboundRule result;
+            string name = default;
+            string etag = default;
+            string type = default;
+            string id = default;
+            int? allocatedOutboundPorts = default;
+            IList<SubResource> frontendIPConfigurations = default;
+            SubResource backendAddressPool = default;
+            ProvisioningState? provisioningState = default;
+            LoadBalancerOutboundRuleProtocol? protocol = default;
+            bool? enableTcpReset = default;
+            int? idleTimeoutInMinutes = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -93,7 +104,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("etag"))
@@ -102,7 +113,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Etag = property.Value.GetString();
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -111,7 +122,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -120,7 +131,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -133,7 +144,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.AllocatedOutboundPorts = property0.Value.GetInt32();
+                            allocatedOutboundPorts = property0.Value.GetInt32();
                             continue;
                         }
                         if (property0.NameEquals("frontendIPConfigurations"))
@@ -142,11 +153,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.FrontendIPConfigurations = new List<SubResource>();
+                            List<SubResource> array = new List<SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.FrontendIPConfigurations.Add(DeserializeSubResource(item));
+                                array.Add(DeserializeSubResource(item));
                             }
+                            frontendIPConfigurations = array;
                             continue;
                         }
                         if (property0.NameEquals("backendAddressPool"))
@@ -155,7 +167,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.BackendAddressPool = DeserializeSubResource(property0.Value);
+                            backendAddressPool = DeserializeSubResource(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -164,7 +176,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningState = new ProvisioningState(property0.Value.GetString());
+                            provisioningState = new ProvisioningState(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("protocol"))
@@ -173,7 +185,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.Protocol = new LoadBalancerOutboundRuleProtocol(property0.Value.GetString());
+                            protocol = new LoadBalancerOutboundRuleProtocol(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("enableTcpReset"))
@@ -182,7 +194,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.EnableTcpReset = property0.Value.GetBoolean();
+                            enableTcpReset = property0.Value.GetBoolean();
                             continue;
                         }
                         if (property0.NameEquals("idleTimeoutInMinutes"))
@@ -191,13 +203,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.IdleTimeoutInMinutes = property0.Value.GetInt32();
+                            idleTimeoutInMinutes = property0.Value.GetInt32();
                             continue;
                         }
                     }
                     continue;
                 }
             }
+            result = new OutboundRule(name, etag, type, allocatedOutboundPorts, frontendIPConfigurations, backendAddressPool, provisioningState, protocol, enableTcpReset, idleTimeoutInMinutes, id);
             return result;
         }
     }

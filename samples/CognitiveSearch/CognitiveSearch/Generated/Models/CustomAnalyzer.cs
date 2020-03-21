@@ -24,12 +24,11 @@ namespace CognitiveSearch.Models
         /// <param name="charFilters"> A list of character filters used to prepare input text before it is processed by the tokenizer. For instance, they can replace certain characters or symbols. The filters are run in the order in which they are listed. </param>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal CustomAnalyzer(TokenizerName tokenizer, IList<TokenFilterName> tokenFilters, IList<string> charFilters, string odataType, string name) : base(odataType, name)
+        internal CustomAnalyzer(TokenizerName tokenizer, IList<TokenFilterName> tokenFilters, IList<string> charFilters, string odataType, string name) : base(odataType ?? "#Microsoft.Azure.Search.CustomAnalyzer", name)
         {
             Tokenizer = tokenizer;
             TokenFilters = tokenFilters;
             CharFilters = charFilters;
-            OdataType = "#Microsoft.Azure.Search.CustomAnalyzer";
         }
 
         /// <summary> The name of the tokenizer to use to divide continuous text into a sequence of tokens, such as breaking a sentence into words. </summary>
