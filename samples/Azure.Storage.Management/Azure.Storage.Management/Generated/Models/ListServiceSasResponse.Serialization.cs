@@ -14,7 +14,7 @@ namespace Azure.Storage.Management.Models
     {
         internal static ListServiceSasResponse DeserializeListServiceSasResponse(JsonElement element)
         {
-            ListServiceSasResponse result = new ListServiceSasResponse();
+            string serviceSasToken = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("serviceSasToken"))
@@ -23,11 +23,11 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.ServiceSasToken = property.Value.GetString();
+                    serviceSasToken = property.Value.GetString();
                     continue;
                 }
             }
-            return result;
+            return new ListServiceSasResponse(serviceSasToken);
         }
     }
 }

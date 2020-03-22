@@ -2,23 +2,22 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 
+using System;
 using AutoRest.CSharp.V3.Generation.Types;
 
 namespace AutoRest.CSharp.V3.Output.Models.Serialization.Json
 {
     internal class JsonObjectSerialization: JsonSerialization
     {
-        public JsonObjectSerialization(CSharpType? type, JsonPropertySerialization[] properties, JsonDynamicPropertiesSerialization? additionalProperties, CSharpType? implementationType)
+        public JsonObjectSerialization(CSharpType? type, JsonPropertySerialization[] properties, JsonAdditionalPropertiesSerialization? additionalProperties)
         {
             Type = type;
             Properties = properties;
             AdditionalProperties = additionalProperties;
-            ImplementationType = implementationType;
         }
 
-        public override CSharpType? Type { get; }
-        public CSharpType? ImplementationType { get; }
+        public CSharpType? Type { get; }
         public JsonPropertySerialization[] Properties { get; }
-        public JsonDynamicPropertiesSerialization? AdditionalProperties { get; }
+        public JsonAdditionalPropertiesSerialization? AdditionalProperties { get; }
     }
 }

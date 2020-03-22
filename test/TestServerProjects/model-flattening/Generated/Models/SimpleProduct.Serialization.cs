@@ -50,12 +50,17 @@ namespace model_flattening.Models
 
         internal static SimpleProduct DeserializeSimpleProduct(JsonElement element)
         {
-            SimpleProduct result = new SimpleProduct();
+            string baseProductId = default;
+            string baseProductDescription = default;
+            string maxProductDisplayName = default;
+            string maxProductCapacity = default;
+            string genericValue = default;
+            string odatavalue = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("base_product_id"))
                 {
-                    result.ProductId = property.Value.GetString();
+                    baseProductId = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("base_product_description"))
@@ -64,7 +69,7 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    result.Description = property.Value.GetString();
+                    baseProductDescription = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("details"))
@@ -77,12 +82,12 @@ namespace model_flattening.Models
                             {
                                 continue;
                             }
-                            result.MaxProductDisplayName = property0.Value.GetString();
+                            maxProductDisplayName = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("max_product_capacity"))
                         {
-                            result.Capacity = property0.Value.GetString();
+                            maxProductCapacity = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("max_product_image"))
@@ -95,7 +100,7 @@ namespace model_flattening.Models
                                     {
                                         continue;
                                     }
-                                    result.GenericValue = property1.Value.GetString();
+                                    genericValue = property1.Value.GetString();
                                     continue;
                                 }
                                 if (property1.NameEquals("@odata.value"))
@@ -104,7 +109,7 @@ namespace model_flattening.Models
                                     {
                                         continue;
                                     }
-                                    result.OdataValue = property1.Value.GetString();
+                                    odatavalue = property1.Value.GetString();
                                     continue;
                                 }
                             }
@@ -114,7 +119,7 @@ namespace model_flattening.Models
                     continue;
                 }
             }
-            return result;
+            return new SimpleProduct(maxProductDisplayName, maxProductCapacity, genericValue, odatavalue, baseProductId, baseProductDescription);
         }
     }
 }

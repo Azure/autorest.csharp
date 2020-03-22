@@ -15,15 +15,20 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static TrainResult DeserializeTrainResult(JsonElement element)
         {
-            TrainResult result = new TrainResult();
+            IList<TrainingDocumentInfo> trainingDocuments = new List<TrainingDocumentInfo>();
+            IList<FormFieldsReport> fields = default;
+            float? averageModelAccuracy = default;
+            IList<ErrorInformation> errors = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("trainingDocuments"))
                 {
+                    List<TrainingDocumentInfo> array = new List<TrainingDocumentInfo>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.TrainingDocuments.Add(TrainingDocumentInfo.DeserializeTrainingDocumentInfo(item));
+                        array.Add(TrainingDocumentInfo.DeserializeTrainingDocumentInfo(item));
                     }
+                    trainingDocuments = array;
                     continue;
                 }
                 if (property.NameEquals("fields"))
@@ -32,11 +37,12 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.Fields = new List<FormFieldsReport>();
+                    List<FormFieldsReport> array = new List<FormFieldsReport>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Fields.Add(FormFieldsReport.DeserializeFormFieldsReport(item));
+                        array.Add(FormFieldsReport.DeserializeFormFieldsReport(item));
                     }
+                    fields = array;
                     continue;
                 }
                 if (property.NameEquals("averageModelAccuracy"))
@@ -45,7 +51,7 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.AverageModelAccuracy = property.Value.GetSingle();
+                    averageModelAccuracy = property.Value.GetSingle();
                     continue;
                 }
                 if (property.NameEquals("errors"))
@@ -54,15 +60,16 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.Errors = new List<ErrorInformation>();
+                    List<ErrorInformation> array = new List<ErrorInformation>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Errors.Add(ErrorInformation.DeserializeErrorInformation(item));
+                        array.Add(ErrorInformation.DeserializeErrorInformation(item));
                     }
+                    errors = array;
                     continue;
                 }
             }
-            return result;
+            return new TrainResult(trainingDocuments, fields, averageModelAccuracy, errors);
         }
     }
 }

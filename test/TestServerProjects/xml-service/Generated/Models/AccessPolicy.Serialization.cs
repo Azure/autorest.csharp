@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
@@ -31,29 +30,20 @@ namespace xml_service.Models
 
         internal static AccessPolicy DeserializeAccessPolicy(XElement element)
         {
-            AccessPolicy result = default;
-            result = new AccessPolicy(); DateTimeOffset value = default;
-            var start = element.Element("Start");
-            if (start != null)
+            var obj = new AccessPolicy();
+            if (element.Element("Start") is XElement start)
             {
-                value = start.GetDateTimeOffsetValue("S");
+                obj.Start = start.GetDateTimeOffsetValue("S");
             }
-            result.Start = value;
-            DateTimeOffset value0 = default;
-            var expiry = element.Element("Expiry");
-            if (expiry != null)
+            if (element.Element("Expiry") is XElement expiry)
             {
-                value0 = expiry.GetDateTimeOffsetValue("S");
+                obj.Expiry = expiry.GetDateTimeOffsetValue("S");
             }
-            result.Expiry = value0;
-            string value1 = default;
-            var permission = element.Element("Permission");
-            if (permission != null)
+            if (element.Element("Permission") is XElement permission)
             {
-                value1 = (string)permission;
+                obj.Permission = (string)permission;
             }
-            result.Permission = value1;
-            return result;
+            return obj;
         }
     }
 }

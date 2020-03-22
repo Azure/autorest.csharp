@@ -94,15 +94,12 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     return BuildSerialization(constantSchema.ValueType, constantSchema.Value.Value == null);
                 case ArraySchema arraySchema:
                     return new JsonArraySerialization(
-                        _typeFactory.CreateType(arraySchema, isNullable),
-                        BuildSerialization(arraySchema.ElementType, false),
-                        _typeFactory.CreateImplementationType(arraySchema, isNullable));
+                        _typeFactory.CreateImplementationType(arraySchema, isNullable),
+                        BuildSerialization(arraySchema.ElementType, false));
                 case DictionarySchema dictionarySchema:
-                    return new JsonObjectSerialization(
-                        _typeFactory.CreateType(dictionarySchema, isNullable),
-                        Array.Empty<JsonPropertySerialization>(),
-                        new JsonDynamicPropertiesSerialization(BuildSerialization(dictionarySchema.ElementType, false)),
-                        _typeFactory.CreateImplementationType(dictionarySchema, isNullable)
+                    return new JsonDictionarySerialization(
+                        _typeFactory.CreateImplementationType(dictionarySchema, isNullable),
+                        BuildSerialization(dictionarySchema.ElementType, false)
                         );
                 default:
                     return new JsonValueSerialization(
@@ -167,11 +164,11 @@ namespace AutoRest.CSharp.V3.Output.Builders
         {
             foreach (Property property in propertyBag.Properties)
             {
-                string propertyName = objectType.GetPropertyForSchemaProperty(property, includeParents: true).Declaration.Name;
+                var objectProperty = objectType.GetPropertyForSchemaProperty(property, includeParents: true);
 
                 yield return new JsonPropertySerialization(
                     property.SerializedName,
-                    propertyName,
+                    objectProperty,
                     BuildSerialization(property.Schema, property.IsNullable())
                     );
             }
@@ -179,7 +176,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             foreach ((string name, PropertyBag innerBag) in propertyBag.Bag)
             {
                 JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag, objectType).ToArray();
-                JsonObjectSerialization objectSerialization = new JsonObjectSerialization(null, serializationProperties, null, null);
+                JsonObjectSerialization objectSerialization = new JsonObjectSerialization(null, serializationProperties, null);
                 yield return new JsonPropertySerialization(name, null, objectSerialization);
             }
         }
@@ -189,7 +186,10 @@ namespace AutoRest.CSharp.V3.Output.Builders
             PropertyBag propertyBag = new PropertyBag();
             propertyBag.Properties.AddRange(EnumerateHierarchy(objectSchema).SelectMany(s => s.Properties!));
             PopulatePropertyBag(propertyBag, 0);
-            return new JsonObjectSerialization(objectType.Type, GetPropertySerializationsFromBag(propertyBag, objectType).ToArray(), CreateAdditionalProperties(objectSchema), objectType.Type);
+            return new JsonObjectSerialization(
+                objectType.Type,
+                GetPropertySerializationsFromBag(propertyBag, objectType).ToArray(),
+                CreateAdditionalProperties(objectSchema, objectType));
         }
 
         private class PropertyBag
@@ -236,18 +236,30 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
         }
 
-        private JsonDynamicPropertiesSerialization? CreateAdditionalProperties(ObjectSchema objectSchema)
+        private JsonAdditionalPropertiesSerialization? CreateAdditionalProperties(ObjectSchema objectSchema, ObjectType objectType)
         {
             var inheritedDictionarySchema = objectSchema.Parents!.All.OfType<DictionarySchema>().FirstOrDefault();
 
-            if (inheritedDictionarySchema == null)
+            ObjectTypeProperty? additionalPropertiesProperty = null;
+            foreach (var obj in objectType.EnumerateHierarchy())
+            {
+                additionalPropertiesProperty = obj.AdditionalPropertiesProperty;
+                if (additionalPropertiesProperty != null)
+                {
+                    break;
+                }
+            }
+
+            if (inheritedDictionarySchema == null || additionalPropertiesProperty == null)
             {
                 return null;
             }
 
-            return new JsonDynamicPropertiesSerialization(
-                BuildSerialization(inheritedDictionarySchema.ElementType, false)
-            );
+            var valueSerialization = BuildSerialization(inheritedDictionarySchema.ElementType, false);
+
+            return  new JsonAdditionalPropertiesSerialization(
+                    additionalPropertiesProperty,
+                    valueSerialization);
         }
     }
 }

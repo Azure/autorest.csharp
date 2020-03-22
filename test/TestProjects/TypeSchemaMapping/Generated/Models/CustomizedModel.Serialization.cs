@@ -30,7 +30,9 @@ namespace CustomNamespace
 
         internal static CustomizedModel DeserializeCustomizedModel(JsonElement element)
         {
-            CustomizedModel result = new CustomizedModel();
+            string modelProperty = default;
+            CustomFruitEnum fruit = default;
+            CustomDaysOfWeek daysOfWeek = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ModelProperty"))
@@ -39,21 +41,21 @@ namespace CustomNamespace
                     {
                         continue;
                     }
-                    result.CustomizedStringProperty = property.Value.GetString();
+                    modelProperty = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("Fruit"))
                 {
-                    result.CustomizedFancyField = property.Value.GetString().ToCustomFruitEnum();
+                    fruit = property.Value.GetString().ToCustomFruitEnum();
                     continue;
                 }
                 if (property.NameEquals("DaysOfWeek"))
                 {
-                    result.DaysOfWeek = new CustomDaysOfWeek(property.Value.GetString());
+                    daysOfWeek = new CustomDaysOfWeek(property.Value.GetString());
                     continue;
                 }
             }
-            return result;
+            return new CustomizedModel(modelProperty, fruit, daysOfWeek);
         }
     }
 }

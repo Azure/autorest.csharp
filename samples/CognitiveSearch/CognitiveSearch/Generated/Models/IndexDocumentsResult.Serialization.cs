@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     {
         internal static IndexDocumentsResult DeserializeIndexDocumentsResult(JsonElement element)
         {
-            IndexDocumentsResult result = new IndexDocumentsResult();
+            IList<IndexingResult> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -24,15 +24,16 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Results = new List<IndexingResult>();
+                    List<IndexingResult> array = new List<IndexingResult>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Results.Add(IndexingResult.DeserializeIndexingResult(item));
+                        array.Add(IndexingResult.DeserializeIndexingResult(item));
                     }
+                    value = array;
                     continue;
                 }
             }
-            return result;
+            return new IndexDocumentsResult(value);
         }
     }
 }

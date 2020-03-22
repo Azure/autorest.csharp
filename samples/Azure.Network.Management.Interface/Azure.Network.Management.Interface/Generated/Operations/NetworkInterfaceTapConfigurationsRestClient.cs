@@ -201,8 +201,9 @@ namespace Azure.Network.Management.Interface
                 {
                     case 200:
                         {
+                            NetworkInterfaceTapConfiguration value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration(document.RootElement);
+                            value = NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -246,8 +247,9 @@ namespace Azure.Network.Management.Interface
                 {
                     case 200:
                         {
+                            NetworkInterfaceTapConfiguration value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration(document.RootElement);
+                            value = NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -423,8 +425,9 @@ namespace Azure.Network.Management.Interface
                 {
                     case 200:
                         {
+                            NetworkInterfaceTapConfigurationListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = NetworkInterfaceTapConfigurationListResult.DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
+                            value = NetworkInterfaceTapConfigurationListResult.DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -463,8 +466,9 @@ namespace Azure.Network.Management.Interface
                 {
                     case 200:
                         {
+                            NetworkInterfaceTapConfigurationListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = NetworkInterfaceTapConfigurationListResult.DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
+                            value = NetworkInterfaceTapConfigurationListResult.DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -509,8 +513,9 @@ namespace Azure.Network.Management.Interface
                 {
                     case 200:
                         {
+                            NetworkInterfaceTapConfigurationListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = NetworkInterfaceTapConfigurationListResult.DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
+                            value = NetworkInterfaceTapConfigurationListResult.DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -544,8 +549,9 @@ namespace Azure.Network.Management.Interface
                 {
                     case 200:
                         {
+                            NetworkInterfaceTapConfigurationListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = NetworkInterfaceTapConfigurationListResult.DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
+                            value = NetworkInterfaceTapConfigurationListResult.DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:

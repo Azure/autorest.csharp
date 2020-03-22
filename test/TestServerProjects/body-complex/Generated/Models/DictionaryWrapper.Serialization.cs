@@ -32,7 +32,7 @@ namespace body_complex.Models
 
         internal static DictionaryWrapper DeserializeDictionaryWrapper(JsonElement element)
         {
-            DictionaryWrapper result = new DictionaryWrapper();
+            IDictionary<string, string> defaultProgram = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("defaultProgram"))
@@ -41,15 +41,16 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.DefaultProgram = new Dictionary<string, string>();
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        result.DefaultProgram.Add(property0.Name, property0.Value.GetString());
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
+                    defaultProgram = dictionary;
                     continue;
                 }
             }
-            return result;
+            return new DictionaryWrapper(defaultProgram);
         }
     }
 }

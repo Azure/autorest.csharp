@@ -30,22 +30,16 @@ namespace xml_service.Models
 
         internal static RetentionPolicy DeserializeRetentionPolicy(XElement element)
         {
-            RetentionPolicy result = default;
-            result = new RetentionPolicy(); bool value = default;
-            var enabled = element.Element("Enabled");
-            if (enabled != null)
+            var obj = new RetentionPolicy();
+            if (element.Element("Enabled") is XElement enabled)
             {
-                value = (bool)enabled;
+                obj.Enabled = (bool)enabled;
             }
-            result.Enabled = value;
-            int? value0 = default;
-            var days = element.Element("Days");
-            if (days != null)
+            if (element.Element("Days") is XElement days)
             {
-                value0 = (int?)days;
+                obj.Days = (int?)days;
             }
-            result.Days = value0;
-            return result;
+            return obj;
         }
     }
 }

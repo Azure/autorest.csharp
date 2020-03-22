@@ -61,8 +61,9 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            Fish value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Fish.DeserializeFish(document.RootElement);
+                            value = Fish.DeserializeFish(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -90,8 +91,9 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            Fish value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Fish.DeserializeFish(document.RootElement);
+                            value = Fish.DeserializeFish(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:

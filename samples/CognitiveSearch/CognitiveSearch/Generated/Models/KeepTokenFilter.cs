@@ -23,11 +23,10 @@ namespace CognitiveSearch.Models
         /// <param name="lowerCaseKeepWords"> A value indicating whether to lower case all words first. Default is false. </param>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal KeepTokenFilter(IList<string> keepWords, bool? lowerCaseKeepWords, string odataType, string name) : base(odataType, name)
+        internal KeepTokenFilter(IList<string> keepWords, bool? lowerCaseKeepWords, string odataType, string name) : base(odataType ?? "#Microsoft.Azure.Search.KeepTokenFilter", name)
         {
             KeepWords = keepWords;
             LowerCaseKeepWords = lowerCaseKeepWords;
-            OdataType = "#Microsoft.Azure.Search.KeepTokenFilter";
         }
 
         /// <summary> The list of words to keep. </summary>

@@ -31,6 +31,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         private ObjectSerialization[]? _serializations;
         private readonly ModelTypeMapping? _sourceTypeMapping;
         private ObjectTypeConstructor[]? _constructors;
+        private ObjectTypeProperty? _additionalPropertiesProperty;
 
         public ObjectType(ObjectSchema objectSchema, BuildContext context)
         {
@@ -63,6 +64,30 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         public ObjectTypeProperty[] Properties => _properties ??= BuildProperties().ToArray();
 
+        public ObjectTypeProperty? AdditionalPropertiesProperty {
+            get
+            {
+                if (_additionalPropertiesProperty != null || ImplementsDictionaryElementType == null)
+                {
+                    return _additionalPropertiesProperty;
+                }
+
+                var dictionaryType = new CSharpType(typeof(IDictionary<,>), new CSharpType(typeof(string)), ImplementsDictionaryElementType);
+                var implType = new CSharpType(typeof(Dictionary<,>), new CSharpType(typeof(string)), ImplementsDictionaryElementType);
+
+                SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetMemberForSchema("$AdditionalProperties");
+
+                _additionalPropertiesProperty = new ObjectTypeProperty(
+                    BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", dictionaryType, "internal", memberMapping?.ExistingMember),
+                    string.Empty,
+                    !_objectSchema.IsInput,
+                    implType,
+                    null);
+
+                return _additionalPropertiesProperty;
+            }
+        }
+
         public ObjectTypeConstructor[] Constructors => _constructors ??= BuildConstructors().ToArray();
 
         private IEnumerable<ObjectTypeConstructor> BuildConstructors()
@@ -91,13 +116,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 // pick ctor with parameters
                 baseCtor = objectType.Constructors.Single(c => c.Parameters.Any());
                 constructorParameters.AddRange(baseCtor.Parameters);
-            }
-
-            if (Discriminator != null)
-            {
-                var discriminatorInitializer = new ObjectPropertyInitializer(Discriminator.Property, BuilderHelpers.StringConstant(Discriminator.Value));
-                initializers.Add(discriminatorInitializer);
-                defaultCtorInitializers.Add(discriminatorInitializer);
             }
 
             yield return new ObjectTypeConstructor(
@@ -139,7 +157,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         public ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false)
         {
-            if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty.SerializedName == serializedName, out ObjectTypeProperty? objectProperty, includeParents))
+            if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty?.SerializedName == serializedName, out ObjectTypeProperty? objectProperty, includeParents))
             {
                 throw new InvalidOperationException($"Unable to find object property with serialized name {serializedName} in schema {Schema.Name}");
             }
@@ -150,25 +168,35 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         private bool TryGetPropertyForSchemaProperty(Func<ObjectTypeProperty, bool> propertySelector, [NotNullWhen(true)] out ObjectTypeProperty? objectProperty, bool includeParents = false)
         {
             objectProperty = null;
-            ObjectType? type = this;
 
-
-            while (type != null && objectProperty == null)
+            foreach (var type in EnumerateHierarchy())
             {
                 objectProperty = type.Properties.SingleOrDefault(propertySelector);
-                CSharpType? inheritsType = type.Inherits;
-                if (includeParents &&
-                    inheritsType != null &&
-                    !inheritsType.IsFrameworkType)
+                if (objectProperty != null || !includeParents)
                 {
-                    type = inheritsType.Implementation as ObjectType;
+                    break;
+                }
+            }
+
+            return objectProperty != null;
+        }
+
+        public IEnumerable<ObjectType> EnumerateHierarchy()
+        {
+            ObjectType? type = this;
+            while (type != null)
+            {
+                yield return type;
+
+                if (type.Inherits?.IsFrameworkType == false && type.Inherits.Implementation is ObjectType o)
+                {
+                    type = o;
                 }
                 else
                 {
                     type = null;
                 }
             }
-            return objectProperty != null;
         }
 
         private ObjectTypeDiscriminator? BuildDiscriminator()
@@ -205,11 +233,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         private ObjectSerialization[] BuildSerializations()
         {
             return _objectSchema.SerializationFormats.Select(type => _serializationBuilder.BuildObject(type, _objectSchema, this)).ToArray();
-        }
-
-        private CSharpType CreateDictionaryElementType(DictionarySchema inheritedDictionarySchema)
-        {
-            return _typeFactory.CreateType(inheritedDictionarySchema.ElementType, false);
         }
 
         private ObjectTypeDiscriminatorImplementation[] CreateDiscriminatorImplementations(Discriminator schemaDiscriminator)
@@ -258,6 +281,11 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     property,
                     defaultValue);
             }
+
+            if (AdditionalPropertiesProperty is ObjectTypeProperty additionalPropertiesProperty)
+            {
+                yield return additionalPropertiesProperty;
+            }
         }
 
         private CSharpType? CreateInheritedType()
@@ -281,7 +309,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             {
                 if (complexSchema is DictionarySchema dictionarySchema)
                 {
-                    return CreateDictionaryElementType(dictionarySchema);
+                    return _typeFactory.CreateType(dictionarySchema.ElementType, false);
                 };
             }
 

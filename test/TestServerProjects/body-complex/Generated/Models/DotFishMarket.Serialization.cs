@@ -15,7 +15,10 @@ namespace body_complex.Models
     {
         internal static DotFishMarket DeserializeDotFishMarket(JsonElement element)
         {
-            DotFishMarket result = new DotFishMarket();
+            DotSalmon sampleSalmon = default;
+            IList<DotSalmon> salmons = default;
+            DotFish sampleFish = default;
+            IList<DotFish> fishes = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sampleSalmon"))
@@ -24,7 +27,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.SampleSalmon = DotSalmon.DeserializeDotSalmon(property.Value);
+                    sampleSalmon = DotSalmon.DeserializeDotSalmon(property.Value);
                     continue;
                 }
                 if (property.NameEquals("salmons"))
@@ -33,11 +36,12 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.Salmons = new List<DotSalmon>();
+                    List<DotSalmon> array = new List<DotSalmon>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Salmons.Add(DotSalmon.DeserializeDotSalmon(item));
+                        array.Add(DotSalmon.DeserializeDotSalmon(item));
                     }
+                    salmons = array;
                     continue;
                 }
                 if (property.NameEquals("sampleFish"))
@@ -46,7 +50,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.SampleFish = DotFish.DeserializeDotFish(property.Value);
+                    sampleFish = DotFish.DeserializeDotFish(property.Value);
                     continue;
                 }
                 if (property.NameEquals("fishes"))
@@ -55,15 +59,16 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.Fishes = new List<DotFish>();
+                    List<DotFish> array = new List<DotFish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Fishes.Add(DotFish.DeserializeDotFish(item));
+                        array.Add(DotFish.DeserializeDotFish(item));
                     }
+                    fishes = array;
                     continue;
                 }
             }
-            return result;
+            return new DotFishMarket(sampleSalmon, salmons, sampleFish, fishes);
         }
     }
 }

@@ -84,8 +84,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            UsageListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = UsageListResult.DeserializeUsageListResult(document.RootElement);
+                            value = UsageListResult.DeserializeUsageListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -119,8 +120,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            UsageListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = UsageListResult.DeserializeUsageListResult(document.RootElement);
+                            value = UsageListResult.DeserializeUsageListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -165,8 +167,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            UsageListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = UsageListResult.DeserializeUsageListResult(document.RootElement);
+                            value = UsageListResult.DeserializeUsageListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -200,8 +203,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            UsageListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = UsageListResult.DeserializeUsageListResult(document.RootElement);
+                            value = UsageListResult.DeserializeUsageListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:

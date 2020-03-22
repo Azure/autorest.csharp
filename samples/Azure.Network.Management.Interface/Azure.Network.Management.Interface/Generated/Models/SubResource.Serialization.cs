@@ -25,7 +25,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static SubResource DeserializeSubResource(JsonElement element)
         {
-            SubResource result = new SubResource();
+            string id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -34,11 +34,11 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
             }
-            return result;
+            return new SubResource(id);
         }
     }
 }

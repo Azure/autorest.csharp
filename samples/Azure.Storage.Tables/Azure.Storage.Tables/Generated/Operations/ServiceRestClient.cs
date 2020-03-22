@@ -175,10 +175,9 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             StorageServiceProperties value = default;
-                            var storageServiceProperties = document.Element("StorageServiceProperties");
-                            if (storageServiceProperties != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("StorageServiceProperties") is XElement storageServiceProperties)
                             {
                                 value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServiceProperties);
                             }
@@ -213,10 +212,9 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             StorageServiceProperties value = default;
-                            var storageServiceProperties = document.Element("StorageServiceProperties");
-                            if (storageServiceProperties != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("StorageServiceProperties") is XElement storageServiceProperties)
                             {
                                 value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServiceProperties);
                             }
@@ -274,10 +272,9 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             StorageServiceStats value = default;
-                            var storageServiceStats = document.Element("StorageServiceStats");
-                            if (storageServiceStats != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("StorageServiceStats") is XElement storageServiceStats)
                             {
                                 value = StorageServiceStats.DeserializeStorageServiceStats(storageServiceStats);
                             }
@@ -312,10 +309,9 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             StorageServiceStats value = default;
-                            var storageServiceStats = document.Element("StorageServiceStats");
-                            if (storageServiceStats != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("StorageServiceStats") is XElement storageServiceStats)
                             {
                                 value = StorageServiceStats.DeserializeStorageServiceStats(storageServiceStats);
                             }

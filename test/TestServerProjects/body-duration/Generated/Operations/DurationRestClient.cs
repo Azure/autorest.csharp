@@ -60,8 +60,9 @@ namespace body_duration
                 {
                     case 200:
                         {
+                            TimeSpan value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetTimeSpan("P");
+                            value = document.RootElement.GetTimeSpan("P");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -89,8 +90,9 @@ namespace body_duration
                 {
                     case 200:
                         {
+                            TimeSpan value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetTimeSpan("P");
+                            value = document.RootElement.GetTimeSpan("P");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -200,8 +202,9 @@ namespace body_duration
                 {
                     case 200:
                         {
+                            TimeSpan value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetTimeSpan("P");
+                            value = document.RootElement.GetTimeSpan("P");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -229,8 +232,9 @@ namespace body_duration
                 {
                     case 200:
                         {
+                            TimeSpan value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetTimeSpan("P");
+                            value = document.RootElement.GetTimeSpan("P");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -270,8 +274,9 @@ namespace body_duration
                 {
                     case 200:
                         {
+                            TimeSpan value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetTimeSpan("P");
+                            value = document.RootElement.GetTimeSpan("P");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -299,8 +304,9 @@ namespace body_duration
                 {
                     case 200:
                         {
+                            TimeSpan value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetTimeSpan("P");
+                            value = document.RootElement.GetTimeSpan("P");
                             return Response.FromValue(value, message.Response);
                         }
                     default:

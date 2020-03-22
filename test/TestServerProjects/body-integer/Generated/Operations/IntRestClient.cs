@@ -60,8 +60,9 @@ namespace body_integer
                 {
                     case 200:
                         {
+                            int value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetInt32();
+                            value = document.RootElement.GetInt32();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -89,8 +90,9 @@ namespace body_integer
                 {
                     case 200:
                         {
+                            int value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetInt32();
+                            value = document.RootElement.GetInt32();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -130,8 +132,9 @@ namespace body_integer
                 {
                     case 200:
                         {
+                            int value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetInt32();
+                            value = document.RootElement.GetInt32();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -159,8 +162,9 @@ namespace body_integer
                 {
                     case 200:
                         {
+                            int value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetInt32();
+                            value = document.RootElement.GetInt32();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -200,8 +204,9 @@ namespace body_integer
                 {
                     case 200:
                         {
+                            int value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetInt32();
+                            value = document.RootElement.GetInt32();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -229,8 +234,9 @@ namespace body_integer
                 {
                     case 200:
                         {
+                            int value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetInt32();
+                            value = document.RootElement.GetInt32();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -270,8 +276,9 @@ namespace body_integer
                 {
                     case 200:
                         {
+                            int value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetInt32();
+                            value = document.RootElement.GetInt32();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -299,8 +306,9 @@ namespace body_integer
                 {
                     case 200:
                         {
+                            int value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetInt32();
+                            value = document.RootElement.GetInt32();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -340,8 +348,9 @@ namespace body_integer
                 {
                     case 200:
                         {
+                            long value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetInt64();
+                            value = document.RootElement.GetInt64();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -369,8 +378,9 @@ namespace body_integer
                 {
                     case 200:
                         {
+                            long value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetInt64();
+                            value = document.RootElement.GetInt64();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -410,8 +420,9 @@ namespace body_integer
                 {
                     case 200:
                         {
+                            long value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetInt64();
+                            value = document.RootElement.GetInt64();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -439,8 +450,9 @@ namespace body_integer
                 {
                     case 200:
                         {
+                            long value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetInt64();
+                            value = document.RootElement.GetInt64();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -760,8 +772,9 @@ namespace body_integer
                 {
                     case 200:
                         {
+                            DateTimeOffset value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetDateTimeOffset("U");
+                            value = document.RootElement.GetDateTimeOffset("U");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -789,8 +802,9 @@ namespace body_integer
                 {
                     case 200:
                         {
+                            DateTimeOffset value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetDateTimeOffset("U");
+                            value = document.RootElement.GetDateTimeOffset("U");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -900,8 +914,9 @@ namespace body_integer
                 {
                     case 200:
                         {
+                            DateTimeOffset value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetDateTimeOffset("U");
+                            value = document.RootElement.GetDateTimeOffset("U");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -929,8 +944,9 @@ namespace body_integer
                 {
                     case 200:
                         {
+                            DateTimeOffset value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetDateTimeOffset("U");
+                            value = document.RootElement.GetDateTimeOffset("U");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -970,8 +986,9 @@ namespace body_integer
                 {
                     case 200:
                         {
+                            DateTimeOffset value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetDateTimeOffset("U");
+                            value = document.RootElement.GetDateTimeOffset("U");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -999,8 +1016,9 @@ namespace body_integer
                 {
                     case 200:
                         {
+                            DateTimeOffset value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetDateTimeOffset("U");
+                            value = document.RootElement.GetDateTimeOffset("U");
                             return Response.FromValue(value, message.Response);
                         }
                     default:

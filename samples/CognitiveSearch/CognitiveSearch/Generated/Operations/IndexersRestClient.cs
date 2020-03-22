@@ -282,8 +282,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            Indexer value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Indexer.DeserializeIndexer(document.RootElement);
+                            value = Indexer.DeserializeIndexer(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -325,8 +326,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            Indexer value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Indexer.DeserializeIndexer(document.RootElement);
+                            value = Indexer.DeserializeIndexer(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -481,8 +483,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            Indexer value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Indexer.DeserializeIndexer(document.RootElement);
+                            value = Indexer.DeserializeIndexer(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -517,8 +520,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            Indexer value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Indexer.DeserializeIndexer(document.RootElement);
+                            value = Indexer.DeserializeIndexer(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -573,8 +577,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            ListIndexersResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ListIndexersResult.DeserializeListIndexersResult(document.RootElement);
+                            value = ListIndexersResult.DeserializeListIndexersResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -605,8 +610,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            ListIndexersResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ListIndexersResult.DeserializeListIndexersResult(document.RootElement);
+                            value = ListIndexersResult.DeserializeListIndexersResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -665,8 +671,9 @@ namespace CognitiveSearch
                 {
                     case 201:
                         {
+                            Indexer value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Indexer.DeserializeIndexer(document.RootElement);
+                            value = Indexer.DeserializeIndexer(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -701,8 +708,9 @@ namespace CognitiveSearch
                 {
                     case 201:
                         {
+                            Indexer value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Indexer.DeserializeIndexer(document.RootElement);
+                            value = Indexer.DeserializeIndexer(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -759,8 +767,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            IndexerExecutionInfo value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = IndexerExecutionInfo.DeserializeIndexerExecutionInfo(document.RootElement);
+                            value = IndexerExecutionInfo.DeserializeIndexerExecutionInfo(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -795,8 +804,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            IndexerExecutionInfo value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = IndexerExecutionInfo.DeserializeIndexerExecutionInfo(document.RootElement);
+                            value = IndexerExecutionInfo.DeserializeIndexerExecutionInfo(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:

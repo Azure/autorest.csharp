@@ -140,7 +140,25 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static NetworkInterface DeserializeNetworkInterface(JsonElement element)
         {
-            NetworkInterface result = new NetworkInterface();
+            string etag = default;
+            string id = default;
+            string name = default;
+            string type = default;
+            string location = default;
+            IDictionary<string, string> tags = default;
+            SubResource virtualMachine = default;
+            NetworkSecurityGroup networkSecurityGroup = default;
+            PrivateEndpoint privateEndpoint = default;
+            IList<NetworkInterfaceIPConfiguration> ipConfigurations = default;
+            IList<NetworkInterfaceTapConfiguration> tapConfigurations = default;
+            NetworkInterfaceDnsSettings dnsSettings = default;
+            string macAddress = default;
+            bool? primary = default;
+            bool? enableAcceleratedNetworking = default;
+            bool? enableIPForwarding = default;
+            IList<string> hostedWorkloads = default;
+            string resourceGuid = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"))
@@ -149,7 +167,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Etag = property.Value.GetString();
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -158,7 +176,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -167,7 +185,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -176,7 +194,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("location"))
@@ -185,7 +203,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Location = property.Value.GetString();
+                    location = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -194,11 +212,12 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Tags = new Dictionary<string, string>();
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        result.Tags.Add(property0.Name, property0.Value.GetString());
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
+                    tags = dictionary;
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -211,7 +230,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.VirtualMachine = SubResource.DeserializeSubResource(property0.Value);
+                            virtualMachine = SubResource.DeserializeSubResource(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("networkSecurityGroup"))
@@ -220,7 +239,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.NetworkSecurityGroup = NetworkSecurityGroup.DeserializeNetworkSecurityGroup(property0.Value);
+                            networkSecurityGroup = NetworkSecurityGroup.DeserializeNetworkSecurityGroup(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("privateEndpoint"))
@@ -229,7 +248,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.PrivateEndpoint = PrivateEndpoint.DeserializePrivateEndpoint(property0.Value);
+                            privateEndpoint = PrivateEndpoint.DeserializePrivateEndpoint(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("ipConfigurations"))
@@ -238,11 +257,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.IpConfigurations = new List<NetworkInterfaceIPConfiguration>();
+                            List<NetworkInterfaceIPConfiguration> array = new List<NetworkInterfaceIPConfiguration>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.IpConfigurations.Add(NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(item));
+                                array.Add(NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(item));
                             }
+                            ipConfigurations = array;
                             continue;
                         }
                         if (property0.NameEquals("tapConfigurations"))
@@ -251,11 +271,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.TapConfigurations = new List<NetworkInterfaceTapConfiguration>();
+                            List<NetworkInterfaceTapConfiguration> array = new List<NetworkInterfaceTapConfiguration>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.TapConfigurations.Add(NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration(item));
+                                array.Add(NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration(item));
                             }
+                            tapConfigurations = array;
                             continue;
                         }
                         if (property0.NameEquals("dnsSettings"))
@@ -264,7 +285,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.DnsSettings = NetworkInterfaceDnsSettings.DeserializeNetworkInterfaceDnsSettings(property0.Value);
+                            dnsSettings = NetworkInterfaceDnsSettings.DeserializeNetworkInterfaceDnsSettings(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("macAddress"))
@@ -273,7 +294,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.MacAddress = property0.Value.GetString();
+                            macAddress = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("primary"))
@@ -282,7 +303,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.Primary = property0.Value.GetBoolean();
+                            primary = property0.Value.GetBoolean();
                             continue;
                         }
                         if (property0.NameEquals("enableAcceleratedNetworking"))
@@ -291,7 +312,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.EnableAcceleratedNetworking = property0.Value.GetBoolean();
+                            enableAcceleratedNetworking = property0.Value.GetBoolean();
                             continue;
                         }
                         if (property0.NameEquals("enableIPForwarding"))
@@ -300,7 +321,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.EnableIPForwarding = property0.Value.GetBoolean();
+                            enableIPForwarding = property0.Value.GetBoolean();
                             continue;
                         }
                         if (property0.NameEquals("hostedWorkloads"))
@@ -309,11 +330,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.HostedWorkloads = new List<string>();
+                            List<string> array = new List<string>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.HostedWorkloads.Add(item.GetString());
+                                array.Add(item.GetString());
                             }
+                            hostedWorkloads = array;
                             continue;
                         }
                         if (property0.NameEquals("resourceGuid"))
@@ -322,7 +344,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ResourceGuid = property0.Value.GetString();
+                            resourceGuid = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -331,14 +353,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningState = new ProvisioningState(property0.Value.GetString());
+                            provisioningState = new ProvisioningState(property0.Value.GetString());
                             continue;
                         }
                     }
                     continue;
                 }
             }
-            return result;
+            return new NetworkInterface(etag, virtualMachine, networkSecurityGroup, privateEndpoint, ipConfigurations, tapConfigurations, dnsSettings, macAddress, primary, enableAcceleratedNetworking, enableIPForwarding, hostedWorkloads, resourceGuid, provisioningState, id, name, type, location, tags);
         }
     }
 }

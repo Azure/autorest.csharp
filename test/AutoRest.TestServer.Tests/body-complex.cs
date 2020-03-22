@@ -537,6 +537,10 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutComplexPolymorphismValid() => TestStatus(async (host, pipeline) =>
         {
+            var ss = new Sawshark()
+            {
+            };
+
             var value = new Salmon()
             {
                 Location = "alaska",

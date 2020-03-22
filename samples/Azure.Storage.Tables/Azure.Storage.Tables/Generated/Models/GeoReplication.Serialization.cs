@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Xml.Linq;
 using Azure.Core;
 
@@ -15,22 +14,16 @@ namespace Azure.Storage.Tables.Models
     {
         internal static GeoReplication DeserializeGeoReplication(XElement element)
         {
-            GeoReplication result = default;
-            result = new GeoReplication(); GeoReplicationStatusType value = default;
-            var status = element.Element("Status");
-            if (status != null)
+            var obj = new GeoReplication();
+            if (element.Element("Status") is XElement status)
             {
-                value = new GeoReplicationStatusType(status.Value);
+                obj.Status = new GeoReplicationStatusType(status.Value);
             }
-            result.Status = value;
-            DateTimeOffset value0 = default;
-            var lastSyncTime = element.Element("LastSyncTime");
-            if (lastSyncTime != null)
+            if (element.Element("LastSyncTime") is XElement lastSyncTime)
             {
-                value0 = lastSyncTime.GetDateTimeOffsetValue("R");
+                obj.LastSyncTime = lastSyncTime.GetDateTimeOffsetValue("R");
             }
-            result.LastSyncTime = value0;
-            return result;
+            return obj;
         }
     }
 }

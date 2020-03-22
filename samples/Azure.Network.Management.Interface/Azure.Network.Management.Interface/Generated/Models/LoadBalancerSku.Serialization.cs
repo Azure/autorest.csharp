@@ -25,7 +25,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static LoadBalancerSku DeserializeLoadBalancerSku(JsonElement element)
         {
-            LoadBalancerSku result = new LoadBalancerSku();
+            LoadBalancerSkuName? name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -34,11 +34,11 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Name = new LoadBalancerSkuName(property.Value.GetString());
+                    name = new LoadBalancerSkuName(property.Value.GetString());
                     continue;
                 }
             }
-            return result;
+            return new LoadBalancerSku(name);
         }
     }
 }

@@ -83,8 +83,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            ServiceStatistics value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ServiceStatistics.DeserializeServiceStatistics(document.RootElement);
+                            value = ServiceStatistics.DeserializeServiceStatistics(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -114,8 +115,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            ServiceStatistics value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ServiceStatistics.DeserializeServiceStatistics(document.RootElement);
+                            value = ServiceStatistics.DeserializeServiceStatistics(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:

@@ -226,14 +226,12 @@ namespace Azure.Network.Management.Interface
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = NetworkInterface.DeserializeNetworkInterface(document.RootElement);
-                return value;
+                return NetworkInterface.DeserializeNetworkInterface(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = NetworkInterface.DeserializeNetworkInterface(document.RootElement);
-                return value;
+                return NetworkInterface.DeserializeNetworkInterface(document.RootElement);
             });
         }
 
@@ -303,14 +301,12 @@ namespace Azure.Network.Management.Interface
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = EffectiveRouteListResult.DeserializeEffectiveRouteListResult(document.RootElement);
-                return value;
+                return EffectiveRouteListResult.DeserializeEffectiveRouteListResult(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = EffectiveRouteListResult.DeserializeEffectiveRouteListResult(document.RootElement);
-                return value;
+                return EffectiveRouteListResult.DeserializeEffectiveRouteListResult(document.RootElement);
             });
         }
 
@@ -370,14 +366,12 @@ namespace Azure.Network.Management.Interface
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = EffectiveNetworkSecurityGroupListResult.DeserializeEffectiveNetworkSecurityGroupListResult(document.RootElement);
-                return value;
+                return EffectiveNetworkSecurityGroupListResult.DeserializeEffectiveNetworkSecurityGroupListResult(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = EffectiveNetworkSecurityGroupListResult.DeserializeEffectiveNetworkSecurityGroupListResult(document.RootElement);
-                return value;
+                return EffectiveNetworkSecurityGroupListResult.DeserializeEffectiveNetworkSecurityGroupListResult(document.RootElement);
             });
         }
 

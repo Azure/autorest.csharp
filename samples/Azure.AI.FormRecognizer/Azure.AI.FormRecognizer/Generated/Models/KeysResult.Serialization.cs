@@ -15,24 +15,26 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static KeysResult DeserializeKeysResult(JsonElement element)
         {
-            KeysResult result = new KeysResult();
+            IDictionary<string, IList<string>> clusters = new Dictionary<string, IList<string>>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("clusters"))
                 {
+                    Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        IList<string> value = new List<string>();
+                        List<string> array = new List<string>();
                         foreach (var item in property0.Value.EnumerateArray())
                         {
-                            value.Add(item.GetString());
+                            array.Add(item.GetString());
                         }
-                        result.Clusters.Add(property0.Name, value);
+                        dictionary.Add(property0.Name, array);
                     }
+                    clusters = dictionary;
                     continue;
                 }
             }
-            return result;
+            return new KeysResult(clusters);
         }
     }
 }

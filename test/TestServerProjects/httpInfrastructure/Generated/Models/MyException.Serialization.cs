@@ -14,7 +14,7 @@ namespace httpInfrastructure.Models
     {
         internal static MyException DeserializeMyException(JsonElement element)
         {
-            MyException result = new MyException();
+            string statusCode = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("statusCode"))
@@ -23,11 +23,11 @@ namespace httpInfrastructure.Models
                     {
                         continue;
                     }
-                    result.StatusCode = property.Value.GetString();
+                    statusCode = property.Value.GetString();
                     continue;
                 }
             }
-            return result;
+            return new MyException(statusCode);
         }
     }
 }

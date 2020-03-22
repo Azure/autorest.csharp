@@ -262,21 +262,25 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 if (responseBodyType != null)
                 {
                     writer.Line($", ");
-                    string valueVariable = "value";
                     string responseVariable = "response";
                     if (lroMethod.OriginalResponse.ResponseBody is ObjectResponseBody objectResponseBody)
                     {
-                        ObjectSerialization serialization = objectResponseBody.Serialization;
                         using (writer.Scope($"({responseVariable:D}, cancellationToken) =>", "{", "},"))
                         {
-                            writer.WriteDeserializationForMethods(objectResponseBody.Serialization, async: false, ref valueVariable, responseVariable);
-                            writer.Line($"return {valueVariable};");
+                            writer.WriteDeserializationForMethods(
+                                objectResponseBody.Serialization,
+                                async: false,
+                                (w, v) => w.Line($"return {v};")
+                                , responseVariable);
                         }
 
                         using (writer.Scope($"async ({responseVariable:D}, cancellationToken) =>", newLine: false))
                         {
-                            writer.WriteDeserializationForMethods(objectResponseBody.Serialization, async: true, ref valueVariable, responseVariable);
-                            writer.Line($"return {valueVariable};");
+                            writer.WriteDeserializationForMethods(
+                                objectResponseBody.Serialization,
+                                async: true,
+                                (w, v) => w.Line($"return {v};")
+                                , responseVariable);
                         }
                     }
                     else if (lroMethod.OriginalResponse.ResponseBody is StreamResponseBody)

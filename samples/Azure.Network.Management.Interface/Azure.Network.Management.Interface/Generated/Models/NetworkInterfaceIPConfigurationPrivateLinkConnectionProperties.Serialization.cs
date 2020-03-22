@@ -41,7 +41,9 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties DeserializeNetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(JsonElement element)
         {
-            NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties result = new NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties();
+            string groupId = default;
+            string requiredMemberName = default;
+            IList<string> fqdns = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("groupId"))
@@ -50,7 +52,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.GroupId = property.Value.GetString();
+                    groupId = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("requiredMemberName"))
@@ -59,7 +61,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.RequiredMemberName = property.Value.GetString();
+                    requiredMemberName = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("fqdns"))
@@ -68,15 +70,16 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Fqdns = new List<string>();
+                    List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Fqdns.Add(item.GetString());
+                        array.Add(item.GetString());
                     }
+                    fqdns = array;
                     continue;
                 }
             }
-            return result;
+            return new NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(groupId, requiredMemberName, fqdns);
         }
     }
 }

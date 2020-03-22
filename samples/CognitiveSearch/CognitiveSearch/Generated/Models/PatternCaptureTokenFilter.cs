@@ -23,11 +23,10 @@ namespace CognitiveSearch.Models
         /// <param name="preserveOriginal"> A value indicating whether to return the original token even if one of the patterns matches. Default is true. </param>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal PatternCaptureTokenFilter(IList<string> patterns, bool? preserveOriginal, string odataType, string name) : base(odataType, name)
+        internal PatternCaptureTokenFilter(IList<string> patterns, bool? preserveOriginal, string odataType, string name) : base(odataType ?? "#Microsoft.Azure.Search.PatternCaptureTokenFilter", name)
         {
             Patterns = patterns;
             PreserveOriginal = preserveOriginal;
-            OdataType = "#Microsoft.Azure.Search.PatternCaptureTokenFilter";
         }
 
         /// <summary> A list of patterns to match against each token. </summary>

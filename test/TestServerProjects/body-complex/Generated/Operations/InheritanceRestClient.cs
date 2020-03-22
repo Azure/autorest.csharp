@@ -61,8 +61,9 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            Siamese value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Siamese.DeserializeSiamese(document.RootElement);
+                            value = Siamese.DeserializeSiamese(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -90,8 +91,9 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            Siamese value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Siamese.DeserializeSiamese(document.RootElement);
+                            value = Siamese.DeserializeSiamese(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:

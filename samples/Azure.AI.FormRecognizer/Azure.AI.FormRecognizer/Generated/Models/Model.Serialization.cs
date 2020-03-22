@@ -14,12 +14,14 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static Model DeserializeModel(JsonElement element)
         {
-            Model result = new Model();
+            ModelInfo modelInfo = new ModelInfo();
+            KeysResult keys = default;
+            TrainResult trainResult = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("modelInfo"))
                 {
-                    result.ModelInfo = ModelInfo.DeserializeModelInfo(property.Value);
+                    modelInfo = ModelInfo.DeserializeModelInfo(property.Value);
                     continue;
                 }
                 if (property.NameEquals("keys"))
@@ -28,7 +30,7 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.Keys = KeysResult.DeserializeKeysResult(property.Value);
+                    keys = KeysResult.DeserializeKeysResult(property.Value);
                     continue;
                 }
                 if (property.NameEquals("trainResult"))
@@ -37,11 +39,11 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.TrainResult = TrainResult.DeserializeTrainResult(property.Value);
+                    trainResult = TrainResult.DeserializeTrainResult(property.Value);
                     continue;
                 }
             }
-            return result;
+            return new Model(modelInfo, keys, trainResult);
         }
     }
 }

@@ -20,11 +20,10 @@ namespace CognitiveSearch.Models
         /// <param name="softDeleteColumnName"> The name of the column to use for soft-deletion detection. </param>
         /// <param name="softDeleteMarkerValue"> The marker value that identifies an item as deleted. </param>
         /// <param name="odataType"> . </param>
-        internal SoftDeleteColumnDeletionDetectionPolicy(string softDeleteColumnName, string softDeleteMarkerValue, string odataType) : base(odataType)
+        internal SoftDeleteColumnDeletionDetectionPolicy(string softDeleteColumnName, string softDeleteMarkerValue, string odataType) : base(odataType ?? "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy")
         {
             SoftDeleteColumnName = softDeleteColumnName;
             SoftDeleteMarkerValue = softDeleteMarkerValue;
-            OdataType = "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy";
         }
 
         /// <summary> The name of the column to use for soft-deletion detection. </summary>

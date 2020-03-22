@@ -27,11 +27,10 @@ namespace CognitiveSearch.Models
         /// <param name="context"> Represents the level at which operations take place, such as the document root or document content (for example, /document or /document/content). The default is /document. </param>
         /// <param name="inputs"> Inputs of the skills could be a column in the source data set, or the output of an upstream skill. </param>
         /// <param name="outputs"> The output of a skill is either a field in a search index, or a value that can be consumed as an input by another skill. </param>
-        internal KeyPhraseExtractionSkill(KeyPhraseExtractionSkillLanguage? defaultLanguageCode, int? maxKeyPhraseCount, string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs) : base(odataType, name, description, context, inputs, outputs)
+        internal KeyPhraseExtractionSkill(KeyPhraseExtractionSkillLanguage? defaultLanguageCode, int? maxKeyPhraseCount, string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs) : base(odataType ?? "#Microsoft.Skills.Text.KeyPhraseExtractionSkill", name, description, context, inputs, outputs)
         {
             DefaultLanguageCode = defaultLanguageCode;
             MaxKeyPhraseCount = maxKeyPhraseCount;
-            OdataType = "#Microsoft.Skills.Text.KeyPhraseExtractionSkill";
         }
 
         /// <summary> A value indicating which language code to use. Default is en. </summary>

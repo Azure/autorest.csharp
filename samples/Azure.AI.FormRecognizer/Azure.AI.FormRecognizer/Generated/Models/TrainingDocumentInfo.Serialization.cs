@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -14,34 +15,39 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static TrainingDocumentInfo DeserializeTrainingDocumentInfo(JsonElement element)
         {
-            TrainingDocumentInfo result = new TrainingDocumentInfo();
+            string documentName = default;
+            int pages = default;
+            IList<ErrorInformation> errors = new List<ErrorInformation>();
+            TrainStatus status = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("documentName"))
                 {
-                    result.DocumentName = property.Value.GetString();
+                    documentName = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("pages"))
                 {
-                    result.Pages = property.Value.GetInt32();
+                    pages = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("errors"))
                 {
+                    List<ErrorInformation> array = new List<ErrorInformation>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Errors.Add(ErrorInformation.DeserializeErrorInformation(item));
+                        array.Add(ErrorInformation.DeserializeErrorInformation(item));
                     }
+                    errors = array;
                     continue;
                 }
                 if (property.NameEquals("status"))
                 {
-                    result.Status = property.Value.GetString().ToTrainStatus();
+                    status = property.Value.GetString().ToTrainStatus();
                     continue;
                 }
             }
-            return result;
+            return new TrainingDocumentInfo(documentName, pages, errors, status);
         }
     }
 }

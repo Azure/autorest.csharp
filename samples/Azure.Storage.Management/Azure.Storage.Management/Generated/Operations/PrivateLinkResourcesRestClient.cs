@@ -91,8 +91,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            PrivateLinkResourceListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = PrivateLinkResourceListResult.DeserializePrivateLinkResourceListResult(document.RootElement);
+                            value = PrivateLinkResourceListResult.DeserializePrivateLinkResourceListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -131,8 +132,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            PrivateLinkResourceListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = PrivateLinkResourceListResult.DeserializePrivateLinkResourceListResult(document.RootElement);
+                            value = PrivateLinkResourceListResult.DeserializePrivateLinkResourceListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:

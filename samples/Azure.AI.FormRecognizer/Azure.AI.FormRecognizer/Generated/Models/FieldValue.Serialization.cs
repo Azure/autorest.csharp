@@ -15,12 +15,25 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static FieldValue DeserializeFieldValue(JsonElement element)
         {
-            FieldValue result = new FieldValue();
+            FieldValueType type = default;
+            string valueString = default;
+            string valueDate = default;
+            string valueTime = default;
+            string valuePhoneNumber = default;
+            float? valueNumber = default;
+            int? valueInteger = default;
+            IList<FieldValue> valueArray = default;
+            IDictionary<string, FieldValue> valueObject = default;
+            string text = default;
+            IList<float> boundingBox = default;
+            float? confidence = default;
+            IList<string> elements = default;
+            int? page = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"))
                 {
-                    result.Type = property.Value.GetString().ToFieldValueType();
+                    type = property.Value.GetString().ToFieldValueType();
                     continue;
                 }
                 if (property.NameEquals("valueString"))
@@ -29,7 +42,7 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.ValueString = property.Value.GetString();
+                    valueString = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("valueDate"))
@@ -38,7 +51,7 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.ValueDate = property.Value.GetString();
+                    valueDate = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("valueTime"))
@@ -47,7 +60,7 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.ValueTime = property.Value.GetString();
+                    valueTime = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("valuePhoneNumber"))
@@ -56,7 +69,7 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.ValuePhoneNumber = property.Value.GetString();
+                    valuePhoneNumber = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("valueNumber"))
@@ -65,7 +78,7 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.ValueNumber = property.Value.GetSingle();
+                    valueNumber = property.Value.GetSingle();
                     continue;
                 }
                 if (property.NameEquals("valueInteger"))
@@ -74,7 +87,7 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.ValueInteger = property.Value.GetInt32();
+                    valueInteger = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("valueArray"))
@@ -83,11 +96,12 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.ValueArray = new List<FieldValue>();
+                    List<FieldValue> array = new List<FieldValue>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.ValueArray.Add(DeserializeFieldValue(item));
+                        array.Add(DeserializeFieldValue(item));
                     }
+                    valueArray = array;
                     continue;
                 }
                 if (property.NameEquals("valueObject"))
@@ -96,11 +110,12 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.ValueObject = new Dictionary<string, FieldValue>();
+                    Dictionary<string, FieldValue> dictionary = new Dictionary<string, FieldValue>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        result.ValueObject.Add(property0.Name, DeserializeFieldValue(property0.Value));
+                        dictionary.Add(property0.Name, DeserializeFieldValue(property0.Value));
                     }
+                    valueObject = dictionary;
                     continue;
                 }
                 if (property.NameEquals("text"))
@@ -109,7 +124,7 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.Text = property.Value.GetString();
+                    text = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("boundingBox"))
@@ -118,11 +133,12 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.BoundingBox = new List<float>();
+                    List<float> array = new List<float>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.BoundingBox.Add(item.GetSingle());
+                        array.Add(item.GetSingle());
                     }
+                    boundingBox = array;
                     continue;
                 }
                 if (property.NameEquals("confidence"))
@@ -131,7 +147,7 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.Confidence = property.Value.GetSingle();
+                    confidence = property.Value.GetSingle();
                     continue;
                 }
                 if (property.NameEquals("elements"))
@@ -140,11 +156,12 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.Elements = new List<string>();
+                    List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Elements.Add(item.GetString());
+                        array.Add(item.GetString());
                     }
+                    elements = array;
                     continue;
                 }
                 if (property.NameEquals("page"))
@@ -153,11 +170,11 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.Page = property.Value.GetInt32();
+                    page = property.Value.GetInt32();
                     continue;
                 }
             }
-            return result;
+            return new FieldValue(type, valueString, valueDate, valueTime, valuePhoneNumber, valueNumber, valueInteger, valueArray, valueObject, text, boundingBox, confidence, elements, page);
         }
     }
 }

@@ -110,8 +110,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            DataSource value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = DataSource.DeserializeDataSource(document.RootElement);
+                            value = DataSource.DeserializeDataSource(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -153,8 +154,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            DataSource value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = DataSource.DeserializeDataSource(document.RootElement);
+                            value = DataSource.DeserializeDataSource(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -309,8 +311,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            DataSource value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = DataSource.DeserializeDataSource(document.RootElement);
+                            value = DataSource.DeserializeDataSource(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -345,8 +348,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            DataSource value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = DataSource.DeserializeDataSource(document.RootElement);
+                            value = DataSource.DeserializeDataSource(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -401,8 +405,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            ListDataSourcesResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ListDataSourcesResult.DeserializeListDataSourcesResult(document.RootElement);
+                            value = ListDataSourcesResult.DeserializeListDataSourcesResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -433,8 +438,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            ListDataSourcesResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ListDataSourcesResult.DeserializeListDataSourcesResult(document.RootElement);
+                            value = ListDataSourcesResult.DeserializeListDataSourcesResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -493,8 +499,9 @@ namespace CognitiveSearch
                 {
                     case 201:
                         {
+                            DataSource value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = DataSource.DeserializeDataSource(document.RootElement);
+                            value = DataSource.DeserializeDataSource(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -529,8 +536,9 @@ namespace CognitiveSearch
                 {
                     case 201:
                         {
+                            DataSource value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = DataSource.DeserializeDataSource(document.RootElement);
+                            value = DataSource.DeserializeDataSource(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:

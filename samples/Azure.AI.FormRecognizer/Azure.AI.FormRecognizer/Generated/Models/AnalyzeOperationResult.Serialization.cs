@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -14,22 +15,25 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static AnalyzeOperationResult DeserializeAnalyzeOperationResult(JsonElement element)
         {
-            AnalyzeOperationResult result = new AnalyzeOperationResult();
+            OperationStatus status = default;
+            DateTimeOffset createdDateTime = default;
+            DateTimeOffset lastUpdatedDateTime = default;
+            AnalyzeResult analyzeResult = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"))
                 {
-                    result.Status = property.Value.GetString().ToOperationStatus();
+                    status = property.Value.GetString().ToOperationStatus();
                     continue;
                 }
                 if (property.NameEquals("createdDateTime"))
                 {
-                    result.CreatedDateTime = property.Value.GetDateTimeOffset("S");
+                    createdDateTime = property.Value.GetDateTimeOffset("S");
                     continue;
                 }
                 if (property.NameEquals("lastUpdatedDateTime"))
                 {
-                    result.LastUpdatedDateTime = property.Value.GetDateTimeOffset("S");
+                    lastUpdatedDateTime = property.Value.GetDateTimeOffset("S");
                     continue;
                 }
                 if (property.NameEquals("analyzeResult"))
@@ -38,11 +42,11 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.AnalyzeResult = AnalyzeResult.DeserializeAnalyzeResult(property.Value);
+                    analyzeResult = AnalyzeResult.DeserializeAnalyzeResult(property.Value);
                     continue;
                 }
             }
-            return result;
+            return new AnalyzeOperationResult(status, createdDateTime, lastUpdatedDateTime, analyzeResult);
         }
     }
 }

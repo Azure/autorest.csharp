@@ -67,8 +67,9 @@ namespace extensible_enums_swagger
                 {
                     case 200:
                         {
+                            Pet value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Pet.DeserializePet(document.RootElement);
+                            value = Pet.DeserializePet(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -101,8 +102,9 @@ namespace extensible_enums_swagger
                 {
                     case 200:
                         {
+                            Pet value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Pet.DeserializePet(document.RootElement);
+                            value = Pet.DeserializePet(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -147,8 +149,9 @@ namespace extensible_enums_swagger
                 {
                     case 200:
                         {
+                            Pet value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Pet.DeserializePet(document.RootElement);
+                            value = Pet.DeserializePet(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -177,8 +180,9 @@ namespace extensible_enums_swagger
                 {
                     case 200:
                         {
+                            Pet value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Pet.DeserializePet(document.RootElement);
+                            value = Pet.DeserializePet(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:

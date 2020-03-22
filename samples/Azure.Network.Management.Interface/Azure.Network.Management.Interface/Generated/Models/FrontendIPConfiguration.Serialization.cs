@@ -129,7 +129,22 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static FrontendIPConfiguration DeserializeFrontendIPConfiguration(JsonElement element)
         {
-            FrontendIPConfiguration result = new FrontendIPConfiguration();
+            string name = default;
+            string etag = default;
+            string type = default;
+            IList<string> zones = default;
+            string id = default;
+            IList<SubResource> inboundNatRules = default;
+            IList<SubResource> inboundNatPools = default;
+            IList<SubResource> outboundRules = default;
+            IList<SubResource> loadBalancingRules = default;
+            string privateIPAddress = default;
+            IPAllocationMethod? privateIPAllocationMethod = default;
+            IPVersion? privateIPAddressVersion = default;
+            Subnet subnet = default;
+            PublicIPAddress publicIPAddress = default;
+            SubResource publicIPPrefix = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -138,7 +153,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("etag"))
@@ -147,7 +162,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Etag = property.Value.GetString();
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -156,7 +171,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("zones"))
@@ -165,11 +180,12 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Zones = new List<string>();
+                    List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Zones.Add(item.GetString());
+                        array.Add(item.GetString());
                     }
+                    zones = array;
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -178,7 +194,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -191,11 +207,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.InboundNatRules = new List<SubResource>();
+                            List<SubResource> array = new List<SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.InboundNatRules.Add(DeserializeSubResource(item));
+                                array.Add(DeserializeSubResource(item));
                             }
+                            inboundNatRules = array;
                             continue;
                         }
                         if (property0.NameEquals("inboundNatPools"))
@@ -204,11 +221,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.InboundNatPools = new List<SubResource>();
+                            List<SubResource> array = new List<SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.InboundNatPools.Add(DeserializeSubResource(item));
+                                array.Add(DeserializeSubResource(item));
                             }
+                            inboundNatPools = array;
                             continue;
                         }
                         if (property0.NameEquals("outboundRules"))
@@ -217,11 +235,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.OutboundRules = new List<SubResource>();
+                            List<SubResource> array = new List<SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.OutboundRules.Add(DeserializeSubResource(item));
+                                array.Add(DeserializeSubResource(item));
                             }
+                            outboundRules = array;
                             continue;
                         }
                         if (property0.NameEquals("loadBalancingRules"))
@@ -230,11 +249,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.LoadBalancingRules = new List<SubResource>();
+                            List<SubResource> array = new List<SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.LoadBalancingRules.Add(DeserializeSubResource(item));
+                                array.Add(DeserializeSubResource(item));
                             }
+                            loadBalancingRules = array;
                             continue;
                         }
                         if (property0.NameEquals("privateIPAddress"))
@@ -243,7 +263,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.PrivateIPAddress = property0.Value.GetString();
+                            privateIPAddress = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("privateIPAllocationMethod"))
@@ -252,7 +272,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.PrivateIPAllocationMethod = new IPAllocationMethod(property0.Value.GetString());
+                            privateIPAllocationMethod = new IPAllocationMethod(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("privateIPAddressVersion"))
@@ -261,7 +281,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.PrivateIPAddressVersion = new IPVersion(property0.Value.GetString());
+                            privateIPAddressVersion = new IPVersion(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("subnet"))
@@ -270,7 +290,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.Subnet = Subnet.DeserializeSubnet(property0.Value);
+                            subnet = Subnet.DeserializeSubnet(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("publicIPAddress"))
@@ -279,7 +299,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.PublicIPAddress = PublicIPAddress.DeserializePublicIPAddress(property0.Value);
+                            publicIPAddress = PublicIPAddress.DeserializePublicIPAddress(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("publicIPPrefix"))
@@ -288,7 +308,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.PublicIPPrefix = DeserializeSubResource(property0.Value);
+                            publicIPPrefix = DeserializeSubResource(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -297,14 +317,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningState = new ProvisioningState(property0.Value.GetString());
+                            provisioningState = new ProvisioningState(property0.Value.GetString());
                             continue;
                         }
                     }
                     continue;
                 }
             }
-            return result;
+            return new FrontendIPConfiguration(name, etag, type, zones, inboundNatRules, inboundNatPools, outboundRules, loadBalancingRules, privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, publicIPAddress, publicIPPrefix, provisioningState, id);
         }
     }
 }

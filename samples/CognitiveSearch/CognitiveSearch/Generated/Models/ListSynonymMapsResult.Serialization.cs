@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     {
         internal static ListSynonymMapsResult DeserializeListSynonymMapsResult(JsonElement element)
         {
-            ListSynonymMapsResult result = new ListSynonymMapsResult();
+            IList<SynonymMap> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -24,15 +24,16 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.SynonymMaps = new List<SynonymMap>();
+                    List<SynonymMap> array = new List<SynonymMap>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.SynonymMaps.Add(SynonymMap.DeserializeSynonymMap(item));
+                        array.Add(SynonymMap.DeserializeSynonymMap(item));
                     }
+                    value = array;
                     continue;
                 }
             }
-            return result;
+            return new ListSynonymMapsResult(value);
         }
     }
 }

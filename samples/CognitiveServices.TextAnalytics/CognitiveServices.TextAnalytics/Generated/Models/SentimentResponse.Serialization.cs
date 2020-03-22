@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -14,23 +15,30 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static SentimentResponse DeserializeSentimentResponse(JsonElement element)
         {
-            SentimentResponse result = new SentimentResponse();
+            IList<DocumentSentiment> documents = new List<DocumentSentiment>();
+            IList<DocumentError> errors = new List<DocumentError>();
+            RequestStatistics statistics = default;
+            string modelVersion = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("documents"))
                 {
+                    List<DocumentSentiment> array = new List<DocumentSentiment>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Documents.Add(DocumentSentiment.DeserializeDocumentSentiment(item));
+                        array.Add(DocumentSentiment.DeserializeDocumentSentiment(item));
                     }
+                    documents = array;
                     continue;
                 }
                 if (property.NameEquals("errors"))
                 {
+                    List<DocumentError> array = new List<DocumentError>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Errors.Add(DocumentError.DeserializeDocumentError(item));
+                        array.Add(DocumentError.DeserializeDocumentError(item));
                     }
+                    errors = array;
                     continue;
                 }
                 if (property.NameEquals("statistics"))
@@ -39,16 +47,16 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    result.Statistics = RequestStatistics.DeserializeRequestStatistics(property.Value);
+                    statistics = RequestStatistics.DeserializeRequestStatistics(property.Value);
                     continue;
                 }
                 if (property.NameEquals("modelVersion"))
                 {
-                    result.ModelVersion = property.Value.GetString();
+                    modelVersion = property.Value.GetString();
                     continue;
                 }
             }
-            return result;
+            return new SentimentResponse(documents, errors, statistics, modelVersion);
         }
     }
 }

@@ -15,20 +15,26 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static AnalyzeResult DeserializeAnalyzeResult(JsonElement element)
         {
-            AnalyzeResult result = new AnalyzeResult();
+            string version = default;
+            IList<ReadResult> readResults = new List<ReadResult>();
+            IList<PageResult> pageResults = default;
+            IList<DocumentResult> documentResults = default;
+            IList<ErrorInformation> errors = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("version"))
                 {
-                    result.Version = property.Value.GetString();
+                    version = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("readResults"))
                 {
+                    List<ReadResult> array = new List<ReadResult>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.ReadResults.Add(ReadResult.DeserializeReadResult(item));
+                        array.Add(ReadResult.DeserializeReadResult(item));
                     }
+                    readResults = array;
                     continue;
                 }
                 if (property.NameEquals("pageResults"))
@@ -37,11 +43,12 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.PageResults = new List<PageResult>();
+                    List<PageResult> array = new List<PageResult>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.PageResults.Add(PageResult.DeserializePageResult(item));
+                        array.Add(PageResult.DeserializePageResult(item));
                     }
+                    pageResults = array;
                     continue;
                 }
                 if (property.NameEquals("documentResults"))
@@ -50,11 +57,12 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.DocumentResults = new List<DocumentResult>();
+                    List<DocumentResult> array = new List<DocumentResult>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.DocumentResults.Add(DocumentResult.DeserializeDocumentResult(item));
+                        array.Add(DocumentResult.DeserializeDocumentResult(item));
                     }
+                    documentResults = array;
                     continue;
                 }
                 if (property.NameEquals("errors"))
@@ -63,15 +71,16 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.Errors = new List<ErrorInformation>();
+                    List<ErrorInformation> array = new List<ErrorInformation>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Errors.Add(ErrorInformation.DeserializeErrorInformation(item));
+                        array.Add(ErrorInformation.DeserializeErrorInformation(item));
                     }
+                    errors = array;
                     continue;
                 }
             }
-            return result;
+            return new AnalyzeResult(version, readResults, pageResults, documentResults, errors);
         }
     }
 }

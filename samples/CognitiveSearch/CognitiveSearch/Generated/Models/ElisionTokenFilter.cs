@@ -22,10 +22,9 @@ namespace CognitiveSearch.Models
         /// <param name="articles"> The set of articles to remove. </param>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal ElisionTokenFilter(IList<string> articles, string odataType, string name) : base(odataType, name)
+        internal ElisionTokenFilter(IList<string> articles, string odataType, string name) : base(odataType ?? "#Microsoft.Azure.Search.ElisionTokenFilter", name)
         {
             Articles = articles;
-            OdataType = "#Microsoft.Azure.Search.ElisionTokenFilter";
         }
 
         /// <summary> The set of articles to remove. </summary>

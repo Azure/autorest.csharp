@@ -24,21 +24,22 @@ namespace Azure.Storage.Management.Models
 
         internal static IPRule DeserializeIPRule(JsonElement element)
         {
-            IPRule result = new IPRule();
+            string value = default;
+            string action = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    result.IPAddressOrRange = property.Value.GetString();
+                    value = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("action"))
                 {
-                    result.Action = property.Value.GetString();
+                    action = property.Value.GetString();
                     continue;
                 }
             }
-            return result;
+            return new IPRule(value, action);
         }
     }
 }

@@ -56,7 +56,11 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static NetworkInterfaceDnsSettings DeserializeNetworkInterfaceDnsSettings(JsonElement element)
         {
-            NetworkInterfaceDnsSettings result = new NetworkInterfaceDnsSettings();
+            IList<string> dnsServers = default;
+            IList<string> appliedDnsServers = default;
+            string internalDnsNameLabel = default;
+            string internalFqdn = default;
+            string internalDomainNameSuffix = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("dnsServers"))
@@ -65,11 +69,12 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.DnsServers = new List<string>();
+                    List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.DnsServers.Add(item.GetString());
+                        array.Add(item.GetString());
                     }
+                    dnsServers = array;
                     continue;
                 }
                 if (property.NameEquals("appliedDnsServers"))
@@ -78,11 +83,12 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.AppliedDnsServers = new List<string>();
+                    List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.AppliedDnsServers.Add(item.GetString());
+                        array.Add(item.GetString());
                     }
+                    appliedDnsServers = array;
                     continue;
                 }
                 if (property.NameEquals("internalDnsNameLabel"))
@@ -91,7 +97,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.InternalDnsNameLabel = property.Value.GetString();
+                    internalDnsNameLabel = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("internalFqdn"))
@@ -100,7 +106,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.InternalFqdn = property.Value.GetString();
+                    internalFqdn = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("internalDomainNameSuffix"))
@@ -109,11 +115,11 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.InternalDomainNameSuffix = property.Value.GetString();
+                    internalDomainNameSuffix = property.Value.GetString();
                     continue;
                 }
             }
-            return result;
+            return new NetworkInterfaceDnsSettings(dnsServers, appliedDnsServers, internalDnsNameLabel, internalFqdn, internalDomainNameSuffix);
         }
     }
 }

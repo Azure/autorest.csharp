@@ -29,7 +29,9 @@ namespace CognitiveSearch.Models
 
         internal static KeywordTokenizer DeserializeKeywordTokenizer(JsonElement element)
         {
-            KeywordTokenizer result = new KeywordTokenizer();
+            int? bufferSize = default;
+            string odatatype = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("bufferSize"))
@@ -38,21 +40,21 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.BufferSize = property.Value.GetInt32();
+                    bufferSize = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
-            return result;
+            return new KeywordTokenizer(bufferSize, odatatype, name);
         }
     }
 }

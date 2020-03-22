@@ -91,8 +91,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            FileServiceItems value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = FileServiceItems.DeserializeFileServiceItems(document.RootElement);
+                            value = FileServiceItems.DeserializeFileServiceItems(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -131,8 +132,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            FileServiceItems value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = FileServiceItems.DeserializeFileServiceItems(document.RootElement);
+                            value = FileServiceItems.DeserializeFileServiceItems(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -202,8 +204,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            FileServiceProperties value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = FileServiceProperties.DeserializeFileServiceProperties(document.RootElement);
+                            value = FileServiceProperties.DeserializeFileServiceProperties(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -244,8 +247,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            FileServiceProperties value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = FileServiceProperties.DeserializeFileServiceProperties(document.RootElement);
+                            value = FileServiceProperties.DeserializeFileServiceProperties(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -304,8 +308,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            FileServiceProperties value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = FileServiceProperties.DeserializeFileServiceProperties(document.RootElement);
+                            value = FileServiceProperties.DeserializeFileServiceProperties(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -344,8 +349,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            FileServiceProperties value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = FileServiceProperties.DeserializeFileServiceProperties(document.RootElement);
+                            value = FileServiceProperties.DeserializeFileServiceProperties(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:

@@ -25,7 +25,7 @@ namespace Azure.Storage.Management.Models
 
         internal static ChangeFeed DeserializeChangeFeed(JsonElement element)
         {
-            ChangeFeed result = new ChangeFeed();
+            bool? enabled = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("enabled"))
@@ -34,11 +34,11 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.Enabled = property.Value.GetBoolean();
+                    enabled = property.Value.GetBoolean();
                     continue;
                 }
             }
-            return result;
+            return new ChangeFeed(enabled);
         }
     }
 }

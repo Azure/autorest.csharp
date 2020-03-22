@@ -91,8 +91,9 @@ namespace Azure.Network.Management.Interface
                 {
                     case 200:
                         {
+                            NetworkInterfaceIPConfigurationListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = NetworkInterfaceIPConfigurationListResult.DeserializeNetworkInterfaceIPConfigurationListResult(document.RootElement);
+                            value = NetworkInterfaceIPConfigurationListResult.DeserializeNetworkInterfaceIPConfigurationListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -131,8 +132,9 @@ namespace Azure.Network.Management.Interface
                 {
                     case 200:
                         {
+                            NetworkInterfaceIPConfigurationListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = NetworkInterfaceIPConfigurationListResult.DeserializeNetworkInterfaceIPConfigurationListResult(document.RootElement);
+                            value = NetworkInterfaceIPConfigurationListResult.DeserializeNetworkInterfaceIPConfigurationListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -196,8 +198,9 @@ namespace Azure.Network.Management.Interface
                 {
                     case 200:
                         {
+                            NetworkInterfaceIPConfiguration value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(document.RootElement);
+                            value = NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -241,8 +244,9 @@ namespace Azure.Network.Management.Interface
                 {
                     case 200:
                         {
+                            NetworkInterfaceIPConfiguration value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(document.RootElement);
+                            value = NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -287,8 +291,9 @@ namespace Azure.Network.Management.Interface
                 {
                     case 200:
                         {
+                            NetworkInterfaceIPConfigurationListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = NetworkInterfaceIPConfigurationListResult.DeserializeNetworkInterfaceIPConfigurationListResult(document.RootElement);
+                            value = NetworkInterfaceIPConfigurationListResult.DeserializeNetworkInterfaceIPConfigurationListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -322,8 +327,9 @@ namespace Azure.Network.Management.Interface
                 {
                     case 200:
                         {
+                            NetworkInterfaceIPConfigurationListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = NetworkInterfaceIPConfigurationListResult.DeserializeNetworkInterfaceIPConfigurationListResult(document.RootElement);
+                            value = NetworkInterfaceIPConfigurationListResult.DeserializeNetworkInterfaceIPConfigurationListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:

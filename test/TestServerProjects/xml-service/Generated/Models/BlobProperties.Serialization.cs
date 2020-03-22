@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Xml.Linq;
 using Azure.Core;
 
@@ -15,204 +14,120 @@ namespace xml_service.Models
     {
         internal static BlobProperties DeserializeBlobProperties(XElement element)
         {
-            BlobProperties result = default;
-            result = new BlobProperties(); DateTimeOffset value = default;
-            var lastModified = element.Element("Last-Modified");
-            if (lastModified != null)
+            var obj = new BlobProperties();
+            if (element.Element("Last-Modified") is XElement lastModified)
             {
-                value = lastModified.GetDateTimeOffsetValue("R");
+                obj.LastModified = lastModified.GetDateTimeOffsetValue("R");
             }
-            result.LastModified = value;
-            string value0 = default;
-            var etag = element.Element("Etag");
-            if (etag != null)
+            if (element.Element("Etag") is XElement etag)
             {
-                value0 = (string)etag;
+                obj.Etag = (string)etag;
             }
-            result.Etag = value0;
-            long? value1 = default;
-            var contentLength = element.Element("Content-Length");
-            if (contentLength != null)
+            if (element.Element("Content-Length") is XElement contentLength)
             {
-                value1 = (long?)contentLength;
+                obj.ContentLength = (long?)contentLength;
             }
-            result.ContentLength = value1;
-            string value2 = default;
-            var contentType = element.Element("Content-Type");
-            if (contentType != null)
+            if (element.Element("Content-Type") is XElement contentType)
             {
-                value2 = (string)contentType;
+                obj.ContentType = (string)contentType;
             }
-            result.ContentType = value2;
-            string value3 = default;
-            var contentEncoding = element.Element("Content-Encoding");
-            if (contentEncoding != null)
+            if (element.Element("Content-Encoding") is XElement contentEncoding)
             {
-                value3 = (string)contentEncoding;
+                obj.ContentEncoding = (string)contentEncoding;
             }
-            result.ContentEncoding = value3;
-            string value4 = default;
-            var contentLanguage = element.Element("Content-Language");
-            if (contentLanguage != null)
+            if (element.Element("Content-Language") is XElement contentLanguage)
             {
-                value4 = (string)contentLanguage;
+                obj.ContentLanguage = (string)contentLanguage;
             }
-            result.ContentLanguage = value4;
-            string value5 = default;
-            var contentMD5 = element.Element("Content-MD5");
-            if (contentMD5 != null)
+            if (element.Element("Content-MD5") is XElement contentMD5)
             {
-                value5 = (string)contentMD5;
+                obj.ContentMD5 = (string)contentMD5;
             }
-            result.ContentMD5 = value5;
-            string value6 = default;
-            var contentDisposition = element.Element("Content-Disposition");
-            if (contentDisposition != null)
+            if (element.Element("Content-Disposition") is XElement contentDisposition)
             {
-                value6 = (string)contentDisposition;
+                obj.ContentDisposition = (string)contentDisposition;
             }
-            result.ContentDisposition = value6;
-            string value7 = default;
-            var cacheControl = element.Element("Cache-Control");
-            if (cacheControl != null)
+            if (element.Element("Cache-Control") is XElement cacheControl)
             {
-                value7 = (string)cacheControl;
+                obj.CacheControl = (string)cacheControl;
             }
-            result.CacheControl = value7;
-            int? value8 = default;
-            var xMsBlobSequenceNumber = element.Element("x-ms-blob-sequence-number");
-            if (xMsBlobSequenceNumber != null)
+            if (element.Element("x-ms-blob-sequence-number") is XElement xMsBlobSequenceNumber)
             {
-                value8 = (int?)xMsBlobSequenceNumber;
+                obj.BlobSequenceNumber = (int?)xMsBlobSequenceNumber;
             }
-            result.BlobSequenceNumber = value8;
-            BlobType? value9 = default;
-            var blobType = element.Element("BlobType");
-            if (blobType != null)
+            if (element.Element("BlobType") is XElement blobType)
             {
-                value9 = blobType.Value.ToBlobType();
+                obj.BlobType = blobType.Value.ToBlobType();
             }
-            result.BlobType = value9;
-            LeaseStatusType? value10 = default;
-            var leaseStatus = element.Element("LeaseStatus");
-            if (leaseStatus != null)
+            if (element.Element("LeaseStatus") is XElement leaseStatus)
             {
-                value10 = leaseStatus.Value.ToLeaseStatusType();
+                obj.LeaseStatus = leaseStatus.Value.ToLeaseStatusType();
             }
-            result.LeaseStatus = value10;
-            LeaseStateType? value11 = default;
-            var leaseState = element.Element("LeaseState");
-            if (leaseState != null)
+            if (element.Element("LeaseState") is XElement leaseState)
             {
-                value11 = leaseState.Value.ToLeaseStateType();
+                obj.LeaseState = leaseState.Value.ToLeaseStateType();
             }
-            result.LeaseState = value11;
-            LeaseDurationType? value12 = default;
-            var leaseDuration = element.Element("LeaseDuration");
-            if (leaseDuration != null)
+            if (element.Element("LeaseDuration") is XElement leaseDuration)
             {
-                value12 = leaseDuration.Value.ToLeaseDurationType();
+                obj.LeaseDuration = leaseDuration.Value.ToLeaseDurationType();
             }
-            result.LeaseDuration = value12;
-            string value13 = default;
-            var copyId = element.Element("CopyId");
-            if (copyId != null)
+            if (element.Element("CopyId") is XElement copyId)
             {
-                value13 = (string)copyId;
+                obj.CopyId = (string)copyId;
             }
-            result.CopyId = value13;
-            CopyStatusType? value14 = default;
-            var copyStatus = element.Element("CopyStatus");
-            if (copyStatus != null)
+            if (element.Element("CopyStatus") is XElement copyStatus)
             {
-                value14 = copyStatus.Value.ToCopyStatusType();
+                obj.CopyStatus = copyStatus.Value.ToCopyStatusType();
             }
-            result.CopyStatus = value14;
-            string value15 = default;
-            var copySource = element.Element("CopySource");
-            if (copySource != null)
+            if (element.Element("CopySource") is XElement copySource)
             {
-                value15 = (string)copySource;
+                obj.CopySource = (string)copySource;
             }
-            result.CopySource = value15;
-            string value16 = default;
-            var copyProgress = element.Element("CopyProgress");
-            if (copyProgress != null)
+            if (element.Element("CopyProgress") is XElement copyProgress)
             {
-                value16 = (string)copyProgress;
+                obj.CopyProgress = (string)copyProgress;
             }
-            result.CopyProgress = value16;
-            DateTimeOffset? value17 = default;
-            var copyCompletionTime = element.Element("CopyCompletionTime");
-            if (copyCompletionTime != null)
+            if (element.Element("CopyCompletionTime") is XElement copyCompletionTime)
             {
-                value17 = copyCompletionTime.GetDateTimeOffsetValue("R");
+                obj.CopyCompletionTime = copyCompletionTime.GetDateTimeOffsetValue("R");
             }
-            result.CopyCompletionTime = value17;
-            string value18 = default;
-            var copyStatusDescription = element.Element("CopyStatusDescription");
-            if (copyStatusDescription != null)
+            if (element.Element("CopyStatusDescription") is XElement copyStatusDescription)
             {
-                value18 = (string)copyStatusDescription;
+                obj.CopyStatusDescription = (string)copyStatusDescription;
             }
-            result.CopyStatusDescription = value18;
-            bool? value19 = default;
-            var serverEncrypted = element.Element("ServerEncrypted");
-            if (serverEncrypted != null)
+            if (element.Element("ServerEncrypted") is XElement serverEncrypted)
             {
-                value19 = (bool?)serverEncrypted;
+                obj.ServerEncrypted = (bool?)serverEncrypted;
             }
-            result.ServerEncrypted = value19;
-            bool? value20 = default;
-            var incrementalCopy = element.Element("IncrementalCopy");
-            if (incrementalCopy != null)
+            if (element.Element("IncrementalCopy") is XElement incrementalCopy)
             {
-                value20 = (bool?)incrementalCopy;
+                obj.IncrementalCopy = (bool?)incrementalCopy;
             }
-            result.IncrementalCopy = value20;
-            string value21 = default;
-            var destinationSnapshot = element.Element("DestinationSnapshot");
-            if (destinationSnapshot != null)
+            if (element.Element("DestinationSnapshot") is XElement destinationSnapshot)
             {
-                value21 = (string)destinationSnapshot;
+                obj.DestinationSnapshot = (string)destinationSnapshot;
             }
-            result.DestinationSnapshot = value21;
-            DateTimeOffset? value22 = default;
-            var deletedTime = element.Element("DeletedTime");
-            if (deletedTime != null)
+            if (element.Element("DeletedTime") is XElement deletedTime)
             {
-                value22 = deletedTime.GetDateTimeOffsetValue("R");
+                obj.DeletedTime = deletedTime.GetDateTimeOffsetValue("R");
             }
-            result.DeletedTime = value22;
-            int? value23 = default;
-            var remainingRetentionDays = element.Element("RemainingRetentionDays");
-            if (remainingRetentionDays != null)
+            if (element.Element("RemainingRetentionDays") is XElement remainingRetentionDays)
             {
-                value23 = (int?)remainingRetentionDays;
+                obj.RemainingRetentionDays = (int?)remainingRetentionDays;
             }
-            result.RemainingRetentionDays = value23;
-            AccessTier? value24 = default;
-            var accessTier = element.Element("AccessTier");
-            if (accessTier != null)
+            if (element.Element("AccessTier") is XElement accessTier)
             {
-                value24 = new AccessTier(accessTier.Value);
+                obj.AccessTier = new AccessTier(accessTier.Value);
             }
-            result.AccessTier = value24;
-            bool? value25 = default;
-            var accessTierInferred = element.Element("AccessTierInferred");
-            if (accessTierInferred != null)
+            if (element.Element("AccessTierInferred") is XElement accessTierInferred)
             {
-                value25 = (bool?)accessTierInferred;
+                obj.AccessTierInferred = (bool?)accessTierInferred;
             }
-            result.AccessTierInferred = value25;
-            ArchiveStatus? value26 = default;
-            var archiveStatus = element.Element("ArchiveStatus");
-            if (archiveStatus != null)
+            if (element.Element("ArchiveStatus") is XElement archiveStatus)
             {
-                value26 = new ArchiveStatus(archiveStatus.Value);
+                obj.ArchiveStatus = new ArchiveStatus(archiveStatus.Value);
             }
-            result.ArchiveStatus = value26;
-            return result;
+            return obj;
         }
     }
 }

@@ -14,21 +14,22 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static FormFieldsReport DeserializeFormFieldsReport(JsonElement element)
         {
-            FormFieldsReport result = new FormFieldsReport();
+            string fieldName = default;
+            float accuracy = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("fieldName"))
                 {
-                    result.FieldName = property.Value.GetString();
+                    fieldName = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("accuracy"))
                 {
-                    result.Accuracy = property.Value.GetSingle();
+                    accuracy = property.Value.GetSingle();
                     continue;
                 }
             }
-            return result;
+            return new FormFieldsReport(fieldName, accuracy);
         }
     }
 }

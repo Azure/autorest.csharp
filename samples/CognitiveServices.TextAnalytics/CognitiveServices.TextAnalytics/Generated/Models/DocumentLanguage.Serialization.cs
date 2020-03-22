@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -14,20 +15,24 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static DocumentLanguage DeserializeDocumentLanguage(JsonElement element)
         {
-            DocumentLanguage result = new DocumentLanguage();
+            string id = default;
+            IList<DetectedLanguage> detectedLanguages = new List<DetectedLanguage>();
+            DocumentStatistics statistics = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
                 {
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("detectedLanguages"))
                 {
+                    List<DetectedLanguage> array = new List<DetectedLanguage>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.DetectedLanguages.Add(DetectedLanguage.DeserializeDetectedLanguage(item));
+                        array.Add(DetectedLanguage.DeserializeDetectedLanguage(item));
                     }
+                    detectedLanguages = array;
                     continue;
                 }
                 if (property.NameEquals("statistics"))
@@ -36,11 +41,11 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    result.Statistics = DocumentStatistics.DeserializeDocumentStatistics(property.Value);
+                    statistics = DocumentStatistics.DeserializeDocumentStatistics(property.Value);
                     continue;
                 }
             }
-            return result;
+            return new DocumentLanguage(id, detectedLanguages, statistics);
         }
     }
 }

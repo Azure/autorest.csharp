@@ -20,10 +20,9 @@ namespace CognitiveSearch.Models
         /// <param name="language"> The language to use. </param>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal SnowballTokenFilter(SnowballTokenFilterLanguage language, string odataType, string name) : base(odataType, name)
+        internal SnowballTokenFilter(SnowballTokenFilterLanguage language, string odataType, string name) : base(odataType ?? "#Microsoft.Azure.Search.SnowballTokenFilter", name)
         {
             Language = language;
-            OdataType = "#Microsoft.Azure.Search.SnowballTokenFilter";
         }
 
         /// <summary> The language to use. </summary>

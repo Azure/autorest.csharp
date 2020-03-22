@@ -90,17 +90,29 @@ namespace CognitiveSearch.Models
 
         internal static Field DeserializeField(JsonElement element)
         {
-            Field result = new Field();
+            string name = default;
+            DataType type = default;
+            bool? key = default;
+            bool? retrievable = default;
+            bool? searchable = default;
+            bool? filterable = default;
+            bool? sortable = default;
+            bool? facetable = default;
+            AnalyzerName? analyzer = default;
+            AnalyzerName? searchAnalyzer = default;
+            AnalyzerName? indexAnalyzer = default;
+            IList<string> synonymMaps = default;
+            IList<Field> fields = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
                 {
-                    result.Type = new DataType(property.Value.GetString());
+                    type = new DataType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("key"))
@@ -109,7 +121,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Key = property.Value.GetBoolean();
+                    key = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("retrievable"))
@@ -118,7 +130,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Retrievable = property.Value.GetBoolean();
+                    retrievable = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("searchable"))
@@ -127,7 +139,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Searchable = property.Value.GetBoolean();
+                    searchable = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("filterable"))
@@ -136,7 +148,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Filterable = property.Value.GetBoolean();
+                    filterable = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("sortable"))
@@ -145,7 +157,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Sortable = property.Value.GetBoolean();
+                    sortable = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("facetable"))
@@ -154,7 +166,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Facetable = property.Value.GetBoolean();
+                    facetable = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("analyzer"))
@@ -163,7 +175,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Analyzer = new AnalyzerName(property.Value.GetString());
+                    analyzer = new AnalyzerName(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("searchAnalyzer"))
@@ -172,7 +184,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.SearchAnalyzer = new AnalyzerName(property.Value.GetString());
+                    searchAnalyzer = new AnalyzerName(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("indexAnalyzer"))
@@ -181,7 +193,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.IndexAnalyzer = new AnalyzerName(property.Value.GetString());
+                    indexAnalyzer = new AnalyzerName(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("synonymMaps"))
@@ -190,11 +202,12 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.SynonymMaps = new List<string>();
+                    List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.SynonymMaps.Add(item.GetString());
+                        array.Add(item.GetString());
                     }
+                    synonymMaps = array;
                     continue;
                 }
                 if (property.NameEquals("fields"))
@@ -203,15 +216,16 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Fields = new List<Field>();
+                    List<Field> array = new List<Field>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Fields.Add(DeserializeField(item));
+                        array.Add(DeserializeField(item));
                     }
+                    fields = array;
                     continue;
                 }
             }
-            return result;
+            return new Field(name, type, key, retrievable, searchable, filterable, sortable, facetable, analyzer, searchAnalyzer, indexAnalyzer, synonymMaps, fields);
         }
     }
 }

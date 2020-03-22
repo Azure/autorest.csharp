@@ -15,7 +15,8 @@ namespace Azure.Storage.Tables.Models
     {
         internal static TableEntityQueryResponse DeserializeTableEntityQueryResponse(JsonElement element)
         {
-            TableEntityQueryResponse result = new TableEntityQueryResponse();
+            string odatametadata = default;
+            IList<IDictionary<string, object>> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("odata.metadata"))
@@ -24,7 +25,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    result.OdataMetadata = property.Value.GetString();
+                    odatametadata = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("value"))
@@ -33,20 +34,21 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    result.Value = new List<IDictionary<string, object>>();
+                    List<IDictionary<string, object>> array = new List<IDictionary<string, object>>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        IDictionary<string, object> value = new Dictionary<string, object>();
+                        Dictionary<string, object> dictionary = new Dictionary<string, object>();
                         foreach (var property0 in item.EnumerateObject())
                         {
-                            value.Add(property0.Name, property0.Value.GetObject());
+                            dictionary.Add(property0.Name, property0.Value.GetObject());
                         }
-                        result.Value.Add(value);
+                        array.Add(dictionary);
                     }
+                    value = array;
                     continue;
                 }
             }
-            return result;
+            return new TableEntityQueryResponse(odatametadata, value);
         }
     }
 }

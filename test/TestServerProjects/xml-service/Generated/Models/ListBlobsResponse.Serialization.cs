@@ -14,60 +14,40 @@ namespace xml_service.Models
     {
         internal static ListBlobsResponse DeserializeListBlobsResponse(XElement element)
         {
-            ListBlobsResponse result = default;
-            result = new ListBlobsResponse(); var serviceEndpoint = element.Attribute("ServiceEndpoint");
-            if (serviceEndpoint != null)
+            var obj = new ListBlobsResponse();
+            if (element.Attribute("ServiceEndpoint") is XAttribute serviceEndpoint)
             {
-                result.ServiceEndpoint = (string)serviceEndpoint;
+                obj.ServiceEndpoint = (string)serviceEndpoint;
             }
-            var containerName = element.Attribute("ContainerName");
-            if (containerName != null)
+            if (element.Attribute("ContainerName") is XAttribute containerName)
             {
-                result.ContainerName = (string)containerName;
+                obj.ContainerName = (string)containerName;
             }
-            string value = default;
-            var prefix = element.Element("Prefix");
-            if (prefix != null)
+            if (element.Element("Prefix") is XElement prefix)
             {
-                value = (string)prefix;
+                obj.Prefix = (string)prefix;
             }
-            result.Prefix = value;
-            string value0 = default;
-            var marker = element.Element("Marker");
-            if (marker != null)
+            if (element.Element("Marker") is XElement marker)
             {
-                value0 = (string)marker;
+                obj.Marker = (string)marker;
             }
-            result.Marker = value0;
-            int value1 = default;
-            var maxResults = element.Element("MaxResults");
-            if (maxResults != null)
+            if (element.Element("MaxResults") is XElement maxResults)
             {
-                value1 = (int)maxResults;
+                obj.MaxResults = (int)maxResults;
             }
-            result.MaxResults = value1;
-            string value2 = default;
-            var delimiter = element.Element("Delimiter");
-            if (delimiter != null)
+            if (element.Element("Delimiter") is XElement delimiter)
             {
-                value2 = (string)delimiter;
+                obj.Delimiter = (string)delimiter;
             }
-            result.Delimiter = value2;
-            Blobs value3 = default;
-            var blobs = element.Element("Blobs");
-            if (blobs != null)
+            if (element.Element("Blobs") is XElement blobs)
             {
-                value3 = Blobs.DeserializeBlobs(blobs);
+                obj.Blobs = Blobs.DeserializeBlobs(blobs);
             }
-            result.Blobs = value3;
-            string value4 = default;
-            var nextMarker = element.Element("NextMarker");
-            if (nextMarker != null)
+            if (element.Element("NextMarker") is XElement nextMarker)
             {
-                value4 = (string)nextMarker;
+                obj.NextMarker = (string)nextMarker;
             }
-            result.NextMarker = value4;
-            return result;
+            return obj;
         }
     }
 }

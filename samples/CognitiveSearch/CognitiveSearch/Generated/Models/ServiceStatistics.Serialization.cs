@@ -14,7 +14,8 @@ namespace CognitiveSearch.Models
     {
         internal static ServiceStatistics DeserializeServiceStatistics(JsonElement element)
         {
-            ServiceStatistics result = new ServiceStatistics();
+            ServiceCounters counters = default;
+            ServiceLimits limits = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("counters"))
@@ -23,7 +24,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Counters = ServiceCounters.DeserializeServiceCounters(property.Value);
+                    counters = ServiceCounters.DeserializeServiceCounters(property.Value);
                     continue;
                 }
                 if (property.NameEquals("limits"))
@@ -32,11 +33,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Limits = ServiceLimits.DeserializeServiceLimits(property.Value);
+                    limits = ServiceLimits.DeserializeServiceLimits(property.Value);
                     continue;
                 }
             }
-            return result;
+            return new ServiceStatistics(counters, limits);
         }
     }
 }

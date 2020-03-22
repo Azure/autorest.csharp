@@ -15,49 +15,33 @@ namespace xml_service.Models
     {
         internal static Blob DeserializeBlob(XElement element)
         {
-            Blob result = default;
-            result = new Blob(); string value = default;
-            var name = element.Element("Name");
-            if (name != null)
+            var obj = new Blob();
+            if (element.Element("Name") is XElement name)
             {
-                value = (string)name;
+                obj.Name = (string)name;
             }
-            result.Name = value;
-            bool value0 = default;
-            var deleted = element.Element("Deleted");
-            if (deleted != null)
+            if (element.Element("Deleted") is XElement deleted)
             {
-                value0 = (bool)deleted;
+                obj.Deleted = (bool)deleted;
             }
-            result.Deleted = value0;
-            string value1 = default;
-            var snapshot = element.Element("Snapshot");
-            if (snapshot != null)
+            if (element.Element("Snapshot") is XElement snapshot)
             {
-                value1 = (string)snapshot;
+                obj.Snapshot = (string)snapshot;
             }
-            result.Snapshot = value1;
-            BlobProperties value2 = default;
-            var properties = element.Element("Properties");
-            if (properties != null)
+            if (element.Element("Properties") is XElement properties)
             {
-                value2 = BlobProperties.DeserializeBlobProperties(properties);
+                obj.Properties = BlobProperties.DeserializeBlobProperties(properties);
             }
-            result.Properties = value2;
-            IDictionary<string, string> value3 = default;
-            var metadata = element.Element("Metadata");
-            if (metadata != null)
+            if (element.Element("Metadata") is XElement metadata)
             {
-                value3 = new Dictionary<string, string>(); var elements = metadata.Elements();
-                foreach (var e in elements)
+                var dictionary = new Dictionary<string, string>();
+                foreach (var e in metadata.Elements())
                 {
-                    string value4 = default;
-                    value4 = (string)e;
-                    value3.Add(e.Name.LocalName, value4);
+                    dictionary.Add(e.Name.LocalName, (string)e);
                 }
+                obj.Metadata = dictionary;
             }
-            result.Metadata = value3;
-            return result;
+            return obj;
         }
     }
 }

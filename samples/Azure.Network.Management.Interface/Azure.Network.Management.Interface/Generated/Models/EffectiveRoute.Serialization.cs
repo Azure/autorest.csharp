@@ -15,7 +15,13 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static EffectiveRoute DeserializeEffectiveRoute(JsonElement element)
         {
-            EffectiveRoute result = new EffectiveRoute();
+            string name = default;
+            bool? disableBgpRoutePropagation = default;
+            EffectiveRouteSource? source = default;
+            EffectiveRouteState? state = default;
+            IList<string> addressPrefix = default;
+            IList<string> nextHopIpAddress = default;
+            RouteNextHopType? nextHopType = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -24,7 +30,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("disableBgpRoutePropagation"))
@@ -33,7 +39,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.DisableBgpRoutePropagation = property.Value.GetBoolean();
+                    disableBgpRoutePropagation = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("source"))
@@ -42,7 +48,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Source = new EffectiveRouteSource(property.Value.GetString());
+                    source = new EffectiveRouteSource(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("state"))
@@ -51,7 +57,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.State = new EffectiveRouteState(property.Value.GetString());
+                    state = new EffectiveRouteState(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("addressPrefix"))
@@ -60,11 +66,12 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.AddressPrefix = new List<string>();
+                    List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.AddressPrefix.Add(item.GetString());
+                        array.Add(item.GetString());
                     }
+                    addressPrefix = array;
                     continue;
                 }
                 if (property.NameEquals("nextHopIpAddress"))
@@ -73,11 +80,12 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.NextHopIpAddress = new List<string>();
+                    List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.NextHopIpAddress.Add(item.GetString());
+                        array.Add(item.GetString());
                     }
+                    nextHopIpAddress = array;
                     continue;
                 }
                 if (property.NameEquals("nextHopType"))
@@ -86,11 +94,11 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.NextHopType = new RouteNextHopType(property.Value.GetString());
+                    nextHopType = new RouteNextHopType(property.Value.GetString());
                     continue;
                 }
             }
-            return result;
+            return new EffectiveRoute(name, disableBgpRoutePropagation, source, state, addressPrefix, nextHopIpAddress, nextHopType);
         }
     }
 }

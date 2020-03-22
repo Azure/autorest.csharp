@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -15,7 +16,16 @@ namespace CognitiveSearch.Models
     {
         internal static IndexerExecutionResult DeserializeIndexerExecutionResult(JsonElement element)
         {
-            IndexerExecutionResult result = new IndexerExecutionResult();
+            IndexerExecutionStatus? status = default;
+            string errorMessage = default;
+            DateTimeOffset? startTime = default;
+            DateTimeOffset? endTime = default;
+            IList<ItemError> errors = default;
+            IList<ItemWarning> warnings = default;
+            int? itemsProcessed = default;
+            int? itemsFailed = default;
+            string initialTrackingState = default;
+            string finalTrackingState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"))
@@ -24,7 +34,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Status = property.Value.GetString().ToIndexerExecutionStatus();
+                    status = property.Value.GetString().ToIndexerExecutionStatus();
                     continue;
                 }
                 if (property.NameEquals("errorMessage"))
@@ -33,7 +43,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.ErrorMessage = property.Value.GetString();
+                    errorMessage = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("startTime"))
@@ -42,7 +52,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.StartTime = property.Value.GetDateTimeOffset("S");
+                    startTime = property.Value.GetDateTimeOffset("S");
                     continue;
                 }
                 if (property.NameEquals("endTime"))
@@ -51,7 +61,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.EndTime = property.Value.GetDateTimeOffset("S");
+                    endTime = property.Value.GetDateTimeOffset("S");
                     continue;
                 }
                 if (property.NameEquals("errors"))
@@ -60,11 +70,12 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Errors = new List<ItemError>();
+                    List<ItemError> array = new List<ItemError>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Errors.Add(ItemError.DeserializeItemError(item));
+                        array.Add(ItemError.DeserializeItemError(item));
                     }
+                    errors = array;
                     continue;
                 }
                 if (property.NameEquals("warnings"))
@@ -73,11 +84,12 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Warnings = new List<ItemWarning>();
+                    List<ItemWarning> array = new List<ItemWarning>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Warnings.Add(ItemWarning.DeserializeItemWarning(item));
+                        array.Add(ItemWarning.DeserializeItemWarning(item));
                     }
+                    warnings = array;
                     continue;
                 }
                 if (property.NameEquals("itemsProcessed"))
@@ -86,7 +98,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.ItemCount = property.Value.GetInt32();
+                    itemsProcessed = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("itemsFailed"))
@@ -95,7 +107,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.FailedItemCount = property.Value.GetInt32();
+                    itemsFailed = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("initialTrackingState"))
@@ -104,7 +116,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.InitialTrackingState = property.Value.GetString();
+                    initialTrackingState = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("finalTrackingState"))
@@ -113,11 +125,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.FinalTrackingState = property.Value.GetString();
+                    finalTrackingState = property.Value.GetString();
                     continue;
                 }
             }
-            return result;
+            return new IndexerExecutionResult(status, errorMessage, startTime, endTime, errors, warnings, itemsProcessed, itemsFailed, initialTrackingState, finalTrackingState);
         }
     }
 }

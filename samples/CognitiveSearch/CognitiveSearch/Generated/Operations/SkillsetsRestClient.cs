@@ -110,8 +110,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            Skillset value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Skillset.DeserializeSkillset(document.RootElement);
+                            value = Skillset.DeserializeSkillset(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -153,8 +154,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            Skillset value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Skillset.DeserializeSkillset(document.RootElement);
+                            value = Skillset.DeserializeSkillset(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -309,8 +311,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            Skillset value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Skillset.DeserializeSkillset(document.RootElement);
+                            value = Skillset.DeserializeSkillset(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -345,8 +348,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            Skillset value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Skillset.DeserializeSkillset(document.RootElement);
+                            value = Skillset.DeserializeSkillset(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -401,8 +405,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            ListSkillsetsResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ListSkillsetsResult.DeserializeListSkillsetsResult(document.RootElement);
+                            value = ListSkillsetsResult.DeserializeListSkillsetsResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -433,8 +438,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            ListSkillsetsResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ListSkillsetsResult.DeserializeListSkillsetsResult(document.RootElement);
+                            value = ListSkillsetsResult.DeserializeListSkillsetsResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -493,8 +499,9 @@ namespace CognitiveSearch
                 {
                     case 201:
                         {
+                            Skillset value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Skillset.DeserializeSkillset(document.RootElement);
+                            value = Skillset.DeserializeSkillset(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -529,8 +536,9 @@ namespace CognitiveSearch
                 {
                     case 201:
                         {
+                            Skillset value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Skillset.DeserializeSkillset(document.RootElement);
+                            value = Skillset.DeserializeSkillset(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:

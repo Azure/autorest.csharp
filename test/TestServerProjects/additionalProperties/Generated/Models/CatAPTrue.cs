@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System.Collections.Generic;
+
 namespace additionalProperties.Models
 {
     /// <summary> The CatAPTrue. </summary>
@@ -20,7 +22,8 @@ namespace additionalProperties.Models
         /// <param name="id"> . </param>
         /// <param name="name"> . </param>
         /// <param name="status"> . </param>
-        internal CatAPTrue(bool? friendly, int id, string name, bool? status) : base(id, name, status)
+        /// <param name="additionalProperties"> . </param>
+        internal CatAPTrue(bool? friendly, int id, string name, bool? status, IDictionary<string, object> additionalProperties) : base(id, name, status, additionalProperties)
         {
             Friendly = friendly;
         }

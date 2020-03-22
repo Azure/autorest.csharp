@@ -26,9 +26,8 @@ namespace body_complex.Models
         /// <param name="species"> . </param>
         /// <param name="length"> . </param>
         /// <param name="siblings"> . </param>
-        internal Cookiecuttershark(int? age, DateTimeOffset birthday, string fishtype, string species, float length, IList<Fish> siblings) : base(age, birthday, fishtype, species, length, siblings)
+        internal Cookiecuttershark(int? age, DateTimeOffset birthday, string fishtype, string species, float length, IList<Fish> siblings) : base(age, birthday, fishtype ?? "cookiecuttershark", species, length, siblings)
         {
-            Fishtype = "cookiecuttershark";
         }
     }
 }

@@ -62,11 +62,7 @@ namespace Azure.Storage.Management
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new StorageAccountCheckNameAvailabilityParameters()
-            {
-                Name = name,
-                Type = type
-            };
+            var model = new StorageAccountCheckNameAvailabilityParameters(name, type);
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
@@ -98,8 +94,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            CheckNameAvailabilityResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = CheckNameAvailabilityResult.DeserializeCheckNameAvailabilityResult(document.RootElement);
+                            value = CheckNameAvailabilityResult.DeserializeCheckNameAvailabilityResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -138,8 +135,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            CheckNameAvailabilityResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = CheckNameAvailabilityResult.DeserializeCheckNameAvailabilityResult(document.RootElement);
+                            value = CheckNameAvailabilityResult.DeserializeCheckNameAvailabilityResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -397,8 +395,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            StorageAccount value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = StorageAccount.DeserializeStorageAccount(document.RootElement);
+                            value = StorageAccount.DeserializeStorageAccount(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -438,8 +437,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            StorageAccount value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = StorageAccount.DeserializeStorageAccount(document.RootElement);
+                            value = StorageAccount.DeserializeStorageAccount(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -505,8 +505,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            StorageAccount value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = StorageAccount.DeserializeStorageAccount(document.RootElement);
+                            value = StorageAccount.DeserializeStorageAccount(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -550,8 +551,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            StorageAccount value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = StorageAccount.DeserializeStorageAccount(document.RootElement);
+                            value = StorageAccount.DeserializeStorageAccount(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -594,8 +596,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            StorageAccountListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = StorageAccountListResult.DeserializeStorageAccountListResult(document.RootElement);
+                            value = StorageAccountListResult.DeserializeStorageAccountListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -623,8 +626,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            StorageAccountListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = StorageAccountListResult.DeserializeStorageAccountListResult(document.RootElement);
+                            value = StorageAccountListResult.DeserializeStorageAccountListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -675,8 +679,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            StorageAccountListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = StorageAccountListResult.DeserializeStorageAccountListResult(document.RootElement);
+                            value = StorageAccountListResult.DeserializeStorageAccountListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -710,8 +715,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            StorageAccountListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = StorageAccountListResult.DeserializeStorageAccountListResult(document.RootElement);
+                            value = StorageAccountListResult.DeserializeStorageAccountListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -770,8 +776,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            StorageAccountListKeysResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = StorageAccountListKeysResult.DeserializeStorageAccountListKeysResult(document.RootElement);
+                            value = StorageAccountListKeysResult.DeserializeStorageAccountListKeysResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -810,8 +817,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            StorageAccountListKeysResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = StorageAccountListKeysResult.DeserializeStorageAccountListKeysResult(document.RootElement);
+                            value = StorageAccountListKeysResult.DeserializeStorageAccountListKeysResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -842,10 +850,7 @@ namespace Azure.Storage.Management
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new StorageAccountRegenerateKeyParameters()
-            {
-                KeyName = keyName
-            };
+            var model = new StorageAccountRegenerateKeyParameters(keyName);
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
@@ -882,8 +887,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            StorageAccountListKeysResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = StorageAccountListKeysResult.DeserializeStorageAccountListKeysResult(document.RootElement);
+                            value = StorageAccountListKeysResult.DeserializeStorageAccountListKeysResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -927,8 +933,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            StorageAccountListKeysResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = StorageAccountListKeysResult.DeserializeStorageAccountListKeysResult(document.RootElement);
+                            value = StorageAccountListKeysResult.DeserializeStorageAccountListKeysResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -995,8 +1002,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            ListAccountSasResponse value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ListAccountSasResponse.DeserializeListAccountSasResponse(document.RootElement);
+                            value = ListAccountSasResponse.DeserializeListAccountSasResponse(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1040,8 +1048,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            ListAccountSasResponse value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ListAccountSasResponse.DeserializeListAccountSasResponse(document.RootElement);
+                            value = ListAccountSasResponse.DeserializeListAccountSasResponse(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1108,8 +1117,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            ListServiceSasResponse value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ListServiceSasResponse.DeserializeListServiceSasResponse(document.RootElement);
+                            value = ListServiceSasResponse.DeserializeListServiceSasResponse(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1153,8 +1163,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            ListServiceSasResponse value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ListServiceSasResponse.DeserializeListServiceSasResponse(document.RootElement);
+                            value = ListServiceSasResponse.DeserializeListServiceSasResponse(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1278,11 +1289,7 @@ namespace Azure.Storage.Management
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new BlobRestoreParameters()
-            {
-                TimeToRestore = timeToRestore,
-                BlobRanges = blobRanges.ToArray()
-            };
+            var model = new BlobRestoreParameters(timeToRestore, blobRanges.ToArray());
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
@@ -1497,8 +1504,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            StorageAccountListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = StorageAccountListResult.DeserializeStorageAccountListResult(document.RootElement);
+                            value = StorageAccountListResult.DeserializeStorageAccountListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1532,8 +1540,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            StorageAccountListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = StorageAccountListResult.DeserializeStorageAccountListResult(document.RootElement);
+                            value = StorageAccountListResult.DeserializeStorageAccountListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1578,8 +1587,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            StorageAccountListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = StorageAccountListResult.DeserializeStorageAccountListResult(document.RootElement);
+                            value = StorageAccountListResult.DeserializeStorageAccountListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1613,8 +1623,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            StorageAccountListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = StorageAccountListResult.DeserializeStorageAccountListResult(document.RootElement);
+                            value = StorageAccountListResult.DeserializeStorageAccountListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:

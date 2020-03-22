@@ -22,16 +22,16 @@ namespace CognitiveSearch.Models
 
         internal static SqlIntegratedChangeTrackingPolicy DeserializeSqlIntegratedChangeTrackingPolicy(JsonElement element)
         {
-            SqlIntegratedChangeTrackingPolicy result = new SqlIntegratedChangeTrackingPolicy();
+            string odatatype = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
             }
-            return result;
+            return new SqlIntegratedChangeTrackingPolicy(odatatype);
         }
     }
 }

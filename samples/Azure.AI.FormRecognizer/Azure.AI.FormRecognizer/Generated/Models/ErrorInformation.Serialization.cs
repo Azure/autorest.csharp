@@ -14,21 +14,22 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static ErrorInformation DeserializeErrorInformation(JsonElement element)
         {
-            ErrorInformation result = new ErrorInformation();
+            string code = default;
+            string message = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"))
                 {
-                    result.Code = property.Value.GetString();
+                    code = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("message"))
                 {
-                    result.Message = property.Value.GetString();
+                    message = property.Value.GetString();
                     continue;
                 }
             }
-            return result;
+            return new ErrorInformation(code, message);
         }
     }
 }

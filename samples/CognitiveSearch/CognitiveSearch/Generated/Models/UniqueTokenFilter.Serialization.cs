@@ -29,7 +29,9 @@ namespace CognitiveSearch.Models
 
         internal static UniqueTokenFilter DeserializeUniqueTokenFilter(JsonElement element)
         {
-            UniqueTokenFilter result = new UniqueTokenFilter();
+            bool? onlyOnSamePosition = default;
+            string odatatype = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("onlyOnSamePosition"))
@@ -38,21 +40,21 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.OnlyOnSamePosition = property.Value.GetBoolean();
+                    onlyOnSamePosition = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
-            return result;
+            return new UniqueTokenFilter(onlyOnSamePosition, odatatype, name);
         }
     }
 }

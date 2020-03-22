@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
@@ -40,29 +39,20 @@ namespace xml_service.Models
 
         internal static Banana DeserializeBanana(XElement element)
         {
-            Banana result = default;
-            result = new Banana(); string value = default;
-            var name = element.Element("name");
-            if (name != null)
+            var obj = new Banana();
+            if (element.Element("name") is XElement name)
             {
-                value = (string)name;
+                obj.Name = (string)name;
             }
-            result.Name = value;
-            string value0 = default;
-            var flavor = element.Element("flavor");
-            if (flavor != null)
+            if (element.Element("flavor") is XElement flavor)
             {
-                value0 = (string)flavor;
+                obj.Flavor = (string)flavor;
             }
-            result.Flavor = value0;
-            DateTimeOffset? value1 = default;
-            var expiration = element.Element("expiration");
-            if (expiration != null)
+            if (element.Element("expiration") is XElement expiration)
             {
-                value1 = expiration.GetDateTimeOffsetValue("S");
+                obj.Expiration = expiration.GetDateTimeOffsetValue("S");
             }
-            result.Expiration = value1;
-            return result;
+            return obj;
         }
     }
 }

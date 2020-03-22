@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Composition;
+using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Requests;
@@ -93,15 +94,15 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         }
 
         public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async,
-            ref string valueVariable, string responseVariable)
+            Action<CodeWriter, CodeWriterDelegate> valueCallback, string responseVariable)
         {
             switch (serialization)
             {
                 case JsonSerialization jsonSerialization:
-                    writer.WriteDeserializationForMethods(jsonSerialization, async, ref valueVariable, responseVariable);
+                    writer.WriteDeserializationForMethods(jsonSerialization, async, valueCallback, responseVariable);
                     break;
                 case XmlElementSerialization xmlSerialization:
-                    writer.WriteDeserializationForMethods(xmlSerialization, ref valueVariable, responseVariable);
+                    writer.WriteDeserializationForMethods(xmlSerialization, valueCallback, responseVariable);
                     break;
                 default:
                     throw new NotImplementedException(serialization.ToString());
@@ -117,7 +118,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             return writer.AppendRaw(enumType.IsStringBased ? ".ToString()" : ".ToSerialString()");
         }
 
-        public static CodeWriter WriteConstantOrParameter(this CodeWriter writer, ParameterOrConstant value)
+        public static CodeWriter WriteReferenceOrConstant(this CodeWriter writer, ReferenceOrConstant value)
         {
             if (value.IsConstant)
             {
@@ -125,7 +126,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
             else
             {
-                writer.AppendRaw(value.Parameter.Name);
+                writer.AppendRaw(value.Reference.Name);
             }
 
             return writer;
@@ -133,33 +134,89 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         public static CodeWriter WriteInitialization(this CodeWriter writer, ObjectType objectType, IEnumerable<ObjectPropertyInitializer> initializers)
         {
-            using (writer.Scope($"new {objectType.Type}()", newLine: false))
+            ObjectPropertyInitializer? FindInitializerForParameter(ObjectTypeConstructor constructor, Parameter constructorParameter)
             {
-                foreach (var propertyInitializer in initializers)
+                var property = constructor.FindPropertyInitializedByParameter(constructorParameter);
+                return initializers.SingleOrDefault(i => i.Property == property);
+            }
+
+            void WriteConversion(ObjectPropertyInitializer propertyInitializer)
+            {
+                var propertyType = propertyInitializer.Property.Declaration.Type;
+                var valueType = propertyInitializer.Value.Type;
+
+                if (propertyType.IsFrameworkType && valueType.IsFrameworkType)
                 {
-                    writer.Append($"{propertyInitializer.Property.Declaration.Name} = ")
-                        .WriteConstantOrParameter(propertyInitializer.Value);
-
-                    var propertyType = propertyInitializer.Property.Declaration.Type;
-                    var valueType = propertyInitializer.Value.Type;
-
-                    if (propertyType.IsFrameworkType && valueType.IsFrameworkType)
+                    if (propertyType.FrameworkType == typeof(IList<>) &&
+                        valueType.FrameworkType == typeof(IEnumerable<>))
                     {
-                        if (propertyType.FrameworkType == typeof(IList<>) &&
-                            valueType.FrameworkType == typeof(IEnumerable<>))
-                        {
-                            writer.UseNamespace(typeof(Enumerable).Namespace!);
-                            writer.Append($".ToArray()");
-                        }
+                        writer.UseNamespace(typeof(Enumerable).Namespace!);
+                        writer.Append($".ToArray()");
                     }
+                }
+            }
 
-                    writer.Line($",");
+            // Checks if constructor parameters can be satisfied by the provided initializer list
+            List<ObjectPropertyInitializer>? TryGetParameters(ObjectTypeConstructor constructor)
+            {
+                List<ObjectPropertyInitializer> constructorInitializers = new List<ObjectPropertyInitializer>();
+                foreach (var constructorParameter in constructor.Parameters)
+                {
+                    var objectPropertyInitializer = FindInitializerForParameter(constructor, constructorParameter);
+                    if (objectPropertyInitializer == null) return null;
+
+                    constructorInitializers.Add(objectPropertyInitializer);
                 }
 
-                writer.RemoveTrailingComma();
+                return constructorInitializers;
+            }
+
+            // Find longest satisfiable ctor
+            List<ObjectPropertyInitializer>? selectedCtorInitializers = null;
+            foreach (var constructor in objectType.Constructors)
+            {
+                var newInitializers = TryGetParameters(constructor);
+                if (newInitializers != null &&
+                    newInitializers.Count > (selectedCtorInitializers?.Count ?? -1))
+                {
+                    selectedCtorInitializers = newInitializers;
+                }
+            }
+
+            Debug.Assert(selectedCtorInitializers != null);
+
+            writer.Append($"new {objectType.Type}(");
+            foreach (var initializer in selectedCtorInitializers)
+            {
+                writer.WriteReferenceOrConstant(initializer.Value);
+                WriteConversion(initializer);
+                writer.Append($", ");
+            }
+            writer.RemoveTrailingComma();
+            writer.Append($")");
+
+            // Find properties that would have to be initialized via property initializers
+            var restOfInitializers = initializers.Except(selectedCtorInitializers).ToArray();
+            if (restOfInitializers.Any())
+            {
+                using (writer.Scope($"", newLine: false))
+                {
+                    foreach (var propertyInitializer in restOfInitializers)
+                    {
+                        writer.Append($"{propertyInitializer.Property.Declaration.Name} = ")
+                            .WriteReferenceOrConstant(propertyInitializer.Value);
+
+                        WriteConversion(propertyInitializer);
+
+                        writer.Line($",");
+                    }
+
+                    writer.RemoveTrailingComma();
+                }
             }
 
             return writer;
         }
+
     }
 }

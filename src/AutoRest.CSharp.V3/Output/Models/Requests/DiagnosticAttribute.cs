@@ -5,13 +5,13 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
 {
     internal class DiagnosticAttribute
     {
-        public DiagnosticAttribute(string name, ParameterOrConstant value)
+        public DiagnosticAttribute(string name, ReferenceOrConstant value)
         {
             Name = name;
             Value = value;
         }
 
         public string Name { get; }
-        public ParameterOrConstant Value { get; }
+        public ReferenceOrConstant Value { get; }
     }
 }

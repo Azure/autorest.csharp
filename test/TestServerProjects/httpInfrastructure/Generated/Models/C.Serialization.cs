@@ -14,7 +14,7 @@ namespace httpInfrastructure.Models
     {
         internal static C DeserializeC(JsonElement element)
         {
-            C result = new C();
+            string httpCode = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("httpCode"))
@@ -23,11 +23,11 @@ namespace httpInfrastructure.Models
                     {
                         continue;
                     }
-                    result.HttpCode = property.Value.GetString();
+                    httpCode = property.Value.GetString();
                     continue;
                 }
             }
-            return result;
+            return new C(httpCode);
         }
     }
 }

@@ -68,8 +68,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            OperationListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = OperationListResult.DeserializeOperationListResult(document.RootElement);
+                            value = OperationListResult.DeserializeOperationListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -97,8 +98,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            OperationListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = OperationListResult.DeserializeOperationListResult(document.RootElement);
+                            value = OperationListResult.DeserializeOperationListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -143,8 +145,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            OperationListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = OperationListResult.DeserializeOperationListResult(document.RootElement);
+                            value = OperationListResult.DeserializeOperationListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -178,8 +181,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            OperationListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = OperationListResult.DeserializeOperationListResult(document.RootElement);
+                            value = OperationListResult.DeserializeOperationListResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:

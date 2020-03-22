@@ -44,9 +44,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     implementsTypes.Add(schema.Inherits);
                 }
 
-                if (schema.ImplementsDictionaryElementType != null)
+                var elementType = schema.ImplementsDictionaryElementType;
+                if (elementType != null)
                 {
-                    var elementType = schema.ImplementsDictionaryElementType;
                     implementsTypes.Add(new CSharpType(typeof(IDictionary<,>), new CSharpType(typeof(string)), elementType));
                 }
 
@@ -79,28 +79,25 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                         CSharpType propertyType = property.Declaration.Type;
                         writer.Append($"{property.Declaration.Accessibility} {propertyType} {property.Declaration.Name:D}");
-                        writer.AppendRaw(property.IsReadOnly ? "{ get; internal set; }" : "{ get; set; }");
+                        writer.AppendRaw(property.IsReadOnly && property.Declaration.Accessibility != "internal" ? "{ get; internal set; }" : "{ get; set; }");
 
                         if (property.DefaultValue != null)
                         {
                             writer.Append($" = {property.DefaultValue.Value.Value:L};");
                         }
-                        else if (property.ImplementationType != null)
+                        else if (property.InitializeWithType != null)
                         {
-                            writer.Append($" = new {property.ImplementationType}();");
+                            writer.Append($" = new {property.InitializeWithType}();");
                         }
 
                         writer.Line();
                     }
 
-                    if (schema.ImplementsDictionaryElementType is CSharpType itemType)
+                    if (schema.AdditionalPropertiesProperty is ObjectTypeProperty additionalPropertiesProperty)
                     {
-                        var dictionaryType = new CSharpType(typeof(IDictionary<,>), new CSharpType(typeof(string)), itemType);
-                        var implementation = new CSharpType(typeof(Dictionary<,>), new CSharpType(typeof(string)), itemType);
-
-                        Debug.Assert(dictionaryType.Arguments.Length == 2);
                         var keyType = typeof(string);
 
+                        var itemType = schema.ImplementsDictionaryElementType!;
                         var keyValuePairType = new CSharpType(typeof(KeyValuePair<,>), keyType, itemType);
                         var iEnumeratorKeyValuePairType = new CSharpType(typeof(IEnumerator<>), keyValuePairType);
                         var iCollectionKeyValuePairType = new CSharpType(typeof(ICollection<>), keyValuePairType);
@@ -109,8 +106,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         var iEnumerator = typeof(IEnumerator);
                         var iEnumerable = typeof(IEnumerable);
 
-                        string additionalProperties = "_additionalProperties";
-                        writer.Line($"private readonly {dictionaryType} {additionalProperties} = new {implementation}();");
+                        string additionalProperties = additionalPropertiesProperty.Declaration.Name;
 
                         writer
                             .WriteXmlDocumentationInheritDoc()
@@ -130,7 +126,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             .WriteXmlDocumentationInheritDoc()
                             .Line($"public bool Remove({keyType} key) => {additionalProperties}.Remove(key);")
                             .WriteXmlDocumentationInheritDoc()
-                            .Line($"int {iCollectionKeyValuePairType}.Count => _additionalProperties.Count;")
+                            .Line($"int {iCollectionKeyValuePairType}.Count => {additionalProperties}.Count;")
                             .WriteXmlDocumentationInheritDoc()
                             .Line($"bool {iCollectionKeyValuePairType}.IsReadOnly => {additionalProperties}.IsReadOnly;")
                             .WriteXmlDocumentationInheritDoc()
@@ -149,8 +145,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             .Scope($"public {itemType} this[{keyType} key]"))
                         {
                             writer
-                                .Line($"get => _additionalProperties[key];")
-                                .Line($"set => _additionalProperties[key] = value;");
+                                .Line($"get => {additionalProperties}[key];")
+                                .Line($"set => {additionalProperties}[key] = value;");
                         }
                     }
                 }
@@ -182,7 +178,18 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Append($": base(");
                     foreach (var baseConstructorParameter in constructor.BaseConstructor.Parameters)
                     {
-                        writer.Append($"{baseConstructorParameter.Name},");
+                        writer.Append($"{baseConstructorParameter.Name}");
+                        if (schema.Discriminator != null)
+                        {
+                            // Check if the parameter is for discriminator and apply a default
+                            var property = constructor.FindPropertyInitializedByParameter(baseConstructorParameter);
+                            if (property == schema.Discriminator.Property)
+                            {
+                                writer.Append($"?? {schema.Discriminator.Value:L}");
+                            }
+                        }
+
+                        writer.Append($",");
                     }
                     writer.RemoveTrailingComma();
                     writer.Append($")");
@@ -193,8 +200,17 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     foreach (var initializer in constructor.Initializers)
                     {
                         writer.Append($"{initializer.Property.Declaration.Name} = ")
-                            .WriteConstantOrParameter(initializer.Value)
+                            .WriteReferenceOrConstant(initializer.Value)
                             .Line($";");
+                    }
+
+                    var discriminator = schema.Discriminator;
+                    if (discriminator != null && discriminator.Value != null)
+                    {
+                        if (constructor.Parameters.Length == 0)
+                        {
+                            writer.Line($"{discriminator.Property.Declaration.Name} = {discriminator.Value:L};");
+                        }
                     }
                 }
 
