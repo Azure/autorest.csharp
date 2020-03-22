@@ -8,17 +8,15 @@ namespace AutoRest.CSharp.V3.Output.Models.Serialization.Xml
 {
     internal class XmlDictionarySerialization : XmlElementSerialization
     {
-        public XmlDictionarySerialization(CSharpType type, XmlElementSerialization valueSerialization, string name, CSharpType implementationType)
+        public XmlDictionarySerialization(CSharpType type, XmlElementSerialization valueSerialization, string name)
         {
             Type = type;
             ValueSerialization = valueSerialization;
             Name = name;
-            ImplementationType = implementationType;
         }
 
         public override string Name { get; }
-        public override CSharpType Type { get; }
-        public CSharpType ImplementationType { get; }
+        public CSharpType Type { get; }
         public XmlElementSerialization ValueSerialization { get; }
     }
 }

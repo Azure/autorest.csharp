@@ -14,12 +14,12 @@ namespace xml_service.Models
     {
         internal static BlobPrefix DeserializeBlobPrefix(XElement element)
         {
-            var obj = new BlobPrefix();
-            if (element.Element("Name") is XElement name)
+            string name = default;
+            if (element.Element("Name") is XElement nameElement)
             {
-                obj.Name = (string)name;
+                name = (string)nameElement;
             }
-            return obj;
+            return new BlobPrefix(name);
         }
     }
 }

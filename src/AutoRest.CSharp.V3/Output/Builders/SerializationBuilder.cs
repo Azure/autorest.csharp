@@ -63,18 +63,16 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     var wrapped = isRoot || arraySchema.Serialization?.Xml?.Wrapped == true;
 
                     return new XmlArraySerialization(
-                        _typeFactory.CreateType(arraySchema, isNullable),
+                        _typeFactory.CreateImplementationType(arraySchema, isNullable: false),
                         BuildXmlElementSerialization(arraySchema.ElementType, false, null, false),
                         xmlName,
-                        wrapped,
-                        _typeFactory.CreateImplementationType(arraySchema, isNullable));
+                        wrapped);
 
                 case DictionarySchema dictionarySchema:
                     return new XmlDictionarySerialization(
-                        _typeFactory.CreateType(dictionarySchema, isNullable),
-                        BuildXmlElementSerialization(dictionarySchema.ElementType, false, "!dictionary-item", false),
-                        xmlName,
-                        _typeFactory.CreateImplementationType(dictionarySchema, isNullable));
+                        _typeFactory.CreateImplementationType(dictionarySchema, isNullable: false),
+                        BuildXmlElementSerialization(dictionarySchema.ElementType, false, null, false),
+                        xmlName);
                 default:
                     return new XmlElementValueSerialization(xmlName, BuildXmlValueSerialization(schema, isNullable));
             }
@@ -120,14 +118,14 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     var name = property.SerializedName;
                     var isAttribute = property.Schema.Serialization?.Xml?.Attribute == true;
 
-                    var propertyName = objectType.GetPropertyForSchemaProperty(property, includeParents: true).Declaration.Name;
+                    ObjectTypeProperty objectProperty = objectType.GetPropertyForSchemaProperty(property, includeParents: true);
 
                     if (isAttribute)
                     {
                         attributes.Add(
                             new XmlObjectAttributeSerialization(
                                 name,
-                                propertyName,
+                                objectProperty,
                                 BuildXmlValueSerialization(property.Schema, property.IsNullable())
                             )
                         );
@@ -138,13 +136,13 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
                         if (valueSerialization is XmlArraySerialization arraySerialization)
                         {
-                            embeddedArrays.Add(new XmlObjectArraySerialization(propertyName, arraySerialization));
+                            embeddedArrays.Add(new XmlObjectArraySerialization(objectProperty, arraySerialization));
                         }
                         else
                         {
                             elements.Add(
                                 new XmlObjectElementSerialization(
-                                    propertyName,
+                                    objectProperty,
                                     valueSerialization
                                 )
                             );
@@ -155,8 +153,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
             return new XmlObjectSerialization(
                 objectSchema.Serialization?.Xml?.Name ?? objectSchema.Language.Default.Name,
-                objectType.Type, elements.ToArray(), attributes.ToArray(), embeddedArrays.ToArray(),
-                objectType.Type
+                objectType.Type, elements.ToArray(), attributes.ToArray(), embeddedArrays.ToArray()
                 );
         }
 

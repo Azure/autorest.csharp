@@ -27,12 +27,12 @@ namespace xml_service.Models
 
         internal static ComplexTypeNoMeta DeserializeComplexTypeNoMeta(XElement element)
         {
-            var obj = new ComplexTypeNoMeta();
-            if (element.Element("ID") is XElement iD)
+            string iD = default;
+            if (element.Element("ID") is XElement iDElement)
             {
-                obj.ID = (string)iD;
+                iD = (string)iDElement;
             }
-            return obj;
+            return new ComplexTypeNoMeta(iD);
         }
     }
 }

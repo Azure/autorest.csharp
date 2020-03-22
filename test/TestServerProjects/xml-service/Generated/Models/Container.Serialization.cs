@@ -15,25 +15,27 @@ namespace xml_service.Models
     {
         internal static Container DeserializeContainer(XElement element)
         {
-            var obj = new Container();
-            if (element.Element("Name") is XElement name)
+            string name = default;
+            ContainerProperties properties = new ContainerProperties();
+            IDictionary<string, string> metadata = default;
+            if (element.Element("Name") is XElement nameElement)
             {
-                obj.Name = (string)name;
+                name = (string)nameElement;
             }
-            if (element.Element("Properties") is XElement properties)
+            if (element.Element("Properties") is XElement propertiesElement)
             {
-                obj.Properties = ContainerProperties.DeserializeContainerProperties(properties);
+                properties = ContainerProperties.DeserializeContainerProperties(propertiesElement);
             }
-            if (element.Element("Metadata") is XElement metadata)
+            if (element.Element("Metadata") is XElement metadataElement)
             {
                 var dictionary = new Dictionary<string, string>();
-                foreach (var e in metadata.Elements())
+                foreach (var e in metadataElement.Elements())
                 {
                     dictionary.Add(e.Name.LocalName, (string)e);
                 }
-                obj.Metadata = dictionary;
+                metadata = dictionary;
             }
-            return obj;
+            return new Container(name, properties, metadata);
         }
     }
 }

@@ -15,37 +15,42 @@ namespace xml_service.Models
     {
         internal static ListContainersResponse DeserializeListContainersResponse(XElement element)
         {
-            var obj = new ListContainersResponse();
-            if (element.Attribute("ServiceEndpoint") is XAttribute serviceEndpoint)
+            string serviceEndpoint = default;
+            string prefix = default;
+            string marker = default;
+            int maxResults = default;
+            string nextMarker = default;
+            IList<Container> containers = default;
+            if (element.Attribute("ServiceEndpoint") is XAttribute serviceEndpointAttribute)
             {
-                obj.ServiceEndpoint = (string)serviceEndpoint;
+                serviceEndpoint = (string)serviceEndpointAttribute;
             }
-            if (element.Element("Prefix") is XElement prefix)
+            if (element.Element("Prefix") is XElement prefixElement)
             {
-                obj.Prefix = (string)prefix;
+                prefix = (string)prefixElement;
             }
-            if (element.Element("Marker") is XElement marker)
+            if (element.Element("Marker") is XElement markerElement)
             {
-                obj.Marker = (string)marker;
+                marker = (string)markerElement;
             }
-            if (element.Element("MaxResults") is XElement maxResults)
+            if (element.Element("MaxResults") is XElement maxResultsElement)
             {
-                obj.MaxResults = (int)maxResults;
+                maxResults = (int)maxResultsElement;
             }
-            if (element.Element("NextMarker") is XElement nextMarker)
+            if (element.Element("NextMarker") is XElement nextMarkerElement)
             {
-                obj.NextMarker = (string)nextMarker;
+                nextMarker = (string)nextMarkerElement;
             }
-            if (element.Element("Containers") is XElement containers)
+            if (element.Element("Containers") is XElement containersElement)
             {
                 var array = new List<Container>();
-                foreach (var e in containers.Elements("Container"))
+                foreach (var e in containersElement.Elements("Container"))
                 {
                     array.Add(Container.DeserializeContainer(e));
                 }
-                obj.Containers = array;
+                containers = array;
             }
-            return obj;
+            return new ListContainersResponse(serviceEndpoint, prefix, marker, maxResults, containers, nextMarker);
         }
     }
 }

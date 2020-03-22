@@ -34,28 +34,32 @@ namespace xml_service.Models
 
         internal static Logging DeserializeLogging(XElement element)
         {
-            var obj = new Logging();
-            if (element.Element("Version") is XElement version)
+            string version = default;
+            bool delete = default;
+            bool read = default;
+            bool write = default;
+            RetentionPolicy retentionPolicy = new RetentionPolicy();
+            if (element.Element("Version") is XElement versionElement)
             {
-                obj.Version = (string)version;
+                version = (string)versionElement;
             }
-            if (element.Element("Delete") is XElement delete)
+            if (element.Element("Delete") is XElement deleteElement)
             {
-                obj.Delete = (bool)delete;
+                delete = (bool)deleteElement;
             }
-            if (element.Element("Read") is XElement read)
+            if (element.Element("Read") is XElement readElement)
             {
-                obj.Read = (bool)read;
+                read = (bool)readElement;
             }
-            if (element.Element("Write") is XElement write)
+            if (element.Element("Write") is XElement writeElement)
             {
-                obj.Write = (bool)write;
+                write = (bool)writeElement;
             }
-            if (element.Element("RetentionPolicy") is XElement retentionPolicy)
+            if (element.Element("RetentionPolicy") is XElement retentionPolicyElement)
             {
-                obj.RetentionPolicy = RetentionPolicy.DeserializeRetentionPolicy(retentionPolicy);
+                retentionPolicy = RetentionPolicy.DeserializeRetentionPolicy(retentionPolicyElement);
             }
-            return obj;
+            return new Logging(version, delete, read, write, retentionPolicy);
         }
     }
 }

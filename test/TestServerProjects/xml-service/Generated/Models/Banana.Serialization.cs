@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
@@ -39,20 +40,22 @@ namespace xml_service.Models
 
         internal static Banana DeserializeBanana(XElement element)
         {
-            var obj = new Banana();
-            if (element.Element("name") is XElement name)
+            string name = default;
+            string flavor = default;
+            DateTimeOffset? expiration = default;
+            if (element.Element("name") is XElement nameElement)
             {
-                obj.Name = (string)name;
+                name = (string)nameElement;
             }
-            if (element.Element("flavor") is XElement flavor)
+            if (element.Element("flavor") is XElement flavorElement)
             {
-                obj.Flavor = (string)flavor;
+                flavor = (string)flavorElement;
             }
-            if (element.Element("expiration") is XElement expiration)
+            if (element.Element("expiration") is XElement expirationElement)
             {
-                obj.Expiration = expiration.GetDateTimeOffsetValue("S");
+                expiration = expirationElement.GetDateTimeOffsetValue("S");
             }
-            return obj;
+            return new Banana(name, flavor, expiration);
         }
     }
 }
