@@ -25,16 +25,17 @@ namespace xml_service.Models
 
         internal static SignedIdentifier DeserializeSignedIdentifier(XElement element)
         {
-            var obj = new SignedIdentifier();
-            if (element.Element("Id") is XElement id)
+            string id = default;
+            AccessPolicy accessPolicy = new AccessPolicy();
+            if (element.Element("Id") is XElement idElement)
             {
-                obj.Id = (string)id;
+                id = (string)idElement;
             }
-            if (element.Element("AccessPolicy") is XElement accessPolicy)
+            if (element.Element("AccessPolicy") is XElement accessPolicyElement)
             {
-                obj.AccessPolicy = AccessPolicy.DeserializeAccessPolicy(accessPolicy);
+                accessPolicy = AccessPolicy.DeserializeAccessPolicy(accessPolicyElement);
             }
-            return obj;
+            return new SignedIdentifier(id, accessPolicy);
         }
     }
 }

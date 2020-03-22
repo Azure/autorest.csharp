@@ -47,26 +47,29 @@ namespace xml_service.Models
 
         internal static Slideshow DeserializeSlideshow(XElement element)
         {
-            var obj = new Slideshow();
-            if (element.Attribute("title") is XAttribute title)
+            string title = default;
+            string date = default;
+            string author = default;
+            IList<Slide> slides = default;
+            if (element.Attribute("title") is XAttribute titleAttribute)
             {
-                obj.Title = (string)title;
+                title = (string)titleAttribute;
             }
-            if (element.Attribute("date") is XAttribute date)
+            if (element.Attribute("date") is XAttribute dateAttribute)
             {
-                obj.Date = (string)date;
+                date = (string)dateAttribute;
             }
-            if (element.Attribute("author") is XAttribute author)
+            if (element.Attribute("author") is XAttribute authorAttribute)
             {
-                obj.Author = (string)author;
+                author = (string)authorAttribute;
             }
             var array = new List<Slide>();
             foreach (var e in element.Elements("slide"))
             {
                 array.Add(Slide.DeserializeSlide(e));
             }
-            obj.Slides = array;
-            return obj;
+            slides = array;
+            return new Slideshow(title, date, author, slides);
         }
     }
 }

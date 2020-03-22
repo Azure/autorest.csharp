@@ -1,23 +1,21 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-
-using AutoRest.CSharp.V3.Generation.Types;
+using AutoRest.CSharp.V3.Output.Models.Types;
 
 namespace AutoRest.CSharp.V3.Output.Models.Serialization.Xml
 {
     internal class XmlObjectElementSerialization
     {
         public XmlObjectElementSerialization(
-            string memberName,
+            ObjectTypeProperty property,
             XmlElementSerialization valueSerialization)
         {
-            MemberName = memberName;
+            Property = property;
             ValueSerialization = valueSerialization;
         }
 
-        public string MemberName { get; }
-        public CSharpType Type => ValueSerialization.Type;
+        public ObjectTypeProperty Property { get; }
         public XmlElementSerialization ValueSerialization { get; }
     }
 }

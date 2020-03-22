@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Xml.Linq;
 using Azure.Core;
 
@@ -14,120 +15,147 @@ namespace xml_service.Models
     {
         internal static BlobProperties DeserializeBlobProperties(XElement element)
         {
-            var obj = new BlobProperties();
-            if (element.Element("Last-Modified") is XElement lastModified)
+            DateTimeOffset lastModified = default;
+            string etag = default;
+            long? contentLength = default;
+            string contentType = default;
+            string contentEncoding = default;
+            string contentLanguage = default;
+            string contentMD5 = default;
+            string contentDisposition = default;
+            string cacheControl = default;
+            int? blobSequenceNumber = default;
+            BlobType? blobType = default;
+            LeaseStatusType? leaseStatus = default;
+            LeaseStateType? leaseState = default;
+            LeaseDurationType? leaseDuration = default;
+            string copyId = default;
+            CopyStatusType? copyStatus = default;
+            string copySource = default;
+            string copyProgress = default;
+            DateTimeOffset? copyCompletionTime = default;
+            string copyStatusDescription = default;
+            bool? serverEncrypted = default;
+            bool? incrementalCopy = default;
+            string destinationSnapshot = default;
+            DateTimeOffset? deletedTime = default;
+            int? remainingRetentionDays = default;
+            AccessTier? accessTier = default;
+            bool? accessTierInferred = default;
+            ArchiveStatus? archiveStatus = default;
+            if (element.Element("Last-Modified") is XElement lastModifiedElement)
             {
-                obj.LastModified = lastModified.GetDateTimeOffsetValue("R");
+                lastModified = lastModifiedElement.GetDateTimeOffsetValue("R");
             }
-            if (element.Element("Etag") is XElement etag)
+            if (element.Element("Etag") is XElement etagElement)
             {
-                obj.Etag = (string)etag;
+                etag = (string)etagElement;
             }
-            if (element.Element("Content-Length") is XElement contentLength)
+            if (element.Element("Content-Length") is XElement contentLengthElement)
             {
-                obj.ContentLength = (long?)contentLength;
+                contentLength = (long?)contentLengthElement;
             }
-            if (element.Element("Content-Type") is XElement contentType)
+            if (element.Element("Content-Type") is XElement contentTypeElement)
             {
-                obj.ContentType = (string)contentType;
+                contentType = (string)contentTypeElement;
             }
-            if (element.Element("Content-Encoding") is XElement contentEncoding)
+            if (element.Element("Content-Encoding") is XElement contentEncodingElement)
             {
-                obj.ContentEncoding = (string)contentEncoding;
+                contentEncoding = (string)contentEncodingElement;
             }
-            if (element.Element("Content-Language") is XElement contentLanguage)
+            if (element.Element("Content-Language") is XElement contentLanguageElement)
             {
-                obj.ContentLanguage = (string)contentLanguage;
+                contentLanguage = (string)contentLanguageElement;
             }
-            if (element.Element("Content-MD5") is XElement contentMD5)
+            if (element.Element("Content-MD5") is XElement contentMD5Element)
             {
-                obj.ContentMD5 = (string)contentMD5;
+                contentMD5 = (string)contentMD5Element;
             }
-            if (element.Element("Content-Disposition") is XElement contentDisposition)
+            if (element.Element("Content-Disposition") is XElement contentDispositionElement)
             {
-                obj.ContentDisposition = (string)contentDisposition;
+                contentDisposition = (string)contentDispositionElement;
             }
-            if (element.Element("Cache-Control") is XElement cacheControl)
+            if (element.Element("Cache-Control") is XElement cacheControlElement)
             {
-                obj.CacheControl = (string)cacheControl;
+                cacheControl = (string)cacheControlElement;
             }
-            if (element.Element("x-ms-blob-sequence-number") is XElement xMsBlobSequenceNumber)
+            if (element.Element("x-ms-blob-sequence-number") is XElement xMsBlobSequenceNumberElement)
             {
-                obj.BlobSequenceNumber = (int?)xMsBlobSequenceNumber;
+                blobSequenceNumber = (int?)xMsBlobSequenceNumberElement;
             }
-            if (element.Element("BlobType") is XElement blobType)
+            if (element.Element("BlobType") is XElement blobTypeElement)
             {
-                obj.BlobType = blobType.Value.ToBlobType();
+                blobType = blobTypeElement.Value.ToBlobType();
             }
-            if (element.Element("LeaseStatus") is XElement leaseStatus)
+            if (element.Element("LeaseStatus") is XElement leaseStatusElement)
             {
-                obj.LeaseStatus = leaseStatus.Value.ToLeaseStatusType();
+                leaseStatus = leaseStatusElement.Value.ToLeaseStatusType();
             }
-            if (element.Element("LeaseState") is XElement leaseState)
+            if (element.Element("LeaseState") is XElement leaseStateElement)
             {
-                obj.LeaseState = leaseState.Value.ToLeaseStateType();
+                leaseState = leaseStateElement.Value.ToLeaseStateType();
             }
-            if (element.Element("LeaseDuration") is XElement leaseDuration)
+            if (element.Element("LeaseDuration") is XElement leaseDurationElement)
             {
-                obj.LeaseDuration = leaseDuration.Value.ToLeaseDurationType();
+                leaseDuration = leaseDurationElement.Value.ToLeaseDurationType();
             }
-            if (element.Element("CopyId") is XElement copyId)
+            if (element.Element("CopyId") is XElement copyIdElement)
             {
-                obj.CopyId = (string)copyId;
+                copyId = (string)copyIdElement;
             }
-            if (element.Element("CopyStatus") is XElement copyStatus)
+            if (element.Element("CopyStatus") is XElement copyStatusElement)
             {
-                obj.CopyStatus = copyStatus.Value.ToCopyStatusType();
+                copyStatus = copyStatusElement.Value.ToCopyStatusType();
             }
-            if (element.Element("CopySource") is XElement copySource)
+            if (element.Element("CopySource") is XElement copySourceElement)
             {
-                obj.CopySource = (string)copySource;
+                copySource = (string)copySourceElement;
             }
-            if (element.Element("CopyProgress") is XElement copyProgress)
+            if (element.Element("CopyProgress") is XElement copyProgressElement)
             {
-                obj.CopyProgress = (string)copyProgress;
+                copyProgress = (string)copyProgressElement;
             }
-            if (element.Element("CopyCompletionTime") is XElement copyCompletionTime)
+            if (element.Element("CopyCompletionTime") is XElement copyCompletionTimeElement)
             {
-                obj.CopyCompletionTime = copyCompletionTime.GetDateTimeOffsetValue("R");
+                copyCompletionTime = copyCompletionTimeElement.GetDateTimeOffsetValue("R");
             }
-            if (element.Element("CopyStatusDescription") is XElement copyStatusDescription)
+            if (element.Element("CopyStatusDescription") is XElement copyStatusDescriptionElement)
             {
-                obj.CopyStatusDescription = (string)copyStatusDescription;
+                copyStatusDescription = (string)copyStatusDescriptionElement;
             }
-            if (element.Element("ServerEncrypted") is XElement serverEncrypted)
+            if (element.Element("ServerEncrypted") is XElement serverEncryptedElement)
             {
-                obj.ServerEncrypted = (bool?)serverEncrypted;
+                serverEncrypted = (bool?)serverEncryptedElement;
             }
-            if (element.Element("IncrementalCopy") is XElement incrementalCopy)
+            if (element.Element("IncrementalCopy") is XElement incrementalCopyElement)
             {
-                obj.IncrementalCopy = (bool?)incrementalCopy;
+                incrementalCopy = (bool?)incrementalCopyElement;
             }
-            if (element.Element("DestinationSnapshot") is XElement destinationSnapshot)
+            if (element.Element("DestinationSnapshot") is XElement destinationSnapshotElement)
             {
-                obj.DestinationSnapshot = (string)destinationSnapshot;
+                destinationSnapshot = (string)destinationSnapshotElement;
             }
-            if (element.Element("DeletedTime") is XElement deletedTime)
+            if (element.Element("DeletedTime") is XElement deletedTimeElement)
             {
-                obj.DeletedTime = deletedTime.GetDateTimeOffsetValue("R");
+                deletedTime = deletedTimeElement.GetDateTimeOffsetValue("R");
             }
-            if (element.Element("RemainingRetentionDays") is XElement remainingRetentionDays)
+            if (element.Element("RemainingRetentionDays") is XElement remainingRetentionDaysElement)
             {
-                obj.RemainingRetentionDays = (int?)remainingRetentionDays;
+                remainingRetentionDays = (int?)remainingRetentionDaysElement;
             }
-            if (element.Element("AccessTier") is XElement accessTier)
+            if (element.Element("AccessTier") is XElement accessTierElement)
             {
-                obj.AccessTier = new AccessTier(accessTier.Value);
+                accessTier = new AccessTier(accessTierElement.Value);
             }
-            if (element.Element("AccessTierInferred") is XElement accessTierInferred)
+            if (element.Element("AccessTierInferred") is XElement accessTierInferredElement)
             {
-                obj.AccessTierInferred = (bool?)accessTierInferred;
+                accessTierInferred = (bool?)accessTierInferredElement;
             }
-            if (element.Element("ArchiveStatus") is XElement archiveStatus)
+            if (element.Element("ArchiveStatus") is XElement archiveStatusElement)
             {
-                obj.ArchiveStatus = new ArchiveStatus(archiveStatus.Value);
+                archiveStatus = new ArchiveStatus(archiveStatusElement.Value);
             }
-            return obj;
+            return new BlobProperties(lastModified, etag, contentLength, contentType, contentEncoding, contentLanguage, contentMD5, contentDisposition, cacheControl, blobSequenceNumber, blobType, leaseStatus, leaseState, leaseDuration, copyId, copyStatus, copySource, copyProgress, copyCompletionTime, copyStatusDescription, serverEncrypted, incrementalCopy, destinationSnapshot, deletedTime, remainingRetentionDays, accessTier, accessTierInferred, archiveStatus);
         }
     }
 }
