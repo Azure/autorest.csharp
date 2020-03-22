@@ -27,8 +27,7 @@ namespace xml_service.Models
             if (element.Element("Metadata") is XElement metadata)
             {
                 var dictionary = new Dictionary<string, string>();
-                var elements = metadata.Elements();
-                foreach (var e in elements)
+                foreach (var e in metadata.Elements())
                 {
                     dictionary.Add(e.Name.LocalName, (string)e);
                 }
