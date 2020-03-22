@@ -27,7 +27,7 @@ namespace body_complex.Models
             Iswild = iswild;
         }
 
-        public string Location { get; internal set; }
-        public bool? Iswild { get; internal set; }
+        public string Location { get; }
+        public bool? Iswild { get; }
     }
 }

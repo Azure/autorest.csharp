@@ -26,6 +26,6 @@ namespace body_complex.Models
             PropD1 = propD1;
         }
 
-        public string PropD1 { get; internal set; }
+        public string PropD1 { get; }
     }
 }

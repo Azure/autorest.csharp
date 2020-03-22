@@ -14,7 +14,8 @@ namespace body_complex.Models
     public partial class SmartSalmon : Salmon, IDictionary<string, object>
     {
         /// <summary> Initializes a new instance of SmartSalmon. </summary>
-        public SmartSalmon()
+        /// <param name="length"> . </param>
+        public SmartSalmon(float length) : base(length)
         {
             Fishtype = "smart_salmon";
         }

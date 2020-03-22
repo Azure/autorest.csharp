@@ -14,7 +14,9 @@ namespace body_complex.Models
     public partial class Cookiecuttershark : Shark
     {
         /// <summary> Initializes a new instance of Cookiecuttershark. </summary>
-        public Cookiecuttershark()
+        /// <param name="birthday"> . </param>
+        /// <param name="length"> . </param>
+        public Cookiecuttershark(DateTimeOffset birthday, float length) : base(birthday, length)
         {
             Fishtype = "cookiecuttershark";
         }

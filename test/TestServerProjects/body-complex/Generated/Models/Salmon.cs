@@ -13,7 +13,8 @@ namespace body_complex.Models
     public partial class Salmon : Fish
     {
         /// <summary> Initializes a new instance of Salmon. </summary>
-        public Salmon()
+        /// <param name="length"> . </param>
+        public Salmon(float length) : base(length)
         {
             Fishtype = "salmon";
         }

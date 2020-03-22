@@ -14,7 +14,9 @@ namespace body_complex.Models
     public partial class Sawshark : Shark
     {
         /// <summary> Initializes a new instance of Sawshark. </summary>
-        public Sawshark()
+        /// <param name="birthday"> . </param>
+        /// <param name="length"> . </param>
+        public Sawshark(DateTimeOffset birthday, float length) : base(birthday, length)
         {
             Fishtype = "sawshark";
         }

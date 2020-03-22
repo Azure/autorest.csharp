@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                         CSharpType propertyType = property.Declaration.Type;
                         writer.Append($"{property.Declaration.Accessibility} {propertyType} {property.Declaration.Name:D}");
-                        writer.AppendRaw(property.IsReadOnly && property.Declaration.Accessibility != "internal" ? "{ get; internal set; }" : "{ get; set; }");
+                        writer.AppendRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
 
                         if (property.DefaultValue != null)
                         {
@@ -173,7 +173,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.RemoveTrailingComma();
                 writer.Append($")");
 
-                if (constructor.BaseConstructor != null)
+                if (constructor.BaseConstructor?.Parameters.Length > 0)
                 {
                     writer.Append($": base(");
                     foreach (var baseConstructorParameter in constructor.BaseConstructor.Parameters)
@@ -202,15 +202,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         writer.Append($"{initializer.Property.Declaration.Name} = ")
                             .WriteReferenceOrConstant(initializer.Value)
                             .Line($";");
-                    }
-
-                    var discriminator = schema.Discriminator;
-                    if (discriminator != null && discriminator.Value != null)
-                    {
-                        if (constructor.Parameters.Length == 0)
-                        {
-                            writer.Line($"{discriminator.Property.Declaration.Name} = {discriminator.Value:L};");
-                        }
                     }
                 }
 
