@@ -21,7 +21,6 @@ namespace body_complex.Models
                     case "Kind1": return MyDerivedType.DeserializeMyDerivedType(element);
                 }
             }
-            MyBaseType result;
             string kind = default;
             string propB1 = default;
             string propBH1 = default;
@@ -58,8 +57,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new MyBaseType(kind, propB1, propBH1);
-            return result;
+            return new MyBaseType(kind, propB1, propBH1);
         }
     }
 }

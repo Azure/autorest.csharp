@@ -30,7 +30,6 @@ namespace body_complex.Models
 
         internal static LongWrapper DeserializeLongWrapper(JsonElement element)
         {
-            LongWrapper result;
             long? field1 = default;
             long? field2 = default;
             foreach (var property in element.EnumerateObject())
@@ -54,8 +53,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new LongWrapper(field1, field2);
-            return result;
+            return new LongWrapper(field1, field2);
         }
     }
 }

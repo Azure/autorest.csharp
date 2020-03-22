@@ -74,7 +74,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static PrivateLinkServiceConnection DeserializePrivateLinkServiceConnection(JsonElement element)
         {
-            PrivateLinkServiceConnection result;
             string name = default;
             string type = default;
             string etag = default;
@@ -180,8 +179,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new PrivateLinkServiceConnection(name, type, etag, provisioningState, privateLinkServiceId, groupIds, requestMessage, privateLinkServiceConnectionState, id);
-            return result;
+            return new PrivateLinkServiceConnection(name, type, etag, provisioningState, privateLinkServiceId, groupIds, requestMessage, privateLinkServiceConnectionState, id);
         }
     }
 }

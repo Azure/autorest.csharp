@@ -58,7 +58,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static Route DeserializeRoute(JsonElement element)
         {
-            Route result;
             string name = default;
             string etag = default;
             string id = default;
@@ -139,8 +138,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new Route(name, etag, addressPrefix, nextHopType, nextHopIpAddress, provisioningState, id);
-            return result;
+            return new Route(name, etag, addressPrefix, nextHopType, nextHopIpAddress, provisioningState, id);
         }
     }
 }

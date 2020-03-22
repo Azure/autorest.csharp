@@ -51,7 +51,6 @@ namespace Azure.Storage.Management.Models
 
         internal static UpdateHistoryProperty DeserializeUpdateHistoryProperty(JsonElement element)
         {
-            UpdateHistoryProperty result;
             ImmutabilityPolicyUpdateType? update = default;
             int? immutabilityPeriodSinceCreationInDays = default;
             DateTimeOffset? timestamp = default;
@@ -115,8 +114,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new UpdateHistoryProperty(update, immutabilityPeriodSinceCreationInDays, timestamp, objectIdentifier, tenantId, upn);
-            return result;
+            return new UpdateHistoryProperty(update, immutabilityPeriodSinceCreationInDays, timestamp, objectIdentifier, tenantId, upn);
         }
     }
 }

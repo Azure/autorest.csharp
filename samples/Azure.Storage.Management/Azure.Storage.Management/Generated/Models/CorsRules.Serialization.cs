@@ -31,7 +31,6 @@ namespace Azure.Storage.Management.Models
 
         internal static CorsRules DeserializeCorsRules(JsonElement element)
         {
-            CorsRules result;
             IList<CorsRule> corsRules = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -50,8 +49,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new CorsRules(corsRules);
-            return result;
+            return new CorsRules(corsRules);
         }
     }
 }

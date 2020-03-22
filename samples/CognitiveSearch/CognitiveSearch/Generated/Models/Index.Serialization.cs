@@ -105,7 +105,6 @@ namespace CognitiveSearch.Models
 
         internal static Index DeserializeIndex(JsonElement element)
         {
-            Index result;
             string name = default;
             IList<Field> fields = new List<Field>();
             IList<ScoringProfile> scoringProfiles = default;
@@ -246,8 +245,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new Index(name, fields, scoringProfiles, defaultScoringProfile, corsOptions, suggesters, analyzers, tokenizers, tokenFilters, charFilters, odataetag);
-            return result;
+            return new Index(name, fields, scoringProfiles, defaultScoringProfile, corsOptions, suggesters, analyzers, tokenizers, tokenFilters, charFilters, odataetag);
         }
     }
 }

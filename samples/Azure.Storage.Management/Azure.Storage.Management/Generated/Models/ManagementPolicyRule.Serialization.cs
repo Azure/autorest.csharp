@@ -31,7 +31,6 @@ namespace Azure.Storage.Management.Models
 
         internal static ManagementPolicyRule DeserializeManagementPolicyRule(JsonElement element)
         {
-            ManagementPolicyRule result;
             bool? enabled = default;
             string name = default;
             string type = default;
@@ -63,8 +62,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new ManagementPolicyRule(enabled, name, type, definition);
-            return result;
+            return new ManagementPolicyRule(enabled, name, type, definition);
         }
     }
 }

@@ -14,7 +14,6 @@ namespace Azure.Storage.Management.Models
     {
         internal static CheckNameAvailabilityResult DeserializeCheckNameAvailabilityResult(JsonElement element)
         {
-            CheckNameAvailabilityResult result;
             bool? nameAvailable = default;
             Reason? reason = default;
             string message = default;
@@ -48,8 +47,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new CheckNameAvailabilityResult(nameAvailable, reason, message);
-            return result;
+            return new CheckNameAvailabilityResult(nameAvailable, reason, message);
         }
     }
 }

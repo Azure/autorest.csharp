@@ -29,7 +29,6 @@ namespace CognitiveSearch.Models
 
         internal static CognitiveServicesAccountKey DeserializeCognitiveServicesAccountKey(JsonElement element)
         {
-            CognitiveServicesAccountKey result;
             string key = default;
             string odatatype = default;
             string description = default;
@@ -55,8 +54,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new CognitiveServicesAccountKey(key, odatatype, description);
-            return result;
+            return new CognitiveServicesAccountKey(key, odatatype, description);
         }
     }
 }

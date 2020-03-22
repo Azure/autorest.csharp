@@ -15,7 +15,6 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static NetworkInterfaceListResult DeserializeNetworkInterfaceListResult(JsonElement element)
         {
-            NetworkInterfaceListResult result;
             IList<NetworkInterface> value = default;
             string nextLink = default;
             foreach (var property in element.EnumerateObject())
@@ -44,8 +43,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new NetworkInterfaceListResult(value, nextLink);
-            return result;
+            return new NetworkInterfaceListResult(value, nextLink);
         }
     }
 }

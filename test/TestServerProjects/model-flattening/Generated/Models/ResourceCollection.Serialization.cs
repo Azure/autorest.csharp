@@ -47,7 +47,6 @@ namespace model_flattening.Models
 
         internal static ResourceCollection DeserializeResourceCollection(JsonElement element)
         {
-            ResourceCollection result;
             FlattenedProduct productresource = default;
             IList<FlattenedProduct> arrayofresources = default;
             IDictionary<string, FlattenedProduct> dictionaryofresources = default;
@@ -82,17 +81,16 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    Dictionary<string, FlattenedProduct> array = new Dictionary<string, FlattenedProduct>();
+                    Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        array.Add(property0.Name, FlattenedProduct.DeserializeFlattenedProduct(property0.Value));
+                        dictionary.Add(property0.Name, FlattenedProduct.DeserializeFlattenedProduct(property0.Value));
                     }
-                    dictionaryofresources = array;
+                    dictionaryofresources = dictionary;
                     continue;
                 }
             }
-            result = new ResourceCollection(productresource, arrayofresources, dictionaryofresources);
-            return result;
+            return new ResourceCollection(productresource, arrayofresources, dictionaryofresources);
         }
     }
 }

@@ -57,7 +57,6 @@ namespace CognitiveSearch.Models
 
         internal static SentimentSkill DeserializeSentimentSkill(JsonElement element)
         {
-            SentimentSkill result;
             SentimentSkillLanguage? defaultLanguageCode = default;
             string odatatype = default;
             string name = default;
@@ -129,8 +128,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new SentimentSkill(defaultLanguageCode, odatatype, name, description, context, inputs, outputs);
-            return result;
+            return new SentimentSkill(defaultLanguageCode, odatatype, name, description, context, inputs, outputs);
         }
     }
 }

@@ -62,7 +62,6 @@ namespace CognitiveSearch.Models
 
         internal static KeyPhraseExtractionSkill DeserializeKeyPhraseExtractionSkill(JsonElement element)
         {
-            KeyPhraseExtractionSkill result;
             KeyPhraseExtractionSkillLanguage? defaultLanguageCode = default;
             int? maxKeyPhraseCount = default;
             string odatatype = default;
@@ -144,8 +143,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new KeyPhraseExtractionSkill(defaultLanguageCode, maxKeyPhraseCount, odatatype, name, description, context, inputs, outputs);
-            return result;
+            return new KeyPhraseExtractionSkill(defaultLanguageCode, maxKeyPhraseCount, odatatype, name, description, context, inputs, outputs);
         }
     }
 }

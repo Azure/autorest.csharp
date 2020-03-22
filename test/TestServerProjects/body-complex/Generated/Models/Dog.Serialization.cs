@@ -35,7 +35,6 @@ namespace body_complex.Models
 
         internal static Dog DeserializeDog(JsonElement element)
         {
-            Dog result;
             string food = default;
             int? id = default;
             string name = default;
@@ -69,8 +68,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new Dog(food, id, name);
-            return result;
+            return new Dog(food, id, name);
         }
     }
 }

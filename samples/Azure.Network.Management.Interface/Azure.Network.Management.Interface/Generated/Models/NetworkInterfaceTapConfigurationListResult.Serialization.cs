@@ -15,7 +15,6 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static NetworkInterfaceTapConfigurationListResult DeserializeNetworkInterfaceTapConfigurationListResult(JsonElement element)
         {
-            NetworkInterfaceTapConfigurationListResult result;
             IList<NetworkInterfaceTapConfiguration> value = default;
             string nextLink = default;
             foreach (var property in element.EnumerateObject())
@@ -44,8 +43,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new NetworkInterfaceTapConfigurationListResult(value, nextLink);
-            return result;
+            return new NetworkInterfaceTapConfigurationListResult(value, nextLink);
         }
     }
 }

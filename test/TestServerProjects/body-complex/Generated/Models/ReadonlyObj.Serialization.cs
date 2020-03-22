@@ -30,7 +30,6 @@ namespace body_complex.Models
 
         internal static ReadonlyObj DeserializeReadonlyObj(JsonElement element)
         {
-            ReadonlyObj result;
             string id = default;
             int? size = default;
             foreach (var property in element.EnumerateObject())
@@ -54,8 +53,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new ReadonlyObj(id, size);
-            return result;
+            return new ReadonlyObj(id, size);
         }
     }
 }

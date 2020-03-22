@@ -76,9 +76,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            StorageSkuListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = StorageSkuListResult.DeserializeStorageSkuListResult(document.RootElement);
-                            return Response.FromValue<StorageSkuListResult>(value, message.Response);
+                            value = StorageSkuListResult.DeserializeStorageSkuListResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -105,9 +106,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            StorageSkuListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = StorageSkuListResult.DeserializeStorageSkuListResult(document.RootElement);
-                            return Response.FromValue<StorageSkuListResult>(value, message.Response);
+                            value = StorageSkuListResult.DeserializeStorageSkuListResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -151,9 +153,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            StorageSkuListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = StorageSkuListResult.DeserializeStorageSkuListResult(document.RootElement);
-                            return Response.FromValue<StorageSkuListResult>(value, message.Response);
+                            value = StorageSkuListResult.DeserializeStorageSkuListResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -186,9 +189,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            StorageSkuListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = StorageSkuListResult.DeserializeStorageSkuListResult(document.RootElement);
-                            return Response.FromValue<StorageSkuListResult>(value, message.Response);
+                            value = StorageSkuListResult.DeserializeStorageSkuListResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

@@ -59,7 +59,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static Delegation DeserializeDelegation(JsonElement element)
         {
-            Delegation result;
             string name = default;
             string etag = default;
             string id = default;
@@ -135,8 +134,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new Delegation(name, etag, serviceName, actions, provisioningState, id);
-            return result;
+            return new Delegation(name, etag, serviceName, actions, provisioningState, id);
         }
     }
 }

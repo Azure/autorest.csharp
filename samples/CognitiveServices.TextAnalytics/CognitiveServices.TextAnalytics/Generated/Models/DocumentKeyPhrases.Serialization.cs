@@ -15,7 +15,6 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static DocumentKeyPhrases DeserializeDocumentKeyPhrases(JsonElement element)
         {
-            DocumentKeyPhrases result;
             string id = default;
             IList<string> keyPhrases = new List<string>();
             DocumentStatistics statistics = default;
@@ -46,8 +45,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            result = new DocumentKeyPhrases(id, keyPhrases, statistics);
-            return result;
+            return new DocumentKeyPhrases(id, keyPhrases, statistics);
         }
     }
 }

@@ -71,9 +71,10 @@ namespace additionalProperties
                 {
                     case 200:
                         {
+                            PetAPTrue value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = PetAPTrue.DeserializePetAPTrue(document.RootElement);
-                            return Response.FromValue<PetAPTrue>(value, message.Response);
+                            value = PetAPTrue.DeserializePetAPTrue(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -106,9 +107,10 @@ namespace additionalProperties
                 {
                     case 200:
                         {
+                            PetAPTrue value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = PetAPTrue.DeserializePetAPTrue(document.RootElement);
-                            return Response.FromValue<PetAPTrue>(value, message.Response);
+                            value = PetAPTrue.DeserializePetAPTrue(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -157,9 +159,10 @@ namespace additionalProperties
                 {
                     case 200:
                         {
+                            CatAPTrue value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = CatAPTrue.DeserializeCatAPTrue(document.RootElement);
-                            return Response.FromValue<CatAPTrue>(value, message.Response);
+                            value = CatAPTrue.DeserializeCatAPTrue(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -192,9 +195,10 @@ namespace additionalProperties
                 {
                     case 200:
                         {
+                            CatAPTrue value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = CatAPTrue.DeserializeCatAPTrue(document.RootElement);
-                            return Response.FromValue<CatAPTrue>(value, message.Response);
+                            value = CatAPTrue.DeserializeCatAPTrue(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -243,9 +247,10 @@ namespace additionalProperties
                 {
                     case 200:
                         {
+                            PetAPObject value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = PetAPObject.DeserializePetAPObject(document.RootElement);
-                            return Response.FromValue<PetAPObject>(value, message.Response);
+                            value = PetAPObject.DeserializePetAPObject(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -278,9 +283,10 @@ namespace additionalProperties
                 {
                     case 200:
                         {
+                            PetAPObject value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = PetAPObject.DeserializePetAPObject(document.RootElement);
-                            return Response.FromValue<PetAPObject>(value, message.Response);
+                            value = PetAPObject.DeserializePetAPObject(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -329,9 +335,10 @@ namespace additionalProperties
                 {
                     case 200:
                         {
+                            PetAPString value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = PetAPString.DeserializePetAPString(document.RootElement);
-                            return Response.FromValue<PetAPString>(value, message.Response);
+                            value = PetAPString.DeserializePetAPString(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -364,9 +371,10 @@ namespace additionalProperties
                 {
                     case 200:
                         {
+                            PetAPString value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = PetAPString.DeserializePetAPString(document.RootElement);
-                            return Response.FromValue<PetAPString>(value, message.Response);
+                            value = PetAPString.DeserializePetAPString(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -415,9 +423,10 @@ namespace additionalProperties
                 {
                     case 200:
                         {
+                            PetAPInProperties value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = PetAPInProperties.DeserializePetAPInProperties(document.RootElement);
-                            return Response.FromValue<PetAPInProperties>(value, message.Response);
+                            value = PetAPInProperties.DeserializePetAPInProperties(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -450,9 +459,10 @@ namespace additionalProperties
                 {
                     case 200:
                         {
+                            PetAPInProperties value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = PetAPInProperties.DeserializePetAPInProperties(document.RootElement);
-                            return Response.FromValue<PetAPInProperties>(value, message.Response);
+                            value = PetAPInProperties.DeserializePetAPInProperties(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -501,9 +511,10 @@ namespace additionalProperties
                 {
                     case 200:
                         {
+                            PetAPInPropertiesWithAPString value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = PetAPInPropertiesWithAPString.DeserializePetAPInPropertiesWithAPString(document.RootElement);
-                            return Response.FromValue<PetAPInPropertiesWithAPString>(value, message.Response);
+                            value = PetAPInPropertiesWithAPString.DeserializePetAPInPropertiesWithAPString(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -536,9 +547,10 @@ namespace additionalProperties
                 {
                     case 200:
                         {
+                            PetAPInPropertiesWithAPString value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = PetAPInPropertiesWithAPString.DeserializePetAPInPropertiesWithAPString(document.RootElement);
-                            return Response.FromValue<PetAPInPropertiesWithAPString>(value, message.Response);
+                            value = PetAPInPropertiesWithAPString.DeserializePetAPInPropertiesWithAPString(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

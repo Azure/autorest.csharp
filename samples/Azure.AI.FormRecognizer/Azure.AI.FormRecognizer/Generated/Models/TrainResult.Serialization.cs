@@ -15,7 +15,6 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static TrainResult DeserializeTrainResult(JsonElement element)
         {
-            TrainResult result;
             IList<TrainingDocumentInfo> trainingDocuments = new List<TrainingDocumentInfo>();
             IList<FormFieldsReport> fields = default;
             float? averageModelAccuracy = default;
@@ -70,8 +69,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            result = new TrainResult(trainingDocuments, fields, averageModelAccuracy, errors);
-            return result;
+            return new TrainResult(trainingDocuments, fields, averageModelAccuracy, errors);
         }
     }
 }

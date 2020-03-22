@@ -46,7 +46,6 @@ namespace body_complex.Models
 
         internal static Cat DeserializeCat(JsonElement element)
         {
-            Cat result;
             string color = default;
             IList<Dog> hates = default;
             int? id = default;
@@ -95,8 +94,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new Cat(color, hates, id, name);
-            return result;
+            return new Cat(color, hates, id, name);
         }
     }
 }

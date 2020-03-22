@@ -35,7 +35,6 @@ namespace Azure.Storage.Management.Models
 
         internal static ManagementPolicyBaseBlob DeserializeManagementPolicyBaseBlob(JsonElement element)
         {
-            ManagementPolicyBaseBlob result;
             DateAfterModification tierToCool = default;
             DateAfterModification tierToArchive = default;
             DateAfterModification delete = default;
@@ -69,8 +68,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new ManagementPolicyBaseBlob(tierToCool, tierToArchive, delete);
-            return result;
+            return new ManagementPolicyBaseBlob(tierToCool, tierToArchive, delete);
         }
     }
 }

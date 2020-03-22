@@ -58,7 +58,6 @@ namespace Azure.Storage.Management.Models
 
         internal static ImmutabilityPolicy DeserializeImmutabilityPolicy(JsonElement element)
         {
-            ImmutabilityPolicy result;
             string etag = default;
             string id = default;
             string name = default;
@@ -139,8 +138,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new ImmutabilityPolicy(immutabilityPeriodSinceCreationInDays, state, allowProtectedAppendWrites, etag, id, name, type);
-            return result;
+            return new ImmutabilityPolicy(immutabilityPeriodSinceCreationInDays, state, allowProtectedAppendWrites, etag, id, name, type);
         }
     }
 }

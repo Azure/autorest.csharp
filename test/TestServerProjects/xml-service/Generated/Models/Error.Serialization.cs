@@ -14,22 +14,16 @@ namespace xml_service.Models
     {
         internal static Error DeserializeError(XElement element)
         {
-            Error result = default;
-            result = new Error(); int? value = default;
-            var status = element.Element("status");
-            if (status != null)
+            var obj = new Error();
+            if (element.Element("status") is XElement status)
             {
-                value = (int?)status;
+                obj.Status = (int?)status;
             }
-            result.Status = value;
-            string value0 = default;
-            var message = element.Element("message");
-            if (message != null)
+            if (element.Element("message") is XElement message)
             {
-                value0 = (string)message;
+                obj.Message = (string)message;
             }
-            result.Message = value0;
-            return result;
+            return obj;
         }
     }
 }

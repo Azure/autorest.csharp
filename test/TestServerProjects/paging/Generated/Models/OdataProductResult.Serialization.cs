@@ -15,7 +15,6 @@ namespace paging.Models
     {
         internal static OdataProductResult DeserializeOdataProductResult(JsonElement element)
         {
-            OdataProductResult result;
             IList<Product> values = default;
             string odatanextLink = default;
             foreach (var property in element.EnumerateObject())
@@ -44,8 +43,7 @@ namespace paging.Models
                     continue;
                 }
             }
-            result = new OdataProductResult(values, odatanextLink);
-            return result;
+            return new OdataProductResult(values, odatanextLink);
         }
     }
 }

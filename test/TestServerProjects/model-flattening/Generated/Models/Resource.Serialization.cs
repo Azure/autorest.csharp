@@ -52,7 +52,6 @@ namespace model_flattening.Models
 
         internal static Resource DeserializeResource(JsonElement element)
         {
-            Resource result;
             string id = default;
             string type = default;
             IDictionary<string, string> tags = default;
@@ -84,12 +83,12 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    Dictionary<string, string> array = new Dictionary<string, string>();
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        array.Add(property0.Name, property0.Value.GetString());
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
-                    tags = array;
+                    tags = dictionary;
                     continue;
                 }
                 if (property.NameEquals("location"))
@@ -111,8 +110,7 @@ namespace model_flattening.Models
                     continue;
                 }
             }
-            result = new Resource(id, type, tags, location, name);
-            return result;
+            return new Resource(id, type, tags, location, name);
         }
     }
 }

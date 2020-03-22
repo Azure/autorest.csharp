@@ -83,7 +83,6 @@ namespace Azure.Storage.Management.Models
 
         internal static BlobServiceProperties DeserializeBlobServiceProperties(JsonElement element)
         {
-            BlobServiceProperties result;
             Sku sku = default;
             string id = default;
             string name = default;
@@ -214,8 +213,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new BlobServiceProperties(sku, cors, defaultServiceVersion, deleteRetentionPolicy, isVersioningEnabled, automaticSnapshotPolicyEnabled, changeFeed, restorePolicy, containerDeleteRetentionPolicy, id, name, type);
-            return result;
+            return new BlobServiceProperties(sku, cors, defaultServiceVersion, deleteRetentionPolicy, isVersioningEnabled, automaticSnapshotPolicyEnabled, changeFeed, restorePolicy, containerDeleteRetentionPolicy, id, name, type);
         }
     }
 }

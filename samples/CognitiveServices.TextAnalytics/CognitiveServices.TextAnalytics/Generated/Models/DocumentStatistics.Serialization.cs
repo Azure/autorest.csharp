@@ -14,7 +14,6 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static DocumentStatistics DeserializeDocumentStatistics(JsonElement element)
         {
-            DocumentStatistics result;
             int charactersCount = default;
             int transactionsCount = default;
             foreach (var property in element.EnumerateObject())
@@ -30,8 +29,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            result = new DocumentStatistics(charactersCount, transactionsCount);
-            return result;
+            return new DocumentStatistics(charactersCount, transactionsCount);
         }
     }
 }

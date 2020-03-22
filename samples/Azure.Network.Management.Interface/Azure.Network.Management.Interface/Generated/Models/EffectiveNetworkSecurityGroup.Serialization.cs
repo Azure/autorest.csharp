@@ -15,7 +15,6 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static EffectiveNetworkSecurityGroup DeserializeEffectiveNetworkSecurityGroup(JsonElement element)
         {
-            EffectiveNetworkSecurityGroup result;
             SubResource networkSecurityGroup = default;
             EffectiveNetworkSecurityGroupAssociation association = default;
             IList<EffectiveNetworkSecurityRule> effectiveSecurityRules = default;
@@ -64,8 +63,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new EffectiveNetworkSecurityGroup(networkSecurityGroup, association, effectiveSecurityRules, tagMap);
-            return result;
+            return new EffectiveNetworkSecurityGroup(networkSecurityGroup, association, effectiveSecurityRules, tagMap);
         }
     }
 }

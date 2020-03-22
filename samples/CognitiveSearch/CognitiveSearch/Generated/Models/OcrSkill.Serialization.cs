@@ -67,7 +67,6 @@ namespace CognitiveSearch.Models
 
         internal static OcrSkill DeserializeOcrSkill(JsonElement element)
         {
-            OcrSkill result;
             TextExtractionAlgorithm? textExtractionAlgorithm = default;
             OcrSkillLanguage? defaultLanguageCode = default;
             bool? detectOrientation = default;
@@ -159,8 +158,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new OcrSkill(textExtractionAlgorithm, defaultLanguageCode, detectOrientation, odatatype, name, description, context, inputs, outputs);
-            return result;
+            return new OcrSkill(textExtractionAlgorithm, defaultLanguageCode, detectOrientation, odatatype, name, description, context, inputs, outputs);
         }
     }
 }

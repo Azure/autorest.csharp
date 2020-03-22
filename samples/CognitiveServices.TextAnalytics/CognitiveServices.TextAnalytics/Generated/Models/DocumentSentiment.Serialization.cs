@@ -15,7 +15,6 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static DocumentSentiment DeserializeDocumentSentiment(JsonElement element)
         {
-            DocumentSentiment result;
             string id = default;
             DocumentSentimentValue sentiment = default;
             DocumentStatistics statistics = default;
@@ -58,8 +57,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            result = new DocumentSentiment(id, sentiment, statistics, documentScores, sentences);
-            return result;
+            return new DocumentSentiment(id, sentiment, statistics, documentScores, sentences);
         }
     }
 }

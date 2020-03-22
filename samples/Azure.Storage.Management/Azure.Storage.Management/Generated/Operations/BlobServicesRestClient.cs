@@ -91,9 +91,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            BlobServiceItems value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = BlobServiceItems.DeserializeBlobServiceItems(document.RootElement);
-                            return Response.FromValue<BlobServiceItems>(value, message.Response);
+                            value = BlobServiceItems.DeserializeBlobServiceItems(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -131,9 +132,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            BlobServiceItems value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = BlobServiceItems.DeserializeBlobServiceItems(document.RootElement);
-                            return Response.FromValue<BlobServiceItems>(value, message.Response);
+                            value = BlobServiceItems.DeserializeBlobServiceItems(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -200,9 +202,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            BlobServiceProperties value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = BlobServiceProperties.DeserializeBlobServiceProperties(document.RootElement);
-                            return Response.FromValue<BlobServiceProperties>(value, message.Response);
+                            value = BlobServiceProperties.DeserializeBlobServiceProperties(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -245,9 +248,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            BlobServiceProperties value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = BlobServiceProperties.DeserializeBlobServiceProperties(document.RootElement);
-                            return Response.FromValue<BlobServiceProperties>(value, message.Response);
+                            value = BlobServiceProperties.DeserializeBlobServiceProperties(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -305,9 +309,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            BlobServiceProperties value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = BlobServiceProperties.DeserializeBlobServiceProperties(document.RootElement);
-                            return Response.FromValue<BlobServiceProperties>(value, message.Response);
+                            value = BlobServiceProperties.DeserializeBlobServiceProperties(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -345,9 +350,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            BlobServiceProperties value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = BlobServiceProperties.DeserializeBlobServiceProperties(document.RootElement);
-                            return Response.FromValue<BlobServiceProperties>(value, message.Response);
+                            value = BlobServiceProperties.DeserializeBlobServiceProperties(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -391,9 +397,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            BlobServiceItems value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = BlobServiceItems.DeserializeBlobServiceItems(document.RootElement);
-                            return Response.FromValue<BlobServiceItems>(value, message.Response);
+                            value = BlobServiceItems.DeserializeBlobServiceItems(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -426,9 +433,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            BlobServiceItems value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = BlobServiceItems.DeserializeBlobServiceItems(document.RootElement);
-                            return Response.FromValue<BlobServiceItems>(value, message.Response);
+                            value = BlobServiceItems.DeserializeBlobServiceItems(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

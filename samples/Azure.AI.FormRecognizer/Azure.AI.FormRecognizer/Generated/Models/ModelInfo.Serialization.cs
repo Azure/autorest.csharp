@@ -15,7 +15,6 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static ModelInfo DeserializeModelInfo(JsonElement element)
         {
-            ModelInfo result;
             Guid modelId = default;
             ModelStatus status = default;
             DateTimeOffset createdDateTime = default;
@@ -43,8 +42,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            result = new ModelInfo(modelId, status, createdDateTime, lastUpdatedDateTime);
-            return result;
+            return new ModelInfo(modelId, status, createdDateTime, lastUpdatedDateTime);
         }
     }
 }

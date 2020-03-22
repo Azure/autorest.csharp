@@ -15,7 +15,6 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static KeyPhraseResult DeserializeKeyPhraseResult(JsonElement element)
         {
-            KeyPhraseResult result;
             IList<DocumentKeyPhrases> documents = new List<DocumentKeyPhrases>();
             IList<DocumentError> errors = new List<DocumentError>();
             RequestStatistics statistics = default;
@@ -57,8 +56,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            result = new KeyPhraseResult(documents, errors, statistics, modelVersion);
-            return result;
+            return new KeyPhraseResult(documents, errors, statistics, modelVersion);
         }
     }
 }

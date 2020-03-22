@@ -14,7 +14,6 @@ namespace httpInfrastructure.Models
     {
         internal static D DeserializeD(JsonElement element)
         {
-            D result;
             string httpStatusCode = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -28,8 +27,7 @@ namespace httpInfrastructure.Models
                     continue;
                 }
             }
-            result = new D(httpStatusCode);
-            return result;
+            return new D(httpStatusCode);
         }
     }
 }

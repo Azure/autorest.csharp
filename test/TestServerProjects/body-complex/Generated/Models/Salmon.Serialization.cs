@@ -57,7 +57,6 @@ namespace body_complex.Models
                     case "smart_salmon": return SmartSalmon.DeserializeSmartSalmon(element);
                 }
             }
-            Salmon result;
             string location = default;
             bool? iswild = default;
             string fishtype = default;
@@ -118,8 +117,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new Salmon(location, iswild, fishtype, species, length, siblings);
-            return result;
+            return new Salmon(location, iswild, fishtype, species, length, siblings);
         }
     }
 }

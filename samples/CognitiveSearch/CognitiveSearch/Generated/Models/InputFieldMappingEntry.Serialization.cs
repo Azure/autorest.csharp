@@ -43,7 +43,6 @@ namespace CognitiveSearch.Models
 
         internal static InputFieldMappingEntry DeserializeInputFieldMappingEntry(JsonElement element)
         {
-            InputFieldMappingEntry result;
             string name = default;
             string source = default;
             string sourceContext = default;
@@ -88,8 +87,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new InputFieldMappingEntry(name, source, sourceContext, inputs);
-            return result;
+            return new InputFieldMappingEntry(name, source, sourceContext, inputs);
         }
     }
 }

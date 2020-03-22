@@ -35,7 +35,6 @@ namespace Azure.Storage.Management.Models
 
         internal static PrivateLinkServiceConnectionState DeserializePrivateLinkServiceConnectionState(JsonElement element)
         {
-            PrivateLinkServiceConnectionState result;
             PrivateEndpointServiceConnectionStatus? status = default;
             string description = default;
             string actionRequired = default;
@@ -69,8 +68,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new PrivateLinkServiceConnectionState(status, description, actionRequired);
-            return result;
+            return new PrivateLinkServiceConnectionState(status, description, actionRequired);
         }
     }
 }

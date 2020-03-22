@@ -54,7 +54,6 @@ namespace Azure.Storage.Management.Models
 
         internal static ImmutabilityPolicyProperties DeserializeImmutabilityPolicyProperties(JsonElement element)
         {
-            ImmutabilityPolicyProperties result;
             string etag = default;
             IList<UpdateHistoryProperty> updateHistory = default;
             int? immutabilityPeriodSinceCreationInDays = default;
@@ -120,8 +119,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new ImmutabilityPolicyProperties(etag, updateHistory, immutabilityPeriodSinceCreationInDays, state, allowProtectedAppendWrites);
-            return result;
+            return new ImmutabilityPolicyProperties(etag, updateHistory, immutabilityPeriodSinceCreationInDays, state, allowProtectedAppendWrites);
         }
     }
 }

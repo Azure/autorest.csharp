@@ -48,7 +48,6 @@ namespace Azure.Storage.Management.Models
 
         internal static NetworkRuleSet DeserializeNetworkRuleSet(JsonElement element)
         {
-            NetworkRuleSet result;
             Bypass? bypass = default;
             IList<VirtualNetworkRule> virtualNetworkRules = default;
             IList<IPRule> ipRules = default;
@@ -98,8 +97,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new NetworkRuleSet(bypass, virtualNetworkRules, ipRules, defaultAction);
-            return result;
+            return new NetworkRuleSet(bypass, virtualNetworkRules, ipRules, defaultAction);
         }
     }
 }

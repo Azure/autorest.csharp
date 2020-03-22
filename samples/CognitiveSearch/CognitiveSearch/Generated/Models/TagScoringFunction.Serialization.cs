@@ -33,7 +33,6 @@ namespace CognitiveSearch.Models
 
         internal static TagScoringFunction DeserializeTagScoringFunction(JsonElement element)
         {
-            TagScoringFunction result;
             TagScoringParameters tag = new TagScoringParameters();
             string type = default;
             string fieldName = default;
@@ -71,8 +70,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new TagScoringFunction(tag, type, fieldName, boost, interpolation);
-            return result;
+            return new TagScoringFunction(tag, type, fieldName, boost, interpolation);
         }
     }
 }

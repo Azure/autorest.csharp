@@ -73,7 +73,7 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 201:
                         var headers = new TrainCustomModelAsyncHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<TrainCustomModelAsyncHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -105,7 +105,7 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 201:
                         var headers = new TrainCustomModelAsyncHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<TrainCustomModelAsyncHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -150,9 +150,10 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 200:
                         {
+                            Models.Models value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Models.Models.DeserializeModels(document.RootElement);
-                            return Response.FromValue<Models.Models>(value, message.Response);
+                            value = Models.Models.DeserializeModels(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -181,9 +182,10 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 200:
                         {
+                            Models.Models value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Models.Models.DeserializeModels(document.RootElement);
-                            return Response.FromValue<Models.Models>(value, message.Response);
+                            value = Models.Models.DeserializeModels(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -231,9 +233,10 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 200:
                         {
+                            Model value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Model.DeserializeModel(document.RootElement);
-                            return Response.FromValue<Model>(value, message.Response);
+                            value = Model.DeserializeModel(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -263,9 +266,10 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 200:
                         {
+                            Model value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Model.DeserializeModel(document.RootElement);
-                            return Response.FromValue<Model>(value, message.Response);
+                            value = Model.DeserializeModel(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -389,7 +393,7 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 202:
                         var headers = new AnalyzeWithCustomModelHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<AnalyzeWithCustomModelHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -420,7 +424,7 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 202:
                         var headers = new AnalyzeWithCustomModelHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<AnalyzeWithCustomModelHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -473,7 +477,7 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 202:
                         var headers = new AnalyzeWithCustomModelHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<AnalyzeWithCustomModelHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -503,7 +507,7 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 202:
                         var headers = new AnalyzeWithCustomModelHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<AnalyzeWithCustomModelHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -548,9 +552,10 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 200:
                         {
+                            AnalyzeOperationResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = AnalyzeOperationResult.DeserializeAnalyzeOperationResult(document.RootElement);
-                            return Response.FromValue<AnalyzeOperationResult>(value, message.Response);
+                            value = AnalyzeOperationResult.DeserializeAnalyzeOperationResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -580,9 +585,10 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 200:
                         {
+                            AnalyzeOperationResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = AnalyzeOperationResult.DeserializeAnalyzeOperationResult(document.RootElement);
-                            return Response.FromValue<AnalyzeOperationResult>(value, message.Response);
+                            value = AnalyzeOperationResult.DeserializeAnalyzeOperationResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -635,7 +641,7 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 202:
                         var headers = new AnalyzeReceiptAsyncHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<AnalyzeReceiptAsyncHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -665,7 +671,7 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 202:
                         var headers = new AnalyzeReceiptAsyncHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<AnalyzeReceiptAsyncHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -715,7 +721,7 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 202:
                         var headers = new AnalyzeReceiptAsyncHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<AnalyzeReceiptAsyncHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -744,7 +750,7 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 202:
                         var headers = new AnalyzeReceiptAsyncHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<AnalyzeReceiptAsyncHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -786,9 +792,10 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 200:
                         {
+                            AnalyzeOperationResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = AnalyzeOperationResult.DeserializeAnalyzeOperationResult(document.RootElement);
-                            return Response.FromValue<AnalyzeOperationResult>(value, message.Response);
+                            value = AnalyzeOperationResult.DeserializeAnalyzeOperationResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -817,9 +824,10 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 200:
                         {
+                            AnalyzeOperationResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = AnalyzeOperationResult.DeserializeAnalyzeOperationResult(document.RootElement);
-                            return Response.FromValue<AnalyzeOperationResult>(value, message.Response);
+                            value = AnalyzeOperationResult.DeserializeAnalyzeOperationResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -867,7 +875,7 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 202:
                         var headers = new AnalyzeLayoutAsyncHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<AnalyzeLayoutAsyncHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -896,7 +904,7 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 202:
                         var headers = new AnalyzeLayoutAsyncHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<AnalyzeLayoutAsyncHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -941,7 +949,7 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 202:
                         var headers = new AnalyzeLayoutAsyncHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<AnalyzeLayoutAsyncHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -969,7 +977,7 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 202:
                         var headers = new AnalyzeLayoutAsyncHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<AnalyzeLayoutAsyncHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1011,9 +1019,10 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 200:
                         {
+                            AnalyzeOperationResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = AnalyzeOperationResult.DeserializeAnalyzeOperationResult(document.RootElement);
-                            return Response.FromValue<AnalyzeOperationResult>(value, message.Response);
+                            value = AnalyzeOperationResult.DeserializeAnalyzeOperationResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1042,9 +1051,10 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 200:
                         {
+                            AnalyzeOperationResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = AnalyzeOperationResult.DeserializeAnalyzeOperationResult(document.RootElement);
-                            return Response.FromValue<AnalyzeOperationResult>(value, message.Response);
+                            value = AnalyzeOperationResult.DeserializeAnalyzeOperationResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1088,9 +1098,10 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 200:
                         {
+                            Models.Models value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Models.Models.DeserializeModels(document.RootElement);
-                            return Response.FromValue<Models.Models>(value, message.Response);
+                            value = Models.Models.DeserializeModels(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1123,9 +1134,10 @@ namespace Azure.AI.FormRecognizer
                 {
                     case 200:
                         {
+                            Models.Models value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Models.Models.DeserializeModels(document.RootElement);
-                            return Response.FromValue<Models.Models>(value, message.Response);
+                            value = Models.Models.DeserializeModels(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

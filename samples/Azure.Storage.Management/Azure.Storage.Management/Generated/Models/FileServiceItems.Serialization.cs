@@ -15,7 +15,6 @@ namespace Azure.Storage.Management.Models
     {
         internal static FileServiceItems DeserializeFileServiceItems(JsonElement element)
         {
-            FileServiceItems result;
             IList<FileServiceProperties> value = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -34,8 +33,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new FileServiceItems(value);
-            return result;
+            return new FileServiceItems(value);
         }
     }
 }

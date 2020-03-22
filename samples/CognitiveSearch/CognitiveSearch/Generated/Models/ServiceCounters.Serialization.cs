@@ -14,7 +14,6 @@ namespace CognitiveSearch.Models
     {
         internal static ServiceCounters DeserializeServiceCounters(JsonElement element)
         {
-            ServiceCounters result;
             ResourceCounter documentCount = default;
             ResourceCounter indexesCount = default;
             ResourceCounter indexersCount = default;
@@ -78,8 +77,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new ServiceCounters(documentCount, indexesCount, indexersCount, dataSourcesCount, storageSize, synonymMaps);
-            return result;
+            return new ServiceCounters(documentCount, indexesCount, indexersCount, dataSourcesCount, storageSize, synonymMaps);
         }
     }
 }

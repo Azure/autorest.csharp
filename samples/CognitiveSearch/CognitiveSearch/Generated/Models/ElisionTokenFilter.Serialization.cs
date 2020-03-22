@@ -35,7 +35,6 @@ namespace CognitiveSearch.Models
 
         internal static ElisionTokenFilter DeserializeElisionTokenFilter(JsonElement element)
         {
-            ElisionTokenFilter result;
             IList<string> articles = default;
             string odatatype = default;
             string name = default;
@@ -66,8 +65,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new ElisionTokenFilter(articles, odatatype, name);
-            return result;
+            return new ElisionTokenFilter(articles, odatatype, name);
         }
     }
 }

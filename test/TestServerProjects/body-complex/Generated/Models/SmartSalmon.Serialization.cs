@@ -60,7 +60,6 @@ namespace body_complex.Models
 
         internal static SmartSalmon DeserializeSmartSalmon(JsonElement element)
         {
-            SmartSalmon result;
             string collegeDegree = default;
             string location = default;
             bool? iswild = default;
@@ -133,8 +132,7 @@ namespace body_complex.Models
                 }
                 additionalProperties.Add(property.Name, property.Value.GetObject());
             }
-            result = new SmartSalmon(collegeDegree, additionalProperties, location, iswild, fishtype, species, length, siblings);
-            return result;
+            return new SmartSalmon(collegeDegree, additionalProperties, location, iswild, fishtype, species, length, siblings);
         }
     }
 }

@@ -14,7 +14,6 @@ namespace AppConfiguration.Models
     {
         internal static Key DeserializeKey(JsonElement element)
         {
-            Key result;
             string name = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -28,8 +27,7 @@ namespace AppConfiguration.Models
                     continue;
                 }
             }
-            result = new Key(name);
-            return result;
+            return new Key(name);
         }
     }
 }

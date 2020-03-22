@@ -149,7 +149,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static SecurityRule DeserializeSecurityRule(JsonElement element)
         {
-            SecurityRule result;
             string name = default;
             string etag = default;
             string id = default;
@@ -380,8 +379,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new SecurityRule(name, etag, description, protocol, sourcePortRange, destinationPortRange, sourceAddressPrefix, sourceAddressPrefixes, sourceApplicationSecurityGroups, destinationAddressPrefix, destinationAddressPrefixes, destinationApplicationSecurityGroups, sourcePortRanges, destinationPortRanges, access, priority, direction, provisioningState, id);
-            return result;
+            return new SecurityRule(name, etag, description, protocol, sourcePortRange, destinationPortRange, sourceAddressPrefix, sourceAddressPrefixes, sourceApplicationSecurityGroups, destinationAddressPrefix, destinationAddressPrefixes, destinationApplicationSecurityGroups, sourcePortRanges, destinationPortRanges, access, priority, direction, provisioningState, id);
         }
     }
 }

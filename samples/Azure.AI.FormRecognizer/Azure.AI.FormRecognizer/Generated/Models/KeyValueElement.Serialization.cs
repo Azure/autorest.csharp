@@ -15,7 +15,6 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static KeyValueElement DeserializeKeyValueElement(JsonElement element)
         {
-            KeyValueElement result;
             string text = default;
             IList<float> boundingBox = default;
             IList<string> elements = default;
@@ -55,8 +54,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            result = new KeyValueElement(text, boundingBox, elements);
-            return result;
+            return new KeyValueElement(text, boundingBox, elements);
         }
     }
 }

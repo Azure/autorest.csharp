@@ -14,7 +14,6 @@ namespace lro.Models
     {
         internal static CloudError DeserializeCloudError(JsonElement element)
         {
-            CloudError result;
             int? status = default;
             string message = default;
             foreach (var property in element.EnumerateObject())
@@ -38,8 +37,7 @@ namespace lro.Models
                     continue;
                 }
             }
-            result = new CloudError(status, message);
-            return result;
+            return new CloudError(status, message);
         }
     }
 }

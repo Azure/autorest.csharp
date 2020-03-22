@@ -32,7 +32,6 @@ namespace extensible_enums_swagger.Models
 
         internal static Pet DeserializePet(JsonElement element)
         {
-            Pet result;
             string name = default;
             DaysOfWeekExtensibleEnum? daysOfWeek = default;
             IntEnum intEnum = default;
@@ -62,8 +61,7 @@ namespace extensible_enums_swagger.Models
                     continue;
                 }
             }
-            result = new Pet(name, daysOfWeek, intEnum);
-            return result;
+            return new Pet(name, daysOfWeek, intEnum);
         }
     }
 }

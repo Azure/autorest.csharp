@@ -60,9 +60,10 @@ namespace body_byte
                 {
                     case 200:
                         {
+                            byte[] value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetBytesFromBase64();
-                            return Response.FromValue<byte[]>(value, message.Response);
+                            value = document.RootElement.GetBytesFromBase64();
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -89,9 +90,10 @@ namespace body_byte
                 {
                     case 200:
                         {
+                            byte[] value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetBytesFromBase64();
-                            return Response.FromValue<byte[]>(value, message.Response);
+                            value = document.RootElement.GetBytesFromBase64();
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -130,9 +132,10 @@ namespace body_byte
                 {
                     case 200:
                         {
+                            byte[] value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetBytesFromBase64();
-                            return Response.FromValue<byte[]>(value, message.Response);
+                            value = document.RootElement.GetBytesFromBase64();
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -159,9 +162,10 @@ namespace body_byte
                 {
                     case 200:
                         {
+                            byte[] value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetBytesFromBase64();
-                            return Response.FromValue<byte[]>(value, message.Response);
+                            value = document.RootElement.GetBytesFromBase64();
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -200,9 +204,10 @@ namespace body_byte
                 {
                     case 200:
                         {
+                            byte[] value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetBytesFromBase64();
-                            return Response.FromValue<byte[]>(value, message.Response);
+                            value = document.RootElement.GetBytesFromBase64();
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -229,9 +234,10 @@ namespace body_byte
                 {
                     case 200:
                         {
+                            byte[] value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetBytesFromBase64();
-                            return Response.FromValue<byte[]>(value, message.Response);
+                            value = document.RootElement.GetBytesFromBase64();
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -348,9 +354,10 @@ namespace body_byte
                 {
                     case 200:
                         {
+                            byte[] value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetBytesFromBase64();
-                            return Response.FromValue<byte[]>(value, message.Response);
+                            value = document.RootElement.GetBytesFromBase64();
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -377,9 +384,10 @@ namespace body_byte
                 {
                     case 200:
                         {
+                            byte[] value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetBytesFromBase64();
-                            return Response.FromValue<byte[]>(value, message.Response);
+                            value = document.RootElement.GetBytesFromBase64();
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

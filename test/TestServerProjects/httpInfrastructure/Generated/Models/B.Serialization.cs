@@ -14,7 +14,6 @@ namespace httpInfrastructure.Models
     {
         internal static B DeserializeB(JsonElement element)
         {
-            B result;
             string textStatusCode = default;
             string statusCode = default;
             foreach (var property in element.EnumerateObject())
@@ -38,8 +37,7 @@ namespace httpInfrastructure.Models
                     continue;
                 }
             }
-            result = new B(textStatusCode, statusCode);
-            return result;
+            return new B(textStatusCode, statusCode);
         }
     }
 }

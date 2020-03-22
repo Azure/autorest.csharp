@@ -15,7 +15,6 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static InnerError DeserializeInnerError(JsonElement element)
         {
-            InnerError result;
             InnerErrorCodeValue code = default;
             string message = default;
             IDictionary<string, string> details = default;
@@ -39,12 +38,12 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    Dictionary<string, string> array = new Dictionary<string, string>();
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        array.Add(property0.Name, property0.Value.GetString());
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
-                    details = array;
+                    details = dictionary;
                     continue;
                 }
                 if (property.NameEquals("target"))
@@ -66,8 +65,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            result = new InnerError(code, message, details, target, innerError);
-            return result;
+            return new InnerError(code, message, details, target, innerError);
         }
     }
 }

@@ -437,7 +437,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     string valueVariable = "value";
                     if (responseBody is ObjectResponseBody objectResponseBody)
                     {
-                        writer.WriteDeserializationForMethods(objectResponseBody.Serialization, async, ref valueVariable, responseVariable);
+                        writer.Line($"{responseBody.Type} {valueVariable:D} = default;");
+                        writer.WriteDeserializationForMethods(
+                            objectResponseBody.Serialization,
+                            async,
+                            (w, v) => w.Line($"{valueVariable} = {v};"),
+                            responseVariable);
                     }
                     else if (responseBody is StreamResponseBody _)
                     {
@@ -452,13 +457,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     switch (responseBody)
                     {
                         case null when headersModelType != null:
-                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue<{headersModelType}>(headers, {responseVariable});");
+                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue(headers, {responseVariable});");
                             break;
                         case { } when headersModelType != null:
-                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue<{responseBody.Type}, {headersModelType}>({valueVariable}, headers, {responseVariable});");
+                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue({valueVariable}, headers, {responseVariable});");
                             break;
                         case { }:
-                            writer.Append($"return {typeof(Response)}.FromValue<{responseBody.Type}>({valueVariable}, {responseVariable});");
+                            writer.Append($"return {typeof(Response)}.FromValue({valueVariable}, {responseVariable});");
                             break;
                         case null when !statusCodes.Any():
                             break;

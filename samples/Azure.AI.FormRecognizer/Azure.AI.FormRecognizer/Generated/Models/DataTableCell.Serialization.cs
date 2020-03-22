@@ -15,7 +15,6 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static DataTableCell DeserializeDataTableCell(JsonElement element)
         {
-            DataTableCell result;
             int rowIndex = default;
             int columnIndex = default;
             int? rowSpan = default;
@@ -109,8 +108,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            result = new DataTableCell(rowIndex, columnIndex, rowSpan, columnSpan, text, boundingBox, confidence, elements, isHeader, isFooter);
-            return result;
+            return new DataTableCell(rowIndex, columnIndex, rowSpan, columnSpan, text, boundingBox, confidence, elements, isHeader, isFooter);
         }
     }
 }

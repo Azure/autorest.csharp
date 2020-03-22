@@ -31,7 +31,6 @@ namespace CognitiveSearch.Models
 
         internal static SynonymMap DeserializeSynonymMap(JsonElement element)
         {
-            SynonymMap result;
             string name = default;
             string format = default;
             string synonyms = default;
@@ -63,8 +62,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new SynonymMap(name, format, synonyms, odataetag);
-            return result;
+            return new SynonymMap(name, format, synonyms, odataetag);
         }
     }
 }

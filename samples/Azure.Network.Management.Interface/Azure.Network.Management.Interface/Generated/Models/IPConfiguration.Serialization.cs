@@ -63,7 +63,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static IPConfiguration DeserializeIPConfiguration(JsonElement element)
         {
-            IPConfiguration result;
             string name = default;
             string etag = default;
             string id = default;
@@ -154,8 +153,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new IPConfiguration(name, etag, privateIPAddress, privateIPAllocationMethod, subnet, publicIPAddress, provisioningState, id);
-            return result;
+            return new IPConfiguration(name, etag, privateIPAddress, privateIPAllocationMethod, subnet, publicIPAddress, provisioningState, id);
         }
     }
 }

@@ -39,7 +39,6 @@ namespace CognitiveSearch.Models
 
         internal static EdgeNGramTokenFilter DeserializeEdgeNGramTokenFilter(JsonElement element)
         {
-            EdgeNGramTokenFilter result;
             int? minGram = default;
             int? maxGram = default;
             EdgeNGramTokenFilterSide? side = default;
@@ -85,8 +84,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new EdgeNGramTokenFilter(minGram, maxGram, side, odatatype, name);
-            return result;
+            return new EdgeNGramTokenFilter(minGram, maxGram, side, odatatype, name);
         }
     }
 }

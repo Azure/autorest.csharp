@@ -282,9 +282,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            Indexer value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Indexer.DeserializeIndexer(document.RootElement);
-                            return Response.FromValue<Indexer>(value, message.Response);
+                            value = Indexer.DeserializeIndexer(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -325,9 +326,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            Indexer value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Indexer.DeserializeIndexer(document.RootElement);
-                            return Response.FromValue<Indexer>(value, message.Response);
+                            value = Indexer.DeserializeIndexer(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -481,9 +483,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            Indexer value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Indexer.DeserializeIndexer(document.RootElement);
-                            return Response.FromValue<Indexer>(value, message.Response);
+                            value = Indexer.DeserializeIndexer(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -517,9 +520,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            Indexer value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Indexer.DeserializeIndexer(document.RootElement);
-                            return Response.FromValue<Indexer>(value, message.Response);
+                            value = Indexer.DeserializeIndexer(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -573,9 +577,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            ListIndexersResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ListIndexersResult.DeserializeListIndexersResult(document.RootElement);
-                            return Response.FromValue<ListIndexersResult>(value, message.Response);
+                            value = ListIndexersResult.DeserializeListIndexersResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -605,9 +610,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            ListIndexersResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ListIndexersResult.DeserializeListIndexersResult(document.RootElement);
-                            return Response.FromValue<ListIndexersResult>(value, message.Response);
+                            value = ListIndexersResult.DeserializeListIndexersResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -665,9 +671,10 @@ namespace CognitiveSearch
                 {
                     case 201:
                         {
+                            Indexer value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Indexer.DeserializeIndexer(document.RootElement);
-                            return Response.FromValue<Indexer>(value, message.Response);
+                            value = Indexer.DeserializeIndexer(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -701,9 +708,10 @@ namespace CognitiveSearch
                 {
                     case 201:
                         {
+                            Indexer value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Indexer.DeserializeIndexer(document.RootElement);
-                            return Response.FromValue<Indexer>(value, message.Response);
+                            value = Indexer.DeserializeIndexer(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -759,9 +767,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            IndexerExecutionInfo value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = IndexerExecutionInfo.DeserializeIndexerExecutionInfo(document.RootElement);
-                            return Response.FromValue<IndexerExecutionInfo>(value, message.Response);
+                            value = IndexerExecutionInfo.DeserializeIndexerExecutionInfo(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -795,9 +804,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            IndexerExecutionInfo value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = IndexerExecutionInfo.DeserializeIndexerExecutionInfo(document.RootElement);
-                            return Response.FromValue<IndexerExecutionInfo>(value, message.Response);
+                            value = IndexerExecutionInfo.DeserializeIndexerExecutionInfo(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

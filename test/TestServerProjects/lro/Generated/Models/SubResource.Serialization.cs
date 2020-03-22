@@ -25,7 +25,6 @@ namespace lro.Models
 
         internal static SubResource DeserializeSubResource(JsonElement element)
         {
-            SubResource result;
             string id = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -39,8 +38,7 @@ namespace lro.Models
                     continue;
                 }
             }
-            result = new SubResource(id);
-            return result;
+            return new SubResource(id);
         }
     }
 }

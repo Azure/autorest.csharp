@@ -169,7 +169,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static Subnet DeserializeSubnet(JsonElement element)
         {
-            Subnet result;
             string name = default;
             string etag = default;
             string id = default;
@@ -425,8 +424,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new Subnet(name, etag, addressPrefix, addressPrefixes, networkSecurityGroup, routeTable, natGateway, serviceEndpoints, serviceEndpointPolicies, privateEndpoints, ipConfigurations, ipConfigurationProfiles, resourceNavigationLinks, serviceAssociationLinks, delegations, purpose, provisioningState, privateEndpointNetworkPolicies, privateLinkServiceNetworkPolicies, id);
-            return result;
+            return new Subnet(name, etag, addressPrefix, addressPrefixes, networkSecurityGroup, routeTable, natGateway, serviceEndpoints, serviceEndpointPolicies, privateEndpoints, ipConfigurations, ipConfigurationProfiles, resourceNavigationLinks, serviceAssociationLinks, delegations, purpose, provisioningState, privateEndpointNetworkPolicies, privateLinkServiceNetworkPolicies, id);
         }
     }
 }

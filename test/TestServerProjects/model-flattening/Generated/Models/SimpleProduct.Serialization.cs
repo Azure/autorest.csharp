@@ -50,7 +50,6 @@ namespace model_flattening.Models
 
         internal static SimpleProduct DeserializeSimpleProduct(JsonElement element)
         {
-            SimpleProduct result;
             string baseProductId = default;
             string baseProductDescription = default;
             string maxProductDisplayName = default;
@@ -120,8 +119,7 @@ namespace model_flattening.Models
                     continue;
                 }
             }
-            result = new SimpleProduct(maxProductDisplayName, maxProductCapacity, genericValue, odatavalue, baseProductId, baseProductDescription);
-            return result;
+            return new SimpleProduct(maxProductDisplayName, maxProductCapacity, genericValue, odatavalue, baseProductId, baseProductDescription);
         }
     }
 }

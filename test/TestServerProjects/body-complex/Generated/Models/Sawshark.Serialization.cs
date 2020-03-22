@@ -53,7 +53,6 @@ namespace body_complex.Models
 
         internal static Sawshark DeserializeSawshark(JsonElement element)
         {
-            Sawshark result;
             byte[] picture = default;
             int? age = default;
             DateTimeOffset birthday = default;
@@ -120,8 +119,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new Sawshark(picture, age, birthday, fishtype, species, length, siblings);
-            return result;
+            return new Sawshark(picture, age, birthday, fishtype, species, length, siblings);
         }
     }
 }

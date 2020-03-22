@@ -35,7 +35,6 @@ namespace CognitiveSearch.Models
                     case "#Microsoft.Azure.Search.DefaultCognitiveServices": return DefaultCognitiveServicesAccount.DeserializeDefaultCognitiveServicesAccount(element);
                 }
             }
-            CognitiveServicesAccount result;
             string odatatype = default;
             string description = default;
             foreach (var property in element.EnumerateObject())
@@ -55,8 +54,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new CognitiveServicesAccount(odatatype, description);
-            return result;
+            return new CognitiveServicesAccount(odatatype, description);
         }
     }
 }

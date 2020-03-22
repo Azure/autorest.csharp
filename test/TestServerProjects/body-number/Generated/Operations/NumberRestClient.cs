@@ -60,8 +60,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            float value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetSingle();
+                            value = document.RootElement.GetSingle();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -89,8 +90,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            float value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetSingle();
+                            value = document.RootElement.GetSingle();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -130,8 +132,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            float value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetSingle();
+                            value = document.RootElement.GetSingle();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -159,8 +162,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            float value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetSingle();
+                            value = document.RootElement.GetSingle();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -200,8 +204,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            double value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetDouble();
+                            value = document.RootElement.GetDouble();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -229,8 +234,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            double value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetDouble();
+                            value = document.RootElement.GetDouble();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -270,8 +276,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            decimal value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetDecimal();
+                            value = document.RootElement.GetDecimal();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -299,8 +306,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            decimal value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetDecimal();
+                            value = document.RootElement.GetDecimal();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -410,8 +418,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            float value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetSingle();
+                            value = document.RootElement.GetSingle();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -439,8 +448,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            float value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetSingle();
+                            value = document.RootElement.GetSingle();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -550,8 +560,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            double value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetDouble();
+                            value = document.RootElement.GetDouble();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -579,8 +590,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            double value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetDouble();
+                            value = document.RootElement.GetDouble();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -686,8 +698,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            double value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetDouble();
+                            value = document.RootElement.GetDouble();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -715,8 +728,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            double value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetDouble();
+                            value = document.RootElement.GetDouble();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -822,8 +836,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            double value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetDouble();
+                            value = document.RootElement.GetDouble();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -851,8 +866,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            double value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetDouble();
+                            value = document.RootElement.GetDouble();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -962,8 +978,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            decimal value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetDecimal();
+                            value = document.RootElement.GetDecimal();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -991,8 +1008,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            decimal value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetDecimal();
+                            value = document.RootElement.GetDecimal();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1098,8 +1116,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            decimal value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetDecimal();
+                            value = document.RootElement.GetDecimal();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1127,8 +1146,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            decimal value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetDecimal();
+                            value = document.RootElement.GetDecimal();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1234,8 +1254,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            decimal value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetDecimal();
+                            value = document.RootElement.GetDecimal();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1263,8 +1284,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            decimal value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetDecimal();
+                            value = document.RootElement.GetDecimal();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1374,8 +1396,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            double value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetDouble();
+                            value = document.RootElement.GetDouble();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1403,8 +1426,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            double value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetDouble();
+                            value = document.RootElement.GetDouble();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1514,8 +1538,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            double value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetDouble();
+                            value = document.RootElement.GetDouble();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1543,8 +1568,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            double value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetDouble();
+                            value = document.RootElement.GetDouble();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1654,8 +1680,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            decimal value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetDecimal();
+                            value = document.RootElement.GetDecimal();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1683,8 +1710,9 @@ namespace body_number
                 {
                     case 200:
                         {
+                            decimal value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetDecimal();
+                            value = document.RootElement.GetDecimal();
                             return Response.FromValue(value, message.Response);
                         }
                     default:

@@ -64,7 +64,6 @@ namespace Azure.Storage.Management.Models
 
         internal static EncryptionScope DeserializeEncryptionScope(JsonElement element)
         {
-            EncryptionScope result;
             string id = default;
             string name = default;
             string type = default;
@@ -155,8 +154,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new EncryptionScope(source, state, creationTime, lastModifiedTime, keyVaultProperties, id, name, type);
-            return result;
+            return new EncryptionScope(source, state, creationTime, lastModifiedTime, keyVaultProperties, id, name, type);
         }
     }
 }

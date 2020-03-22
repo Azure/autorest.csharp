@@ -37,7 +37,6 @@ namespace CognitiveSearch.Models
 
         internal static KeywordMarkerTokenFilter DeserializeKeywordMarkerTokenFilter(JsonElement element)
         {
-            KeywordMarkerTokenFilter result;
             IList<string> keywords = new List<string>();
             bool? ignoreCase = default;
             string odatatype = default;
@@ -74,8 +73,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new KeywordMarkerTokenFilter(keywords, ignoreCase, odatatype, name);
-            return result;
+            return new KeywordMarkerTokenFilter(keywords, ignoreCase, odatatype, name);
         }
     }
 }

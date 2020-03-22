@@ -29,23 +29,21 @@ namespace CognitiveSearch.Models
 
         internal static TextWeights DeserializeTextWeights(JsonElement element)
         {
-            TextWeights result;
             IDictionary<string, double> weights = new Dictionary<string, double>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("weights"))
                 {
-                    Dictionary<string, double> array = new Dictionary<string, double>();
+                    Dictionary<string, double> dictionary = new Dictionary<string, double>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        array.Add(property0.Name, property0.Value.GetDouble());
+                        dictionary.Add(property0.Name, property0.Value.GetDouble());
                     }
-                    weights = array;
+                    weights = dictionary;
                     continue;
                 }
             }
-            result = new TextWeights(weights);
-            return result;
+            return new TextWeights(weights);
         }
     }
 }

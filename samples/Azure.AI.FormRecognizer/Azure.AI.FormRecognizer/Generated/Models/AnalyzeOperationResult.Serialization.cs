@@ -15,7 +15,6 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static AnalyzeOperationResult DeserializeAnalyzeOperationResult(JsonElement element)
         {
-            AnalyzeOperationResult result;
             OperationStatus status = default;
             DateTimeOffset createdDateTime = default;
             DateTimeOffset lastUpdatedDateTime = default;
@@ -47,8 +46,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            result = new AnalyzeOperationResult(status, createdDateTime, lastUpdatedDateTime, analyzeResult);
-            return result;
+            return new AnalyzeOperationResult(status, createdDateTime, lastUpdatedDateTime, analyzeResult);
         }
     }
 }

@@ -69,7 +69,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static ApplicationGatewayBackendAddressPool DeserializeApplicationGatewayBackendAddressPool(JsonElement element)
         {
-            ApplicationGatewayBackendAddressPool result;
             string name = default;
             string etag = default;
             string type = default;
@@ -160,8 +159,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new ApplicationGatewayBackendAddressPool(name, etag, type, backendIPConfigurations, backendAddresses, provisioningState, id);
-            return result;
+            return new ApplicationGatewayBackendAddressPool(name, etag, type, backendIPConfigurations, backendAddresses, provisioningState, id);
         }
     }
 }

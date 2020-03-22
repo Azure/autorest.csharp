@@ -94,15 +94,15 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         }
 
         public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async,
-            ref string valueVariable, string responseVariable)
+            Action<CodeWriter, CodeWriterDelegate> valueCallback, string responseVariable)
         {
             switch (serialization)
             {
                 case JsonSerialization jsonSerialization:
-                    writer.WriteDeserializationForMethods(jsonSerialization, async, ref valueVariable, responseVariable);
+                    writer.WriteDeserializationForMethods(jsonSerialization, async, valueCallback, responseVariable);
                     break;
                 case XmlElementSerialization xmlSerialization:
-                    writer.WriteDeserializationForMethods(xmlSerialization, ref valueVariable, responseVariable);
+                    writer.WriteDeserializationForMethods(xmlSerialization, valueCallback, responseVariable);
                     break;
                 default:
                     throw new NotImplementedException(serialization.ToString());
@@ -184,11 +184,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
 
             Debug.Assert(selectedCtorInitializers != null);
-
-            if (selectedCtorInitializers.Count == 0 && initializers.Any())
-            {
-
-            }
 
             writer.Append($"new {objectType.Type}(");
             foreach (var initializer in selectedCtorInitializers)

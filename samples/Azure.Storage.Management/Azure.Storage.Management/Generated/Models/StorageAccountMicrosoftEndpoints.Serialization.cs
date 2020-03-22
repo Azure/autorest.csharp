@@ -50,7 +50,6 @@ namespace Azure.Storage.Management.Models
 
         internal static StorageAccountMicrosoftEndpoints DeserializeStorageAccountMicrosoftEndpoints(JsonElement element)
         {
-            StorageAccountMicrosoftEndpoints result;
             string blob = default;
             string queue = default;
             string table = default;
@@ -114,8 +113,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new StorageAccountMicrosoftEndpoints(blob, queue, table, file, web, dfs);
-            return result;
+            return new StorageAccountMicrosoftEndpoints(blob, queue, table, file, web, dfs);
         }
     }
 }

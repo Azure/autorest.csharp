@@ -51,7 +51,6 @@ namespace additionalProperties.Models
 
         internal static PetAPInPropertiesWithAPString DeserializePetAPInPropertiesWithAPString(JsonElement element)
         {
-            PetAPInPropertiesWithAPString result;
             int id = default;
             string name = default;
             bool? status = default;
@@ -94,18 +93,17 @@ namespace additionalProperties.Models
                     {
                         continue;
                     }
-                    Dictionary<string, float> array = new Dictionary<string, float>();
+                    Dictionary<string, float> dictionary = new Dictionary<string, float>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        array.Add(property0.Name, property0.Value.GetSingle());
+                        dictionary.Add(property0.Name, property0.Value.GetSingle());
                     }
-                    additionalProperties = array;
+                    additionalProperties = dictionary;
                     continue;
                 }
                 moreAdditionalProperties.Add(property.Name, property.Value.GetString());
             }
-            result = new PetAPInPropertiesWithAPString(id, name, status, odatalocation, additionalProperties, moreAdditionalProperties);
-            return result;
+            return new PetAPInPropertiesWithAPString(id, name, status, odatalocation, additionalProperties, moreAdditionalProperties);
         }
     }
 }

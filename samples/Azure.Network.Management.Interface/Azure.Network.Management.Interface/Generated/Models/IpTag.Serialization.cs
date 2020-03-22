@@ -30,7 +30,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static IpTag DeserializeIpTag(JsonElement element)
         {
-            IpTag result;
             string ipTagType = default;
             string tag = default;
             foreach (var property in element.EnumerateObject())
@@ -54,8 +53,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new IpTag(ipTagType, tag);
-            return result;
+            return new IpTag(ipTagType, tag);
         }
     }
 }

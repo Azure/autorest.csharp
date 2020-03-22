@@ -27,7 +27,6 @@ namespace Azure.Storage.Management.Models
 
         internal static AzureFilesIdentityBasedAuthentication DeserializeAzureFilesIdentityBasedAuthentication(JsonElement element)
         {
-            AzureFilesIdentityBasedAuthentication result;
             DirectoryServiceOptions directoryServiceOptions = default;
             ActiveDirectoryProperties activeDirectoryProperties = default;
             foreach (var property in element.EnumerateObject())
@@ -47,8 +46,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new AzureFilesIdentityBasedAuthentication(directoryServiceOptions, activeDirectoryProperties);
-            return result;
+            return new AzureFilesIdentityBasedAuthentication(directoryServiceOptions, activeDirectoryProperties);
         }
     }
 }

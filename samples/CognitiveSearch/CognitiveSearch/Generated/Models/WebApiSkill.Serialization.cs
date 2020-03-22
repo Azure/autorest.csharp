@@ -86,7 +86,6 @@ namespace CognitiveSearch.Models
 
         internal static WebApiSkill DeserializeWebApiSkill(JsonElement element)
         {
-            WebApiSkill result;
             string uri = default;
             IDictionary<string, string> httpHeaders = default;
             string httpMethod = default;
@@ -112,12 +111,12 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    Dictionary<string, string> array = new Dictionary<string, string>();
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        array.Add(property0.Name, property0.Value.GetString());
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
-                    httpHeaders = array;
+                    httpHeaders = dictionary;
                     continue;
                 }
                 if (property.NameEquals("httpMethod"))
@@ -209,8 +208,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new WebApiSkill(uri, httpHeaders, httpMethod, timeout, batchSize, degreeOfParallelism, odatatype, name, description, context, inputs, outputs);
-            return result;
+            return new WebApiSkill(uri, httpHeaders, httpMethod, timeout, batchSize, degreeOfParallelism, odatatype, name, description, context, inputs, outputs);
         }
     }
 }

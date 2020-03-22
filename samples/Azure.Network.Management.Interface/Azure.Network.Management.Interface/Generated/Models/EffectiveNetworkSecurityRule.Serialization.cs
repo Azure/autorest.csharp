@@ -15,7 +15,6 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static EffectiveNetworkSecurityRule DeserializeEffectiveNetworkSecurityRule(JsonElement element)
         {
-            EffectiveNetworkSecurityRule result;
             string name = default;
             EffectiveSecurityRuleProtocol? protocol = default;
             string sourcePortRange = default;
@@ -199,8 +198,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new EffectiveNetworkSecurityRule(name, protocol, sourcePortRange, destinationPortRange, sourcePortRanges, destinationPortRanges, sourceAddressPrefix, destinationAddressPrefix, sourceAddressPrefixes, destinationAddressPrefixes, expandedSourceAddressPrefix, expandedDestinationAddressPrefix, access, priority, direction);
-            return result;
+            return new EffectiveNetworkSecurityRule(name, protocol, sourcePortRange, destinationPortRange, sourcePortRanges, destinationPortRanges, sourceAddressPrefix, destinationAddressPrefix, sourceAddressPrefixes, destinationAddressPrefixes, expandedSourceAddressPrefix, expandedDestinationAddressPrefix, access, priority, direction);
         }
     }
 }

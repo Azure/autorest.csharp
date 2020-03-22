@@ -30,7 +30,6 @@ namespace body_complex.Models
 
         internal static FloatWrapper DeserializeFloatWrapper(JsonElement element)
         {
-            FloatWrapper result;
             float? field1 = default;
             float? field2 = default;
             foreach (var property in element.EnumerateObject())
@@ -54,8 +53,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new FloatWrapper(field1, field2);
-            return result;
+            return new FloatWrapper(field1, field2);
         }
     }
 }

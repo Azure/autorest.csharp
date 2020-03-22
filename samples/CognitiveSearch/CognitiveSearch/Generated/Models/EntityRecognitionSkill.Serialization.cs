@@ -77,7 +77,6 @@ namespace CognitiveSearch.Models
 
         internal static EntityRecognitionSkill DeserializeEntityRecognitionSkill(JsonElement element)
         {
-            EntityRecognitionSkill result;
             IList<EntityCategory> categories = default;
             EntityRecognitionSkillLanguage? defaultLanguageCode = default;
             bool? includeTypelessEntities = default;
@@ -184,8 +183,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new EntityRecognitionSkill(categories, defaultLanguageCode, includeTypelessEntities, minimumPrecision, odatatype, name, description, context, inputs, outputs);
-            return result;
+            return new EntityRecognitionSkill(categories, defaultLanguageCode, includeTypelessEntities, minimumPrecision, odatatype, name, description, context, inputs, outputs);
         }
     }
 }

@@ -28,7 +28,6 @@ namespace CognitiveSearch.Models
 
         internal static PatternReplaceTokenFilter DeserializePatternReplaceTokenFilter(JsonElement element)
         {
-            PatternReplaceTokenFilter result;
             string pattern = default;
             string replacement = default;
             string odatatype = default;
@@ -56,8 +55,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new PatternReplaceTokenFilter(pattern, replacement, odatatype, name);
-            return result;
+            return new PatternReplaceTokenFilter(pattern, replacement, odatatype, name);
         }
     }
 }

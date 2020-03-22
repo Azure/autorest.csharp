@@ -50,7 +50,6 @@ namespace CognitiveSearch.Models
 
         internal static StopwordsTokenFilter DeserializeStopwordsTokenFilter(JsonElement element)
         {
-            StopwordsTokenFilter result;
             IList<string> stopwords = default;
             StopwordsList? stopwordsList = default;
             bool? ignoreCase = default;
@@ -111,8 +110,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new StopwordsTokenFilter(stopwords, stopwordsList, ignoreCase, removeTrailing, odatatype, name);
-            return result;
+            return new StopwordsTokenFilter(stopwords, stopwordsList, ignoreCase, removeTrailing, odatatype, name);
         }
     }
 }

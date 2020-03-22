@@ -15,7 +15,6 @@ namespace Azure.Storage.Tables.Models
     {
         internal static TableEntityQueryResponse DeserializeTableEntityQueryResponse(JsonElement element)
         {
-            TableEntityQueryResponse result;
             string odatametadata = default;
             IList<IDictionary<string, object>> value = default;
             foreach (var property in element.EnumerateObject())
@@ -38,21 +37,18 @@ namespace Azure.Storage.Tables.Models
                     List<IDictionary<string, object>> array = new List<IDictionary<string, object>>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        Dictionary<string, object> value0;
-                        Dictionary<string, object> array0 = new Dictionary<string, object>();
+                        Dictionary<string, object> dictionary = new Dictionary<string, object>();
                         foreach (var property0 in item.EnumerateObject())
                         {
-                            array0.Add(property0.Name, property0.Value.GetObject());
+                            dictionary.Add(property0.Name, property0.Value.GetObject());
                         }
-                        value0 = array0;
-                        array.Add(value0);
+                        array.Add(dictionary);
                     }
                     value = array;
                     continue;
                 }
             }
-            result = new TableEntityQueryResponse(odatametadata, value);
-            return result;
+            return new TableEntityQueryResponse(odatametadata, value);
         }
     }
 }

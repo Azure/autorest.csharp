@@ -15,22 +15,20 @@ namespace xml_service.Models
     {
         internal static Blobs DeserializeBlobs(XElement element)
         {
-            Blobs result = default;
-            result = new Blobs(); result.BlobPrefix = new List<BlobPrefix>();
+            var obj = new Blobs();
+            var array = new List<BlobPrefix>();
             foreach (var e in element.Elements("BlobPrefix"))
             {
-                BlobPrefix value = default;
-                value = Models.BlobPrefix.DeserializeBlobPrefix(e);
-                result.BlobPrefix.Add(value);
+                array.Add(Models.BlobPrefix.DeserializeBlobPrefix(e));
             }
-            result.Blob = new List<Blob>();
+            obj.BlobPrefix = array;
+            var array0 = new List<Blob>();
             foreach (var e0 in element.Elements("Blob"))
             {
-                Blob value = default;
-                value = Models.Blob.DeserializeBlob(e0);
-                result.Blob.Add(value);
+                array0.Add(Models.Blob.DeserializeBlob(e0));
             }
-            return result;
+            obj.Blob = array0;
+            return obj;
         }
     }
 }

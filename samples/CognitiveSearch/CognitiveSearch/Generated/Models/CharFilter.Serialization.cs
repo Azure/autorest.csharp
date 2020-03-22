@@ -32,7 +32,6 @@ namespace CognitiveSearch.Models
                     case "#Microsoft.Azure.Search.PatternReplaceCharFilter": return PatternReplaceCharFilter.DeserializePatternReplaceCharFilter(element);
                 }
             }
-            CharFilter result;
             string odatatype = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -48,8 +47,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new CharFilter(odatatype, name);
-            return result;
+            return new CharFilter(odatatype, name);
         }
     }
 }

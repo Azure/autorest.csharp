@@ -135,7 +135,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseExistingKeyHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseExistingKeyHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -161,7 +161,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseExistingKeyHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseExistingKeyHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -274,7 +274,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseProtectedKeyHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseProtectedKeyHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -300,7 +300,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseProtectedKeyHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseProtectedKeyHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -423,7 +423,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseIntegerHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseIntegerHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -455,7 +455,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseIntegerHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseIntegerHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -578,7 +578,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseLongHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseLongHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -610,7 +610,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseLongHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseLongHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -733,7 +733,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseFloatHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseFloatHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -765,7 +765,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseFloatHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseFloatHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -888,7 +888,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseDoubleHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseDoubleHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -920,7 +920,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseDoubleHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseDoubleHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1043,7 +1043,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseBoolHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseBoolHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1075,7 +1075,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseBoolHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseBoolHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1201,7 +1201,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseStringHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseStringHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1233,7 +1233,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseStringHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseStringHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1356,7 +1356,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseDateHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseDateHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1388,7 +1388,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseDateHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseDateHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1511,7 +1511,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseDatetimeHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseDatetimeHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1543,7 +1543,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseDatetimeHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseDatetimeHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1669,7 +1669,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseDatetimeRfc1123Headers(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseDatetimeRfc1123Headers>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1701,7 +1701,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseDatetimeRfc1123Headers(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseDatetimeRfc1123Headers>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1824,7 +1824,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseDurationHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseDurationHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1856,7 +1856,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseDurationHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseDurationHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1987,7 +1987,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseByteHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseByteHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -2019,7 +2019,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseByteHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseByteHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -2145,7 +2145,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseEnumHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseEnumHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -2177,7 +2177,7 @@ namespace header
                 {
                     case 200:
                         var headers = new ResponseEnumHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<ResponseEnumHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }

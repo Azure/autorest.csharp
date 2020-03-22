@@ -90,7 +90,6 @@ namespace CognitiveSearch.Models
 
         internal static Field DeserializeField(JsonElement element)
         {
-            Field result;
             string name = default;
             DataType type = default;
             bool? key = default;
@@ -226,8 +225,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new Field(name, type, key, retrievable, searchable, filterable, sortable, facetable, analyzer, searchAnalyzer, indexAnalyzer, synonymMaps, fields);
-            return result;
+            return new Field(name, type, key, retrievable, searchable, filterable, sortable, facetable, analyzer, searchAnalyzer, indexAnalyzer, synonymMaps, fields);
         }
     }
 }

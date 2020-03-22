@@ -37,7 +37,6 @@ namespace CognitiveSearch.Models
 
         internal static KeepTokenFilter DeserializeKeepTokenFilter(JsonElement element)
         {
-            KeepTokenFilter result;
             IList<string> keepWords = new List<string>();
             bool? keepWordsCase = default;
             string odatatype = default;
@@ -74,8 +73,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new KeepTokenFilter(keepWords, keepWordsCase, odatatype, name);
-            return result;
+            return new KeepTokenFilter(keepWords, keepWordsCase, odatatype, name);
         }
     }
 }

@@ -14,7 +14,6 @@ namespace CognitiveSearch.Models
     {
         internal static AutocompleteItem DeserializeAutocompleteItem(JsonElement element)
         {
-            AutocompleteItem result;
             string text = default;
             string queryPlusText = default;
             foreach (var property in element.EnumerateObject())
@@ -38,8 +37,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new AutocompleteItem(text, queryPlusText);
-            return result;
+            return new AutocompleteItem(text, queryPlusText);
         }
     }
 }

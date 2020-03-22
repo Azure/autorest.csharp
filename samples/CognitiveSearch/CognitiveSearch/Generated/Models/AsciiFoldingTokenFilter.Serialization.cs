@@ -29,7 +29,6 @@ namespace CognitiveSearch.Models
 
         internal static AsciiFoldingTokenFilter DeserializeAsciiFoldingTokenFilter(JsonElement element)
         {
-            AsciiFoldingTokenFilter result;
             bool? preserveOriginal = default;
             string odatatype = default;
             string name = default;
@@ -55,8 +54,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new AsciiFoldingTokenFilter(preserveOriginal, odatatype, name);
-            return result;
+            return new AsciiFoldingTokenFilter(preserveOriginal, odatatype, name);
         }
     }
 }

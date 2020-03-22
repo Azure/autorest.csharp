@@ -15,7 +15,6 @@ namespace Azure.Storage.Management.Models
     {
         internal static SkuInformation DeserializeSkuInformation(JsonElement element)
         {
-            SkuInformation result;
             SkuName name = default;
             SkuTier? tier = default;
             string resourceType = default;
@@ -100,8 +99,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new SkuInformation(name, tier, resourceType, kind, locations, capabilities, restrictions);
-            return result;
+            return new SkuInformation(name, tier, resourceType, kind, locations, capabilities, restrictions);
         }
     }
 }

@@ -14,7 +14,6 @@ namespace CognitiveSearch.Models
     {
         internal static ItemWarning DeserializeItemWarning(JsonElement element)
         {
-            ItemWarning result;
             string key = default;
             string message = default;
             string name = default;
@@ -68,8 +67,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new ItemWarning(key, message, name, details, documentationLink);
-            return result;
+            return new ItemWarning(key, message, name, details, documentationLink);
         }
     }
 }

@@ -34,7 +34,6 @@ namespace CognitiveSearch.Models
 
         internal static NGramTokenFilterV2 DeserializeNGramTokenFilterV2(JsonElement element)
         {
-            NGramTokenFilterV2 result;
             int? minGram = default;
             int? maxGram = default;
             string odatatype = default;
@@ -70,8 +69,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new NGramTokenFilterV2(minGram, maxGram, odatatype, name);
-            return result;
+            return new NGramTokenFilterV2(minGram, maxGram, odatatype, name);
         }
     }
 }

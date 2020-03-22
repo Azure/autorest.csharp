@@ -15,7 +15,6 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static DocumentLinkedEntities DeserializeDocumentLinkedEntities(JsonElement element)
         {
-            DocumentLinkedEntities result;
             string id = default;
             IList<LinkedEntity> entities = new List<LinkedEntity>();
             DocumentStatistics statistics = default;
@@ -46,8 +45,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            result = new DocumentLinkedEntities(id, entities, statistics);
-            return result;
+            return new DocumentLinkedEntities(id, entities, statistics);
         }
     }
 }

@@ -16,7 +16,6 @@ namespace CognitiveSearch.Models
     {
         internal static IndexerExecutionResult DeserializeIndexerExecutionResult(JsonElement element)
         {
-            IndexerExecutionResult result;
             IndexerExecutionStatus? status = default;
             string errorMessage = default;
             DateTimeOffset? startTime = default;
@@ -130,8 +129,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new IndexerExecutionResult(status, errorMessage, startTime, endTime, errors, warnings, itemsProcessed, itemsFailed, initialTrackingState, finalTrackingState);
-            return result;
+            return new IndexerExecutionResult(status, errorMessage, startTime, endTime, errors, warnings, itemsProcessed, itemsFailed, initialTrackingState, finalTrackingState);
         }
     }
 }

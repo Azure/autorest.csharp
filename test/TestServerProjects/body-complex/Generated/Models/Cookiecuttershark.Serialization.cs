@@ -48,7 +48,6 @@ namespace body_complex.Models
 
         internal static Cookiecuttershark DeserializeCookiecuttershark(JsonElement element)
         {
-            Cookiecuttershark result;
             int? age = default;
             DateTimeOffset birthday = default;
             string fishtype = default;
@@ -105,8 +104,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new Cookiecuttershark(age, birthday, fishtype, species, length, siblings);
-            return result;
+            return new Cookiecuttershark(age, birthday, fishtype, species, length, siblings);
         }
     }
 }

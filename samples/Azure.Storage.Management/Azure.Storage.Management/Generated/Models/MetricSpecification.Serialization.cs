@@ -15,7 +15,6 @@ namespace Azure.Storage.Management.Models
     {
         internal static MetricSpecification DeserializeMetricSpecification(JsonElement element)
         {
-            MetricSpecification result;
             string name = default;
             string displayName = default;
             string displayDescription = default;
@@ -114,8 +113,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new MetricSpecification(name, displayName, displayDescription, unit, dimensions, aggregationType, fillGapWithZero, category, resourceIdDimensionNameOverride);
-            return result;
+            return new MetricSpecification(name, displayName, displayDescription, unit, dimensions, aggregationType, fillGapWithZero, category, resourceIdDimensionNameOverride);
         }
     }
 }

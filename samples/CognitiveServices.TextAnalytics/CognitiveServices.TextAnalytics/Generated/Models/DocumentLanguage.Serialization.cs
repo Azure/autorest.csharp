@@ -15,7 +15,6 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static DocumentLanguage DeserializeDocumentLanguage(JsonElement element)
         {
-            DocumentLanguage result;
             string id = default;
             IList<DetectedLanguage> detectedLanguages = new List<DetectedLanguage>();
             DocumentStatistics statistics = default;
@@ -46,8 +45,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            result = new DocumentLanguage(id, detectedLanguages, statistics);
-            return result;
+            return new DocumentLanguage(id, detectedLanguages, statistics);
         }
     }
 }

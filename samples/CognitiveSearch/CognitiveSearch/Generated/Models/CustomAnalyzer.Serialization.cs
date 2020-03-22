@@ -47,7 +47,6 @@ namespace CognitiveSearch.Models
 
         internal static CustomAnalyzer DeserializeCustomAnalyzer(JsonElement element)
         {
-            CustomAnalyzer result;
             TokenizerName tokenizer = default;
             IList<TokenFilterName> tokenFilters = default;
             IList<string> charFilters = default;
@@ -99,8 +98,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new CustomAnalyzer(tokenizer, tokenFilters, charFilters, odatatype, name);
-            return result;
+            return new CustomAnalyzer(tokenizer, tokenFilters, charFilters, odatatype, name);
         }
     }
 }

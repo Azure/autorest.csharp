@@ -34,7 +34,6 @@ namespace CognitiveSearch.Models
 
         internal static LimitTokenFilter DeserializeLimitTokenFilter(JsonElement element)
         {
-            LimitTokenFilter result;
             int? maxTokenCount = default;
             bool? consumeAllTokens = default;
             string odatatype = default;
@@ -70,8 +69,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new LimitTokenFilter(maxTokenCount, consumeAllTokens, odatatype, name);
-            return result;
+            return new LimitTokenFilter(maxTokenCount, consumeAllTokens, odatatype, name);
         }
     }
 }

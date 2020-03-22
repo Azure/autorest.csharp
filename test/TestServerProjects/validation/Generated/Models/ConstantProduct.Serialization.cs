@@ -24,7 +24,6 @@ namespace validation.Models
 
         internal static ConstantProduct DeserializeConstantProduct(JsonElement element)
         {
-            ConstantProduct result;
             string constProperty = default;
             string constProperty2 = default;
             foreach (var property in element.EnumerateObject())
@@ -40,8 +39,7 @@ namespace validation.Models
                     continue;
                 }
             }
-            result = new ConstantProduct(constProperty, constProperty2);
-            return result;
+            return new ConstantProduct(constProperty, constProperty2);
         }
     }
 }

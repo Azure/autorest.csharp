@@ -53,7 +53,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static NetworkInterfaceTapConfiguration DeserializeNetworkInterfaceTapConfiguration(JsonElement element)
         {
-            NetworkInterfaceTapConfiguration result;
             string name = default;
             string etag = default;
             string type = default;
@@ -124,8 +123,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new NetworkInterfaceTapConfiguration(name, etag, type, virtualNetworkTap, provisioningState, id);
-            return result;
+            return new NetworkInterfaceTapConfiguration(name, etag, type, virtualNetworkTap, provisioningState, id);
         }
     }
 }

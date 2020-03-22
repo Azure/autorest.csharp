@@ -15,7 +15,6 @@ namespace AppConfiguration.Models
     {
         internal static KeyListResult DeserializeKeyListResult(JsonElement element)
         {
-            KeyListResult result;
             IList<Key> items = default;
             string nextLink = default;
             foreach (var property in element.EnumerateObject())
@@ -44,8 +43,7 @@ namespace AppConfiguration.Models
                     continue;
                 }
             }
-            result = new KeyListResult(items, nextLink);
-            return result;
+            return new KeyListResult(items, nextLink);
         }
     }
 }

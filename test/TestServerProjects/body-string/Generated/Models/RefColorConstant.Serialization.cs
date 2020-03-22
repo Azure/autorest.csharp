@@ -27,7 +27,6 @@ namespace body_string.Models
 
         internal static RefColorConstant DeserializeRefColorConstant(JsonElement element)
         {
-            RefColorConstant result;
             string colorConstant = default;
             string field1 = default;
             foreach (var property in element.EnumerateObject())
@@ -47,8 +46,7 @@ namespace body_string.Models
                     continue;
                 }
             }
-            result = new RefColorConstant(colorConstant, field1);
-            return result;
+            return new RefColorConstant(colorConstant, field1);
         }
     }
 }

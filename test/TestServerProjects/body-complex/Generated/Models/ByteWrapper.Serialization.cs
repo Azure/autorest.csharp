@@ -26,7 +26,6 @@ namespace body_complex.Models
 
         internal static ByteWrapper DeserializeByteWrapper(JsonElement element)
         {
-            ByteWrapper result;
             byte[] field = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -40,8 +39,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new ByteWrapper(field);
-            return result;
+            return new ByteWrapper(field);
         }
     }
 }

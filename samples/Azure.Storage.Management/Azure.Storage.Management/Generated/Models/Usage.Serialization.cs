@@ -14,7 +14,6 @@ namespace Azure.Storage.Management.Models
     {
         internal static Usage DeserializeUsage(JsonElement element)
         {
-            Usage result;
             UsageUnit? unit = default;
             int? currentValue = default;
             int? limit = default;
@@ -58,8 +57,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new Usage(unit, currentValue, limit, name);
-            return result;
+            return new Usage(unit, currentValue, limit, name);
         }
     }
 }

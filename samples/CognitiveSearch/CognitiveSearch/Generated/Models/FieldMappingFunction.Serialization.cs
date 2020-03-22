@@ -34,7 +34,6 @@ namespace CognitiveSearch.Models
 
         internal static FieldMappingFunction DeserializeFieldMappingFunction(JsonElement element)
         {
-            FieldMappingFunction result;
             string name = default;
             IDictionary<string, object> parameters = default;
             foreach (var property in element.EnumerateObject())
@@ -50,17 +49,16 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    Dictionary<string, object> array = new Dictionary<string, object>();
+                    Dictionary<string, object> dictionary = new Dictionary<string, object>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        array.Add(property0.Name, property0.Value.GetObject());
+                        dictionary.Add(property0.Name, property0.Value.GetObject());
                     }
-                    parameters = array;
+                    parameters = dictionary;
                     continue;
                 }
             }
-            result = new FieldMappingFunction(name, parameters);
-            return result;
+            return new FieldMappingFunction(name, parameters);
         }
     }
 }

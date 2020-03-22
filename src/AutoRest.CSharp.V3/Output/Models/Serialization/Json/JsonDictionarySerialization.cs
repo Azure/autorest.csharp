@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Serialization.Json
             ValueSerialization = valueSerialization;
         }
 
-        public override CSharpType? Type { get; }
+        public CSharpType? Type { get; }
         public JsonSerialization ValueSerialization { get; }
     }
 }

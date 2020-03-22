@@ -15,7 +15,6 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static EntitiesResult DeserializeEntitiesResult(JsonElement element)
         {
-            EntitiesResult result;
             IList<DocumentEntities> documents = new List<DocumentEntities>();
             IList<DocumentError> errors = new List<DocumentError>();
             RequestStatistics statistics = default;
@@ -57,8 +56,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            result = new EntitiesResult(documents, errors, statistics, modelVersion);
-            return result;
+            return new EntitiesResult(documents, errors, statistics, modelVersion);
         }
     }
 }

@@ -14,7 +14,6 @@ namespace xml_service.Models
     {
         internal static JsonOutput DeserializeJsonOutput(JsonElement element)
         {
-            JsonOutput result;
             int? id = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -28,8 +27,7 @@ namespace xml_service.Models
                     continue;
                 }
             }
-            result = new JsonOutput(id);
-            return result;
+            return new JsonOutput(id);
         }
     }
 }

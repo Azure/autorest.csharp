@@ -32,7 +32,6 @@ namespace CognitiveSearch.Models
 
         internal static Suggester DeserializeSuggester(JsonElement element)
         {
-            Suggester result;
             string name = default;
             SearchMode searchMode = default;
             IList<string> sourceFields = new List<string>();
@@ -59,8 +58,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new Suggester(name, searchMode, sourceFields);
-            return result;
+            return new Suggester(name, searchMode, sourceFields);
         }
     }
 }

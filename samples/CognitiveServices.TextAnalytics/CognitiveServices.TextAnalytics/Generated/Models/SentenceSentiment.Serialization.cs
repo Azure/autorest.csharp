@@ -15,7 +15,6 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static SentenceSentiment DeserializeSentenceSentiment(JsonElement element)
         {
-            SentenceSentiment result;
             SentenceSentimentValue sentiment = default;
             SentimentConfidenceScorePerLabel sentenceScores = new SentimentConfidenceScorePerLabel();
             int offset = default;
@@ -58,8 +57,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            result = new SentenceSentiment(sentiment, sentenceScores, offset, length, warnings);
-            return result;
+            return new SentenceSentiment(sentiment, sentenceScores, offset, length, warnings);
         }
     }
 }

@@ -52,7 +52,6 @@ namespace CognitiveSearch.Models
 
         internal static DictionaryDecompounderTokenFilter DeserializeDictionaryDecompounderTokenFilter(JsonElement element)
         {
-            DictionaryDecompounderTokenFilter result;
             IList<string> wordList = new List<string>();
             int? minWordSize = default;
             int? minSubwordSize = default;
@@ -119,8 +118,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new DictionaryDecompounderTokenFilter(wordList, minWordSize, minSubwordSize, maxSubwordSize, onlyLongestMatch, odatatype, name);
-            return result;
+            return new DictionaryDecompounderTokenFilter(wordList, minWordSize, minSubwordSize, maxSubwordSize, onlyLongestMatch, odatatype, name);
         }
     }
 }

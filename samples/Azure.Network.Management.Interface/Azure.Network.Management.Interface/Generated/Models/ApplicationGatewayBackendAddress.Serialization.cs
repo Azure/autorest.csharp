@@ -30,7 +30,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static ApplicationGatewayBackendAddress DeserializeApplicationGatewayBackendAddress(JsonElement element)
         {
-            ApplicationGatewayBackendAddress result;
             string fqdn = default;
             string ipAddress = default;
             foreach (var property in element.EnumerateObject())
@@ -54,8 +53,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new ApplicationGatewayBackendAddress(fqdn, ipAddress);
-            return result;
+            return new ApplicationGatewayBackendAddress(fqdn, ipAddress);
         }
     }
 }

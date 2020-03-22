@@ -14,7 +14,6 @@ namespace AppConfiguration.Models
     {
         internal static Error DeserializeError(JsonElement element)
         {
-            Error result;
             string type = default;
             string title = default;
             string name = default;
@@ -68,8 +67,7 @@ namespace AppConfiguration.Models
                     continue;
                 }
             }
-            result = new Error(type, title, name, detail, status);
-            return result;
+            return new Error(type, title, name, detail, status);
         }
     }
 }

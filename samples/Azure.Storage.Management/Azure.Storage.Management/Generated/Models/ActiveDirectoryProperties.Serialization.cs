@@ -32,7 +32,6 @@ namespace Azure.Storage.Management.Models
 
         internal static ActiveDirectoryProperties DeserializeActiveDirectoryProperties(JsonElement element)
         {
-            ActiveDirectoryProperties result;
             string domainName = default;
             string netBiosDomainName = default;
             string forestName = default;
@@ -72,8 +71,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new ActiveDirectoryProperties(domainName, netBiosDomainName, forestName, domainGuid, domainSid, azureStorageSid);
-            return result;
+            return new ActiveDirectoryProperties(domainName, netBiosDomainName, forestName, domainGuid, domainSid, azureStorageSid);
         }
     }
 }

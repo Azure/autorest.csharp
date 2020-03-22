@@ -33,7 +33,6 @@ namespace CognitiveSearch.Models
 
         internal static DistanceScoringFunction DeserializeDistanceScoringFunction(JsonElement element)
         {
-            DistanceScoringFunction result;
             DistanceScoringParameters distance = new DistanceScoringParameters();
             string type = default;
             string fieldName = default;
@@ -71,8 +70,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new DistanceScoringFunction(distance, type, fieldName, boost, interpolation);
-            return result;
+            return new DistanceScoringFunction(distance, type, fieldName, boost, interpolation);
         }
     }
 }

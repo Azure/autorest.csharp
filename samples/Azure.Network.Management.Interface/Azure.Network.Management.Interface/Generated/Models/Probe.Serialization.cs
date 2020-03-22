@@ -84,7 +84,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static Probe DeserializeProbe(JsonElement element)
         {
-            Probe result;
             string name = default;
             string etag = default;
             string type = default;
@@ -210,8 +209,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new Probe(name, etag, type, loadBalancingRules, protocol, port, intervalInSeconds, numberOfProbes, requestPath, provisioningState, id);
-            return result;
+            return new Probe(name, etag, type, loadBalancingRules, protocol, port, intervalInSeconds, numberOfProbes, requestPath, provisioningState, id);
         }
     }
 }

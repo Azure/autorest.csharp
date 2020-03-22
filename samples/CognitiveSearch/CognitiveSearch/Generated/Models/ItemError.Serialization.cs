@@ -14,7 +14,6 @@ namespace CognitiveSearch.Models
     {
         internal static ItemError DeserializeItemError(JsonElement element)
         {
-            ItemError result;
             string key = default;
             string errorMessage = default;
             int? statusCode = default;
@@ -78,8 +77,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new ItemError(key, errorMessage, statusCode, name, details, documentationLink);
-            return result;
+            return new ItemError(key, errorMessage, statusCode, name, details, documentationLink);
         }
     }
 }

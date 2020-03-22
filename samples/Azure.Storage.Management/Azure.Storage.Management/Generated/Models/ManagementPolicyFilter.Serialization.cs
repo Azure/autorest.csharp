@@ -38,7 +38,6 @@ namespace Azure.Storage.Management.Models
 
         internal static ManagementPolicyFilter DeserializeManagementPolicyFilter(JsonElement element)
         {
-            ManagementPolicyFilter result;
             IList<string> prefixMatch = default;
             IList<string> blobTypes = new List<string>();
             foreach (var property in element.EnumerateObject())
@@ -68,8 +67,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new ManagementPolicyFilter(prefixMatch, blobTypes);
-            return result;
+            return new ManagementPolicyFilter(prefixMatch, blobTypes);
         }
     }
 }

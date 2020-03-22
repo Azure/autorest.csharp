@@ -57,7 +57,6 @@ namespace body_complex.Models
                     case "sawshark": return Sawshark.DeserializeSawshark(element);
                 }
             }
-            Shark result;
             int? age = default;
             DateTimeOffset birthday = default;
             string fishtype = default;
@@ -114,8 +113,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new Shark(age, birthday, fishtype, species, length, siblings);
-            return result;
+            return new Shark(age, birthday, fishtype, species, length, siblings);
         }
     }
 }

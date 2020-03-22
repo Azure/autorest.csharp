@@ -96,10 +96,11 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
+                            TableQueryResponse value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = TableQueryResponse.DeserializeTableQueryResponse(document.RootElement);
+                            value = TableQueryResponse.DeserializeTableQueryResponse(document.RootElement);
                             var headers = new QueryHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<TableQueryResponse, QueryHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -132,10 +133,11 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
+                            TableQueryResponse value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = TableQueryResponse.DeserializeTableQueryResponse(document.RootElement);
+                            value = TableQueryResponse.DeserializeTableQueryResponse(document.RootElement);
                             var headers = new QueryHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<TableQueryResponse, QueryHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -196,10 +198,11 @@ namespace Azure.Storage.Tables
                 {
                     case 201:
                         {
+                            TableResponse value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = TableResponse.DeserializeTableResponse(document.RootElement);
+                            value = TableResponse.DeserializeTableResponse(document.RootElement);
                             var headers = new CreateHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<TableResponse, CreateHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -234,10 +237,11 @@ namespace Azure.Storage.Tables
                 {
                     case 201:
                         {
+                            TableResponse value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = TableResponse.DeserializeTableResponse(document.RootElement);
+                            value = TableResponse.DeserializeTableResponse(document.RootElement);
                             var headers = new CreateHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<TableResponse, CreateHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -290,7 +294,7 @@ namespace Azure.Storage.Tables
                 {
                     case 204:
                         var headers = new DeleteHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<DeleteHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -323,7 +327,7 @@ namespace Azure.Storage.Tables
                 {
                     case 204:
                         var headers = new DeleteHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<DeleteHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -401,10 +405,11 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
+                            TableEntityQueryResponse value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
+                            value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
                             var headers = new QueryEntitiesHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<TableEntityQueryResponse, QueryEntitiesHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -443,10 +448,11 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
+                            TableEntityQueryResponse value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
+                            value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
                             var headers = new QueryEntitiesHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<TableEntityQueryResponse, QueryEntitiesHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -534,10 +540,11 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
+                            TableEntityQueryResponse value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
+                            value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
                             var headers = new QueryEntitiesWithPartitionAndRowKeyHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<TableEntityQueryResponse, QueryEntitiesWithPartitionAndRowKeyHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -585,10 +592,11 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
+                            TableEntityQueryResponse value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
+                            value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
                             var headers = new QueryEntitiesWithPartitionAndRowKeyHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<TableEntityQueryResponse, QueryEntitiesWithPartitionAndRowKeyHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -677,7 +685,7 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         var headers = new UpdateEntityHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<UpdateEntityHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -723,7 +731,7 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         var headers = new UpdateEntityHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<UpdateEntityHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -800,7 +808,7 @@ namespace Azure.Storage.Tables
                 {
                     case 204:
                         var headers = new DeleteEntityHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<DeleteEntityHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -845,7 +853,7 @@ namespace Azure.Storage.Tables
                 {
                     case 204:
                         var headers = new DeleteEntityHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<DeleteEntityHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -918,16 +926,16 @@ namespace Azure.Storage.Tables
                 {
                     case 201:
                         {
+                            IDictionary<string, object> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, object> value;
-                            Dictionary<string, object> array = new Dictionary<string, object>();
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetObject());
+                                dictionary.Add(property.Name, property.Value.GetObject());
                             }
-                            value = array;
+                            value = dictionary;
                             var headers = new InsertEntityHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<IDictionary<string, object>, InsertEntityHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -964,16 +972,16 @@ namespace Azure.Storage.Tables
                 {
                     case 201:
                         {
+                            IDictionary<string, object> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, object> value;
-                            Dictionary<string, object> array = new Dictionary<string, object>();
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetObject());
+                                dictionary.Add(property.Name, property.Value.GetObject());
                             }
-                            value = array;
+                            value = dictionary;
                             var headers = new InsertEntityHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<IDictionary<string, object>, InsertEntityHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1031,21 +1039,19 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             IList<SignedIdentifier> value = default;
-                            var signedIdentifiers = document.Element("SignedIdentifiers");
-                            if (signedIdentifiers != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("SignedIdentifiers") is XElement signedIdentifiers)
                             {
-                                value = new List<SignedIdentifier>();
+                                var array = new List<SignedIdentifier>();
                                 foreach (var e in signedIdentifiers.Elements("SignedIdentifier"))
                                 {
-                                    SignedIdentifier value0 = default;
-                                    value0 = SignedIdentifier.DeserializeSignedIdentifier(e);
-                                    value.Add(value0);
+                                    array.Add(SignedIdentifier.DeserializeSignedIdentifier(e));
                                 }
+                                value = array;
                             }
                             var headers = new GetAccessPolicyHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<IList<SignedIdentifier>, GetAccessPolicyHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1080,21 +1086,19 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             IList<SignedIdentifier> value = default;
-                            var signedIdentifiers = document.Element("SignedIdentifiers");
-                            if (signedIdentifiers != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("SignedIdentifiers") is XElement signedIdentifiers)
                             {
-                                value = new List<SignedIdentifier>();
+                                var array = new List<SignedIdentifier>();
                                 foreach (var e in signedIdentifiers.Elements("SignedIdentifier"))
                                 {
-                                    SignedIdentifier value0 = default;
-                                    value0 = SignedIdentifier.DeserializeSignedIdentifier(e);
-                                    value.Add(value0);
+                                    array.Add(SignedIdentifier.DeserializeSignedIdentifier(e));
                                 }
+                                value = array;
                             }
                             var headers = new GetAccessPolicyHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<IList<SignedIdentifier>, GetAccessPolicyHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1162,7 +1166,7 @@ namespace Azure.Storage.Tables
                 {
                     case 204:
                         var headers = new SetAccessPolicyHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<SetAccessPolicyHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1197,7 +1201,7 @@ namespace Azure.Storage.Tables
                 {
                     case 204:
                         var headers = new SetAccessPolicyHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<SetAccessPolicyHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }

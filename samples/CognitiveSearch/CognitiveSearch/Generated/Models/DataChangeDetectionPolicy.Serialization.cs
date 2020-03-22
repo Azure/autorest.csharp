@@ -30,7 +30,6 @@ namespace CognitiveSearch.Models
                     case "#Microsoft.Azure.Search.SqlIntegratedChangeTrackingPolicy": return SqlIntegratedChangeTrackingPolicy.DeserializeSqlIntegratedChangeTrackingPolicy(element);
                 }
             }
-            DataChangeDetectionPolicy result;
             string odatatype = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -40,8 +39,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new DataChangeDetectionPolicy(odatatype);
-            return result;
+            return new DataChangeDetectionPolicy(odatatype);
         }
     }
 }

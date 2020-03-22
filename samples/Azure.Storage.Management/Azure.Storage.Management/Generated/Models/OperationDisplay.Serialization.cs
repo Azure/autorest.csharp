@@ -14,7 +14,6 @@ namespace Azure.Storage.Management.Models
     {
         internal static OperationDisplay DeserializeOperationDisplay(JsonElement element)
         {
-            OperationDisplay result;
             string provider = default;
             string resource = default;
             string operation = default;
@@ -58,8 +57,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new OperationDisplay(provider, resource, operation, description);
-            return result;
+            return new OperationDisplay(provider, resource, operation, description);
         }
     }
 }

@@ -62,15 +62,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, int> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, int> value;
-                            Dictionary<string, int> array = new Dictionary<string, int>();
+                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetInt32());
+                                dictionary.Add(property.Name, property.Value.GetInt32());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, int>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -97,15 +97,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, int> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, int> value;
-                            Dictionary<string, int> array = new Dictionary<string, int>();
+                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetInt32());
+                                dictionary.Add(property.Name, property.Value.GetInt32());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, int>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -144,15 +144,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, int> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, int> value;
-                            Dictionary<string, int> array = new Dictionary<string, int>();
+                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetInt32());
+                                dictionary.Add(property.Name, property.Value.GetInt32());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, int>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -179,15 +179,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, int> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, int> value;
-                            Dictionary<string, int> array = new Dictionary<string, int>();
+                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetInt32());
+                                dictionary.Add(property.Name, property.Value.GetInt32());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, int>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -310,15 +310,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, string> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, string> value;
-                            Dictionary<string, string> array = new Dictionary<string, string>();
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetString());
+                                dictionary.Add(property.Name, property.Value.GetString());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, string>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -345,15 +345,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, string> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, string> value;
-                            Dictionary<string, string> array = new Dictionary<string, string>();
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetString());
+                                dictionary.Add(property.Name, property.Value.GetString());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, string>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -392,15 +392,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, string> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, string> value;
-                            Dictionary<string, string> array = new Dictionary<string, string>();
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetString());
+                                dictionary.Add(property.Name, property.Value.GetString());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, string>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -427,15 +427,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, string> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, string> value;
-                            Dictionary<string, string> array = new Dictionary<string, string>();
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetString());
+                                dictionary.Add(property.Name, property.Value.GetString());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, string>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -474,15 +474,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, string> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, string> value;
-                            Dictionary<string, string> array = new Dictionary<string, string>();
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetString());
+                                dictionary.Add(property.Name, property.Value.GetString());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, string>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -509,15 +509,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, string> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, string> value;
-                            Dictionary<string, string> array = new Dictionary<string, string>();
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetString());
+                                dictionary.Add(property.Name, property.Value.GetString());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, string>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -556,15 +556,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, string> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, string> value;
-                            Dictionary<string, string> array = new Dictionary<string, string>();
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetString());
+                                dictionary.Add(property.Name, property.Value.GetString());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, string>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -591,15 +591,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, string> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, string> value;
-                            Dictionary<string, string> array = new Dictionary<string, string>();
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetString());
+                                dictionary.Add(property.Name, property.Value.GetString());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, string>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -638,15 +638,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, bool> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, bool> value;
-                            Dictionary<string, bool> array = new Dictionary<string, bool>();
+                            Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetBoolean());
+                                dictionary.Add(property.Name, property.Value.GetBoolean());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, bool>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -673,15 +673,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, bool> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, bool> value;
-                            Dictionary<string, bool> array = new Dictionary<string, bool>();
+                            Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetBoolean());
+                                dictionary.Add(property.Name, property.Value.GetBoolean());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, bool>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -804,15 +804,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, bool> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, bool> value;
-                            Dictionary<string, bool> array = new Dictionary<string, bool>();
+                            Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetBoolean());
+                                dictionary.Add(property.Name, property.Value.GetBoolean());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, bool>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -839,15 +839,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, bool> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, bool> value;
-                            Dictionary<string, bool> array = new Dictionary<string, bool>();
+                            Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetBoolean());
+                                dictionary.Add(property.Name, property.Value.GetBoolean());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, bool>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -886,15 +886,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, bool> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, bool> value;
-                            Dictionary<string, bool> array = new Dictionary<string, bool>();
+                            Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetBoolean());
+                                dictionary.Add(property.Name, property.Value.GetBoolean());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, bool>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -921,15 +921,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, bool> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, bool> value;
-                            Dictionary<string, bool> array = new Dictionary<string, bool>();
+                            Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetBoolean());
+                                dictionary.Add(property.Name, property.Value.GetBoolean());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, bool>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -968,15 +968,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, int> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, int> value;
-                            Dictionary<string, int> array = new Dictionary<string, int>();
+                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetInt32());
+                                dictionary.Add(property.Name, property.Value.GetInt32());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, int>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1003,15 +1003,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, int> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, int> value;
-                            Dictionary<string, int> array = new Dictionary<string, int>();
+                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetInt32());
+                                dictionary.Add(property.Name, property.Value.GetInt32());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, int>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1134,15 +1134,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, int> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, int> value;
-                            Dictionary<string, int> array = new Dictionary<string, int>();
+                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetInt32());
+                                dictionary.Add(property.Name, property.Value.GetInt32());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, int>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1169,15 +1169,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, int> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, int> value;
-                            Dictionary<string, int> array = new Dictionary<string, int>();
+                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetInt32());
+                                dictionary.Add(property.Name, property.Value.GetInt32());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, int>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1216,15 +1216,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, int> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, int> value;
-                            Dictionary<string, int> array = new Dictionary<string, int>();
+                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetInt32());
+                                dictionary.Add(property.Name, property.Value.GetInt32());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, int>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1251,15 +1251,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, int> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, int> value;
-                            Dictionary<string, int> array = new Dictionary<string, int>();
+                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetInt32());
+                                dictionary.Add(property.Name, property.Value.GetInt32());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, int>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1298,15 +1298,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, long> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, long> value;
-                            Dictionary<string, long> array = new Dictionary<string, long>();
+                            Dictionary<string, long> dictionary = new Dictionary<string, long>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetInt64());
+                                dictionary.Add(property.Name, property.Value.GetInt64());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, long>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1333,15 +1333,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, long> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, long> value;
-                            Dictionary<string, long> array = new Dictionary<string, long>();
+                            Dictionary<string, long> dictionary = new Dictionary<string, long>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetInt64());
+                                dictionary.Add(property.Name, property.Value.GetInt64());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, long>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1464,15 +1464,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, long> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, long> value;
-                            Dictionary<string, long> array = new Dictionary<string, long>();
+                            Dictionary<string, long> dictionary = new Dictionary<string, long>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetInt64());
+                                dictionary.Add(property.Name, property.Value.GetInt64());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, long>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1499,15 +1499,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, long> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, long> value;
-                            Dictionary<string, long> array = new Dictionary<string, long>();
+                            Dictionary<string, long> dictionary = new Dictionary<string, long>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetInt64());
+                                dictionary.Add(property.Name, property.Value.GetInt64());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, long>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1546,15 +1546,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, long> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, long> value;
-                            Dictionary<string, long> array = new Dictionary<string, long>();
+                            Dictionary<string, long> dictionary = new Dictionary<string, long>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetInt64());
+                                dictionary.Add(property.Name, property.Value.GetInt64());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, long>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1581,15 +1581,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, long> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, long> value;
-                            Dictionary<string, long> array = new Dictionary<string, long>();
+                            Dictionary<string, long> dictionary = new Dictionary<string, long>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetInt64());
+                                dictionary.Add(property.Name, property.Value.GetInt64());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, long>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1628,15 +1628,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, float> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, float> value;
-                            Dictionary<string, float> array = new Dictionary<string, float>();
+                            Dictionary<string, float> dictionary = new Dictionary<string, float>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetSingle());
+                                dictionary.Add(property.Name, property.Value.GetSingle());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, float>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1663,15 +1663,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, float> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, float> value;
-                            Dictionary<string, float> array = new Dictionary<string, float>();
+                            Dictionary<string, float> dictionary = new Dictionary<string, float>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetSingle());
+                                dictionary.Add(property.Name, property.Value.GetSingle());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, float>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1794,15 +1794,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, float> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, float> value;
-                            Dictionary<string, float> array = new Dictionary<string, float>();
+                            Dictionary<string, float> dictionary = new Dictionary<string, float>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetSingle());
+                                dictionary.Add(property.Name, property.Value.GetSingle());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, float>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1829,15 +1829,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, float> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, float> value;
-                            Dictionary<string, float> array = new Dictionary<string, float>();
+                            Dictionary<string, float> dictionary = new Dictionary<string, float>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetSingle());
+                                dictionary.Add(property.Name, property.Value.GetSingle());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, float>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1876,15 +1876,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, float> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, float> value;
-                            Dictionary<string, float> array = new Dictionary<string, float>();
+                            Dictionary<string, float> dictionary = new Dictionary<string, float>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetSingle());
+                                dictionary.Add(property.Name, property.Value.GetSingle());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, float>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1911,15 +1911,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, float> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, float> value;
-                            Dictionary<string, float> array = new Dictionary<string, float>();
+                            Dictionary<string, float> dictionary = new Dictionary<string, float>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetSingle());
+                                dictionary.Add(property.Name, property.Value.GetSingle());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, float>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1958,15 +1958,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, double> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, double> value;
-                            Dictionary<string, double> array = new Dictionary<string, double>();
+                            Dictionary<string, double> dictionary = new Dictionary<string, double>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetDouble());
+                                dictionary.Add(property.Name, property.Value.GetDouble());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, double>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1993,15 +1993,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, double> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, double> value;
-                            Dictionary<string, double> array = new Dictionary<string, double>();
+                            Dictionary<string, double> dictionary = new Dictionary<string, double>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetDouble());
+                                dictionary.Add(property.Name, property.Value.GetDouble());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, double>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2124,15 +2124,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, double> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, double> value;
-                            Dictionary<string, double> array = new Dictionary<string, double>();
+                            Dictionary<string, double> dictionary = new Dictionary<string, double>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetDouble());
+                                dictionary.Add(property.Name, property.Value.GetDouble());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, double>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2159,15 +2159,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, double> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, double> value;
-                            Dictionary<string, double> array = new Dictionary<string, double>();
+                            Dictionary<string, double> dictionary = new Dictionary<string, double>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetDouble());
+                                dictionary.Add(property.Name, property.Value.GetDouble());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, double>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2206,15 +2206,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, double> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, double> value;
-                            Dictionary<string, double> array = new Dictionary<string, double>();
+                            Dictionary<string, double> dictionary = new Dictionary<string, double>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetDouble());
+                                dictionary.Add(property.Name, property.Value.GetDouble());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, double>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2241,15 +2241,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, double> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, double> value;
-                            Dictionary<string, double> array = new Dictionary<string, double>();
+                            Dictionary<string, double> dictionary = new Dictionary<string, double>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetDouble());
+                                dictionary.Add(property.Name, property.Value.GetDouble());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, double>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2288,15 +2288,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, string> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, string> value;
-                            Dictionary<string, string> array = new Dictionary<string, string>();
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetString());
+                                dictionary.Add(property.Name, property.Value.GetString());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, string>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2323,15 +2323,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, string> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, string> value;
-                            Dictionary<string, string> array = new Dictionary<string, string>();
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetString());
+                                dictionary.Add(property.Name, property.Value.GetString());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, string>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2454,15 +2454,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, string> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, string> value;
-                            Dictionary<string, string> array = new Dictionary<string, string>();
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetString());
+                                dictionary.Add(property.Name, property.Value.GetString());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, string>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2489,15 +2489,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, string> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, string> value;
-                            Dictionary<string, string> array = new Dictionary<string, string>();
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetString());
+                                dictionary.Add(property.Name, property.Value.GetString());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, string>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2536,15 +2536,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, string> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, string> value;
-                            Dictionary<string, string> array = new Dictionary<string, string>();
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetString());
+                                dictionary.Add(property.Name, property.Value.GetString());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, string>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2571,15 +2571,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, string> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, string> value;
-                            Dictionary<string, string> array = new Dictionary<string, string>();
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetString());
+                                dictionary.Add(property.Name, property.Value.GetString());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, string>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2618,15 +2618,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, DateTimeOffset> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, DateTimeOffset> value;
-                            Dictionary<string, DateTimeOffset> array = new Dictionary<string, DateTimeOffset>();
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, DateTimeOffset>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2653,15 +2653,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, DateTimeOffset> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, DateTimeOffset> value;
-                            Dictionary<string, DateTimeOffset> array = new Dictionary<string, DateTimeOffset>();
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, DateTimeOffset>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2784,15 +2784,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, DateTimeOffset> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, DateTimeOffset> value;
-                            Dictionary<string, DateTimeOffset> array = new Dictionary<string, DateTimeOffset>();
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, DateTimeOffset>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2819,15 +2819,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, DateTimeOffset> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, DateTimeOffset> value;
-                            Dictionary<string, DateTimeOffset> array = new Dictionary<string, DateTimeOffset>();
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, DateTimeOffset>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2866,15 +2866,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, DateTimeOffset> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, DateTimeOffset> value;
-                            Dictionary<string, DateTimeOffset> array = new Dictionary<string, DateTimeOffset>();
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, DateTimeOffset>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2901,15 +2901,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, DateTimeOffset> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, DateTimeOffset> value;
-                            Dictionary<string, DateTimeOffset> array = new Dictionary<string, DateTimeOffset>();
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, DateTimeOffset>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2948,15 +2948,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, DateTimeOffset> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, DateTimeOffset> value;
-                            Dictionary<string, DateTimeOffset> array = new Dictionary<string, DateTimeOffset>();
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, DateTimeOffset>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2983,15 +2983,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, DateTimeOffset> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, DateTimeOffset> value;
-                            Dictionary<string, DateTimeOffset> array = new Dictionary<string, DateTimeOffset>();
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, DateTimeOffset>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -3114,15 +3114,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, DateTimeOffset> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, DateTimeOffset> value;
-                            Dictionary<string, DateTimeOffset> array = new Dictionary<string, DateTimeOffset>();
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, DateTimeOffset>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -3149,15 +3149,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, DateTimeOffset> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, DateTimeOffset> value;
-                            Dictionary<string, DateTimeOffset> array = new Dictionary<string, DateTimeOffset>();
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, DateTimeOffset>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -3196,15 +3196,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, DateTimeOffset> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, DateTimeOffset> value;
-                            Dictionary<string, DateTimeOffset> array = new Dictionary<string, DateTimeOffset>();
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, DateTimeOffset>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -3231,15 +3231,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, DateTimeOffset> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, DateTimeOffset> value;
-                            Dictionary<string, DateTimeOffset> array = new Dictionary<string, DateTimeOffset>();
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, DateTimeOffset>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -3278,15 +3278,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, DateTimeOffset> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, DateTimeOffset> value;
-                            Dictionary<string, DateTimeOffset> array = new Dictionary<string, DateTimeOffset>();
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetDateTimeOffset("R"));
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("R"));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, DateTimeOffset>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -3313,15 +3313,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, DateTimeOffset> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, DateTimeOffset> value;
-                            Dictionary<string, DateTimeOffset> array = new Dictionary<string, DateTimeOffset>();
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetDateTimeOffset("R"));
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("R"));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, DateTimeOffset>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -3444,15 +3444,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, TimeSpan> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, TimeSpan> value;
-                            Dictionary<string, TimeSpan> array = new Dictionary<string, TimeSpan>();
+                            Dictionary<string, TimeSpan> dictionary = new Dictionary<string, TimeSpan>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetTimeSpan("P"));
+                                dictionary.Add(property.Name, property.Value.GetTimeSpan("P"));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, TimeSpan>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -3479,15 +3479,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, TimeSpan> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, TimeSpan> value;
-                            Dictionary<string, TimeSpan> array = new Dictionary<string, TimeSpan>();
+                            Dictionary<string, TimeSpan> dictionary = new Dictionary<string, TimeSpan>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetTimeSpan("P"));
+                                dictionary.Add(property.Name, property.Value.GetTimeSpan("P"));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, TimeSpan>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -3610,15 +3610,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, byte[]> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, byte[]> value;
-                            Dictionary<string, byte[]> array = new Dictionary<string, byte[]>();
+                            Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetBytesFromBase64());
+                                dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, byte[]>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -3645,15 +3645,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, byte[]> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, byte[]> value;
-                            Dictionary<string, byte[]> array = new Dictionary<string, byte[]>();
+                            Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetBytesFromBase64());
+                                dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, byte[]>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -3776,15 +3776,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, byte[]> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, byte[]> value;
-                            Dictionary<string, byte[]> array = new Dictionary<string, byte[]>();
+                            Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetBytesFromBase64());
+                                dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, byte[]>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -3811,15 +3811,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, byte[]> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, byte[]> value;
-                            Dictionary<string, byte[]> array = new Dictionary<string, byte[]>();
+                            Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetBytesFromBase64());
+                                dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, byte[]>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -3858,15 +3858,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, byte[]> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, byte[]> value;
-                            Dictionary<string, byte[]> array = new Dictionary<string, byte[]>();
+                            Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetBytesFromBase64("U"));
+                                dictionary.Add(property.Name, property.Value.GetBytesFromBase64("U"));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, byte[]>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -3893,15 +3893,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, byte[]> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, byte[]> value;
-                            Dictionary<string, byte[]> array = new Dictionary<string, byte[]>();
+                            Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetBytesFromBase64("U"));
+                                dictionary.Add(property.Name, property.Value.GetBytesFromBase64("U"));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, byte[]>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -3940,15 +3940,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, Widget> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, Widget> value;
-                            Dictionary<string, Widget> array = new Dictionary<string, Widget>();
+                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, Widget>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -3975,15 +3975,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, Widget> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, Widget> value;
-                            Dictionary<string, Widget> array = new Dictionary<string, Widget>();
+                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, Widget>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -4022,15 +4022,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, Widget> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, Widget> value;
-                            Dictionary<string, Widget> array = new Dictionary<string, Widget>();
+                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, Widget>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -4057,15 +4057,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, Widget> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, Widget> value;
-                            Dictionary<string, Widget> array = new Dictionary<string, Widget>();
+                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, Widget>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -4104,15 +4104,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, Widget> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, Widget> value;
-                            Dictionary<string, Widget> array = new Dictionary<string, Widget>();
+                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, Widget>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -4139,15 +4139,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, Widget> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, Widget> value;
-                            Dictionary<string, Widget> array = new Dictionary<string, Widget>();
+                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, Widget>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -4186,15 +4186,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, Widget> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, Widget> value;
-                            Dictionary<string, Widget> array = new Dictionary<string, Widget>();
+                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, Widget>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -4221,15 +4221,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, Widget> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, Widget> value;
-                            Dictionary<string, Widget> array = new Dictionary<string, Widget>();
+                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, Widget>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -4268,15 +4268,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, Widget> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, Widget> value;
-                            Dictionary<string, Widget> array = new Dictionary<string, Widget>();
+                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, Widget>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -4303,15 +4303,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, Widget> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, Widget> value;
-                            Dictionary<string, Widget> array = new Dictionary<string, Widget>();
+                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, Widget>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -4434,22 +4434,20 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, IList<string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, IList<string>> value;
-                            Dictionary<string, IList<string>> array = new Dictionary<string, IList<string>>();
+                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                IList<string> value0;
-                                List<string> array0 = new List<string>();
+                                List<string> array = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
-                                    array0.Add(item.GetString());
+                                    array.Add(item.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(property.Name, value0);
+                                dictionary.Add(property.Name, array);
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, IList<string>>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -4476,22 +4474,20 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, IList<string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, IList<string>> value;
-                            Dictionary<string, IList<string>> array = new Dictionary<string, IList<string>>();
+                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                IList<string> value0;
-                                List<string> array0 = new List<string>();
+                                List<string> array = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
-                                    array0.Add(item.GetString());
+                                    array.Add(item.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(property.Name, value0);
+                                dictionary.Add(property.Name, array);
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, IList<string>>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -4530,22 +4526,20 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, IList<string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, IList<string>> value;
-                            Dictionary<string, IList<string>> array = new Dictionary<string, IList<string>>();
+                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                IList<string> value0;
-                                List<string> array0 = new List<string>();
+                                List<string> array = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
-                                    array0.Add(item.GetString());
+                                    array.Add(item.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(property.Name, value0);
+                                dictionary.Add(property.Name, array);
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, IList<string>>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -4572,22 +4566,20 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, IList<string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, IList<string>> value;
-                            Dictionary<string, IList<string>> array = new Dictionary<string, IList<string>>();
+                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                IList<string> value0;
-                                List<string> array0 = new List<string>();
+                                List<string> array = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
-                                    array0.Add(item.GetString());
+                                    array.Add(item.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(property.Name, value0);
+                                dictionary.Add(property.Name, array);
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, IList<string>>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -4626,22 +4618,20 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, IList<string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, IList<string>> value;
-                            Dictionary<string, IList<string>> array = new Dictionary<string, IList<string>>();
+                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                IList<string> value0;
-                                List<string> array0 = new List<string>();
+                                List<string> array = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
-                                    array0.Add(item.GetString());
+                                    array.Add(item.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(property.Name, value0);
+                                dictionary.Add(property.Name, array);
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, IList<string>>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -4668,22 +4658,20 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, IList<string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, IList<string>> value;
-                            Dictionary<string, IList<string>> array = new Dictionary<string, IList<string>>();
+                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                IList<string> value0;
-                                List<string> array0 = new List<string>();
+                                List<string> array = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
-                                    array0.Add(item.GetString());
+                                    array.Add(item.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(property.Name, value0);
+                                dictionary.Add(property.Name, array);
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, IList<string>>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -4722,22 +4710,20 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, IList<string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, IList<string>> value;
-                            Dictionary<string, IList<string>> array = new Dictionary<string, IList<string>>();
+                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                IList<string> value0;
-                                List<string> array0 = new List<string>();
+                                List<string> array = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
-                                    array0.Add(item.GetString());
+                                    array.Add(item.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(property.Name, value0);
+                                dictionary.Add(property.Name, array);
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, IList<string>>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -4764,22 +4750,20 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, IList<string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, IList<string>> value;
-                            Dictionary<string, IList<string>> array = new Dictionary<string, IList<string>>();
+                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                IList<string> value0;
-                                List<string> array0 = new List<string>();
+                                List<string> array = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
-                                    array0.Add(item.GetString());
+                                    array.Add(item.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(property.Name, value0);
+                                dictionary.Add(property.Name, array);
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, IList<string>>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -4818,22 +4802,20 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, IList<string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, IList<string>> value;
-                            Dictionary<string, IList<string>> array = new Dictionary<string, IList<string>>();
+                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                IList<string> value0;
-                                List<string> array0 = new List<string>();
+                                List<string> array = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
-                                    array0.Add(item.GetString());
+                                    array.Add(item.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(property.Name, value0);
+                                dictionary.Add(property.Name, array);
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, IList<string>>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -4860,22 +4842,20 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, IList<string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, IList<string>> value;
-                            Dictionary<string, IList<string>> array = new Dictionary<string, IList<string>>();
+                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                IList<string> value0;
-                                List<string> array0 = new List<string>();
+                                List<string> array = new List<string>();
                                 foreach (var item in property.Value.EnumerateArray())
                                 {
-                                    array0.Add(item.GetString());
+                                    array.Add(item.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(property.Name, value0);
+                                dictionary.Add(property.Name, array);
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, IList<string>>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -5003,15 +4983,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, object> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, object> value;
-                            Dictionary<string, object> array = new Dictionary<string, object>();
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetObject());
+                                dictionary.Add(property.Name, property.Value.GetObject());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, object>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -5038,15 +5018,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, object> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, object> value;
-                            Dictionary<string, object> array = new Dictionary<string, object>();
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetObject());
+                                dictionary.Add(property.Name, property.Value.GetObject());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, object>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -5085,15 +5065,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, object> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, object> value;
-                            Dictionary<string, object> array = new Dictionary<string, object>();
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetObject());
+                                dictionary.Add(property.Name, property.Value.GetObject());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, object>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -5120,15 +5100,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, object> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, object> value;
-                            Dictionary<string, object> array = new Dictionary<string, object>();
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetObject());
+                                dictionary.Add(property.Name, property.Value.GetObject());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, object>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -5167,15 +5147,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, object> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, object> value;
-                            Dictionary<string, object> array = new Dictionary<string, object>();
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetObject());
+                                dictionary.Add(property.Name, property.Value.GetObject());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, object>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -5202,15 +5182,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, object> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, object> value;
-                            Dictionary<string, object> array = new Dictionary<string, object>();
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetObject());
+                                dictionary.Add(property.Name, property.Value.GetObject());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, object>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -5249,15 +5229,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, object> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, object> value;
-                            Dictionary<string, object> array = new Dictionary<string, object>();
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetObject());
+                                dictionary.Add(property.Name, property.Value.GetObject());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, object>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -5284,15 +5264,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, object> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, object> value;
-                            Dictionary<string, object> array = new Dictionary<string, object>();
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetObject());
+                                dictionary.Add(property.Name, property.Value.GetObject());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, object>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -5331,15 +5311,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, object> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, object> value;
-                            Dictionary<string, object> array = new Dictionary<string, object>();
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetObject());
+                                dictionary.Add(property.Name, property.Value.GetObject());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, object>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -5366,15 +5346,15 @@ namespace body_dictionary
                 {
                     case 200:
                         {
+                            IDictionary<string, object> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, object> value;
-                            Dictionary<string, object> array = new Dictionary<string, object>();
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, property.Value.GetObject());
+                                dictionary.Add(property.Name, property.Value.GetObject());
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, object>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

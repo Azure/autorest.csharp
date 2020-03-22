@@ -22,7 +22,6 @@ namespace CognitiveSearch.Models
 
         internal static TagScoringParameters DeserializeTagScoringParameters(JsonElement element)
         {
-            TagScoringParameters result;
             string tagsParameter = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -32,8 +31,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new TagScoringParameters(tagsParameter);
-            return result;
+            return new TagScoringParameters(tagsParameter);
         }
     }
 }

@@ -14,7 +14,6 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static Entity DeserializeEntity(JsonElement element)
         {
-            Entity result;
             string text = default;
             string type = default;
             string subtype = default;
@@ -58,8 +57,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            result = new Entity(text, type, subtype, offset, length, score);
-            return result;
+            return new Entity(text, type, subtype, offset, length, score);
         }
     }
 }

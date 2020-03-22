@@ -45,7 +45,6 @@ namespace CognitiveSearch.Models
 
         internal static EdgeNGramTokenizer DeserializeEdgeNGramTokenizer(JsonElement element)
         {
-            EdgeNGramTokenizer result;
             int? minGram = default;
             int? maxGram = default;
             IList<TokenCharacterKind> tokenChars = default;
@@ -96,8 +95,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new EdgeNGramTokenizer(minGram, maxGram, tokenChars, odatatype, name);
-            return result;
+            return new EdgeNGramTokenizer(minGram, maxGram, tokenChars, odatatype, name);
         }
     }
 }

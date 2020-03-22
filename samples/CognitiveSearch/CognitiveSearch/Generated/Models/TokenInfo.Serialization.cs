@@ -14,7 +14,6 @@ namespace CognitiveSearch.Models
     {
         internal static TokenInfo DeserializeTokenInfo(JsonElement element)
         {
-            TokenInfo result;
             string token = default;
             int? startOffset = default;
             int? endOffset = default;
@@ -58,8 +57,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new TokenInfo(token, startOffset, endOffset, position);
-            return result;
+            return new TokenInfo(token, startOffset, endOffset, position);
         }
     }
 }

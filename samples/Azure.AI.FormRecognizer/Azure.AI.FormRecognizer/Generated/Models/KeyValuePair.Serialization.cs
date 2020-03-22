@@ -14,7 +14,6 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static KeyValuePair DeserializeKeyValuePair(JsonElement element)
         {
-            KeyValuePair result;
             string label = default;
             KeyValueElement key = new KeyValueElement();
             KeyValueElement value = new KeyValueElement();
@@ -46,8 +45,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            result = new KeyValuePair(label, key, value, confidence);
-            return result;
+            return new KeyValuePair(label, key, value, confidence);
         }
     }
 }

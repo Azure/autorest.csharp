@@ -40,7 +40,6 @@ namespace Azure.Storage.Management.Models
 
         internal static BlobRestoreStatus DeserializeBlobRestoreStatus(JsonElement element)
         {
-            BlobRestoreStatus result;
             BlobRestoreProgressStatus? status = default;
             string failureReason = default;
             string restoreId = default;
@@ -84,8 +83,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new BlobRestoreStatus(status, failureReason, restoreId, parameters);
-            return result;
+            return new BlobRestoreStatus(status, failureReason, restoreId, parameters);
         }
     }
 }

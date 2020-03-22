@@ -69,9 +69,10 @@ namespace custom_baseUrl_paging
                 {
                     case 200:
                         {
+                            ProductResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Response.FromValue<ProductResult>(value, message.Response);
+                            value = ProductResult.DeserializeProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -104,9 +105,10 @@ namespace custom_baseUrl_paging
                 {
                     case 200:
                         {
+                            ProductResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Response.FromValue<ProductResult>(value, message.Response);
+                            value = ProductResult.DeserializeProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -153,9 +155,10 @@ namespace custom_baseUrl_paging
                 {
                     case 200:
                         {
+                            ProductResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Response.FromValue<ProductResult>(value, message.Response);
+                            value = ProductResult.DeserializeProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -188,9 +191,10 @@ namespace custom_baseUrl_paging
                 {
                     case 200:
                         {
+                            ProductResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Response.FromValue<ProductResult>(value, message.Response);
+                            value = ProductResult.DeserializeProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -243,9 +247,10 @@ namespace custom_baseUrl_paging
                 {
                     case 200:
                         {
+                            ProductResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Response.FromValue<ProductResult>(value, message.Response);
+                            value = ProductResult.DeserializeProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -283,9 +288,10 @@ namespace custom_baseUrl_paging
                 {
                     case 200:
                         {
+                            ProductResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Response.FromValue<ProductResult>(value, message.Response);
+                            value = ProductResult.DeserializeProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -329,9 +335,10 @@ namespace custom_baseUrl_paging
                 {
                     case 200:
                         {
+                            ProductResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Response.FromValue<ProductResult>(value, message.Response);
+                            value = ProductResult.DeserializeProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -364,9 +371,10 @@ namespace custom_baseUrl_paging
                 {
                     case 200:
                         {
+                            ProductResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Response.FromValue<ProductResult>(value, message.Response);
+                            value = ProductResult.DeserializeProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -410,9 +418,10 @@ namespace custom_baseUrl_paging
                 {
                     case 200:
                         {
+                            ProductResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Response.FromValue<ProductResult>(value, message.Response);
+                            value = ProductResult.DeserializeProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -445,9 +454,10 @@ namespace custom_baseUrl_paging
                 {
                     case 200:
                         {
+                            ProductResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
-                            return Response.FromValue<ProductResult>(value, message.Response);
+                            value = ProductResult.DeserializeProductResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

@@ -46,7 +46,6 @@ namespace Azure.Storage.Management.Models
 
         internal static KeyVaultProperties DeserializeKeyVaultProperties(JsonElement element)
         {
-            KeyVaultProperties result;
             string keyname = default;
             string keyversion = default;
             string keyvaulturi = default;
@@ -100,8 +99,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new KeyVaultProperties(keyname, keyversion, keyvaulturi, currentVersionedKeyIdentifier, lastKeyRotationTimestamp);
-            return result;
+            return new KeyVaultProperties(keyname, keyversion, keyvaulturi, currentVersionedKeyIdentifier, lastKeyRotationTimestamp);
         }
     }
 }

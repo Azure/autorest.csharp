@@ -60,7 +60,6 @@ namespace Azure.Storage.Management.Models
 
         internal static Endpoints DeserializeEndpoints(JsonElement element)
         {
-            Endpoints result;
             string blob = default;
             string queue = default;
             string table = default;
@@ -144,8 +143,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new Endpoints(blob, queue, table, file, web, dfs, microsoftEndpoints, internetEndpoints);
-            return result;
+            return new Endpoints(blob, queue, table, file, web, dfs, microsoftEndpoints, internetEndpoints);
         }
     }
 }

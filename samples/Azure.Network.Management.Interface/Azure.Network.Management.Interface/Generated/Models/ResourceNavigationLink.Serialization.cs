@@ -63,7 +63,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static ResourceNavigationLink DeserializeResourceNavigationLink(JsonElement element)
         {
-            ResourceNavigationLink result;
             string name = default;
             string id = default;
             string etag = default;
@@ -154,8 +153,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new ResourceNavigationLink(name, id, etag, type, linkedResourceType, link, provisioningState, id0);
-            return result;
+            return new ResourceNavigationLink(name, id, etag, type, linkedResourceType, link, provisioningState, id0);
         }
     }
 }

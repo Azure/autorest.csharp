@@ -14,7 +14,6 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static ErrorInformation DeserializeErrorInformation(JsonElement element)
         {
-            ErrorInformation result;
             string code = default;
             string message = default;
             foreach (var property in element.EnumerateObject())
@@ -30,8 +29,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            result = new ErrorInformation(code, message);
-            return result;
+            return new ErrorInformation(code, message);
         }
     }
 }

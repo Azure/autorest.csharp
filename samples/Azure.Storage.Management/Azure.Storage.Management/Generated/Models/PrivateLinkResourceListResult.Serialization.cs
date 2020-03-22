@@ -15,7 +15,6 @@ namespace Azure.Storage.Management.Models
     {
         internal static PrivateLinkResourceListResult DeserializePrivateLinkResourceListResult(JsonElement element)
         {
-            PrivateLinkResourceListResult result;
             IList<PrivateLinkResource> value = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -34,8 +33,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new PrivateLinkResourceListResult(value);
-            return result;
+            return new PrivateLinkResourceListResult(value);
         }
     }
 }

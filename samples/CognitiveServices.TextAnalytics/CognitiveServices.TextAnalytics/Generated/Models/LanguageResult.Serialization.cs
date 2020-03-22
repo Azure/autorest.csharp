@@ -15,7 +15,6 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static LanguageResult DeserializeLanguageResult(JsonElement element)
         {
-            LanguageResult result;
             IList<DocumentLanguage> documents = new List<DocumentLanguage>();
             IList<DocumentError> errors = new List<DocumentError>();
             RequestStatistics statistics = default;
@@ -57,8 +56,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            result = new LanguageResult(documents, errors, statistics, modelVersion);
-            return result;
+            return new LanguageResult(documents, errors, statistics, modelVersion);
         }
     }
 }

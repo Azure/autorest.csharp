@@ -39,7 +39,6 @@ namespace CognitiveSearch.Models
 
         internal static PatternTokenizer DeserializePatternTokenizer(JsonElement element)
         {
-            PatternTokenizer result;
             string pattern = default;
             RegexFlags? flags = default;
             int? group = default;
@@ -85,8 +84,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new PatternTokenizer(pattern, flags, group, odatatype, name);
-            return result;
+            return new PatternTokenizer(pattern, flags, group, odatatype, name);
         }
     }
 }

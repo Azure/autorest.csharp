@@ -51,7 +51,6 @@ namespace Azure.Storage.Management.Models
 
         internal static CorsRule DeserializeCorsRule(JsonElement element)
         {
-            CorsRule result;
             IList<string> allowedOrigins = new List<string>();
             IList<CorsRuleAllowedMethodsItem> allowedMethods = new List<CorsRuleAllowedMethodsItem>();
             int maxAgeInSeconds = default;
@@ -105,8 +104,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new CorsRule(allowedOrigins, allowedMethods, maxAgeInSeconds, exposedHeaders, allowedHeaders);
-            return result;
+            return new CorsRule(allowedOrigins, allowedMethods, maxAgeInSeconds, exposedHeaders, allowedHeaders);
         }
     }
 }

@@ -15,7 +15,6 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static DataTable DeserializeDataTable(JsonElement element)
         {
-            DataTable result;
             int rows = default;
             int columns = default;
             IList<DataTableCell> cells = new List<DataTableCell>();
@@ -42,8 +41,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            result = new DataTable(rows, columns, cells);
-            return result;
+            return new DataTable(rows, columns, cells);
         }
     }
 }

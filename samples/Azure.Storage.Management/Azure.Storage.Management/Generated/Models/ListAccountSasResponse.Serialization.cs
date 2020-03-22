@@ -14,7 +14,6 @@ namespace Azure.Storage.Management.Models
     {
         internal static ListAccountSasResponse DeserializeListAccountSasResponse(JsonElement element)
         {
-            ListAccountSasResponse result;
             string accountSasToken = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -28,8 +27,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new ListAccountSasResponse(accountSasToken);
-            return result;
+            return new ListAccountSasResponse(accountSasToken);
         }
     }
 }

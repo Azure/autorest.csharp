@@ -15,7 +15,6 @@ namespace CognitiveSearch.Models
     {
         internal static AnalyzeResult DeserializeAnalyzeResult(JsonElement element)
         {
-            AnalyzeResult result;
             IList<TokenInfo> tokens = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -34,8 +33,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new AnalyzeResult(tokens);
-            return result;
+            return new AnalyzeResult(tokens);
         }
     }
 }

@@ -38,7 +38,6 @@ namespace lro.Models
 
         internal static SubProduct DeserializeSubProduct(JsonElement element)
         {
-            SubProduct result;
             string id = default;
             string provisioningState = default;
             SubProductPropertiesProvisioningStateValues? provisioningStateValues = default;
@@ -79,8 +78,7 @@ namespace lro.Models
                     continue;
                 }
             }
-            result = new SubProduct(provisioningState, provisioningStateValues, id);
-            return result;
+            return new SubProduct(provisioningState, provisioningStateValues, id);
         }
     }
 }

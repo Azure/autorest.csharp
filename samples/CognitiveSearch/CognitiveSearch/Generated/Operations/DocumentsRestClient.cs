@@ -93,8 +93,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            long value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetInt64();
+                            value = document.RootElement.GetInt64();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -124,8 +125,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            long value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetInt64();
+                            value = document.RootElement.GetInt64();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -263,9 +265,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            SearchDocumentsResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = SearchDocumentsResult.DeserializeSearchDocumentsResult(document.RootElement);
-                            return Response.FromValue<SearchDocumentsResult>(value, message.Response);
+                            value = SearchDocumentsResult.DeserializeSearchDocumentsResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -311,9 +314,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            SearchDocumentsResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = SearchDocumentsResult.DeserializeSearchDocumentsResult(document.RootElement);
-                            return Response.FromValue<SearchDocumentsResult>(value, message.Response);
+                            value = SearchDocumentsResult.DeserializeSearchDocumentsResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -374,9 +378,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            SearchDocumentsResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = SearchDocumentsResult.DeserializeSearchDocumentsResult(document.RootElement);
-                            return Response.FromValue<SearchDocumentsResult>(value, message.Response);
+                            value = SearchDocumentsResult.DeserializeSearchDocumentsResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -410,9 +415,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            SearchDocumentsResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = SearchDocumentsResult.DeserializeSearchDocumentsResult(document.RootElement);
-                            return Response.FromValue<SearchDocumentsResult>(value, message.Response);
+                            value = SearchDocumentsResult.DeserializeSearchDocumentsResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -476,9 +482,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            object value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetObject();
-                            return Response.FromValue<object>(value, message.Response);
+                            value = document.RootElement.GetObject();
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -513,9 +520,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            object value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetObject();
-                            return Response.FromValue<object>(value, message.Response);
+                            value = document.RootElement.GetObject();
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -624,9 +632,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            SuggestDocumentsResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = SuggestDocumentsResult.DeserializeSuggestDocumentsResult(document.RootElement);
-                            return Response.FromValue<SuggestDocumentsResult>(value, message.Response);
+                            value = SuggestDocumentsResult.DeserializeSuggestDocumentsResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -674,9 +683,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            SuggestDocumentsResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = SuggestDocumentsResult.DeserializeSuggestDocumentsResult(document.RootElement);
-                            return Response.FromValue<SuggestDocumentsResult>(value, message.Response);
+                            value = SuggestDocumentsResult.DeserializeSuggestDocumentsResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -737,9 +747,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            SuggestDocumentsResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = SuggestDocumentsResult.DeserializeSuggestDocumentsResult(document.RootElement);
-                            return Response.FromValue<SuggestDocumentsResult>(value, message.Response);
+                            value = SuggestDocumentsResult.DeserializeSuggestDocumentsResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -773,9 +784,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            SuggestDocumentsResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = SuggestDocumentsResult.DeserializeSuggestDocumentsResult(document.RootElement);
-                            return Response.FromValue<SuggestDocumentsResult>(value, message.Response);
+                            value = SuggestDocumentsResult.DeserializeSuggestDocumentsResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -836,9 +848,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            IndexDocumentsResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = IndexDocumentsResult.DeserializeIndexDocumentsResult(document.RootElement);
-                            return Response.FromValue<IndexDocumentsResult>(value, message.Response);
+                            value = IndexDocumentsResult.DeserializeIndexDocumentsResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -872,9 +885,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            IndexDocumentsResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = IndexDocumentsResult.DeserializeIndexDocumentsResult(document.RootElement);
-                            return Response.FromValue<IndexDocumentsResult>(value, message.Response);
+                            value = IndexDocumentsResult.DeserializeIndexDocumentsResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -978,9 +992,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            AutocompleteResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = AutocompleteResult.DeserializeAutocompleteResult(document.RootElement);
-                            return Response.FromValue<AutocompleteResult>(value, message.Response);
+                            value = AutocompleteResult.DeserializeAutocompleteResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1027,9 +1042,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            AutocompleteResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = AutocompleteResult.DeserializeAutocompleteResult(document.RootElement);
-                            return Response.FromValue<AutocompleteResult>(value, message.Response);
+                            value = AutocompleteResult.DeserializeAutocompleteResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1090,9 +1106,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            AutocompleteResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = AutocompleteResult.DeserializeAutocompleteResult(document.RootElement);
-                            return Response.FromValue<AutocompleteResult>(value, message.Response);
+                            value = AutocompleteResult.DeserializeAutocompleteResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1126,9 +1143,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            AutocompleteResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = AutocompleteResult.DeserializeAutocompleteResult(document.RootElement);
-                            return Response.FromValue<AutocompleteResult>(value, message.Response);
+                            value = AutocompleteResult.DeserializeAutocompleteResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

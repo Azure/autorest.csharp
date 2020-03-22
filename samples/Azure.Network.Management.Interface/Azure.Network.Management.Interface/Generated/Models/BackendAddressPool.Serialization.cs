@@ -84,7 +84,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static BackendAddressPool DeserializeBackendAddressPool(JsonElement element)
         {
-            BackendAddressPool result;
             string name = default;
             string etag = default;
             string type = default;
@@ -200,8 +199,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new BackendAddressPool(name, etag, type, backendIPConfigurations, loadBalancingRules, outboundRule, outboundRules, provisioningState, id);
-            return result;
+            return new BackendAddressPool(name, etag, type, backendIPConfigurations, loadBalancingRules, outboundRule, outboundRules, provisioningState, id);
         }
     }
 }

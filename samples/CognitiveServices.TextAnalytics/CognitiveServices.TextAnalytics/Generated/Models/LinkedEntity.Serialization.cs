@@ -15,7 +15,6 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static LinkedEntity DeserializeLinkedEntity(JsonElement element)
         {
-            LinkedEntity result;
             string name = default;
             IList<Match> matches = new List<Match>();
             string language = default;
@@ -64,8 +63,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            result = new LinkedEntity(name, matches, language, id, url, dataSource);
-            return result;
+            return new LinkedEntity(name, matches, language, id, url, dataSource);
         }
     }
 }

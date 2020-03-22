@@ -14,7 +14,6 @@ namespace Azure.Storage.Management.Models
     {
         internal static UsageName DeserializeUsageName(JsonElement element)
         {
-            UsageName result;
             string value = default;
             string localizedValue = default;
             foreach (var property in element.EnumerateObject())
@@ -38,8 +37,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new UsageName(value, localizedValue);
-            return result;
+            return new UsageName(value, localizedValue);
         }
     }
 }

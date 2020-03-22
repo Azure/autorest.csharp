@@ -103,7 +103,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static LoadBalancingRule DeserializeLoadBalancingRule(JsonElement element)
         {
-            LoadBalancingRule result;
             string name = default;
             string etag = default;
             string type = default;
@@ -274,8 +273,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new LoadBalancingRule(name, etag, type, frontendIPConfiguration, backendAddressPool, probe, protocol, loadDistribution, frontendPort, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, disableOutboundSnat, provisioningState, id);
-            return result;
+            return new LoadBalancingRule(name, etag, type, frontendIPConfiguration, backendAddressPool, probe, protocol, loadDistribution, frontendPort, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, disableOutboundSnat, provisioningState, id);
         }
     }
 }

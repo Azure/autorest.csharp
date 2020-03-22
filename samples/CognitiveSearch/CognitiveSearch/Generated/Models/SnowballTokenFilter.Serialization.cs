@@ -26,7 +26,6 @@ namespace CognitiveSearch.Models
 
         internal static SnowballTokenFilter DeserializeSnowballTokenFilter(JsonElement element)
         {
-            SnowballTokenFilter result;
             SnowballTokenFilterLanguage language = default;
             string odatatype = default;
             string name = default;
@@ -48,8 +47,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new SnowballTokenFilter(language, odatatype, name);
-            return result;
+            return new SnowballTokenFilter(language, odatatype, name);
         }
     }
 }

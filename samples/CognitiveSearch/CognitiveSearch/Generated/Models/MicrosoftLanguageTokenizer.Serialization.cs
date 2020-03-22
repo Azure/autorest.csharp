@@ -39,7 +39,6 @@ namespace CognitiveSearch.Models
 
         internal static MicrosoftLanguageTokenizer DeserializeMicrosoftLanguageTokenizer(JsonElement element)
         {
-            MicrosoftLanguageTokenizer result;
             int? maxTokenLength = default;
             bool? isSearchTokenizer = default;
             MicrosoftTokenizerLanguage? language = default;
@@ -85,8 +84,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new MicrosoftLanguageTokenizer(maxTokenLength, isSearchTokenizer, language, odatatype, name);
-            return result;
+            return new MicrosoftLanguageTokenizer(maxTokenLength, isSearchTokenizer, language, odatatype, name);
         }
     }
 }

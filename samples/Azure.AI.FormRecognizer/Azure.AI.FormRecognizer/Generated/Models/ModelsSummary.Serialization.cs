@@ -15,7 +15,6 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static ModelsSummary DeserializeModelsSummary(JsonElement element)
         {
-            ModelsSummary result;
             int count = default;
             int limit = default;
             DateTimeOffset lastUpdatedDateTime = default;
@@ -37,8 +36,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            result = new ModelsSummary(count, limit, lastUpdatedDateTime);
-            return result;
+            return new ModelsSummary(count, limit, lastUpdatedDateTime);
         }
     }
 }

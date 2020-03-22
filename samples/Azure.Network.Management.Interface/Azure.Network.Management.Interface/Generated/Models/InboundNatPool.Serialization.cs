@@ -88,7 +88,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static InboundNatPool DeserializeInboundNatPool(JsonElement element)
         {
-            InboundNatPool result;
             string name = default;
             string etag = default;
             string type = default;
@@ -229,8 +228,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new InboundNatPool(name, etag, type, frontendIPConfiguration, protocol, frontendPortRangeStart, frontendPortRangeEnd, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, provisioningState, id);
-            return result;
+            return new InboundNatPool(name, etag, type, frontendIPConfiguration, protocol, frontendPortRangeStart, frontendPortRangeEnd, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, provisioningState, id);
         }
     }
 }

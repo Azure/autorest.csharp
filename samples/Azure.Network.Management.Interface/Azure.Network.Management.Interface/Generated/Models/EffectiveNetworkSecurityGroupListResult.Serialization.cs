@@ -15,7 +15,6 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static EffectiveNetworkSecurityGroupListResult DeserializeEffectiveNetworkSecurityGroupListResult(JsonElement element)
         {
-            EffectiveNetworkSecurityGroupListResult result;
             IList<EffectiveNetworkSecurityGroup> value = default;
             string nextLink = default;
             foreach (var property in element.EnumerateObject())
@@ -44,8 +43,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new EffectiveNetworkSecurityGroupListResult(value, nextLink);
-            return result;
+            return new EffectiveNetworkSecurityGroupListResult(value, nextLink);
         }
     }
 }

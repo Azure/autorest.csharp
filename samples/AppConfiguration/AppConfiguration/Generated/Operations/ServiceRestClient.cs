@@ -90,10 +90,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            KeyListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = KeyListResult.DeserializeKeyListResult(document.RootElement);
+                            value = KeyListResult.DeserializeKeyListResult(document.RootElement);
                             var headers = new GetKeysHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<KeyListResult, GetKeysHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -124,10 +125,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            KeyListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = KeyListResult.DeserializeKeyListResult(document.RootElement);
+                            value = KeyListResult.DeserializeKeyListResult(document.RootElement);
                             var headers = new GetKeysHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<KeyListResult, GetKeysHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -187,7 +189,7 @@ namespace AppConfiguration
                 {
                     case 200:
                         var headers = new CheckKeysHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<CheckKeysHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -217,7 +219,7 @@ namespace AppConfiguration
                 {
                     case 200:
                         var headers = new CheckKeysHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<CheckKeysHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -286,10 +288,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            KeyValueListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
+                            value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
                             var headers = new GetKeyValuesHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<KeyValueListResult, GetKeyValuesHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -322,10 +325,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            KeyValueListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
+                            value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
                             var headers = new GetKeyValuesHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<KeyValueListResult, GetKeyValuesHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -395,7 +399,7 @@ namespace AppConfiguration
                 {
                     case 200:
                         var headers = new CheckKeyValuesHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<CheckKeyValuesHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -427,7 +431,7 @@ namespace AppConfiguration
                 {
                     case 200:
                         var headers = new CheckKeyValuesHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<CheckKeyValuesHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -502,10 +506,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            KeyValue value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = KeyValue.DeserializeKeyValue(document.RootElement);
+                            value = KeyValue.DeserializeKeyValue(document.RootElement);
                             var headers = new GetKeyValueHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<KeyValue, GetKeyValueHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -543,10 +548,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            KeyValue value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = KeyValue.DeserializeKeyValue(document.RootElement);
+                            value = KeyValue.DeserializeKeyValue(document.RootElement);
                             var headers = new GetKeyValueHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<KeyValue, GetKeyValueHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -622,10 +628,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            KeyValue value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = KeyValue.DeserializeKeyValue(document.RootElement);
+                            value = KeyValue.DeserializeKeyValue(document.RootElement);
                             var headers = new PutKeyValueHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<KeyValue, PutKeyValueHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -662,10 +669,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            KeyValue value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = KeyValue.DeserializeKeyValue(document.RootElement);
+                            value = KeyValue.DeserializeKeyValue(document.RootElement);
                             var headers = new PutKeyValueHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<KeyValue, PutKeyValueHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -726,10 +734,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            KeyValue value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = KeyValue.DeserializeKeyValue(document.RootElement);
+                            value = KeyValue.DeserializeKeyValue(document.RootElement);
                             var headers = new DeleteKeyValueHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<KeyValue, DeleteKeyValueHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -764,10 +773,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            KeyValue value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = KeyValue.DeserializeKeyValue(document.RootElement);
+                            value = KeyValue.DeserializeKeyValue(document.RootElement);
                             var headers = new DeleteKeyValueHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<KeyValue, DeleteKeyValueHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -843,7 +853,7 @@ namespace AppConfiguration
                 {
                     case 200:
                         var headers = new CheckKeyValueHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<CheckKeyValueHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -880,7 +890,7 @@ namespace AppConfiguration
                 {
                     case 200:
                         var headers = new CheckKeyValueHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<CheckKeyValueHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -944,10 +954,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            LabelListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = LabelListResult.DeserializeLabelListResult(document.RootElement);
+                            value = LabelListResult.DeserializeLabelListResult(document.RootElement);
                             var headers = new GetLabelsHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<LabelListResult, GetLabelsHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -979,10 +990,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            LabelListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = LabelListResult.DeserializeLabelListResult(document.RootElement);
+                            value = LabelListResult.DeserializeLabelListResult(document.RootElement);
                             var headers = new GetLabelsHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<LabelListResult, GetLabelsHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1047,7 +1059,7 @@ namespace AppConfiguration
                 {
                     case 200:
                         var headers = new CheckLabelsHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<CheckLabelsHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1078,7 +1090,7 @@ namespace AppConfiguration
                 {
                     case 200:
                         var headers = new CheckLabelsHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<CheckLabelsHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1143,10 +1155,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            KeyValue value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = KeyValue.DeserializeKeyValue(document.RootElement);
+                            value = KeyValue.DeserializeKeyValue(document.RootElement);
                             var headers = new PutLockHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<KeyValue, PutLockHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1182,10 +1195,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            KeyValue value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = KeyValue.DeserializeKeyValue(document.RootElement);
+                            value = KeyValue.DeserializeKeyValue(document.RootElement);
                             var headers = new PutLockHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<KeyValue, PutLockHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1251,10 +1265,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            KeyValue value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = KeyValue.DeserializeKeyValue(document.RootElement);
+                            value = KeyValue.DeserializeKeyValue(document.RootElement);
                             var headers = new DeleteLockHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<KeyValue, DeleteLockHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1290,10 +1305,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            KeyValue value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = KeyValue.DeserializeKeyValue(document.RootElement);
+                            value = KeyValue.DeserializeKeyValue(document.RootElement);
                             var headers = new DeleteLockHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<KeyValue, DeleteLockHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1363,10 +1379,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            KeyValueListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
+                            value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
                             var headers = new GetRevisionsHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<KeyValueListResult, GetRevisionsHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1399,10 +1416,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            KeyValueListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
+                            value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
                             var headers = new GetRevisionsHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<KeyValueListResult, GetRevisionsHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1472,7 +1490,7 @@ namespace AppConfiguration
                 {
                     case 200:
                         var headers = new CheckRevisionsHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<CheckRevisionsHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1504,7 +1522,7 @@ namespace AppConfiguration
                 {
                     case 200:
                         var headers = new CheckRevisionsHeaders(message.Response);
-                        return ResponseWithHeaders.FromValue<CheckRevisionsHeaders>(headers, message.Response);
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1556,10 +1574,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            KeyListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = KeyListResult.DeserializeKeyListResult(document.RootElement);
+                            value = KeyListResult.DeserializeKeyListResult(document.RootElement);
                             var headers = new GetKeysHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<KeyListResult, GetKeysHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1593,10 +1612,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            KeyListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = KeyListResult.DeserializeKeyListResult(document.RootElement);
+                            value = KeyListResult.DeserializeKeyListResult(document.RootElement);
                             var headers = new GetKeysHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<KeyListResult, GetKeysHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1649,10 +1669,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            KeyValueListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
+                            value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
                             var headers = new GetKeyValuesHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<KeyValueListResult, GetKeyValuesHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1686,10 +1707,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            KeyValueListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
+                            value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
                             var headers = new GetKeyValuesHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<KeyValueListResult, GetKeyValuesHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1742,10 +1764,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            LabelListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = LabelListResult.DeserializeLabelListResult(document.RootElement);
+                            value = LabelListResult.DeserializeLabelListResult(document.RootElement);
                             var headers = new GetLabelsHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<LabelListResult, GetLabelsHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1779,10 +1802,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            LabelListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = LabelListResult.DeserializeLabelListResult(document.RootElement);
+                            value = LabelListResult.DeserializeLabelListResult(document.RootElement);
                             var headers = new GetLabelsHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<LabelListResult, GetLabelsHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1835,10 +1859,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            KeyValueListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
+                            value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
                             var headers = new GetRevisionsHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<KeyValueListResult, GetRevisionsHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1872,10 +1897,11 @@ namespace AppConfiguration
                 {
                     case 200:
                         {
+                            KeyValueListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
+                            value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
                             var headers = new GetRevisionsHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue<KeyValueListResult, GetRevisionsHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

@@ -15,7 +15,6 @@ namespace Azure.Storage.Tables.Models
     {
         internal static TableQueryResponse DeserializeTableQueryResponse(JsonElement element)
         {
-            TableQueryResponse result;
             string odatametadata = default;
             IList<TableResponseProperties> value = default;
             foreach (var property in element.EnumerateObject())
@@ -44,8 +43,7 @@ namespace Azure.Storage.Tables.Models
                     continue;
                 }
             }
-            result = new TableQueryResponse(odatametadata, value);
-            return result;
+            return new TableQueryResponse(odatametadata, value);
         }
     }
 }

@@ -52,7 +52,6 @@ namespace CognitiveSearch.Models
 
         internal static ShaperSkill DeserializeShaperSkill(JsonElement element)
         {
-            ShaperSkill result;
             string odatatype = default;
             string name = default;
             string description = default;
@@ -114,8 +113,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new ShaperSkill(odatatype, name, description, context, inputs, outputs);
-            return result;
+            return new ShaperSkill(odatatype, name, description, context, inputs, outputs);
         }
     }
 }

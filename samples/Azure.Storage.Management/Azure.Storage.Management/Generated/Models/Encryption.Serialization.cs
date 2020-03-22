@@ -32,7 +32,6 @@ namespace Azure.Storage.Management.Models
 
         internal static Encryption DeserializeEncryption(JsonElement element)
         {
-            Encryption result;
             EncryptionServices services = default;
             KeySource keySource = default;
             KeyVaultProperties keyvaultproperties = default;
@@ -62,8 +61,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new Encryption(services, keySource, keyvaultproperties);
-            return result;
+            return new Encryption(services, keySource, keyvaultproperties);
         }
     }
 }

@@ -40,7 +40,6 @@ namespace Azure.Storage.Management.Models
 
         internal static AzureEntityResource DeserializeAzureEntityResource(JsonElement element)
         {
-            AzureEntityResource result;
             string etag = default;
             string id = default;
             string name = default;
@@ -84,8 +83,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new AzureEntityResource(etag, id, name, type);
-            return result;
+            return new AzureEntityResource(etag, id, name, type);
         }
     }
 }

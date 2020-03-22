@@ -15,7 +15,6 @@ namespace custom_baseUrl_paging.Models
     {
         internal static ProductResult DeserializeProductResult(JsonElement element)
         {
-            ProductResult result;
             IList<Product> values = default;
             string nextLink = default;
             foreach (var property in element.EnumerateObject())
@@ -44,8 +43,7 @@ namespace custom_baseUrl_paging.Models
                     continue;
                 }
             }
-            result = new ProductResult(values, nextLink);
-            return result;
+            return new ProductResult(values, nextLink);
         }
     }
 }

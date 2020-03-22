@@ -15,7 +15,6 @@ namespace Azure.Storage.Management.Models
     {
         internal static CloudErrorBody DeserializeCloudErrorBody(JsonElement element)
         {
-            CloudErrorBody result;
             string code = default;
             string message = default;
             string target = default;
@@ -64,8 +63,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new CloudErrorBody(code, message, target, details);
-            return result;
+            return new CloudErrorBody(code, message, target, details);
         }
     }
 }

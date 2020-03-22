@@ -61,7 +61,7 @@ namespace body_file
                     case 200:
                         {
                             var value = message.ExtractResponseContent();
-                            return Response.FromValue<Stream>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -89,7 +89,7 @@ namespace body_file
                     case 200:
                         {
                             var value = message.ExtractResponseContent();
-                            return Response.FromValue<Stream>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -129,7 +129,7 @@ namespace body_file
                     case 200:
                         {
                             var value = message.ExtractResponseContent();
-                            return Response.FromValue<Stream>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -157,7 +157,7 @@ namespace body_file
                     case 200:
                         {
                             var value = message.ExtractResponseContent();
-                            return Response.FromValue<Stream>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -197,7 +197,7 @@ namespace body_file
                     case 200:
                         {
                             var value = message.ExtractResponseContent();
-                            return Response.FromValue<Stream>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -225,7 +225,7 @@ namespace body_file
                     case 200:
                         {
                             var value = message.ExtractResponseContent();
-                            return Response.FromValue<Stream>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

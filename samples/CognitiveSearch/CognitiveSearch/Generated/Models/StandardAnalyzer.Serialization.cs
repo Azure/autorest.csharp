@@ -40,7 +40,6 @@ namespace CognitiveSearch.Models
 
         internal static StandardAnalyzer DeserializeStandardAnalyzer(JsonElement element)
         {
-            StandardAnalyzer result;
             int? maxTokenLength = default;
             IList<string> stopwords = default;
             string odatatype = default;
@@ -81,8 +80,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new StandardAnalyzer(maxTokenLength, stopwords, odatatype, name);
-            return result;
+            return new StandardAnalyzer(maxTokenLength, stopwords, odatatype, name);
         }
     }
 }

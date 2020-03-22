@@ -15,7 +15,6 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static PageResult DeserializePageResult(JsonElement element)
         {
-            PageResult result;
             int page = default;
             int? clusterId = default;
             IList<KeyValuePair> keyValuePairs = default;
@@ -65,8 +64,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            result = new PageResult(page, clusterId, keyValuePairs, tables);
-            return result;
+            return new PageResult(page, clusterId, keyValuePairs, tables);
         }
     }
 }

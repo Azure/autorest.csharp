@@ -40,7 +40,6 @@ namespace CognitiveSearch.Models
 
         internal static CjkBigramTokenFilter DeserializeCjkBigramTokenFilter(JsonElement element)
         {
-            CjkBigramTokenFilter result;
             IList<CjkBigramTokenFilterScripts> ignoreScripts = default;
             bool? outputUnigrams = default;
             string odatatype = default;
@@ -81,8 +80,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new CjkBigramTokenFilter(ignoreScripts, outputUnigrams, odatatype, name);
-            return result;
+            return new CjkBigramTokenFilter(ignoreScripts, outputUnigrams, odatatype, name);
         }
     }
 }

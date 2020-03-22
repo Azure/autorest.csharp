@@ -41,7 +41,6 @@ namespace CognitiveSearch.Models
                     case "tag": return TagScoringFunction.DeserializeTagScoringFunction(element);
                 }
             }
-            ScoringFunction result;
             string type = default;
             string fieldName = default;
             double boost = default;
@@ -73,8 +72,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new ScoringFunction(type, fieldName, boost, interpolation);
-            return result;
+            return new ScoringFunction(type, fieldName, boost, interpolation);
         }
     }
 }

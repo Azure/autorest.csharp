@@ -15,7 +15,6 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static TrainingDocumentInfo DeserializeTrainingDocumentInfo(JsonElement element)
         {
-            TrainingDocumentInfo result;
             string documentName = default;
             int pages = default;
             IList<ErrorInformation> errors = new List<ErrorInformation>();
@@ -48,8 +47,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            result = new TrainingDocumentInfo(documentName, pages, errors, status);
-            return result;
+            return new TrainingDocumentInfo(documentName, pages, errors, status);
         }
     }
 }

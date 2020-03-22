@@ -67,9 +67,10 @@ namespace extensible_enums_swagger
                 {
                     case 200:
                         {
+                            Pet value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Pet.DeserializePet(document.RootElement);
-                            return Response.FromValue<Pet>(value, message.Response);
+                            value = Pet.DeserializePet(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -101,9 +102,10 @@ namespace extensible_enums_swagger
                 {
                     case 200:
                         {
+                            Pet value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Pet.DeserializePet(document.RootElement);
-                            return Response.FromValue<Pet>(value, message.Response);
+                            value = Pet.DeserializePet(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -147,9 +149,10 @@ namespace extensible_enums_swagger
                 {
                     case 200:
                         {
+                            Pet value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Pet.DeserializePet(document.RootElement);
-                            return Response.FromValue<Pet>(value, message.Response);
+                            value = Pet.DeserializePet(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -177,9 +180,10 @@ namespace extensible_enums_swagger
                 {
                     case 200:
                         {
+                            Pet value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Pet.DeserializePet(document.RootElement);
-                            return Response.FromValue<Pet>(value, message.Response);
+                            value = Pet.DeserializePet(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

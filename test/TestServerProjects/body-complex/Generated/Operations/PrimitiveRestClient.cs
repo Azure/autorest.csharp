@@ -61,9 +61,10 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            IntWrapper value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = IntWrapper.DeserializeIntWrapper(document.RootElement);
-                            return Response.FromValue<IntWrapper>(value, message.Response);
+                            value = IntWrapper.DeserializeIntWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -90,9 +91,10 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            IntWrapper value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = IntWrapper.DeserializeIntWrapper(document.RootElement);
-                            return Response.FromValue<IntWrapper>(value, message.Response);
+                            value = IntWrapper.DeserializeIntWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -209,9 +211,10 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            LongWrapper value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = LongWrapper.DeserializeLongWrapper(document.RootElement);
-                            return Response.FromValue<LongWrapper>(value, message.Response);
+                            value = LongWrapper.DeserializeLongWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -238,9 +241,10 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            LongWrapper value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = LongWrapper.DeserializeLongWrapper(document.RootElement);
-                            return Response.FromValue<LongWrapper>(value, message.Response);
+                            value = LongWrapper.DeserializeLongWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -357,9 +361,10 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            FloatWrapper value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = FloatWrapper.DeserializeFloatWrapper(document.RootElement);
-                            return Response.FromValue<FloatWrapper>(value, message.Response);
+                            value = FloatWrapper.DeserializeFloatWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -386,9 +391,10 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            FloatWrapper value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = FloatWrapper.DeserializeFloatWrapper(document.RootElement);
-                            return Response.FromValue<FloatWrapper>(value, message.Response);
+                            value = FloatWrapper.DeserializeFloatWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -505,9 +511,10 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            DoubleWrapper value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = DoubleWrapper.DeserializeDoubleWrapper(document.RootElement);
-                            return Response.FromValue<DoubleWrapper>(value, message.Response);
+                            value = DoubleWrapper.DeserializeDoubleWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -534,9 +541,10 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            DoubleWrapper value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = DoubleWrapper.DeserializeDoubleWrapper(document.RootElement);
-                            return Response.FromValue<DoubleWrapper>(value, message.Response);
+                            value = DoubleWrapper.DeserializeDoubleWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -653,9 +661,10 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            BooleanWrapper value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = BooleanWrapper.DeserializeBooleanWrapper(document.RootElement);
-                            return Response.FromValue<BooleanWrapper>(value, message.Response);
+                            value = BooleanWrapper.DeserializeBooleanWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -682,9 +691,10 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            BooleanWrapper value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = BooleanWrapper.DeserializeBooleanWrapper(document.RootElement);
-                            return Response.FromValue<BooleanWrapper>(value, message.Response);
+                            value = BooleanWrapper.DeserializeBooleanWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -801,9 +811,10 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            StringWrapper value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = StringWrapper.DeserializeStringWrapper(document.RootElement);
-                            return Response.FromValue<StringWrapper>(value, message.Response);
+                            value = StringWrapper.DeserializeStringWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -830,9 +841,10 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            StringWrapper value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = StringWrapper.DeserializeStringWrapper(document.RootElement);
-                            return Response.FromValue<StringWrapper>(value, message.Response);
+                            value = StringWrapper.DeserializeStringWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -949,9 +961,10 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            DateWrapper value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = DateWrapper.DeserializeDateWrapper(document.RootElement);
-                            return Response.FromValue<DateWrapper>(value, message.Response);
+                            value = DateWrapper.DeserializeDateWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -978,9 +991,10 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            DateWrapper value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = DateWrapper.DeserializeDateWrapper(document.RootElement);
-                            return Response.FromValue<DateWrapper>(value, message.Response);
+                            value = DateWrapper.DeserializeDateWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1097,9 +1111,10 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            DatetimeWrapper value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = DatetimeWrapper.DeserializeDatetimeWrapper(document.RootElement);
-                            return Response.FromValue<DatetimeWrapper>(value, message.Response);
+                            value = DatetimeWrapper.DeserializeDatetimeWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1126,9 +1141,10 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            DatetimeWrapper value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = DatetimeWrapper.DeserializeDatetimeWrapper(document.RootElement);
-                            return Response.FromValue<DatetimeWrapper>(value, message.Response);
+                            value = DatetimeWrapper.DeserializeDatetimeWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1245,9 +1261,10 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            Datetimerfc1123Wrapper value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Datetimerfc1123Wrapper.DeserializeDatetimerfc1123Wrapper(document.RootElement);
-                            return Response.FromValue<Datetimerfc1123Wrapper>(value, message.Response);
+                            value = Datetimerfc1123Wrapper.DeserializeDatetimerfc1123Wrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1274,9 +1291,10 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            Datetimerfc1123Wrapper value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Datetimerfc1123Wrapper.DeserializeDatetimerfc1123Wrapper(document.RootElement);
-                            return Response.FromValue<Datetimerfc1123Wrapper>(value, message.Response);
+                            value = Datetimerfc1123Wrapper.DeserializeDatetimerfc1123Wrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1393,9 +1411,10 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            DurationWrapper value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = DurationWrapper.DeserializeDurationWrapper(document.RootElement);
-                            return Response.FromValue<DurationWrapper>(value, message.Response);
+                            value = DurationWrapper.DeserializeDurationWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1422,9 +1441,10 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            DurationWrapper value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = DurationWrapper.DeserializeDurationWrapper(document.RootElement);
-                            return Response.FromValue<DurationWrapper>(value, message.Response);
+                            value = DurationWrapper.DeserializeDurationWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1541,9 +1561,10 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            ByteWrapper value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ByteWrapper.DeserializeByteWrapper(document.RootElement);
-                            return Response.FromValue<ByteWrapper>(value, message.Response);
+                            value = ByteWrapper.DeserializeByteWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1570,9 +1591,10 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            ByteWrapper value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ByteWrapper.DeserializeByteWrapper(document.RootElement);
-                            return Response.FromValue<ByteWrapper>(value, message.Response);
+                            value = ByteWrapper.DeserializeByteWrapper(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

@@ -36,43 +36,28 @@ namespace xml_service.Models
 
         internal static CorsRule DeserializeCorsRule(XElement element)
         {
-            CorsRule result = default;
-            result = new CorsRule(); string value = default;
-            var allowedOrigins = element.Element("AllowedOrigins");
-            if (allowedOrigins != null)
+            var obj = new CorsRule();
+            if (element.Element("AllowedOrigins") is XElement allowedOrigins)
             {
-                value = (string)allowedOrigins;
+                obj.AllowedOrigins = (string)allowedOrigins;
             }
-            result.AllowedOrigins = value;
-            string value0 = default;
-            var allowedMethods = element.Element("AllowedMethods");
-            if (allowedMethods != null)
+            if (element.Element("AllowedMethods") is XElement allowedMethods)
             {
-                value0 = (string)allowedMethods;
+                obj.AllowedMethods = (string)allowedMethods;
             }
-            result.AllowedMethods = value0;
-            string value1 = default;
-            var allowedHeaders = element.Element("AllowedHeaders");
-            if (allowedHeaders != null)
+            if (element.Element("AllowedHeaders") is XElement allowedHeaders)
             {
-                value1 = (string)allowedHeaders;
+                obj.AllowedHeaders = (string)allowedHeaders;
             }
-            result.AllowedHeaders = value1;
-            string value2 = default;
-            var exposedHeaders = element.Element("ExposedHeaders");
-            if (exposedHeaders != null)
+            if (element.Element("ExposedHeaders") is XElement exposedHeaders)
             {
-                value2 = (string)exposedHeaders;
+                obj.ExposedHeaders = (string)exposedHeaders;
             }
-            result.ExposedHeaders = value2;
-            int value3 = default;
-            var maxAgeInSeconds = element.Element("MaxAgeInSeconds");
-            if (maxAgeInSeconds != null)
+            if (element.Element("MaxAgeInSeconds") is XElement maxAgeInSeconds)
             {
-                value3 = (int)maxAgeInSeconds;
+                obj.MaxAgeInSeconds = (int)maxAgeInSeconds;
             }
-            result.MaxAgeInSeconds = value3;
-            return result;
+            return obj;
         }
     }
 }

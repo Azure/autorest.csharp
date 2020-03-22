@@ -31,7 +31,6 @@ namespace body_complex.Models
 
         internal static DateWrapper DeserializeDateWrapper(JsonElement element)
         {
-            DateWrapper result;
             DateTimeOffset? field = default;
             DateTimeOffset? leap = default;
             foreach (var property in element.EnumerateObject())
@@ -55,8 +54,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new DateWrapper(field, leap);
-            return result;
+            return new DateWrapper(field, leap);
         }
     }
 }

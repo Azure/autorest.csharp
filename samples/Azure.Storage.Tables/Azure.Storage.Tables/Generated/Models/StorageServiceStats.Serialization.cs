@@ -14,15 +14,12 @@ namespace Azure.Storage.Tables.Models
     {
         internal static StorageServiceStats DeserializeStorageServiceStats(XElement element)
         {
-            StorageServiceStats result = default;
-            result = new StorageServiceStats(); GeoReplication value = default;
-            var geoReplication = element.Element("GeoReplication");
-            if (geoReplication != null)
+            var obj = new StorageServiceStats();
+            if (element.Element("GeoReplication") is XElement geoReplication)
             {
-                value = GeoReplication.DeserializeGeoReplication(geoReplication);
+                obj.GeoReplication = GeoReplication.DeserializeGeoReplication(geoReplication);
             }
-            result.GeoReplication = value;
-            return result;
+            return obj;
         }
     }
 }

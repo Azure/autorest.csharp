@@ -97,9 +97,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            PrivateEndpointConnection value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = PrivateEndpointConnection.DeserializePrivateEndpointConnection(document.RootElement);
-                            return Response.FromValue<PrivateEndpointConnection>(value, message.Response);
+                            value = PrivateEndpointConnection.DeserializePrivateEndpointConnection(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -142,9 +143,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            PrivateEndpointConnection value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = PrivateEndpointConnection.DeserializePrivateEndpointConnection(document.RootElement);
-                            return Response.FromValue<PrivateEndpointConnection>(value, message.Response);
+                            value = PrivateEndpointConnection.DeserializePrivateEndpointConnection(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -216,9 +218,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            PrivateEndpointConnection value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = PrivateEndpointConnection.DeserializePrivateEndpointConnection(document.RootElement);
-                            return Response.FromValue<PrivateEndpointConnection>(value, message.Response);
+                            value = PrivateEndpointConnection.DeserializePrivateEndpointConnection(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -266,9 +269,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            PrivateEndpointConnection value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = PrivateEndpointConnection.DeserializePrivateEndpointConnection(document.RootElement);
-                            return Response.FromValue<PrivateEndpointConnection>(value, message.Response);
+                            value = PrivateEndpointConnection.DeserializePrivateEndpointConnection(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

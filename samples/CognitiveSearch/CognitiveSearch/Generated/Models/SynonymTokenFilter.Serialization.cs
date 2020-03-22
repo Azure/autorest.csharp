@@ -42,7 +42,6 @@ namespace CognitiveSearch.Models
 
         internal static SynonymTokenFilter DeserializeSynonymTokenFilter(JsonElement element)
         {
-            SynonymTokenFilter result;
             IList<string> synonyms = new List<string>();
             bool? ignoreCase = default;
             bool? expand = default;
@@ -89,8 +88,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new SynonymTokenFilter(synonyms, ignoreCase, expand, odatatype, name);
-            return result;
+            return new SynonymTokenFilter(synonyms, ignoreCase, expand, odatatype, name);
         }
     }
 }

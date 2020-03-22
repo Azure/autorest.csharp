@@ -137,15 +137,15 @@ namespace model_flattening
                 {
                     case 200:
                         {
+                            IList<FlattenedProduct> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<FlattenedProduct> value;
                             List<FlattenedProduct> array = new List<FlattenedProduct>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
                             }
                             value = array;
-                            return Response.FromValue<IList<FlattenedProduct>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -172,15 +172,15 @@ namespace model_flattening
                 {
                     case 200:
                         {
+                            IList<FlattenedProduct> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<FlattenedProduct> value;
                             List<FlattenedProduct> array = new List<FlattenedProduct>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
                             }
                             value = array;
-                            return Response.FromValue<IList<FlattenedProduct>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -294,15 +294,15 @@ namespace model_flattening
                 {
                     case 200:
                         {
+                            IList<ProductWrapper> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<ProductWrapper> value;
                             List<ProductWrapper> array = new List<ProductWrapper>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(ProductWrapper.DeserializeProductWrapper(item));
                             }
                             value = array;
-                            return Response.FromValue<IList<ProductWrapper>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -329,15 +329,15 @@ namespace model_flattening
                 {
                     case 200:
                         {
+                            IList<ProductWrapper> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<ProductWrapper> value;
                             List<ProductWrapper> array = new List<ProductWrapper>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(ProductWrapper.DeserializeProductWrapper(item));
                             }
                             value = array;
-                            return Response.FromValue<IList<ProductWrapper>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -452,15 +452,15 @@ namespace model_flattening
                 {
                     case 200:
                         {
+                            IDictionary<string, FlattenedProduct> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, FlattenedProduct> value;
-                            Dictionary<string, FlattenedProduct> array = new Dictionary<string, FlattenedProduct>();
+                            Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, FlattenedProduct.DeserializeFlattenedProduct(property.Value));
+                                dictionary.Add(property.Name, FlattenedProduct.DeserializeFlattenedProduct(property.Value));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, FlattenedProduct>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -487,15 +487,15 @@ namespace model_flattening
                 {
                     case 200:
                         {
+                            IDictionary<string, FlattenedProduct> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, FlattenedProduct> value;
-                            Dictionary<string, FlattenedProduct> array = new Dictionary<string, FlattenedProduct>();
+                            Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                array.Add(property.Name, FlattenedProduct.DeserializeFlattenedProduct(property.Value));
+                                dictionary.Add(property.Name, FlattenedProduct.DeserializeFlattenedProduct(property.Value));
                             }
-                            value = array;
-                            return Response.FromValue<IDictionary<string, FlattenedProduct>>(value, message.Response);
+                            value = dictionary;
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -604,9 +604,10 @@ namespace model_flattening
                 {
                     case 200:
                         {
+                            ResourceCollection value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ResourceCollection.DeserializeResourceCollection(document.RootElement);
-                            return Response.FromValue<ResourceCollection>(value, message.Response);
+                            value = ResourceCollection.DeserializeResourceCollection(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -633,9 +634,10 @@ namespace model_flattening
                 {
                     case 200:
                         {
+                            ResourceCollection value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ResourceCollection.DeserializeResourceCollection(document.RootElement);
-                            return Response.FromValue<ResourceCollection>(value, message.Response);
+                            value = ResourceCollection.DeserializeResourceCollection(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -680,9 +682,10 @@ namespace model_flattening
                 {
                     case 200:
                         {
+                            SimpleProduct value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
-                            return Response.FromValue<SimpleProduct>(value, message.Response);
+                            value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -711,9 +714,10 @@ namespace model_flattening
                 {
                     case 200:
                         {
+                            SimpleProduct value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
-                            return Response.FromValue<SimpleProduct>(value, message.Response);
+                            value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -768,9 +772,10 @@ namespace model_flattening
                 {
                     case 200:
                         {
+                            SimpleProduct value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
-                            return Response.FromValue<SimpleProduct>(value, message.Response);
+                            value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -808,9 +813,10 @@ namespace model_flattening
                 {
                     case 200:
                         {
+                            SimpleProduct value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
-                            return Response.FromValue<SimpleProduct>(value, message.Response);
+                            value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -872,9 +878,10 @@ namespace model_flattening
                 {
                     case 200:
                         {
+                            SimpleProduct value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
-                            return Response.FromValue<SimpleProduct>(value, message.Response);
+                            value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -917,9 +924,10 @@ namespace model_flattening
                 {
                     case 200:
                         {
+                            SimpleProduct value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
-                            return Response.FromValue<SimpleProduct>(value, message.Response);
+                            value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

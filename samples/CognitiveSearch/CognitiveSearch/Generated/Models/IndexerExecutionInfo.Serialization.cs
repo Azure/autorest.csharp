@@ -15,7 +15,6 @@ namespace CognitiveSearch.Models
     {
         internal static IndexerExecutionInfo DeserializeIndexerExecutionInfo(JsonElement element)
         {
-            IndexerExecutionInfo result;
             IndexerStatus? status = default;
             IndexerExecutionResult lastResult = default;
             IList<IndexerExecutionResult> executionHistory = default;
@@ -64,8 +63,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new IndexerExecutionInfo(status, lastResult, executionHistory, limits);
-            return result;
+            return new IndexerExecutionInfo(status, lastResult, executionHistory, limits);
         }
     }
 }

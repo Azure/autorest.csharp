@@ -14,7 +14,6 @@ namespace AppConfiguration.Models
     {
         internal static Label DeserializeLabel(JsonElement element)
         {
-            Label result;
             string name = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -28,8 +27,7 @@ namespace AppConfiguration.Models
                     continue;
                 }
             }
-            result = new Label(name);
-            return result;
+            return new Label(name);
         }
     }
 }

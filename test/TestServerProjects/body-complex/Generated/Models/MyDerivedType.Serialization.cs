@@ -14,7 +14,6 @@ namespace body_complex.Models
     {
         internal static MyDerivedType DeserializeMyDerivedType(JsonElement element)
         {
-            MyDerivedType result;
             string propD1 = default;
             string kind = default;
             string propB1 = default;
@@ -61,8 +60,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new MyDerivedType(propD1, kind, propB1, propBH1);
-            return result;
+            return new MyDerivedType(propD1, kind, propB1, propBH1);
         }
     }
 }

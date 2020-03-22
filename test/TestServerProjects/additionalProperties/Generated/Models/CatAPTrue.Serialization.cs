@@ -43,7 +43,6 @@ namespace additionalProperties.Models
 
         internal static CatAPTrue DeserializeCatAPTrue(JsonElement element)
         {
-            CatAPTrue result;
             bool? friendly = default;
             int id = default;
             string name = default;
@@ -85,8 +84,7 @@ namespace additionalProperties.Models
                 }
                 additionalProperties.Add(property.Name, property.Value.GetObject());
             }
-            result = new CatAPTrue(friendly, id, name, status, additionalProperties);
-            return result;
+            return new CatAPTrue(friendly, id, name, status, additionalProperties);
         }
     }
 }

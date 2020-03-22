@@ -27,7 +27,6 @@ namespace validation.Models
 
         internal static ChildProduct DeserializeChildProduct(JsonElement element)
         {
-            ChildProduct result;
             string constProperty = default;
             int? count = default;
             foreach (var property in element.EnumerateObject())
@@ -47,8 +46,7 @@ namespace validation.Models
                     continue;
                 }
             }
-            result = new ChildProduct(constProperty, count);
-            return result;
+            return new ChildProduct(constProperty, count);
         }
     }
 }

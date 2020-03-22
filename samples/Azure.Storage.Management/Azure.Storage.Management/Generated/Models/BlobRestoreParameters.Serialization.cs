@@ -31,7 +31,6 @@ namespace Azure.Storage.Management.Models
 
         internal static BlobRestoreParameters DeserializeBlobRestoreParameters(JsonElement element)
         {
-            BlobRestoreParameters result;
             DateTimeOffset timeToRestore = default;
             IList<BlobRestoreRange> blobRanges = new List<BlobRestoreRange>();
             foreach (var property in element.EnumerateObject())
@@ -52,8 +51,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new BlobRestoreParameters(timeToRestore, blobRanges);
-            return result;
+            return new BlobRestoreParameters(timeToRestore, blobRanges);
         }
     }
 }

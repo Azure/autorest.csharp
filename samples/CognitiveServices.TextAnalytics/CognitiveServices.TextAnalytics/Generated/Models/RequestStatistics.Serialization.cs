@@ -14,7 +14,6 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static RequestStatistics DeserializeRequestStatistics(JsonElement element)
         {
-            RequestStatistics result;
             int documentsCount = default;
             int validDocumentsCount = default;
             int erroneousDocumentsCount = default;
@@ -42,8 +41,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            result = new RequestStatistics(documentsCount, validDocumentsCount, erroneousDocumentsCount, transactionsCount);
-            return result;
+            return new RequestStatistics(documentsCount, validDocumentsCount, erroneousDocumentsCount, transactionsCount);
         }
     }
 }

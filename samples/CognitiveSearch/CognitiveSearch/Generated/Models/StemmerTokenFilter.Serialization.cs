@@ -26,7 +26,6 @@ namespace CognitiveSearch.Models
 
         internal static StemmerTokenFilter DeserializeStemmerTokenFilter(JsonElement element)
         {
-            StemmerTokenFilter result;
             StemmerTokenFilterLanguage language = default;
             string odatatype = default;
             string name = default;
@@ -48,8 +47,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new StemmerTokenFilter(language, odatatype, name);
-            return result;
+            return new StemmerTokenFilter(language, odatatype, name);
         }
     }
 }

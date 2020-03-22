@@ -106,9 +106,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            EncryptionScope value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
-                            return Response.FromValue<EncryptionScope>(value, message.Response);
+                            value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -156,9 +157,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            EncryptionScope value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
-                            return Response.FromValue<EncryptionScope>(value, message.Response);
+                            value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -230,9 +232,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            EncryptionScope value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
-                            return Response.FromValue<EncryptionScope>(value, message.Response);
+                            value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -280,9 +283,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            EncryptionScope value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
-                            return Response.FromValue<EncryptionScope>(value, message.Response);
+                            value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -345,9 +349,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            EncryptionScope value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
-                            return Response.FromValue<EncryptionScope>(value, message.Response);
+                            value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -390,9 +395,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            EncryptionScope value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
-                            return Response.FromValue<EncryptionScope>(value, message.Response);
+                            value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -449,9 +455,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            EncryptionScopeListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = EncryptionScopeListResult.DeserializeEncryptionScopeListResult(document.RootElement);
-                            return Response.FromValue<EncryptionScopeListResult>(value, message.Response);
+                            value = EncryptionScopeListResult.DeserializeEncryptionScopeListResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -489,9 +496,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            EncryptionScopeListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = EncryptionScopeListResult.DeserializeEncryptionScopeListResult(document.RootElement);
-                            return Response.FromValue<EncryptionScopeListResult>(value, message.Response);
+                            value = EncryptionScopeListResult.DeserializeEncryptionScopeListResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -535,9 +543,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            EncryptionScopeListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = EncryptionScopeListResult.DeserializeEncryptionScopeListResult(document.RootElement);
-                            return Response.FromValue<EncryptionScopeListResult>(value, message.Response);
+                            value = EncryptionScopeListResult.DeserializeEncryptionScopeListResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -570,9 +579,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            EncryptionScopeListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = EncryptionScopeListResult.DeserializeEncryptionScopeListResult(document.RootElement);
-                            return Response.FromValue<EncryptionScopeListResult>(value, message.Response);
+                            value = EncryptionScopeListResult.DeserializeEncryptionScopeListResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

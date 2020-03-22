@@ -15,7 +15,6 @@ namespace CognitiveSearch.Models
     {
         internal static ListDataSourcesResult DeserializeListDataSourcesResult(JsonElement element)
         {
-            ListDataSourcesResult result;
             IList<DataSource> value = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -34,8 +33,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new ListDataSourcesResult(value);
-            return result;
+            return new ListDataSourcesResult(value);
         }
     }
 }

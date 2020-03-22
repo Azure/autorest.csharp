@@ -67,7 +67,6 @@ namespace CognitiveSearch.Models
 
         internal static SplitSkill DeserializeSplitSkill(JsonElement element)
         {
-            SplitSkill result;
             SplitSkillLanguage? defaultLanguageCode = default;
             TextSplitMode? textSplitMode = default;
             int? maximumPageLength = default;
@@ -159,8 +158,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new SplitSkill(defaultLanguageCode, textSplitMode, maximumPageLength, odatatype, name, description, context, inputs, outputs);
-            return result;
+            return new SplitSkill(defaultLanguageCode, textSplitMode, maximumPageLength, odatatype, name, description, context, inputs, outputs);
         }
     }
 }

@@ -201,9 +201,10 @@ namespace Azure.Network.Management.Interface
                 {
                     case 200:
                         {
+                            NetworkInterfaceTapConfiguration value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration(document.RootElement);
-                            return Response.FromValue<NetworkInterfaceTapConfiguration>(value, message.Response);
+                            value = NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -246,9 +247,10 @@ namespace Azure.Network.Management.Interface
                 {
                     case 200:
                         {
+                            NetworkInterfaceTapConfiguration value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration(document.RootElement);
-                            return Response.FromValue<NetworkInterfaceTapConfiguration>(value, message.Response);
+                            value = NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -423,9 +425,10 @@ namespace Azure.Network.Management.Interface
                 {
                     case 200:
                         {
+                            NetworkInterfaceTapConfigurationListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = NetworkInterfaceTapConfigurationListResult.DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
-                            return Response.FromValue<NetworkInterfaceTapConfigurationListResult>(value, message.Response);
+                            value = NetworkInterfaceTapConfigurationListResult.DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -463,9 +466,10 @@ namespace Azure.Network.Management.Interface
                 {
                     case 200:
                         {
+                            NetworkInterfaceTapConfigurationListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = NetworkInterfaceTapConfigurationListResult.DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
-                            return Response.FromValue<NetworkInterfaceTapConfigurationListResult>(value, message.Response);
+                            value = NetworkInterfaceTapConfigurationListResult.DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -509,9 +513,10 @@ namespace Azure.Network.Management.Interface
                 {
                     case 200:
                         {
+                            NetworkInterfaceTapConfigurationListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = NetworkInterfaceTapConfigurationListResult.DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
-                            return Response.FromValue<NetworkInterfaceTapConfigurationListResult>(value, message.Response);
+                            value = NetworkInterfaceTapConfigurationListResult.DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -544,9 +549,10 @@ namespace Azure.Network.Management.Interface
                 {
                     case 200:
                         {
+                            NetworkInterfaceTapConfigurationListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = NetworkInterfaceTapConfigurationListResult.DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
-                            return Response.FromValue<NetworkInterfaceTapConfigurationListResult>(value, message.Response);
+                            value = NetworkInterfaceTapConfigurationListResult.DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

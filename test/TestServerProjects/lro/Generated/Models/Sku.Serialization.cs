@@ -30,7 +30,6 @@ namespace lro.Models
 
         internal static Sku DeserializeSku(JsonElement element)
         {
-            Sku result;
             string name = default;
             string id = default;
             foreach (var property in element.EnumerateObject())
@@ -54,8 +53,7 @@ namespace lro.Models
                     continue;
                 }
             }
-            result = new Sku(name, id);
-            return result;
+            return new Sku(name, id);
         }
     }
 }

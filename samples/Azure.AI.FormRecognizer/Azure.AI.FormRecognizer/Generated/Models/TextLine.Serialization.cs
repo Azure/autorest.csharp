@@ -15,7 +15,6 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static TextLine DeserializeTextLine(JsonElement element)
         {
-            TextLine result;
             string text = default;
             IList<float> boundingBox = new List<float>();
             Language? language = default;
@@ -57,8 +56,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            result = new TextLine(text, boundingBox, language, words);
-            return result;
+            return new TextLine(text, boundingBox, language, words);
         }
     }
 }

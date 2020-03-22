@@ -41,7 +41,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties DeserializeNetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(JsonElement element)
         {
-            NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties result;
             string groupId = default;
             string requiredMemberName = default;
             IList<string> fqdns = default;
@@ -80,8 +79,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(groupId, requiredMemberName, fqdns);
-            return result;
+            return new NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(groupId, requiredMemberName, fqdns);
         }
     }
 }

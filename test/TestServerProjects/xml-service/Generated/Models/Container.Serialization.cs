@@ -15,35 +15,26 @@ namespace xml_service.Models
     {
         internal static Container DeserializeContainer(XElement element)
         {
-            Container result = default;
-            result = new Container(); string value = default;
-            var name = element.Element("Name");
-            if (name != null)
+            var obj = new Container();
+            if (element.Element("Name") is XElement name)
             {
-                value = (string)name;
+                obj.Name = (string)name;
             }
-            result.Name = value;
-            ContainerProperties value0 = default;
-            var properties = element.Element("Properties");
-            if (properties != null)
+            if (element.Element("Properties") is XElement properties)
             {
-                value0 = ContainerProperties.DeserializeContainerProperties(properties);
+                obj.Properties = ContainerProperties.DeserializeContainerProperties(properties);
             }
-            result.Properties = value0;
-            IDictionary<string, string> value1 = default;
-            var metadata = element.Element("Metadata");
-            if (metadata != null)
+            if (element.Element("Metadata") is XElement metadata)
             {
-                value1 = new Dictionary<string, string>(); var elements = metadata.Elements();
+                var dictionary = new Dictionary<string, string>();
+                var elements = metadata.Elements();
                 foreach (var e in elements)
                 {
-                    string value2 = default;
-                    value2 = (string)e;
-                    value1.Add(e.Name.LocalName, value2);
+                    dictionary.Add(e.Name.LocalName, (string)e);
                 }
+                obj.Metadata = dictionary;
             }
-            result.Metadata = value1;
-            return result;
+            return obj;
         }
     }
 }

@@ -37,7 +37,6 @@ namespace ExtensionClientName.Models
 
         internal static RenamedSchema DeserializeRenamedSchema(JsonElement element)
         {
-            RenamedSchema result;
             IDictionary<string, string> originalProperty = default;
             string originalPropertyString = default;
             foreach (var property in element.EnumerateObject())
@@ -48,12 +47,12 @@ namespace ExtensionClientName.Models
                     {
                         continue;
                     }
-                    Dictionary<string, string> array = new Dictionary<string, string>();
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        array.Add(property0.Name, property0.Value.GetString());
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
-                    originalProperty = array;
+                    originalProperty = dictionary;
                     continue;
                 }
                 if (property.NameEquals("originalPropertyString"))
@@ -66,8 +65,7 @@ namespace ExtensionClientName.Models
                     continue;
                 }
             }
-            result = new RenamedSchema(originalProperty, originalPropertyString);
-            return result;
+            return new RenamedSchema(originalProperty, originalPropertyString);
         }
     }
 }

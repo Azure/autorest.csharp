@@ -129,7 +129,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static FrontendIPConfiguration DeserializeFrontendIPConfiguration(JsonElement element)
         {
-            FrontendIPConfiguration result;
             string name = default;
             string etag = default;
             string type = default;
@@ -325,8 +324,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new FrontendIPConfiguration(name, etag, type, zones, inboundNatRules, inboundNatPools, outboundRules, loadBalancingRules, privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, publicIPAddress, publicIPPrefix, provisioningState, id);
-            return result;
+            return new FrontendIPConfiguration(name, etag, type, zones, inboundNatRules, inboundNatPools, outboundRules, loadBalancingRules, privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, publicIPAddress, publicIPPrefix, provisioningState, id);
         }
     }
 }

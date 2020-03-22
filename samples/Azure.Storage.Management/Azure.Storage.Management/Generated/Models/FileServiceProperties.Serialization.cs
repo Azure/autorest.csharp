@@ -53,7 +53,6 @@ namespace Azure.Storage.Management.Models
 
         internal static FileServiceProperties DeserializeFileServiceProperties(JsonElement element)
         {
-            FileServiceProperties result;
             Sku sku = default;
             string id = default;
             string name = default;
@@ -124,8 +123,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new FileServiceProperties(sku, cors, shareDeleteRetentionPolicy, id, name, type);
-            return result;
+            return new FileServiceProperties(sku, cors, shareDeleteRetentionPolicy, id, name, type);
         }
     }
 }

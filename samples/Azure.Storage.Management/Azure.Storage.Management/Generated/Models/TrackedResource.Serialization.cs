@@ -49,7 +49,6 @@ namespace Azure.Storage.Management.Models
 
         internal static TrackedResource DeserializeTrackedResource(JsonElement element)
         {
-            TrackedResource result;
             IDictionary<string, string> tags = default;
             string location = default;
             string id = default;
@@ -63,12 +62,12 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    Dictionary<string, string> array = new Dictionary<string, string>();
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        array.Add(property0.Name, property0.Value.GetString());
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
-                    tags = array;
+                    tags = dictionary;
                     continue;
                 }
                 if (property.NameEquals("location"))
@@ -104,8 +103,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new TrackedResource(tags, location, id, name, type);
-            return result;
+            return new TrackedResource(tags, location, id, name, type);
         }
     }
 }

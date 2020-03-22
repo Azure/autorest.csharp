@@ -110,9 +110,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            Skillset value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Skillset.DeserializeSkillset(document.RootElement);
-                            return Response.FromValue<Skillset>(value, message.Response);
+                            value = Skillset.DeserializeSkillset(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -153,9 +154,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            Skillset value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Skillset.DeserializeSkillset(document.RootElement);
-                            return Response.FromValue<Skillset>(value, message.Response);
+                            value = Skillset.DeserializeSkillset(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -309,9 +311,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            Skillset value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Skillset.DeserializeSkillset(document.RootElement);
-                            return Response.FromValue<Skillset>(value, message.Response);
+                            value = Skillset.DeserializeSkillset(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -345,9 +348,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            Skillset value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Skillset.DeserializeSkillset(document.RootElement);
-                            return Response.FromValue<Skillset>(value, message.Response);
+                            value = Skillset.DeserializeSkillset(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -401,9 +405,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            ListSkillsetsResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ListSkillsetsResult.DeserializeListSkillsetsResult(document.RootElement);
-                            return Response.FromValue<ListSkillsetsResult>(value, message.Response);
+                            value = ListSkillsetsResult.DeserializeListSkillsetsResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -433,9 +438,10 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            ListSkillsetsResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ListSkillsetsResult.DeserializeListSkillsetsResult(document.RootElement);
-                            return Response.FromValue<ListSkillsetsResult>(value, message.Response);
+                            value = ListSkillsetsResult.DeserializeListSkillsetsResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -493,9 +499,10 @@ namespace CognitiveSearch
                 {
                     case 201:
                         {
+                            Skillset value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Skillset.DeserializeSkillset(document.RootElement);
-                            return Response.FromValue<Skillset>(value, message.Response);
+                            value = Skillset.DeserializeSkillset(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -529,9 +536,10 @@ namespace CognitiveSearch
                 {
                     case 201:
                         {
+                            Skillset value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Skillset.DeserializeSkillset(document.RootElement);
-                            return Response.FromValue<Skillset>(value, message.Response);
+                            value = Skillset.DeserializeSkillset(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

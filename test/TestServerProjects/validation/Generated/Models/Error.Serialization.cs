@@ -14,7 +14,6 @@ namespace validation.Models
     {
         internal static Error DeserializeError(JsonElement element)
         {
-            Error result;
             int? code = default;
             string message = default;
             string fields = default;
@@ -48,8 +47,7 @@ namespace validation.Models
                     continue;
                 }
             }
-            result = new Error(code, message, fields);
-            return result;
+            return new Error(code, message, fields);
         }
     }
 }

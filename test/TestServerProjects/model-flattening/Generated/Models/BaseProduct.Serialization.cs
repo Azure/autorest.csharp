@@ -27,7 +27,6 @@ namespace model_flattening.Models
 
         internal static BaseProduct DeserializeBaseProduct(JsonElement element)
         {
-            BaseProduct result;
             string baseProductId = default;
             string baseProductDescription = default;
             foreach (var property in element.EnumerateObject())
@@ -47,8 +46,7 @@ namespace model_flattening.Models
                     continue;
                 }
             }
-            result = new BaseProduct(baseProductId, baseProductDescription);
-            return result;
+            return new BaseProduct(baseProductId, baseProductDescription);
         }
     }
 }

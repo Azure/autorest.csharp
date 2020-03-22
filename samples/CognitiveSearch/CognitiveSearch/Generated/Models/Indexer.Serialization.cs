@@ -77,7 +77,6 @@ namespace CognitiveSearch.Models
 
         internal static Indexer DeserializeIndexer(JsonElement element)
         {
-            Indexer result;
             string name = default;
             string description = default;
             string dataSourceName = default;
@@ -189,8 +188,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new Indexer(name, description, dataSourceName, skillsetName, targetIndexName, schedule, parameters, fieldMappings, outputFieldMappings, disabled, odataetag);
-            return result;
+            return new Indexer(name, description, dataSourceName, skillsetName, targetIndexName, schedule, parameters, fieldMappings, outputFieldMappings, disabled, odataetag);
         }
     }
 }

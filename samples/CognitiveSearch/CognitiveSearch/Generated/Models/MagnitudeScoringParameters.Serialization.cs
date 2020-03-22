@@ -29,7 +29,6 @@ namespace CognitiveSearch.Models
 
         internal static MagnitudeScoringParameters DeserializeMagnitudeScoringParameters(JsonElement element)
         {
-            MagnitudeScoringParameters result;
             double boostingRangeStart = default;
             double boostingRangeEnd = default;
             bool? constantBoostBeyondRange = default;
@@ -55,8 +54,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new MagnitudeScoringParameters(boostingRangeStart, boostingRangeEnd, constantBoostBeyondRange);
-            return result;
+            return new MagnitudeScoringParameters(boostingRangeStart, boostingRangeEnd, constantBoostBeyondRange);
         }
     }
 }

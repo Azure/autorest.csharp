@@ -15,7 +15,6 @@ namespace CognitiveSearch.Models
     {
         internal static SearchDocumentsResult DeserializeSearchDocumentsResult(JsonElement element)
         {
-            SearchDocumentsResult result;
             long? odatacount = default;
             double? searchcoverage = default;
             IDictionary<string, IList<FacetResult>> searchfacets = default;
@@ -48,19 +47,17 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    Dictionary<string, IList<FacetResult>> array = new Dictionary<string, IList<FacetResult>>();
+                    Dictionary<string, IList<FacetResult>> dictionary = new Dictionary<string, IList<FacetResult>>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        IList<FacetResult> value0;
-                        List<FacetResult> array0 = new List<FacetResult>();
+                        List<FacetResult> array = new List<FacetResult>();
                         foreach (var item in property0.Value.EnumerateArray())
                         {
-                            array0.Add(FacetResult.DeserializeFacetResult(item));
+                            array.Add(FacetResult.DeserializeFacetResult(item));
                         }
-                        value0 = array0;
-                        array.Add(property0.Name, value0);
+                        dictionary.Add(property0.Name, array);
                     }
-                    searchfacets = array;
+                    searchfacets = dictionary;
                     continue;
                 }
                 if (property.NameEquals("@search.nextPageParameters"))
@@ -96,8 +93,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new SearchDocumentsResult(odatacount, searchcoverage, searchfacets, searchnextPageParameters, value, odatanextLink);
-            return result;
+            return new SearchDocumentsResult(odatacount, searchcoverage, searchfacets, searchnextPageParameters, value, odatanextLink);
         }
     }
 }

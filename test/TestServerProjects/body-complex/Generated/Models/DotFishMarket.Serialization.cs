@@ -15,7 +15,6 @@ namespace body_complex.Models
     {
         internal static DotFishMarket DeserializeDotFishMarket(JsonElement element)
         {
-            DotFishMarket result;
             DotSalmon sampleSalmon = default;
             IList<DotSalmon> salmons = default;
             DotFish sampleFish = default;
@@ -69,8 +68,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new DotFishMarket(sampleSalmon, salmons, sampleFish, fishes);
-            return result;
+            return new DotFishMarket(sampleSalmon, salmons, sampleFish, fishes);
         }
     }
 }

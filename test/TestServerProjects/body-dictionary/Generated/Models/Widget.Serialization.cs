@@ -30,7 +30,6 @@ namespace body_dictionary.Models
 
         internal static Widget DeserializeWidget(JsonElement element)
         {
-            Widget result;
             int? integer = default;
             string @string = default;
             foreach (var property in element.EnumerateObject())
@@ -54,8 +53,7 @@ namespace body_dictionary.Models
                     continue;
                 }
             }
-            result = new Widget(integer, @string);
-            return result;
+            return new Widget(integer, @string);
         }
     }
 }

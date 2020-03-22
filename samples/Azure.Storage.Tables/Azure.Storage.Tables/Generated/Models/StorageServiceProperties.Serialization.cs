@@ -43,40 +43,29 @@ namespace Azure.Storage.Tables.Models
 
         internal static StorageServiceProperties DeserializeStorageServiceProperties(XElement element)
         {
-            StorageServiceProperties result = default;
-            result = new StorageServiceProperties(); Logging value = default;
-            var logging = element.Element("Logging");
-            if (logging != null)
+            var obj = new StorageServiceProperties();
+            if (element.Element("Logging") is XElement logging)
             {
-                value = Logging.DeserializeLogging(logging);
+                obj.Logging = Logging.DeserializeLogging(logging);
             }
-            result.Logging = value;
-            Metrics value0 = default;
-            var hourMetrics = element.Element("HourMetrics");
-            if (hourMetrics != null)
+            if (element.Element("HourMetrics") is XElement hourMetrics)
             {
-                value0 = Metrics.DeserializeMetrics(hourMetrics);
+                obj.HourMetrics = Metrics.DeserializeMetrics(hourMetrics);
             }
-            result.HourMetrics = value0;
-            Metrics value1 = default;
-            var minuteMetrics = element.Element("MinuteMetrics");
-            if (minuteMetrics != null)
+            if (element.Element("MinuteMetrics") is XElement minuteMetrics)
             {
-                value1 = Metrics.DeserializeMetrics(minuteMetrics);
+                obj.MinuteMetrics = Metrics.DeserializeMetrics(minuteMetrics);
             }
-            result.MinuteMetrics = value1;
-            var cors = element.Element("Cors");
-            if (cors != null)
+            if (element.Element("Cors") is XElement cors)
             {
-                result.Cors = new List<CorsRule>();
+                var array = new List<CorsRule>();
                 foreach (var e in cors.Elements("CorsRule"))
                 {
-                    CorsRule value2 = default;
-                    value2 = CorsRule.DeserializeCorsRule(e);
-                    result.Cors.Add(value2);
+                    array.Add(CorsRule.DeserializeCorsRule(e));
                 }
+                obj.Cors = array;
             }
-            return result;
+            return obj;
         }
     }
 }

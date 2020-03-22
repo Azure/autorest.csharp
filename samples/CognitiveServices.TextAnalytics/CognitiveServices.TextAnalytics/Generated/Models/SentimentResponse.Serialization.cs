@@ -15,7 +15,6 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static SentimentResponse DeserializeSentimentResponse(JsonElement element)
         {
-            SentimentResponse result;
             IList<DocumentSentiment> documents = new List<DocumentSentiment>();
             IList<DocumentError> errors = new List<DocumentError>();
             RequestStatistics statistics = default;
@@ -57,8 +56,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            result = new SentimentResponse(documents, errors, statistics, modelVersion);
-            return result;
+            return new SentimentResponse(documents, errors, statistics, modelVersion);
         }
     }
 }

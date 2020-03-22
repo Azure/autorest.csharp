@@ -15,7 +15,6 @@ namespace Azure.Storage.Management.Models
     {
         internal static StorageAccountListResult DeserializeStorageAccountListResult(JsonElement element)
         {
-            StorageAccountListResult result;
             IList<StorageAccount> value = default;
             string nextLink = default;
             foreach (var property in element.EnumerateObject())
@@ -44,8 +43,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new StorageAccountListResult(value, nextLink);
-            return result;
+            return new StorageAccountListResult(value, nextLink);
         }
     }
 }

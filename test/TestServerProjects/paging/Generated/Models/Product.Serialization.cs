@@ -14,7 +14,6 @@ namespace paging.Models
     {
         internal static Product DeserializeProduct(JsonElement element)
         {
-            Product result;
             ProductProperties properties = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -28,8 +27,7 @@ namespace paging.Models
                     continue;
                 }
             }
-            result = new Product(properties);
-            return result;
+            return new Product(properties);
         }
     }
 }

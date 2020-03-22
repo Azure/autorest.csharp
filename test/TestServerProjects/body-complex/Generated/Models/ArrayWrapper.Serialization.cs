@@ -31,7 +31,6 @@ namespace body_complex.Models
 
         internal static ArrayWrapper DeserializeArrayWrapper(JsonElement element)
         {
-            ArrayWrapper result;
             IList<string> array = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -50,8 +49,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new ArrayWrapper(array);
-            return result;
+            return new ArrayWrapper(array);
         }
     }
 }

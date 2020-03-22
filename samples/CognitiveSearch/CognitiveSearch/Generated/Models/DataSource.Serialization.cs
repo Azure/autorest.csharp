@@ -48,7 +48,6 @@ namespace CognitiveSearch.Models
 
         internal static DataSource DeserializeDataSource(JsonElement element)
         {
-            DataSource result;
             string name = default;
             string description = default;
             DataSourceType type = default;
@@ -116,8 +115,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new DataSource(name, description, type, credentials, container, dataChangeDetectionPolicy, dataDeletionDetectionPolicy, odataetag);
-            return result;
+            return new DataSource(name, description, type, credentials, container, dataChangeDetectionPolicy, dataDeletionDetectionPolicy, odataetag);
         }
     }
 }

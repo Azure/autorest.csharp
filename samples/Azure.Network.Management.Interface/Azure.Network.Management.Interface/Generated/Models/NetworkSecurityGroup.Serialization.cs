@@ -110,7 +110,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static NetworkSecurityGroup DeserializeNetworkSecurityGroup(JsonElement element)
         {
-            NetworkSecurityGroup result;
             string etag = default;
             string id = default;
             string name = default;
@@ -176,12 +175,12 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    Dictionary<string, string> array = new Dictionary<string, string>();
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        array.Add(property0.Name, property0.Value.GetString());
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
-                    tags = array;
+                    tags = dictionary;
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -266,8 +265,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new NetworkSecurityGroup(etag, securityRules, defaultSecurityRules, networkInterfaces, subnets, resourceGuid, provisioningState, id, name, type, location, tags);
-            return result;
+            return new NetworkSecurityGroup(etag, securityRules, defaultSecurityRules, networkInterfaces, subnets, resourceGuid, provisioningState, id, name, type, location, tags);
         }
     }
 }

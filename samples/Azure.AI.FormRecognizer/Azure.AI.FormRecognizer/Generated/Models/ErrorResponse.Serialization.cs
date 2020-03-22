@@ -14,7 +14,6 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static ErrorResponse DeserializeErrorResponse(JsonElement element)
         {
-            ErrorResponse result;
             ErrorInformation error = new ErrorInformation();
             foreach (var property in element.EnumerateObject())
             {
@@ -24,8 +23,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            result = new ErrorResponse(error);
-            return result;
+            return new ErrorResponse(error);
         }
     }
 }

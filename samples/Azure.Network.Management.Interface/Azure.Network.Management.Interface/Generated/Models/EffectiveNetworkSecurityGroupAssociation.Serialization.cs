@@ -14,7 +14,6 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static EffectiveNetworkSecurityGroupAssociation DeserializeEffectiveNetworkSecurityGroupAssociation(JsonElement element)
         {
-            EffectiveNetworkSecurityGroupAssociation result;
             SubResource subnet = default;
             SubResource networkInterface = default;
             foreach (var property in element.EnumerateObject())
@@ -38,8 +37,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new EffectiveNetworkSecurityGroupAssociation(subnet, networkInterface);
-            return result;
+            return new EffectiveNetworkSecurityGroupAssociation(subnet, networkInterface);
         }
     }
 }

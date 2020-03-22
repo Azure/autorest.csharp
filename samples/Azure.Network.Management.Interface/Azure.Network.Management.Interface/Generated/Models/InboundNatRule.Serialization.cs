@@ -88,7 +88,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static InboundNatRule DeserializeInboundNatRule(JsonElement element)
         {
-            InboundNatRule result;
             string name = default;
             string etag = default;
             string type = default;
@@ -229,8 +228,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new InboundNatRule(name, etag, type, frontendIPConfiguration, backendIPConfiguration, protocol, frontendPort, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, provisioningState, id);
-            return result;
+            return new InboundNatRule(name, etag, type, frontendIPConfiguration, backendIPConfiguration, protocol, frontendPort, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, provisioningState, id);
         }
     }
 }

@@ -14,7 +14,6 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static Model DeserializeModel(JsonElement element)
         {
-            Model result;
             ModelInfo modelInfo = new ModelInfo();
             KeysResult keys = default;
             TrainResult trainResult = default;
@@ -44,8 +43,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            result = new Model(modelInfo, keys, trainResult);
-            return result;
+            return new Model(modelInfo, keys, trainResult);
         }
     }
 }

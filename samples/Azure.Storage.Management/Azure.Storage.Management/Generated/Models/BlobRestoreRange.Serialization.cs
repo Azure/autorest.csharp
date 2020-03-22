@@ -24,7 +24,6 @@ namespace Azure.Storage.Management.Models
 
         internal static BlobRestoreRange DeserializeBlobRestoreRange(JsonElement element)
         {
-            BlobRestoreRange result;
             string startRange = default;
             string endRange = default;
             foreach (var property in element.EnumerateObject())
@@ -40,8 +39,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new BlobRestoreRange(startRange, endRange);
-            return result;
+            return new BlobRestoreRange(startRange, endRange);
         }
     }
 }

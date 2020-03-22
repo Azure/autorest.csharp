@@ -32,7 +32,6 @@ namespace CognitiveSearch.Models
 
         internal static SoftDeleteColumnDeletionDetectionPolicy DeserializeSoftDeleteColumnDeletionDetectionPolicy(JsonElement element)
         {
-            SoftDeleteColumnDeletionDetectionPolicy result;
             string softDeleteColumnName = default;
             string softDeleteMarkerValue = default;
             string odatatype = default;
@@ -62,8 +61,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new SoftDeleteColumnDeletionDetectionPolicy(softDeleteColumnName, softDeleteMarkerValue, odatatype);
-            return result;
+            return new SoftDeleteColumnDeletionDetectionPolicy(softDeleteColumnName, softDeleteMarkerValue, odatatype);
         }
     }
 }

@@ -70,7 +70,6 @@ namespace CognitiveSearch.Models
                     case "#Microsoft.Skills.Vision.OcrSkill": return OcrSkill.DeserializeOcrSkill(element);
                 }
             }
-            Skill result;
             string odatatype = default;
             string name = default;
             string description = default;
@@ -132,8 +131,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new Skill(odatatype, name, description, context, inputs, outputs);
-            return result;
+            return new Skill(odatatype, name, description, context, inputs, outputs);
         }
     }
 }

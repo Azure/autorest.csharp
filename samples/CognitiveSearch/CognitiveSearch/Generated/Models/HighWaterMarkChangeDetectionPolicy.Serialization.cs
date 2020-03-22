@@ -24,7 +24,6 @@ namespace CognitiveSearch.Models
 
         internal static HighWaterMarkChangeDetectionPolicy DeserializeHighWaterMarkChangeDetectionPolicy(JsonElement element)
         {
-            HighWaterMarkChangeDetectionPolicy result;
             string highWaterMarkColumnName = default;
             string odatatype = default;
             foreach (var property in element.EnumerateObject())
@@ -40,8 +39,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new HighWaterMarkChangeDetectionPolicy(highWaterMarkColumnName, odatatype);
-            return result;
+            return new HighWaterMarkChangeDetectionPolicy(highWaterMarkColumnName, odatatype);
         }
     }
 }

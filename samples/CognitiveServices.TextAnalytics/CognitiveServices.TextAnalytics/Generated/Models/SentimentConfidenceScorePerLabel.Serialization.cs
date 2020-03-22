@@ -14,7 +14,6 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static SentimentConfidenceScorePerLabel DeserializeSentimentConfidenceScorePerLabel(JsonElement element)
         {
-            SentimentConfidenceScorePerLabel result;
             double positive = default;
             double neutral = default;
             double negative = default;
@@ -36,8 +35,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            result = new SentimentConfidenceScorePerLabel(positive, neutral, negative);
-            return result;
+            return new SentimentConfidenceScorePerLabel(positive, neutral, negative);
         }
     }
 }

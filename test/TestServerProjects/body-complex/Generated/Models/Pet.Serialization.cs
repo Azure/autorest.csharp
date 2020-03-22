@@ -30,7 +30,6 @@ namespace body_complex.Models
 
         internal static Pet DeserializePet(JsonElement element)
         {
-            Pet result;
             int? id = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -54,8 +53,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new Pet(id, name);
-            return result;
+            return new Pet(id, name);
         }
     }
 }

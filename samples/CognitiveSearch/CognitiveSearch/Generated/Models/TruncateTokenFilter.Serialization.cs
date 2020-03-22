@@ -29,7 +29,6 @@ namespace CognitiveSearch.Models
 
         internal static TruncateTokenFilter DeserializeTruncateTokenFilter(JsonElement element)
         {
-            TruncateTokenFilter result;
             int? length = default;
             string odatatype = default;
             string name = default;
@@ -55,8 +54,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new TruncateTokenFilter(length, odatatype, name);
-            return result;
+            return new TruncateTokenFilter(length, odatatype, name);
         }
     }
 }

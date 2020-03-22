@@ -30,7 +30,6 @@ namespace model_flattening.Models
 
         internal static ProductUrl DeserializeProductUrl(JsonElement element)
         {
-            ProductUrl result;
             string odatavalue = default;
             string genericValue = default;
             foreach (var property in element.EnumerateObject())
@@ -54,8 +53,7 @@ namespace model_flattening.Models
                     continue;
                 }
             }
-            result = new ProductUrl(odatavalue, genericValue);
-            return result;
+            return new ProductUrl(odatavalue, genericValue);
         }
     }
 }

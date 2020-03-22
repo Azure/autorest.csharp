@@ -29,7 +29,6 @@ namespace CognitiveSearch.Models
 
         internal static UaxUrlEmailTokenizer DeserializeUaxUrlEmailTokenizer(JsonElement element)
         {
-            UaxUrlEmailTokenizer result;
             int? maxTokenLength = default;
             string odatatype = default;
             string name = default;
@@ -55,8 +54,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new UaxUrlEmailTokenizer(maxTokenLength, odatatype, name);
-            return result;
+            return new UaxUrlEmailTokenizer(maxTokenLength, odatatype, name);
         }
     }
 }

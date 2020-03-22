@@ -15,7 +15,6 @@ namespace CognitiveSearch.Models
     {
         internal static IndexerLimits DeserializeIndexerLimits(JsonElement element)
         {
-            IndexerLimits result;
             TimeSpan? maxRunTime = default;
             long? maxDocumentExtractionSize = default;
             long? maxDocumentContentCharactersToExtract = default;
@@ -49,8 +48,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new IndexerLimits(maxRunTime, maxDocumentExtractionSize, maxDocumentContentCharactersToExtract);
-            return result;
+            return new IndexerLimits(maxRunTime, maxDocumentExtractionSize, maxDocumentContentCharactersToExtract);
         }
     }
 }

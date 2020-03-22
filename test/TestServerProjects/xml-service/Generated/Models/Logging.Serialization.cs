@@ -34,43 +34,28 @@ namespace xml_service.Models
 
         internal static Logging DeserializeLogging(XElement element)
         {
-            Logging result = default;
-            result = new Logging(); string value = default;
-            var version = element.Element("Version");
-            if (version != null)
+            var obj = new Logging();
+            if (element.Element("Version") is XElement version)
             {
-                value = (string)version;
+                obj.Version = (string)version;
             }
-            result.Version = value;
-            bool value0 = default;
-            var delete = element.Element("Delete");
-            if (delete != null)
+            if (element.Element("Delete") is XElement delete)
             {
-                value0 = (bool)delete;
+                obj.Delete = (bool)delete;
             }
-            result.Delete = value0;
-            bool value1 = default;
-            var read = element.Element("Read");
-            if (read != null)
+            if (element.Element("Read") is XElement read)
             {
-                value1 = (bool)read;
+                obj.Read = (bool)read;
             }
-            result.Read = value1;
-            bool value2 = default;
-            var write = element.Element("Write");
-            if (write != null)
+            if (element.Element("Write") is XElement write)
             {
-                value2 = (bool)write;
+                obj.Write = (bool)write;
             }
-            result.Write = value2;
-            RetentionPolicy value3 = default;
-            var retentionPolicy = element.Element("RetentionPolicy");
-            if (retentionPolicy != null)
+            if (element.Element("RetentionPolicy") is XElement retentionPolicy)
             {
-                value3 = RetentionPolicy.DeserializeRetentionPolicy(retentionPolicy);
+                obj.RetentionPolicy = RetentionPolicy.DeserializeRetentionPolicy(retentionPolicy);
             }
-            result.RetentionPolicy = value3;
-            return result;
+            return obj;
         }
     }
 }

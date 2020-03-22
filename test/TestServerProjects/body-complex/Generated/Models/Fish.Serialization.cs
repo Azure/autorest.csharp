@@ -52,7 +52,6 @@ namespace body_complex.Models
                     case "smart_salmon": return SmartSalmon.DeserializeSmartSalmon(element);
                 }
             }
-            Fish result;
             string fishtype = default;
             string species = default;
             float length = default;
@@ -93,8 +92,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new Fish(fishtype, species, length, siblings);
-            return result;
+            return new Fish(fishtype, species, length, siblings);
         }
     }
 }

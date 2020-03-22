@@ -43,7 +43,6 @@ namespace CognitiveSearch.Models
 
         internal static ScoringProfile DeserializeScoringProfile(JsonElement element)
         {
-            ScoringProfile result;
             string name = default;
             TextWeights text = default;
             IList<ScoringFunction> functions = default;
@@ -88,8 +87,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new ScoringProfile(name, text, functions, functionAggregation);
-            return result;
+            return new ScoringProfile(name, text, functions, functionAggregation);
         }
     }
 }

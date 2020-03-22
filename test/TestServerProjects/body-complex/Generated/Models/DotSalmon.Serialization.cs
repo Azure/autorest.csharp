@@ -14,7 +14,6 @@ namespace body_complex.Models
     {
         internal static DotSalmon DeserializeDotSalmon(JsonElement element)
         {
-            DotSalmon result;
             string location = default;
             bool? iswild = default;
             string fishtype = default;
@@ -54,8 +53,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new DotSalmon(location, iswild, fishtype, species);
-            return result;
+            return new DotSalmon(location, iswild, fishtype, species);
         }
     }
 }

@@ -52,7 +52,6 @@ namespace CognitiveSearch.Models
 
         internal static ConditionalSkill DeserializeConditionalSkill(JsonElement element)
         {
-            ConditionalSkill result;
             string odatatype = default;
             string name = default;
             string description = default;
@@ -114,8 +113,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new ConditionalSkill(odatatype, name, description, context, inputs, outputs);
-            return result;
+            return new ConditionalSkill(odatatype, name, description, context, inputs, outputs);
         }
     }
 }

@@ -51,7 +51,6 @@ namespace validation.Models
 
         internal static Product DeserializeProduct(JsonElement element)
         {
-            Product result;
             IList<string> displayNames = default;
             int? capacity = default;
             string image = default;
@@ -120,8 +119,7 @@ namespace validation.Models
                     continue;
                 }
             }
-            result = new Product(displayNames, capacity, image, child, constChild, constInt, constString, constStringAsEnum);
-            return result;
+            return new Product(displayNames, capacity, image, child, constChild, constInt, constString, constStringAsEnum);
         }
     }
 }

@@ -55,7 +55,6 @@ namespace CognitiveSearch.Models
                     case "#Microsoft.Azure.Search.WordDelimiterTokenFilter": return WordDelimiterTokenFilter.DeserializeWordDelimiterTokenFilter(element);
                 }
             }
-            TokenFilter result;
             string odatatype = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -71,8 +70,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new TokenFilter(odatatype, name);
-            return result;
+            return new TokenFilter(odatatype, name);
         }
     }
 }

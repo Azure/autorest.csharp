@@ -15,7 +15,6 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static TextWord DeserializeTextWord(JsonElement element)
         {
-            TextWord result;
             string text = default;
             IList<float> boundingBox = new List<float>();
             float? confidence = default;
@@ -46,8 +45,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            result = new TextWord(text, boundingBox, confidence);
-            return result;
+            return new TextWord(text, boundingBox, confidence);
         }
     }
 }

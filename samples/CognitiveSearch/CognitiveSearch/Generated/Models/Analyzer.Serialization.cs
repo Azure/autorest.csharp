@@ -34,7 +34,6 @@ namespace CognitiveSearch.Models
                     case "#Microsoft.Azure.Search.StopAnalyzer": return StopAnalyzer.DeserializeStopAnalyzer(element);
                 }
             }
-            Analyzer result;
             string odatatype = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -50,8 +49,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new Analyzer(odatatype, name);
-            return result;
+            return new Analyzer(odatatype, name);
         }
     }
 }

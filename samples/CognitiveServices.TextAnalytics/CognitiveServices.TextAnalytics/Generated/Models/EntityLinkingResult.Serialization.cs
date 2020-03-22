@@ -15,7 +15,6 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static EntityLinkingResult DeserializeEntityLinkingResult(JsonElement element)
         {
-            EntityLinkingResult result;
             IList<DocumentLinkedEntities> documents = new List<DocumentLinkedEntities>();
             IList<DocumentError> errors = new List<DocumentError>();
             RequestStatistics statistics = default;
@@ -57,8 +56,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            result = new EntityLinkingResult(documents, errors, statistics, modelVersion);
-            return result;
+            return new EntityLinkingResult(documents, errors, statistics, modelVersion);
         }
     }
 }

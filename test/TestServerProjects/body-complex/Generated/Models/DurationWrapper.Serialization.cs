@@ -26,7 +26,6 @@ namespace body_complex.Models
 
         internal static DurationWrapper DeserializeDurationWrapper(JsonElement element)
         {
-            DurationWrapper result;
             TimeSpan? field = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -40,8 +39,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new DurationWrapper(field);
-            return result;
+            return new DurationWrapper(field);
         }
     }
 }

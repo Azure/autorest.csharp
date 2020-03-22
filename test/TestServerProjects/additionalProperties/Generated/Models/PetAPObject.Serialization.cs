@@ -38,7 +38,6 @@ namespace additionalProperties.Models
 
         internal static PetAPObject DeserializePetAPObject(JsonElement element)
         {
-            PetAPObject result;
             int id = default;
             string name = default;
             bool? status = default;
@@ -70,8 +69,7 @@ namespace additionalProperties.Models
                 }
                 additionalProperties.Add(property.Name, property.Value.GetObject());
             }
-            result = new PetAPObject(id, name, status, additionalProperties);
-            return result;
+            return new PetAPObject(id, name, status, additionalProperties);
         }
     }
 }

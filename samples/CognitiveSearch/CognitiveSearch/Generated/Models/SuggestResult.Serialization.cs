@@ -15,7 +15,6 @@ namespace CognitiveSearch.Models
     {
         internal static SuggestResult DeserializeSuggestResult(JsonElement element)
         {
-            SuggestResult result;
             string searchtext = default;
             IDictionary<string, object> additionalProperties = new Dictionary<string, object>();
             foreach (var property in element.EnumerateObject())
@@ -31,8 +30,7 @@ namespace CognitiveSearch.Models
                 }
                 additionalProperties.Add(property.Name, property.Value.GetObject());
             }
-            result = new SuggestResult(searchtext, additionalProperties);
-            return result;
+            return new SuggestResult(searchtext, additionalProperties);
         }
     }
 }

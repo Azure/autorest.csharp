@@ -77,7 +77,6 @@ namespace CognitiveSearch.Models
 
         internal static ImageAnalysisSkill DeserializeImageAnalysisSkill(JsonElement element)
         {
-            ImageAnalysisSkill result;
             ImageAnalysisSkillLanguage? defaultLanguageCode = default;
             IList<VisualFeature> visualFeatures = default;
             IList<ImageDetail> details = default;
@@ -179,8 +178,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new ImageAnalysisSkill(defaultLanguageCode, visualFeatures, details, odatatype, name, description, context, inputs, outputs);
-            return result;
+            return new ImageAnalysisSkill(defaultLanguageCode, visualFeatures, details, odatatype, name, description, context, inputs, outputs);
         }
     }
 }

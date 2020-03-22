@@ -35,7 +35,6 @@ namespace body_complex.Models
 
         internal static StringWrapper DeserializeStringWrapper(JsonElement element)
         {
-            StringWrapper result;
             string field = default;
             string empty = default;
             string @null = default;
@@ -69,8 +68,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new StringWrapper(field, empty, @null);
-            return result;
+            return new StringWrapper(field, empty, @null);
         }
     }
 }

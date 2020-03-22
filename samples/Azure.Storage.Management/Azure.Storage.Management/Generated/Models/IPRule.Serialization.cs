@@ -24,7 +24,6 @@ namespace Azure.Storage.Management.Models
 
         internal static IPRule DeserializeIPRule(JsonElement element)
         {
-            IPRule result;
             string value = default;
             string action = default;
             foreach (var property in element.EnumerateObject())
@@ -40,8 +39,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new IPRule(value, action);
-            return result;
+            return new IPRule(value, action);
         }
     }
 }

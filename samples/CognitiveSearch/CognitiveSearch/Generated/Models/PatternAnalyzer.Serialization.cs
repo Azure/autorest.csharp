@@ -50,7 +50,6 @@ namespace CognitiveSearch.Models
 
         internal static PatternAnalyzer DeserializePatternAnalyzer(JsonElement element)
         {
-            PatternAnalyzer result;
             bool? lowercase = default;
             string pattern = default;
             RegexFlags? flags = default;
@@ -111,8 +110,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new PatternAnalyzer(lowercase, pattern, flags, stopwords, odatatype, name);
-            return result;
+            return new PatternAnalyzer(lowercase, pattern, flags, stopwords, odatatype, name);
         }
     }
 }

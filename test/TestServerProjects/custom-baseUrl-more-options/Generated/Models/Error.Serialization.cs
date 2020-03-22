@@ -14,7 +14,6 @@ namespace custom_baseUrl_more_options.Models
     {
         internal static Error DeserializeError(JsonElement element)
         {
-            Error result;
             int? status = default;
             string message = default;
             foreach (var property in element.EnumerateObject())
@@ -38,8 +37,7 @@ namespace custom_baseUrl_more_options.Models
                     continue;
                 }
             }
-            result = new Error(status, message);
-            return result;
+            return new Error(status, message);
         }
     }
 }

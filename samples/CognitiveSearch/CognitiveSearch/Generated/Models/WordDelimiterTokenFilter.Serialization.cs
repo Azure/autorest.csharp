@@ -80,7 +80,6 @@ namespace CognitiveSearch.Models
 
         internal static WordDelimiterTokenFilter DeserializeWordDelimiterTokenFilter(JsonElement element)
         {
-            WordDelimiterTokenFilter result;
             bool? generateWordParts = default;
             bool? generateNumberParts = default;
             bool? catenateWords = default;
@@ -201,8 +200,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new WordDelimiterTokenFilter(generateWordParts, generateNumberParts, catenateWords, catenateNumbers, catenateAll, splitOnCaseChange, preserveOriginal, splitOnNumerics, stemEnglishPossessive, protectedWords, odatatype, name);
-            return result;
+            return new WordDelimiterTokenFilter(generateWordParts, generateNumberParts, catenateWords, catenateNumbers, catenateAll, splitOnCaseChange, preserveOriginal, splitOnNumerics, stemEnglishPossessive, protectedWords, odatatype, name);
         }
     }
 }

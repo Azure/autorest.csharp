@@ -32,7 +32,6 @@ namespace CognitiveSearch.Models
 
         internal static FieldMapping DeserializeFieldMapping(JsonElement element)
         {
-            FieldMapping result;
             string sourceFieldName = default;
             string targetFieldName = default;
             FieldMappingFunction mappingFunction = default;
@@ -62,8 +61,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new FieldMapping(sourceFieldName, targetFieldName, mappingFunction);
-            return result;
+            return new FieldMapping(sourceFieldName, targetFieldName, mappingFunction);
         }
     }
 }

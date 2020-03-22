@@ -35,7 +35,6 @@ namespace body_complex.Models
 
         internal static Basic DeserializeBasic(JsonElement element)
         {
-            Basic result;
             int? id = default;
             string name = default;
             CMYKColors? color = default;
@@ -69,8 +68,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new Basic(id, name, color);
-            return result;
+            return new Basic(id, name, color);
         }
     }
 }

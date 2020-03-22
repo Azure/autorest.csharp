@@ -42,7 +42,6 @@ namespace CognitiveSearch.Models
 
         internal static Skillset DeserializeSkillset(JsonElement element)
         {
-            Skillset result;
             string name = default;
             string description = default;
             IList<Skill> skills = new List<Skill>();
@@ -89,8 +88,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new Skillset(name, description, skills, cognitiveServices, odataetag);
-            return result;
+            return new Skillset(name, description, skills, cognitiveServices, odataetag);
         }
     }
 }

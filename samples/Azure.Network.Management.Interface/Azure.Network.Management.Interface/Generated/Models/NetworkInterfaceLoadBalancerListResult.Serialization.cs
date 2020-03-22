@@ -15,7 +15,6 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static NetworkInterfaceLoadBalancerListResult DeserializeNetworkInterfaceLoadBalancerListResult(JsonElement element)
         {
-            NetworkInterfaceLoadBalancerListResult result;
             IList<LoadBalancer> value = default;
             string nextLink = default;
             foreach (var property in element.EnumerateObject())
@@ -44,8 +43,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new NetworkInterfaceLoadBalancerListResult(value, nextLink);
-            return result;
+            return new NetworkInterfaceLoadBalancerListResult(value, nextLink);
         }
     }
 }

@@ -27,7 +27,6 @@ namespace CognitiveSearch.Models
 
         internal static OutputFieldMappingEntry DeserializeOutputFieldMappingEntry(JsonElement element)
         {
-            OutputFieldMappingEntry result;
             string name = default;
             string targetName = default;
             foreach (var property in element.EnumerateObject())
@@ -47,8 +46,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new OutputFieldMappingEntry(name, targetName);
-            return result;
+            return new OutputFieldMappingEntry(name, targetName);
         }
     }
 }

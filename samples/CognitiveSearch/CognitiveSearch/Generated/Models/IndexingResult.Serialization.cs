@@ -14,7 +14,6 @@ namespace CognitiveSearch.Models
     {
         internal static IndexingResult DeserializeIndexingResult(JsonElement element)
         {
-            IndexingResult result;
             string key = default;
             string errorMessage = default;
             bool? status = default;
@@ -58,8 +57,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new IndexingResult(key, errorMessage, status, statusCode);
-            return result;
+            return new IndexingResult(key, errorMessage, status, statusCode);
         }
     }
 }

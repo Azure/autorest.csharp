@@ -22,7 +22,6 @@ namespace Azure.Storage.Management.Models
 
         internal static DateAfterModification DeserializeDateAfterModification(JsonElement element)
         {
-            DateAfterModification result;
             float daysAfterModificationGreaterThan = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -32,8 +31,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new DateAfterModification(daysAfterModificationGreaterThan);
-            return result;
+            return new DateAfterModification(daysAfterModificationGreaterThan);
         }
     }
 }

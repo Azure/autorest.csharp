@@ -15,7 +15,6 @@ namespace Azure.Storage.Management.Models
     {
         internal static UsageListResult DeserializeUsageListResult(JsonElement element)
         {
-            UsageListResult result;
             IList<Usage> value = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -34,8 +33,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new UsageListResult(value);
-            return result;
+            return new UsageListResult(value);
         }
     }
 }

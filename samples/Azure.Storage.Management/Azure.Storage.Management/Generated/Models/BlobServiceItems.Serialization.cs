@@ -15,7 +15,6 @@ namespace Azure.Storage.Management.Models
     {
         internal static BlobServiceItems DeserializeBlobServiceItems(JsonElement element)
         {
-            BlobServiceItems result;
             IList<BlobServiceProperties> value = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -34,8 +33,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new BlobServiceItems(value);
-            return result;
+            return new BlobServiceItems(value);
         }
     }
 }

@@ -28,7 +28,6 @@ namespace Azure.Storage.Management.Models
 
         internal static ManagementPolicySchema DeserializeManagementPolicySchema(JsonElement element)
         {
-            ManagementPolicySchema result;
             IList<ManagementPolicyRule> rules = new List<ManagementPolicyRule>();
             foreach (var property in element.EnumerateObject())
             {
@@ -43,8 +42,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new ManagementPolicySchema(rules);
-            return result;
+            return new ManagementPolicySchema(rules);
         }
     }
 }

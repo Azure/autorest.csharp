@@ -15,7 +15,6 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static EffectiveRouteListResult DeserializeEffectiveRouteListResult(JsonElement element)
         {
-            EffectiveRouteListResult result;
             IList<EffectiveRoute> value = default;
             string nextLink = default;
             foreach (var property in element.EnumerateObject())
@@ -44,8 +43,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new EffectiveRouteListResult(value, nextLink);
-            return result;
+            return new EffectiveRouteListResult(value, nextLink);
         }
     }
 }

@@ -60,8 +60,9 @@ namespace body_date
                 {
                     case 200:
                         {
+                            DateTimeOffset value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetDateTimeOffset("D");
+                            value = document.RootElement.GetDateTimeOffset("D");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -89,8 +90,9 @@ namespace body_date
                 {
                     case 200:
                         {
+                            DateTimeOffset value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetDateTimeOffset("D");
+                            value = document.RootElement.GetDateTimeOffset("D");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -130,8 +132,9 @@ namespace body_date
                 {
                     case 200:
                         {
+                            DateTimeOffset value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetDateTimeOffset("D");
+                            value = document.RootElement.GetDateTimeOffset("D");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -159,8 +162,9 @@ namespace body_date
                 {
                     case 200:
                         {
+                            DateTimeOffset value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetDateTimeOffset("D");
+                            value = document.RootElement.GetDateTimeOffset("D");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -200,8 +204,9 @@ namespace body_date
                 {
                     case 200:
                         {
+                            DateTimeOffset value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetDateTimeOffset("D");
+                            value = document.RootElement.GetDateTimeOffset("D");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -229,8 +234,9 @@ namespace body_date
                 {
                     case 200:
                         {
+                            DateTimeOffset value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetDateTimeOffset("D");
+                            value = document.RootElement.GetDateTimeOffset("D");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -270,8 +276,9 @@ namespace body_date
                 {
                     case 200:
                         {
+                            DateTimeOffset value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetDateTimeOffset("D");
+                            value = document.RootElement.GetDateTimeOffset("D");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -299,8 +306,9 @@ namespace body_date
                 {
                     case 200:
                         {
+                            DateTimeOffset value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetDateTimeOffset("D");
+                            value = document.RootElement.GetDateTimeOffset("D");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -410,8 +418,9 @@ namespace body_date
                 {
                     case 200:
                         {
+                            DateTimeOffset value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetDateTimeOffset("D");
+                            value = document.RootElement.GetDateTimeOffset("D");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -439,8 +448,9 @@ namespace body_date
                 {
                     case 200:
                         {
+                            DateTimeOffset value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetDateTimeOffset("D");
+                            value = document.RootElement.GetDateTimeOffset("D");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -550,8 +560,9 @@ namespace body_date
                 {
                     case 200:
                         {
+                            DateTimeOffset value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetDateTimeOffset("D");
+                            value = document.RootElement.GetDateTimeOffset("D");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -579,8 +590,9 @@ namespace body_date
                 {
                     case 200:
                         {
+                            DateTimeOffset value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetDateTimeOffset("D");
+                            value = document.RootElement.GetDateTimeOffset("D");
                             return Response.FromValue(value, message.Response);
                         }
                     default:

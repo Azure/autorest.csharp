@@ -61,8 +61,9 @@ namespace body_string
                 {
                     case 200:
                         {
+                            Colors value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetString().ToColors();
+                            value = document.RootElement.GetString().ToColors();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -90,8 +91,9 @@ namespace body_string
                 {
                     case 200:
                         {
+                            Colors value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetString().ToColors();
+                            value = document.RootElement.GetString().ToColors();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -201,8 +203,9 @@ namespace body_string
                 {
                     case 200:
                         {
+                            Colors value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetString().ToColors();
+                            value = document.RootElement.GetString().ToColors();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -230,8 +233,9 @@ namespace body_string
                 {
                     case 200:
                         {
+                            Colors value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetString().ToColors();
+                            value = document.RootElement.GetString().ToColors();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -341,9 +345,10 @@ namespace body_string
                 {
                     case 200:
                         {
+                            RefColorConstant value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = RefColorConstant.DeserializeRefColorConstant(document.RootElement);
-                            return Response.FromValue<RefColorConstant>(value, message.Response);
+                            value = RefColorConstant.DeserializeRefColorConstant(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -370,9 +375,10 @@ namespace body_string
                 {
                     case 200:
                         {
+                            RefColorConstant value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = RefColorConstant.DeserializeRefColorConstant(document.RootElement);
-                            return Response.FromValue<RefColorConstant>(value, message.Response);
+                            value = RefColorConstant.DeserializeRefColorConstant(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

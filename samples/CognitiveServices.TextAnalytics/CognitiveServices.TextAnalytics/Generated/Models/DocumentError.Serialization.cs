@@ -14,7 +14,6 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static DocumentError DeserializeDocumentError(JsonElement element)
         {
-            DocumentError result;
             string id = default;
             TextAnalyticsError error = new TextAnalyticsError();
             foreach (var property in element.EnumerateObject())
@@ -30,8 +29,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            result = new DocumentError(id, error);
-            return result;
+            return new DocumentError(id, error);
         }
     }
 }

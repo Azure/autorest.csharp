@@ -15,7 +15,6 @@ namespace Azure.Storage.Management.Models
     {
         internal static ServiceSpecification DeserializeServiceSpecification(JsonElement element)
         {
-            ServiceSpecification result;
             IList<MetricSpecification> metricSpecifications = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -34,8 +33,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new ServiceSpecification(metricSpecifications);
-            return result;
+            return new ServiceSpecification(metricSpecifications);
         }
     }
 }

@@ -15,7 +15,6 @@ namespace Azure.Storage.Management.Models
     {
         internal static Restriction DeserializeRestriction(JsonElement element)
         {
-            Restriction result;
             string type = default;
             IList<string> values = default;
             ReasonCode? reasonCode = default;
@@ -54,8 +53,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new Restriction(type, values, reasonCode);
-            return result;
+            return new Restriction(type, values, reasonCode);
         }
     }
 }

@@ -92,9 +92,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            ManagementPolicy value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ManagementPolicy.DeserializeManagementPolicy(document.RootElement);
-                            return Response.FromValue<ManagementPolicy>(value, message.Response);
+                            value = ManagementPolicy.DeserializeManagementPolicy(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -132,9 +133,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            ManagementPolicy value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ManagementPolicy.DeserializeManagementPolicy(document.RootElement);
-                            return Response.FromValue<ManagementPolicy>(value, message.Response);
+                            value = ManagementPolicy.DeserializeManagementPolicy(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -201,9 +203,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            ManagementPolicy value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ManagementPolicy.DeserializeManagementPolicy(document.RootElement);
-                            return Response.FromValue<ManagementPolicy>(value, message.Response);
+                            value = ManagementPolicy.DeserializeManagementPolicy(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -242,9 +245,10 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            ManagementPolicy value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ManagementPolicy.DeserializeManagementPolicy(document.RootElement);
-                            return Response.FromValue<ManagementPolicy>(value, message.Response);
+                            value = ManagementPolicy.DeserializeManagementPolicy(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

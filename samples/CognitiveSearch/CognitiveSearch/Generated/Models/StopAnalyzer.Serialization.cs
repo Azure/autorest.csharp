@@ -35,7 +35,6 @@ namespace CognitiveSearch.Models
 
         internal static StopAnalyzer DeserializeStopAnalyzer(JsonElement element)
         {
-            StopAnalyzer result;
             IList<string> stopwords = default;
             string odatatype = default;
             string name = default;
@@ -66,8 +65,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new StopAnalyzer(stopwords, odatatype, name);
-            return result;
+            return new StopAnalyzer(stopwords, odatatype, name);
         }
     }
 }

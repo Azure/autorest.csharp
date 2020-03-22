@@ -29,7 +29,6 @@ namespace CognitiveSearch.Models
 
         internal static KeywordTokenizerV2 DeserializeKeywordTokenizerV2(JsonElement element)
         {
-            KeywordTokenizerV2 result;
             int? maxTokenLength = default;
             string odatatype = default;
             string name = default;
@@ -55,8 +54,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new KeywordTokenizerV2(maxTokenLength, odatatype, name);
-            return result;
+            return new KeywordTokenizerV2(maxTokenLength, odatatype, name);
         }
     }
 }

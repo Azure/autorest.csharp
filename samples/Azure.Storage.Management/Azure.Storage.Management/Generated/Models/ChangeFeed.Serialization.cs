@@ -25,7 +25,6 @@ namespace Azure.Storage.Management.Models
 
         internal static ChangeFeed DeserializeChangeFeed(JsonElement element)
         {
-            ChangeFeed result;
             bool? enabled = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -39,8 +38,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new ChangeFeed(enabled);
-            return result;
+            return new ChangeFeed(enabled);
         }
     }
 }

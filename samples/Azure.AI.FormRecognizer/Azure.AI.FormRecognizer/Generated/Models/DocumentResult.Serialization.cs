@@ -15,7 +15,6 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static DocumentResult DeserializeDocumentResult(JsonElement element)
         {
-            DocumentResult result;
             string docType = default;
             IList<int> pageRange = new List<int>();
             IDictionary<string, FieldValue> fields = new Dictionary<string, FieldValue>();
@@ -38,17 +37,16 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("fields"))
                 {
-                    Dictionary<string, FieldValue> array = new Dictionary<string, FieldValue>();
+                    Dictionary<string, FieldValue> dictionary = new Dictionary<string, FieldValue>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        array.Add(property0.Name, FieldValue.DeserializeFieldValue(property0.Value));
+                        dictionary.Add(property0.Name, FieldValue.DeserializeFieldValue(property0.Value));
                     }
-                    fields = array;
+                    fields = dictionary;
                     continue;
                 }
             }
-            result = new DocumentResult(docType, pageRange, fields);
-            return result;
+            return new DocumentResult(docType, pageRange, fields);
         }
     }
 }

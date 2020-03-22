@@ -74,7 +74,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static ServiceAssociationLink DeserializeServiceAssociationLink(JsonElement element)
         {
-            ServiceAssociationLink result;
             string name = default;
             string etag = default;
             string type = default;
@@ -180,8 +179,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new ServiceAssociationLink(name, etag, type, linkedResourceType, link, provisioningState, allowDelete, locations, id);
-            return result;
+            return new ServiceAssociationLink(name, etag, type, linkedResourceType, link, provisioningState, allowDelete, locations, id);
         }
     }
 }

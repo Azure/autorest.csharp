@@ -35,7 +35,6 @@ namespace Azure.Storage.Management.Models
 
         internal static Resource DeserializeResource(JsonElement element)
         {
-            Resource result;
             string id = default;
             string name = default;
             string type = default;
@@ -69,8 +68,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new Resource(id, name, type);
-            return result;
+            return new Resource(id, name, type);
         }
     }
 }

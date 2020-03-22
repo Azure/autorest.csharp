@@ -101,7 +101,6 @@ namespace Azure.Storage.Management.Models
 
         internal static ListContainerItem DeserializeListContainerItem(JsonElement element)
         {
-            ListContainerItem result;
             string etag = default;
             string id = default;
             string name = default;
@@ -209,12 +208,12 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            Dictionary<string, string> array = new Dictionary<string, string>();
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
                             foreach (var property1 in property0.Value.EnumerateObject())
                             {
-                                array.Add(property1.Name, property1.Value.GetString());
+                                dictionary.Add(property1.Name, property1.Value.GetString());
                             }
-                            metadata = array;
+                            metadata = dictionary;
                             continue;
                         }
                         if (property0.NameEquals("immutabilityPolicy"))
@@ -257,8 +256,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new ListContainerItem(publicAccess, lastModifiedTime, leaseStatus, leaseState, leaseDuration, metadata, immutabilityPolicy, legalHold, hasLegalHold, hasImmutabilityPolicy, etag, id, name, type);
-            return result;
+            return new ListContainerItem(publicAccess, lastModifiedTime, leaseStatus, leaseState, leaseDuration, metadata, immutabilityPolicy, legalHold, hasLegalHold, hasImmutabilityPolicy, etag, id, name, type);
         }
     }
 }

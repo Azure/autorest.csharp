@@ -15,7 +15,6 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static Models DeserializeModels(JsonElement element)
         {
-            Models result;
             ModelsSummary summary = default;
             IList<ModelInfo> modelList = default;
             string nextLink = default;
@@ -54,8 +53,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            result = new Models(summary, modelList, nextLink);
-            return result;
+            return new Models(summary, modelList, nextLink);
         }
     }
 }

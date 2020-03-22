@@ -27,7 +27,6 @@ namespace CognitiveSearch.Models
 
         internal static DataContainer DeserializeDataContainer(JsonElement element)
         {
-            DataContainer result;
             string name = default;
             string query = default;
             foreach (var property in element.EnumerateObject())
@@ -47,8 +46,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new DataContainer(name, query);
-            return result;
+            return new DataContainer(name, query);
         }
     }
 }

@@ -30,7 +30,6 @@ namespace CustomNamespace
 
         internal static CustomizedModel DeserializeCustomizedModel(JsonElement element)
         {
-            CustomizedModel result;
             string modelProperty = default;
             CustomFruitEnum fruit = default;
             CustomDaysOfWeek daysOfWeek = default;
@@ -56,8 +55,7 @@ namespace CustomNamespace
                     continue;
                 }
             }
-            result = new CustomizedModel(modelProperty, fruit, daysOfWeek);
-            return result;
+            return new CustomizedModel(modelProperty, fruit, daysOfWeek);
         }
     }
 }

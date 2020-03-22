@@ -49,7 +49,6 @@ namespace Azure.Storage.Management.Models
 
         internal static ManagementPolicy DeserializeManagementPolicy(JsonElement element)
         {
-            ManagementPolicy result;
             string id = default;
             string name = default;
             string type = default;
@@ -110,8 +109,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new ManagementPolicy(lastModifiedTime, policy, id, name, type);
-            return result;
+            return new ManagementPolicy(lastModifiedTime, policy, id, name, type);
         }
     }
 }

@@ -62,15 +62,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<int> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<int> value;
                             List<int> array = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetInt32());
                             }
                             value = array;
-                            return Response.FromValue<IList<int>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -97,15 +97,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<int> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<int> value;
                             List<int> array = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetInt32());
                             }
                             value = array;
-                            return Response.FromValue<IList<int>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -144,15 +144,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<int> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<int> value;
                             List<int> array = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetInt32());
                             }
                             value = array;
-                            return Response.FromValue<IList<int>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -179,15 +179,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<int> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<int> value;
                             List<int> array = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetInt32());
                             }
                             value = array;
-                            return Response.FromValue<IList<int>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -226,15 +226,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<int> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<int> value;
                             List<int> array = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetInt32());
                             }
                             value = array;
-                            return Response.FromValue<IList<int>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -261,15 +261,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<int> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<int> value;
                             List<int> array = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetInt32());
                             }
                             value = array;
-                            return Response.FromValue<IList<int>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -391,15 +391,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<bool> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<bool> value;
                             List<bool> array = new List<bool>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetBoolean());
                             }
                             value = array;
-                            return Response.FromValue<IList<bool>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -426,15 +426,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<bool> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<bool> value;
                             List<bool> array = new List<bool>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetBoolean());
                             }
                             value = array;
-                            return Response.FromValue<IList<bool>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -556,15 +556,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<bool> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<bool> value;
                             List<bool> array = new List<bool>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetBoolean());
                             }
                             value = array;
-                            return Response.FromValue<IList<bool>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -591,15 +591,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<bool> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<bool> value;
                             List<bool> array = new List<bool>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetBoolean());
                             }
                             value = array;
-                            return Response.FromValue<IList<bool>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -638,15 +638,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<bool> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<bool> value;
                             List<bool> array = new List<bool>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetBoolean());
                             }
                             value = array;
-                            return Response.FromValue<IList<bool>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -673,15 +673,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<bool> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<bool> value;
                             List<bool> array = new List<bool>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetBoolean());
                             }
                             value = array;
-                            return Response.FromValue<IList<bool>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -720,15 +720,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<int> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<int> value;
                             List<int> array = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetInt32());
                             }
                             value = array;
-                            return Response.FromValue<IList<int>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -755,15 +755,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<int> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<int> value;
                             List<int> array = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetInt32());
                             }
                             value = array;
-                            return Response.FromValue<IList<int>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -885,15 +885,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<int> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<int> value;
                             List<int> array = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetInt32());
                             }
                             value = array;
-                            return Response.FromValue<IList<int>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -920,15 +920,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<int> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<int> value;
                             List<int> array = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetInt32());
                             }
                             value = array;
-                            return Response.FromValue<IList<int>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -967,15 +967,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<int> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<int> value;
                             List<int> array = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetInt32());
                             }
                             value = array;
-                            return Response.FromValue<IList<int>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1002,15 +1002,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<int> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<int> value;
                             List<int> array = new List<int>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetInt32());
                             }
                             value = array;
-                            return Response.FromValue<IList<int>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1049,15 +1049,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<long> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<long> value;
                             List<long> array = new List<long>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetInt64());
                             }
                             value = array;
-                            return Response.FromValue<IList<long>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1084,15 +1084,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<long> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<long> value;
                             List<long> array = new List<long>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetInt64());
                             }
                             value = array;
-                            return Response.FromValue<IList<long>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1214,15 +1214,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<long> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<long> value;
                             List<long> array = new List<long>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetInt64());
                             }
                             value = array;
-                            return Response.FromValue<IList<long>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1249,15 +1249,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<long> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<long> value;
                             List<long> array = new List<long>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetInt64());
                             }
                             value = array;
-                            return Response.FromValue<IList<long>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1296,15 +1296,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<long> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<long> value;
                             List<long> array = new List<long>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetInt64());
                             }
                             value = array;
-                            return Response.FromValue<IList<long>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1331,15 +1331,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<long> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<long> value;
                             List<long> array = new List<long>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetInt64());
                             }
                             value = array;
-                            return Response.FromValue<IList<long>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1378,15 +1378,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<float> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<float> value;
                             List<float> array = new List<float>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetSingle());
                             }
                             value = array;
-                            return Response.FromValue<IList<float>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1413,15 +1413,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<float> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<float> value;
                             List<float> array = new List<float>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetSingle());
                             }
                             value = array;
-                            return Response.FromValue<IList<float>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1543,15 +1543,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<float> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<float> value;
                             List<float> array = new List<float>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetSingle());
                             }
                             value = array;
-                            return Response.FromValue<IList<float>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1578,15 +1578,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<float> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<float> value;
                             List<float> array = new List<float>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetSingle());
                             }
                             value = array;
-                            return Response.FromValue<IList<float>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1625,15 +1625,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<float> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<float> value;
                             List<float> array = new List<float>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetSingle());
                             }
                             value = array;
-                            return Response.FromValue<IList<float>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1660,15 +1660,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<float> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<float> value;
                             List<float> array = new List<float>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetSingle());
                             }
                             value = array;
-                            return Response.FromValue<IList<float>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1707,15 +1707,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<double> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<double> value;
                             List<double> array = new List<double>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetDouble());
                             }
                             value = array;
-                            return Response.FromValue<IList<double>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1742,15 +1742,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<double> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<double> value;
                             List<double> array = new List<double>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetDouble());
                             }
                             value = array;
-                            return Response.FromValue<IList<double>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1872,15 +1872,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<double> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<double> value;
                             List<double> array = new List<double>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetDouble());
                             }
                             value = array;
-                            return Response.FromValue<IList<double>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1907,15 +1907,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<double> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<double> value;
                             List<double> array = new List<double>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetDouble());
                             }
                             value = array;
-                            return Response.FromValue<IList<double>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1954,15 +1954,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<double> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<double> value;
                             List<double> array = new List<double>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetDouble());
                             }
                             value = array;
-                            return Response.FromValue<IList<double>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1989,15 +1989,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<double> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<double> value;
                             List<double> array = new List<double>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetDouble());
                             }
                             value = array;
-                            return Response.FromValue<IList<double>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2036,15 +2036,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<string> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<string> value;
                             List<string> array = new List<string>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetString());
                             }
                             value = array;
-                            return Response.FromValue<IList<string>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2071,15 +2071,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<string> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<string> value;
                             List<string> array = new List<string>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetString());
                             }
                             value = array;
-                            return Response.FromValue<IList<string>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2201,15 +2201,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<FooEnum> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<FooEnum> value;
                             List<FooEnum> array = new List<FooEnum>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetString().ToFooEnum());
                             }
                             value = array;
-                            return Response.FromValue<IList<FooEnum>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2236,15 +2236,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<FooEnum> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<FooEnum> value;
                             List<FooEnum> array = new List<FooEnum>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetString().ToFooEnum());
                             }
                             value = array;
-                            return Response.FromValue<IList<FooEnum>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2366,15 +2366,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<Enum0> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<Enum0> value;
                             List<Enum0> array = new List<Enum0>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(new Enum0(item.GetString()));
                             }
                             value = array;
-                            return Response.FromValue<IList<Enum0>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2401,15 +2401,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<Enum0> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<Enum0> value;
                             List<Enum0> array = new List<Enum0>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(new Enum0(item.GetString()));
                             }
                             value = array;
-                            return Response.FromValue<IList<Enum0>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2531,15 +2531,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<string> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<string> value;
                             List<string> array = new List<string>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetString());
                             }
                             value = array;
-                            return Response.FromValue<IList<string>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2566,15 +2566,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<string> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<string> value;
                             List<string> array = new List<string>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetString());
                             }
                             value = array;
-                            return Response.FromValue<IList<string>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2613,15 +2613,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<string> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<string> value;
                             List<string> array = new List<string>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetString());
                             }
                             value = array;
-                            return Response.FromValue<IList<string>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2648,15 +2648,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<string> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<string> value;
                             List<string> array = new List<string>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetString());
                             }
                             value = array;
-                            return Response.FromValue<IList<string>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2695,15 +2695,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<Guid> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<Guid> value;
                             List<Guid> array = new List<Guid>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetGuid());
                             }
                             value = array;
-                            return Response.FromValue<IList<Guid>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2730,15 +2730,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<Guid> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<Guid> value;
                             List<Guid> array = new List<Guid>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetGuid());
                             }
                             value = array;
-                            return Response.FromValue<IList<Guid>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2860,15 +2860,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<Guid> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<Guid> value;
                             List<Guid> array = new List<Guid>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetGuid());
                             }
                             value = array;
-                            return Response.FromValue<IList<Guid>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2895,15 +2895,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<Guid> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<Guid> value;
                             List<Guid> array = new List<Guid>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetGuid());
                             }
                             value = array;
-                            return Response.FromValue<IList<Guid>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2942,15 +2942,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<DateTimeOffset> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<DateTimeOffset> value;
                             List<DateTimeOffset> array = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetDateTimeOffset("D"));
                             }
                             value = array;
-                            return Response.FromValue<IList<DateTimeOffset>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2977,15 +2977,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<DateTimeOffset> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<DateTimeOffset> value;
                             List<DateTimeOffset> array = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetDateTimeOffset("D"));
                             }
                             value = array;
-                            return Response.FromValue<IList<DateTimeOffset>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -3107,15 +3107,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<DateTimeOffset> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<DateTimeOffset> value;
                             List<DateTimeOffset> array = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetDateTimeOffset("D"));
                             }
                             value = array;
-                            return Response.FromValue<IList<DateTimeOffset>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -3142,15 +3142,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<DateTimeOffset> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<DateTimeOffset> value;
                             List<DateTimeOffset> array = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetDateTimeOffset("D"));
                             }
                             value = array;
-                            return Response.FromValue<IList<DateTimeOffset>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -3189,15 +3189,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<DateTimeOffset> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<DateTimeOffset> value;
                             List<DateTimeOffset> array = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetDateTimeOffset("D"));
                             }
                             value = array;
-                            return Response.FromValue<IList<DateTimeOffset>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -3224,15 +3224,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<DateTimeOffset> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<DateTimeOffset> value;
                             List<DateTimeOffset> array = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetDateTimeOffset("D"));
                             }
                             value = array;
-                            return Response.FromValue<IList<DateTimeOffset>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -3271,15 +3271,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<DateTimeOffset> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<DateTimeOffset> value;
                             List<DateTimeOffset> array = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetDateTimeOffset("S"));
                             }
                             value = array;
-                            return Response.FromValue<IList<DateTimeOffset>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -3306,15 +3306,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<DateTimeOffset> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<DateTimeOffset> value;
                             List<DateTimeOffset> array = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetDateTimeOffset("S"));
                             }
                             value = array;
-                            return Response.FromValue<IList<DateTimeOffset>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -3436,15 +3436,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<DateTimeOffset> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<DateTimeOffset> value;
                             List<DateTimeOffset> array = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetDateTimeOffset("S"));
                             }
                             value = array;
-                            return Response.FromValue<IList<DateTimeOffset>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -3471,15 +3471,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<DateTimeOffset> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<DateTimeOffset> value;
                             List<DateTimeOffset> array = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetDateTimeOffset("S"));
                             }
                             value = array;
-                            return Response.FromValue<IList<DateTimeOffset>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -3518,15 +3518,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<DateTimeOffset> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<DateTimeOffset> value;
                             List<DateTimeOffset> array = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetDateTimeOffset("S"));
                             }
                             value = array;
-                            return Response.FromValue<IList<DateTimeOffset>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -3553,15 +3553,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<DateTimeOffset> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<DateTimeOffset> value;
                             List<DateTimeOffset> array = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetDateTimeOffset("S"));
                             }
                             value = array;
-                            return Response.FromValue<IList<DateTimeOffset>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -3600,15 +3600,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<DateTimeOffset> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<DateTimeOffset> value;
                             List<DateTimeOffset> array = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetDateTimeOffset("R"));
                             }
                             value = array;
-                            return Response.FromValue<IList<DateTimeOffset>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -3635,15 +3635,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<DateTimeOffset> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<DateTimeOffset> value;
                             List<DateTimeOffset> array = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetDateTimeOffset("R"));
                             }
                             value = array;
-                            return Response.FromValue<IList<DateTimeOffset>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -3765,15 +3765,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<TimeSpan> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<TimeSpan> value;
                             List<TimeSpan> array = new List<TimeSpan>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetTimeSpan("P"));
                             }
                             value = array;
-                            return Response.FromValue<IList<TimeSpan>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -3800,15 +3800,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<TimeSpan> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<TimeSpan> value;
                             List<TimeSpan> array = new List<TimeSpan>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetTimeSpan("P"));
                             }
                             value = array;
-                            return Response.FromValue<IList<TimeSpan>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -3930,15 +3930,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<byte[]> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<byte[]> value;
                             List<byte[]> array = new List<byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetBytesFromBase64());
                             }
                             value = array;
-                            return Response.FromValue<IList<byte[]>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -3965,15 +3965,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<byte[]> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<byte[]> value;
                             List<byte[]> array = new List<byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetBytesFromBase64());
                             }
                             value = array;
-                            return Response.FromValue<IList<byte[]>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -4095,15 +4095,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<byte[]> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<byte[]> value;
                             List<byte[]> array = new List<byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetBytesFromBase64());
                             }
                             value = array;
-                            return Response.FromValue<IList<byte[]>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -4130,15 +4130,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<byte[]> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<byte[]> value;
                             List<byte[]> array = new List<byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetBytesFromBase64());
                             }
                             value = array;
-                            return Response.FromValue<IList<byte[]>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -4177,15 +4177,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<byte[]> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<byte[]> value;
                             List<byte[]> array = new List<byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetBytesFromBase64("U"));
                             }
                             value = array;
-                            return Response.FromValue<IList<byte[]>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -4212,15 +4212,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<byte[]> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<byte[]> value;
                             List<byte[]> array = new List<byte[]>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(item.GetBytesFromBase64("U"));
                             }
                             value = array;
-                            return Response.FromValue<IList<byte[]>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -4259,15 +4259,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<Product> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<Product> value;
                             List<Product> array = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(Product.DeserializeProduct(item));
                             }
                             value = array;
-                            return Response.FromValue<IList<Product>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -4294,15 +4294,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<Product> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<Product> value;
                             List<Product> array = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(Product.DeserializeProduct(item));
                             }
                             value = array;
-                            return Response.FromValue<IList<Product>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -4341,15 +4341,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<Product> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<Product> value;
                             List<Product> array = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(Product.DeserializeProduct(item));
                             }
                             value = array;
-                            return Response.FromValue<IList<Product>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -4376,15 +4376,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<Product> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<Product> value;
                             List<Product> array = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(Product.DeserializeProduct(item));
                             }
                             value = array;
-                            return Response.FromValue<IList<Product>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -4423,15 +4423,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<Product> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<Product> value;
                             List<Product> array = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(Product.DeserializeProduct(item));
                             }
                             value = array;
-                            return Response.FromValue<IList<Product>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -4458,15 +4458,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<Product> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<Product> value;
                             List<Product> array = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(Product.DeserializeProduct(item));
                             }
                             value = array;
-                            return Response.FromValue<IList<Product>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -4505,15 +4505,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<Product> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<Product> value;
                             List<Product> array = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(Product.DeserializeProduct(item));
                             }
                             value = array;
-                            return Response.FromValue<IList<Product>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -4540,15 +4540,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<Product> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<Product> value;
                             List<Product> array = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(Product.DeserializeProduct(item));
                             }
                             value = array;
-                            return Response.FromValue<IList<Product>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -4587,15 +4587,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<Product> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<Product> value;
                             List<Product> array = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(Product.DeserializeProduct(item));
                             }
                             value = array;
-                            return Response.FromValue<IList<Product>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -4622,15 +4622,15 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<Product> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<Product> value;
                             List<Product> array = new List<Product>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 array.Add(Product.DeserializeProduct(item));
                             }
                             value = array;
-                            return Response.FromValue<IList<Product>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -4752,22 +4752,20 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<IList<string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<IList<string>> value;
                             List<IList<string>> array = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IList<string> value0;
                                 List<string> array0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     array0.Add(item0.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(value0);
+                                array.Add(array0);
                             }
                             value = array;
-                            return Response.FromValue<IList<IList<string>>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -4794,22 +4792,20 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<IList<string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<IList<string>> value;
                             List<IList<string>> array = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IList<string> value0;
                                 List<string> array0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     array0.Add(item0.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(value0);
+                                array.Add(array0);
                             }
                             value = array;
-                            return Response.FromValue<IList<IList<string>>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -4848,22 +4844,20 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<IList<string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<IList<string>> value;
                             List<IList<string>> array = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IList<string> value0;
                                 List<string> array0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     array0.Add(item0.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(value0);
+                                array.Add(array0);
                             }
                             value = array;
-                            return Response.FromValue<IList<IList<string>>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -4890,22 +4884,20 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<IList<string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<IList<string>> value;
                             List<IList<string>> array = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IList<string> value0;
                                 List<string> array0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     array0.Add(item0.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(value0);
+                                array.Add(array0);
                             }
                             value = array;
-                            return Response.FromValue<IList<IList<string>>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -4944,22 +4936,20 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<IList<string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<IList<string>> value;
                             List<IList<string>> array = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IList<string> value0;
                                 List<string> array0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     array0.Add(item0.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(value0);
+                                array.Add(array0);
                             }
                             value = array;
-                            return Response.FromValue<IList<IList<string>>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -4986,22 +4976,20 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<IList<string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<IList<string>> value;
                             List<IList<string>> array = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IList<string> value0;
                                 List<string> array0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     array0.Add(item0.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(value0);
+                                array.Add(array0);
                             }
                             value = array;
-                            return Response.FromValue<IList<IList<string>>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -5040,22 +5028,20 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<IList<string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<IList<string>> value;
                             List<IList<string>> array = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IList<string> value0;
                                 List<string> array0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     array0.Add(item0.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(value0);
+                                array.Add(array0);
                             }
                             value = array;
-                            return Response.FromValue<IList<IList<string>>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -5082,22 +5068,20 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<IList<string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<IList<string>> value;
                             List<IList<string>> array = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IList<string> value0;
                                 List<string> array0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     array0.Add(item0.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(value0);
+                                array.Add(array0);
                             }
                             value = array;
-                            return Response.FromValue<IList<IList<string>>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -5136,22 +5120,20 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<IList<string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<IList<string>> value;
                             List<IList<string>> array = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IList<string> value0;
                                 List<string> array0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     array0.Add(item0.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(value0);
+                                array.Add(array0);
                             }
                             value = array;
-                            return Response.FromValue<IList<IList<string>>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -5178,22 +5160,20 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<IList<string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<IList<string>> value;
                             List<IList<string>> array = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                IList<string> value0;
                                 List<string> array0 = new List<string>();
                                 foreach (var item0 in item.EnumerateArray())
                                 {
                                     array0.Add(item0.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(value0);
+                                array.Add(array0);
                             }
                             value = array;
-                            return Response.FromValue<IList<IList<string>>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -5320,22 +5300,20 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<IDictionary<string, string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<IDictionary<string, string>> value;
                             List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                Dictionary<string, string> value0;
-                                Dictionary<string, string> array0 = new Dictionary<string, string>();
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
-                                    array0.Add(property.Name, property.Value.GetString());
+                                    dictionary.Add(property.Name, property.Value.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(value0);
+                                array.Add(dictionary);
                             }
                             value = array;
-                            return Response.FromValue<IList<IDictionary<string, string>>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -5362,22 +5340,20 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<IDictionary<string, string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<IDictionary<string, string>> value;
                             List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                Dictionary<string, string> value0;
-                                Dictionary<string, string> array0 = new Dictionary<string, string>();
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
-                                    array0.Add(property.Name, property.Value.GetString());
+                                    dictionary.Add(property.Name, property.Value.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(value0);
+                                array.Add(dictionary);
                             }
                             value = array;
-                            return Response.FromValue<IList<IDictionary<string, string>>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -5416,22 +5392,20 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<IDictionary<string, string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<IDictionary<string, string>> value;
                             List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                Dictionary<string, string> value0;
-                                Dictionary<string, string> array0 = new Dictionary<string, string>();
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
-                                    array0.Add(property.Name, property.Value.GetString());
+                                    dictionary.Add(property.Name, property.Value.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(value0);
+                                array.Add(dictionary);
                             }
                             value = array;
-                            return Response.FromValue<IList<IDictionary<string, string>>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -5458,22 +5432,20 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<IDictionary<string, string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<IDictionary<string, string>> value;
                             List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                Dictionary<string, string> value0;
-                                Dictionary<string, string> array0 = new Dictionary<string, string>();
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
-                                    array0.Add(property.Name, property.Value.GetString());
+                                    dictionary.Add(property.Name, property.Value.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(value0);
+                                array.Add(dictionary);
                             }
                             value = array;
-                            return Response.FromValue<IList<IDictionary<string, string>>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -5512,22 +5484,20 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<IDictionary<string, string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<IDictionary<string, string>> value;
                             List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                Dictionary<string, string> value0;
-                                Dictionary<string, string> array0 = new Dictionary<string, string>();
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
-                                    array0.Add(property.Name, property.Value.GetString());
+                                    dictionary.Add(property.Name, property.Value.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(value0);
+                                array.Add(dictionary);
                             }
                             value = array;
-                            return Response.FromValue<IList<IDictionary<string, string>>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -5554,22 +5524,20 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<IDictionary<string, string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<IDictionary<string, string>> value;
                             List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                Dictionary<string, string> value0;
-                                Dictionary<string, string> array0 = new Dictionary<string, string>();
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
-                                    array0.Add(property.Name, property.Value.GetString());
+                                    dictionary.Add(property.Name, property.Value.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(value0);
+                                array.Add(dictionary);
                             }
                             value = array;
-                            return Response.FromValue<IList<IDictionary<string, string>>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -5608,22 +5576,20 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<IDictionary<string, string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<IDictionary<string, string>> value;
                             List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                Dictionary<string, string> value0;
-                                Dictionary<string, string> array0 = new Dictionary<string, string>();
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
-                                    array0.Add(property.Name, property.Value.GetString());
+                                    dictionary.Add(property.Name, property.Value.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(value0);
+                                array.Add(dictionary);
                             }
                             value = array;
-                            return Response.FromValue<IList<IDictionary<string, string>>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -5650,22 +5616,20 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<IDictionary<string, string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<IDictionary<string, string>> value;
                             List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                Dictionary<string, string> value0;
-                                Dictionary<string, string> array0 = new Dictionary<string, string>();
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
-                                    array0.Add(property.Name, property.Value.GetString());
+                                    dictionary.Add(property.Name, property.Value.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(value0);
+                                array.Add(dictionary);
                             }
                             value = array;
-                            return Response.FromValue<IList<IDictionary<string, string>>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -5704,22 +5668,20 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<IDictionary<string, string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<IDictionary<string, string>> value;
                             List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                Dictionary<string, string> value0;
-                                Dictionary<string, string> array0 = new Dictionary<string, string>();
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
-                                    array0.Add(property.Name, property.Value.GetString());
+                                    dictionary.Add(property.Name, property.Value.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(value0);
+                                array.Add(dictionary);
                             }
                             value = array;
-                            return Response.FromValue<IList<IDictionary<string, string>>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -5746,22 +5708,20 @@ namespace body_array
                 {
                     case 200:
                         {
+                            IList<IDictionary<string, string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<IDictionary<string, string>> value;
                             List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                Dictionary<string, string> value0;
-                                Dictionary<string, string> array0 = new Dictionary<string, string>();
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
                                 foreach (var property in item.EnumerateObject())
                                 {
-                                    array0.Add(property.Name, property.Value.GetString());
+                                    dictionary.Add(property.Name, property.Value.GetString());
                                 }
-                                value0 = array0;
-                                array.Add(value0);
+                                array.Add(dictionary);
                             }
                             value = array;
-                            return Response.FromValue<IList<IDictionary<string, string>>>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

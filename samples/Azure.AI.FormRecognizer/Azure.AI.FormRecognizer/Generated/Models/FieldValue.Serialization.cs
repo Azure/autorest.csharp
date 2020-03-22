@@ -15,7 +15,6 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static FieldValue DeserializeFieldValue(JsonElement element)
         {
-            FieldValue result;
             FieldValueType type = default;
             string valueString = default;
             string valueDate = default;
@@ -111,12 +110,12 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    Dictionary<string, FieldValue> array = new Dictionary<string, FieldValue>();
+                    Dictionary<string, FieldValue> dictionary = new Dictionary<string, FieldValue>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        array.Add(property0.Name, DeserializeFieldValue(property0.Value));
+                        dictionary.Add(property0.Name, DeserializeFieldValue(property0.Value));
                     }
-                    valueObject = array;
+                    valueObject = dictionary;
                     continue;
                 }
                 if (property.NameEquals("text"))
@@ -175,8 +174,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            result = new FieldValue(type, valueString, valueDate, valueTime, valuePhoneNumber, valueNumber, valueInteger, valueArray, valueObject, text, boundingBox, confidence, elements, page);
-            return result;
+            return new FieldValue(type, valueString, valueDate, valueTime, valuePhoneNumber, valueNumber, valueInteger, valueArray, valueObject, text, boundingBox, confidence, elements, page);
         }
     }
 }

@@ -15,7 +15,6 @@ namespace Azure.Storage.Management.Models
     {
         internal static ListContainerItems DeserializeListContainerItems(JsonElement element)
         {
-            ListContainerItems result;
             IList<ListContainerItem> value = default;
             string nextLink = default;
             foreach (var property in element.EnumerateObject())
@@ -44,8 +43,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new ListContainerItems(value, nextLink);
-            return result;
+            return new ListContainerItems(value, nextLink);
         }
     }
 }

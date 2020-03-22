@@ -27,7 +27,6 @@ namespace Azure.Storage.Management.Models
 
         internal static ManagementPolicyDefinition DeserializeManagementPolicyDefinition(JsonElement element)
         {
-            ManagementPolicyDefinition result;
             ManagementPolicyAction actions = new ManagementPolicyAction();
             ManagementPolicyFilter filters = default;
             foreach (var property in element.EnumerateObject())
@@ -47,8 +46,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new ManagementPolicyDefinition(actions, filters);
-            return result;
+            return new ManagementPolicyDefinition(actions, filters);
         }
     }
 }

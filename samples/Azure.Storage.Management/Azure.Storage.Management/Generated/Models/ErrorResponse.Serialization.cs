@@ -14,7 +14,6 @@ namespace Azure.Storage.Management.Models
     {
         internal static ErrorResponse DeserializeErrorResponse(JsonElement element)
         {
-            ErrorResponse result;
             string code = default;
             string message = default;
             foreach (var property in element.EnumerateObject())
@@ -38,8 +37,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new ErrorResponse(code, message);
-            return result;
+            return new ErrorResponse(code, message);
         }
     }
 }

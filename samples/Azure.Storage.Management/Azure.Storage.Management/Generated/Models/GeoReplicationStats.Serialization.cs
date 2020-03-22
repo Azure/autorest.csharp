@@ -36,7 +36,6 @@ namespace Azure.Storage.Management.Models
 
         internal static GeoReplicationStats DeserializeGeoReplicationStats(JsonElement element)
         {
-            GeoReplicationStats result;
             GeoReplicationStatus? status = default;
             DateTimeOffset? lastSyncTime = default;
             bool? canFailover = default;
@@ -70,8 +69,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new GeoReplicationStats(status, lastSyncTime, canFailover);
-            return result;
+            return new GeoReplicationStats(status, lastSyncTime, canFailover);
         }
     }
 }

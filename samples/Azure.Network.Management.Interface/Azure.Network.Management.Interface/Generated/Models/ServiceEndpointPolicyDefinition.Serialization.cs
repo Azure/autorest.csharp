@@ -64,7 +64,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static ServiceEndpointPolicyDefinition DeserializeServiceEndpointPolicyDefinition(JsonElement element)
         {
-            ServiceEndpointPolicyDefinition result;
             string name = default;
             string etag = default;
             string id = default;
@@ -150,8 +149,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new ServiceEndpointPolicyDefinition(name, etag, description, service, serviceResources, provisioningState, id);
-            return result;
+            return new ServiceEndpointPolicyDefinition(name, etag, description, service, serviceResources, provisioningState, id);
         }
     }
 }

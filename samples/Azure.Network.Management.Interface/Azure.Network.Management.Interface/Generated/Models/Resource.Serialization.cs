@@ -52,7 +52,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static Resource DeserializeResource(JsonElement element)
         {
-            Resource result;
             string id = default;
             string name = default;
             string type = default;
@@ -102,17 +101,16 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    Dictionary<string, string> array = new Dictionary<string, string>();
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        array.Add(property0.Name, property0.Value.GetString());
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
-                    tags = array;
+                    tags = dictionary;
                     continue;
                 }
             }
-            result = new Resource(id, name, type, location, tags);
-            return result;
+            return new Resource(id, name, type, location, tags);
         }
     }
 }

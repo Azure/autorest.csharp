@@ -49,7 +49,6 @@ namespace CognitiveSearch.Models
 
         internal static PathHierarchyTokenizer DeserializePathHierarchyTokenizer(JsonElement element)
         {
-            PathHierarchyTokenizer result;
             char? delimiter = default;
             char? replacement = default;
             int? bufferSize = default;
@@ -115,8 +114,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new PathHierarchyTokenizer(delimiter, replacement, bufferSize, reverse, skip, odatatype, name);
-            return result;
+            return new PathHierarchyTokenizer(delimiter, replacement, bufferSize, reverse, skip, odatatype, name);
         }
     }
 }

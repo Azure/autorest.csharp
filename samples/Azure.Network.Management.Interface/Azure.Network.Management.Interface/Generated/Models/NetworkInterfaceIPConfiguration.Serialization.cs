@@ -129,7 +129,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static NetworkInterfaceIPConfiguration DeserializeNetworkInterfaceIPConfiguration(JsonElement element)
         {
-            NetworkInterfaceIPConfiguration result;
             string name = default;
             string etag = default;
             string id = default;
@@ -325,8 +324,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new NetworkInterfaceIPConfiguration(name, etag, virtualNetworkTaps, applicationGatewayBackendAddressPools, loadBalancerBackendAddressPools, loadBalancerInboundNatRules, privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, primary, publicIPAddress, applicationSecurityGroups, provisioningState, privateLinkConnectionProperties, id);
-            return result;
+            return new NetworkInterfaceIPConfiguration(name, etag, virtualNetworkTaps, applicationGatewayBackendAddressPools, loadBalancerBackendAddressPools, loadBalancerInboundNatRules, privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, primary, publicIPAddress, applicationSecurityGroups, provisioningState, privateLinkConnectionProperties, id);
         }
     }
 }

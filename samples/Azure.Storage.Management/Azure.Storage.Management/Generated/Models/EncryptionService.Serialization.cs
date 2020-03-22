@@ -36,7 +36,6 @@ namespace Azure.Storage.Management.Models
 
         internal static EncryptionService DeserializeEncryptionService(JsonElement element)
         {
-            EncryptionService result;
             bool? enabled = default;
             DateTimeOffset? lastEnabledTime = default;
             KeyType? keyType = default;
@@ -70,8 +69,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new EncryptionService(enabled, lastEnabledTime, keyType);
-            return result;
+            return new EncryptionService(enabled, lastEnabledTime, keyType);
         }
     }
 }

@@ -66,9 +66,10 @@ namespace TypeSchemaMapping
                 {
                     case 200:
                         {
+                            CustomizedModel value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = CustomizedModel.DeserializeCustomizedModel(document.RootElement);
-                            return Response.FromValue<CustomizedModel>(value, message.Response);
+                            value = CustomizedModel.DeserializeCustomizedModel(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -96,9 +97,10 @@ namespace TypeSchemaMapping
                 {
                     case 200:
                         {
+                            CustomizedModel value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = CustomizedModel.DeserializeCustomizedModel(document.RootElement);
-                            return Response.FromValue<CustomizedModel>(value, message.Response);
+                            value = CustomizedModel.DeserializeCustomizedModel(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

@@ -56,7 +56,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static NetworkInterfaceDnsSettings DeserializeNetworkInterfaceDnsSettings(JsonElement element)
         {
-            NetworkInterfaceDnsSettings result;
             IList<string> dnsServers = default;
             IList<string> appliedDnsServers = default;
             string internalDnsNameLabel = default;
@@ -120,8 +119,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new NetworkInterfaceDnsSettings(dnsServers, appliedDnsServers, internalDnsNameLabel, internalFqdn, internalDomainNameSuffix);
-            return result;
+            return new NetworkInterfaceDnsSettings(dnsServers, appliedDnsServers, internalDnsNameLabel, internalFqdn, internalDomainNameSuffix);
         }
     }
 }

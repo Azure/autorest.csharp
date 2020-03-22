@@ -54,7 +54,6 @@ namespace CognitiveSearch.Models
 
         internal static ShingleTokenFilter DeserializeShingleTokenFilter(JsonElement element)
         {
-            ShingleTokenFilter result;
             int? maxShingleSize = default;
             int? minShingleSize = default;
             bool? outputUnigrams = default;
@@ -130,8 +129,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new ShingleTokenFilter(maxShingleSize, minShingleSize, outputUnigrams, outputUnigramsIfNoShingles, tokenSeparator, filterToken, odatatype, name);
-            return result;
+            return new ShingleTokenFilter(maxShingleSize, minShingleSize, outputUnigrams, outputUnigramsIfNoShingles, tokenSeparator, filterToken, odatatype, name);
         }
     }
 }

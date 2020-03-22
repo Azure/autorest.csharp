@@ -15,7 +15,6 @@ namespace CognitiveSearch.Models
     {
         internal static ListSkillsetsResult DeserializeListSkillsetsResult(JsonElement element)
         {
-            ListSkillsetsResult result;
             IList<Skillset> value = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -34,8 +33,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new ListSkillsetsResult(value);
-            return result;
+            return new ListSkillsetsResult(value);
         }
     }
 }

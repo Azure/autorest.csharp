@@ -84,7 +84,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static OutboundRule DeserializeOutboundRule(JsonElement element)
         {
-            OutboundRule result;
             string name = default;
             string etag = default;
             string type = default;
@@ -210,8 +209,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new OutboundRule(name, etag, type, allocatedOutboundPorts, frontendIPConfigurations, backendAddressPool, provisioningState, protocol, enableTcpReset, idleTimeoutInMinutes, id);
-            return result;
+            return new OutboundRule(name, etag, type, allocatedOutboundPorts, frontendIPConfigurations, backendAddressPool, provisioningState, protocol, enableTcpReset, idleTimeoutInMinutes, id);
         }
     }
 }

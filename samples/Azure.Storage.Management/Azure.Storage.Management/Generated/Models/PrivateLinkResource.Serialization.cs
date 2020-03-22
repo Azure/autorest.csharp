@@ -64,7 +64,6 @@ namespace Azure.Storage.Management.Models
 
         internal static PrivateLinkResource DeserializePrivateLinkResource(JsonElement element)
         {
-            PrivateLinkResource result;
             string id = default;
             string name = default;
             string type = default;
@@ -145,8 +144,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new PrivateLinkResource(groupId, requiredMembers, requiredZoneNames, id, name, type);
-            return result;
+            return new PrivateLinkResource(groupId, requiredMembers, requiredZoneNames, id, name, type);
         }
     }
 }

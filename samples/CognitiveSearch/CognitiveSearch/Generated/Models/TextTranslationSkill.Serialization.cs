@@ -64,7 +64,6 @@ namespace CognitiveSearch.Models
 
         internal static TextTranslationSkill DeserializeTextTranslationSkill(JsonElement element)
         {
-            TextTranslationSkill result;
             TextTranslationSkillLanguage defaultToLanguageCode = default;
             TextTranslationSkillLanguage? defaultFromLanguageCode = default;
             TextTranslationSkillLanguage? suggestedFrom = default;
@@ -152,8 +151,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new TextTranslationSkill(defaultToLanguageCode, defaultFromLanguageCode, suggestedFrom, odatatype, name, description, context, inputs, outputs);
-            return result;
+            return new TextTranslationSkill(defaultToLanguageCode, defaultFromLanguageCode, suggestedFrom, odatatype, name, description, context, inputs, outputs);
         }
     }
 }

@@ -35,7 +35,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static DdosSettings DeserializeDdosSettings(JsonElement element)
         {
-            DdosSettings result;
             SubResource ddosCustomPolicy = default;
             DdosSettingsProtectionCoverage? protectionCoverage = default;
             bool? protectedIP = default;
@@ -69,8 +68,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new DdosSettings(ddosCustomPolicy, protectionCoverage, protectedIP);
-            return result;
+            return new DdosSettings(ddosCustomPolicy, protectionCoverage, protectedIP);
         }
     }
 }

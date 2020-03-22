@@ -68,7 +68,6 @@ namespace AppConfiguration.Models
 
         internal static KeyValue DeserializeKeyValue(JsonElement element)
         {
-            KeyValue result;
             string key = default;
             string label = default;
             string contentType = default;
@@ -130,12 +129,12 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    Dictionary<string, string> array = new Dictionary<string, string>();
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        array.Add(property0.Name, property0.Value.GetString());
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
-                    tags = array;
+                    tags = dictionary;
                     continue;
                 }
                 if (property.NameEquals("locked"))
@@ -157,8 +156,7 @@ namespace AppConfiguration.Models
                     continue;
                 }
             }
-            result = new KeyValue(key, label, contentType, value, lastModified, tags, locked, etag);
-            return result;
+            return new KeyValue(key, label, contentType, value, lastModified, tags, locked, etag);
         }
     }
 }

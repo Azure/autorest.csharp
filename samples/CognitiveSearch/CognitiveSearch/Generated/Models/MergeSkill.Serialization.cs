@@ -62,7 +62,6 @@ namespace CognitiveSearch.Models
 
         internal static MergeSkill DeserializeMergeSkill(JsonElement element)
         {
-            MergeSkill result;
             string insertPreTag = default;
             string insertPostTag = default;
             string odatatype = default;
@@ -144,8 +143,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new MergeSkill(insertPreTag, insertPostTag, odatatype, name, description, context, inputs, outputs);
-            return result;
+            return new MergeSkill(insertPreTag, insertPostTag, odatatype, name, description, context, inputs, outputs);
         }
     }
 }

@@ -51,7 +51,6 @@ namespace body_complex.Models
 
         internal static Siamese DeserializeSiamese(JsonElement element)
         {
-            Siamese result;
             string breed = default;
             string color = default;
             IList<Dog> hates = default;
@@ -110,8 +109,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new Siamese(breed, color, hates, id, name);
-            return result;
+            return new Siamese(breed, color, hates, id, name);
         }
     }
 }

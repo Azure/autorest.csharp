@@ -58,7 +58,6 @@ namespace body_complex.Models
 
         internal static Goblinshark DeserializeGoblinshark(JsonElement element)
         {
-            Goblinshark result;
             int? jawsize = default;
             GoblinSharkColor? color = default;
             int? age = default;
@@ -135,8 +134,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new Goblinshark(jawsize, color, age, birthday, fishtype, species, length, siblings);
-            return result;
+            return new Goblinshark(jawsize, color, age, birthday, fishtype, species, length, siblings);
         }
     }
 }

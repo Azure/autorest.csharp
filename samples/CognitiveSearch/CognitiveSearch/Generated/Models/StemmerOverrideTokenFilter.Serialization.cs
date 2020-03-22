@@ -32,7 +32,6 @@ namespace CognitiveSearch.Models
 
         internal static StemmerOverrideTokenFilter DeserializeStemmerOverrideTokenFilter(JsonElement element)
         {
-            StemmerOverrideTokenFilter result;
             IList<string> rules = new List<string>();
             string odatatype = default;
             string name = default;
@@ -59,8 +58,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new StemmerOverrideTokenFilter(rules, odatatype, name);
-            return result;
+            return new StemmerOverrideTokenFilter(rules, odatatype, name);
         }
     }
 }

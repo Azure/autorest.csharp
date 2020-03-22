@@ -52,7 +52,6 @@ namespace CognitiveSearch.Models
 
         internal static LanguageDetectionSkill DeserializeLanguageDetectionSkill(JsonElement element)
         {
-            LanguageDetectionSkill result;
             string odatatype = default;
             string name = default;
             string description = default;
@@ -114,8 +113,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new LanguageDetectionSkill(odatatype, name, description, context, inputs, outputs);
-            return result;
+            return new LanguageDetectionSkill(odatatype, name, description, context, inputs, outputs);
         }
     }
 }

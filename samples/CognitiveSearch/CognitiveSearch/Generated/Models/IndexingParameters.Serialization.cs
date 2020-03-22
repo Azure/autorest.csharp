@@ -52,7 +52,6 @@ namespace CognitiveSearch.Models
 
         internal static IndexingParameters DeserializeIndexingParameters(JsonElement element)
         {
-            IndexingParameters result;
             int? batchSize = default;
             int? maxFailedItems = default;
             int? maxFailedItemsPerBatch = default;
@@ -102,17 +101,16 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    Dictionary<string, object> array = new Dictionary<string, object>();
+                    Dictionary<string, object> dictionary = new Dictionary<string, object>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        array.Add(property0.Name, property0.Value.GetObject());
+                        dictionary.Add(property0.Name, property0.Value.GetObject());
                     }
-                    configuration = array;
+                    configuration = dictionary;
                     continue;
                 }
             }
-            result = new IndexingParameters(batchSize, maxFailedItems, maxFailedItemsPerBatch, base64EncodeKeys, configuration);
-            return result;
+            return new IndexingParameters(batchSize, maxFailedItems, maxFailedItemsPerBatch, base64EncodeKeys, configuration);
         }
     }
 }

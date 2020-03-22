@@ -14,7 +14,6 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static FormFieldsReport DeserializeFormFieldsReport(JsonElement element)
         {
-            FormFieldsReport result;
             string fieldName = default;
             float accuracy = default;
             foreach (var property in element.EnumerateObject())
@@ -30,8 +29,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            result = new FormFieldsReport(fieldName, accuracy);
-            return result;
+            return new FormFieldsReport(fieldName, accuracy);
         }
     }
 }

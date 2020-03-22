@@ -35,7 +35,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static PrivateLinkServiceConnectionState DeserializePrivateLinkServiceConnectionState(JsonElement element)
         {
-            PrivateLinkServiceConnectionState result;
             string status = default;
             string description = default;
             string actionsRequired = default;
@@ -69,8 +68,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new PrivateLinkServiceConnectionState(status, description, actionsRequired);
-            return result;
+            return new PrivateLinkServiceConnectionState(status, description, actionsRequired);
         }
     }
 }

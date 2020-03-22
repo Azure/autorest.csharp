@@ -15,7 +15,6 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static TextAnalyticsError DeserializeTextAnalyticsError(JsonElement element)
         {
-            TextAnalyticsError result;
             ErrorCodeValue code = default;
             string message = default;
             string target = default;
@@ -66,8 +65,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            result = new TextAnalyticsError(code, message, target, innerError, details);
-            return result;
+            return new TextAnalyticsError(code, message, target, innerError, details);
         }
     }
 }

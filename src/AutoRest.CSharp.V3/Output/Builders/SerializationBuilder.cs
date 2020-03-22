@@ -94,9 +94,8 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     return BuildSerialization(constantSchema.ValueType, constantSchema.Value.Value == null);
                 case ArraySchema arraySchema:
                     return new JsonArraySerialization(
-                        _typeFactory.CreateType(arraySchema, isNullable),
-                        BuildSerialization(arraySchema.ElementType, false),
-                        _typeFactory.CreateImplementationType(arraySchema, isNullable));
+                        _typeFactory.CreateImplementationType(arraySchema, isNullable),
+                        BuildSerialization(arraySchema.ElementType, false));
                 case DictionarySchema dictionarySchema:
                     return new JsonDictionarySerialization(
                         _typeFactory.CreateImplementationType(dictionarySchema, isNullable),
@@ -177,7 +176,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             foreach ((string name, PropertyBag innerBag) in propertyBag.Bag)
             {
                 JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag, objectType).ToArray();
-                JsonObjectSerialization objectSerialization = new JsonObjectSerialization(null, serializationProperties, null, null);
+                JsonObjectSerialization objectSerialization = new JsonObjectSerialization(null, serializationProperties, null);
                 yield return new JsonPropertySerialization(name, null, objectSerialization);
             }
         }
@@ -190,8 +189,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             return new JsonObjectSerialization(
                 objectType.Type,
                 GetPropertySerializationsFromBag(propertyBag, objectType).ToArray(),
-                CreateAdditionalProperties(objectSchema, objectType),
-                objectType.Type);
+                CreateAdditionalProperties(objectSchema, objectType));
         }
 
         private class PropertyBag

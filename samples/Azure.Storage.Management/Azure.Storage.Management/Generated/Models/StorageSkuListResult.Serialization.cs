@@ -15,7 +15,6 @@ namespace Azure.Storage.Management.Models
     {
         internal static StorageSkuListResult DeserializeStorageSkuListResult(JsonElement element)
         {
-            StorageSkuListResult result;
             IList<SkuInformation> value = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -34,8 +33,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new StorageSkuListResult(value);
-            return result;
+            return new StorageSkuListResult(value);
         }
     }
 }

@@ -28,7 +28,6 @@ namespace CognitiveSearch.Models
 
         internal static IndexingSchedule DeserializeIndexingSchedule(JsonElement element)
         {
-            IndexingSchedule result;
             TimeSpan interval = default;
             DateTimeOffset? startTime = default;
             foreach (var property in element.EnumerateObject())
@@ -48,8 +47,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new IndexingSchedule(interval, startTime);
-            return result;
+            return new IndexingSchedule(interval, startTime);
         }
     }
 }

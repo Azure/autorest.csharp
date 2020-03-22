@@ -23,7 +23,6 @@ namespace CognitiveSearch.Models
 
         internal static FreshnessScoringParameters DeserializeFreshnessScoringParameters(JsonElement element)
         {
-            FreshnessScoringParameters result;
             TimeSpan boostingDuration = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -33,8 +32,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new FreshnessScoringParameters(boostingDuration);
-            return result;
+            return new FreshnessScoringParameters(boostingDuration);
         }
     }
 }

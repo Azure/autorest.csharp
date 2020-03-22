@@ -66,7 +66,6 @@ namespace Azure.Storage.Management.Models
 
         internal static FileShareItem DeserializeFileShareItem(JsonElement element)
         {
-            FileShareItem result;
             string etag = default;
             string id = default;
             string name = default;
@@ -131,12 +130,12 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            Dictionary<string, string> array = new Dictionary<string, string>();
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
                             foreach (var property1 in property0.Value.EnumerateObject())
                             {
-                                array.Add(property1.Name, property1.Value.GetString());
+                                dictionary.Add(property1.Name, property1.Value.GetString());
                             }
-                            metadata = array;
+                            metadata = dictionary;
                             continue;
                         }
                         if (property0.NameEquals("shareQuota"))
@@ -152,8 +151,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new FileShareItem(lastModifiedTime, metadata, shareQuota, etag, id, name, type);
-            return result;
+            return new FileShareItem(lastModifiedTime, metadata, shareQuota, etag, id, name, type);
         }
     }
 }

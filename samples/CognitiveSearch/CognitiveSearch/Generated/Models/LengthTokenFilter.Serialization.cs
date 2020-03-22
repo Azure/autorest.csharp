@@ -34,7 +34,6 @@ namespace CognitiveSearch.Models
 
         internal static LengthTokenFilter DeserializeLengthTokenFilter(JsonElement element)
         {
-            LengthTokenFilter result;
             int? min = default;
             int? max = default;
             string odatatype = default;
@@ -70,8 +69,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new LengthTokenFilter(min, max, odatatype, name);
-            return result;
+            return new LengthTokenFilter(min, max, odatatype, name);
         }
     }
 }

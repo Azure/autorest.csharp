@@ -41,7 +41,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static ServiceEndpointPropertiesFormat DeserializeServiceEndpointPropertiesFormat(JsonElement element)
         {
-            ServiceEndpointPropertiesFormat result;
             string service = default;
             IList<string> locations = default;
             ProvisioningState? provisioningState = default;
@@ -80,8 +79,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new ServiceEndpointPropertiesFormat(service, locations, provisioningState);
-            return result;
+            return new ServiceEndpointPropertiesFormat(service, locations, provisioningState);
         }
     }
 }

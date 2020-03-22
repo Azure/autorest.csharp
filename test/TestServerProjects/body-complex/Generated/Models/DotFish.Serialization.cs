@@ -21,7 +21,6 @@ namespace body_complex.Models
                     case "DotSalmon": return DotSalmon.DeserializeDotSalmon(element);
                 }
             }
-            DotFish result;
             string fishtype = default;
             string species = default;
             foreach (var property in element.EnumerateObject())
@@ -41,8 +40,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            result = new DotFish(fishtype, species);
-            return result;
+            return new DotFish(fishtype, species);
         }
     }
 }

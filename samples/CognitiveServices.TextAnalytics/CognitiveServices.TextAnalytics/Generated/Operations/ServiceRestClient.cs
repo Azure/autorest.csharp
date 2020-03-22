@@ -83,9 +83,10 @@ namespace CognitiveServices.TextAnalytics
                 {
                     case 200:
                         {
+                            EntitiesResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
-                            return Response.FromValue<EntitiesResult>(value, message.Response);
+                            value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -120,9 +121,10 @@ namespace CognitiveServices.TextAnalytics
                 {
                     case 200:
                         {
+                            EntitiesResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
-                            return Response.FromValue<EntitiesResult>(value, message.Response);
+                            value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -186,9 +188,10 @@ namespace CognitiveServices.TextAnalytics
                 {
                     case 200:
                         {
+                            EntitiesResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
-                            return Response.FromValue<EntitiesResult>(value, message.Response);
+                            value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -226,9 +229,10 @@ namespace CognitiveServices.TextAnalytics
                 {
                     case 200:
                         {
+                            EntitiesResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
-                            return Response.FromValue<EntitiesResult>(value, message.Response);
+                            value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -289,9 +293,10 @@ namespace CognitiveServices.TextAnalytics
                 {
                     case 200:
                         {
+                            EntityLinkingResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = EntityLinkingResult.DeserializeEntityLinkingResult(document.RootElement);
-                            return Response.FromValue<EntityLinkingResult>(value, message.Response);
+                            value = EntityLinkingResult.DeserializeEntityLinkingResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -326,9 +331,10 @@ namespace CognitiveServices.TextAnalytics
                 {
                     case 200:
                         {
+                            EntityLinkingResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = EntityLinkingResult.DeserializeEntityLinkingResult(document.RootElement);
-                            return Response.FromValue<EntityLinkingResult>(value, message.Response);
+                            value = EntityLinkingResult.DeserializeEntityLinkingResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -389,9 +395,10 @@ namespace CognitiveServices.TextAnalytics
                 {
                     case 200:
                         {
+                            KeyPhraseResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = KeyPhraseResult.DeserializeKeyPhraseResult(document.RootElement);
-                            return Response.FromValue<KeyPhraseResult>(value, message.Response);
+                            value = KeyPhraseResult.DeserializeKeyPhraseResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -426,9 +433,10 @@ namespace CognitiveServices.TextAnalytics
                 {
                     case 200:
                         {
+                            KeyPhraseResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = KeyPhraseResult.DeserializeKeyPhraseResult(document.RootElement);
-                            return Response.FromValue<KeyPhraseResult>(value, message.Response);
+                            value = KeyPhraseResult.DeserializeKeyPhraseResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -489,9 +497,10 @@ namespace CognitiveServices.TextAnalytics
                 {
                     case 200:
                         {
+                            LanguageResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = LanguageResult.DeserializeLanguageResult(document.RootElement);
-                            return Response.FromValue<LanguageResult>(value, message.Response);
+                            value = LanguageResult.DeserializeLanguageResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -526,9 +535,10 @@ namespace CognitiveServices.TextAnalytics
                 {
                     case 200:
                         {
+                            LanguageResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = LanguageResult.DeserializeLanguageResult(document.RootElement);
-                            return Response.FromValue<LanguageResult>(value, message.Response);
+                            value = LanguageResult.DeserializeLanguageResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -589,9 +599,10 @@ namespace CognitiveServices.TextAnalytics
                 {
                     case 200:
                         {
+                            SentimentResponse value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = SentimentResponse.DeserializeSentimentResponse(document.RootElement);
-                            return Response.FromValue<SentimentResponse>(value, message.Response);
+                            value = SentimentResponse.DeserializeSentimentResponse(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -626,9 +637,10 @@ namespace CognitiveServices.TextAnalytics
                 {
                     case 200:
                         {
+                            SentimentResponse value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = SentimentResponse.DeserializeSentimentResponse(document.RootElement);
-                            return Response.FromValue<SentimentResponse>(value, message.Response);
+                            value = SentimentResponse.DeserializeSentimentResponse(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

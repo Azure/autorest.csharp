@@ -695,14 +695,12 @@ namespace paging
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = ProductResult.DeserializeProductResult(document.RootElement);
-                return value;
+                return ProductResult.DeserializeProductResult(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = ProductResult.DeserializeProductResult(document.RootElement);
-                return value;
+                return ProductResult.DeserializeProductResult(document.RootElement);
             });
         }
 

@@ -40,7 +40,6 @@ namespace Azure.Storage.Management.Models
 
         internal static EncryptionServices DeserializeEncryptionServices(JsonElement element)
         {
-            EncryptionServices result;
             EncryptionService blob = default;
             EncryptionService file = default;
             EncryptionService table = default;
@@ -84,8 +83,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new EncryptionServices(blob, file, table, queue);
-            return result;
+            return new EncryptionServices(blob, file, table, queue);
         }
     }
 }

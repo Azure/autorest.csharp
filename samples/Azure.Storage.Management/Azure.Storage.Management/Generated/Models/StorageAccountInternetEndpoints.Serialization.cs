@@ -40,7 +40,6 @@ namespace Azure.Storage.Management.Models
 
         internal static StorageAccountInternetEndpoints DeserializeStorageAccountInternetEndpoints(JsonElement element)
         {
-            StorageAccountInternetEndpoints result;
             string blob = default;
             string file = default;
             string web = default;
@@ -84,8 +83,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new StorageAccountInternetEndpoints(blob, file, web, dfs);
-            return result;
+            return new StorageAccountInternetEndpoints(blob, file, web, dfs);
         }
     }
 }

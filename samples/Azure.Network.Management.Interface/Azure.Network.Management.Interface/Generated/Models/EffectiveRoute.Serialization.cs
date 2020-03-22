@@ -15,7 +15,6 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static EffectiveRoute DeserializeEffectiveRoute(JsonElement element)
         {
-            EffectiveRoute result;
             string name = default;
             bool? disableBgpRoutePropagation = default;
             EffectiveRouteSource? source = default;
@@ -99,8 +98,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new EffectiveRoute(name, disableBgpRoutePropagation, source, state, addressPrefix, nextHopIpAddress, nextHopType);
-            return result;
+            return new EffectiveRoute(name, disableBgpRoutePropagation, source, state, addressPrefix, nextHopIpAddress, nextHopType);
         }
     }
 }

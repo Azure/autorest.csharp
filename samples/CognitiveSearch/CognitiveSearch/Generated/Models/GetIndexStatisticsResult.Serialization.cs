@@ -14,7 +14,6 @@ namespace CognitiveSearch.Models
     {
         internal static GetIndexStatisticsResult DeserializeGetIndexStatisticsResult(JsonElement element)
         {
-            GetIndexStatisticsResult result;
             long? documentCount = default;
             long? storageSize = default;
             foreach (var property in element.EnumerateObject())
@@ -38,8 +37,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new GetIndexStatisticsResult(documentCount, storageSize);
-            return result;
+            return new GetIndexStatisticsResult(documentCount, storageSize);
         }
     }
 }

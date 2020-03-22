@@ -14,7 +14,6 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static Match DeserializeMatch(JsonElement element)
         {
-            Match result;
             double score = default;
             string text = default;
             int offset = default;
@@ -42,8 +41,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            result = new Match(score, text, offset, length);
-            return result;
+            return new Match(score, text, offset, length);
         }
     }
 }

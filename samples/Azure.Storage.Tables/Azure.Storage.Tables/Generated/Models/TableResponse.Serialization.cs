@@ -14,7 +14,6 @@ namespace Azure.Storage.Tables.Models
     {
         internal static TableResponse DeserializeTableResponse(JsonElement element)
         {
-            TableResponse result;
             string odatametadata = default;
             string tableName = default;
             string odatatype = default;
@@ -68,8 +67,7 @@ namespace Azure.Storage.Tables.Models
                     continue;
                 }
             }
-            result = new TableResponse(odatametadata, tableName, odatatype, odataid, odataeditLink);
-            return result;
+            return new TableResponse(odatametadata, tableName, odatatype, odataid, odataeditLink);
         }
     }
 }

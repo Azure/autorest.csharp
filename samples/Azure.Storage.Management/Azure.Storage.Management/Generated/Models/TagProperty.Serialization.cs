@@ -46,7 +46,6 @@ namespace Azure.Storage.Management.Models
 
         internal static TagProperty DeserializeTagProperty(JsonElement element)
         {
-            TagProperty result;
             string tag = default;
             DateTimeOffset? timestamp = default;
             string objectIdentifier = default;
@@ -100,8 +99,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new TagProperty(tag, timestamp, objectIdentifier, tenantId, upn);
-            return result;
+            return new TagProperty(tag, timestamp, objectIdentifier, tenantId, upn);
         }
     }
 }

@@ -30,7 +30,6 @@ namespace body_array.Models
 
         internal static Product DeserializeProduct(JsonElement element)
         {
-            Product result;
             int? integer = default;
             string @string = default;
             foreach (var property in element.EnumerateObject())
@@ -54,8 +53,7 @@ namespace body_array.Models
                     continue;
                 }
             }
-            result = new Product(integer, @string);
-            return result;
+            return new Product(integer, @string);
         }
     }
 }

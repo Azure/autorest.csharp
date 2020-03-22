@@ -14,7 +14,6 @@ namespace model_flattening.Models
     {
         internal static Error DeserializeError(JsonElement element)
         {
-            Error result;
             int? status = default;
             string message = default;
             Error parentError = default;
@@ -48,8 +47,7 @@ namespace model_flattening.Models
                     continue;
                 }
             }
-            result = new Error(status, message, parentError);
-            return result;
+            return new Error(status, message, parentError);
         }
     }
 }

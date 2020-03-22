@@ -304,14 +304,12 @@ namespace Azure.Storage.Management
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = StorageAccount.DeserializeStorageAccount(document.RootElement);
-                return value;
+                return StorageAccount.DeserializeStorageAccount(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = StorageAccount.DeserializeStorageAccount(document.RootElement);
-                return value;
+                return StorageAccount.DeserializeStorageAccount(document.RootElement);
             });
         }
 
@@ -436,14 +434,12 @@ namespace Azure.Storage.Management
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = BlobRestoreStatus.DeserializeBlobRestoreStatus(document.RootElement);
-                return value;
+                return BlobRestoreStatus.DeserializeBlobRestoreStatus(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = BlobRestoreStatus.DeserializeBlobRestoreStatus(document.RootElement);
-                return value;
+                return BlobRestoreStatus.DeserializeBlobRestoreStatus(document.RootElement);
             });
         }
 

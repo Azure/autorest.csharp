@@ -14,7 +14,6 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static DetectedLanguage DeserializeDetectedLanguage(JsonElement element)
         {
-            DetectedLanguage result;
             string name = default;
             string iso6391Name = default;
             double score = default;
@@ -36,8 +35,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            result = new DetectedLanguage(name, iso6391Name, score);
-            return result;
+            return new DetectedLanguage(name, iso6391Name, score);
         }
     }
 }

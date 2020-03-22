@@ -27,7 +27,6 @@ namespace Azure.Storage.Management.Models
 
         internal static Sku DeserializeSku(JsonElement element)
         {
-            Sku result;
             SkuName name = default;
             SkuTier? tier = default;
             foreach (var property in element.EnumerateObject())
@@ -47,8 +46,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new Sku(name, tier);
-            return result;
+            return new Sku(name, tier);
         }
     }
 }

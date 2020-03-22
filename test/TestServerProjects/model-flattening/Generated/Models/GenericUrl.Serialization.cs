@@ -25,7 +25,6 @@ namespace model_flattening.Models
 
         internal static GenericUrl DeserializeGenericUrl(JsonElement element)
         {
-            GenericUrl result;
             string genericValue = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -39,8 +38,7 @@ namespace model_flattening.Models
                     continue;
                 }
             }
-            result = new GenericUrl(genericValue);
-            return result;
+            return new GenericUrl(genericValue);
         }
     }
 }

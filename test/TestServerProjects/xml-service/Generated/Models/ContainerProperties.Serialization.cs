@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Xml.Linq;
 using Azure.Core;
 
@@ -15,50 +14,32 @@ namespace xml_service.Models
     {
         internal static ContainerProperties DeserializeContainerProperties(XElement element)
         {
-            ContainerProperties result = default;
-            result = new ContainerProperties(); DateTimeOffset value = default;
-            var lastModified = element.Element("Last-Modified");
-            if (lastModified != null)
+            var obj = new ContainerProperties();
+            if (element.Element("Last-Modified") is XElement lastModified)
             {
-                value = lastModified.GetDateTimeOffsetValue("R");
+                obj.LastModified = lastModified.GetDateTimeOffsetValue("R");
             }
-            result.LastModified = value;
-            string value0 = default;
-            var etag = element.Element("Etag");
-            if (etag != null)
+            if (element.Element("Etag") is XElement etag)
             {
-                value0 = (string)etag;
+                obj.Etag = (string)etag;
             }
-            result.Etag = value0;
-            LeaseStatusType? value1 = default;
-            var leaseStatus = element.Element("LeaseStatus");
-            if (leaseStatus != null)
+            if (element.Element("LeaseStatus") is XElement leaseStatus)
             {
-                value1 = leaseStatus.Value.ToLeaseStatusType();
+                obj.LeaseStatus = leaseStatus.Value.ToLeaseStatusType();
             }
-            result.LeaseStatus = value1;
-            LeaseStateType? value2 = default;
-            var leaseState = element.Element("LeaseState");
-            if (leaseState != null)
+            if (element.Element("LeaseState") is XElement leaseState)
             {
-                value2 = leaseState.Value.ToLeaseStateType();
+                obj.LeaseState = leaseState.Value.ToLeaseStateType();
             }
-            result.LeaseState = value2;
-            LeaseDurationType? value3 = default;
-            var leaseDuration = element.Element("LeaseDuration");
-            if (leaseDuration != null)
+            if (element.Element("LeaseDuration") is XElement leaseDuration)
             {
-                value3 = leaseDuration.Value.ToLeaseDurationType();
+                obj.LeaseDuration = leaseDuration.Value.ToLeaseDurationType();
             }
-            result.LeaseDuration = value3;
-            PublicAccessType? value4 = default;
-            var publicAccess = element.Element("PublicAccess");
-            if (publicAccess != null)
+            if (element.Element("PublicAccess") is XElement publicAccess)
             {
-                value4 = new PublicAccessType(publicAccess.Value);
+                obj.PublicAccess = new PublicAccessType(publicAccess.Value);
             }
-            result.PublicAccess = value4;
-            return result;
+            return obj;
         }
     }
 }

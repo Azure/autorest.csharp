@@ -14,7 +14,6 @@ namespace CognitiveSearch.Models
     {
         internal static ServiceLimits DeserializeServiceLimits(JsonElement element)
         {
-            ServiceLimits result;
             int? maxFieldsPerIndex = default;
             int? maxFieldNestingDepthPerIndex = default;
             int? maxComplexCollectionFieldsPerIndex = default;
@@ -58,8 +57,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new ServiceLimits(maxFieldsPerIndex, maxFieldNestingDepthPerIndex, maxComplexCollectionFieldsPerIndex, maxComplexObjectsInCollectionsPerDocument);
-            return result;
+            return new ServiceLimits(maxFieldsPerIndex, maxFieldNestingDepthPerIndex, maxComplexCollectionFieldsPerIndex, maxComplexObjectsInCollectionsPerDocument);
         }
     }
 }

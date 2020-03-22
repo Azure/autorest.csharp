@@ -34,7 +34,6 @@ namespace CognitiveSearch.Models
 
         internal static PhoneticTokenFilter DeserializePhoneticTokenFilter(JsonElement element)
         {
-            PhoneticTokenFilter result;
             PhoneticEncoder? encoder = default;
             bool? replace = default;
             string odatatype = default;
@@ -70,8 +69,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new PhoneticTokenFilter(encoder, replace, odatatype, name);
-            return result;
+            return new PhoneticTokenFilter(encoder, replace, odatatype, name);
         }
     }
 }

@@ -14,7 +14,6 @@ namespace Azure.Storage.Management.Models
     {
         internal static LeaseContainerResponse DeserializeLeaseContainerResponse(JsonElement element)
         {
-            LeaseContainerResponse result;
             string leaseId = default;
             string leaseTimeSeconds = default;
             foreach (var property in element.EnumerateObject())
@@ -38,8 +37,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new LeaseContainerResponse(leaseId, leaseTimeSeconds);
-            return result;
+            return new LeaseContainerResponse(leaseId, leaseTimeSeconds);
         }
     }
 }

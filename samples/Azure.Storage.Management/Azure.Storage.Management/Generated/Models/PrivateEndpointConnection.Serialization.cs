@@ -53,7 +53,6 @@ namespace Azure.Storage.Management.Models
 
         internal static PrivateEndpointConnection DeserializePrivateEndpointConnection(JsonElement element)
         {
-            PrivateEndpointConnection result;
             string id = default;
             string name = default;
             string type = default;
@@ -124,8 +123,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new PrivateEndpointConnection(privateEndpoint, privateLinkServiceConnectionState, provisioningState, id, name, type);
-            return result;
+            return new PrivateEndpointConnection(privateEndpoint, privateLinkServiceConnectionState, provisioningState, id, name, type);
         }
     }
 }

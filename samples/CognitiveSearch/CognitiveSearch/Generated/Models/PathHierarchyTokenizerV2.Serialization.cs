@@ -49,7 +49,6 @@ namespace CognitiveSearch.Models
 
         internal static PathHierarchyTokenizerV2 DeserializePathHierarchyTokenizerV2(JsonElement element)
         {
-            PathHierarchyTokenizerV2 result;
             char? delimiter = default;
             char? replacement = default;
             int? maxTokenLength = default;
@@ -115,8 +114,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new PathHierarchyTokenizerV2(delimiter, replacement, maxTokenLength, reverse, skip, odatatype, name);
-            return result;
+            return new PathHierarchyTokenizerV2(delimiter, replacement, maxTokenLength, reverse, skip, odatatype, name);
         }
     }
 }

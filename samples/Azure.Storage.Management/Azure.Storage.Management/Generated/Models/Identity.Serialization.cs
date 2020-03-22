@@ -32,7 +32,6 @@ namespace Azure.Storage.Management.Models
 
         internal static Identity DeserializeIdentity(JsonElement element)
         {
-            Identity result;
             string principalId = default;
             string tenantId = default;
             string type = default;
@@ -62,8 +61,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new Identity(principalId, tenantId, type);
-            return result;
+            return new Identity(principalId, tenantId, type);
         }
     }
 }

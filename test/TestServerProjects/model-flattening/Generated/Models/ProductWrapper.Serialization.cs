@@ -14,7 +14,6 @@ namespace model_flattening.Models
     {
         internal static ProductWrapper DeserializeProductWrapper(JsonElement element)
         {
-            ProductWrapper result;
             string value = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -35,8 +34,7 @@ namespace model_flattening.Models
                     continue;
                 }
             }
-            result = new ProductWrapper(value);
-            return result;
+            return new ProductWrapper(value);
         }
     }
 }

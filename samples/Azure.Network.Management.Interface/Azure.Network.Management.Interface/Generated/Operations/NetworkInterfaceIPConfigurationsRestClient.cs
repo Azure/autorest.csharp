@@ -91,9 +91,10 @@ namespace Azure.Network.Management.Interface
                 {
                     case 200:
                         {
+                            NetworkInterfaceIPConfigurationListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = NetworkInterfaceIPConfigurationListResult.DeserializeNetworkInterfaceIPConfigurationListResult(document.RootElement);
-                            return Response.FromValue<NetworkInterfaceIPConfigurationListResult>(value, message.Response);
+                            value = NetworkInterfaceIPConfigurationListResult.DeserializeNetworkInterfaceIPConfigurationListResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -131,9 +132,10 @@ namespace Azure.Network.Management.Interface
                 {
                     case 200:
                         {
+                            NetworkInterfaceIPConfigurationListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = NetworkInterfaceIPConfigurationListResult.DeserializeNetworkInterfaceIPConfigurationListResult(document.RootElement);
-                            return Response.FromValue<NetworkInterfaceIPConfigurationListResult>(value, message.Response);
+                            value = NetworkInterfaceIPConfigurationListResult.DeserializeNetworkInterfaceIPConfigurationListResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -196,9 +198,10 @@ namespace Azure.Network.Management.Interface
                 {
                     case 200:
                         {
+                            NetworkInterfaceIPConfiguration value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(document.RootElement);
-                            return Response.FromValue<NetworkInterfaceIPConfiguration>(value, message.Response);
+                            value = NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -241,9 +244,10 @@ namespace Azure.Network.Management.Interface
                 {
                     case 200:
                         {
+                            NetworkInterfaceIPConfiguration value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(document.RootElement);
-                            return Response.FromValue<NetworkInterfaceIPConfiguration>(value, message.Response);
+                            value = NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -287,9 +291,10 @@ namespace Azure.Network.Management.Interface
                 {
                     case 200:
                         {
+                            NetworkInterfaceIPConfigurationListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = NetworkInterfaceIPConfigurationListResult.DeserializeNetworkInterfaceIPConfigurationListResult(document.RootElement);
-                            return Response.FromValue<NetworkInterfaceIPConfigurationListResult>(value, message.Response);
+                            value = NetworkInterfaceIPConfigurationListResult.DeserializeNetworkInterfaceIPConfigurationListResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -322,9 +327,10 @@ namespace Azure.Network.Management.Interface
                 {
                     case 200:
                         {
+                            NetworkInterfaceIPConfigurationListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = NetworkInterfaceIPConfigurationListResult.DeserializeNetworkInterfaceIPConfigurationListResult(document.RootElement);
-                            return Response.FromValue<NetworkInterfaceIPConfigurationListResult>(value, message.Response);
+                            value = NetworkInterfaceIPConfigurationListResult.DeserializeNetworkInterfaceIPConfigurationListResult(document.RootElement);
+                            return Response.FromValue(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

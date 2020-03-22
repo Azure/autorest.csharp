@@ -15,7 +15,6 @@ namespace AppConfiguration.Models
     {
         internal static LabelListResult DeserializeLabelListResult(JsonElement element)
         {
-            LabelListResult result;
             IList<Label> items = default;
             string nextLink = default;
             foreach (var property in element.EnumerateObject())
@@ -44,8 +43,7 @@ namespace AppConfiguration.Models
                     continue;
                 }
             }
-            result = new LabelListResult(items, nextLink);
-            return result;
+            return new LabelListResult(items, nextLink);
         }
     }
 }

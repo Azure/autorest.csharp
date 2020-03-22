@@ -38,7 +38,6 @@ namespace additionalProperties.Models
 
         internal static PetAPTrue DeserializePetAPTrue(JsonElement element)
         {
-            PetAPTrue result;
             int id = default;
             string name = default;
             bool? status = default;
@@ -70,8 +69,7 @@ namespace additionalProperties.Models
                 }
                 additionalProperties.Add(property.Name, property.Value.GetObject());
             }
-            result = new PetAPTrue(id, name, status, additionalProperties);
-            return result;
+            return new PetAPTrue(id, name, status, additionalProperties);
         }
     }
 }

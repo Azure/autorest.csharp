@@ -37,7 +37,6 @@ namespace CognitiveSearch.Models
 
         internal static PatternCaptureTokenFilter DeserializePatternCaptureTokenFilter(JsonElement element)
         {
-            PatternCaptureTokenFilter result;
             IList<string> patterns = new List<string>();
             bool? preserveOriginal = default;
             string odatatype = default;
@@ -74,8 +73,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new PatternCaptureTokenFilter(patterns, preserveOriginal, odatatype, name);
-            return result;
+            return new PatternCaptureTokenFilter(patterns, preserveOriginal, odatatype, name);
         }
     }
 }

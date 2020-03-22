@@ -53,7 +53,6 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static IPConfigurationProfile DeserializeIPConfigurationProfile(JsonElement element)
         {
-            IPConfigurationProfile result;
             string name = default;
             string type = default;
             string etag = default;
@@ -124,8 +123,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            result = new IPConfigurationProfile(name, type, etag, subnet, provisioningState, id);
-            return result;
+            return new IPConfigurationProfile(name, type, etag, subnet, provisioningState, id);
         }
     }
 }

@@ -35,7 +35,6 @@ namespace Azure.Storage.Management.Models
 
         internal static RoutingPreference DeserializeRoutingPreference(JsonElement element)
         {
-            RoutingPreference result;
             RoutingChoice? routingChoice = default;
             bool? publishMicrosoftEndpoints = default;
             bool? publishInternetEndpoints = default;
@@ -69,8 +68,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            result = new RoutingPreference(routingChoice, publishMicrosoftEndpoints, publishInternetEndpoints);
-            return result;
+            return new RoutingPreference(routingChoice, publishMicrosoftEndpoints, publishInternetEndpoints);
         }
     }
 }

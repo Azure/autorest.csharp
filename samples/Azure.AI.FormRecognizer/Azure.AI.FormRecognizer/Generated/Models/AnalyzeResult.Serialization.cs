@@ -15,7 +15,6 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static AnalyzeResult DeserializeAnalyzeResult(JsonElement element)
         {
-            AnalyzeResult result;
             string version = default;
             IList<ReadResult> readResults = new List<ReadResult>();
             IList<PageResult> pageResults = default;
@@ -81,8 +80,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            result = new AnalyzeResult(version, readResults, pageResults, documentResults, errors);
-            return result;
+            return new AnalyzeResult(version, readResults, pageResults, documentResults, errors);
         }
     }
 }

@@ -116,7 +116,6 @@ namespace CognitiveSearch.Models
 
         internal static SearchRequest DeserializeSearchRequest(JsonElement element)
         {
-            SearchRequest result;
             bool? count = default;
             IList<string> facets = default;
             string filter = default;
@@ -300,8 +299,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            result = new SearchRequest(count, facets, filter, highlight, highlightPostTag, highlightPreTag, minimumCoverage, orderby, queryType, scoringParameters, scoringProfile, search, searchFields, searchMode, select, skip, top);
-            return result;
+            return new SearchRequest(count, facets, filter, highlight, highlightPostTag, highlightPreTag, minimumCoverage, orderby, queryType, scoringParameters, scoringProfile, search, searchFields, searchMode, select, skip, top);
         }
     }
 }
