@@ -145,12 +145,16 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 defaultCtorInitializers.ToArray(),
                 baseCtor);
 
-            yield return new ObjectTypeConstructor(
-                BuilderHelpers.CreateMemberDeclaration(Type.Name, Type, "internal", null),
-                serializationConstructorParameters.ToArray(),
-                initializers.ToArray(),
-                baseSerializationCtor
-            );
+            // Skip serialization ctor if they are the same
+            if (defaultCtorParameters.Count != serializationConstructorParameters.Count)
+            {
+                yield return new ObjectTypeConstructor(
+                    BuilderHelpers.CreateMemberDeclaration(Type.Name, Type, "internal", null),
+                    serializationConstructorParameters.ToArray(),
+                    initializers.ToArray(),
+                    baseSerializationCtor
+                );
+            }
         }
 
         public ObjectTypeDiscriminator? Discriminator => _discriminator ??= BuildDiscriminator();
