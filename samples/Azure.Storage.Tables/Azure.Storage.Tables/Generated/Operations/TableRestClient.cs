@@ -1041,10 +1041,10 @@ namespace Azure.Storage.Tables
                         {
                             IList<SignedIdentifier> value = default;
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("SignedIdentifiers") is XElement signedIdentifiers)
+                            if (document.Element("SignedIdentifiers") is XElement signedIdentifiersElement)
                             {
                                 var array = new List<SignedIdentifier>();
-                                foreach (var e in signedIdentifiers.Elements("SignedIdentifier"))
+                                foreach (var e in signedIdentifiersElement.Elements("SignedIdentifier"))
                                 {
                                     array.Add(SignedIdentifier.DeserializeSignedIdentifier(e));
                                 }
@@ -1088,10 +1088,10 @@ namespace Azure.Storage.Tables
                         {
                             IList<SignedIdentifier> value = default;
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("SignedIdentifiers") is XElement signedIdentifiers)
+                            if (document.Element("SignedIdentifiers") is XElement signedIdentifiersElement)
                             {
                                 var array = new List<SignedIdentifier>();
-                                foreach (var e in signedIdentifiers.Elements("SignedIdentifier"))
+                                foreach (var e in signedIdentifiersElement.Elements("SignedIdentifier"))
                                 {
                                     array.Add(SignedIdentifier.DeserializeSignedIdentifier(e));
                                 }

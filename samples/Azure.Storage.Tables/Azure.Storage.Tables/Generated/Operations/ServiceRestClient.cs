@@ -177,9 +177,9 @@ namespace Azure.Storage.Tables
                         {
                             StorageServiceProperties value = default;
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("StorageServiceProperties") is XElement storageServiceProperties)
+                            if (document.Element("StorageServiceProperties") is XElement storageServicePropertiesElement)
                             {
-                                value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServiceProperties);
+                                value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServicePropertiesElement);
                             }
                             var headers = new GetPropertiesHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
@@ -214,9 +214,9 @@ namespace Azure.Storage.Tables
                         {
                             StorageServiceProperties value = default;
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("StorageServiceProperties") is XElement storageServiceProperties)
+                            if (document.Element("StorageServiceProperties") is XElement storageServicePropertiesElement)
                             {
-                                value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServiceProperties);
+                                value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServicePropertiesElement);
                             }
                             var headers = new GetPropertiesHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
@@ -274,9 +274,9 @@ namespace Azure.Storage.Tables
                         {
                             StorageServiceStats value = default;
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("StorageServiceStats") is XElement storageServiceStats)
+                            if (document.Element("StorageServiceStats") is XElement storageServiceStatsElement)
                             {
-                                value = StorageServiceStats.DeserializeStorageServiceStats(storageServiceStats);
+                                value = StorageServiceStats.DeserializeStorageServiceStats(storageServiceStatsElement);
                             }
                             var headers = new GetStatisticsHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
@@ -311,9 +311,9 @@ namespace Azure.Storage.Tables
                         {
                             StorageServiceStats value = default;
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("StorageServiceStats") is XElement storageServiceStats)
+                            if (document.Element("StorageServiceStats") is XElement storageServiceStatsElement)
                             {
-                                value = StorageServiceStats.DeserializeStorageServiceStats(storageServiceStats);
+                                value = StorageServiceStats.DeserializeStorageServiceStats(storageServiceStatsElement);
                             }
                             var headers = new GetStatisticsHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);

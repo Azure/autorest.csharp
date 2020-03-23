@@ -40,24 +40,27 @@ namespace xml_service.Models
 
         internal static Metrics DeserializeMetrics(XElement element)
         {
-            var obj = new Metrics();
-            if (element.Element("Version") is XElement version)
+            string version = default;
+            bool enabled = default;
+            bool? includeAPIs = default;
+            RetentionPolicy retentionPolicy = default;
+            if (element.Element("Version") is XElement versionElement)
             {
-                obj.Version = (string)version;
+                version = (string)versionElement;
             }
-            if (element.Element("Enabled") is XElement enabled)
+            if (element.Element("Enabled") is XElement enabledElement)
             {
-                obj.Enabled = (bool)enabled;
+                enabled = (bool)enabledElement;
             }
-            if (element.Element("IncludeAPIs") is XElement includeAPIs)
+            if (element.Element("IncludeAPIs") is XElement includeAPIsElement)
             {
-                obj.IncludeAPIs = (bool?)includeAPIs;
+                includeAPIs = (bool?)includeAPIsElement;
             }
-            if (element.Element("RetentionPolicy") is XElement retentionPolicy)
+            if (element.Element("RetentionPolicy") is XElement retentionPolicyElement)
             {
-                obj.RetentionPolicy = RetentionPolicy.DeserializeRetentionPolicy(retentionPolicy);
+                retentionPolicy = RetentionPolicy.DeserializeRetentionPolicy(retentionPolicyElement);
             }
-            return obj;
+            return new Metrics(version, enabled, includeAPIs, retentionPolicy);
         }
     }
 }

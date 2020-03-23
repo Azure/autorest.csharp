@@ -15,33 +15,37 @@ namespace xml_service.Models
     {
         internal static Blob DeserializeBlob(XElement element)
         {
-            var obj = new Blob();
-            if (element.Element("Name") is XElement name)
+            string name = default;
+            bool deleted = default;
+            string snapshot = default;
+            BlobProperties properties = new BlobProperties();
+            IDictionary<string, string> metadata = default;
+            if (element.Element("Name") is XElement nameElement)
             {
-                obj.Name = (string)name;
+                name = (string)nameElement;
             }
-            if (element.Element("Deleted") is XElement deleted)
+            if (element.Element("Deleted") is XElement deletedElement)
             {
-                obj.Deleted = (bool)deleted;
+                deleted = (bool)deletedElement;
             }
-            if (element.Element("Snapshot") is XElement snapshot)
+            if (element.Element("Snapshot") is XElement snapshotElement)
             {
-                obj.Snapshot = (string)snapshot;
+                snapshot = (string)snapshotElement;
             }
-            if (element.Element("Properties") is XElement properties)
+            if (element.Element("Properties") is XElement propertiesElement)
             {
-                obj.Properties = BlobProperties.DeserializeBlobProperties(properties);
+                properties = BlobProperties.DeserializeBlobProperties(propertiesElement);
             }
-            if (element.Element("Metadata") is XElement metadata)
+            if (element.Element("Metadata") is XElement metadataElement)
             {
                 var dictionary = new Dictionary<string, string>();
-                foreach (var e in metadata.Elements())
+                foreach (var e in metadataElement.Elements())
                 {
                     dictionary.Add(e.Name.LocalName, (string)e);
                 }
-                obj.Metadata = dictionary;
+                metadata = dictionary;
             }
-            return obj;
+            return new Blob(name, deleted, snapshot, properties, metadata);
         }
     }
 }

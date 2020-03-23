@@ -31,16 +31,17 @@ namespace xml_service.Models
 
         internal static RootWithRefAndNoMeta DeserializeRootWithRefAndNoMeta(XElement element)
         {
-            var obj = new RootWithRefAndNoMeta();
-            if (element.Element("RefToModel") is XElement refToModel)
+            ComplexTypeNoMeta refToModel = default;
+            string something = default;
+            if (element.Element("RefToModel") is XElement refToModelElement)
             {
-                obj.RefToModel = ComplexTypeNoMeta.DeserializeComplexTypeNoMeta(refToModel);
+                refToModel = ComplexTypeNoMeta.DeserializeComplexTypeNoMeta(refToModelElement);
             }
-            if (element.Element("Something") is XElement something)
+            if (element.Element("Something") is XElement somethingElement)
             {
-                obj.Something = (string)something;
+                something = (string)somethingElement;
             }
-            return obj;
+            return new RootWithRefAndNoMeta(refToModel, something);
         }
     }
 }

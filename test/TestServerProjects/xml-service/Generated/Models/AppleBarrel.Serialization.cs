@@ -44,26 +44,27 @@ namespace xml_service.Models
 
         internal static AppleBarrel DeserializeAppleBarrel(XElement element)
         {
-            var obj = new AppleBarrel();
-            if (element.Element("GoodApples") is XElement goodApples)
+            IList<string> goodApples = default;
+            IList<string> badApples = default;
+            if (element.Element("GoodApples") is XElement goodApplesElement)
             {
                 var array = new List<string>();
-                foreach (var e in goodApples.Elements("Apple"))
+                foreach (var e in goodApplesElement.Elements("Apple"))
                 {
                     array.Add((string)e);
                 }
-                obj.GoodApples = array;
+                goodApples = array;
             }
-            if (element.Element("BadApples") is XElement badApples)
+            if (element.Element("BadApples") is XElement badApplesElement)
             {
                 var array = new List<string>();
-                foreach (var e in badApples.Elements("Apple"))
+                foreach (var e in badApplesElement.Elements("Apple"))
                 {
                     array.Add((string)e);
                 }
-                obj.BadApples = array;
+                badApples = array;
             }
-            return obj;
+            return new AppleBarrel(goodApples, badApples);
         }
     }
 }

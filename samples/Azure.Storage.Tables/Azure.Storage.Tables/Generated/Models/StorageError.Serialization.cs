@@ -33,12 +33,12 @@ namespace Azure.Storage.Tables.Models
 
         internal static StorageError DeserializeStorageError(XElement element)
         {
-            var obj = new StorageError();
-            if (element.Element("Message") is XElement message)
+            string message = default;
+            if (element.Element("Message") is XElement messageElement)
             {
-                obj.Message = (string)message;
+                message = (string)messageElement;
             }
-            return obj;
+            return new StorageError(message);
         }
     }
 }

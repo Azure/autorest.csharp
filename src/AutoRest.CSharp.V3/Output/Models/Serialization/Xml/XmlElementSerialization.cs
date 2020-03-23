@@ -9,6 +9,5 @@ namespace AutoRest.CSharp.V3.Output.Models.Serialization.Xml
     internal abstract class XmlElementSerialization: ObjectSerialization
     {
         public abstract string Name { get; }
-        public abstract CSharpType Type { get; }
     }
 }

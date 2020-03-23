@@ -36,28 +36,32 @@ namespace Azure.Storage.Tables.Models
 
         internal static CorsRule DeserializeCorsRule(XElement element)
         {
-            var obj = new CorsRule();
-            if (element.Element("AllowedOrigins") is XElement allowedOrigins)
+            string allowedOrigins = default;
+            string allowedMethods = default;
+            string allowedHeaders = default;
+            string exposedHeaders = default;
+            int maxAgeInSeconds = default;
+            if (element.Element("AllowedOrigins") is XElement allowedOriginsElement)
             {
-                obj.AllowedOrigins = (string)allowedOrigins;
+                allowedOrigins = (string)allowedOriginsElement;
             }
-            if (element.Element("AllowedMethods") is XElement allowedMethods)
+            if (element.Element("AllowedMethods") is XElement allowedMethodsElement)
             {
-                obj.AllowedMethods = (string)allowedMethods;
+                allowedMethods = (string)allowedMethodsElement;
             }
-            if (element.Element("AllowedHeaders") is XElement allowedHeaders)
+            if (element.Element("AllowedHeaders") is XElement allowedHeadersElement)
             {
-                obj.AllowedHeaders = (string)allowedHeaders;
+                allowedHeaders = (string)allowedHeadersElement;
             }
-            if (element.Element("ExposedHeaders") is XElement exposedHeaders)
+            if (element.Element("ExposedHeaders") is XElement exposedHeadersElement)
             {
-                obj.ExposedHeaders = (string)exposedHeaders;
+                exposedHeaders = (string)exposedHeadersElement;
             }
-            if (element.Element("MaxAgeInSeconds") is XElement maxAgeInSeconds)
+            if (element.Element("MaxAgeInSeconds") is XElement maxAgeInSecondsElement)
             {
-                obj.MaxAgeInSeconds = (int)maxAgeInSeconds;
+                maxAgeInSeconds = (int)maxAgeInSecondsElement;
             }
-            return obj;
+            return new CorsRule(allowedOrigins, allowedMethods, allowedHeaders, exposedHeaders, maxAgeInSeconds);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
@@ -30,20 +31,22 @@ namespace Azure.Storage.Tables.Models
 
         internal static AccessPolicy DeserializeAccessPolicy(XElement element)
         {
-            var obj = new AccessPolicy();
-            if (element.Element("Start") is XElement start)
+            DateTimeOffset start = default;
+            DateTimeOffset expiry = default;
+            string permission = default;
+            if (element.Element("Start") is XElement startElement)
             {
-                obj.Start = start.GetDateTimeOffsetValue("S");
+                start = startElement.GetDateTimeOffsetValue("S");
             }
-            if (element.Element("Expiry") is XElement expiry)
+            if (element.Element("Expiry") is XElement expiryElement)
             {
-                obj.Expiry = expiry.GetDateTimeOffsetValue("S");
+                expiry = expiryElement.GetDateTimeOffsetValue("S");
             }
-            if (element.Element("Permission") is XElement permission)
+            if (element.Element("Permission") is XElement permissionElement)
             {
-                obj.Permission = (string)permission;
+                permission = (string)permissionElement;
             }
-            return obj;
+            return new AccessPolicy(start, expiry, permission);
         }
     }
 }

@@ -53,37 +53,42 @@ namespace xml_service.Models
 
         internal static StorageServiceProperties DeserializeStorageServiceProperties(XElement element)
         {
-            var obj = new StorageServiceProperties();
-            if (element.Element("Logging") is XElement logging)
+            Logging logging = default;
+            Metrics hourMetrics = default;
+            Metrics minuteMetrics = default;
+            string defaultServiceVersion = default;
+            RetentionPolicy deleteRetentionPolicy = default;
+            IList<CorsRule> cors = default;
+            if (element.Element("Logging") is XElement loggingElement)
             {
-                obj.Logging = Logging.DeserializeLogging(logging);
+                logging = Logging.DeserializeLogging(loggingElement);
             }
-            if (element.Element("HourMetrics") is XElement hourMetrics)
+            if (element.Element("HourMetrics") is XElement hourMetricsElement)
             {
-                obj.HourMetrics = Metrics.DeserializeMetrics(hourMetrics);
+                hourMetrics = Metrics.DeserializeMetrics(hourMetricsElement);
             }
-            if (element.Element("MinuteMetrics") is XElement minuteMetrics)
+            if (element.Element("MinuteMetrics") is XElement minuteMetricsElement)
             {
-                obj.MinuteMetrics = Metrics.DeserializeMetrics(minuteMetrics);
+                minuteMetrics = Metrics.DeserializeMetrics(minuteMetricsElement);
             }
-            if (element.Element("DefaultServiceVersion") is XElement defaultServiceVersion)
+            if (element.Element("DefaultServiceVersion") is XElement defaultServiceVersionElement)
             {
-                obj.DefaultServiceVersion = (string)defaultServiceVersion;
+                defaultServiceVersion = (string)defaultServiceVersionElement;
             }
-            if (element.Element("DeleteRetentionPolicy") is XElement deleteRetentionPolicy)
+            if (element.Element("DeleteRetentionPolicy") is XElement deleteRetentionPolicyElement)
             {
-                obj.DeleteRetentionPolicy = RetentionPolicy.DeserializeRetentionPolicy(deleteRetentionPolicy);
+                deleteRetentionPolicy = RetentionPolicy.DeserializeRetentionPolicy(deleteRetentionPolicyElement);
             }
-            if (element.Element("Cors") is XElement cors)
+            if (element.Element("Cors") is XElement corsElement)
             {
                 var array = new List<CorsRule>();
-                foreach (var e in cors.Elements("CorsRule"))
+                foreach (var e in corsElement.Elements("CorsRule"))
                 {
                     array.Add(CorsRule.DeserializeCorsRule(e));
                 }
-                obj.Cors = array;
+                cors = array;
             }
-            return obj;
+            return new StorageServiceProperties(logging, hourMetrics, minuteMetrics, cors, defaultServiceVersion, deleteRetentionPolicy);
         }
     }
 }
