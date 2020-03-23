@@ -11,8 +11,13 @@ namespace CognitiveSearch.Models
     public partial class ScoringFunction
     {
         /// <summary> Initializes a new instance of ScoringFunction. </summary>
-        public ScoringFunction()
+        /// <param name="fieldName"> The name of the field used as input to the scoring function. </param>
+        /// <param name="boost"> A multiplier for the raw score. Must be a positive number not equal to 1.0. </param>
+        public ScoringFunction(string fieldName, double boost)
         {
+            FieldName = fieldName;
+            Boost = boost;
+            Type = null;
         }
 
         /// <summary> Initializes a new instance of ScoringFunction. </summary>
@@ -28,11 +33,11 @@ namespace CognitiveSearch.Models
             Interpolation = interpolation;
         }
 
-        public string Type { get; internal set; }
+        internal string Type { get; set; }
         /// <summary> The name of the field used as input to the scoring function. </summary>
-        public string FieldName { get; set; }
+        public string FieldName { get; }
         /// <summary> A multiplier for the raw score. Must be a positive number not equal to 1.0. </summary>
-        public double Boost { get; set; }
+        public double Boost { get; }
         /// <summary> A value indicating how boosting will be interpolated across document scores; defaults to &quot;Linear&quot;. </summary>
         public ScoringFunctionInterpolation? Interpolation { get; set; }
     }

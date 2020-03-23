@@ -58,7 +58,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The public IP address SKU. </summary>
         public PublicIPAddressSku Sku { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string Etag { get; internal set; }
+        public string Etag { get; }
         /// <summary> A list of availability zones denoting the IP allocated for the resource needs to come from. </summary>
         public IList<string> Zones { get; set; }
         /// <summary> The public IP address allocation method. </summary>
@@ -66,7 +66,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The public IP address version. </summary>
         public IPVersion? PublicIPAddressVersion { get; set; }
         /// <summary> The IP configuration associated with the public IP address. </summary>
-        public IPConfiguration IpConfiguration { get; internal set; }
+        public IPConfiguration IpConfiguration { get; }
         /// <summary> The FQDN of the DNS record associated with the public IP address. </summary>
         public PublicIPAddressDnsSettings DnsSettings { get; set; }
         /// <summary> The DDoS protection custom policy associated with the public IP address. </summary>
@@ -80,8 +80,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The idle timeout of the public IP address. </summary>
         public int? IdleTimeoutInMinutes { get; set; }
         /// <summary> The resource GUID property of the public IP address resource. </summary>
-        public string ResourceGuid { get; internal set; }
+        public string ResourceGuid { get; }
         /// <summary> The provisioning state of the public IP address resource. </summary>
-        public ProvisioningState? ProvisioningState { get; internal set; }
+        public ProvisioningState? ProvisioningState { get; }
     }
 }

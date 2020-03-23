@@ -302,16 +302,12 @@ namespace AutoRest.TestServer.Tests
         {
             var root = new List<SignedIdentifier>()
             {
-                new SignedIdentifier()
-                {
-                    Id = "MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=",
-                    AccessPolicy =
-                    {
-                        Start = DateTimeOffset.Parse("2009-09-28T08:49:37.123Z"),
-                        Expiry = DateTimeOffset.Parse("2009-09-29T08:49:37.123Z"),
-                        Permission = "rwd"
-                    }
-                }
+                new SignedIdentifier(
+                    "MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=",
+                    new AccessPolicy(
+                        DateTimeOffset.Parse("2009-09-28T08:49:37.123Z"),
+                        DateTimeOffset.Parse("2009-09-29T08:49:37.123Z"),
+                        "rwd"))
             };
 
             return await new XmlClient(ClientDiagnostics, pipeline, host).PutAclsAsync(root);
@@ -520,38 +516,23 @@ namespace AutoRest.TestServer.Tests
         {
             var properties = new StorageServiceProperties()
             {
-                Logging = new Logging()
+                Logging = new Logging("1.0", true, false, true, new RetentionPolicy(true, 7)),
+                HourMetrics = new Metrics(true)
                 {
                     Version = "1.0",
-                    Delete = true,
-                    Read = false,
-                    Write = true,
-                    RetentionPolicy = new RetentionPolicy()
-                    {
-                        Days = 7,
-                        Enabled = true
-                    }
-                },
-                HourMetrics = new Metrics()
-                {
-                    Version = "1.0",
-                    Enabled = true,
                     IncludeAPIs = false,
-                    RetentionPolicy = new RetentionPolicy()
+                    RetentionPolicy = new RetentionPolicy(true)
                     {
                         Days = 7,
-                        Enabled = true
                     }
                 },
-                MinuteMetrics = new Metrics()
+                MinuteMetrics = new Metrics(true)
                 {
                     Version = "1.0",
-                    Enabled = true,
                     IncludeAPIs = true,
-                    RetentionPolicy = new RetentionPolicy()
+                    RetentionPolicy = new RetentionPolicy(true)
                     {
                         Days = 7,
-                        Enabled = true
                     }
                 }
             };

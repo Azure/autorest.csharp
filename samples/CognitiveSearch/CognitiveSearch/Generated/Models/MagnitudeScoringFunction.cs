@@ -11,8 +11,12 @@ namespace CognitiveSearch.Models
     public partial class MagnitudeScoringFunction : ScoringFunction
     {
         /// <summary> Initializes a new instance of MagnitudeScoringFunction. </summary>
-        public MagnitudeScoringFunction()
+        /// <param name="parameters"> Parameter values for the magnitude scoring function. </param>
+        /// <param name="fieldName"> The name of the field used as input to the scoring function. </param>
+        /// <param name="boost"> A multiplier for the raw score. Must be a positive number not equal to 1.0. </param>
+        public MagnitudeScoringFunction(MagnitudeScoringParameters parameters, string fieldName, double boost) : base(fieldName, boost)
         {
+            Parameters = parameters;
             Type = "magnitude";
         }
 
@@ -28,6 +32,6 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> Parameter values for the magnitude scoring function. </summary>
-        public MagnitudeScoringParameters Parameters { get; set; } = new MagnitudeScoringParameters();
+        public MagnitudeScoringParameters Parameters { get; }
     }
 }

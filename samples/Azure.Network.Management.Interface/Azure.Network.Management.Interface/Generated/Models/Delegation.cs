@@ -36,12 +36,12 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The name of the resource that is unique within a subnet. This name can be used to access the resource. </summary>
         public string Name { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string Etag { get; internal set; }
+        public string Etag { get; }
         /// <summary> The name of the service to whom the subnet should be delegated (e.g. Microsoft.Sql/servers). </summary>
         public string ServiceName { get; set; }
         /// <summary> The actions permitted to the service upon delegation. </summary>
-        public IList<string> Actions { get; internal set; }
+        public IList<string> Actions { get; }
         /// <summary> The provisioning state of the service delegation resource. </summary>
-        public ProvisioningState? ProvisioningState { get; internal set; }
+        public ProvisioningState? ProvisioningState { get; }
     }
 }

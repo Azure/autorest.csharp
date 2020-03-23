@@ -15,8 +15,8 @@ namespace Azure.AI.FormRecognizer.Models
         internal static KeyValuePair DeserializeKeyValuePair(JsonElement element)
         {
             string label = default;
-            KeyValueElement key = new KeyValueElement();
-            KeyValueElement value = new KeyValueElement();
+            KeyValueElement key = default;
+            KeyValueElement value = default;
             float confidence = default;
             foreach (var property in element.EnumerateObject())
             {

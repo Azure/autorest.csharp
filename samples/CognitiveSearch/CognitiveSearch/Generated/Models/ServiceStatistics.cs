@@ -25,8 +25,8 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> Service level resource counters. </summary>
-        public ServiceCounters Counters { get; internal set; }
+        public ServiceCounters Counters { get; }
         /// <summary> Service level general limits. </summary>
-        public ServiceLimits Limits { get; internal set; }
+        public ServiceLimits Limits { get; }
     }
 }

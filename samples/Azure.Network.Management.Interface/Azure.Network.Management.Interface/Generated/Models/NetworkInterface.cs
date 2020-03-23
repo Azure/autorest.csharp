@@ -56,32 +56,32 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string Etag { get; internal set; }
+        public string Etag { get; }
         /// <summary> The reference to a virtual machine. </summary>
-        public SubResource VirtualMachine { get; internal set; }
+        public SubResource VirtualMachine { get; }
         /// <summary> The reference to the NetworkSecurityGroup resource. </summary>
         public NetworkSecurityGroup NetworkSecurityGroup { get; set; }
         /// <summary> A reference to the private endpoint to which the network interface is linked. </summary>
-        public PrivateEndpoint PrivateEndpoint { get; internal set; }
+        public PrivateEndpoint PrivateEndpoint { get; }
         /// <summary> A list of IPConfigurations of the network interface. </summary>
         public IList<NetworkInterfaceIPConfiguration> IpConfigurations { get; set; }
         /// <summary> A list of TapConfigurations of the network interface. </summary>
-        public IList<NetworkInterfaceTapConfiguration> TapConfigurations { get; internal set; }
+        public IList<NetworkInterfaceTapConfiguration> TapConfigurations { get; }
         /// <summary> The DNS settings in network interface. </summary>
         public NetworkInterfaceDnsSettings DnsSettings { get; set; }
         /// <summary> The MAC address of the network interface. </summary>
-        public string MacAddress { get; internal set; }
+        public string MacAddress { get; }
         /// <summary> Whether this is a primary network interface on a virtual machine. </summary>
-        public bool? Primary { get; internal set; }
+        public bool? Primary { get; }
         /// <summary> If the network interface is accelerated networking enabled. </summary>
         public bool? EnableAcceleratedNetworking { get; set; }
         /// <summary> Indicates whether IP forwarding is enabled on this network interface. </summary>
         public bool? EnableIPForwarding { get; set; }
         /// <summary> A list of references to linked BareMetal resources. </summary>
-        public IList<string> HostedWorkloads { get; internal set; }
+        public IList<string> HostedWorkloads { get; }
         /// <summary> The resource GUID property of the network interface resource. </summary>
-        public string ResourceGuid { get; internal set; }
+        public string ResourceGuid { get; }
         /// <summary> The provisioning state of the network interface resource. </summary>
-        public ProvisioningState? ProvisioningState { get; internal set; }
+        public ProvisioningState? ProvisioningState { get; }
     }
 }

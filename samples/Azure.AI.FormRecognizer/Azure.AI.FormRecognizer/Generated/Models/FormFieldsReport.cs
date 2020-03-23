@@ -11,11 +11,6 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class FormFieldsReport
     {
         /// <summary> Initializes a new instance of FormFieldsReport. </summary>
-        internal FormFieldsReport()
-        {
-        }
-
-        /// <summary> Initializes a new instance of FormFieldsReport. </summary>
         /// <param name="fieldName"> Training field name. </param>
         /// <param name="accuracy"> Estimated extraction accuracy for this field. </param>
         internal FormFieldsReport(string fieldName, float accuracy)
@@ -25,8 +20,8 @@ namespace Azure.AI.FormRecognizer.Models
         }
 
         /// <summary> Training field name. </summary>
-        public string FieldName { get; internal set; }
+        public string FieldName { get; }
         /// <summary> Estimated extraction accuracy for this field. </summary>
-        public float Accuracy { get; internal set; }
+        public float Accuracy { get; }
     }
 }

@@ -25,8 +25,8 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The number of documents in the index. </summary>
-        public long? DocumentCount { get; internal set; }
+        public long? DocumentCount { get; }
         /// <summary> The amount of storage in bytes consumed by the index. </summary>
-        public long? StorageSize { get; internal set; }
+        public long? StorageSize { get; }
     }
 }

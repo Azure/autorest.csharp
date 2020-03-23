@@ -13,18 +13,13 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class MultiLanguageBatchInput
     {
         /// <summary> Initializes a new instance of MultiLanguageBatchInput. </summary>
-        public MultiLanguageBatchInput()
-        {
-        }
-
-        /// <summary> Initializes a new instance of MultiLanguageBatchInput. </summary>
         /// <param name="documents"> The set of documents to process as part of this batch. </param>
-        internal MultiLanguageBatchInput(IList<MultiLanguageInput> documents)
+        public MultiLanguageBatchInput(IList<MultiLanguageInput> documents)
         {
             Documents = documents;
         }
 
         /// <summary> The set of documents to process as part of this batch. </summary>
-        public IList<MultiLanguageInput> Documents { get; set; } = new List<MultiLanguageInput>();
+        public IList<MultiLanguageInput> Documents { get; } = new List<MultiLanguageInput>();
     }
 }

@@ -46,11 +46,11 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The name of the resource that is unique within the set of probes used by the load balancer. This name can be used to access the resource. </summary>
         public string Name { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string Etag { get; internal set; }
+        public string Etag { get; }
         /// <summary> Type of the resource. </summary>
-        public string Type { get; internal set; }
+        public string Type { get; }
         /// <summary> The load balancer rules that use this probe. </summary>
-        public IList<SubResource> LoadBalancingRules { get; internal set; }
+        public IList<SubResource> LoadBalancingRules { get; }
         /// <summary> The protocol of the end point. If &apos;Tcp&apos; is specified, a received ACK is required for the probe to be successful. If &apos;Http&apos; or &apos;Https&apos; is specified, a 200 OK response from the specifies URI is required for the probe to be successful. </summary>
         public ProbeProtocol? Protocol { get; set; }
         /// <summary> The port for communicating the probe. Possible values range from 1 to 65535, inclusive. </summary>
@@ -62,6 +62,6 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The URI used for requesting health status from the VM. Path is required if a protocol is set to http. Otherwise, it is not allowed. There is no default value. </summary>
         public string RequestPath { get; set; }
         /// <summary> The provisioning state of the probe resource. </summary>
-        public ProvisioningState? ProvisioningState { get; internal set; }
+        public ProvisioningState? ProvisioningState { get; }
     }
 }

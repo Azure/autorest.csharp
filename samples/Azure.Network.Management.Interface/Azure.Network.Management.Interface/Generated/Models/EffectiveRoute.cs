@@ -37,18 +37,18 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> The name of the user defined route. This is optional. </summary>
-        public string Name { get; internal set; }
+        public string Name { get; }
         /// <summary> If true, on-premises routes are not propagated to the network interfaces in the subnet. </summary>
-        public bool? DisableBgpRoutePropagation { get; internal set; }
+        public bool? DisableBgpRoutePropagation { get; }
         /// <summary> Who created the route. </summary>
-        public EffectiveRouteSource? Source { get; internal set; }
+        public EffectiveRouteSource? Source { get; }
         /// <summary> The value of effective route. </summary>
-        public EffectiveRouteState? State { get; internal set; }
+        public EffectiveRouteState? State { get; }
         /// <summary> The address prefixes of the effective routes in CIDR notation. </summary>
-        public IList<string> AddressPrefix { get; internal set; }
+        public IList<string> AddressPrefix { get; }
         /// <summary> The IP address of the next hop of the effective route. </summary>
-        public IList<string> NextHopIpAddress { get; internal set; }
+        public IList<string> NextHopIpAddress { get; }
         /// <summary> The type of Azure hop the packet should be sent to. </summary>
-        public RouteNextHopType? NextHopType { get; internal set; }
+        public RouteNextHopType? NextHopType { get; }
     }
 }

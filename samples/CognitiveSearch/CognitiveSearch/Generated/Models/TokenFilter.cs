@@ -11,8 +11,11 @@ namespace CognitiveSearch.Models
     public partial class TokenFilter
     {
         /// <summary> Initializes a new instance of TokenFilter. </summary>
-        public TokenFilter()
+        /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public TokenFilter(string name)
         {
+            Name = name;
+            OdataType = null;
         }
 
         /// <summary> Initializes a new instance of TokenFilter. </summary>
@@ -24,8 +27,8 @@ namespace CognitiveSearch.Models
             Name = name;
         }
 
-        public string OdataType { get; internal set; }
+        internal string OdataType { get; set; }
         /// <summary> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </summary>
-        public string Name { get; set; }
+        public string Name { get; }
     }
 }

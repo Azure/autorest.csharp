@@ -21,10 +21,11 @@ namespace body_complex.Models
         /// <param name="iswild"> . </param>
         /// <param name="fishType"> . </param>
         /// <param name="species"> . </param>
-        internal DotSalmon(string location, bool? iswild, string fishType, string species) : base(fishType ?? "DotSalmon", species)
+        internal DotSalmon(string location, bool? iswild, string fishType, string species) : base(fishType, species)
         {
             Location = location;
             Iswild = iswild;
+            FishType = fishType ?? "DotSalmon";
         }
 
         public string Location { get; }

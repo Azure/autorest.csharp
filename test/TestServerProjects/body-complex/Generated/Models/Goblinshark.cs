@@ -30,10 +30,11 @@ namespace body_complex.Models
         /// <param name="species"> . </param>
         /// <param name="length"> . </param>
         /// <param name="siblings"> . </param>
-        internal Goblinshark(int? jawsize, GoblinSharkColor? color, int? age, DateTimeOffset birthday, string fishtype, string species, float length, IList<Fish> siblings) : base(age, birthday, fishtype ?? "goblin", species, length, siblings)
+        internal Goblinshark(int? jawsize, GoblinSharkColor? color, int? age, DateTimeOffset birthday, string fishtype, string species, float length, IList<Fish> siblings) : base(age, birthday, fishtype, species, length, siblings)
         {
             Jawsize = jawsize;
             Color = color;
+            Fishtype = fishtype ?? "goblin";
         }
 
         public int? Jawsize { get; set; }

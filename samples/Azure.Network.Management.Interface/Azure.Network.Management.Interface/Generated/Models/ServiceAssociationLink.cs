@@ -42,15 +42,15 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Name of the resource that is unique within a resource group. This name can be used to access the resource. </summary>
         public string Name { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string Etag { get; internal set; }
+        public string Etag { get; }
         /// <summary> Resource type. </summary>
-        public string Type { get; internal set; }
+        public string Type { get; }
         /// <summary> Resource type of the linked resource. </summary>
         public string LinkedResourceType { get; set; }
         /// <summary> Link to the external resource. </summary>
         public string Link { get; set; }
         /// <summary> The provisioning state of the service association link resource. </summary>
-        public ProvisioningState? ProvisioningState { get; internal set; }
+        public ProvisioningState? ProvisioningState { get; }
         /// <summary> If true, the resource can be deleted. </summary>
         public bool? AllowDelete { get; set; }
         /// <summary> A list of locations. </summary>

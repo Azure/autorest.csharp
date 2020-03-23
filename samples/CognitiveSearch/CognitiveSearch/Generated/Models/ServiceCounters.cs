@@ -33,16 +33,16 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> Total number of documents across all indexes in the service. </summary>
-        public ResourceCounter DocumentCounter { get; internal set; }
+        public ResourceCounter DocumentCounter { get; }
         /// <summary> Total number of indexes. </summary>
-        public ResourceCounter IndexCounter { get; internal set; }
+        public ResourceCounter IndexCounter { get; }
         /// <summary> Total number of indexers. </summary>
-        public ResourceCounter IndexerCounter { get; internal set; }
+        public ResourceCounter IndexerCounter { get; }
         /// <summary> Total number of data sources. </summary>
-        public ResourceCounter DataSourceCounter { get; internal set; }
+        public ResourceCounter DataSourceCounter { get; }
         /// <summary> Total size of used storage in bytes. </summary>
-        public ResourceCounter StorageSizeCounter { get; internal set; }
+        public ResourceCounter StorageSizeCounter { get; }
         /// <summary> Total number of synonym maps. </summary>
-        public ResourceCounter SynonymMapCounter { get; internal set; }
+        public ResourceCounter SynonymMapCounter { get; }
     }
 }

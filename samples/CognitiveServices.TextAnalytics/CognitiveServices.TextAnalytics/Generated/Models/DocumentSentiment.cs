@@ -13,8 +13,16 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class DocumentSentiment
     {
         /// <summary> Initializes a new instance of DocumentSentiment. </summary>
-        internal DocumentSentiment()
+        /// <param name="id"> Unique, non-empty document identifier. </param>
+        /// <param name="sentiment"> Predicted sentiment for document (Negative, Neutral, Positive, or Mixed). </param>
+        /// <param name="documentScores"> Document level sentiment confidence scores between 0 and 1 for each sentiment class. </param>
+        /// <param name="sentences"> Sentence level sentiment analysis. </param>
+        internal DocumentSentiment(string id, DocumentSentimentValue sentiment, SentimentConfidenceScorePerLabel documentScores, IList<SentenceSentiment> sentences)
         {
+            Id = id;
+            Sentiment = sentiment;
+            DocumentScores = documentScores;
+            Sentences = sentences;
         }
 
         /// <summary> Initializes a new instance of DocumentSentiment. </summary>
@@ -33,14 +41,14 @@ namespace CognitiveServices.TextAnalytics.Models
         }
 
         /// <summary> Unique, non-empty document identifier. </summary>
-        public string Id { get; internal set; }
+        public string Id { get; }
         /// <summary> Predicted sentiment for document (Negative, Neutral, Positive, or Mixed). </summary>
-        public DocumentSentimentValue Sentiment { get; internal set; }
+        public DocumentSentimentValue Sentiment { get; }
         /// <summary> if showStats=true was specified in the request this field will contain information about the document payload. </summary>
-        public DocumentStatistics Statistics { get; internal set; }
+        public DocumentStatistics Statistics { get; }
         /// <summary> Document level sentiment confidence scores between 0 and 1 for each sentiment class. </summary>
-        public SentimentConfidenceScorePerLabel DocumentScores { get; internal set; } = new SentimentConfidenceScorePerLabel();
+        public SentimentConfidenceScorePerLabel DocumentScores { get; }
         /// <summary> Sentence level sentiment analysis. </summary>
-        public IList<SentenceSentiment> Sentences { get; internal set; } = new List<SentenceSentiment>();
+        public IList<SentenceSentiment> Sentences { get; } = new List<SentenceSentiment>();
     }
 }

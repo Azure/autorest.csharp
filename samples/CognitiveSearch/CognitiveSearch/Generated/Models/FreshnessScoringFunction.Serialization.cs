@@ -33,7 +33,7 @@ namespace CognitiveSearch.Models
 
         internal static FreshnessScoringFunction DeserializeFreshnessScoringFunction(JsonElement element)
         {
-            FreshnessScoringParameters freshness = new FreshnessScoringParameters();
+            FreshnessScoringParameters freshness = default;
             string type = default;
             string fieldName = default;
             double boost = default;

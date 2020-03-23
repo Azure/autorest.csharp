@@ -27,8 +27,8 @@ namespace Azure.Storage.Management.Models
         }
 
         /// <summary> List of blobs containers returned. </summary>
-        public IList<ListContainerItem> Value { get; internal set; }
+        public IList<ListContainerItem> Value { get; }
         /// <summary> Request URL that can be used to query next page of containers. Returned when total number of requested containers exceed maximum page size. </summary>
-        public string NextLink { get; internal set; }
+        public string NextLink { get; }
     }
 }

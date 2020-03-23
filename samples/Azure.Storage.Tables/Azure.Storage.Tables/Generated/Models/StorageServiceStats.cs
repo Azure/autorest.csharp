@@ -23,6 +23,6 @@ namespace Azure.Storage.Tables.Models
         }
 
         /// <summary> Geo-Replication information for the Secondary Storage Service. </summary>
-        public GeoReplication GeoReplication { get; internal set; }
+        public GeoReplication GeoReplication { get; }
     }
 }

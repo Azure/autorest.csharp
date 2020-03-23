@@ -34,7 +34,7 @@ namespace Azure.Storage.Management.Models
             bool? enabled = default;
             string name = default;
             string type = default;
-            ManagementPolicyDefinition definition = new ManagementPolicyDefinition();
+            ManagementPolicyDefinition definition = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("enabled"))

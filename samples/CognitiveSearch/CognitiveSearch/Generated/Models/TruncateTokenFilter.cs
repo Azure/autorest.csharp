@@ -11,7 +11,8 @@ namespace CognitiveSearch.Models
     public partial class TruncateTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of TruncateTokenFilter. </summary>
-        public TruncateTokenFilter()
+        /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public TruncateTokenFilter(string name) : base(name)
         {
             OdataType = "#Microsoft.Azure.Search.TruncateTokenFilter";
         }

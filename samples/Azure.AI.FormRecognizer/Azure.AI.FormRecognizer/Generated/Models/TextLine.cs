@@ -13,8 +13,14 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class TextLine
     {
         /// <summary> Initializes a new instance of TextLine. </summary>
-        internal TextLine()
+        /// <param name="text"> The text content of the line. </param>
+        /// <param name="boundingBox"> Bounding box of an extracted line. </param>
+        /// <param name="words"> List of words in the text line. </param>
+        internal TextLine(string text, IList<float> boundingBox, IList<TextWord> words)
         {
+            Text = text;
+            BoundingBox = boundingBox;
+            Words = words;
         }
 
         /// <summary> Initializes a new instance of TextLine. </summary>
@@ -31,12 +37,12 @@ namespace Azure.AI.FormRecognizer.Models
         }
 
         /// <summary> The text content of the line. </summary>
-        public string Text { get; internal set; }
+        public string Text { get; }
         /// <summary> Bounding box of an extracted line. </summary>
-        public IList<float> BoundingBox { get; internal set; } = new List<float>();
+        public IList<float> BoundingBox { get; } = new List<float>();
         /// <summary> The detected language of this line, if different from the overall page language. </summary>
-        public Language? Language { get; internal set; }
+        public Language? Language { get; }
         /// <summary> List of words in the text line. </summary>
-        public IList<TextWord> Words { get; internal set; } = new List<TextWord>();
+        public IList<TextWord> Words { get; } = new List<TextWord>();
     }
 }

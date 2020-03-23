@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Linq;
 using AutoRest.CSharp.V3.Output.Models.Shared;
 
 namespace AutoRest.CSharp.V3.Output.Models.Types
@@ -35,6 +36,25 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             }
 
             return BaseConstructor?.FindPropertyInitializedByParameter(constructorParameter);
+        }
+
+        public Parameter? FindParameterByInitializedProperty(ObjectTypeProperty property)
+        {
+            foreach (var propertyInitializer in Initializers)
+            {
+                if (propertyInitializer.Property == property)
+                {
+                    if (propertyInitializer.Value.IsConstant)
+                    {
+                        continue;
+                    }
+
+                    var parameterName = propertyInitializer.Value.Reference.Name;
+                    return Parameters.Single(p => p.Name == parameterName);
+                }
+            }
+
+            return BaseConstructor?.FindParameterByInitializedProperty(property);
         }
     }
 }

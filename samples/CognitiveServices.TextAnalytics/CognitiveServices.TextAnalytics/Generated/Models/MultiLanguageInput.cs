@@ -11,8 +11,12 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class MultiLanguageInput
     {
         /// <summary> Initializes a new instance of MultiLanguageInput. </summary>
-        public MultiLanguageInput()
+        /// <param name="id"> A unique, non-empty document identifier. </param>
+        /// <param name="text"> The input text to process. </param>
+        public MultiLanguageInput(string id, string text)
         {
+            Id = id;
+            Text = text;
         }
 
         /// <summary> Initializes a new instance of MultiLanguageInput. </summary>
@@ -27,9 +31,9 @@ namespace CognitiveServices.TextAnalytics.Models
         }
 
         /// <summary> A unique, non-empty document identifier. </summary>
-        public string Id { get; set; }
+        public string Id { get; }
         /// <summary> The input text to process. </summary>
-        public string Text { get; set; }
+        public string Text { get; }
         /// <summary> (Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use &quot;en&quot; for English; &quot;es&quot; for Spanish etc. If not set, use &quot;en&quot; for English as default. </summary>
         public string Language { get; set; }
     }

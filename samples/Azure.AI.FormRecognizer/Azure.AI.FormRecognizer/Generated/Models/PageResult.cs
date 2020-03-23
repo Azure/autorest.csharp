@@ -13,8 +13,10 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class PageResult
     {
         /// <summary> Initializes a new instance of PageResult. </summary>
-        internal PageResult()
+        /// <param name="page"> Page number. </param>
+        internal PageResult(int page)
         {
+            Page = page;
         }
 
         /// <summary> Initializes a new instance of PageResult. </summary>
@@ -31,12 +33,12 @@ namespace Azure.AI.FormRecognizer.Models
         }
 
         /// <summary> Page number. </summary>
-        public int Page { get; internal set; }
+        public int Page { get; }
         /// <summary> Cluster identifier. </summary>
-        public int? ClusterId { get; internal set; }
+        public int? ClusterId { get; }
         /// <summary> List of key-value pairs extracted from the page. </summary>
-        public IList<KeyValuePair> KeyValuePairs { get; internal set; }
+        public IList<KeyValuePair> KeyValuePairs { get; }
         /// <summary> List of data tables extracted from the page. </summary>
-        public IList<DataTable> Tables { get; internal set; }
+        public IList<DataTable> Tables { get; }
     }
 }

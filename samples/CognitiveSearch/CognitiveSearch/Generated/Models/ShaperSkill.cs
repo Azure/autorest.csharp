@@ -13,7 +13,9 @@ namespace CognitiveSearch.Models
     public partial class ShaperSkill : Skill
     {
         /// <summary> Initializes a new instance of ShaperSkill. </summary>
-        public ShaperSkill()
+        /// <param name="inputs"> Inputs of the skills could be a column in the source data set, or the output of an upstream skill. </param>
+        /// <param name="outputs"> The output of a skill is either a field in a search index, or a value that can be consumed as an input by another skill. </param>
+        public ShaperSkill(IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs) : base(inputs, outputs)
         {
             OdataType = "#Microsoft.Skills.Util.ShaperSkill";
         }

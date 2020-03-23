@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of CognitiveServicesAccount. </summary>
         public CognitiveServicesAccount()
         {
+            OdataType = null;
         }
 
         /// <summary> Initializes a new instance of CognitiveServicesAccount. </summary>
@@ -24,7 +25,7 @@ namespace CognitiveSearch.Models
             Description = description;
         }
 
-        public string OdataType { get; internal set; }
+        internal string OdataType { get; set; }
         public string Description { get; set; }
     }
 }

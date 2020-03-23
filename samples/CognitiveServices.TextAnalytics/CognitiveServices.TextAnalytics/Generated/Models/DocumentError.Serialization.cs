@@ -15,7 +15,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal static DocumentError DeserializeDocumentError(JsonElement element)
         {
             string id = default;
-            TextAnalyticsError error = new TextAnalyticsError();
+            TextAnalyticsError error = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))

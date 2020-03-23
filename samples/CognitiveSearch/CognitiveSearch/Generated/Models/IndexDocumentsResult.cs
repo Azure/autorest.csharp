@@ -25,6 +25,6 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The list of status information for each document in the indexing request. </summary>
-        public IList<IndexingResult> Results { get; internal set; }
+        public IList<IndexingResult> Results { get; }
     }
 }

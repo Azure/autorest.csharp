@@ -11,8 +11,14 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class KeyValuePair
     {
         /// <summary> Initializes a new instance of KeyValuePair. </summary>
-        internal KeyValuePair()
+        /// <param name="key"> Information about the extracted key in a key-value pair. </param>
+        /// <param name="value"> Information about the extracted value in a key-value pair. </param>
+        /// <param name="confidence"> Confidence value. </param>
+        internal KeyValuePair(KeyValueElement key, KeyValueElement value, float confidence)
         {
+            Key = key;
+            Value = value;
+            Confidence = confidence;
         }
 
         /// <summary> Initializes a new instance of KeyValuePair. </summary>
@@ -29,12 +35,12 @@ namespace Azure.AI.FormRecognizer.Models
         }
 
         /// <summary> A user defined label for the key/value pair entry. </summary>
-        public string Label { get; internal set; }
+        public string Label { get; }
         /// <summary> Information about the extracted key in a key-value pair. </summary>
-        public KeyValueElement Key { get; internal set; } = new KeyValueElement();
+        public KeyValueElement Key { get; }
         /// <summary> Information about the extracted value in a key-value pair. </summary>
-        public KeyValueElement Value { get; internal set; } = new KeyValueElement();
+        public KeyValueElement Value { get; }
         /// <summary> Confidence value. </summary>
-        public float Confidence { get; internal set; }
+        public float Confidence { get; }
     }
 }

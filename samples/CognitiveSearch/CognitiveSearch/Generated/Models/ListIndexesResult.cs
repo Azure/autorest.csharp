@@ -25,6 +25,6 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The indexes in the Search service. </summary>
-        public IList<Index> Indexes { get; internal set; }
+        public IList<Index> Indexes { get; }
     }
 }

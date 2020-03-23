@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
             foreach (var property in Properties)
             {
-                var parameter = new Parameter(
+                var deserializationParameter = new Parameter(
                     property.Declaration.Name.ToVariableName(),
                     property.Description,
                     property.Declaration.Type,
@@ -105,22 +105,49 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     false
                 );
 
-                var initializer = new ObjectPropertyInitializer(property, parameter);
+                var initializer = new ObjectPropertyInitializer(property, deserializationParameter);
 
-                serializationConstructorParameters.Add(parameter);
+                serializationConstructorParameters.Add(deserializationParameter);
                 initializers.Add(initializer);
 
-                if (property.SchemaProperty?.Required == true &&
-                    property != Discriminator?.Property)
+                // Only required properties that are not discriminators go into default ctor
+                if (property.SchemaProperty?.Required != true ||
+                    property == Discriminator?.Property)
                 {
-                    defaultCtorParameters.Add(parameter);
-                    defaultCtorInitializers.Add(initializer);
+                    continue;
                 }
-            }
 
-            if (Discriminator != null)
-            {
-                defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, BuilderHelpers.StringConstant(Discriminator.Value)));
+                // Turn constants into initializers
+                if (property.SchemaProperty?.Schema is ConstantSchema constantSchema)
+                {
+                    var constantValue = constantSchema.Value.Value != null ?
+                        BuilderHelpers.ParseConstant(constantSchema.Value.Value, property.Declaration.Type) :
+                        Constant.NewInstanceOf(property.Declaration.Type);
+
+                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(
+                        property,
+                        constantValue));
+
+                    continue;
+                }
+
+                Constant? defaultValue = null;
+
+                if (property.SchemaProperty?.ClientDefaultValue is object defaultValueObject)
+                {
+                    defaultValue = BuilderHelpers.ParseConstant(defaultValueObject, property.Declaration.Type);
+                }
+
+                var defaultCtorParameter = new Parameter(
+                    property.Declaration.Name.ToVariableName(),
+                    property.Description,
+                    property.Declaration.Type,
+                    defaultValue,
+                    false
+                );
+
+                defaultCtorParameters.Add(defaultCtorParameter);
+                defaultCtorInitializers.Add(initializer);
             }
 
             ObjectTypeConstructor? baseCtor = null;
@@ -132,6 +159,19 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
                 defaultCtorParameters.AddRange(baseCtor.Parameters);
                 serializationConstructorParameters.AddRange(baseSerializationCtor.Parameters);
+            }
+
+            if (Discriminator != null)
+            {
+                // Add discriminator initializer to constructor at every level of hierarchy
+                if (baseSerializationCtor != null)
+                {
+                    var discriminatorParameter = baseSerializationCtor.FindParameterByInitializedProperty(Discriminator.Property);
+                    Debug.Assert(discriminatorParameter != null);
+
+                    initializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorParameter));
+                }
+                defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, BuilderHelpers.StringConstant(Discriminator.Value)));
             }
 
             yield return new ObjectTypeConstructor(
@@ -276,23 +316,16 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                      property.Required == true ||
                      !_objectSchema.IsInput);
 
-                Constant? defaultValue = null;
-
                 CSharpType type;
                 CSharpType? implementationType = null;
                 if (property.Schema is ConstantSchema constantSchema)
                 {
                     type = _typeFactory.CreateType(constantSchema.ValueType, false);
-                    defaultValue = BuilderHelpers.ParseConstant(constantSchema.Value.Value, type);
                 }
                 else
                 {
                     type = _typeFactory.CreateType(property.Schema, property.IsNullable());
-                    if (property.ClientDefaultValue != null)
-                    {
-                        defaultValue = BuilderHelpers.ParseConstant(property.ClientDefaultValue, type);
-                    }
-                    else if (property.Required == true && (property.Schema is ObjectSchema || property.Schema is ArraySchema || property.Schema is DictionarySchema))
+                    if (property.Required == true && (property.Schema is ArraySchema || property.Schema is DictionarySchema))
                     {
                         implementationType = _typeFactory.CreateImplementationType(property.Schema, property.IsNullable());
                     }
@@ -305,8 +338,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     BuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
                     isReadOnly,
                     implementationType,
-                    property,
-                    defaultValue);
+                    property);
             }
 
             if (AdditionalPropertiesProperty is ObjectTypeProperty additionalPropertiesProperty)

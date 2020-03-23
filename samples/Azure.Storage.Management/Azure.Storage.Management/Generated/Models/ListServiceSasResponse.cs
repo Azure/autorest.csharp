@@ -23,6 +23,6 @@ namespace Azure.Storage.Management.Models
         }
 
         /// <summary> List service SAS credentials of specific resource. </summary>
-        public string ServiceSasToken { get; internal set; }
+        public string ServiceSasToken { get; }
     }
 }

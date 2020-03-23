@@ -46,9 +46,9 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The name of the resource that is unique within the set of outbound rules used by the load balancer. This name can be used to access the resource. </summary>
         public string Name { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string Etag { get; internal set; }
+        public string Etag { get; }
         /// <summary> Type of the resource. </summary>
-        public string Type { get; internal set; }
+        public string Type { get; }
         /// <summary> The number of outbound ports to be used for NAT. </summary>
         public int? AllocatedOutboundPorts { get; set; }
         /// <summary> The Frontend IP addresses of the load balancer. </summary>
@@ -56,7 +56,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> A reference to a pool of DIPs. Outbound traffic is randomly load balanced across IPs in the backend IPs. </summary>
         public SubResource BackendAddressPool { get; set; }
         /// <summary> The provisioning state of the outbound rule resource. </summary>
-        public ProvisioningState? ProvisioningState { get; internal set; }
+        public ProvisioningState? ProvisioningState { get; }
         /// <summary> The protocol for the outbound rule in load balancer. </summary>
         public LoadBalancerOutboundRuleProtocol? Protocol { get; set; }
         /// <summary> Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP. </summary>

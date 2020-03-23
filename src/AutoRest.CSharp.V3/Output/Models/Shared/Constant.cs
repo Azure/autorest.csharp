@@ -10,6 +10,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Shared
 {
     internal struct Constant
     {
+        public static object NewInstanceSentinel { get; } = new object();
+
         public Constant(object? value, CSharpType type)
         {
             Debug.Assert(value == null || value.GetType().Namespace?.StartsWith("System") == true);
@@ -22,6 +24,11 @@ namespace AutoRest.CSharp.V3.Output.Models.Shared
                 {
                     throw new InvalidOperationException("Null constant with non-nullable type");
                 }
+                return;
+            }
+
+            if (value == NewInstanceSentinel)
+            {
                 return;
             }
 
@@ -43,5 +50,10 @@ namespace AutoRest.CSharp.V3.Output.Models.Shared
 
         public object? Value { get; }
         public CSharpType Type { get; }
+
+        public static Constant NewInstanceOf(CSharpType type)
+        {
+            return new Constant(NewInstanceSentinel, type);
+        }
     }
 }

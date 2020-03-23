@@ -62,7 +62,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The name of the resource that is unique within a resource group. This name can be used to access the resource. </summary>
         public string Name { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string Etag { get; internal set; }
+        public string Etag { get; }
         /// <summary> A description for this rule. Restricted to 140 chars. </summary>
         public string Description { get; set; }
         /// <summary> Network protocol this rule applies to. </summary>
@@ -94,6 +94,6 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic. </summary>
         public SecurityRuleDirection? Direction { get; set; }
         /// <summary> The provisioning state of the security rule resource. </summary>
-        public ProvisioningState? ProvisioningState { get; internal set; }
+        public ProvisioningState? ProvisioningState { get; }
     }
 }

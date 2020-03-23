@@ -11,8 +11,10 @@ namespace Azure.Storage.Tables.Models
     public partial class RetentionPolicy
     {
         /// <summary> Initializes a new instance of RetentionPolicy. </summary>
-        public RetentionPolicy()
+        /// <param name="enabled"> Indicates whether a retention policy is enabled for the storage service. </param>
+        public RetentionPolicy(bool enabled)
         {
+            Enabled = enabled;
         }
 
         /// <summary> Initializes a new instance of RetentionPolicy. </summary>
@@ -25,7 +27,7 @@ namespace Azure.Storage.Tables.Models
         }
 
         /// <summary> Indicates whether a retention policy is enabled for the storage service. </summary>
-        public bool Enabled { get; set; }
+        public bool Enabled { get; }
         /// <summary> Indicates the number of days that metrics or logging or soft-deleted data should be retained. All data older than this value will be deleted. </summary>
         public int? Days { get; set; }
     }

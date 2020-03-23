@@ -13,8 +13,12 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class DocumentLanguage
     {
         /// <summary> Initializes a new instance of DocumentLanguage. </summary>
-        internal DocumentLanguage()
+        /// <param name="id"> Unique, non-empty document identifier. </param>
+        /// <param name="detectedLanguages"> A list of extracted languages. </param>
+        internal DocumentLanguage(string id, IList<DetectedLanguage> detectedLanguages)
         {
+            Id = id;
+            DetectedLanguages = detectedLanguages;
         }
 
         /// <summary> Initializes a new instance of DocumentLanguage. </summary>
@@ -29,10 +33,10 @@ namespace CognitiveServices.TextAnalytics.Models
         }
 
         /// <summary> Unique, non-empty document identifier. </summary>
-        public string Id { get; internal set; }
+        public string Id { get; }
         /// <summary> A list of extracted languages. </summary>
-        public IList<DetectedLanguage> DetectedLanguages { get; internal set; } = new List<DetectedLanguage>();
+        public IList<DetectedLanguage> DetectedLanguages { get; } = new List<DetectedLanguage>();
         /// <summary> if showStats=true was specified in the request this field will contain information about the document payload. </summary>
-        public DocumentStatistics Statistics { get; internal set; }
+        public DocumentStatistics Statistics { get; }
     }
 }

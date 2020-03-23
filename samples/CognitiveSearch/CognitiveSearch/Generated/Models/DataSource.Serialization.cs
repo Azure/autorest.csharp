@@ -51,8 +51,8 @@ namespace CognitiveSearch.Models
             string name = default;
             string description = default;
             DataSourceType type = default;
-            DataSourceCredentials credentials = new DataSourceCredentials();
-            DataContainer container = new DataContainer();
+            DataSourceCredentials credentials = default;
+            DataContainer container = default;
             DataChangeDetectionPolicy dataChangeDetectionPolicy = default;
             DataDeletionDetectionPolicy dataDeletionDetectionPolicy = default;
             string odataetag = default;

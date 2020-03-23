@@ -25,6 +25,6 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The skillsets defined in the Search service. </summary>
-        public IList<Skillset> Skillsets { get; internal set; }
+        public IList<Skillset> Skillsets { get; }
     }
 }

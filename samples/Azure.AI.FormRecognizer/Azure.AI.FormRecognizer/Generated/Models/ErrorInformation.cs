@@ -11,11 +11,6 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class ErrorInformation
     {
         /// <summary> Initializes a new instance of ErrorInformation. </summary>
-        internal ErrorInformation()
-        {
-        }
-
-        /// <summary> Initializes a new instance of ErrorInformation. </summary>
         /// <param name="code"> . </param>
         /// <param name="message"> . </param>
         internal ErrorInformation(string code, string message)
@@ -24,7 +19,7 @@ namespace Azure.AI.FormRecognizer.Models
             Message = message;
         }
 
-        public string Code { get; internal set; }
-        public string Message { get; internal set; }
+        public string Code { get; }
+        public string Message { get; }
     }
 }

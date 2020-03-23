@@ -153,9 +153,8 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PutModelFlattenCustomBase() => Test(async (host, pipeline) =>
         {
-            var value = new SimpleProduct
+            var value = new SimpleProduct("123")
             {
-                ProductId = "123",
                 Description = "product description",
                 MaxProductDisplayName = "max name",
                 Capacity = "Large",

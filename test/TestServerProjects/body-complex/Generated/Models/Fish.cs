@@ -27,7 +27,7 @@ namespace body_complex.Models
         /// <param name="siblings"> . </param>
         internal Fish(string fishtype, string species, float length, IList<Fish> siblings)
         {
-            Fishtype = fishtype;
+            Fishtype = fishtype ?? null;
             Species = species;
             Length = length;
             Siblings = siblings;

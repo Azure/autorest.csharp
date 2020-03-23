@@ -13,7 +13,8 @@ namespace CognitiveSearch.Models
     public partial class StopAnalyzer : Analyzer
     {
         /// <summary> Initializes a new instance of StopAnalyzer. </summary>
-        public StopAnalyzer()
+        /// <param name="name"> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public StopAnalyzer(string name) : base(name)
         {
             OdataType = "#Microsoft.Azure.Search.StopAnalyzer";
         }

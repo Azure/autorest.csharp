@@ -52,7 +52,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The load balancer SKU. </summary>
         public LoadBalancerSku Sku { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string Etag { get; internal set; }
+        public string Etag { get; }
         /// <summary> Object representing the frontend IPs to be used for the load balancer. </summary>
         public IList<FrontendIPConfiguration> FrontendIPConfigurations { get; set; }
         /// <summary> Collection of backend address pools used by a load balancer. </summary>
@@ -68,8 +68,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The outbound rules. </summary>
         public IList<OutboundRule> OutboundRules { get; set; }
         /// <summary> The resource GUID property of the load balancer resource. </summary>
-        public string ResourceGuid { get; internal set; }
+        public string ResourceGuid { get; }
         /// <summary> The provisioning state of the load balancer resource. </summary>
-        public ProvisioningState? ProvisioningState { get; internal set; }
+        public ProvisioningState? ProvisioningState { get; }
     }
 }

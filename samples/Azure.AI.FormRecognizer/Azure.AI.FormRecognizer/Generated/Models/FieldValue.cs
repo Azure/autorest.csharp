@@ -13,8 +13,10 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class FieldValue
     {
         /// <summary> Initializes a new instance of FieldValue. </summary>
-        internal FieldValue()
+        /// <param name="type"> Type of field value. </param>
+        internal FieldValue(FieldValueType type)
         {
+            Type = type;
         }
 
         /// <summary> Initializes a new instance of FieldValue. </summary>
@@ -51,32 +53,32 @@ namespace Azure.AI.FormRecognizer.Models
         }
 
         /// <summary> Type of field value. </summary>
-        public FieldValueType Type { get; internal set; }
+        public FieldValueType Type { get; }
         /// <summary> String value. </summary>
-        public string ValueString { get; internal set; }
+        public string ValueString { get; }
         /// <summary> Date value. </summary>
-        public string ValueDate { get; internal set; }
+        public string ValueDate { get; }
         /// <summary> Time value. </summary>
-        public string ValueTime { get; internal set; }
+        public string ValueTime { get; }
         /// <summary> Phone number value. </summary>
-        public string ValuePhoneNumber { get; internal set; }
+        public string ValuePhoneNumber { get; }
         /// <summary> Floating point value. </summary>
-        public float? ValueNumber { get; internal set; }
+        public float? ValueNumber { get; }
         /// <summary> Integer value. </summary>
-        public int? ValueInteger { get; internal set; }
+        public int? ValueInteger { get; }
         /// <summary> Array of field values. </summary>
-        public IList<FieldValue> ValueArray { get; internal set; }
+        public IList<FieldValue> ValueArray { get; }
         /// <summary> Dictionary of named field values. </summary>
-        public IDictionary<string, FieldValue> ValueObject { get; internal set; }
+        public IDictionary<string, FieldValue> ValueObject { get; }
         /// <summary> Text content of the extracted field. </summary>
-        public string Text { get; internal set; }
+        public string Text { get; }
         /// <summary> Bounding box of the field value, if appropriate. </summary>
-        public IList<float> BoundingBox { get; internal set; }
+        public IList<float> BoundingBox { get; }
         /// <summary> Confidence score. </summary>
-        public float? Confidence { get; internal set; }
+        public float? Confidence { get; }
         /// <summary> When includeTextDetails is set to true, a list of references to the text elements constituting this field. </summary>
-        public IList<string> Elements { get; internal set; }
+        public IList<string> Elements { get; }
         /// <summary> The 1-based page number in the input document. </summary>
-        public int? Page { get; internal set; }
+        public int? Page { get; }
     }
 }

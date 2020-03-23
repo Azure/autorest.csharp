@@ -25,6 +25,6 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The datasources in the Search service. </summary>
-        public IList<DataSource> DataSources { get; internal set; }
+        public IList<DataSource> DataSources { get; }
     }
 }

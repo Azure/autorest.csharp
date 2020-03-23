@@ -11,7 +11,8 @@ namespace CognitiveSearch.Models
     public partial class StandardTokenizer : Tokenizer
     {
         /// <summary> Initializes a new instance of StandardTokenizer. </summary>
-        public StandardTokenizer()
+        /// <param name="name"> The name of the tokenizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public StandardTokenizer(string name) : base(name)
         {
             OdataType = "#Microsoft.Azure.Search.StandardTokenizer";
         }

@@ -24,6 +24,6 @@ namespace CustomNamespace
         }
 
         /// <summary> Day of week. </summary>
-        public CustomDaysOfWeek DaysOfWeek { get; set; }
+        public CustomDaysOfWeek DaysOfWeek { get; }
     }
 }

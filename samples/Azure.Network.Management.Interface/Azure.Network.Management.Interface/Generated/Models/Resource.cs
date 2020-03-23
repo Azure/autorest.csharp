@@ -35,9 +35,9 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Resource ID. </summary>
         public string Id { get; set; }
         /// <summary> Resource name. </summary>
-        public string Name { get; internal set; }
+        public string Name { get; }
         /// <summary> Resource type. </summary>
-        public string Type { get; internal set; }
+        public string Type { get; }
         /// <summary> Resource location. </summary>
         public string Location { get; set; }
         /// <summary> Resource tags. </summary>

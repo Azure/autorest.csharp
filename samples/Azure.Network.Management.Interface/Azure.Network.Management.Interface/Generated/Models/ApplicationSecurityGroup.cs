@@ -34,10 +34,10 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string Etag { get; internal set; }
+        public string Etag { get; }
         /// <summary> The resource GUID property of the application security group resource. It uniquely identifies a resource, even if the user changes its name or migrate the resource across subscriptions or resource groups. </summary>
-        public string ResourceGuid { get; internal set; }
+        public string ResourceGuid { get; }
         /// <summary> The provisioning state of the application security group resource. </summary>
-        public ProvisioningState? ProvisioningState { get; internal set; }
+        public ProvisioningState? ProvisioningState { get; }
     }
 }
