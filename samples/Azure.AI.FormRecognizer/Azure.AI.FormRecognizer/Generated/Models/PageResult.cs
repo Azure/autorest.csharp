@@ -24,7 +24,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="clusterId"> Cluster identifier. </param>
         /// <param name="keyValuePairs"> List of key-value pairs extracted from the page. </param>
         /// <param name="tables"> List of data tables extracted from the page. </param>
-        internal PageResult(int page, int? clusterId, IList<KeyValuePair> keyValuePairs, IList<DataTable> tables)
+        internal PageResult(int page, int? clusterId, IReadOnlyList<KeyValuePair> keyValuePairs, IReadOnlyList<DataTable> tables)
         {
             Page = page;
             ClusterId = clusterId;
@@ -37,8 +37,8 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> Cluster identifier. </summary>
         public int? ClusterId { get; }
         /// <summary> List of key-value pairs extracted from the page. </summary>
-        public IList<KeyValuePair> KeyValuePairs { get; }
+        public IReadOnlyList<KeyValuePair> KeyValuePairs { get; }
         /// <summary> List of data tables extracted from the page. </summary>
-        public IList<DataTable> Tables { get; }
+        public IReadOnlyList<DataTable> Tables { get; }
     }
 }

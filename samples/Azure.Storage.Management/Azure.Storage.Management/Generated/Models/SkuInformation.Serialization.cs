@@ -19,9 +19,9 @@ namespace Azure.Storage.Management.Models
             SkuTier? tier = default;
             string resourceType = default;
             Kind? kind = default;
-            IList<string> locations = default;
-            IList<SKUCapability> capabilities = default;
-            IList<Restriction> restrictions = default;
+            IReadOnlyList<string> locations = default;
+            IReadOnlyList<SKUCapability> capabilities = default;
+            IReadOnlyList<Restriction> restrictions = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))

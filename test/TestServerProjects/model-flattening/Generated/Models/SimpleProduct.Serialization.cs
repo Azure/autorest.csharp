@@ -29,8 +29,11 @@ namespace model_flattening.Models
                 writer.WritePropertyName("max_product_display_name");
                 writer.WriteStringValue(MaxProductDisplayName);
             }
-            writer.WritePropertyName("max_product_capacity");
-            writer.WriteStringValue(Capacity);
+            if (Capacity != null)
+            {
+                writer.WritePropertyName("max_product_capacity");
+                writer.WriteStringValue(Capacity);
+            }
             writer.WritePropertyName("max_product_image");
             writer.WriteStartObject();
             if (GenericValue != null)
@@ -87,6 +90,10 @@ namespace model_flattening.Models
                         }
                         if (property0.NameEquals("max_product_capacity"))
                         {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
                             maxProductCapacity = property0.Value.GetString();
                             continue;
                         }

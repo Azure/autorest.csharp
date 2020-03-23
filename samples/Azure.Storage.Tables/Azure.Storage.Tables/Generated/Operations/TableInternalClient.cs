@@ -212,7 +212,7 @@ namespace Azure.Storage.Tables
         /// <param name="table"> The name of the table. </param>
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IDictionary<string, object>>> InsertEntityAsync(int? timeout, string requestId, ResponseFormat? format, string table, IDictionary<string, object> tableEntityProperties, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyDictionary<string, object>>> InsertEntityAsync(int? timeout, string requestId, ResponseFormat? format, string table, IDictionary<string, object> tableEntityProperties, CancellationToken cancellationToken = default)
         {
             return await RestClient.InsertEntityAsync(timeout, requestId, format, table, tableEntityProperties, cancellationToken).ConfigureAwait(false);
         }
@@ -224,7 +224,7 @@ namespace Azure.Storage.Tables
         /// <param name="table"> The name of the table. </param>
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IDictionary<string, object>> InsertEntity(int? timeout, string requestId, ResponseFormat? format, string table, IDictionary<string, object> tableEntityProperties, CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyDictionary<string, object>> InsertEntity(int? timeout, string requestId, ResponseFormat? format, string table, IDictionary<string, object> tableEntityProperties, CancellationToken cancellationToken = default)
         {
             return RestClient.InsertEntity(timeout, requestId, format, table, tableEntityProperties, cancellationToken);
         }
@@ -234,7 +234,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IList<SignedIdentifier>>> GetAccessPolicyAsync(int? timeout, string requestId, string table, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<SignedIdentifier>>> GetAccessPolicyAsync(int? timeout, string requestId, string table, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetAccessPolicyAsync(timeout, requestId, table, cancellationToken).ConfigureAwait(false);
         }
@@ -244,7 +244,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IList<SignedIdentifier>> GetAccessPolicy(int? timeout, string requestId, string table, CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<SignedIdentifier>> GetAccessPolicy(int? timeout, string requestId, string table, CancellationToken cancellationToken = default)
         {
             return RestClient.GetAccessPolicy(timeout, requestId, table, cancellationToken);
         }

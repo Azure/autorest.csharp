@@ -16,7 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal static DocumentEntities DeserializeDocumentEntities(JsonElement element)
         {
             string id = default;
-            IList<Entity> entities = new List<Entity>();
+            IReadOnlyList<Entity> entities = new List<Entity>();
             DocumentStatistics statistics = default;
             foreach (var property in element.EnumerateObject())
             {

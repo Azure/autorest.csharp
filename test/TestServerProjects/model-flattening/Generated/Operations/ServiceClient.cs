@@ -49,14 +49,14 @@ namespace model_flattening
 
         /// <summary> Get External Resource as an Array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IList<FlattenedProduct>>> GetArrayAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<FlattenedProduct>>> GetArrayAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetArrayAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Get External Resource as an Array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IList<FlattenedProduct>> GetArray(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<FlattenedProduct>> GetArray(CancellationToken cancellationToken = default)
         {
             return RestClient.GetArray(cancellationToken);
         }
@@ -79,14 +79,14 @@ namespace model_flattening
 
         /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IList<ProductWrapper>>> GetWrappedArrayAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<ProductWrapper>>> GetWrappedArrayAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetWrappedArrayAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IList<ProductWrapper>> GetWrappedArray(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<ProductWrapper>> GetWrappedArray(CancellationToken cancellationToken = default)
         {
             return RestClient.GetWrappedArray(cancellationToken);
         }
@@ -109,14 +109,14 @@ namespace model_flattening
 
         /// <summary> Get External Resource as a Dictionary. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IDictionary<string, FlattenedProduct>>> GetDictionaryAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyDictionary<string, FlattenedProduct>>> GetDictionaryAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetDictionaryAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Get External Resource as a Dictionary. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IDictionary<string, FlattenedProduct>> GetDictionary(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyDictionary<string, FlattenedProduct>> GetDictionary(CancellationToken cancellationToken = default)
         {
             return RestClient.GetDictionary(cancellationToken);
         }

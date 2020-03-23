@@ -19,7 +19,7 @@ namespace CognitiveServices.TextAnalytics.Models
             DocumentSentimentValue sentiment = default;
             DocumentStatistics statistics = default;
             SentimentConfidenceScorePerLabel documentScores = default;
-            IList<SentenceSentiment> sentences = new List<SentenceSentiment>();
+            IReadOnlyList<SentenceSentiment> sentences = new List<SentenceSentiment>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))

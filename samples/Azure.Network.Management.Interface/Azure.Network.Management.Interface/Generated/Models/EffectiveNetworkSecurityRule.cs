@@ -33,7 +33,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="access"> Whether network traffic is allowed or denied. </param>
         /// <param name="priority"> The priority of the rule. </param>
         /// <param name="direction"> The direction of the rule. </param>
-        internal EffectiveNetworkSecurityRule(string name, EffectiveSecurityRuleProtocol? protocol, string sourcePortRange, string destinationPortRange, IList<string> sourcePortRanges, IList<string> destinationPortRanges, string sourceAddressPrefix, string destinationAddressPrefix, IList<string> sourceAddressPrefixes, IList<string> destinationAddressPrefixes, IList<string> expandedSourceAddressPrefix, IList<string> expandedDestinationAddressPrefix, SecurityRuleAccess? access, int? priority, SecurityRuleDirection? direction)
+        internal EffectiveNetworkSecurityRule(string name, EffectiveSecurityRuleProtocol? protocol, string sourcePortRange, string destinationPortRange, IReadOnlyList<string> sourcePortRanges, IReadOnlyList<string> destinationPortRanges, string sourceAddressPrefix, string destinationAddressPrefix, IReadOnlyList<string> sourceAddressPrefixes, IReadOnlyList<string> destinationAddressPrefixes, IReadOnlyList<string> expandedSourceAddressPrefix, IReadOnlyList<string> expandedDestinationAddressPrefix, SecurityRuleAccess? access, int? priority, SecurityRuleDirection? direction)
         {
             Name = name;
             Protocol = protocol;
@@ -61,21 +61,21 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The destination port or range. </summary>
         public string DestinationPortRange { get; }
         /// <summary> The source port ranges. Expected values include a single integer between 0 and 65535, a range using &apos;-&apos; as separator (e.g. 100-400), or an asterisk (*). </summary>
-        public IList<string> SourcePortRanges { get; }
+        public IReadOnlyList<string> SourcePortRanges { get; }
         /// <summary> The destination port ranges. Expected values include a single integer between 0 and 65535, a range using &apos;-&apos; as separator (e.g. 100-400), or an asterisk (*). </summary>
-        public IList<string> DestinationPortRanges { get; }
+        public IReadOnlyList<string> DestinationPortRanges { get; }
         /// <summary> The source address prefix. </summary>
         public string SourceAddressPrefix { get; }
         /// <summary> The destination address prefix. </summary>
         public string DestinationAddressPrefix { get; }
         /// <summary> The source address prefixes. Expected values include CIDR IP ranges, Default Tags (VirtualNetwork, AzureLoadBalancer, Internet), System Tags, and the asterisk (*). </summary>
-        public IList<string> SourceAddressPrefixes { get; }
+        public IReadOnlyList<string> SourceAddressPrefixes { get; }
         /// <summary> The destination address prefixes. Expected values include CIDR IP ranges, Default Tags (VirtualNetwork, AzureLoadBalancer, Internet), System Tags, and the asterisk (*). </summary>
-        public IList<string> DestinationAddressPrefixes { get; }
+        public IReadOnlyList<string> DestinationAddressPrefixes { get; }
         /// <summary> The expanded source address prefix. </summary>
-        public IList<string> ExpandedSourceAddressPrefix { get; }
+        public IReadOnlyList<string> ExpandedSourceAddressPrefix { get; }
         /// <summary> Expanded destination address prefix. </summary>
-        public IList<string> ExpandedDestinationAddressPrefix { get; }
+        public IReadOnlyList<string> ExpandedDestinationAddressPrefix { get; }
         /// <summary> Whether network traffic is allowed or denied. </summary>
         public SecurityRuleAccess? Access { get; }
         /// <summary> The priority of the rule. </summary>

@@ -20,13 +20,13 @@ namespace paging.Models
         /// <summary> Initializes a new instance of OdataProductResult. </summary>
         /// <param name="values"> . </param>
         /// <param name="odataNextLink"> . </param>
-        internal OdataProductResult(IList<Product> values, string odataNextLink)
+        internal OdataProductResult(IReadOnlyList<Product> values, string odataNextLink)
         {
             Values = values;
             OdataNextLink = odataNextLink;
         }
 
-        public IList<Product> Values { get; }
+        public IReadOnlyList<Product> Values { get; }
         public string OdataNextLink { get; }
     }
 }

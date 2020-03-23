@@ -15,7 +15,7 @@ namespace AppConfiguration.Models
     {
         internal static LabelListResult DeserializeLabelListResult(JsonElement element)
         {
-            IList<Label> items = default;
+            IReadOnlyList<Label> items = default;
             string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {

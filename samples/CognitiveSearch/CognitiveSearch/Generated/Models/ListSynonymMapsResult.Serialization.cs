@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     {
         internal static ListSynonymMapsResult DeserializeListSynonymMapsResult(JsonElement element)
         {
-            IList<SynonymMap> value = default;
+            IReadOnlyList<SynonymMap> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))

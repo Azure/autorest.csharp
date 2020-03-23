@@ -31,7 +31,7 @@ namespace xml_service.Models
         /// <param name="snapshot"> . </param>
         /// <param name="properties"> Properties of a blob. </param>
         /// <param name="metadata"> Dictionary of &lt;string&gt;. </param>
-        internal Blob(string name, bool deleted, string snapshot, BlobProperties properties, IDictionary<string, string> metadata)
+        internal Blob(string name, bool deleted, string snapshot, BlobProperties properties, IReadOnlyDictionary<string, string> metadata)
         {
             Name = name;
             Deleted = deleted;
@@ -46,6 +46,6 @@ namespace xml_service.Models
         /// <summary> Properties of a blob. </summary>
         public BlobProperties Properties { get; }
         /// <summary> Dictionary of &lt;string&gt;. </summary>
-        public IDictionary<string, string> Metadata { get; }
+        public IReadOnlyDictionary<string, string> Metadata { get; }
     }
 }

@@ -16,10 +16,10 @@ namespace Azure.AI.FormRecognizer.Models
         internal static AnalyzeResult DeserializeAnalyzeResult(JsonElement element)
         {
             string version = default;
-            IList<ReadResult> readResults = new List<ReadResult>();
-            IList<PageResult> pageResults = default;
-            IList<DocumentResult> documentResults = default;
-            IList<ErrorInformation> errors = default;
+            IReadOnlyList<ReadResult> readResults = new List<ReadResult>();
+            IReadOnlyList<PageResult> pageResults = default;
+            IReadOnlyList<DocumentResult> documentResults = default;
+            IReadOnlyList<ErrorInformation> errors = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("version"))

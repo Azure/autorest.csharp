@@ -15,7 +15,7 @@ namespace Azure.Storage.Management.Models
     {
         internal static BlobServiceItems DeserializeBlobServiceItems(JsonElement element)
         {
-            IList<BlobServiceProperties> value = default;
+            IReadOnlyList<BlobServiceProperties> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))

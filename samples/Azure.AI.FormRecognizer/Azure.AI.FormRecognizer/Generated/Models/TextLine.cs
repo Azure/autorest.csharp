@@ -16,7 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="text"> The text content of the line. </param>
         /// <param name="boundingBox"> Bounding box of an extracted line. </param>
         /// <param name="words"> List of words in the text line. </param>
-        internal TextLine(string text, IList<float> boundingBox, IList<TextWord> words)
+        internal TextLine(string text, IReadOnlyList<float> boundingBox, IReadOnlyList<TextWord> words)
         {
             Text = text;
             BoundingBox = boundingBox;
@@ -28,7 +28,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="boundingBox"> Bounding box of an extracted line. </param>
         /// <param name="language"> The detected language of this line, if different from the overall page language. </param>
         /// <param name="words"> List of words in the text line. </param>
-        internal TextLine(string text, IList<float> boundingBox, Language? language, IList<TextWord> words)
+        internal TextLine(string text, IReadOnlyList<float> boundingBox, Language? language, IReadOnlyList<TextWord> words)
         {
             Text = text;
             BoundingBox = boundingBox;
@@ -39,10 +39,10 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> The text content of the line. </summary>
         public string Text { get; }
         /// <summary> Bounding box of an extracted line. </summary>
-        public IList<float> BoundingBox { get; } = new List<float>();
+        public IReadOnlyList<float> BoundingBox { get; } = new List<float>();
         /// <summary> The detected language of this line, if different from the overall page language. </summary>
         public Language? Language { get; }
         /// <summary> List of words in the text line. </summary>
-        public IList<TextWord> Words { get; } = new List<TextWord>();
+        public IReadOnlyList<TextWord> Words { get; } = new List<TextWord>();
     }
 }

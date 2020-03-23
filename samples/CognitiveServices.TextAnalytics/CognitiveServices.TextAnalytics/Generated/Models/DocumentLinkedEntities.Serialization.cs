@@ -16,7 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal static DocumentLinkedEntities DeserializeDocumentLinkedEntities(JsonElement element)
         {
             string id = default;
-            IList<LinkedEntity> entities = new List<LinkedEntity>();
+            IReadOnlyList<LinkedEntity> entities = new List<LinkedEntity>();
             DocumentStatistics statistics = default;
             foreach (var property in element.EnumerateObject())
             {

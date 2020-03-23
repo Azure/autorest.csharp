@@ -14,7 +14,7 @@ namespace Azure.AI.FormRecognizer.Models
     {
         /// <summary> Initializes a new instance of TrainResult. </summary>
         /// <param name="trainingDocuments"> List of the documents used to train the model and any errors reported in each document. </param>
-        internal TrainResult(IList<TrainingDocumentInfo> trainingDocuments)
+        internal TrainResult(IReadOnlyList<TrainingDocumentInfo> trainingDocuments)
         {
             TrainingDocuments = trainingDocuments;
         }
@@ -24,7 +24,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="fields"> List of fields used to train the model and the train operation error reported by each. </param>
         /// <param name="averageModelAccuracy"> Average accuracy. </param>
         /// <param name="errors"> Errors returned during the training operation. </param>
-        internal TrainResult(IList<TrainingDocumentInfo> trainingDocuments, IList<FormFieldsReport> fields, float? averageModelAccuracy, IList<ErrorInformation> errors)
+        internal TrainResult(IReadOnlyList<TrainingDocumentInfo> trainingDocuments, IReadOnlyList<FormFieldsReport> fields, float? averageModelAccuracy, IReadOnlyList<ErrorInformation> errors)
         {
             TrainingDocuments = trainingDocuments;
             Fields = fields;
@@ -33,12 +33,12 @@ namespace Azure.AI.FormRecognizer.Models
         }
 
         /// <summary> List of the documents used to train the model and any errors reported in each document. </summary>
-        public IList<TrainingDocumentInfo> TrainingDocuments { get; } = new List<TrainingDocumentInfo>();
+        public IReadOnlyList<TrainingDocumentInfo> TrainingDocuments { get; } = new List<TrainingDocumentInfo>();
         /// <summary> List of fields used to train the model and the train operation error reported by each. </summary>
-        public IList<FormFieldsReport> Fields { get; }
+        public IReadOnlyList<FormFieldsReport> Fields { get; }
         /// <summary> Average accuracy. </summary>
         public float? AverageModelAccuracy { get; }
         /// <summary> Errors returned during the training operation. </summary>
-        public IList<ErrorInformation> Errors { get; }
+        public IReadOnlyList<ErrorInformation> Errors { get; }
     }
 }

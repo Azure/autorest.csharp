@@ -17,7 +17,7 @@ namespace Azure.Network.Management.Interface.Models
         {
             SubResource networkSecurityGroup = default;
             EffectiveNetworkSecurityGroupAssociation association = default;
-            IList<EffectiveNetworkSecurityRule> effectiveSecurityRules = default;
+            IReadOnlyList<EffectiveNetworkSecurityRule> effectiveSecurityRules = default;
             string tagMap = default;
             foreach (var property in element.EnumerateObject())
             {

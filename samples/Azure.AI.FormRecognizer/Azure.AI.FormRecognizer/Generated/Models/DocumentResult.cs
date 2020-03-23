@@ -16,7 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="docType"> Document type. </param>
         /// <param name="pageRange"> First and last page number where the document is found. </param>
         /// <param name="fields"> Dictionary of named field values. </param>
-        internal DocumentResult(string docType, IList<int> pageRange, IDictionary<string, FieldValue> fields)
+        internal DocumentResult(string docType, IReadOnlyList<int> pageRange, IReadOnlyDictionary<string, FieldValue> fields)
         {
             DocType = docType;
             PageRange = pageRange;
@@ -26,8 +26,8 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> Document type. </summary>
         public string DocType { get; }
         /// <summary> First and last page number where the document is found. </summary>
-        public IList<int> PageRange { get; } = new List<int>();
+        public IReadOnlyList<int> PageRange { get; } = new List<int>();
         /// <summary> Dictionary of named field values. </summary>
-        public IDictionary<string, FieldValue> Fields { get; } = new Dictionary<string, FieldValue>();
+        public IReadOnlyDictionary<string, FieldValue> Fields { get; } = new Dictionary<string, FieldValue>();
     }
 }

@@ -17,7 +17,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="pages"> Total number of pages trained. </param>
         /// <param name="errors"> List of errors. </param>
         /// <param name="status"> Status of the training operation. </param>
-        internal TrainingDocumentInfo(string documentName, int pages, IList<ErrorInformation> errors, TrainStatus status)
+        internal TrainingDocumentInfo(string documentName, int pages, IReadOnlyList<ErrorInformation> errors, TrainStatus status)
         {
             DocumentName = documentName;
             Pages = pages;
@@ -30,7 +30,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> Total number of pages trained. </summary>
         public int Pages { get; }
         /// <summary> List of errors. </summary>
-        public IList<ErrorInformation> Errors { get; } = new List<ErrorInformation>();
+        public IReadOnlyList<ErrorInformation> Errors { get; } = new List<ErrorInformation>();
         /// <summary> Status of the training operation. </summary>
         public TrainStatus Status { get; }
     }

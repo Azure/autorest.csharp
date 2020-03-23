@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     {
         internal static ListSkillsetsResult DeserializeListSkillsetsResult(JsonElement element)
         {
-            IList<Skillset> value = default;
+            IReadOnlyList<Skillset> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))

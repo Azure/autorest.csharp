@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static NetworkInterfaceListResult DeserializeNetworkInterfaceListResult(JsonElement element)
         {
-            IList<NetworkInterface> value = default;
+            IReadOnlyList<NetworkInterface> value = default;
             string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {

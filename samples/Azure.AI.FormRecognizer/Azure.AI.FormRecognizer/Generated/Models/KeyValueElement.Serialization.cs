@@ -16,8 +16,8 @@ namespace Azure.AI.FormRecognizer.Models
         internal static KeyValueElement DeserializeKeyValueElement(JsonElement element)
         {
             string text = default;
-            IList<float> boundingBox = default;
-            IList<string> elements = default;
+            IReadOnlyList<float> boundingBox = default;
+            IReadOnlyList<string> elements = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("text"))

@@ -15,7 +15,7 @@ namespace Azure.Storage.Management.Models
     {
         internal static FileShareItems DeserializeFileShareItems(JsonElement element)
         {
-            IList<FileShareItem> value = default;
+            IReadOnlyList<FileShareItem> value = default;
             string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {

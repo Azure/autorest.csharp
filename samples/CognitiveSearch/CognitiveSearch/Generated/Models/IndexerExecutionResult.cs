@@ -29,7 +29,7 @@ namespace CognitiveSearch.Models
         /// <param name="failedItemCount"> The number of items that failed to be indexed during this indexer execution. </param>
         /// <param name="initialTrackingState"> Change tracking state with which an indexer execution started. </param>
         /// <param name="finalTrackingState"> Change tracking state with which an indexer execution finished. </param>
-        internal IndexerExecutionResult(IndexerExecutionStatus? status, string errorMessage, DateTimeOffset? startTime, DateTimeOffset? endTime, IList<ItemError> errors, IList<ItemWarning> warnings, int? itemCount, int? failedItemCount, string initialTrackingState, string finalTrackingState)
+        internal IndexerExecutionResult(IndexerExecutionStatus? status, string errorMessage, DateTimeOffset? startTime, DateTimeOffset? endTime, IReadOnlyList<ItemError> errors, IReadOnlyList<ItemWarning> warnings, int? itemCount, int? failedItemCount, string initialTrackingState, string finalTrackingState)
         {
             Status = status;
             ErrorMessage = errorMessage;
@@ -52,9 +52,9 @@ namespace CognitiveSearch.Models
         /// <summary> The end time of this indexer execution, if the execution has already completed. </summary>
         public DateTimeOffset? EndTime { get; }
         /// <summary> The item-level indexing errors. </summary>
-        public IList<ItemError> Errors { get; }
+        public IReadOnlyList<ItemError> Errors { get; }
         /// <summary> The item-level indexing warnings. </summary>
-        public IList<ItemWarning> Warnings { get; }
+        public IReadOnlyList<ItemWarning> Warnings { get; }
         /// <summary> The number of items that were processed during this indexer execution. This includes both successfully processed items and items where indexing was attempted but failed. </summary>
         public int? ItemCount { get; }
         /// <summary> The number of items that failed to be indexed during this indexer execution. </summary>

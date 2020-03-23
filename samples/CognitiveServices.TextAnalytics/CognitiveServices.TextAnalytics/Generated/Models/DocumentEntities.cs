@@ -15,7 +15,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Initializes a new instance of DocumentEntities. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="entities"> Recognized entities in the document. </param>
-        internal DocumentEntities(string id, IList<Entity> entities)
+        internal DocumentEntities(string id, IReadOnlyList<Entity> entities)
         {
             Id = id;
             Entities = entities;
@@ -25,7 +25,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="entities"> Recognized entities in the document. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the document payload. </param>
-        internal DocumentEntities(string id, IList<Entity> entities, DocumentStatistics statistics)
+        internal DocumentEntities(string id, IReadOnlyList<Entity> entities, DocumentStatistics statistics)
         {
             Id = id;
             Entities = entities;
@@ -35,7 +35,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Unique, non-empty document identifier. </summary>
         public string Id { get; }
         /// <summary> Recognized entities in the document. </summary>
-        public IList<Entity> Entities { get; } = new List<Entity>();
+        public IReadOnlyList<Entity> Entities { get; } = new List<Entity>();
         /// <summary> if showStats=true was specified in the request this field will contain information about the document payload. </summary>
         public DocumentStatistics Statistics { get; }
     }

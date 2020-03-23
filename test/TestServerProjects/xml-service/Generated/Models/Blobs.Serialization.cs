@@ -15,8 +15,8 @@ namespace xml_service.Models
     {
         internal static Blobs DeserializeBlobs(XElement element)
         {
-            IList<BlobPrefix> blobPrefix = default;
-            IList<Blob> blob = default;
+            IReadOnlyList<BlobPrefix> blobPrefix = default;
+            IReadOnlyList<Blob> blob = default;
             var array = new List<BlobPrefix>();
             foreach (var e in element.Elements("BlobPrefix"))
             {

@@ -18,55 +18,59 @@ namespace AutoRest.CSharp.V3.Generation.Types
             _library = library;
         }
 
-        public CSharpType CreateType(Schema schema, bool isNullable) => schema switch
+        public CSharpType CreateType(Schema schema, bool isNullable, TypeFlags typeFlags = TypeFlags.Normal) => schema switch
         {
-            ConstantSchema constantSchema => CreateType(constantSchema.ValueType, isNullable),
+            ConstantSchema constantSchema => CreateType(constantSchema.ValueType, isNullable, typeFlags),
             BinarySchema _ => new CSharpType(typeof(Stream), isNullable),
             ByteArraySchema _ => new CSharpType(typeof(byte[]), isNullable),
-            ArraySchema array => new CSharpType(typeof(IList<>), isNullable, CreateType(array.ElementType, false)),
-            DictionarySchema dictionary => new CSharpType(typeof(IDictionary<,>), isNullable, new CSharpType(typeof(string)), CreateType(dictionary.ElementType, false)),
+            ArraySchema array => new CSharpType(
+                GetListType(typeFlags),
+                isNullable,
+                CreateType(array.ElementType, false, RemoveImplementation(typeFlags))),
+            DictionarySchema dictionary => new CSharpType(
+                GetDictionaryType(typeFlags),
+                isNullable,
+                new CSharpType(typeof(string)), CreateType(dictionary.ElementType, false, RemoveImplementation(typeFlags))),
             NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
             _ when ToFrameworkType(schema.Type) is Type type => new CSharpType(type, isNullable),
             _ => _library.FindTypeForSchema(schema).Type.WithNullable(isNullable)
         };
 
-        public CSharpType CreateImplementationType(Schema schema, bool isNullable)
+        private static TypeFlags RemoveImplementation(TypeFlags flags)
         {
-            var definitionType = CreateType(schema, isNullable);
-
-            if (!definitionType.IsFrameworkType)
-            {
-                return definitionType;
-            }
-
-            if (definitionType.FrameworkType == typeof(IList<>))
-            {
-                return new CSharpType(typeof(List<>), definitionType.IsNullable, definitionType.Arguments);
-            }
-
-            if (definitionType.FrameworkType == typeof(IDictionary<,>))
-            {
-                return new CSharpType(typeof(Dictionary<,>), definitionType.IsNullable, definitionType.Arguments);
-            }
-
-            return definitionType;
+            return flags & ~TypeFlags.Implementation;
         }
 
-        public CSharpType CreateInputType(Schema schema, bool isNullable)
+        private static Type GetListType(TypeFlags typeFlags)
         {
-            var definitionType = CreateType(schema, isNullable);
-
-            if (!definitionType.IsFrameworkType)
+            if ((typeFlags & TypeFlags.Implementation) > 0)
             {
-                return definitionType;
+                return typeof(List<>);
             }
 
-            if (definitionType.FrameworkType == typeof(IList<>))
+            return typeFlags switch
             {
-                return new CSharpType(typeof(IEnumerable<>), definitionType.IsNullable, definitionType.Arguments);
+                TypeFlags.Normal => typeof(IList<>),
+                TypeFlags.Input => typeof(IEnumerable<>),
+                TypeFlags.Output => typeof(IReadOnlyList<>),
+                _ => throw new NotSupportedException(typeFlags.ToString())
+            };
+        }
+
+        private static Type GetDictionaryType(TypeFlags typeFlags)
+        {
+            if ((typeFlags & TypeFlags.Implementation) > 0)
+            {
+                return typeof(Dictionary<,>);
             }
 
-            return definitionType;
+            return typeFlags switch
+            {
+                TypeFlags.Normal => typeof(IDictionary<,>),
+                TypeFlags.Input => typeof(IDictionary<,>),
+                TypeFlags.Output => typeof(IReadOnlyDictionary<,>),
+                _ => throw new NotSupportedException(typeFlags.ToString())
+            };
         }
 
         private static Type? ToFrameworkType(AllSchemaTypes schemaType) => schemaType switch

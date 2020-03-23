@@ -17,8 +17,11 @@ namespace Azure.Storage.Management.Models
             writer.WriteStartObject();
             writer.WritePropertyName("value");
             writer.WriteStringValue(IPAddressOrRange);
-            writer.WritePropertyName("action");
-            writer.WriteStringValue(Action);
+            if (Action != null)
+            {
+                writer.WritePropertyName("action");
+                writer.WriteStringValue(Action);
+            }
             writer.WriteEndObject();
         }
 
@@ -35,6 +38,10 @@ namespace Azure.Storage.Management.Models
                 }
                 if (property.NameEquals("action"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     action = property.Value.GetString();
                     continue;
                 }

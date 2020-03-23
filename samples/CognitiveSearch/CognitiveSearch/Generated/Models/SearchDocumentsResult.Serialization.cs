@@ -17,9 +17,9 @@ namespace CognitiveSearch.Models
         {
             long? odatacount = default;
             double? searchcoverage = default;
-            IDictionary<string, IList<FacetResult>> searchfacets = default;
+            IReadOnlyDictionary<string, IReadOnlyList<FacetResult>> searchfacets = default;
             SearchRequest searchnextPageParameters = default;
-            IList<SearchResult> value = default;
+            IReadOnlyList<SearchResult> value = default;
             string odatanextLink = default;
             foreach (var property in element.EnumerateObject())
             {

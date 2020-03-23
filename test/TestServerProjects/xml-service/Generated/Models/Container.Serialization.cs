@@ -17,7 +17,7 @@ namespace xml_service.Models
         {
             string name = default;
             ContainerProperties properties = default;
-            IDictionary<string, string> metadata = default;
+            IReadOnlyDictionary<string, string> metadata = default;
             if (element.Element("Name") is XElement nameElement)
             {
                 name = (string)nameElement;

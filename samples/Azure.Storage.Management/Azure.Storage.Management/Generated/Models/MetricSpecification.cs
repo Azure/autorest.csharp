@@ -27,7 +27,7 @@ namespace Azure.Storage.Management.Models
         /// <param name="fillGapWithZero"> The property to decide fill gap with zero or not. </param>
         /// <param name="category"> The category this metric specification belong to, could be Capacity. </param>
         /// <param name="resourceIdDimensionNameOverride"> Account Resource Id. </param>
-        internal MetricSpecification(string name, string displayName, string displayDescription, string unit, IList<Dimension> dimensions, string aggregationType, bool? fillGapWithZero, string category, string resourceIdDimensionNameOverride)
+        internal MetricSpecification(string name, string displayName, string displayDescription, string unit, IReadOnlyList<Dimension> dimensions, string aggregationType, bool? fillGapWithZero, string category, string resourceIdDimensionNameOverride)
         {
             Name = name;
             DisplayName = displayName;
@@ -49,7 +49,7 @@ namespace Azure.Storage.Management.Models
         /// <summary> Unit could be Bytes or Count. </summary>
         public string Unit { get; }
         /// <summary> Dimensions of blobs, including blob type and access tier. </summary>
-        public IList<Dimension> Dimensions { get; }
+        public IReadOnlyList<Dimension> Dimensions { get; }
         /// <summary> Aggregation type could be Average. </summary>
         public string AggregationType { get; }
         /// <summary> The property to decide fill gap with zero or not. </summary>

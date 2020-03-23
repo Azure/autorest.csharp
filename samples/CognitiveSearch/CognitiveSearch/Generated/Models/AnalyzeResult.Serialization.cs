@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     {
         internal static AnalyzeResult DeserializeAnalyzeResult(JsonElement element)
         {
-            IList<TokenInfo> tokens = default;
+            IReadOnlyList<TokenInfo> tokens = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tokens"))

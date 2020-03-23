@@ -19,12 +19,12 @@ namespace Azure.Storage.Management.Models
 
         /// <summary> Initializes a new instance of ServiceSpecification. </summary>
         /// <param name="metricSpecifications"> Metric specifications of operation. </param>
-        internal ServiceSpecification(IList<MetricSpecification> metricSpecifications)
+        internal ServiceSpecification(IReadOnlyList<MetricSpecification> metricSpecifications)
         {
             MetricSpecifications = metricSpecifications;
         }
 
         /// <summary> Metric specifications of operation. </summary>
-        public IList<MetricSpecification> MetricSpecifications { get; }
+        public IReadOnlyList<MetricSpecification> MetricSpecifications { get; }
     }
 }

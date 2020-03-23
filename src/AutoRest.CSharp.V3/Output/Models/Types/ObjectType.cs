@@ -316,19 +316,16 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                      property.Required == true ||
                      !_objectSchema.IsInput);
 
-                CSharpType type;
                 CSharpType? implementationType = null;
-                if (property.Schema is ConstantSchema constantSchema)
+
+                CSharpType type = _typeFactory.CreateType(
+                    property.Schema,
+                    property.IsNullable(),
+                    _objectSchema.IsInput ? TypeFlags.Normal : TypeFlags.Output);
+
+                if (property.Required == true && (property.Schema is ArraySchema || property.Schema is DictionarySchema))
                 {
-                    type = _typeFactory.CreateType(constantSchema.ValueType, false);
-                }
-                else
-                {
-                    type = _typeFactory.CreateType(property.Schema, property.IsNullable());
-                    if (property.Required == true && (property.Schema is ArraySchema || property.Schema is DictionarySchema))
-                    {
-                        implementationType = _typeFactory.CreateImplementationType(property.Schema, property.IsNullable());
-                    }
+                    implementationType = _typeFactory.CreateType(property.Schema, property.IsNullable(), TypeFlags.Implementation);
                 }
 
                 var accessibility = property.IsDiscriminator == true ? "internal" : "public";

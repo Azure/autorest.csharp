@@ -15,7 +15,7 @@ namespace Azure.Storage.Management.Models
     {
         internal static ListContainerItems DeserializeListContainerItems(JsonElement element)
         {
-            IList<ListContainerItem> value = default;
+            IReadOnlyList<ListContainerItem> value = default;
             string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {

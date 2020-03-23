@@ -19,12 +19,12 @@ namespace CognitiveSearch.Models
 
         /// <summary> Initializes a new instance of IndexDocumentsResult. </summary>
         /// <param name="results"> The list of status information for each document in the indexing request. </param>
-        internal IndexDocumentsResult(IList<IndexingResult> results)
+        internal IndexDocumentsResult(IReadOnlyList<IndexingResult> results)
         {
             Results = results;
         }
 
         /// <summary> The list of status information for each document in the indexing request. </summary>
-        public IList<IndexingResult> Results { get; }
+        public IReadOnlyList<IndexingResult> Results { get; }
     }
 }

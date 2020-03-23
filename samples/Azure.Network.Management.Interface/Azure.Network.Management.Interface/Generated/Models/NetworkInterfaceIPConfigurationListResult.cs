@@ -20,14 +20,14 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Initializes a new instance of NetworkInterfaceIPConfigurationListResult. </summary>
         /// <param name="value"> A list of ip configurations. </param>
         /// <param name="nextLink"> The URL to get the next set of results. </param>
-        internal NetworkInterfaceIPConfigurationListResult(IList<NetworkInterfaceIPConfiguration> value, string nextLink)
+        internal NetworkInterfaceIPConfigurationListResult(IReadOnlyList<NetworkInterfaceIPConfiguration> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> A list of ip configurations. </summary>
-        public IList<NetworkInterfaceIPConfiguration> Value { get; }
+        public IReadOnlyList<NetworkInterfaceIPConfiguration> Value { get; }
         /// <summary> The URL to get the next set of results. </summary>
         public string NextLink { get; }
     }

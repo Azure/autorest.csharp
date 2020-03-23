@@ -16,7 +16,7 @@ namespace Azure.Storage.Tables.Models
         internal static TableEntityQueryResponse DeserializeTableEntityQueryResponse(JsonElement element)
         {
             string odatametadata = default;
-            IList<IDictionary<string, object>> value = default;
+            IReadOnlyList<IReadOnlyDictionary<string, object>> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("odata.metadata"))

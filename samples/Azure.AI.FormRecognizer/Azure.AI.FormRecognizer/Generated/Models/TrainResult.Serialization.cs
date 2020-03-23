@@ -15,10 +15,10 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static TrainResult DeserializeTrainResult(JsonElement element)
         {
-            IList<TrainingDocumentInfo> trainingDocuments = new List<TrainingDocumentInfo>();
-            IList<FormFieldsReport> fields = default;
+            IReadOnlyList<TrainingDocumentInfo> trainingDocuments = new List<TrainingDocumentInfo>();
+            IReadOnlyList<FormFieldsReport> fields = default;
             float? averageModelAccuracy = default;
-            IList<ErrorInformation> errors = default;
+            IReadOnlyList<ErrorInformation> errors = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("trainingDocuments"))

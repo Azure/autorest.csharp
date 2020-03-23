@@ -20,13 +20,13 @@ namespace xml_service.Models
         /// <summary> Initializes a new instance of Blobs. </summary>
         /// <param name="blobPrefix"> . </param>
         /// <param name="blob"> . </param>
-        internal Blobs(IList<BlobPrefix> blobPrefix, IList<Blob> blob)
+        internal Blobs(IReadOnlyList<BlobPrefix> blobPrefix, IReadOnlyList<Blob> blob)
         {
             BlobPrefix = blobPrefix;
             Blob = blob;
         }
 
-        public IList<BlobPrefix> BlobPrefix { get; }
-        public IList<Blob> Blob { get; }
+        public IReadOnlyList<BlobPrefix> BlobPrefix { get; }
+        public IReadOnlyList<Blob> Blob { get; }
     }
 }

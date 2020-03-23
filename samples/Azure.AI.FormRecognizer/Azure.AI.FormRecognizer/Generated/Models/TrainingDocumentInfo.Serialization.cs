@@ -17,7 +17,7 @@ namespace Azure.AI.FormRecognizer.Models
         {
             string documentName = default;
             int pages = default;
-            IList<ErrorInformation> errors = new List<ErrorInformation>();
+            IReadOnlyList<ErrorInformation> errors = new List<ErrorInformation>();
             TrainStatus status = default;
             foreach (var property in element.EnumerateObject())
             {

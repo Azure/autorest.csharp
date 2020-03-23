@@ -17,8 +17,8 @@ namespace Azure.AI.FormRecognizer.Models
         {
             int page = default;
             int? clusterId = default;
-            IList<KeyValuePair> keyValuePairs = default;
-            IList<DataTable> tables = default;
+            IReadOnlyList<KeyValuePair> keyValuePairs = default;
+            IReadOnlyList<DataTable> tables = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("page"))

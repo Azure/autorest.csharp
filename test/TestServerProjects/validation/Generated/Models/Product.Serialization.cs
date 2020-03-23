@@ -44,8 +44,11 @@ namespace validation.Models
             writer.WriteNumberValue(ConstInt);
             writer.WritePropertyName("constString");
             writer.WriteStringValue(ConstString);
-            writer.WritePropertyName("constStringAsEnum");
-            writer.WriteStringValue(ConstStringAsEnum);
+            if (ConstStringAsEnum != null)
+            {
+                writer.WritePropertyName("constStringAsEnum");
+                writer.WriteStringValue(ConstStringAsEnum);
+            }
             writer.WriteEndObject();
         }
 
@@ -115,6 +118,10 @@ namespace validation.Models
                 }
                 if (property.NameEquals("constStringAsEnum"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     constStringAsEnum = property.Value.GetString();
                     continue;
                 }

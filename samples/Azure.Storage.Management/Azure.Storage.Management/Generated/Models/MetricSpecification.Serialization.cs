@@ -19,7 +19,7 @@ namespace Azure.Storage.Management.Models
             string displayName = default;
             string displayDescription = default;
             string unit = default;
-            IList<Dimension> dimensions = default;
+            IReadOnlyList<Dimension> dimensions = default;
             string aggregationType = default;
             bool? fillGapWithZero = default;
             string category = default;

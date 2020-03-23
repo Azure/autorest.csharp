@@ -15,7 +15,7 @@ namespace paging.Models
     {
         internal static OdataProductResult DeserializeOdataProductResult(JsonElement element)
         {
-            IList<Product> values = default;
+            IReadOnlyList<Product> values = default;
             string odatanextLink = default;
             foreach (var property in element.EnumerateObject())
             {

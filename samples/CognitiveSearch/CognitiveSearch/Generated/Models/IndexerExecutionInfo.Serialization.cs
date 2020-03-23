@@ -17,7 +17,7 @@ namespace CognitiveSearch.Models
         {
             IndexerStatus? status = default;
             IndexerExecutionResult lastResult = default;
-            IList<IndexerExecutionResult> executionHistory = default;
+            IReadOnlyList<IndexerExecutionResult> executionHistory = default;
             IndexerLimits limits = default;
             foreach (var property in element.EnumerateObject())
             {

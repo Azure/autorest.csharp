@@ -17,8 +17,11 @@ namespace Azure.Storage.Management.Models
             writer.WriteStartObject();
             writer.WritePropertyName("id");
             writer.WriteStringValue(VirtualNetworkResourceId);
-            writer.WritePropertyName("action");
-            writer.WriteStringValue(Action);
+            if (Action != null)
+            {
+                writer.WritePropertyName("action");
+                writer.WriteStringValue(Action);
+            }
             if (State != null)
             {
                 writer.WritePropertyName("state");
@@ -41,6 +44,10 @@ namespace Azure.Storage.Management.Models
                 }
                 if (property.NameEquals("action"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     action = property.Value.GetString();
                     continue;
                 }
