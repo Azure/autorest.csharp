@@ -909,7 +909,7 @@ namespace Azure.Storage.Tables
         /// <param name="table"> The name of the table. </param>
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<IDictionary<string, object>, InsertEntityHeaders>> InsertEntityAsync(int? timeout, string requestId, ResponseFormat? format, string table, IDictionary<string, object> tableEntityProperties, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<IReadOnlyDictionary<string, object>, InsertEntityHeaders>> InsertEntityAsync(int? timeout, string requestId, ResponseFormat? format, string table, IDictionary<string, object> tableEntityProperties, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -926,7 +926,7 @@ namespace Azure.Storage.Tables
                 {
                     case 201:
                         {
-                            IDictionary<string, object> value = default;
+                            IReadOnlyDictionary<string, object> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             Dictionary<string, object> dictionary = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
@@ -955,7 +955,7 @@ namespace Azure.Storage.Tables
         /// <param name="table"> The name of the table. </param>
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<IDictionary<string, object>, InsertEntityHeaders> InsertEntity(int? timeout, string requestId, ResponseFormat? format, string table, IDictionary<string, object> tableEntityProperties, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<IReadOnlyDictionary<string, object>, InsertEntityHeaders> InsertEntity(int? timeout, string requestId, ResponseFormat? format, string table, IDictionary<string, object> tableEntityProperties, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -972,7 +972,7 @@ namespace Azure.Storage.Tables
                 {
                     case 201:
                         {
-                            IDictionary<string, object> value = default;
+                            IReadOnlyDictionary<string, object> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             Dictionary<string, object> dictionary = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
@@ -1022,7 +1022,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<IList<SignedIdentifier>, GetAccessPolicyHeaders>> GetAccessPolicyAsync(int? timeout, string requestId, string table, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<IReadOnlyList<SignedIdentifier>, GetAccessPolicyHeaders>> GetAccessPolicyAsync(int? timeout, string requestId, string table, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -1039,7 +1039,7 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
-                            IList<SignedIdentifier> value = default;
+                            IReadOnlyList<SignedIdentifier> value = default;
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             if (document.Element("SignedIdentifiers") is XElement signedIdentifiersElement)
                             {
@@ -1069,7 +1069,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<IList<SignedIdentifier>, GetAccessPolicyHeaders> GetAccessPolicy(int? timeout, string requestId, string table, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<IReadOnlyList<SignedIdentifier>, GetAccessPolicyHeaders> GetAccessPolicy(int? timeout, string requestId, string table, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -1086,7 +1086,7 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
-                            IList<SignedIdentifier> value = default;
+                            IReadOnlyList<SignedIdentifier> value = default;
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             if (document.Element("SignedIdentifiers") is XElement signedIdentifiersElement)
                             {

@@ -15,7 +15,7 @@ namespace Azure.Storage.Management.Models
     {
         internal static EncryptionScopeListResult DeserializeEncryptionScopeListResult(JsonElement element)
         {
-            IList<EncryptionScope> value = default;
+            IReadOnlyList<EncryptionScope> value = default;
             string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {

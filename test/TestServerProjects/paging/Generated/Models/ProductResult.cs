@@ -20,13 +20,13 @@ namespace paging.Models
         /// <summary> Initializes a new instance of ProductResult. </summary>
         /// <param name="values"> . </param>
         /// <param name="nextLink"> . </param>
-        internal ProductResult(IList<Product> values, string nextLink)
+        internal ProductResult(IReadOnlyList<Product> values, string nextLink)
         {
             Values = values;
             NextLink = nextLink;
         }
 
-        public IList<Product> Values { get; }
+        public IReadOnlyList<Product> Values { get; }
         public string NextLink { get; }
     }
 }

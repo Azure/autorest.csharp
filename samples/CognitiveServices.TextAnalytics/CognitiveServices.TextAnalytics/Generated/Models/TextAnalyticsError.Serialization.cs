@@ -19,7 +19,7 @@ namespace CognitiveServices.TextAnalytics.Models
             string message = default;
             string target = default;
             InnerError innerError = default;
-            IList<TextAnalyticsError> details = default;
+            IReadOnlyList<TextAnalyticsError> details = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"))

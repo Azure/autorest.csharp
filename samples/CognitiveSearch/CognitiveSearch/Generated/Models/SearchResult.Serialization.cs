@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
         internal static SearchResult DeserializeSearchResult(JsonElement element)
         {
             double? searchscore = default;
-            IDictionary<string, IList<string>> searchhighlights = default;
+            IReadOnlyDictionary<string, IReadOnlyList<string>> searchhighlights = default;
             IDictionary<string, object> additionalProperties = new Dictionary<string, object>();
             foreach (var property in element.EnumerateObject())
             {
@@ -35,7 +35,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
+                    Dictionary<string, IReadOnlyList<string>> dictionary = new Dictionary<string, IReadOnlyList<string>>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         List<string> array = new List<string>();

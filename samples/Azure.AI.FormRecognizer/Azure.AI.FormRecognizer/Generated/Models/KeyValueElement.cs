@@ -23,7 +23,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="text"> The text content of the key or value. </param>
         /// <param name="boundingBox"> Bounding box of the key or value. </param>
         /// <param name="elements"> When includeTextDetails is set to true, a list of references to the text elements constituting this key or value. </param>
-        internal KeyValueElement(string text, IList<float> boundingBox, IList<string> elements)
+        internal KeyValueElement(string text, IReadOnlyList<float> boundingBox, IReadOnlyList<string> elements)
         {
             Text = text;
             BoundingBox = boundingBox;
@@ -33,8 +33,8 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> The text content of the key or value. </summary>
         public string Text { get; }
         /// <summary> Bounding box of the key or value. </summary>
-        public IList<float> BoundingBox { get; }
+        public IReadOnlyList<float> BoundingBox { get; }
         /// <summary> When includeTextDetails is set to true, a list of references to the text elements constituting this key or value. </summary>
-        public IList<string> Elements { get; }
+        public IReadOnlyList<string> Elements { get; }
     }
 }

@@ -27,7 +27,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="target"> Error target. </param>
         /// <param name="innerError"> Inner error contains more specific information. </param>
         /// <param name="details"> Details about specific errors that led to this reported error. </param>
-        internal TextAnalyticsError(ErrorCodeValue code, string message, string target, InnerError innerError, IList<TextAnalyticsError> details)
+        internal TextAnalyticsError(ErrorCodeValue code, string message, string target, InnerError innerError, IReadOnlyList<TextAnalyticsError> details)
         {
             Code = code;
             Message = message;
@@ -45,6 +45,6 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Inner error contains more specific information. </summary>
         public InnerError InnerError { get; }
         /// <summary> Details about specific errors that led to this reported error. </summary>
-        public IList<TextAnalyticsError> Details { get; }
+        public IReadOnlyList<TextAnalyticsError> Details { get; }
     }
 }

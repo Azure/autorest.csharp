@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
         internal static AutocompleteResult DeserializeAutocompleteResult(JsonElement element)
         {
             double? searchcoverage = default;
-            IList<AutocompleteItem> value = default;
+            IReadOnlyList<AutocompleteItem> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("@search.coverage"))

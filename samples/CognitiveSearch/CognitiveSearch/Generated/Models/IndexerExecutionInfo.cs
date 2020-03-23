@@ -22,7 +22,7 @@ namespace CognitiveSearch.Models
         /// <param name="lastResult"> The result of the most recent or an in-progress indexer execution. </param>
         /// <param name="executionHistory"> History of the recent indexer executions, sorted in reverse chronological order. </param>
         /// <param name="limits"> The execution limits for the indexer. </param>
-        internal IndexerExecutionInfo(IndexerStatus? status, IndexerExecutionResult lastResult, IList<IndexerExecutionResult> executionHistory, IndexerLimits limits)
+        internal IndexerExecutionInfo(IndexerStatus? status, IndexerExecutionResult lastResult, IReadOnlyList<IndexerExecutionResult> executionHistory, IndexerLimits limits)
         {
             Status = status;
             LastResult = lastResult;
@@ -35,7 +35,7 @@ namespace CognitiveSearch.Models
         /// <summary> The result of the most recent or an in-progress indexer execution. </summary>
         public IndexerExecutionResult LastResult { get; }
         /// <summary> History of the recent indexer executions, sorted in reverse chronological order. </summary>
-        public IList<IndexerExecutionResult> ExecutionHistory { get; }
+        public IReadOnlyList<IndexerExecutionResult> ExecutionHistory { get; }
         /// <summary> The execution limits for the indexer. </summary>
         public IndexerLimits Limits { get; }
     }

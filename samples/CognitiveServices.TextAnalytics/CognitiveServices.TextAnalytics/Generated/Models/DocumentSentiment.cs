@@ -17,7 +17,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="sentiment"> Predicted sentiment for document (Negative, Neutral, Positive, or Mixed). </param>
         /// <param name="documentScores"> Document level sentiment confidence scores between 0 and 1 for each sentiment class. </param>
         /// <param name="sentences"> Sentence level sentiment analysis. </param>
-        internal DocumentSentiment(string id, DocumentSentimentValue sentiment, SentimentConfidenceScorePerLabel documentScores, IList<SentenceSentiment> sentences)
+        internal DocumentSentiment(string id, DocumentSentimentValue sentiment, SentimentConfidenceScorePerLabel documentScores, IReadOnlyList<SentenceSentiment> sentences)
         {
             Id = id;
             Sentiment = sentiment;
@@ -31,7 +31,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the document payload. </param>
         /// <param name="documentScores"> Document level sentiment confidence scores between 0 and 1 for each sentiment class. </param>
         /// <param name="sentences"> Sentence level sentiment analysis. </param>
-        internal DocumentSentiment(string id, DocumentSentimentValue sentiment, DocumentStatistics statistics, SentimentConfidenceScorePerLabel documentScores, IList<SentenceSentiment> sentences)
+        internal DocumentSentiment(string id, DocumentSentimentValue sentiment, DocumentStatistics statistics, SentimentConfidenceScorePerLabel documentScores, IReadOnlyList<SentenceSentiment> sentences)
         {
             Id = id;
             Sentiment = sentiment;
@@ -49,6 +49,6 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Document level sentiment confidence scores between 0 and 1 for each sentiment class. </summary>
         public SentimentConfidenceScorePerLabel DocumentScores { get; }
         /// <summary> Sentence level sentiment analysis. </summary>
-        public IList<SentenceSentiment> Sentences { get; } = new List<SentenceSentiment>();
+        public IReadOnlyList<SentenceSentiment> Sentences { get; } = new List<SentenceSentiment>();
     }
 }

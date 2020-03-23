@@ -21,9 +21,9 @@ namespace Azure.Storage.Tables
             _operationTimeout = 100;
         }
 
-        public async Task<Response<IDictionary<string, object>>> InsertAsync(IDictionary<string, object> entity, CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyDictionary<string, object>>> InsertAsync(IDictionary<string, object> entity, CancellationToken cancellationToken = default)
         {
-            Response<IDictionary<string, object>> response =
+            Response<IReadOnlyDictionary<string, object>> response =
                 await _tableOperations.InsertEntityAsync(_operationTimeout, string.Empty, _format, _table, entity, cancellationToken)
                     .ConfigureAwait(false);
 
@@ -35,7 +35,7 @@ namespace Azure.Storage.Tables
             return await _tableOperations.UpdateEntityAsync(_operationTimeout, string.Empty, _format, _table, partitionKey, rowKey, entity, cancellationToken);
         }
 
-        public AsyncPageable<IDictionary<string, object>> QueryAsync(string select = null, string filter = null, int? limit = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<IReadOnlyDictionary<string, object>> QueryAsync(string select = null, string filter = null, int? limit = null, CancellationToken cancellationToken = default)
         {
             return PageableHelpers.CreateAsyncEnumerable(async tableName =>
             {

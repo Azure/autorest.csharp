@@ -20,14 +20,14 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Initializes a new instance of EffectiveRouteListResult. </summary>
         /// <param name="value"> A list of effective routes. </param>
         /// <param name="nextLink"> The URL to get the next set of results. </param>
-        internal EffectiveRouteListResult(IList<EffectiveRoute> value, string nextLink)
+        internal EffectiveRouteListResult(IReadOnlyList<EffectiveRoute> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> A list of effective routes. </summary>
-        public IList<EffectiveRoute> Value { get; }
+        public IReadOnlyList<EffectiveRoute> Value { get; }
         /// <summary> The URL to get the next set of results. </summary>
         public string NextLink { get; }
     }

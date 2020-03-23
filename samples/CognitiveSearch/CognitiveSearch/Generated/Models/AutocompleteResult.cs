@@ -20,7 +20,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of AutocompleteResult. </summary>
         /// <param name="coverage"> A value indicating the percentage of the index that was considered by the autocomplete request, or null if minimumCoverage was not specified in the request. </param>
         /// <param name="results"> The list of returned Autocompleted items. </param>
-        internal AutocompleteResult(double? coverage, IList<AutocompleteItem> results)
+        internal AutocompleteResult(double? coverage, IReadOnlyList<AutocompleteItem> results)
         {
             Coverage = coverage;
             Results = results;
@@ -29,6 +29,6 @@ namespace CognitiveSearch.Models
         /// <summary> A value indicating the percentage of the index that was considered by the autocomplete request, or null if minimumCoverage was not specified in the request. </summary>
         public double? Coverage { get; }
         /// <summary> The list of returned Autocompleted items. </summary>
-        public IList<AutocompleteItem> Results { get; }
+        public IReadOnlyList<AutocompleteItem> Results { get; }
     }
 }

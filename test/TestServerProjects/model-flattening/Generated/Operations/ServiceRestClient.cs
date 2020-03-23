@@ -125,7 +125,7 @@ namespace model_flattening
 
         /// <summary> Get External Resource as an Array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IList<FlattenedProduct>>> GetArrayAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IReadOnlyList<FlattenedProduct>>> GetArrayAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetArray");
             scope.Start();
@@ -137,7 +137,7 @@ namespace model_flattening
                 {
                     case 200:
                         {
-                            IList<FlattenedProduct> value = default;
+                            IReadOnlyList<FlattenedProduct> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             List<FlattenedProduct> array = new List<FlattenedProduct>();
                             foreach (var item in document.RootElement.EnumerateArray())
@@ -160,7 +160,7 @@ namespace model_flattening
 
         /// <summary> Get External Resource as an Array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IList<FlattenedProduct>> GetArray(CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<FlattenedProduct>> GetArray(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetArray");
             scope.Start();
@@ -172,7 +172,7 @@ namespace model_flattening
                 {
                     case 200:
                         {
-                            IList<FlattenedProduct> value = default;
+                            IReadOnlyList<FlattenedProduct> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             List<FlattenedProduct> array = new List<FlattenedProduct>();
                             foreach (var item in document.RootElement.EnumerateArray())
@@ -282,7 +282,7 @@ namespace model_flattening
 
         /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IList<ProductWrapper>>> GetWrappedArrayAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IReadOnlyList<ProductWrapper>>> GetWrappedArrayAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetWrappedArray");
             scope.Start();
@@ -294,7 +294,7 @@ namespace model_flattening
                 {
                     case 200:
                         {
-                            IList<ProductWrapper> value = default;
+                            IReadOnlyList<ProductWrapper> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             List<ProductWrapper> array = new List<ProductWrapper>();
                             foreach (var item in document.RootElement.EnumerateArray())
@@ -317,7 +317,7 @@ namespace model_flattening
 
         /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IList<ProductWrapper>> GetWrappedArray(CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<ProductWrapper>> GetWrappedArray(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetWrappedArray");
             scope.Start();
@@ -329,7 +329,7 @@ namespace model_flattening
                 {
                     case 200:
                         {
-                            IList<ProductWrapper> value = default;
+                            IReadOnlyList<ProductWrapper> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             List<ProductWrapper> array = new List<ProductWrapper>();
                             foreach (var item in document.RootElement.EnumerateArray())
@@ -440,7 +440,7 @@ namespace model_flattening
 
         /// <summary> Get External Resource as a Dictionary. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IDictionary<string, FlattenedProduct>>> GetDictionaryAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IReadOnlyDictionary<string, FlattenedProduct>>> GetDictionaryAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetDictionary");
             scope.Start();
@@ -452,7 +452,7 @@ namespace model_flattening
                 {
                     case 200:
                         {
-                            IDictionary<string, FlattenedProduct> value = default;
+                            IReadOnlyDictionary<string, FlattenedProduct> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();
                             foreach (var property in document.RootElement.EnumerateObject())
@@ -475,7 +475,7 @@ namespace model_flattening
 
         /// <summary> Get External Resource as a Dictionary. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IDictionary<string, FlattenedProduct>> GetDictionary(CancellationToken cancellationToken = default)
+        public Response<IReadOnlyDictionary<string, FlattenedProduct>> GetDictionary(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetDictionary");
             scope.Start();
@@ -487,7 +487,7 @@ namespace model_flattening
                 {
                     case 200:
                         {
-                            IDictionary<string, FlattenedProduct> value = default;
+                            IReadOnlyDictionary<string, FlattenedProduct> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();
                             foreach (var property in document.RootElement.EnumerateObject())

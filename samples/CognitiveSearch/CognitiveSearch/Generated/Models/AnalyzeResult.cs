@@ -19,12 +19,12 @@ namespace CognitiveSearch.Models
 
         /// <summary> Initializes a new instance of AnalyzeResult. </summary>
         /// <param name="tokens"> The list of tokens returned by the analyzer specified in the request. </param>
-        internal AnalyzeResult(IList<TokenInfo> tokens)
+        internal AnalyzeResult(IReadOnlyList<TokenInfo> tokens)
         {
             Tokens = tokens;
         }
 
         /// <summary> The list of tokens returned by the analyzer specified in the request. </summary>
-        public IList<TokenInfo> Tokens { get; }
+        public IReadOnlyList<TokenInfo> Tokens { get; }
     }
 }

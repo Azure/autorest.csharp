@@ -25,7 +25,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="addressPrefix"> The address prefixes of the effective routes in CIDR notation. </param>
         /// <param name="nextHopIpAddress"> The IP address of the next hop of the effective route. </param>
         /// <param name="nextHopType"> The type of Azure hop the packet should be sent to. </param>
-        internal EffectiveRoute(string name, bool? disableBgpRoutePropagation, EffectiveRouteSource? source, EffectiveRouteState? state, IList<string> addressPrefix, IList<string> nextHopIpAddress, RouteNextHopType? nextHopType)
+        internal EffectiveRoute(string name, bool? disableBgpRoutePropagation, EffectiveRouteSource? source, EffectiveRouteState? state, IReadOnlyList<string> addressPrefix, IReadOnlyList<string> nextHopIpAddress, RouteNextHopType? nextHopType)
         {
             Name = name;
             DisableBgpRoutePropagation = disableBgpRoutePropagation;
@@ -45,9 +45,9 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The value of effective route. </summary>
         public EffectiveRouteState? State { get; }
         /// <summary> The address prefixes of the effective routes in CIDR notation. </summary>
-        public IList<string> AddressPrefix { get; }
+        public IReadOnlyList<string> AddressPrefix { get; }
         /// <summary> The IP address of the next hop of the effective route. </summary>
-        public IList<string> NextHopIpAddress { get; }
+        public IReadOnlyList<string> NextHopIpAddress { get; }
         /// <summary> The type of Azure hop the packet should be sent to. </summary>
         public RouteNextHopType? NextHopType { get; }
     }

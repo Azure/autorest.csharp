@@ -32,7 +32,7 @@ namespace xml_service.Models
         /// <param name="maxResults"> . </param>
         /// <param name="containers"> . </param>
         /// <param name="nextMarker"> . </param>
-        internal ListContainersResponse(string serviceEndpoint, string prefix, string marker, int maxResults, IList<Container> containers, string nextMarker)
+        internal ListContainersResponse(string serviceEndpoint, string prefix, string marker, int maxResults, IReadOnlyList<Container> containers, string nextMarker)
         {
             ServiceEndpoint = serviceEndpoint;
             Prefix = prefix;
@@ -46,7 +46,7 @@ namespace xml_service.Models
         public string Prefix { get; }
         public string Marker { get; }
         public int MaxResults { get; }
-        public IList<Container> Containers { get; }
+        public IReadOnlyList<Container> Containers { get; }
         public string NextMarker { get; }
     }
 }

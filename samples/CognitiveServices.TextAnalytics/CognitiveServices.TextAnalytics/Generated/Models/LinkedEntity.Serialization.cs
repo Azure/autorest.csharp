@@ -16,7 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal static LinkedEntity DeserializeLinkedEntity(JsonElement element)
         {
             string name = default;
-            IList<Match> matches = new List<Match>();
+            IReadOnlyList<Match> matches = new List<Match>();
             string language = default;
             string id = default;
             string url = default;

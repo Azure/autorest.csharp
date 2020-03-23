@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     {
         internal static SuggestDocumentsResult DeserializeSuggestDocumentsResult(JsonElement element)
         {
-            IList<SuggestResult> value = default;
+            IReadOnlyList<SuggestResult> value = default;
             double? searchcoverage = default;
             foreach (var property in element.EnumerateObject())
             {

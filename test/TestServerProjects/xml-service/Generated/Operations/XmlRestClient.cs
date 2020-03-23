@@ -1051,7 +1051,7 @@ namespace xml_service
 
         /// <summary> Gets a list as the root element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IList<Banana>>> GetRootListAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IReadOnlyList<Banana>>> GetRootListAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetRootList");
             scope.Start();
@@ -1063,7 +1063,7 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            IList<Banana> value = default;
+                            IReadOnlyList<Banana> value = default;
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             if (document.Element("bananas") is XElement bananasElement)
                             {
@@ -1089,7 +1089,7 @@ namespace xml_service
 
         /// <summary> Gets a list as the root element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IList<Banana>> GetRootList(CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<Banana>> GetRootList(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetRootList");
             scope.Start();
@@ -1101,7 +1101,7 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            IList<Banana> value = default;
+                            IReadOnlyList<Banana> value = default;
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             if (document.Element("bananas") is XElement bananasElement)
                             {
@@ -1222,7 +1222,7 @@ namespace xml_service
 
         /// <summary> Gets a list with a single item. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IList<Banana>>> GetRootListSingleItemAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IReadOnlyList<Banana>>> GetRootListSingleItemAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetRootListSingleItem");
             scope.Start();
@@ -1234,7 +1234,7 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            IList<Banana> value = default;
+                            IReadOnlyList<Banana> value = default;
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             if (document.Element("bananas") is XElement bananasElement)
                             {
@@ -1260,7 +1260,7 @@ namespace xml_service
 
         /// <summary> Gets a list with a single item. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IList<Banana>> GetRootListSingleItem(CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<Banana>> GetRootListSingleItem(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetRootListSingleItem");
             scope.Start();
@@ -1272,7 +1272,7 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            IList<Banana> value = default;
+                            IReadOnlyList<Banana> value = default;
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             if (document.Element("bananas") is XElement bananasElement)
                             {
@@ -1393,7 +1393,7 @@ namespace xml_service
 
         /// <summary> Gets an empty list as the root element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IList<Banana>>> GetEmptyRootListAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IReadOnlyList<Banana>>> GetEmptyRootListAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetEmptyRootList");
             scope.Start();
@@ -1405,7 +1405,7 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            IList<Banana> value = default;
+                            IReadOnlyList<Banana> value = default;
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             if (document.Element("bananas") is XElement bananasElement)
                             {
@@ -1431,7 +1431,7 @@ namespace xml_service
 
         /// <summary> Gets an empty list as the root element. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IList<Banana>> GetEmptyRootList(CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<Banana>> GetEmptyRootList(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetEmptyRootList");
             scope.Start();
@@ -1443,7 +1443,7 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            IList<Banana> value = default;
+                            IReadOnlyList<Banana> value = default;
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             if (document.Element("bananas") is XElement bananasElement)
                             {
@@ -1961,7 +1961,7 @@ namespace xml_service
 
         /// <summary> Gets storage ACLs for a container. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IList<SignedIdentifier>>> GetAclsAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IReadOnlyList<SignedIdentifier>>> GetAclsAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetAcls");
             scope.Start();
@@ -1973,7 +1973,7 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            IList<SignedIdentifier> value = default;
+                            IReadOnlyList<SignedIdentifier> value = default;
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             if (document.Element("SignedIdentifiers") is XElement signedIdentifiersElement)
                             {
@@ -1999,7 +1999,7 @@ namespace xml_service
 
         /// <summary> Gets storage ACLs for a container. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IList<SignedIdentifier>> GetAcls(CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<SignedIdentifier>> GetAcls(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetAcls");
             scope.Start();
@@ -2011,7 +2011,7 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            IList<SignedIdentifier> value = default;
+                            IReadOnlyList<SignedIdentifier> value = default;
                             var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             if (document.Element("SignedIdentifiers") is XElement signedIdentifiersElement)
                             {

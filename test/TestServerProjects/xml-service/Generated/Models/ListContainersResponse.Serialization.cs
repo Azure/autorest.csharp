@@ -20,7 +20,7 @@ namespace xml_service.Models
             string marker = default;
             int maxResults = default;
             string nextMarker = default;
-            IList<Container> containers = default;
+            IReadOnlyList<Container> containers = default;
             if (element.Attribute("ServiceEndpoint") is XAttribute serviceEndpointAttribute)
             {
                 serviceEndpoint = (string)serviceEndpointAttribute;

@@ -17,7 +17,7 @@ namespace Azure.AI.FormRecognizer.Models
         {
             int rows = default;
             int columns = default;
-            IList<DataTableCell> cells = new List<DataTableCell>();
+            IReadOnlyList<DataTableCell> cells = new List<DataTableCell>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("rows"))

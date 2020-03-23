@@ -16,9 +16,9 @@ namespace Azure.AI.FormRecognizer.Models
         internal static TextLine DeserializeTextLine(JsonElement element)
         {
             string text = default;
-            IList<float> boundingBox = new List<float>();
+            IReadOnlyList<float> boundingBox = new List<float>();
             Language? language = default;
-            IList<TextWord> words = new List<TextWord>();
+            IReadOnlyList<TextWord> words = new List<TextWord>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("text"))

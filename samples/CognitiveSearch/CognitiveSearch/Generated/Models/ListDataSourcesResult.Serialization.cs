@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     {
         internal static ListDataSourcesResult DeserializeListDataSourcesResult(JsonElement element)
         {
-            IList<DataSource> value = default;
+            IReadOnlyList<DataSource> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))

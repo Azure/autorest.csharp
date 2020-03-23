@@ -15,8 +15,8 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static SentimentResponse DeserializeSentimentResponse(JsonElement element)
         {
-            IList<DocumentSentiment> documents = new List<DocumentSentiment>();
-            IList<DocumentError> errors = new List<DocumentError>();
+            IReadOnlyList<DocumentSentiment> documents = new List<DocumentSentiment>();
+            IReadOnlyList<DocumentError> errors = new List<DocumentError>();
             RequestStatistics statistics = default;
             string modelVersion = default;
             foreach (var property in element.EnumerateObject())

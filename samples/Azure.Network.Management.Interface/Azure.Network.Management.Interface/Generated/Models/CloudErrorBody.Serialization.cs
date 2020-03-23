@@ -18,7 +18,7 @@ namespace Azure.Network.Management.Interface.Models
             string code = default;
             string message = default;
             string target = default;
-            IList<CloudErrorBody> details = default;
+            IReadOnlyList<CloudErrorBody> details = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"))

@@ -20,14 +20,14 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of SuggestDocumentsResult. </summary>
         /// <param name="results"> The sequence of results returned by the query. </param>
         /// <param name="coverage"> A value indicating the percentage of the index that was included in the query, or null if minimumCoverage was not set in the request. </param>
-        internal SuggestDocumentsResult(IList<SuggestResult> results, double? coverage)
+        internal SuggestDocumentsResult(IReadOnlyList<SuggestResult> results, double? coverage)
         {
             Results = results;
             Coverage = coverage;
         }
 
         /// <summary> The sequence of results returned by the query. </summary>
-        public IList<SuggestResult> Results { get; }
+        public IReadOnlyList<SuggestResult> Results { get; }
         /// <summary> A value indicating the percentage of the index that was included in the query, or null if minimumCoverage was not set in the request. </summary>
         public double? Coverage { get; }
     }

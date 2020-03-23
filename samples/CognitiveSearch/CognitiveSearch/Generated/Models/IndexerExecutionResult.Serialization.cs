@@ -20,8 +20,8 @@ namespace CognitiveSearch.Models
             string errorMessage = default;
             DateTimeOffset? startTime = default;
             DateTimeOffset? endTime = default;
-            IList<ItemError> errors = default;
-            IList<ItemWarning> warnings = default;
+            IReadOnlyList<ItemError> errors = default;
+            IReadOnlyList<ItemWarning> warnings = default;
             int? itemsProcessed = default;
             int? itemsFailed = default;
             string initialTrackingState = default;

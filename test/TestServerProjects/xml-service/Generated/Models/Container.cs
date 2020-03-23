@@ -25,7 +25,7 @@ namespace xml_service.Models
         /// <param name="name"> . </param>
         /// <param name="properties"> Properties of a container. </param>
         /// <param name="metadata"> Dictionary of &lt;string&gt;. </param>
-        internal Container(string name, ContainerProperties properties, IDictionary<string, string> metadata)
+        internal Container(string name, ContainerProperties properties, IReadOnlyDictionary<string, string> metadata)
         {
             Name = name;
             Properties = properties;
@@ -36,6 +36,6 @@ namespace xml_service.Models
         /// <summary> Properties of a container. </summary>
         public ContainerProperties Properties { get; }
         /// <summary> Dictionary of &lt;string&gt;. </summary>
-        public IDictionary<string, string> Metadata { get; }
+        public IReadOnlyDictionary<string, string> Metadata { get; }
     }
 }

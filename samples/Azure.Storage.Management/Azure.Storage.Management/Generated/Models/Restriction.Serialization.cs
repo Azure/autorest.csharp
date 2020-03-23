@@ -16,7 +16,7 @@ namespace Azure.Storage.Management.Models
         internal static Restriction DeserializeRestriction(JsonElement element)
         {
             string type = default;
-            IList<string> values = default;
+            IReadOnlyList<string> values = default;
             ReasonCode? reasonCode = default;
             foreach (var property in element.EnumerateObject())
             {

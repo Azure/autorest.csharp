@@ -16,7 +16,7 @@ namespace Azure.Storage.Tables.Models
         internal static TableQueryResponse DeserializeTableQueryResponse(JsonElement element)
         {
             string odatametadata = default;
-            IList<TableResponseProperties> value = default;
+            IReadOnlyList<TableResponseProperties> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("odata.metadata"))

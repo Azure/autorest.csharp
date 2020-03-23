@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static NetworkInterfaceTapConfigurationListResult DeserializeNetworkInterfaceTapConfigurationListResult(JsonElement element)
         {
-            IList<NetworkInterfaceTapConfiguration> value = default;
+            IReadOnlyList<NetworkInterfaceTapConfiguration> value = default;
             string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {

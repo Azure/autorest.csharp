@@ -22,7 +22,7 @@ namespace body_complex.Models
         /// <param name="salmons"> . </param>
         /// <param name="sampleFish"> . </param>
         /// <param name="fishes"> . </param>
-        internal DotFishMarket(DotSalmon sampleSalmon, IList<DotSalmon> salmons, DotFish sampleFish, IList<DotFish> fishes)
+        internal DotFishMarket(DotSalmon sampleSalmon, IReadOnlyList<DotSalmon> salmons, DotFish sampleFish, IReadOnlyList<DotFish> fishes)
         {
             SampleSalmon = sampleSalmon;
             Salmons = salmons;
@@ -31,8 +31,8 @@ namespace body_complex.Models
         }
 
         public DotSalmon SampleSalmon { get; }
-        public IList<DotSalmon> Salmons { get; }
+        public IReadOnlyList<DotSalmon> Salmons { get; }
         public DotFish SampleFish { get; }
-        public IList<DotFish> Fishes { get; }
+        public IReadOnlyList<DotFish> Fishes { get; }
     }
 }

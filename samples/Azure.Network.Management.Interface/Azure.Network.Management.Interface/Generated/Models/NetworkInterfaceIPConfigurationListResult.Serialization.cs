@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static NetworkInterfaceIPConfigurationListResult DeserializeNetworkInterfaceIPConfigurationListResult(JsonElement element)
         {
-            IList<NetworkInterfaceIPConfiguration> value = default;
+            IReadOnlyList<NetworkInterfaceIPConfiguration> value = default;
             string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {

@@ -15,7 +15,7 @@ namespace Azure.Storage.Management.Models
     {
         internal static StorageSkuListResult DeserializeStorageSkuListResult(JsonElement element)
         {
-            IList<SkuInformation> value = default;
+            IReadOnlyList<SkuInformation> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))

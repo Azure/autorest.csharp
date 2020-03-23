@@ -19,12 +19,12 @@ namespace CognitiveSearch.Models
 
         /// <summary> Initializes a new instance of ListSynonymMapsResult. </summary>
         /// <param name="synonymMaps"> The synonym maps in the Search service. </param>
-        internal ListSynonymMapsResult(IList<SynonymMap> synonymMaps)
+        internal ListSynonymMapsResult(IReadOnlyList<SynonymMap> synonymMaps)
         {
             SynonymMaps = synonymMaps;
         }
 
         /// <summary> The synonym maps in the Search service. </summary>
-        public IList<SynonymMap> SynonymMaps { get; }
+        public IReadOnlyList<SynonymMap> SynonymMaps { get; }
     }
 }

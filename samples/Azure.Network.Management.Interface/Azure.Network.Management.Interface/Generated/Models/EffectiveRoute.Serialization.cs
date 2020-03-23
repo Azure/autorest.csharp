@@ -19,8 +19,8 @@ namespace Azure.Network.Management.Interface.Models
             bool? disableBgpRoutePropagation = default;
             EffectiveRouteSource? source = default;
             EffectiveRouteState? state = default;
-            IList<string> addressPrefix = default;
-            IList<string> nextHopIpAddress = default;
+            IReadOnlyList<string> addressPrefix = default;
+            IReadOnlyList<string> nextHopIpAddress = default;
             RouteNextHopType? nextHopType = default;
             foreach (var property in element.EnumerateObject())
             {

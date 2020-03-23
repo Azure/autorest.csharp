@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     {
         internal static ListIndexesResult DeserializeListIndexesResult(JsonElement element)
         {
-            IList<Index> value = default;
+            IReadOnlyList<Index> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))

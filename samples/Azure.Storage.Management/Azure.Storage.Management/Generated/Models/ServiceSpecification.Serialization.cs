@@ -15,7 +15,7 @@ namespace Azure.Storage.Management.Models
     {
         internal static ServiceSpecification DeserializeServiceSpecification(JsonElement element)
         {
-            IList<MetricSpecification> metricSpecifications = default;
+            IReadOnlyList<MetricSpecification> metricSpecifications = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("metricSpecifications"))

@@ -18,7 +18,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="text"> Text content of the cell. </param>
         /// <param name="boundingBox"> Bounding box of the cell. </param>
         /// <param name="confidence"> Confidence value. </param>
-        internal DataTableCell(int rowIndex, int columnIndex, string text, IList<float> boundingBox, float confidence)
+        internal DataTableCell(int rowIndex, int columnIndex, string text, IReadOnlyList<float> boundingBox, float confidence)
         {
             RowIndex = rowIndex;
             ColumnIndex = columnIndex;
@@ -38,7 +38,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="elements"> When includeTextDetails is set to true, a list of references to the text elements constituting this table cell. </param>
         /// <param name="isHeader"> Is the current cell a header cell?. </param>
         /// <param name="isFooter"> Is the current cell a footer cell?. </param>
-        internal DataTableCell(int rowIndex, int columnIndex, int? rowSpan, int? columnSpan, string text, IList<float> boundingBox, float confidence, IList<string> elements, bool? isHeader, bool? isFooter)
+        internal DataTableCell(int rowIndex, int columnIndex, int? rowSpan, int? columnSpan, string text, IReadOnlyList<float> boundingBox, float confidence, IReadOnlyList<string> elements, bool? isHeader, bool? isFooter)
         {
             RowIndex = rowIndex;
             ColumnIndex = columnIndex;
@@ -63,11 +63,11 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> Text content of the cell. </summary>
         public string Text { get; }
         /// <summary> Bounding box of the cell. </summary>
-        public IList<float> BoundingBox { get; } = new List<float>();
+        public IReadOnlyList<float> BoundingBox { get; } = new List<float>();
         /// <summary> Confidence value. </summary>
         public float Confidence { get; }
         /// <summary> When includeTextDetails is set to true, a list of references to the text elements constituting this table cell. </summary>
-        public IList<string> Elements { get; }
+        public IReadOnlyList<string> Elements { get; }
         /// <summary> Is the current cell a header cell?. </summary>
         public bool? IsHeader { get; }
         /// <summary> Is the current cell a footer cell?. </summary>

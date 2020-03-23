@@ -20,14 +20,14 @@ namespace AppConfiguration.Models
         /// <summary> Initializes a new instance of LabelListResult. </summary>
         /// <param name="items"> The collection value. </param>
         /// <param name="nextLink"> The URI that can be used to request the next set of paged results. </param>
-        internal LabelListResult(IList<Label> items, string nextLink)
+        internal LabelListResult(IReadOnlyList<Label> items, string nextLink)
         {
             Items = items;
             NextLink = nextLink;
         }
 
         /// <summary> The collection value. </summary>
-        public IList<Label> Items { get; }
+        public IReadOnlyList<Label> Items { get; }
         /// <summary> The URI that can be used to request the next set of paged results. </summary>
         public string NextLink { get; }
     }

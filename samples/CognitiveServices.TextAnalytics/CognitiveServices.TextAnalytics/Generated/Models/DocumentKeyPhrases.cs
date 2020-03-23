@@ -15,7 +15,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Initializes a new instance of DocumentKeyPhrases. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="keyPhrases"> A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document. </param>
-        internal DocumentKeyPhrases(string id, IList<string> keyPhrases)
+        internal DocumentKeyPhrases(string id, IReadOnlyList<string> keyPhrases)
         {
             Id = id;
             KeyPhrases = keyPhrases;
@@ -25,7 +25,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="keyPhrases"> A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the document payload. </param>
-        internal DocumentKeyPhrases(string id, IList<string> keyPhrases, DocumentStatistics statistics)
+        internal DocumentKeyPhrases(string id, IReadOnlyList<string> keyPhrases, DocumentStatistics statistics)
         {
             Id = id;
             KeyPhrases = keyPhrases;
@@ -35,7 +35,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Unique, non-empty document identifier. </summary>
         public string Id { get; }
         /// <summary> A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document. </summary>
-        public IList<string> KeyPhrases { get; } = new List<string>();
+        public IReadOnlyList<string> KeyPhrases { get; } = new List<string>();
         /// <summary> if showStats=true was specified in the request this field will contain information about the document payload. </summary>
         public DocumentStatistics Statistics { get; }
     }

@@ -15,7 +15,7 @@ namespace Azure.Storage.Management.Models
     {
         internal static FileServiceItems DeserializeFileServiceItems(JsonElement element)
         {
-            IList<FileServiceProperties> value = default;
+            IReadOnlyList<FileServiceProperties> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))

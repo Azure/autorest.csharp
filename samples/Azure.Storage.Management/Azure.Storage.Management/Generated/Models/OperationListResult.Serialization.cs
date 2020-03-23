@@ -15,7 +15,7 @@ namespace Azure.Storage.Management.Models
     {
         internal static OperationListResult DeserializeOperationListResult(JsonElement element)
         {
-            IList<Operation> value = default;
+            IReadOnlyList<Operation> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))

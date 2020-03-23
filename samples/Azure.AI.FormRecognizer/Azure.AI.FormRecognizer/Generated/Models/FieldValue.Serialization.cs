@@ -22,12 +22,12 @@ namespace Azure.AI.FormRecognizer.Models
             string valuePhoneNumber = default;
             float? valueNumber = default;
             int? valueInteger = default;
-            IList<FieldValue> valueArray = default;
-            IDictionary<string, FieldValue> valueObject = default;
+            IReadOnlyList<FieldValue> valueArray = default;
+            IReadOnlyDictionary<string, FieldValue> valueObject = default;
             string text = default;
-            IList<float> boundingBox = default;
+            IReadOnlyList<float> boundingBox = default;
             float? confidence = default;
-            IList<string> elements = default;
+            IReadOnlyList<string> elements = default;
             int? page = default;
             foreach (var property in element.EnumerateObject())
             {

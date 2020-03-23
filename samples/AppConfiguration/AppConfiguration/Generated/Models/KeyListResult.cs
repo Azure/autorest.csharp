@@ -20,14 +20,14 @@ namespace AppConfiguration.Models
         /// <summary> Initializes a new instance of KeyListResult. </summary>
         /// <param name="items"> The collection value. </param>
         /// <param name="nextLink"> The URI that can be used to request the next set of paged results. </param>
-        internal KeyListResult(IList<Key> items, string nextLink)
+        internal KeyListResult(IReadOnlyList<Key> items, string nextLink)
         {
             Items = items;
             NextLink = nextLink;
         }
 
         /// <summary> The collection value. </summary>
-        public IList<Key> Items { get; }
+        public IReadOnlyList<Key> Items { get; }
         /// <summary> The URI that can be used to request the next set of paged results. </summary>
         public string NextLink { get; }
     }

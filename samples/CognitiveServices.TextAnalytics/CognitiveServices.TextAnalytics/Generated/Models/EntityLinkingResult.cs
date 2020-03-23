@@ -16,7 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="documents"> Response by document. </param>
         /// <param name="errors"> Errors by document id. </param>
         /// <param name="modelVersion"> This field indicates which model is used for scoring. </param>
-        internal EntityLinkingResult(IList<DocumentLinkedEntities> documents, IList<DocumentError> errors, string modelVersion)
+        internal EntityLinkingResult(IReadOnlyList<DocumentLinkedEntities> documents, IReadOnlyList<DocumentError> errors, string modelVersion)
         {
             Documents = documents;
             Errors = errors;
@@ -28,7 +28,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="errors"> Errors by document id. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the request payload. </param>
         /// <param name="modelVersion"> This field indicates which model is used for scoring. </param>
-        internal EntityLinkingResult(IList<DocumentLinkedEntities> documents, IList<DocumentError> errors, RequestStatistics statistics, string modelVersion)
+        internal EntityLinkingResult(IReadOnlyList<DocumentLinkedEntities> documents, IReadOnlyList<DocumentError> errors, RequestStatistics statistics, string modelVersion)
         {
             Documents = documents;
             Errors = errors;
@@ -37,9 +37,9 @@ namespace CognitiveServices.TextAnalytics.Models
         }
 
         /// <summary> Response by document. </summary>
-        public IList<DocumentLinkedEntities> Documents { get; } = new List<DocumentLinkedEntities>();
+        public IReadOnlyList<DocumentLinkedEntities> Documents { get; } = new List<DocumentLinkedEntities>();
         /// <summary> Errors by document id. </summary>
-        public IList<DocumentError> Errors { get; } = new List<DocumentError>();
+        public IReadOnlyList<DocumentError> Errors { get; } = new List<DocumentError>();
         /// <summary> if showStats=true was specified in the request this field will contain information about the request payload. </summary>
         public RequestStatistics Statistics { get; }
         /// <summary> This field indicates which model is used for scoring. </summary>

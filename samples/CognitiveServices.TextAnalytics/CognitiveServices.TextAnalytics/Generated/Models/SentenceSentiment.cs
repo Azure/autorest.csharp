@@ -31,7 +31,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="offset"> The sentence offset from the start of the document. </param>
         /// <param name="length"> The length of the sentence by Unicode standard. </param>
         /// <param name="warnings"> The warnings generated for the sentence. </param>
-        internal SentenceSentiment(SentenceSentimentValue sentiment, SentimentConfidenceScorePerLabel sentenceScores, int offset, int length, IList<string> warnings)
+        internal SentenceSentiment(SentenceSentimentValue sentiment, SentimentConfidenceScorePerLabel sentenceScores, int offset, int length, IReadOnlyList<string> warnings)
         {
             Sentiment = sentiment;
             SentenceScores = sentenceScores;
@@ -49,6 +49,6 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> The length of the sentence by Unicode standard. </summary>
         public int Length { get; }
         /// <summary> The warnings generated for the sentence. </summary>
-        public IList<string> Warnings { get; }
+        public IReadOnlyList<string> Warnings { get; }
     }
 }

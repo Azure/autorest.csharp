@@ -21,7 +21,7 @@ namespace Azure.AI.FormRecognizer.Models
             float height = default;
             LengthUnit unit = default;
             Language? language = default;
-            IList<TextLine> lines = default;
+            IReadOnlyList<TextLine> lines = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("page"))

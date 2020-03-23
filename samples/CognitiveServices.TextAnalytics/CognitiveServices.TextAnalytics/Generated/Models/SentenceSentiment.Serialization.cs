@@ -19,7 +19,7 @@ namespace CognitiveServices.TextAnalytics.Models
             SentimentConfidenceScorePerLabel sentenceScores = default;
             int offset = default;
             int length = default;
-            IList<string> warnings = default;
+            IReadOnlyList<string> warnings = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sentiment"))

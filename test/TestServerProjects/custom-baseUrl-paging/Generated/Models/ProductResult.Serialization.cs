@@ -15,7 +15,7 @@ namespace custom_baseUrl_paging.Models
     {
         internal static ProductResult DeserializeProductResult(JsonElement element)
         {
-            IList<Product> values = default;
+            IReadOnlyList<Product> values = default;
             string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {

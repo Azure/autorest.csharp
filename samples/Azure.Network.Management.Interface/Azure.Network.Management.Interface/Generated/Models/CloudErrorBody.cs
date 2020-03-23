@@ -22,7 +22,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="message"> A message describing the error, intended to be suitable for display in a user interface. </param>
         /// <param name="target"> The target of the particular error. For example, the name of the property in error. </param>
         /// <param name="details"> A list of additional details about the error. </param>
-        internal CloudErrorBody(string code, string message, string target, IList<CloudErrorBody> details)
+        internal CloudErrorBody(string code, string message, string target, IReadOnlyList<CloudErrorBody> details)
         {
             Code = code;
             Message = message;
@@ -37,6 +37,6 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The target of the particular error. For example, the name of the property in error. </summary>
         public string Target { get; }
         /// <summary> A list of additional details about the error. </summary>
-        public IList<CloudErrorBody> Details { get; }
+        public IReadOnlyList<CloudErrorBody> Details { get; }
     }
 }

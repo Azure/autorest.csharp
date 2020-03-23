@@ -15,7 +15,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> Initializes a new instance of AnalyzeResult. </summary>
         /// <param name="version"> Version of schema used for this result. </param>
         /// <param name="readResults"> Text extracted from the input. </param>
-        internal AnalyzeResult(string version, IList<ReadResult> readResults)
+        internal AnalyzeResult(string version, IReadOnlyList<ReadResult> readResults)
         {
             Version = version;
             ReadResults = readResults;
@@ -27,7 +27,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="pageResults"> Page-level information extracted from the input. </param>
         /// <param name="documentResults"> Document-level information extracted from the input. </param>
         /// <param name="errors"> List of errors reported during the analyze operation. </param>
-        internal AnalyzeResult(string version, IList<ReadResult> readResults, IList<PageResult> pageResults, IList<DocumentResult> documentResults, IList<ErrorInformation> errors)
+        internal AnalyzeResult(string version, IReadOnlyList<ReadResult> readResults, IReadOnlyList<PageResult> pageResults, IReadOnlyList<DocumentResult> documentResults, IReadOnlyList<ErrorInformation> errors)
         {
             Version = version;
             ReadResults = readResults;
@@ -39,12 +39,12 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> Version of schema used for this result. </summary>
         public string Version { get; }
         /// <summary> Text extracted from the input. </summary>
-        public IList<ReadResult> ReadResults { get; } = new List<ReadResult>();
+        public IReadOnlyList<ReadResult> ReadResults { get; } = new List<ReadResult>();
         /// <summary> Page-level information extracted from the input. </summary>
-        public IList<PageResult> PageResults { get; }
+        public IReadOnlyList<PageResult> PageResults { get; }
         /// <summary> Document-level information extracted from the input. </summary>
-        public IList<DocumentResult> DocumentResults { get; }
+        public IReadOnlyList<DocumentResult> DocumentResults { get; }
         /// <summary> List of errors reported during the analyze operation. </summary>
-        public IList<ErrorInformation> Errors { get; }
+        public IReadOnlyList<ErrorInformation> Errors { get; }
     }
 }

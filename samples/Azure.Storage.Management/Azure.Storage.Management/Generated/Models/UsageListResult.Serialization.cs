@@ -15,7 +15,7 @@ namespace Azure.Storage.Management.Models
     {
         internal static UsageListResult DeserializeUsageListResult(JsonElement element)
         {
-            IList<Usage> value = default;
+            IReadOnlyList<Usage> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))

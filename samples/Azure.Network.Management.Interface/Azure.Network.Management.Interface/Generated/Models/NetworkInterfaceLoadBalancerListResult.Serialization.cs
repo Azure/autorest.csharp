@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static NetworkInterfaceLoadBalancerListResult DeserializeNetworkInterfaceLoadBalancerListResult(JsonElement element)
         {
-            IList<LoadBalancer> value = default;
+            IReadOnlyList<LoadBalancer> value = default;
             string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {

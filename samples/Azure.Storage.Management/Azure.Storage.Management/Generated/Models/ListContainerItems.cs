@@ -20,14 +20,14 @@ namespace Azure.Storage.Management.Models
         /// <summary> Initializes a new instance of ListContainerItems. </summary>
         /// <param name="value"> List of blobs containers returned. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of containers. Returned when total number of requested containers exceed maximum page size. </param>
-        internal ListContainerItems(IList<ListContainerItem> value, string nextLink)
+        internal ListContainerItems(IReadOnlyList<ListContainerItem> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> List of blobs containers returned. </summary>
-        public IList<ListContainerItem> Value { get; }
+        public IReadOnlyList<ListContainerItem> Value { get; }
         /// <summary> Request URL that can be used to query next page of containers. Returned when total number of requested containers exceed maximum page size. </summary>
         public string NextLink { get; }
     }

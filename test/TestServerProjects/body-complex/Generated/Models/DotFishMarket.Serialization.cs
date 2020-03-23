@@ -16,9 +16,9 @@ namespace body_complex.Models
         internal static DotFishMarket DeserializeDotFishMarket(JsonElement element)
         {
             DotSalmon sampleSalmon = default;
-            IList<DotSalmon> salmons = default;
+            IReadOnlyList<DotSalmon> salmons = default;
             DotFish sampleFish = default;
-            IList<DotFish> fishes = default;
+            IReadOnlyList<DotFish> fishes = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sampleSalmon"))

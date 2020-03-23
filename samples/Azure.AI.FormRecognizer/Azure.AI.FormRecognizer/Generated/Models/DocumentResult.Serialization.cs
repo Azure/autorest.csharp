@@ -16,8 +16,8 @@ namespace Azure.AI.FormRecognizer.Models
         internal static DocumentResult DeserializeDocumentResult(JsonElement element)
         {
             string docType = default;
-            IList<int> pageRange = new List<int>();
-            IDictionary<string, FieldValue> fields = new Dictionary<string, FieldValue>();
+            IReadOnlyList<int> pageRange = new List<int>();
+            IReadOnlyDictionary<string, FieldValue> fields = new Dictionary<string, FieldValue>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("docType"))

@@ -22,7 +22,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="association"> Associated resources. </param>
         /// <param name="effectiveSecurityRules"> A collection of effective security rules. </param>
         /// <param name="tagMap"> Mapping of tags to list of IP Addresses included within the tag. </param>
-        internal EffectiveNetworkSecurityGroup(SubResource networkSecurityGroup, EffectiveNetworkSecurityGroupAssociation association, IList<EffectiveNetworkSecurityRule> effectiveSecurityRules, string tagMap)
+        internal EffectiveNetworkSecurityGroup(SubResource networkSecurityGroup, EffectiveNetworkSecurityGroupAssociation association, IReadOnlyList<EffectiveNetworkSecurityRule> effectiveSecurityRules, string tagMap)
         {
             NetworkSecurityGroup = networkSecurityGroup;
             Association = association;
@@ -35,7 +35,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Associated resources. </summary>
         public EffectiveNetworkSecurityGroupAssociation Association { get; }
         /// <summary> A collection of effective security rules. </summary>
-        public IList<EffectiveNetworkSecurityRule> EffectiveSecurityRules { get; }
+        public IReadOnlyList<EffectiveNetworkSecurityRule> EffectiveSecurityRules { get; }
         /// <summary> Mapping of tags to list of IP Addresses included within the tag. </summary>
         public string TagMap { get; }
     }

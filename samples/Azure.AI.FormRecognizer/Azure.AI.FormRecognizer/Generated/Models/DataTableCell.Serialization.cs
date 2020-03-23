@@ -20,9 +20,9 @@ namespace Azure.AI.FormRecognizer.Models
             int? rowSpan = default;
             int? columnSpan = default;
             string text = default;
-            IList<float> boundingBox = new List<float>();
+            IReadOnlyList<float> boundingBox = new List<float>();
             float confidence = default;
-            IList<string> elements = default;
+            IReadOnlyList<string> elements = default;
             bool? isHeader = default;
             bool? isFooter = default;
             foreach (var property in element.EnumerateObject())

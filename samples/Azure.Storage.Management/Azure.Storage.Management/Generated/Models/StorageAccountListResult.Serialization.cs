@@ -15,7 +15,7 @@ namespace Azure.Storage.Management.Models
     {
         internal static StorageAccountListResult DeserializeStorageAccountListResult(JsonElement element)
         {
-            IList<StorageAccount> value = default;
+            IReadOnlyList<StorageAccount> value = default;
             string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {

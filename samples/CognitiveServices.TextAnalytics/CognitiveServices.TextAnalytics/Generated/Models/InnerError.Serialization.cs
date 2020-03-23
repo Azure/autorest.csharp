@@ -17,7 +17,7 @@ namespace CognitiveServices.TextAnalytics.Models
         {
             InnerErrorCodeValue code = default;
             string message = default;
-            IDictionary<string, string> details = default;
+            IReadOnlyDictionary<string, string> details = default;
             string target = default;
             InnerError innerError = default;
             foreach (var property in element.EnumerateObject())

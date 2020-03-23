@@ -16,7 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal static DocumentKeyPhrases DeserializeDocumentKeyPhrases(JsonElement element)
         {
             string id = default;
-            IList<string> keyPhrases = new List<string>();
+            IReadOnlyList<string> keyPhrases = new List<string>();
             DocumentStatistics statistics = default;
             foreach (var property in element.EnumerateObject())
             {

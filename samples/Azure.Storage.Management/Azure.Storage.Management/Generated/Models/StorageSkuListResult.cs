@@ -19,12 +19,12 @@ namespace Azure.Storage.Management.Models
 
         /// <summary> Initializes a new instance of StorageSkuListResult. </summary>
         /// <param name="value"> Get the list result of storage SKUs and their properties. </param>
-        internal StorageSkuListResult(IList<SkuInformation> value)
+        internal StorageSkuListResult(IReadOnlyList<SkuInformation> value)
         {
             Value = value;
         }
 
         /// <summary> Get the list result of storage SKUs and their properties. </summary>
-        public IList<SkuInformation> Value { get; }
+        public IReadOnlyList<SkuInformation> Value { get; }
     }
 }

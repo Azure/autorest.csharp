@@ -15,8 +15,8 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static KeyPhraseResult DeserializeKeyPhraseResult(JsonElement element)
         {
-            IList<DocumentKeyPhrases> documents = new List<DocumentKeyPhrases>();
-            IList<DocumentError> errors = new List<DocumentError>();
+            IReadOnlyList<DocumentKeyPhrases> documents = new List<DocumentKeyPhrases>();
+            IReadOnlyList<DocumentError> errors = new List<DocumentError>();
             RequestStatistics statistics = default;
             string modelVersion = default;
             foreach (var property in element.EnumerateObject())

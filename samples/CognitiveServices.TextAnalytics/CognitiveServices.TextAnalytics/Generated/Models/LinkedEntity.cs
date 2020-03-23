@@ -18,7 +18,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="language"> Language used in the data source. </param>
         /// <param name="url"> URL for the entity&apos;s page from the data source. </param>
         /// <param name="dataSource"> Data source used to extract entity linking, such as Wiki/Bing etc. </param>
-        internal LinkedEntity(string name, IList<Match> matches, string language, string url, string dataSource)
+        internal LinkedEntity(string name, IReadOnlyList<Match> matches, string language, string url, string dataSource)
         {
             Name = name;
             Matches = matches;
@@ -34,7 +34,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="id"> Unique identifier of the recognized entity from the data source. </param>
         /// <param name="url"> URL for the entity&apos;s page from the data source. </param>
         /// <param name="dataSource"> Data source used to extract entity linking, such as Wiki/Bing etc. </param>
-        internal LinkedEntity(string name, IList<Match> matches, string language, string id, string url, string dataSource)
+        internal LinkedEntity(string name, IReadOnlyList<Match> matches, string language, string id, string url, string dataSource)
         {
             Name = name;
             Matches = matches;
@@ -47,7 +47,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Entity Linking formal name. </summary>
         public string Name { get; }
         /// <summary> List of instances this entity appears in the text. </summary>
-        public IList<Match> Matches { get; } = new List<Match>();
+        public IReadOnlyList<Match> Matches { get; } = new List<Match>();
         /// <summary> Language used in the data source. </summary>
         public string Language { get; }
         /// <summary> Unique identifier of the recognized entity from the data source. </summary>

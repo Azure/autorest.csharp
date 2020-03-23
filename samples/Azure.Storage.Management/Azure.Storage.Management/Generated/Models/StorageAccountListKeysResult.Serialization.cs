@@ -15,7 +15,7 @@ namespace Azure.Storage.Management.Models
     {
         internal static StorageAccountListKeysResult DeserializeStorageAccountListKeysResult(JsonElement element)
         {
-            IList<StorageAccountKey> keys = default;
+            IReadOnlyList<StorageAccountKey> keys = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("keys"))
