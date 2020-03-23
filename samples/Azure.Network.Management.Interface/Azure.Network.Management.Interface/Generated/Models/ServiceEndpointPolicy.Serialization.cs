@@ -90,7 +90,16 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static ServiceEndpointPolicy DeserializeServiceEndpointPolicy(JsonElement element)
         {
-            ServiceEndpointPolicy result = new ServiceEndpointPolicy();
+            string etag = default;
+            string id = default;
+            string name = default;
+            string type = default;
+            string location = default;
+            IDictionary<string, string> tags = default;
+            IList<ServiceEndpointPolicyDefinition> serviceEndpointPolicyDefinitions = default;
+            IList<Subnet> subnets = default;
+            string resourceGuid = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"))
@@ -99,7 +108,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Etag = property.Value.GetString();
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -108,7 +117,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -117,7 +126,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -126,7 +135,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("location"))
@@ -135,7 +144,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Location = property.Value.GetString();
+                    location = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -144,11 +153,12 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Tags = new Dictionary<string, string>();
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        result.Tags.Add(property0.Name, property0.Value.GetString());
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
+                    tags = dictionary;
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -161,11 +171,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ServiceEndpointPolicyDefinitions = new List<ServiceEndpointPolicyDefinition>();
+                            List<ServiceEndpointPolicyDefinition> array = new List<ServiceEndpointPolicyDefinition>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.ServiceEndpointPolicyDefinitions.Add(ServiceEndpointPolicyDefinition.DeserializeServiceEndpointPolicyDefinition(item));
+                                array.Add(ServiceEndpointPolicyDefinition.DeserializeServiceEndpointPolicyDefinition(item));
                             }
+                            serviceEndpointPolicyDefinitions = array;
                             continue;
                         }
                         if (property0.NameEquals("subnets"))
@@ -174,11 +185,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.Subnets = new List<Subnet>();
+                            List<Subnet> array = new List<Subnet>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.Subnets.Add(Subnet.DeserializeSubnet(item));
+                                array.Add(Subnet.DeserializeSubnet(item));
                             }
+                            subnets = array;
                             continue;
                         }
                         if (property0.NameEquals("resourceGuid"))
@@ -187,7 +199,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ResourceGuid = property0.Value.GetString();
+                            resourceGuid = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -196,14 +208,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningState = new ProvisioningState(property0.Value.GetString());
+                            provisioningState = new ProvisioningState(property0.Value.GetString());
                             continue;
                         }
                     }
                     continue;
                 }
             }
-            return result;
+            return new ServiceEndpointPolicy(etag, serviceEndpointPolicyDefinitions, subnets, resourceGuid, provisioningState, id, name, type, location, tags);
         }
     }
 }

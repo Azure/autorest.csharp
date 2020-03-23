@@ -15,52 +15,42 @@ namespace xml_service.Models
     {
         internal static ListContainersResponse DeserializeListContainersResponse(XElement element)
         {
-            ListContainersResponse result = default;
-            result = new ListContainersResponse(); var serviceEndpoint = element.Attribute("ServiceEndpoint");
-            if (serviceEndpoint != null)
+            string serviceEndpoint = default;
+            string prefix = default;
+            string marker = default;
+            int maxResults = default;
+            string nextMarker = default;
+            IList<Container> containers = default;
+            if (element.Attribute("ServiceEndpoint") is XAttribute serviceEndpointAttribute)
             {
-                result.ServiceEndpoint = (string)serviceEndpoint;
+                serviceEndpoint = (string)serviceEndpointAttribute;
             }
-            string value = default;
-            var prefix = element.Element("Prefix");
-            if (prefix != null)
+            if (element.Element("Prefix") is XElement prefixElement)
             {
-                value = (string)prefix;
+                prefix = (string)prefixElement;
             }
-            result.Prefix = value;
-            string value0 = default;
-            var marker = element.Element("Marker");
-            if (marker != null)
+            if (element.Element("Marker") is XElement markerElement)
             {
-                value0 = (string)marker;
+                marker = (string)markerElement;
             }
-            result.Marker = value0;
-            int value1 = default;
-            var maxResults = element.Element("MaxResults");
-            if (maxResults != null)
+            if (element.Element("MaxResults") is XElement maxResultsElement)
             {
-                value1 = (int)maxResults;
+                maxResults = (int)maxResultsElement;
             }
-            result.MaxResults = value1;
-            string value2 = default;
-            var nextMarker = element.Element("NextMarker");
-            if (nextMarker != null)
+            if (element.Element("NextMarker") is XElement nextMarkerElement)
             {
-                value2 = (string)nextMarker;
+                nextMarker = (string)nextMarkerElement;
             }
-            result.NextMarker = value2;
-            var containers = element.Element("Containers");
-            if (containers != null)
+            if (element.Element("Containers") is XElement containersElement)
             {
-                result.Containers = new List<Container>();
-                foreach (var e in containers.Elements("Container"))
+                var array = new List<Container>();
+                foreach (var e in containersElement.Elements("Container"))
                 {
-                    Container value3 = default;
-                    value3 = Container.DeserializeContainer(e);
-                    result.Containers.Add(value3);
+                    array.Add(Container.DeserializeContainer(e));
                 }
+                containers = array;
             }
-            return result;
+            return new ListContainersResponse(serviceEndpoint, prefix, marker, maxResults, containers, nextMarker);
         }
     }
 }

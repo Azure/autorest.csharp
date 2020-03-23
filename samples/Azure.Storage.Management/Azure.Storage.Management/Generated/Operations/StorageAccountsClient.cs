@@ -27,29 +27,29 @@ namespace Azure.Storage.Management
         {
         }
         /// <summary> Initializes a new instance of StorageAccountsClient. </summary>
-        internal StorageAccountsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-06-01")
+        internal StorageAccountsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
         {
-            RestClient = new StorageAccountsRestClient(clientDiagnostics, pipeline, subscriptionId, host, ApiVersion);
+            RestClient = new StorageAccountsRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
 
         /// <summary> Checks that the storage account name is valid and is not already in use. </summary>
         /// <param name="name"> The storage account name. </param>
-        /// <param name="Type"> The type of resource, Microsoft.Storage/storageAccounts. </param>
+        /// <param name="type"> The type of resource, Microsoft.Storage/storageAccounts. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityAsync(string name, string Type = "Microsoft.Storage/storageAccounts", CancellationToken cancellationToken = default)
+        public virtual async Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityAsync(string name, string type = "Microsoft.Storage/storageAccounts", CancellationToken cancellationToken = default)
         {
-            return await RestClient.CheckNameAvailabilityAsync(name, Type, cancellationToken).ConfigureAwait(false);
+            return await RestClient.CheckNameAvailabilityAsync(name, type, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Checks that the storage account name is valid and is not already in use. </summary>
         /// <param name="name"> The storage account name. </param>
-        /// <param name="Type"> The type of resource, Microsoft.Storage/storageAccounts. </param>
+        /// <param name="type"> The type of resource, Microsoft.Storage/storageAccounts. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<CheckNameAvailabilityResult> CheckNameAvailability(string name, string Type = "Microsoft.Storage/storageAccounts", CancellationToken cancellationToken = default)
+        public virtual Response<CheckNameAvailabilityResult> CheckNameAvailability(string name, string type = "Microsoft.Storage/storageAccounts", CancellationToken cancellationToken = default)
         {
-            return RestClient.CheckNameAvailability(name, Type, cancellationToken);
+            return RestClient.CheckNameAvailability(name, type, cancellationToken);
         }
 
         /// <summary> Deletes a storage account in Microsoft Azure. </summary>
@@ -304,14 +304,12 @@ namespace Azure.Storage.Management
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = StorageAccount.DeserializeStorageAccount(document.RootElement);
-                return value;
+                return StorageAccount.DeserializeStorageAccount(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = StorageAccount.DeserializeStorageAccount(document.RootElement);
-                return value;
+                return StorageAccount.DeserializeStorageAccount(document.RootElement);
             });
         }
 
@@ -436,14 +434,12 @@ namespace Azure.Storage.Management
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = BlobRestoreStatus.DeserializeBlobRestoreStatus(document.RootElement);
-                return value;
+                return BlobRestoreStatus.DeserializeBlobRestoreStatus(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = BlobRestoreStatus.DeserializeBlobRestoreStatus(document.RootElement);
-                return value;
+                return BlobRestoreStatus.DeserializeBlobRestoreStatus(document.RootElement);
             });
         }
 

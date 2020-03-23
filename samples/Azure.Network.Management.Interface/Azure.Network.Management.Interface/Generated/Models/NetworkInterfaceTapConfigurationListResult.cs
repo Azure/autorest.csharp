@@ -27,8 +27,8 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> A list of tap configurations. </summary>
-        public IList<NetworkInterfaceTapConfiguration> Value { get; internal set; }
+        public IList<NetworkInterfaceTapConfiguration> Value { get; }
         /// <summary> The URL to get the next set of results. </summary>
-        public string NextLink { get; internal set; }
+        public string NextLink { get; }
     }
 }

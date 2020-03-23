@@ -11,7 +11,8 @@ namespace CognitiveSearch.Models
     public partial class TruncateTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of TruncateTokenFilter. </summary>
-        public TruncateTokenFilter()
+        /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public TruncateTokenFilter(string name) : base(name)
         {
             OdataType = "#Microsoft.Azure.Search.TruncateTokenFilter";
         }
@@ -23,7 +24,7 @@ namespace CognitiveSearch.Models
         internal TruncateTokenFilter(int? length, string odataType, string name) : base(odataType, name)
         {
             Length = length;
-            OdataType = "#Microsoft.Azure.Search.TruncateTokenFilter";
+            OdataType = odataType ?? "#Microsoft.Azure.Search.TruncateTokenFilter";
         }
 
         /// <summary> The length at which terms will be truncated. Default and maximum is 300. </summary>

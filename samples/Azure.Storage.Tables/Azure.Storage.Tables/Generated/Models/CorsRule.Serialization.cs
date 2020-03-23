@@ -36,43 +36,32 @@ namespace Azure.Storage.Tables.Models
 
         internal static CorsRule DeserializeCorsRule(XElement element)
         {
-            CorsRule result = default;
-            result = new CorsRule(); string value = default;
-            var allowedOrigins = element.Element("AllowedOrigins");
-            if (allowedOrigins != null)
+            string allowedOrigins = default;
+            string allowedMethods = default;
+            string allowedHeaders = default;
+            string exposedHeaders = default;
+            int maxAgeInSeconds = default;
+            if (element.Element("AllowedOrigins") is XElement allowedOriginsElement)
             {
-                value = (string)allowedOrigins;
+                allowedOrigins = (string)allowedOriginsElement;
             }
-            result.AllowedOrigins = value;
-            string value0 = default;
-            var allowedMethods = element.Element("AllowedMethods");
-            if (allowedMethods != null)
+            if (element.Element("AllowedMethods") is XElement allowedMethodsElement)
             {
-                value0 = (string)allowedMethods;
+                allowedMethods = (string)allowedMethodsElement;
             }
-            result.AllowedMethods = value0;
-            string value1 = default;
-            var allowedHeaders = element.Element("AllowedHeaders");
-            if (allowedHeaders != null)
+            if (element.Element("AllowedHeaders") is XElement allowedHeadersElement)
             {
-                value1 = (string)allowedHeaders;
+                allowedHeaders = (string)allowedHeadersElement;
             }
-            result.AllowedHeaders = value1;
-            string value2 = default;
-            var exposedHeaders = element.Element("ExposedHeaders");
-            if (exposedHeaders != null)
+            if (element.Element("ExposedHeaders") is XElement exposedHeadersElement)
             {
-                value2 = (string)exposedHeaders;
+                exposedHeaders = (string)exposedHeadersElement;
             }
-            result.ExposedHeaders = value2;
-            int value3 = default;
-            var maxAgeInSeconds = element.Element("MaxAgeInSeconds");
-            if (maxAgeInSeconds != null)
+            if (element.Element("MaxAgeInSeconds") is XElement maxAgeInSecondsElement)
             {
-                value3 = (int)maxAgeInSeconds;
+                maxAgeInSeconds = (int)maxAgeInSecondsElement;
             }
-            result.MaxAgeInSeconds = value3;
-            return result;
+            return new CorsRule(allowedOrigins, allowedMethods, allowedHeaders, exposedHeaders, maxAgeInSeconds);
         }
     }
 }

@@ -30,7 +30,8 @@ namespace body_complex.Models
 
         internal static BooleanWrapper DeserializeBooleanWrapper(JsonElement element)
         {
-            BooleanWrapper result = new BooleanWrapper();
+            bool? fieldTrue = default;
+            bool? fieldFalse = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field_true"))
@@ -39,7 +40,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.FieldTrue = property.Value.GetBoolean();
+                    fieldTrue = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("field_false"))
@@ -48,11 +49,11 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.FieldFalse = property.Value.GetBoolean();
+                    fieldFalse = property.Value.GetBoolean();
                     continue;
                 }
             }
-            return result;
+            return new BooleanWrapper(fieldTrue, fieldFalse);
         }
     }
 }

@@ -31,14 +31,14 @@ namespace AppConfiguration.Models
         }
 
         /// <summary> The type of the error. </summary>
-        public string Type { get; internal set; }
+        public string Type { get; }
         /// <summary> A brief summary of the error. </summary>
-        public string Title { get; internal set; }
+        public string Title { get; }
         /// <summary> The name of the parameter that resulted in the error. </summary>
-        public string Name { get; internal set; }
+        public string Name { get; }
         /// <summary> A detailed description of the error. </summary>
-        public string Detail { get; internal set; }
+        public string Detail { get; }
         /// <summary> The HTTP status code that the error maps to. </summary>
-        public int? Status { get; internal set; }
+        public int? Status { get; }
     }
 }

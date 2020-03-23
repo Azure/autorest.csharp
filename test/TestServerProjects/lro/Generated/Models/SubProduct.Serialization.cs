@@ -38,7 +38,9 @@ namespace lro.Models
 
         internal static SubProduct DeserializeSubProduct(JsonElement element)
         {
-            SubProduct result = new SubProduct();
+            string id = default;
+            string provisioningState = default;
+            SubProductPropertiesProvisioningStateValues? provisioningStateValues = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -47,7 +49,7 @@ namespace lro.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -60,7 +62,7 @@ namespace lro.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningState = property0.Value.GetString();
+                            provisioningState = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("provisioningStateValues"))
@@ -69,14 +71,14 @@ namespace lro.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningStateValues = new SubProductPropertiesProvisioningStateValues(property0.Value.GetString());
+                            provisioningStateValues = new SubProductPropertiesProvisioningStateValues(property0.Value.GetString());
                             continue;
                         }
                     }
                     continue;
                 }
             }
-            return result;
+            return new SubProduct(provisioningState, provisioningStateValues, id);
         }
     }
 }

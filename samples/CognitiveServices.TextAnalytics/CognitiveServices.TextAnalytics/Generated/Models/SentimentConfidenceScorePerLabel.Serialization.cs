@@ -14,26 +14,28 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static SentimentConfidenceScorePerLabel DeserializeSentimentConfidenceScorePerLabel(JsonElement element)
         {
-            SentimentConfidenceScorePerLabel result = new SentimentConfidenceScorePerLabel();
+            double positive = default;
+            double neutral = default;
+            double negative = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("positive"))
                 {
-                    result.Positive = property.Value.GetDouble();
+                    positive = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("neutral"))
                 {
-                    result.Neutral = property.Value.GetDouble();
+                    neutral = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("negative"))
                 {
-                    result.Negative = property.Value.GetDouble();
+                    negative = property.Value.GetDouble();
                     continue;
                 }
             }
-            return result;
+            return new SentimentConfidenceScorePerLabel(positive, neutral, negative);
         }
     }
 }

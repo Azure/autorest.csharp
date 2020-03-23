@@ -14,7 +14,10 @@ namespace CognitiveSearch.Models
     {
         internal static IndexingResult DeserializeIndexingResult(JsonElement element)
         {
-            IndexingResult result = new IndexingResult();
+            string key = default;
+            string errorMessage = default;
+            bool? status = default;
+            int? statusCode = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("key"))
@@ -23,7 +26,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Key = property.Value.GetString();
+                    key = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("errorMessage"))
@@ -32,7 +35,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.ErrorMessage = property.Value.GetString();
+                    errorMessage = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("status"))
@@ -41,7 +44,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Succeeded = property.Value.GetBoolean();
+                    status = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("statusCode"))
@@ -50,11 +53,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.StatusCode = property.Value.GetInt32();
+                    statusCode = property.Value.GetInt32();
                     continue;
                 }
             }
-            return result;
+            return new IndexingResult(key, errorMessage, status, statusCode);
         }
     }
 }

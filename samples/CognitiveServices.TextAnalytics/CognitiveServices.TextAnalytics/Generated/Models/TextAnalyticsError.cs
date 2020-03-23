@@ -13,8 +13,12 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class TextAnalyticsError
     {
         /// <summary> Initializes a new instance of TextAnalyticsError. </summary>
-        internal TextAnalyticsError()
+        /// <param name="code"> Error code. </param>
+        /// <param name="message"> Error message. </param>
+        internal TextAnalyticsError(ErrorCodeValue code, string message)
         {
+            Code = code;
+            Message = message;
         }
 
         /// <summary> Initializes a new instance of TextAnalyticsError. </summary>
@@ -33,14 +37,14 @@ namespace CognitiveServices.TextAnalytics.Models
         }
 
         /// <summary> Error code. </summary>
-        public ErrorCodeValue Code { get; internal set; }
+        public ErrorCodeValue Code { get; }
         /// <summary> Error message. </summary>
-        public string Message { get; internal set; }
+        public string Message { get; }
         /// <summary> Error target. </summary>
-        public string Target { get; internal set; }
+        public string Target { get; }
         /// <summary> Inner error contains more specific information. </summary>
-        public InnerError InnerError { get; internal set; }
+        public InnerError InnerError { get; }
         /// <summary> Details about specific errors that led to this reported error. </summary>
-        public IList<TextAnalyticsError> Details { get; internal set; }
+        public IList<TextAnalyticsError> Details { get; }
     }
 }

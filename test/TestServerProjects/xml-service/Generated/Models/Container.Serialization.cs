@@ -15,35 +15,27 @@ namespace xml_service.Models
     {
         internal static Container DeserializeContainer(XElement element)
         {
-            Container result = default;
-            result = new Container(); string value = default;
-            var name = element.Element("Name");
-            if (name != null)
+            string name = default;
+            ContainerProperties properties = default;
+            IDictionary<string, string> metadata = default;
+            if (element.Element("Name") is XElement nameElement)
             {
-                value = (string)name;
+                name = (string)nameElement;
             }
-            result.Name = value;
-            ContainerProperties value0 = default;
-            var properties = element.Element("Properties");
-            if (properties != null)
+            if (element.Element("Properties") is XElement propertiesElement)
             {
-                value0 = ContainerProperties.DeserializeContainerProperties(properties);
+                properties = ContainerProperties.DeserializeContainerProperties(propertiesElement);
             }
-            result.Properties = value0;
-            IDictionary<string, string> value1 = default;
-            var metadata = element.Element("Metadata");
-            if (metadata != null)
+            if (element.Element("Metadata") is XElement metadataElement)
             {
-                value1 = new Dictionary<string, string>(); var elements = metadata.Elements();
-                foreach (var e in elements)
+                var dictionary = new Dictionary<string, string>();
+                foreach (var e in metadataElement.Elements())
                 {
-                    string value2 = default;
-                    value2 = (string)e;
-                    value1.Add(e.Name.LocalName, value2);
+                    dictionary.Add(e.Name.LocalName, (string)e);
                 }
+                metadata = dictionary;
             }
-            result.Metadata = value1;
-            return result;
+            return new Container(name, properties, metadata);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Azure.Storage.Tables.Models
     {
         internal static StorageError DeserializeStorageError(JsonElement element)
         {
-            StorageError result = new StorageError();
+            string message = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("Message"))
@@ -24,24 +24,21 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    result.Message = property.Value.GetString();
+                    message = property.Value.GetString();
                     continue;
                 }
             }
-            return result;
+            return new StorageError(message);
         }
 
         internal static StorageError DeserializeStorageError(XElement element)
         {
-            StorageError result = default;
-            result = new StorageError(); string value = default;
-            var message = element.Element("Message");
-            if (message != null)
+            string message = default;
+            if (element.Element("Message") is XElement messageElement)
             {
-                value = (string)message;
+                message = (string)messageElement;
             }
-            result.Message = value;
-            return result;
+            return new StorageError(message);
         }
     }
 }

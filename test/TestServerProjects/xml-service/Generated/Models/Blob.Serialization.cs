@@ -15,49 +15,37 @@ namespace xml_service.Models
     {
         internal static Blob DeserializeBlob(XElement element)
         {
-            Blob result = default;
-            result = new Blob(); string value = default;
-            var name = element.Element("Name");
-            if (name != null)
+            string name = default;
+            bool deleted = default;
+            string snapshot = default;
+            BlobProperties properties = default;
+            IDictionary<string, string> metadata = default;
+            if (element.Element("Name") is XElement nameElement)
             {
-                value = (string)name;
+                name = (string)nameElement;
             }
-            result.Name = value;
-            bool value0 = default;
-            var deleted = element.Element("Deleted");
-            if (deleted != null)
+            if (element.Element("Deleted") is XElement deletedElement)
             {
-                value0 = (bool)deleted;
+                deleted = (bool)deletedElement;
             }
-            result.Deleted = value0;
-            string value1 = default;
-            var snapshot = element.Element("Snapshot");
-            if (snapshot != null)
+            if (element.Element("Snapshot") is XElement snapshotElement)
             {
-                value1 = (string)snapshot;
+                snapshot = (string)snapshotElement;
             }
-            result.Snapshot = value1;
-            BlobProperties value2 = default;
-            var properties = element.Element("Properties");
-            if (properties != null)
+            if (element.Element("Properties") is XElement propertiesElement)
             {
-                value2 = BlobProperties.DeserializeBlobProperties(properties);
+                properties = BlobProperties.DeserializeBlobProperties(propertiesElement);
             }
-            result.Properties = value2;
-            IDictionary<string, string> value3 = default;
-            var metadata = element.Element("Metadata");
-            if (metadata != null)
+            if (element.Element("Metadata") is XElement metadataElement)
             {
-                value3 = new Dictionary<string, string>(); var elements = metadata.Elements();
-                foreach (var e in elements)
+                var dictionary = new Dictionary<string, string>();
+                foreach (var e in metadataElement.Elements())
                 {
-                    string value4 = default;
-                    value4 = (string)e;
-                    value3.Add(e.Name.LocalName, value4);
+                    dictionary.Add(e.Name.LocalName, (string)e);
                 }
+                metadata = dictionary;
             }
-            result.Metadata = value3;
-            return result;
+            return new Blob(name, deleted, snapshot, properties, metadata);
         }
     }
 }

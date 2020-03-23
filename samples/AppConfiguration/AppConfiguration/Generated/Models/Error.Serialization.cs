@@ -14,7 +14,11 @@ namespace AppConfiguration.Models
     {
         internal static Error DeserializeError(JsonElement element)
         {
-            Error result = new Error();
+            string type = default;
+            string title = default;
+            string name = default;
+            string detail = default;
+            int? status = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"))
@@ -23,7 +27,7 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("title"))
@@ -32,7 +36,7 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    result.Title = property.Value.GetString();
+                    title = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -41,7 +45,7 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("detail"))
@@ -50,7 +54,7 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    result.Detail = property.Value.GetString();
+                    detail = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("status"))
@@ -59,11 +63,11 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    result.Status = property.Value.GetInt32();
+                    status = property.Value.GetInt32();
                     continue;
                 }
             }
-            return result;
+            return new Error(type, title, name, detail, status);
         }
     }
 }

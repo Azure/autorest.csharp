@@ -35,7 +35,9 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static PublicIPAddressDnsSettings DeserializePublicIPAddressDnsSettings(JsonElement element)
         {
-            PublicIPAddressDnsSettings result = new PublicIPAddressDnsSettings();
+            string domainNameLabel = default;
+            string fqdn = default;
+            string reverseFqdn = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("domainNameLabel"))
@@ -44,7 +46,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.DomainNameLabel = property.Value.GetString();
+                    domainNameLabel = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("fqdn"))
@@ -53,7 +55,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Fqdn = property.Value.GetString();
+                    fqdn = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("reverseFqdn"))
@@ -62,11 +64,11 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.ReverseFqdn = property.Value.GetString();
+                    reverseFqdn = property.Value.GetString();
                     continue;
                 }
             }
-            return result;
+            return new PublicIPAddressDnsSettings(domainNameLabel, fqdn, reverseFqdn);
         }
     }
 }

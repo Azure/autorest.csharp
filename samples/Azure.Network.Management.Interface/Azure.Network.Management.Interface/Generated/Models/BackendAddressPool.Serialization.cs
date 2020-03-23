@@ -84,7 +84,15 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static BackendAddressPool DeserializeBackendAddressPool(JsonElement element)
         {
-            BackendAddressPool result = new BackendAddressPool();
+            string name = default;
+            string etag = default;
+            string type = default;
+            string id = default;
+            IList<NetworkInterfaceIPConfiguration> backendIPConfigurations = default;
+            IList<SubResource> loadBalancingRules = default;
+            SubResource outboundRule = default;
+            IList<SubResource> outboundRules = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -93,7 +101,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("etag"))
@@ -102,7 +110,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Etag = property.Value.GetString();
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -111,7 +119,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -120,7 +128,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -133,11 +141,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.BackendIPConfigurations = new List<NetworkInterfaceIPConfiguration>();
+                            List<NetworkInterfaceIPConfiguration> array = new List<NetworkInterfaceIPConfiguration>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.BackendIPConfigurations.Add(NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(item));
+                                array.Add(NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(item));
                             }
+                            backendIPConfigurations = array;
                             continue;
                         }
                         if (property0.NameEquals("loadBalancingRules"))
@@ -146,11 +155,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.LoadBalancingRules = new List<SubResource>();
+                            List<SubResource> array = new List<SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.LoadBalancingRules.Add(DeserializeSubResource(item));
+                                array.Add(DeserializeSubResource(item));
                             }
+                            loadBalancingRules = array;
                             continue;
                         }
                         if (property0.NameEquals("outboundRule"))
@@ -159,7 +169,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.OutboundRule = DeserializeSubResource(property0.Value);
+                            outboundRule = DeserializeSubResource(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("outboundRules"))
@@ -168,11 +178,12 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.OutboundRules = new List<SubResource>();
+                            List<SubResource> array = new List<SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                result.OutboundRules.Add(DeserializeSubResource(item));
+                                array.Add(DeserializeSubResource(item));
                             }
+                            outboundRules = array;
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -181,14 +192,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningState = new ProvisioningState(property0.Value.GetString());
+                            provisioningState = new ProvisioningState(property0.Value.GetString());
                             continue;
                         }
                     }
                     continue;
                 }
             }
-            return result;
+            return new BackendAddressPool(name, etag, type, backendIPConfigurations, loadBalancingRules, outboundRule, outboundRules, provisioningState, id);
         }
     }
 }

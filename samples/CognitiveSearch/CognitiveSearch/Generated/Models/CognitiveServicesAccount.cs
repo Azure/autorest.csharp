@@ -21,12 +21,11 @@ namespace CognitiveSearch.Models
         /// <param name="description"> . </param>
         internal CognitiveServicesAccount(string odataType, string description)
         {
-            OdataType = odataType;
+            OdataType = odataType ?? null;
             Description = description;
-            OdataType = null;
         }
 
-        public string OdataType { get; internal set; }
+        internal string OdataType { get; set; }
         public string Description { get; set; }
     }
 }

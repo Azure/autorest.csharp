@@ -51,14 +51,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             });
         }
 
@@ -100,14 +98,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             });
         }
 
@@ -149,14 +145,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             });
         }
 
@@ -198,14 +192,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             });
         }
 
@@ -247,14 +239,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             });
         }
 
@@ -296,14 +286,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             });
         }
 
@@ -345,14 +333,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             });
         }
 
@@ -394,14 +380,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             });
         }
 
@@ -443,14 +427,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             });
         }
 
@@ -492,14 +474,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             });
         }
 
@@ -541,14 +521,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             });
         }
 
@@ -590,14 +568,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             });
         }
 
@@ -639,14 +615,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             });
         }
 
@@ -688,14 +662,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Sku.DeserializeSku(document.RootElement);
-                return value;
+                return Sku.DeserializeSku(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Sku.DeserializeSku(document.RootElement);
-                return value;
+                return Sku.DeserializeSku(document.RootElement);
             });
         }
 
@@ -737,14 +709,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Sku.DeserializeSku(document.RootElement);
-                return value;
+                return Sku.DeserializeSku(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Sku.DeserializeSku(document.RootElement);
-                return value;
+                return Sku.DeserializeSku(document.RootElement);
             });
         }
 
@@ -786,14 +756,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = SubProduct.DeserializeSubProduct(document.RootElement);
-                return value;
+                return SubProduct.DeserializeSubProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = SubProduct.DeserializeSubProduct(document.RootElement);
-                return value;
+                return SubProduct.DeserializeSubProduct(document.RootElement);
             });
         }
 
@@ -835,14 +803,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = SubProduct.DeserializeSubProduct(document.RootElement);
-                return value;
+                return SubProduct.DeserializeSubProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = SubProduct.DeserializeSubProduct(document.RootElement);
-                return value;
+                return SubProduct.DeserializeSubProduct(document.RootElement);
             });
         }
 
@@ -884,14 +850,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             });
         }
 
@@ -929,14 +893,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             });
         }
 
@@ -974,14 +936,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             });
         }
 
@@ -1052,14 +1012,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             });
         }
 
@@ -1097,14 +1055,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             });
         }
 
@@ -1340,14 +1296,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Sku.DeserializeSku(document.RootElement);
-                return value;
+                return Sku.DeserializeSku(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Sku.DeserializeSku(document.RootElement);
-                return value;
+                return Sku.DeserializeSku(document.RootElement);
             });
         }
 
@@ -1422,14 +1376,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             });
         }
 
@@ -1471,14 +1423,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             });
         }
 
@@ -1516,14 +1466,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             });
         }
 
@@ -1561,14 +1509,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             });
         }
 
@@ -1606,14 +1552,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             });
         }
 
@@ -1655,14 +1599,12 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                var value = Product.DeserializeProduct(document.RootElement);
-                return value;
+                return Product.DeserializeProduct(document.RootElement);
             });
         }
 

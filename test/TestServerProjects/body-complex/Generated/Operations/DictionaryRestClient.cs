@@ -61,8 +61,9 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            DictionaryWrapper value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
+                            value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -90,8 +91,9 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            DictionaryWrapper value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
+                            value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -209,8 +211,9 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            DictionaryWrapper value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
+                            value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -238,8 +241,9 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            DictionaryWrapper value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
+                            value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -357,8 +361,9 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            DictionaryWrapper value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
+                            value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -386,8 +391,9 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            DictionaryWrapper value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
+                            value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -427,8 +433,9 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            DictionaryWrapper value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
+                            value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -456,8 +463,9 @@ namespace body_complex
                 {
                     case 200:
                         {
+                            DictionaryWrapper value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
+                            value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:

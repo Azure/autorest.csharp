@@ -40,36 +40,27 @@ namespace xml_service.Models
 
         internal static Metrics DeserializeMetrics(XElement element)
         {
-            Metrics result = default;
-            result = new Metrics(); string value = default;
-            var version = element.Element("Version");
-            if (version != null)
+            string version = default;
+            bool enabled = default;
+            bool? includeAPIs = default;
+            RetentionPolicy retentionPolicy = default;
+            if (element.Element("Version") is XElement versionElement)
             {
-                value = (string)version;
+                version = (string)versionElement;
             }
-            result.Version = value;
-            bool value0 = default;
-            var enabled = element.Element("Enabled");
-            if (enabled != null)
+            if (element.Element("Enabled") is XElement enabledElement)
             {
-                value0 = (bool)enabled;
+                enabled = (bool)enabledElement;
             }
-            result.Enabled = value0;
-            bool? value1 = default;
-            var includeAPIs = element.Element("IncludeAPIs");
-            if (includeAPIs != null)
+            if (element.Element("IncludeAPIs") is XElement includeAPIsElement)
             {
-                value1 = (bool?)includeAPIs;
+                includeAPIs = (bool?)includeAPIsElement;
             }
-            result.IncludeAPIs = value1;
-            RetentionPolicy value2 = default;
-            var retentionPolicy = element.Element("RetentionPolicy");
-            if (retentionPolicy != null)
+            if (element.Element("RetentionPolicy") is XElement retentionPolicyElement)
             {
-                value2 = RetentionPolicy.DeserializeRetentionPolicy(retentionPolicy);
+                retentionPolicy = RetentionPolicy.DeserializeRetentionPolicy(retentionPolicyElement);
             }
-            result.RetentionPolicy = value2;
-            return result;
+            return new Metrics(version, enabled, includeAPIs, retentionPolicy);
         }
     }
 }

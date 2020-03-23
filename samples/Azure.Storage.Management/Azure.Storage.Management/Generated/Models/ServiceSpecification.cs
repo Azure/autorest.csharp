@@ -25,6 +25,6 @@ namespace Azure.Storage.Management.Models
         }
 
         /// <summary> Metric specifications of operation. </summary>
-        public IList<MetricSpecification> MetricSpecifications { get; internal set; }
+        public IList<MetricSpecification> MetricSpecifications { get; }
     }
 }

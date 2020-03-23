@@ -5,13 +5,16 @@
 
 #nullable disable
 
+using System.Collections.Generic;
+
 namespace additionalProperties.Models
 {
     /// <summary> The CatAPTrue. </summary>
     public partial class CatAPTrue : PetAPTrue
     {
         /// <summary> Initializes a new instance of CatAPTrue. </summary>
-        public CatAPTrue()
+        /// <param name="id"> . </param>
+        public CatAPTrue(int id) : base(id)
         {
         }
 
@@ -20,7 +23,8 @@ namespace additionalProperties.Models
         /// <param name="id"> . </param>
         /// <param name="name"> . </param>
         /// <param name="status"> . </param>
-        internal CatAPTrue(bool? friendly, int id, string name, bool? status) : base(id, name, status)
+        /// <param name="additionalProperties"> . </param>
+        internal CatAPTrue(bool? friendly, int id, string name, bool? status, IDictionary<string, object> additionalProperties) : base(id, name, status, additionalProperties)
         {
             Friendly = friendly;
         }

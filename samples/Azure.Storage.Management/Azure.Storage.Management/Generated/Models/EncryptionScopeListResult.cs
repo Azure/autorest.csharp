@@ -27,8 +27,8 @@ namespace Azure.Storage.Management.Models
         }
 
         /// <summary> List of encryption scopes requested. </summary>
-        public IList<EncryptionScope> Value { get; internal set; }
+        public IList<EncryptionScope> Value { get; }
         /// <summary> Request URL that can be used to query next page of encryption scopes. Returned when total number of requested encryption scopes exceeds the maximum page size. </summary>
-        public string NextLink { get; internal set; }
+        public string NextLink { get; }
     }
 }

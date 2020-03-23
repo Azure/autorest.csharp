@@ -11,7 +11,8 @@ namespace CognitiveSearch.Models
     public partial class PatternTokenizer : Tokenizer
     {
         /// <summary> Initializes a new instance of PatternTokenizer. </summary>
-        public PatternTokenizer()
+        /// <param name="name"> The name of the tokenizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public PatternTokenizer(string name) : base(name)
         {
             OdataType = "#Microsoft.Azure.Search.PatternTokenizer";
         }
@@ -27,7 +28,7 @@ namespace CognitiveSearch.Models
             Pattern = pattern;
             Flags = flags;
             Group = group;
-            OdataType = "#Microsoft.Azure.Search.PatternTokenizer";
+            OdataType = odataType ?? "#Microsoft.Azure.Search.PatternTokenizer";
         }
 
         /// <summary> A regular expression pattern to match token separators. Default is an expression that matches one or more whitespace characters. </summary>

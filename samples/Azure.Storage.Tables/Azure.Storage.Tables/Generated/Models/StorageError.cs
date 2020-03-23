@@ -22,6 +22,6 @@ namespace Azure.Storage.Tables.Models
             Message = message;
         }
 
-        public string Message { get; internal set; }
+        public string Message { get; }
     }
 }

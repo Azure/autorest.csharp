@@ -69,8 +69,9 @@ namespace custom_baseUrl_paging
                 {
                     case 200:
                         {
+                            ProductResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
+                            value = ProductResult.DeserializeProductResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -104,8 +105,9 @@ namespace custom_baseUrl_paging
                 {
                     case 200:
                         {
+                            ProductResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
+                            value = ProductResult.DeserializeProductResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -153,8 +155,9 @@ namespace custom_baseUrl_paging
                 {
                     case 200:
                         {
+                            ProductResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
+                            value = ProductResult.DeserializeProductResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -188,8 +191,9 @@ namespace custom_baseUrl_paging
                 {
                     case 200:
                         {
+                            ProductResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
+                            value = ProductResult.DeserializeProductResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -243,8 +247,9 @@ namespace custom_baseUrl_paging
                 {
                     case 200:
                         {
+                            ProductResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
+                            value = ProductResult.DeserializeProductResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -283,8 +288,9 @@ namespace custom_baseUrl_paging
                 {
                     case 200:
                         {
+                            ProductResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
+                            value = ProductResult.DeserializeProductResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -329,8 +335,9 @@ namespace custom_baseUrl_paging
                 {
                     case 200:
                         {
+                            ProductResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
+                            value = ProductResult.DeserializeProductResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -364,8 +371,9 @@ namespace custom_baseUrl_paging
                 {
                     case 200:
                         {
+                            ProductResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
+                            value = ProductResult.DeserializeProductResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -410,8 +418,9 @@ namespace custom_baseUrl_paging
                 {
                     case 200:
                         {
+                            ProductResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
+                            value = ProductResult.DeserializeProductResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -445,8 +454,9 @@ namespace custom_baseUrl_paging
                 {
                     case 200:
                         {
+                            ProductResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ProductResult.DeserializeProductResult(document.RootElement);
+                            value = ProductResult.DeserializeProductResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:

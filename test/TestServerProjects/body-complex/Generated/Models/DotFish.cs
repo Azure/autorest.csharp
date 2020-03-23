@@ -21,12 +21,11 @@ namespace body_complex.Models
         /// <param name="species"> . </param>
         internal DotFish(string fishType, string species)
         {
-            FishType = fishType;
+            FishType = fishType ?? null;
             Species = species;
-            FishType = null;
         }
 
-        public string FishType { get; internal set; }
-        public string Species { get; internal set; }
+        internal string FishType { get; set; }
+        public string Species { get; }
     }
 }

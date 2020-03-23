@@ -13,8 +13,10 @@ namespace CognitiveSearch.Models
     public partial class IndexingSchedule
     {
         /// <summary> Initializes a new instance of IndexingSchedule. </summary>
-        public IndexingSchedule()
+        /// <param name="interval"> The interval of time between indexer executions. </param>
+        public IndexingSchedule(TimeSpan interval)
         {
+            Interval = interval;
         }
 
         /// <summary> Initializes a new instance of IndexingSchedule. </summary>
@@ -27,7 +29,7 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The interval of time between indexer executions. </summary>
-        public TimeSpan Interval { get; set; }
+        public TimeSpan Interval { get; }
         /// <summary> The time when an indexer should start running. </summary>
         public DateTimeOffset? StartTime { get; set; }
     }

@@ -15,27 +15,31 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static SentenceSentiment DeserializeSentenceSentiment(JsonElement element)
         {
-            SentenceSentiment result = new SentenceSentiment();
+            SentenceSentimentValue sentiment = default;
+            SentimentConfidenceScorePerLabel sentenceScores = default;
+            int offset = default;
+            int length = default;
+            IList<string> warnings = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sentiment"))
                 {
-                    result.Sentiment = property.Value.GetString().ToSentenceSentimentValue();
+                    sentiment = property.Value.GetString().ToSentenceSentimentValue();
                     continue;
                 }
                 if (property.NameEquals("sentenceScores"))
                 {
-                    result.SentenceScores = SentimentConfidenceScorePerLabel.DeserializeSentimentConfidenceScorePerLabel(property.Value);
+                    sentenceScores = SentimentConfidenceScorePerLabel.DeserializeSentimentConfidenceScorePerLabel(property.Value);
                     continue;
                 }
                 if (property.NameEquals("offset"))
                 {
-                    result.Offset = property.Value.GetInt32();
+                    offset = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("length"))
                 {
-                    result.Length = property.Value.GetInt32();
+                    length = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("warnings"))
@@ -44,15 +48,16 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    result.Warnings = new List<string>();
+                    List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Warnings.Add(item.GetString());
+                        array.Add(item.GetString());
                     }
+                    warnings = array;
                     continue;
                 }
             }
-            return result;
+            return new SentenceSentiment(sentiment, sentenceScores, offset, length, warnings);
         }
     }
 }

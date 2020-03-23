@@ -14,60 +14,47 @@ namespace xml_service.Models
     {
         internal static ListBlobsResponse DeserializeListBlobsResponse(XElement element)
         {
-            ListBlobsResponse result = default;
-            result = new ListBlobsResponse(); var serviceEndpoint = element.Attribute("ServiceEndpoint");
-            if (serviceEndpoint != null)
+            string serviceEndpoint = default;
+            string containerName = default;
+            string prefix = default;
+            string marker = default;
+            int maxResults = default;
+            string delimiter = default;
+            Blobs blobs = default;
+            string nextMarker = default;
+            if (element.Attribute("ServiceEndpoint") is XAttribute serviceEndpointAttribute)
             {
-                result.ServiceEndpoint = (string)serviceEndpoint;
+                serviceEndpoint = (string)serviceEndpointAttribute;
             }
-            var containerName = element.Attribute("ContainerName");
-            if (containerName != null)
+            if (element.Attribute("ContainerName") is XAttribute containerNameAttribute)
             {
-                result.ContainerName = (string)containerName;
+                containerName = (string)containerNameAttribute;
             }
-            string value = default;
-            var prefix = element.Element("Prefix");
-            if (prefix != null)
+            if (element.Element("Prefix") is XElement prefixElement)
             {
-                value = (string)prefix;
+                prefix = (string)prefixElement;
             }
-            result.Prefix = value;
-            string value0 = default;
-            var marker = element.Element("Marker");
-            if (marker != null)
+            if (element.Element("Marker") is XElement markerElement)
             {
-                value0 = (string)marker;
+                marker = (string)markerElement;
             }
-            result.Marker = value0;
-            int value1 = default;
-            var maxResults = element.Element("MaxResults");
-            if (maxResults != null)
+            if (element.Element("MaxResults") is XElement maxResultsElement)
             {
-                value1 = (int)maxResults;
+                maxResults = (int)maxResultsElement;
             }
-            result.MaxResults = value1;
-            string value2 = default;
-            var delimiter = element.Element("Delimiter");
-            if (delimiter != null)
+            if (element.Element("Delimiter") is XElement delimiterElement)
             {
-                value2 = (string)delimiter;
+                delimiter = (string)delimiterElement;
             }
-            result.Delimiter = value2;
-            Blobs value3 = default;
-            var blobs = element.Element("Blobs");
-            if (blobs != null)
+            if (element.Element("Blobs") is XElement blobsElement)
             {
-                value3 = Blobs.DeserializeBlobs(blobs);
+                blobs = Blobs.DeserializeBlobs(blobsElement);
             }
-            result.Blobs = value3;
-            string value4 = default;
-            var nextMarker = element.Element("NextMarker");
-            if (nextMarker != null)
+            if (element.Element("NextMarker") is XElement nextMarkerElement)
             {
-                value4 = (string)nextMarker;
+                nextMarker = (string)nextMarkerElement;
             }
-            result.NextMarker = value4;
-            return result;
+            return new ListBlobsResponse(serviceEndpoint, containerName, prefix, marker, maxResults, delimiter, blobs, nextMarker);
         }
     }
 }

@@ -13,7 +13,8 @@ namespace CognitiveSearch.Models
     public partial class PatternAnalyzer : Analyzer
     {
         /// <summary> Initializes a new instance of PatternAnalyzer. </summary>
-        public PatternAnalyzer()
+        /// <param name="name"> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public PatternAnalyzer(string name) : base(name)
         {
             OdataType = "#Microsoft.Azure.Search.PatternAnalyzer";
         }
@@ -31,7 +32,7 @@ namespace CognitiveSearch.Models
             Pattern = pattern;
             Flags = flags;
             Stopwords = stopwords;
-            OdataType = "#Microsoft.Azure.Search.PatternAnalyzer";
+            OdataType = odataType ?? "#Microsoft.Azure.Search.PatternAnalyzer";
         }
 
         /// <summary> A value indicating whether terms should be lower-cased. Default is true. </summary>

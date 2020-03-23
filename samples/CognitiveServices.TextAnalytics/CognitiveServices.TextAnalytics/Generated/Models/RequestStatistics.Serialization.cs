@@ -14,31 +14,34 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static RequestStatistics DeserializeRequestStatistics(JsonElement element)
         {
-            RequestStatistics result = new RequestStatistics();
+            int documentsCount = default;
+            int validDocumentsCount = default;
+            int erroneousDocumentsCount = default;
+            long transactionsCount = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("documentsCount"))
                 {
-                    result.DocumentsCount = property.Value.GetInt32();
+                    documentsCount = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("validDocumentsCount"))
                 {
-                    result.ValidDocumentsCount = property.Value.GetInt32();
+                    validDocumentsCount = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("erroneousDocumentsCount"))
                 {
-                    result.ErroneousDocumentsCount = property.Value.GetInt32();
+                    erroneousDocumentsCount = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("transactionsCount"))
                 {
-                    result.TransactionsCount = property.Value.GetInt64();
+                    transactionsCount = property.Value.GetInt64();
                     continue;
                 }
             }
-            return result;
+            return new RequestStatistics(documentsCount, validDocumentsCount, erroneousDocumentsCount, transactionsCount);
         }
     }
 }

@@ -13,8 +13,10 @@ namespace CognitiveSearch.Models
     public partial class InputFieldMappingEntry
     {
         /// <summary> Initializes a new instance of InputFieldMappingEntry. </summary>
-        public InputFieldMappingEntry()
+        /// <param name="name"> The name of the input. </param>
+        public InputFieldMappingEntry(string name)
         {
+            Name = name;
         }
 
         /// <summary> Initializes a new instance of InputFieldMappingEntry. </summary>
@@ -31,7 +33,7 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The name of the input. </summary>
-        public string Name { get; set; }
+        public string Name { get; }
         /// <summary> The source of the input. </summary>
         public string Source { get; set; }
         /// <summary> The source context used for selecting recursive inputs. </summary>

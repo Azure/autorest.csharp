@@ -105,20 +105,32 @@ namespace CognitiveSearch.Models
 
         internal static Index DeserializeIndex(JsonElement element)
         {
-            Index result = new Index();
+            string name = default;
+            IList<Field> fields = new List<Field>();
+            IList<ScoringProfile> scoringProfiles = default;
+            string defaultScoringProfile = default;
+            CorsOptions corsOptions = default;
+            IList<Suggester> suggesters = default;
+            IList<Analyzer> analyzers = default;
+            IList<Tokenizer> tokenizers = default;
+            IList<TokenFilter> tokenFilters = default;
+            IList<CharFilter> charFilters = default;
+            string odataetag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("fields"))
                 {
+                    List<Field> array = new List<Field>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Fields.Add(Field.DeserializeField(item));
+                        array.Add(Field.DeserializeField(item));
                     }
+                    fields = array;
                     continue;
                 }
                 if (property.NameEquals("scoringProfiles"))
@@ -127,11 +139,12 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.ScoringProfiles = new List<ScoringProfile>();
+                    List<ScoringProfile> array = new List<ScoringProfile>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.ScoringProfiles.Add(ScoringProfile.DeserializeScoringProfile(item));
+                        array.Add(ScoringProfile.DeserializeScoringProfile(item));
                     }
+                    scoringProfiles = array;
                     continue;
                 }
                 if (property.NameEquals("defaultScoringProfile"))
@@ -140,7 +153,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.DefaultScoringProfile = property.Value.GetString();
+                    defaultScoringProfile = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("corsOptions"))
@@ -149,7 +162,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.CorsOptions = CorsOptions.DeserializeCorsOptions(property.Value);
+                    corsOptions = CorsOptions.DeserializeCorsOptions(property.Value);
                     continue;
                 }
                 if (property.NameEquals("suggesters"))
@@ -158,11 +171,12 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Suggesters = new List<Suggester>();
+                    List<Suggester> array = new List<Suggester>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Suggesters.Add(Suggester.DeserializeSuggester(item));
+                        array.Add(Suggester.DeserializeSuggester(item));
                     }
+                    suggesters = array;
                     continue;
                 }
                 if (property.NameEquals("analyzers"))
@@ -171,11 +185,12 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Analyzers = new List<Analyzer>();
+                    List<Analyzer> array = new List<Analyzer>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Analyzers.Add(Analyzer.DeserializeAnalyzer(item));
+                        array.Add(Analyzer.DeserializeAnalyzer(item));
                     }
+                    analyzers = array;
                     continue;
                 }
                 if (property.NameEquals("tokenizers"))
@@ -184,11 +199,12 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Tokenizers = new List<Tokenizer>();
+                    List<Tokenizer> array = new List<Tokenizer>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Tokenizers.Add(Tokenizer.DeserializeTokenizer(item));
+                        array.Add(Tokenizer.DeserializeTokenizer(item));
                     }
+                    tokenizers = array;
                     continue;
                 }
                 if (property.NameEquals("tokenFilters"))
@@ -197,11 +213,12 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.TokenFilters = new List<TokenFilter>();
+                    List<TokenFilter> array = new List<TokenFilter>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.TokenFilters.Add(TokenFilter.DeserializeTokenFilter(item));
+                        array.Add(TokenFilter.DeserializeTokenFilter(item));
                     }
+                    tokenFilters = array;
                     continue;
                 }
                 if (property.NameEquals("charFilters"))
@@ -210,11 +227,12 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.CharFilters = new List<CharFilter>();
+                    List<CharFilter> array = new List<CharFilter>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.CharFilters.Add(CharFilter.DeserializeCharFilter(item));
+                        array.Add(CharFilter.DeserializeCharFilter(item));
                     }
+                    charFilters = array;
                     continue;
                 }
                 if (property.NameEquals("@odata.etag"))
@@ -223,11 +241,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.ETag = property.Value.GetString();
+                    odataetag = property.Value.GetString();
                     continue;
                 }
             }
-            return result;
+            return new Index(name, fields, scoringProfiles, defaultScoringProfile, corsOptions, suggesters, analyzers, tokenizers, tokenFilters, charFilters, odataetag);
         }
     }
 }

@@ -14,60 +14,64 @@ namespace additionalProperties.Models
     public partial class PetAPString : IDictionary<string, string>
     {
         /// <summary> Initializes a new instance of PetAPString. </summary>
-        public PetAPString()
+        /// <param name="id"> . </param>
+        public PetAPString(int id)
         {
+            Id = id;
         }
 
         /// <summary> Initializes a new instance of PetAPString. </summary>
         /// <param name="id"> . </param>
         /// <param name="name"> . </param>
         /// <param name="status"> . </param>
-        internal PetAPString(int id, string name, bool? status)
+        /// <param name="additionalProperties"> . </param>
+        internal PetAPString(int id, string name, bool? status, IDictionary<string, string> additionalProperties)
         {
             Id = id;
             Name = name;
             Status = status;
+            AdditionalProperties = additionalProperties;
         }
 
-        public int Id { get; set; }
+        public int Id { get; }
         public string Name { get; set; }
-        public bool? Status { get; internal set; }
-        private readonly IDictionary<string, string> _additionalProperties = new Dictionary<string, string>();
+        public bool? Status { get; }
+        internal IDictionary<string, string> AdditionalProperties { get; set; } = new Dictionary<string, string>();
         /// <inheritdoc />
-        public IEnumerator<KeyValuePair<string, string>> GetEnumerator() => _additionalProperties.GetEnumerator();
+        public IEnumerator<KeyValuePair<string, string>> GetEnumerator() => AdditionalProperties.GetEnumerator();
         /// <inheritdoc />
-        IEnumerator IEnumerable.GetEnumerator() => _additionalProperties.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => AdditionalProperties.GetEnumerator();
         /// <inheritdoc />
-        public ICollection<string> Keys => _additionalProperties.Keys;
+        public ICollection<string> Keys => AdditionalProperties.Keys;
         /// <inheritdoc />
-        public ICollection<string> Values => _additionalProperties.Values;
+        public ICollection<string> Values => AdditionalProperties.Values;
         /// <inheritdoc />
-        public bool TryGetValue(string key, out string value) => _additionalProperties.TryGetValue(key, out value);
+        public bool TryGetValue(string key, out string value) => AdditionalProperties.TryGetValue(key, out value);
         /// <inheritdoc />
-        public void Add(string key, string value) => _additionalProperties.Add(key, value);
+        public void Add(string key, string value) => AdditionalProperties.Add(key, value);
         /// <inheritdoc />
-        public bool ContainsKey(string key) => _additionalProperties.ContainsKey(key);
+        public bool ContainsKey(string key) => AdditionalProperties.ContainsKey(key);
         /// <inheritdoc />
-        public bool Remove(string key) => _additionalProperties.Remove(key);
+        public bool Remove(string key) => AdditionalProperties.Remove(key);
         /// <inheritdoc />
-        int ICollection<KeyValuePair<string, string>>.Count => _additionalProperties.Count;
+        int ICollection<KeyValuePair<string, string>>.Count => AdditionalProperties.Count;
         /// <inheritdoc />
-        bool ICollection<KeyValuePair<string, string>>.IsReadOnly => _additionalProperties.IsReadOnly;
+        bool ICollection<KeyValuePair<string, string>>.IsReadOnly => AdditionalProperties.IsReadOnly;
         /// <inheritdoc />
-        void ICollection<KeyValuePair<string, string>>.Add(KeyValuePair<string, string> value) => _additionalProperties.Add(value);
+        void ICollection<KeyValuePair<string, string>>.Add(KeyValuePair<string, string> value) => AdditionalProperties.Add(value);
         /// <inheritdoc />
-        bool ICollection<KeyValuePair<string, string>>.Remove(KeyValuePair<string, string> value) => _additionalProperties.Remove(value);
+        bool ICollection<KeyValuePair<string, string>>.Remove(KeyValuePair<string, string> value) => AdditionalProperties.Remove(value);
         /// <inheritdoc />
-        bool ICollection<KeyValuePair<string, string>>.Contains(KeyValuePair<string, string> value) => _additionalProperties.Contains(value);
+        bool ICollection<KeyValuePair<string, string>>.Contains(KeyValuePair<string, string> value) => AdditionalProperties.Contains(value);
         /// <inheritdoc />
-        void ICollection<KeyValuePair<string, string>>.CopyTo(KeyValuePair<string, string>[] destination, int offset) => _additionalProperties.CopyTo(destination, offset);
+        void ICollection<KeyValuePair<string, string>>.CopyTo(KeyValuePair<string, string>[] destination, int offset) => AdditionalProperties.CopyTo(destination, offset);
         /// <inheritdoc />
-        void ICollection<KeyValuePair<string, string>>.Clear() => _additionalProperties.Clear();
+        void ICollection<KeyValuePair<string, string>>.Clear() => AdditionalProperties.Clear();
         /// <inheritdoc />
         public string this[string key]
         {
-            get => _additionalProperties[key];
-            set => _additionalProperties[key] = value;
+            get => AdditionalProperties[key];
+            set => AdditionalProperties[key] = value;
         }
     }
 }

@@ -2,8 +2,6 @@
 // Licensed under the MIT License.
 
 
-using AutoRest.CSharp.V3.Generation.Types;
-
 namespace AutoRest.CSharp.V3.Output.Models.Serialization.Xml
 {
     internal class XmlElementValueSerialization: XmlElementSerialization
@@ -15,7 +13,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Serialization.Xml
         }
 
         public override string Name { get; }
-        public override CSharpType Type => Value.Type;
         public XmlValueSerialization Value { get; }
     }
 }

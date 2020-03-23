@@ -20,24 +20,24 @@ namespace Azure.Storage.Tables
     internal partial class TableRestClient
     {
         private string url;
-        private string Version;
+        private string version;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
 
         /// <summary> Initializes a new instance of TableRestClient. </summary>
-        public TableRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string url, string Version = "2018-10-10")
+        public TableRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string url, string version = "2018-10-10")
         {
             if (url == null)
             {
                 throw new ArgumentNullException(nameof(url));
             }
-            if (Version == null)
+            if (version == null)
             {
-                throw new ArgumentNullException(nameof(Version));
+                throw new ArgumentNullException(nameof(version));
             }
 
             this.url = url;
-            this.Version = Version;
+            this.version = version;
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
@@ -67,7 +67,7 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("$filter", filter, true);
             }
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", Version);
+            request.Headers.Add("x-ms-version", version);
             if (requestId != null)
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);
@@ -96,8 +96,9 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
+                            TableQueryResponse value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = TableQueryResponse.DeserializeTableQueryResponse(document.RootElement);
+                            value = TableQueryResponse.DeserializeTableQueryResponse(document.RootElement);
                             var headers = new QueryHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
@@ -132,8 +133,9 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
+                            TableQueryResponse value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = TableQueryResponse.DeserializeTableQueryResponse(document.RootElement);
+                            value = TableQueryResponse.DeserializeTableQueryResponse(document.RootElement);
                             var headers = new QueryHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
@@ -161,7 +163,7 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("$format", format.Value.ToString(), true);
             }
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", Version);
+            request.Headers.Add("x-ms-version", version);
             if (requestId != null)
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);
@@ -196,8 +198,9 @@ namespace Azure.Storage.Tables
                 {
                     case 201:
                         {
+                            TableResponse value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = TableResponse.DeserializeTableResponse(document.RootElement);
+                            value = TableResponse.DeserializeTableResponse(document.RootElement);
                             var headers = new CreateHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
@@ -234,8 +237,9 @@ namespace Azure.Storage.Tables
                 {
                     case 201:
                         {
+                            TableResponse value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = TableResponse.DeserializeTableResponse(document.RootElement);
+                            value = TableResponse.DeserializeTableResponse(document.RootElement);
                             var headers = new CreateHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
@@ -261,7 +265,7 @@ namespace Azure.Storage.Tables
             uri.AppendPath(table, true);
             uri.AppendPath("')", false);
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", Version);
+            request.Headers.Add("x-ms-version", version);
             if (requestId != null)
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);
@@ -366,7 +370,7 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("$filter", filter, true);
             }
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", Version);
+            request.Headers.Add("x-ms-version", version);
             if (requestId != null)
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);
@@ -401,8 +405,9 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
+                            TableEntityQueryResponse value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
+                            value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
                             var headers = new QueryEntitiesHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
@@ -443,8 +448,9 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
+                            TableEntityQueryResponse value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
+                            value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
                             var headers = new QueryEntitiesHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
@@ -490,7 +496,7 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("$filter", filter, true);
             }
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", Version);
+            request.Headers.Add("x-ms-version", version);
             if (requestId != null)
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);
@@ -534,8 +540,9 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
+                            TableEntityQueryResponse value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
+                            value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
                             var headers = new QueryEntitiesWithPartitionAndRowKeyHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
@@ -585,8 +592,9 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
+                            TableEntityQueryResponse value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
+                            value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
                             var headers = new QueryEntitiesWithPartitionAndRowKeyHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
@@ -624,7 +632,7 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("$format", format.Value.ToString(), true);
             }
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", Version);
+            request.Headers.Add("x-ms-version", version);
             if (requestId != null)
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);
@@ -758,7 +766,7 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("$format", format.Value.ToString(), true);
             }
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", Version);
+            request.Headers.Add("x-ms-version", version);
             if (requestId != null)
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);
@@ -875,7 +883,7 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("$format", format.Value.ToString(), true);
             }
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", Version);
+            request.Headers.Add("x-ms-version", version);
             if (requestId != null)
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);
@@ -918,12 +926,14 @@ namespace Azure.Storage.Tables
                 {
                     case 201:
                         {
+                            IDictionary<string, object> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, object> value = new Dictionary<string, object>();
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(property.Name, property.Value.GetObject());
+                                dictionary.Add(property.Name, property.Value.GetObject());
                             }
+                            value = dictionary;
                             var headers = new InsertEntityHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
@@ -962,12 +972,14 @@ namespace Azure.Storage.Tables
                 {
                     case 201:
                         {
+                            IDictionary<string, object> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, object> value = new Dictionary<string, object>();
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(property.Name, property.Value.GetObject());
+                                dictionary.Add(property.Name, property.Value.GetObject());
                             }
+                            value = dictionary;
                             var headers = new InsertEntityHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
@@ -997,7 +1009,7 @@ namespace Azure.Storage.Tables
             }
             uri.AppendQuery("comp", "acl", true);
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", Version);
+            request.Headers.Add("x-ms-version", version);
             if (requestId != null)
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);
@@ -1027,18 +1039,16 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             IList<SignedIdentifier> value = default;
-                            var signedIdentifiers = document.Element("SignedIdentifiers");
-                            if (signedIdentifiers != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("SignedIdentifiers") is XElement signedIdentifiersElement)
                             {
-                                value = new List<SignedIdentifier>();
-                                foreach (var e in signedIdentifiers.Elements("SignedIdentifier"))
+                                var array = new List<SignedIdentifier>();
+                                foreach (var e in signedIdentifiersElement.Elements("SignedIdentifier"))
                                 {
-                                    SignedIdentifier value0 = default;
-                                    value0 = SignedIdentifier.DeserializeSignedIdentifier(e);
-                                    value.Add(value0);
+                                    array.Add(SignedIdentifier.DeserializeSignedIdentifier(e));
                                 }
+                                value = array;
                             }
                             var headers = new GetAccessPolicyHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
@@ -1076,18 +1086,16 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             IList<SignedIdentifier> value = default;
-                            var signedIdentifiers = document.Element("SignedIdentifiers");
-                            if (signedIdentifiers != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("SignedIdentifiers") is XElement signedIdentifiersElement)
                             {
-                                value = new List<SignedIdentifier>();
-                                foreach (var e in signedIdentifiers.Elements("SignedIdentifier"))
+                                var array = new List<SignedIdentifier>();
+                                foreach (var e in signedIdentifiersElement.Elements("SignedIdentifier"))
                                 {
-                                    SignedIdentifier value0 = default;
-                                    value0 = SignedIdentifier.DeserializeSignedIdentifier(e);
-                                    value.Add(value0);
+                                    array.Add(SignedIdentifier.DeserializeSignedIdentifier(e));
                                 }
+                                value = array;
                             }
                             var headers = new GetAccessPolicyHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
@@ -1118,7 +1126,7 @@ namespace Azure.Storage.Tables
             }
             uri.AppendQuery("comp", "acl", true);
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", Version);
+            request.Headers.Add("x-ms-version", version);
             if (requestId != null)
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);

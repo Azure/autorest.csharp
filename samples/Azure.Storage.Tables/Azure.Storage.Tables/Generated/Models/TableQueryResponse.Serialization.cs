@@ -15,7 +15,8 @@ namespace Azure.Storage.Tables.Models
     {
         internal static TableQueryResponse DeserializeTableQueryResponse(JsonElement element)
         {
-            TableQueryResponse result = new TableQueryResponse();
+            string odatametadata = default;
+            IList<TableResponseProperties> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("odata.metadata"))
@@ -24,7 +25,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    result.OdataMetadata = property.Value.GetString();
+                    odatametadata = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("value"))
@@ -33,15 +34,16 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    result.Value = new List<TableResponseProperties>();
+                    List<TableResponseProperties> array = new List<TableResponseProperties>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Value.Add(TableResponseProperties.DeserializeTableResponseProperties(item));
+                        array.Add(TableResponseProperties.DeserializeTableResponseProperties(item));
                     }
+                    value = array;
                     continue;
                 }
             }
-            return result;
+            return new TableQueryResponse(odatametadata, value);
         }
     }
 }

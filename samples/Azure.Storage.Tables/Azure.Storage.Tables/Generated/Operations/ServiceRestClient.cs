@@ -18,24 +18,24 @@ namespace Azure.Storage.Tables
     internal partial class ServiceRestClient
     {
         private string url;
-        private string Version;
+        private string version;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
 
         /// <summary> Initializes a new instance of ServiceRestClient. </summary>
-        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string url, string Version = "2018-10-10")
+        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string url, string version = "2018-10-10")
         {
             if (url == null)
             {
                 throw new ArgumentNullException(nameof(url));
             }
-            if (Version == null)
+            if (version == null)
             {
-                throw new ArgumentNullException(nameof(Version));
+                throw new ArgumentNullException(nameof(version));
             }
 
             this.url = url;
-            this.Version = Version;
+            this.version = version;
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
@@ -55,7 +55,7 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("timeout", timeout.Value, true);
             }
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", Version);
+            request.Headers.Add("x-ms-version", version);
             if (requestId != null)
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);
@@ -150,7 +150,7 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("timeout", timeout.Value, true);
             }
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", Version);
+            request.Headers.Add("x-ms-version", version);
             if (requestId != null)
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);
@@ -175,12 +175,11 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             StorageServiceProperties value = default;
-                            var storageServiceProperties = document.Element("StorageServiceProperties");
-                            if (storageServiceProperties != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("StorageServiceProperties") is XElement storageServicePropertiesElement)
                             {
-                                value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServiceProperties);
+                                value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServicePropertiesElement);
                             }
                             var headers = new GetPropertiesHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
@@ -213,12 +212,11 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             StorageServiceProperties value = default;
-                            var storageServiceProperties = document.Element("StorageServiceProperties");
-                            if (storageServiceProperties != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("StorageServiceProperties") is XElement storageServicePropertiesElement)
                             {
-                                value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServiceProperties);
+                                value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServicePropertiesElement);
                             }
                             var headers = new GetPropertiesHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
@@ -249,7 +247,7 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("timeout", timeout.Value, true);
             }
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", Version);
+            request.Headers.Add("x-ms-version", version);
             if (requestId != null)
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);
@@ -274,12 +272,11 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             StorageServiceStats value = default;
-                            var storageServiceStats = document.Element("StorageServiceStats");
-                            if (storageServiceStats != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("StorageServiceStats") is XElement storageServiceStatsElement)
                             {
-                                value = StorageServiceStats.DeserializeStorageServiceStats(storageServiceStats);
+                                value = StorageServiceStats.DeserializeStorageServiceStats(storageServiceStatsElement);
                             }
                             var headers = new GetStatisticsHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
@@ -312,12 +309,11 @@ namespace Azure.Storage.Tables
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             StorageServiceStats value = default;
-                            var storageServiceStats = document.Element("StorageServiceStats");
-                            if (storageServiceStats != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("StorageServiceStats") is XElement storageServiceStatsElement)
                             {
-                                value = StorageServiceStats.DeserializeStorageServiceStats(storageServiceStats);
+                                value = StorageServiceStats.DeserializeStorageServiceStats(storageServiceStatsElement);
                             }
                             var headers = new GetStatisticsHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);

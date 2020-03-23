@@ -15,7 +15,8 @@ namespace CognitiveSearch.Models
     {
         internal static SuggestDocumentsResult DeserializeSuggestDocumentsResult(JsonElement element)
         {
-            SuggestDocumentsResult result = new SuggestDocumentsResult();
+            IList<SuggestResult> value = default;
+            double? searchcoverage = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -24,11 +25,12 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Results = new List<SuggestResult>();
+                    List<SuggestResult> array = new List<SuggestResult>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Results.Add(SuggestResult.DeserializeSuggestResult(item));
+                        array.Add(SuggestResult.DeserializeSuggestResult(item));
                     }
+                    value = array;
                     continue;
                 }
                 if (property.NameEquals("@search.coverage"))
@@ -37,11 +39,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.Coverage = property.Value.GetDouble();
+                    searchcoverage = property.Value.GetDouble();
                     continue;
                 }
             }
-            return result;
+            return new SuggestDocumentsResult(value, searchcoverage);
         }
     }
 }

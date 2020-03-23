@@ -29,17 +29,19 @@ namespace Azure.Storage.Management.Models
 
         internal static VirtualNetworkRule DeserializeVirtualNetworkRule(JsonElement element)
         {
-            VirtualNetworkRule result = new VirtualNetworkRule();
+            string id = default;
+            string action = default;
+            State? state = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
                 {
-                    result.VirtualNetworkResourceId = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("action"))
                 {
-                    result.Action = property.Value.GetString();
+                    action = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("state"))
@@ -48,11 +50,11 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    result.State = property.Value.GetString().ToState();
+                    state = property.Value.GetString().ToState();
                     continue;
                 }
             }
-            return result;
+            return new VirtualNetworkRule(id, action, state);
         }
     }
 }

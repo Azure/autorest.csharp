@@ -81,8 +81,9 @@ namespace ExtensionClientName
                 {
                     case 200:
                         {
+                            RenamedSchema value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = RenamedSchema.DeserializeRenamedSchema(document.RootElement);
+                            value = RenamedSchema.DeserializeRenamedSchema(document.RootElement);
                             var headers = new RenamedOperationHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
@@ -126,8 +127,9 @@ namespace ExtensionClientName
                 {
                     case 200:
                         {
+                            RenamedSchema value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = RenamedSchema.DeserializeRenamedSchema(document.RootElement);
+                            value = RenamedSchema.DeserializeRenamedSchema(document.RootElement);
                             var headers = new RenamedOperationHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }

@@ -25,22 +25,17 @@ namespace Azure.Storage.Tables.Models
 
         internal static SignedIdentifier DeserializeSignedIdentifier(XElement element)
         {
-            SignedIdentifier result = default;
-            result = new SignedIdentifier(); string value = default;
-            var id = element.Element("Id");
-            if (id != null)
+            string id = default;
+            AccessPolicy accessPolicy = default;
+            if (element.Element("Id") is XElement idElement)
             {
-                value = (string)id;
+                id = (string)idElement;
             }
-            result.Id = value;
-            AccessPolicy value0 = default;
-            var accessPolicy = element.Element("AccessPolicy");
-            if (accessPolicy != null)
+            if (element.Element("AccessPolicy") is XElement accessPolicyElement)
             {
-                value0 = AccessPolicy.DeserializeAccessPolicy(accessPolicy);
+                accessPolicy = AccessPolicy.DeserializeAccessPolicy(accessPolicyElement);
             }
-            result.AccessPolicy = value0;
-            return result;
+            return new SignedIdentifier(id, accessPolicy);
         }
     }
 }

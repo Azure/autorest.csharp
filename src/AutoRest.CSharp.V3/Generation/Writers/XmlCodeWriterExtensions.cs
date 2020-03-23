@@ -2,8 +2,10 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 using AutoRest.CSharp.V3.Generation.Types;
+using AutoRest.CSharp.V3.Output.Models.Requests;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
@@ -64,13 +66,18 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         writer.Line($"{writerName}.WriteStartElement({objectSerialization.Name:L});");
                     }
 
+                    CodeWriter.CodeWriterScope? CheckPropertyForNull(ObjectTypeProperty objectTypeProperty)
+                    {
+                        return objectTypeProperty.Declaration.Type.IsNullable ? writer.Scope($"if ({objectTypeProperty.Declaration.Name} != null)") : default;
+                    }
+
                     foreach (XmlObjectAttributeSerialization property in objectSerialization.Attributes)
                     {
-                        using (property.Type.IsNullable ? writer.Scope($"if ({property.MemberName} != null)") : default)
+                        using (CheckPropertyForNull(property.Property))
                         {
                             writer.Line($"{writerName}.WriteStartAttribute({property.Name:L});");
                             writer.ToSerializeValueCall(
-                                w => w.Append($"{property.MemberName}"),
+                                w => w.Append($"{property.Property.Declaration.Name}"),
                                 writerName,
                                 property.ValueSerialization);
                             writer.Line($"{writerName}.WriteEndAttribute();");
@@ -79,21 +86,21 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (XmlObjectElementSerialization property in objectSerialization.Elements)
                     {
-                        using (property.Type.IsNullable ? writer.Scope($"if ({property.MemberName} != null)") : default)
+                        using (CheckPropertyForNull(property.Property))
                         {
                             writer.ToSerializeCall(
                                 property.ValueSerialization,
-                                w => w.Append($"{property.MemberName}"));
+                                w => w.Append($"{property.Property.Declaration.Name}"));
                         }
                     }
 
                     foreach (XmlObjectArraySerialization property in objectSerialization.EmbeddedArrays)
                     {
-                        using (property.ArraySerialization.Type.IsNullable ? writer.Scope($"if ({property.MemberName} != null)") : default)
+                        using (CheckPropertyForNull(property.Property))
                         {
                             writer.ToSerializeCall(
                                 property.ArraySerialization,
-                                w => w.Append($"{property.MemberName}"));
+                                w => w.Append($"{property.Property.Declaration.Name}"));
                         }
                     }
 
@@ -174,137 +181,144 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.LineRaw(");");
         }
 
-        public static void ToDeserializeCall(this CodeWriter writer, XmlElementSerialization serialization, CodeWriterDelegate element, ref string destination, bool isElement = false)
+        public static void ToDeserializeCall(this CodeWriter writer, XmlElementSerialization serialization, CodeWriterDelegate element, Action<CodeWriter, CodeWriterDelegate> valueCallback, bool isElement = false)
         {
-            var type = serialization.Type;
-
-            var destinationDeclaration = new CodeWriterDeclaration(destination);
-
-            writer.Line($"{type} {destinationDeclaration:D} = default;");
-
-            destination = destinationDeclaration.ActualName;
-
             if (isElement)
             {
-                writer.ToDeserializeElementCall(serialization, w=> w.Append(destinationDeclaration), element);
+                writer.ToDeserializeElementCall(serialization, valueCallback, element);
             }
             else
             {
-                writer.ToDeserializeCall(serialization, w => w.Append(destinationDeclaration), element);
+                writer.ToDeserializeCall(serialization, valueCallback, element);
             }
         }
 
-        private static void ToDeserializeCall(this CodeWriter writer, XmlElementSerialization serialization, CodeWriterDelegate destination, CodeWriterDelegate element)
+        private static void ToDeserializeCall(this CodeWriter writer, XmlElementSerialization serialization, Action<CodeWriter, CodeWriterDelegate> valueCallback, CodeWriterDelegate element)
         {
             if (serialization is XmlArraySerialization arraySerialization && !arraySerialization.Wrapped)
             {
-                writer.ToDeserializeElementCall(serialization, destination, element);
+                writer.ToDeserializeElementCall(serialization, valueCallback, element);
                 return;
             }
 
-            var elementVariable = new CodeWriterDeclaration(serialization.Name.ToVariableName());
-
-            writer.Line($"var {elementVariable:D} = {element}.Element({serialization.Name:L});");
-
-            element = w => w.Append(elementVariable);
-
-            using (writer.Scope($"if ({elementVariable} != null)"))
+            var elementVariable = new CodeWriterDeclaration(serialization.Name.ToVariableName() + "Element");
+            using (writer.Scope($"if ({element}.Element({serialization.Name:L}) is {typeof(XElement)} {elementVariable:D})"))
             {
-                writer.ToDeserializeElementCall(serialization, destination, element);
+                writer.ToDeserializeElementCall(serialization,
+                    valueCallback,
+                    w => w.Append(elementVariable));
             }
         }
 
-        private static void ToDeserializeElementCall(this CodeWriter writer, XmlElementSerialization serialization, CodeWriterDelegate destination, CodeWriterDelegate element, bool isElement = false)
+        private static void ToDeserializeElementCall(this CodeWriter writer, XmlElementSerialization serialization, Action<CodeWriter, CodeWriterDelegate> valueCallback, CodeWriterDelegate element, bool isElement = false)
         {
             switch (serialization)
             {
                 case XmlArraySerialization arraySerialization:
                 {
+                    var arrayVariable = new CodeWriterDeclaration("array");
                     var childElementVariable = new CodeWriterDeclaration("e");
 
-                    writer.Line($"{destination} = new {arraySerialization.ImplementationType}();");
+                    writer.Line($"var {arrayVariable:D} = new {arraySerialization.Type}();");
 
                     using (writer.Scope($"foreach (var {childElementVariable:D} in {element}.Elements({arraySerialization.ValueSerialization.Name:L}))"))
                     {
-                        var itemVariableName = "value";
                         writer.ToDeserializeCall(
                             arraySerialization.ValueSerialization,
                             w => w.Append(childElementVariable),
-                            ref itemVariableName,
+                            (w, v) => w.Line($"{arrayVariable}.Add({v});"),
                             true);
-
-                        writer.Line($"{destination}.Add({itemVariableName});");
                     }
 
-                    break;
+                    valueCallback(writer, w => w.Append(arrayVariable));
+                    return;
                 }
                 case XmlDictionarySerialization dictionarySerialization:
                 {
-                    writer.Append($"{destination} = new {dictionarySerialization.ImplementationType}();");
+                    var dictionaryVariable = new CodeWriterDeclaration("dictionary");
+                    writer.Line($"var {dictionaryVariable:D} = new {dictionarySerialization.Type}();");
 
-                    var elementsVariable = new CodeWriterDeclaration("elements");
                     var elementVariable = new CodeWriterDeclaration("e");
 
-                    writer.Line($"var {elementsVariable:D} = {element}.Elements();");
-                    using (writer.Scope($"foreach (var {elementVariable:D} in {elementsVariable})"))
+                    using (writer.Scope($"foreach (var {elementVariable:D} in {element}.Elements())"))
                     {
-                        var itemVariableName = "value";
                         writer.ToDeserializeCall(
                             dictionarySerialization.ValueSerialization,
                             w => w.Append(elementVariable),
-                            ref itemVariableName,
+                            (w, v) => w.Line($"{dictionaryVariable}.Add({elementVariable}.Name.LocalName, {v});"),
                             true);
-
-                        writer.Line($"{destination}.Add({elementVariable}.Name.LocalName, {itemVariableName});");
                     }
 
-                    break;
+                    valueCallback(writer, w => w.Append(dictionaryVariable));
+                    return;
                 }
                 case XmlObjectSerialization elementSerialization:
-                    writer.Append($"{destination} = new {elementSerialization.Type}();");
+
+                    var propertyVariables = new Dictionary<ObjectTypeProperty, CodeWriterDeclaration>();
+
+                    CollectProperties(propertyVariables, elementSerialization);
+
+                    foreach (var variable in propertyVariables)
+                    {
+                        var objectTypeProperty = variable.Key;
+                        writer.Append($"{objectTypeProperty.Declaration.Type} {variable.Value:D} = ");
+                        if (objectTypeProperty.InitializeWithType != null)
+                        {
+                            writer.Append($"new {objectTypeProperty.InitializeWithType}()");
+                        }
+                        else
+                        {
+                            writer.Append($"default");
+                        }
+                        writer.Line($";");
+                    }
+
 
                     foreach (XmlObjectAttributeSerialization attribute in elementSerialization.Attributes)
                     {
-                        var elementVariable = new CodeWriterDeclaration(attribute.MemberName.ToVariableName());
-
-                        writer.Line($"var {elementVariable:D} = {element}.Attribute({attribute.Name:L});");
-                        using (writer.Scope($"if ({elementVariable} != null)"))
+                        var attributeVariable = new CodeWriterDeclaration(attribute.Property.Declaration.Name.ToVariableName() + "Attribute");
+                        using (writer.Scope($"if ({element}.Attribute({attribute.Name:L}) is {typeof(XAttribute)} {attributeVariable:D})"))
                         {
-                            writer.Append($"{destination}.{attribute.MemberName} = ");
-                            writer.ToDeserializeValueCall(attribute.ValueSerialization, w => w.Append(elementVariable));
+                            writer.Append($"{propertyVariables[attribute.Property]} = ");
+                            writer.ToDeserializeValueCall(attribute.ValueSerialization, w => w.Append(attributeVariable));
                             writer.Line($";");
                         }
                     }
 
                     foreach (XmlObjectElementSerialization elem in elementSerialization.Elements)
                     {
-                        var itemVariableName = "value";
                         writer.ToDeserializeCall(
                             elem.ValueSerialization,
                             element,
-                            ref itemVariableName);
-
-                        writer.Line($"{destination}.{elem.MemberName} = {itemVariableName};");
+                            (w, v) => w.Line($"{propertyVariables[elem.Property]} = {v};"));
                     }
 
                     foreach (var embeddedArray in elementSerialization.EmbeddedArrays)
                     {
-                        CodeWriterDelegate arrayDestination = w => w.Append($"{destination}.{embeddedArray.MemberName}");
-
                         writer.ToDeserializeCall(
                             embeddedArray.ArraySerialization,
-                            arrayDestination,
+                            (w, v) => w.Line($"{propertyVariables[embeddedArray.Property]} = {v};"),
                             element);
                     }
 
-                    break;
+                    var initializers = new List<ObjectPropertyInitializer>();
+                    foreach (var variable in propertyVariables)
+                    {
+                        var property = variable.Key;
+
+                        initializers.Add(new ObjectPropertyInitializer(
+                            property,
+                            new Reference(variable.Value.ActualName, property.Declaration.Type)));
+                    }
+
+                    valueCallback(writer,
+                        w => w.WriteInitialization((ObjectType) elementSerialization.Type.Implementation, initializers));
+
+                    return;
                 case XmlElementValueSerialization valueSerialization:
                 {
-                    writer.Append($"{destination} = ");
-                    writer.ToDeserializeValueCall(valueSerialization.Value, w => w.Append(element));
-                    writer.Line($";");
-
-                    break;
+                    valueCallback(writer, w => w.ToDeserializeValueCall(valueSerialization.Value, element));
+                    return;
                 }
             }
         }
@@ -381,14 +395,33 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         }
 
         public static void WriteDeserializationForMethods(this CodeWriter writer, XmlElementSerialization serialization,
-            ref string destination, string response, string document = "document")
+            Action<CodeWriter, CodeWriterDelegate> valueCallback, string response)
         {
+            var document = new CodeWriterDeclaration("document");
             writer.Line($"var {document:D} = {typeof(XDocument)}.Load({response}.ContentStream, LoadOptions.PreserveWhitespace);");
             writer.ToDeserializeCall(
                 serialization,
-                w => w.Append($"{document}"),
-                ref destination
+                w => w.Append(document),
+                valueCallback
             );
+        }
+
+        private static void CollectProperties(Dictionary<ObjectTypeProperty, CodeWriterDeclaration> propertyVariables, XmlObjectSerialization element)
+        {
+            foreach (var attribute in element.Attributes)
+            {
+                propertyVariables.Add(attribute.Property, new CodeWriterDeclaration(attribute.Property.Declaration.Name.ToVariableName()));
+            }
+
+            foreach (var attribute in element.Elements)
+            {
+                propertyVariables.Add(attribute.Property, new CodeWriterDeclaration(attribute.Property.Declaration.Name.ToVariableName()));
+            }
+
+            foreach (var attribute in element.EmbeddedArrays)
+            {
+                propertyVariables.Add(attribute.Property, new CodeWriterDeclaration(attribute.Property.Declaration.Name.ToVariableName()));
+            }
         }
     }
 }

@@ -27,8 +27,8 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> A list of network interfaces in a resource group. </summary>
-        public IList<NetworkInterface> Value { get; internal set; }
+        public IList<NetworkInterface> Value { get; }
         /// <summary> The URL to get the next set of results. </summary>
-        public string NextLink { get; internal set; }
+        public string NextLink { get; }
     }
 }

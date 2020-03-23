@@ -43,40 +43,32 @@ namespace Azure.Storage.Tables.Models
 
         internal static StorageServiceProperties DeserializeStorageServiceProperties(XElement element)
         {
-            StorageServiceProperties result = default;
-            result = new StorageServiceProperties(); Logging value = default;
-            var logging = element.Element("Logging");
-            if (logging != null)
+            Logging logging = default;
+            Metrics hourMetrics = default;
+            Metrics minuteMetrics = default;
+            IList<CorsRule> cors = default;
+            if (element.Element("Logging") is XElement loggingElement)
             {
-                value = Logging.DeserializeLogging(logging);
+                logging = Logging.DeserializeLogging(loggingElement);
             }
-            result.Logging = value;
-            Metrics value0 = default;
-            var hourMetrics = element.Element("HourMetrics");
-            if (hourMetrics != null)
+            if (element.Element("HourMetrics") is XElement hourMetricsElement)
             {
-                value0 = Metrics.DeserializeMetrics(hourMetrics);
+                hourMetrics = Metrics.DeserializeMetrics(hourMetricsElement);
             }
-            result.HourMetrics = value0;
-            Metrics value1 = default;
-            var minuteMetrics = element.Element("MinuteMetrics");
-            if (minuteMetrics != null)
+            if (element.Element("MinuteMetrics") is XElement minuteMetricsElement)
             {
-                value1 = Metrics.DeserializeMetrics(minuteMetrics);
+                minuteMetrics = Metrics.DeserializeMetrics(minuteMetricsElement);
             }
-            result.MinuteMetrics = value1;
-            var cors = element.Element("Cors");
-            if (cors != null)
+            if (element.Element("Cors") is XElement corsElement)
             {
-                result.Cors = new List<CorsRule>();
-                foreach (var e in cors.Elements("CorsRule"))
+                var array = new List<CorsRule>();
+                foreach (var e in corsElement.Elements("CorsRule"))
                 {
-                    CorsRule value2 = default;
-                    value2 = CorsRule.DeserializeCorsRule(e);
-                    result.Cors.Add(value2);
+                    array.Add(CorsRule.DeserializeCorsRule(e));
                 }
+                cors = array;
             }
-            return result;
+            return new StorageServiceProperties(logging, hourMetrics, minuteMetrics, cors);
         }
     }
 }

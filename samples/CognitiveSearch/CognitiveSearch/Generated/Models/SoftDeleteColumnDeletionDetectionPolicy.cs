@@ -24,7 +24,7 @@ namespace CognitiveSearch.Models
         {
             SoftDeleteColumnName = softDeleteColumnName;
             SoftDeleteMarkerValue = softDeleteMarkerValue;
-            OdataType = "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy";
+            OdataType = odataType ?? "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy";
         }
 
         /// <summary> The name of the column to use for soft-deletion detection. </summary>

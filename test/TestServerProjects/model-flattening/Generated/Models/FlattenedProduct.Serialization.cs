@@ -75,7 +75,15 @@ namespace model_flattening.Models
 
         internal static FlattenedProduct DeserializeFlattenedProduct(JsonElement element)
         {
-            FlattenedProduct result = new FlattenedProduct();
+            string id = default;
+            string type = default;
+            IDictionary<string, string> tags = default;
+            string location = default;
+            string name = default;
+            string pname = default;
+            string type0 = default;
+            FlattenedProductPropertiesProvisioningStateValues? provisioningStateValues = default;
+            string provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -84,7 +92,7 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -93,7 +101,7 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    result.Type = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -102,11 +110,12 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    result.Tags = new Dictionary<string, string>();
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        result.Tags.Add(property0.Name, property0.Value.GetString());
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
+                    tags = dictionary;
                     continue;
                 }
                 if (property.NameEquals("location"))
@@ -115,7 +124,7 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    result.Location = property.Value.GetString();
+                    location = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -124,7 +133,7 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -137,7 +146,7 @@ namespace model_flattening.Models
                             {
                                 continue;
                             }
-                            result.PName = property0.Value.GetString();
+                            pname = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("type"))
@@ -146,7 +155,7 @@ namespace model_flattening.Models
                             {
                                 continue;
                             }
-                            result.TypePropertiesType = property0.Value.GetString();
+                            type0 = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("provisioningStateValues"))
@@ -155,7 +164,7 @@ namespace model_flattening.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningStateValues = new FlattenedProductPropertiesProvisioningStateValues(property0.Value.GetString());
+                            provisioningStateValues = new FlattenedProductPropertiesProvisioningStateValues(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -164,14 +173,14 @@ namespace model_flattening.Models
                             {
                                 continue;
                             }
-                            result.ProvisioningState = property0.Value.GetString();
+                            provisioningState = property0.Value.GetString();
                             continue;
                         }
                     }
                     continue;
                 }
             }
-            return result;
+            return new FlattenedProduct(pname, type0, provisioningStateValues, provisioningState, id, type, tags, location, name);
         }
     }
 }

@@ -15,22 +15,17 @@ namespace Azure.Storage.Tables.Models
     {
         internal static GeoReplication DeserializeGeoReplication(XElement element)
         {
-            GeoReplication result = default;
-            result = new GeoReplication(); GeoReplicationStatusType value = default;
-            var status = element.Element("Status");
-            if (status != null)
+            GeoReplicationStatusType status = default;
+            DateTimeOffset lastSyncTime = default;
+            if (element.Element("Status") is XElement statusElement)
             {
-                value = new GeoReplicationStatusType(status.Value);
+                status = new GeoReplicationStatusType(statusElement.Value);
             }
-            result.Status = value;
-            DateTimeOffset value0 = default;
-            var lastSyncTime = element.Element("LastSyncTime");
-            if (lastSyncTime != null)
+            if (element.Element("LastSyncTime") is XElement lastSyncTimeElement)
             {
-                value0 = lastSyncTime.GetDateTimeOffsetValue("R");
+                lastSyncTime = lastSyncTimeElement.GetDateTimeOffsetValue("R");
             }
-            result.LastSyncTime = value0;
-            return result;
+            return new GeoReplication(status, lastSyncTime);
         }
     }
 }

@@ -13,8 +13,10 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class KeyValueElement
     {
         /// <summary> Initializes a new instance of KeyValueElement. </summary>
-        internal KeyValueElement()
+        /// <param name="text"> The text content of the key or value. </param>
+        internal KeyValueElement(string text)
         {
+            Text = text;
         }
 
         /// <summary> Initializes a new instance of KeyValueElement. </summary>
@@ -29,10 +31,10 @@ namespace Azure.AI.FormRecognizer.Models
         }
 
         /// <summary> The text content of the key or value. </summary>
-        public string Text { get; internal set; }
+        public string Text { get; }
         /// <summary> Bounding box of the key or value. </summary>
-        public IList<float> BoundingBox { get; internal set; }
+        public IList<float> BoundingBox { get; }
         /// <summary> When includeTextDetails is set to true, a list of references to the text elements constituting this key or value. </summary>
-        public IList<string> Elements { get; internal set; }
+        public IList<string> Elements { get; }
     }
 }

@@ -20,10 +20,9 @@ namespace CognitiveSearch.Models
         /// <param name="odataType"> . </param>
         internal DataDeletionDetectionPolicy(string odataType)
         {
-            OdataType = odataType;
-            OdataType = null;
+            OdataType = odataType ?? null;
         }
 
-        public string OdataType { get; internal set; }
+        internal string OdataType { get; set; }
     }
 }

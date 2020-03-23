@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -67,7 +68,14 @@ namespace AppConfiguration.Models
 
         internal static KeyValue DeserializeKeyValue(JsonElement element)
         {
-            KeyValue result = new KeyValue();
+            string key = default;
+            string label = default;
+            string contentType = default;
+            string value = default;
+            DateTimeOffset? lastModified = default;
+            IDictionary<string, string> tags = default;
+            bool? locked = default;
+            string etag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("key"))
@@ -76,7 +84,7 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    result.Key = property.Value.GetString();
+                    key = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("label"))
@@ -85,7 +93,7 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    result.Label = property.Value.GetString();
+                    label = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("content_type"))
@@ -94,7 +102,7 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    result.ContentType = property.Value.GetString();
+                    contentType = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("value"))
@@ -103,7 +111,7 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    result.Value = property.Value.GetString();
+                    value = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("last_modified"))
@@ -112,7 +120,7 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    result.LastModified = property.Value.GetDateTimeOffset("S");
+                    lastModified = property.Value.GetDateTimeOffset("S");
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -121,11 +129,12 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    result.Tags = new Dictionary<string, string>();
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        result.Tags.Add(property0.Name, property0.Value.GetString());
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
+                    tags = dictionary;
                     continue;
                 }
                 if (property.NameEquals("locked"))
@@ -134,7 +143,7 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    result.Locked = property.Value.GetBoolean();
+                    locked = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("etag"))
@@ -143,11 +152,11 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    result.Etag = property.Value.GetString();
+                    etag = property.Value.GetString();
                     continue;
                 }
             }
-            return result;
+            return new KeyValue(key, label, contentType, value, lastModified, tags, locked, etag);
         }
     }
 }

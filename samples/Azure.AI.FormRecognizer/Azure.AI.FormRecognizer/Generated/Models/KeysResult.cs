@@ -13,11 +13,6 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class KeysResult
     {
         /// <summary> Initializes a new instance of KeysResult. </summary>
-        internal KeysResult()
-        {
-        }
-
-        /// <summary> Initializes a new instance of KeysResult. </summary>
         /// <param name="clusters"> Object mapping clusterIds to a list of keys. </param>
         internal KeysResult(IDictionary<string, IList<string>> clusters)
         {
@@ -25,6 +20,6 @@ namespace Azure.AI.FormRecognizer.Models
         }
 
         /// <summary> Object mapping clusterIds to a list of keys. </summary>
-        public IDictionary<string, IList<string>> Clusters { get; internal set; } = new Dictionary<string, IList<string>>();
+        public IDictionary<string, IList<string>> Clusters { get; } = new Dictionary<string, IList<string>>();
     }
 }

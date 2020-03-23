@@ -42,18 +42,18 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The name of the resource that is unique within the set of backend address pools used by the load balancer. This name can be used to access the resource. </summary>
         public string Name { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string Etag { get; internal set; }
+        public string Etag { get; }
         /// <summary> Type of the resource. </summary>
-        public string Type { get; internal set; }
+        public string Type { get; }
         /// <summary> An array of references to IP addresses defined in network interfaces. </summary>
-        public IList<NetworkInterfaceIPConfiguration> BackendIPConfigurations { get; internal set; }
+        public IList<NetworkInterfaceIPConfiguration> BackendIPConfigurations { get; }
         /// <summary> An array of references to load balancing rules that use this backend address pool. </summary>
-        public IList<SubResource> LoadBalancingRules { get; internal set; }
+        public IList<SubResource> LoadBalancingRules { get; }
         /// <summary> A reference to an outbound rule that uses this backend address pool. </summary>
-        public SubResource OutboundRule { get; internal set; }
+        public SubResource OutboundRule { get; }
         /// <summary> An array of references to outbound rules that use this backend address pool. </summary>
-        public IList<SubResource> OutboundRules { get; internal set; }
+        public IList<SubResource> OutboundRules { get; }
         /// <summary> The provisioning state of the backend address pool resource. </summary>
-        public ProvisioningState? ProvisioningState { get; internal set; }
+        public ProvisioningState? ProvisioningState { get; }
     }
 }

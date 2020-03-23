@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Serialization.Json
             Format = format;
         }
 
-        public override CSharpType Type { get; }
+        public CSharpType Type { get; }
         public SerializationFormat Format { get; }
     }
 }

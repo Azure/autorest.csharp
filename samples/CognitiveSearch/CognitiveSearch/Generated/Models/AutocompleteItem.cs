@@ -25,8 +25,8 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The completed term. </summary>
-        public string Text { get; internal set; }
+        public string Text { get; }
         /// <summary> The query along with the completed term. </summary>
-        public string QueryPlusText { get; internal set; }
+        public string QueryPlusText { get; }
     }
 }

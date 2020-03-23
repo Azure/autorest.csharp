@@ -48,13 +48,13 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The name of the resource that is unique within the set of inbound NAT rules used by the load balancer. This name can be used to access the resource. </summary>
         public string Name { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string Etag { get; internal set; }
+        public string Etag { get; }
         /// <summary> Type of the resource. </summary>
-        public string Type { get; internal set; }
+        public string Type { get; }
         /// <summary> A reference to frontend IP addresses. </summary>
         public SubResource FrontendIPConfiguration { get; set; }
         /// <summary> A reference to a private IP address defined on a network interface of a VM. Traffic sent to the frontend port of each of the frontend IP configurations is forwarded to the backend IP. </summary>
-        public NetworkInterfaceIPConfiguration BackendIPConfiguration { get; internal set; }
+        public NetworkInterfaceIPConfiguration BackendIPConfiguration { get; }
         /// <summary> The reference to the transport protocol used by the load balancing rule. </summary>
         public TransportProtocol? Protocol { get; set; }
         /// <summary> The port for the external endpoint. Port numbers for each rule must be unique within the Load Balancer. Acceptable values range from 1 to 65534. </summary>
@@ -68,6 +68,6 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP. </summary>
         public bool? EnableTcpReset { get; set; }
         /// <summary> The provisioning state of the inbound NAT rule resource. </summary>
-        public ProvisioningState? ProvisioningState { get; internal set; }
+        public ProvisioningState? ProvisioningState { get; }
     }
 }

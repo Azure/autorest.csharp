@@ -29,10 +29,10 @@ namespace Azure.AI.FormRecognizer.Models
         }
 
         /// <summary> Summary of all trained custom models. </summary>
-        public ModelsSummary Summary { get; internal set; }
+        public ModelsSummary Summary { get; }
         /// <summary> Collection of trained custom models. </summary>
-        public IList<ModelInfo> ModelList { get; internal set; }
+        public IList<ModelInfo> ModelList { get; }
         /// <summary> Link to the next page of custom models. </summary>
-        public string NextLink { get; internal set; }
+        public string NextLink { get; }
     }
 }

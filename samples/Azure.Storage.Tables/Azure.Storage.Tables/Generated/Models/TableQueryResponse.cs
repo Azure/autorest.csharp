@@ -27,8 +27,8 @@ namespace Azure.Storage.Tables.Models
         }
 
         /// <summary> The metadata response of the table. </summary>
-        public string OdataMetadata { get; internal set; }
+        public string OdataMetadata { get; }
         /// <summary> List of tables. </summary>
-        public IList<TableResponseProperties> Value { get; internal set; }
+        public IList<TableResponseProperties> Value { get; }
     }
 }

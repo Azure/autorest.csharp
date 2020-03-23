@@ -537,34 +537,27 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutComplexPolymorphismValid() => TestStatus(async (host, pipeline) =>
         {
-            var value = new Salmon()
+            var value = new Salmon(1)
             {
                 Location = "alaska",
                 Iswild = true,
                 Species = "king",
-                Length = 1,
                 Siblings = new[]
                 {
-                    new Shark
+                    new Shark(DateTimeOffset.Parse("2012-01-05T01:00:00Z"), 20)
                     {
                         Age = 6,
-                        Birthday = DateTimeOffset.Parse("2012-01-05T01:00:00Z"),
-                        Length = 20,
                         Species = "predator"
                     },
-                    new Sawshark()
+                    new Sawshark(DateTimeOffset.Parse("1900-01-05T01:00:00Z"), 10)
                     {
                         Age = 105,
-                        Birthday = DateTimeOffset.Parse("1900-01-05T01:00:00Z"),
                         Picture = new byte[] {255, 255, 255, 255, 254},
-                        Length = 10,
                         Species = "dangerous"
                     },
-                    new Goblinshark()
+                    new Goblinshark(DateTimeOffset.Parse("2015-08-08T00:00:00Z"), 30)
                     {
                         Age = 1,
-                        Birthday = DateTimeOffset.Parse("2015-08-08T00:00:00Z"),
-                        Length = 30,
                         Species = "scary",
                         Jawsize = 5,
                         Color = "pinkish-gray"
@@ -627,34 +620,27 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutComplexPolymorphismComplicated() => TestStatus(async (host, pipeline) =>
         {
-            var value = new SmartSalmon()
+            var value = new SmartSalmon(1)
             {
                 Location = "alaska",
                 Iswild = true,
                 Species = "king",
-                Length = 1,
                 Siblings = new[]
                 {
-                    new Shark
+                    new Shark(DateTimeOffset.Parse("2012-01-05T01:00:00Z"), 20)
                     {
                         Age = 6,
-                        Birthday = DateTimeOffset.Parse("2012-01-05T01:00:00Z"),
-                        Length = 20,
                         Species = "predator"
                     },
-                    new Sawshark()
+                    new Sawshark(DateTimeOffset.Parse("1900-01-05T01:00:00Z"), 10)
                     {
                         Age = 105,
-                        Birthday = DateTimeOffset.Parse("1900-01-05T01:00:00Z"),
                         Picture = new byte[] {255, 255, 255, 255, 254},
-                        Length = 10,
                         Species = "dangerous"
                     },
-                    new Goblinshark()
+                    new Goblinshark(DateTimeOffset.Parse("2015-08-08T00:00:00Z"), 30)
                     {
                         Age = 1,
-                        Birthday = DateTimeOffset.Parse("2015-08-08T00:00:00Z"),
-                        Length = 30,
                         Species = "scary",
                         Jawsize = 5,
                         Color = "pinkish-gray"
@@ -674,34 +660,27 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutComplexPolymorphismNoDiscriminator() => TestStatus(async (host, pipeline) =>
         {
-            var value = new Salmon()
+            var value = new Salmon(1)
             {
                 Location = "alaska",
                 Iswild = true,
                 Species = "king",
-                Length = 1,
                 Siblings = new[]
                 {
-                    new Shark
+                    new Shark(DateTimeOffset.Parse("2012-01-05T01:00:00Z"), 20)
                     {
                         Age = 6,
-                        Birthday = DateTimeOffset.Parse("2012-01-05T01:00:00Z"),
-                        Length = 20,
                         Species = "predator"
                     },
-                    new Sawshark()
+                    new Sawshark(DateTimeOffset.Parse("1900-01-05T01:00:00Z"), 10)
                     {
                         Age = 105,
-                        Birthday = DateTimeOffset.Parse("1900-01-05T01:00:00Z"),
                         Picture = new byte[] {255, 255, 255, 255, 254},
-                        Length = 10,
                         Species = "dangerous"
                     },
-                    new Goblinshark()
+                    new Goblinshark(DateTimeOffset.Parse("2015-08-08T00:00:00Z"), 30)
                     {
                         Age = 1,
-                        Birthday = DateTimeOffset.Parse("2015-08-08T00:00:00Z"),
-                        Length = 30,
                         Species = "scary",
                         Jawsize = 5,
                         Color = "pinkish-gray"
@@ -932,65 +911,53 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutComplexPolymorphicRecursiveValid() => TestStatus(async (host, pipeline) =>
         {
-            var value = new Salmon()
+            var value = new Salmon(1)
             {
                 Location = "alaska",
                 Iswild = true,
                 Species = "king",
-                Length = 1,
                 Siblings = new[]
                 {
-                    new Shark
+                    new Shark(DateTimeOffset.Parse("2012-01-05T01:00:00Z"), 20)
                     {
                         Age = 6,
-                        Birthday = DateTimeOffset.Parse("2012-01-05T01:00:00Z"),
-                        Length = 20,
                         Species = "predator",
                         Siblings = new Fish[]
                         {
-                            new Salmon()
+                            new Salmon(2)
                             {
                                 Location = "atlantic",
                                 Iswild = true,
                                 Species = "coho",
-                                Length = 2,
                                 Siblings = new[]
                                 {
-                                    new Shark
+                                    new Shark(DateTimeOffset.Parse("2012-01-05T01:00:00Z"), 20)
                                     {
                                         Age = 6,
-                                        Birthday = DateTimeOffset.Parse("2012-01-05T01:00:00Z"),
-                                        Length = 20,
                                         Species = "predator",
                                     },
-                                    new Sawshark()
+                                    new Sawshark(DateTimeOffset.Parse("1900-01-05T01:00:00Z"), 10)
                                     {
                                         Age = 105,
-                                        Birthday = DateTimeOffset.Parse("1900-01-05T01:00:00Z"),
                                         Picture = new byte[] {255, 255, 255, 255, 254},
-                                        Length = 10,
                                         Species = "dangerous"
                                     },
                                 }
                             },
 
-                            new Sawshark()
+                            new Sawshark(DateTimeOffset.Parse("1900-01-05T01:00:00Z"), 10)
                             {
                                 Age = 105,
-                                Birthday = DateTimeOffset.Parse("1900-01-05T01:00:00Z"),
                                 Picture = new byte[] {255, 255, 255, 255, 254},
-                                Length = 10,
                                 Species = "dangerous",
                                 Siblings = new Fish[] {}
                             },
                         }
                     },
-                    new Sawshark()
+                    new Sawshark(DateTimeOffset.Parse("1900-01-05T01:00:00Z"), 10)
                     {
                         Age = 105,
-                        Birthday = DateTimeOffset.Parse("1900-01-05T01:00:00Z"),
                         Picture = new byte[] {255, 255, 255, 255, 254},
-                        Length = 10,
                         Species = "dangerous",
                         Siblings = new Fish[] {}
                     },
@@ -1042,26 +1009,27 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ReadonlyPropertiesAreGetOnly()
         {
-            Assert.False(typeof(ReadonlyObj).GetProperty(nameof(ReadonlyObj.Id)).SetMethod.IsPublic);
+            Assert.Null(typeof(ReadonlyObj).GetProperty(nameof(ReadonlyObj.Id)).SetMethod);
         }
 
         [Test]
         public void PolymorphicModelsDiscriminatorValueSet()
         {
-            var shark = new Shark();
+            var shark = new Shark(default, default);
             Assert.AreEqual("shark" ,shark.Fishtype);
         }
 
         [Test]
-        public void DiscriminatorPropertiesAreGetOnly()
+        public void DiscriminatorPropertiesAreInternal()
         {
-            Assert.False(typeof(Shark).GetProperty(nameof(Shark.Fishtype)).SetMethod.IsPublic);
+            var prop = TypeAsserts.HasProperty(typeof(Shark), nameof(Shark.Fishtype), BindingFlags.Instance | BindingFlags.NonPublic);
+            Assert.NotNull(prop.SetMethod);
         }
 
         [Test]
         public void OutputSchemaPropertiesReadonly()
         {
-            Assert.False(typeof(Error).GetProperty(nameof(Error.Message)).SetMethod.IsPublic);
+            Assert.Null(typeof(Error).GetProperty(nameof(Error.Message)).SetMethod);
         }
 
         [Test]
@@ -1069,7 +1037,7 @@ namespace AutoRest.TestServer.Tests
         {
             Assert.NotNull(typeof(Shark)
                 .GetConstructors(BindingFlags.Instance | BindingFlags.Public)
-                .SingleOrDefault(c => c.GetParameters().Length == 0));
+                .SingleOrDefault(c => c.GetParameters().Length == 2));
         }
 
         [Test]

@@ -34,7 +34,10 @@ namespace CognitiveSearch.Models
 
         internal static NGramTokenFilter DeserializeNGramTokenFilter(JsonElement element)
         {
-            NGramTokenFilter result = new NGramTokenFilter();
+            int? minGram = default;
+            int? maxGram = default;
+            string odatatype = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("minGram"))
@@ -43,7 +46,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.MinGram = property.Value.GetInt32();
+                    minGram = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("maxGram"))
@@ -52,21 +55,21 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.MaxGram = property.Value.GetInt32();
+                    maxGram = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
-            return result;
+            return new NGramTokenFilter(minGram, maxGram, odatatype, name);
         }
     }
 }

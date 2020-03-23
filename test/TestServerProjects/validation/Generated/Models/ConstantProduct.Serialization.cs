@@ -24,21 +24,22 @@ namespace validation.Models
 
         internal static ConstantProduct DeserializeConstantProduct(JsonElement element)
         {
-            ConstantProduct result = new ConstantProduct();
+            string constProperty = default;
+            string constProperty2 = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("constProperty"))
                 {
-                    result.ConstProperty = property.Value.GetString();
+                    constProperty = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("constProperty2"))
                 {
-                    result.ConstProperty2 = property.Value.GetString();
+                    constProperty2 = property.Value.GetString();
                     continue;
                 }
             }
-            return result;
+            return new ConstantProduct(constProperty, constProperty2);
         }
     }
 }

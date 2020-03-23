@@ -11,7 +11,8 @@ namespace CognitiveSearch.Models
     public partial class KeywordTokenizerV2 : Tokenizer
     {
         /// <summary> Initializes a new instance of KeywordTokenizerV2. </summary>
-        public KeywordTokenizerV2()
+        /// <param name="name"> The name of the tokenizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public KeywordTokenizerV2(string name) : base(name)
         {
             OdataType = "#Microsoft.Azure.Search.KeywordTokenizerV2";
         }
@@ -23,7 +24,7 @@ namespace CognitiveSearch.Models
         internal KeywordTokenizerV2(int? maxTokenLength, string odataType, string name) : base(odataType, name)
         {
             MaxTokenLength = maxTokenLength;
-            OdataType = "#Microsoft.Azure.Search.KeywordTokenizerV2";
+            OdataType = odataType ?? "#Microsoft.Azure.Search.KeywordTokenizerV2";
         }
 
         /// <summary> The maximum token length. Default is 256. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters. </summary>

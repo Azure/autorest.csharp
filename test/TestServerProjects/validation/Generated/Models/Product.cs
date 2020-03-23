@@ -13,8 +13,14 @@ namespace validation.Models
     public partial class Product
     {
         /// <summary> Initializes a new instance of Product. </summary>
-        public Product()
+        /// <param name="child"> The product documentation. </param>
+        /// <param name="constChild"> The product documentation. </param>
+        public Product(ChildProduct child, ConstantProduct constChild)
         {
+            Child = child;
+            ConstChild = constChild;
+            ConstInt = 0F;
+            ConstString = "constant";
         }
 
         /// <summary> Initializes a new instance of Product. </summary>
@@ -45,14 +51,14 @@ namespace validation.Models
         /// <summary> Image URL representing the product. </summary>
         public string Image { get; set; }
         /// <summary> The product documentation. </summary>
-        public ChildProduct Child { get; set; } = new ChildProduct();
+        public ChildProduct Child { get; }
         /// <summary> The product documentation. </summary>
-        public ConstantProduct ConstChild { get; set; } = new ConstantProduct();
+        public ConstantProduct ConstChild { get; }
         /// <summary> Constant int. </summary>
-        public float ConstInt { get; set; } = 0F;
+        public float ConstInt { get; }
         /// <summary> Constant string. </summary>
-        public string ConstString { get; set; } = "constant";
+        public string ConstString { get; }
         /// <summary> Constant string as Enum. </summary>
-        public string ConstStringAsEnum { get; set; } = "constant_string_as_enum";
+        public string ConstStringAsEnum { get; set; }
     }
 }

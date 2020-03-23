@@ -308,24 +308,24 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Line();
         }
 
-        private void WriteConstantOrParameter(CodeWriter writer, ParameterOrConstant constantOrParameter, bool ignoreNullability = false, bool enumAsString = false)
+        private void WriteConstantOrParameter(CodeWriter writer, ReferenceOrConstant constantOrReference, bool ignoreNullability = false, bool enumAsString = false)
         {
-            if (constantOrParameter.IsConstant)
+            if (constantOrReference.IsConstant)
             {
-                writer.WriteConstant(constantOrParameter.Constant);
+                writer.WriteConstant(constantOrReference.Constant);
             }
             else
             {
-                writer.AppendRaw(constantOrParameter.Parameter.Name);
+                writer.AppendRaw(constantOrReference.Reference.Name);
                 if (!ignoreNullability)
                 {
-                    writer.AppendNullableValue(constantOrParameter.Type);
+                    writer.AppendNullableValue(constantOrReference.Type);
                 }
             }
 
             if (enumAsString &&
-                !constantOrParameter.Type.IsFrameworkType &&
-                constantOrParameter.Type.Implementation is EnumType enumType)
+                !constantOrReference.Type.IsFrameworkType &&
+                constantOrReference.Type.Implementation is EnumType enumType)
             {
                 writer.AppendEnumToString(enumType);
             }
@@ -350,7 +350,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        private CodeWriter.CodeWriterScope? WriteValueNullCheck(CodeWriter writer, ParameterOrConstant value)
+        private CodeWriter.CodeWriterScope? WriteValueNullCheck(CodeWriter writer, ReferenceOrConstant value)
         {
             if (value.IsConstant)
                 return default;
@@ -358,7 +358,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             var type = value.Type;
             if (type.IsNullable)
             {
-                return writer.Scope($"if ({value.Parameter.Name} != null)");
+                return writer.Scope($"if ({value.Reference.Name} != null)");
             }
 
             return default;
@@ -406,7 +406,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     break;
             }
 
-            ParameterOrConstant value = queryParameter.Value;
+            ReferenceOrConstant value = queryParameter.Value;
             using (WriteValueNullCheck(writer, value))
             {
                 writer.Append($"{uri}.{method}({queryParameter.Name:L}, ");
@@ -437,7 +437,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     string valueVariable = "value";
                     if (responseBody is ObjectResponseBody objectResponseBody)
                     {
-                        writer.WriteDeserializationForMethods(objectResponseBody.Serialization, async, ref valueVariable, responseVariable);
+                        writer.Line($"{responseBody.Type} {valueVariable:D} = default;");
+                        writer.WriteDeserializationForMethods(
+                            objectResponseBody.Serialization,
+                            async,
+                            (w, v) => w.Line($"{valueVariable} = {v};"),
+                            responseVariable);
                     }
                     else if (responseBody is StreamResponseBody _)
                     {

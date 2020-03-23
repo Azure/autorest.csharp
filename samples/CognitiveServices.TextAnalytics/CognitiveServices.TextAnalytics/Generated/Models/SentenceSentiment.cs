@@ -13,8 +13,16 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class SentenceSentiment
     {
         /// <summary> Initializes a new instance of SentenceSentiment. </summary>
-        internal SentenceSentiment()
+        /// <param name="sentiment"> The predicted Sentiment for the sentence. </param>
+        /// <param name="sentenceScores"> The sentiment confidence score between 0 and 1 for the sentence for all classes. </param>
+        /// <param name="offset"> The sentence offset from the start of the document. </param>
+        /// <param name="length"> The length of the sentence by Unicode standard. </param>
+        internal SentenceSentiment(SentenceSentimentValue sentiment, SentimentConfidenceScorePerLabel sentenceScores, int offset, int length)
         {
+            Sentiment = sentiment;
+            SentenceScores = sentenceScores;
+            Offset = offset;
+            Length = length;
         }
 
         /// <summary> Initializes a new instance of SentenceSentiment. </summary>
@@ -33,14 +41,14 @@ namespace CognitiveServices.TextAnalytics.Models
         }
 
         /// <summary> The predicted Sentiment for the sentence. </summary>
-        public SentenceSentimentValue Sentiment { get; internal set; }
+        public SentenceSentimentValue Sentiment { get; }
         /// <summary> The sentiment confidence score between 0 and 1 for the sentence for all classes. </summary>
-        public SentimentConfidenceScorePerLabel SentenceScores { get; internal set; } = new SentimentConfidenceScorePerLabel();
+        public SentimentConfidenceScorePerLabel SentenceScores { get; }
         /// <summary> The sentence offset from the start of the document. </summary>
-        public int Offset { get; internal set; }
+        public int Offset { get; }
         /// <summary> The length of the sentence by Unicode standard. </summary>
-        public int Length { get; internal set; }
+        public int Length { get; }
         /// <summary> The warnings generated for the sentence. </summary>
-        public IList<string> Warnings { get; internal set; }
+        public IList<string> Warnings { get; }
     }
 }

@@ -11,8 +11,10 @@ namespace model_flattening.Models
     public partial class BaseProduct
     {
         /// <summary> Initializes a new instance of BaseProduct. </summary>
-        public BaseProduct()
+        /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
+        public BaseProduct(string productId)
         {
+            ProductId = productId;
         }
 
         /// <summary> Initializes a new instance of BaseProduct. </summary>
@@ -25,7 +27,7 @@ namespace model_flattening.Models
         }
 
         /// <summary> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </summary>
-        public string ProductId { get; set; }
+        public string ProductId { get; }
         /// <summary> Description of product. </summary>
         public string Description { get; set; }
     }

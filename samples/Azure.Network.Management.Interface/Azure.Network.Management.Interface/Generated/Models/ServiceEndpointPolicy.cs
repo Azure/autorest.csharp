@@ -38,14 +38,14 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string Etag { get; internal set; }
+        public string Etag { get; }
         /// <summary> A collection of service endpoint policy definitions of the service endpoint policy. </summary>
         public IList<ServiceEndpointPolicyDefinition> ServiceEndpointPolicyDefinitions { get; set; }
         /// <summary> A collection of references to subnets. </summary>
-        public IList<Subnet> Subnets { get; internal set; }
+        public IList<Subnet> Subnets { get; }
         /// <summary> The resource GUID property of the service endpoint policy resource. </summary>
-        public string ResourceGuid { get; internal set; }
+        public string ResourceGuid { get; }
         /// <summary> The provisioning state of the service endpoint policy resource. </summary>
-        public ProvisioningState? ProvisioningState { get; internal set; }
+        public ProvisioningState? ProvisioningState { get; }
     }
 }

@@ -25,6 +25,6 @@ namespace Azure.Storage.Management.Models
         }
 
         /// <summary> Gets or sets the list of Storage Resource Usages. </summary>
-        public IList<Usage> Value { get; internal set; }
+        public IList<Usage> Value { get; }
     }
 }

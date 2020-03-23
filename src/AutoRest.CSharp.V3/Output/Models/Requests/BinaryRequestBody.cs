@@ -5,9 +5,9 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
 {
     internal class BinaryRequestBody : RequestBody
     {
-        public ParameterOrConstant Value { get; }
+        public ReferenceOrConstant Value { get; }
 
-        public BinaryRequestBody(ParameterOrConstant value)
+        public BinaryRequestBody(ReferenceOrConstant value)
         {
             Value = value;
         }

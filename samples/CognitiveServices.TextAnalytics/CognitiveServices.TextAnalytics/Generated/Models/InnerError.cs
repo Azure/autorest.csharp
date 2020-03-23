@@ -13,8 +13,12 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class InnerError
     {
         /// <summary> Initializes a new instance of InnerError. </summary>
-        internal InnerError()
+        /// <param name="code"> Error code. </param>
+        /// <param name="message"> Error message. </param>
+        internal InnerError(InnerErrorCodeValue code, string message)
         {
+            Code = code;
+            Message = message;
         }
 
         /// <summary> Initializes a new instance of InnerError. </summary>
@@ -33,12 +37,12 @@ namespace CognitiveServices.TextAnalytics.Models
         }
 
         /// <summary> Error code. </summary>
-        public InnerErrorCodeValue Code { get; internal set; }
+        public InnerErrorCodeValue Code { get; }
         /// <summary> Error message. </summary>
-        public string Message { get; internal set; }
+        public string Message { get; }
         /// <summary> Error details. </summary>
-        public IDictionary<string, string> Details { get; internal set; }
+        public IDictionary<string, string> Details { get; }
         /// <summary> Error target. </summary>
-        public string Target { get; internal set; }
+        public string Target { get; }
     }
 }

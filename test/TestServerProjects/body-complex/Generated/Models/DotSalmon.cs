@@ -25,10 +25,10 @@ namespace body_complex.Models
         {
             Location = location;
             Iswild = iswild;
-            FishType = "DotSalmon";
+            FishType = fishType ?? "DotSalmon";
         }
 
-        public string Location { get; internal set; }
-        public bool? Iswild { get; internal set; }
+        public string Location { get; }
+        public bool? Iswild { get; }
     }
 }

@@ -42,11 +42,11 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The name of the resource that is unique within a resource group. This name can be used to access the resource. </summary>
         public string Name { get; set; }
         /// <summary> The resource type. </summary>
-        public string Type { get; internal set; }
+        public string Type { get; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string Etag { get; internal set; }
+        public string Etag { get; }
         /// <summary> The provisioning state of the private link service connection resource. </summary>
-        public ProvisioningState? ProvisioningState { get; internal set; }
+        public ProvisioningState? ProvisioningState { get; }
         /// <summary> The resource id of private link service. </summary>
         public string PrivateLinkServiceId { get; set; }
         /// <summary> The ID(s) of the group(s) obtained from the remote resource that this private endpoint should connect to. </summary>

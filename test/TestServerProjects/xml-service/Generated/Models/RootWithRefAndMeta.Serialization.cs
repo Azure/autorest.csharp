@@ -31,22 +31,17 @@ namespace xml_service.Models
 
         internal static RootWithRefAndMeta DeserializeRootWithRefAndMeta(XElement element)
         {
-            RootWithRefAndMeta result = default;
-            result = new RootWithRefAndMeta(); ComplexTypeWithMeta value = default;
-            var xMLComplexTypeWithMeta = element.Element("XMLComplexTypeWithMeta");
-            if (xMLComplexTypeWithMeta != null)
+            ComplexTypeWithMeta refToModel = default;
+            string something = default;
+            if (element.Element("XMLComplexTypeWithMeta") is XElement xMLComplexTypeWithMetaElement)
             {
-                value = ComplexTypeWithMeta.DeserializeComplexTypeWithMeta(xMLComplexTypeWithMeta);
+                refToModel = ComplexTypeWithMeta.DeserializeComplexTypeWithMeta(xMLComplexTypeWithMetaElement);
             }
-            result.RefToModel = value;
-            string value0 = default;
-            var something = element.Element("Something");
-            if (something != null)
+            if (element.Element("Something") is XElement somethingElement)
             {
-                value0 = (string)something;
+                something = (string)somethingElement;
             }
-            result.Something = value0;
-            return result;
+            return new RootWithRefAndMeta(refToModel, something);
         }
     }
 }

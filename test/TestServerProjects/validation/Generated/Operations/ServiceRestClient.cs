@@ -20,12 +20,12 @@ namespace validation
     {
         private string subscriptionId;
         private string host;
-        private string ApiVersion;
+        private string apiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
 
         /// <summary> Initializes a new instance of ServiceRestClient. </summary>
-        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "http://localhost:3000", string ApiVersion = "1.0.0")
+        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "http://localhost:3000", string apiVersion = "1.0.0")
         {
             if (subscriptionId == null)
             {
@@ -35,14 +35,14 @@ namespace validation
             {
                 throw new ArgumentNullException(nameof(host));
             }
-            if (ApiVersion == null)
+            if (apiVersion == null)
             {
-                throw new ArgumentNullException(nameof(ApiVersion));
+                throw new ArgumentNullException(nameof(apiVersion));
             }
 
             this.subscriptionId = subscriptionId;
             this.host = host;
-            this.ApiVersion = ApiVersion;
+            this.apiVersion = apiVersion;
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
@@ -60,7 +60,7 @@ namespace validation
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/", false);
             uri.AppendPath(id, true);
-            uri.AppendQuery("apiVersion", ApiVersion, true);
+            uri.AppendQuery("apiVersion", apiVersion, true);
             request.Uri = uri;
             return message;
         }
@@ -86,8 +86,9 @@ namespace validation
                 {
                     case 200:
                         {
+                            Product value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
+                            value = Product.DeserializeProduct(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -122,8 +123,9 @@ namespace validation
                 {
                     case 200:
                         {
+                            Product value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
+                            value = Product.DeserializeProduct(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -150,7 +152,7 @@ namespace validation
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/", false);
             uri.AppendPath(id, true);
-            uri.AppendQuery("apiVersion", ApiVersion, true);
+            uri.AppendQuery("apiVersion", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -181,8 +183,9 @@ namespace validation
                 {
                     case 200:
                         {
+                            Product value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
+                            value = Product.DeserializeProduct(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -218,8 +221,9 @@ namespace validation
                 {
                     case 200:
                         {
+                            Product value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
+                            value = Product.DeserializeProduct(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -328,8 +332,9 @@ namespace validation
                 {
                     case 200:
                         {
+                            Product value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Product.DeserializeProduct(document.RootElement);
+                            value = Product.DeserializeProduct(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -358,8 +363,9 @@ namespace validation
                 {
                     case 200:
                         {
+                            Product value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Product.DeserializeProduct(document.RootElement);
+                            value = Product.DeserializeProduct(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:

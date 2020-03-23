@@ -41,7 +41,9 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static ServiceEndpointPropertiesFormat DeserializeServiceEndpointPropertiesFormat(JsonElement element)
         {
-            ServiceEndpointPropertiesFormat result = new ServiceEndpointPropertiesFormat();
+            string service = default;
+            IList<string> locations = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("service"))
@@ -50,7 +52,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Service = property.Value.GetString();
+                    service = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("locations"))
@@ -59,11 +61,12 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Locations = new List<string>();
+                    List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Locations.Add(item.GetString());
+                        array.Add(item.GetString());
                     }
+                    locations = array;
                     continue;
                 }
                 if (property.NameEquals("provisioningState"))
@@ -72,11 +75,11 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.ProvisioningState = new ProvisioningState(property.Value.GetString());
+                    provisioningState = new ProvisioningState(property.Value.GetString());
                     continue;
                 }
             }
-            return result;
+            return new ServiceEndpointPropertiesFormat(service, locations, provisioningState);
         }
     }
 }

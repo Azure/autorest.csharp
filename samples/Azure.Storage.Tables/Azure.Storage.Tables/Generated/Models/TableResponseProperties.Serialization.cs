@@ -14,7 +14,10 @@ namespace Azure.Storage.Tables.Models
     {
         internal static TableResponseProperties DeserializeTableResponseProperties(JsonElement element)
         {
-            TableResponseProperties result = new TableResponseProperties();
+            string tableName = default;
+            string odatatype = default;
+            string odataid = default;
+            string odataeditLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("TableName"))
@@ -23,7 +26,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    result.TableName = property.Value.GetString();
+                    tableName = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("odata.type"))
@@ -32,7 +35,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    result.OdataType = property.Value.GetString();
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("odata.id"))
@@ -41,7 +44,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    result.OdataId = property.Value.GetString();
+                    odataid = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("odata.editLink"))
@@ -50,11 +53,11 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    result.OdataEditLink = property.Value.GetString();
+                    odataeditLink = property.Value.GetString();
                     continue;
                 }
             }
-            return result;
+            return new TableResponseProperties(tableName, odatatype, odataid, odataeditLink);
         }
     }
 }

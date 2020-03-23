@@ -31,12 +31,12 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> The ID of network security group that is applied. </summary>
-        public SubResource NetworkSecurityGroup { get; internal set; }
+        public SubResource NetworkSecurityGroup { get; }
         /// <summary> Associated resources. </summary>
-        public EffectiveNetworkSecurityGroupAssociation Association { get; internal set; }
+        public EffectiveNetworkSecurityGroupAssociation Association { get; }
         /// <summary> A collection of effective security rules. </summary>
-        public IList<EffectiveNetworkSecurityRule> EffectiveSecurityRules { get; internal set; }
+        public IList<EffectiveNetworkSecurityRule> EffectiveSecurityRules { get; }
         /// <summary> Mapping of tags to list of IP Addresses included within the tag. </summary>
-        public string TagMap { get; internal set; }
+        public string TagMap { get; }
     }
 }

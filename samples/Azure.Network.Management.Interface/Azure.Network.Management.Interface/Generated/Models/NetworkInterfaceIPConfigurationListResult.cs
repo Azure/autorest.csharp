@@ -27,8 +27,8 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> A list of ip configurations. </summary>
-        public IList<NetworkInterfaceIPConfiguration> Value { get; internal set; }
+        public IList<NetworkInterfaceIPConfiguration> Value { get; }
         /// <summary> The URL to get the next set of results. </summary>
-        public string NextLink { get; internal set; }
+        public string NextLink { get; }
     }
 }

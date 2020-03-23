@@ -31,29 +31,22 @@ namespace Azure.Storage.Tables.Models
 
         internal static AccessPolicy DeserializeAccessPolicy(XElement element)
         {
-            AccessPolicy result = default;
-            result = new AccessPolicy(); DateTimeOffset value = default;
-            var start = element.Element("Start");
-            if (start != null)
+            DateTimeOffset start = default;
+            DateTimeOffset expiry = default;
+            string permission = default;
+            if (element.Element("Start") is XElement startElement)
             {
-                value = start.GetDateTimeOffsetValue("S");
+                start = startElement.GetDateTimeOffsetValue("S");
             }
-            result.Start = value;
-            DateTimeOffset value0 = default;
-            var expiry = element.Element("Expiry");
-            if (expiry != null)
+            if (element.Element("Expiry") is XElement expiryElement)
             {
-                value0 = expiry.GetDateTimeOffsetValue("S");
+                expiry = expiryElement.GetDateTimeOffsetValue("S");
             }
-            result.Expiry = value0;
-            string value1 = default;
-            var permission = element.Element("Permission");
-            if (permission != null)
+            if (element.Element("Permission") is XElement permissionElement)
             {
-                value1 = (string)permission;
+                permission = (string)permissionElement;
             }
-            result.Permission = value1;
-            return result;
+            return new AccessPolicy(start, expiry, permission);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static PublicIPAddressSku DeserializePublicIPAddressSku(JsonElement element)
         {
-            PublicIPAddressSku result = new PublicIPAddressSku();
+            PublicIPAddressSkuName? name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -34,11 +34,11 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Name = new PublicIPAddressSkuName(property.Value.GetString());
+                    name = new PublicIPAddressSkuName(property.Value.GetString());
                     continue;
                 }
             }
-            return result;
+            return new PublicIPAddressSku(name);
         }
     }
 }

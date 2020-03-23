@@ -15,12 +15,15 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static PageResult DeserializePageResult(JsonElement element)
         {
-            PageResult result = new PageResult();
+            int page = default;
+            int? clusterId = default;
+            IList<KeyValuePair> keyValuePairs = default;
+            IList<DataTable> tables = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("page"))
                 {
-                    result.Page = property.Value.GetInt32();
+                    page = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("clusterId"))
@@ -29,7 +32,7 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.ClusterId = property.Value.GetInt32();
+                    clusterId = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("keyValuePairs"))
@@ -38,11 +41,12 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.KeyValuePairs = new List<KeyValuePair>();
+                    List<KeyValuePair> array = new List<KeyValuePair>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.KeyValuePairs.Add(KeyValuePair.DeserializeKeyValuePair(item));
+                        array.Add(KeyValuePair.DeserializeKeyValuePair(item));
                     }
+                    keyValuePairs = array;
                     continue;
                 }
                 if (property.NameEquals("tables"))
@@ -51,15 +55,16 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    result.Tables = new List<DataTable>();
+                    List<DataTable> array = new List<DataTable>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Tables.Add(DataTable.DeserializeDataTable(item));
+                        array.Add(DataTable.DeserializeDataTable(item));
                     }
+                    tables = array;
                     continue;
                 }
             }
-            return result;
+            return new PageResult(page, clusterId, keyValuePairs, tables);
         }
     }
 }

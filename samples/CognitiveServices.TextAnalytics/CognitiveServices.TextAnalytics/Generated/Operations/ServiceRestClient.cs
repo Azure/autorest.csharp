@@ -83,8 +83,9 @@ namespace CognitiveServices.TextAnalytics
                 {
                     case 200:
                         {
+                            EntitiesResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
+                            value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -120,8 +121,9 @@ namespace CognitiveServices.TextAnalytics
                 {
                     case 200:
                         {
+                            EntitiesResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
+                            value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -186,8 +188,9 @@ namespace CognitiveServices.TextAnalytics
                 {
                     case 200:
                         {
+                            EntitiesResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
+                            value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -226,8 +229,9 @@ namespace CognitiveServices.TextAnalytics
                 {
                     case 200:
                         {
+                            EntitiesResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
+                            value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -289,8 +293,9 @@ namespace CognitiveServices.TextAnalytics
                 {
                     case 200:
                         {
+                            EntityLinkingResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = EntityLinkingResult.DeserializeEntityLinkingResult(document.RootElement);
+                            value = EntityLinkingResult.DeserializeEntityLinkingResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -326,8 +331,9 @@ namespace CognitiveServices.TextAnalytics
                 {
                     case 200:
                         {
+                            EntityLinkingResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = EntityLinkingResult.DeserializeEntityLinkingResult(document.RootElement);
+                            value = EntityLinkingResult.DeserializeEntityLinkingResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -389,8 +395,9 @@ namespace CognitiveServices.TextAnalytics
                 {
                     case 200:
                         {
+                            KeyPhraseResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = KeyPhraseResult.DeserializeKeyPhraseResult(document.RootElement);
+                            value = KeyPhraseResult.DeserializeKeyPhraseResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -426,8 +433,9 @@ namespace CognitiveServices.TextAnalytics
                 {
                     case 200:
                         {
+                            KeyPhraseResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = KeyPhraseResult.DeserializeKeyPhraseResult(document.RootElement);
+                            value = KeyPhraseResult.DeserializeKeyPhraseResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -489,8 +497,9 @@ namespace CognitiveServices.TextAnalytics
                 {
                     case 200:
                         {
+                            LanguageResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = LanguageResult.DeserializeLanguageResult(document.RootElement);
+                            value = LanguageResult.DeserializeLanguageResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -526,8 +535,9 @@ namespace CognitiveServices.TextAnalytics
                 {
                     case 200:
                         {
+                            LanguageResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = LanguageResult.DeserializeLanguageResult(document.RootElement);
+                            value = LanguageResult.DeserializeLanguageResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -589,8 +599,9 @@ namespace CognitiveServices.TextAnalytics
                 {
                     case 200:
                         {
+                            SentimentResponse value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = SentimentResponse.DeserializeSentimentResponse(document.RootElement);
+                            value = SentimentResponse.DeserializeSentimentResponse(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -626,8 +637,9 @@ namespace CognitiveServices.TextAnalytics
                 {
                     case 200:
                         {
+                            SentimentResponse value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = SentimentResponse.DeserializeSentimentResponse(document.RootElement);
+                            value = SentimentResponse.DeserializeSentimentResponse(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:

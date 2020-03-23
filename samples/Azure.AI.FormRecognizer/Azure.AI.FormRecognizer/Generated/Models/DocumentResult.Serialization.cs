@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -14,32 +15,38 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static DocumentResult DeserializeDocumentResult(JsonElement element)
         {
-            DocumentResult result = new DocumentResult();
+            string docType = default;
+            IList<int> pageRange = new List<int>();
+            IDictionary<string, FieldValue> fields = new Dictionary<string, FieldValue>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("docType"))
                 {
-                    result.DocType = property.Value.GetString();
+                    docType = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("pageRange"))
                 {
+                    List<int> array = new List<int>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.PageRange.Add(item.GetInt32());
+                        array.Add(item.GetInt32());
                     }
+                    pageRange = array;
                     continue;
                 }
                 if (property.NameEquals("fields"))
                 {
+                    Dictionary<string, FieldValue> dictionary = new Dictionary<string, FieldValue>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        result.Fields.Add(property0.Name, FieldValue.DeserializeFieldValue(property0.Value));
+                        dictionary.Add(property0.Name, FieldValue.DeserializeFieldValue(property0.Value));
                     }
+                    fields = dictionary;
                     continue;
                 }
             }
-            return result;
+            return new DocumentResult(docType, pageRange, fields);
         }
     }
 }

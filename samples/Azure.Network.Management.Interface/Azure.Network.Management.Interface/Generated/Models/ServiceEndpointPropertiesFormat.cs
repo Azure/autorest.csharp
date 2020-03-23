@@ -33,6 +33,6 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> A list of locations. </summary>
         public IList<string> Locations { get; set; }
         /// <summary> The provisioning state of the service endpoint resource. </summary>
-        public ProvisioningState? ProvisioningState { get; internal set; }
+        public ProvisioningState? ProvisioningState { get; }
     }
 }

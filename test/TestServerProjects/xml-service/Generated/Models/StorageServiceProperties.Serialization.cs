@@ -53,54 +53,42 @@ namespace xml_service.Models
 
         internal static StorageServiceProperties DeserializeStorageServiceProperties(XElement element)
         {
-            StorageServiceProperties result = default;
-            result = new StorageServiceProperties(); Logging value = default;
-            var logging = element.Element("Logging");
-            if (logging != null)
+            Logging logging = default;
+            Metrics hourMetrics = default;
+            Metrics minuteMetrics = default;
+            string defaultServiceVersion = default;
+            RetentionPolicy deleteRetentionPolicy = default;
+            IList<CorsRule> cors = default;
+            if (element.Element("Logging") is XElement loggingElement)
             {
-                value = Logging.DeserializeLogging(logging);
+                logging = Logging.DeserializeLogging(loggingElement);
             }
-            result.Logging = value;
-            Metrics value0 = default;
-            var hourMetrics = element.Element("HourMetrics");
-            if (hourMetrics != null)
+            if (element.Element("HourMetrics") is XElement hourMetricsElement)
             {
-                value0 = Metrics.DeserializeMetrics(hourMetrics);
+                hourMetrics = Metrics.DeserializeMetrics(hourMetricsElement);
             }
-            result.HourMetrics = value0;
-            Metrics value1 = default;
-            var minuteMetrics = element.Element("MinuteMetrics");
-            if (minuteMetrics != null)
+            if (element.Element("MinuteMetrics") is XElement minuteMetricsElement)
             {
-                value1 = Metrics.DeserializeMetrics(minuteMetrics);
+                minuteMetrics = Metrics.DeserializeMetrics(minuteMetricsElement);
             }
-            result.MinuteMetrics = value1;
-            string value2 = default;
-            var defaultServiceVersion = element.Element("DefaultServiceVersion");
-            if (defaultServiceVersion != null)
+            if (element.Element("DefaultServiceVersion") is XElement defaultServiceVersionElement)
             {
-                value2 = (string)defaultServiceVersion;
+                defaultServiceVersion = (string)defaultServiceVersionElement;
             }
-            result.DefaultServiceVersion = value2;
-            RetentionPolicy value3 = default;
-            var deleteRetentionPolicy = element.Element("DeleteRetentionPolicy");
-            if (deleteRetentionPolicy != null)
+            if (element.Element("DeleteRetentionPolicy") is XElement deleteRetentionPolicyElement)
             {
-                value3 = RetentionPolicy.DeserializeRetentionPolicy(deleteRetentionPolicy);
+                deleteRetentionPolicy = RetentionPolicy.DeserializeRetentionPolicy(deleteRetentionPolicyElement);
             }
-            result.DeleteRetentionPolicy = value3;
-            var cors = element.Element("Cors");
-            if (cors != null)
+            if (element.Element("Cors") is XElement corsElement)
             {
-                result.Cors = new List<CorsRule>();
-                foreach (var e in cors.Elements("CorsRule"))
+                var array = new List<CorsRule>();
+                foreach (var e in corsElement.Elements("CorsRule"))
                 {
-                    CorsRule value4 = default;
-                    value4 = CorsRule.DeserializeCorsRule(e);
-                    result.Cors.Add(value4);
+                    array.Add(CorsRule.DeserializeCorsRule(e));
                 }
+                cors = array;
             }
-            return result;
+            return new StorageServiceProperties(logging, hourMetrics, minuteMetrics, cors, defaultServiceVersion, deleteRetentionPolicy);
         }
     }
 }

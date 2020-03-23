@@ -34,12 +34,12 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The name of the resource. This name can be used to access the resource. </summary>
         public string Name { get; set; }
         /// <summary> Sub Resource type. </summary>
-        public string Type { get; internal set; }
+        public string Type { get; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string Etag { get; internal set; }
+        public string Etag { get; }
         /// <summary> The reference to the subnet resource to create a container network interface ip configuration. </summary>
         public Subnet Subnet { get; set; }
         /// <summary> The provisioning state of the IP configuration profile resource. </summary>
-        public ProvisioningState? ProvisioningState { get; internal set; }
+        public ProvisioningState? ProvisioningState { get; }
     }
 }

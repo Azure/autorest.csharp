@@ -13,7 +13,9 @@ namespace CognitiveSearch.Models
     public partial class OcrSkill : Skill
     {
         /// <summary> Initializes a new instance of OcrSkill. </summary>
-        public OcrSkill()
+        /// <param name="inputs"> Inputs of the skills could be a column in the source data set, or the output of an upstream skill. </param>
+        /// <param name="outputs"> The output of a skill is either a field in a search index, or a value that can be consumed as an input by another skill. </param>
+        public OcrSkill(IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs) : base(inputs, outputs)
         {
             OdataType = "#Microsoft.Skills.Vision.OcrSkill";
         }
@@ -33,7 +35,7 @@ namespace CognitiveSearch.Models
             TextExtractionAlgorithm = textExtractionAlgorithm;
             DefaultLanguageCode = defaultLanguageCode;
             ShouldDetectOrientation = shouldDetectOrientation;
-            OdataType = "#Microsoft.Skills.Vision.OcrSkill";
+            OdataType = odataType ?? "#Microsoft.Skills.Vision.OcrSkill";
         }
 
         /// <summary> A value indicating which algorithm to use for extracting text. Default is printed. </summary>

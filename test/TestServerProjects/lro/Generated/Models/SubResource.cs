@@ -23,6 +23,6 @@ namespace lro.Models
         }
 
         /// <summary> Sub Resource Id. </summary>
-        public string Id { get; internal set; }
+        public string Id { get; }
     }
 }

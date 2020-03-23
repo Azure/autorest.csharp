@@ -27,8 +27,8 @@ namespace Azure.Storage.Management.Models
         }
 
         /// <summary> List of file shares returned. </summary>
-        public IList<FileShareItem> Value { get; internal set; }
+        public IList<FileShareItem> Value { get; }
         /// <summary> Request URL that can be used to query next page of shares. Returned when total number of requested shares exceed maximum page size. </summary>
-        public string NextLink { get; internal set; }
+        public string NextLink { get; }
     }
 }

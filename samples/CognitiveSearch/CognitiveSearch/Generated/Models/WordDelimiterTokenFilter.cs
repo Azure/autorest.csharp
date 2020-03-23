@@ -13,7 +13,8 @@ namespace CognitiveSearch.Models
     public partial class WordDelimiterTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of WordDelimiterTokenFilter. </summary>
-        public WordDelimiterTokenFilter()
+        /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public WordDelimiterTokenFilter(string name) : base(name)
         {
             OdataType = "#Microsoft.Azure.Search.WordDelimiterTokenFilter";
         }
@@ -43,7 +44,7 @@ namespace CognitiveSearch.Models
             SplitOnNumerics = splitOnNumerics;
             StemEnglishPossessive = stemEnglishPossessive;
             ProtectedWords = protectedWords;
-            OdataType = "#Microsoft.Azure.Search.WordDelimiterTokenFilter";
+            OdataType = odataType ?? "#Microsoft.Azure.Search.WordDelimiterTokenFilter";
         }
 
         /// <summary> A value indicating whether to generate part words. If set, causes parts of words to be generated; for example &quot;AzureSearch&quot; becomes &quot;Azure&quot; &quot;Search&quot;. Default is true. </summary>

@@ -13,8 +13,12 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class DocumentKeyPhrases
     {
         /// <summary> Initializes a new instance of DocumentKeyPhrases. </summary>
-        internal DocumentKeyPhrases()
+        /// <param name="id"> Unique, non-empty document identifier. </param>
+        /// <param name="keyPhrases"> A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document. </param>
+        internal DocumentKeyPhrases(string id, IList<string> keyPhrases)
         {
+            Id = id;
+            KeyPhrases = keyPhrases;
         }
 
         /// <summary> Initializes a new instance of DocumentKeyPhrases. </summary>
@@ -29,10 +33,10 @@ namespace CognitiveServices.TextAnalytics.Models
         }
 
         /// <summary> Unique, non-empty document identifier. </summary>
-        public string Id { get; internal set; }
+        public string Id { get; }
         /// <summary> A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document. </summary>
-        public IList<string> KeyPhrases { get; internal set; } = new List<string>();
+        public IList<string> KeyPhrases { get; } = new List<string>();
         /// <summary> if showStats=true was specified in the request this field will contain information about the document payload. </summary>
-        public DocumentStatistics Statistics { get; internal set; }
+        public DocumentStatistics Statistics { get; }
     }
 }

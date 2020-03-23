@@ -60,8 +60,9 @@ namespace body_string
                 {
                     case 200:
                         {
+                            string value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetString();
+                            value = document.RootElement.GetString();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -89,8 +90,9 @@ namespace body_string
                 {
                     case 200:
                         {
+                            string value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetString();
+                            value = document.RootElement.GetString();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -196,8 +198,9 @@ namespace body_string
                 {
                     case 200:
                         {
+                            string value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetString();
+                            value = document.RootElement.GetString();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -225,8 +228,9 @@ namespace body_string
                 {
                     case 200:
                         {
+                            string value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetString();
+                            value = document.RootElement.GetString();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -332,8 +336,9 @@ namespace body_string
                 {
                     case 200:
                         {
+                            string value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetString();
+                            value = document.RootElement.GetString();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -361,8 +366,9 @@ namespace body_string
                 {
                     case 200:
                         {
+                            string value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetString();
+                            value = document.RootElement.GetString();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -468,8 +474,9 @@ namespace body_string
                 {
                     case 200:
                         {
+                            string value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetString();
+                            value = document.RootElement.GetString();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -497,8 +504,9 @@ namespace body_string
                 {
                     case 200:
                         {
+                            string value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetString();
+                            value = document.RootElement.GetString();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -604,8 +612,9 @@ namespace body_string
                 {
                     case 200:
                         {
+                            string value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetString();
+                            value = document.RootElement.GetString();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -633,8 +642,9 @@ namespace body_string
                 {
                     case 200:
                         {
+                            string value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetString();
+                            value = document.RootElement.GetString();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -674,8 +684,9 @@ namespace body_string
                 {
                     case 200:
                         {
+                            byte[] value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetBytesFromBase64("U");
+                            value = document.RootElement.GetBytesFromBase64("U");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -703,8 +714,9 @@ namespace body_string
                 {
                     case 200:
                         {
+                            byte[] value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetBytesFromBase64("U");
+                            value = document.RootElement.GetBytesFromBase64("U");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -744,8 +756,9 @@ namespace body_string
                 {
                     case 200:
                         {
+                            byte[] value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetBytesFromBase64("U");
+                            value = document.RootElement.GetBytesFromBase64("U");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -773,8 +786,9 @@ namespace body_string
                 {
                     case 200:
                         {
+                            byte[] value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetBytesFromBase64("U");
+                            value = document.RootElement.GetBytesFromBase64("U");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -892,8 +906,9 @@ namespace body_string
                 {
                     case 200:
                         {
+                            byte[] value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetBytesFromBase64("U");
+                            value = document.RootElement.GetBytesFromBase64("U");
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -921,8 +936,9 @@ namespace body_string
                 {
                     case 200:
                         {
+                            byte[] value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetBytesFromBase64("U");
+                            value = document.RootElement.GetBytesFromBase64("U");
                             return Response.FromValue(value, message.Response);
                         }
                     default:

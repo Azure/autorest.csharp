@@ -14,62 +14,65 @@ namespace body_complex.Models
     public partial class SmartSalmon : Salmon, IDictionary<string, object>
     {
         /// <summary> Initializes a new instance of SmartSalmon. </summary>
-        public SmartSalmon()
+        /// <param name="length"> . </param>
+        public SmartSalmon(float length) : base(length)
         {
             Fishtype = "smart_salmon";
         }
 
         /// <summary> Initializes a new instance of SmartSalmon. </summary>
         /// <param name="collegeDegree"> . </param>
+        /// <param name="additionalProperties"> . </param>
         /// <param name="location"> . </param>
         /// <param name="iswild"> . </param>
         /// <param name="fishtype"> . </param>
         /// <param name="species"> . </param>
         /// <param name="length"> . </param>
         /// <param name="siblings"> . </param>
-        internal SmartSalmon(string collegeDegree, string location, bool? iswild, string fishtype, string species, float length, IList<Fish> siblings) : base(location, iswild, fishtype, species, length, siblings)
+        internal SmartSalmon(string collegeDegree, IDictionary<string, object> additionalProperties, string location, bool? iswild, string fishtype, string species, float length, IList<Fish> siblings) : base(location, iswild, fishtype, species, length, siblings)
         {
             CollegeDegree = collegeDegree;
-            Fishtype = "smart_salmon";
+            AdditionalProperties = additionalProperties;
+            Fishtype = fishtype ?? "smart_salmon";
         }
 
         public string CollegeDegree { get; set; }
-        private readonly IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
+        internal IDictionary<string, object> AdditionalProperties { get; set; } = new Dictionary<string, object>();
         /// <inheritdoc />
-        public IEnumerator<KeyValuePair<string, object>> GetEnumerator() => _additionalProperties.GetEnumerator();
+        public IEnumerator<KeyValuePair<string, object>> GetEnumerator() => AdditionalProperties.GetEnumerator();
         /// <inheritdoc />
-        IEnumerator IEnumerable.GetEnumerator() => _additionalProperties.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => AdditionalProperties.GetEnumerator();
         /// <inheritdoc />
-        public ICollection<string> Keys => _additionalProperties.Keys;
+        public ICollection<string> Keys => AdditionalProperties.Keys;
         /// <inheritdoc />
-        public ICollection<object> Values => _additionalProperties.Values;
+        public ICollection<object> Values => AdditionalProperties.Values;
         /// <inheritdoc />
-        public bool TryGetValue(string key, out object value) => _additionalProperties.TryGetValue(key, out value);
+        public bool TryGetValue(string key, out object value) => AdditionalProperties.TryGetValue(key, out value);
         /// <inheritdoc />
-        public void Add(string key, object value) => _additionalProperties.Add(key, value);
+        public void Add(string key, object value) => AdditionalProperties.Add(key, value);
         /// <inheritdoc />
-        public bool ContainsKey(string key) => _additionalProperties.ContainsKey(key);
+        public bool ContainsKey(string key) => AdditionalProperties.ContainsKey(key);
         /// <inheritdoc />
-        public bool Remove(string key) => _additionalProperties.Remove(key);
+        public bool Remove(string key) => AdditionalProperties.Remove(key);
         /// <inheritdoc />
-        int ICollection<KeyValuePair<string, object>>.Count => _additionalProperties.Count;
+        int ICollection<KeyValuePair<string, object>>.Count => AdditionalProperties.Count;
         /// <inheritdoc />
-        bool ICollection<KeyValuePair<string, object>>.IsReadOnly => _additionalProperties.IsReadOnly;
+        bool ICollection<KeyValuePair<string, object>>.IsReadOnly => AdditionalProperties.IsReadOnly;
         /// <inheritdoc />
-        void ICollection<KeyValuePair<string, object>>.Add(KeyValuePair<string, object> value) => _additionalProperties.Add(value);
+        void ICollection<KeyValuePair<string, object>>.Add(KeyValuePair<string, object> value) => AdditionalProperties.Add(value);
         /// <inheritdoc />
-        bool ICollection<KeyValuePair<string, object>>.Remove(KeyValuePair<string, object> value) => _additionalProperties.Remove(value);
+        bool ICollection<KeyValuePair<string, object>>.Remove(KeyValuePair<string, object> value) => AdditionalProperties.Remove(value);
         /// <inheritdoc />
-        bool ICollection<KeyValuePair<string, object>>.Contains(KeyValuePair<string, object> value) => _additionalProperties.Contains(value);
+        bool ICollection<KeyValuePair<string, object>>.Contains(KeyValuePair<string, object> value) => AdditionalProperties.Contains(value);
         /// <inheritdoc />
-        void ICollection<KeyValuePair<string, object>>.CopyTo(KeyValuePair<string, object>[] destination, int offset) => _additionalProperties.CopyTo(destination, offset);
+        void ICollection<KeyValuePair<string, object>>.CopyTo(KeyValuePair<string, object>[] destination, int offset) => AdditionalProperties.CopyTo(destination, offset);
         /// <inheritdoc />
-        void ICollection<KeyValuePair<string, object>>.Clear() => _additionalProperties.Clear();
+        void ICollection<KeyValuePair<string, object>>.Clear() => AdditionalProperties.Clear();
         /// <inheritdoc />
         public object this[string key]
         {
-            get => _additionalProperties[key];
-            set => _additionalProperties[key] = value;
+            get => AdditionalProperties[key];
+            set => AdditionalProperties[key] = value;
         }
     }
 }

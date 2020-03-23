@@ -13,11 +13,6 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class DataTable
     {
         /// <summary> Initializes a new instance of DataTable. </summary>
-        internal DataTable()
-        {
-        }
-
-        /// <summary> Initializes a new instance of DataTable. </summary>
         /// <param name="rows"> Number of rows. </param>
         /// <param name="columns"> Number of columns. </param>
         /// <param name="cells"> List of cells contained in the table. </param>
@@ -29,10 +24,10 @@ namespace Azure.AI.FormRecognizer.Models
         }
 
         /// <summary> Number of rows. </summary>
-        public int Rows { get; internal set; }
+        public int Rows { get; }
         /// <summary> Number of columns. </summary>
-        public int Columns { get; internal set; }
+        public int Columns { get; }
         /// <summary> List of cells contained in the table. </summary>
-        public IList<DataTableCell> Cells { get; internal set; } = new List<DataTableCell>();
+        public IList<DataTableCell> Cells { get; } = new List<DataTableCell>();
     }
 }

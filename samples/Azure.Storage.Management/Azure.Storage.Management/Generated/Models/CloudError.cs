@@ -23,6 +23,6 @@ namespace Azure.Storage.Management.Models
         }
 
         /// <summary> An error response from the Storage service. </summary>
-        public CloudErrorBody Error { get; internal set; }
+        public CloudErrorBody Error { get; }
     }
 }

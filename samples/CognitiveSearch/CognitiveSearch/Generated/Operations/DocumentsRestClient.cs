@@ -22,12 +22,12 @@ namespace CognitiveSearch
         private string searchServiceName;
         private string indexName;
         private string searchDnsSuffix;
-        private string ApiVersion;
+        private string apiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
 
         /// <summary> Initializes a new instance of DocumentsRestClient. </summary>
-        public DocumentsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string indexName, string searchDnsSuffix = "search.windows.net", string ApiVersion = "2019-05-06")
+        public DocumentsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string indexName, string searchDnsSuffix = "search.windows.net", string apiVersion = "2019-05-06")
         {
             if (searchServiceName == null)
             {
@@ -41,15 +41,15 @@ namespace CognitiveSearch
             {
                 throw new ArgumentNullException(nameof(searchDnsSuffix));
             }
-            if (ApiVersion == null)
+            if (apiVersion == null)
             {
-                throw new ArgumentNullException(nameof(ApiVersion));
+                throw new ArgumentNullException(nameof(apiVersion));
             }
 
             this.searchServiceName = searchServiceName;
             this.indexName = indexName;
             this.searchDnsSuffix = searchDnsSuffix;
-            this.ApiVersion = ApiVersion;
+            this.apiVersion = apiVersion;
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
@@ -68,7 +68,7 @@ namespace CognitiveSearch
             uri.AppendRaw(indexName, true);
             uri.AppendRaw("')", false);
             uri.AppendPath("/docs/$count", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             if (clientRequestId != null)
             {
@@ -93,8 +93,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            long value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetInt64();
+                            value = document.RootElement.GetInt64();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -124,8 +125,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            long value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetInt64();
+                            value = document.RootElement.GetInt64();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -221,7 +223,7 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("$top", top.Value, true);
             }
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             if (clientRequestId != null)
             {
@@ -263,8 +265,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            SearchDocumentsResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = SearchDocumentsResult.DeserializeSearchDocumentsResult(document.RootElement);
+                            value = SearchDocumentsResult.DeserializeSearchDocumentsResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -311,8 +314,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            SearchDocumentsResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = SearchDocumentsResult.DeserializeSearchDocumentsResult(document.RootElement);
+                            value = SearchDocumentsResult.DeserializeSearchDocumentsResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -340,7 +344,7 @@ namespace CognitiveSearch
             uri.AppendRaw(indexName, true);
             uri.AppendRaw("')", false);
             uri.AppendPath("/docs/search.post.search", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             if (clientRequestId != null)
             {
@@ -374,8 +378,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            SearchDocumentsResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = SearchDocumentsResult.DeserializeSearchDocumentsResult(document.RootElement);
+                            value = SearchDocumentsResult.DeserializeSearchDocumentsResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -410,8 +415,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            SearchDocumentsResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = SearchDocumentsResult.DeserializeSearchDocumentsResult(document.RootElement);
+                            value = SearchDocumentsResult.DeserializeSearchDocumentsResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -445,7 +451,7 @@ namespace CognitiveSearch
             {
                 uri.AppendQueryDelimited("$select", selectedFields, ",", true);
             }
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             if (clientRequestId != null)
             {
@@ -476,8 +482,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            object value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = document.RootElement.GetObject();
+                            value = document.RootElement.GetObject();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -513,8 +520,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            object value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = document.RootElement.GetObject();
+                            value = document.RootElement.GetObject();
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -580,7 +588,7 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("$top", top.Value, true);
             }
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             if (clientRequestId != null)
             {
@@ -624,8 +632,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            SuggestDocumentsResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = SuggestDocumentsResult.DeserializeSuggestDocumentsResult(document.RootElement);
+                            value = SuggestDocumentsResult.DeserializeSuggestDocumentsResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -674,8 +683,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            SuggestDocumentsResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = SuggestDocumentsResult.DeserializeSuggestDocumentsResult(document.RootElement);
+                            value = SuggestDocumentsResult.DeserializeSuggestDocumentsResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -703,7 +713,7 @@ namespace CognitiveSearch
             uri.AppendRaw(indexName, true);
             uri.AppendRaw("')", false);
             uri.AppendPath("/docs/search.post.suggest", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             if (clientRequestId != null)
             {
@@ -737,8 +747,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            SuggestDocumentsResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = SuggestDocumentsResult.DeserializeSuggestDocumentsResult(document.RootElement);
+                            value = SuggestDocumentsResult.DeserializeSuggestDocumentsResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -773,8 +784,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            SuggestDocumentsResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = SuggestDocumentsResult.DeserializeSuggestDocumentsResult(document.RootElement);
+                            value = SuggestDocumentsResult.DeserializeSuggestDocumentsResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -802,7 +814,7 @@ namespace CognitiveSearch
             uri.AppendRaw(indexName, true);
             uri.AppendRaw("')", false);
             uri.AppendPath("/docs/search.index", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             if (clientRequestId != null)
             {
@@ -836,8 +848,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            IndexDocumentsResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = IndexDocumentsResult.DeserializeIndexDocumentsResult(document.RootElement);
+                            value = IndexDocumentsResult.DeserializeIndexDocumentsResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -872,8 +885,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            IndexDocumentsResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = IndexDocumentsResult.DeserializeIndexDocumentsResult(document.RootElement);
+                            value = IndexDocumentsResult.DeserializeIndexDocumentsResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -901,7 +915,7 @@ namespace CognitiveSearch
             uri.AppendRaw(indexName, true);
             uri.AppendRaw("')", false);
             uri.AppendPath("/docs/search.autocomplete", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             uri.AppendQuery("search", searchText, true);
             uri.AppendQuery("suggesterName", suggesterName, true);
             if (autocompleteMode != null)
@@ -978,8 +992,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            AutocompleteResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = AutocompleteResult.DeserializeAutocompleteResult(document.RootElement);
+                            value = AutocompleteResult.DeserializeAutocompleteResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1027,8 +1042,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            AutocompleteResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = AutocompleteResult.DeserializeAutocompleteResult(document.RootElement);
+                            value = AutocompleteResult.DeserializeAutocompleteResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1056,7 +1072,7 @@ namespace CognitiveSearch
             uri.AppendRaw(indexName, true);
             uri.AppendRaw("')", false);
             uri.AppendPath("/docs/search.post.autocomplete", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             if (clientRequestId != null)
             {
@@ -1090,8 +1106,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            AutocompleteResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = AutocompleteResult.DeserializeAutocompleteResult(document.RootElement);
+                            value = AutocompleteResult.DeserializeAutocompleteResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1126,8 +1143,9 @@ namespace CognitiveSearch
                 {
                     case 200:
                         {
+                            AutocompleteResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = AutocompleteResult.DeserializeAutocompleteResult(document.RootElement);
+                            value = AutocompleteResult.DeserializeAutocompleteResult(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:

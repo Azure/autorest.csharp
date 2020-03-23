@@ -63,12 +63,11 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             RootWithRefAndNoMeta value = default;
-                            var rootWithRefAndNoMeta = document.Element("RootWithRefAndNoMeta");
-                            if (rootWithRefAndNoMeta != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("RootWithRefAndNoMeta") is XElement rootWithRefAndNoMetaElement)
                             {
-                                value = RootWithRefAndNoMeta.DeserializeRootWithRefAndNoMeta(rootWithRefAndNoMeta);
+                                value = RootWithRefAndNoMeta.DeserializeRootWithRefAndNoMeta(rootWithRefAndNoMetaElement);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -97,12 +96,11 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             RootWithRefAndNoMeta value = default;
-                            var rootWithRefAndNoMeta = document.Element("RootWithRefAndNoMeta");
-                            if (rootWithRefAndNoMeta != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("RootWithRefAndNoMeta") is XElement rootWithRefAndNoMetaElement)
                             {
-                                value = RootWithRefAndNoMeta.DeserializeRootWithRefAndNoMeta(rootWithRefAndNoMeta);
+                                value = RootWithRefAndNoMeta.DeserializeRootWithRefAndNoMeta(rootWithRefAndNoMetaElement);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -221,12 +219,11 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             RootWithRefAndMeta value = default;
-                            var rootWithRefAndMeta = document.Element("RootWithRefAndMeta");
-                            if (rootWithRefAndMeta != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("RootWithRefAndMeta") is XElement rootWithRefAndMetaElement)
                             {
-                                value = RootWithRefAndMeta.DeserializeRootWithRefAndMeta(rootWithRefAndMeta);
+                                value = RootWithRefAndMeta.DeserializeRootWithRefAndMeta(rootWithRefAndMetaElement);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -255,12 +252,11 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             RootWithRefAndMeta value = default;
-                            var rootWithRefAndMeta = document.Element("RootWithRefAndMeta");
-                            if (rootWithRefAndMeta != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("RootWithRefAndMeta") is XElement rootWithRefAndMetaElement)
                             {
-                                value = RootWithRefAndMeta.DeserializeRootWithRefAndMeta(rootWithRefAndMeta);
+                                value = RootWithRefAndMeta.DeserializeRootWithRefAndMeta(rootWithRefAndMetaElement);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -379,12 +375,11 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             Slideshow value = default;
-                            var slideshow = document.Element("slideshow");
-                            if (slideshow != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("slideshow") is XElement slideshowElement)
                             {
-                                value = Slideshow.DeserializeSlideshow(slideshow);
+                                value = Slideshow.DeserializeSlideshow(slideshowElement);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -413,12 +408,11 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             Slideshow value = default;
-                            var slideshow = document.Element("slideshow");
-                            if (slideshow != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("slideshow") is XElement slideshowElement)
                             {
-                                value = Slideshow.DeserializeSlideshow(slideshow);
+                                value = Slideshow.DeserializeSlideshow(slideshowElement);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -537,12 +531,11 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             AppleBarrel value = default;
-                            var appleBarrel = document.Element("AppleBarrel");
-                            if (appleBarrel != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("AppleBarrel") is XElement appleBarrelElement)
                             {
-                                value = AppleBarrel.DeserializeAppleBarrel(appleBarrel);
+                                value = AppleBarrel.DeserializeAppleBarrel(appleBarrelElement);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -571,12 +564,11 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             AppleBarrel value = default;
-                            var appleBarrel = document.Element("AppleBarrel");
-                            if (appleBarrel != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("AppleBarrel") is XElement appleBarrelElement)
                             {
-                                value = AppleBarrel.DeserializeAppleBarrel(appleBarrel);
+                                value = AppleBarrel.DeserializeAppleBarrel(appleBarrelElement);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -759,12 +751,11 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             Slideshow value = default;
-                            var slideshow = document.Element("slideshow");
-                            if (slideshow != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("slideshow") is XElement slideshowElement)
                             {
-                                value = Slideshow.DeserializeSlideshow(slideshow);
+                                value = Slideshow.DeserializeSlideshow(slideshowElement);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -793,12 +784,11 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             Slideshow value = default;
-                            var slideshow = document.Element("slideshow");
-                            if (slideshow != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("slideshow") is XElement slideshowElement)
                             {
-                                value = Slideshow.DeserializeSlideshow(slideshow);
+                                value = Slideshow.DeserializeSlideshow(slideshowElement);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -917,12 +907,11 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             AppleBarrel value = default;
-                            var appleBarrel = document.Element("AppleBarrel");
-                            if (appleBarrel != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("AppleBarrel") is XElement appleBarrelElement)
                             {
-                                value = AppleBarrel.DeserializeAppleBarrel(appleBarrel);
+                                value = AppleBarrel.DeserializeAppleBarrel(appleBarrelElement);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -951,12 +940,11 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             AppleBarrel value = default;
-                            var appleBarrel = document.Element("AppleBarrel");
-                            if (appleBarrel != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("AppleBarrel") is XElement appleBarrelElement)
                             {
-                                value = AppleBarrel.DeserializeAppleBarrel(appleBarrel);
+                                value = AppleBarrel.DeserializeAppleBarrel(appleBarrelElement);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -1075,18 +1063,16 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             IList<Banana> value = default;
-                            var bananas = document.Element("bananas");
-                            if (bananas != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("bananas") is XElement bananasElement)
                             {
-                                value = new List<Banana>();
-                                foreach (var e in bananas.Elements("banana"))
+                                var array = new List<Banana>();
+                                foreach (var e in bananasElement.Elements("banana"))
                                 {
-                                    Banana value0 = default;
-                                    value0 = Banana.DeserializeBanana(e);
-                                    value.Add(value0);
+                                    array.Add(Banana.DeserializeBanana(e));
                                 }
+                                value = array;
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -1115,18 +1101,16 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             IList<Banana> value = default;
-                            var bananas = document.Element("bananas");
-                            if (bananas != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("bananas") is XElement bananasElement)
                             {
-                                value = new List<Banana>();
-                                foreach (var e in bananas.Elements("banana"))
+                                var array = new List<Banana>();
+                                foreach (var e in bananasElement.Elements("banana"))
                                 {
-                                    Banana value0 = default;
-                                    value0 = Banana.DeserializeBanana(e);
-                                    value.Add(value0);
+                                    array.Add(Banana.DeserializeBanana(e));
                                 }
+                                value = array;
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -1250,18 +1234,16 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             IList<Banana> value = default;
-                            var bananas = document.Element("bananas");
-                            if (bananas != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("bananas") is XElement bananasElement)
                             {
-                                value = new List<Banana>();
-                                foreach (var e in bananas.Elements("banana"))
+                                var array = new List<Banana>();
+                                foreach (var e in bananasElement.Elements("banana"))
                                 {
-                                    Banana value0 = default;
-                                    value0 = Banana.DeserializeBanana(e);
-                                    value.Add(value0);
+                                    array.Add(Banana.DeserializeBanana(e));
                                 }
+                                value = array;
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -1290,18 +1272,16 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             IList<Banana> value = default;
-                            var bananas = document.Element("bananas");
-                            if (bananas != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("bananas") is XElement bananasElement)
                             {
-                                value = new List<Banana>();
-                                foreach (var e in bananas.Elements("banana"))
+                                var array = new List<Banana>();
+                                foreach (var e in bananasElement.Elements("banana"))
                                 {
-                                    Banana value0 = default;
-                                    value0 = Banana.DeserializeBanana(e);
-                                    value.Add(value0);
+                                    array.Add(Banana.DeserializeBanana(e));
                                 }
+                                value = array;
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -1425,18 +1405,16 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             IList<Banana> value = default;
-                            var bananas = document.Element("bananas");
-                            if (bananas != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("bananas") is XElement bananasElement)
                             {
-                                value = new List<Banana>();
-                                foreach (var e in bananas.Elements("banana"))
+                                var array = new List<Banana>();
+                                foreach (var e in bananasElement.Elements("banana"))
                                 {
-                                    Banana value0 = default;
-                                    value0 = Banana.DeserializeBanana(e);
-                                    value.Add(value0);
+                                    array.Add(Banana.DeserializeBanana(e));
                                 }
+                                value = array;
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -1465,18 +1443,16 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             IList<Banana> value = default;
-                            var bananas = document.Element("bananas");
-                            if (bananas != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("bananas") is XElement bananasElement)
                             {
-                                value = new List<Banana>();
-                                foreach (var e in bananas.Elements("banana"))
+                                var array = new List<Banana>();
+                                foreach (var e in bananasElement.Elements("banana"))
                                 {
-                                    Banana value0 = default;
-                                    value0 = Banana.DeserializeBanana(e);
-                                    value.Add(value0);
+                                    array.Add(Banana.DeserializeBanana(e));
                                 }
+                                value = array;
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -1600,12 +1576,11 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             Banana value = default;
-                            var banana = document.Element("banana");
-                            if (banana != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("banana") is XElement bananaElement)
                             {
-                                value = Banana.DeserializeBanana(banana);
+                                value = Banana.DeserializeBanana(bananaElement);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -1634,12 +1609,11 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             Banana value = default;
-                            var banana = document.Element("banana");
-                            if (banana != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("banana") is XElement bananaElement)
                             {
-                                value = Banana.DeserializeBanana(banana);
+                                value = Banana.DeserializeBanana(bananaElement);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -1759,12 +1733,11 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             ListContainersResponse value = default;
-                            var enumerationResults = document.Element("EnumerationResults");
-                            if (enumerationResults != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("EnumerationResults") is XElement enumerationResultsElement)
                             {
-                                value = ListContainersResponse.DeserializeListContainersResponse(enumerationResults);
+                                value = ListContainersResponse.DeserializeListContainersResponse(enumerationResultsElement);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -1793,12 +1766,11 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             ListContainersResponse value = default;
-                            var enumerationResults = document.Element("EnumerationResults");
-                            if (enumerationResults != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("EnumerationResults") is XElement enumerationResultsElement)
                             {
-                                value = ListContainersResponse.DeserializeListContainersResponse(enumerationResults);
+                                value = ListContainersResponse.DeserializeListContainersResponse(enumerationResultsElement);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -1841,12 +1813,11 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             StorageServiceProperties value = default;
-                            var storageServiceProperties = document.Element("StorageServiceProperties");
-                            if (storageServiceProperties != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("StorageServiceProperties") is XElement storageServicePropertiesElement)
                             {
-                                value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServiceProperties);
+                                value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServicePropertiesElement);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -1875,12 +1846,11 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             StorageServiceProperties value = default;
-                            var storageServiceProperties = document.Element("StorageServiceProperties");
-                            if (storageServiceProperties != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("StorageServiceProperties") is XElement storageServicePropertiesElement)
                             {
-                                value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServiceProperties);
+                                value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServicePropertiesElement);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -2003,18 +1973,16 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             IList<SignedIdentifier> value = default;
-                            var signedIdentifiers = document.Element("SignedIdentifiers");
-                            if (signedIdentifiers != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("SignedIdentifiers") is XElement signedIdentifiersElement)
                             {
-                                value = new List<SignedIdentifier>();
-                                foreach (var e in signedIdentifiers.Elements("SignedIdentifier"))
+                                var array = new List<SignedIdentifier>();
+                                foreach (var e in signedIdentifiersElement.Elements("SignedIdentifier"))
                                 {
-                                    SignedIdentifier value0 = default;
-                                    value0 = SignedIdentifier.DeserializeSignedIdentifier(e);
-                                    value.Add(value0);
+                                    array.Add(SignedIdentifier.DeserializeSignedIdentifier(e));
                                 }
+                                value = array;
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -2043,18 +2011,16 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             IList<SignedIdentifier> value = default;
-                            var signedIdentifiers = document.Element("SignedIdentifiers");
-                            if (signedIdentifiers != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("SignedIdentifiers") is XElement signedIdentifiersElement)
                             {
-                                value = new List<SignedIdentifier>();
-                                foreach (var e in signedIdentifiers.Elements("SignedIdentifier"))
+                                var array = new List<SignedIdentifier>();
+                                foreach (var e in signedIdentifiersElement.Elements("SignedIdentifier"))
                                 {
-                                    SignedIdentifier value0 = default;
-                                    value0 = SignedIdentifier.DeserializeSignedIdentifier(e);
-                                    value.Add(value0);
+                                    array.Add(SignedIdentifier.DeserializeSignedIdentifier(e));
                                 }
+                                value = array;
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -2182,12 +2148,11 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             ListBlobsResponse value = default;
-                            var enumerationResults = document.Element("EnumerationResults");
-                            if (enumerationResults != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("EnumerationResults") is XElement enumerationResultsElement)
                             {
-                                value = ListBlobsResponse.DeserializeListBlobsResponse(enumerationResults);
+                                value = ListBlobsResponse.DeserializeListBlobsResponse(enumerationResultsElement);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -2216,12 +2181,11 @@ namespace xml_service
                 {
                     case 200:
                         {
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
                             ListBlobsResponse value = default;
-                            var enumerationResults = document.Element("EnumerationResults");
-                            if (enumerationResults != null)
+                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                            if (document.Element("EnumerationResults") is XElement enumerationResultsElement)
                             {
-                                value = ListBlobsResponse.DeserializeListBlobsResponse(enumerationResults);
+                                value = ListBlobsResponse.DeserializeListBlobsResponse(enumerationResultsElement);
                             }
                             return Response.FromValue(value, message.Response);
                         }
@@ -2340,8 +2304,9 @@ namespace xml_service
                 {
                     case 200:
                         {
+                            JsonOutput value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = Models.JsonOutput.DeserializeJsonOutput(document.RootElement);
+                            value = Models.JsonOutput.DeserializeJsonOutput(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -2369,8 +2334,9 @@ namespace xml_service
                 {
                     case 200:
                         {
+                            JsonOutput value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = Models.JsonOutput.DeserializeJsonOutput(document.RootElement);
+                            value = Models.JsonOutput.DeserializeJsonOutput(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:

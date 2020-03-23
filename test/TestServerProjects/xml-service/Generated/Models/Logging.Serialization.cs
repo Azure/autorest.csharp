@@ -34,43 +34,32 @@ namespace xml_service.Models
 
         internal static Logging DeserializeLogging(XElement element)
         {
-            Logging result = default;
-            result = new Logging(); string value = default;
-            var version = element.Element("Version");
-            if (version != null)
+            string version = default;
+            bool delete = default;
+            bool read = default;
+            bool write = default;
+            RetentionPolicy retentionPolicy = default;
+            if (element.Element("Version") is XElement versionElement)
             {
-                value = (string)version;
+                version = (string)versionElement;
             }
-            result.Version = value;
-            bool value0 = default;
-            var delete = element.Element("Delete");
-            if (delete != null)
+            if (element.Element("Delete") is XElement deleteElement)
             {
-                value0 = (bool)delete;
+                delete = (bool)deleteElement;
             }
-            result.Delete = value0;
-            bool value1 = default;
-            var read = element.Element("Read");
-            if (read != null)
+            if (element.Element("Read") is XElement readElement)
             {
-                value1 = (bool)read;
+                read = (bool)readElement;
             }
-            result.Read = value1;
-            bool value2 = default;
-            var write = element.Element("Write");
-            if (write != null)
+            if (element.Element("Write") is XElement writeElement)
             {
-                value2 = (bool)write;
+                write = (bool)writeElement;
             }
-            result.Write = value2;
-            RetentionPolicy value3 = default;
-            var retentionPolicy = element.Element("RetentionPolicy");
-            if (retentionPolicy != null)
+            if (element.Element("RetentionPolicy") is XElement retentionPolicyElement)
             {
-                value3 = RetentionPolicy.DeserializeRetentionPolicy(retentionPolicy);
+                retentionPolicy = RetentionPolicy.DeserializeRetentionPolicy(retentionPolicyElement);
             }
-            result.RetentionPolicy = value3;
-            return result;
+            return new Logging(version, delete, read, write, retentionPolicy);
         }
     }
 }

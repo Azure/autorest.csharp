@@ -13,7 +13,8 @@ namespace CognitiveSearch.Models
     public partial class NGramTokenizer : Tokenizer
     {
         /// <summary> Initializes a new instance of NGramTokenizer. </summary>
-        public NGramTokenizer()
+        /// <param name="name"> The name of the tokenizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public NGramTokenizer(string name) : base(name)
         {
             OdataType = "#Microsoft.Azure.Search.NGramTokenizer";
         }
@@ -29,7 +30,7 @@ namespace CognitiveSearch.Models
             MinGram = minGram;
             MaxGram = maxGram;
             TokenChars = tokenChars;
-            OdataType = "#Microsoft.Azure.Search.NGramTokenizer";
+            OdataType = odataType ?? "#Microsoft.Azure.Search.NGramTokenizer";
         }
 
         /// <summary> The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram. </summary>

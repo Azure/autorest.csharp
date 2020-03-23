@@ -30,22 +30,17 @@ namespace Azure.Storage.Tables.Models
 
         internal static RetentionPolicy DeserializeRetentionPolicy(XElement element)
         {
-            RetentionPolicy result = default;
-            result = new RetentionPolicy(); bool value = default;
-            var enabled = element.Element("Enabled");
-            if (enabled != null)
+            bool enabled = default;
+            int? days = default;
+            if (element.Element("Enabled") is XElement enabledElement)
             {
-                value = (bool)enabled;
+                enabled = (bool)enabledElement;
             }
-            result.Enabled = value;
-            int? value0 = default;
-            var days = element.Element("Days");
-            if (days != null)
+            if (element.Element("Days") is XElement daysElement)
             {
-                value0 = (int?)days;
+                days = (int?)daysElement;
             }
-            result.Days = value0;
-            return result;
+            return new RetentionPolicy(enabled, days);
         }
     }
 }

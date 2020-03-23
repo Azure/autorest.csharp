@@ -51,7 +51,14 @@ namespace validation.Models
 
         internal static Product DeserializeProduct(JsonElement element)
         {
-            Product result = new Product();
+            IList<string> displayNames = default;
+            int? capacity = default;
+            string image = default;
+            ChildProduct child = default;
+            ConstantProduct constChild = default;
+            float constInt = default;
+            string constString = default;
+            string constStringAsEnum = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("display_names"))
@@ -60,11 +67,12 @@ namespace validation.Models
                     {
                         continue;
                     }
-                    result.DisplayNames = new List<string>();
+                    List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.DisplayNames.Add(item.GetString());
+                        array.Add(item.GetString());
                     }
+                    displayNames = array;
                     continue;
                 }
                 if (property.NameEquals("capacity"))
@@ -73,7 +81,7 @@ namespace validation.Models
                     {
                         continue;
                     }
-                    result.Capacity = property.Value.GetInt32();
+                    capacity = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("image"))
@@ -82,36 +90,36 @@ namespace validation.Models
                     {
                         continue;
                     }
-                    result.Image = property.Value.GetString();
+                    image = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("child"))
                 {
-                    result.Child = ChildProduct.DeserializeChildProduct(property.Value);
+                    child = ChildProduct.DeserializeChildProduct(property.Value);
                     continue;
                 }
                 if (property.NameEquals("constChild"))
                 {
-                    result.ConstChild = ConstantProduct.DeserializeConstantProduct(property.Value);
+                    constChild = ConstantProduct.DeserializeConstantProduct(property.Value);
                     continue;
                 }
                 if (property.NameEquals("constInt"))
                 {
-                    result.ConstInt = property.Value.GetSingle();
+                    constInt = property.Value.GetSingle();
                     continue;
                 }
                 if (property.NameEquals("constString"))
                 {
-                    result.ConstString = property.Value.GetString();
+                    constString = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("constStringAsEnum"))
                 {
-                    result.ConstStringAsEnum = property.Value.GetString();
+                    constStringAsEnum = property.Value.GetString();
                     continue;
                 }
             }
-            return result;
+            return new Product(displayNames, capacity, image, child, constChild, constInt, constString, constStringAsEnum);
         }
     }
 }

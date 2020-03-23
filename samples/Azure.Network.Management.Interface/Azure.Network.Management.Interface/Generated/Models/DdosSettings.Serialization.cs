@@ -35,7 +35,9 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static DdosSettings DeserializeDdosSettings(JsonElement element)
         {
-            DdosSettings result = new DdosSettings();
+            SubResource ddosCustomPolicy = default;
+            DdosSettingsProtectionCoverage? protectionCoverage = default;
+            bool? protectedIP = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ddosCustomPolicy"))
@@ -44,7 +46,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.DdosCustomPolicy = SubResource.DeserializeSubResource(property.Value);
+                    ddosCustomPolicy = SubResource.DeserializeSubResource(property.Value);
                     continue;
                 }
                 if (property.NameEquals("protectionCoverage"))
@@ -53,7 +55,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.ProtectionCoverage = new DdosSettingsProtectionCoverage(property.Value.GetString());
+                    protectionCoverage = new DdosSettingsProtectionCoverage(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("protectedIP"))
@@ -62,11 +64,11 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.ProtectedIP = property.Value.GetBoolean();
+                    protectedIP = property.Value.GetBoolean();
                     continue;
                 }
             }
-            return result;
+            return new DdosSettings(ddosCustomPolicy, protectionCoverage, protectedIP);
         }
     }
 }

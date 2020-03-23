@@ -24,7 +24,7 @@ namespace body_integer.Models
             Message = message;
         }
 
-        public int? Status { get; internal set; }
-        public string Message { get; internal set; }
+        public int? Status { get; }
+        public string Message { get; }
     }
 }

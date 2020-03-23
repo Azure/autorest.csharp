@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -25,7 +26,7 @@ namespace body_complex.Models
 
         internal static ByteWrapper DeserializeByteWrapper(JsonElement element)
         {
-            ByteWrapper result = new ByteWrapper();
+            byte[] field = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field"))
@@ -34,11 +35,11 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    result.Field = property.Value.GetBytesFromBase64();
+                    field = property.Value.GetBytesFromBase64();
                     continue;
                 }
             }
-            return result;
+            return new ByteWrapper(field);
         }
     }
 }

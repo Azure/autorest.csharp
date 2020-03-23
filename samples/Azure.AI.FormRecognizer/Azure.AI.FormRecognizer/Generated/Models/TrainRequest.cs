@@ -11,8 +11,10 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class TrainRequest
     {
         /// <summary> Initializes a new instance of TrainRequest. </summary>
-        public TrainRequest()
+        /// <param name="source"> Source path containing the training documents. </param>
+        public TrainRequest(string source)
         {
+            Source = source;
         }
 
         /// <summary> Initializes a new instance of TrainRequest. </summary>
@@ -27,7 +29,7 @@ namespace Azure.AI.FormRecognizer.Models
         }
 
         /// <summary> Source path containing the training documents. </summary>
-        public string Source { get; set; }
+        public string Source { get; }
         /// <summary> Filter to apply to the documents in the source path for training. </summary>
         public TrainSourceFilter SourceFilter { get; set; }
         /// <summary> Use label file for training a model. </summary>

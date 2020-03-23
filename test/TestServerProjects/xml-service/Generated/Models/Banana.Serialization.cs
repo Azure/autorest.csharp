@@ -40,29 +40,22 @@ namespace xml_service.Models
 
         internal static Banana DeserializeBanana(XElement element)
         {
-            Banana result = default;
-            result = new Banana(); string value = default;
-            var name = element.Element("name");
-            if (name != null)
+            string name = default;
+            string flavor = default;
+            DateTimeOffset? expiration = default;
+            if (element.Element("name") is XElement nameElement)
             {
-                value = (string)name;
+                name = (string)nameElement;
             }
-            result.Name = value;
-            string value0 = default;
-            var flavor = element.Element("flavor");
-            if (flavor != null)
+            if (element.Element("flavor") is XElement flavorElement)
             {
-                value0 = (string)flavor;
+                flavor = (string)flavorElement;
             }
-            result.Flavor = value0;
-            DateTimeOffset? value1 = default;
-            var expiration = element.Element("expiration");
-            if (expiration != null)
+            if (element.Element("expiration") is XElement expirationElement)
             {
-                value1 = expiration.GetDateTimeOffsetValue("S");
+                expiration = expirationElement.GetDateTimeOffsetValue("S");
             }
-            result.Expiration = value1;
-            return result;
+            return new Banana(name, flavor, expiration);
         }
     }
 }

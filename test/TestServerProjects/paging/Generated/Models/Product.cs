@@ -22,6 +22,6 @@ namespace paging.Models
             Properties = properties;
         }
 
-        public ProductProperties Properties { get; internal set; }
+        public ProductProperties Properties { get; }
     }
 }

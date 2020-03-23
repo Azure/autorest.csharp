@@ -11,7 +11,8 @@ namespace CognitiveSearch.Models
     public partial class LimitTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of LimitTokenFilter. </summary>
-        public LimitTokenFilter()
+        /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public LimitTokenFilter(string name) : base(name)
         {
             OdataType = "#Microsoft.Azure.Search.LimitTokenFilter";
         }
@@ -25,7 +26,7 @@ namespace CognitiveSearch.Models
         {
             MaxTokenCount = maxTokenCount;
             ConsumeAllTokens = consumeAllTokens;
-            OdataType = "#Microsoft.Azure.Search.LimitTokenFilter";
+            OdataType = odataType ?? "#Microsoft.Azure.Search.LimitTokenFilter";
         }
 
         /// <summary> The maximum number of tokens to produce. Default is 1. </summary>

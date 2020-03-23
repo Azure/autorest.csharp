@@ -122,9 +122,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             using (writer.Scope($"internal static {model.Type} Deserialize{model.Declaration.Name}({typeof(XElement)} element)"))
             {
-                var resultVariable = "result";
-                writer.ToDeserializeCall(serialization, w=> w.AppendRaw("element"), ref resultVariable, true);
-                writer.Line($"return {resultVariable};");
+                writer.ToDeserializeCall(
+                    serialization,
+                    w=> w.AppendRaw("element"),
+                    (w, v) => w.Line($"return {v};"),
+                    true);
             }
             writer.Line();
         }
@@ -144,16 +146,16 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             {
                                 writer
                                     .Append($"case {implementation.Key:L}: return ")
-                                    .ToDeserializeCall(implementation.Type.Implementation, w => w.Append($"element"));
+                                    .DeserializeImplementation(implementation.Type.Implementation, w => w.Append($"element"));
                                 writer.Line($";");
                             }
                         }
                     }
                 }
 
-                var resultVariable = "result";
-                writer.ToDeserializeCall(jsonSerialization, w=>w.AppendRaw("element"), ref resultVariable);
-                writer.Line($"return {resultVariable};");
+                writer.DeserializeValue(jsonSerialization,
+                    w=> w.AppendRaw("element"),
+                    (w, v) => w.Line($"return {v};"));
             }
             writer.Line();
         }

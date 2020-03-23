@@ -119,7 +119,7 @@ namespace AutoRest.TestServer.Tests
                 description: "product description",
                 maxProductDisplayName: "max name",
                 null,
-                Capacity: "Large",
+                capacity: "Large",
                 odataValue: "http://foo");
             Assert.AreEqual("123", result.Value.ProductId);
             Assert.AreEqual("product description", result.Value.Description);
@@ -153,9 +153,8 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PutModelFlattenCustomBase() => Test(async (host, pipeline) =>
         {
-            var value = new SimpleProduct
+            var value = new SimpleProduct("123")
             {
-                ProductId = "123",
                 Description = "product description",
                 MaxProductDisplayName = "max name",
                 Capacity = "Large",
@@ -179,7 +178,7 @@ namespace AutoRest.TestServer.Tests
                 description: "product description",
                 maxProductDisplayName: "max name",
                 null,
-                Capacity: "Large",
+                capacity: "Large",
                 odataValue: "http://foo");
             Assert.AreEqual("123", result.Value.ProductId);
             Assert.AreEqual("product description", result.Value.Description);

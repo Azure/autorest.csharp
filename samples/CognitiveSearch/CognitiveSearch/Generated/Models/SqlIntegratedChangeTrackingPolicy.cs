@@ -20,7 +20,7 @@ namespace CognitiveSearch.Models
         /// <param name="odataType"> . </param>
         internal SqlIntegratedChangeTrackingPolicy(string odataType) : base(odataType)
         {
-            OdataType = "#Microsoft.Azure.Search.SqlIntegratedChangeTrackingPolicy";
+            OdataType = odataType ?? "#Microsoft.Azure.Search.SqlIntegratedChangeTrackingPolicy";
         }
     }
 }

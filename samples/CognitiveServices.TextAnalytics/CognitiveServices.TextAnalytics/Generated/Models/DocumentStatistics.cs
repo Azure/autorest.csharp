@@ -11,11 +11,6 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class DocumentStatistics
     {
         /// <summary> Initializes a new instance of DocumentStatistics. </summary>
-        internal DocumentStatistics()
-        {
-        }
-
-        /// <summary> Initializes a new instance of DocumentStatistics. </summary>
         /// <param name="charactersCount"> Number of text elements recognized in the document. </param>
         /// <param name="transactionsCount"> Number of transactions for the document. </param>
         internal DocumentStatistics(int charactersCount, int transactionsCount)
@@ -25,8 +20,8 @@ namespace CognitiveServices.TextAnalytics.Models
         }
 
         /// <summary> Number of text elements recognized in the document. </summary>
-        public int CharactersCount { get; internal set; }
+        public int CharactersCount { get; }
         /// <summary> Number of transactions for the document. </summary>
-        public int TransactionsCount { get; internal set; }
+        public int TransactionsCount { get; }
     }
 }

@@ -42,13 +42,13 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string Etag { get; internal set; }
+        public string Etag { get; }
         /// <summary> Specifies the list of resource IDs for the network interface IP configuration that needs to be tapped. </summary>
-        public IList<NetworkInterfaceTapConfiguration> NetworkInterfaceTapConfigurations { get; internal set; }
+        public IList<NetworkInterfaceTapConfiguration> NetworkInterfaceTapConfigurations { get; }
         /// <summary> The resource GUID property of the virtual network tap resource. </summary>
-        public string ResourceGuid { get; internal set; }
+        public string ResourceGuid { get; }
         /// <summary> The provisioning state of the virtual network tap resource. </summary>
-        public ProvisioningState? ProvisioningState { get; internal set; }
+        public ProvisioningState? ProvisioningState { get; }
         /// <summary> The reference to the private IP Address of the collector nic that will receive the tap. </summary>
         public NetworkInterfaceIPConfiguration DestinationNetworkInterfaceIPConfiguration { get; set; }
         /// <summary> The reference to the private IP address on the internal Load Balancer that will receive the tap. </summary>

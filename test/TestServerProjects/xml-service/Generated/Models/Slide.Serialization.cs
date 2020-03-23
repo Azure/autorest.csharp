@@ -43,27 +43,24 @@ namespace xml_service.Models
 
         internal static Slide DeserializeSlide(XElement element)
         {
-            Slide result = default;
-            result = new Slide(); var type = element.Attribute("type");
-            if (type != null)
+            string type = default;
+            string title = default;
+            IList<string> items = default;
+            if (element.Attribute("type") is XAttribute typeAttribute)
             {
-                result.Type = (string)type;
+                type = (string)typeAttribute;
             }
-            string value = default;
-            var title = element.Element("title");
-            if (title != null)
+            if (element.Element("title") is XElement titleElement)
             {
-                value = (string)title;
+                title = (string)titleElement;
             }
-            result.Title = value;
-            result.Items = new List<string>();
+            var array = new List<string>();
             foreach (var e in element.Elements("item"))
             {
-                string value0 = default;
-                value0 = (string)e;
-                result.Items.Add(value0);
+                array.Add((string)e);
             }
-            return result;
+            items = array;
+            return new Slide(type, title, items);
         }
     }
 }

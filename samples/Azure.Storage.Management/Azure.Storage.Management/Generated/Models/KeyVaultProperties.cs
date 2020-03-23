@@ -39,8 +39,8 @@ namespace Azure.Storage.Management.Models
         /// <summary> The Uri of KeyVault. </summary>
         public string KeyVaultUri { get; set; }
         /// <summary> The object identifier of the current versioned Key Vault Key in use. </summary>
-        public string CurrentVersionedKeyIdentifier { get; internal set; }
+        public string CurrentVersionedKeyIdentifier { get; }
         /// <summary> Timestamp of last rotation of the Key Vault Key. </summary>
-        public DateTimeOffset? LastKeyRotationTimestamp { get; internal set; }
+        public DateTimeOffset? LastKeyRotationTimestamp { get; }
     }
 }

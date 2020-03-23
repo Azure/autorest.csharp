@@ -11,7 +11,8 @@ namespace CognitiveSearch.Models
     public partial class ShingleTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of ShingleTokenFilter. </summary>
-        public ShingleTokenFilter()
+        /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public ShingleTokenFilter(string name) : base(name)
         {
             OdataType = "#Microsoft.Azure.Search.ShingleTokenFilter";
         }
@@ -33,7 +34,7 @@ namespace CognitiveSearch.Models
             OutputUnigramsIfNoShingles = outputUnigramsIfNoShingles;
             TokenSeparator = tokenSeparator;
             FilterToken = filterToken;
-            OdataType = "#Microsoft.Azure.Search.ShingleTokenFilter";
+            OdataType = odataType ?? "#Microsoft.Azure.Search.ShingleTokenFilter";
         }
 
         /// <summary> The maximum shingle size. Default and minimum value is 2. </summary>

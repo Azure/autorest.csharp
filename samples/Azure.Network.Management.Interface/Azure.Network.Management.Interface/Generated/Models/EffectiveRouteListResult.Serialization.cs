@@ -15,7 +15,8 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static EffectiveRouteListResult DeserializeEffectiveRouteListResult(JsonElement element)
         {
-            EffectiveRouteListResult result = new EffectiveRouteListResult();
+            IList<EffectiveRoute> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -24,11 +25,12 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Value = new List<EffectiveRoute>();
+                    List<EffectiveRoute> array = new List<EffectiveRoute>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Value.Add(EffectiveRoute.DeserializeEffectiveRoute(item));
+                        array.Add(EffectiveRoute.DeserializeEffectiveRoute(item));
                     }
+                    value = array;
                     continue;
                 }
                 if (property.NameEquals("nextLink"))
@@ -37,11 +39,11 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.NextLink = property.Value.GetString();
+                    nextLink = property.Value.GetString();
                     continue;
                 }
             }
-            return result;
+            return new EffectiveRouteListResult(value, nextLink);
         }
     }
 }

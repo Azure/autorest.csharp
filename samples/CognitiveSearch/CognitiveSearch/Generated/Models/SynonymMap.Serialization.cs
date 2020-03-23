@@ -31,22 +31,25 @@ namespace CognitiveSearch.Models
 
         internal static SynonymMap DeserializeSynonymMap(JsonElement element)
         {
-            SynonymMap result = new SynonymMap();
+            string name = default;
+            string format = default;
+            string synonyms = default;
+            string odataetag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
                 {
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("format"))
                 {
-                    result.Format = property.Value.GetString();
+                    format = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("synonyms"))
                 {
-                    result.Synonyms = property.Value.GetString();
+                    synonyms = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("@odata.etag"))
@@ -55,11 +58,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    result.ETag = property.Value.GetString();
+                    odataetag = property.Value.GetString();
                     continue;
                 }
             }
-            return result;
+            return new SynonymMap(name, format, synonyms, odataetag);
         }
     }
 }

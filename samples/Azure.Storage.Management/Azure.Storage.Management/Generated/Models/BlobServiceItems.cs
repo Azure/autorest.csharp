@@ -25,6 +25,6 @@ namespace Azure.Storage.Management.Models
         }
 
         /// <summary> List of blob services returned. </summary>
-        public IList<BlobServiceProperties> Value { get; internal set; }
+        public IList<BlobServiceProperties> Value { get; }
     }
 }

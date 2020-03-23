@@ -13,8 +13,11 @@ namespace CognitiveSearch.Models
     public partial class KeywordMarkerTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of KeywordMarkerTokenFilter. </summary>
-        public KeywordMarkerTokenFilter()
+        /// <param name="keywords"> A list of words to mark as keywords. </param>
+        /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public KeywordMarkerTokenFilter(IList<string> keywords, string name) : base(name)
         {
+            Keywords = keywords;
             OdataType = "#Microsoft.Azure.Search.KeywordMarkerTokenFilter";
         }
 
@@ -27,11 +30,11 @@ namespace CognitiveSearch.Models
         {
             Keywords = keywords;
             IgnoreCase = ignoreCase;
-            OdataType = "#Microsoft.Azure.Search.KeywordMarkerTokenFilter";
+            OdataType = odataType ?? "#Microsoft.Azure.Search.KeywordMarkerTokenFilter";
         }
 
         /// <summary> A list of words to mark as keywords. </summary>
-        public IList<string> Keywords { get; set; } = new List<string>();
+        public IList<string> Keywords { get; } = new List<string>();
         /// <summary> A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false. </summary>
         public bool? IgnoreCase { get; set; }
     }

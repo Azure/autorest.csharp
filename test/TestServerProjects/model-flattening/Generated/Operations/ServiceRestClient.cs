@@ -137,12 +137,14 @@ namespace model_flattening
                 {
                     case 200:
                         {
+                            IList<FlattenedProduct> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<FlattenedProduct> value = new List<FlattenedProduct>();
+                            List<FlattenedProduct> array = new List<FlattenedProduct>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                value.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
+                                array.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
                             }
+                            value = array;
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -170,12 +172,14 @@ namespace model_flattening
                 {
                     case 200:
                         {
+                            IList<FlattenedProduct> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<FlattenedProduct> value = new List<FlattenedProduct>();
+                            List<FlattenedProduct> array = new List<FlattenedProduct>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                value.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
+                                array.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
                             }
+                            value = array;
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -290,12 +294,14 @@ namespace model_flattening
                 {
                     case 200:
                         {
+                            IList<ProductWrapper> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IList<ProductWrapper> value = new List<ProductWrapper>();
+                            List<ProductWrapper> array = new List<ProductWrapper>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                value.Add(ProductWrapper.DeserializeProductWrapper(item));
+                                array.Add(ProductWrapper.DeserializeProductWrapper(item));
                             }
+                            value = array;
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -323,12 +329,14 @@ namespace model_flattening
                 {
                     case 200:
                         {
+                            IList<ProductWrapper> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IList<ProductWrapper> value = new List<ProductWrapper>();
+                            List<ProductWrapper> array = new List<ProductWrapper>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                value.Add(ProductWrapper.DeserializeProductWrapper(item));
+                                array.Add(ProductWrapper.DeserializeProductWrapper(item));
                             }
+                            value = array;
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -444,12 +452,14 @@ namespace model_flattening
                 {
                     case 200:
                         {
+                            IDictionary<string, FlattenedProduct> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            IDictionary<string, FlattenedProduct> value = new Dictionary<string, FlattenedProduct>();
+                            Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(property.Name, FlattenedProduct.DeserializeFlattenedProduct(property.Value));
+                                dictionary.Add(property.Name, FlattenedProduct.DeserializeFlattenedProduct(property.Value));
                             }
+                            value = dictionary;
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -477,12 +487,14 @@ namespace model_flattening
                 {
                     case 200:
                         {
+                            IDictionary<string, FlattenedProduct> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            IDictionary<string, FlattenedProduct> value = new Dictionary<string, FlattenedProduct>();
+                            Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                value.Add(property.Name, FlattenedProduct.DeserializeFlattenedProduct(property.Value));
+                                dictionary.Add(property.Name, FlattenedProduct.DeserializeFlattenedProduct(property.Value));
                             }
+                            value = dictionary;
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -592,8 +604,9 @@ namespace model_flattening
                 {
                     case 200:
                         {
+                            ResourceCollection value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ResourceCollection.DeserializeResourceCollection(document.RootElement);
+                            value = ResourceCollection.DeserializeResourceCollection(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -621,8 +634,9 @@ namespace model_flattening
                 {
                     case 200:
                         {
+                            ResourceCollection value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ResourceCollection.DeserializeResourceCollection(document.RootElement);
+                            value = ResourceCollection.DeserializeResourceCollection(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -668,8 +682,9 @@ namespace model_flattening
                 {
                     case 200:
                         {
+                            SimpleProduct value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
+                            value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -699,8 +714,9 @@ namespace model_flattening
                 {
                     case 200:
                         {
+                            SimpleProduct value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
+                            value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -714,7 +730,7 @@ namespace model_flattening
             }
         }
 
-        internal HttpMessage CreatePostFlattenedSimpleProductRequest(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string Capacity)
+        internal HttpMessage CreatePostFlattenedSimpleProductRequest(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -724,15 +740,7 @@ namespace model_flattening
             uri.AppendPath("/model-flatten/customFlattening", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new SimpleProduct()
-            {
-                ProductId = productId,
-                Description = description,
-                MaxProductDisplayName = maxProductDisplayName,
-                Capacity = Capacity,
-                GenericValue = genericValue,
-                OdataValue = odataValue
-            };
+            var model = new SimpleProduct(maxProductDisplayName, capacity, genericValue, odataValue, productId, description);
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
@@ -745,9 +753,9 @@ namespace model_flattening
         /// <param name="maxProductDisplayName"> Display name of product. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
-        /// <param name="Capacity"> Capacity of product. For example, 4 people. </param>
+        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string Capacity = "Large", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity = "Large", CancellationToken cancellationToken = default)
         {
             if (productId == null)
             {
@@ -758,14 +766,15 @@ namespace model_flattening
             scope.Start();
             try
             {
-                using var message = CreatePostFlattenedSimpleProductRequest(productId, description, maxProductDisplayName, genericValue, odataValue, Capacity);
+                using var message = CreatePostFlattenedSimpleProductRequest(productId, description, maxProductDisplayName, genericValue, odataValue, capacity);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         {
+                            SimpleProduct value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
+                            value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -785,9 +794,9 @@ namespace model_flattening
         /// <param name="maxProductDisplayName"> Display name of product. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
-        /// <param name="Capacity"> Capacity of product. For example, 4 people. </param>
+        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SimpleProduct> PostFlattenedSimpleProduct(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string Capacity = "Large", CancellationToken cancellationToken = default)
+        public Response<SimpleProduct> PostFlattenedSimpleProduct(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity = "Large", CancellationToken cancellationToken = default)
         {
             if (productId == null)
             {
@@ -798,14 +807,15 @@ namespace model_flattening
             scope.Start();
             try
             {
-                using var message = CreatePostFlattenedSimpleProductRequest(productId, description, maxProductDisplayName, genericValue, odataValue, Capacity);
+                using var message = CreatePostFlattenedSimpleProductRequest(productId, description, maxProductDisplayName, genericValue, odataValue, capacity);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         {
+                            SimpleProduct value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
+                            value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -819,7 +829,7 @@ namespace model_flattening
             }
         }
 
-        internal HttpMessage CreatePutSimpleProductWithGroupingRequest(string name, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string Capacity)
+        internal HttpMessage CreatePutSimpleProductWithGroupingRequest(string name, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -831,15 +841,7 @@ namespace model_flattening
             uri.AppendPath("/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new SimpleProduct()
-            {
-                ProductId = productId,
-                Description = description,
-                MaxProductDisplayName = maxProductDisplayName,
-                Capacity = Capacity,
-                GenericValue = genericValue,
-                OdataValue = odataValue
-            };
+            var model = new SimpleProduct(maxProductDisplayName, capacity, genericValue, odataValue, productId, description);
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
@@ -853,9 +855,9 @@ namespace model_flattening
         /// <param name="maxProductDisplayName"> Display name of product. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
-        /// <param name="Capacity"> Capacity of product. For example, 4 people. </param>
+        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SimpleProduct>> PutSimpleProductWithGroupingAsync(string name, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string Capacity = "Large", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SimpleProduct>> PutSimpleProductWithGroupingAsync(string name, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity = "Large", CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -870,14 +872,15 @@ namespace model_flattening
             scope.Start();
             try
             {
-                using var message = CreatePutSimpleProductWithGroupingRequest(name, productId, description, maxProductDisplayName, genericValue, odataValue, Capacity);
+                using var message = CreatePutSimpleProductWithGroupingRequest(name, productId, description, maxProductDisplayName, genericValue, odataValue, capacity);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         {
+                            SimpleProduct value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
+                            value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -898,9 +901,9 @@ namespace model_flattening
         /// <param name="maxProductDisplayName"> Display name of product. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
-        /// <param name="Capacity"> Capacity of product. For example, 4 people. </param>
+        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SimpleProduct> PutSimpleProductWithGrouping(string name, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string Capacity = "Large", CancellationToken cancellationToken = default)
+        public Response<SimpleProduct> PutSimpleProductWithGrouping(string name, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity = "Large", CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -915,14 +918,15 @@ namespace model_flattening
             scope.Start();
             try
             {
-                using var message = CreatePutSimpleProductWithGroupingRequest(name, productId, description, maxProductDisplayName, genericValue, odataValue, Capacity);
+                using var message = CreatePutSimpleProductWithGroupingRequest(name, productId, description, maxProductDisplayName, genericValue, odataValue, capacity);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         {
+                            SimpleProduct value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
+                            value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:

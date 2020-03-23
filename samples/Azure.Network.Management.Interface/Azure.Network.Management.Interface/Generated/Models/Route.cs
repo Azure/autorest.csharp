@@ -36,7 +36,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The name of the resource that is unique within a resource group. This name can be used to access the resource. </summary>
         public string Name { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string Etag { get; internal set; }
+        public string Etag { get; }
         /// <summary> The destination CIDR to which the route applies. </summary>
         public string AddressPrefix { get; set; }
         /// <summary> The type of Azure hop the packet should be sent to. </summary>
@@ -44,6 +44,6 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance. </summary>
         public string NextHopIpAddress { get; set; }
         /// <summary> The provisioning state of the route resource. </summary>
-        public ProvisioningState? ProvisioningState { get; internal set; }
+        public ProvisioningState? ProvisioningState { get; }
     }
 }

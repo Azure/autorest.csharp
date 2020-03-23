@@ -14,21 +14,22 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static DocumentStatistics DeserializeDocumentStatistics(JsonElement element)
         {
-            DocumentStatistics result = new DocumentStatistics();
+            int charactersCount = default;
+            int transactionsCount = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("charactersCount"))
                 {
-                    result.CharactersCount = property.Value.GetInt32();
+                    charactersCount = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("transactionsCount"))
                 {
-                    result.TransactionsCount = property.Value.GetInt32();
+                    transactionsCount = property.Value.GetInt32();
                     continue;
                 }
             }
-            return result;
+            return new DocumentStatistics(charactersCount, transactionsCount);
         }
     }
 }

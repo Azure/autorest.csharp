@@ -22,12 +22,12 @@ namespace Azure.Storage.Management
     {
         private string subscriptionId;
         private string host;
-        private string ApiVersion;
+        private string apiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
 
         /// <summary> Initializes a new instance of BlobContainersRestClient. </summary>
-        public BlobContainersRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string ApiVersion = "2019-06-01")
+        public BlobContainersRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
         {
             if (subscriptionId == null)
             {
@@ -37,14 +37,14 @@ namespace Azure.Storage.Management
             {
                 throw new ArgumentNullException(nameof(host));
             }
-            if (ApiVersion == null)
+            if (apiVersion == null)
             {
-                throw new ArgumentNullException(nameof(ApiVersion));
+                throw new ArgumentNullException(nameof(apiVersion));
             }
 
             this.subscriptionId = subscriptionId;
             this.host = host;
-            this.ApiVersion = ApiVersion;
+            this.apiVersion = apiVersion;
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
@@ -63,7 +63,7 @@ namespace Azure.Storage.Management
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
             uri.AppendPath("/blobServices/default/containers", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             if (maxpagesize != null)
             {
                 uri.AppendQuery("$maxpagesize", maxpagesize, true);
@@ -103,8 +103,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            ListContainerItems value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
+                            value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -145,8 +146,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            ListContainerItems value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
+                            value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -175,7 +177,7 @@ namespace Azure.Storage.Management
             uri.AppendPath(accountName, true);
             uri.AppendPath("/blobServices/default/containers/", false);
             uri.AppendPath(containerName, true);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             var model = new BlobContainer()
@@ -221,8 +223,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            BlobContainer value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = BlobContainer.DeserializeBlobContainer(document.RootElement);
+                            value = BlobContainer.DeserializeBlobContainer(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -268,8 +271,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            BlobContainer value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = BlobContainer.DeserializeBlobContainer(document.RootElement);
+                            value = BlobContainer.DeserializeBlobContainer(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -298,7 +302,7 @@ namespace Azure.Storage.Management
             uri.AppendPath(accountName, true);
             uri.AppendPath("/blobServices/default/containers/", false);
             uri.AppendPath(containerName, true);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             var model = new BlobContainer()
@@ -344,8 +348,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            BlobContainer value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = BlobContainer.DeserializeBlobContainer(document.RootElement);
+                            value = BlobContainer.DeserializeBlobContainer(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -391,8 +396,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            BlobContainer value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = BlobContainer.DeserializeBlobContainer(document.RootElement);
+                            value = BlobContainer.DeserializeBlobContainer(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -421,7 +427,7 @@ namespace Azure.Storage.Management
             uri.AppendPath(accountName, true);
             uri.AppendPath("/blobServices/default/containers/", false);
             uri.AppendPath(containerName, true);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             return message;
         }
@@ -456,8 +462,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            BlobContainer value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = BlobContainer.DeserializeBlobContainer(document.RootElement);
+                            value = BlobContainer.DeserializeBlobContainer(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -501,8 +508,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            BlobContainer value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = BlobContainer.DeserializeBlobContainer(document.RootElement);
+                            value = BlobContainer.DeserializeBlobContainer(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -531,7 +539,7 @@ namespace Azure.Storage.Management
             uri.AppendPath(accountName, true);
             uri.AppendPath("/blobServices/default/containers/", false);
             uri.AppendPath(containerName, true);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             return message;
         }
@@ -634,13 +642,10 @@ namespace Azure.Storage.Management
             uri.AppendPath("/blobServices/default/containers/", false);
             uri.AppendPath(containerName, true);
             uri.AppendPath("/setLegalHold", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new LegalHold()
-            {
-                Tags = tags.ToArray()
-            };
+            var model = new LegalHold(tags.ToArray());
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
@@ -682,8 +687,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            LegalHold value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = LegalHold.DeserializeLegalHold(document.RootElement);
+                            value = LegalHold.DeserializeLegalHold(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -732,8 +738,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            LegalHold value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = LegalHold.DeserializeLegalHold(document.RootElement);
+                            value = LegalHold.DeserializeLegalHold(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -763,13 +770,10 @@ namespace Azure.Storage.Management
             uri.AppendPath("/blobServices/default/containers/", false);
             uri.AppendPath(containerName, true);
             uri.AppendPath("/clearLegalHold", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new LegalHold()
-            {
-                Tags = tags.ToArray()
-            };
+            var model = new LegalHold(tags.ToArray());
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
@@ -811,8 +815,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            LegalHold value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = LegalHold.DeserializeLegalHold(document.RootElement);
+                            value = LegalHold.DeserializeLegalHold(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -861,8 +866,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            LegalHold value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = LegalHold.DeserializeLegalHold(document.RootElement);
+                            value = LegalHold.DeserializeLegalHold(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -893,7 +899,7 @@ namespace Azure.Storage.Management
             uri.AppendPath(containerName, true);
             uri.AppendPath("/immutabilityPolicies/", false);
             uri.AppendPath("default", true);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             if (ifMatch != null)
             {
@@ -944,8 +950,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            ImmutabilityPolicy value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
+                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -992,8 +999,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            ImmutabilityPolicy value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
+                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1024,7 +1032,7 @@ namespace Azure.Storage.Management
             uri.AppendPath(containerName, true);
             uri.AppendPath("/immutabilityPolicies/", false);
             uri.AppendPath("default", true);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             if (ifMatch != null)
             {
@@ -1064,8 +1072,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            ImmutabilityPolicy value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
+                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1110,8 +1119,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            ImmutabilityPolicy value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
+                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1142,7 +1152,7 @@ namespace Azure.Storage.Management
             uri.AppendPath(containerName, true);
             uri.AppendPath("/immutabilityPolicies/", false);
             uri.AppendPath("default", true);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("If-Match", ifMatch);
             return message;
@@ -1183,8 +1193,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            ImmutabilityPolicy value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
+                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1233,8 +1244,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            ImmutabilityPolicy value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
+                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1264,7 +1276,7 @@ namespace Azure.Storage.Management
             uri.AppendPath("/blobServices/default/containers/", false);
             uri.AppendPath(containerName, true);
             uri.AppendPath("/immutabilityPolicies/default/lock", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("If-Match", ifMatch);
             return message;
@@ -1305,8 +1317,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            ImmutabilityPolicy value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
+                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1355,8 +1368,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            ImmutabilityPolicy value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
+                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1386,7 +1400,7 @@ namespace Azure.Storage.Management
             uri.AppendPath("/blobServices/default/containers/", false);
             uri.AppendPath(containerName, true);
             uri.AppendPath("/immutabilityPolicies/default/extend", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("If-Match", ifMatch);
             request.Headers.Add("Content-Type", "application/json");
@@ -1438,8 +1452,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            ImmutabilityPolicy value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
+                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1490,8 +1505,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            ImmutabilityPolicy value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
+                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1521,7 +1537,7 @@ namespace Azure.Storage.Management
             uri.AppendPath("/blobServices/default/containers/", false);
             uri.AppendPath(containerName, true);
             uri.AppendPath("/lease", false);
-            uri.AppendQuery("api-version", ApiVersion, true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -1561,8 +1577,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            LeaseContainerResponse value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = LeaseContainerResponse.DeserializeLeaseContainerResponse(document.RootElement);
+                            value = LeaseContainerResponse.DeserializeLeaseContainerResponse(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1607,8 +1624,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            LeaseContainerResponse value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = LeaseContainerResponse.DeserializeLeaseContainerResponse(document.RootElement);
+                            value = LeaseContainerResponse.DeserializeLeaseContainerResponse(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1653,8 +1671,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            ListContainerItems value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            var value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
+                            value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1688,8 +1707,9 @@ namespace Azure.Storage.Management
                 {
                     case 200:
                         {
+                            ListContainerItems value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            var value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
+                            value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:

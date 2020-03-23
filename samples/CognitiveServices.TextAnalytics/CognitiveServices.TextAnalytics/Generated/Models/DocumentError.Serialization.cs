@@ -14,21 +14,22 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static DocumentError DeserializeDocumentError(JsonElement element)
         {
-            DocumentError result = new DocumentError();
+            string id = default;
+            TextAnalyticsError error = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
                 {
-                    result.Id = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("error"))
                 {
-                    result.Error = TextAnalyticsError.DeserializeTextAnalyticsError(property.Value);
+                    error = TextAnalyticsError.DeserializeTextAnalyticsError(property.Value);
                     continue;
                 }
             }
-            return result;
+            return new DocumentError(id, error);
         }
     }
 }

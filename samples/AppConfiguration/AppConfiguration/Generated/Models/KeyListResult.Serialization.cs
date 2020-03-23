@@ -15,7 +15,8 @@ namespace AppConfiguration.Models
     {
         internal static KeyListResult DeserializeKeyListResult(JsonElement element)
         {
-            KeyListResult result = new KeyListResult();
+            IList<Key> items = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("items"))
@@ -24,11 +25,12 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    result.Items = new List<Key>();
+                    List<Key> array = new List<Key>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Items.Add(Key.DeserializeKey(item));
+                        array.Add(Key.DeserializeKey(item));
                     }
+                    items = array;
                     continue;
                 }
                 if (property.NameEquals("@nextLink"))
@@ -37,11 +39,11 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    result.NextLink = property.Value.GetString();
+                    nextLink = property.Value.GetString();
                     continue;
                 }
             }
-            return result;
+            return new KeyListResult(items, nextLink);
         }
     }
 }

@@ -14,31 +14,34 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static Match DeserializeMatch(JsonElement element)
         {
-            Match result = new Match();
+            double score = default;
+            string text = default;
+            int offset = default;
+            int length = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("score"))
                 {
-                    result.Score = property.Value.GetDouble();
+                    score = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("text"))
                 {
-                    result.Text = property.Value.GetString();
+                    text = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("offset"))
                 {
-                    result.Offset = property.Value.GetInt32();
+                    offset = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("length"))
                 {
-                    result.Length = property.Value.GetInt32();
+                    length = property.Value.GetInt32();
                     continue;
                 }
             }
-            return result;
+            return new Match(score, text, offset, length);
         }
     }
 }

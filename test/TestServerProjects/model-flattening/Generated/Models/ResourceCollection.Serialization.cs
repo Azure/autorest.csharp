@@ -47,7 +47,9 @@ namespace model_flattening.Models
 
         internal static ResourceCollection DeserializeResourceCollection(JsonElement element)
         {
-            ResourceCollection result = new ResourceCollection();
+            FlattenedProduct productresource = default;
+            IList<FlattenedProduct> arrayofresources = default;
+            IDictionary<string, FlattenedProduct> dictionaryofresources = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("productresource"))
@@ -56,7 +58,7 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    result.Productresource = FlattenedProduct.DeserializeFlattenedProduct(property.Value);
+                    productresource = FlattenedProduct.DeserializeFlattenedProduct(property.Value);
                     continue;
                 }
                 if (property.NameEquals("arrayofresources"))
@@ -65,11 +67,12 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    result.Arrayofresources = new List<FlattenedProduct>();
+                    List<FlattenedProduct> array = new List<FlattenedProduct>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Arrayofresources.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
+                        array.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
                     }
+                    arrayofresources = array;
                     continue;
                 }
                 if (property.NameEquals("dictionaryofresources"))
@@ -78,15 +81,16 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    result.Dictionaryofresources = new Dictionary<string, FlattenedProduct>();
+                    Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        result.Dictionaryofresources.Add(property0.Name, FlattenedProduct.DeserializeFlattenedProduct(property0.Value));
+                        dictionary.Add(property0.Name, FlattenedProduct.DeserializeFlattenedProduct(property0.Value));
                     }
+                    dictionaryofresources = dictionary;
                     continue;
                 }
             }
-            return result;
+            return new ResourceCollection(productresource, arrayofresources, dictionaryofresources);
         }
     }
 }

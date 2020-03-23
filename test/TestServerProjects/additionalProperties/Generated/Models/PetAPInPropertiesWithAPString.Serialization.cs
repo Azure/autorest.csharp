@@ -41,7 +41,7 @@ namespace additionalProperties.Models
                 }
                 writer.WriteEndObject();
             }
-            foreach (var item in this)
+            foreach (var item in MoreAdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
                 writer.WriteStringValue(item.Value);
@@ -51,12 +51,17 @@ namespace additionalProperties.Models
 
         internal static PetAPInPropertiesWithAPString DeserializePetAPInPropertiesWithAPString(JsonElement element)
         {
-            PetAPInPropertiesWithAPString result = new PetAPInPropertiesWithAPString();
+            int id = default;
+            string name = default;
+            bool? status = default;
+            string odatalocation = default;
+            IDictionary<string, float> additionalProperties = default;
+            IDictionary<string, string> moreAdditionalProperties = new Dictionary<string, string>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
                 {
-                    result.Id = property.Value.GetInt32();
+                    id = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -65,7 +70,7 @@ namespace additionalProperties.Models
                     {
                         continue;
                     }
-                    result.Name = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("status"))
@@ -74,12 +79,12 @@ namespace additionalProperties.Models
                     {
                         continue;
                     }
-                    result.Status = property.Value.GetBoolean();
+                    status = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("@odata.location"))
                 {
-                    result.OdataLocation = property.Value.GetString();
+                    odatalocation = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("additionalProperties"))
@@ -88,16 +93,17 @@ namespace additionalProperties.Models
                     {
                         continue;
                     }
-                    result.AdditionalProperties = new Dictionary<string, float>();
+                    Dictionary<string, float> dictionary = new Dictionary<string, float>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        result.AdditionalProperties.Add(property0.Name, property0.Value.GetSingle());
+                        dictionary.Add(property0.Name, property0.Value.GetSingle());
                     }
+                    additionalProperties = dictionary;
                     continue;
                 }
-                result.Add(property.Name, property.Value.GetString());
+                moreAdditionalProperties.Add(property.Name, property.Value.GetString());
             }
-            return result;
+            return new PetAPInPropertiesWithAPString(id, name, status, odatalocation, additionalProperties, moreAdditionalProperties);
         }
     }
 }

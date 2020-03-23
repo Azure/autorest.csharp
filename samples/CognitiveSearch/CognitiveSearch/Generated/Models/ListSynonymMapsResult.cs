@@ -25,6 +25,6 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The synonym maps in the Search service. </summary>
-        public IList<SynonymMap> SynonymMaps { get; internal set; }
+        public IList<SynonymMap> SynonymMaps { get; }
     }
 }

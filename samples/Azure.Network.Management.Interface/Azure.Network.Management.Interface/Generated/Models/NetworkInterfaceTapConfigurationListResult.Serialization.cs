@@ -15,7 +15,8 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static NetworkInterfaceTapConfigurationListResult DeserializeNetworkInterfaceTapConfigurationListResult(JsonElement element)
         {
-            NetworkInterfaceTapConfigurationListResult result = new NetworkInterfaceTapConfigurationListResult();
+            IList<NetworkInterfaceTapConfiguration> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -24,11 +25,12 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.Value = new List<NetworkInterfaceTapConfiguration>();
+                    List<NetworkInterfaceTapConfiguration> array = new List<NetworkInterfaceTapConfiguration>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        result.Value.Add(NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration(item));
+                        array.Add(NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration(item));
                     }
+                    value = array;
                     continue;
                 }
                 if (property.NameEquals("nextLink"))
@@ -37,11 +39,11 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    result.NextLink = property.Value.GetString();
+                    nextLink = property.Value.GetString();
                     continue;
                 }
             }
-            return result;
+            return new NetworkInterfaceTapConfigurationListResult(value, nextLink);
         }
     }
 }

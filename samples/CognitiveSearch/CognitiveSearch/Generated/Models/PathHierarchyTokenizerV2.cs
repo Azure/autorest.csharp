@@ -11,7 +11,8 @@ namespace CognitiveSearch.Models
     public partial class PathHierarchyTokenizerV2 : Tokenizer
     {
         /// <summary> Initializes a new instance of PathHierarchyTokenizerV2. </summary>
-        public PathHierarchyTokenizerV2()
+        /// <param name="name"> The name of the tokenizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public PathHierarchyTokenizerV2(string name) : base(name)
         {
             OdataType = "#Microsoft.Azure.Search.PathHierarchyTokenizerV2";
         }
@@ -31,7 +32,7 @@ namespace CognitiveSearch.Models
             MaxTokenLength = maxTokenLength;
             ReverseTokenOrder = reverseTokenOrder;
             NumberOfTokensToSkip = numberOfTokensToSkip;
-            OdataType = "#Microsoft.Azure.Search.PathHierarchyTokenizerV2";
+            OdataType = odataType ?? "#Microsoft.Azure.Search.PathHierarchyTokenizerV2";
         }
 
         /// <summary> The delimiter character to use. Default is &quot;/&quot;. </summary>
