@@ -11,11 +11,6 @@ namespace xml_service.Models
     public partial class ListBlobsResponse
     {
         /// <summary> Initializes a new instance of ListBlobsResponse. </summary>
-        internal ListBlobsResponse()
-        {
-        }
-
-        /// <summary> Initializes a new instance of ListBlobsResponse. </summary>
         /// <param name="serviceEndpoint"> . </param>
         /// <param name="containerName"> . </param>
         /// <param name="prefix"> . </param>
@@ -36,13 +31,13 @@ namespace xml_service.Models
             NextMarker = nextMarker;
         }
 
-        public string ServiceEndpoint { get; internal set; }
-        public string ContainerName { get; internal set; }
-        public string Prefix { get; internal set; }
-        public string Marker { get; internal set; }
-        public int MaxResults { get; internal set; }
-        public string Delimiter { get; internal set; }
-        public Blobs Blobs { get; internal set; } = new Blobs();
-        public string NextMarker { get; internal set; }
+        public string ServiceEndpoint { get; }
+        public string ContainerName { get; }
+        public string Prefix { get; }
+        public string Marker { get; }
+        public int MaxResults { get; }
+        public string Delimiter { get; }
+        public Blobs Blobs { get; }
+        public string NextMarker { get; }
     }
 }

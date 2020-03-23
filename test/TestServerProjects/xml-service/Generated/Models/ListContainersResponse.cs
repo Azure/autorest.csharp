@@ -13,8 +13,16 @@ namespace xml_service.Models
     public partial class ListContainersResponse
     {
         /// <summary> Initializes a new instance of ListContainersResponse. </summary>
-        internal ListContainersResponse()
+        /// <param name="serviceEndpoint"> . </param>
+        /// <param name="prefix"> . </param>
+        /// <param name="maxResults"> . </param>
+        /// <param name="nextMarker"> . </param>
+        internal ListContainersResponse(string serviceEndpoint, string prefix, int maxResults, string nextMarker)
         {
+            ServiceEndpoint = serviceEndpoint;
+            Prefix = prefix;
+            MaxResults = maxResults;
+            NextMarker = nextMarker;
         }
 
         /// <summary> Initializes a new instance of ListContainersResponse. </summary>
@@ -34,11 +42,11 @@ namespace xml_service.Models
             NextMarker = nextMarker;
         }
 
-        public string ServiceEndpoint { get; internal set; }
-        public string Prefix { get; internal set; }
-        public string Marker { get; internal set; }
-        public int MaxResults { get; internal set; }
-        public IList<Container> Containers { get; internal set; }
-        public string NextMarker { get; internal set; }
+        public string ServiceEndpoint { get; }
+        public string Prefix { get; }
+        public string Marker { get; }
+        public int MaxResults { get; }
+        public IList<Container> Containers { get; }
+        public string NextMarker { get; }
     }
 }

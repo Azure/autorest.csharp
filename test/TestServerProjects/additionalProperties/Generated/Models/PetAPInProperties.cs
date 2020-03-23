@@ -13,8 +13,10 @@ namespace additionalProperties.Models
     public partial class PetAPInProperties
     {
         /// <summary> Initializes a new instance of PetAPInProperties. </summary>
-        public PetAPInProperties()
+        /// <param name="id"> . </param>
+        public PetAPInProperties(int id)
         {
+            Id = id;
         }
 
         /// <summary> Initializes a new instance of PetAPInProperties. </summary>
@@ -30,9 +32,9 @@ namespace additionalProperties.Models
             AdditionalProperties = additionalProperties;
         }
 
-        public int Id { get; set; }
+        public int Id { get; }
         public string Name { get; set; }
-        public bool? Status { get; internal set; }
+        public bool? Status { get; }
         /// <summary> Dictionary of &lt;number&gt;. </summary>
         public IDictionary<string, float> AdditionalProperties { get; set; }
     }

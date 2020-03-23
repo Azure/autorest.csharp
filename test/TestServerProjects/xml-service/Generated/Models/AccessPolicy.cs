@@ -13,15 +13,10 @@ namespace xml_service.Models
     public partial class AccessPolicy
     {
         /// <summary> Initializes a new instance of AccessPolicy. </summary>
-        public AccessPolicy()
-        {
-        }
-
-        /// <summary> Initializes a new instance of AccessPolicy. </summary>
         /// <param name="start"> the date-time the policy is active. </param>
         /// <param name="expiry"> the date-time the policy expires. </param>
         /// <param name="permission"> the permissions for the acl policy. </param>
-        internal AccessPolicy(DateTimeOffset start, DateTimeOffset expiry, string permission)
+        public AccessPolicy(DateTimeOffset start, DateTimeOffset expiry, string permission)
         {
             Start = start;
             Expiry = expiry;
@@ -29,10 +24,10 @@ namespace xml_service.Models
         }
 
         /// <summary> the date-time the policy is active. </summary>
-        public DateTimeOffset Start { get; set; }
+        public DateTimeOffset Start { get; }
         /// <summary> the date-time the policy expires. </summary>
-        public DateTimeOffset Expiry { get; set; }
+        public DateTimeOffset Expiry { get; }
         /// <summary> the permissions for the acl policy. </summary>
-        public string Permission { get; set; }
+        public string Permission { get; }
     }
 }

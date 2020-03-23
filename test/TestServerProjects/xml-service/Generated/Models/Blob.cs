@@ -13,8 +13,16 @@ namespace xml_service.Models
     public partial class Blob
     {
         /// <summary> Initializes a new instance of Blob. </summary>
-        internal Blob()
+        /// <param name="name"> . </param>
+        /// <param name="deleted"> . </param>
+        /// <param name="snapshot"> . </param>
+        /// <param name="properties"> Properties of a blob. </param>
+        internal Blob(string name, bool deleted, string snapshot, BlobProperties properties)
         {
+            Name = name;
+            Deleted = deleted;
+            Snapshot = snapshot;
+            Properties = properties;
         }
 
         /// <summary> Initializes a new instance of Blob. </summary>
@@ -32,12 +40,12 @@ namespace xml_service.Models
             Metadata = metadata;
         }
 
-        public string Name { get; internal set; }
-        public bool Deleted { get; internal set; }
-        public string Snapshot { get; internal set; }
+        public string Name { get; }
+        public bool Deleted { get; }
+        public string Snapshot { get; }
         /// <summary> Properties of a blob. </summary>
-        public BlobProperties Properties { get; internal set; } = new BlobProperties();
+        public BlobProperties Properties { get; }
         /// <summary> Dictionary of &lt;string&gt;. </summary>
-        public IDictionary<string, string> Metadata { get; internal set; }
+        public IDictionary<string, string> Metadata { get; }
     }
 }

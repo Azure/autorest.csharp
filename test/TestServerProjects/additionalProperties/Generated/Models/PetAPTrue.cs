@@ -14,8 +14,10 @@ namespace additionalProperties.Models
     public partial class PetAPTrue : IDictionary<string, object>
     {
         /// <summary> Initializes a new instance of PetAPTrue. </summary>
-        public PetAPTrue()
+        /// <param name="id"> . </param>
+        public PetAPTrue(int id)
         {
+            Id = id;
         }
 
         /// <summary> Initializes a new instance of PetAPTrue. </summary>
@@ -31,9 +33,9 @@ namespace additionalProperties.Models
             AdditionalProperties = additionalProperties;
         }
 
-        public int Id { get; set; }
+        public int Id { get; }
         public string Name { get; set; }
-        public bool? Status { get; internal set; }
+        public bool? Status { get; }
         internal IDictionary<string, object> AdditionalProperties { get; set; } = new Dictionary<string, object>();
         /// <inheritdoc />
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator() => AdditionalProperties.GetEnumerator();

@@ -13,8 +13,12 @@ namespace xml_service.Models
     public partial class BlobProperties
     {
         /// <summary> Initializes a new instance of BlobProperties. </summary>
-        internal BlobProperties()
+        /// <param name="lastModified"> . </param>
+        /// <param name="etag"> . </param>
+        internal BlobProperties(DateTimeOffset lastModified, string etag)
         {
+            LastModified = lastModified;
+            Etag = etag;
         }
 
         /// <summary> Initializes a new instance of BlobProperties. </summary>
@@ -78,34 +82,34 @@ namespace xml_service.Models
             ArchiveStatus = archiveStatus;
         }
 
-        public DateTimeOffset LastModified { get; internal set; }
-        public string Etag { get; internal set; }
+        public DateTimeOffset LastModified { get; }
+        public string Etag { get; }
         /// <summary> Size in bytes. </summary>
-        public long? ContentLength { get; internal set; }
-        public string ContentType { get; internal set; }
-        public string ContentEncoding { get; internal set; }
-        public string ContentLanguage { get; internal set; }
-        public string ContentMD5 { get; internal set; }
-        public string ContentDisposition { get; internal set; }
-        public string CacheControl { get; internal set; }
-        public int? BlobSequenceNumber { get; internal set; }
-        public BlobType? BlobType { get; internal set; }
-        public LeaseStatusType? LeaseStatus { get; internal set; }
-        public LeaseStateType? LeaseState { get; internal set; }
-        public LeaseDurationType? LeaseDuration { get; internal set; }
-        public string CopyId { get; internal set; }
-        public CopyStatusType? CopyStatus { get; internal set; }
-        public string CopySource { get; internal set; }
-        public string CopyProgress { get; internal set; }
-        public DateTimeOffset? CopyCompletionTime { get; internal set; }
-        public string CopyStatusDescription { get; internal set; }
-        public bool? ServerEncrypted { get; internal set; }
-        public bool? IncrementalCopy { get; internal set; }
-        public string DestinationSnapshot { get; internal set; }
-        public DateTimeOffset? DeletedTime { get; internal set; }
-        public int? RemainingRetentionDays { get; internal set; }
-        public AccessTier? AccessTier { get; internal set; }
-        public bool? AccessTierInferred { get; internal set; }
-        public ArchiveStatus? ArchiveStatus { get; internal set; }
+        public long? ContentLength { get; }
+        public string ContentType { get; }
+        public string ContentEncoding { get; }
+        public string ContentLanguage { get; }
+        public string ContentMD5 { get; }
+        public string ContentDisposition { get; }
+        public string CacheControl { get; }
+        public int? BlobSequenceNumber { get; }
+        public BlobType? BlobType { get; }
+        public LeaseStatusType? LeaseStatus { get; }
+        public LeaseStateType? LeaseState { get; }
+        public LeaseDurationType? LeaseDuration { get; }
+        public string CopyId { get; }
+        public CopyStatusType? CopyStatus { get; }
+        public string CopySource { get; }
+        public string CopyProgress { get; }
+        public DateTimeOffset? CopyCompletionTime { get; }
+        public string CopyStatusDescription { get; }
+        public bool? ServerEncrypted { get; }
+        public bool? IncrementalCopy { get; }
+        public string DestinationSnapshot { get; }
+        public DateTimeOffset? DeletedTime { get; }
+        public int? RemainingRetentionDays { get; }
+        public AccessTier? AccessTier { get; }
+        public bool? AccessTierInferred { get; }
+        public ArchiveStatus? ArchiveStatus { get; }
     }
 }

@@ -11,17 +11,12 @@ namespace xml_service.Models
     public partial class Logging
     {
         /// <summary> Initializes a new instance of Logging. </summary>
-        public Logging()
-        {
-        }
-
-        /// <summary> Initializes a new instance of Logging. </summary>
         /// <param name="version"> The version of Storage Analytics to configure. </param>
         /// <param name="delete"> Indicates whether all delete requests should be logged. </param>
         /// <param name="read"> Indicates whether all read requests should be logged. </param>
         /// <param name="write"> Indicates whether all write requests should be logged. </param>
         /// <param name="retentionPolicy"> the retention policy. </param>
-        internal Logging(string version, bool delete, bool read, bool write, RetentionPolicy retentionPolicy)
+        public Logging(string version, bool delete, bool read, bool write, RetentionPolicy retentionPolicy)
         {
             Version = version;
             Delete = delete;
@@ -31,14 +26,14 @@ namespace xml_service.Models
         }
 
         /// <summary> The version of Storage Analytics to configure. </summary>
-        public string Version { get; set; }
+        public string Version { get; }
         /// <summary> Indicates whether all delete requests should be logged. </summary>
-        public bool Delete { get; set; }
+        public bool Delete { get; }
         /// <summary> Indicates whether all read requests should be logged. </summary>
-        public bool Read { get; set; }
+        public bool Read { get; }
         /// <summary> Indicates whether all write requests should be logged. </summary>
-        public bool Write { get; set; }
+        public bool Write { get; }
         /// <summary> the retention policy. </summary>
-        public RetentionPolicy RetentionPolicy { get; set; } = new RetentionPolicy();
+        public RetentionPolicy RetentionPolicy { get; }
     }
 }

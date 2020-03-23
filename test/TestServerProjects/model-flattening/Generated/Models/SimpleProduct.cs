@@ -11,7 +11,8 @@ namespace model_flattening.Models
     public partial class SimpleProduct : BaseProduct
     {
         /// <summary> Initializes a new instance of SimpleProduct. </summary>
-        public SimpleProduct()
+        /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
+        public SimpleProduct(string productId) : base(productId)
         {
         }
 
@@ -33,7 +34,7 @@ namespace model_flattening.Models
         /// <summary> Display name of product. </summary>
         public string MaxProductDisplayName { get; set; }
         /// <summary> Capacity of product. For example, 4 people. </summary>
-        public string Capacity { get; set; } = "Large";
+        public string Capacity { get; set; }
         /// <summary> Generic URL value. </summary>
         public string GenericValue { get; set; }
         /// <summary> URL value. </summary>

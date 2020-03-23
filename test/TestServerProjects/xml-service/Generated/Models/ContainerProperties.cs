@@ -13,8 +13,12 @@ namespace xml_service.Models
     public partial class ContainerProperties
     {
         /// <summary> Initializes a new instance of ContainerProperties. </summary>
-        internal ContainerProperties()
+        /// <param name="lastModified"> . </param>
+        /// <param name="etag"> . </param>
+        internal ContainerProperties(DateTimeOffset lastModified, string etag)
         {
+            LastModified = lastModified;
+            Etag = etag;
         }
 
         /// <summary> Initializes a new instance of ContainerProperties. </summary>
@@ -34,11 +38,11 @@ namespace xml_service.Models
             PublicAccess = publicAccess;
         }
 
-        public DateTimeOffset LastModified { get; internal set; }
-        public string Etag { get; internal set; }
-        public LeaseStatusType? LeaseStatus { get; internal set; }
-        public LeaseStateType? LeaseState { get; internal set; }
-        public LeaseDurationType? LeaseDuration { get; internal set; }
-        public PublicAccessType? PublicAccess { get; internal set; }
+        public DateTimeOffset LastModified { get; }
+        public string Etag { get; }
+        public LeaseStatusType? LeaseStatus { get; }
+        public LeaseStateType? LeaseState { get; }
+        public LeaseDurationType? LeaseDuration { get; }
+        public PublicAccessType? PublicAccess { get; }
     }
 }

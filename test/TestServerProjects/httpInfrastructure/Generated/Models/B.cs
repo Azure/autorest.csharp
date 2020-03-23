@@ -23,6 +23,6 @@ namespace httpInfrastructure.Models
             TextStatusCode = textStatusCode;
         }
 
-        public string TextStatusCode { get; internal set; }
+        public string TextStatusCode { get; }
     }
 }

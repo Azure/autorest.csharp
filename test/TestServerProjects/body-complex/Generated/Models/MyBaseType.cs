@@ -22,12 +22,12 @@ namespace body_complex.Models
         /// <param name="propBH1"> . </param>
         internal MyBaseType(string kind, string propB1, string propBH1)
         {
-            Kind = kind;
+            Kind = kind ?? null;
             PropB1 = propB1;
             PropBH1 = propBH1;
         }
 
-        internal string Kind { get; set; } = "Kind1";
+        internal string Kind { get; set; }
         public string PropB1 { get; }
         public string PropBH1 { get; }
     }
