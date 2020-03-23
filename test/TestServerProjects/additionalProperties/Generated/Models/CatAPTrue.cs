@@ -13,7 +13,8 @@ namespace additionalProperties.Models
     public partial class CatAPTrue : PetAPTrue
     {
         /// <summary> Initializes a new instance of CatAPTrue. </summary>
-        public CatAPTrue()
+        /// <param name="id"> . </param>
+        public CatAPTrue(int id) : base(id)
         {
         }
 

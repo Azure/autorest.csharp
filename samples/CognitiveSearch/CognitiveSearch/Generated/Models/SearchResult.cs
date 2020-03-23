@@ -30,10 +30,10 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The relevance score of the document compared to other documents returned by the query. </summary>
-        public double? Score { get; internal set; }
+        public double? Score { get; }
         /// <summary> Text fragments from the document that indicate the matching search terms, organized by each applicable field; null if hit highlighting was not enabled for the query. </summary>
-        public IDictionary<string, IList<string>> Highlights { get; internal set; }
-        internal IDictionary<string, object> AdditionalProperties { get; set; } = new Dictionary<string, object>();
+        public IDictionary<string, IList<string>> Highlights { get; }
+        internal IDictionary<string, object> AdditionalProperties { get; } = new Dictionary<string, object>();
         /// <inheritdoc />
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator() => AdditionalProperties.GetEnumerator();
         /// <inheritdoc />

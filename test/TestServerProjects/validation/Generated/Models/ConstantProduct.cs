@@ -13,6 +13,8 @@ namespace validation.Models
         /// <summary> Initializes a new instance of ConstantProduct. </summary>
         public ConstantProduct()
         {
+            ConstProperty = "constant";
+            ConstProperty2 = "constant2";
         }
 
         /// <summary> Initializes a new instance of ConstantProduct. </summary>
@@ -25,8 +27,8 @@ namespace validation.Models
         }
 
         /// <summary> Constant string. </summary>
-        public string ConstProperty { get; set; } = "constant";
+        public string ConstProperty { get; }
         /// <summary> Constant string2. </summary>
-        public string ConstProperty2 { get; set; } = "constant2";
+        public string ConstProperty2 { get; }
     }
 }

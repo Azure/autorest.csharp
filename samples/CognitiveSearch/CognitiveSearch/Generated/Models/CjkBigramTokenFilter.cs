@@ -13,7 +13,8 @@ namespace CognitiveSearch.Models
     public partial class CjkBigramTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of CjkBigramTokenFilter. </summary>
-        public CjkBigramTokenFilter()
+        /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public CjkBigramTokenFilter(string name) : base(name)
         {
             OdataType = "#Microsoft.Azure.Search.CjkBigramTokenFilter";
         }
@@ -23,10 +24,11 @@ namespace CognitiveSearch.Models
         /// <param name="outputUnigrams"> A value indicating whether to output both unigrams and bigrams (if true), or just bigrams (if false). Default is false. </param>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal CjkBigramTokenFilter(IList<CjkBigramTokenFilterScripts> ignoreScripts, bool? outputUnigrams, string odataType, string name) : base(odataType ?? "#Microsoft.Azure.Search.CjkBigramTokenFilter", name)
+        internal CjkBigramTokenFilter(IList<CjkBigramTokenFilterScripts> ignoreScripts, bool? outputUnigrams, string odataType, string name) : base(odataType, name)
         {
             IgnoreScripts = ignoreScripts;
             OutputUnigrams = outputUnigrams;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.CjkBigramTokenFilter";
         }
 
         /// <summary> The scripts to ignore. </summary>

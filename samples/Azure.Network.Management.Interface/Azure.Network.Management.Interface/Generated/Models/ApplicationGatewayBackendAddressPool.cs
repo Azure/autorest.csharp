@@ -38,14 +38,14 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Name of the backend address pool that is unique within an Application Gateway. </summary>
         public string Name { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string Etag { get; internal set; }
+        public string Etag { get; }
         /// <summary> Type of the resource. </summary>
-        public string Type { get; internal set; }
+        public string Type { get; }
         /// <summary> Collection of references to IPs defined in network interfaces. </summary>
-        public IList<NetworkInterfaceIPConfiguration> BackendIPConfigurations { get; internal set; }
+        public IList<NetworkInterfaceIPConfiguration> BackendIPConfigurations { get; }
         /// <summary> Backend addresses. </summary>
         public IList<ApplicationGatewayBackendAddress> BackendAddresses { get; set; }
         /// <summary> The provisioning state of the backend address pool resource. </summary>
-        public ProvisioningState? ProvisioningState { get; internal set; }
+        public ProvisioningState? ProvisioningState { get; }
     }
 }

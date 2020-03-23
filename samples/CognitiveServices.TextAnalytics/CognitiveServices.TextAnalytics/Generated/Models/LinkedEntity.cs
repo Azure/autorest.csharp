@@ -13,8 +13,18 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class LinkedEntity
     {
         /// <summary> Initializes a new instance of LinkedEntity. </summary>
-        internal LinkedEntity()
+        /// <param name="name"> Entity Linking formal name. </param>
+        /// <param name="matches"> List of instances this entity appears in the text. </param>
+        /// <param name="language"> Language used in the data source. </param>
+        /// <param name="url"> URL for the entity&apos;s page from the data source. </param>
+        /// <param name="dataSource"> Data source used to extract entity linking, such as Wiki/Bing etc. </param>
+        internal LinkedEntity(string name, IList<Match> matches, string language, string url, string dataSource)
         {
+            Name = name;
+            Matches = matches;
+            Language = language;
+            Url = url;
+            DataSource = dataSource;
         }
 
         /// <summary> Initializes a new instance of LinkedEntity. </summary>
@@ -35,16 +45,16 @@ namespace CognitiveServices.TextAnalytics.Models
         }
 
         /// <summary> Entity Linking formal name. </summary>
-        public string Name { get; internal set; }
+        public string Name { get; }
         /// <summary> List of instances this entity appears in the text. </summary>
-        public IList<Match> Matches { get; internal set; } = new List<Match>();
+        public IList<Match> Matches { get; } = new List<Match>();
         /// <summary> Language used in the data source. </summary>
-        public string Language { get; internal set; }
+        public string Language { get; }
         /// <summary> Unique identifier of the recognized entity from the data source. </summary>
-        public string Id { get; internal set; }
+        public string Id { get; }
         /// <summary> URL for the entity&apos;s page from the data source. </summary>
-        public string Url { get; internal set; }
+        public string Url { get; }
         /// <summary> Data source used to extract entity linking, such as Wiki/Bing etc. </summary>
-        public string DataSource { get; internal set; }
+        public string DataSource { get; }
     }
 }

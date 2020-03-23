@@ -30,9 +30,9 @@ namespace body_complex.Models
             Fishes = fishes;
         }
 
-        public DotSalmon SampleSalmon { get; internal set; }
-        public IList<DotSalmon> Salmons { get; internal set; }
-        public DotFish SampleFish { get; internal set; }
-        public IList<DotFish> Fishes { get; internal set; }
+        public DotSalmon SampleSalmon { get; }
+        public IList<DotSalmon> Salmons { get; }
+        public DotFish SampleFish { get; }
+        public IList<DotFish> Fishes { get; }
     }
 }

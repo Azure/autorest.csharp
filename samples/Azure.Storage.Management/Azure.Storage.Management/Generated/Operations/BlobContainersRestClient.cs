@@ -645,10 +645,7 @@ namespace Azure.Storage.Management
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new LegalHold()
-            {
-                Tags = tags.ToArray()
-            };
+            var model = new LegalHold(tags.ToArray());
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
@@ -776,10 +773,7 @@ namespace Azure.Storage.Management
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new LegalHold()
-            {
-                Tags = tags.ToArray()
-            };
+            var model = new LegalHold(tags.ToArray());
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
             request.Content = content;

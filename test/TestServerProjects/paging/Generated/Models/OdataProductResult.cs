@@ -26,7 +26,7 @@ namespace paging.Models
             OdataNextLink = odataNextLink;
         }
 
-        public IList<Product> Values { get; internal set; }
-        public string OdataNextLink { get; internal set; }
+        public IList<Product> Values { get; }
+        public string OdataNextLink { get; }
     }
 }

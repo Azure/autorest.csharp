@@ -11,8 +11,10 @@ namespace Azure.Storage.Tables.Models
     public partial class Metrics
     {
         /// <summary> Initializes a new instance of Metrics. </summary>
-        public Metrics()
+        /// <param name="enabled"> Indicates whether metrics are enabled for the Queue service. </param>
+        public Metrics(bool enabled)
         {
+            Enabled = enabled;
         }
 
         /// <summary> Initializes a new instance of Metrics. </summary>
@@ -31,7 +33,7 @@ namespace Azure.Storage.Tables.Models
         /// <summary> The version of Storage Analytics to configure. </summary>
         public string Version { get; set; }
         /// <summary> Indicates whether metrics are enabled for the Queue service. </summary>
-        public bool Enabled { get; set; }
+        public bool Enabled { get; }
         /// <summary> Indicates whether metrics should generate summary statistics for called API operations. </summary>
         public bool? IncludeAPIs { get; set; }
         /// <summary> the retention policy. </summary>

@@ -69,6 +69,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 return;
             }
 
+            if (constant.Value == Constant.NewInstanceSentinel)
+            {
+                writer.Append($"new {constant.Type}()");
+                return;
+            }
+
             Type frameworkType = constant.Type.FrameworkType;
             if (frameworkType == typeof(DateTimeOffset))
             {

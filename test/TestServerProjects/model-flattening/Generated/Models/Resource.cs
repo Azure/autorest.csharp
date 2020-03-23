@@ -33,14 +33,14 @@ namespace model_flattening.Models
         }
 
         /// <summary> Resource Id. </summary>
-        public string Id { get; internal set; }
+        public string Id { get; }
         /// <summary> Resource Type. </summary>
-        public string Type { get; internal set; }
+        public string Type { get; }
         /// <summary> Dictionary of &lt;string&gt;. </summary>
         public IDictionary<string, string> Tags { get; set; }
         /// <summary> Resource Location. </summary>
         public string Location { get; set; }
         /// <summary> Resource Name. </summary>
-        public string Name { get; internal set; }
+        public string Name { get; }
     }
 }

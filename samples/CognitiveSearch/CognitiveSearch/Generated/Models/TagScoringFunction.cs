@@ -11,8 +11,12 @@ namespace CognitiveSearch.Models
     public partial class TagScoringFunction : ScoringFunction
     {
         /// <summary> Initializes a new instance of TagScoringFunction. </summary>
-        public TagScoringFunction()
+        /// <param name="parameters"> Parameter values for the tag scoring function. </param>
+        /// <param name="fieldName"> The name of the field used as input to the scoring function. </param>
+        /// <param name="boost"> A multiplier for the raw score. Must be a positive number not equal to 1.0. </param>
+        public TagScoringFunction(TagScoringParameters parameters, string fieldName, double boost) : base(fieldName, boost)
         {
+            Parameters = parameters;
             Type = "tag";
         }
 
@@ -22,12 +26,13 @@ namespace CognitiveSearch.Models
         /// <param name="fieldName"> The name of the field used as input to the scoring function. </param>
         /// <param name="boost"> A multiplier for the raw score. Must be a positive number not equal to 1.0. </param>
         /// <param name="interpolation"> A value indicating how boosting will be interpolated across document scores; defaults to &quot;Linear&quot;. </param>
-        internal TagScoringFunction(TagScoringParameters parameters, string type, string fieldName, double boost, ScoringFunctionInterpolation? interpolation) : base(type ?? "tag", fieldName, boost, interpolation)
+        internal TagScoringFunction(TagScoringParameters parameters, string type, string fieldName, double boost, ScoringFunctionInterpolation? interpolation) : base(type, fieldName, boost, interpolation)
         {
             Parameters = parameters;
+            Type = type ?? "tag";
         }
 
         /// <summary> Parameter values for the tag scoring function. </summary>
-        public TagScoringParameters Parameters { get; set; } = new TagScoringParameters();
+        public TagScoringParameters Parameters { get; }
     }
 }

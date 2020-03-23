@@ -56,19 +56,19 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The name of the resource that is unique within the set of frontend IP configurations used by the load balancer. This name can be used to access the resource. </summary>
         public string Name { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string Etag { get; internal set; }
+        public string Etag { get; }
         /// <summary> Type of the resource. </summary>
-        public string Type { get; internal set; }
+        public string Type { get; }
         /// <summary> A list of availability zones denoting the IP allocated for the resource needs to come from. </summary>
         public IList<string> Zones { get; set; }
         /// <summary> An array of references to inbound rules that use this frontend IP. </summary>
-        public IList<SubResource> InboundNatRules { get; internal set; }
+        public IList<SubResource> InboundNatRules { get; }
         /// <summary> An array of references to inbound pools that use this frontend IP. </summary>
-        public IList<SubResource> InboundNatPools { get; internal set; }
+        public IList<SubResource> InboundNatPools { get; }
         /// <summary> An array of references to outbound rules that use this frontend IP. </summary>
-        public IList<SubResource> OutboundRules { get; internal set; }
+        public IList<SubResource> OutboundRules { get; }
         /// <summary> An array of references to load balancing rules that use this frontend IP. </summary>
-        public IList<SubResource> LoadBalancingRules { get; internal set; }
+        public IList<SubResource> LoadBalancingRules { get; }
         /// <summary> The private IP address of the IP configuration. </summary>
         public string PrivateIPAddress { get; set; }
         /// <summary> The Private IP allocation method. </summary>
@@ -82,6 +82,6 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The reference to the Public IP Prefix resource. </summary>
         public SubResource PublicIPPrefix { get; set; }
         /// <summary> The provisioning state of the frontend IP configuration resource. </summary>
-        public ProvisioningState? ProvisioningState { get; internal set; }
+        public ProvisioningState? ProvisioningState { get; }
     }
 }

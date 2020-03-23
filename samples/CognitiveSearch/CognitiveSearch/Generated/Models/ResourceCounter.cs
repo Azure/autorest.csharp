@@ -25,8 +25,8 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The resource usage amount. </summary>
-        public long? Usage { get; internal set; }
+        public long? Usage { get; }
         /// <summary> The resource amount quota. </summary>
-        public long? Quota { get; internal set; }
+        public long? Quota { get; }
     }
 }

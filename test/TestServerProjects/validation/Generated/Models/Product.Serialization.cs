@@ -54,8 +54,8 @@ namespace validation.Models
             IList<string> displayNames = default;
             int? capacity = default;
             string image = default;
-            ChildProduct child = new ChildProduct();
-            ConstantProduct constChild = new ConstantProduct();
+            ChildProduct child = default;
+            ConstantProduct constChild = default;
             float constInt = default;
             string constString = default;
             string constStringAsEnum = default;

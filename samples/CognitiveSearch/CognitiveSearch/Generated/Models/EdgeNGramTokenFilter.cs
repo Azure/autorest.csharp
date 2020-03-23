@@ -11,7 +11,8 @@ namespace CognitiveSearch.Models
     public partial class EdgeNGramTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of EdgeNGramTokenFilter. </summary>
-        public EdgeNGramTokenFilter()
+        /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public EdgeNGramTokenFilter(string name) : base(name)
         {
             OdataType = "#Microsoft.Azure.Search.EdgeNGramTokenFilter";
         }
@@ -22,11 +23,12 @@ namespace CognitiveSearch.Models
         /// <param name="side"> Specifies which side of the input the n-gram should be generated from. Default is &quot;front&quot;. </param>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal EdgeNGramTokenFilter(int? minGram, int? maxGram, EdgeNGramTokenFilterSide? side, string odataType, string name) : base(odataType ?? "#Microsoft.Azure.Search.EdgeNGramTokenFilter", name)
+        internal EdgeNGramTokenFilter(int? minGram, int? maxGram, EdgeNGramTokenFilterSide? side, string odataType, string name) : base(odataType, name)
         {
             MinGram = minGram;
             MaxGram = maxGram;
             Side = side;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.EdgeNGramTokenFilter";
         }
 
         /// <summary> The minimum n-gram length. Default is 1. Must be less than the value of maxGram. </summary>

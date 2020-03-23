@@ -25,6 +25,6 @@ namespace Azure.Storage.Management.Models
         }
 
         /// <summary> List of Storage operations supported by the Storage resource provider. </summary>
-        public IList<Operation> Value { get; internal set; }
+        public IList<Operation> Value { get; }
     }
 }

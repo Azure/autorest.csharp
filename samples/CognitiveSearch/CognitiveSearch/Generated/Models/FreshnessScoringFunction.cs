@@ -11,8 +11,12 @@ namespace CognitiveSearch.Models
     public partial class FreshnessScoringFunction : ScoringFunction
     {
         /// <summary> Initializes a new instance of FreshnessScoringFunction. </summary>
-        public FreshnessScoringFunction()
+        /// <param name="parameters"> Parameter values for the freshness scoring function. </param>
+        /// <param name="fieldName"> The name of the field used as input to the scoring function. </param>
+        /// <param name="boost"> A multiplier for the raw score. Must be a positive number not equal to 1.0. </param>
+        public FreshnessScoringFunction(FreshnessScoringParameters parameters, string fieldName, double boost) : base(fieldName, boost)
         {
+            Parameters = parameters;
             Type = "freshness";
         }
 
@@ -22,12 +26,13 @@ namespace CognitiveSearch.Models
         /// <param name="fieldName"> The name of the field used as input to the scoring function. </param>
         /// <param name="boost"> A multiplier for the raw score. Must be a positive number not equal to 1.0. </param>
         /// <param name="interpolation"> A value indicating how boosting will be interpolated across document scores; defaults to &quot;Linear&quot;. </param>
-        internal FreshnessScoringFunction(FreshnessScoringParameters parameters, string type, string fieldName, double boost, ScoringFunctionInterpolation? interpolation) : base(type ?? "freshness", fieldName, boost, interpolation)
+        internal FreshnessScoringFunction(FreshnessScoringParameters parameters, string type, string fieldName, double boost, ScoringFunctionInterpolation? interpolation) : base(type, fieldName, boost, interpolation)
         {
             Parameters = parameters;
+            Type = type ?? "freshness";
         }
 
         /// <summary> Parameter values for the freshness scoring function. </summary>
-        public FreshnessScoringParameters Parameters { get; set; } = new FreshnessScoringParameters();
+        public FreshnessScoringParameters Parameters { get; }
     }
 }

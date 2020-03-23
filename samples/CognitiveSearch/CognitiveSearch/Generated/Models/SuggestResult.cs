@@ -28,8 +28,8 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The text of the suggestion result. </summary>
-        public string Text { get; internal set; }
-        internal IDictionary<string, object> AdditionalProperties { get; set; } = new Dictionary<string, object>();
+        public string Text { get; }
+        internal IDictionary<string, object> AdditionalProperties { get; } = new Dictionary<string, object>();
         /// <inheritdoc />
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator() => AdditionalProperties.GetEnumerator();
         /// <inheritdoc />

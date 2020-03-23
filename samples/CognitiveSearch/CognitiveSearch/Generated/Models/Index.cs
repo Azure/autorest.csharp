@@ -13,8 +13,12 @@ namespace CognitiveSearch.Models
     public partial class Index
     {
         /// <summary> Initializes a new instance of Index. </summary>
-        public Index()
+        /// <param name="name"> The name of the index. </param>
+        /// <param name="fields"> The fields of the index. </param>
+        public Index(string name, IList<Field> fields)
         {
+            Name = name;
+            Fields = fields;
         }
 
         /// <summary> Initializes a new instance of Index. </summary>
@@ -45,9 +49,9 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The name of the index. </summary>
-        public string Name { get; set; }
+        public string Name { get; }
         /// <summary> The fields of the index. </summary>
-        public IList<Field> Fields { get; set; } = new List<Field>();
+        public IList<Field> Fields { get; } = new List<Field>();
         /// <summary> The scoring profiles for the index. </summary>
         public IList<ScoringProfile> ScoringProfiles { get; set; }
         /// <summary> The name of the scoring profile to use if none is specified in the query. If this property is not set and no scoring profile is specified in the query, then default scoring (tf-idf) will be used. </summary>

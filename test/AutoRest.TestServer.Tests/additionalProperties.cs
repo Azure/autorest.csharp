@@ -20,9 +20,8 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task AdditionalPropertiesInProperties() => Test(async (host, pipeline) =>
         {
-            var response = await new PetsClient(ClientDiagnostics, pipeline, host).CreateAPInPropertiesAsync(new PetAPInProperties()
+            var response = await new PetsClient(ClientDiagnostics, pipeline, host).CreateAPInPropertiesAsync(new PetAPInProperties(4)
             {
-                Id = 4,
                 Name = "Bunny",
                 AdditionalProperties = new Dictionary<string, float>()
                 {
@@ -44,11 +43,9 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task AdditionalPropertiesInPropertiesWithAPTypeString() => Test(async (host, pipeline) =>
         {
-            PetAPInPropertiesWithAPString parameter = new PetAPInPropertiesWithAPString()
+            PetAPInPropertiesWithAPString parameter = new PetAPInPropertiesWithAPString(5, "westus")
             {
-                Id = 5,
                 Name = "Funny",
-                OdataLocation = "westus",
                 AdditionalProperties = new Dictionary<string, float>()
                 {
                     { "height", 5.61f },
@@ -80,9 +77,8 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task AdditionalPropertiesSubclass() => Test(async (host, pipeline) =>
         {
-            CatAPTrue catAPTrue = new CatAPTrue()
+            CatAPTrue catAPTrue = new CatAPTrue(1)
             {
-                Id = 1,
                 Name = "Lisa",
                 Friendly = true,
             };
@@ -108,9 +104,8 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task AdditionalPropertiesTrue() => Test(async (host, pipeline) =>
         {
-            PetAPTrue catAPTrue = new PetAPTrue()
+            PetAPTrue catAPTrue = new PetAPTrue(1)
             {
-                Id = 1,
                 Name = "Puppy",
             };
 
@@ -134,9 +129,8 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task AdditionalPropertiesTypeObject() => Test(async (host, pipeline) =>
         {
-            PetAPObject petAPObject = new PetAPObject()
+            PetAPObject petAPObject = new PetAPObject(1)
             {
-                Id = 1,
                 Name = "Puppy",
             };
 
@@ -146,9 +140,8 @@ namespace AutoRest.TestServer.Tests
                 {"color", "Red"}
             };
 
-            PetAPObject outerAPObject = new PetAPObject()
+            PetAPObject outerAPObject = new PetAPObject(2)
             {
-                Id = 2,
                 Name = "Hira"
             };
             outerAPObject["siblings"] = new object[]
@@ -177,9 +170,8 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task AdditionalPropertiesTypeString() => Test(async (host, pipeline) =>
         {
-            PetAPString petAPObject = new PetAPString()
+            PetAPString petAPObject = new PetAPString(3)
             {
-                Id = 3,
                 Name = "Tommy"
             };
 

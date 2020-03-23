@@ -11,17 +11,12 @@ namespace Azure.Storage.Tables.Models
     public partial class CorsRule
     {
         /// <summary> Initializes a new instance of CorsRule. </summary>
-        public CorsRule()
-        {
-        }
-
-        /// <summary> Initializes a new instance of CorsRule. </summary>
         /// <param name="allowedOrigins"> The origin domains that are permitted to make a request against the storage service via CORS. The origin domain is the domain from which the request originates. Note that the origin must be an exact case-sensitive match with the origin that the user age sends to the service. You can also use the wildcard character &apos;*&apos; to allow all origin domains to make requests via CORS. </param>
         /// <param name="allowedMethods"> The methods (HTTP request verbs) that the origin domain may use for a CORS request. (comma separated). </param>
         /// <param name="allowedHeaders"> the request headers that the origin domain may specify on the CORS request. </param>
         /// <param name="exposedHeaders"> The response headers that may be sent in the response to the CORS request and exposed by the browser to the request issuer. </param>
         /// <param name="maxAgeInSeconds"> The maximum amount time that a browser should cache the preflight OPTIONS request. </param>
-        internal CorsRule(string allowedOrigins, string allowedMethods, string allowedHeaders, string exposedHeaders, int maxAgeInSeconds)
+        public CorsRule(string allowedOrigins, string allowedMethods, string allowedHeaders, string exposedHeaders, int maxAgeInSeconds)
         {
             AllowedOrigins = allowedOrigins;
             AllowedMethods = allowedMethods;
@@ -31,14 +26,14 @@ namespace Azure.Storage.Tables.Models
         }
 
         /// <summary> The origin domains that are permitted to make a request against the storage service via CORS. The origin domain is the domain from which the request originates. Note that the origin must be an exact case-sensitive match with the origin that the user age sends to the service. You can also use the wildcard character &apos;*&apos; to allow all origin domains to make requests via CORS. </summary>
-        public string AllowedOrigins { get; set; }
+        public string AllowedOrigins { get; }
         /// <summary> The methods (HTTP request verbs) that the origin domain may use for a CORS request. (comma separated). </summary>
-        public string AllowedMethods { get; set; }
+        public string AllowedMethods { get; }
         /// <summary> the request headers that the origin domain may specify on the CORS request. </summary>
-        public string AllowedHeaders { get; set; }
+        public string AllowedHeaders { get; }
         /// <summary> The response headers that may be sent in the response to the CORS request and exposed by the browser to the request issuer. </summary>
-        public string ExposedHeaders { get; set; }
+        public string ExposedHeaders { get; }
         /// <summary> The maximum amount time that a browser should cache the preflight OPTIONS request. </summary>
-        public int MaxAgeInSeconds { get; set; }
+        public int MaxAgeInSeconds { get; }
     }
 }

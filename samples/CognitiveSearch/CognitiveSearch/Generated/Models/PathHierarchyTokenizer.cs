@@ -11,7 +11,8 @@ namespace CognitiveSearch.Models
     public partial class PathHierarchyTokenizer : Tokenizer
     {
         /// <summary> Initializes a new instance of PathHierarchyTokenizer. </summary>
-        public PathHierarchyTokenizer()
+        /// <param name="name"> The name of the tokenizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public PathHierarchyTokenizer(string name) : base(name)
         {
             OdataType = "#Microsoft.Azure.Search.PathHierarchyTokenizer";
         }
@@ -24,13 +25,14 @@ namespace CognitiveSearch.Models
         /// <param name="numberOfTokensToSkip"> The number of initial tokens to skip. Default is 0. </param>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the tokenizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal PathHierarchyTokenizer(char? delimiter, char? replacement, int? bufferSize, bool? reverseTokenOrder, int? numberOfTokensToSkip, string odataType, string name) : base(odataType ?? "#Microsoft.Azure.Search.PathHierarchyTokenizer", name)
+        internal PathHierarchyTokenizer(char? delimiter, char? replacement, int? bufferSize, bool? reverseTokenOrder, int? numberOfTokensToSkip, string odataType, string name) : base(odataType, name)
         {
             Delimiter = delimiter;
             Replacement = replacement;
             BufferSize = bufferSize;
             ReverseTokenOrder = reverseTokenOrder;
             NumberOfTokensToSkip = numberOfTokensToSkip;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.PathHierarchyTokenizer";
         }
 
         /// <summary> The delimiter character to use. Default is &quot;/&quot;. </summary>

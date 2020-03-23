@@ -11,7 +11,8 @@ namespace CognitiveSearch.Models
     public partial class MicrosoftLanguageTokenizer : Tokenizer
     {
         /// <summary> Initializes a new instance of MicrosoftLanguageTokenizer. </summary>
-        public MicrosoftLanguageTokenizer()
+        /// <param name="name"> The name of the tokenizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public MicrosoftLanguageTokenizer(string name) : base(name)
         {
             OdataType = "#Microsoft.Azure.Search.MicrosoftLanguageTokenizer";
         }
@@ -22,11 +23,12 @@ namespace CognitiveSearch.Models
         /// <param name="language"> The language to use. The default is English. </param>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the tokenizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal MicrosoftLanguageTokenizer(int? maxTokenLength, bool? isSearchTokenizer, MicrosoftTokenizerLanguage? language, string odataType, string name) : base(odataType ?? "#Microsoft.Azure.Search.MicrosoftLanguageTokenizer", name)
+        internal MicrosoftLanguageTokenizer(int? maxTokenLength, bool? isSearchTokenizer, MicrosoftTokenizerLanguage? language, string odataType, string name) : base(odataType, name)
         {
             MaxTokenLength = maxTokenLength;
             IsSearchTokenizer = isSearchTokenizer;
             Language = language;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.MicrosoftLanguageTokenizer";
         }
 
         /// <summary> The maximum token length. Tokens longer than the maximum length are split. Maximum token length that can be used is 300 characters. Tokens longer than 300 characters are first split into tokens of length 300 and then each of those tokens is split based on the max token length set. Default is 255. </summary>

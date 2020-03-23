@@ -13,7 +13,8 @@ namespace body_complex.Models
     public partial class Salmon : Fish
     {
         /// <summary> Initializes a new instance of Salmon. </summary>
-        public Salmon()
+        /// <param name="length"> . </param>
+        public Salmon(float length) : base(length)
         {
             Fishtype = "salmon";
         }
@@ -25,10 +26,11 @@ namespace body_complex.Models
         /// <param name="species"> . </param>
         /// <param name="length"> . </param>
         /// <param name="siblings"> . </param>
-        internal Salmon(string location, bool? iswild, string fishtype, string species, float length, IList<Fish> siblings) : base(fishtype ?? "salmon", species, length, siblings)
+        internal Salmon(string location, bool? iswild, string fishtype, string species, float length, IList<Fish> siblings) : base(fishtype, species, length, siblings)
         {
             Location = location;
             Iswild = iswild;
+            Fishtype = fishtype ?? "salmon";
         }
 
         public string Location { get; set; }

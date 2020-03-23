@@ -13,6 +13,7 @@ namespace validation.Models
         /// <summary> Initializes a new instance of ChildProduct. </summary>
         public ChildProduct()
         {
+            ConstProperty = "constant";
         }
 
         /// <summary> Initializes a new instance of ChildProduct. </summary>
@@ -25,7 +26,7 @@ namespace validation.Models
         }
 
         /// <summary> Constant string. </summary>
-        public string ConstProperty { get; set; } = "constant";
+        public string ConstProperty { get; }
         /// <summary> Count. </summary>
         public int? Count { get; set; }
     }

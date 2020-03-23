@@ -20,7 +20,7 @@ namespace xml_service.Models
             string marker = default;
             int maxResults = default;
             string delimiter = default;
-            Blobs blobs = new Blobs();
+            Blobs blobs = default;
             string nextMarker = default;
             if (element.Attribute("ServiceEndpoint") is XAttribute serviceEndpointAttribute)
             {

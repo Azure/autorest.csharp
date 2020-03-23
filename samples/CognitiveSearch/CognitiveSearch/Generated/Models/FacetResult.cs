@@ -28,8 +28,8 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The approximate count of documents falling within the bucket described by this facet. </summary>
-        public long? Count { get; internal set; }
-        internal IDictionary<string, object> AdditionalProperties { get; set; } = new Dictionary<string, object>();
+        public long? Count { get; }
+        internal IDictionary<string, object> AdditionalProperties { get; } = new Dictionary<string, object>();
         /// <inheritdoc />
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator() => AdditionalProperties.GetEnumerator();
         /// <inheritdoc />

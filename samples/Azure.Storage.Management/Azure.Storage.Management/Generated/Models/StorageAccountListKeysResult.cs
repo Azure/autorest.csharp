@@ -25,6 +25,6 @@ namespace Azure.Storage.Management.Models
         }
 
         /// <summary> Gets the list of storage account keys and their properties for the specified storage account. </summary>
-        public IList<StorageAccountKey> Keys { get; internal set; }
+        public IList<StorageAccountKey> Keys { get; }
     }
 }

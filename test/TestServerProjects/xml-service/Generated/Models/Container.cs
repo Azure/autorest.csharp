@@ -13,8 +13,12 @@ namespace xml_service.Models
     public partial class Container
     {
         /// <summary> Initializes a new instance of Container. </summary>
-        internal Container()
+        /// <param name="name"> . </param>
+        /// <param name="properties"> Properties of a container. </param>
+        internal Container(string name, ContainerProperties properties)
         {
+            Name = name;
+            Properties = properties;
         }
 
         /// <summary> Initializes a new instance of Container. </summary>
@@ -28,10 +32,10 @@ namespace xml_service.Models
             Metadata = metadata;
         }
 
-        public string Name { get; internal set; }
+        public string Name { get; }
         /// <summary> Properties of a container. </summary>
-        public ContainerProperties Properties { get; internal set; } = new ContainerProperties();
+        public ContainerProperties Properties { get; }
         /// <summary> Dictionary of &lt;string&gt;. </summary>
-        public IDictionary<string, string> Metadata { get; internal set; }
+        public IDictionary<string, string> Metadata { get; }
     }
 }

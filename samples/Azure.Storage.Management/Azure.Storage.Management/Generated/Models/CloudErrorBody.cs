@@ -31,12 +31,12 @@ namespace Azure.Storage.Management.Models
         }
 
         /// <summary> An identifier for the error. Codes are invariant and are intended to be consumed programmatically. </summary>
-        public string Code { get; internal set; }
+        public string Code { get; }
         /// <summary> A message describing the error, intended to be suitable for display in a user interface. </summary>
-        public string Message { get; internal set; }
+        public string Message { get; }
         /// <summary> The target of the particular error. For example, the name of the property in error. </summary>
-        public string Target { get; internal set; }
+        public string Target { get; }
         /// <summary> A list of additional details about the error. </summary>
-        public IList<CloudErrorBody> Details { get; internal set; }
+        public IList<CloudErrorBody> Details { get; }
     }
 }

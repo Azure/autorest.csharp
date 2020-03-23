@@ -27,8 +27,8 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> A list of load balancers. </summary>
-        public IList<LoadBalancer> Value { get; internal set; }
+        public IList<LoadBalancer> Value { get; }
         /// <summary> The URL to get the next set of results. </summary>
-        public string NextLink { get; internal set; }
+        public string NextLink { get; }
     }
 }

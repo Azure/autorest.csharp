@@ -11,22 +11,17 @@ namespace Azure.Storage.Tables.Models
     public partial class SignedIdentifier
     {
         /// <summary> Initializes a new instance of SignedIdentifier. </summary>
-        public SignedIdentifier()
-        {
-        }
-
-        /// <summary> Initializes a new instance of SignedIdentifier. </summary>
         /// <param name="id"> a unique id. </param>
         /// <param name="accessPolicy"> The access policy. </param>
-        internal SignedIdentifier(string id, AccessPolicy accessPolicy)
+        public SignedIdentifier(string id, AccessPolicy accessPolicy)
         {
             Id = id;
             AccessPolicy = accessPolicy;
         }
 
         /// <summary> a unique id. </summary>
-        public string Id { get; set; }
+        public string Id { get; }
         /// <summary> The access policy. </summary>
-        public AccessPolicy AccessPolicy { get; set; } = new AccessPolicy();
+        public AccessPolicy AccessPolicy { get; }
     }
 }

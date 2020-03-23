@@ -25,6 +25,6 @@ namespace Azure.Storage.Management.Models
         }
 
         /// <summary> List of file services returned. </summary>
-        public IList<FileServiceProperties> Value { get; internal set; }
+        public IList<FileServiceProperties> Value { get; }
     }
 }

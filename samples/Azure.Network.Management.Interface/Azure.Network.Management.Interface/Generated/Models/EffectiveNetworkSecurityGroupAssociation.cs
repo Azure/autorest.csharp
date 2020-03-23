@@ -25,8 +25,8 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> The ID of the subnet if assigned. </summary>
-        public SubResource Subnet { get; internal set; }
+        public SubResource Subnet { get; }
         /// <summary> The ID of the network interface if assigned. </summary>
-        public SubResource NetworkInterface { get; internal set; }
+        public SubResource NetworkInterface { get; }
     }
 }

@@ -56,7 +56,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The name of the resource that is unique within a resource group. This name can be used to access the resource. </summary>
         public string Name { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string Etag { get; internal set; }
+        public string Etag { get; }
         /// <summary> The reference to Virtual Network Taps. </summary>
         public IList<VirtualNetworkTap> VirtualNetworkTaps { get; set; }
         /// <summary> The reference to ApplicationGatewayBackendAddressPool resource. </summary>
@@ -80,8 +80,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Application security groups in which the IP configuration is included. </summary>
         public IList<ApplicationSecurityGroup> ApplicationSecurityGroups { get; set; }
         /// <summary> The provisioning state of the network interface IP configuration. </summary>
-        public ProvisioningState? ProvisioningState { get; internal set; }
+        public ProvisioningState? ProvisioningState { get; }
         /// <summary> PrivateLinkConnection properties for the network interface. </summary>
-        public NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties PrivateLinkConnectionProperties { get; internal set; }
+        public NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties PrivateLinkConnectionProperties { get; }
     }
 }

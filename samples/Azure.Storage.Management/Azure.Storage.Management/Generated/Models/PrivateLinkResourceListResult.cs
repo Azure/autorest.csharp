@@ -25,6 +25,6 @@ namespace Azure.Storage.Management.Models
         }
 
         /// <summary> Array of private link resources. </summary>
-        public IList<PrivateLinkResource> Value { get; internal set; }
+        public IList<PrivateLinkResource> Value { get; }
     }
 }

@@ -11,8 +11,11 @@ namespace CognitiveSearch.Models
     public partial class SnowballTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of SnowballTokenFilter. </summary>
-        public SnowballTokenFilter()
+        /// <param name="language"> The language to use. </param>
+        /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public SnowballTokenFilter(SnowballTokenFilterLanguage language, string name) : base(name)
         {
+            Language = language;
             OdataType = "#Microsoft.Azure.Search.SnowballTokenFilter";
         }
 
@@ -20,12 +23,13 @@ namespace CognitiveSearch.Models
         /// <param name="language"> The language to use. </param>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal SnowballTokenFilter(SnowballTokenFilterLanguage language, string odataType, string name) : base(odataType ?? "#Microsoft.Azure.Search.SnowballTokenFilter", name)
+        internal SnowballTokenFilter(SnowballTokenFilterLanguage language, string odataType, string name) : base(odataType, name)
         {
             Language = language;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.SnowballTokenFilter";
         }
 
         /// <summary> The language to use. </summary>
-        public SnowballTokenFilterLanguage Language { get; set; }
+        public SnowballTokenFilterLanguage Language { get; }
     }
 }

@@ -14,7 +14,7 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static ErrorResponse DeserializeErrorResponse(JsonElement element)
         {
-            ErrorInformation error = new ErrorInformation();
+            ErrorInformation error = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("error"))

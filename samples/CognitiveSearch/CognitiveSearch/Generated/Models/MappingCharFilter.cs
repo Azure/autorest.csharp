@@ -13,8 +13,11 @@ namespace CognitiveSearch.Models
     public partial class MappingCharFilter : CharFilter
     {
         /// <summary> Initializes a new instance of MappingCharFilter. </summary>
-        public MappingCharFilter()
+        /// <param name="mappings"> A list of mappings of the following format: &quot;a=&gt;b&quot; (all occurrences of the character &quot;a&quot; will be replaced with character &quot;b&quot;). </param>
+        /// <param name="name"> The name of the char filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public MappingCharFilter(IList<string> mappings, string name) : base(name)
         {
+            Mappings = mappings;
             OdataType = "#Microsoft.Azure.Search.MappingCharFilter";
         }
 
@@ -22,12 +25,13 @@ namespace CognitiveSearch.Models
         /// <param name="mappings"> A list of mappings of the following format: &quot;a=&gt;b&quot; (all occurrences of the character &quot;a&quot; will be replaced with character &quot;b&quot;). </param>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the char filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal MappingCharFilter(IList<string> mappings, string odataType, string name) : base(odataType ?? "#Microsoft.Azure.Search.MappingCharFilter", name)
+        internal MappingCharFilter(IList<string> mappings, string odataType, string name) : base(odataType, name)
         {
             Mappings = mappings;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.MappingCharFilter";
         }
 
         /// <summary> A list of mappings of the following format: &quot;a=&gt;b&quot; (all occurrences of the character &quot;a&quot; will be replaced with character &quot;b&quot;). </summary>
-        public IList<string> Mappings { get; set; } = new List<string>();
+        public IList<string> Mappings { get; } = new List<string>();
     }
 }

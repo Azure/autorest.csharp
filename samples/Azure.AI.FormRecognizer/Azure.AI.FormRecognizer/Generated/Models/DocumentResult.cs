@@ -13,11 +13,6 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class DocumentResult
     {
         /// <summary> Initializes a new instance of DocumentResult. </summary>
-        internal DocumentResult()
-        {
-        }
-
-        /// <summary> Initializes a new instance of DocumentResult. </summary>
         /// <param name="docType"> Document type. </param>
         /// <param name="pageRange"> First and last page number where the document is found. </param>
         /// <param name="fields"> Dictionary of named field values. </param>
@@ -29,10 +24,10 @@ namespace Azure.AI.FormRecognizer.Models
         }
 
         /// <summary> Document type. </summary>
-        public string DocType { get; internal set; }
+        public string DocType { get; }
         /// <summary> First and last page number where the document is found. </summary>
-        public IList<int> PageRange { get; internal set; } = new List<int>();
+        public IList<int> PageRange { get; } = new List<int>();
         /// <summary> Dictionary of named field values. </summary>
-        public IDictionary<string, FieldValue> Fields { get; internal set; } = new Dictionary<string, FieldValue>();
+        public IDictionary<string, FieldValue> Fields { get; } = new Dictionary<string, FieldValue>();
     }
 }

@@ -42,18 +42,18 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string Etag { get; internal set; }
+        public string Etag { get; }
         /// <summary> A collection of security rules of the network security group. </summary>
         public IList<SecurityRule> SecurityRules { get; set; }
         /// <summary> The default security rules of network security group. </summary>
-        public IList<SecurityRule> DefaultSecurityRules { get; internal set; }
+        public IList<SecurityRule> DefaultSecurityRules { get; }
         /// <summary> A collection of references to network interfaces. </summary>
-        public IList<NetworkInterface> NetworkInterfaces { get; internal set; }
+        public IList<NetworkInterface> NetworkInterfaces { get; }
         /// <summary> A collection of references to subnets. </summary>
-        public IList<Subnet> Subnets { get; internal set; }
+        public IList<Subnet> Subnets { get; }
         /// <summary> The resource GUID property of the network security group resource. </summary>
-        public string ResourceGuid { get; internal set; }
+        public string ResourceGuid { get; }
         /// <summary> The provisioning state of the network security group resource. </summary>
-        public ProvisioningState? ProvisioningState { get; internal set; }
+        public ProvisioningState? ProvisioningState { get; }
     }
 }

@@ -16,12 +16,10 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             InitializeWithType = initializeWithType;
             SchemaProperty = schemaProperty;
             Declaration = declaration;
-            DefaultValue = defaultValue;
         }
 
         public MemberDeclarationOptions Declaration { get; }
         public string Description { get; }
-        public Constant? DefaultValue { get; }
         public CSharpType? InitializeWithType { get; }
         public Property? SchemaProperty { get; }
         public bool IsReadOnly { get; }

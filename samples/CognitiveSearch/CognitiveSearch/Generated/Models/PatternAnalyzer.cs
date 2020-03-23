@@ -13,7 +13,8 @@ namespace CognitiveSearch.Models
     public partial class PatternAnalyzer : Analyzer
     {
         /// <summary> Initializes a new instance of PatternAnalyzer. </summary>
-        public PatternAnalyzer()
+        /// <param name="name"> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public PatternAnalyzer(string name) : base(name)
         {
             OdataType = "#Microsoft.Azure.Search.PatternAnalyzer";
         }
@@ -25,12 +26,13 @@ namespace CognitiveSearch.Models
         /// <param name="stopwords"> A list of stopwords. </param>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal PatternAnalyzer(bool? lowerCaseTerms, string pattern, RegexFlags? flags, IList<string> stopwords, string odataType, string name) : base(odataType ?? "#Microsoft.Azure.Search.PatternAnalyzer", name)
+        internal PatternAnalyzer(bool? lowerCaseTerms, string pattern, RegexFlags? flags, IList<string> stopwords, string odataType, string name) : base(odataType, name)
         {
             LowerCaseTerms = lowerCaseTerms;
             Pattern = pattern;
             Flags = flags;
             Stopwords = stopwords;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.PatternAnalyzer";
         }
 
         /// <summary> A value indicating whether terms should be lower-cased. Default is true. </summary>

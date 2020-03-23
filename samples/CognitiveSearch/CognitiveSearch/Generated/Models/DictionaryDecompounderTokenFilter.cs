@@ -13,8 +13,11 @@ namespace CognitiveSearch.Models
     public partial class DictionaryDecompounderTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of DictionaryDecompounderTokenFilter. </summary>
-        public DictionaryDecompounderTokenFilter()
+        /// <param name="wordList"> The list of words to match against. </param>
+        /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public DictionaryDecompounderTokenFilter(IList<string> wordList, string name) : base(name)
         {
+            WordList = wordList;
             OdataType = "#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter";
         }
 
@@ -26,17 +29,18 @@ namespace CognitiveSearch.Models
         /// <param name="onlyLongestMatch"> A value indicating whether to add only the longest matching subword to the output. Default is false. </param>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal DictionaryDecompounderTokenFilter(IList<string> wordList, int? minWordSize, int? minSubwordSize, int? maxSubwordSize, bool? onlyLongestMatch, string odataType, string name) : base(odataType ?? "#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter", name)
+        internal DictionaryDecompounderTokenFilter(IList<string> wordList, int? minWordSize, int? minSubwordSize, int? maxSubwordSize, bool? onlyLongestMatch, string odataType, string name) : base(odataType, name)
         {
             WordList = wordList;
             MinWordSize = minWordSize;
             MinSubwordSize = minSubwordSize;
             MaxSubwordSize = maxSubwordSize;
             OnlyLongestMatch = onlyLongestMatch;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter";
         }
 
         /// <summary> The list of words to match against. </summary>
-        public IList<string> WordList { get; set; } = new List<string>();
+        public IList<string> WordList { get; } = new List<string>();
         /// <summary> The minimum word size. Only words longer than this get processed. Default is 5. Maximum is 300. </summary>
         public int? MinWordSize { get; set; }
         /// <summary> The minimum subword size. Only subwords longer than this are outputted. Default is 2. Maximum is 300. </summary>

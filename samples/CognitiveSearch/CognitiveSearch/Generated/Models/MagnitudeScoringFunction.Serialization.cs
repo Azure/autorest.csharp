@@ -33,7 +33,7 @@ namespace CognitiveSearch.Models
 
         internal static MagnitudeScoringFunction DeserializeMagnitudeScoringFunction(JsonElement element)
         {
-            MagnitudeScoringParameters magnitude = new MagnitudeScoringParameters();
+            MagnitudeScoringParameters magnitude = default;
             string type = default;
             string fieldName = default;
             double boost = default;

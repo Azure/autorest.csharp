@@ -37,7 +37,7 @@ namespace model_flattening.Models
 
         public string PName { get; set; }
         public string TypePropertiesType { get; set; }
-        public FlattenedProductPropertiesProvisioningStateValues? ProvisioningStateValues { get; internal set; }
+        public FlattenedProductPropertiesProvisioningStateValues? ProvisioningStateValues { get; }
         public string ProvisioningState { get; set; }
     }
 }

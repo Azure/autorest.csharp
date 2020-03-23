@@ -38,7 +38,7 @@ namespace xml_service.Models
             bool delete = default;
             bool read = default;
             bool write = default;
-            RetentionPolicy retentionPolicy = new RetentionPolicy();
+            RetentionPolicy retentionPolicy = default;
             if (element.Element("Version") is XElement versionElement)
             {
                 version = (string)versionElement;

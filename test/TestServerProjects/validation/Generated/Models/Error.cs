@@ -26,8 +26,8 @@ namespace validation.Models
             Fields = fields;
         }
 
-        public int? Code { get; internal set; }
-        public string Message { get; internal set; }
-        public string Fields { get; internal set; }
+        public int? Code { get; }
+        public string Message { get; }
+        public string Fields { get; }
     }
 }

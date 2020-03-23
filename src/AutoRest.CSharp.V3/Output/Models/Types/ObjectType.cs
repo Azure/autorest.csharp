@@ -20,7 +20,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
     internal class ObjectType : ISchemaType
     {
         private readonly ObjectSchema _objectSchema;
-        private readonly BuildContext _context;
         private readonly SerializationBuilder _serializationBuilder;
         private readonly TypeFactory _typeFactory;
 
@@ -37,8 +36,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         {
             _objectSchema = objectSchema;
             _sourceTypeMapping = context.SourceInputModel.FindForSchema(_objectSchema.Name);
-            _context = context;
-            _typeFactory = _context.TypeFactory;
+            _typeFactory = context.TypeFactory;
             _serializationBuilder = new SerializationBuilder(_typeFactory);
 
             Schema = objectSchema;
@@ -92,13 +90,14 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         private IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
-            List<Parameter> constructorParameters = new List<Parameter>();
+            List<Parameter> serializationConstructorParameters = new List<Parameter>();
+            List<Parameter> defaultCtorParameters = new List<Parameter>();
             List<ObjectPropertyInitializer> initializers = new List<ObjectPropertyInitializer>();
             List<ObjectPropertyInitializer> defaultCtorInitializers = new List<ObjectPropertyInitializer>();
 
             foreach (var property in Properties)
             {
-                var parameter = new Parameter(
+                var deserializationParameter = new Parameter(
                     property.Declaration.Name.ToVariableName(),
                     property.Description,
                     property.Declaration.Type,
@@ -106,16 +105,73 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     false
                 );
 
-                constructorParameters.Add(parameter);
-                initializers.Add(new ObjectPropertyInitializer(property, parameter));
+                var initializer = new ObjectPropertyInitializer(property, deserializationParameter);
+
+                serializationConstructorParameters.Add(deserializationParameter);
+                initializers.Add(initializer);
+
+                // Only required properties that are not discriminators go into default ctor
+                if (property.SchemaProperty?.Required != true ||
+                    property == Discriminator?.Property)
+                {
+                    continue;
+                }
+
+                // Turn constants into initializers
+                if (property.SchemaProperty?.Schema is ConstantSchema constantSchema)
+                {
+                    var constantValue = constantSchema.Value.Value != null ?
+                        BuilderHelpers.ParseConstant(constantSchema.Value.Value, property.Declaration.Type) :
+                        Constant.NewInstanceOf(property.Declaration.Type);
+
+                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(
+                        property,
+                        constantValue));
+
+                    continue;
+                }
+
+                Constant? defaultValue = null;
+
+                if (property.SchemaProperty?.ClientDefaultValue is object defaultValueObject)
+                {
+                    defaultValue = BuilderHelpers.ParseConstant(defaultValueObject, property.Declaration.Type);
+                }
+
+                var defaultCtorParameter = new Parameter(
+                    property.Declaration.Name.ToVariableName(),
+                    property.Description,
+                    property.Declaration.Type,
+                    defaultValue,
+                    false
+                );
+
+                defaultCtorParameters.Add(defaultCtorParameter);
+                defaultCtorInitializers.Add(initializer);
             }
 
             ObjectTypeConstructor? baseCtor = null;
+            ObjectTypeConstructor? baseSerializationCtor = null;
             if (Inherits != null && !Inherits.IsFrameworkType && Inherits.Implementation is ObjectType objectType)
             {
-                // pick ctor with parameters
-                baseCtor = objectType.Constructors.Single(c => c.Parameters.Any());
-                constructorParameters.AddRange(baseCtor.Parameters);
+                baseCtor = objectType.Constructors.First();
+                baseSerializationCtor = objectType.Constructors.Last();
+
+                defaultCtorParameters.AddRange(baseCtor.Parameters);
+                serializationConstructorParameters.AddRange(baseSerializationCtor.Parameters);
+            }
+
+            if (Discriminator != null)
+            {
+                // Add discriminator initializer to constructor at every level of hierarchy
+                if (baseSerializationCtor != null)
+                {
+                    var discriminatorParameter = baseSerializationCtor.FindParameterByInitializedProperty(Discriminator.Property);
+                    Debug.Assert(discriminatorParameter != null);
+
+                    initializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorParameter));
+                }
+                defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, BuilderHelpers.StringConstant(Discriminator.Value)));
             }
 
             yield return new ObjectTypeConstructor(
@@ -125,15 +181,20 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     // inputs have public ctor by default
                     _objectSchema.IsInput ? "public" : "internal",
                     _sourceTypeMapping?.DefaultConstructor),
-                Array.Empty<Parameter>(),
-                defaultCtorInitializers.ToArray());
+                defaultCtorParameters.ToArray(),
+                defaultCtorInitializers.ToArray(),
+                baseCtor);
 
-            yield return new ObjectTypeConstructor(
-                BuilderHelpers.CreateMemberDeclaration(Type.Name, Type, "internal", null),
-                constructorParameters.ToArray(),
-                initializers.ToArray(),
-                baseCtor
-            );
+            // Skip serialization ctor if they are the same
+            if (defaultCtorParameters.Count != serializationConstructorParameters.Count)
+            {
+                yield return new ObjectTypeConstructor(
+                    BuilderHelpers.CreateMemberDeclaration(Type.Name, Type, "internal", null),
+                    serializationConstructorParameters.ToArray(),
+                    initializers.ToArray(),
+                    baseSerializationCtor
+                );
+            }
         }
 
         public ObjectTypeDiscriminator? Discriminator => _discriminator ??= BuildDiscriminator();
@@ -249,37 +310,35 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             foreach (Property property in _objectSchema.Properties!)
             {
                 SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetMemberForSchema(property.SerializedName);
-                bool isReadOnly = property.IsDiscriminator == true || property.ReadOnly == true || !_objectSchema.IsInput;
-
-                Constant? defaultValue = null;
+                bool isReadOnly =
+                    property.IsDiscriminator != true &&
+                    (property.ReadOnly == true ||
+                     property.Required == true ||
+                     !_objectSchema.IsInput);
 
                 CSharpType type;
                 CSharpType? implementationType = null;
                 if (property.Schema is ConstantSchema constantSchema)
                 {
                     type = _typeFactory.CreateType(constantSchema.ValueType, false);
-                    defaultValue = BuilderHelpers.ParseConstant(constantSchema.Value.Value, type);
                 }
                 else
                 {
                     type = _typeFactory.CreateType(property.Schema, property.IsNullable());
-                    if (property.ClientDefaultValue != null)
-                    {
-                        defaultValue = BuilderHelpers.ParseConstant(property.ClientDefaultValue, type);
-                    }
-                    else if (property.Required == true && (property.Schema is ObjectSchema || property.Schema is ArraySchema || property.Schema is DictionarySchema))
+                    if (property.Required == true && (property.Schema is ArraySchema || property.Schema is DictionarySchema))
                     {
                         implementationType = _typeFactory.CreateImplementationType(property.Schema, property.IsNullable());
                     }
                 }
 
+                var accessibility = property.IsDiscriminator == true ? "internal" : "public";
+
                 yield return new ObjectTypeProperty(
-                    BuilderHelpers.CreateMemberDeclaration(property.CSharpName(), type, "public", memberMapping?.ExistingMember),
+                    BuilderHelpers.CreateMemberDeclaration(property.CSharpName(), type, accessibility, memberMapping?.ExistingMember),
                     BuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
                     isReadOnly,
                     implementationType,
-                    property,
-                    defaultValue);
+                    property);
             }
 
             if (AdditionalPropertiesProperty is ObjectTypeProperty additionalPropertiesProperty)

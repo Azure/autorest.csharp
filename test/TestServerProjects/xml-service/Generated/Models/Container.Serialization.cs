@@ -16,7 +16,7 @@ namespace xml_service.Models
         internal static Container DeserializeContainer(XElement element)
         {
             string name = default;
-            ContainerProperties properties = new ContainerProperties();
+            ContainerProperties properties = default;
             IDictionary<string, string> metadata = default;
             if (element.Element("Name") is XElement nameElement)
             {

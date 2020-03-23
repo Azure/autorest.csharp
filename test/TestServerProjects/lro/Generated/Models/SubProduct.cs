@@ -26,6 +26,6 @@ namespace lro.Models
         }
 
         public string ProvisioningState { get; set; }
-        public SubProductPropertiesProvisioningStateValues? ProvisioningStateValues { get; internal set; }
+        public SubProductPropertiesProvisioningStateValues? ProvisioningStateValues { get; }
     }
 }

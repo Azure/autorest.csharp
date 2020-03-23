@@ -13,15 +13,16 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of DataChangeDetectionPolicy. </summary>
         public DataChangeDetectionPolicy()
         {
+            OdataType = null;
         }
 
         /// <summary> Initializes a new instance of DataChangeDetectionPolicy. </summary>
         /// <param name="odataType"> . </param>
         internal DataChangeDetectionPolicy(string odataType)
         {
-            OdataType = odataType;
+            OdataType = odataType ?? null;
         }
 
-        public string OdataType { get; internal set; }
+        internal string OdataType { get; set; }
     }
 }

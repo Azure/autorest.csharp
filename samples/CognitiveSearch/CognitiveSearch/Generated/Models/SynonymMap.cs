@@ -11,8 +11,13 @@ namespace CognitiveSearch.Models
     public partial class SynonymMap
     {
         /// <summary> Initializes a new instance of SynonymMap. </summary>
-        public SynonymMap()
+        /// <param name="name"> The name of the synonym map. </param>
+        /// <param name="synonyms"> A series of synonym rules in the specified synonym map format. The rules must be separated by newlines. </param>
+        public SynonymMap(string name, string synonyms)
         {
+            Name = name;
+            Format = "solr";
+            Synonyms = synonyms;
         }
 
         /// <summary> Initializes a new instance of SynonymMap. </summary>
@@ -29,11 +34,11 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The name of the synonym map. </summary>
-        public string Name { get; set; }
+        public string Name { get; }
         /// <summary> The format of the synonym map. Only the &apos;solr&apos; format is currently supported. </summary>
-        public string Format { get; set; } = "solr";
+        public string Format { get; }
         /// <summary> A series of synonym rules in the specified synonym map format. The rules must be separated by newlines. </summary>
-        public string Synonyms { get; set; }
+        public string Synonyms { get; }
         /// <summary> The ETag of the synonym map. </summary>
         public string ETag { get; set; }
     }

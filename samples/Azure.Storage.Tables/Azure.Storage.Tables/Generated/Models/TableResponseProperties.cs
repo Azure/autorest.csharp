@@ -29,12 +29,12 @@ namespace Azure.Storage.Tables.Models
         }
 
         /// <summary> The name of the table. </summary>
-        public string TableName { get; internal set; }
+        public string TableName { get; }
         /// <summary> The odata type of the table. </summary>
-        public string OdataType { get; internal set; }
+        public string OdataType { get; }
         /// <summary> The id of the table. </summary>
-        public string OdataId { get; internal set; }
+        public string OdataId { get; }
         /// <summary> The edit link of the table. </summary>
-        public string OdataEditLink { get; internal set; }
+        public string OdataEditLink { get; }
     }
 }

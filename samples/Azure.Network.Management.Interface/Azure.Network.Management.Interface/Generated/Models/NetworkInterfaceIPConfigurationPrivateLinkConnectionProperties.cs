@@ -29,10 +29,10 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> The group ID for current private link connection. </summary>
-        public string GroupId { get; internal set; }
+        public string GroupId { get; }
         /// <summary> The required member name for current private link connection. </summary>
-        public string RequiredMemberName { get; internal set; }
+        public string RequiredMemberName { get; }
         /// <summary> List of FQDNs for current private link connection. </summary>
-        public IList<string> Fqdns { get; internal set; }
+        public IList<string> Fqdns { get; }
     }
 }

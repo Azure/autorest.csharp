@@ -14,7 +14,7 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static Model DeserializeModel(JsonElement element)
         {
-            ModelInfo modelInfo = new ModelInfo();
+            ModelInfo modelInfo = default;
             KeysResult keys = default;
             TrainResult trainResult = default;
             foreach (var property in element.EnumerateObject())

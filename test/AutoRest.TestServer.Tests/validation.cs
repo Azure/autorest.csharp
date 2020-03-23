@@ -16,7 +16,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task ConstantsInBody() => Test(async (host, pipeline) =>
         {
-            var value = new Product();
+            var value = new Product(new ChildProduct(), new ConstantProduct());
             var result = await new ServiceClient(ClientDiagnostics, pipeline, string.Empty, host).PostWithConstantInBodyAsync(value);
             Assert.AreEqual(value.ConstString, result.Value.ConstString);
             Assert.AreEqual(value.ConstInt, result.Value.ConstInt);

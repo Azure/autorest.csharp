@@ -13,8 +13,12 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class AnalyzeResult
     {
         /// <summary> Initializes a new instance of AnalyzeResult. </summary>
-        internal AnalyzeResult()
+        /// <param name="version"> Version of schema used for this result. </param>
+        /// <param name="readResults"> Text extracted from the input. </param>
+        internal AnalyzeResult(string version, IList<ReadResult> readResults)
         {
+            Version = version;
+            ReadResults = readResults;
         }
 
         /// <summary> Initializes a new instance of AnalyzeResult. </summary>
@@ -33,14 +37,14 @@ namespace Azure.AI.FormRecognizer.Models
         }
 
         /// <summary> Version of schema used for this result. </summary>
-        public string Version { get; internal set; }
+        public string Version { get; }
         /// <summary> Text extracted from the input. </summary>
-        public IList<ReadResult> ReadResults { get; internal set; } = new List<ReadResult>();
+        public IList<ReadResult> ReadResults { get; } = new List<ReadResult>();
         /// <summary> Page-level information extracted from the input. </summary>
-        public IList<PageResult> PageResults { get; internal set; }
+        public IList<PageResult> PageResults { get; }
         /// <summary> Document-level information extracted from the input. </summary>
-        public IList<DocumentResult> DocumentResults { get; internal set; }
+        public IList<DocumentResult> DocumentResults { get; }
         /// <summary> List of errors reported during the analyze operation. </summary>
-        public IList<ErrorInformation> Errors { get; internal set; }
+        public IList<ErrorInformation> Errors { get; }
     }
 }

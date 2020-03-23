@@ -38,7 +38,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The name of the resource that is unique within a resource group. This name can be used to access the resource. </summary>
         public string Name { get; set; }
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string Etag { get; internal set; }
+        public string Etag { get; }
         /// <summary> The private IP address of the IP configuration. </summary>
         public string PrivateIPAddress { get; set; }
         /// <summary> The private IP address allocation method. </summary>
@@ -48,6 +48,6 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The reference to the public IP resource. </summary>
         public PublicIPAddress PublicIPAddress { get; set; }
         /// <summary> The provisioning state of the IP configuration resource. </summary>
-        public ProvisioningState? ProvisioningState { get; internal set; }
+        public ProvisioningState? ProvisioningState { get; }
     }
 }

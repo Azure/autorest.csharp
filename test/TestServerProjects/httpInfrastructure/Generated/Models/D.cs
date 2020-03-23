@@ -22,6 +22,6 @@ namespace httpInfrastructure.Models
             HttpStatusCode = httpStatusCode;
         }
 
-        public string HttpStatusCode { get; internal set; }
+        public string HttpStatusCode { get; }
     }
 }

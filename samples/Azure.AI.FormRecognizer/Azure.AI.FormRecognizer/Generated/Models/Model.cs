@@ -11,8 +11,10 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class Model
     {
         /// <summary> Initializes a new instance of Model. </summary>
-        internal Model()
+        /// <param name="modelInfo"> Basic custom model information. </param>
+        internal Model(ModelInfo modelInfo)
         {
+            ModelInfo = modelInfo;
         }
 
         /// <summary> Initializes a new instance of Model. </summary>
@@ -27,10 +29,10 @@ namespace Azure.AI.FormRecognizer.Models
         }
 
         /// <summary> Basic custom model information. </summary>
-        public ModelInfo ModelInfo { get; internal set; } = new ModelInfo();
+        public ModelInfo ModelInfo { get; }
         /// <summary> Keys extracted by the custom model. </summary>
-        public KeysResult Keys { get; internal set; }
+        public KeysResult Keys { get; }
         /// <summary> Custom model training result. </summary>
-        public TrainResult TrainResult { get; internal set; }
+        public TrainResult TrainResult { get; }
     }
 }

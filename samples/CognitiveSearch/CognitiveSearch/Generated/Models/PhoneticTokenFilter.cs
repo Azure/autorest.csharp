@@ -11,7 +11,8 @@ namespace CognitiveSearch.Models
     public partial class PhoneticTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of PhoneticTokenFilter. </summary>
-        public PhoneticTokenFilter()
+        /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public PhoneticTokenFilter(string name) : base(name)
         {
             OdataType = "#Microsoft.Azure.Search.PhoneticTokenFilter";
         }
@@ -21,10 +22,11 @@ namespace CognitiveSearch.Models
         /// <param name="replaceOriginalTokens"> A value indicating whether encoded tokens should replace original tokens. If false, encoded tokens are added as synonyms. Default is true. </param>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal PhoneticTokenFilter(PhoneticEncoder? encoder, bool? replaceOriginalTokens, string odataType, string name) : base(odataType ?? "#Microsoft.Azure.Search.PhoneticTokenFilter", name)
+        internal PhoneticTokenFilter(PhoneticEncoder? encoder, bool? replaceOriginalTokens, string odataType, string name) : base(odataType, name)
         {
             Encoder = encoder;
             ReplaceOriginalTokens = replaceOriginalTokens;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.PhoneticTokenFilter";
         }
 
         /// <summary> The phonetic encoder to use. Default is &quot;metaphone&quot;. </summary>

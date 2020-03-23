@@ -14,10 +14,9 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "Dynamic")]
         public Task RoundTripEnum() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new PetClient(ClientDiagnostics, pipeline, host).AddPetAsync( new Pet()
+            var response = await new PetClient(ClientDiagnostics, pipeline, host).AddPetAsync( new Pet(IntEnum.Two)
             {
                 Name = "Retriever",
-                IntEnum = IntEnum.Two,
                 DaysOfWeek = DaysOfWeekExtensibleEnum.Friday
             });
 
@@ -32,10 +31,9 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "Dynamic")]
         public Task RoundTripEnum_Custom() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new PetClient(ClientDiagnostics, pipeline, host).AddPetAsync( new Pet()
+            var response = await new PetClient(ClientDiagnostics, pipeline, host).AddPetAsync( new Pet("77")
             {
                 Name = "Retriever",
-                IntEnum = "77",
                 DaysOfWeek = "WED"
             });
 
@@ -50,10 +48,9 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "Dynamic")]
         public Task RoundTripEnum_Null() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new PetClient(ClientDiagnostics, pipeline, host).AddPetAsync( new Pet()
+            var response = await new PetClient(ClientDiagnostics, pipeline, host).AddPetAsync( new Pet("77")
             {
                 Name = "Retriever",
-                IntEnum = "77",
                 DaysOfWeek = null
             });
 

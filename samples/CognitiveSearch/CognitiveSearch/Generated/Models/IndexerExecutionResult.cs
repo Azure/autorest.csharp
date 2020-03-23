@@ -44,24 +44,24 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The outcome of this indexer execution. </summary>
-        public IndexerExecutionStatus? Status { get; internal set; }
+        public IndexerExecutionStatus? Status { get; }
         /// <summary> The error message indicating the top-level error, if any. </summary>
-        public string ErrorMessage { get; internal set; }
+        public string ErrorMessage { get; }
         /// <summary> The start time of this indexer execution. </summary>
-        public DateTimeOffset? StartTime { get; internal set; }
+        public DateTimeOffset? StartTime { get; }
         /// <summary> The end time of this indexer execution, if the execution has already completed. </summary>
-        public DateTimeOffset? EndTime { get; internal set; }
+        public DateTimeOffset? EndTime { get; }
         /// <summary> The item-level indexing errors. </summary>
-        public IList<ItemError> Errors { get; internal set; }
+        public IList<ItemError> Errors { get; }
         /// <summary> The item-level indexing warnings. </summary>
-        public IList<ItemWarning> Warnings { get; internal set; }
+        public IList<ItemWarning> Warnings { get; }
         /// <summary> The number of items that were processed during this indexer execution. This includes both successfully processed items and items where indexing was attempted but failed. </summary>
-        public int? ItemCount { get; internal set; }
+        public int? ItemCount { get; }
         /// <summary> The number of items that failed to be indexed during this indexer execution. </summary>
-        public int? FailedItemCount { get; internal set; }
+        public int? FailedItemCount { get; }
         /// <summary> Change tracking state with which an indexer execution started. </summary>
-        public string InitialTrackingState { get; internal set; }
+        public string InitialTrackingState { get; }
         /// <summary> Change tracking state with which an indexer execution finished. </summary>
-        public string FinalTrackingState { get; internal set; }
+        public string FinalTrackingState { get; }
     }
 }

@@ -11,7 +11,8 @@ namespace CognitiveSearch.Models
     public partial class ShingleTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of ShingleTokenFilter. </summary>
-        public ShingleTokenFilter()
+        /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public ShingleTokenFilter(string name) : base(name)
         {
             OdataType = "#Microsoft.Azure.Search.ShingleTokenFilter";
         }
@@ -25,7 +26,7 @@ namespace CognitiveSearch.Models
         /// <param name="filterToken"> The string to insert for each position at which there is no token. Default is an underscore (&quot;_&quot;). </param>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal ShingleTokenFilter(int? maxShingleSize, int? minShingleSize, bool? outputUnigrams, bool? outputUnigramsIfNoShingles, string tokenSeparator, string filterToken, string odataType, string name) : base(odataType ?? "#Microsoft.Azure.Search.ShingleTokenFilter", name)
+        internal ShingleTokenFilter(int? maxShingleSize, int? minShingleSize, bool? outputUnigrams, bool? outputUnigramsIfNoShingles, string tokenSeparator, string filterToken, string odataType, string name) : base(odataType, name)
         {
             MaxShingleSize = maxShingleSize;
             MinShingleSize = minShingleSize;
@@ -33,6 +34,7 @@ namespace CognitiveSearch.Models
             OutputUnigramsIfNoShingles = outputUnigramsIfNoShingles;
             TokenSeparator = tokenSeparator;
             FilterToken = filterToken;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.ShingleTokenFilter";
         }
 
         /// <summary> The maximum shingle size. Default and minimum value is 2. </summary>

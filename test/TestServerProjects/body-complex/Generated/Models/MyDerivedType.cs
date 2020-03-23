@@ -21,11 +21,12 @@ namespace body_complex.Models
         /// <param name="kind"> . </param>
         /// <param name="propB1"> . </param>
         /// <param name="propBH1"> . </param>
-        internal MyDerivedType(string propD1, string kind, string propB1, string propBH1) : base(kind ?? "Kind1", propB1, propBH1)
+        internal MyDerivedType(string propD1, string kind, string propB1, string propBH1) : base(kind, propB1, propBH1)
         {
             PropD1 = propD1;
+            Kind = kind ?? "Kind1";
         }
 
-        public string PropD1 { get; internal set; }
+        public string PropD1 { get; }
     }
 }

@@ -79,13 +79,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                         CSharpType propertyType = property.Declaration.Type;
                         writer.Append($"{property.Declaration.Accessibility} {propertyType} {property.Declaration.Name:D}");
-                        writer.AppendRaw(property.IsReadOnly && property.Declaration.Accessibility != "internal" ? "{ get; internal set; }" : "{ get; set; }");
+                        writer.AppendRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
 
-                        if (property.DefaultValue != null)
-                        {
-                            writer.Append($" = {property.DefaultValue.Value.Value:L};");
-                        }
-                        else if (property.InitializeWithType != null)
+                        if (property.InitializeWithType != null)
                         {
                             writer.Append($" = new {property.InitializeWithType}();");
                         }
@@ -168,28 +164,17 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.Append($"{constructor.Declaration.Accessibility} {constructor.Declaration.Name}(");
                 foreach (var parameter in constructor.Parameters)
                 {
-                    writer.Append($"{parameter.Type} {parameter.Name},");
+                    writer.WriteParameter(parameter);
                 }
                 writer.RemoveTrailingComma();
                 writer.Append($")");
 
-                if (constructor.BaseConstructor != null)
+                if (constructor.BaseConstructor?.Parameters.Length > 0)
                 {
                     writer.Append($": base(");
                     foreach (var baseConstructorParameter in constructor.BaseConstructor.Parameters)
                     {
-                        writer.Append($"{baseConstructorParameter.Name}");
-                        if (schema.Discriminator != null)
-                        {
-                            // Check if the parameter is for discriminator and apply a default
-                            var property = constructor.FindPropertyInitializedByParameter(baseConstructorParameter);
-                            if (property == schema.Discriminator.Property)
-                            {
-                                writer.Append($"?? {schema.Discriminator.Value:L}");
-                            }
-                        }
-
-                        writer.Append($",");
+                        writer.Append($"{baseConstructorParameter.Name}, ");
                     }
                     writer.RemoveTrailingComma();
                     writer.Append($")");
@@ -200,17 +185,16 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     foreach (var initializer in constructor.Initializers)
                     {
                         writer.Append($"{initializer.Property.Declaration.Name} = ")
-                            .WriteReferenceOrConstant(initializer.Value)
-                            .Line($";");
-                    }
+                            .WriteReferenceOrConstant(initializer.Value);
 
-                    var discriminator = schema.Discriminator;
-                    if (discriminator != null && discriminator.Value != null)
-                    {
-                        if (constructor.Parameters.Length == 0)
+                        // Check if the parameter is for discriminator and apply a default
+                        if (initializer.Property == schema.Discriminator?.Property &&
+                            !initializer.Value.IsConstant)
                         {
-                            writer.Line($"{discriminator.Property.Declaration.Name} = {discriminator.Value:L};");
+                            writer.Append($"?? {schema.Discriminator.Value:L}");
                         }
+
+                        writer.Line($";");
                     }
                 }
 

@@ -18,7 +18,7 @@ namespace xml_service.Models
             string name = default;
             bool deleted = default;
             string snapshot = default;
-            BlobProperties properties = new BlobProperties();
+            BlobProperties properties = default;
             IDictionary<string, string> metadata = default;
             if (element.Element("Name") is XElement nameElement)
             {

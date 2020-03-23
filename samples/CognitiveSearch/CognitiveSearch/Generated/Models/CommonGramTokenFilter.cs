@@ -13,8 +13,11 @@ namespace CognitiveSearch.Models
     public partial class CommonGramTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of CommonGramTokenFilter. </summary>
-        public CommonGramTokenFilter()
+        /// <param name="commonWords"> The set of common words. </param>
+        /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        public CommonGramTokenFilter(IList<string> commonWords, string name) : base(name)
         {
+            CommonWords = commonWords;
             OdataType = "#Microsoft.Azure.Search.CommonGramTokenFilter";
         }
 
@@ -24,15 +27,16 @@ namespace CognitiveSearch.Models
         /// <param name="useQueryMode"> A value that indicates whether the token filter is in query mode. When in query mode, the token filter generates bigrams and then removes common words and single terms followed by a common word. Default is false. </param>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal CommonGramTokenFilter(IList<string> commonWords, bool? ignoreCase, bool? useQueryMode, string odataType, string name) : base(odataType ?? "#Microsoft.Azure.Search.CommonGramTokenFilter", name)
+        internal CommonGramTokenFilter(IList<string> commonWords, bool? ignoreCase, bool? useQueryMode, string odataType, string name) : base(odataType, name)
         {
             CommonWords = commonWords;
             IgnoreCase = ignoreCase;
             UseQueryMode = useQueryMode;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.CommonGramTokenFilter";
         }
 
         /// <summary> The set of common words. </summary>
-        public IList<string> CommonWords { get; set; } = new List<string>();
+        public IList<string> CommonWords { get; } = new List<string>();
         /// <summary> A value indicating whether common words matching will be case insensitive. Default is false. </summary>
         public bool? IgnoreCase { get; set; }
         /// <summary> A value that indicates whether the token filter is in query mode. When in query mode, the token filter generates bigrams and then removes common words and single terms followed by a common word. Default is false. </summary>

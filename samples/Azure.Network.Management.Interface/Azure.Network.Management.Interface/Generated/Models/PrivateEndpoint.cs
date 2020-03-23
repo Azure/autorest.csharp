@@ -40,13 +40,13 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
-        public string Etag { get; internal set; }
+        public string Etag { get; }
         /// <summary> The ID of the subnet from which the private IP will be allocated. </summary>
         public Subnet Subnet { get; set; }
         /// <summary> An array of references to the network interfaces created for this private endpoint. </summary>
-        public IList<NetworkInterface> NetworkInterfaces { get; internal set; }
+        public IList<NetworkInterface> NetworkInterfaces { get; }
         /// <summary> The provisioning state of the private endpoint resource. </summary>
-        public ProvisioningState? ProvisioningState { get; internal set; }
+        public ProvisioningState? ProvisioningState { get; }
         /// <summary> A grouping of information about the connection to the remote resource. </summary>
         public IList<PrivateLinkServiceConnection> PrivateLinkServiceConnections { get; set; }
         /// <summary> A grouping of information about the connection to the remote resource. Used when the network admin does not have access to approve connections to the remote resource. </summary>

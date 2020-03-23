@@ -11,8 +11,18 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class Entity
     {
         /// <summary> Initializes a new instance of Entity. </summary>
-        internal Entity()
+        /// <param name="text"> Entity text as appears in the request. </param>
+        /// <param name="type"> Entity type, such as Person/Location/Org/SSN etc. </param>
+        /// <param name="offset"> Start position (in Unicode characters) for the entity text. </param>
+        /// <param name="length"> Length (in Unicode characters) for the entity text. </param>
+        /// <param name="score"> Confidence score between 0 and 1 of the extracted entity. </param>
+        internal Entity(string text, string type, int offset, int length, double score)
         {
+            Text = text;
+            Type = type;
+            Offset = offset;
+            Length = length;
+            Score = score;
         }
 
         /// <summary> Initializes a new instance of Entity. </summary>
@@ -33,16 +43,16 @@ namespace CognitiveServices.TextAnalytics.Models
         }
 
         /// <summary> Entity text as appears in the request. </summary>
-        public string Text { get; internal set; }
+        public string Text { get; }
         /// <summary> Entity type, such as Person/Location/Org/SSN etc. </summary>
-        public string Type { get; internal set; }
+        public string Type { get; }
         /// <summary> Entity sub type, such as Age/Year/TimeRange etc. </summary>
-        public string Subtype { get; internal set; }
+        public string Subtype { get; }
         /// <summary> Start position (in Unicode characters) for the entity text. </summary>
-        public int Offset { get; internal set; }
+        public int Offset { get; }
         /// <summary> Length (in Unicode characters) for the entity text. </summary>
-        public int Length { get; internal set; }
+        public int Length { get; }
         /// <summary> Confidence score between 0 and 1 of the extracted entity. </summary>
-        public double Score { get; internal set; }
+        public double Score { get; }
     }
 }

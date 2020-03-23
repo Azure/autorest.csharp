@@ -14,8 +14,12 @@ namespace CognitiveSearch.Models
     public partial class WebApiSkill : Skill
     {
         /// <summary> Initializes a new instance of WebApiSkill. </summary>
-        public WebApiSkill()
+        /// <param name="uri"> The url for the Web API. </param>
+        /// <param name="inputs"> Inputs of the skills could be a column in the source data set, or the output of an upstream skill. </param>
+        /// <param name="outputs"> The output of a skill is either a field in a search index, or a value that can be consumed as an input by another skill. </param>
+        public WebApiSkill(string uri, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs) : base(inputs, outputs)
         {
+            Uri = uri;
             OdataType = "#Microsoft.Skills.Custom.WebApiSkill";
         }
 
@@ -32,7 +36,7 @@ namespace CognitiveSearch.Models
         /// <param name="context"> Represents the level at which operations take place, such as the document root or document content (for example, /document or /document/content). The default is /document. </param>
         /// <param name="inputs"> Inputs of the skills could be a column in the source data set, or the output of an upstream skill. </param>
         /// <param name="outputs"> The output of a skill is either a field in a search index, or a value that can be consumed as an input by another skill. </param>
-        internal WebApiSkill(string uri, IDictionary<string, string> httpHeaders, string httpMethod, TimeSpan? timeout, int? batchSize, int? degreeOfParallelism, string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs) : base(odataType ?? "#Microsoft.Skills.Custom.WebApiSkill", name, description, context, inputs, outputs)
+        internal WebApiSkill(string uri, IDictionary<string, string> httpHeaders, string httpMethod, TimeSpan? timeout, int? batchSize, int? degreeOfParallelism, string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs) : base(odataType, name, description, context, inputs, outputs)
         {
             Uri = uri;
             HttpHeaders = httpHeaders;
@@ -40,10 +44,11 @@ namespace CognitiveSearch.Models
             Timeout = timeout;
             BatchSize = batchSize;
             DegreeOfParallelism = degreeOfParallelism;
+            OdataType = odataType ?? "#Microsoft.Skills.Custom.WebApiSkill";
         }
 
         /// <summary> The url for the Web API. </summary>
-        public string Uri { get; set; }
+        public string Uri { get; }
         /// <summary> The headers required to make the http request. </summary>
         public IDictionary<string, string> HttpHeaders { get; set; }
         /// <summary> The method for the http request. </summary>

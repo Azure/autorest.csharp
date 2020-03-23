@@ -31,12 +31,12 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> Overall indexer status. </summary>
-        public IndexerStatus? Status { get; internal set; }
+        public IndexerStatus? Status { get; }
         /// <summary> The result of the most recent or an in-progress indexer execution. </summary>
-        public IndexerExecutionResult LastResult { get; internal set; }
+        public IndexerExecutionResult LastResult { get; }
         /// <summary> History of the recent indexer executions, sorted in reverse chronological order. </summary>
-        public IList<IndexerExecutionResult> ExecutionHistory { get; internal set; }
+        public IList<IndexerExecutionResult> ExecutionHistory { get; }
         /// <summary> The execution limits for the indexer. </summary>
-        public IndexerLimits Limits { get; internal set; }
+        public IndexerLimits Limits { get; }
     }
 }

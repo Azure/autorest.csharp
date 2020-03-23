@@ -13,11 +13,6 @@ namespace Azure.Storage.Tables.Models
     public partial class GeoReplication
     {
         /// <summary> Initializes a new instance of GeoReplication. </summary>
-        internal GeoReplication()
-        {
-        }
-
-        /// <summary> Initializes a new instance of GeoReplication. </summary>
         /// <param name="status"> The status of the secondary location. </param>
         /// <param name="lastSyncTime"> A GMT date/time value, to the second. All primary writes preceding this value are guaranteed to be available for read operations at the secondary. Primary writes after this point in time may or may not be available for reads. </param>
         internal GeoReplication(GeoReplicationStatusType status, DateTimeOffset lastSyncTime)
@@ -27,8 +22,8 @@ namespace Azure.Storage.Tables.Models
         }
 
         /// <summary> The status of the secondary location. </summary>
-        public GeoReplicationStatusType Status { get; internal set; }
+        public GeoReplicationStatusType Status { get; }
         /// <summary> A GMT date/time value, to the second. All primary writes preceding this value are guaranteed to be available for read operations at the secondary. Primary writes after this point in time may or may not be available for reads. </summary>
-        public DateTimeOffset LastSyncTime { get; internal set; }
+        public DateTimeOffset LastSyncTime { get; }
     }
 }
