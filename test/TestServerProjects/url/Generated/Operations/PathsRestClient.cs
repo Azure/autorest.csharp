@@ -169,7 +169,7 @@ namespace url
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paths/int/1000000/", false);
-            uri.AppendPath(1000000F, true);
+            uri.AppendPath(1000000, true);
             request.Uri = uri;
             return message;
         }
@@ -232,7 +232,7 @@ namespace url
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paths/int/-1000000/", false);
-            uri.AppendPath(-1000000F, true);
+            uri.AppendPath(-1000000, true);
             request.Uri = uri;
             return message;
         }
@@ -295,7 +295,7 @@ namespace url
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paths/long/10000000000/", false);
-            uri.AppendPath(1E+10F, true);
+            uri.AppendPath(10000000000L, true);
             request.Uri = uri;
             return message;
         }
@@ -358,7 +358,7 @@ namespace url
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paths/long/-10000000000/", false);
-            uri.AppendPath(-1E+10F, true);
+            uri.AppendPath(-10000000000L, true);
             request.Uri = uri;
             return message;
         }
@@ -1073,7 +1073,7 @@ namespace url
         }
 
         /// <summary> Get null (should throw on the client before the request is sent on wire). </summary>
-        /// <param name="enumPath"> send the value green. </param>
+        /// <param name="enumPath"> send null should throw. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> EnumNullAsync(UriColor enumPath, CancellationToken cancellationToken = default)
         {
@@ -1100,7 +1100,7 @@ namespace url
         }
 
         /// <summary> Get null (should throw on the client before the request is sent on wire). </summary>
-        /// <param name="enumPath"> send the value green. </param>
+        /// <param name="enumPath"> send null should throw. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response EnumNull(UriColor enumPath, CancellationToken cancellationToken = default)
         {
@@ -1278,7 +1278,7 @@ namespace url
         }
 
         /// <summary> Get null as byte array (should throw). </summary>
-        /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
+        /// <param name="bytePath"> null as byte array (should throw). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ByteNullAsync(byte[] bytePath, CancellationToken cancellationToken = default)
         {
@@ -1309,7 +1309,7 @@ namespace url
         }
 
         /// <summary> Get null as byte array (should throw). </summary>
-        /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
+        /// <param name="bytePath"> null as byte array (should throw). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ByteNull(byte[] bytePath, CancellationToken cancellationToken = default)
         {

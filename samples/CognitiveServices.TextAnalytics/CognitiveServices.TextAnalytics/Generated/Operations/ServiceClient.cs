@@ -99,7 +99,7 @@ namespace CognitiveServices.TextAnalytics
         /// <summary> The API returns a list of strings denoting the key phrases in the input text. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </summary>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="input"> Collection of documents to analyze. </param>
+        /// <param name="input"> Collection of documents to analyze. Documents can now contain a language field to indicate the text language. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<KeyPhraseResult>> KeyPhrasesAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
         {
@@ -109,7 +109,7 @@ namespace CognitiveServices.TextAnalytics
         /// <summary> The API returns a list of strings denoting the key phrases in the input text. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </summary>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="input"> Collection of documents to analyze. </param>
+        /// <param name="input"> Collection of documents to analyze. Documents can now contain a language field to indicate the text language. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<KeyPhraseResult> KeyPhrases(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
         {

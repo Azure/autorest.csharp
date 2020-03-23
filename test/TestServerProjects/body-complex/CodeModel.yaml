@@ -371,6 +371,16 @@ schemas: !<!Schemas>
         name: ApiVersion20160229
         description: Api Version (2016-02-29)
     protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_72
+    type: constant
+    value: !<!ConstantValue> 
+      value: application/json
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: ApplicationJson
+        description: Content Type 'application/json'
+    protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_58
     type: constant
     apiVersions:
@@ -592,7 +602,7 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_73
+  - !<!ObjectSchema> &ref_74
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -625,7 +635,7 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_75
+  - !<!ObjectSchema> &ref_76
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -658,7 +668,7 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_77
+  - !<!ObjectSchema> &ref_78
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -691,7 +701,7 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_79
+  - !<!ObjectSchema> &ref_80
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -724,7 +734,7 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_81
+  - !<!ObjectSchema> &ref_82
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -757,7 +767,7 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_83
+  - !<!ObjectSchema> &ref_84
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -798,7 +808,7 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_85
+  - !<!ObjectSchema> &ref_86
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -831,7 +841,7 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_87
+  - !<!ObjectSchema> &ref_88
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -864,7 +874,7 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_89
+  - !<!ObjectSchema> &ref_90
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -897,7 +907,7 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_91
+  - !<!ObjectSchema> &ref_92
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -922,7 +932,7 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_93
+  - !<!ObjectSchema> &ref_94
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -947,7 +957,7 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_95
+  - !<!ObjectSchema> &ref_96
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -982,7 +992,7 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_98
+  - !<!ObjectSchema> &ref_99
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -1568,7 +1578,7 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_103
+  - !<!ObjectSchema> &ref_104
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -1638,7 +1648,7 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
   - *ref_50
   - *ref_32
-  - !<!ObjectSchema> &ref_108
+  - !<!ObjectSchema> &ref_109
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -1795,7 +1805,7 @@ globalParameters:
   required: true
   language: !<!Languages> 
     default:
-      name: ApiVersion
+      name: apiVersion
       description: Api Version
       serializedName: api-version
   protocol: !<!Protocols> 
@@ -1866,7 +1876,18 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_72
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_73
         schema: *ref_69
         implementation: Method
         required: true
@@ -1879,7 +1900,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_72
+      - *ref_73
       language: !<!Languages> 
         default:
           name: ''
@@ -2154,7 +2175,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_73
+      schema: *ref_74
       language: !<!Languages> 
         default:
           name: ''
@@ -2194,8 +2215,19 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_74
-        schema: *ref_73
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_75
+        schema: *ref_74
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -2207,7 +2239,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_74
+      - *ref_75
       language: !<!Languages> 
         default:
           name: ''
@@ -2270,7 +2302,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_75
+      schema: *ref_76
       language: !<!Languages> 
         default:
           name: ''
@@ -2310,8 +2342,19 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_76
-        schema: *ref_75
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_77
+        schema: *ref_76
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -2323,7 +2366,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_76
+      - *ref_77
       language: !<!Languages> 
         default:
           name: ''
@@ -2386,7 +2429,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_77
+      schema: *ref_78
       language: !<!Languages> 
         default:
           name: ''
@@ -2426,8 +2469,19 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_78
-        schema: *ref_77
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_79
+        schema: *ref_78
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -2439,7 +2493,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_78
+      - *ref_79
       language: !<!Languages> 
         default:
           name: ''
@@ -2502,7 +2556,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_79
+      schema: *ref_80
       language: !<!Languages> 
         default:
           name: ''
@@ -2542,8 +2596,19 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_80
-        schema: *ref_79
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_81
+        schema: *ref_80
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -2555,7 +2620,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_80
+      - *ref_81
       language: !<!Languages> 
         default:
           name: ''
@@ -2618,7 +2683,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_81
+      schema: *ref_82
       language: !<!Languages> 
         default:
           name: ''
@@ -2658,8 +2723,19 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_82
-        schema: *ref_81
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_83
+        schema: *ref_82
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -2671,7 +2747,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_82
+      - *ref_83
       language: !<!Languages> 
         default:
           name: ''
@@ -2734,7 +2810,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_83
+      schema: *ref_84
       language: !<!Languages> 
         default:
           name: ''
@@ -2774,8 +2850,19 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_84
-        schema: *ref_83
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_85
+        schema: *ref_84
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -2787,7 +2874,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_84
+      - *ref_85
       language: !<!Languages> 
         default:
           name: ''
@@ -2850,7 +2937,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_85
+      schema: *ref_86
       language: !<!Languages> 
         default:
           name: ''
@@ -2890,8 +2977,19 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_86
-        schema: *ref_85
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_87
+        schema: *ref_86
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -2903,7 +3001,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_86
+      - *ref_87
       language: !<!Languages> 
         default:
           name: ''
@@ -2966,7 +3064,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_87
+      schema: *ref_88
       language: !<!Languages> 
         default:
           name: ''
@@ -3006,8 +3104,19 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_88
-        schema: *ref_87
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_89
+        schema: *ref_88
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -3019,7 +3128,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_88
+      - *ref_89
       language: !<!Languages> 
         default:
           name: ''
@@ -3082,7 +3191,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_89
+      schema: *ref_90
       language: !<!Languages> 
         default:
           name: ''
@@ -3122,8 +3231,19 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_90
-        schema: *ref_89
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_91
+        schema: *ref_90
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -3135,7 +3255,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_90
+      - *ref_91
       language: !<!Languages> 
         default:
           name: ''
@@ -3198,7 +3318,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_91
+      schema: *ref_92
       language: !<!Languages> 
         default:
           name: ''
@@ -3238,8 +3358,19 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_92
-        schema: *ref_91
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_93
+        schema: *ref_92
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -3251,7 +3382,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_92
+      - *ref_93
       language: !<!Languages> 
         default:
           name: ''
@@ -3314,7 +3445,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_93
+      schema: *ref_94
       language: !<!Languages> 
         default:
           name: ''
@@ -3354,8 +3485,19 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_94
-        schema: *ref_93
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_95
+        schema: *ref_94
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -3367,7 +3509,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_94
+      - *ref_95
       language: !<!Languages> 
         default:
           name: ''
@@ -3438,7 +3580,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_95
+      schema: *ref_96
       language: !<!Languages> 
         default:
           name: ''
@@ -3478,8 +3620,19 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_96
-        schema: *ref_95
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_97
+        schema: *ref_96
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -3491,7 +3644,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_96
+      - *ref_97
       language: !<!Languages> 
         default:
           name: ''
@@ -3554,7 +3707,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_95
+      schema: *ref_96
       language: !<!Languages> 
         default:
           name: ''
@@ -3594,20 +3747,31 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_97
-        schema: *ref_95
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_98
+        schema: *ref_96
         implementation: Method
         required: true
         language: !<!Languages> 
           default:
             name: complexBody
-            description: 'Please put an array with 4 items: "1, 2, 3, 4", "", null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog"'
+            description: Please put an empty array
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: body
             style: json
       signatureParameters:
-      - *ref_97
+      - *ref_98
       language: !<!Languages> 
         default:
           name: ''
@@ -3670,7 +3834,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_95
+      schema: *ref_96
       language: !<!Languages> 
         default:
           name: ''
@@ -3729,7 +3893,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_98
+      schema: *ref_99
       language: !<!Languages> 
         default:
           name: ''
@@ -3769,8 +3933,19 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_99
-        schema: *ref_98
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_100
+        schema: *ref_99
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -3782,7 +3957,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_99
+      - *ref_100
       language: !<!Languages> 
         default:
           name: ''
@@ -3845,7 +4020,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_98
+      schema: *ref_99
       language: !<!Languages> 
         default:
           name: ''
@@ -3885,20 +4060,31 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_100
-        schema: *ref_98
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_101
+        schema: *ref_99
         implementation: Method
         required: true
         language: !<!Languages> 
           default:
             name: complexBody
-            description: 'Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null'
+            description: Please put an empty dictionary
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: body
             style: json
       signatureParameters:
-      - *ref_100
+      - *ref_101
       language: !<!Languages> 
         default:
           name: ''
@@ -3961,7 +4147,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_98
+      schema: *ref_99
       language: !<!Languages> 
         default:
           name: ''
@@ -4012,7 +4198,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_98
+      schema: *ref_99
       language: !<!Languages> 
         default:
           name: ''
@@ -4111,7 +4297,18 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_101
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_102
         schema: *ref_28
         implementation: Method
         required: true
@@ -4124,7 +4321,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_101
+      - *ref_102
       language: !<!Languages> 
         default:
           name: ''
@@ -4235,7 +4432,18 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_102
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_103
         schema: *ref_34
         implementation: Method
         required: true
@@ -4281,7 +4489,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_102
+      - *ref_103
       language: !<!Languages> 
         default:
           name: ''
@@ -4395,7 +4603,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_103
+      schema: *ref_104
       language: !<!Languages> 
         default:
           name: ''
@@ -4446,7 +4654,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_103
+      schema: *ref_104
       language: !<!Languages> 
         default:
           name: ''
@@ -4537,7 +4745,18 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_104
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_105
         schema: *ref_32
         implementation: Method
         required: true
@@ -4550,7 +4769,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_104
+      - *ref_105
       language: !<!Languages> 
         default:
           name: ''
@@ -4602,7 +4821,18 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_105
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_106
         schema: *ref_32
         implementation: Method
         required: true
@@ -4615,7 +4845,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_105
+      - *ref_106
       language: !<!Languages> 
         default:
           name: ''
@@ -4671,7 +4901,18 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_106
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_107
         schema: *ref_34
         implementation: Method
         required: true
@@ -4679,45 +4920,38 @@ operationGroups:
           default:
             name: complexBody
             description: |-
-              Please put a salmon that looks like this:
+              Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
               {
-                      'fishtype':'Salmon',
-                      'location':'alaska',
-                      'iswild':true,
-                      'species':'king',
-                      'length':1.0,
-                      'siblings':[
-                        {
-                          'fishtype':'Shark',
-                          'age':6,
-                          'birthday': '2012-01-05T01:00:00Z',
-                          'length':20.0,
-                          'species':'predator',
-                        },
-                        {
-                          'fishtype':'Sawshark',
-                          'age':105,
-                          'birthday': '1900-01-05T01:00:00Z',
-                          'length':10.0,
-                          'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-                          'species':'dangerous',
-                        },
-                        {
-                          'fishtype': 'goblin',
-                          'age': 1,
-                          'birthday': '2015-08-08T00:00:00Z',
-                          'length': 30.0,
-                          'species': 'scary',
-                          'jawsize': 5
-                        }
-                      ]
-                    };
+                  "fishtype": "sawshark",
+                  "species": "snaggle toothed",
+                  "length": 18.5,
+                  "age": 2,
+                  "birthday": "2013-06-01T01:00:00Z",
+                  "location": "alaska",
+                  "picture": base64(FF FF FF FF FE),
+                  "siblings": [
+                      {
+                          "fishtype": "shark",
+                          "species": "predator",
+                          "birthday": "2012-01-05T01:00:00Z",
+                          "length": 20,
+                          "age": 6
+                      },
+                      {
+                          "fishtype": "sawshark",
+                          "species": "dangerous",
+                          "picture": base64(FF FF FF FF FE),
+                          "length": 10,
+                          "age": 105
+                      }
+                  ]
+              }
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: body
             style: json
       signatureParameters:
-      - *ref_106
+      - *ref_107
       language: !<!Languages> 
         default:
           name: ''
@@ -4828,7 +5062,18 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_107
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_108
         schema: *ref_34
         implementation: Method
         required: true
@@ -4838,43 +5083,63 @@ operationGroups:
             description: |-
               Please put a salmon that looks like this:
               {
-                      'fishtype':'Salmon',
-                      'location':'alaska',
-                      'iswild':true,
-                      'species':'king',
-                      'length':1.0,
-                      'siblings':[
-                        {
-                          'fishtype':'Shark',
-                          'age':6,
-                          'birthday': '2012-01-05T01:00:00Z',
-                          'length':20.0,
-                          'species':'predator',
-                        },
-                        {
-                          'fishtype':'Sawshark',
-                          'age':105,
-                          'birthday': '1900-01-05T01:00:00Z',
-                          'length':10.0,
-                          'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-                          'species':'dangerous',
-                        },
-                        {
-                          'fishtype': 'goblin',
-                          'age': 1,
-                          'birthday': '2015-08-08T00:00:00Z',
-                          'length': 30.0,
-                          'species': 'scary',
-                          'jawsize': 5
-                        }
-                      ]
-                    };
+                  "fishtype": "salmon",
+                  "species": "king",
+                  "length": 1,
+                  "age": 1,
+                  "location": "alaska",
+                  "iswild": true,
+                  "siblings": [
+                      {
+                          "fishtype": "shark",
+                          "species": "predator",
+                          "length": 20,
+                          "age": 6,
+                          "siblings": [
+                              {
+                                  "fishtype": "salmon",
+                                  "species": "coho",
+                                  "length": 2,
+                                  "age": 2,
+                                  "location": "atlantic",
+                                  "iswild": true,
+                                  "siblings": [
+                                      {
+                                          "fishtype": "shark",
+                                          "species": "predator",
+                                          "length": 20,
+                                          "age": 6
+                                      },
+                                      {
+                                          "fishtype": "sawshark",
+                                          "species": "dangerous",
+                                          "length": 10,
+                                          "age": 105
+                                      }
+                                  ]
+                              },
+                              {
+                                  "fishtype": "sawshark",
+                                  "species": "dangerous",
+                                  "length": 10,
+                                  "age": 105
+                              }
+                          ]
+                      },
+                      {
+                          "fishtype": "sawshark",
+                          "species": "dangerous",
+                          "length": 10,
+                          "age": 105
+                      }
+                  ]
+              }
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: body
             style: json
       signatureParameters:
-      - *ref_107
+      - *ref_108
       language: !<!Languages> 
         default:
           name: ''
@@ -4945,7 +5210,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_108
+      schema: *ref_109
       language: !<!Languages> 
         default:
           name: ''
@@ -4985,8 +5250,19 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_109
-        schema: *ref_108
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_110
+        schema: *ref_109
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -4998,7 +5274,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_109
+      - *ref_110
       language: !<!Languages> 
         default:
           name: ''

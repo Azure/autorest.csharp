@@ -106,6 +106,17 @@ schemas: !<!Schemas>
         name: ArrayOfString
         description: Array of String
     protocol: !<!Protocols> {}
+  - !<!ArraySchema> &ref_11
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: *ref_3
+    language: !<!Languages> 
+      default:
+        name: ArrayOfString
+        description: Array of String
+    protocol: !<!Protocols> {}
 globalParameters:
 - !<!Parameter> &ref_5
   schema: *ref_4
@@ -252,13 +263,13 @@ operationGroups:
       version: 1.0.0
     parameters:
     - *ref_5
-    - !<!Parameter> &ref_11
-      schema: *ref_9
+    - !<!Parameter> &ref_12
+      schema: *ref_11
       implementation: Method
       language: !<!Languages> 
         default:
           name: arrayQuery
-          description: 'an empty array [] of string using the multi-array format'
+          description: 'an array of string [''ArrayQuery1'', ''begin!*''();:@ &=+$,/?#[]end'' , null, ''''] using the mult-array format'
           serializedName: arrayQuery
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
@@ -276,7 +287,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_11
+    - *ref_12
     responses:
     - !<!Response> 
       language: !<!Languages> 

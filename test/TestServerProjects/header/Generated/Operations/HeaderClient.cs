@@ -228,7 +228,7 @@ namespace header
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;true&quot;, &quot;value&quot;: true or &quot;scenario&quot;: &quot;false&quot;, &quot;value&quot;: false. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
         /// <param name="value"> Send a post request with header values true or false. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ParamBoolAsync(string scenario, bool value, CancellationToken cancellationToken = default)
@@ -237,7 +237,7 @@ namespace header
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;true&quot;, &quot;value&quot;: true or &quot;scenario&quot;: &quot;false&quot;, &quot;value&quot;: false. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
         /// <param name="value"> Send a post request with header values true or false. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ParamBool(string scenario, bool value, CancellationToken cancellationToken = default)
@@ -246,7 +246,7 @@ namespace header
         }
 
         /// <summary> Get a response with header value &quot;value&quot;: true or false. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ResponseBoolAsync(string scenario, CancellationToken cancellationToken = default)
         {
@@ -254,7 +254,7 @@ namespace header
         }
 
         /// <summary> Get a response with header value &quot;value&quot;: true or false. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ResponseBool(string scenario, CancellationToken cancellationToken = default)
         {
@@ -262,7 +262,7 @@ namespace header
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;The quick brown fox jumps over the lazy dog&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null or &quot;scenario&quot;: &quot;empty&quot;, &quot;value&quot;: &quot;&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ParamStringAsync(string scenario, string value, CancellationToken cancellationToken = default)
@@ -271,7 +271,7 @@ namespace header
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;The quick brown fox jumps over the lazy dog&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null or &quot;scenario&quot;: &quot;empty&quot;, &quot;value&quot;: &quot;&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ParamString(string scenario, string value, CancellationToken cancellationToken = default)
@@ -280,7 +280,7 @@ namespace header
         }
 
         /// <summary> Get a response with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ResponseStringAsync(string scenario, CancellationToken cancellationToken = default)
         {
@@ -288,7 +288,7 @@ namespace header
         }
 
         /// <summary> Get a response with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ResponseString(string scenario, CancellationToken cancellationToken = default)
         {
@@ -296,7 +296,7 @@ namespace header
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ParamDateAsync(string scenario, DateTimeOffset value, CancellationToken cancellationToken = default)
@@ -305,7 +305,7 @@ namespace header
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ParamDate(string scenario, DateTimeOffset value, CancellationToken cancellationToken = default)
@@ -314,7 +314,7 @@ namespace header
         }
 
         /// <summary> Get a response with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ResponseDateAsync(string scenario, CancellationToken cancellationToken = default)
         {
@@ -322,7 +322,7 @@ namespace header
         }
 
         /// <summary> Get a response with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ResponseDate(string scenario, CancellationToken cancellationToken = default)
         {
@@ -330,7 +330,7 @@ namespace header
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01T12:34:56Z&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01T00:00:00Z&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ParamDatetimeAsync(string scenario, DateTimeOffset value, CancellationToken cancellationToken = default)
@@ -339,7 +339,7 @@ namespace header
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01T12:34:56Z&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01T00:00:00Z&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ParamDatetime(string scenario, DateTimeOffset value, CancellationToken cancellationToken = default)
@@ -348,7 +348,7 @@ namespace header
         }
 
         /// <summary> Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ResponseDatetimeAsync(string scenario, CancellationToken cancellationToken = default)
         {
@@ -356,7 +356,7 @@ namespace header
         }
 
         /// <summary> Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ResponseDatetime(string scenario, CancellationToken cancellationToken = default)
         {
@@ -364,7 +364,7 @@ namespace header
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ParamDatetimeRfc1123Async(string scenario, DateTimeOffset? value, CancellationToken cancellationToken = default)
@@ -373,7 +373,7 @@ namespace header
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ParamDatetimeRfc1123(string scenario, DateTimeOffset? value, CancellationToken cancellationToken = default)
@@ -382,7 +382,7 @@ namespace header
         }
 
         /// <summary> Get a response with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ResponseDatetimeRfc1123Async(string scenario, CancellationToken cancellationToken = default)
         {
@@ -390,7 +390,7 @@ namespace header
         }
 
         /// <summary> Get a response with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ResponseDatetimeRfc1123(string scenario, CancellationToken cancellationToken = default)
         {
@@ -398,7 +398,7 @@ namespace header
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;P123DT22H14M12.011S&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ParamDurationAsync(string scenario, TimeSpan value, CancellationToken cancellationToken = default)
@@ -407,7 +407,7 @@ namespace header
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;P123DT22H14M12.011S&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ParamDuration(string scenario, TimeSpan value, CancellationToken cancellationToken = default)
@@ -416,7 +416,7 @@ namespace header
         }
 
         /// <summary> Get a response with header values &quot;P123DT22H14M12.011S&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ResponseDurationAsync(string scenario, CancellationToken cancellationToken = default)
         {
@@ -424,7 +424,7 @@ namespace header
         }
 
         /// <summary> Get a response with header values &quot;P123DT22H14M12.011S&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ResponseDuration(string scenario, CancellationToken cancellationToken = default)
         {
@@ -432,7 +432,7 @@ namespace header
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ParamByteAsync(string scenario, byte[] value, CancellationToken cancellationToken = default)
@@ -441,7 +441,7 @@ namespace header
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ParamByte(string scenario, byte[] value, CancellationToken cancellationToken = default)
@@ -450,7 +450,7 @@ namespace header
         }
 
         /// <summary> Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ResponseByteAsync(string scenario, CancellationToken cancellationToken = default)
         {
@@ -458,7 +458,7 @@ namespace header
         }
 
         /// <summary> Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ResponseByte(string scenario, CancellationToken cancellationToken = default)
         {
@@ -466,7 +466,7 @@ namespace header
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;GREY&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ParamEnumAsync(string scenario, GreyscaleColors? value, CancellationToken cancellationToken = default)
@@ -475,7 +475,7 @@ namespace header
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;GREY&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ParamEnum(string scenario, GreyscaleColors? value, CancellationToken cancellationToken = default)
@@ -484,7 +484,7 @@ namespace header
         }
 
         /// <summary> Get a response with header values &quot;GREY&quot; or null. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ResponseEnumAsync(string scenario, CancellationToken cancellationToken = default)
         {
@@ -492,7 +492,7 @@ namespace header
         }
 
         /// <summary> Get a response with header values &quot;GREY&quot; or null. </summary>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ResponseEnum(string scenario, CancellationToken cancellationToken = default)
         {

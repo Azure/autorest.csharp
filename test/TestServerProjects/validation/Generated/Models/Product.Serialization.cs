@@ -56,7 +56,7 @@ namespace validation.Models
             string image = default;
             ChildProduct child = default;
             ConstantProduct constChild = default;
-            float constInt = default;
+            int constInt = default;
             string constString = default;
             string constStringAsEnum = default;
             foreach (var property in element.EnumerateObject())
@@ -105,7 +105,7 @@ namespace validation.Models
                 }
                 if (property.NameEquals("constInt"))
                 {
-                    constInt = property.Value.GetSingle();
+                    constInt = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("constString"))

@@ -19,7 +19,7 @@ namespace validation.Models
         {
             Child = child;
             ConstChild = constChild;
-            ConstInt = 0F;
+            ConstInt = 0;
             ConstString = "constant";
         }
 
@@ -32,7 +32,7 @@ namespace validation.Models
         /// <param name="constInt"> Constant int. </param>
         /// <param name="constString"> Constant string. </param>
         /// <param name="constStringAsEnum"> Constant string as Enum. </param>
-        internal Product(IList<string> displayNames, int? capacity, string image, ChildProduct child, ConstantProduct constChild, float constInt, string constString, string constStringAsEnum)
+        internal Product(IList<string> displayNames, int? capacity, string image, ChildProduct child, ConstantProduct constChild, int constInt, string constString, string constStringAsEnum)
         {
             DisplayNames = displayNames;
             Capacity = capacity;
@@ -55,7 +55,7 @@ namespace validation.Models
         /// <summary> The product documentation. </summary>
         public ConstantProduct ConstChild { get; }
         /// <summary> Constant int. </summary>
-        public float ConstInt { get; }
+        public int ConstInt { get; }
         /// <summary> Constant string. </summary>
         public string ConstString { get; }
         /// <summary> Constant string as Enum. </summary>

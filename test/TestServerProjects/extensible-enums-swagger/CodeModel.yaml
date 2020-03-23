@@ -117,6 +117,17 @@ schemas: !<!Schemas>
         name: IntEnum
         description: ''
     protocol: !<!Protocols> {}
+  constants:
+  - !<!ConstantSchema> &ref_8
+    type: constant
+    value: !<!ConstantValue> 
+      value: application/json
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: ApplicationJson
+        description: Content Type 'application/json'
+    protocol: !<!Protocols> {}
   objects:
   - !<!ObjectSchema> &ref_7
     type: object
@@ -241,7 +252,18 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_8
+      - !<!Parameter> 
+        schema: *ref_8
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_9
         schema: *ref_7
         implementation: Method
         language: !<!Languages> 
@@ -253,7 +275,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_8
+      - *ref_9
       language: !<!Languages> 
         default:
           name: ''

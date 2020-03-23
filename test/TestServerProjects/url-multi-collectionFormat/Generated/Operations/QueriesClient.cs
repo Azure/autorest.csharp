@@ -63,7 +63,7 @@ namespace url_multi_collectionFormat
         }
 
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
-        /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
+        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ArrayStringMultiValidAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
@@ -71,7 +71,7 @@ namespace url_multi_collectionFormat
         }
 
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
-        /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
+        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ArrayStringMultiValid(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {

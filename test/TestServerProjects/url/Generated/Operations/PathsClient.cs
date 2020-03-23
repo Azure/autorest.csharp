@@ -261,7 +261,7 @@ namespace url
         }
 
         /// <summary> Get null (should throw on the client before the request is sent on wire). </summary>
-        /// <param name="enumPath"> send the value green. </param>
+        /// <param name="enumPath"> send null should throw. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> EnumNullAsync(UriColor enumPath, CancellationToken cancellationToken = default)
         {
@@ -269,7 +269,7 @@ namespace url
         }
 
         /// <summary> Get null (should throw on the client before the request is sent on wire). </summary>
-        /// <param name="enumPath"> send the value green. </param>
+        /// <param name="enumPath"> send null should throw. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response EnumNull(UriColor enumPath, CancellationToken cancellationToken = default)
         {
@@ -307,7 +307,7 @@ namespace url
         }
 
         /// <summary> Get null as byte array (should throw). </summary>
-        /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
+        /// <param name="bytePath"> null as byte array (should throw). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ByteNullAsync(byte[] bytePath, CancellationToken cancellationToken = default)
         {
@@ -315,7 +315,7 @@ namespace url
         }
 
         /// <summary> Get null as byte array (should throw). </summary>
-        /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
+        /// <param name="bytePath"> null as byte array (should throw). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ByteNull(byte[] bytePath, CancellationToken cancellationToken = default)
         {

@@ -2422,7 +2422,7 @@ namespace body_array
             }
         }
 
-        internal HttpMessage CreatePutStringEnumValidRequest(IEnumerable<Enum0> arrayBody)
+        internal HttpMessage CreatePutStringEnumValidRequest(IEnumerable<Enum1> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -2444,9 +2444,9 @@ namespace body_array
         }
 
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
-        /// <param name="arrayBody"> The ArrayOfEnum0 to use. </param>
+        /// <param name="arrayBody"> The ArrayOfEnum1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutStringEnumValidAsync(IEnumerable<Enum0> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutStringEnumValidAsync(IEnumerable<Enum1> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -2475,9 +2475,9 @@ namespace body_array
         }
 
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
-        /// <param name="arrayBody"> The ArrayOfEnum0 to use. </param>
+        /// <param name="arrayBody"> The ArrayOfEnum1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutStringEnumValid(IEnumerable<Enum0> arrayBody, CancellationToken cancellationToken = default)
+        public Response PutStringEnumValid(IEnumerable<Enum1> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {

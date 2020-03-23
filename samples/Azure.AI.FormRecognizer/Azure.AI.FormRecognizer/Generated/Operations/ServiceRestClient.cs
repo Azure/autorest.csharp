@@ -366,10 +366,10 @@ namespace Azure.AI.FormRecognizer
                 uri.AppendQuery("includeTextDetails", includeTextDetails.Value, true);
             }
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/pdf");
-            request.Headers.Add("Content-Type", "image/jpeg");
-            request.Headers.Add("Content-Type", "image/png");
-            request.Headers.Add("Content-Type", "image/tiff");
+            if (contentType != null)
+            {
+                request.Headers.Add("Content-Type", contentType.Value.ToSerialString());
+            }
             request.Content = RequestContent.Create(fileStream);
             return message;
         }
@@ -615,10 +615,10 @@ namespace Azure.AI.FormRecognizer
                 uri.AppendQuery("includeTextDetails", includeTextDetails.Value, true);
             }
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/pdf");
-            request.Headers.Add("Content-Type", "image/jpeg");
-            request.Headers.Add("Content-Type", "image/png");
-            request.Headers.Add("Content-Type", "image/tiff");
+            if (contentType != null)
+            {
+                request.Headers.Add("Content-Type", contentType.Value.ToSerialString());
+            }
             request.Content = RequestContent.Create(fileStream);
             return message;
         }
@@ -850,10 +850,10 @@ namespace Azure.AI.FormRecognizer
             uri.AppendRaw("/formrecognizer/v2.0-preview", false);
             uri.AppendPath("/layout/analyze", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/pdf");
-            request.Headers.Add("Content-Type", "image/jpeg");
-            request.Headers.Add("Content-Type", "image/png");
-            request.Headers.Add("Content-Type", "image/tiff");
+            if (contentType != null)
+            {
+                request.Headers.Add("Content-Type", contentType.Value.ToSerialString());
+            }
             request.Content = RequestContent.Create(fileStream);
             return message;
         }

@@ -77,7 +77,7 @@ namespace url
         /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
         /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
-        /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
+        /// <param name="localStringQuery"> should contain null value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetGlobalAndLocalQueryNullAsync(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
         {
@@ -88,7 +88,7 @@ namespace url
         /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
         /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
-        /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
+        /// <param name="localStringQuery"> should contain null value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetGlobalAndLocalQueryNull(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
         {
@@ -97,9 +97,9 @@ namespace url
 
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=&apos;globalStringQuery&apos;, pathItemStringQuery=null, localStringQuery=null. </summary>
         /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
-        /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
+        /// <param name="pathItemStringQuery"> should contain value null. </param>
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
-        /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
+        /// <param name="localStringQuery"> should contain value null. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetLocalPathItemQueryNullAsync(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
         {
@@ -108,9 +108,9 @@ namespace url
 
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=&apos;globalStringQuery&apos;, pathItemStringQuery=null, localStringQuery=null. </summary>
         /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
-        /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
+        /// <param name="pathItemStringQuery"> should contain value null. </param>
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
-        /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
+        /// <param name="localStringQuery"> should contain value null. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetLocalPathItemQueryNull(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
         {

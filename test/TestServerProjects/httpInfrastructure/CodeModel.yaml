@@ -89,7 +89,7 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   constants:
-  - !<!ConstantSchema> &ref_13
+  - !<!ConstantSchema> 
     type: constant
     apiVersions:
     - !<!ApiVersion> 
@@ -102,7 +102,251 @@ schemas: !<!Schemas>
         name: Constant0
         description: Simple boolean value true
     protocol: !<!Protocols> {}
+  - !<!ConstantSchema> 
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant1
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> 
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant2
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> 
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant3
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> 
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant4
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_13
+    type: constant
+    value: !<!ConstantValue> 
+      value: application/json
+    valueType: *ref_1
+    language: !<!Languages> 
+      default:
+        name: ApplicationJson
+        description: Content Type 'application/json'
+    protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_14
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant6
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_15
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant7
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_16
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant8
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_17
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant9
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_18
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant10
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_19
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant11
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_20
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant12
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_21
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant13
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_22
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant14
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_23
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant15
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_24
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant16
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_25
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant17
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_26
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant18
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_27
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant19
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_28
     type: constant
     apiVersions:
     - !<!ApiVersion> 
@@ -112,11 +356,11 @@ schemas: !<!Schemas>
     valueType: *ref_1
     language: !<!Languages> 
       default:
-        name: Constant1
+        name: Constant20
         description: ''
         header: Location
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_16
+  - !<!ConstantSchema> &ref_30
     type: constant
     apiVersions:
     - !<!ApiVersion> 
@@ -126,11 +370,52 @@ schemas: !<!Schemas>
     valueType: *ref_1
     language: !<!Languages> 
       default:
-        name: Constant2
+        name: Constant21
         description: ''
         header: Location
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_17
+  - !<!ConstantSchema> &ref_31
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: /http/success/head/200
+    valueType: *ref_1
+    language: !<!Languages> 
+      default:
+        name: Constant22
+        description: ''
+        header: Location
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_32
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: /http/success/get/200
+    valueType: *ref_1
+    language: !<!Languages> 
+      default:
+        name: Constant23
+        description: ''
+        header: Location
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_33
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant24
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_34
     type: constant
     apiVersions:
     - !<!ApiVersion> 
@@ -140,11 +425,121 @@ schemas: !<!Schemas>
     valueType: *ref_1
     language: !<!Languages> 
       default:
-        name: Constant3
+        name: Constant25
         description: ''
         header: Location
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_18
+  - !<!ConstantSchema> &ref_35
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: /http/success/head/200
+    valueType: *ref_1
+    language: !<!Languages> 
+      default:
+        name: Constant26
+        description: ''
+        header: Location
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_36
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: /http/success/get/200
+    valueType: *ref_1
+    language: !<!Languages> 
+      default:
+        name: Constant27
+        description: ''
+        header: Location
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_37
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant28
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_38
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: /http/failure/500
+    valueType: *ref_1
+    language: !<!Languages> 
+      default:
+        name: Constant29
+        description: ''
+        header: Location
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_39
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant30
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_40
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: /http/success/get/200
+    valueType: *ref_1
+    language: !<!Languages> 
+      default:
+        name: Constant31
+        description: ''
+        header: Location
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_41
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: /http/success/head/200
+    valueType: *ref_1
+    language: !<!Languages> 
+      default:
+        name: Constant32
+        description: ''
+        header: Location
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_42
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: /http/success/get/200
+    valueType: *ref_1
+    language: !<!Languages> 
+      default:
+        name: Constant33
+        description: ''
+        header: Location
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_43
     type: constant
     apiVersions:
     - !<!ApiVersion> 
@@ -154,11 +549,24 @@ schemas: !<!Schemas>
     valueType: *ref_1
     language: !<!Languages> 
       default:
-        name: Constant4
+        name: Constant34
         description: ''
         header: Location
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_19
+  - !<!ConstantSchema> &ref_44
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant35
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_45
     type: constant
     apiVersions:
     - !<!ApiVersion> 
@@ -168,11 +576,24 @@ schemas: !<!Schemas>
     valueType: *ref_1
     language: !<!Languages> 
       default:
-        name: Constant5
+        name: Constant36
         description: ''
         header: Location
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_20
+  - !<!ConstantSchema> &ref_46
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant37
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_47
     type: constant
     apiVersions:
     - !<!ApiVersion> 
@@ -182,11 +603,24 @@ schemas: !<!Schemas>
     valueType: *ref_1
     language: !<!Languages> 
       default:
-        name: Constant6
+        name: Constant38
         description: ''
         header: Location
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_21
+  - !<!ConstantSchema> &ref_48
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant39
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_49
     type: constant
     apiVersions:
     - !<!ApiVersion> 
@@ -196,11 +630,24 @@ schemas: !<!Schemas>
     valueType: *ref_1
     language: !<!Languages> 
       default:
-        name: Constant7
+        name: Constant40
         description: ''
         header: Location
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_22
+  - !<!ConstantSchema> &ref_50
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant41
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_51
     type: constant
     apiVersions:
     - !<!ApiVersion> 
@@ -210,9 +657,295 @@ schemas: !<!Schemas>
     valueType: *ref_1
     language: !<!Languages> 
       default:
-        name: Constant8
+        name: Constant42
         description: ''
         header: Location
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_52
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant43
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_53
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant44
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_54
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant45
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_55
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant46
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_56
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant47
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_57
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant48
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_58
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant49
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_59
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant50
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_60
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant51
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_61
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant52
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_62
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant53
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_63
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant54
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_64
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant55
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_65
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant56
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_66
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant57
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_67
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant58
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_68
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant59
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> 
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant60
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_69
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant61
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_70
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant62
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_71
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant63
+        description: Simple boolean value true
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_72
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: true
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant64
+        description: Simple boolean value true
     protocol: !<!Protocols> {}
   objects:
   - !<!ObjectSchema> &ref_12
@@ -305,7 +1038,7 @@ schemas: !<!Schemas>
         namespace: ''
     protocol: !<!Protocols> {}
   - *ref_6
-  - !<!ObjectSchema> &ref_23
+  - !<!ObjectSchema> &ref_73
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -329,7 +1062,7 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_24
+  - !<!ObjectSchema> &ref_74
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -354,7 +1087,7 @@ schemas: !<!Schemas>
         namespace: ''
     protocol: !<!Protocols> {}
   arrays:
-  - !<!ArraySchema> &ref_15
+  - !<!ArraySchema> &ref_29
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -681,7 +1414,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_14
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -744,7 +1488,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_15
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -807,7 +1562,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_16
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -870,7 +1636,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_17
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -933,7 +1710,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_18
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -996,7 +1784,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_19
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -1059,7 +1858,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_20
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -1122,7 +1932,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_21
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -1185,7 +2006,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_22
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -1248,7 +2080,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_23
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -1358,7 +2201,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_24
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -1421,7 +2275,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_25
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -1484,7 +2349,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_26
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -1547,7 +2423,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_27
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -1697,7 +2584,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_14
+            schema: *ref_28
             header: Location
           statusCodes:
           - '300'
@@ -1749,7 +2636,7 @@ operationGroups:
           statusCodes:
           - '200'
     - !<!SchemaResponse> 
-      schema: *ref_15
+      schema: *ref_29
       language: !<!Languages> 
         default:
           name: ''
@@ -1758,7 +2645,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_16
+            schema: *ref_30
             header: Location
           knownMediaType: json
           mediaTypes:
@@ -1821,7 +2708,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_14
+            schema: *ref_31
             header: Location
           statusCodes:
           - '301'
@@ -1881,7 +2768,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_16
+            schema: *ref_32
             header: Location
           statusCodes:
           - '301'
@@ -1918,7 +2805,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_33
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -1948,7 +2846,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_17
+            schema: *ref_34
             header: Location
           statusCodes:
           - '301'
@@ -2008,7 +2906,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_14
+            schema: *ref_35
             header: Location
           statusCodes:
           - '302'
@@ -2068,7 +2966,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_16
+            schema: *ref_36
             header: Location
           statusCodes:
           - '302'
@@ -2105,7 +3003,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_37
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -2135,7 +3044,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_17
+            schema: *ref_38
             header: Location
           statusCodes:
           - '302'
@@ -2172,7 +3081,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_39
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -2211,7 +3131,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_16
+            schema: *ref_40
             header: Location
           statusCodes:
           - '303'
@@ -2271,7 +3191,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_14
+            schema: *ref_41
             header: Location
           statusCodes:
           - '307'
@@ -2331,7 +3251,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_16
+            schema: *ref_42
             header: Location
           statusCodes:
           - '307'
@@ -2391,7 +3311,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_18
+            schema: *ref_43
             header: Location
           statusCodes:
           - '307'
@@ -2428,7 +3348,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_44
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -2467,7 +3398,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_19
+            schema: *ref_45
             header: Location
           statusCodes:
           - '307'
@@ -2504,7 +3435,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_46
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -2543,7 +3485,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_20
+            schema: *ref_47
             header: Location
           statusCodes:
           - '307'
@@ -2580,7 +3522,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_48
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -2619,7 +3572,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_21
+            schema: *ref_49
             header: Location
           statusCodes:
           - '307'
@@ -2656,7 +3609,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_50
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -2695,7 +3659,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_22
+            schema: *ref_51
             header: Location
           statusCodes:
           - '307'
@@ -2851,7 +3815,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_52
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -2904,7 +3879,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_53
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -2957,7 +3943,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_54
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -3010,7 +4007,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_55
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -3211,7 +4219,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_56
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -3264,7 +4283,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_57
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -3317,7 +4347,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_58
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -3370,7 +4411,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_59
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -3423,7 +4475,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_60
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -3624,7 +4687,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_61
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -3677,7 +4751,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_62
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -3730,7 +4815,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_63
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -3820,7 +4916,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_64
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -3992,7 +5099,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_65
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -4045,7 +5163,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_66
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -4153,7 +5282,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_67
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -4216,7 +5356,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_68
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -4377,7 +5528,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_69
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -4440,7 +5602,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_70
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -4503,7 +5676,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_71
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -4566,7 +5750,18 @@ operationGroups:
         implementation: Method
         language: !<!Languages> 
           default:
-            name: BooleanValue
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> 
+        schema: *ref_72
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: booleanValue
             description: Simple boolean value true
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
@@ -5148,7 +6343,7 @@ operationGroups:
           statusCodes:
           - '200'
     - !<!SchemaResponse> 
-      schema: *ref_23
+      schema: *ref_73
       language: !<!Languages> 
         default:
           name: ''
@@ -5161,7 +6356,7 @@ operationGroups:
           statusCodes:
           - '201'
     - !<!SchemaResponse> 
-      schema: *ref_24
+      schema: *ref_74
       language: !<!Languages> 
         default:
           name: ''
@@ -5225,7 +6420,7 @@ operationGroups:
           statusCodes:
           - '200'
     - !<!SchemaResponse> 
-      schema: *ref_23
+      schema: *ref_73
       language: !<!Languages> 
         default:
           name: ''
@@ -5238,7 +6433,7 @@ operationGroups:
           statusCodes:
           - '201'
     - !<!SchemaResponse> 
-      schema: *ref_24
+      schema: *ref_74
       language: !<!Languages> 
         default:
           name: ''
@@ -5302,7 +6497,7 @@ operationGroups:
           statusCodes:
           - '200'
     - !<!SchemaResponse> 
-      schema: *ref_23
+      schema: *ref_73
       language: !<!Languages> 
         default:
           name: ''
@@ -5315,7 +6510,7 @@ operationGroups:
           statusCodes:
           - '201'
     - !<!SchemaResponse> 
-      schema: *ref_24
+      schema: *ref_74
       language: !<!Languages> 
         default:
           name: ''
@@ -5379,7 +6574,7 @@ operationGroups:
           statusCodes:
           - '200'
     - !<!SchemaResponse> 
-      schema: *ref_23
+      schema: *ref_73
       language: !<!Languages> 
         default:
           name: ''
@@ -5392,7 +6587,7 @@ operationGroups:
           statusCodes:
           - '201'
     - !<!SchemaResponse> 
-      schema: *ref_24
+      schema: *ref_74
       language: !<!Languages> 
         default:
           name: ''

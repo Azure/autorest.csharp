@@ -274,7 +274,7 @@ namespace body_complex
         }
 
         /// <summary> Put complex types with array property which is empty. </summary>
-        /// <param name="complexBody"> Please put an array with 4 items: &quot;1, 2, 3, 4&quot;, &quot;&quot;, null, &quot;&amp;S#$(*Y&quot;, &quot;The quick brown fox jumps over the lazy dog&quot;. </param>
+        /// <param name="complexBody"> Please put an empty array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutEmptyAsync(ArrayWrapper complexBody, CancellationToken cancellationToken = default)
         {
@@ -305,7 +305,7 @@ namespace body_complex
         }
 
         /// <summary> Put complex types with array property which is empty. </summary>
-        /// <param name="complexBody"> Please put an array with 4 items: &quot;1, 2, 3, 4&quot;, &quot;&quot;, null, &quot;&amp;S#$(*Y&quot;, &quot;The quick brown fox jumps over the lazy dog&quot;. </param>
+        /// <param name="complexBody"> Please put an empty array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutEmpty(ArrayWrapper complexBody, CancellationToken cancellationToken = default)
         {

@@ -39,11 +39,11 @@ schemas: !<!Schemas>
         description: Count
     protocol: !<!Protocols> {}
   - !<!NumberSchema> &ref_1
-    type: number
+    type: integer
     precision: 32
     language: !<!Languages> 
       default:
-        name: Number
+        name: Integer
         description: Constant int
     protocol: !<!Protocols> {}
   - !<!NumberSchema> &ref_14
@@ -223,14 +223,24 @@ schemas: !<!Schemas>
         name: EnumConst
         description: Constant string as Enum
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_32
+  - !<!ConstantSchema> &ref_29
+    type: constant
+    value: !<!ConstantValue> 
+      value: application/json
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: ApplicationJson
+        description: Content Type 'application/json'
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_33
     type: constant
     value: !<!ConstantValue> 
       value: constant
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: Constant7
+        name: Constant8
         description: ''
     protocol: !<!Protocols> {}
   objects:
@@ -483,7 +493,7 @@ globalParameters:
   required: true
   language: !<!Languages> 
     default:
-      name: ApiVersion
+      name: apiVersion
       description: Api Version
       serializedName: apiVersion
   protocol: !<!Protocols> 
@@ -580,7 +590,7 @@ operationGroups:
     parameters:
     - *ref_20
     - *ref_21
-    - !<!Parameter> &ref_30
+    - !<!Parameter> &ref_31
       schema: *ref_22
       implementation: Method
       required: true
@@ -592,7 +602,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_31
+    - !<!Parameter> &ref_32
       schema: *ref_23
       implementation: Method
       required: true
@@ -608,7 +618,18 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_29
+      - !<!Parameter> 
+        schema: *ref_29
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_30
         schema: *ref_27
         implementation: Method
         language: !<!Languages> 
@@ -620,7 +641,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_29
+      - *ref_30
       language: !<!Languages> 
         default:
           name: ''
@@ -634,8 +655,8 @@ operationGroups:
           - application/json
           uri: '{$host}'
     signatureParameters:
-    - *ref_30
     - *ref_31
+    - *ref_32
     responses:
     - !<!SchemaResponse> 
       schema: *ref_27
@@ -677,12 +698,12 @@ operationGroups:
     parameters:
     - *ref_20
     - !<!Parameter> 
-      schema: *ref_32
+      schema: *ref_33
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: ConstantParam
+          name: constantParam
           description: ''
           serializedName: constantParam
       protocol: !<!Protocols> 
@@ -722,12 +743,12 @@ operationGroups:
     parameters:
     - *ref_20
     - !<!Parameter> 
-      schema: *ref_32
+      schema: *ref_33
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: ConstantParam
+          name: constantParam
           description: ''
           serializedName: constantParam
       protocol: !<!Protocols> 
@@ -736,7 +757,18 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_33
+      - !<!Parameter> 
+        schema: *ref_29
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_34
         schema: *ref_27
         implementation: Method
         language: !<!Languages> 
@@ -748,7 +780,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_33
+      - *ref_34
       language: !<!Languages> 
         default:
           name: ''

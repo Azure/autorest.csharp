@@ -552,9 +552,9 @@ namespace AutoRest.TestServer.Tests
         public Task PutArrayStringEnumValid() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutStringEnumValidAsync(
             new[]
             {
-                Enum0.Foo1,
-                Enum0.Foo2,
-                Enum0.Foo3
+                Enum1.Foo1,
+                Enum1.Foo2,
+                Enum1.Foo3
             }));
 
         [Test]

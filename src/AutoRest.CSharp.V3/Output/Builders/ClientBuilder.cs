@@ -292,8 +292,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
                         body = new SchemaRequestBody(bodyParameterValue, serialization);
                     }
                 }
-
-                headers.AddRange(httpRequestWithBody.MediaTypes.Select(mediaType => new RequestHeader("Content-Type", BuilderHelpers.StringConstant(mediaType))));
             }
 
             Request request = new Request(

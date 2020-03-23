@@ -201,7 +201,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Deletes a synonym map. </summary>
-        /// <param name="synonymMapName"> The name of the synonym map to create or update. </param>
+        /// <param name="synonymMapName"> The name of the synonym map to delete. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
@@ -235,7 +235,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Deletes a synonym map. </summary>
-        /// <param name="synonymMapName"> The name of the synonym map to create or update. </param>
+        /// <param name="synonymMapName"> The name of the synonym map to delete. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
@@ -291,7 +291,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Retrieves a synonym map definition. </summary>
-        /// <param name="synonymMapName"> The name of the synonym map to create or update. </param>
+        /// <param name="synonymMapName"> The name of the synonym map to retrieve. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<SynonymMap>> GetAsync(string synonymMapName, Guid? clientRequestId, CancellationToken cancellationToken = default)
@@ -328,7 +328,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Retrieves a synonym map definition. </summary>
-        /// <param name="synonymMapName"> The name of the synonym map to create or update. </param>
+        /// <param name="synonymMapName"> The name of the synonym map to retrieve. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<SynonymMap> Get(string synonymMapName, Guid? clientRequestId, CancellationToken cancellationToken = default)
@@ -389,7 +389,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Lists all synonym maps available for a search service. </summary>
-        /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
+        /// <param name="select"> Selects which top-level properties of the synonym maps to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ListSynonymMapsResult>> ListAsync(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
@@ -422,7 +422,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Lists all synonym maps available for a search service. </summary>
-        /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
+        /// <param name="select"> Selects which top-level properties of the synonym maps to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ListSynonymMapsResult> List(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
@@ -480,7 +480,7 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new synonym map. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="synonymMap"> The definition of the synonym map to create or update. </param>
+        /// <param name="synonymMap"> The definition of the synonym map to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<SynonymMap>> CreateAsync(Guid? clientRequestId, SynonymMap synonymMap, CancellationToken cancellationToken = default)
         {
@@ -517,7 +517,7 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new synonym map. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="synonymMap"> The definition of the synonym map to create or update. </param>
+        /// <param name="synonymMap"> The definition of the synonym map to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<SynonymMap> Create(Guid? clientRequestId, SynonymMap synonymMap, CancellationToken cancellationToken = default)
         {

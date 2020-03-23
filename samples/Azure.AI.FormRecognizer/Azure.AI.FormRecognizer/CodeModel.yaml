@@ -2513,7 +2513,10 @@ operationGroups:
           default:
             name: contentType
             description: Body Parameter content-type
-        protocol: !<!Protocols> {}
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
       - !<!Parameter> &ref_107
         schema: *ref_106
         implementation: Method
@@ -2923,7 +2926,10 @@ operationGroups:
           default:
             name: contentType
             description: Upload file type
-        protocol: !<!Protocols> {}
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
       - !<!Parameter> &ref_122
         schema: *ref_120
         implementation: Method
@@ -2963,7 +2969,10 @@ operationGroups:
           default:
             name: contentType
             description: Body Parameter content-type
-        protocol: !<!Protocols> {}
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
       - !<!Parameter> &ref_124
         schema: *ref_123
         implementation: Method
@@ -3168,7 +3177,10 @@ operationGroups:
           default:
             name: contentType
             description: Upload file type
-        protocol: !<!Protocols> {}
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
       - !<!Parameter> &ref_133
         schema: *ref_131
         implementation: Method
@@ -3208,7 +3220,10 @@ operationGroups:
           default:
             name: contentType
             description: Body Parameter content-type
-        protocol: !<!Protocols> {}
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
       - !<!Parameter> &ref_134
         schema: *ref_123
         implementation: Method
@@ -3387,7 +3402,10 @@ operationGroups:
           default:
             name: contentType
             description: Upload file type
-        protocol: !<!Protocols> {}
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
       - !<!Parameter> &ref_140
         schema: *ref_138
         implementation: Method
@@ -3427,7 +3445,10 @@ operationGroups:
           default:
             name: contentType
             description: Body Parameter content-type
-        protocol: !<!Protocols> {}
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
       - !<!Parameter> &ref_141
         schema: *ref_123
         implementation: Method

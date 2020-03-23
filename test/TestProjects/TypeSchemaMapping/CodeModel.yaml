@@ -100,8 +100,19 @@ schemas: !<!Schemas>
         name: DaysOfWeek
         description: Day of week
     protocol: !<!Protocols> {}
+  constants:
+  - !<!ConstantSchema> &ref_5
+    type: constant
+    value: !<!ConstantValue> 
+      value: application/json
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: ApplicationJson
+        description: Content Type 'application/json'
+    protocol: !<!Protocols> {}
   objects:
-  - !<!ObjectSchema> &ref_5
+  - !<!ObjectSchema> &ref_6
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -174,8 +185,19 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_6
+      - !<!Parameter> 
         schema: *ref_5
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_7
+        schema: *ref_6
         implementation: Method
         language: !<!Languages> 
           default:
@@ -186,7 +208,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_6
+      - *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -202,7 +224,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_5
+      schema: *ref_6
       language: !<!Languages> 
         default:
           name: ''
