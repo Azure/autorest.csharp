@@ -20,6 +20,7 @@ namespace additionalProperties.Models
         {
             Id = id;
             OdataLocation = odataLocation;
+            MoreAdditionalProperties = new Dictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of PetAPInPropertiesWithAPString. </summary>
@@ -50,19 +51,19 @@ namespace additionalProperties.Models
         /// <inheritdoc />
         IEnumerator IEnumerable.GetEnumerator() => MoreAdditionalProperties.GetEnumerator();
         /// <inheritdoc />
+        public bool TryGetValue(string key, out string value) => MoreAdditionalProperties.TryGetValue(key, out value);
+        /// <inheritdoc />
+        public bool ContainsKey(string key) => MoreAdditionalProperties.ContainsKey(key);
+        /// <inheritdoc />
         public ICollection<string> Keys => MoreAdditionalProperties.Keys;
         /// <inheritdoc />
         public ICollection<string> Values => MoreAdditionalProperties.Values;
         /// <inheritdoc />
-        public bool TryGetValue(string key, out string value) => MoreAdditionalProperties.TryGetValue(key, out value);
+        int ICollection<KeyValuePair<string, string>>.Count => MoreAdditionalProperties.Count;
         /// <inheritdoc />
         public void Add(string key, string value) => MoreAdditionalProperties.Add(key, value);
         /// <inheritdoc />
-        public bool ContainsKey(string key) => MoreAdditionalProperties.ContainsKey(key);
-        /// <inheritdoc />
         public bool Remove(string key) => MoreAdditionalProperties.Remove(key);
-        /// <inheritdoc />
-        int ICollection<KeyValuePair<string, string>>.Count => MoreAdditionalProperties.Count;
         /// <inheritdoc />
         bool ICollection<KeyValuePair<string, string>>.IsReadOnly => MoreAdditionalProperties.IsReadOnly;
         /// <inheritdoc />

@@ -254,9 +254,10 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
             var valueSerialization = BuildSerialization(inheritedDictionarySchema.ElementType, false, typeFlags);
 
-            return  new JsonAdditionalPropertiesSerialization(
+            return new JsonAdditionalPropertiesSerialization(
                     additionalPropertiesProperty,
-                    valueSerialization);
+                    valueSerialization,
+                    new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments));
         }
     }
 }

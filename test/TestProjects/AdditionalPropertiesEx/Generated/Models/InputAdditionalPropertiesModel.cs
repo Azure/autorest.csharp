@@ -8,35 +8,29 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace additionalProperties.Models
+namespace AdditionalPropertiesEx.Models
 {
-    /// <summary> The PetAPTrue. </summary>
-    public partial class PetAPTrue : IDictionary<string, object>
+    /// <summary> The InputAdditionalPropertiesModel. </summary>
+    public partial class InputAdditionalPropertiesModel : IDictionary<string, object>
     {
-        /// <summary> Initializes a new instance of PetAPTrue. </summary>
+        /// <summary> Initializes a new instance of InputAdditionalPropertiesModel. </summary>
         /// <param name="id"> . </param>
-        public PetAPTrue(int id)
+        public InputAdditionalPropertiesModel(int id)
         {
             Id = id;
             AdditionalProperties = new Dictionary<string, object>();
         }
 
-        /// <summary> Initializes a new instance of PetAPTrue. </summary>
+        /// <summary> Initializes a new instance of InputAdditionalPropertiesModel. </summary>
         /// <param name="id"> . </param>
-        /// <param name="name"> . </param>
-        /// <param name="status"> . </param>
         /// <param name="additionalProperties"> . </param>
-        internal PetAPTrue(int id, string name, bool? status, IDictionary<string, object> additionalProperties)
+        internal InputAdditionalPropertiesModel(int id, IDictionary<string, object> additionalProperties)
         {
             Id = id;
-            Name = name;
-            Status = status;
             AdditionalProperties = additionalProperties;
         }
 
         public int Id { get; }
-        public string Name { get; set; }
-        public bool? Status { get; }
         internal IDictionary<string, object> AdditionalProperties { get; }
         /// <inheritdoc />
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator() => AdditionalProperties.GetEnumerator();

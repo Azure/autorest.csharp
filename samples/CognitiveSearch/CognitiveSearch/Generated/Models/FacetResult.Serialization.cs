@@ -16,7 +16,8 @@ namespace CognitiveSearch.Models
         internal static FacetResult DeserializeFacetResult(JsonElement element)
         {
             long? count = default;
-            IDictionary<string, object> additionalProperties = new Dictionary<string, object>();
+            IReadOnlyDictionary<string, object> additionalProperties = default;
+            Dictionary<string, object> additionalPropertiesDictionary = new Dictionary<string, object>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("count"))
@@ -28,8 +29,9 @@ namespace CognitiveSearch.Models
                     count = property.Value.GetInt64();
                     continue;
                 }
-                additionalProperties.Add(property.Name, property.Value.GetObject());
+                additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
+            additionalProperties = additionalPropertiesDictionary;
             return new FacetResult(count, additionalProperties);
         }
     }

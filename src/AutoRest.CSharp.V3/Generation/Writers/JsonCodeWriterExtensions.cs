@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text.Json;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Requests;
@@ -201,6 +200,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     }
                 }
 
+                var dictionaryVariable = new CodeWriterDeclaration("additionalPropertiesDictionary");
+
+                var objAdditionalProperties = obj.AdditionalProperties;
+                if (objAdditionalProperties != null)
+                {
+                    writer.Line($"{objAdditionalProperties.Type} {dictionaryVariable:D} = new {objAdditionalProperties.Type}();");
+                }
+
                 writer.Line($"foreach (var {itemVariable:D} in {element}.EnumerateObject())");
                 using (writer.Scope())
                 {
@@ -248,16 +255,18 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         }
                     }
 
-                    var objAdditionalProperties = obj.AdditionalProperties;
                     if (objAdditionalProperties != null)
                     {
-                        var variable = propertyVariables[objAdditionalProperties.Property];
-
                         DeserializeValue(writer,
                             objAdditionalProperties.ValueSerialization,
                             w => w.Append($"{itemVariable}.Value"),
-                            (w, v) => w.Line($"{variable}.Add({itemVariable}.Name, {v});"));
+                            (w, v) => w.Line($"{dictionaryVariable}.Add({itemVariable}.Name, {v});"));
                     }
+                }
+
+                if (objAdditionalProperties != null)
+                {
+                    writer.Line($"{propertyVariables[objAdditionalProperties.Property]} = {dictionaryVariable};");
                 }
 
                 if (obj.Type != null)
