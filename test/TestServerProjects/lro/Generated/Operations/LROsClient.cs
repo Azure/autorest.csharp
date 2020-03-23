@@ -719,7 +719,7 @@ namespace lro
         }
 
         /// <summary> Long running put request with non resource. </summary>
-        /// <param name="sku"> sku to put. </param>
+        /// <param name="sku"> Sku to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async ValueTask<Operation<Sku>> StartPutAsyncNonResourceAsync(Sku sku, CancellationToken cancellationToken = default)
         {
@@ -729,7 +729,7 @@ namespace lro
         }
 
         /// <summary> Long running put request with non resource. </summary>
-        /// <param name="sku"> sku to put. </param>
+        /// <param name="sku"> Sku to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Operation<Sku> StartPutAsyncNonResource(Sku sku, CancellationToken cancellationToken = default)
         {

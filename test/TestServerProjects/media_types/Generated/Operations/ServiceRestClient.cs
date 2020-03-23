@@ -45,10 +45,10 @@ namespace media_types
             uri.AppendRaw(host, false);
             uri.AppendPath("/mediatypes/analyze", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/pdf");
-            request.Headers.Add("Content-Type", "image/jpeg");
-            request.Headers.Add("Content-Type", "image/png");
-            request.Headers.Add("Content-Type", "image/tiff");
+            if (contentType != null)
+            {
+                request.Headers.Add("Content-Type", contentType.Value.ToSerialString());
+            }
             request.Content = RequestContent.Create(input);
             return message;
         }

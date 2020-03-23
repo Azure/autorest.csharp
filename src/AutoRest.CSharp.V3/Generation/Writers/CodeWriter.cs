@@ -239,6 +239,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 null => "null",
                 string s => SyntaxFactory.Literal(s).ToString(),
                 int i => SyntaxFactory.Literal(i).ToString(),
+                long l => SyntaxFactory.Literal(l).ToString(),
                 decimal d => SyntaxFactory.Literal(d).ToString(),
                 double d => SyntaxFactory.Literal(d).ToString(),
                 float f => SyntaxFactory.Literal(f).ToString(),

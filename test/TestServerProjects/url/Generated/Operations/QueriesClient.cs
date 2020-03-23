@@ -327,7 +327,7 @@ namespace url
         }
 
         /// <summary> Get null (no query parameter in url). </summary>
-        /// <param name="enumQuery"> &apos;green color&apos; enum value. </param>
+        /// <param name="enumQuery"> null string value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> EnumNullAsync(UriColor? enumQuery, CancellationToken cancellationToken = default)
         {
@@ -335,7 +335,7 @@ namespace url
         }
 
         /// <summary> Get null (no query parameter in url). </summary>
-        /// <param name="enumQuery"> &apos;green color&apos; enum value. </param>
+        /// <param name="enumQuery"> null string value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response EnumNull(UriColor? enumQuery, CancellationToken cancellationToken = default)
         {
@@ -373,7 +373,7 @@ namespace url
         }
 
         /// <summary> Get null as byte array (no query parameters in uri). </summary>
-        /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
+        /// <param name="byteQuery"> null as byte array (no query parameters in uri). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ByteNullAsync(byte[] byteQuery, CancellationToken cancellationToken = default)
         {
@@ -381,7 +381,7 @@ namespace url
         }
 
         /// <summary> Get null as byte array (no query parameters in uri). </summary>
-        /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
+        /// <param name="byteQuery"> null as byte array (no query parameters in uri). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ByteNull(byte[] byteQuery, CancellationToken cancellationToken = default)
         {
@@ -465,7 +465,7 @@ namespace url
         }
 
         /// <summary> Get a null array of string using the csv-array format. </summary>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
+        /// <param name="arrayQuery"> a null array of string using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ArrayStringCsvNullAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
@@ -473,7 +473,7 @@ namespace url
         }
 
         /// <summary> Get a null array of string using the csv-array format. </summary>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
+        /// <param name="arrayQuery"> a null array of string using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ArrayStringCsvNull(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
@@ -481,7 +481,7 @@ namespace url
         }
 
         /// <summary> Get an empty array [] of string using the csv-array format. </summary>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
+        /// <param name="arrayQuery"> an empty array [] of string using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ArrayStringCsvEmptyAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {
@@ -489,7 +489,7 @@ namespace url
         }
 
         /// <summary> Get an empty array [] of string using the csv-array format. </summary>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
+        /// <param name="arrayQuery"> an empty array [] of string using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ArrayStringCsvEmpty(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
         {

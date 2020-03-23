@@ -4,14 +4,14 @@ info: !<!Info>
   title: media_types
 schemas: !<!Schemas> 
   strings:
-  - !<!StringSchema> &ref_1
+  - !<!StringSchema> &ref_0
     type: string
     language: !<!Languages> 
       default:
         name: String
         description: simple string
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_0
+  - !<!StringSchema> &ref_1
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -22,7 +22,7 @@ schemas: !<!Schemas>
         name: SourcePathSource
         description: File source path.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_9
+  - !<!StringSchema> &ref_10
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -65,6 +65,17 @@ schemas: !<!Schemas>
         name: ContentType
         description: Content type for upload
     protocol: !<!Protocols> {}
+  constants:
+  - !<!ConstantSchema> &ref_7
+    type: constant
+    value: !<!ConstantValue> 
+      value: application/json
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: ApplicationJson
+        description: Content Type 'application/json'
+    protocol: !<!Protocols> {}
   binaries:
   - !<!BinarySchema> &ref_4
     type: binary
@@ -77,14 +88,14 @@ schemas: !<!Schemas>
         description: Uri or local path to source data.
     protocol: !<!Protocols> {}
   objects:
-  - !<!ObjectSchema> &ref_7
+  - !<!ObjectSchema> &ref_8
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 2.0-preview
     properties:
     - !<!Property> 
-      schema: *ref_0
+      schema: *ref_1
       serializedName: source
       language: !<!Languages> 
         default:
@@ -103,7 +114,7 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
 globalParameters:
 - !<!Parameter> &ref_2
-  schema: *ref_1
+  schema: *ref_0
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
@@ -137,7 +148,10 @@ operationGroups:
           default:
             name: contentType
             description: Upload file type
-        protocol: !<!Protocols> {}
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
       - !<!Parameter> &ref_6
         schema: *ref_4
         implementation: Method
@@ -170,8 +184,19 @@ operationGroups:
           uri: '{$host}'
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_8
+      - !<!Parameter> 
         schema: *ref_7
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_9
+        schema: *ref_8
         implementation: Method
         language: !<!Languages> 
           default:
@@ -182,7 +207,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_8
+      - *ref_9
       language: !<!Languages> 
         default:
           name: ''
@@ -198,7 +223,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_9
+      schema: *ref_10
       language: !<!Languages> 
         default:
           name: ''

@@ -50,7 +50,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Lists all indexes available for a search service. </summary>
-        /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
+        /// <param name="select"> Selects which top-level properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ListIndexesResult>> ListAsync(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
@@ -59,7 +59,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Lists all indexes available for a search service. </summary>
-        /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
+        /// <param name="select"> Selects which top-level properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ListIndexesResult> List(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
@@ -73,7 +73,7 @@ namespace CognitiveSearch
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
-        /// <param name="index"> The definition of the index to create. </param>
+        /// <param name="index"> The definition of the index to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Models.Index>> CreateOrUpdateAsync(string indexName, bool? allowIndexDowntime, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Models.Index index, CancellationToken cancellationToken = default)
         {
@@ -86,7 +86,7 @@ namespace CognitiveSearch
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
-        /// <param name="index"> The definition of the index to create. </param>
+        /// <param name="index"> The definition of the index to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Models.Index> CreateOrUpdate(string indexName, bool? allowIndexDowntime, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Models.Index index, CancellationToken cancellationToken = default)
         {
@@ -94,7 +94,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Deletes a search index and all the documents it contains. </summary>
-        /// <param name="indexName"> The definition of the index to create or update. </param>
+        /// <param name="indexName"> The name of the index to delete. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
@@ -105,7 +105,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Deletes a search index and all the documents it contains. </summary>
-        /// <param name="indexName"> The definition of the index to create or update. </param>
+        /// <param name="indexName"> The name of the index to delete. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
@@ -116,7 +116,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Retrieves an index definition. </summary>
-        /// <param name="indexName"> The definition of the index to create or update. </param>
+        /// <param name="indexName"> The name of the index to retrieve. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Models.Index>> GetAsync(string indexName, Guid? clientRequestId, CancellationToken cancellationToken = default)
@@ -125,7 +125,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Retrieves an index definition. </summary>
-        /// <param name="indexName"> The definition of the index to create or update. </param>
+        /// <param name="indexName"> The name of the index to retrieve. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Models.Index> Get(string indexName, Guid? clientRequestId, CancellationToken cancellationToken = default)
@@ -134,7 +134,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Returns statistics for the given index, including a document count and storage usage. </summary>
-        /// <param name="indexName"> The definition of the index to create or update. </param>
+        /// <param name="indexName"> The name of the index for which to retrieve statistics. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<GetIndexStatisticsResult>> GetStatisticsAsync(string indexName, Guid? clientRequestId, CancellationToken cancellationToken = default)
@@ -143,7 +143,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Returns statistics for the given index, including a document count and storage usage. </summary>
-        /// <param name="indexName"> The definition of the index to create or update. </param>
+        /// <param name="indexName"> The name of the index for which to retrieve statistics. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<GetIndexStatisticsResult> GetStatistics(string indexName, Guid? clientRequestId, CancellationToken cancellationToken = default)
@@ -152,7 +152,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Shows how an analyzer breaks text into tokens. </summary>
-        /// <param name="indexName"> The definition of the index to create or update. </param>
+        /// <param name="indexName"> The name of the index for which to test an analyzer. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="requestTodo"> The text and analyzer or analysis components to test. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -162,7 +162,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Shows how an analyzer breaks text into tokens. </summary>
-        /// <param name="indexName"> The definition of the index to create or update. </param>
+        /// <param name="indexName"> The name of the index for which to test an analyzer. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="requestTodo"> The text and analyzer or analysis components to test. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

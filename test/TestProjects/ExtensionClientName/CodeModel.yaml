@@ -4,14 +4,14 @@ info: !<!Info>
   title: ExtensionClientName
 schemas: !<!Schemas> 
   strings:
-  - !<!StringSchema> &ref_3
+  - !<!StringSchema> &ref_0
     type: string
     language: !<!Languages> 
       default:
         name: String
         description: simple string
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_0
+  - !<!StringSchema> &ref_1
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -22,7 +22,7 @@ schemas: !<!Schemas>
         description: ''
         header: originalHeader
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_2
+  - !<!StringSchema> &ref_3
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -33,24 +33,35 @@ schemas: !<!Schemas>
         name: RenamedPropertyString
         description: A description about the set of tags.
     protocol: !<!Protocols> {}
+  constants:
+  - !<!ConstantSchema> &ref_5
+    type: constant
+    value: !<!ConstantValue> 
+      value: application/json
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: ApplicationJson
+        description: Content Type 'application/json'
+    protocol: !<!Protocols> {}
   dictionaries:
-  - !<!DictionarySchema> &ref_1
+  - !<!DictionarySchema> &ref_2
     type: dictionary
-    elementType: *ref_0
+    elementType: *ref_1
     language: !<!Languages> 
       default:
         name: RenamedProperty
         description: A description about the set of tags.
     protocol: !<!Protocols> {}
   objects:
-  - !<!ObjectSchema> &ref_5
+  - !<!ObjectSchema> &ref_6
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: *ref_1
+      schema: *ref_2
       required: false
       serializedName: originalProperty
       language: !<!Languages> 
@@ -59,7 +70,7 @@ schemas: !<!Schemas>
           description: A description about the set of tags.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_2
+      schema: *ref_3
       required: false
       serializedName: originalPropertyString
       language: !<!Languages> 
@@ -80,7 +91,7 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
 globalParameters:
 - !<!Parameter> &ref_4
-  schema: *ref_3
+  schema: *ref_0
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
   required: true
@@ -104,8 +115,8 @@ operationGroups:
       version: 1.0.0
     parameters:
     - *ref_4
-    - !<!Parameter> &ref_7
-      schema: *ref_0
+    - !<!Parameter> &ref_8
+      schema: *ref_1
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -116,8 +127,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_8
-      schema: *ref_0
+    - !<!Parameter> &ref_9
+      schema: *ref_1
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -131,8 +142,19 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_6
+      - !<!Parameter> 
         schema: *ref_5
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_7
+        schema: *ref_6
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -144,7 +166,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_6
+      - *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -158,11 +180,11 @@ operationGroups:
           - application/json
           uri: '{$host}'
     signatureParameters:
-    - *ref_7
     - *ref_8
+    - *ref_9
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_5
+      schema: *ref_6
       language: !<!Languages> 
         default:
           name: ''
@@ -171,7 +193,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_0
+            schema: *ref_1
             header: originalHeader
           knownMediaType: json
           mediaTypes:

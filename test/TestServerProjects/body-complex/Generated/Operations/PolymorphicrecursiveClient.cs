@@ -48,37 +48,57 @@ namespace body_complex
         /// <param name="complexBody">
         /// Please put a salmon that looks like this:
         /// {
-        ///         &apos;fishtype&apos;:&apos;Salmon&apos;,
-        ///         &apos;location&apos;:&apos;alaska&apos;,
-        ///         &apos;iswild&apos;:true,
-        ///         &apos;species&apos;:&apos;king&apos;,
-        ///         &apos;length&apos;:1.0,
-        ///         &apos;siblings&apos;:[
-        ///           {
-        ///             &apos;fishtype&apos;:&apos;Shark&apos;,
-        ///             &apos;age&apos;:6,
-        ///             &apos;birthday&apos;: &apos;2012-01-05T01:00:00Z&apos;,
-        ///             &apos;length&apos;:20.0,
-        ///             &apos;species&apos;:&apos;predator&apos;,
-        ///           },
-        ///           {
-        ///             &apos;fishtype&apos;:&apos;Sawshark&apos;,
-        ///             &apos;age&apos;:105,
-        ///             &apos;birthday&apos;: &apos;1900-01-05T01:00:00Z&apos;,
-        ///             &apos;length&apos;:10.0,
-        ///             &apos;picture&apos;: new Buffer([255, 255, 255, 255, 254]).toString(&apos;base64&apos;),
-        ///             &apos;species&apos;:&apos;dangerous&apos;,
-        ///           },
-        ///           {
-        ///             &apos;fishtype&apos;: &apos;goblin&apos;,
-        ///             &apos;age&apos;: 1,
-        ///             &apos;birthday&apos;: &apos;2015-08-08T00:00:00Z&apos;,
-        ///             &apos;length&apos;: 30.0,
-        ///             &apos;species&apos;: &apos;scary&apos;,
-        ///             &apos;jawsize&apos;: 5
-        ///           }
-        ///         ]
-        ///       };.
+        ///     &quot;fishtype&quot;: &quot;salmon&quot;,
+        ///     &quot;species&quot;: &quot;king&quot;,
+        ///     &quot;length&quot;: 1,
+        ///     &quot;age&quot;: 1,
+        ///     &quot;location&quot;: &quot;alaska&quot;,
+        ///     &quot;iswild&quot;: true,
+        ///     &quot;siblings&quot;: [
+        ///         {
+        ///             &quot;fishtype&quot;: &quot;shark&quot;,
+        ///             &quot;species&quot;: &quot;predator&quot;,
+        ///             &quot;length&quot;: 20,
+        ///             &quot;age&quot;: 6,
+        ///             &quot;siblings&quot;: [
+        ///                 {
+        ///                     &quot;fishtype&quot;: &quot;salmon&quot;,
+        ///                     &quot;species&quot;: &quot;coho&quot;,
+        ///                     &quot;length&quot;: 2,
+        ///                     &quot;age&quot;: 2,
+        ///                     &quot;location&quot;: &quot;atlantic&quot;,
+        ///                     &quot;iswild&quot;: true,
+        ///                     &quot;siblings&quot;: [
+        ///                         {
+        ///                             &quot;fishtype&quot;: &quot;shark&quot;,
+        ///                             &quot;species&quot;: &quot;predator&quot;,
+        ///                             &quot;length&quot;: 20,
+        ///                             &quot;age&quot;: 6
+        ///                         },
+        ///                         {
+        ///                             &quot;fishtype&quot;: &quot;sawshark&quot;,
+        ///                             &quot;species&quot;: &quot;dangerous&quot;,
+        ///                             &quot;length&quot;: 10,
+        ///                             &quot;age&quot;: 105
+        ///                         }
+        ///                     ]
+        ///                 },
+        ///                 {
+        ///                     &quot;fishtype&quot;: &quot;sawshark&quot;,
+        ///                     &quot;species&quot;: &quot;dangerous&quot;,
+        ///                     &quot;length&quot;: 10,
+        ///                     &quot;age&quot;: 105
+        ///                 }
+        ///             ]
+        ///         },
+        ///         {
+        ///             &quot;fishtype&quot;: &quot;sawshark&quot;,
+        ///             &quot;species&quot;: &quot;dangerous&quot;,
+        ///             &quot;length&quot;: 10,
+        ///             &quot;age&quot;: 105
+        ///         }
+        ///     ]
+        /// }.
         /// </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutValidAsync(Fish complexBody, CancellationToken cancellationToken = default)
@@ -90,37 +110,57 @@ namespace body_complex
         /// <param name="complexBody">
         /// Please put a salmon that looks like this:
         /// {
-        ///         &apos;fishtype&apos;:&apos;Salmon&apos;,
-        ///         &apos;location&apos;:&apos;alaska&apos;,
-        ///         &apos;iswild&apos;:true,
-        ///         &apos;species&apos;:&apos;king&apos;,
-        ///         &apos;length&apos;:1.0,
-        ///         &apos;siblings&apos;:[
-        ///           {
-        ///             &apos;fishtype&apos;:&apos;Shark&apos;,
-        ///             &apos;age&apos;:6,
-        ///             &apos;birthday&apos;: &apos;2012-01-05T01:00:00Z&apos;,
-        ///             &apos;length&apos;:20.0,
-        ///             &apos;species&apos;:&apos;predator&apos;,
-        ///           },
-        ///           {
-        ///             &apos;fishtype&apos;:&apos;Sawshark&apos;,
-        ///             &apos;age&apos;:105,
-        ///             &apos;birthday&apos;: &apos;1900-01-05T01:00:00Z&apos;,
-        ///             &apos;length&apos;:10.0,
-        ///             &apos;picture&apos;: new Buffer([255, 255, 255, 255, 254]).toString(&apos;base64&apos;),
-        ///             &apos;species&apos;:&apos;dangerous&apos;,
-        ///           },
-        ///           {
-        ///             &apos;fishtype&apos;: &apos;goblin&apos;,
-        ///             &apos;age&apos;: 1,
-        ///             &apos;birthday&apos;: &apos;2015-08-08T00:00:00Z&apos;,
-        ///             &apos;length&apos;: 30.0,
-        ///             &apos;species&apos;: &apos;scary&apos;,
-        ///             &apos;jawsize&apos;: 5
-        ///           }
-        ///         ]
-        ///       };.
+        ///     &quot;fishtype&quot;: &quot;salmon&quot;,
+        ///     &quot;species&quot;: &quot;king&quot;,
+        ///     &quot;length&quot;: 1,
+        ///     &quot;age&quot;: 1,
+        ///     &quot;location&quot;: &quot;alaska&quot;,
+        ///     &quot;iswild&quot;: true,
+        ///     &quot;siblings&quot;: [
+        ///         {
+        ///             &quot;fishtype&quot;: &quot;shark&quot;,
+        ///             &quot;species&quot;: &quot;predator&quot;,
+        ///             &quot;length&quot;: 20,
+        ///             &quot;age&quot;: 6,
+        ///             &quot;siblings&quot;: [
+        ///                 {
+        ///                     &quot;fishtype&quot;: &quot;salmon&quot;,
+        ///                     &quot;species&quot;: &quot;coho&quot;,
+        ///                     &quot;length&quot;: 2,
+        ///                     &quot;age&quot;: 2,
+        ///                     &quot;location&quot;: &quot;atlantic&quot;,
+        ///                     &quot;iswild&quot;: true,
+        ///                     &quot;siblings&quot;: [
+        ///                         {
+        ///                             &quot;fishtype&quot;: &quot;shark&quot;,
+        ///                             &quot;species&quot;: &quot;predator&quot;,
+        ///                             &quot;length&quot;: 20,
+        ///                             &quot;age&quot;: 6
+        ///                         },
+        ///                         {
+        ///                             &quot;fishtype&quot;: &quot;sawshark&quot;,
+        ///                             &quot;species&quot;: &quot;dangerous&quot;,
+        ///                             &quot;length&quot;: 10,
+        ///                             &quot;age&quot;: 105
+        ///                         }
+        ///                     ]
+        ///                 },
+        ///                 {
+        ///                     &quot;fishtype&quot;: &quot;sawshark&quot;,
+        ///                     &quot;species&quot;: &quot;dangerous&quot;,
+        ///                     &quot;length&quot;: 10,
+        ///                     &quot;age&quot;: 105
+        ///                 }
+        ///             ]
+        ///         },
+        ///         {
+        ///             &quot;fishtype&quot;: &quot;sawshark&quot;,
+        ///             &quot;species&quot;: &quot;dangerous&quot;,
+        ///             &quot;length&quot;: 10,
+        ///             &quot;age&quot;: 105
+        ///         }
+        ///     ]
+        /// }.
         /// </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutValid(Fish complexBody, CancellationToken cancellationToken = default)

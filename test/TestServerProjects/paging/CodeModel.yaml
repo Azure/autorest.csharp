@@ -313,7 +313,7 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_26
+  - !<!ObjectSchema> &ref_24
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -580,7 +580,7 @@ operationGroups:
       schema: *ref_16
       implementation: Method
       extensions:
-        x-ms-parameter-grouping: &ref_21
+        x-ms-parameter-grouping:
           postfix: Options
       language: !<!Languages> 
         default:
@@ -594,7 +594,7 @@ operationGroups:
       schema: *ref_17
       implementation: Method
       extensions:
-        x-ms-parameter-grouping: &ref_22
+        x-ms-parameter-grouping:
           postfix: Options
       language: !<!Languages> 
         default:
@@ -661,7 +661,7 @@ operationGroups:
       version: 1.0.0
     parameters:
     - *ref_12
-    - !<!Parameter> &ref_23
+    - !<!Parameter> &ref_21
       schema: *ref_15
       implementation: Method
       language: !<!Languages> 
@@ -672,11 +672,12 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: header
-    - !<!Parameter> &ref_24
+    - !<!Parameter> &ref_22
       schema: *ref_16
       implementation: Method
       extensions:
-        x-ms-parameter-grouping: *ref_21
+        x-ms-parameter-grouping:
+          postfix: Options
       language: !<!Languages> 
         default:
           name: maxresults
@@ -685,11 +686,12 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: header
-    - !<!Parameter> &ref_25
+    - !<!Parameter> &ref_23
       schema: *ref_17
       implementation: Method
       extensions:
-        x-ms-parameter-grouping: *ref_22
+        x-ms-parameter-grouping:
+          postfix: Options
       language: !<!Languages> 
         default:
           name: timeout
@@ -710,12 +712,12 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
+    - *ref_21
+    - *ref_22
     - *ref_23
-    - *ref_24
-    - *ref_25
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_26
+      schema: *ref_24
       language: !<!Languages> 
         default:
           name: ''
@@ -755,7 +757,7 @@ operationGroups:
       version: 1.0.0
     parameters:
     - *ref_12
-    - !<!Parameter> &ref_27
+    - !<!Parameter> &ref_25
       schema: *ref_15
       implementation: Method
       language: !<!Languages> 
@@ -766,11 +768,12 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: header
-    - !<!Parameter> &ref_28
+    - !<!Parameter> &ref_26
       schema: *ref_16
       implementation: Method
       extensions:
-        x-ms-parameter-grouping: *ref_21
+        x-ms-parameter-grouping:
+          postfix: Options
       language: !<!Languages> 
         default:
           name: maxresults
@@ -779,7 +782,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: header
-    - !<!Parameter> &ref_29
+    - !<!Parameter> &ref_27
       schema: *ref_16
       implementation: Method
       required: true
@@ -794,11 +797,12 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_30
+    - !<!Parameter> &ref_28
       schema: *ref_17
       implementation: Method
       extensions:
-        x-ms-parameter-grouping: *ref_22
+        x-ms-parameter-grouping:
+          postfix: Options
       language: !<!Languages> 
         default:
           name: timeout
@@ -819,10 +823,10 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
+    - *ref_25
+    - *ref_26
     - *ref_27
     - *ref_28
-    - *ref_29
-    - *ref_30
     responses:
     - !<!SchemaResponse> 
       schema: *ref_14
@@ -1135,7 +1139,7 @@ operationGroups:
       version: 1.0.0
     parameters:
     - *ref_12
-    - !<!Parameter> &ref_31
+    - !<!Parameter> &ref_29
       schema: *ref_15
       implementation: Method
       required: true
@@ -1147,7 +1151,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: query
-    - !<!Parameter> &ref_32
+    - !<!Parameter> &ref_30
       schema: *ref_15
       implementation: Method
       required: true
@@ -1171,11 +1175,11 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_31
-    - *ref_32
+    - *ref_29
+    - *ref_30
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_26
+      schema: *ref_24
       language: !<!Languages> 
         default:
           name: ''
@@ -1211,13 +1215,13 @@ operationGroups:
           itemName: values
           member: NextFragment
           nextLinkName: odata.nextLink
-          nextLinkOperation: !<!Operation> &ref_36
+          nextLinkOperation: !<!Operation> &ref_34
             apiVersions:
             - !<!ApiVersion> 
               version: 1.0.0
             parameters:
             - *ref_12
-            - !<!Parameter> &ref_33
+            - !<!Parameter> &ref_31
               schema: *ref_15
               implementation: Method
               required: true
@@ -1229,7 +1233,7 @@ operationGroups:
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: query
-            - !<!Parameter> &ref_34
+            - !<!Parameter> &ref_32
               schema: *ref_15
               implementation: Method
               required: true
@@ -1241,7 +1245,7 @@ operationGroups:
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: path
-            - !<!Parameter> &ref_35
+            - !<!Parameter> &ref_33
               schema: *ref_15
               implementation: Method
               required: true
@@ -1267,12 +1271,12 @@ operationGroups:
                   method: get
                   uri: '{$host}'
             signatureParameters:
+            - *ref_31
+            - *ref_32
             - *ref_33
-            - *ref_34
-            - *ref_35
             responses:
             - !<!SchemaResponse> 
-              schema: *ref_26
+              schema: *ref_24
               language: !<!Languages> 
                 default:
                   name: ''
@@ -1308,7 +1312,7 @@ operationGroups:
                   itemName: values
                   member: NextFragment
                   nextLinkName: odata.nextLink
-                  nextLinkOperation: *ref_36
+                  nextLinkOperation: *ref_34
             protocol: !<!Protocols> {}
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1317,12 +1321,12 @@ operationGroups:
       version: 1.0.0
     parameters:
     - *ref_12
-    - !<!Parameter> &ref_37
+    - !<!Parameter> &ref_35
       schema: *ref_15
       implementation: Method
       required: true
       extensions:
-        x-ms-parameter-grouping: &ref_39
+        x-ms-parameter-grouping:
           name: custom-parameter-group
       language: !<!Languages> 
         default:
@@ -1332,12 +1336,12 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: query
-    - !<!Parameter> &ref_38
+    - !<!Parameter> &ref_36
       schema: *ref_15
       implementation: Method
       required: true
       extensions:
-        x-ms-parameter-grouping: &ref_40
+        x-ms-parameter-grouping:
           name: custom-parameter-group
       language: !<!Languages> 
         default:
@@ -1359,11 +1363,11 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_37
-    - *ref_38
+    - *ref_35
+    - *ref_36
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_26
+      schema: *ref_24
       language: !<!Languages> 
         default:
           name: ''
@@ -1399,18 +1403,19 @@ operationGroups:
           itemName: values
           member: NextFragmentWithGrouping
           nextLinkName: odata.nextLink
-          nextLinkOperation: !<!Operation> &ref_44
+          nextLinkOperation: !<!Operation> &ref_40
             apiVersions:
             - !<!ApiVersion> 
               version: 1.0.0
             parameters:
             - *ref_12
-            - !<!Parameter> &ref_41
+            - !<!Parameter> &ref_37
               schema: *ref_15
               implementation: Method
               required: true
               extensions:
-                x-ms-parameter-grouping: *ref_39
+                x-ms-parameter-grouping:
+                  name: custom-parameter-group
               language: !<!Languages> 
                 default:
                   name: apiVersion
@@ -1419,12 +1424,13 @@ operationGroups:
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: query
-            - !<!Parameter> &ref_42
+            - !<!Parameter> &ref_38
               schema: *ref_15
               implementation: Method
               required: true
               extensions:
-                x-ms-parameter-grouping: *ref_40
+                x-ms-parameter-grouping:
+                  name: custom-parameter-group
               language: !<!Languages> 
                 default:
                   name: tenant
@@ -1433,7 +1439,7 @@ operationGroups:
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: path
-            - !<!Parameter> &ref_43
+            - !<!Parameter> &ref_39
               schema: *ref_15
               implementation: Method
               required: true
@@ -1459,12 +1465,12 @@ operationGroups:
                   method: get
                   uri: '{$host}'
             signatureParameters:
-            - *ref_41
-            - *ref_42
-            - *ref_43
+            - *ref_37
+            - *ref_38
+            - *ref_39
             responses:
             - !<!SchemaResponse> 
-              schema: *ref_26
+              schema: *ref_24
               language: !<!Languages> 
                 default:
                   name: ''
@@ -1500,7 +1506,7 @@ operationGroups:
                   itemName: values
                   member: NextFragmentWithGrouping
                   nextLinkName: odata.nextLink
-                  nextLinkOperation: *ref_44
+                  nextLinkOperation: *ref_40
             protocol: !<!Protocols> {}
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1509,7 +1515,7 @@ operationGroups:
       version: 1.0.0
     parameters:
     - *ref_12
-    - !<!Parameter> &ref_45
+    - !<!Parameter> &ref_41
       schema: *ref_15
       implementation: Method
       language: !<!Languages> 
@@ -1520,11 +1526,12 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: header
-    - !<!Parameter> &ref_46
+    - !<!Parameter> &ref_42
       schema: *ref_16
       implementation: Method
       extensions:
-        x-ms-parameter-grouping: *ref_21
+        x-ms-parameter-grouping:
+          postfix: Options
       language: !<!Languages> 
         default:
           name: maxresults
@@ -1533,11 +1540,12 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: header
-    - !<!Parameter> &ref_47
+    - !<!Parameter> &ref_43
       schema: *ref_17
       implementation: Method
       extensions:
-        x-ms-parameter-grouping: *ref_22
+        x-ms-parameter-grouping:
+          postfix: Options
       language: !<!Languages> 
         default:
           name: timeout
@@ -1558,9 +1566,9 @@ operationGroups:
           method: post
           uri: '{$host}'
     signatureParameters:
-    - *ref_45
-    - *ref_46
-    - *ref_47
+    - *ref_41
+    - *ref_42
+    - *ref_43
     responses:
     - !<!SchemaResponse> 
       schema: *ref_14
@@ -1598,8 +1606,8 @@ operationGroups:
           itemName: values
           nextLinkName: nextLink
     protocol: !<!Protocols> {}
-  - *ref_36
-  - *ref_44
+  - *ref_34
+  - *ref_40
   language: !<!Languages> 
     default:
       name: Paging

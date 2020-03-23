@@ -483,7 +483,7 @@ namespace AppConfiguration
 
         /// <summary> Gets a single key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="label"> A filter used to match labels. </param>
+        /// <param name="label"> The label of the key-value to retrieve. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
@@ -525,7 +525,7 @@ namespace AppConfiguration
 
         /// <summary> Gets a single key-value. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="label"> A filter used to match labels. </param>
+        /// <param name="label"> The label of the key-value to retrieve. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
@@ -593,11 +593,6 @@ namespace AppConfiguration
                 request.Headers.Add("If-None-Match", ifNoneMatch);
             }
             request.Headers.Add("Content-Type", "application/vnd.microsoft.appconfig.kv+json");
-            request.Headers.Add("Content-Type", "application/vnd.microsoft.appconfig.kvset+json");
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Content-Type", "text/json");
-            request.Headers.Add("Content-Type", "application/*+json");
-            request.Headers.Add("Content-Type", "application/json-patch+json");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(entity);
             request.Content = content;
@@ -605,8 +600,8 @@ namespace AppConfiguration
         }
 
         /// <summary> Creates a key-value. </summary>
-        /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="label"> A filter used to match labels. </param>
+        /// <param name="key"> The key of the key-value to create. </param>
+        /// <param name="label"> The label of the key-value to create. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="entity"> The key-value to create. </param>
@@ -646,8 +641,8 @@ namespace AppConfiguration
         }
 
         /// <summary> Creates a key-value. </summary>
-        /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="label"> A filter used to match labels. </param>
+        /// <param name="key"> The key of the key-value to create. </param>
+        /// <param name="label"> The label of the key-value to create. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="entity"> The key-value to create. </param>
@@ -713,8 +708,8 @@ namespace AppConfiguration
         }
 
         /// <summary> Deletes a key-value. </summary>
-        /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="label"> A filter used to match labels. </param>
+        /// <param name="key"> The key of the key-value to delete. </param>
+        /// <param name="label"> The label of the key-value to delete. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<KeyValue, DeleteKeyValueHeaders>> DeleteKeyValueAsync(string key, string label, string ifMatch, CancellationToken cancellationToken = default)
@@ -752,8 +747,8 @@ namespace AppConfiguration
         }
 
         /// <summary> Deletes a key-value. </summary>
-        /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="label"> A filter used to match labels. </param>
+        /// <param name="key"> The key of the key-value to delete. </param>
+        /// <param name="label"> The label of the key-value to delete. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<KeyValue, DeleteKeyValueHeaders> DeleteKeyValue(string key, string label, string ifMatch, CancellationToken cancellationToken = default)
@@ -830,7 +825,7 @@ namespace AppConfiguration
 
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="label"> A filter used to match labels. </param>
+        /// <param name="label"> The label of the key-value to retrieve. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
@@ -867,7 +862,7 @@ namespace AppConfiguration
 
         /// <summary> Requests the headers and status of the given resource. </summary>
         /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="label"> A filter used to match labels. </param>
+        /// <param name="label"> The label of the key-value to retrieve. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
@@ -936,7 +931,7 @@ namespace AppConfiguration
         }
 
         /// <summary> Gets a list of labels. </summary>
-        /// <param name="name"> A filter for the name of the returned keys. </param>
+        /// <param name="name"> A filter for the name of the returned labels. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
@@ -972,7 +967,7 @@ namespace AppConfiguration
         }
 
         /// <summary> Gets a list of labels. </summary>
-        /// <param name="name"> A filter for the name of the returned keys. </param>
+        /// <param name="name"> A filter for the name of the returned labels. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
@@ -1041,7 +1036,7 @@ namespace AppConfiguration
         }
 
         /// <summary> Requests the headers and status of the given resource. </summary>
-        /// <param name="name"> A filter for the name of the returned keys. </param>
+        /// <param name="name"> A filter for the name of the returned labels. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
@@ -1072,7 +1067,7 @@ namespace AppConfiguration
         }
 
         /// <summary> Requests the headers and status of the given resource. </summary>
-        /// <param name="name"> A filter for the name of the returned keys. </param>
+        /// <param name="name"> A filter for the name of the returned labels. </param>
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
@@ -1133,8 +1128,8 @@ namespace AppConfiguration
         }
 
         /// <summary> Locks a key-value. </summary>
-        /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="label"> A filter used to match labels. </param>
+        /// <param name="key"> The key of the key-value to lock. </param>
+        /// <param name="label"> The label, if any, of the key-value to lock. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1173,8 +1168,8 @@ namespace AppConfiguration
         }
 
         /// <summary> Locks a key-value. </summary>
-        /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="label"> A filter used to match labels. </param>
+        /// <param name="key"> The key of the key-value to lock. </param>
+        /// <param name="label"> The label, if any, of the key-value to lock. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1243,8 +1238,8 @@ namespace AppConfiguration
         }
 
         /// <summary> Unlocks a key-value. </summary>
-        /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="label"> A filter used to match labels. </param>
+        /// <param name="key"> The key of the key-value to unlock. </param>
+        /// <param name="label"> The label, if any, of the key-value to unlock. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1283,8 +1278,8 @@ namespace AppConfiguration
         }
 
         /// <summary> Unlocks a key-value. </summary>
-        /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="label"> A filter used to match labels. </param>
+        /// <param name="key"> The key of the key-value to unlock. </param>
+        /// <param name="label"> The label, if any, of the key-value to unlock. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1433,7 +1428,7 @@ namespace AppConfiguration
             }
         }
 
-        internal HttpMessage CreateCheckRevisionsRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select)
+        internal HttpMessage CreateCheckRevisionsRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Enum5> select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1477,7 +1472,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<CheckRevisionsHeaders>> CheckRevisionsAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<CheckRevisionsHeaders>> CheckRevisionsAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Enum5> select, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckRevisions");
@@ -1509,7 +1504,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<CheckRevisionsHeaders> CheckRevisions(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<CheckRevisionsHeaders> CheckRevisions(string key, string label, string after, string acceptDatetime, IEnumerable<Enum5> select, CancellationToken cancellationToken = default)
         {
 
             using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckRevisions");

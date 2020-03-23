@@ -455,17 +455,17 @@ namespace body_array
         }
 
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
-        /// <param name="arrayBody"> The ArrayOfEnum0 to use. </param>
+        /// <param name="arrayBody"> The ArrayOfEnum1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutStringEnumValidAsync(IEnumerable<Enum0> arrayBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutStringEnumValidAsync(IEnumerable<Enum1> arrayBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutStringEnumValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
-        /// <param name="arrayBody"> The ArrayOfEnum0 to use. </param>
+        /// <param name="arrayBody"> The ArrayOfEnum1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutStringEnumValid(IEnumerable<Enum0> arrayBody, CancellationToken cancellationToken = default)
+        public virtual Response PutStringEnumValid(IEnumerable<Enum1> arrayBody, CancellationToken cancellationToken = default)
         {
             return RestClient.PutStringEnumValid(arrayBody, cancellationToken);
         }

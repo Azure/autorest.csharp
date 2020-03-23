@@ -50,7 +50,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Runs an indexer on-demand. </summary>
-        /// <param name="indexerName"> The name of the indexer to reset. </param>
+        /// <param name="indexerName"> The name of the indexer to run. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> RunAsync(string indexerName, Guid? clientRequestId, CancellationToken cancellationToken = default)
@@ -59,7 +59,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Runs an indexer on-demand. </summary>
-        /// <param name="indexerName"> The name of the indexer to reset. </param>
+        /// <param name="indexerName"> The name of the indexer to run. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Run(string indexerName, Guid? clientRequestId, CancellationToken cancellationToken = default)
@@ -68,7 +68,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Creates a new indexer or updates an indexer if it already exists. </summary>
-        /// <param name="indexerName"> The name of the indexer to reset. </param>
+        /// <param name="indexerName"> The name of the indexer to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
@@ -80,7 +80,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Creates a new indexer or updates an indexer if it already exists. </summary>
-        /// <param name="indexerName"> The name of the indexer to reset. </param>
+        /// <param name="indexerName"> The name of the indexer to create or update. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
@@ -92,7 +92,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Deletes an indexer. </summary>
-        /// <param name="indexerName"> The name of the indexer to reset. </param>
+        /// <param name="indexerName"> The name of the indexer to delete. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
@@ -103,7 +103,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Deletes an indexer. </summary>
-        /// <param name="indexerName"> The name of the indexer to reset. </param>
+        /// <param name="indexerName"> The name of the indexer to delete. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
@@ -114,7 +114,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Retrieves an indexer definition. </summary>
-        /// <param name="indexerName"> The name of the indexer to reset. </param>
+        /// <param name="indexerName"> The name of the indexer to retrieve. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Indexer>> GetAsync(string indexerName, Guid? clientRequestId, CancellationToken cancellationToken = default)
@@ -123,7 +123,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Retrieves an indexer definition. </summary>
-        /// <param name="indexerName"> The name of the indexer to reset. </param>
+        /// <param name="indexerName"> The name of the indexer to retrieve. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Indexer> Get(string indexerName, Guid? clientRequestId, CancellationToken cancellationToken = default)
@@ -132,7 +132,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Lists all indexers available for a search service. </summary>
-        /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
+        /// <param name="select"> Selects which top-level properties of the indexers to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ListIndexersResult>> ListAsync(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
@@ -141,7 +141,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Lists all indexers available for a search service. </summary>
-        /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
+        /// <param name="select"> Selects which top-level properties of the indexers to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ListIndexersResult> List(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
@@ -151,7 +151,7 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new indexer. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="indexer"> The definition of the indexer to create or update. </param>
+        /// <param name="indexer"> The definition of the indexer to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Indexer>> CreateAsync(Guid? clientRequestId, Indexer indexer, CancellationToken cancellationToken = default)
         {
@@ -160,7 +160,7 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new indexer. </summary>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="indexer"> The definition of the indexer to create or update. </param>
+        /// <param name="indexer"> The definition of the indexer to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Indexer> Create(Guid? clientRequestId, Indexer indexer, CancellationToken cancellationToken = default)
         {
@@ -168,7 +168,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Returns the current status and execution history of an indexer. </summary>
-        /// <param name="indexerName"> The name of the indexer to reset. </param>
+        /// <param name="indexerName"> The name of the indexer for which to retrieve status. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IndexerExecutionInfo>> GetStatusAsync(string indexerName, Guid? clientRequestId, CancellationToken cancellationToken = default)
@@ -177,7 +177,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Returns the current status and execution history of an indexer. </summary>
-        /// <param name="indexerName"> The name of the indexer to reset. </param>
+        /// <param name="indexerName"> The name of the indexer for which to retrieve status. </param>
         /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IndexerExecutionInfo> GetStatus(string indexerName, Guid? clientRequestId, CancellationToken cancellationToken = default)

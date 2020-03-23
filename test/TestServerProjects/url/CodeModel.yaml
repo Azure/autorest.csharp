@@ -11,7 +11,7 @@ schemas: !<!Schemas>
         name: Bool
         description: simple boolean
     protocol: !<!Protocols> {}
-  - !<!BooleanSchema> &ref_47
+  - !<!BooleanSchema> &ref_49
     type: boolean
     apiVersions:
     - !<!ApiVersion> 
@@ -22,7 +22,7 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   numbers:
-  - !<!NumberSchema> &ref_7
+  - !<!NumberSchema> &ref_2
     type: integer
     precision: 32
     language: !<!Languages> 
@@ -30,7 +30,15 @@ schemas: !<!Schemas>
         name: Integer
         description: ''
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_2
+  - !<!NumberSchema> &ref_3
+    type: integer
+    precision: 64
+    language: !<!Languages> 
+      default:
+        name: Integer
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!NumberSchema> &ref_4
     type: number
     precision: 32
     language: !<!Languages> 
@@ -38,23 +46,12 @@ schemas: !<!Schemas>
         name: Number
         description: ''
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_3
+  - !<!NumberSchema> &ref_5
     type: number
     precision: 64
     language: !<!Languages> 
       default:
         name: Number
-        description: ''
-    protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_49
-    type: integer
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    precision: 32
-    language: !<!Languages> 
-      default:
-        name: Integer
         description: ''
     protocol: !<!Protocols> {}
   - !<!NumberSchema> &ref_51
@@ -62,13 +59,24 @@ schemas: !<!Schemas>
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    precision: 64
+    precision: 32
     language: !<!Languages> 
       default:
         name: Integer
         description: ''
     protocol: !<!Protocols> {}
   - !<!NumberSchema> &ref_53
+    type: integer
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    precision: 64
+    language: !<!Languages> 
+      default:
+        name: Integer
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!NumberSchema> &ref_55
     type: number
     apiVersions:
     - !<!ApiVersion> 
@@ -79,7 +87,7 @@ schemas: !<!Schemas>
         name: Number
         description: ''
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_55
+  - !<!NumberSchema> &ref_57
     type: number
     apiVersions:
     - !<!ApiVersion> 
@@ -98,7 +106,7 @@ schemas: !<!Schemas>
         name: String
         description: simple string
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_8
+  - !<!StringSchema> &ref_9
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -108,7 +116,7 @@ schemas: !<!Schemas>
         name: ErrorMessage
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_10
+  - !<!StringSchema> &ref_11
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -118,7 +126,7 @@ schemas: !<!Schemas>
         name: String
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_9
+  - !<!StringSchema> &ref_10
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -129,7 +137,7 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   sealedChoices:
-  - !<!SealedChoiceSchema> &ref_28
+  - !<!SealedChoiceSchema> &ref_29
     choices:
     - !<!ChoiceValue> 
       value: red color
@@ -160,7 +168,7 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   constants:
-  - !<!ConstantSchema> &ref_12
+  - !<!ConstantSchema> &ref_13
     type: constant
     value: !<!ConstantValue> 
       value: true
@@ -170,7 +178,7 @@ schemas: !<!Schemas>
         name: Constant1
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_14
+  - !<!ConstantSchema> &ref_15
     type: constant
     value: !<!ConstantValue> 
       value: false
@@ -180,7 +188,7 @@ schemas: !<!Schemas>
         name: Constant2
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_15
+  - !<!ConstantSchema> &ref_16
     type: constant
     value: !<!ConstantValue> 
       value: 1000000
@@ -190,7 +198,7 @@ schemas: !<!Schemas>
         name: Constant3
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_16
+  - !<!ConstantSchema> &ref_17
     type: constant
     value: !<!ConstantValue> 
       value: -1000000
@@ -200,67 +208,67 @@ schemas: !<!Schemas>
         name: Constant4
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_17
+  - !<!ConstantSchema> &ref_18
     type: constant
     value: !<!ConstantValue> 
       value: 10000000000
-    valueType: *ref_2
+    valueType: *ref_3
     language: !<!Languages> 
       default:
         name: Constant5
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_18
+  - !<!ConstantSchema> &ref_19
     type: constant
     value: !<!ConstantValue> 
       value: -10000000000
-    valueType: *ref_2
+    valueType: *ref_3
     language: !<!Languages> 
       default:
         name: Constant6
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_19
+  - !<!ConstantSchema> &ref_20
     type: constant
     value: !<!ConstantValue> 
       value: 103400000000000000000
-    valueType: *ref_2
+    valueType: *ref_4
     language: !<!Languages> 
       default:
         name: Constant7
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_20
+  - !<!ConstantSchema> &ref_21
     type: constant
     value: !<!ConstantValue> 
       value: -1.034e-20
-    valueType: *ref_2
+    valueType: *ref_4
     language: !<!Languages> 
       default:
         name: Constant8
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_21
+  - !<!ConstantSchema> &ref_22
     type: constant
     value: !<!ConstantValue> 
       value: 9999999.999
-    valueType: *ref_3
+    valueType: *ref_5
     language: !<!Languages> 
       default:
         name: Constant9
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_22
+  - !<!ConstantSchema> &ref_23
     type: constant
     value: !<!ConstantValue> 
       value: -9999999.999
-    valueType: *ref_3
+    valueType: *ref_5
     language: !<!Languages> 
       default:
         name: Constant10
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_23
+  - !<!ConstantSchema> &ref_24
     type: constant
     value: !<!ConstantValue> 
       value: 啊齄丂狛狜隣郎隣兀﨩
@@ -270,7 +278,7 @@ schemas: !<!Schemas>
         name: Constant11
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_24
+  - !<!ConstantSchema> &ref_25
     type: constant
     value: !<!ConstantValue> 
       value: 'begin!*''();:@ &=+$,/?#[]end'
@@ -280,7 +288,7 @@ schemas: !<!Schemas>
         name: Constant12
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_25
+  - !<!ConstantSchema> &ref_26
     type: constant
     value: !<!ConstantValue> 
       value: 'begin!*''();:@&=+$,end'
@@ -290,7 +298,7 @@ schemas: !<!Schemas>
         name: Constant13
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_26
+  - !<!ConstantSchema> &ref_27
     type: constant
     value: !<!ConstantValue> 
       value: ''
@@ -300,11 +308,11 @@ schemas: !<!Schemas>
         name: Constant14
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_33
+  - !<!ConstantSchema> &ref_34
     type: constant
     value: !<!ConstantValue> 
       value: ''
-    valueType: !<!ByteArraySchema> &ref_4
+    valueType: !<!ByteArraySchema> &ref_6
       type: byte-array
       format: byte
       language: !<!Languages> 
@@ -317,11 +325,11 @@ schemas: !<!Schemas>
         name: Constant15
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_35
+  - !<!ConstantSchema> &ref_37
     type: constant
     value: !<!ConstantValue> 
       value: '2012-01-01'
-    valueType: !<!DateSchema> &ref_6
+    valueType: !<!DateSchema> &ref_8
       type: date
       language: !<!Languages> 
         default:
@@ -333,11 +341,11 @@ schemas: !<!Schemas>
         name: Constant16
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_38
+  - !<!ConstantSchema> &ref_40
     type: constant
     value: !<!ConstantValue> 
       value: '2012-01-01T01:01:01Z'
-    valueType: !<!DateTimeSchema> &ref_5
+    valueType: !<!DateTimeSchema> &ref_7
       type: date-time
       format: date-time
       language: !<!Languages> 
@@ -351,7 +359,7 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   byteArrays:
-  - !<!ByteArraySchema> &ref_31
+  - !<!ByteArraySchema> &ref_32
     type: byte-array
     format: byte
     apiVersions:
@@ -362,8 +370,19 @@ schemas: !<!Schemas>
         name: ByteArray
         description: ''
     protocol: !<!Protocols> {}
-  - *ref_4
-  - !<!ByteArraySchema> &ref_41
+  - *ref_6
+  - !<!ByteArraySchema> &ref_35
+    type: byte-array
+    format: byte
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ByteArray
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!ByteArraySchema> &ref_43
     type: byte-array
     format: base64url
     apiVersions:
@@ -374,9 +393,31 @@ schemas: !<!Schemas>
         name: ByteArray
         description: ''
     protocol: !<!Protocols> {}
+  - !<!ByteArraySchema> &ref_62
+    type: byte-array
+    format: byte
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ByteArray
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!ByteArraySchema> &ref_64
+    type: byte-array
+    format: byte
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ByteArray
+        description: ''
+    protocol: !<!Protocols> {}
   dateTimes:
-  - *ref_5
-  - !<!DateTimeSchema> &ref_39
+  - *ref_7
+  - !<!DateTimeSchema> &ref_41
     type: date-time
     format: date-time
     apiVersions:
@@ -388,8 +429,8 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   dates:
-  - *ref_6
-  - !<!DateSchema> &ref_36
+  - *ref_8
+  - !<!DateSchema> &ref_38
     type: date
     apiVersions:
     - !<!ApiVersion> 
@@ -400,7 +441,7 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   unixtimes:
-  - !<!UnixTimeSchema> &ref_45
+  - !<!UnixTimeSchema> &ref_47
     type: unixtime
     apiVersions:
     - !<!ApiVersion> 
@@ -411,14 +452,14 @@ schemas: !<!Schemas>
         description: 'date in seconds since 1970-01-01T00:00:00Z.'
     protocol: !<!Protocols> {}
   objects:
-  - !<!ObjectSchema> &ref_13
+  - !<!ObjectSchema> &ref_14
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: *ref_7
+      schema: *ref_2
       serializedName: status
       language: !<!Languages> 
         default:
@@ -426,7 +467,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_8
+      schema: *ref_9
       serializedName: message
       language: !<!Languages> 
         default:
@@ -444,18 +485,7 @@ schemas: !<!Schemas>
         namespace: ''
     protocol: !<!Protocols> {}
   arrays:
-  - !<!ArraySchema> &ref_43
-    type: array
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    elementType: *ref_9
-    language: !<!Languages> 
-      default:
-        name: ArrayOfGet0ItemsItem
-        description: Array of Get0ItemsItem
-    protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_64
+  - !<!ArraySchema> &ref_45
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -463,12 +493,78 @@ schemas: !<!Schemas>
     elementType: *ref_10
     language: !<!Languages> 
       default:
+        name: ArrayOfGet0ItemsItem
+        description: Array of Get0ItemsItem
+    protocol: !<!Protocols> {}
+  - !<!ArraySchema> &ref_68
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: *ref_11
+    language: !<!Languages> 
+      default:
+        name: ArrayOfString
+        description: Array of String
+    protocol: !<!Protocols> {}
+  - !<!ArraySchema> &ref_70
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: *ref_11
+    language: !<!Languages> 
+      default:
+        name: ArrayOfString
+        description: Array of String
+    protocol: !<!Protocols> {}
+  - !<!ArraySchema> &ref_72
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: *ref_11
+    language: !<!Languages> 
+      default:
+        name: ArrayOfString
+        description: Array of String
+    protocol: !<!Protocols> {}
+  - !<!ArraySchema> &ref_74
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: *ref_11
+    language: !<!Languages> 
+      default:
+        name: ArrayOfString
+        description: Array of String
+    protocol: !<!Protocols> {}
+  - !<!ArraySchema> &ref_76
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: *ref_11
+    language: !<!Languages> 
+      default:
+        name: ArrayOfString
+        description: Array of String
+    protocol: !<!Protocols> {}
+  - !<!ArraySchema> &ref_78
+    type: array
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    elementType: *ref_11
+    language: !<!Languages> 
+      default:
         name: ArrayOfString
         description: Array of String
     protocol: !<!Protocols> {}
 globalParameters:
-- !<!Parameter> &ref_71
-  schema: *ref_10
+- !<!Parameter> &ref_80
+  schema: *ref_11
   implementation: Client
   required: true
   extensions:
@@ -481,8 +577,8 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: path
-- !<!Parameter> &ref_72
-  schema: *ref_10
+- !<!Parameter> &ref_81
+  schema: *ref_11
   implementation: Client
   extensions:
     x-ms-priority: 1
@@ -494,7 +590,7 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: query
-- !<!Parameter> &ref_11
+- !<!Parameter> &ref_12
   schema: *ref_0
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
@@ -518,14 +614,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_12
+      schema: *ref_13
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: BoolPath
+          name: boolPath
           description: true boolean value
           serializedName: boolPath
       protocol: !<!Protocols> 
@@ -555,7 +651,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -577,14 +673,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_14
+      schema: *ref_15
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: BoolPath
+          name: boolPath
           description: false boolean value
           serializedName: boolPath
       protocol: !<!Protocols> 
@@ -614,7 +710,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -636,14 +732,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_15
+      schema: *ref_16
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: IntPath
+          name: intPath
           description: '''1000000'' integer value'
           serializedName: intPath
       protocol: !<!Protocols> 
@@ -673,7 +769,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -695,14 +791,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_16
+      schema: *ref_17
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: IntPath
+          name: intPath
           description: '''-1000000'' integer value'
           serializedName: intPath
       protocol: !<!Protocols> 
@@ -732,7 +828,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -754,14 +850,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_17
+      schema: *ref_18
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: LongPath
+          name: longPath
           description: '''10000000000'' 64 bit integer value'
           serializedName: longPath
       protocol: !<!Protocols> 
@@ -791,7 +887,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -813,14 +909,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_18
+      schema: *ref_19
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: LongPath
+          name: longPath
           description: '''-10000000000'' 64 bit integer value'
           serializedName: longPath
       protocol: !<!Protocols> 
@@ -850,7 +946,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -872,14 +968,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_19
+      schema: *ref_20
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: FloatPath
+          name: floatPath
           description: '''1.034E+20''numeric value'
           serializedName: floatPath
       protocol: !<!Protocols> 
@@ -909,7 +1005,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -931,14 +1027,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_20
+      schema: *ref_21
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: FloatPath
+          name: floatPath
           description: '''-1.034E-20''numeric value'
           serializedName: floatPath
       protocol: !<!Protocols> 
@@ -968,7 +1064,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -990,14 +1086,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_21
+      schema: *ref_22
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: DoublePath
+          name: doublePath
           description: '''9999999.999''numeric value'
           serializedName: doublePath
       protocol: !<!Protocols> 
@@ -1027,7 +1123,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -1049,14 +1145,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_22
+      schema: *ref_23
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: DoublePath
+          name: doublePath
           description: '''-9999999.999''numeric value'
           serializedName: doublePath
       protocol: !<!Protocols> 
@@ -1086,7 +1182,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -1108,14 +1204,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_23
+      schema: *ref_24
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: StringPath
+          name: stringPath
           description: '''啊齄丂狛狜隣郎隣兀﨩''multi-byte string value'
           serializedName: stringPath
       protocol: !<!Protocols> 
@@ -1145,7 +1241,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -1167,14 +1263,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_24
+      schema: *ref_25
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: StringPath
+          name: stringPath
           description: '''begin!*''();:@ &=+$,/?#[]end'' url encoded string value'
           serializedName: stringPath
       protocol: !<!Protocols> 
@@ -1204,7 +1300,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -1226,16 +1322,16 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_25
+      schema: *ref_26
       implementation: Method
       required: true
       extensions:
         x-ms-skip-url-encoding: true
       language: !<!Languages> 
         default:
-          name: StringPath
+          name: stringPath
           description: '''begin!*''();:@&=+$,end'' url encoded string value'
           serializedName: stringPath
       protocol: !<!Protocols> 
@@ -1265,7 +1361,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -1288,14 +1384,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_26
+      schema: *ref_27
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: StringPath
+          name: stringPath
           description: ''''' string value'
           serializedName: stringPath
       protocol: !<!Protocols> 
@@ -1325,7 +1421,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -1347,9 +1443,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_27
-      schema: *ref_10
+    - *ref_12
+    - !<!Parameter> &ref_28
+      schema: *ref_11
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -1372,7 +1468,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_27
+    - *ref_28
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -1385,7 +1481,7 @@ operationGroups:
           - '400'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -1407,9 +1503,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_29
-      schema: *ref_28
+    - *ref_12
+    - !<!Parameter> &ref_30
+      schema: *ref_29
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -1432,7 +1528,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_29
+    - *ref_30
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -1445,7 +1541,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -1467,15 +1563,15 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_30
-      schema: *ref_28
+    - *ref_12
+    - !<!Parameter> &ref_31
+      schema: *ref_29
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
           name: enumPath
-          description: send the value green
+          description: send null should throw
           serializedName: enumPath
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
@@ -1492,7 +1588,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_30
+    - *ref_31
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -1505,7 +1601,7 @@ operationGroups:
           - '400'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -1527,9 +1623,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_32
-      schema: *ref_31
+    - *ref_12
+    - !<!Parameter> &ref_33
+      schema: *ref_32
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -1552,7 +1648,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_32
+    - *ref_33
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -1565,7 +1661,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -1587,14 +1683,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_33
+      schema: *ref_34
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: BytePath
+          name: bytePath
           description: ''''' as byte array'
           serializedName: bytePath
       protocol: !<!Protocols> 
@@ -1624,7 +1720,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -1646,15 +1742,15 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_34
-      schema: *ref_31
+    - *ref_12
+    - !<!Parameter> &ref_36
+      schema: *ref_35
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
           name: bytePath
-          description: '''啊齄丂狛狜隣郎隣兀﨩'' multibyte value as utf-8 encoded byte array'
+          description: null as byte array (should throw)
           serializedName: bytePath
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
@@ -1671,7 +1767,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_34
+    - *ref_36
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -1684,7 +1780,7 @@ operationGroups:
           - '400'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -1706,14 +1802,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_35
+      schema: *ref_37
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: DatePath
+          name: datePath
           description: '''2012-01-01'' as date'
           serializedName: datePath
       protocol: !<!Protocols> 
@@ -1743,7 +1839,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -1765,9 +1861,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_37
-      schema: *ref_36
+    - *ref_12
+    - !<!Parameter> &ref_39
+      schema: *ref_38
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -1790,7 +1886,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_37
+    - *ref_39
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -1803,7 +1899,7 @@ operationGroups:
           - '400'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -1825,14 +1921,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_38
+      schema: *ref_40
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: DateTimePath
+          name: dateTimePath
           description: '''2012-01-01T01:01:01Z'' as date-time'
           serializedName: dateTimePath
       protocol: !<!Protocols> 
@@ -1862,7 +1958,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -1884,9 +1980,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_40
-      schema: *ref_39
+    - *ref_12
+    - !<!Parameter> &ref_42
+      schema: *ref_41
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -1909,7 +2005,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_40
+    - *ref_42
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -1922,7 +2018,7 @@ operationGroups:
           - '400'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -1944,9 +2040,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_42
-      schema: *ref_41
+    - *ref_12
+    - !<!Parameter> &ref_44
+      schema: *ref_43
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -1969,7 +2065,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_42
+    - *ref_44
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -1982,7 +2078,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -2004,9 +2100,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_44
-      schema: *ref_43
+    - *ref_12
+    - !<!Parameter> &ref_46
+      schema: *ref_45
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -2030,7 +2126,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_44
+    - *ref_46
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2043,7 +2139,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -2065,9 +2161,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_46
-      schema: *ref_45
+    - *ref_12
+    - !<!Parameter> &ref_48
+      schema: *ref_47
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -2090,7 +2186,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_46
+    - *ref_48
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2103,7 +2199,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -2133,14 +2229,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_12
+      schema: *ref_13
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: BoolQuery
+          name: boolQuery
           description: true boolean value
           serializedName: boolQuery
       protocol: !<!Protocols> 
@@ -2170,7 +2266,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -2192,14 +2288,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_14
+      schema: *ref_15
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: BoolQuery
+          name: boolQuery
           description: false boolean value
           serializedName: boolQuery
       protocol: !<!Protocols> 
@@ -2229,7 +2325,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -2251,9 +2347,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_48
-      schema: *ref_47
+    - *ref_12
+    - !<!Parameter> &ref_50
+      schema: *ref_49
       implementation: Method
       language: !<!Languages> 
         default:
@@ -2275,7 +2371,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_48
+    - *ref_50
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2288,7 +2384,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -2310,14 +2406,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_15
+      schema: *ref_16
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: IntQuery
+          name: intQuery
           description: '''1000000'' integer value'
           serializedName: intQuery
       protocol: !<!Protocols> 
@@ -2347,7 +2443,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -2369,14 +2465,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_16
+      schema: *ref_17
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: IntQuery
+          name: intQuery
           description: '''-1000000'' integer value'
           serializedName: intQuery
       protocol: !<!Protocols> 
@@ -2406,7 +2502,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -2428,9 +2524,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_50
-      schema: *ref_49
+    - *ref_12
+    - !<!Parameter> &ref_52
+      schema: *ref_51
       implementation: Method
       language: !<!Languages> 
         default:
@@ -2452,7 +2548,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_50
+    - *ref_52
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2465,7 +2561,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -2487,14 +2583,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_17
+      schema: *ref_18
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: LongQuery
+          name: longQuery
           description: '''10000000000'' 64 bit integer value'
           serializedName: longQuery
       protocol: !<!Protocols> 
@@ -2524,7 +2620,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -2546,14 +2642,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_18
+      schema: *ref_19
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: LongQuery
+          name: longQuery
           description: '''-10000000000'' 64 bit integer value'
           serializedName: longQuery
       protocol: !<!Protocols> 
@@ -2583,7 +2679,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -2605,9 +2701,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_52
-      schema: *ref_51
+    - *ref_12
+    - !<!Parameter> &ref_54
+      schema: *ref_53
       implementation: Method
       language: !<!Languages> 
         default:
@@ -2629,7 +2725,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_52
+    - *ref_54
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2642,7 +2738,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -2664,14 +2760,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_19
+      schema: *ref_20
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: FloatQuery
+          name: floatQuery
           description: '''1.034E+20''numeric value'
           serializedName: floatQuery
       protocol: !<!Protocols> 
@@ -2701,7 +2797,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -2723,14 +2819,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_20
+      schema: *ref_21
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: FloatQuery
+          name: floatQuery
           description: '''-1.034E-20''numeric value'
           serializedName: floatQuery
       protocol: !<!Protocols> 
@@ -2760,7 +2856,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -2782,9 +2878,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_54
-      schema: *ref_53
+    - *ref_12
+    - !<!Parameter> &ref_56
+      schema: *ref_55
       implementation: Method
       language: !<!Languages> 
         default:
@@ -2806,7 +2902,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_54
+    - *ref_56
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2819,7 +2915,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -2841,14 +2937,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_21
+      schema: *ref_22
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: DoubleQuery
+          name: doubleQuery
           description: '''9999999.999''numeric value'
           serializedName: doubleQuery
       protocol: !<!Protocols> 
@@ -2878,7 +2974,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -2900,14 +2996,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_22
+      schema: *ref_23
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: DoubleQuery
+          name: doubleQuery
           description: '''-9999999.999''numeric value'
           serializedName: doubleQuery
       protocol: !<!Protocols> 
@@ -2937,7 +3033,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -2959,9 +3055,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_56
-      schema: *ref_55
+    - *ref_12
+    - !<!Parameter> &ref_58
+      schema: *ref_57
       implementation: Method
       language: !<!Languages> 
         default:
@@ -2983,7 +3079,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_56
+    - *ref_58
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2996,7 +3092,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -3018,14 +3114,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_23
+      schema: *ref_24
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: StringQuery
+          name: stringQuery
           description: '''啊齄丂狛狜隣郎隣兀﨩''multi-byte string value'
           serializedName: stringQuery
       protocol: !<!Protocols> 
@@ -3055,7 +3151,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -3077,14 +3173,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_24
+      schema: *ref_25
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: StringQuery
+          name: stringQuery
           description: '''begin!*''();:@ &=+$,/?#[]end'' url encoded string value'
           serializedName: stringQuery
       protocol: !<!Protocols> 
@@ -3114,7 +3210,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -3136,14 +3232,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_26
+      schema: *ref_27
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: StringQuery
+          name: stringQuery
           description: ''''' string value'
           serializedName: stringQuery
       protocol: !<!Protocols> 
@@ -3173,7 +3269,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -3195,9 +3291,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_57
-      schema: *ref_10
+    - *ref_12
+    - !<!Parameter> &ref_59
+      schema: *ref_11
       implementation: Method
       language: !<!Languages> 
         default:
@@ -3219,7 +3315,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_57
+    - *ref_59
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -3232,7 +3328,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -3254,9 +3350,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_58
-      schema: *ref_28
+    - *ref_12
+    - !<!Parameter> &ref_60
+      schema: *ref_29
       implementation: Method
       language: !<!Languages> 
         default:
@@ -3278,7 +3374,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_58
+    - *ref_60
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -3291,7 +3387,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -3313,14 +3409,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_59
-      schema: *ref_28
+    - *ref_12
+    - !<!Parameter> &ref_61
+      schema: *ref_29
       implementation: Method
       language: !<!Languages> 
         default:
           name: enumQuery
-          description: '''green color'' enum value'
+          description: null string value
           serializedName: enumQuery
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
@@ -3337,7 +3433,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_59
+    - *ref_61
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -3350,7 +3446,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -3372,9 +3468,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_60
-      schema: *ref_31
+    - *ref_12
+    - !<!Parameter> &ref_63
+      schema: *ref_62
       implementation: Method
       language: !<!Languages> 
         default:
@@ -3396,7 +3492,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_60
+    - *ref_63
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -3409,7 +3505,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -3431,14 +3527,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_33
+      schema: *ref_34
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: ByteQuery
+          name: byteQuery
           description: ''''' as byte array'
           serializedName: byteQuery
       protocol: !<!Protocols> 
@@ -3468,7 +3564,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -3490,14 +3586,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_61
-      schema: *ref_31
+    - *ref_12
+    - !<!Parameter> &ref_65
+      schema: *ref_64
       implementation: Method
       language: !<!Languages> 
         default:
           name: byteQuery
-          description: '''啊齄丂狛狜隣郎隣兀﨩'' multibyte value as utf-8 encoded byte array'
+          description: null as byte array (no query parameters in uri)
           serializedName: byteQuery
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
@@ -3514,7 +3610,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_61
+    - *ref_65
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -3527,7 +3623,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -3549,14 +3645,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_35
+      schema: *ref_37
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: DateQuery
+          name: dateQuery
           description: '''2012-01-01'' as date'
           serializedName: dateQuery
       protocol: !<!Protocols> 
@@ -3586,7 +3682,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -3608,9 +3704,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_62
-      schema: *ref_36
+    - *ref_12
+    - !<!Parameter> &ref_66
+      schema: *ref_38
       implementation: Method
       language: !<!Languages> 
         default:
@@ -3632,7 +3728,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_62
+    - *ref_66
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -3645,7 +3741,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -3667,14 +3763,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
+    - *ref_12
     - !<!Parameter> 
-      schema: *ref_38
+      schema: *ref_40
       implementation: Method
       required: true
       language: !<!Languages> 
         default:
-          name: DateTimeQuery
+          name: dateTimeQuery
           description: '''2012-01-01T01:01:01Z'' as date-time'
           serializedName: dateTimeQuery
       protocol: !<!Protocols> 
@@ -3704,7 +3800,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -3726,9 +3822,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_63
-      schema: *ref_39
+    - *ref_12
+    - !<!Parameter> &ref_67
+      schema: *ref_41
       implementation: Method
       language: !<!Languages> 
         default:
@@ -3750,7 +3846,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_63
+    - *ref_67
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -3763,7 +3859,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -3785,9 +3881,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_65
-      schema: *ref_64
+    - *ref_12
+    - !<!Parameter> &ref_69
+      schema: *ref_68
       implementation: Method
       language: !<!Languages> 
         default:
@@ -3810,7 +3906,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_65
+    - *ref_69
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -3823,7 +3919,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -3845,14 +3941,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_66
-      schema: *ref_64
+    - *ref_12
+    - !<!Parameter> &ref_71
+      schema: *ref_70
       implementation: Method
       language: !<!Languages> 
         default:
           name: arrayQuery
-          description: 'an array of string [''ArrayQuery1'', ''begin!*''();:@ &=+$,/?#[]end'' , null, ''''] using the csv-array format'
+          description: a null array of string using the csv-array format
           serializedName: arrayQuery
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
@@ -3870,7 +3966,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_66
+    - *ref_71
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -3883,7 +3979,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -3905,14 +4001,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_67
-      schema: *ref_64
+    - *ref_12
+    - !<!Parameter> &ref_73
+      schema: *ref_72
       implementation: Method
       language: !<!Languages> 
         default:
           name: arrayQuery
-          description: 'an array of string [''ArrayQuery1'', ''begin!*''();:@ &=+$,/?#[]end'' , null, ''''] using the csv-array format'
+          description: 'an empty array [] of string using the csv-array format'
           serializedName: arrayQuery
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
@@ -3930,7 +4026,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_67
+    - *ref_73
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -3943,7 +4039,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -3965,9 +4061,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_68
-      schema: *ref_64
+    - *ref_12
+    - !<!Parameter> &ref_75
+      schema: *ref_74
       implementation: Method
       language: !<!Languages> 
         default:
@@ -3990,7 +4086,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_68
+    - *ref_75
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -4003,7 +4099,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -4025,9 +4121,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_69
-      schema: *ref_64
+    - *ref_12
+    - !<!Parameter> &ref_77
+      schema: *ref_76
       implementation: Method
       language: !<!Languages> 
         default:
@@ -4050,7 +4146,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_69
+    - *ref_77
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -4063,7 +4159,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -4085,9 +4181,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_70
-      schema: *ref_64
+    - *ref_12
+    - !<!Parameter> &ref_79
+      schema: *ref_78
       implementation: Method
       language: !<!Languages> 
         default:
@@ -4110,7 +4206,7 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_70
+    - *ref_79
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -4123,7 +4219,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -4153,9 +4249,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_73
-      schema: *ref_10
+    - *ref_12
+    - !<!Parameter> &ref_82
+      schema: *ref_11
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -4166,8 +4262,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_74
-      schema: *ref_10
+    - !<!Parameter> &ref_83
+      schema: *ref_11
       implementation: Method
       language: !<!Languages> 
         default:
@@ -4177,10 +4273,10 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: query
-    - *ref_71
-    - *ref_72
-    - !<!Parameter> &ref_75
-      schema: *ref_10
+    - *ref_80
+    - *ref_81
+    - !<!Parameter> &ref_84
+      schema: *ref_11
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -4191,8 +4287,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_76
-      schema: *ref_10
+    - !<!Parameter> &ref_85
+      schema: *ref_11
       implementation: Method
       language: !<!Languages> 
         default:
@@ -4214,10 +4310,10 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_73
-    - *ref_74
-    - *ref_75
-    - *ref_76
+    - *ref_82
+    - *ref_83
+    - *ref_84
+    - *ref_85
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -4230,7 +4326,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -4254,9 +4350,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_77
-      schema: *ref_10
+    - *ref_12
+    - !<!Parameter> &ref_86
+      schema: *ref_11
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -4267,8 +4363,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_78
-      schema: *ref_10
+    - !<!Parameter> &ref_87
+      schema: *ref_11
       implementation: Method
       language: !<!Languages> 
         default:
@@ -4278,10 +4374,10 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: query
-    - *ref_71
-    - *ref_72
-    - !<!Parameter> &ref_79
-      schema: *ref_10
+    - *ref_80
+    - *ref_81
+    - !<!Parameter> &ref_88
+      schema: *ref_11
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -4292,8 +4388,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_80
-      schema: *ref_10
+    - !<!Parameter> &ref_89
+      schema: *ref_11
       implementation: Method
       language: !<!Languages> 
         default:
@@ -4315,10 +4411,10 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_77
-    - *ref_78
-    - *ref_79
-    - *ref_80
+    - *ref_86
+    - *ref_87
+    - *ref_88
+    - *ref_89
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -4331,7 +4427,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -4353,9 +4449,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_81
-      schema: *ref_10
+    - *ref_12
+    - !<!Parameter> &ref_90
+      schema: *ref_11
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -4366,8 +4462,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_82
-      schema: *ref_10
+    - !<!Parameter> &ref_91
+      schema: *ref_11
       implementation: Method
       language: !<!Languages> 
         default:
@@ -4377,10 +4473,10 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: query
-    - *ref_71
-    - *ref_72
-    - !<!Parameter> &ref_83
-      schema: *ref_10
+    - *ref_80
+    - *ref_81
+    - !<!Parameter> &ref_92
+      schema: *ref_11
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -4391,13 +4487,13 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_84
-      schema: *ref_10
+    - !<!Parameter> &ref_93
+      schema: *ref_11
       implementation: Method
       language: !<!Languages> 
         default:
           name: localStringQuery
-          description: should contain value 'localStringQuery'
+          description: should contain null value
           serializedName: localStringQuery
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
@@ -4414,10 +4510,10 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_81
-    - *ref_82
-    - *ref_83
-    - *ref_84
+    - *ref_90
+    - *ref_91
+    - *ref_92
+    - *ref_93
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -4430,7 +4526,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -4452,9 +4548,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_11
-    - !<!Parameter> &ref_85
-      schema: *ref_10
+    - *ref_12
+    - !<!Parameter> &ref_94
+      schema: *ref_11
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -4465,21 +4561,21 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_86
-      schema: *ref_10
+    - !<!Parameter> &ref_95
+      schema: *ref_11
       implementation: Method
       language: !<!Languages> 
         default:
           name: pathItemStringQuery
-          description: A string value 'pathItemStringQuery' that appears as a query parameter
+          description: should contain value null
           serializedName: pathItemStringQuery
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: query
-    - *ref_71
-    - *ref_72
-    - !<!Parameter> &ref_87
-      schema: *ref_10
+    - *ref_80
+    - *ref_81
+    - !<!Parameter> &ref_96
+      schema: *ref_11
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -4490,13 +4586,13 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_88
-      schema: *ref_10
+    - !<!Parameter> &ref_97
+      schema: *ref_11
       implementation: Method
       language: !<!Languages> 
         default:
           name: localStringQuery
-          description: should contain value 'localStringQuery'
+          description: should contain value null
           serializedName: localStringQuery
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
@@ -4513,10 +4609,10 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_85
-    - *ref_86
-    - *ref_87
-    - *ref_88
+    - *ref_94
+    - *ref_95
+    - *ref_96
+    - *ref_97
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -4529,7 +4625,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
