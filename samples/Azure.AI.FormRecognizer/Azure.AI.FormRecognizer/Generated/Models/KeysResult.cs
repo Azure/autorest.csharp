@@ -20,6 +20,6 @@ namespace Azure.AI.FormRecognizer.Models
         }
 
         /// <summary> Object mapping clusterIds to a list of keys. </summary>
-        public IReadOnlyDictionary<string, IReadOnlyList<string>> Clusters { get; } = new Dictionary<string, IList<string>>();
+        public IReadOnlyDictionary<string, IReadOnlyList<string>> Clusters { get; } = new Dictionary<string, IReadOnlyList<string>>();
     }
 }

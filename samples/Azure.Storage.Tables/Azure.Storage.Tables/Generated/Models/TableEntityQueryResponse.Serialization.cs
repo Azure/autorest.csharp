@@ -34,7 +34,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    List<IDictionary<string, object>> array = new List<IDictionary<string, object>>();
+                    List<IReadOnlyDictionary<string, object>> array = new List<IReadOnlyDictionary<string, object>>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
                         Dictionary<string, object> dictionary = new Dictionary<string, object>();

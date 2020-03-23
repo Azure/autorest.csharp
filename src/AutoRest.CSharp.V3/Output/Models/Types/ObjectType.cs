@@ -293,7 +293,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         private ObjectSerialization[] BuildSerializations()
         {
-            return _objectSchema.SerializationFormats.Select(type => _serializationBuilder.BuildObject(type, _objectSchema, this)).ToArray();
+            var typeFlags = _objectSchema.IsInput ? TypeFlags.Normal : TypeFlags.Output;
+            return _objectSchema.SerializationFormats.Select(type => _serializationBuilder.BuildObject(type, _objectSchema, this, typeFlags)).ToArray();
         }
 
         private ObjectTypeDiscriminatorImplementation[] CreateDiscriminatorImplementations(Discriminator schemaDiscriminator)
@@ -318,14 +319,16 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
                 CSharpType? implementationType = null;
 
+                var typeFlags = _objectSchema.IsInput ? TypeFlags.Normal : TypeFlags.Output;
+
                 CSharpType type = _typeFactory.CreateType(
                     property.Schema,
                     property.IsNullable(),
-                    _objectSchema.IsInput ? TypeFlags.Normal : TypeFlags.Output);
+                    typeFlags);
 
                 if (property.Required == true && (property.Schema is ArraySchema || property.Schema is DictionarySchema))
                 {
-                    implementationType = _typeFactory.CreateType(property.Schema, property.IsNullable(), TypeFlags.Implementation);
+                    implementationType = _typeFactory.CreateType(property.Schema, property.IsNullable(), typeFlags | TypeFlags.Implementation);
                 }
 
                 var accessibility = property.IsDiscriminator == true ? "internal" : "public";

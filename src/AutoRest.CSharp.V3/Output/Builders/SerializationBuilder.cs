@@ -22,12 +22,12 @@ namespace AutoRest.CSharp.V3.Output.Builders
             _typeFactory = typeFactory;
         }
 
-        public ObjectSerialization BuildObject(KnownMediaType mediaType, ObjectSchema objectSchema, ObjectType type)
+        public ObjectSerialization BuildObject(KnownMediaType mediaType, ObjectSchema objectSchema, ObjectType type, TypeFlags typeFlags)
         {
             switch (mediaType)
             {
                 case KnownMediaType.Json:
-                    return BuildJsonObjectSerialization(objectSchema, type, TypeFlags.Normal);
+                    return BuildJsonObjectSerialization(objectSchema, type, typeFlags);
                 case KnownMediaType.Xml:
                     return BuildXmlObjectSerialization(objectSchema, type);
                 default:

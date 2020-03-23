@@ -47,7 +47,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    Dictionary<string, IList<FacetResult>> dictionary = new Dictionary<string, IList<FacetResult>>();
+                    Dictionary<string, IReadOnlyList<FacetResult>> dictionary = new Dictionary<string, IReadOnlyList<FacetResult>>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         List<FacetResult> array = new List<FacetResult>();

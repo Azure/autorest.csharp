@@ -8,9 +8,9 @@ namespace AutoRest.CSharp.V3.Generation.Types
     [Flags]
     internal enum TypeFlags
     {
-        Normal = 1,
-        Input = 1 << 1,
-        Output = 1 << 2,
-        Implementation = 1 << 3,
+        Normal = 0,
+        Input = 1,
+        Output = 1 << 1,
+        Implementation = 1 << 2,
     }
 }
