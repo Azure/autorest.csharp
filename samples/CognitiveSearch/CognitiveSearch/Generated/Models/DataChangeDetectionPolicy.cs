@@ -20,7 +20,7 @@ namespace CognitiveSearch.Models
         /// <param name="odataType"> . </param>
         internal DataChangeDetectionPolicy(string odataType)
         {
-            OdataType = odataType;
+            OdataType = odataType ?? null;
         }
 
         internal string OdataType { get; set; }

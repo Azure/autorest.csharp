@@ -27,7 +27,7 @@ namespace CognitiveSearch.Models
         /// <param name="interpolation"> A value indicating how boosting will be interpolated across document scores; defaults to &quot;Linear&quot;. </param>
         internal ScoringFunction(string type, string fieldName, double boost, ScoringFunctionInterpolation? interpolation)
         {
-            Type = type;
+            Type = type ?? null;
             FieldName = fieldName;
             Boost = boost;
             Interpolation = interpolation;

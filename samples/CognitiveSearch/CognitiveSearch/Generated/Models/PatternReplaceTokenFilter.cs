@@ -26,10 +26,11 @@ namespace CognitiveSearch.Models
         /// <param name="replacement"> The replacement text. </param>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal PatternReplaceTokenFilter(string pattern, string replacement, string odataType, string name) : base(odataType ?? "#Microsoft.Azure.Search.PatternReplaceTokenFilter", name)
+        internal PatternReplaceTokenFilter(string pattern, string replacement, string odataType, string name) : base(odataType, name)
         {
             Pattern = pattern;
             Replacement = replacement;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.PatternReplaceTokenFilter";
         }
 
         /// <summary> A regular expression pattern. </summary>

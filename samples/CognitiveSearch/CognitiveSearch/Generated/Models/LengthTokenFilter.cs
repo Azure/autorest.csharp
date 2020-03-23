@@ -22,10 +22,11 @@ namespace CognitiveSearch.Models
         /// <param name="max"> The maximum length in characters. Default and maximum is 300. </param>
         /// <param name="odataType"> . </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal LengthTokenFilter(int? min, int? max, string odataType, string name) : base(odataType ?? "#Microsoft.Azure.Search.LengthTokenFilter", name)
+        internal LengthTokenFilter(int? min, int? max, string odataType, string name) : base(odataType, name)
         {
             Min = min;
             Max = max;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.LengthTokenFilter";
         }
 
         /// <summary> The minimum length in characters. Default is 0. Maximum is 300. Must be less than the value of max. </summary>

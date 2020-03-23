@@ -22,9 +22,10 @@ namespace CognitiveSearch.Models
         /// <param name="key"> . </param>
         /// <param name="odataType"> . </param>
         /// <param name="description"> . </param>
-        internal CognitiveServicesAccountKey(string key, string odataType, string description) : base(odataType ?? "#Microsoft.Azure.Search.CognitiveServicesByKey", description)
+        internal CognitiveServicesAccountKey(string key, string odataType, string description) : base(odataType, description)
         {
             Key = key;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.CognitiveServicesByKey";
         }
 
         public string Key { get; }
