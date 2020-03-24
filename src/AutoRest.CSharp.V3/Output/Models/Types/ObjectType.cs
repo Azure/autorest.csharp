@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 _sourceTypeMapping?.ExistingType);
 
             Description = BuilderHelpers.CreateDescription(objectSchema);
-            Type = new CSharpType(this, Declaration.Namespace, Declaration.Name, isValueType: false);;
+            Type = new CSharpType(this, Declaration.Namespace, Declaration.Name, isValueType: false);
         }
 
         public TypeDeclarationOptions Declaration { get; }
@@ -302,8 +302,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         {
             return schemaDiscriminator.All.Select(implementation => new ObjectTypeDiscriminatorImplementation(
                 implementation.Key,
-                _typeFactory.CreateType(implementation.Value, false),
-                schemaDiscriminator.Immediate.ContainsKey(implementation.Key)
+                _typeFactory.CreateType(implementation.Value, false)
             )).ToArray();
         }
 

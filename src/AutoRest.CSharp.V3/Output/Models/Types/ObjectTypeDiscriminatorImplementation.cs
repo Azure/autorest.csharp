@@ -8,15 +8,13 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 {
     internal class ObjectTypeDiscriminatorImplementation
     {
-        public ObjectTypeDiscriminatorImplementation(string key, CSharpType type, bool isDirect)
+        public ObjectTypeDiscriminatorImplementation(string key, CSharpType type)
         {
             Key = key;
             Type = type;
-            IsDirect = isDirect;
         }
 
         public string Key { get; }
         public CSharpType Type { get; }
-        public bool IsDirect { get; }
     }
 }
