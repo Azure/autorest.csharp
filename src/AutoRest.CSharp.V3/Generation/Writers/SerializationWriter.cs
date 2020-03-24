@@ -38,8 +38,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             using (writer.Namespace(model.Declaration.Namespace))
             {
-                writer.Append($"{model.Declaration.Accessibility} partial class {model.Declaration.Name}");
-
+                if (model.IsStruct)
+                {
+                    writer.Append($"{model.Declaration.Accessibility} partial struct {model.Declaration.Name}");
+                }
+                else
+                {
+                    writer.Append($"{model.Declaration.Accessibility} partial class {model.Declaration.Name}");
+                }
 
                 if (model.IncludeSerializer)
                 {

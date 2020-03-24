@@ -59,5 +59,35 @@ namespace AdditionalPropertiesEx
         {
             return RestClient.ReadOnly(cancellationToken);
         }
+
+        /// <summary> Create a Pet which contains more properties than what is defined. </summary>
+        /// <param name="createParameters"> The InputAdditionalPropertiesModelStruct to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> WriteOnlyStructAsync(InputAdditionalPropertiesModelStruct createParameters, CancellationToken cancellationToken = default)
+        {
+            return await RestClient.WriteOnlyStructAsync(createParameters, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary> Create a Pet which contains more properties than what is defined. </summary>
+        /// <param name="createParameters"> The InputAdditionalPropertiesModelStruct to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response WriteOnlyStruct(InputAdditionalPropertiesModelStruct createParameters, CancellationToken cancellationToken = default)
+        {
+            return RestClient.WriteOnlyStruct(createParameters, cancellationToken);
+        }
+
+        /// <summary> Create a Pet which contains more properties than what is defined. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<OutputAdditionalPropertiesModelStruct>> ReadOnlyStructAsync(CancellationToken cancellationToken = default)
+        {
+            return await RestClient.ReadOnlyStructAsync(cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary> Create a Pet which contains more properties than what is defined. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<OutputAdditionalPropertiesModelStruct> ReadOnlyStruct(CancellationToken cancellationToken = default)
+        {
+            return RestClient.ReadOnlyStruct(cancellationToken);
+        }
     }
 }

@@ -51,7 +51,15 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 writer.WriteXmlDocumentationSummary(schema.Description);
 
-                writer.Append($"{schema.Declaration.Accessibility} partial class {schema.Declaration.Name}");
+                if (schema.IsStruct)
+                {
+                    writer.Append($"{schema.Declaration.Accessibility} readonly partial struct {schema.Declaration.Name}");
+                }
+                else
+                {
+                    writer.Append($"{schema.Declaration.Accessibility} partial class {schema.Declaration.Name}");
+                }
+
                 if (implementsTypes.Any())
                 {
                     writer.AppendRaw(" : ");

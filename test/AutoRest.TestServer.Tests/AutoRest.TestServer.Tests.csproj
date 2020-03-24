@@ -21,6 +21,18 @@
     <Compile Include="../TestServerProjects/**/*.cs" LinkBase="TestServerProjects" />
     <Compile Include="../TestProjects/**/*.cs" LinkBase="TestProjects" />
     <None Include="../TestServerProjects/**/*.yaml" LinkBase="TestServerProjects" />
+    <Compile Update="..\TestProjects\AdditionalPropertiesEx\InputAdditionalPropertiesModelStruct.cs">
+      <LinkBase>TestProjects</LinkBase>
+      <Link>TestProjects\AdditionalPropertiesEx\InputAdditionalPropertiesModelStruct.cs</Link>
+    </Compile>
+    <Compile Update="..\TestProjects\AdditionalPropertiesEx\OutputAdditionalPropertiesModelStruct.cs">
+      <LinkBase>TestProjects</LinkBase>
+      <Link>TestProjects\AdditionalPropertiesEx\OutputAdditionalPropertiesModelStruct.cs</Link>
+    </Compile>
+    <Compile Update="..\TestProjects\TypeSchemaMapping\Customized\RenamedModelStruct.cs">
+      <LinkBase>TestProjects</LinkBase>
+      <Link>TestProjects\TypeSchemaMapping\Customized\RenamedModelStruct.cs</Link>
+    </Compile>
   </ItemGroup>
 
 </Project>

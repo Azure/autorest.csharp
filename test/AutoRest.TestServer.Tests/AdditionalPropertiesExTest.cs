@@ -15,10 +15,12 @@ namespace AutoRest.TestServer.Tests
 {
     public class AdditionalPropertiesExTest
     {
-        [Test]
-        public void InputModelsImplementIDictionary()
+        [Theory]
+        [TestCase(typeof(InputAdditionalPropertiesModel))]
+        [TestCase(typeof(InputAdditionalPropertiesModelStruct))]
+        public void InputModelsImplementIDictionary(Type type)
         {
-            var iface = typeof(InputAdditionalPropertiesModel)
+            var iface = type
                 .GetInterfaces()
                 .SingleOrDefault(i => i.IsConstructedGenericType && i.GetGenericTypeDefinition() == typeof(IDictionary<,>));
 
@@ -27,16 +29,32 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(typeof(object), iface.GenericTypeArguments[1]);
         }
 
-        [Test]
-        public void OutputModelsImplementIReadOnlyDictionary()
+        [Theory]
+        [TestCase(typeof(OutputAdditionalPropertiesModel))]
+        [TestCase(typeof(OutputAdditionalPropertiesModelStruct))]
+        public void OutputModelsImplementIReadOnlyDictionary(Type type)
         {
-            var iface = typeof(OutputAdditionalPropertiesModel)
+            var iface = type
                 .GetInterfaces()
                 .SingleOrDefault(i => i.IsConstructedGenericType && i.GetGenericTypeDefinition() == typeof(IReadOnlyDictionary<,>));
 
             Assert.NotNull(iface);
             Assert.AreEqual(typeof(string), iface.GenericTypeArguments[0]);
             Assert.AreEqual(typeof(string), iface.GenericTypeArguments[1]);
+        }
+
+        [Test]
+        public void CanCreateStructWithAdditionalProperties()
+        {
+            var s = new InputAdditionalPropertiesModelStruct(123, new Dictionary<string, object>()
+            {
+                {"a", "b"},
+                {"c", 2}
+            });
+
+            Assert.AreEqual(123, s.Id);
+            Assert.AreEqual("b", s["a"]);
+            Assert.AreEqual(2, s["c"]);
         }
     }
 }
