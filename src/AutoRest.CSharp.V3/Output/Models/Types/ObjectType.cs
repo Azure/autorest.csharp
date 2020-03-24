@@ -47,8 +47,12 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 _sourceTypeMapping?.ExistingType);
 
             Description = BuilderHelpers.CreateDescription(objectSchema);
-            Type = new CSharpType(this, Declaration.Namespace, Declaration.Name, isValueType: false);;
+            IsStruct = _sourceTypeMapping?.ExistingType.IsValueType == true;
+
+            Type = new CSharpType(this, Declaration.Namespace, Declaration.Name, isValueType: IsStruct);;
         }
+
+        public bool IsStruct { get; }
 
         public TypeDeclarationOptions Declaration { get; }
 
@@ -108,7 +112,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 initializers.Add(initializer);
 
                 // Only required properties that are not discriminators go into default ctor
-                if (property.SchemaProperty?.Required != true ||
+                // For structs all properties become required
+                if ((!IsStruct && property.SchemaProperty?.Required != true) ||
                     property == Discriminator?.Property)
                 {
                     continue;
@@ -171,7 +176,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, BuilderHelpers.StringConstant(Discriminator.Value)));
             }
 
-            if (AdditionalPropertiesProperty != null)
+            // In structs additional properties would become required and get initialized from parameter
+            if (AdditionalPropertiesProperty != null && !IsStruct)
             {
                 var implType = new CSharpType(typeof(Dictionary<,>), AdditionalPropertiesProperty.Declaration.Type.Arguments);
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(AdditionalPropertiesProperty, Constant.NewInstanceOf(implType)));
@@ -315,6 +321,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             {
                 SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetMemberForSchema(property.SerializedName);
                 bool isReadOnly =
+                    IsStruct ||
                     property.IsDiscriminator != true &&
                     (property.ReadOnly == true ||
                      property.Required == true ||

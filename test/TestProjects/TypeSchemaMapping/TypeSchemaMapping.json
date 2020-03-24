@@ -37,6 +37,28 @@
           }
         }
       }
+    },
+    "/OperationStruct/": {
+      "patch": {
+        "operationId": "OperationStruct",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ModelStruct"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ModelStruct"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -81,6 +103,17 @@
         "DaysOfWeek",
         "Fruit"
       ]
+    },
+    "ModelStruct": {
+      "type": "object",
+      "properties": {
+        "ModelProperty": {
+          "type": "object",
+          "$ref": "#/definitions/Model",
+          "description": "A description about the set of tags.",
+          "x-ms-client-flatten": true
+        }
+      }
     }
   }
 }

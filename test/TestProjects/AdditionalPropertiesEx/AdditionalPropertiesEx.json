@@ -60,6 +60,51 @@
           }
         }
       }
+    },
+    "/ap_struct_operation": {
+      "get": {
+        "operationId": "AP_writeOnlyStruct",
+        "description": "Create a Pet which contains more properties than what is defined.",
+        "parameters": [
+          {
+            "name": "createParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InputAdditionalPropertiesModelStruct"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Pet which contains more properties than what is defined."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "AP_readOnlyStruct",
+        "description": "Create a Pet which contains more properties than what is defined.",
+        "responses": {
+          "200": {
+            "description": "A Pet which contains more properties than what is defined.",
+            "schema": {
+              "$ref": "#/definitions/OutputAdditionalPropertiesModelStruct"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -89,7 +134,35 @@
         "type": "object"
       }
     },
+    "InputAdditionalPropertiesModelStruct": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
     "OutputAdditionalPropertiesModel": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "OutputAdditionalPropertiesModelStruct": {
       "type": "object",
       "required": [
         "id"

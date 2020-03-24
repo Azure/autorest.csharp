@@ -150,9 +150,61 @@ schemas: !<!Schemas>
     usage:
     - input
     - output
+    extensions:
+      x-ms-flattened: true
     language: !<!Languages> 
       default:
         name: Model
+        description: ''
+        namespace: ''
+    protocol: !<!Protocols> {}
+  - !<!ObjectSchema> &ref_8
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: *ref_1
+      flattenedNames:
+      - ModelProperty
+      - ModelProperty
+      serializedName: ModelProperty
+      language: !<!Languages> 
+        default:
+          name: modelProperty
+          description: A description about the set of tags.
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_2
+      flattenedNames:
+      - ModelProperty
+      - Fruit
+      serializedName: Fruit
+      language: !<!Languages> 
+        default:
+          name: fruit
+          description: Fruit
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_3
+      flattenedNames:
+      - ModelProperty
+      - DaysOfWeek
+      serializedName: DaysOfWeek
+      language: !<!Languages> 
+        default:
+          name: daysOfWeek
+          description: Day of week
+      protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - input
+    - output
+    language: !<!Languages> 
+      default:
+        name: ModelStruct
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
@@ -239,6 +291,71 @@ operationGroups:
     language: !<!Languages> 
       default:
         name: Operation
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    parameters:
+    - *ref_4
+    requests:
+    - !<!Request> 
+      parameters:
+      - !<!Parameter> 
+        schema: *ref_5
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_9
+        schema: *ref_8
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: body
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters:
+      - *ref_9
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /OperationStruct/
+          method: patch
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    signatureParameters: []
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_8
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    language: !<!Languages> 
+      default:
+        name: OperationStruct
         description: ''
     protocol: !<!Protocols> {}
   language: !<!Languages> 
