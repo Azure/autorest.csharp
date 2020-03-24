@@ -10,7 +10,6 @@ namespace AutoRest.CSharp.V3.Generation.Types
     {
         Normal = 0,
         Input = 1,
-        Output = 1 << 1,
-        Implementation = 1 << 2,
+        Output = 1 << 1
     }
 }

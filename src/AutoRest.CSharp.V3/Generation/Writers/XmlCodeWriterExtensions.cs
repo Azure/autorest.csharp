@@ -262,14 +262,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     {
                         var objectTypeProperty = variable.Key;
                         writer.Append($"{objectTypeProperty.Declaration.Type} {variable.Value:D} = ");
-                        if (objectTypeProperty.InitializeWithType != null)
-                        {
-                            writer.Append($"new {objectTypeProperty.InitializeWithType}()");
-                        }
-                        else
-                        {
-                            writer.Append($"default");
-                        }
+                        writer.Append($"default");
                         writer.Line($";");
                     }
 

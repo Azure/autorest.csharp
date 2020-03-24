@@ -26,28 +26,60 @@ namespace AutoRest.CSharp.V3.Generation.Types
             ArraySchema array => new CSharpType(
                 GetListType(typeFlags),
                 isNullable,
-                CreateType(array.ElementType, false, RemoveImplementation(typeFlags))),
+                CreateType(array.ElementType, false, typeFlags)),
             DictionarySchema dictionary => new CSharpType(
                 GetDictionaryType(typeFlags),
                 isNullable,
-                new CSharpType(typeof(string)), CreateType(dictionary.ElementType, false, RemoveImplementation(typeFlags))),
+                new CSharpType(typeof(string)), CreateType(dictionary.ElementType, false, typeFlags)),
             NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
             _ when ToFrameworkType(schema.Type) is Type type => new CSharpType(type, isNullable),
             _ => _library.FindTypeForSchema(schema).Type.WithNullable(isNullable)
         };
 
-        private static TypeFlags RemoveImplementation(TypeFlags flags)
+        public CSharpType GetImplementationType(CSharpType type)
         {
-            return flags & ~TypeFlags.Implementation;
+            if (type.IsFrameworkType)
+            {
+                if (type.FrameworkType == typeof(IEnumerable<>) ||
+                    type.FrameworkType == typeof(IReadOnlyList<>) ||
+                    type.FrameworkType == typeof(IList<>))
+                {
+                    return new CSharpType(typeof(List<>), type.Arguments);
+                }
+
+                if (type.FrameworkType == typeof(IDictionary<,>) ||
+                    type.FrameworkType == typeof(IReadOnlyDictionary<,>))
+                {
+                    return new CSharpType(typeof(Dictionary<,>), type.Arguments);
+                }
+            }
+
+            return type;
+        }
+
+        public CSharpType GetElementType(CSharpType type)
+        {
+            if (type.IsFrameworkType)
+            {
+                if (type.FrameworkType == typeof(IEnumerable<>) ||
+                    type.FrameworkType == typeof(IReadOnlyList<>) ||
+                    type.FrameworkType == typeof(IList<>))
+                {
+                    return type.Arguments[0];
+                }
+
+                if (type.FrameworkType == typeof(IDictionary<,>) ||
+                    type.FrameworkType == typeof(IReadOnlyDictionary<,>))
+                {
+                    return type.Arguments[1];
+                }
+            }
+
+            throw new NotSupportedException(type.Name);
         }
 
         private static Type GetListType(TypeFlags typeFlags)
         {
-            if ((typeFlags & TypeFlags.Implementation) > 0)
-            {
-                return typeof(List<>);
-            }
-
             return typeFlags switch
             {
                 TypeFlags.Normal => typeof(IList<>),
@@ -59,11 +91,6 @@ namespace AutoRest.CSharp.V3.Generation.Types
 
         private static Type GetDictionaryType(TypeFlags typeFlags)
         {
-            if ((typeFlags & TypeFlags.Implementation) > 0)
-            {
-                return typeof(Dictionary<,>);
-            }
-
             return typeFlags switch
             {
                 TypeFlags.Normal => typeof(IDictionary<,>),

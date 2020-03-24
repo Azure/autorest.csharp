@@ -80,11 +80,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         writer.Append($"{property.Declaration.Accessibility} {propertyType} {property.Declaration.Name:D}");
                         writer.AppendRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
 
-                        if (property.InitializeWithType != null)
-                        {
-                            writer.Append($" = new {property.InitializeWithType}();");
-                        }
-
                         writer.Line();
                     }
 

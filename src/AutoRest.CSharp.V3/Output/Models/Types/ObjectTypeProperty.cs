@@ -3,24 +3,21 @@
 
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Input;
-using AutoRest.CSharp.V3.Output.Models.Shared;
 
 namespace AutoRest.CSharp.V3.Output.Models.Types
 {
     internal class ObjectTypeProperty
     {
-        public ObjectTypeProperty(MemberDeclarationOptions declaration, string description, bool isReadOnly, CSharpType? initializeWithType, Property? schemaProperty, Constant? defaultValue = null)
+        public ObjectTypeProperty(MemberDeclarationOptions declaration, string description, bool isReadOnly, Property? schemaProperty)
         {
             Description = description;
             IsReadOnly = isReadOnly;
-            InitializeWithType = initializeWithType;
             SchemaProperty = schemaProperty;
             Declaration = declaration;
         }
 
         public MemberDeclarationOptions Declaration { get; }
         public string Description { get; }
-        public CSharpType? InitializeWithType { get; }
         public Property? SchemaProperty { get; }
         public bool IsReadOnly { get; }
     }
