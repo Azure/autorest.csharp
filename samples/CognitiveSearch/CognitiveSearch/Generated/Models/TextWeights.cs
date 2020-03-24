@@ -20,6 +20,6 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The dictionary of per-field weights to boost document scoring. The keys are field names and the values are the weights for each field. </summary>
-        public IDictionary<string, double> Weights { get; } = new Dictionary<string, double>();
+        public IDictionary<string, double> Weights { get; }
     }
 }

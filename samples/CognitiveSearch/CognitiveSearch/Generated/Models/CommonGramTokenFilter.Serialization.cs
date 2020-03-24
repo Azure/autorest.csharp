@@ -42,7 +42,7 @@ namespace CognitiveSearch.Models
 
         internal static CommonGramTokenFilter DeserializeCommonGramTokenFilter(JsonElement element)
         {
-            IList<string> commonWords = new List<string>();
+            IList<string> commonWords = default;
             bool? ignoreCase = default;
             bool? queryMode = default;
             string odatatype = default;

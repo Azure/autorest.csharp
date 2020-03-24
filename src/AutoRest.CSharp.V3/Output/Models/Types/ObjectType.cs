@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             _objectSchema = objectSchema;
             _sourceTypeMapping = context.SourceInputModel.FindForSchema(_objectSchema.Name);
             _typeFactory = context.TypeFactory;
-            _serializationBuilder = new SerializationBuilder(_typeFactory);
+            _serializationBuilder = new SerializationBuilder();
 
             Schema = objectSchema;
             Declaration = BuilderHelpers.CreateTypeAttributes(
@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             Description = BuilderHelpers.CreateDescription(objectSchema);
             IsStruct = _sourceTypeMapping?.ExistingType.IsValueType == true;
 
-            Type = new CSharpType(this, Declaration.Namespace, Declaration.Name, isValueType: IsStruct);;
+            Type = new CSharpType(this, Declaration.Namespace, Declaration.Name, isValueType: IsStruct);
         }
 
         public bool IsStruct { get; }
@@ -80,7 +80,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "internal", memberMapping?.ExistingMember),
                     string.Empty,
                     true,
-                    null,
                     null);
 
                 return _additionalPropertiesProperty;
@@ -302,16 +301,14 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         private ObjectSerialization[] BuildSerializations()
         {
-            var typeFlags = _objectSchema.IsInput ? TypeFlags.Normal : TypeFlags.Output;
-            return _objectSchema.SerializationFormats.Select(type => _serializationBuilder.BuildObject(type, _objectSchema, this, typeFlags)).ToArray();
+            return _objectSchema.SerializationFormats.Select(type => _serializationBuilder.BuildObject(type, _objectSchema, this)).ToArray();
         }
 
         private ObjectTypeDiscriminatorImplementation[] CreateDiscriminatorImplementations(Discriminator schemaDiscriminator)
         {
             return schemaDiscriminator.All.Select(implementation => new ObjectTypeDiscriminatorImplementation(
                 implementation.Key,
-                _typeFactory.CreateType(implementation.Value, false),
-                schemaDiscriminator.Immediate.ContainsKey(implementation.Key)
+                _typeFactory.CreateType(implementation.Value, false)
             )).ToArray();
         }
 
@@ -327,8 +324,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                      property.Required == true ||
                      !_objectSchema.IsInput);
 
-                CSharpType? implementationType = null;
-
                 var typeFlags = _objectSchema.IsInput ? TypeFlags.Normal : TypeFlags.Output;
 
                 CSharpType type = _typeFactory.CreateType(
@@ -336,18 +331,12 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     property.IsNullable(),
                     typeFlags);
 
-                if (property.Required == true && (property.Schema is ArraySchema || property.Schema is DictionarySchema))
-                {
-                    implementationType = _typeFactory.CreateType(property.Schema, property.IsNullable(), typeFlags | TypeFlags.Implementation);
-                }
-
                 var accessibility = property.IsDiscriminator == true ? "internal" : "public";
 
                 yield return new ObjectTypeProperty(
                     BuilderHelpers.CreateMemberDeclaration(property.CSharpName(), type, accessibility, memberMapping?.ExistingMember),
                     BuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
                     isReadOnly,
-                    implementationType,
                     property);
             }
 

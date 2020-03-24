@@ -37,9 +37,9 @@ namespace CognitiveServices.TextAnalytics.Models
         }
 
         /// <summary> Sentiment analysis per document. </summary>
-        public IReadOnlyList<DocumentSentiment> Documents { get; } = new List<DocumentSentiment>();
+        public IReadOnlyList<DocumentSentiment> Documents { get; }
         /// <summary> Errors by document id. </summary>
-        public IReadOnlyList<DocumentError> Errors { get; } = new List<DocumentError>();
+        public IReadOnlyList<DocumentError> Errors { get; }
         /// <summary> if showStats=true was specified in the request this field will contain information about the request payload. </summary>
         public RequestStatistics Statistics { get; }
         /// <summary> This field indicates which model is used for scoring. </summary>

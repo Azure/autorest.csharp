@@ -187,16 +187,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     foreach (var variable in propertyVariables)
                     {
                         var objectTypeProperty = variable.Key;
-                        writer.Append($"{objectTypeProperty.Declaration.Type} {variable.Value:D} = ");
-                        if (objectTypeProperty.InitializeWithType != null)
-                        {
-                            writer.Append($"new {objectTypeProperty.InitializeWithType}()");
-                        }
-                        else
-                        {
-                            writer.Append($"default");
-                        }
-                        writer.Line($";");
+                        writer.Line($"{objectTypeProperty.Declaration.Type} {variable.Value:D} = default;");
                     }
                 }
 

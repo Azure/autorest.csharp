@@ -43,7 +43,7 @@ namespace CognitiveSearch.Models
         /// <summary> The description of the skillset. </summary>
         public string Description { get; }
         /// <summary> A list of skills in the skillset. </summary>
-        public IList<Skill> Skills { get; } = new List<Skill>();
+        public IList<Skill> Skills { get; }
         /// <summary> Details about cognitive services to be used when running skills. </summary>
         public CognitiveServicesAccount CognitiveServicesAccount { get; set; }
         /// <summary> The ETag of the skillset. </summary>

@@ -33,7 +33,7 @@ namespace Azure.AI.FormRecognizer.Models
         }
 
         /// <summary> List of the documents used to train the model and any errors reported in each document. </summary>
-        public IReadOnlyList<TrainingDocumentInfo> TrainingDocuments { get; } = new List<TrainingDocumentInfo>();
+        public IReadOnlyList<TrainingDocumentInfo> TrainingDocuments { get; }
         /// <summary> List of fields used to train the model and the train operation error reported by each. </summary>
         public IReadOnlyList<FormFieldsReport> Fields { get; }
         /// <summary> Average accuracy. </summary>

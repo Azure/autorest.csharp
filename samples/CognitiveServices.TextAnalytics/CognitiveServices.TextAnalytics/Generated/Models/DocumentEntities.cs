@@ -35,7 +35,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Unique, non-empty document identifier. </summary>
         public string Id { get; }
         /// <summary> Recognized entities in the document. </summary>
-        public IReadOnlyList<Entity> Entities { get; } = new List<Entity>();
+        public IReadOnlyList<Entity> Entities { get; }
         /// <summary> if showStats=true was specified in the request this field will contain information about the document payload. </summary>
         public DocumentStatistics Statistics { get; }
     }

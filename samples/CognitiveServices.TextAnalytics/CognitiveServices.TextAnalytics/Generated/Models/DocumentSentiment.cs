@@ -49,6 +49,6 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Document level sentiment confidence scores between 0 and 1 for each sentiment class. </summary>
         public SentimentConfidenceScorePerLabel DocumentScores { get; }
         /// <summary> Sentence level sentiment analysis. </summary>
-        public IReadOnlyList<SentenceSentiment> Sentences { get; } = new List<SentenceSentiment>();
+        public IReadOnlyList<SentenceSentiment> Sentences { get; }
     }
 }

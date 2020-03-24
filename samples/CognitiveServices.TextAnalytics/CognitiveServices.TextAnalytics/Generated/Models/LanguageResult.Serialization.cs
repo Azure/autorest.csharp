@@ -15,8 +15,8 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static LanguageResult DeserializeLanguageResult(JsonElement element)
         {
-            IReadOnlyList<DocumentLanguage> documents = new List<DocumentLanguage>();
-            IReadOnlyList<DocumentError> errors = new List<DocumentError>();
+            IReadOnlyList<DocumentLanguage> documents = default;
+            IReadOnlyList<DocumentError> errors = default;
             RequestStatistics statistics = default;
             string modelVersion = default;
             foreach (var property in element.EnumerateObject())

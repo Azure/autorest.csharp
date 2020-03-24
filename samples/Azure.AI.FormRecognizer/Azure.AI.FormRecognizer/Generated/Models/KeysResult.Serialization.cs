@@ -15,7 +15,7 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static KeysResult DeserializeKeysResult(JsonElement element)
         {
-            IReadOnlyDictionary<string, IReadOnlyList<string>> clusters = new Dictionary<string, IReadOnlyList<string>>();
+            IReadOnlyDictionary<string, IReadOnlyList<string>> clusters = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("clusters"))

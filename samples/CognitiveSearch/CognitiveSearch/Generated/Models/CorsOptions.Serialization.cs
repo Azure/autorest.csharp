@@ -33,7 +33,7 @@ namespace CognitiveSearch.Models
 
         internal static CorsOptions DeserializeCorsOptions(JsonElement element)
         {
-            IList<string> allowedOrigins = new List<string>();
+            IList<string> allowedOrigins = default;
             long? maxAgeInSeconds = default;
             foreach (var property in element.EnumerateObject())
             {

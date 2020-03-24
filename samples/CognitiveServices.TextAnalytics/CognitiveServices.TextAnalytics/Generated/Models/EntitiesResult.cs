@@ -37,9 +37,9 @@ namespace CognitiveServices.TextAnalytics.Models
         }
 
         /// <summary> Response by document. </summary>
-        public IReadOnlyList<DocumentEntities> Documents { get; } = new List<DocumentEntities>();
+        public IReadOnlyList<DocumentEntities> Documents { get; }
         /// <summary> Errors by document id. </summary>
-        public IReadOnlyList<DocumentError> Errors { get; } = new List<DocumentError>();
+        public IReadOnlyList<DocumentError> Errors { get; }
         /// <summary> if showStats=true was specified in the request this field will contain information about the request payload. </summary>
         public RequestStatistics Statistics { get; }
         /// <summary> This field indicates which model is used for scoring. </summary>

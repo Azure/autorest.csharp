@@ -15,19 +15,12 @@ namespace AutoRest.CSharp.V3.Output.Builders
 {
     internal class SerializationBuilder
     {
-        private readonly TypeFactory _typeFactory;
-
-        public SerializationBuilder(TypeFactory typeFactory)
-        {
-            _typeFactory = typeFactory;
-        }
-
-        public ObjectSerialization BuildObject(KnownMediaType mediaType, ObjectSchema objectSchema, ObjectType type, TypeFlags typeFlags)
+        public ObjectSerialization BuildObject(KnownMediaType mediaType, ObjectSchema objectSchema, ObjectType type)
         {
             switch (mediaType)
             {
                 case KnownMediaType.Json:
-                    return BuildJsonObjectSerialization(objectSchema, type, typeFlags);
+                    return BuildJsonObjectSerialization(objectSchema, type);
                 case KnownMediaType.Xml:
                     return BuildXmlObjectSerialization(objectSchema, type);
                 default:
@@ -35,20 +28,20 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
         }
 
-        public ObjectSerialization Build(KnownMediaType mediaType, Schema schema, bool isNullable, TypeFlags typeFlags)
+        public ObjectSerialization Build(KnownMediaType mediaType, Schema schema, CSharpType type)
         {
             switch (mediaType)
             {
                 case KnownMediaType.Json:
-                    return BuildSerialization(schema, isNullable, typeFlags);
+                    return BuildSerialization(schema, type);
                 case KnownMediaType.Xml:
-                    return BuildXmlElementSerialization(schema, isNullable, schema.XmlName ?? schema.Name, true);
+                    return BuildXmlElementSerialization(schema, type, schema.XmlName ?? schema.Name, true);
                 default:
                     throw new NotImplementedException(mediaType.ToString());
             }
         }
 
-        private XmlElementSerialization BuildXmlElementSerialization(Schema schema, bool isNullable, string? name, bool isRoot)
+        private XmlElementSerialization BuildXmlElementSerialization(Schema schema, CSharpType type, string? name, bool isRoot)
         {
             string xmlName =
                 schema.XmlName ??
@@ -58,50 +51,49 @@ namespace AutoRest.CSharp.V3.Output.Builders
             switch (schema)
             {
                 case ConstantSchema constantSchema:
-                    return BuildXmlElementSerialization(constantSchema.ValueType, constantSchema.Value.Value == null, name, false);
+                    return BuildXmlElementSerialization(constantSchema.ValueType, type, name, false);
                 case ArraySchema arraySchema:
                     var wrapped = isRoot || arraySchema.Serialization?.Xml?.Wrapped == true;
 
                     return new XmlArraySerialization(
-                        _typeFactory.CreateType(arraySchema, isNullable: false, TypeFlags.Implementation),
-                        BuildXmlElementSerialization(arraySchema.ElementType, false, null, false),
+                        TypeFactory.GetImplementationType(type),
+                        BuildXmlElementSerialization(arraySchema.ElementType, TypeFactory.GetElementType(type), null, false),
                         xmlName,
                         wrapped);
 
                 case DictionarySchema dictionarySchema:
                     return new XmlDictionarySerialization(
-                        _typeFactory.CreateType(dictionarySchema, isNullable: false, TypeFlags.Implementation),
-                        BuildXmlElementSerialization(dictionarySchema.ElementType, false, null, false),
+                        TypeFactory.GetImplementationType(type),
+                        BuildXmlElementSerialization(dictionarySchema.ElementType,TypeFactory.GetElementType(type), null, false),
                         xmlName);
                 default:
-                    return new XmlElementValueSerialization(xmlName, BuildXmlValueSerialization(schema, isNullable));
+                    return new XmlElementValueSerialization(xmlName, BuildXmlValueSerialization(schema, type));
             }
         }
 
-        private XmlValueSerialization BuildXmlValueSerialization(Schema schema, bool isNullable)
+        private XmlValueSerialization BuildXmlValueSerialization(Schema schema, CSharpType type)
         {
-            return new XmlValueSerialization(_typeFactory.CreateType(schema, isNullable),
-                    BuilderHelpers.GetSerializationFormat(schema));
+            return new XmlValueSerialization(type, BuilderHelpers.GetSerializationFormat(schema));
         }
 
-        private JsonSerialization BuildSerialization(Schema schema, bool isNullable, TypeFlags typeFlags)
+        private JsonSerialization BuildSerialization(Schema schema, CSharpType type)
         {
             switch (schema)
             {
                 case ConstantSchema constantSchema:
-                    return BuildSerialization(constantSchema.ValueType, constantSchema.Value.Value == null, typeFlags);
+                    return BuildSerialization(constantSchema.ValueType, type);
                 case ArraySchema arraySchema:
                     return new JsonArraySerialization(
-                        _typeFactory.CreateType(arraySchema, isNullable, typeFlags | TypeFlags.Implementation),
-                        BuildSerialization(arraySchema.ElementType, false, typeFlags));
+                        TypeFactory.GetImplementationType(type),
+                        BuildSerialization(arraySchema.ElementType, TypeFactory.GetElementType(type)));
                 case DictionarySchema dictionarySchema:
                     return new JsonDictionarySerialization(
-                        _typeFactory.CreateType(dictionarySchema, isNullable, typeFlags | TypeFlags.Implementation),
-                        BuildSerialization(dictionarySchema.ElementType, false, typeFlags)
+                        TypeFactory.GetImplementationType(type),
+                        BuildSerialization(dictionarySchema.ElementType, TypeFactory.GetElementType(type))
                         );
                 default:
                     return new JsonValueSerialization(
-                        _typeFactory.CreateType(schema, isNullable),
+                        type,
                         BuilderHelpers.GetSerializationFormat(schema));
             }
         }
@@ -126,13 +118,13 @@ namespace AutoRest.CSharp.V3.Output.Builders
                             new XmlObjectAttributeSerialization(
                                 name,
                                 objectProperty,
-                                BuildXmlValueSerialization(property.Schema, property.IsNullable())
+                                BuildXmlValueSerialization(property.Schema, objectProperty.Declaration.Type)
                             )
                         );
                     }
                     else
                     {
-                        XmlElementSerialization valueSerialization = BuildXmlElementSerialization(property.Schema, property.IsNullable(), name, false);
+                        XmlElementSerialization valueSerialization = BuildXmlElementSerialization(property.Schema, objectProperty.Declaration.Type, name, false);
 
                         if (valueSerialization is XmlArraySerialization arraySerialization)
                         {
@@ -157,7 +149,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 );
         }
 
-        private IEnumerable<JsonPropertySerialization> GetPropertySerializationsFromBag(PropertyBag propertyBag, ObjectType objectType, TypeFlags typeFlags)
+        private IEnumerable<JsonPropertySerialization> GetPropertySerializationsFromBag(PropertyBag propertyBag, ObjectType objectType)
         {
             foreach (Property property in propertyBag.Properties)
             {
@@ -166,27 +158,27 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 yield return new JsonPropertySerialization(
                     property.SerializedName,
                     objectProperty,
-                    BuildSerialization(property.Schema, property.IsNullable(), typeFlags)
+                    BuildSerialization(property.Schema, objectProperty.Declaration.Type)
                     );
             }
 
             foreach ((string name, PropertyBag innerBag) in propertyBag.Bag)
             {
-                JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag, objectType, typeFlags).ToArray();
+                JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag, objectType).ToArray();
                 JsonObjectSerialization objectSerialization = new JsonObjectSerialization(null, serializationProperties, null);
                 yield return new JsonPropertySerialization(name, null, objectSerialization);
             }
         }
 
-        private JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, ObjectType objectType, TypeFlags typeFlags)
+        private JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, ObjectType objectType)
         {
             PropertyBag propertyBag = new PropertyBag();
             propertyBag.Properties.AddRange(EnumerateHierarchy(objectSchema).SelectMany(s => s.Properties!));
             PopulatePropertyBag(propertyBag, 0);
             return new JsonObjectSerialization(
                 objectType.Type,
-                GetPropertySerializationsFromBag(propertyBag, objectType, typeFlags).ToArray(),
-                CreateAdditionalProperties(objectSchema, objectType, typeFlags));
+                GetPropertySerializationsFromBag(propertyBag, objectType).ToArray(),
+                CreateAdditionalProperties(objectSchema, objectType));
         }
 
         private class PropertyBag
@@ -233,7 +225,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
         }
 
-        private JsonAdditionalPropertiesSerialization? CreateAdditionalProperties(ObjectSchema objectSchema, ObjectType objectType, TypeFlags typeFlags)
+        private JsonAdditionalPropertiesSerialization? CreateAdditionalProperties(ObjectSchema objectSchema, ObjectType objectType)
         {
             var inheritedDictionarySchema = objectSchema.Parents!.All.OfType<DictionarySchema>().FirstOrDefault();
 
@@ -252,7 +244,9 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 return null;
             }
 
-            var valueSerialization = BuildSerialization(inheritedDictionarySchema.ElementType, false, typeFlags);
+            var valueSerialization = BuildSerialization(
+                inheritedDictionarySchema.ElementType,
+                TypeFactory.GetElementType(additionalPropertiesProperty.Declaration.Type));
 
             return new JsonAdditionalPropertiesSerialization(
                     additionalPropertiesProperty,

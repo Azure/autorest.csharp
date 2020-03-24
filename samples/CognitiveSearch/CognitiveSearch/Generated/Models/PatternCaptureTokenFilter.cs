@@ -34,7 +34,7 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> A list of patterns to match against each token. </summary>
-        public IList<string> Patterns { get; } = new List<string>();
+        public IList<string> Patterns { get; }
         /// <summary> A value indicating whether to return the original token even if one of the patterns matches. Default is true. </summary>
         public bool? PreserveOriginal { get; set; }
     }

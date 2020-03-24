@@ -32,6 +32,6 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> A list of mappings of the following format: &quot;a=&gt;b&quot; (all occurrences of the character &quot;a&quot; will be replaced with character &quot;b&quot;). </summary>
-        public IList<string> Mappings { get; } = new List<string>();
+        public IList<string> Mappings { get; }
     }
 }

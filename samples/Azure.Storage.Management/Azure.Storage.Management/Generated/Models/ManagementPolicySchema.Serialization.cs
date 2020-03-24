@@ -28,7 +28,7 @@ namespace Azure.Storage.Management.Models
 
         internal static ManagementPolicySchema DeserializeManagementPolicySchema(JsonElement element)
         {
-            IList<ManagementPolicyRule> rules = new List<ManagementPolicyRule>();
+            IList<ManagementPolicyRule> rules = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("rules"))

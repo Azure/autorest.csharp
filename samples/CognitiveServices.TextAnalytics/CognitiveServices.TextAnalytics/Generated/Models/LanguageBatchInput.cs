@@ -19,6 +19,6 @@ namespace CognitiveServices.TextAnalytics.Models
             Documents = documents;
         }
 
-        public IList<LanguageInput> Documents { get; } = new List<LanguageInput>();
+        public IList<LanguageInput> Documents { get; }
     }
 }

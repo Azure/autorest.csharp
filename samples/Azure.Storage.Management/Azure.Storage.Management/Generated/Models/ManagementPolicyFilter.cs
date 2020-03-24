@@ -31,6 +31,6 @@ namespace Azure.Storage.Management.Models
         /// <summary> An array of strings for prefixes to be match. </summary>
         public IList<string> PrefixMatch { get; set; }
         /// <summary> An array of predefined enum values. Only blockBlob is supported. </summary>
-        public IList<string> BlobTypes { get; } = new List<string>();
+        public IList<string> BlobTypes { get; }
     }
 }

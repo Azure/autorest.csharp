@@ -37,7 +37,7 @@ namespace CognitiveSearch.Models
 
         internal static PatternCaptureTokenFilter DeserializePatternCaptureTokenFilter(JsonElement element)
         {
-            IList<string> patterns = new List<string>();
+            IList<string> patterns = default;
             bool? preserveOriginal = default;
             string odatatype = default;
             string name = default;

@@ -28,6 +28,6 @@ namespace CognitiveSearch.Models
         /// <summary> A value indicating the capabilities of the suggester. </summary>
         public SearchMode SearchMode { get; }
         /// <summary> The list of field names to which the suggester applies. Each field must be searchable. </summary>
-        public IList<string> SourceFields { get; } = new List<string>();
+        public IList<string> SourceFields { get; }
     }
 }

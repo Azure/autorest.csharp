@@ -34,7 +34,7 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The list of words to keep. </summary>
-        public IList<string> KeepWords { get; } = new List<string>();
+        public IList<string> KeepWords { get; }
         /// <summary> A value indicating whether to lower case all words first. Default is false. </summary>
         public bool? LowerCaseKeepWords { get; set; }
     }

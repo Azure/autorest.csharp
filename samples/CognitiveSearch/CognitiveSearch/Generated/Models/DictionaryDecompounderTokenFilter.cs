@@ -40,7 +40,7 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The list of words to match against. </summary>
-        public IList<string> WordList { get; } = new List<string>();
+        public IList<string> WordList { get; }
         /// <summary> The minimum word size. Only words longer than this get processed. Default is 5. Maximum is 300. </summary>
         public int? MinWordSize { get; set; }
         /// <summary> The minimum subword size. Only subwords longer than this are outputted. Default is 2. Maximum is 300. </summary>

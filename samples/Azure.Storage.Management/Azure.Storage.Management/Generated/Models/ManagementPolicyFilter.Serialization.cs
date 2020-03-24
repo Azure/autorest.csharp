@@ -39,7 +39,7 @@ namespace Azure.Storage.Management.Models
         internal static ManagementPolicyFilter DeserializeManagementPolicyFilter(JsonElement element)
         {
             IList<string> prefixMatch = default;
-            IList<string> blobTypes = new List<string>();
+            IList<string> blobTypes = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("prefixMatch"))

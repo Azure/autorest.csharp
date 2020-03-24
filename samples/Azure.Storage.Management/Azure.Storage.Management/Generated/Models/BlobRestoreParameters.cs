@@ -25,6 +25,6 @@ namespace Azure.Storage.Management.Models
         /// <summary> Restore blob to the specified time. </summary>
         public DateTimeOffset TimeToRestore { get; }
         /// <summary> Blob ranges to restore. </summary>
-        public IList<BlobRestoreRange> BlobRanges { get; } = new List<BlobRestoreRange>();
+        public IList<BlobRestoreRange> BlobRanges { get; }
     }
 }
