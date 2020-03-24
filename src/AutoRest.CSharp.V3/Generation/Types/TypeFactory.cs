@@ -40,15 +40,12 @@ namespace AutoRest.CSharp.V3.Generation.Types
         {
             if (type.IsFrameworkType)
             {
-                if (type.FrameworkType == typeof(IEnumerable<>) ||
-                    type.FrameworkType == typeof(IReadOnlyList<>) ||
-                    type.FrameworkType == typeof(IList<>))
+                if (IsList(type))
                 {
                     return new CSharpType(typeof(List<>), type.Arguments);
                 }
 
-                if (type.FrameworkType == typeof(IDictionary<,>) ||
-                    type.FrameworkType == typeof(IReadOnlyDictionary<,>))
+                if (IsDictionary(type))
                 {
                     return new CSharpType(typeof(Dictionary<,>), type.Arguments);
                 }
@@ -61,21 +58,31 @@ namespace AutoRest.CSharp.V3.Generation.Types
         {
             if (type.IsFrameworkType)
             {
-                if (type.FrameworkType == typeof(IEnumerable<>) ||
-                    type.FrameworkType == typeof(IReadOnlyList<>) ||
-                    type.FrameworkType == typeof(IList<>))
+                if (IsList(type))
                 {
                     return type.Arguments[0];
                 }
 
-                if (type.FrameworkType == typeof(IDictionary<,>) ||
-                    type.FrameworkType == typeof(IReadOnlyDictionary<,>))
+                if (IsDictionary(type))
                 {
                     return type.Arguments[1];
                 }
             }
 
             throw new NotSupportedException(type.Name);
+        }
+
+        private static bool IsDictionary(CSharpType type)
+        {
+            return type.FrameworkType == typeof(IDictionary<,>) ||
+                   type.FrameworkType == typeof(IReadOnlyDictionary<,>);
+        }
+
+        private static bool IsList(CSharpType type)
+        {
+            return type.FrameworkType == typeof(IEnumerable<>) ||
+                   type.FrameworkType == typeof(IReadOnlyList<>) ||
+                   type.FrameworkType == typeof(IList<>);
         }
 
         private static Type GetListType(TypeFlags typeFlags)

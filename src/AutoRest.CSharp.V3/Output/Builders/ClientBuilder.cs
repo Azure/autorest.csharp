@@ -270,8 +270,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     var serialization = _serializationBuilder.Build(
                         httpRequestWithBody.KnownMediaType,
                         bodyRequestParameter.Schema,
-                        bodyParameterValue.Type,
-                        bodyRequestParameter.IsNullable());
+                        bodyParameterValue.Type);
 
                     // This method has a flattened body
                     if (bodyRequestParameter.Flattened == true)
@@ -377,7 +376,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 Schema schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
                 CSharpType responseType = _typeFactory.CreateType(schema, isNullable: false, TypeFlags.Output);
 
-                ObjectSerialization serialization = _serializationBuilder.Build(response.HttpResponse.KnownMediaType, schema, responseType, isNullable: false);
+                ObjectSerialization serialization = _serializationBuilder.Build(response.HttpResponse.KnownMediaType, schema, responseType);
 
                 responseBody = new ObjectResponseBody(responseType, serialization);
             }
