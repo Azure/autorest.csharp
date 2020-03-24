@@ -128,7 +128,6 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutNotExpandableAsync(Colors stringBody, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
             scope.Start();
             try
@@ -155,7 +154,6 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutNotExpandable(Colors stringBody, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
             scope.Start();
             try
@@ -270,7 +268,6 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutReferencedAsync(Colors enumStringBody, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("EnumClient.PutReferenced");
             scope.Start();
             try
@@ -297,7 +294,6 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutReferenced(Colors enumStringBody, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("EnumClient.PutReferenced");
             scope.Start();
             try

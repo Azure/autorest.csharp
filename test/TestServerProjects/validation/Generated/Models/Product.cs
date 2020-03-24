@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace validation.Models
@@ -17,6 +18,15 @@ namespace validation.Models
         /// <param name="constChild"> The product documentation. </param>
         public Product(ChildProduct child, ConstantProduct constChild)
         {
+            if (child == null)
+            {
+                throw new ArgumentNullException(nameof(child));
+            }
+            if (constChild == null)
+            {
+                throw new ArgumentNullException(nameof(constChild));
+            }
+
             Child = child;
             ConstChild = constChild;
             ConstInt = 0;

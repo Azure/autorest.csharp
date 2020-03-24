@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace CognitiveServices.TextAnalytics.Models
@@ -17,6 +18,15 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="detectedLanguages"> A list of extracted languages. </param>
         internal DocumentLanguage(string id, IReadOnlyList<DetectedLanguage> detectedLanguages)
         {
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            if (detectedLanguages == null)
+            {
+                throw new ArgumentNullException(nameof(detectedLanguages));
+            }
+
             Id = id;
             DetectedLanguages = detectedLanguages;
         }

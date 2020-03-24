@@ -197,8 +197,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Append($")");
                 }
 
+                writer.Line();
+
                 using (writer.Scope())
                 {
+                    writer.WriteParameterNullChecks(constructor.Parameters);
+
                     foreach (var initializer in constructor.Initializers)
                     {
                         writer.Append($"{initializer.Property.Declaration.Name} = ")

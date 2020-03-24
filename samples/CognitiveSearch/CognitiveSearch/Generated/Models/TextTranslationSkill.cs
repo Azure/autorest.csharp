@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -18,6 +19,15 @@ namespace CognitiveSearch.Models
         /// <param name="outputs"> The output of a skill is either a field in a search index, or a value that can be consumed as an input by another skill. </param>
         public TextTranslationSkill(TextTranslationSkillLanguage defaultToLanguageCode, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs) : base(inputs, outputs)
         {
+            if (inputs == null)
+            {
+                throw new ArgumentNullException(nameof(inputs));
+            }
+            if (outputs == null)
+            {
+                throw new ArgumentNullException(nameof(outputs));
+            }
+
             DefaultToLanguageCode = defaultToLanguageCode;
             OdataType = "#Microsoft.Skills.Text.TranslationSkill";
         }

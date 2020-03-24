@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace xml_service.Models
 {
     /// <summary> An enumeration of blobs. </summary>
@@ -21,6 +23,35 @@ namespace xml_service.Models
         /// <param name="nextMarker"> . </param>
         internal ListBlobsResponse(string serviceEndpoint, string containerName, string prefix, string marker, int maxResults, string delimiter, Blobs blobs, string nextMarker)
         {
+            if (serviceEndpoint == null)
+            {
+                throw new ArgumentNullException(nameof(serviceEndpoint));
+            }
+            if (containerName == null)
+            {
+                throw new ArgumentNullException(nameof(containerName));
+            }
+            if (prefix == null)
+            {
+                throw new ArgumentNullException(nameof(prefix));
+            }
+            if (marker == null)
+            {
+                throw new ArgumentNullException(nameof(marker));
+            }
+            if (delimiter == null)
+            {
+                throw new ArgumentNullException(nameof(delimiter));
+            }
+            if (blobs == null)
+            {
+                throw new ArgumentNullException(nameof(blobs));
+            }
+            if (nextMarker == null)
+            {
+                throw new ArgumentNullException(nameof(nextMarker));
+            }
+
             ServiceEndpoint = serviceEndpoint;
             ContainerName = containerName;
             Prefix = prefix;

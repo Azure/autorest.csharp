@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace CognitiveServices.TextAnalytics.Models
@@ -17,6 +18,15 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="keyPhrases"> A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document. </param>
         internal DocumentKeyPhrases(string id, IReadOnlyList<string> keyPhrases)
         {
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            if (keyPhrases == null)
+            {
+                throw new ArgumentNullException(nameof(keyPhrases));
+            }
+
             Id = id;
             KeyPhrases = keyPhrases;
         }

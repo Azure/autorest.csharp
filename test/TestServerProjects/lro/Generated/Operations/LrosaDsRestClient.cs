@@ -55,7 +55,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutNonRetry400Async(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry400");
             scope.Start();
             try
@@ -83,7 +82,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutNonRetry400(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry400");
             scope.Start();
             try
@@ -127,7 +125,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutNonRetry201Creating400Async(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400");
             scope.Start();
             try
@@ -155,7 +152,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutNonRetry201Creating400(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400");
             scope.Start();
             try
@@ -199,7 +195,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutNonRetry201Creating400InvalidJsonAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400InvalidJson");
             scope.Start();
             try
@@ -227,7 +222,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutNonRetry201Creating400InvalidJson(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400InvalidJson");
             scope.Start();
             try
@@ -271,7 +265,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutAsyncRelativeRetry400Async(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetry400");
             scope.Start();
             try
@@ -298,7 +291,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutAsyncRelativeRetry400(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetry400");
             scope.Start();
             try
@@ -527,7 +519,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostNonRetry400Async(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostNonRetry400");
             scope.Start();
             try
@@ -554,7 +545,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostNonRetry400(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostNonRetry400");
             scope.Start();
             try
@@ -597,7 +587,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post202NonRetry400Async(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Post202NonRetry400");
             scope.Start();
             try
@@ -624,7 +613,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post202NonRetry400(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Post202NonRetry400");
             scope.Start();
             try
@@ -667,7 +655,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostAsyncRelativeRetry400Async(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetry400");
             scope.Start();
             try
@@ -694,7 +681,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostAsyncRelativeRetry400(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetry400");
             scope.Start();
             try
@@ -737,7 +723,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutError201NoProvisioningStatePayloadAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutError201NoProvisioningStatePayload");
             scope.Start();
             try
@@ -765,7 +750,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutError201NoProvisioningStatePayload(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutError201NoProvisioningStatePayload");
             scope.Start();
             try
@@ -809,7 +793,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutAsyncRelativeRetryNoStatusAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatus");
             scope.Start();
             try
@@ -836,7 +819,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutAsyncRelativeRetryNoStatus(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatus");
             scope.Start();
             try
@@ -879,7 +861,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutAsyncRelativeRetryNoStatusPayloadAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload");
             scope.Start();
             try
@@ -906,7 +887,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutAsyncRelativeRetryNoStatusPayload(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload");
             scope.Start();
             try
@@ -1073,7 +1053,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post202NoLocationAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Post202NoLocation");
             scope.Start();
             try
@@ -1100,7 +1079,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post202NoLocation(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Post202NoLocation");
             scope.Start();
             try
@@ -1143,7 +1121,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostAsyncRelativeRetryNoPayloadAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryNoPayload");
             scope.Start();
             try
@@ -1170,7 +1147,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostAsyncRelativeRetryNoPayload(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryNoPayload");
             scope.Start();
             try
@@ -1213,7 +1189,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Put200InvalidJsonAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Put200InvalidJson");
             scope.Start();
             try
@@ -1240,7 +1215,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put200InvalidJson(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Put200InvalidJson");
             scope.Start();
             try
@@ -1283,7 +1257,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutAsyncRelativeRetryInvalidHeaderAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidHeader");
             scope.Start();
             try
@@ -1310,7 +1283,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutAsyncRelativeRetryInvalidHeader(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidHeader");
             scope.Start();
             try
@@ -1353,7 +1325,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutAsyncRelativeRetryInvalidJsonPollingAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
             try
@@ -1380,7 +1351,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutAsyncRelativeRetryInvalidJsonPolling(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
             try
@@ -1609,7 +1579,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post202RetryInvalidHeaderAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Post202RetryInvalidHeader");
             scope.Start();
             try
@@ -1636,7 +1605,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post202RetryInvalidHeader(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Post202RetryInvalidHeader");
             scope.Start();
             try
@@ -1679,7 +1647,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostAsyncRelativeRetryInvalidHeaderAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidHeader");
             scope.Start();
             try
@@ -1706,7 +1673,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostAsyncRelativeRetryInvalidHeader(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidHeader");
             scope.Start();
             try
@@ -1749,7 +1715,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostAsyncRelativeRetryInvalidJsonPollingAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
             try
@@ -1776,7 +1741,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostAsyncRelativeRetryInvalidJsonPolling(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
             try

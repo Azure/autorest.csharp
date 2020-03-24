@@ -65,7 +65,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async ValueTask<Operation<Product>> StartPutAsyncRetrySucceededAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             var originalResponse = await RestClient.PutAsyncRetrySucceededAsync(product, cancellationToken).ConfigureAwait(false);
             return CreatePutAsyncRetrySucceeded(originalResponse, () => RestClient.CreatePutAsyncRetrySucceededRequest(product));
         }
@@ -75,7 +74,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Operation<Product> StartPutAsyncRetrySucceeded(Product product, CancellationToken cancellationToken = default)
         {
-
             var originalResponse = RestClient.PutAsyncRetrySucceeded(product, cancellationToken);
             return CreatePutAsyncRetrySucceeded(originalResponse, () => RestClient.CreatePutAsyncRetrySucceededRequest(product));
         }
@@ -112,7 +110,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async ValueTask<Operation<Product>> StartPut201CreatingSucceeded200Async(Product product, CancellationToken cancellationToken = default)
         {
-
             var originalResponse = await RestClient.Put201CreatingSucceeded200Async(product, cancellationToken).ConfigureAwait(false);
             return CreatePut201CreatingSucceeded200(originalResponse, () => RestClient.CreatePut201CreatingSucceeded200Request(product));
         }
@@ -122,7 +119,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Operation<Product> StartPut201CreatingSucceeded200(Product product, CancellationToken cancellationToken = default)
         {
-
             var originalResponse = RestClient.Put201CreatingSucceeded200(product, cancellationToken);
             return CreatePut201CreatingSucceeded200(originalResponse, () => RestClient.CreatePut201CreatingSucceeded200Request(product));
         }
@@ -149,7 +145,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async ValueTask<Operation<Response>> StartPost202Retry200Async(Product product, CancellationToken cancellationToken = default)
         {
-
             var originalResponse = await RestClient.Post202Retry200Async(product, cancellationToken).ConfigureAwait(false);
             return CreatePost202Retry200(originalResponse, () => RestClient.CreatePost202Retry200Request(product));
         }
@@ -159,7 +154,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Operation<Response> StartPost202Retry200(Product product, CancellationToken cancellationToken = default)
         {
-
             var originalResponse = RestClient.Post202Retry200(product, cancellationToken);
             return CreatePost202Retry200(originalResponse, () => RestClient.CreatePost202Retry200Request(product));
         }
@@ -186,7 +180,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async ValueTask<Operation<Response>> StartPostAsyncRetrySucceededAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             var originalResponse = await RestClient.PostAsyncRetrySucceededAsync(product, cancellationToken).ConfigureAwait(false);
             return CreatePostAsyncRetrySucceeded(originalResponse, () => RestClient.CreatePostAsyncRetrySucceededRequest(product));
         }
@@ -196,7 +189,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Operation<Response> StartPostAsyncRetrySucceeded(Product product, CancellationToken cancellationToken = default)
         {
-
             var originalResponse = RestClient.PostAsyncRetrySucceeded(product, cancellationToken);
             return CreatePostAsyncRetrySucceeded(originalResponse, () => RestClient.CreatePostAsyncRetrySucceededRequest(product));
         }

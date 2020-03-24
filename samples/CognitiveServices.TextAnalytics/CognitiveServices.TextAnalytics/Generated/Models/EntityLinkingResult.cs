@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace CognitiveServices.TextAnalytics.Models
@@ -18,6 +19,19 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="modelVersion"> This field indicates which model is used for scoring. </param>
         internal EntityLinkingResult(IReadOnlyList<DocumentLinkedEntities> documents, IReadOnlyList<DocumentError> errors, string modelVersion)
         {
+            if (documents == null)
+            {
+                throw new ArgumentNullException(nameof(documents));
+            }
+            if (errors == null)
+            {
+                throw new ArgumentNullException(nameof(errors));
+            }
+            if (modelVersion == null)
+            {
+                throw new ArgumentNullException(nameof(modelVersion));
+            }
+
             Documents = documents;
             Errors = errors;
             ModelVersion = modelVersion;

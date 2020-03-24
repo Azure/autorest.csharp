@@ -18,6 +18,11 @@ namespace Azure.Storage.Tables.Models
         /// <param name="permission"> the permissions for the acl policy. </param>
         public AccessPolicy(DateTimeOffset start, DateTimeOffset expiry, string permission)
         {
+            if (permission == null)
+            {
+                throw new ArgumentNullException(nameof(permission));
+            }
+
             Start = start;
             Expiry = expiry;
             Permission = permission;

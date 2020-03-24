@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace Azure.Storage.Management.Models
@@ -16,6 +17,11 @@ namespace Azure.Storage.Management.Models
         /// <param name="rules"> The Storage Account ManagementPolicies Rules. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
         public ManagementPolicySchema(IList<ManagementPolicyRule> rules)
         {
+            if (rules == null)
+            {
+                throw new ArgumentNullException(nameof(rules));
+            }
+
             Rules = rules;
         }
 

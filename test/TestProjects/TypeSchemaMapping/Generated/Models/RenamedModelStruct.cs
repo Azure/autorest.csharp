@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using NamespaceForEnums;
 
 namespace CustomNamespace
@@ -18,6 +19,19 @@ namespace CustomNamespace
         /// <param name="daysOfWeek"> Day of week. </param>
         public RenamedModelStruct(string customizedFlattenedStringProperty, CustomFruitEnum? fruit, CustomDaysOfWeek? daysOfWeek)
         {
+            if (customizedFlattenedStringProperty == null)
+            {
+                throw new ArgumentNullException(nameof(customizedFlattenedStringProperty));
+            }
+            if (fruit == null)
+            {
+                throw new ArgumentNullException(nameof(fruit));
+            }
+            if (daysOfWeek == null)
+            {
+                throw new ArgumentNullException(nameof(daysOfWeek));
+            }
+
             CustomizedFlattenedStringProperty = customizedFlattenedStringProperty;
             Fruit = fruit;
             DaysOfWeek = daysOfWeek;

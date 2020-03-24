@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace CognitiveServices.TextAnalytics.Models
@@ -17,6 +18,15 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="entities"> Recognized well-known entities in the document. </param>
         internal DocumentLinkedEntities(string id, IReadOnlyList<LinkedEntity> entities)
         {
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            if (entities == null)
+            {
+                throw new ArgumentNullException(nameof(entities));
+            }
+
             Id = id;
             Entities = entities;
         }

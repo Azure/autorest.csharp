@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace xml_service.Models
@@ -19,6 +20,19 @@ namespace xml_service.Models
         /// <param name="nextMarker"> . </param>
         internal ListContainersResponse(string serviceEndpoint, string prefix, int maxResults, string nextMarker)
         {
+            if (serviceEndpoint == null)
+            {
+                throw new ArgumentNullException(nameof(serviceEndpoint));
+            }
+            if (prefix == null)
+            {
+                throw new ArgumentNullException(nameof(prefix));
+            }
+            if (nextMarker == null)
+            {
+                throw new ArgumentNullException(nameof(nextMarker));
+            }
+
             ServiceEndpoint = serviceEndpoint;
             Prefix = prefix;
             MaxResults = maxResults;

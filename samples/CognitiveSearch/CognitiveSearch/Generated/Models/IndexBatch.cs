@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -16,6 +17,11 @@ namespace CognitiveSearch.Models
         /// <param name="actions"> The actions in the batch. </param>
         public IndexBatch(IList<IndexAction> actions)
         {
+            if (actions == null)
+            {
+                throw new ArgumentNullException(nameof(actions));
+            }
+
             Actions = actions;
         }
 

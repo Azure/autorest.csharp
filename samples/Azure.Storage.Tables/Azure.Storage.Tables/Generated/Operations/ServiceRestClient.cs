@@ -164,7 +164,6 @@ namespace Azure.Storage.Tables
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<StorageServiceProperties, GetPropertiesHeaders>> GetPropertiesAsync(int? timeout, string requestId, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetProperties");
             scope.Start();
             try
@@ -201,7 +200,6 @@ namespace Azure.Storage.Tables
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<StorageServiceProperties, GetPropertiesHeaders> GetProperties(int? timeout, string requestId, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetProperties");
             scope.Start();
             try
@@ -261,7 +259,6 @@ namespace Azure.Storage.Tables
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<StorageServiceStats, GetStatisticsHeaders>> GetStatisticsAsync(int? timeout, string requestId, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetStatistics");
             scope.Start();
             try
@@ -298,7 +295,6 @@ namespace Azure.Storage.Tables
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<StorageServiceStats, GetStatisticsHeaders> GetStatistics(int? timeout, string requestId, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetStatistics");
             scope.Start();
             try

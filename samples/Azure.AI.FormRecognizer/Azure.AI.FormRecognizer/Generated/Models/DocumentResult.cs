@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace Azure.AI.FormRecognizer.Models
@@ -18,6 +19,19 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="fields"> Dictionary of named field values. </param>
         internal DocumentResult(string docType, IReadOnlyList<int> pageRange, IReadOnlyDictionary<string, FieldValue> fields)
         {
+            if (docType == null)
+            {
+                throw new ArgumentNullException(nameof(docType));
+            }
+            if (pageRange == null)
+            {
+                throw new ArgumentNullException(nameof(pageRange));
+            }
+            if (fields == null)
+            {
+                throw new ArgumentNullException(nameof(fields));
+            }
+
             DocType = docType;
             PageRange = pageRange;
             Fields = fields;

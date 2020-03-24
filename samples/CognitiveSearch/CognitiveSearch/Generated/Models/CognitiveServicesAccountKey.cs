@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace CognitiveSearch.Models
 {
     /// <summary> A cognitive service resource provisioned with a key that is attached to a skillset. </summary>
@@ -14,6 +16,11 @@ namespace CognitiveSearch.Models
         /// <param name="key"> . </param>
         public CognitiveServicesAccountKey(string key)
         {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
             Key = key;
             OdataType = "#Microsoft.Azure.Search.CognitiveServicesByKey";
         }

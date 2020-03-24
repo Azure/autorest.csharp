@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace Azure.AI.FormRecognizer.Models
@@ -18,6 +19,11 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="cells"> List of cells contained in the table. </param>
         internal DataTable(int rows, int columns, IReadOnlyList<DataTableCell> cells)
         {
+            if (cells == null)
+            {
+                throw new ArgumentNullException(nameof(cells));
+            }
+
             Rows = rows;
             Columns = columns;
             Cells = cells;

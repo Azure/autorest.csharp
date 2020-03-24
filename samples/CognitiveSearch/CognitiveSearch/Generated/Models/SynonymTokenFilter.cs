@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -17,6 +18,15 @@ namespace CognitiveSearch.Models
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         public SynonymTokenFilter(IList<string> synonyms, string name) : base(name)
         {
+            if (synonyms == null)
+            {
+                throw new ArgumentNullException(nameof(synonyms));
+            }
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             Synonyms = synonyms;
             OdataType = "#Microsoft.Azure.Search.SynonymTokenFilter";
         }

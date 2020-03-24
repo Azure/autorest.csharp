@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace Azure.Storage.Management.Models
@@ -20,6 +21,23 @@ namespace Azure.Storage.Management.Models
         /// <param name="allowedHeaders"> Required if CorsRule element is present. A list of headers allowed to be part of the cross-origin request. </param>
         public CorsRule(IList<string> allowedOrigins, IList<CorsRuleAllowedMethodsItem> allowedMethods, int maxAgeInSeconds, IList<string> exposedHeaders, IList<string> allowedHeaders)
         {
+            if (allowedOrigins == null)
+            {
+                throw new ArgumentNullException(nameof(allowedOrigins));
+            }
+            if (allowedMethods == null)
+            {
+                throw new ArgumentNullException(nameof(allowedMethods));
+            }
+            if (exposedHeaders == null)
+            {
+                throw new ArgumentNullException(nameof(exposedHeaders));
+            }
+            if (allowedHeaders == null)
+            {
+                throw new ArgumentNullException(nameof(allowedHeaders));
+            }
+
             AllowedOrigins = allowedOrigins;
             AllowedMethods = allowedMethods;
             MaxAgeInSeconds = maxAgeInSeconds;

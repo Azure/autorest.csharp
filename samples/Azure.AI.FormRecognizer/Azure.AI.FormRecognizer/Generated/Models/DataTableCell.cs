@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace Azure.AI.FormRecognizer.Models
@@ -20,6 +21,15 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="confidence"> Confidence value. </param>
         internal DataTableCell(int rowIndex, int columnIndex, string text, IReadOnlyList<float> boundingBox, float confidence)
         {
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+            if (boundingBox == null)
+            {
+                throw new ArgumentNullException(nameof(boundingBox));
+            }
+
             RowIndex = rowIndex;
             ColumnIndex = columnIndex;
             Text = text;

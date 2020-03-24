@@ -1010,7 +1010,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> EnumValidAsync(UriColor enumPath, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsClient.EnumValid");
             scope.Start();
             try
@@ -1037,7 +1036,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response EnumValid(UriColor enumPath, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsClient.EnumValid");
             scope.Start();
             try
@@ -1077,7 +1075,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> EnumNullAsync(UriColor enumPath, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsClient.EnumNull");
             scope.Start();
             try
@@ -1104,7 +1101,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response EnumNull(UriColor enumPath, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsClient.EnumNull");
             scope.Start();
             try
@@ -1420,7 +1416,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DateNullAsync(DateTimeOffset datePath, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsClient.DateNull");
             scope.Start();
             try
@@ -1447,7 +1442,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DateNull(DateTimeOffset datePath, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsClient.DateNull");
             scope.Start();
             try
@@ -1550,7 +1544,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DateTimeNullAsync(DateTimeOffset dateTimePath, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsClient.DateTimeNull");
             scope.Start();
             try
@@ -1577,7 +1570,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DateTimeNull(DateTimeOffset dateTimePath, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsClient.DateTimeNull");
             scope.Start();
             try
@@ -1767,7 +1759,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> UnixTimeUrlAsync(DateTimeOffset unixTimeUrlPath, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
             scope.Start();
             try
@@ -1794,7 +1785,6 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response UnixTimeUrl(DateTimeOffset unixTimeUrlPath, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
             scope.Start();
             try

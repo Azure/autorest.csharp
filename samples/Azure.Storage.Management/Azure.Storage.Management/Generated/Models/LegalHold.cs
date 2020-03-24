@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace Azure.Storage.Management.Models
@@ -16,6 +17,11 @@ namespace Azure.Storage.Management.Models
         /// <param name="tags"> Each tag should be 3 to 23 alphanumeric characters and is normalized to lower case at SRP. </param>
         public LegalHold(IList<string> tags)
         {
+            if (tags == null)
+            {
+                throw new ArgumentNullException(nameof(tags));
+            }
+
             Tags = tags;
         }
 

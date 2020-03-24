@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -18,6 +19,19 @@ namespace CognitiveSearch.Models
         /// <param name="skills"> A list of skills in the skillset. </param>
         public Skillset(string name, string description, IList<Skill> skills)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (description == null)
+            {
+                throw new ArgumentNullException(nameof(description));
+            }
+            if (skills == null)
+            {
+                throw new ArgumentNullException(nameof(skills));
+            }
+
             Name = name;
             Description = description;
             Skills = skills;

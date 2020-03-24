@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -17,6 +18,11 @@ namespace CognitiveSearch.Models
         /// <param name="type"> The data type of the field. </param>
         public Field(string name, DataType type)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             Name = name;
             Type = type;
         }

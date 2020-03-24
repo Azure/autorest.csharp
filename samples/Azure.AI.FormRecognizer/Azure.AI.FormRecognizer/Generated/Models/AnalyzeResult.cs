@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace Azure.AI.FormRecognizer.Models
@@ -17,6 +18,15 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="readResults"> Text extracted from the input. </param>
         internal AnalyzeResult(string version, IReadOnlyList<ReadResult> readResults)
         {
+            if (version == null)
+            {
+                throw new ArgumentNullException(nameof(version));
+            }
+            if (readResults == null)
+            {
+                throw new ArgumentNullException(nameof(readResults));
+            }
+
             Version = version;
             ReadResults = readResults;
         }

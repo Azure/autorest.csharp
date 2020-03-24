@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace CognitiveServices.TextAnalytics.Models
@@ -16,6 +17,11 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="documents"> The set of documents to process as part of this batch. </param>
         public MultiLanguageBatchInput(IList<MultiLanguageInput> documents)
         {
+            if (documents == null)
+            {
+                throw new ArgumentNullException(nameof(documents));
+            }
+
             Documents = documents;
         }
 

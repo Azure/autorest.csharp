@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -16,6 +17,11 @@ namespace CognitiveSearch.Models
         /// <param name="text"> The text to break into tokens. </param>
         public AnalyzeRequest(string text)
         {
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+
             Text = text;
         }
 

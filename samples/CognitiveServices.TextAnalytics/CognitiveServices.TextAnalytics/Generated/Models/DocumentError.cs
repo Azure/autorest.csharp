@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace CognitiveServices.TextAnalytics.Models
 {
     /// <summary> The DocumentError. </summary>
@@ -15,6 +17,15 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="error"> Document Error. </param>
         internal DocumentError(string id, TextAnalyticsError error)
         {
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            if (error == null)
+            {
+                throw new ArgumentNullException(nameof(error));
+            }
+
             Id = id;
             Error = error;
         }

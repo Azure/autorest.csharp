@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -17,6 +18,15 @@ namespace CognitiveSearch.Models
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         public StemmerOverrideTokenFilter(IList<string> rules, string name) : base(name)
         {
+            if (rules == null)
+            {
+                throw new ArgumentNullException(nameof(rules));
+            }
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             Rules = rules;
             OdataType = "#Microsoft.Azure.Search.StemmerOverrideTokenFilter";
         }

@@ -18,6 +18,11 @@ namespace Azure.Storage.Management.Models
         /// <param name="blobRanges"> Blob ranges to restore. </param>
         public BlobRestoreParameters(DateTimeOffset timeToRestore, IList<BlobRestoreRange> blobRanges)
         {
+            if (blobRanges == null)
+            {
+                throw new ArgumentNullException(nameof(blobRanges));
+            }
+
             TimeToRestore = timeToRestore;
             BlobRanges = blobRanges;
         }

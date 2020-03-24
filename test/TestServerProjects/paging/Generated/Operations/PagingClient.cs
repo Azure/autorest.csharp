@@ -142,7 +142,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<Product> GetMultiplePagesAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
-
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await RestClient.GetMultiplePagesAsync(clientRequestId, maxresults, timeout, cancellationToken).ConfigureAwait(false);
@@ -163,7 +162,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<Product> GetMultiplePages(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
-
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
                 var response = RestClient.GetMultiplePages(clientRequestId, maxresults, timeout, cancellationToken);
@@ -184,7 +182,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<Product> GetOdataMultiplePagesAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
-
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await RestClient.GetOdataMultiplePagesAsync(clientRequestId, maxresults, timeout, cancellationToken).ConfigureAwait(false);
@@ -205,7 +202,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<Product> GetOdataMultiplePages(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
-
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
                 var response = RestClient.GetOdataMultiplePages(clientRequestId, maxresults, timeout, cancellationToken);
@@ -227,7 +223,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<Product> GetMultiplePagesWithOffsetAsync(string clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
         {
-
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await RestClient.GetMultiplePagesWithOffsetAsync(clientRequestId, maxresults, offset, timeout, cancellationToken).ConfigureAwait(false);
@@ -249,7 +244,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<Product> GetMultiplePagesWithOffset(string clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
         {
-
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
                 var response = RestClient.GetMultiplePagesWithOffset(clientRequestId, maxresults, offset, timeout, cancellationToken);
@@ -711,7 +705,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async ValueTask<Operation<ProductResult>> StartGetMultiplePagesLROAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
-
             var originalResponse = await RestClient.GetMultiplePagesLROAsync(clientRequestId, maxresults, timeout, cancellationToken).ConfigureAwait(false);
             return CreateGetMultiplePagesLRO(originalResponse, () => RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout));
         }
@@ -723,7 +716,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Operation<ProductResult> StartGetMultiplePagesLRO(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
-
             var originalResponse = RestClient.GetMultiplePagesLRO(clientRequestId, maxresults, timeout, cancellationToken);
             return CreateGetMultiplePagesLRO(originalResponse, () => RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout));
         }

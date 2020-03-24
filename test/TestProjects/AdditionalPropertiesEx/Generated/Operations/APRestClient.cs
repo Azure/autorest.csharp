@@ -206,7 +206,6 @@ namespace AdditionalPropertiesEx
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> WriteOnlyStructAsync(InputAdditionalPropertiesModelStruct createParameters, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("APClient.WriteOnlyStruct");
             scope.Start();
             try
@@ -233,7 +232,6 @@ namespace AdditionalPropertiesEx
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response WriteOnlyStruct(InputAdditionalPropertiesModelStruct createParameters, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("APClient.WriteOnlyStruct");
             scope.Start();
             try

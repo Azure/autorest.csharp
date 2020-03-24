@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -18,6 +19,15 @@ namespace CognitiveSearch.Models
         /// <param name="sourceFields"> The list of field names to which the suggester applies. Each field must be searchable. </param>
         public Suggester(string name, SearchMode searchMode, IList<string> sourceFields)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (sourceFields == null)
+            {
+                throw new ArgumentNullException(nameof(sourceFields));
+            }
+
             Name = name;
             SearchMode = searchMode;
             SourceFields = sourceFields;

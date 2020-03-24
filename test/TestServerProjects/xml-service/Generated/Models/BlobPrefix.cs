@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace xml_service.Models
 {
     /// <summary> The BlobPrefix. </summary>
@@ -14,6 +16,11 @@ namespace xml_service.Models
         /// <param name="name"> . </param>
         internal BlobPrefix(string name)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             Name = name;
         }
 

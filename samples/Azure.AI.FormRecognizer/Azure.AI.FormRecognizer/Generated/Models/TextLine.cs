@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace Azure.AI.FormRecognizer.Models
@@ -18,6 +19,19 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="words"> List of words in the text line. </param>
         internal TextLine(string text, IReadOnlyList<float> boundingBox, IReadOnlyList<TextWord> words)
         {
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+            if (boundingBox == null)
+            {
+                throw new ArgumentNullException(nameof(boundingBox));
+            }
+            if (words == null)
+            {
+                throw new ArgumentNullException(nameof(words));
+            }
+
             Text = text;
             BoundingBox = boundingBox;
             Words = words;

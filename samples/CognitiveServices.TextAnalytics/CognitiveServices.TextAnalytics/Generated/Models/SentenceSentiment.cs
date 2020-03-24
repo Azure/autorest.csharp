@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace CognitiveServices.TextAnalytics.Models
@@ -19,6 +20,11 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="length"> The length of the sentence by Unicode standard. </param>
         internal SentenceSentiment(SentenceSentimentValue sentiment, SentimentConfidenceScorePerLabel sentenceScores, int offset, int length)
         {
+            if (sentenceScores == null)
+            {
+                throw new ArgumentNullException(nameof(sentenceScores));
+            }
+
             Sentiment = sentiment;
             SentenceScores = sentenceScores;
             Offset = offset;

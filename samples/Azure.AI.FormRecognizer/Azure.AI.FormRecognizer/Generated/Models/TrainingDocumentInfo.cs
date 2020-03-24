@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace Azure.AI.FormRecognizer.Models
@@ -19,6 +20,15 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="status"> Status of the training operation. </param>
         internal TrainingDocumentInfo(string documentName, int pages, IReadOnlyList<ErrorInformation> errors, TrainStatus status)
         {
+            if (documentName == null)
+            {
+                throw new ArgumentNullException(nameof(documentName));
+            }
+            if (errors == null)
+            {
+                throw new ArgumentNullException(nameof(errors));
+            }
+
             DocumentName = documentName;
             Pages = pages;
             Errors = errors;

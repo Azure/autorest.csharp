@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace CognitiveServices.TextAnalytics.Models
@@ -16,6 +17,11 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="documents"> . </param>
         public LanguageBatchInput(IList<LanguageInput> documents)
         {
+            if (documents == null)
+            {
+                throw new ArgumentNullException(nameof(documents));
+            }
+
             Documents = documents;
         }
 

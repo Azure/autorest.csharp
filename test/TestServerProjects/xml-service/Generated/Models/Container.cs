@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace xml_service.Models
@@ -17,6 +18,15 @@ namespace xml_service.Models
         /// <param name="properties"> Properties of a container. </param>
         internal Container(string name, ContainerProperties properties)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (properties == null)
+            {
+                throw new ArgumentNullException(nameof(properties));
+            }
+
             Name = name;
             Properties = properties;
         }

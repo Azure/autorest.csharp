@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -16,6 +17,11 @@ namespace CognitiveSearch.Models
         /// <param name="name"> The name of the scoring profile. </param>
         public ScoringProfile(string name)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             Name = name;
         }
 

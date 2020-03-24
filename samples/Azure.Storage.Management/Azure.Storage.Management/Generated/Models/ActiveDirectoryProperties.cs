@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace Azure.Storage.Management.Models
 {
     /// <summary> Settings properties for Active Directory (AD). </summary>
@@ -19,6 +21,31 @@ namespace Azure.Storage.Management.Models
         /// <param name="azureStorageSid"> Specifies the security identifier (SID) for Azure Storage. </param>
         public ActiveDirectoryProperties(string domainName, string netBiosDomainName, string forestName, string domainGuid, string domainSid, string azureStorageSid)
         {
+            if (domainName == null)
+            {
+                throw new ArgumentNullException(nameof(domainName));
+            }
+            if (netBiosDomainName == null)
+            {
+                throw new ArgumentNullException(nameof(netBiosDomainName));
+            }
+            if (forestName == null)
+            {
+                throw new ArgumentNullException(nameof(forestName));
+            }
+            if (domainGuid == null)
+            {
+                throw new ArgumentNullException(nameof(domainGuid));
+            }
+            if (domainSid == null)
+            {
+                throw new ArgumentNullException(nameof(domainSid));
+            }
+            if (azureStorageSid == null)
+            {
+                throw new ArgumentNullException(nameof(azureStorageSid));
+            }
+
             DomainName = domainName;
             NetBiosDomainName = netBiosDomainName;
             ForestName = forestName;

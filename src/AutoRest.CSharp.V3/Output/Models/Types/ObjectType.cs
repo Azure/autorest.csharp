@@ -144,7 +144,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     property.Description,
                     property.Declaration.Type,
                     defaultValue,
-                    false
+                    true
                 );
 
                 defaultCtorParameters.Add(defaultCtorParameter);

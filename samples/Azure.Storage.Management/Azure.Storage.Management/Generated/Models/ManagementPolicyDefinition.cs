@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace Azure.Storage.Management.Models
 {
     /// <summary> An object that defines the Lifecycle rule. Each definition is made up with a filters set and an actions set. </summary>
@@ -14,6 +16,11 @@ namespace Azure.Storage.Management.Models
         /// <param name="actions"> An object that defines the action set. </param>
         public ManagementPolicyDefinition(ManagementPolicyAction actions)
         {
+            if (actions == null)
+            {
+                throw new ArgumentNullException(nameof(actions));
+            }
+
             Actions = actions;
         }
 

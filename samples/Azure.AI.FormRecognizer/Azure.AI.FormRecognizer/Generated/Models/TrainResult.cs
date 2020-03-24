@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace Azure.AI.FormRecognizer.Models
@@ -16,6 +17,11 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="trainingDocuments"> List of the documents used to train the model and any errors reported in each document. </param>
         internal TrainResult(IReadOnlyList<TrainingDocumentInfo> trainingDocuments)
         {
+            if (trainingDocuments == null)
+            {
+                throw new ArgumentNullException(nameof(trainingDocuments));
+            }
+
             TrainingDocuments = trainingDocuments;
         }
 

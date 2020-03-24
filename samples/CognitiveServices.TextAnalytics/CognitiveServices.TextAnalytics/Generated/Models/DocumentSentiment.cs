@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace CognitiveServices.TextAnalytics.Models
@@ -19,6 +20,19 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="sentences"> Sentence level sentiment analysis. </param>
         internal DocumentSentiment(string id, DocumentSentimentValue sentiment, SentimentConfidenceScorePerLabel documentScores, IReadOnlyList<SentenceSentiment> sentences)
         {
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            if (documentScores == null)
+            {
+                throw new ArgumentNullException(nameof(documentScores));
+            }
+            if (sentences == null)
+            {
+                throw new ArgumentNullException(nameof(sentences));
+            }
+
             Id = id;
             Sentiment = sentiment;
             DocumentScores = documentScores;

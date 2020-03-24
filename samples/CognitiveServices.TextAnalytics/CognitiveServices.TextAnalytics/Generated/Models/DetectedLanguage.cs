@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace CognitiveServices.TextAnalytics.Models
 {
     /// <summary> The DetectedLanguage. </summary>
@@ -16,6 +18,15 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="score"> A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. </param>
         internal DetectedLanguage(string name, string iso6391Name, double score)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (iso6391Name == null)
+            {
+                throw new ArgumentNullException(nameof(iso6391Name));
+            }
+
             Name = name;
             Iso6391Name = iso6391Name;
             Score = score;

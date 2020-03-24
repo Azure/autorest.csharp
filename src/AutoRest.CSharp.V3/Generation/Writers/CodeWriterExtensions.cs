@@ -53,10 +53,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 }
             }
 
-            if (parameters.Any())
-            {
-                writer.Line();
-            }
+            writer.Line();
         }
 
 

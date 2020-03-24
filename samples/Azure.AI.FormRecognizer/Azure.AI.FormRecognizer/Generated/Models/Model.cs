@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Response to the get custom model operation. </summary>
@@ -14,6 +16,11 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="modelInfo"> Basic custom model information. </param>
         internal Model(ModelInfo modelInfo)
         {
+            if (modelInfo == null)
+            {
+                throw new ArgumentNullException(nameof(modelInfo));
+            }
+
             ModelInfo = modelInfo;
         }
 

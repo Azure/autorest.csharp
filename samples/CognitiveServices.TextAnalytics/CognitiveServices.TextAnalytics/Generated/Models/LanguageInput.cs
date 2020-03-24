@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace CognitiveServices.TextAnalytics.Models
 {
     /// <summary> The LanguageInput. </summary>
@@ -15,6 +17,15 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="text"> . </param>
         public LanguageInput(string id, string text)
         {
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+
             Id = id;
             Text = text;
         }

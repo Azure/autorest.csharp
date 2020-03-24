@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -17,6 +18,11 @@ namespace CognitiveSearch.Models
         /// <param name="name"> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         public CustomAnalyzer(TokenizerName tokenizer, string name) : base(name)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             Tokenizer = tokenizer;
             OdataType = "#Microsoft.Azure.Search.CustomAnalyzer";
         }
