@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             _objectSchema = objectSchema;
             _sourceTypeMapping = context.SourceInputModel.FindForSchema(_objectSchema.Name);
             _typeFactory = context.TypeFactory;
-            _serializationBuilder = new SerializationBuilder(_typeFactory);
+            _serializationBuilder = new SerializationBuilder();
 
             Schema = objectSchema;
             Declaration = BuilderHelpers.CreateTypeAttributes(

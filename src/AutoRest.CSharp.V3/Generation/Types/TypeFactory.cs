@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
             _ => _library.FindTypeForSchema(schema).Type.WithNullable(isNullable)
         };
 
-        public CSharpType GetImplementationType(CSharpType type)
+        public static CSharpType GetImplementationType(CSharpType type)
         {
             if (type.IsFrameworkType)
             {
@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
             return type;
         }
 
-        public CSharpType GetElementType(CSharpType type)
+        public static CSharpType GetElementType(CSharpType type)
         {
             if (type.IsFrameworkType)
             {

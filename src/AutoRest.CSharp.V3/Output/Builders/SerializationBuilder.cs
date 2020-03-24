@@ -15,13 +15,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
 {
     internal class SerializationBuilder
     {
-        private readonly TypeFactory _typeFactory;
-
-        public SerializationBuilder(TypeFactory typeFactory)
-        {
-            _typeFactory = typeFactory;
-        }
-
         public ObjectSerialization BuildObject(KnownMediaType mediaType, ObjectSchema objectSchema, ObjectType type)
         {
             switch (mediaType)
@@ -63,15 +56,15 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     var wrapped = isRoot || arraySchema.Serialization?.Xml?.Wrapped == true;
 
                     return new XmlArraySerialization(
-                        _typeFactory.GetImplementationType(type),
-                        BuildXmlElementSerialization(arraySchema.ElementType, _typeFactory.GetElementType(type), null, false),
+                        TypeFactory.GetImplementationType(type),
+                        BuildXmlElementSerialization(arraySchema.ElementType, TypeFactory.GetElementType(type), null, false),
                         xmlName,
                         wrapped);
 
                 case DictionarySchema dictionarySchema:
                     return new XmlDictionarySerialization(
-                        _typeFactory.GetImplementationType(type),
-                        BuildXmlElementSerialization(dictionarySchema.ElementType,_typeFactory.GetElementType(type), null, false),
+                        TypeFactory.GetImplementationType(type),
+                        BuildXmlElementSerialization(dictionarySchema.ElementType,TypeFactory.GetElementType(type), null, false),
                         xmlName);
                 default:
                     return new XmlElementValueSerialization(xmlName, BuildXmlValueSerialization(schema, type));
@@ -91,12 +84,12 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     return BuildSerialization(constantSchema.ValueType, type);
                 case ArraySchema arraySchema:
                     return new JsonArraySerialization(
-                        _typeFactory.GetImplementationType(type),
-                        BuildSerialization(arraySchema.ElementType, _typeFactory.GetElementType(type)));
+                        TypeFactory.GetImplementationType(type),
+                        BuildSerialization(arraySchema.ElementType, TypeFactory.GetElementType(type)));
                 case DictionarySchema dictionarySchema:
                     return new JsonDictionarySerialization(
-                        _typeFactory.GetImplementationType(type),
-                        BuildSerialization(dictionarySchema.ElementType, _typeFactory.GetElementType(type))
+                        TypeFactory.GetImplementationType(type),
+                        BuildSerialization(dictionarySchema.ElementType, TypeFactory.GetElementType(type))
                         );
                 default:
                     return new JsonValueSerialization(
@@ -253,7 +246,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
             var valueSerialization = BuildSerialization(
                 inheritedDictionarySchema.ElementType,
-                _typeFactory.GetElementType(additionalPropertiesProperty.Declaration.Type));
+                TypeFactory.GetElementType(additionalPropertiesProperty.Declaration.Type));
 
             return new JsonAdditionalPropertiesSerialization(
                     additionalPropertiesProperty,
