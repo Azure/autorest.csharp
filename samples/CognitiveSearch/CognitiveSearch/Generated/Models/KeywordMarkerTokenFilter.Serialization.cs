@@ -37,7 +37,7 @@ namespace CognitiveSearch.Models
 
         internal static KeywordMarkerTokenFilter DeserializeKeywordMarkerTokenFilter(JsonElement element)
         {
-            IList<string> keywords = new List<string>();
+            IList<string> keywords = default;
             bool? ignoreCase = default;
             string odatatype = default;
             string name = default;

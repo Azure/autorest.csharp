@@ -15,7 +15,7 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static TrainResult DeserializeTrainResult(JsonElement element)
         {
-            IReadOnlyList<TrainingDocumentInfo> trainingDocuments = new List<TrainingDocumentInfo>();
+            IReadOnlyList<TrainingDocumentInfo> trainingDocuments = default;
             IReadOnlyList<FormFieldsReport> fields = default;
             float? averageModelAccuracy = default;
             IReadOnlyList<ErrorInformation> errors = default;

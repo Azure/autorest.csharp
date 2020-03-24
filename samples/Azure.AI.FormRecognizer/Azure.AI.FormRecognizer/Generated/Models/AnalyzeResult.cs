@@ -39,7 +39,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> Version of schema used for this result. </summary>
         public string Version { get; }
         /// <summary> Text extracted from the input. </summary>
-        public IReadOnlyList<ReadResult> ReadResults { get; } = new List<ReadResult>();
+        public IReadOnlyList<ReadResult> ReadResults { get; }
         /// <summary> Page-level information extracted from the input. </summary>
         public IReadOnlyList<PageResult> PageResults { get; }
         /// <summary> Document-level information extracted from the input. </summary>

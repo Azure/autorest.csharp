@@ -26,8 +26,8 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> Document type. </summary>
         public string DocType { get; }
         /// <summary> First and last page number where the document is found. </summary>
-        public IReadOnlyList<int> PageRange { get; } = new List<int>();
+        public IReadOnlyList<int> PageRange { get; }
         /// <summary> Dictionary of named field values. </summary>
-        public IReadOnlyDictionary<string, FieldValue> Fields { get; } = new Dictionary<string, FieldValue>();
+        public IReadOnlyDictionary<string, FieldValue> Fields { get; }
     }
 }

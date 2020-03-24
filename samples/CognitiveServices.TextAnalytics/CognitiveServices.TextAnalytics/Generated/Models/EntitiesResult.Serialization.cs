@@ -15,8 +15,8 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static EntitiesResult DeserializeEntitiesResult(JsonElement element)
         {
-            IReadOnlyList<DocumentEntities> documents = new List<DocumentEntities>();
-            IReadOnlyList<DocumentError> errors = new List<DocumentError>();
+            IReadOnlyList<DocumentEntities> documents = default;
+            IReadOnlyList<DocumentError> errors = default;
             RequestStatistics statistics = default;
             string modelVersion = default;
             foreach (var property in element.EnumerateObject())

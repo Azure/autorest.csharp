@@ -34,7 +34,7 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> A list of words to mark as keywords. </summary>
-        public IList<string> Keywords { get; } = new List<string>();
+        public IList<string> Keywords { get; }
         /// <summary> A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false. </summary>
         public bool? IgnoreCase { get; set; }
     }

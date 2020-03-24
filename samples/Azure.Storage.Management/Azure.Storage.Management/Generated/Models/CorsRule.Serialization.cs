@@ -51,11 +51,11 @@ namespace Azure.Storage.Management.Models
 
         internal static CorsRule DeserializeCorsRule(JsonElement element)
         {
-            IList<string> allowedOrigins = new List<string>();
-            IList<CorsRuleAllowedMethodsItem> allowedMethods = new List<CorsRuleAllowedMethodsItem>();
+            IList<string> allowedOrigins = default;
+            IList<CorsRuleAllowedMethodsItem> allowedMethods = default;
             int maxAgeInSeconds = default;
-            IList<string> exposedHeaders = new List<string>();
-            IList<string> allowedHeaders = new List<string>();
+            IList<string> exposedHeaders = default;
+            IList<string> allowedHeaders = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("allowedOrigins"))

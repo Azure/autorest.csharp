@@ -47,7 +47,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Entity Linking formal name. </summary>
         public string Name { get; }
         /// <summary> List of instances this entity appears in the text. </summary>
-        public IReadOnlyList<Match> Matches { get; } = new List<Match>();
+        public IReadOnlyList<Match> Matches { get; }
         /// <summary> Language used in the data source. </summary>
         public string Language { get; }
         /// <summary> Unique identifier of the recognized entity from the data source. </summary>

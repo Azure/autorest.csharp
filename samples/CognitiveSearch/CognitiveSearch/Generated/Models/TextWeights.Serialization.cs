@@ -29,7 +29,7 @@ namespace CognitiveSearch.Models
 
         internal static TextWeights DeserializeTextWeights(JsonElement element)
         {
-            IDictionary<string, double> weights = new Dictionary<string, double>();
+            IDictionary<string, double> weights = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("weights"))

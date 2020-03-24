@@ -63,7 +63,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> Text content of the cell. </summary>
         public string Text { get; }
         /// <summary> Bounding box of the cell. </summary>
-        public IReadOnlyList<float> BoundingBox { get; } = new List<float>();
+        public IReadOnlyList<float> BoundingBox { get; }
         /// <summary> Confidence value. </summary>
         public float Confidence { get; }
         /// <summary> When includeTextDetails is set to true, a list of references to the text elements constituting this table cell. </summary>

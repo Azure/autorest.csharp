@@ -47,8 +47,8 @@ namespace CognitiveSearch.Models
         /// <summary> Represents the level at which operations take place, such as the document root or document content (for example, /document or /document/content). The default is /document. </summary>
         public string Context { get; set; }
         /// <summary> Inputs of the skills could be a column in the source data set, or the output of an upstream skill. </summary>
-        public IList<InputFieldMappingEntry> Inputs { get; } = new List<InputFieldMappingEntry>();
+        public IList<InputFieldMappingEntry> Inputs { get; }
         /// <summary> The output of a skill is either a field in a search index, or a value that can be consumed as an input by another skill. </summary>
-        public IList<OutputFieldMappingEntry> Outputs { get; } = new List<OutputFieldMappingEntry>();
+        public IList<OutputFieldMappingEntry> Outputs { get; }
     }
 }

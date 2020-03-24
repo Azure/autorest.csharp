@@ -106,7 +106,7 @@ namespace CognitiveSearch.Models
         internal static Index DeserializeIndex(JsonElement element)
         {
             string name = default;
-            IList<Field> fields = new List<Field>();
+            IList<Field> fields = default;
             IList<ScoringProfile> scoringProfiles = default;
             string defaultScoringProfile = default;
             CorsOptions corsOptions = default;

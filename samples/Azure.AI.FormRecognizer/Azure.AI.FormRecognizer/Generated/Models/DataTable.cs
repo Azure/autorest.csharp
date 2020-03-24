@@ -28,6 +28,6 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> Number of columns. </summary>
         public int Columns { get; }
         /// <summary> List of cells contained in the table. </summary>
-        public IReadOnlyList<DataTableCell> Cells { get; } = new List<DataTableCell>();
+        public IReadOnlyList<DataTableCell> Cells { get; }
     }
 }

@@ -30,7 +30,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> Total number of pages trained. </summary>
         public int Pages { get; }
         /// <summary> List of errors. </summary>
-        public IReadOnlyList<ErrorInformation> Errors { get; } = new List<ErrorInformation>();
+        public IReadOnlyList<ErrorInformation> Errors { get; }
         /// <summary> Status of the training operation. </summary>
         public TrainStatus Status { get; }
     }

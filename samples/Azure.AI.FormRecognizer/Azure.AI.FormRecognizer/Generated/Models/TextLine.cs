@@ -39,10 +39,10 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> The text content of the line. </summary>
         public string Text { get; }
         /// <summary> Bounding box of an extracted line. </summary>
-        public IReadOnlyList<float> BoundingBox { get; } = new List<float>();
+        public IReadOnlyList<float> BoundingBox { get; }
         /// <summary> The detected language of this line, if different from the overall page language. </summary>
         public Language? Language { get; }
         /// <summary> List of words in the text line. </summary>
-        public IReadOnlyList<TextWord> Words { get; } = new List<TextWord>();
+        public IReadOnlyList<TextWord> Words { get; }
     }
 }

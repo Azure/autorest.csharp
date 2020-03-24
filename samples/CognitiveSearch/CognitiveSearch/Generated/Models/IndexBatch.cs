@@ -20,6 +20,6 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The actions in the batch. </summary>
-        public IList<IndexAction> Actions { get; } = new List<IndexAction>();
+        public IList<IndexAction> Actions { get; }
     }
 }
