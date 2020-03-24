@@ -184,5 +184,147 @@ namespace AdditionalPropertiesEx
                 throw;
             }
         }
+
+        internal HttpMessage CreateWriteOnlyStructRequest(InputAdditionalPropertiesModelStruct createParameters)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/ap_struct_operation", false);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(createParameters);
+            request.Content = content;
+            return message;
+        }
+
+        /// <summary> Create a Pet which contains more properties than what is defined. </summary>
+        /// <param name="createParameters"> The InputAdditionalPropertiesModelStruct to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response> WriteOnlyStructAsync(InputAdditionalPropertiesModelStruct createParameters, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("APClient.WriteOnlyStruct");
+            scope.Start();
+            try
+            {
+                using var message = CreateWriteOnlyStructRequest(createParameters);
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Create a Pet which contains more properties than what is defined. </summary>
+        /// <param name="createParameters"> The InputAdditionalPropertiesModelStruct to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response WriteOnlyStruct(InputAdditionalPropertiesModelStruct createParameters, CancellationToken cancellationToken = default)
+        {
+
+            using var scope = clientDiagnostics.CreateScope("APClient.WriteOnlyStruct");
+            scope.Start();
+            try
+            {
+                using var message = CreateWriteOnlyStructRequest(createParameters);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        internal HttpMessage CreateReadOnlyStructRequest()
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/ap_struct_operation", false);
+            request.Uri = uri;
+            return message;
+        }
+
+        /// <summary> Create a Pet which contains more properties than what is defined. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response<OutputAdditionalPropertiesModelStruct>> ReadOnlyStructAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("APClient.ReadOnlyStruct");
+            scope.Start();
+            try
+            {
+                using var message = CreateReadOnlyStructRequest();
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            OutputAdditionalPropertiesModelStruct value = default;
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            value = OutputAdditionalPropertiesModelStruct.DeserializeOutputAdditionalPropertiesModelStruct(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Create a Pet which contains more properties than what is defined. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<OutputAdditionalPropertiesModelStruct> ReadOnlyStruct(CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("APClient.ReadOnlyStruct");
+            scope.Start();
+            try
+            {
+                using var message = CreateReadOnlyStructRequest();
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            OutputAdditionalPropertiesModelStruct value = default;
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            value = OutputAdditionalPropertiesModelStruct.DeserializeOutputAdditionalPropertiesModelStruct(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
     }
 }

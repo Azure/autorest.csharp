@@ -51,5 +51,21 @@ namespace AutoRest.TestServer.Tests
             var modelType = typeof(CustomizedModel);
             Assert.NotNull(modelType.GetConstructors().SingleOrDefault(c => !c.IsStatic && !c.GetParameters().Any()));
         }
+
+        [Test]
+        public void StructsAreMappedToSchemas()
+        {
+            var modelType = typeof(RenamedModelStruct);
+            Assert.AreEqual(false, modelType.IsPublic);
+            Assert.AreEqual(true, modelType.IsValueType);
+            Assert.AreEqual("CustomNamespace", modelType.Namespace);
+
+            var property = TypeAsserts.HasProperty(modelType, "CustomizedFlattenedStringProperty", BindingFlags.Instance | BindingFlags.NonPublic);
+            Assert.AreEqual(typeof(string), property.PropertyType);
+
+            var field = TypeAsserts.HasProperty(modelType, "Fruit", BindingFlags.Instance | BindingFlags.Public);
+            // TODO: Remove nullable after https://github.com/Azure/autorest.modelerfour/issues/231 is done
+            Assert.AreEqual(typeof(CustomFruitEnum?), field.PropertyType);
+        }
     }
 }

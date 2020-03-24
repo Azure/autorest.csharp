@@ -43,5 +43,19 @@ namespace CustomNamespace
         {
             return RestClient.Operation(body, cancellationToken);
         }
+
+        /// <param name="body"> The ModelStruct to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<RenamedModelStruct>> OperationStructAsync(RenamedModelStruct? body, CancellationToken cancellationToken = default)
+        {
+            return await RestClient.OperationStructAsync(body, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <param name="body"> The ModelStruct to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<RenamedModelStruct> OperationStruct(RenamedModelStruct? body, CancellationToken cancellationToken = default)
+        {
+            return RestClient.OperationStruct(body, cancellationToken);
+        }
     }
 }

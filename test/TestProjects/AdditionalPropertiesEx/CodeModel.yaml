@@ -4,7 +4,7 @@ info: !<!Info>
   title: AdditionalPropertiesEx
 schemas: !<!Schemas> 
   numbers:
-  - !<!NumberSchema> &ref_3
+  - !<!NumberSchema> &ref_4
     type: integer
     precision: 32
     language: !<!Languages> 
@@ -20,7 +20,7 @@ schemas: !<!Schemas>
         name: String
         description: simple string
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_4
+  - !<!StringSchema> &ref_5
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -41,7 +41,7 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   constants:
-  - !<!ConstantSchema> &ref_7
+  - !<!ConstantSchema> &ref_10
     type: constant
     value: !<!ConstantValue> 
       value: application/json
@@ -52,9 +52,9 @@ schemas: !<!Schemas>
         description: Content Type 'application/json'
     protocol: !<!Protocols> {}
   dictionaries:
-  - !<!DictionarySchema> &ref_2
+  - !<!DictionarySchema> &ref_3
     type: dictionary
-    elementType: !<!AnySchema> 
+    elementType: !<!AnySchema> &ref_2
       type: any
       language: !<!Languages> 
         default:
@@ -66,7 +66,7 @@ schemas: !<!Schemas>
         name: InputAdditionalPropertiesModel
         description: Dictionary of <any>
     protocol: !<!Protocols> {}
-  - !<!DictionarySchema> &ref_5
+  - !<!DictionarySchema> &ref_6
     type: dictionary
     elementType: *ref_1
     language: !<!Languages> 
@@ -74,20 +74,36 @@ schemas: !<!Schemas>
         name: OutputAdditionalPropertiesModel
         description: Dictionary of <string>
     protocol: !<!Protocols> {}
+  - !<!DictionarySchema> &ref_7
+    type: dictionary
+    elementType: *ref_2
+    language: !<!Languages> 
+      default:
+        name: InputAdditionalPropertiesModelStruct
+        description: Dictionary of <any>
+    protocol: !<!Protocols> {}
+  - !<!DictionarySchema> &ref_8
+    type: dictionary
+    elementType: *ref_1
+    language: !<!Languages> 
+      default:
+        name: OutputAdditionalPropertiesModelStruct
+        description: Dictionary of <string>
+    protocol: !<!Protocols> {}
   objects:
-  - !<!ObjectSchema> &ref_8
+  - !<!ObjectSchema> &ref_11
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     parents: !<!Relations> 
       all:
-      - *ref_2
+      - *ref_3
       immediate:
-      - *ref_2
+      - *ref_3
     properties:
     - !<!Property> 
-      schema: *ref_3
+      schema: *ref_4
       required: true
       serializedName: id
       language: !<!Languages> 
@@ -105,14 +121,14 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_10
+  - !<!ObjectSchema> &ref_13
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: *ref_3
+      schema: *ref_4
       serializedName: status
       language: !<!Languages> 
         default:
@@ -120,7 +136,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_4
+      schema: *ref_5
       serializedName: message
       language: !<!Languages> 
         default:
@@ -137,19 +153,19 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_11
+  - !<!ObjectSchema> &ref_14
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     parents: !<!Relations> 
       all:
-      - *ref_5
+      - *ref_6
       immediate:
-      - *ref_5
+      - *ref_6
     properties:
     - !<!Property> 
-      schema: *ref_3
+      schema: *ref_4
       required: true
       serializedName: id
       language: !<!Languages> 
@@ -167,8 +183,68 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
+  - !<!ObjectSchema> &ref_15
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    parents: !<!Relations> 
+      all:
+      - *ref_7
+      immediate:
+      - *ref_7
+    properties:
+    - !<!Property> 
+      schema: *ref_4
+      required: true
+      serializedName: id
+      language: !<!Languages> 
+        default:
+          name: id
+          description: ''
+      protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - input
+    language: !<!Languages> 
+      default:
+        name: InputAdditionalPropertiesModelStruct
+        description: ''
+        namespace: ''
+    protocol: !<!Protocols> {}
+  - !<!ObjectSchema> &ref_17
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    parents: !<!Relations> 
+      all:
+      - *ref_8
+      immediate:
+      - *ref_8
+    properties:
+    - !<!Property> 
+      schema: *ref_4
+      required: true
+      serializedName: id
+      language: !<!Languages> 
+        default:
+          name: id
+          description: ''
+      protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    language: !<!Languages> 
+      default:
+        name: OutputAdditionalPropertiesModelStruct
+        description: ''
+        namespace: ''
+    protocol: !<!Protocols> {}
 globalParameters:
-- !<!Parameter> &ref_6
+- !<!Parameter> &ref_9
   schema: *ref_0
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
@@ -192,12 +268,12 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_6
+    - *ref_9
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_7
+        schema: *ref_10
         implementation: Method
         language: !<!Languages> 
           default:
@@ -207,8 +283,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_9
-        schema: *ref_8
+      - !<!Parameter> &ref_12
+        schema: *ref_11
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -220,7 +296,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_9
+      - *ref_12
       language: !<!Languages> 
         default:
           name: ''
@@ -246,7 +322,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_10
+      schema: *ref_13
       language: !<!Languages> 
         default:
           name: ''
@@ -268,7 +344,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_6
+    - *ref_9
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -283,7 +359,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_11
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -297,7 +373,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_10
+      schema: *ref_13
       language: !<!Languages> 
         default:
           name: ''
@@ -312,6 +388,133 @@ operationGroups:
     language: !<!Languages> 
       default:
         name: ReadOnly
+        description: Create a Pet which contains more properties than what is defined.
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    parameters:
+    - *ref_9
+    requests:
+    - !<!Request> 
+      parameters:
+      - !<!Parameter> 
+        schema: *ref_10
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_16
+        schema: *ref_15
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: createParameters
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters:
+      - *ref_16
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /ap_struct_operation
+          method: get
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    signatureParameters: []
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_13
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: WriteOnlyStruct
+        description: Create a Pet which contains more properties than what is defined.
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    parameters:
+    - *ref_9
+    requests:
+    - !<!Request> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /ap_struct_operation
+          method: put
+          uri: '{$host}'
+    signatureParameters: []
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_17
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_13
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: ReadOnlyStruct
         description: Create a Pet which contains more properties than what is defined.
     protocol: !<!Protocols> {}
   language: !<!Languages> 
