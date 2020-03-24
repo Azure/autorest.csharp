@@ -65,21 +65,18 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         public ObjectTypeProperty? AdditionalPropertiesProperty {
             get
             {
-                if (_additionalPropertiesProperty != null || ImplementsDictionaryElementType == null)
+                if (_additionalPropertiesProperty != null || ImplementsDictionaryType == null)
                 {
                     return _additionalPropertiesProperty;
                 }
 
-                var dictionaryType = new CSharpType(typeof(IDictionary<,>), new CSharpType(typeof(string)), ImplementsDictionaryElementType);
-                var implType = new CSharpType(typeof(Dictionary<,>), new CSharpType(typeof(string)), ImplementsDictionaryElementType);
-
                 SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetMemberForSchema("$AdditionalProperties");
 
                 _additionalPropertiesProperty = new ObjectTypeProperty(
-                    BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", dictionaryType, "internal", memberMapping?.ExistingMember),
+                    BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "internal", memberMapping?.ExistingMember),
                     string.Empty,
-                    !_objectSchema.IsInput,
-                    implType,
+                    true,
+                    null,
                     null);
 
                 return _additionalPropertiesProperty;
@@ -174,6 +171,12 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, BuilderHelpers.StringConstant(Discriminator.Value)));
             }
 
+            if (AdditionalPropertiesProperty != null)
+            {
+                var implType = new CSharpType(typeof(Dictionary<,>), AdditionalPropertiesProperty.Declaration.Type.Arguments);
+                defaultCtorInitializers.Add(new ObjectPropertyInitializer(AdditionalPropertiesProperty, Constant.NewInstanceOf(implType)));
+            }
+
             yield return new ObjectTypeConstructor(
                 BuilderHelpers.CreateMemberDeclaration(
                     Type.Name,
@@ -199,7 +202,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         public ObjectTypeDiscriminator? Discriminator => _discriminator ??= BuildDiscriminator();
 
-        public CSharpType? ImplementsDictionaryElementType => _implementsDictionaryType ??= CreateInheritedDictionaryElementType();
+        public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
 
         public CSharpType Type { get; }
 
@@ -362,13 +365,16 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             return null;
         }
 
-        private CSharpType? CreateInheritedDictionaryElementType()
+        private CSharpType? CreateInheritedDictionaryType()
         {
             foreach (ComplexSchema complexSchema in _objectSchema.Parents!.Immediate)
             {
                 if (complexSchema is DictionarySchema dictionarySchema)
                 {
-                    return _typeFactory.CreateType(dictionarySchema.ElementType, false);
+                    return new CSharpType(
+                        _objectSchema.IsInput ? typeof(IDictionary<,>) : typeof(IReadOnlyDictionary<,>),
+                        typeof(string),
+                        _typeFactory.CreateType(dictionarySchema.ElementType, false));
                 };
             }
 

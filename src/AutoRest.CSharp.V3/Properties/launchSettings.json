@@ -4,6 +4,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\additionalProperties\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\additionalProperties --namespace=additionalProperties --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
     },
+    "AdditionalPropertiesEx": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestProjects\\AdditionalPropertiesEx\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestProjects\\AdditionalPropertiesEx --namespace=AdditionalPropertiesEx --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
     "AppConfiguration": {
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\AppConfiguration\\AppConfiguration\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\AppConfiguration\\AppConfiguration --namespace=AppConfiguration --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"

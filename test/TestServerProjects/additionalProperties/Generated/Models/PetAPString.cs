@@ -18,6 +18,7 @@ namespace additionalProperties.Models
         public PetAPString(int id)
         {
             Id = id;
+            AdditionalProperties = new Dictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of PetAPString. </summary>
@@ -36,25 +37,25 @@ namespace additionalProperties.Models
         public int Id { get; }
         public string Name { get; set; }
         public bool? Status { get; }
-        internal IDictionary<string, string> AdditionalProperties { get; set; } = new Dictionary<string, string>();
+        internal IDictionary<string, string> AdditionalProperties { get; }
         /// <inheritdoc />
         public IEnumerator<KeyValuePair<string, string>> GetEnumerator() => AdditionalProperties.GetEnumerator();
         /// <inheritdoc />
         IEnumerator IEnumerable.GetEnumerator() => AdditionalProperties.GetEnumerator();
         /// <inheritdoc />
+        public bool TryGetValue(string key, out string value) => AdditionalProperties.TryGetValue(key, out value);
+        /// <inheritdoc />
+        public bool ContainsKey(string key) => AdditionalProperties.ContainsKey(key);
+        /// <inheritdoc />
         public ICollection<string> Keys => AdditionalProperties.Keys;
         /// <inheritdoc />
         public ICollection<string> Values => AdditionalProperties.Values;
         /// <inheritdoc />
-        public bool TryGetValue(string key, out string value) => AdditionalProperties.TryGetValue(key, out value);
+        int ICollection<KeyValuePair<string, string>>.Count => AdditionalProperties.Count;
         /// <inheritdoc />
         public void Add(string key, string value) => AdditionalProperties.Add(key, value);
         /// <inheritdoc />
-        public bool ContainsKey(string key) => AdditionalProperties.ContainsKey(key);
-        /// <inheritdoc />
         public bool Remove(string key) => AdditionalProperties.Remove(key);
-        /// <inheritdoc />
-        int ICollection<KeyValuePair<string, string>>.Count => AdditionalProperties.Count;
         /// <inheritdoc />
         bool ICollection<KeyValuePair<string, string>>.IsReadOnly => AdditionalProperties.IsReadOnly;
         /// <inheritdoc />

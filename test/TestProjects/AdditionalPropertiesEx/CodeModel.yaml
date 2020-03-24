@@ -1,0 +1,327 @@
+!<!CodeModel> 
+info: !<!Info> 
+  description: Test Infrastructure for AutoRest
+  title: AdditionalPropertiesEx
+schemas: !<!Schemas> 
+  numbers:
+  - !<!NumberSchema> &ref_3
+    type: integer
+    precision: 32
+    language: !<!Languages> 
+      default:
+        name: Integer
+        description: ''
+    protocol: !<!Protocols> {}
+  strings:
+  - !<!StringSchema> &ref_0
+    type: string
+    language: !<!Languages> 
+      default:
+        name: String
+        description: simple string
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_4
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ErrorMessage
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_1
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+    protocol: !<!Protocols> {}
+  constants:
+  - !<!ConstantSchema> &ref_7
+    type: constant
+    value: !<!ConstantValue> 
+      value: application/json
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: ApplicationJson
+        description: Content Type 'application/json'
+    protocol: !<!Protocols> {}
+  dictionaries:
+  - !<!DictionarySchema> &ref_2
+    type: dictionary
+    elementType: !<!AnySchema> 
+      type: any
+      language: !<!Languages> 
+        default:
+          name: any
+          description: Any object
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: InputAdditionalPropertiesModel
+        description: Dictionary of <any>
+    protocol: !<!Protocols> {}
+  - !<!DictionarySchema> &ref_5
+    type: dictionary
+    elementType: *ref_1
+    language: !<!Languages> 
+      default:
+        name: OutputAdditionalPropertiesModel
+        description: Dictionary of <string>
+    protocol: !<!Protocols> {}
+  objects:
+  - !<!ObjectSchema> &ref_8
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    parents: !<!Relations> 
+      all:
+      - *ref_2
+      immediate:
+      - *ref_2
+    properties:
+    - !<!Property> 
+      schema: *ref_3
+      required: true
+      serializedName: id
+      language: !<!Languages> 
+        default:
+          name: id
+          description: ''
+      protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - input
+    language: !<!Languages> 
+      default:
+        name: InputAdditionalPropertiesModel
+        description: ''
+        namespace: ''
+    protocol: !<!Protocols> {}
+  - !<!ObjectSchema> &ref_10
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: *ref_3
+      serializedName: status
+      language: !<!Languages> 
+        default:
+          name: status
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_4
+      serializedName: message
+      language: !<!Languages> 
+        default:
+          name: message
+          description: ''
+      protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    language: !<!Languages> 
+      default:
+        name: Error
+        description: ''
+        namespace: ''
+    protocol: !<!Protocols> {}
+  - !<!ObjectSchema> &ref_11
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    parents: !<!Relations> 
+      all:
+      - *ref_5
+      immediate:
+      - *ref_5
+    properties:
+    - !<!Property> 
+      schema: *ref_3
+      required: true
+      serializedName: id
+      language: !<!Languages> 
+        default:
+          name: id
+          description: ''
+      protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    language: !<!Languages> 
+      default:
+        name: OutputAdditionalPropertiesModel
+        description: ''
+        namespace: ''
+    protocol: !<!Protocols> {}
+globalParameters:
+- !<!Parameter> &ref_6
+  schema: *ref_0
+  clientDefaultValue: 'http://localhost:3000'
+  implementation: Client
+  required: true
+  extensions:
+    x-ms-skip-url-encoding: true
+  language: !<!Languages> 
+    default:
+      name: $host
+      description: server parameter
+      serializedName: $host
+  protocol: !<!Protocols> 
+    http: !<!HttpParameter> 
+      in: uri
+operationGroups:
+- !<!OperationGroup> 
+  $key: AP
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    parameters:
+    - *ref_6
+    requests:
+    - !<!Request> 
+      parameters:
+      - !<!Parameter> 
+        schema: *ref_7
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_9
+        schema: *ref_8
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: createParameters
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters:
+      - *ref_9
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /ap_operation
+          method: get
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    signatureParameters: []
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_10
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: WriteOnly
+        description: Create a Pet which contains more properties than what is defined.
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    parameters:
+    - *ref_6
+    requests:
+    - !<!Request> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /ap_operation
+          method: put
+          uri: '{$host}'
+    signatureParameters: []
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_11
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_10
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: ReadOnly
+        description: Create a Pet which contains more properties than what is defined.
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: AP
+      description: ''
+  protocol: !<!Protocols> {}
+language: !<!Languages> 
+  default:
+    name: AdditionalPropertiesEx
+    description: ''
+protocol: !<!Protocols> 
+  http: !<!HttpModel> {}

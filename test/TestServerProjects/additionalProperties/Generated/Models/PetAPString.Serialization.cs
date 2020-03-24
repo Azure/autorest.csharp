@@ -41,7 +41,8 @@ namespace additionalProperties.Models
             int id = default;
             string name = default;
             bool? status = default;
-            IDictionary<string, string> additionalProperties = new Dictionary<string, string>();
+            IDictionary<string, string> additionalProperties = default;
+            Dictionary<string, string> additionalPropertiesDictionary = new Dictionary<string, string>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -67,8 +68,9 @@ namespace additionalProperties.Models
                     status = property.Value.GetBoolean();
                     continue;
                 }
-                additionalProperties.Add(property.Name, property.Value.GetString());
+                additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
             }
+            additionalProperties = additionalPropertiesDictionary;
             return new PetAPString(id, name, status, additionalProperties);
         }
     }

@@ -44,10 +44,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     implementsTypes.Add(schema.Inherits);
                 }
 
-                var elementType = schema.ImplementsDictionaryElementType;
-                if (elementType != null)
+                if (schema.ImplementsDictionaryType != null)
                 {
-                    implementsTypes.Add(new CSharpType(typeof(IDictionary<,>), new CSharpType(typeof(string)), elementType));
+                    implementsTypes.Add(schema.ImplementsDictionaryType);
                 }
 
                 writer.WriteXmlDocumentationSummary(schema.Description);
@@ -91,14 +90,22 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     if (schema.AdditionalPropertiesProperty is ObjectTypeProperty additionalPropertiesProperty)
                     {
-                        var keyType = typeof(string);
+                        var dictionaryType = schema.ImplementsDictionaryType;
+                        Debug.Assert(dictionaryType != null);
 
-                        var itemType = schema.ImplementsDictionaryElementType!;
+                        var keyType = typeof(string);
+                        var isReadonly = dictionaryType.FrameworkType == typeof(IReadOnlyDictionary<,>);
+                        var itemType = dictionaryType.Arguments[1];
                         var keyValuePairType = new CSharpType(typeof(KeyValuePair<,>), keyType, itemType);
                         var iEnumeratorKeyValuePairType = new CSharpType(typeof(IEnumerator<>), keyValuePairType);
-                        var iCollectionKeyValuePairType = new CSharpType(typeof(ICollection<>), keyValuePairType);
-                        var iCollectionKeyType = new CSharpType(typeof(ICollection<>), keyType);
-                        var iCollectionItemType = new CSharpType(typeof(ICollection<>), itemType);
+
+                        var collectionType = isReadonly ? typeof(IReadOnlyCollection<>) : typeof(ICollection<>);
+
+                        var iCollectionKeyValuePairType = new CSharpType(collectionType, keyValuePairType);
+
+                        var keyValueCollectionType = isReadonly ? typeof(IEnumerable<>) : typeof(ICollection<>);
+                        var iCollectionKeyType = new CSharpType(keyValueCollectionType, keyType);
+                        var iCollectionItemType = new CSharpType(keyValueCollectionType, itemType);
                         var iEnumerator = typeof(IEnumerator);
                         var iEnumerable = typeof(IEnumerable);
 
@@ -108,41 +115,48 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             .WriteXmlDocumentationInheritDoc()
                             .Line($"public {iEnumeratorKeyValuePairType} GetEnumerator() => {additionalProperties}.GetEnumerator();")
                             .WriteXmlDocumentationInheritDoc()
-                            .Line($"{iEnumerator}  {iEnumerable}.GetEnumerator() => {additionalProperties}.GetEnumerator();")
+                            .Line($"{iEnumerator} {iEnumerable}.GetEnumerator() => {additionalProperties}.GetEnumerator();")
+                            .WriteXmlDocumentationInheritDoc()
+                            .Line($"public bool TryGetValue(string key, out {itemType} value) => {additionalProperties}.TryGetValue(key, out value);")
+                            .WriteXmlDocumentationInheritDoc()
+                            .Line($"public bool ContainsKey({keyType} key) => {additionalProperties}.ContainsKey(key);")
                             .WriteXmlDocumentationInheritDoc()
                             .Line($"public {iCollectionKeyType} Keys => {additionalProperties}.Keys;")
                             .WriteXmlDocumentationInheritDoc()
                             .Line($"public {iCollectionItemType} Values => {additionalProperties}.Values;")
                             .WriteXmlDocumentationInheritDoc()
-                            .Line($"public bool TryGetValue(string key, out {itemType} value) => {additionalProperties}.TryGetValue(key, out value);")
-                            .WriteXmlDocumentationInheritDoc()
-                            .Line($"public void Add({keyType} key, {itemType} value) => {additionalProperties}.Add(key, value);")
-                            .WriteXmlDocumentationInheritDoc()
-                            .Line($"public bool ContainsKey({keyType} key) => {additionalProperties}.ContainsKey(key);")
-                            .WriteXmlDocumentationInheritDoc()
-                            .Line($"public bool Remove({keyType} key) => {additionalProperties}.Remove(key);")
-                            .WriteXmlDocumentationInheritDoc()
-                            .Line($"int {iCollectionKeyValuePairType}.Count => {additionalProperties}.Count;")
-                            .WriteXmlDocumentationInheritDoc()
-                            .Line($"bool {iCollectionKeyValuePairType}.IsReadOnly => {additionalProperties}.IsReadOnly;")
-                            .WriteXmlDocumentationInheritDoc()
-                            .Line($"void {iCollectionKeyValuePairType}.Add({keyValuePairType} value) => {additionalProperties}.Add(value);")
-                            .WriteXmlDocumentationInheritDoc()
-                            .Line($"bool {iCollectionKeyValuePairType}.Remove({keyValuePairType} value) => {additionalProperties}.Remove(value);")
-                            .WriteXmlDocumentationInheritDoc()
-                            .Line($"bool {iCollectionKeyValuePairType}.Contains({keyValuePairType} value) => {additionalProperties}.Contains(value);")
-                            .WriteXmlDocumentationInheritDoc()
-                            .Line($"void {iCollectionKeyValuePairType}.CopyTo({keyValuePairType}[] destination, int offset) => {additionalProperties}.CopyTo(destination, offset);")
-                            .WriteXmlDocumentationInheritDoc()
-                            .Line($"void {iCollectionKeyValuePairType}.Clear() => {additionalProperties}.Clear();");
+                            .Line($"int {iCollectionKeyValuePairType}.Count => {additionalProperties}.Count;");
+
+                        if (!isReadonly)
+                        {
+                            writer
+                                .WriteXmlDocumentationInheritDoc()
+                                .Line($"public void Add({keyType} key, {itemType} value) => {additionalProperties}.Add(key, value);")
+                                .WriteXmlDocumentationInheritDoc()
+                                .Line($"public bool Remove({keyType} key) => {additionalProperties}.Remove(key);")
+                                .WriteXmlDocumentationInheritDoc()
+                                .Line($"bool {iCollectionKeyValuePairType}.IsReadOnly => {additionalProperties}.IsReadOnly;")
+                                .WriteXmlDocumentationInheritDoc()
+                                .Line($"void {iCollectionKeyValuePairType}.Add({keyValuePairType} value) => {additionalProperties}.Add(value);")
+                                .WriteXmlDocumentationInheritDoc()
+                                .Line($"bool {iCollectionKeyValuePairType}.Remove({keyValuePairType} value) => {additionalProperties}.Remove(value);")
+                                .WriteXmlDocumentationInheritDoc()
+                                .Line($"bool {iCollectionKeyValuePairType}.Contains({keyValuePairType} value) => {additionalProperties}.Contains(value);")
+                                .WriteXmlDocumentationInheritDoc()
+                                .Line($"void {iCollectionKeyValuePairType}.CopyTo({keyValuePairType}[] destination, int offset) => {additionalProperties}.CopyTo(destination, offset);")
+                                .WriteXmlDocumentationInheritDoc()
+                                .Line($"void {iCollectionKeyValuePairType}.Clear() => {additionalProperties}.Clear();");
+                        }
 
                         using (writer
                             .WriteXmlDocumentationInheritDoc()
                             .Scope($"public {itemType} this[{keyType} key]"))
                         {
-                            writer
-                                .Line($"get => {additionalProperties}[key];")
-                                .Line($"set => {additionalProperties}[key] = value;");
+                            writer.Line($"get => {additionalProperties}[key];");
+                            if (!isReadonly)
+                            {
+                                writer.Line($"set => {additionalProperties}[key] = value;");
+                            }
                         }
                     }
                 }

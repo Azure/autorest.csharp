@@ -47,7 +47,8 @@ namespace additionalProperties.Models
             int id = default;
             string name = default;
             bool? status = default;
-            IDictionary<string, object> additionalProperties = new Dictionary<string, object>();
+            IDictionary<string, object> additionalProperties = default;
+            Dictionary<string, object> additionalPropertiesDictionary = new Dictionary<string, object>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("friendly"))
@@ -82,8 +83,9 @@ namespace additionalProperties.Models
                     status = property.Value.GetBoolean();
                     continue;
                 }
-                additionalProperties.Add(property.Name, property.Value.GetObject());
+                additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
+            additionalProperties = additionalPropertiesDictionary;
             return new CatAPTrue(friendly, id, name, status, additionalProperties);
         }
     }
