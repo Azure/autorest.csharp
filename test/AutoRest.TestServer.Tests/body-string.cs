@@ -79,7 +79,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PutStringEmpty() => Test(async (host, pipeline) =>
         {
-            var result = await new StringClient(ClientDiagnostics, pipeline).PutEmptyAsync("");
+            var result = await new StringClient(ClientDiagnostics, pipeline, host).PutEmptyAsync("");
             Assert.AreEqual(200, result.Status);
         });
 
@@ -87,7 +87,7 @@ namespace AutoRest.TestServer.Tests
         [Ignore("We are sending null in a body but should be doing a null check")]
         public Task PutStringNull() => Test(async (host, pipeline) =>
         {
-            var result = await new StringClient(ClientDiagnostics, pipeline).PutNullAsync(null);
+            var result = await new StringClient(ClientDiagnostics, pipeline, host).PutNullAsync(null);
             Assert.AreEqual(200, result.Status);
         });
 
