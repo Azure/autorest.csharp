@@ -306,6 +306,7 @@
         "sealed-choice",
         "sealed-conditional",
         "string",
+        "time",
         "unixtime",
         "unknown",
         "uri",
@@ -332,6 +333,7 @@
         "integer",
         "number",
         "string",
+        "time",
         "unixtime",
         "uri",
         "uuid"
@@ -356,6 +358,7 @@
         "sealed-choice",
         "sealed-conditional",
         "string",
+        "time",
         "unixtime",
         "uri",
         "uuid"
@@ -398,6 +401,7 @@
         "sealed-choice",
         "sealed-conditional",
         "string",
+        "time",
         "unixtime",
         "uri",
         "uuid",
@@ -1300,6 +1304,23 @@
         }
       ]
     },
+    "TimeSchema": {
+      "description": "a schema that represents a Date value",
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveSchema"
+        }
+      ]
+    },
     "UnixTimeSchema": {
       "description": "a schema that represents a UnixTime value",
       "type": "object",
@@ -1710,6 +1731,13 @@
             "$ref": "#/definitions/DateSchema"
           }
         },
+        "times": {
+          "description": "a time",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimeSchema"
+          }
+        },
         "dateTimes": {
           "description": "a DateTime",
           "type": "array",
@@ -1753,7 +1781,7 @@
           }
         },
         "choices": {
-          "description": "- this is essentially can be thought of as an 'enum'\nthat is a choice between one of several items, but an unspecified value is permitted.",
+          "description": "- this is essentially can be thought of as an 'enum' \nthat is a choice between one of several items, but an unspecified value is permitted.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ChoiceSchema"
@@ -1811,7 +1839,7 @@
           }
         },
         "unknowns": {
-          "description": "it's possible that we just may make this an error\nin representation.",
+          "description": "it's possible that we just may make this an error \nin representation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Schema"
@@ -1821,6 +1849,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/GroupSchema"
+          }
+        },
+        "any": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnySchema"
           }
         }
       },

@@ -21,6 +21,11 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Format);
             writer.WritePropertyName("synonyms");
             writer.WriteStringValue(Synonyms);
+            if (EncryptionKey != null)
+            {
+                writer.WritePropertyName("encryptionKey");
+                writer.WriteObjectValue(EncryptionKey);
+            }
             if (ETag != null)
             {
                 writer.WritePropertyName("@odata.etag");
@@ -34,6 +39,7 @@ namespace CognitiveSearch.Models
             string name = default;
             string format = default;
             string synonyms = default;
+            EncryptionKey encryptionKey = default;
             string odataetag = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -52,6 +58,15 @@ namespace CognitiveSearch.Models
                     synonyms = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("encryptionKey"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    encryptionKey = EncryptionKey.DeserializeEncryptionKey(property.Value);
+                    continue;
+                }
                 if (property.NameEquals("@odata.etag"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -62,7 +77,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SynonymMap(name, format, synonyms, odataetag);
+            return new SynonymMap(name, format, synonyms, encryptionKey, odataetag);
         }
     }
 }

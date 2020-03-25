@@ -621,6 +621,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_29
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -632,6 +633,7 @@ operationGroups:
       - !<!Parameter> &ref_30
         schema: *ref_27
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: body
@@ -760,6 +762,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_29
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -771,6 +774,7 @@ operationGroups:
       - !<!Parameter> &ref_34
         schema: *ref_27
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: body

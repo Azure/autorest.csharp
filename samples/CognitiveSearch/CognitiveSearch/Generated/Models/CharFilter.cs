@@ -9,7 +9,7 @@ using System;
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> Abstract base class for character filters. </summary>
+    /// <summary> Base type for character filters. </summary>
     public partial class CharFilter
     {
         /// <summary> Initializes a new instance of CharFilter. </summary>
@@ -26,7 +26,7 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> Initializes a new instance of CharFilter. </summary>
-        /// <param name="odataType"> . </param>
+        /// <param name="odataType"> Identifies the concrete type of the char filter. </param>
         /// <param name="name"> The name of the char filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         internal CharFilter(string odataType, string name)
         {
@@ -34,6 +34,7 @@ namespace CognitiveSearch.Models
             Name = name;
         }
 
+        /// <summary> Identifies the concrete type of the char filter. </summary>
         internal string OdataType { get; set; }
         /// <summary> The name of the char filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </summary>
         public string Name { get; }

@@ -3988,7 +3988,6 @@ schemas: !<!Schemas>
                                                             properties:
                                                             - !<!Property> 
                                                               schema: *ref_11
-                                                              readOnly: false
                                                               serializedName: ddosCustomPolicy
                                                               language: !<!Languages> 
                                                                 default:
@@ -8265,6 +8264,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_343
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -8461,6 +8461,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_343
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -9824,6 +9825,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_343
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType

@@ -7,7 +7,7 @@
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> Abstract base class for data change detection policies. </summary>
+    /// <summary> Base type for data change detection policies. </summary>
     public partial class DataChangeDetectionPolicy
     {
         /// <summary> Initializes a new instance of DataChangeDetectionPolicy. </summary>
@@ -17,12 +17,13 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> Initializes a new instance of DataChangeDetectionPolicy. </summary>
-        /// <param name="odataType"> . </param>
+        /// <param name="odataType"> Identifies the concrete type of the data change detection policy. </param>
         internal DataChangeDetectionPolicy(string odataType)
         {
             OdataType = odataType ?? null;
         }
 
+        /// <summary> Identifies the concrete type of the data change detection policy. </summary>
         internal string OdataType { get; set; }
     }
 }

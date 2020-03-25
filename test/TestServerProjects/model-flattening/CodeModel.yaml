@@ -832,6 +832,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_32
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -843,6 +844,7 @@ operationGroups:
       - !<!Parameter> &ref_34
         schema: *ref_33
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: resourceArray
@@ -958,6 +960,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_32
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -969,6 +972,7 @@ operationGroups:
       - !<!Parameter> &ref_37
         schema: *ref_36
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: resourceArray
@@ -1084,6 +1088,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_32
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1095,6 +1100,7 @@ operationGroups:
       - !<!Parameter> &ref_40
         schema: *ref_39
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: resourceDictionary
@@ -1210,6 +1216,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_32
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1221,6 +1228,7 @@ operationGroups:
       - !<!Parameter> &ref_43
         schema: *ref_42
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: resourceComplexObject
@@ -1336,6 +1344,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_32
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1347,6 +1356,7 @@ operationGroups:
       - !<!Parameter> &ref_44
         schema: *ref_23
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: simpleBodyProduct
@@ -1415,6 +1425,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_32
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1427,6 +1438,7 @@ operationGroups:
         schema: *ref_23
         flattened: true
         implementation: Method
+        required: false
         extensions:
           x-ms-client-flatten: true
         language: !<!Languages> 
@@ -1584,6 +1596,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_32
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1596,6 +1609,7 @@ operationGroups:
         schema: *ref_23
         flattened: true
         implementation: Method
+        required: false
         extensions:
           x-ms-client-flatten: true
           x-ms-parameter-grouping: &ref_58

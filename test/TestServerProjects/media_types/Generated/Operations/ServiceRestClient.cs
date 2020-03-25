@@ -36,7 +36,7 @@ namespace media_types
             this.pipeline = pipeline;
         }
 
-        internal HttpMessage CreateAnalyzeBodyRequest(ContentType? contentType, Stream input)
+        internal HttpMessage CreateAnalyzeBodyRequest(ContentType contentType, Stream input)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -45,10 +45,7 @@ namespace media_types
             uri.AppendRaw(host, false);
             uri.AppendPath("/mediatypes/analyze", false);
             request.Uri = uri;
-            if (contentType != null)
-            {
-                request.Headers.Add("Content-Type", contentType.Value.ToSerialString());
-            }
+            request.Headers.Add("Content-Type", contentType.ToSerialString());
             request.Content = RequestContent.Create(input);
             return message;
         }
@@ -57,8 +54,13 @@ namespace media_types
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<string>> AnalyzeBodyAsync(ContentType? contentType, Stream input, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<string>> AnalyzeBodyAsync(ContentType contentType, Stream input, CancellationToken cancellationToken = default)
         {
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeBody");
             scope.Start();
             try
@@ -89,8 +91,13 @@ namespace media_types
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<string> AnalyzeBody(ContentType? contentType, Stream input, CancellationToken cancellationToken = default)
+        public Response<string> AnalyzeBody(ContentType contentType, Stream input, CancellationToken cancellationToken = default)
         {
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
+
             using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeBody");
             scope.Start();
             try

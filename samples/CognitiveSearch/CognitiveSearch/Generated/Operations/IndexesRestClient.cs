@@ -18,51 +18,42 @@ namespace CognitiveSearch
 {
     internal partial class IndexesRestClient
     {
-        private string searchServiceName;
-        private string searchDnsSuffix;
+        private string endpoint;
         private string apiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
 
         /// <summary> Initializes a new instance of IndexesRestClient. </summary>
-        public IndexesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string searchDnsSuffix = "search.windows.net", string apiVersion = "2019-05-06")
+        public IndexesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string apiVersion = "2019-05-06-Preview")
         {
-            if (searchServiceName == null)
+            if (endpoint == null)
             {
-                throw new ArgumentNullException(nameof(searchServiceName));
-            }
-            if (searchDnsSuffix == null)
-            {
-                throw new ArgumentNullException(nameof(searchDnsSuffix));
+                throw new ArgumentNullException(nameof(endpoint));
             }
             if (apiVersion == null)
             {
                 throw new ArgumentNullException(nameof(apiVersion));
             }
 
-            this.searchServiceName = searchServiceName;
-            this.searchDnsSuffix = searchDnsSuffix;
+            this.endpoint = endpoint;
             this.apiVersion = apiVersion;
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
 
-        internal HttpMessage CreateCreateRequest(Guid? clientRequestId, Models.Index index)
+        internal HttpMessage CreateCreateRequest(Guid? xMsClientRequestId, Models.Index index)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("https://", false);
-            uri.AppendRaw(searchServiceName, false);
-            uri.AppendRaw(".", false);
-            uri.AppendRaw(searchDnsSuffix, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/indexes", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (clientRequestId != null)
+            if (xMsClientRequestId != null)
             {
-                request.Headers.Add("client-request-id", clientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
             }
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -72,10 +63,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Creates a new search index. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="index"> The definition of the index to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Models.Index>> CreateAsync(Guid? clientRequestId, Models.Index index, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Models.Index>> CreateAsync(Guid? xMsClientRequestId, Models.Index index, CancellationToken cancellationToken = default)
         {
             if (index == null)
             {
@@ -86,7 +77,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateRequest(clientRequestId, index);
+                using var message = CreateCreateRequest(xMsClientRequestId, index);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -109,10 +100,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Creates a new search index. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="index"> The definition of the index to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Models.Index> Create(Guid? clientRequestId, Models.Index index, CancellationToken cancellationToken = default)
+        public Response<Models.Index> Create(Guid? xMsClientRequestId, Models.Index index, CancellationToken cancellationToken = default)
         {
             if (index == null)
             {
@@ -123,7 +114,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateRequest(clientRequestId, index);
+                using var message = CreateCreateRequest(xMsClientRequestId, index);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -145,16 +136,13 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateListRequest(string select, Guid? clientRequestId)
+        internal HttpMessage CreateListRequest(string select, Guid? xMsClientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("https://", false);
-            uri.AppendRaw(searchServiceName, false);
-            uri.AppendRaw(".", false);
-            uri.AppendRaw(searchDnsSuffix, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/indexes", false);
             if (select != null)
             {
@@ -162,24 +150,24 @@ namespace CognitiveSearch
             }
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (clientRequestId != null)
+            if (xMsClientRequestId != null)
             {
-                request.Headers.Add("client-request-id", clientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
             }
             return message;
         }
 
         /// <summary> Lists all indexes available for a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ListIndexesResult>> ListAsync(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ListIndexesResult>> ListAsync(string select, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("IndexesClient.List");
             scope.Start();
             try
             {
-                using var message = CreateListRequest(select, clientRequestId);
+                using var message = CreateListRequest(select, xMsClientRequestId);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -203,15 +191,15 @@ namespace CognitiveSearch
 
         /// <summary> Lists all indexes available for a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ListIndexesResult> List(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public Response<ListIndexesResult> List(string select, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("IndexesClient.List");
             scope.Start();
             try
             {
-                using var message = CreateListRequest(select, clientRequestId);
+                using var message = CreateListRequest(select, xMsClientRequestId);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -233,16 +221,13 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string indexName, bool? allowIndexDowntime, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Models.Index index)
+        internal HttpMessage CreateCreateOrUpdateRequest(string indexName, bool? allowIndexDowntime, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, Models.Index index)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("https://", false);
-            uri.AppendRaw(searchServiceName, false);
-            uri.AppendRaw(".", false);
-            uri.AppendRaw(searchDnsSuffix, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/indexes('", false);
             uri.AppendPath(indexName, true);
             uri.AppendPath("')", false);
@@ -252,9 +237,9 @@ namespace CognitiveSearch
             }
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (clientRequestId != null)
+            if (xMsClientRequestId != null)
             {
-                request.Headers.Add("client-request-id", clientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
             }
             if (ifMatch != null)
             {
@@ -275,12 +260,12 @@ namespace CognitiveSearch
         /// <summary> Creates a new search index or updates an index if it already exists. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
         /// <param name="allowIndexDowntime"> Allows new analyzers, tokenizers, token filters, or char filters to be added to an index by taking the index offline for at least a few seconds. This temporarily causes indexing and query requests to fail. Performance and write availability of the index can be impaired for several minutes after the index is updated, or longer for very large indexes. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="index"> The definition of the index to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Models.Index>> CreateOrUpdateAsync(string indexName, bool? allowIndexDowntime, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Models.Index index, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Models.Index>> CreateOrUpdateAsync(string indexName, bool? allowIndexDowntime, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, Models.Index index, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -295,7 +280,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateOrUpdateRequest(indexName, allowIndexDowntime, clientRequestId, ifMatch, ifNoneMatch, index);
+                using var message = CreateCreateOrUpdateRequest(indexName, allowIndexDowntime, xMsClientRequestId, ifMatch, ifNoneMatch, index);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -320,12 +305,12 @@ namespace CognitiveSearch
         /// <summary> Creates a new search index or updates an index if it already exists. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
         /// <param name="allowIndexDowntime"> Allows new analyzers, tokenizers, token filters, or char filters to be added to an index by taking the index offline for at least a few seconds. This temporarily causes indexing and query requests to fail. Performance and write availability of the index can be impaired for several minutes after the index is updated, or longer for very large indexes. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="index"> The definition of the index to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Models.Index> CreateOrUpdate(string indexName, bool? allowIndexDowntime, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Models.Index index, CancellationToken cancellationToken = default)
+        public Response<Models.Index> CreateOrUpdate(string indexName, bool? allowIndexDowntime, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, Models.Index index, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -340,7 +325,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateOrUpdateRequest(indexName, allowIndexDowntime, clientRequestId, ifMatch, ifNoneMatch, index);
+                using var message = CreateCreateOrUpdateRequest(indexName, allowIndexDowntime, xMsClientRequestId, ifMatch, ifNoneMatch, index);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -362,24 +347,21 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string indexName, Guid? clientRequestId, string ifMatch, string ifNoneMatch)
+        internal HttpMessage CreateDeleteRequest(string indexName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("https://", false);
-            uri.AppendRaw(searchServiceName, false);
-            uri.AppendRaw(".", false);
-            uri.AppendRaw(searchDnsSuffix, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/indexes('", false);
             uri.AppendPath(indexName, true);
             uri.AppendPath("')", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (clientRequestId != null)
+            if (xMsClientRequestId != null)
             {
-                request.Headers.Add("client-request-id", clientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
             }
             if (ifMatch != null)
             {
@@ -394,11 +376,11 @@ namespace CognitiveSearch
 
         /// <summary> Deletes a search index and all the documents it contains. </summary>
         /// <param name="indexName"> The name of the index to delete. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteAsync(string indexName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> DeleteAsync(string indexName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -409,7 +391,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateDeleteRequest(indexName, clientRequestId, ifMatch, ifNoneMatch);
+                using var message = CreateDeleteRequest(indexName, xMsClientRequestId, ifMatch, ifNoneMatch);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -428,11 +410,11 @@ namespace CognitiveSearch
 
         /// <summary> Deletes a search index and all the documents it contains. </summary>
         /// <param name="indexName"> The name of the index to delete. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete(string indexName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public Response Delete(string indexName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -443,7 +425,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateDeleteRequest(indexName, clientRequestId, ifMatch, ifNoneMatch);
+                using var message = CreateDeleteRequest(indexName, xMsClientRequestId, ifMatch, ifNoneMatch);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -460,33 +442,30 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateGetRequest(string indexName, Guid? clientRequestId)
+        internal HttpMessage CreateGetRequest(string indexName, Guid? xMsClientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("https://", false);
-            uri.AppendRaw(searchServiceName, false);
-            uri.AppendRaw(".", false);
-            uri.AppendRaw(searchDnsSuffix, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/indexes('", false);
             uri.AppendPath(indexName, true);
             uri.AppendPath("')", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (clientRequestId != null)
+            if (xMsClientRequestId != null)
             {
-                request.Headers.Add("client-request-id", clientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
             }
             return message;
         }
 
         /// <summary> Retrieves an index definition. </summary>
         /// <param name="indexName"> The name of the index to retrieve. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Models.Index>> GetAsync(string indexName, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Models.Index>> GetAsync(string indexName, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -497,7 +476,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateGetRequest(indexName, clientRequestId);
+                using var message = CreateGetRequest(indexName, xMsClientRequestId);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -521,9 +500,9 @@ namespace CognitiveSearch
 
         /// <summary> Retrieves an index definition. </summary>
         /// <param name="indexName"> The name of the index to retrieve. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Models.Index> Get(string indexName, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public Response<Models.Index> Get(string indexName, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -534,7 +513,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateGetRequest(indexName, clientRequestId);
+                using var message = CreateGetRequest(indexName, xMsClientRequestId);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -556,33 +535,30 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateGetStatisticsRequest(string indexName, Guid? clientRequestId)
+        internal HttpMessage CreateGetStatisticsRequest(string indexName, Guid? xMsClientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("https://", false);
-            uri.AppendRaw(searchServiceName, false);
-            uri.AppendRaw(".", false);
-            uri.AppendRaw(searchDnsSuffix, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/indexes('", false);
             uri.AppendPath(indexName, true);
             uri.AppendPath("')/search.stats", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (clientRequestId != null)
+            if (xMsClientRequestId != null)
             {
-                request.Headers.Add("client-request-id", clientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
             }
             return message;
         }
 
         /// <summary> Returns statistics for the given index, including a document count and storage usage. </summary>
         /// <param name="indexName"> The name of the index for which to retrieve statistics. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<GetIndexStatisticsResult>> GetStatisticsAsync(string indexName, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<GetIndexStatisticsResult>> GetStatisticsAsync(string indexName, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -593,7 +569,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateGetStatisticsRequest(indexName, clientRequestId);
+                using var message = CreateGetStatisticsRequest(indexName, xMsClientRequestId);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -617,9 +593,9 @@ namespace CognitiveSearch
 
         /// <summary> Returns statistics for the given index, including a document count and storage usage. </summary>
         /// <param name="indexName"> The name of the index for which to retrieve statistics. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<GetIndexStatisticsResult> GetStatistics(string indexName, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public Response<GetIndexStatisticsResult> GetStatistics(string indexName, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -630,7 +606,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateGetStatisticsRequest(indexName, clientRequestId);
+                using var message = CreateGetStatisticsRequest(indexName, xMsClientRequestId);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -652,53 +628,50 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateAnalyzeRequest(string indexName, Guid? clientRequestId, AnalyzeRequest requestTodo)
+        internal HttpMessage CreateAnalyzeRequest(string indexName, Guid? xMsClientRequestId, AnalyzeRequest request)
         {
             var message = pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
+            var request0 = message.Request;
+            request0.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("https://", false);
-            uri.AppendRaw(searchServiceName, false);
-            uri.AppendRaw(".", false);
-            uri.AppendRaw(searchDnsSuffix, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/indexes('", false);
             uri.AppendPath(indexName, true);
             uri.AppendPath("')/search.analyze", false);
             uri.AppendQuery("api-version", apiVersion, true);
-            request.Uri = uri;
-            if (clientRequestId != null)
+            request0.Uri = uri;
+            if (xMsClientRequestId != null)
             {
-                request.Headers.Add("client-request-id", clientRequestId.Value);
+                request0.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
             }
-            request.Headers.Add("Content-Type", "application/json");
+            request0.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(requestTodo);
-            request.Content = content;
+            content.JsonWriter.WriteObjectValue(request);
+            request0.Content = content;
             return message;
         }
 
         /// <summary> Shows how an analyzer breaks text into tokens. </summary>
         /// <param name="indexName"> The name of the index for which to test an analyzer. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="requestTodo"> The text and analyzer or analysis components to test. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="request"> The text and analyzer or analysis components to test. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<AnalyzeResult>> AnalyzeAsync(string indexName, Guid? clientRequestId, AnalyzeRequest requestTodo, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<AnalyzeResult>> AnalyzeAsync(string indexName, Guid? xMsClientRequestId, AnalyzeRequest request, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
                 throw new ArgumentNullException(nameof(indexName));
             }
-            if (requestTodo == null)
+            if (request == null)
             {
-                throw new ArgumentNullException(nameof(requestTodo));
+                throw new ArgumentNullException(nameof(request));
             }
 
             using var scope = clientDiagnostics.CreateScope("IndexesClient.Analyze");
             scope.Start();
             try
             {
-                using var message = CreateAnalyzeRequest(indexName, clientRequestId, requestTodo);
+                using var message = CreateAnalyzeRequest(indexName, xMsClientRequestId, request);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -722,25 +695,25 @@ namespace CognitiveSearch
 
         /// <summary> Shows how an analyzer breaks text into tokens. </summary>
         /// <param name="indexName"> The name of the index for which to test an analyzer. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="requestTodo"> The text and analyzer or analysis components to test. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="request"> The text and analyzer or analysis components to test. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<AnalyzeResult> Analyze(string indexName, Guid? clientRequestId, AnalyzeRequest requestTodo, CancellationToken cancellationToken = default)
+        public Response<AnalyzeResult> Analyze(string indexName, Guid? xMsClientRequestId, AnalyzeRequest request, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
                 throw new ArgumentNullException(nameof(indexName));
             }
-            if (requestTodo == null)
+            if (request == null)
             {
-                throw new ArgumentNullException(nameof(requestTodo));
+                throw new ArgumentNullException(nameof(request));
             }
 
             using var scope = clientDiagnostics.CreateScope("IndexesClient.Analyze");
             scope.Start();
             try
             {
-                using var message = CreateAnalyzeRequest(indexName, clientRequestId, requestTodo);
+                using var message = CreateAnalyzeRequest(indexName, xMsClientRequestId, request);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

@@ -15,44 +15,28 @@ namespace CognitiveSearch.Models
         internal static TokenInfo DeserializeTokenInfo(JsonElement element)
         {
             string token = default;
-            int? startOffset = default;
-            int? endOffset = default;
-            int? position = default;
+            int startOffset = default;
+            int endOffset = default;
+            int position = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("token"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     token = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("startOffset"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     startOffset = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("endOffset"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     endOffset = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("position"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     position = property.Value.GetInt32();
                     continue;
                 }

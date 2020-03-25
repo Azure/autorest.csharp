@@ -15,11 +15,8 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (SearchText != null)
-            {
-                writer.WritePropertyName("search");
-                writer.WriteStringValue(SearchText);
-            }
+            writer.WritePropertyName("search");
+            writer.WriteStringValue(SearchText);
             if (AutocompleteMode != null)
             {
                 writer.WritePropertyName("autocompleteMode");
@@ -55,11 +52,8 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("searchFields");
                 writer.WriteStringValue(SearchFields);
             }
-            if (SuggesterName != null)
-            {
-                writer.WritePropertyName("suggesterName");
-                writer.WriteStringValue(SuggesterName);
-            }
+            writer.WritePropertyName("suggesterName");
+            writer.WriteStringValue(SuggesterName);
             if (Top != null)
             {
                 writer.WritePropertyName("top");

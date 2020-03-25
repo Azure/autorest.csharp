@@ -1466,6 +1466,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_43
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1593,6 +1594,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_43
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1822,6 +1824,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_43
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2051,6 +2054,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_43
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2280,6 +2284,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_43
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2509,6 +2514,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_43
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2738,6 +2744,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_43
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2865,6 +2872,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_43
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2992,6 +3000,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_43
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3221,6 +3230,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_43
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3399,6 +3409,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_43
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3628,6 +3639,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_43
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3857,6 +3869,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_43
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3984,6 +3997,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_43
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4111,6 +4125,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_43
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4544,6 +4559,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_43
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4875,6 +4891,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_43
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -5206,6 +5223,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_43
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType

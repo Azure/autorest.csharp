@@ -5,14 +5,29 @@
 
 #nullable disable
 
+using System;
+
 namespace CognitiveSearch.Models
 {
     /// <summary> Parameters for filtering, sorting, fuzzy matching, and other suggestions query behaviors. </summary>
     public partial class SuggestRequest
     {
         /// <summary> Initializes a new instance of SuggestRequest. </summary>
-        public SuggestRequest()
+        /// <param name="searchText"> The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters. </param>
+        /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </param>
+        public SuggestRequest(string searchText, string suggesterName)
         {
+            if (searchText == null)
+            {
+                throw new ArgumentNullException(nameof(searchText));
+            }
+            if (suggesterName == null)
+            {
+                throw new ArgumentNullException(nameof(suggesterName));
+            }
+
+            SearchText = searchText;
+            SuggesterName = suggesterName;
         }
 
         /// <summary> Initializes a new instance of SuggestRequest. </summary>
@@ -55,13 +70,13 @@ namespace CognitiveSearch.Models
         /// <summary> The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses. </summary>
         public string OrderBy { get; set; }
         /// <summary> The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters. </summary>
-        public string SearchText { get; set; }
+        public string SearchText { get; }
         /// <summary> The comma-separated list of field names to search for the specified search text. Target fields must be included in the specified suggester. </summary>
         public string SearchFields { get; set; }
         /// <summary> The comma-separated list of fields to retrieve. If unspecified, only the key field will be included in the results. </summary>
         public string Select { get; set; }
         /// <summary> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </summary>
-        public string SuggesterName { get; set; }
+        public string SuggesterName { get; }
         /// <summary> The number of suggestions to retrieve. This must be a value between 1 and 100. The default is 5. </summary>
         public int? Top { get; set; }
     }

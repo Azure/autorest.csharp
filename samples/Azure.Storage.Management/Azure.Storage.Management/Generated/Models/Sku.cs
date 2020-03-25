@@ -29,6 +29,6 @@ namespace Azure.Storage.Management.Models
         /// <summary> The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType. </summary>
         public SkuName Name { get; }
         /// <summary> The SKU tier. This is based on the SKU name. </summary>
-        public SkuTier? Tier { get; set; }
+        public SkuTier? Tier { get; }
     }
 }

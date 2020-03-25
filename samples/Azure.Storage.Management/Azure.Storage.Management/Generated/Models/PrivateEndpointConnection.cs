@@ -34,6 +34,6 @@ namespace Azure.Storage.Management.Models
         /// <summary> A collection of information about the state of the connection between service consumer and provider. </summary>
         public PrivateLinkServiceConnectionState PrivateLinkServiceConnectionState { get; set; }
         /// <summary> The provisioning state of the private endpoint connection resource. </summary>
-        public PrivateEndpointConnectionProvisioningState? ProvisioningState { get; set; }
+        public PrivateEndpointConnectionProvisioningState? ProvisioningState { get; }
     }
 }

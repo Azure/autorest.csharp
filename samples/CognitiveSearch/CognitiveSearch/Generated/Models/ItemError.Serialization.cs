@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
         {
             string key = default;
             string errorMessage = default;
-            int? statusCode = default;
+            int statusCode = default;
             string name = default;
             string details = default;
             string documentationLink = default;
@@ -33,19 +33,11 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("errorMessage"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     errorMessage = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("statusCode"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     statusCode = property.Value.GetInt32();
                     continue;
                 }

@@ -2193,6 +2193,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2204,6 +2205,7 @@ operationGroups:
       - !<!Parameter> &ref_26
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -2283,6 +2285,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2294,6 +2297,7 @@ operationGroups:
       - !<!Parameter> &ref_28
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -2364,6 +2368,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2375,6 +2380,7 @@ operationGroups:
       - !<!Parameter> &ref_29
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -2445,6 +2451,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2456,6 +2463,7 @@ operationGroups:
       - !<!Parameter> &ref_30
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -2539,6 +2547,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2550,6 +2559,7 @@ operationGroups:
       - !<!Parameter> &ref_31
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -2620,6 +2630,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2631,6 +2642,7 @@ operationGroups:
       - !<!Parameter> &ref_32
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -2714,6 +2726,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2725,6 +2738,7 @@ operationGroups:
       - !<!Parameter> &ref_33
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -2795,6 +2809,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2806,6 +2821,7 @@ operationGroups:
       - !<!Parameter> &ref_34
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -2880,6 +2896,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2891,6 +2908,7 @@ operationGroups:
       - !<!Parameter> &ref_35
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -2971,6 +2989,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2982,6 +3001,7 @@ operationGroups:
       - !<!Parameter> &ref_39
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -3059,6 +3079,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3070,6 +3091,7 @@ operationGroups:
       - !<!Parameter> &ref_42
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -3150,6 +3172,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3161,6 +3184,7 @@ operationGroups:
       - !<!Parameter> &ref_46
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -3238,6 +3262,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3249,6 +3274,7 @@ operationGroups:
       - !<!Parameter> &ref_49
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -3323,6 +3349,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3334,6 +3361,7 @@ operationGroups:
       - !<!Parameter> &ref_52
         schema: *ref_51
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: sku
@@ -3404,6 +3432,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3415,6 +3444,7 @@ operationGroups:
       - !<!Parameter> &ref_53
         schema: *ref_51
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: sku
@@ -3485,6 +3515,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3496,6 +3527,7 @@ operationGroups:
       - !<!Parameter> &ref_54
         schema: *ref_18
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -3566,6 +3598,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3577,6 +3610,7 @@ operationGroups:
       - !<!Parameter> &ref_55
         schema: *ref_18
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -4479,6 +4513,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4490,6 +4525,7 @@ operationGroups:
       - !<!Parameter> &ref_80
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -4563,6 +4599,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4574,6 +4611,7 @@ operationGroups:
       - !<!Parameter> &ref_83
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -4816,6 +4854,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4827,6 +4866,7 @@ operationGroups:
       - !<!Parameter> &ref_86
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -4916,6 +4956,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4927,6 +4968,7 @@ operationGroups:
       - !<!Parameter> &ref_90
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -5016,6 +5058,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -5027,6 +5070,7 @@ operationGroups:
       - !<!Parameter> &ref_94
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -5103,6 +5147,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -5114,6 +5159,7 @@ operationGroups:
       - !<!Parameter> &ref_98
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -5198,6 +5244,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -5209,6 +5256,7 @@ operationGroups:
       - !<!Parameter> &ref_102
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -5294,6 +5342,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -5305,6 +5354,7 @@ operationGroups:
       - !<!Parameter> &ref_103
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -5575,6 +5625,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -5586,6 +5637,7 @@ operationGroups:
       - !<!Parameter> &ref_114
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -5659,6 +5711,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -5670,6 +5723,7 @@ operationGroups:
       - !<!Parameter> &ref_117
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -5754,6 +5808,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -5765,6 +5820,7 @@ operationGroups:
       - !<!Parameter> &ref_121
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -5848,6 +5904,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -5859,6 +5916,7 @@ operationGroups:
       - !<!Parameter> &ref_122
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -5942,6 +6000,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -5953,6 +6012,7 @@ operationGroups:
       - !<!Parameter> &ref_123
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -6036,6 +6096,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -6047,6 +6108,7 @@ operationGroups:
       - !<!Parameter> &ref_124
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -6298,6 +6360,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -6309,6 +6372,7 @@ operationGroups:
       - !<!Parameter> &ref_135
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -6382,6 +6446,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -6393,6 +6458,7 @@ operationGroups:
       - !<!Parameter> &ref_138
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -6466,6 +6532,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -6477,6 +6544,7 @@ operationGroups:
       - !<!Parameter> &ref_141
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -6553,6 +6621,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -6564,6 +6633,7 @@ operationGroups:
       - !<!Parameter> &ref_145
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -6647,6 +6717,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -6658,6 +6729,7 @@ operationGroups:
       - !<!Parameter> &ref_146
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -6738,6 +6810,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -6749,6 +6822,7 @@ operationGroups:
       - !<!Parameter> &ref_150
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -6937,6 +7011,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -6948,6 +7023,7 @@ operationGroups:
       - !<!Parameter> &ref_157
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -7021,6 +7097,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -7032,6 +7109,7 @@ operationGroups:
       - !<!Parameter> &ref_160
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -7108,6 +7186,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -7119,6 +7198,7 @@ operationGroups:
       - !<!Parameter> &ref_164
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -7198,6 +7278,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -7209,6 +7290,7 @@ operationGroups:
       - !<!Parameter> &ref_165
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -7289,6 +7371,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -7300,6 +7383,7 @@ operationGroups:
       - !<!Parameter> &ref_169
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -7554,6 +7638,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -7565,6 +7650,7 @@ operationGroups:
       - !<!Parameter> &ref_181
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -7638,6 +7724,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -7649,6 +7736,7 @@ operationGroups:
       - !<!Parameter> &ref_184
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -7725,6 +7813,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -7736,6 +7825,7 @@ operationGroups:
       - !<!Parameter> &ref_188
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -7820,6 +7910,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -7831,6 +7922,7 @@ operationGroups:
       - !<!Parameter> &ref_192
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -7913,6 +8005,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -7924,6 +8017,7 @@ operationGroups:
       - !<!Parameter> &ref_196
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -8009,6 +8103,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -8020,6 +8115,7 @@ operationGroups:
       - !<!Parameter> &ref_197
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product
@@ -8095,6 +8191,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -8106,6 +8203,7 @@ operationGroups:
       - !<!Parameter> &ref_200
         schema: *ref_5
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: product

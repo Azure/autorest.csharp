@@ -20,10 +20,6 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("value"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<Skillset> array = new List<Skillset>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

@@ -2187,6 +2187,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_97
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2354,6 +2355,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_97
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2512,6 +2514,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_97
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2680,6 +2683,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_97
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2824,6 +2828,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_97
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2971,6 +2976,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_97
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType

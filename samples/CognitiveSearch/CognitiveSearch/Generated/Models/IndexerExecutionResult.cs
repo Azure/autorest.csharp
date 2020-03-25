@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CognitiveSearch.Models
 {
@@ -14,8 +15,27 @@ namespace CognitiveSearch.Models
     public partial class IndexerExecutionResult
     {
         /// <summary> Initializes a new instance of IndexerExecutionResult. </summary>
-        internal IndexerExecutionResult()
+        /// <param name="status"> The outcome of this indexer execution. </param>
+        /// <param name="errors"> The item-level indexing errors. </param>
+        /// <param name="warnings"> The item-level indexing warnings. </param>
+        /// <param name="itemCount"> The number of items that were processed during this indexer execution. This includes both successfully processed items and items where indexing was attempted but failed. </param>
+        /// <param name="failedItemCount"> The number of items that failed to be indexed during this indexer execution. </param>
+        internal IndexerExecutionResult(IndexerExecutionStatus status, IEnumerable<ItemError> errors, IEnumerable<ItemWarning> warnings, int itemCount, int failedItemCount)
         {
+            if (errors == null)
+            {
+                throw new ArgumentNullException(nameof(errors));
+            }
+            if (warnings == null)
+            {
+                throw new ArgumentNullException(nameof(warnings));
+            }
+
+            Status = status;
+            Errors = errors.ToArray();
+            Warnings = warnings.ToArray();
+            ItemCount = itemCount;
+            FailedItemCount = failedItemCount;
         }
 
         /// <summary> Initializes a new instance of IndexerExecutionResult. </summary>
@@ -29,7 +49,7 @@ namespace CognitiveSearch.Models
         /// <param name="failedItemCount"> The number of items that failed to be indexed during this indexer execution. </param>
         /// <param name="initialTrackingState"> Change tracking state with which an indexer execution started. </param>
         /// <param name="finalTrackingState"> Change tracking state with which an indexer execution finished. </param>
-        internal IndexerExecutionResult(IndexerExecutionStatus? status, string errorMessage, DateTimeOffset? startTime, DateTimeOffset? endTime, IReadOnlyList<ItemError> errors, IReadOnlyList<ItemWarning> warnings, int? itemCount, int? failedItemCount, string initialTrackingState, string finalTrackingState)
+        internal IndexerExecutionResult(IndexerExecutionStatus status, string errorMessage, DateTimeOffset? startTime, DateTimeOffset? endTime, IReadOnlyList<ItemError> errors, IReadOnlyList<ItemWarning> warnings, int itemCount, int failedItemCount, string initialTrackingState, string finalTrackingState)
         {
             Status = status;
             ErrorMessage = errorMessage;
@@ -44,7 +64,7 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The outcome of this indexer execution. </summary>
-        public IndexerExecutionStatus? Status { get; }
+        public IndexerExecutionStatus Status { get; }
         /// <summary> The error message indicating the top-level error, if any. </summary>
         public string ErrorMessage { get; }
         /// <summary> The start time of this indexer execution. </summary>
@@ -56,9 +76,9 @@ namespace CognitiveSearch.Models
         /// <summary> The item-level indexing warnings. </summary>
         public IReadOnlyList<ItemWarning> Warnings { get; }
         /// <summary> The number of items that were processed during this indexer execution. This includes both successfully processed items and items where indexing was attempted but failed. </summary>
-        public int? ItemCount { get; }
+        public int ItemCount { get; }
         /// <summary> The number of items that failed to be indexed during this indexer execution. </summary>
-        public int? FailedItemCount { get; }
+        public int FailedItemCount { get; }
         /// <summary> Change tracking state with which an indexer execution started. </summary>
         public string InitialTrackingState { get; }
         /// <summary> Change tracking state with which an indexer execution finished. </summary>

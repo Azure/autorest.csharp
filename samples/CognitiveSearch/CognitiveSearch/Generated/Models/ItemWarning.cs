@@ -5,14 +5,23 @@
 
 #nullable disable
 
+using System;
+
 namespace CognitiveSearch.Models
 {
     /// <summary> Represents an item-level warning. </summary>
     public partial class ItemWarning
     {
         /// <summary> Initializes a new instance of ItemWarning. </summary>
-        internal ItemWarning()
+        /// <param name="message"> The message describing the warning that occurred while processing the item. </param>
+        internal ItemWarning(string message)
         {
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
+
+            Message = message;
         }
 
         /// <summary> Initializes a new instance of ItemWarning. </summary>

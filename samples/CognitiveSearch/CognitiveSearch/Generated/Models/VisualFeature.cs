@@ -10,17 +10,19 @@ namespace CognitiveSearch.Models
     /// <summary> The strings indicating what visual feature types to return. </summary>
     public enum VisualFeature
     {
+        /// <summary> adult. </summary>
+        Adult,
+        /// <summary> brands. </summary>
+        Brands,
         /// <summary> categories. </summary>
         Categories,
-        /// <summary> tags. </summary>
-        Tags,
         /// <summary> description. </summary>
         Description,
         /// <summary> faces. </summary>
         Faces,
-        /// <summary> imageType. </summary>
-        ImageType,
-        /// <summary> color. </summary>
-        Color
+        /// <summary> objects. </summary>
+        Objects,
+        /// <summary> tags. </summary>
+        Tags
     }
 }

@@ -34,7 +34,7 @@ namespace CognitiveSearch.Models
 
         /// <summary> Initializes a new instance of MappingCharFilter. </summary>
         /// <param name="mappings"> A list of mappings of the following format: &quot;a=&gt;b&quot; (all occurrences of the character &quot;a&quot; will be replaced with character &quot;b&quot;). </param>
-        /// <param name="odataType"> . </param>
+        /// <param name="odataType"> Identifies the concrete type of the char filter. </param>
         /// <param name="name"> The name of the char filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         internal MappingCharFilter(IList<string> mappings, string odataType, string name) : base(odataType, name)
         {

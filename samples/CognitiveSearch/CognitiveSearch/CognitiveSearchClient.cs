@@ -102,7 +102,7 @@ namespace Azure.CognitiveSearch
                 select: null,
                 skip: null,
                 top: null,
-                clientRequestId: null,
+                xMsClientRequestId: null,
                 cancellationToken: cancellationToken);
     }
 }

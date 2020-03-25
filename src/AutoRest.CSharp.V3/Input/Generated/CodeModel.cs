@@ -319,20 +319,23 @@ namespace AutoRest.CSharp.V3.Input
         [System.Runtime.Serialization.EnumMember(Value = @"string")]
         String = 24,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"time")]
+        Time = 25,
+
         [System.Runtime.Serialization.EnumMember(Value = @"unixtime")]
-        Unixtime = 25,
+        Unixtime = 26,
 
         [System.Runtime.Serialization.EnumMember(Value = @"unknown")]
-        Unknown = 26,
+        Unknown = 27,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uri")]
-        Uri = 27,
+        Uri = 28,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uuid")]
-        Uuid = 28,
+        Uuid = 29,
 
         [System.Runtime.Serialization.EnumMember(Value = @"xor")]
-        Xor = 29,
+        Xor = 30,
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
@@ -375,14 +378,17 @@ namespace AutoRest.CSharp.V3.Input
         [System.Runtime.Serialization.EnumMember(Value = @"string")]
         String = 8,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"time")]
+        Time = 9,
+
         [System.Runtime.Serialization.EnumMember(Value = @"unixtime")]
-        Unixtime = 9,
+        Unixtime = 10,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uri")]
-        Uri = 10,
+        Uri = 11,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uuid")]
-        Uuid = 11,
+        Uuid = 12,
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
@@ -436,14 +442,17 @@ namespace AutoRest.CSharp.V3.Input
         [System.Runtime.Serialization.EnumMember(Value = @"string")]
         String = 15,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"time")]
+        Time = 16,
+
         [System.Runtime.Serialization.EnumMember(Value = @"unixtime")]
-        Unixtime = 16,
+        Unixtime = 17,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uri")]
-        Uri = 17,
+        Uri = 18,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uuid")]
-        Uuid = 18,
+        Uuid = 19,
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
@@ -538,17 +547,20 @@ namespace AutoRest.CSharp.V3.Input
         [System.Runtime.Serialization.EnumMember(Value = @"string")]
         String = 24,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"time")]
+        Time = 25,
+
         [System.Runtime.Serialization.EnumMember(Value = @"unixtime")]
-        Unixtime = 25,
+        Unixtime = 26,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uri")]
-        Uri = 26,
+        Uri = 27,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uuid")]
-        Uuid = 27,
+        Uuid = 28,
 
         [System.Runtime.Serialization.EnumMember(Value = @"xor")]
-        Xor = 28,
+        Xor = 29,
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
@@ -1082,6 +1094,12 @@ namespace AutoRest.CSharp.V3.Input
     {
     }
 
+    /// <summary>a schema that represents a Date value</summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
+    internal partial class TimeSchema : PrimitiveSchema
+    {
+    }
+
     /// <summary>a schema that represents a UnixTime value</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal partial class UnixTimeSchema : PrimitiveSchema
@@ -1308,6 +1326,11 @@ namespace AutoRest.CSharp.V3.Input
         [System.ComponentModel.DataAnnotations.Required]
         public System.Collections.Generic.ICollection<DateSchema> Dates { get; set; } = new System.Collections.ObjectModel.Collection<DateSchema>();
 
+        /// <summary>a time</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "times")]
+        [System.ComponentModel.DataAnnotations.Required]
+        public System.Collections.Generic.ICollection<TimeSchema> Times { get; set; } = new System.Collections.ObjectModel.Collection<TimeSchema>();
+
         /// <summary>a DateTime</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "dateTimes")]
         [System.ComponentModel.DataAnnotations.Required]
@@ -1389,6 +1412,10 @@ namespace AutoRest.CSharp.V3.Input
         [YamlDotNet.Serialization.YamlMember(Alias = "groups")]
         [System.ComponentModel.DataAnnotations.Required]
         public System.Collections.Generic.ICollection<GroupSchema> Groups { get; set; } = new System.Collections.ObjectModel.Collection<GroupSchema>();
+
+        [YamlDotNet.Serialization.YamlMember(Alias = "any")]
+        [System.ComponentModel.DataAnnotations.Required]
+        public System.Collections.Generic.ICollection<AnySchema> Any { get; set; } = new System.Collections.ObjectModel.Collection<AnySchema>();
     }
 
     /// <summary>contact information</summary>

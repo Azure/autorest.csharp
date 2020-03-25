@@ -17,8 +17,8 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> Initializes a new instance of DefaultCognitiveServicesAccount. </summary>
-        /// <param name="odataType"> . </param>
-        /// <param name="description"> . </param>
+        /// <param name="odataType"> Identifies the concrete type of the cognitive service resource attached to a skillset. </param>
+        /// <param name="description"> Description of the cognitive service resource attached to a skillset. </param>
         internal DefaultCognitiveServicesAccount(string odataType, string description) : base(odataType, description)
         {
             OdataType = odataType ?? "#Microsoft.Azure.Search.DefaultCognitiveServices";

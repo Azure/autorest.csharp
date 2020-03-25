@@ -31,11 +31,6 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("maxFailedItemsPerBatch");
                 writer.WriteNumberValue(MaxFailedItemsPerBatch.Value);
             }
-            if (Base64EncodeKeys != null)
-            {
-                writer.WritePropertyName("base64EncodeKeys");
-                writer.WriteBooleanValue(Base64EncodeKeys.Value);
-            }
             if (Configuration != null)
             {
                 writer.WritePropertyName("configuration");
@@ -55,7 +50,6 @@ namespace CognitiveSearch.Models
             int? batchSize = default;
             int? maxFailedItems = default;
             int? maxFailedItemsPerBatch = default;
-            bool? base64EncodeKeys = default;
             IDictionary<string, object> configuration = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -86,15 +80,6 @@ namespace CognitiveSearch.Models
                     maxFailedItemsPerBatch = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("base64EncodeKeys"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    base64EncodeKeys = property.Value.GetBoolean();
-                    continue;
-                }
                 if (property.NameEquals("configuration"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -110,7 +95,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new IndexingParameters(batchSize, maxFailedItems, maxFailedItemsPerBatch, base64EncodeKeys, configuration);
+            return new IndexingParameters(batchSize, maxFailedItems, maxFailedItemsPerBatch, configuration);
         }
     }
 }

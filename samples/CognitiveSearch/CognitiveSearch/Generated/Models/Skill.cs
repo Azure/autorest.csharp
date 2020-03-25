@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> Abstract base class for skills. </summary>
+    /// <summary> Base type for skills. </summary>
     public partial class Skill
     {
         /// <summary> Initializes a new instance of Skill. </summary>
@@ -34,7 +34,7 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> Initializes a new instance of Skill. </summary>
-        /// <param name="odataType"> . </param>
+        /// <param name="odataType"> Identifies the concrete type of the skill. </param>
         /// <param name="name"> The name of the skill which uniquely identifies it within the skillset. A skill with no name defined will be given a default name of its 1-based index in the skills array, prefixed with the character &apos;#&apos;. </param>
         /// <param name="description"> The description of the skill which describes the inputs, outputs, and usage of the skill. </param>
         /// <param name="context"> Represents the level at which operations take place, such as the document root or document content (for example, /document or /document/content). The default is /document. </param>
@@ -50,6 +50,7 @@ namespace CognitiveSearch.Models
             Outputs = outputs;
         }
 
+        /// <summary> Identifies the concrete type of the skill. </summary>
         internal string OdataType { get; set; }
         /// <summary> The name of the skill which uniquely identifies it within the skillset. A skill with no name defined will be given a default name of its 1-based index in the skills array, prefixed with the character &apos;#&apos;. </summary>
         public string Name { get; set; }

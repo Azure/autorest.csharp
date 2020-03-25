@@ -36,7 +36,7 @@ namespace CognitiveSearch.Models
         /// <param name="defaultToLanguageCode"> The language code to translate documents into for documents that don&apos;t specify the to language explicitly. </param>
         /// <param name="defaultFromLanguageCode"> The language code to translate documents from for documents that don&apos;t specify the from language explicitly. </param>
         /// <param name="suggestedFrom"> The language code to translate documents from when neither the fromLanguageCode input nor the defaultFromLanguageCode parameter are provided, and the automatic language detection is unsuccessful. Default is en. </param>
-        /// <param name="odataType"> . </param>
+        /// <param name="odataType"> Identifies the concrete type of the skill. </param>
         /// <param name="name"> The name of the skill which uniquely identifies it within the skillset. A skill with no name defined will be given a default name of its 1-based index in the skills array, prefixed with the character &apos;#&apos;. </param>
         /// <param name="description"> The description of the skill which describes the inputs, outputs, and usage of the skill. </param>
         /// <param name="context"> Represents the level at which operations take place, such as the document root or document content (for example, /document or /document/content). The default is /document. </param>

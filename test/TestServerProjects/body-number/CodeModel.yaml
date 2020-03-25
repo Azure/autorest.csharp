@@ -525,6 +525,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_8
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -652,6 +653,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_8
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -779,6 +781,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_8
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -905,6 +908,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_8
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1031,6 +1035,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_8
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1158,6 +1163,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_8
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1284,6 +1290,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_8
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1410,6 +1417,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_8
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1537,6 +1545,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_8
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1664,6 +1673,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_8
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType

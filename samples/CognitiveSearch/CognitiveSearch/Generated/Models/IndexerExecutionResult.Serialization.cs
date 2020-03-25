@@ -16,24 +16,20 @@ namespace CognitiveSearch.Models
     {
         internal static IndexerExecutionResult DeserializeIndexerExecutionResult(JsonElement element)
         {
-            IndexerExecutionStatus? status = default;
+            IndexerExecutionStatus status = default;
             string errorMessage = default;
             DateTimeOffset? startTime = default;
             DateTimeOffset? endTime = default;
             IReadOnlyList<ItemError> errors = default;
             IReadOnlyList<ItemWarning> warnings = default;
-            int? itemsProcessed = default;
-            int? itemsFailed = default;
+            int itemsProcessed = default;
+            int itemsFailed = default;
             string initialTrackingState = default;
             string finalTrackingState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     status = property.Value.GetString().ToIndexerExecutionStatus();
                     continue;
                 }
@@ -66,10 +62,6 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("errors"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<ItemError> array = new List<ItemError>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -80,10 +72,6 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("warnings"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<ItemWarning> array = new List<ItemWarning>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -94,19 +82,11 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("itemsProcessed"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     itemsProcessed = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("itemsFailed"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     itemsFailed = property.Value.GetInt32();
                     continue;
                 }

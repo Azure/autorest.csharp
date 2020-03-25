@@ -20,19 +20,11 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("text"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     text = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("queryPlusText"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     queryPlusText = property.Value.GetString();
                     continue;
                 }
