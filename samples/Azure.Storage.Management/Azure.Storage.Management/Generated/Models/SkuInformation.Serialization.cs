@@ -58,10 +58,6 @@ namespace Azure.Storage.Management.Models
                 }
                 if (property.NameEquals("locations"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -72,10 +68,6 @@ namespace Azure.Storage.Management.Models
                 }
                 if (property.NameEquals("capabilities"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<SKUCapability> array = new List<SKUCapability>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -86,10 +78,6 @@ namespace Azure.Storage.Management.Models
                 }
                 if (property.NameEquals("restrictions"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<Restriction> array = new List<Restriction>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

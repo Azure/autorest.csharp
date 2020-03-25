@@ -1867,10 +1867,7 @@ namespace url
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/queries/array/csv/string/valid", false);
-            if (arrayQuery != null)
-            {
-                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
-            }
+            uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
             request.Uri = uri;
             return message;
         }
@@ -1935,10 +1932,7 @@ namespace url
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/queries/array/csv/string/null", false);
-            if (arrayQuery != null)
-            {
-                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
-            }
+            uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
             request.Uri = uri;
             return message;
         }
@@ -2003,10 +1997,7 @@ namespace url
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/queries/array/csv/string/empty", false);
-            if (arrayQuery != null)
-            {
-                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
-            }
+            uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
             request.Uri = uri;
             return message;
         }
@@ -2071,10 +2062,7 @@ namespace url
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/queries/array/ssv/string/valid", false);
-            if (arrayQuery != null)
-            {
-                uri.AppendQueryDelimited("arrayQuery", arrayQuery, " ", true);
-            }
+            uri.AppendQueryDelimited("arrayQuery", arrayQuery, " ", true);
             request.Uri = uri;
             return message;
         }
@@ -2139,10 +2127,7 @@ namespace url
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/queries/array/tsv/string/valid", false);
-            if (arrayQuery != null)
-            {
-                uri.AppendQueryDelimited("arrayQuery", arrayQuery, "\t", true);
-            }
+            uri.AppendQueryDelimited("arrayQuery", arrayQuery, "\t", true);
             request.Uri = uri;
             return message;
         }
@@ -2207,10 +2192,7 @@ namespace url
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/queries/array/pipes/string/valid", false);
-            if (arrayQuery != null)
-            {
-                uri.AppendQueryDelimited("arrayQuery", arrayQuery, "|", true);
-            }
+            uri.AppendQueryDelimited("arrayQuery", arrayQuery, "|", true);
             request.Uri = uri;
             return message;
         }

@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CognitiveSearch.Models
 {
@@ -16,7 +17,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of KeepTokenFilter. </summary>
         /// <param name="keepWords"> The list of words to keep. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        public KeepTokenFilter(IList<string> keepWords, string name) : base(name)
+        public KeepTokenFilter(IEnumerable<string> keepWords, string name) : base(name)
         {
             if (keepWords == null)
             {
@@ -27,7 +28,7 @@ namespace CognitiveSearch.Models
                 throw new ArgumentNullException(nameof(name));
             }
 
-            KeepWords = keepWords;
+            KeepWords = keepWords.ToArray();
             OdataType = "#Microsoft.Azure.Search.KeepTokenFilter";
         }
 

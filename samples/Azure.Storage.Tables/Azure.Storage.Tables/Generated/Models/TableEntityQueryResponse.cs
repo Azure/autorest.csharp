@@ -20,7 +20,7 @@ namespace Azure.Storage.Tables.Models
         /// <summary> Initializes a new instance of TableEntityQueryResponse. </summary>
         /// <param name="odataMetadata"> The metadata response of the table. </param>
         /// <param name="value"> List of table entities. </param>
-        internal TableEntityQueryResponse(string odataMetadata, IReadOnlyList<IReadOnlyDictionary<string, object>> value)
+        internal TableEntityQueryResponse(string odataMetadata, IReadOnlyList<IDictionary<string, object>> value)
         {
             OdataMetadata = odataMetadata;
             Value = value;
@@ -29,6 +29,6 @@ namespace Azure.Storage.Tables.Models
         /// <summary> The metadata response of the table. </summary>
         public string OdataMetadata { get; }
         /// <summary> List of table entities. </summary>
-        public IReadOnlyList<IReadOnlyDictionary<string, object>> Value { get; }
+        public IReadOnlyList<IDictionary<string, object>> Value { get; }
     }
 }

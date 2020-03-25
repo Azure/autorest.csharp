@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CognitiveSearch.Models
 {
@@ -16,7 +17,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of SynonymTokenFilter. </summary>
         /// <param name="synonyms"> A list of synonyms in following one of two formats: 1. incredible, unbelievable, fabulous =&gt; amazing - all terms on the left side of =&gt; symbol will be replaced with all terms on its right side; 2. incredible, unbelievable, fabulous, amazing - comma separated list of equivalent words. Set the expand option to change how this list is interpreted. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        public SynonymTokenFilter(IList<string> synonyms, string name) : base(name)
+        public SynonymTokenFilter(IEnumerable<string> synonyms, string name) : base(name)
         {
             if (synonyms == null)
             {
@@ -27,7 +28,7 @@ namespace CognitiveSearch.Models
                 throw new ArgumentNullException(nameof(name));
             }
 
-            Synonyms = synonyms;
+            Synonyms = synonyms.ToArray();
             OdataType = "#Microsoft.Azure.Search.SynonymTokenFilter";
         }
 

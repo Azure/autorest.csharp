@@ -20,10 +20,6 @@ namespace Azure.Storage.Management.Models
             {
                 if (property.NameEquals("value"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<Operation> array = new List<Operation>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

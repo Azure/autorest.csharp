@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Azure.Storage.Management.Models
 {
@@ -15,14 +16,14 @@ namespace Azure.Storage.Management.Models
     {
         /// <summary> Initializes a new instance of LegalHold. </summary>
         /// <param name="tags"> Each tag should be 3 to 23 alphanumeric characters and is normalized to lower case at SRP. </param>
-        public LegalHold(IList<string> tags)
+        public LegalHold(IEnumerable<string> tags)
         {
             if (tags == null)
             {
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            Tags = tags;
+            Tags = tags.ToArray();
         }
 
         /// <summary> Initializes a new instance of LegalHold. </summary>

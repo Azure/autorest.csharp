@@ -20,10 +20,6 @@ namespace Azure.Storage.Management.Models
             {
                 if (property.NameEquals("metricSpecifications"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<MetricSpecification> array = new List<MetricSpecification>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

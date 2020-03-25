@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Azure.AI.FormRecognizer.Models
 {
@@ -17,13 +18,24 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="rows"> Number of rows. </param>
         /// <param name="columns"> Number of columns. </param>
         /// <param name="cells"> List of cells contained in the table. </param>
-        internal DataTable(int rows, int columns, IReadOnlyList<DataTableCell> cells)
+        internal DataTable(int rows, int columns, IEnumerable<DataTableCell> cells)
         {
             if (cells == null)
             {
                 throw new ArgumentNullException(nameof(cells));
             }
 
+            Rows = rows;
+            Columns = columns;
+            Cells = cells.ToArray();
+        }
+
+        /// <summary> Initializes a new instance of DataTable. </summary>
+        /// <param name="rows"> Number of rows. </param>
+        /// <param name="columns"> Number of columns. </param>
+        /// <param name="cells"> List of cells contained in the table. </param>
+        internal DataTable(int rows, int columns, IReadOnlyList<DataTableCell> cells)
+        {
             Rows = rows;
             Columns = columns;
             Cells = cells;

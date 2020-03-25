@@ -44,10 +44,6 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
                 if (property.NameEquals("warnings"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

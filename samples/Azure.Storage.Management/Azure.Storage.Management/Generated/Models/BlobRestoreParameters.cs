@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Azure.Storage.Management.Models
 {
@@ -16,13 +17,22 @@ namespace Azure.Storage.Management.Models
         /// <summary> Initializes a new instance of BlobRestoreParameters. </summary>
         /// <param name="timeToRestore"> Restore blob to the specified time. </param>
         /// <param name="blobRanges"> Blob ranges to restore. </param>
-        public BlobRestoreParameters(DateTimeOffset timeToRestore, IList<BlobRestoreRange> blobRanges)
+        public BlobRestoreParameters(DateTimeOffset timeToRestore, IEnumerable<BlobRestoreRange> blobRanges)
         {
             if (blobRanges == null)
             {
                 throw new ArgumentNullException(nameof(blobRanges));
             }
 
+            TimeToRestore = timeToRestore;
+            BlobRanges = blobRanges.ToArray();
+        }
+
+        /// <summary> Initializes a new instance of BlobRestoreParameters. </summary>
+        /// <param name="timeToRestore"> Restore blob to the specified time. </param>
+        /// <param name="blobRanges"> Blob ranges to restore. </param>
+        internal BlobRestoreParameters(DateTimeOffset timeToRestore, IList<BlobRestoreRange> blobRanges)
+        {
             TimeToRestore = timeToRestore;
             BlobRanges = blobRanges;
         }

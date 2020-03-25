@@ -17,7 +17,7 @@ namespace CognitiveSearch.Models
         {
             long? odatacount = default;
             double? searchcoverage = default;
-            IReadOnlyDictionary<string, IReadOnlyList<FacetResult>> searchfacets = default;
+            IReadOnlyDictionary<string, IList<FacetResult>> searchfacets = default;
             SearchRequest searchnextPageParameters = default;
             IReadOnlyList<SearchResult> value = default;
             string odatanextLink = default;
@@ -43,11 +43,7 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("@search.facets"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    Dictionary<string, IReadOnlyList<FacetResult>> dictionary = new Dictionary<string, IReadOnlyList<FacetResult>>();
+                    Dictionary<string, IList<FacetResult>> dictionary = new Dictionary<string, IList<FacetResult>>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         List<FacetResult> array = new List<FacetResult>();
@@ -71,10 +67,6 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("value"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<SearchResult> array = new List<SearchResult>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

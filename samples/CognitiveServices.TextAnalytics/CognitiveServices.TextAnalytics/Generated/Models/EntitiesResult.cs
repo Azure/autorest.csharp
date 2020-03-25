@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -17,7 +18,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="documents"> Response by document. </param>
         /// <param name="errors"> Errors by document id. </param>
         /// <param name="modelVersion"> This field indicates which model is used for scoring. </param>
-        internal EntitiesResult(IReadOnlyList<DocumentEntities> documents, IReadOnlyList<DocumentError> errors, string modelVersion)
+        internal EntitiesResult(IEnumerable<DocumentEntities> documents, IEnumerable<DocumentError> errors, string modelVersion)
         {
             if (documents == null)
             {
@@ -32,8 +33,8 @@ namespace CognitiveServices.TextAnalytics.Models
                 throw new ArgumentNullException(nameof(modelVersion));
             }
 
-            Documents = documents;
-            Errors = errors;
+            Documents = documents.ToArray();
+            Errors = errors.ToArray();
             ModelVersion = modelVersion;
         }
 

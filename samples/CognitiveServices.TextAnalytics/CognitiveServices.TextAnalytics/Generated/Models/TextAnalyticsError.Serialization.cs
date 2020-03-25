@@ -52,10 +52,6 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
                 if (property.NameEquals("details"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<TextAnalyticsError> array = new List<TextAnalyticsError>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

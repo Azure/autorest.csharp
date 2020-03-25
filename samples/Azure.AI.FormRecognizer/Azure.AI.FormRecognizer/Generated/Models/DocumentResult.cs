@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Azure.AI.FormRecognizer.Models
 {
@@ -17,7 +18,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="docType"> Document type. </param>
         /// <param name="pageRange"> First and last page number where the document is found. </param>
         /// <param name="fields"> Dictionary of named field values. </param>
-        internal DocumentResult(string docType, IReadOnlyList<int> pageRange, IReadOnlyDictionary<string, FieldValue> fields)
+        internal DocumentResult(string docType, IEnumerable<int> pageRange, IReadOnlyDictionary<string, FieldValue> fields)
         {
             if (docType == null)
             {
@@ -32,6 +33,17 @@ namespace Azure.AI.FormRecognizer.Models
                 throw new ArgumentNullException(nameof(fields));
             }
 
+            DocType = docType;
+            PageRange = pageRange.ToArray();
+            Fields = fields;
+        }
+
+        /// <summary> Initializes a new instance of DocumentResult. </summary>
+        /// <param name="docType"> Document type. </param>
+        /// <param name="pageRange"> First and last page number where the document is found. </param>
+        /// <param name="fields"> Dictionary of named field values. </param>
+        internal DocumentResult(string docType, IReadOnlyList<int> pageRange, IReadOnlyDictionary<string, FieldValue> fields)
+        {
             DocType = docType;
             PageRange = pageRange;
             Fields = fields;

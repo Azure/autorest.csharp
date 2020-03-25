@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Azure.Storage.Management.Models
 {
@@ -15,14 +16,14 @@ namespace Azure.Storage.Management.Models
     {
         /// <summary> Initializes a new instance of ManagementPolicyFilter. </summary>
         /// <param name="blobTypes"> An array of predefined enum values. Only blockBlob is supported. </param>
-        public ManagementPolicyFilter(IList<string> blobTypes)
+        public ManagementPolicyFilter(IEnumerable<string> blobTypes)
         {
             if (blobTypes == null)
             {
                 throw new ArgumentNullException(nameof(blobTypes));
             }
 
-            BlobTypes = blobTypes;
+            BlobTypes = blobTypes.ToArray();
         }
 
         /// <summary> Initializes a new instance of ManagementPolicyFilter. </summary>

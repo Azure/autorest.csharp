@@ -248,10 +248,7 @@ namespace AppConfiguration
             {
                 uri.AppendQuery("After", after, true);
             }
-            if (select != null)
-            {
-                uri.AppendQueryDelimited("$Select", select, ",", true);
-            }
+            uri.AppendQueryDelimited("$Select", select, ",", true);
             request.Uri = uri;
             if (syncToken != null)
             {
@@ -357,10 +354,7 @@ namespace AppConfiguration
             {
                 uri.AppendQuery("After", after, true);
             }
-            if (select != null)
-            {
-                uri.AppendQueryDelimited("$Select", select, ",", true);
-            }
+            uri.AppendQueryDelimited("$Select", select, ",", true);
             request.Uri = uri;
             if (syncToken != null)
             {
@@ -449,10 +443,7 @@ namespace AppConfiguration
                 uri.AppendQuery("label", label, true);
             }
             uri.AppendQuery("api-version", apiVersion, true);
-            if (select != null)
-            {
-                uri.AppendQueryDelimited("$Select", select, ",", true);
-            }
+            uri.AppendQueryDelimited("$Select", select, ",", true);
             request.Uri = uri;
             if (syncToken != null)
             {
@@ -791,10 +782,7 @@ namespace AppConfiguration
                 uri.AppendQuery("label", label, true);
             }
             uri.AppendQuery("api-version", apiVersion, true);
-            if (select != null)
-            {
-                uri.AppendQueryDelimited("$Select", select, ",", true);
-            }
+            uri.AppendQueryDelimited("$Select", select, ",", true);
             request.Uri = uri;
             if (syncToken != null)
             {
@@ -906,10 +894,7 @@ namespace AppConfiguration
             {
                 uri.AppendQuery("After", after, true);
             }
-            if (select != null)
-            {
-                uri.AppendQueryDelimited("$Select", select, ",", true);
-            }
+            uri.AppendQueryDelimited("$Select", select, ",", true);
             request.Uri = uri;
             if (syncToken != null)
             {
@@ -1009,10 +994,7 @@ namespace AppConfiguration
             {
                 uri.AppendQuery("After", after, true);
             }
-            if (select != null)
-            {
-                uri.AppendQueryDelimited("$Select", select, ",", true);
-            }
+            uri.AppendQueryDelimited("$Select", select, ",", true);
             request.Uri = uri;
             if (syncToken != null)
             {
@@ -1326,10 +1308,7 @@ namespace AppConfiguration
             {
                 uri.AppendQuery("After", after, true);
             }
-            if (select != null)
-            {
-                uri.AppendQueryDelimited("$Select", select, ",", true);
-            }
+            uri.AppendQueryDelimited("$Select", select, ",", true);
             request.Uri = uri;
             if (syncToken != null)
             {
@@ -1435,10 +1414,7 @@ namespace AppConfiguration
             {
                 uri.AppendQuery("After", after, true);
             }
-            if (select != null)
-            {
-                uri.AppendQueryDelimited("$Select", select, ",", true);
-            }
+            uri.AppendQueryDelimited("$Select", select, ",", true);
             request.Uri = uri;
             if (syncToken != null)
             {

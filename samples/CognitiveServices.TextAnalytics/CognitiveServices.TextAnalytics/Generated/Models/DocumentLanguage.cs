@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -16,7 +17,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Initializes a new instance of DocumentLanguage. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="detectedLanguages"> A list of extracted languages. </param>
-        internal DocumentLanguage(string id, IReadOnlyList<DetectedLanguage> detectedLanguages)
+        internal DocumentLanguage(string id, IEnumerable<DetectedLanguage> detectedLanguages)
         {
             if (id == null)
             {
@@ -28,7 +29,7 @@ namespace CognitiveServices.TextAnalytics.Models
             }
 
             Id = id;
-            DetectedLanguages = detectedLanguages;
+            DetectedLanguages = detectedLanguages.ToArray();
         }
 
         /// <summary> Initializes a new instance of DocumentLanguage. </summary>

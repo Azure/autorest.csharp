@@ -32,10 +32,6 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("salmons"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<DotSalmon> array = new List<DotSalmon>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -55,10 +51,6 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("fishes"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<DotFish> array = new List<DotFish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

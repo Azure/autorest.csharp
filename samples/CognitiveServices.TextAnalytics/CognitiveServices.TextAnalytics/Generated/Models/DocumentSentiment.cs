@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -18,7 +19,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="sentiment"> Predicted sentiment for document (Negative, Neutral, Positive, or Mixed). </param>
         /// <param name="documentScores"> Document level sentiment confidence scores between 0 and 1 for each sentiment class. </param>
         /// <param name="sentences"> Sentence level sentiment analysis. </param>
-        internal DocumentSentiment(string id, DocumentSentimentValue sentiment, SentimentConfidenceScorePerLabel documentScores, IReadOnlyList<SentenceSentiment> sentences)
+        internal DocumentSentiment(string id, DocumentSentimentValue sentiment, SentimentConfidenceScorePerLabel documentScores, IEnumerable<SentenceSentiment> sentences)
         {
             if (id == null)
             {
@@ -36,7 +37,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Id = id;
             Sentiment = sentiment;
             DocumentScores = documentScores;
-            Sentences = sentences;
+            Sentences = sentences.ToArray();
         }
 
         /// <summary> Initializes a new instance of DocumentSentiment. </summary>

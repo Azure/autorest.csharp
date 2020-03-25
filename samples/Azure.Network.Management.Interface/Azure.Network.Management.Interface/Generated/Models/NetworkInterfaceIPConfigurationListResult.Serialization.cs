@@ -21,10 +21,6 @@ namespace Azure.Network.Management.Interface.Models
             {
                 if (property.NameEquals("value"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<NetworkInterfaceIPConfiguration> array = new List<NetworkInterfaceIPConfiguration>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

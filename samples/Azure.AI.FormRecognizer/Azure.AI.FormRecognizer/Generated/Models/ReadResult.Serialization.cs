@@ -60,10 +60,6 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("lines"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<TextLine> array = new List<TextLine>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

@@ -41,10 +41,6 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("executionHistory"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<IndexerExecutionResult> array = new List<IndexerExecutionResult>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -19,7 +20,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="language"> Language used in the data source. </param>
         /// <param name="url"> URL for the entity&apos;s page from the data source. </param>
         /// <param name="dataSource"> Data source used to extract entity linking, such as Wiki/Bing etc. </param>
-        internal LinkedEntity(string name, IReadOnlyList<Match> matches, string language, string url, string dataSource)
+        internal LinkedEntity(string name, IEnumerable<Match> matches, string language, string url, string dataSource)
         {
             if (name == null)
             {
@@ -43,7 +44,7 @@ namespace CognitiveServices.TextAnalytics.Models
             }
 
             Name = name;
-            Matches = matches;
+            Matches = matches.ToArray();
             Language = language;
             Url = url;
             DataSource = dataSource;

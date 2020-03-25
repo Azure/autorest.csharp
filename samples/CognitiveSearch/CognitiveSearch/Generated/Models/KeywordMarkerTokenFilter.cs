@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CognitiveSearch.Models
 {
@@ -16,7 +17,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of KeywordMarkerTokenFilter. </summary>
         /// <param name="keywords"> A list of words to mark as keywords. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        public KeywordMarkerTokenFilter(IList<string> keywords, string name) : base(name)
+        public KeywordMarkerTokenFilter(IEnumerable<string> keywords, string name) : base(name)
         {
             if (keywords == null)
             {
@@ -27,7 +28,7 @@ namespace CognitiveSearch.Models
                 throw new ArgumentNullException(nameof(name));
             }
 
-            Keywords = keywords;
+            Keywords = keywords.ToArray();
             OdataType = "#Microsoft.Azure.Search.KeywordMarkerTokenFilter";
         }
 

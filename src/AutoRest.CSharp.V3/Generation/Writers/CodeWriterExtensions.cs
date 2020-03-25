@@ -143,22 +143,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 return initializers.SingleOrDefault(i => i.Property == property);
             }
 
-            void WriteConversion(ObjectPropertyInitializer propertyInitializer)
-            {
-                var propertyType = propertyInitializer.Property.Declaration.Type;
-                var valueType = propertyInitializer.Value.Type;
-
-                if (propertyType.IsFrameworkType && valueType.IsFrameworkType)
-                {
-                    if (propertyType.FrameworkType == typeof(IList<>) &&
-                        valueType.FrameworkType == typeof(IEnumerable<>))
-                    {
-                        writer.UseNamespace(typeof(Enumerable).Namespace!);
-                        writer.Append($".ToArray()");
-                    }
-                }
-            }
-
             // Checks if constructor parameters can be satisfied by the provided initializer list
             List<ObjectPropertyInitializer>? TryGetParameters(ObjectTypeConstructor constructor)
             {
@@ -192,7 +176,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             foreach (var initializer in selectedCtorInitializers)
             {
                 writer.WriteReferenceOrConstant(initializer.Value);
-                WriteConversion(initializer);
+                writer.WriteConversion(initializer.Value.Type, initializer.Property.Declaration.Type);
                 writer.Append($", ");
             }
             writer.RemoveTrailingComma();
@@ -209,7 +193,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         writer.Append($"{propertyInitializer.Property.Declaration.Name} = ")
                             .WriteReferenceOrConstant(propertyInitializer.Value);
 
-                        WriteConversion(propertyInitializer);
+                        writer.WriteConversion(propertyInitializer.Value.Type, propertyInitializer.Property.Declaration.Type);
 
                         writer.Line($",");
                     }
@@ -221,5 +205,18 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             return writer;
         }
 
+        public static void WriteConversion(this CodeWriter writer, CSharpType from, CSharpType to)
+        {
+            if (to.IsFrameworkType && from.IsFrameworkType)
+            {
+                if ((to.FrameworkType == typeof(IList<>) ||
+                     to.FrameworkType == typeof(IReadOnlyList<>)) &&
+                    from.FrameworkType == typeof(IEnumerable<>))
+                {
+                    writer.UseNamespace(typeof(Enumerable).Namespace!);
+                    writer.Append($".ToArray()");
+                }
+            }
+        }
     }
 }

@@ -20,10 +20,6 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("value"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<SynonymMap> array = new List<SynonymMap>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

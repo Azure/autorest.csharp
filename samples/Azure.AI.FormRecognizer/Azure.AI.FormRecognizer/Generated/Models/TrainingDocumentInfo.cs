@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Azure.AI.FormRecognizer.Models
 {
@@ -18,7 +19,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="pages"> Total number of pages trained. </param>
         /// <param name="errors"> List of errors. </param>
         /// <param name="status"> Status of the training operation. </param>
-        internal TrainingDocumentInfo(string documentName, int pages, IReadOnlyList<ErrorInformation> errors, TrainStatus status)
+        internal TrainingDocumentInfo(string documentName, int pages, IEnumerable<ErrorInformation> errors, TrainStatus status)
         {
             if (documentName == null)
             {
@@ -29,6 +30,19 @@ namespace Azure.AI.FormRecognizer.Models
                 throw new ArgumentNullException(nameof(errors));
             }
 
+            DocumentName = documentName;
+            Pages = pages;
+            Errors = errors.ToArray();
+            Status = status;
+        }
+
+        /// <summary> Initializes a new instance of TrainingDocumentInfo. </summary>
+        /// <param name="documentName"> Training document name. </param>
+        /// <param name="pages"> Total number of pages trained. </param>
+        /// <param name="errors"> List of errors. </param>
+        /// <param name="status"> Status of the training operation. </param>
+        internal TrainingDocumentInfo(string documentName, int pages, IReadOnlyList<ErrorInformation> errors, TrainStatus status)
+        {
             DocumentName = documentName;
             Pages = pages;
             Errors = errors;

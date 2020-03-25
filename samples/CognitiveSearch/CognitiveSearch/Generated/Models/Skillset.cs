@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CognitiveSearch.Models
 {
@@ -17,7 +18,7 @@ namespace CognitiveSearch.Models
         /// <param name="name"> The name of the skillset. </param>
         /// <param name="description"> The description of the skillset. </param>
         /// <param name="skills"> A list of skills in the skillset. </param>
-        public Skillset(string name, string description, IList<Skill> skills)
+        public Skillset(string name, string description, IEnumerable<Skill> skills)
         {
             if (name == null)
             {
@@ -34,7 +35,7 @@ namespace CognitiveSearch.Models
 
             Name = name;
             Description = description;
-            Skills = skills;
+            Skills = skills.ToArray();
         }
 
         /// <summary> Initializes a new instance of Skillset. </summary>

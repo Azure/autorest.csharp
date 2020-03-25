@@ -21,10 +21,6 @@ namespace AppConfiguration.Models
             {
                 if (property.NameEquals("items"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<Key> array = new List<Key>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

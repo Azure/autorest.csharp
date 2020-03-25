@@ -39,10 +39,6 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("pageResults"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<PageResult> array = new List<PageResult>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -53,10 +49,6 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("documentResults"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<DocumentResult> array = new List<DocumentResult>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -67,10 +59,6 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("errors"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<ErrorInformation> array = new List<ErrorInformation>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

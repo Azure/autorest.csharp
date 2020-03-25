@@ -4740,7 +4740,7 @@ namespace body_array
 
         /// <summary> Get a null array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<IReadOnlyList<string>>>> GetArrayNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IReadOnlyList<IList<string>>>> GetArrayNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayNull");
             scope.Start();
@@ -4752,9 +4752,9 @@ namespace body_array
                 {
                     case 200:
                         {
-                            IReadOnlyList<IReadOnlyList<string>> value = default;
+                            IReadOnlyList<IList<string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            List<IReadOnlyList<string>> array = new List<IReadOnlyList<string>>();
+                            List<IList<string>> array = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 List<string> array0 = new List<string>();
@@ -4780,7 +4780,7 @@ namespace body_array
 
         /// <summary> Get a null array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IReadOnlyList<IReadOnlyList<string>>> GetArrayNull(CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<IList<string>>> GetArrayNull(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayNull");
             scope.Start();
@@ -4792,9 +4792,9 @@ namespace body_array
                 {
                     case 200:
                         {
-                            IReadOnlyList<IReadOnlyList<string>> value = default;
+                            IReadOnlyList<IList<string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            List<IReadOnlyList<string>> array = new List<IReadOnlyList<string>>();
+                            List<IList<string>> array = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 List<string> array0 = new List<string>();
@@ -4832,7 +4832,7 @@ namespace body_array
 
         /// <summary> Get an empty array []. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<IReadOnlyList<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IReadOnlyList<IList<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayEmpty");
             scope.Start();
@@ -4844,9 +4844,9 @@ namespace body_array
                 {
                     case 200:
                         {
-                            IReadOnlyList<IReadOnlyList<string>> value = default;
+                            IReadOnlyList<IList<string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            List<IReadOnlyList<string>> array = new List<IReadOnlyList<string>>();
+                            List<IList<string>> array = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 List<string> array0 = new List<string>();
@@ -4872,7 +4872,7 @@ namespace body_array
 
         /// <summary> Get an empty array []. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IReadOnlyList<IReadOnlyList<string>>> GetArrayEmpty(CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<IList<string>>> GetArrayEmpty(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayEmpty");
             scope.Start();
@@ -4884,9 +4884,9 @@ namespace body_array
                 {
                     case 200:
                         {
-                            IReadOnlyList<IReadOnlyList<string>> value = default;
+                            IReadOnlyList<IList<string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            List<IReadOnlyList<string>> array = new List<IReadOnlyList<string>>();
+                            List<IList<string>> array = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 List<string> array0 = new List<string>();
@@ -4924,7 +4924,7 @@ namespace body_array
 
         /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], null, [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<IReadOnlyList<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IReadOnlyList<IList<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayItemNull");
             scope.Start();
@@ -4936,9 +4936,9 @@ namespace body_array
                 {
                     case 200:
                         {
-                            IReadOnlyList<IReadOnlyList<string>> value = default;
+                            IReadOnlyList<IList<string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            List<IReadOnlyList<string>> array = new List<IReadOnlyList<string>>();
+                            List<IList<string>> array = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 List<string> array0 = new List<string>();
@@ -4964,7 +4964,7 @@ namespace body_array
 
         /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], null, [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IReadOnlyList<IReadOnlyList<string>>> GetArrayItemNull(CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<IList<string>>> GetArrayItemNull(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayItemNull");
             scope.Start();
@@ -4976,9 +4976,9 @@ namespace body_array
                 {
                     case 200:
                         {
-                            IReadOnlyList<IReadOnlyList<string>> value = default;
+                            IReadOnlyList<IList<string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            List<IReadOnlyList<string>> array = new List<IReadOnlyList<string>>();
+                            List<IList<string>> array = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 List<string> array0 = new List<string>();
@@ -5016,7 +5016,7 @@ namespace body_array
 
         /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<IReadOnlyList<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IReadOnlyList<IList<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayItemEmpty");
             scope.Start();
@@ -5028,9 +5028,9 @@ namespace body_array
                 {
                     case 200:
                         {
-                            IReadOnlyList<IReadOnlyList<string>> value = default;
+                            IReadOnlyList<IList<string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            List<IReadOnlyList<string>> array = new List<IReadOnlyList<string>>();
+                            List<IList<string>> array = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 List<string> array0 = new List<string>();
@@ -5056,7 +5056,7 @@ namespace body_array
 
         /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IReadOnlyList<IReadOnlyList<string>>> GetArrayItemEmpty(CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<IList<string>>> GetArrayItemEmpty(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayItemEmpty");
             scope.Start();
@@ -5068,9 +5068,9 @@ namespace body_array
                 {
                     case 200:
                         {
-                            IReadOnlyList<IReadOnlyList<string>> value = default;
+                            IReadOnlyList<IList<string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            List<IReadOnlyList<string>> array = new List<IReadOnlyList<string>>();
+                            List<IList<string>> array = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 List<string> array0 = new List<string>();
@@ -5108,7 +5108,7 @@ namespace body_array
 
         /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<IReadOnlyList<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IReadOnlyList<IList<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayValid");
             scope.Start();
@@ -5120,9 +5120,9 @@ namespace body_array
                 {
                     case 200:
                         {
-                            IReadOnlyList<IReadOnlyList<string>> value = default;
+                            IReadOnlyList<IList<string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            List<IReadOnlyList<string>> array = new List<IReadOnlyList<string>>();
+                            List<IList<string>> array = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 List<string> array0 = new List<string>();
@@ -5148,7 +5148,7 @@ namespace body_array
 
         /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IReadOnlyList<IReadOnlyList<string>>> GetArrayValid(CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<IList<string>>> GetArrayValid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayValid");
             scope.Start();
@@ -5160,9 +5160,9 @@ namespace body_array
                 {
                     case 200:
                         {
-                            IReadOnlyList<IReadOnlyList<string>> value = default;
+                            IReadOnlyList<IList<string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            List<IReadOnlyList<string>> array = new List<IReadOnlyList<string>>();
+                            List<IList<string>> array = new List<IList<string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 List<string> array0 = new List<string>();
@@ -5186,7 +5186,7 @@ namespace body_array
             }
         }
 
-        internal HttpMessage CreatePutArrayValidRequest(IEnumerable<IEnumerable<string>> arrayBody)
+        internal HttpMessage CreatePutArrayValidRequest(IEnumerable<IList<string>> arrayBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -5215,7 +5215,7 @@ namespace body_array
         /// <summary> Put An array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="arrayBody"> The ArrayOfPutContentSchemaItemsItem to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutArrayValidAsync(IEnumerable<IEnumerable<string>> arrayBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutArrayValidAsync(IEnumerable<IList<string>> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -5246,7 +5246,7 @@ namespace body_array
         /// <summary> Put An array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="arrayBody"> The ArrayOfPutContentSchemaItemsItem to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutArrayValid(IEnumerable<IEnumerable<string>> arrayBody, CancellationToken cancellationToken = default)
+        public Response PutArrayValid(IEnumerable<IList<string>> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -5288,7 +5288,7 @@ namespace body_array
 
         /// <summary> Get an array of Dictionaries with value null. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<IReadOnlyDictionary<string, string>>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryNull");
             scope.Start();
@@ -5300,9 +5300,9 @@ namespace body_array
                 {
                     case 200:
                         {
-                            IReadOnlyList<IReadOnlyDictionary<string, string>> value = default;
+                            IReadOnlyList<IDictionary<string, string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            List<IReadOnlyDictionary<string, string>> array = new List<IReadOnlyDictionary<string, string>>();
+                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -5328,7 +5328,7 @@ namespace body_array
 
         /// <summary> Get an array of Dictionaries with value null. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IReadOnlyList<IReadOnlyDictionary<string, string>>> GetDictionaryNull(CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<IDictionary<string, string>>> GetDictionaryNull(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryNull");
             scope.Start();
@@ -5340,9 +5340,9 @@ namespace body_array
                 {
                     case 200:
                         {
-                            IReadOnlyList<IReadOnlyDictionary<string, string>> value = default;
+                            IReadOnlyList<IDictionary<string, string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            List<IReadOnlyDictionary<string, string>> array = new List<IReadOnlyDictionary<string, string>>();
+                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -5380,7 +5380,7 @@ namespace body_array
 
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value []. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<IReadOnlyDictionary<string, string>>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryEmpty");
             scope.Start();
@@ -5392,9 +5392,9 @@ namespace body_array
                 {
                     case 200:
                         {
-                            IReadOnlyList<IReadOnlyDictionary<string, string>> value = default;
+                            IReadOnlyList<IDictionary<string, string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            List<IReadOnlyDictionary<string, string>> array = new List<IReadOnlyDictionary<string, string>>();
+                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -5420,7 +5420,7 @@ namespace body_array
 
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value []. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IReadOnlyList<IReadOnlyDictionary<string, string>>> GetDictionaryEmpty(CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<IDictionary<string, string>>> GetDictionaryEmpty(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryEmpty");
             scope.Start();
@@ -5432,9 +5432,9 @@ namespace body_array
                 {
                     case 200:
                         {
-                            IReadOnlyList<IReadOnlyDictionary<string, string>> value = default;
+                            IReadOnlyList<IDictionary<string, string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            List<IReadOnlyDictionary<string, string>> array = new List<IReadOnlyDictionary<string, string>>();
+                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -5472,7 +5472,7 @@ namespace body_array
 
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, null, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<IReadOnlyDictionary<string, string>>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemNull");
             scope.Start();
@@ -5484,9 +5484,9 @@ namespace body_array
                 {
                     case 200:
                         {
-                            IReadOnlyList<IReadOnlyDictionary<string, string>> value = default;
+                            IReadOnlyList<IDictionary<string, string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            List<IReadOnlyDictionary<string, string>> array = new List<IReadOnlyDictionary<string, string>>();
+                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -5512,7 +5512,7 @@ namespace body_array
 
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, null, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IReadOnlyList<IReadOnlyDictionary<string, string>>> GetDictionaryItemNull(CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<IDictionary<string, string>>> GetDictionaryItemNull(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemNull");
             scope.Start();
@@ -5524,9 +5524,9 @@ namespace body_array
                 {
                     case 200:
                         {
-                            IReadOnlyList<IReadOnlyDictionary<string, string>> value = default;
+                            IReadOnlyList<IDictionary<string, string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            List<IReadOnlyDictionary<string, string>> array = new List<IReadOnlyDictionary<string, string>>();
+                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -5564,7 +5564,7 @@ namespace body_array
 
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<IReadOnlyDictionary<string, string>>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemEmpty");
             scope.Start();
@@ -5576,9 +5576,9 @@ namespace body_array
                 {
                     case 200:
                         {
-                            IReadOnlyList<IReadOnlyDictionary<string, string>> value = default;
+                            IReadOnlyList<IDictionary<string, string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            List<IReadOnlyDictionary<string, string>> array = new List<IReadOnlyDictionary<string, string>>();
+                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -5604,7 +5604,7 @@ namespace body_array
 
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IReadOnlyList<IReadOnlyDictionary<string, string>>> GetDictionaryItemEmpty(CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<IDictionary<string, string>>> GetDictionaryItemEmpty(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemEmpty");
             scope.Start();
@@ -5616,9 +5616,9 @@ namespace body_array
                 {
                     case 200:
                         {
-                            IReadOnlyList<IReadOnlyDictionary<string, string>> value = default;
+                            IReadOnlyList<IDictionary<string, string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            List<IReadOnlyDictionary<string, string>> array = new List<IReadOnlyDictionary<string, string>>();
+                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -5656,7 +5656,7 @@ namespace body_array
 
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<IReadOnlyDictionary<string, string>>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryValid");
             scope.Start();
@@ -5668,9 +5668,9 @@ namespace body_array
                 {
                     case 200:
                         {
-                            IReadOnlyList<IReadOnlyDictionary<string, string>> value = default;
+                            IReadOnlyList<IDictionary<string, string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            List<IReadOnlyDictionary<string, string>> array = new List<IReadOnlyDictionary<string, string>>();
+                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -5696,7 +5696,7 @@ namespace body_array
 
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IReadOnlyList<IReadOnlyDictionary<string, string>>> GetDictionaryValid(CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<IDictionary<string, string>>> GetDictionaryValid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryValid");
             scope.Start();
@@ -5708,9 +5708,9 @@ namespace body_array
                 {
                     case 200:
                         {
-                            IReadOnlyList<IReadOnlyDictionary<string, string>> value = default;
+                            IReadOnlyList<IDictionary<string, string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            List<IReadOnlyDictionary<string, string>> array = new List<IReadOnlyDictionary<string, string>>();
+                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
                                 Dictionary<string, string> dictionary = new Dictionary<string, string>();

@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -16,7 +17,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Initializes a new instance of DocumentKeyPhrases. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="keyPhrases"> A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document. </param>
-        internal DocumentKeyPhrases(string id, IReadOnlyList<string> keyPhrases)
+        internal DocumentKeyPhrases(string id, IEnumerable<string> keyPhrases)
         {
             if (id == null)
             {
@@ -28,7 +29,7 @@ namespace CognitiveServices.TextAnalytics.Models
             }
 
             Id = id;
-            KeyPhrases = keyPhrases;
+            KeyPhrases = keyPhrases.ToArray();
         }
 
         /// <summary> Initializes a new instance of DocumentKeyPhrases. </summary>

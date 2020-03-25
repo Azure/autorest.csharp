@@ -21,10 +21,6 @@ namespace paging.Models
             {
                 if (property.NameEquals("values"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<Product> array = new List<Product>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

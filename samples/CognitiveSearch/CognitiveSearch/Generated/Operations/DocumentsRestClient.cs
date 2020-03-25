@@ -161,18 +161,12 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("$count", includeTotalResultCount.Value, true);
             }
-            if (facets != null)
-            {
-                uri.AppendQueryDelimited("facet", facets, ",", true);
-            }
+            uri.AppendQueryDelimited("facet", facets, ",", true);
             if (filter != null)
             {
                 uri.AppendQuery("$filter", filter, true);
             }
-            if (highlightFields != null)
-            {
-                uri.AppendQueryDelimited("highlight", highlightFields, ",", true);
-            }
+            uri.AppendQueryDelimited("highlight", highlightFields, ",", true);
             if (highlightPostTag != null)
             {
                 uri.AppendQuery("highlightPostTag", highlightPostTag, true);
@@ -185,34 +179,22 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("minimumCoverage", minimumCoverage.Value, true);
             }
-            if (orderBy != null)
-            {
-                uri.AppendQueryDelimited("$orderby", orderBy, ",", true);
-            }
+            uri.AppendQueryDelimited("$orderby", orderBy, ",", true);
             if (queryType != null)
             {
                 uri.AppendQuery("queryType", queryType.Value.ToSerialString(), true);
             }
-            if (scoringParameters != null)
-            {
-                uri.AppendQueryDelimited("scoringParameter", scoringParameters, ",", true);
-            }
+            uri.AppendQueryDelimited("scoringParameter", scoringParameters, ",", true);
             if (scoringProfile != null)
             {
                 uri.AppendQuery("scoringProfile", scoringProfile, true);
             }
-            if (searchFields != null)
-            {
-                uri.AppendQueryDelimited("searchFields", searchFields, ",", true);
-            }
+            uri.AppendQueryDelimited("searchFields", searchFields, ",", true);
             if (searchMode != null)
             {
                 uri.AppendQuery("searchMode", searchMode.Value.ToSerialString(), true);
             }
-            if (select != null)
-            {
-                uri.AppendQueryDelimited("$select", select, ",", true);
-            }
+            uri.AppendQueryDelimited("$select", select, ",", true);
             if (skip != null)
             {
                 uri.AppendQuery("$skip", skip.Value, true);
@@ -443,10 +425,7 @@ namespace CognitiveSearch
             uri.AppendPath("/docs('", false);
             uri.AppendPath(key, true);
             uri.AppendPath("')", false);
-            if (selectedFields != null)
-            {
-                uri.AppendQueryDelimited("$select", selectedFields, ",", true);
-            }
+            uri.AppendQueryDelimited("$select", selectedFields, ",", true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -568,18 +547,9 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("minimumCoverage", minimumCoverage.Value, true);
             }
-            if (orderBy != null)
-            {
-                uri.AppendQueryDelimited("$orderby", orderBy, ",", true);
-            }
-            if (searchFields != null)
-            {
-                uri.AppendQueryDelimited("searchFields", searchFields, ",", true);
-            }
-            if (select != null)
-            {
-                uri.AppendQueryDelimited("$select", select, ",", true);
-            }
+            uri.AppendQueryDelimited("$orderby", orderBy, ",", true);
+            uri.AppendQueryDelimited("searchFields", searchFields, ",", true);
+            uri.AppendQueryDelimited("$select", select, ",", true);
             if (top != null)
             {
                 uri.AppendQuery("$top", top.Value, true);
@@ -938,10 +908,7 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("minimumCoverage", minimumCoverage.Value, true);
             }
-            if (searchFields != null)
-            {
-                uri.AppendQueryDelimited("searchFields", searchFields, ",", true);
-            }
+            uri.AppendQueryDelimited("searchFields", searchFields, ",", true);
             if (top != null)
             {
                 uri.AppendQuery("$top", top.Value, true);

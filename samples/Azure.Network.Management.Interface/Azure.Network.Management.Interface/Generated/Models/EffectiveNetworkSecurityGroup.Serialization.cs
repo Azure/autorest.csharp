@@ -41,10 +41,6 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 if (property.NameEquals("effectiveSecurityRules"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<EffectiveNetworkSecurityRule> array = new List<EffectiveNetworkSecurityRule>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

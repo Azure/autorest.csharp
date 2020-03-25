@@ -21,10 +21,6 @@ namespace Azure.Network.Management.Interface.Models
             {
                 if (property.NameEquals("value"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<EffectiveRoute> array = new List<EffectiveRoute>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

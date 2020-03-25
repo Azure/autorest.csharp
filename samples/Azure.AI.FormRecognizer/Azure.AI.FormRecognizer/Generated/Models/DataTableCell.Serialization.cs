@@ -77,10 +77,6 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("elements"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

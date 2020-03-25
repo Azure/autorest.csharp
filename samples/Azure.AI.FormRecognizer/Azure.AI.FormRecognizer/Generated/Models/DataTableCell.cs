@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Azure.AI.FormRecognizer.Models
 {
@@ -19,7 +20,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="text"> Text content of the cell. </param>
         /// <param name="boundingBox"> Bounding box of the cell. </param>
         /// <param name="confidence"> Confidence value. </param>
-        internal DataTableCell(int rowIndex, int columnIndex, string text, IReadOnlyList<float> boundingBox, float confidence)
+        internal DataTableCell(int rowIndex, int columnIndex, string text, IEnumerable<float> boundingBox, float confidence)
         {
             if (text == null)
             {
@@ -33,7 +34,7 @@ namespace Azure.AI.FormRecognizer.Models
             RowIndex = rowIndex;
             ColumnIndex = columnIndex;
             Text = text;
-            BoundingBox = boundingBox;
+            BoundingBox = boundingBox.ToArray();
             Confidence = confidence;
         }
 

@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -16,7 +17,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Initializes a new instance of DocumentLinkedEntities. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="entities"> Recognized well-known entities in the document. </param>
-        internal DocumentLinkedEntities(string id, IReadOnlyList<LinkedEntity> entities)
+        internal DocumentLinkedEntities(string id, IEnumerable<LinkedEntity> entities)
         {
             if (id == null)
             {
@@ -28,7 +29,7 @@ namespace CognitiveServices.TextAnalytics.Models
             }
 
             Id = id;
-            Entities = entities;
+            Entities = entities.ToArray();
         }
 
         /// <summary> Initializes a new instance of DocumentLinkedEntities. </summary>
