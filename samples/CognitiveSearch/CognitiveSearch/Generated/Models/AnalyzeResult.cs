@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CognitiveSearch.Models
 {
@@ -13,8 +15,15 @@ namespace CognitiveSearch.Models
     public partial class AnalyzeResult
     {
         /// <summary> Initializes a new instance of AnalyzeResult. </summary>
-        internal AnalyzeResult()
+        /// <param name="tokens"> The list of tokens returned by the analyzer specified in the request. </param>
+        internal AnalyzeResult(IEnumerable<TokenInfo> tokens)
         {
+            if (tokens == null)
+            {
+                throw new ArgumentNullException(nameof(tokens));
+            }
+
+            Tokens = tokens.ToArray();
         }
 
         /// <summary> Initializes a new instance of AnalyzeResult. </summary>

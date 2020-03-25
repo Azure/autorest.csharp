@@ -35,7 +35,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of PatternCaptureTokenFilter. </summary>
         /// <param name="patterns"> A list of patterns to match against each token. </param>
         /// <param name="preserveOriginal"> A value indicating whether to return the original token even if one of the patterns matches. Default is true. </param>
-        /// <param name="odataType"> . </param>
+        /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         internal PatternCaptureTokenFilter(IList<string> patterns, bool? preserveOriginal, string odataType, string name) : base(odataType, name)
         {

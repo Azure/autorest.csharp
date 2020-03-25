@@ -185,6 +185,8 @@ schemas: !<!Schemas>
         name: PetAPInPropertiesWithAPStringAdditionalProperties
         description: Dictionary of <number>
     protocol: !<!Protocols> {}
+  any:
+  - *ref_1
   objects:
   - !<!ObjectSchema> &ref_4
     type: object
@@ -558,6 +560,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_22
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -638,6 +641,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_22
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -718,6 +722,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_22
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -798,6 +803,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_22
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -878,6 +884,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_22
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -958,6 +965,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_22
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType

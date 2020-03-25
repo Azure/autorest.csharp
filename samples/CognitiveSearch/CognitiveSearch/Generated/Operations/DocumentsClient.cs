@@ -25,27 +25,27 @@ namespace CognitiveSearch
         {
         }
         /// <summary> Initializes a new instance of DocumentsClient. </summary>
-        internal DocumentsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string indexName, string searchDnsSuffix = "search.windows.net", string apiVersion = "2019-05-06")
+        internal DocumentsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string indexName, string apiVersion = "2019-05-06-Preview")
         {
-            RestClient = new DocumentsRestClient(clientDiagnostics, pipeline, searchServiceName, indexName, searchDnsSuffix, apiVersion);
+            RestClient = new DocumentsRestClient(clientDiagnostics, pipeline, endpoint, indexName, apiVersion);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
 
         /// <summary> Queries the number of documents in the index. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<long>> CountAsync(Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<long>> CountAsync(Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
-            return await RestClient.CountAsync(clientRequestId, cancellationToken).ConfigureAwait(false);
+            return await RestClient.CountAsync(xMsClientRequestId, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Queries the number of documents in the index. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<long> Count(Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual Response<long> Count(Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
-            return RestClient.Count(clientRequestId, cancellationToken);
+            return RestClient.Count(xMsClientRequestId, cancellationToken);
         }
 
         /// <summary> Searches for documents in the index. </summary>
@@ -66,11 +66,11 @@ namespace CognitiveSearch
         /// <param name="select"> The list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included. </param>
         /// <param name="skip"> The number of search results to skip. This value cannot be greater than 100,000. If you need to scan documents in sequence, but cannot use $skip due to this limitation, consider using $orderby on a totally-ordered key and $filter with a range query instead. </param>
         /// <param name="top"> The number of search results to retrieve. This can be used in conjunction with $skip to implement client-side paging of search results. If results are truncated due to server-side paging, the response will include a continuation token that can be used to issue another Search request for the next page of results. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SearchDocumentsResult>> SearchGetAsync(string searchText, bool? includeTotalResultCount, IEnumerable<string> facets, string filter, IEnumerable<string> highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, QueryType? queryType, IEnumerable<string> scoringParameters, string scoringProfile, IEnumerable<string> searchFields, SearchMode? searchMode, IEnumerable<string> select, int? skip, int? top, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SearchDocumentsResult>> SearchGetAsync(string searchText, bool? includeTotalResultCount, IEnumerable<string> facets, string filter, IEnumerable<string> highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, QueryType? queryType, IEnumerable<string> scoringParameters, string scoringProfile, IEnumerable<string> searchFields, SearchMode? searchMode, IEnumerable<string> select, int? skip, int? top, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
-            return await RestClient.SearchGetAsync(searchText, includeTotalResultCount, facets, filter, highlightFields, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, queryType, scoringParameters, scoringProfile, searchFields, searchMode, select, skip, top, clientRequestId, cancellationToken).ConfigureAwait(false);
+            return await RestClient.SearchGetAsync(searchText, includeTotalResultCount, facets, filter, highlightFields, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, queryType, scoringParameters, scoringProfile, searchFields, searchMode, select, skip, top, xMsClientRequestId, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Searches for documents in the index. </summary>
@@ -91,49 +91,49 @@ namespace CognitiveSearch
         /// <param name="select"> The list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included. </param>
         /// <param name="skip"> The number of search results to skip. This value cannot be greater than 100,000. If you need to scan documents in sequence, but cannot use $skip due to this limitation, consider using $orderby on a totally-ordered key and $filter with a range query instead. </param>
         /// <param name="top"> The number of search results to retrieve. This can be used in conjunction with $skip to implement client-side paging of search results. If results are truncated due to server-side paging, the response will include a continuation token that can be used to issue another Search request for the next page of results. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SearchDocumentsResult> SearchGet(string searchText, bool? includeTotalResultCount, IEnumerable<string> facets, string filter, IEnumerable<string> highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, QueryType? queryType, IEnumerable<string> scoringParameters, string scoringProfile, IEnumerable<string> searchFields, SearchMode? searchMode, IEnumerable<string> select, int? skip, int? top, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual Response<SearchDocumentsResult> SearchGet(string searchText, bool? includeTotalResultCount, IEnumerable<string> facets, string filter, IEnumerable<string> highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, QueryType? queryType, IEnumerable<string> scoringParameters, string scoringProfile, IEnumerable<string> searchFields, SearchMode? searchMode, IEnumerable<string> select, int? skip, int? top, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
-            return RestClient.SearchGet(searchText, includeTotalResultCount, facets, filter, highlightFields, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, queryType, scoringParameters, scoringProfile, searchFields, searchMode, select, skip, top, clientRequestId, cancellationToken);
+            return RestClient.SearchGet(searchText, includeTotalResultCount, facets, filter, highlightFields, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, queryType, scoringParameters, scoringProfile, searchFields, searchMode, select, skip, top, xMsClientRequestId, cancellationToken);
         }
 
         /// <summary> Searches for documents in the index. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="searchRequest"> The definition of the Search request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SearchDocumentsResult>> SearchPostAsync(Guid? clientRequestId, SearchRequest searchRequest, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SearchDocumentsResult>> SearchPostAsync(Guid? xMsClientRequestId, SearchRequest searchRequest, CancellationToken cancellationToken = default)
         {
-            return await RestClient.SearchPostAsync(clientRequestId, searchRequest, cancellationToken).ConfigureAwait(false);
+            return await RestClient.SearchPostAsync(xMsClientRequestId, searchRequest, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Searches for documents in the index. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="searchRequest"> The definition of the Search request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SearchDocumentsResult> SearchPost(Guid? clientRequestId, SearchRequest searchRequest, CancellationToken cancellationToken = default)
+        public virtual Response<SearchDocumentsResult> SearchPost(Guid? xMsClientRequestId, SearchRequest searchRequest, CancellationToken cancellationToken = default)
         {
-            return RestClient.SearchPost(clientRequestId, searchRequest, cancellationToken);
+            return RestClient.SearchPost(xMsClientRequestId, searchRequest, cancellationToken);
         }
 
         /// <summary> Retrieves a document from the index. </summary>
         /// <param name="key"> The key of the document to retrieve. </param>
         /// <param name="selectedFields"> List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<object>> GetAsync(string key, IEnumerable<string> selectedFields, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<object>> GetAsync(string key, IEnumerable<string> selectedFields, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetAsync(key, selectedFields, clientRequestId, cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetAsync(key, selectedFields, xMsClientRequestId, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Retrieves a document from the index. </summary>
         /// <param name="key"> The key of the document to retrieve. </param>
         /// <param name="selectedFields"> List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<object> Get(string key, IEnumerable<string> selectedFields, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual Response<object> Get(string key, IEnumerable<string> selectedFields, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
-            return RestClient.Get(key, selectedFields, clientRequestId, cancellationToken);
+            return RestClient.Get(key, selectedFields, xMsClientRequestId, cancellationToken);
         }
 
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
@@ -148,11 +148,11 @@ namespace CognitiveSearch
         /// <param name="searchFields"> The list of field names to search for the specified search text. Target fields must be included in the specified suggester. </param>
         /// <param name="select"> The list of fields to retrieve. If unspecified, only the key field will be included in the results. </param>
         /// <param name="top"> The number of suggestions to retrieve. The value must be a number between 1 and 100. The default is 5. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SuggestDocumentsResult>> SuggestGetAsync(string searchText, string suggesterName, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, IEnumerable<string> searchFields, IEnumerable<string> select, int? top, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SuggestDocumentsResult>> SuggestGetAsync(string searchText, string suggesterName, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, IEnumerable<string> searchFields, IEnumerable<string> select, int? top, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
-            return await RestClient.SuggestGetAsync(searchText, suggesterName, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, searchFields, select, top, clientRequestId, cancellationToken).ConfigureAwait(false);
+            return await RestClient.SuggestGetAsync(searchText, suggesterName, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, searchFields, select, top, xMsClientRequestId, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
@@ -167,51 +167,51 @@ namespace CognitiveSearch
         /// <param name="searchFields"> The list of field names to search for the specified search text. Target fields must be included in the specified suggester. </param>
         /// <param name="select"> The list of fields to retrieve. If unspecified, only the key field will be included in the results. </param>
         /// <param name="top"> The number of suggestions to retrieve. The value must be a number between 1 and 100. The default is 5. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SuggestDocumentsResult> SuggestGet(string searchText, string suggesterName, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, IEnumerable<string> searchFields, IEnumerable<string> select, int? top, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual Response<SuggestDocumentsResult> SuggestGet(string searchText, string suggesterName, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, IEnumerable<string> searchFields, IEnumerable<string> select, int? top, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
-            return RestClient.SuggestGet(searchText, suggesterName, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, searchFields, select, top, clientRequestId, cancellationToken);
+            return RestClient.SuggestGet(searchText, suggesterName, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, searchFields, select, top, xMsClientRequestId, cancellationToken);
         }
 
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="suggestRequest"> The Suggest request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SuggestDocumentsResult>> SuggestPostAsync(Guid? clientRequestId, SuggestRequest suggestRequest, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SuggestDocumentsResult>> SuggestPostAsync(Guid? xMsClientRequestId, SuggestRequest suggestRequest, CancellationToken cancellationToken = default)
         {
-            return await RestClient.SuggestPostAsync(clientRequestId, suggestRequest, cancellationToken).ConfigureAwait(false);
+            return await RestClient.SuggestPostAsync(xMsClientRequestId, suggestRequest, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="suggestRequest"> The Suggest request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SuggestDocumentsResult> SuggestPost(Guid? clientRequestId, SuggestRequest suggestRequest, CancellationToken cancellationToken = default)
+        public virtual Response<SuggestDocumentsResult> SuggestPost(Guid? xMsClientRequestId, SuggestRequest suggestRequest, CancellationToken cancellationToken = default)
         {
-            return RestClient.SuggestPost(clientRequestId, suggestRequest, cancellationToken);
+            return RestClient.SuggestPost(xMsClientRequestId, suggestRequest, cancellationToken);
         }
 
         /// <summary> Sends a batch of document write actions to the index. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="batch"> The batch of index actions. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IndexDocumentsResult>> IndexAsync(Guid? clientRequestId, IndexBatch batch, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IndexDocumentsResult>> IndexAsync(Guid? xMsClientRequestId, IndexBatch batch, CancellationToken cancellationToken = default)
         {
-            return await RestClient.IndexAsync(clientRequestId, batch, cancellationToken).ConfigureAwait(false);
+            return await RestClient.IndexAsync(xMsClientRequestId, batch, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Sends a batch of document write actions to the index. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="batch"> The batch of index actions. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IndexDocumentsResult> Index(Guid? clientRequestId, IndexBatch batch, CancellationToken cancellationToken = default)
+        public virtual Response<IndexDocumentsResult> Index(Guid? xMsClientRequestId, IndexBatch batch, CancellationToken cancellationToken = default)
         {
-            return RestClient.Index(clientRequestId, batch, cancellationToken);
+            return RestClient.Index(xMsClientRequestId, batch, cancellationToken);
         }
 
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="searchText"> The incomplete term which should be auto-completed. </param>
         /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </param>
         /// <param name="autocompleteMode"> Specifies the mode for Autocomplete. The default is &apos;oneTerm&apos;. Use &apos;twoTerms&apos; to get shingles and &apos;oneTermWithContext&apos; to use the current context while producing auto-completed terms. </param>
@@ -223,13 +223,13 @@ namespace CognitiveSearch
         /// <param name="searchFields"> The list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester. </param>
         /// <param name="top"> The number of auto-completed terms to retrieve. This must be a value between 1 and 100. The default is 5. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<AutocompleteResult>> AutocompleteGetAsync(Guid? clientRequestId, string searchText, string suggesterName, AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> searchFields, int? top, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AutocompleteResult>> AutocompleteGetAsync(Guid? xMsClientRequestId, string searchText, string suggesterName, AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> searchFields, int? top, CancellationToken cancellationToken = default)
         {
-            return await RestClient.AutocompleteGetAsync(clientRequestId, searchText, suggesterName, autocompleteMode, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, searchFields, top, cancellationToken).ConfigureAwait(false);
+            return await RestClient.AutocompleteGetAsync(xMsClientRequestId, searchText, suggesterName, autocompleteMode, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, searchFields, top, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="searchText"> The incomplete term which should be auto-completed. </param>
         /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </param>
         /// <param name="autocompleteMode"> Specifies the mode for Autocomplete. The default is &apos;oneTerm&apos;. Use &apos;twoTerms&apos; to get shingles and &apos;oneTermWithContext&apos; to use the current context while producing auto-completed terms. </param>
@@ -241,27 +241,27 @@ namespace CognitiveSearch
         /// <param name="searchFields"> The list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester. </param>
         /// <param name="top"> The number of auto-completed terms to retrieve. This must be a value between 1 and 100. The default is 5. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<AutocompleteResult> AutocompleteGet(Guid? clientRequestId, string searchText, string suggesterName, AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> searchFields, int? top, CancellationToken cancellationToken = default)
+        public virtual Response<AutocompleteResult> AutocompleteGet(Guid? xMsClientRequestId, string searchText, string suggesterName, AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> searchFields, int? top, CancellationToken cancellationToken = default)
         {
-            return RestClient.AutocompleteGet(clientRequestId, searchText, suggesterName, autocompleteMode, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, searchFields, top, cancellationToken);
+            return RestClient.AutocompleteGet(xMsClientRequestId, searchText, suggesterName, autocompleteMode, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, searchFields, top, cancellationToken);
         }
 
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="autocompleteRequest"> The definition of the Autocomplete request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<AutocompleteResult>> AutocompletePostAsync(Guid? clientRequestId, AutocompleteRequest autocompleteRequest, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AutocompleteResult>> AutocompletePostAsync(Guid? xMsClientRequestId, AutocompleteRequest autocompleteRequest, CancellationToken cancellationToken = default)
         {
-            return await RestClient.AutocompletePostAsync(clientRequestId, autocompleteRequest, cancellationToken).ConfigureAwait(false);
+            return await RestClient.AutocompletePostAsync(xMsClientRequestId, autocompleteRequest, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="autocompleteRequest"> The definition of the Autocomplete request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<AutocompleteResult> AutocompletePost(Guid? clientRequestId, AutocompleteRequest autocompleteRequest, CancellationToken cancellationToken = default)
+        public virtual Response<AutocompleteResult> AutocompletePost(Guid? xMsClientRequestId, AutocompleteRequest autocompleteRequest, CancellationToken cancellationToken = default)
         {
-            return RestClient.AutocompletePost(clientRequestId, autocompleteRequest, cancellationToken);
+            return RestClient.AutocompletePost(xMsClientRequestId, autocompleteRequest, cancellationToken);
         }
     }
 }

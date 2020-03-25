@@ -159,7 +159,7 @@ namespace Azure.Storage.Management
             }
         }
 
-        internal HttpMessage CreatePutRequest(string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpointConnection properties)
+        internal HttpMessage CreatePutRequest(string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpoint privateEndpoint, PrivateLinkServiceConnectionState privateLinkServiceConnectionState)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -177,8 +177,13 @@ namespace Azure.Storage.Management
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            var model = new PrivateEndpointConnection()
+            {
+                PrivateEndpoint = privateEndpoint,
+                PrivateLinkServiceConnectionState = privateLinkServiceConnectionState
+            };
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(properties);
+            content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
             return message;
         }
@@ -187,9 +192,10 @@ namespace Azure.Storage.Management
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
-        /// <param name="properties"> The private endpoint connection properties. </param>
+        /// <param name="privateEndpoint"> The resource of private end point. </param>
+        /// <param name="privateLinkServiceConnectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<PrivateEndpointConnection>> PutAsync(string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpointConnection properties, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<PrivateEndpointConnection>> PutAsync(string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpoint privateEndpoint, PrivateLinkServiceConnectionState privateLinkServiceConnectionState, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -203,16 +209,12 @@ namespace Azure.Storage.Management
             {
                 throw new ArgumentNullException(nameof(privateEndpointConnectionName));
             }
-            if (properties == null)
-            {
-                throw new ArgumentNullException(nameof(properties));
-            }
 
             using var scope = clientDiagnostics.CreateScope("PrivateEndpointConnectionsClient.Put");
             scope.Start();
             try
             {
-                using var message = CreatePutRequest(resourceGroupName, accountName, privateEndpointConnectionName, properties);
+                using var message = CreatePutRequest(resourceGroupName, accountName, privateEndpointConnectionName, privateEndpoint, privateLinkServiceConnectionState);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -238,9 +240,10 @@ namespace Azure.Storage.Management
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
-        /// <param name="properties"> The private endpoint connection properties. </param>
+        /// <param name="privateEndpoint"> The resource of private end point. </param>
+        /// <param name="privateLinkServiceConnectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<PrivateEndpointConnection> Put(string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpointConnection properties, CancellationToken cancellationToken = default)
+        public Response<PrivateEndpointConnection> Put(string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpoint privateEndpoint, PrivateLinkServiceConnectionState privateLinkServiceConnectionState, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -254,16 +257,12 @@ namespace Azure.Storage.Management
             {
                 throw new ArgumentNullException(nameof(privateEndpointConnectionName));
             }
-            if (properties == null)
-            {
-                throw new ArgumentNullException(nameof(properties));
-            }
 
             using var scope = clientDiagnostics.CreateScope("PrivateEndpointConnectionsClient.Put");
             scope.Start();
             try
             {
-                using var message = CreatePutRequest(resourceGroupName, accountName, privateEndpointConnectionName, properties);
+                using var message = CreatePutRequest(resourceGroupName, accountName, privateEndpointConnectionName, privateEndpoint, privateLinkServiceConnectionState);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

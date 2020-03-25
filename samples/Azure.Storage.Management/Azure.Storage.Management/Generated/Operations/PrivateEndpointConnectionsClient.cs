@@ -54,22 +54,24 @@ namespace Azure.Storage.Management
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
-        /// <param name="properties"> The private endpoint connection properties. </param>
+        /// <param name="privateEndpoint"> The resource of private end point. </param>
+        /// <param name="privateLinkServiceConnectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<PrivateEndpointConnection>> PutAsync(string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpointConnection properties, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<PrivateEndpointConnection>> PutAsync(string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpoint privateEndpoint, PrivateLinkServiceConnectionState privateLinkServiceConnectionState, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutAsync(resourceGroupName, accountName, privateEndpointConnectionName, properties, cancellationToken).ConfigureAwait(false);
+            return await RestClient.PutAsync(resourceGroupName, accountName, privateEndpointConnectionName, privateEndpoint, privateLinkServiceConnectionState, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Update the state of specified private endpoint connection associated with the storage account. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
-        /// <param name="properties"> The private endpoint connection properties. </param>
+        /// <param name="privateEndpoint"> The resource of private end point. </param>
+        /// <param name="privateLinkServiceConnectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<PrivateEndpointConnection> Put(string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpointConnection properties, CancellationToken cancellationToken = default)
+        public virtual Response<PrivateEndpointConnection> Put(string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpoint privateEndpoint, PrivateLinkServiceConnectionState privateLinkServiceConnectionState, CancellationToken cancellationToken = default)
         {
-            return RestClient.Put(resourceGroupName, accountName, privateEndpointConnectionName, properties, cancellationToken);
+            return RestClient.Put(resourceGroupName, accountName, privateEndpointConnectionName, privateEndpoint, privateLinkServiceConnectionState, cancellationToken);
         }
 
         /// <summary> Deletes the specified private endpoint connection associated with the storage account. </summary>

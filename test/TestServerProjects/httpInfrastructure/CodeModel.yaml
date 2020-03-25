@@ -1412,6 +1412,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1423,6 +1424,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_14
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -1486,6 +1488,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1497,6 +1500,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_15
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -1560,6 +1564,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1571,6 +1576,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_16
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -1634,6 +1640,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1645,6 +1652,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_17
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -1708,6 +1716,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1719,6 +1728,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_18
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -1782,6 +1792,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1793,6 +1804,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_19
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -1856,6 +1868,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1867,6 +1880,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_20
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -1930,6 +1944,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1941,6 +1956,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_21
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -2004,6 +2020,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2015,6 +2032,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_22
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -2078,6 +2096,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2089,6 +2108,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_23
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -2199,6 +2219,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2210,6 +2231,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_24
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -2273,6 +2295,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2284,6 +2307,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_25
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -2347,6 +2371,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2358,6 +2383,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_26
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -2421,6 +2447,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2432,6 +2459,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_27
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -2803,6 +2831,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2814,6 +2843,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_33
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -3001,6 +3031,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3012,6 +3043,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_37
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -3079,6 +3111,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3090,6 +3123,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_39
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -3346,6 +3380,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3357,6 +3392,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_44
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -3433,6 +3469,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3444,6 +3481,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_46
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -3520,6 +3558,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3531,6 +3570,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_48
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -3607,6 +3647,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3618,6 +3659,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_50
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -3813,6 +3855,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3824,6 +3867,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_52
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -3877,6 +3921,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3888,6 +3933,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_53
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -3941,6 +3987,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3952,6 +3999,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_54
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -4005,6 +4053,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4016,6 +4065,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_55
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -4217,6 +4267,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4228,6 +4279,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_56
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -4281,6 +4333,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4292,6 +4345,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_57
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -4345,6 +4399,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4356,6 +4411,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_58
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -4409,6 +4465,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4420,6 +4477,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_59
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -4473,6 +4531,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4484,6 +4543,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_60
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -4685,6 +4745,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4696,6 +4757,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_61
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -4749,6 +4811,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4760,6 +4823,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_62
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -4813,6 +4877,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4824,6 +4889,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_63
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -4914,6 +4980,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4925,6 +4992,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_64
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -5097,6 +5165,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -5108,6 +5177,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_65
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -5161,6 +5231,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -5172,6 +5243,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_66
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -5280,6 +5352,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -5291,6 +5364,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_67
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -5354,6 +5428,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -5365,6 +5440,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_68
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -5526,6 +5602,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -5537,6 +5614,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_69
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -5600,6 +5678,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -5611,6 +5690,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_70
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -5674,6 +5754,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -5685,6 +5766,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_71
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue
@@ -5748,6 +5830,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_13
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -5759,6 +5842,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_72
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: booleanValue

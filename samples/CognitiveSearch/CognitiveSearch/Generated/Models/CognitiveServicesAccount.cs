@@ -7,7 +7,7 @@
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> Abstract base class for describing any cognitive service resource attached to the skillset. </summary>
+    /// <summary> Base type for describing any cognitive service resource attached to a skillset. </summary>
     public partial class CognitiveServicesAccount
     {
         /// <summary> Initializes a new instance of CognitiveServicesAccount. </summary>
@@ -17,15 +17,17 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> Initializes a new instance of CognitiveServicesAccount. </summary>
-        /// <param name="odataType"> . </param>
-        /// <param name="description"> . </param>
+        /// <param name="odataType"> Identifies the concrete type of the cognitive service resource attached to a skillset. </param>
+        /// <param name="description"> Description of the cognitive service resource attached to a skillset. </param>
         internal CognitiveServicesAccount(string odataType, string description)
         {
             OdataType = odataType ?? null;
             Description = description;
         }
 
+        /// <summary> Identifies the concrete type of the cognitive service resource attached to a skillset. </summary>
         internal string OdataType { get; set; }
+        /// <summary> Description of the cognitive service resource attached to a skillset. </summary>
         public string Description { get; set; }
     }
 }

@@ -18,65 +18,56 @@ namespace CognitiveSearch
 {
     internal partial class ServiceRestClient
     {
-        private string searchServiceName;
-        private string searchDnsSuffix;
+        private string endpoint;
         private string apiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
 
         /// <summary> Initializes a new instance of ServiceRestClient. </summary>
-        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string searchDnsSuffix = "search.windows.net", string apiVersion = "2019-05-06")
+        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string apiVersion = "2019-05-06-Preview")
         {
-            if (searchServiceName == null)
+            if (endpoint == null)
             {
-                throw new ArgumentNullException(nameof(searchServiceName));
-            }
-            if (searchDnsSuffix == null)
-            {
-                throw new ArgumentNullException(nameof(searchDnsSuffix));
+                throw new ArgumentNullException(nameof(endpoint));
             }
             if (apiVersion == null)
             {
                 throw new ArgumentNullException(nameof(apiVersion));
             }
 
-            this.searchServiceName = searchServiceName;
-            this.searchDnsSuffix = searchDnsSuffix;
+            this.endpoint = endpoint;
             this.apiVersion = apiVersion;
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
 
-        internal HttpMessage CreateGetServiceStatisticsRequest(Guid? clientRequestId)
+        internal HttpMessage CreateGetServiceStatisticsRequest(Guid? xMsClientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("https://", false);
-            uri.AppendRaw(searchServiceName, false);
-            uri.AppendRaw(".", false);
-            uri.AppendRaw(searchDnsSuffix, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/servicestats", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (clientRequestId != null)
+            if (xMsClientRequestId != null)
             {
-                request.Headers.Add("client-request-id", clientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
             }
             return message;
         }
 
         /// <summary> Gets service level statistics for a search service. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ServiceStatistics>> GetServiceStatisticsAsync(Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ServiceStatistics>> GetServiceStatisticsAsync(Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetServiceStatistics");
             scope.Start();
             try
             {
-                using var message = CreateGetServiceStatisticsRequest(clientRequestId);
+                using var message = CreateGetServiceStatisticsRequest(xMsClientRequestId);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -99,15 +90,15 @@ namespace CognitiveSearch
         }
 
         /// <summary> Gets service level statistics for a search service. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ServiceStatistics> GetServiceStatistics(Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public Response<ServiceStatistics> GetServiceStatistics(Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetServiceStatistics");
             scope.Start();
             try
             {
-                using var message = CreateGetServiceStatisticsRequest(clientRequestId);
+                using var message = CreateGetServiceStatisticsRequest(xMsClientRequestId);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

@@ -24,27 +24,27 @@ namespace CognitiveSearch
         {
         }
         /// <summary> Initializes a new instance of ServiceClient. </summary>
-        internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string searchDnsSuffix = "search.windows.net", string apiVersion = "2019-05-06")
+        internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string apiVersion = "2019-05-06-Preview")
         {
-            RestClient = new ServiceRestClient(clientDiagnostics, pipeline, searchServiceName, searchDnsSuffix, apiVersion);
+            RestClient = new ServiceRestClient(clientDiagnostics, pipeline, endpoint, apiVersion);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
 
         /// <summary> Gets service level statistics for a search service. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<ServiceStatistics>> GetServiceStatisticsAsync(Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ServiceStatistics>> GetServiceStatisticsAsync(Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetServiceStatisticsAsync(clientRequestId, cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetServiceStatisticsAsync(xMsClientRequestId, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Gets service level statistics for a search service. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ServiceStatistics> GetServiceStatistics(Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public virtual Response<ServiceStatistics> GetServiceStatistics(Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetServiceStatistics(clientRequestId, cancellationToken);
+            return RestClient.GetServiceStatistics(xMsClientRequestId, cancellationToken);
         }
     }
 }

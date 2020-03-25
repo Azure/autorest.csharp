@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CognitiveSearch.Models
 {
@@ -13,8 +15,23 @@ namespace CognitiveSearch.Models
     public partial class IndexerExecutionInfo
     {
         /// <summary> Initializes a new instance of IndexerExecutionInfo. </summary>
-        internal IndexerExecutionInfo()
+        /// <param name="status"> Overall indexer status. </param>
+        /// <param name="executionHistory"> History of the recent indexer executions, sorted in reverse chronological order. </param>
+        /// <param name="limits"> The execution limits for the indexer. </param>
+        internal IndexerExecutionInfo(IndexerStatus status, IEnumerable<IndexerExecutionResult> executionHistory, IndexerLimits limits)
         {
+            if (executionHistory == null)
+            {
+                throw new ArgumentNullException(nameof(executionHistory));
+            }
+            if (limits == null)
+            {
+                throw new ArgumentNullException(nameof(limits));
+            }
+
+            Status = status;
+            ExecutionHistory = executionHistory.ToArray();
+            Limits = limits;
         }
 
         /// <summary> Initializes a new instance of IndexerExecutionInfo. </summary>
@@ -22,7 +39,7 @@ namespace CognitiveSearch.Models
         /// <param name="lastResult"> The result of the most recent or an in-progress indexer execution. </param>
         /// <param name="executionHistory"> History of the recent indexer executions, sorted in reverse chronological order. </param>
         /// <param name="limits"> The execution limits for the indexer. </param>
-        internal IndexerExecutionInfo(IndexerStatus? status, IndexerExecutionResult lastResult, IReadOnlyList<IndexerExecutionResult> executionHistory, IndexerLimits limits)
+        internal IndexerExecutionInfo(IndexerStatus status, IndexerExecutionResult lastResult, IReadOnlyList<IndexerExecutionResult> executionHistory, IndexerLimits limits)
         {
             Status = status;
             LastResult = lastResult;
@@ -31,7 +48,7 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> Overall indexer status. </summary>
-        public IndexerStatus? Status { get; }
+        public IndexerStatus Status { get; }
         /// <summary> The result of the most recent or an in-progress indexer execution. </summary>
         public IndexerExecutionResult LastResult { get; }
         /// <summary> History of the recent indexer executions, sorted in reverse chronological order. </summary>

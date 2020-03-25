@@ -29,7 +29,7 @@ namespace CognitiveSearch.Models
         /// <param name="minGram"> The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram. </param>
         /// <param name="maxGram"> The maximum n-gram length. Default is 2. Maximum is 300. </param>
         /// <param name="tokenChars"> Character classes to keep in the tokens. </param>
-        /// <param name="odataType"> . </param>
+        /// <param name="odataType"> Identifies the concrete type of the tokenizer. </param>
         /// <param name="name"> The name of the tokenizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         internal EdgeNGramTokenizer(int? minGram, int? maxGram, IList<TokenCharacterKind> tokenChars, string odataType, string name) : base(odataType, name)
         {

@@ -18,53 +18,44 @@ namespace CognitiveSearch
 {
     internal partial class SkillsetsRestClient
     {
-        private string searchServiceName;
-        private string searchDnsSuffix;
+        private string endpoint;
         private string apiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
 
         /// <summary> Initializes a new instance of SkillsetsRestClient. </summary>
-        public SkillsetsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string searchDnsSuffix = "search.windows.net", string apiVersion = "2019-05-06")
+        public SkillsetsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string apiVersion = "2019-05-06-Preview")
         {
-            if (searchServiceName == null)
+            if (endpoint == null)
             {
-                throw new ArgumentNullException(nameof(searchServiceName));
-            }
-            if (searchDnsSuffix == null)
-            {
-                throw new ArgumentNullException(nameof(searchDnsSuffix));
+                throw new ArgumentNullException(nameof(endpoint));
             }
             if (apiVersion == null)
             {
                 throw new ArgumentNullException(nameof(apiVersion));
             }
 
-            this.searchServiceName = searchServiceName;
-            this.searchDnsSuffix = searchDnsSuffix;
+            this.endpoint = endpoint;
             this.apiVersion = apiVersion;
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string skillsetName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Skillset skillset)
+        internal HttpMessage CreateCreateOrUpdateRequest(string skillsetName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, Skillset skillset)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("https://", false);
-            uri.AppendRaw(searchServiceName, false);
-            uri.AppendRaw(".", false);
-            uri.AppendRaw(searchDnsSuffix, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/skillsets('", false);
             uri.AppendPath(skillsetName, true);
             uri.AppendPath("')", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (clientRequestId != null)
+            if (xMsClientRequestId != null)
             {
-                request.Headers.Add("client-request-id", clientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
             }
             if (ifMatch != null)
             {
@@ -84,12 +75,12 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new skillset in a search service or updates the skillset if it already exists. </summary>
         /// <param name="skillsetName"> The name of the skillset to create or update. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="skillset"> The skillset containing one or more skills to create or update in a search service. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Skillset>> CreateOrUpdateAsync(string skillsetName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Skillset skillset, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Skillset>> CreateOrUpdateAsync(string skillsetName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, Skillset skillset, CancellationToken cancellationToken = default)
         {
             if (skillsetName == null)
             {
@@ -104,7 +95,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateOrUpdateRequest(skillsetName, clientRequestId, ifMatch, ifNoneMatch, skillset);
+                using var message = CreateCreateOrUpdateRequest(skillsetName, xMsClientRequestId, ifMatch, ifNoneMatch, skillset);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -128,12 +119,12 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new skillset in a search service or updates the skillset if it already exists. </summary>
         /// <param name="skillsetName"> The name of the skillset to create or update. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="skillset"> The skillset containing one or more skills to create or update in a search service. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Skillset> CreateOrUpdate(string skillsetName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, Skillset skillset, CancellationToken cancellationToken = default)
+        public Response<Skillset> CreateOrUpdate(string skillsetName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, Skillset skillset, CancellationToken cancellationToken = default)
         {
             if (skillsetName == null)
             {
@@ -148,7 +139,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateOrUpdateRequest(skillsetName, clientRequestId, ifMatch, ifNoneMatch, skillset);
+                using var message = CreateCreateOrUpdateRequest(skillsetName, xMsClientRequestId, ifMatch, ifNoneMatch, skillset);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -170,24 +161,21 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string skillsetName, Guid? clientRequestId, string ifMatch, string ifNoneMatch)
+        internal HttpMessage CreateDeleteRequest(string skillsetName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("https://", false);
-            uri.AppendRaw(searchServiceName, false);
-            uri.AppendRaw(".", false);
-            uri.AppendRaw(searchDnsSuffix, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/skillsets('", false);
             uri.AppendPath(skillsetName, true);
             uri.AppendPath("')", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (clientRequestId != null)
+            if (xMsClientRequestId != null)
             {
-                request.Headers.Add("client-request-id", clientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
             }
             if (ifMatch != null)
             {
@@ -202,11 +190,11 @@ namespace CognitiveSearch
 
         /// <summary> Deletes a skillset in a search service. </summary>
         /// <param name="skillsetName"> The name of the skillset to delete. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteAsync(string skillsetName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> DeleteAsync(string skillsetName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
             if (skillsetName == null)
             {
@@ -217,7 +205,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateDeleteRequest(skillsetName, clientRequestId, ifMatch, ifNoneMatch);
+                using var message = CreateDeleteRequest(skillsetName, xMsClientRequestId, ifMatch, ifNoneMatch);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -236,11 +224,11 @@ namespace CognitiveSearch
 
         /// <summary> Deletes a skillset in a search service. </summary>
         /// <param name="skillsetName"> The name of the skillset to delete. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete(string skillsetName, Guid? clientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public Response Delete(string skillsetName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
         {
             if (skillsetName == null)
             {
@@ -251,7 +239,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateDeleteRequest(skillsetName, clientRequestId, ifMatch, ifNoneMatch);
+                using var message = CreateDeleteRequest(skillsetName, xMsClientRequestId, ifMatch, ifNoneMatch);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -268,33 +256,30 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateGetRequest(string skillsetName, Guid? clientRequestId)
+        internal HttpMessage CreateGetRequest(string skillsetName, Guid? xMsClientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("https://", false);
-            uri.AppendRaw(searchServiceName, false);
-            uri.AppendRaw(".", false);
-            uri.AppendRaw(searchDnsSuffix, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/skillsets('", false);
             uri.AppendPath(skillsetName, true);
             uri.AppendPath("')", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (clientRequestId != null)
+            if (xMsClientRequestId != null)
             {
-                request.Headers.Add("client-request-id", clientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
             }
             return message;
         }
 
         /// <summary> Retrieves a skillset in a search service. </summary>
         /// <param name="skillsetName"> The name of the skillset to retrieve. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Skillset>> GetAsync(string skillsetName, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Skillset>> GetAsync(string skillsetName, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
             if (skillsetName == null)
             {
@@ -305,7 +290,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateGetRequest(skillsetName, clientRequestId);
+                using var message = CreateGetRequest(skillsetName, xMsClientRequestId);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -329,9 +314,9 @@ namespace CognitiveSearch
 
         /// <summary> Retrieves a skillset in a search service. </summary>
         /// <param name="skillsetName"> The name of the skillset to retrieve. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Skillset> Get(string skillsetName, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public Response<Skillset> Get(string skillsetName, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
             if (skillsetName == null)
             {
@@ -342,7 +327,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateGetRequest(skillsetName, clientRequestId);
+                using var message = CreateGetRequest(skillsetName, xMsClientRequestId);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -364,16 +349,13 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateListRequest(string select, Guid? clientRequestId)
+        internal HttpMessage CreateListRequest(string select, Guid? xMsClientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("https://", false);
-            uri.AppendRaw(searchServiceName, false);
-            uri.AppendRaw(".", false);
-            uri.AppendRaw(searchDnsSuffix, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/skillsets", false);
             if (select != null)
             {
@@ -381,24 +363,24 @@ namespace CognitiveSearch
             }
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (clientRequestId != null)
+            if (xMsClientRequestId != null)
             {
-                request.Headers.Add("client-request-id", clientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
             }
             return message;
         }
 
         /// <summary> List all skillsets in a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the skillsets to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ListSkillsetsResult>> ListAsync(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ListSkillsetsResult>> ListAsync(string select, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("SkillsetsClient.List");
             scope.Start();
             try
             {
-                using var message = CreateListRequest(select, clientRequestId);
+                using var message = CreateListRequest(select, xMsClientRequestId);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -422,15 +404,15 @@ namespace CognitiveSearch
 
         /// <summary> List all skillsets in a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the skillsets to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ListSkillsetsResult> List(string select, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public Response<ListSkillsetsResult> List(string select, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("SkillsetsClient.List");
             scope.Start();
             try
             {
-                using var message = CreateListRequest(select, clientRequestId);
+                using var message = CreateListRequest(select, xMsClientRequestId);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -452,22 +434,19 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateCreateRequest(Guid? clientRequestId, Skillset skillset)
+        internal HttpMessage CreateCreateRequest(Guid? xMsClientRequestId, Skillset skillset)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("https://", false);
-            uri.AppendRaw(searchServiceName, false);
-            uri.AppendRaw(".", false);
-            uri.AppendRaw(searchDnsSuffix, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/skillsets", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (clientRequestId != null)
+            if (xMsClientRequestId != null)
             {
-                request.Headers.Add("client-request-id", clientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
             }
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -477,10 +456,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Creates a new skillset in a search service. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="skillset"> The skillset containing one or more skills to create in a search service. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Skillset>> CreateAsync(Guid? clientRequestId, Skillset skillset, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Skillset>> CreateAsync(Guid? xMsClientRequestId, Skillset skillset, CancellationToken cancellationToken = default)
         {
             if (skillset == null)
             {
@@ -491,7 +470,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateRequest(clientRequestId, skillset);
+                using var message = CreateCreateRequest(xMsClientRequestId, skillset);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -514,10 +493,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Creates a new skillset in a search service. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="skillset"> The skillset containing one or more skills to create in a search service. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Skillset> Create(Guid? clientRequestId, Skillset skillset, CancellationToken cancellationToken = default)
+        public Response<Skillset> Create(Guid? xMsClientRequestId, Skillset skillset, CancellationToken cancellationToken = default)
         {
             if (skillset == null)
             {
@@ -528,7 +507,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateRequest(clientRequestId, skillset);
+                using var message = CreateCreateRequest(xMsClientRequestId, skillset);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

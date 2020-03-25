@@ -20,64 +20,46 @@ namespace CognitiveSearch.Models
             ResourceCounter dataSourcesCount = default;
             ResourceCounter storageSize = default;
             ResourceCounter synonymMaps = default;
+            ResourceCounter skillsetCount = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("documentCount"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     documentCount = ResourceCounter.DeserializeResourceCounter(property.Value);
                     continue;
                 }
                 if (property.NameEquals("indexesCount"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     indexesCount = ResourceCounter.DeserializeResourceCounter(property.Value);
                     continue;
                 }
                 if (property.NameEquals("indexersCount"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     indexersCount = ResourceCounter.DeserializeResourceCounter(property.Value);
                     continue;
                 }
                 if (property.NameEquals("dataSourcesCount"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     dataSourcesCount = ResourceCounter.DeserializeResourceCounter(property.Value);
                     continue;
                 }
                 if (property.NameEquals("storageSize"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     storageSize = ResourceCounter.DeserializeResourceCounter(property.Value);
                     continue;
                 }
                 if (property.NameEquals("synonymMaps"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     synonymMaps = ResourceCounter.DeserializeResourceCounter(property.Value);
                     continue;
                 }
+                if (property.NameEquals("skillsetCount"))
+                {
+                    skillsetCount = ResourceCounter.DeserializeResourceCounter(property.Value);
+                    continue;
+                }
             }
-            return new ServiceCounters(documentCount, indexesCount, indexersCount, dataSourcesCount, storageSize, synonymMaps);
+            return new ServiceCounters(documentCount, indexesCount, indexersCount, dataSourcesCount, storageSize, synonymMaps, skillsetCount);
         }
     }
 }

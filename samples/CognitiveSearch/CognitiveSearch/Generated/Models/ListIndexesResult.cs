@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CognitiveSearch.Models
 {
@@ -13,8 +15,15 @@ namespace CognitiveSearch.Models
     public partial class ListIndexesResult
     {
         /// <summary> Initializes a new instance of ListIndexesResult. </summary>
-        internal ListIndexesResult()
+        /// <param name="indexes"> The indexes in the Search service. </param>
+        internal ListIndexesResult(IEnumerable<Index> indexes)
         {
+            if (indexes == null)
+            {
+                throw new ArgumentNullException(nameof(indexes));
+            }
+
+            Indexes = indexes.ToArray();
         }
 
         /// <summary> Initializes a new instance of ListIndexesResult. </summary>

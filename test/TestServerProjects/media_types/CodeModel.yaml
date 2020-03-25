@@ -144,6 +144,7 @@ operationGroups:
       - !<!Parameter> &ref_5
         schema: *ref_3
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -155,6 +156,7 @@ operationGroups:
       - !<!Parameter> &ref_6
         schema: *ref_4
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: input
@@ -187,6 +189,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_7
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -198,6 +201,7 @@ operationGroups:
       - !<!Parameter> &ref_9
         schema: *ref_8
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: input

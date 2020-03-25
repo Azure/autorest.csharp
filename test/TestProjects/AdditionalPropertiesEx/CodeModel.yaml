@@ -90,6 +90,8 @@ schemas: !<!Schemas>
         name: OutputAdditionalPropertiesModelStruct
         description: Dictionary of <string>
     protocol: !<!Protocols> {}
+  any:
+  - *ref_2
   objects:
   - !<!ObjectSchema> &ref_11
     type: object
@@ -275,6 +277,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_10
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -402,6 +405,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_10
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType

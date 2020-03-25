@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CognitiveSearch.Models
 {
@@ -13,8 +15,15 @@ namespace CognitiveSearch.Models
     public partial class ListSynonymMapsResult
     {
         /// <summary> Initializes a new instance of ListSynonymMapsResult. </summary>
-        internal ListSynonymMapsResult()
+        /// <param name="synonymMaps"> The synonym maps in the Search service. </param>
+        internal ListSynonymMapsResult(IEnumerable<SynonymMap> synonymMaps)
         {
+            if (synonymMaps == null)
+            {
+                throw new ArgumentNullException(nameof(synonymMaps));
+            }
+
+            SynonymMaps = synonymMaps.ToArray();
         }
 
         /// <summary> Initializes a new instance of ListSynonymMapsResult. </summary>

@@ -16,16 +16,12 @@ namespace CognitiveSearch.Models
         {
             string key = default;
             string errorMessage = default;
-            bool? status = default;
-            int? statusCode = default;
+            bool status = default;
+            int statusCode = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("key"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     key = property.Value.GetString();
                     continue;
                 }
@@ -40,19 +36,11 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("status"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     status = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("statusCode"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     statusCode = property.Value.GetInt32();
                     continue;
                 }

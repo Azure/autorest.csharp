@@ -20,10 +20,6 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("tokens"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<TokenInfo> array = new List<TokenInfo>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

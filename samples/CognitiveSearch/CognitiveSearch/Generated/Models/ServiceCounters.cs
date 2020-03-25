@@ -5,16 +5,13 @@
 
 #nullable disable
 
+using System;
+
 namespace CognitiveSearch.Models
 {
     /// <summary> Represents service-level resource counters and quotas. </summary>
     public partial class ServiceCounters
     {
-        /// <summary> Initializes a new instance of ServiceCounters. </summary>
-        internal ServiceCounters()
-        {
-        }
-
         /// <summary> Initializes a new instance of ServiceCounters. </summary>
         /// <param name="documentCounter"> Total number of documents across all indexes in the service. </param>
         /// <param name="indexCounter"> Total number of indexes. </param>
@@ -22,14 +19,45 @@ namespace CognitiveSearch.Models
         /// <param name="dataSourceCounter"> Total number of data sources. </param>
         /// <param name="storageSizeCounter"> Total size of used storage in bytes. </param>
         /// <param name="synonymMapCounter"> Total number of synonym maps. </param>
-        internal ServiceCounters(ResourceCounter documentCounter, ResourceCounter indexCounter, ResourceCounter indexerCounter, ResourceCounter dataSourceCounter, ResourceCounter storageSizeCounter, ResourceCounter synonymMapCounter)
+        /// <param name="skillsetCounter"> Total number of skillsets. </param>
+        internal ServiceCounters(ResourceCounter documentCounter, ResourceCounter indexCounter, ResourceCounter indexerCounter, ResourceCounter dataSourceCounter, ResourceCounter storageSizeCounter, ResourceCounter synonymMapCounter, ResourceCounter skillsetCounter)
         {
+            if (documentCounter == null)
+            {
+                throw new ArgumentNullException(nameof(documentCounter));
+            }
+            if (indexCounter == null)
+            {
+                throw new ArgumentNullException(nameof(indexCounter));
+            }
+            if (indexerCounter == null)
+            {
+                throw new ArgumentNullException(nameof(indexerCounter));
+            }
+            if (dataSourceCounter == null)
+            {
+                throw new ArgumentNullException(nameof(dataSourceCounter));
+            }
+            if (storageSizeCounter == null)
+            {
+                throw new ArgumentNullException(nameof(storageSizeCounter));
+            }
+            if (synonymMapCounter == null)
+            {
+                throw new ArgumentNullException(nameof(synonymMapCounter));
+            }
+            if (skillsetCounter == null)
+            {
+                throw new ArgumentNullException(nameof(skillsetCounter));
+            }
+
             DocumentCounter = documentCounter;
             IndexCounter = indexCounter;
             IndexerCounter = indexerCounter;
             DataSourceCounter = dataSourceCounter;
             StorageSizeCounter = storageSizeCounter;
             SynonymMapCounter = synonymMapCounter;
+            SkillsetCounter = skillsetCounter;
         }
 
         /// <summary> Total number of documents across all indexes in the service. </summary>
@@ -44,5 +72,7 @@ namespace CognitiveSearch.Models
         public ResourceCounter StorageSizeCounter { get; }
         /// <summary> Total number of synonym maps. </summary>
         public ResourceCounter SynonymMapCounter { get; }
+        /// <summary> Total number of skillsets. </summary>
+        public ResourceCounter SkillsetCounter { get; }
     }
 }

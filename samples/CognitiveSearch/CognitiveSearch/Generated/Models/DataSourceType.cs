@@ -25,6 +25,7 @@ namespace CognitiveSearch.Models
         private const string CosmosDbValue = "cosmosdb";
         private const string AzureBlobValue = "azureblob";
         private const string AzureTableValue = "azuretable";
+        private const string MySqlValue = "mysql";
 
         /// <summary> azuresql. </summary>
         public static DataSourceType AzureSql { get; } = new DataSourceType(AzureSqlValue);
@@ -34,6 +35,8 @@ namespace CognitiveSearch.Models
         public static DataSourceType AzureBlob { get; } = new DataSourceType(AzureBlobValue);
         /// <summary> azuretable. </summary>
         public static DataSourceType AzureTable { get; } = new DataSourceType(AzureTableValue);
+        /// <summary> mysql. </summary>
+        public static DataSourceType MySql { get; } = new DataSourceType(MySqlValue);
         /// <summary> Determines if two <see cref="DataSourceType"/> values are the same. </summary>
         public static bool operator ==(DataSourceType left, DataSourceType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="DataSourceType"/> values are not the same. </summary>

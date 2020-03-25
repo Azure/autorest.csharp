@@ -95,6 +95,11 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
+            if (EncryptionKey != null)
+            {
+                writer.WritePropertyName("encryptionKey");
+                writer.WriteObjectValue(EncryptionKey);
+            }
             if (ETag != null)
             {
                 writer.WritePropertyName("@odata.etag");
@@ -115,6 +120,7 @@ namespace CognitiveSearch.Models
             IList<Tokenizer> tokenizers = default;
             IList<TokenFilter> tokenFilters = default;
             IList<CharFilter> charFilters = default;
+            EncryptionKey encryptionKey = default;
             string odataetag = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -235,6 +241,15 @@ namespace CognitiveSearch.Models
                     charFilters = array;
                     continue;
                 }
+                if (property.NameEquals("encryptionKey"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    encryptionKey = EncryptionKey.DeserializeEncryptionKey(property.Value);
+                    continue;
+                }
                 if (property.NameEquals("@odata.etag"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -245,7 +260,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new Index(name, fields, scoringProfiles, defaultScoringProfile, corsOptions, suggesters, analyzers, tokenizers, tokenFilters, charFilters, odataetag);
+            return new Index(name, fields, scoringProfiles, defaultScoringProfile, corsOptions, suggesters, analyzers, tokenizers, tokenFilters, charFilters, encryptionKey, odataetag);
         }
     }
 }

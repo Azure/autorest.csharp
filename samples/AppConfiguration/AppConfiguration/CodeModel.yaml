@@ -1943,6 +1943,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1954,6 +1955,7 @@ operationGroups:
       - !<!Parameter> &ref_74
         schema: *ref_19
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: entity

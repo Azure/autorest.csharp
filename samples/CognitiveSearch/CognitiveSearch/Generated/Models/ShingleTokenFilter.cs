@@ -31,7 +31,7 @@ namespace CognitiveSearch.Models
         /// <param name="outputUnigramsIfNoShingles"> A value indicating whether to output unigrams for those times when no shingles are available. This property takes precedence when outputUnigrams is set to false. Default is false. </param>
         /// <param name="tokenSeparator"> The string to use when joining adjacent tokens to form a shingle. Default is a single space (&quot; &quot;). </param>
         /// <param name="filterToken"> The string to insert for each position at which there is no token. Default is an underscore (&quot;_&quot;). </param>
-        /// <param name="odataType"> . </param>
+        /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         internal ShingleTokenFilter(int? maxShingleSize, int? minShingleSize, bool? outputUnigrams, bool? outputUnigramsIfNoShingles, string tokenSeparator, string filterToken, string odataType, string name) : base(odataType, name)
         {

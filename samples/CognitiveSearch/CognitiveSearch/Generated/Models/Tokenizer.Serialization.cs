@@ -35,7 +35,6 @@ namespace CognitiveSearch.Models
                     case "#Microsoft.Azure.Search.MicrosoftLanguageStemmingTokenizer": return MicrosoftLanguageStemmingTokenizer.DeserializeMicrosoftLanguageStemmingTokenizer(element);
                     case "#Microsoft.Azure.Search.MicrosoftLanguageTokenizer": return MicrosoftLanguageTokenizer.DeserializeMicrosoftLanguageTokenizer(element);
                     case "#Microsoft.Azure.Search.NGramTokenizer": return NGramTokenizer.DeserializeNGramTokenizer(element);
-                    case "#Microsoft.Azure.Search.PathHierarchyTokenizer": return PathHierarchyTokenizer.DeserializePathHierarchyTokenizer(element);
                     case "#Microsoft.Azure.Search.PathHierarchyTokenizerV2": return PathHierarchyTokenizerV2.DeserializePathHierarchyTokenizerV2(element);
                     case "#Microsoft.Azure.Search.PatternTokenizer": return PatternTokenizer.DeserializePatternTokenizer(element);
                     case "#Microsoft.Azure.Search.StandardTokenizer": return StandardTokenizer.DeserializeStandardTokenizer(element);

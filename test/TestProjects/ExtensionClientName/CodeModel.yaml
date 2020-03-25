@@ -145,6 +145,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_5
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType

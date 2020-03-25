@@ -5,14 +5,25 @@
 
 #nullable disable
 
+using System;
+
 namespace CognitiveSearch.Models
 {
     /// <summary> Represents an item- or document-level indexing error. </summary>
     public partial class ItemError
     {
         /// <summary> Initializes a new instance of ItemError. </summary>
-        internal ItemError()
+        /// <param name="errorMessage"> The message describing the error that occurred while processing the item. </param>
+        /// <param name="statusCode"> The status code indicating why the indexing operation failed. Possible values include: 400 for a malformed input document, 404 for document not found, 409 for a version conflict, 422 when the index is temporarily unavailable, or 503 for when the service is too busy. </param>
+        internal ItemError(string errorMessage, int statusCode)
         {
+            if (errorMessage == null)
+            {
+                throw new ArgumentNullException(nameof(errorMessage));
+            }
+
+            ErrorMessage = errorMessage;
+            StatusCode = statusCode;
         }
 
         /// <summary> Initializes a new instance of ItemError. </summary>
@@ -22,7 +33,7 @@ namespace CognitiveSearch.Models
         /// <param name="name"> The name of the source at which the error originated. For example, this could refer to a particular skill in the attached skillset. This may not be always available. </param>
         /// <param name="details"> Additional, verbose details about the error to assist in debugging the indexer. This may not be always available. </param>
         /// <param name="documentationLink"> A link to a troubleshooting guide for these classes of errors. This may not be always available. </param>
-        internal ItemError(string key, string errorMessage, int? statusCode, string name, string details, string documentationLink)
+        internal ItemError(string key, string errorMessage, int statusCode, string name, string details, string documentationLink)
         {
             Key = key;
             ErrorMessage = errorMessage;
@@ -37,7 +48,7 @@ namespace CognitiveSearch.Models
         /// <summary> The message describing the error that occurred while processing the item. </summary>
         public string ErrorMessage { get; }
         /// <summary> The status code indicating why the indexing operation failed. Possible values include: 400 for a malformed input document, 404 for document not found, 409 for a version conflict, 422 when the index is temporarily unavailable, or 503 for when the service is too busy. </summary>
-        public int? StatusCode { get; }
+        public int StatusCode { get; }
         /// <summary> The name of the source at which the error originated. For example, this could refer to a particular skill in the attached skillset. This may not be always available. </summary>
         public string Name { get; }
         /// <summary> Additional, verbose details about the error to assist in debugging the indexer. This may not be always available. </summary>

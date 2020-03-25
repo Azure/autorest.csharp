@@ -26,7 +26,7 @@ namespace CognitiveSearch.Models
 
         /// <summary> Initializes a new instance of StandardTokenizer. </summary>
         /// <param name="maxTokenLength"> The maximum token length. Default is 255. Tokens longer than the maximum length are split. </param>
-        /// <param name="odataType"> . </param>
+        /// <param name="odataType"> Identifies the concrete type of the tokenizer. </param>
         /// <param name="name"> The name of the tokenizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         internal StandardTokenizer(int? maxTokenLength, string odataType, string name) : base(odataType, name)
         {

@@ -7,7 +7,7 @@
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> Abstract base class for data deletion detection policies. </summary>
+    /// <summary> Base type for data deletion detection policies. </summary>
     public partial class DataDeletionDetectionPolicy
     {
         /// <summary> Initializes a new instance of DataDeletionDetectionPolicy. </summary>
@@ -17,12 +17,13 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> Initializes a new instance of DataDeletionDetectionPolicy. </summary>
-        /// <param name="odataType"> . </param>
+        /// <param name="odataType"> Identifies the concrete type of the data deletion detection policy. </param>
         internal DataDeletionDetectionPolicy(string odataType)
         {
             OdataType = odataType ?? null;
         }
 
+        /// <summary> Identifies the concrete type of the data deletion detection policy. </summary>
         internal string OdataType { get; set; }
     }
 }

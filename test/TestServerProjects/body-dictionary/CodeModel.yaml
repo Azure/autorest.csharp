@@ -833,6 +833,8 @@ schemas: !<!Schemas>
         name: DictionaryOfany
         description: 'An dictionaries of dictionaries of type <string, string> with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}'
     protocol: !<!Protocols> {}
+  any:
+  - *ref_16
   byteArrays:
   - *ref_17
   - *ref_18
@@ -1020,6 +1022,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_32
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1351,6 +1354,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_32
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1580,6 +1584,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_32
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1809,6 +1814,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_32
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2038,6 +2044,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_32
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2267,6 +2274,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_32
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2496,6 +2504,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_32
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2725,6 +2734,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_32
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2954,6 +2964,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_32
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3183,6 +3194,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_32
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3310,6 +3322,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_32
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3437,6 +3450,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_32
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3870,6 +3884,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_32
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4201,6 +4216,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_32
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4532,6 +4548,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_32
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType

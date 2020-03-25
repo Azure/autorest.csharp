@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -14,8 +15,15 @@ namespace CognitiveSearch.Models
     public partial class SuggestResult : IReadOnlyDictionary<string, object>
     {
         /// <summary> Initializes a new instance of SuggestResult. </summary>
-        internal SuggestResult()
+        /// <param name="text"> The text of the suggestion result. </param>
+        internal SuggestResult(string text)
         {
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+
+            Text = text;
             AdditionalProperties = new Dictionary<string, object>();
         }
 

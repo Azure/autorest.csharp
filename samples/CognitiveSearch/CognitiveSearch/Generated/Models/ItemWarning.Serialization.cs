@@ -32,10 +32,6 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("message"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     message = property.Value.GetString();
                     continue;
                 }

@@ -22,10 +22,6 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("@search.text"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     searchtext = property.Value.GetString();
                     continue;
                 }

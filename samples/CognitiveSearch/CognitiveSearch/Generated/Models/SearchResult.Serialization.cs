@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     {
         internal static SearchResult DeserializeSearchResult(JsonElement element)
         {
-            double? searchscore = default;
+            double searchscore = default;
             IReadOnlyDictionary<string, IList<string>> searchhighlights = default;
             IReadOnlyDictionary<string, object> additionalProperties = default;
             Dictionary<string, object> additionalPropertiesDictionary = new Dictionary<string, object>();
@@ -23,10 +23,6 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("@search.score"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     searchscore = property.Value.GetDouble();
                     continue;
                 }

@@ -4,7 +4,7 @@ info: !<!Info>
   title: body-complex
 schemas: !<!Schemas> 
   booleans:
-  - !<!BooleanSchema> &ref_10
+  - !<!BooleanSchema> &ref_11
     type: boolean
     language: !<!Languages> 
       default:
@@ -12,7 +12,7 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   numbers:
-  - !<!NumberSchema> &ref_2
+  - !<!NumberSchema> &ref_3
     type: integer
     precision: 32
     language: !<!Languages> 
@@ -20,7 +20,7 @@ schemas: !<!Schemas>
         name: Integer
         description: Basic Id
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_5
+  - !<!NumberSchema> &ref_6
     type: integer
     precision: 32
     language: !<!Languages> 
@@ -28,7 +28,7 @@ schemas: !<!Schemas>
         name: Integer
         description: ''
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_7
+  - !<!NumberSchema> &ref_8
     type: integer
     precision: 64
     language: !<!Languages> 
@@ -36,7 +36,7 @@ schemas: !<!Schemas>
         name: Integer
         description: ''
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_8
+  - !<!NumberSchema> &ref_9
     type: number
     precision: 32
     language: !<!Languages> 
@@ -44,7 +44,7 @@ schemas: !<!Schemas>
         name: Number
         description: ''
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_9
+  - !<!NumberSchema> &ref_10
     type: number
     precision: 64
     language: !<!Languages> 
@@ -60,7 +60,7 @@ schemas: !<!Schemas>
         name: String
         description: simple string
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_3
+  - !<!StringSchema> &ref_4
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -70,7 +70,7 @@ schemas: !<!Schemas>
         name: BasicName
         description: Name property with a very long description that does not fit on a single line and a line break.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_6
+  - !<!StringSchema> &ref_7
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -80,7 +80,7 @@ schemas: !<!Schemas>
         name: ErrorMessage
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_11
+  - !<!StringSchema> &ref_12
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -90,7 +90,7 @@ schemas: !<!Schemas>
         name: StringWrapperField
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_12
+  - !<!StringSchema> &ref_13
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -100,7 +100,7 @@ schemas: !<!Schemas>
         name: StringWrapperEmpty
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_13
+  - !<!StringSchema> &ref_14
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -110,7 +110,7 @@ schemas: !<!Schemas>
         name: StringWrapperNull
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_22
+  - !<!StringSchema> &ref_23
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -130,7 +130,7 @@ schemas: !<!Schemas>
         name: String
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_31
+  - !<!StringSchema> &ref_32
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -140,7 +140,7 @@ schemas: !<!Schemas>
         name: PetName
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_29
+  - !<!StringSchema> &ref_30
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -150,7 +150,7 @@ schemas: !<!Schemas>
         name: CatColor
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_25
+  - !<!StringSchema> &ref_26
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -160,7 +160,7 @@ schemas: !<!Schemas>
         name: DogFood
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_27
+  - !<!StringSchema> &ref_28
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -170,7 +170,7 @@ schemas: !<!Schemas>
         name: SiameseBreed
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_37
+  - !<!StringSchema> &ref_38
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -180,7 +180,7 @@ schemas: !<!Schemas>
         name: FishFishtype
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_47
+  - !<!StringSchema> &ref_48
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -190,7 +190,7 @@ schemas: !<!Schemas>
         name: FishSpecies
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_51
+  - !<!StringSchema> &ref_52
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -200,7 +200,7 @@ schemas: !<!Schemas>
         name: DotFishType
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_53
+  - !<!StringSchema> &ref_54
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -210,7 +210,7 @@ schemas: !<!Schemas>
         name: DotFishSpecies
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_49
+  - !<!StringSchema> &ref_50
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -220,7 +220,7 @@ schemas: !<!Schemas>
         name: DotSalmonLocation
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_38
+  - !<!StringSchema> &ref_39
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -230,7 +230,7 @@ schemas: !<!Schemas>
         name: SalmonLocation
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_54
+  - !<!StringSchema> &ref_55
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -240,7 +240,7 @@ schemas: !<!Schemas>
         name: ReadonlyObjId
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_60
+  - !<!StringSchema> &ref_61
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -250,7 +250,7 @@ schemas: !<!Schemas>
         name: MyBaseTypePropB1
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_61
+  - !<!StringSchema> &ref_62
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -260,7 +260,7 @@ schemas: !<!Schemas>
         name: MyBaseHelperTypePropBH1
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_35
+  - !<!StringSchema> &ref_36
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -270,7 +270,7 @@ schemas: !<!Schemas>
         name: SmartSalmonCollegeDegree
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_56
+  - !<!StringSchema> &ref_57
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -281,7 +281,7 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   choices:
-  - !<!ChoiceSchema> &ref_4
+  - !<!ChoiceSchema> &ref_5
     choices:
     - !<!ChoiceValue> 
       value: cyan
@@ -317,7 +317,7 @@ schemas: !<!Schemas>
         name: CMYKColors
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ChoiceSchema> &ref_41
+  - !<!ChoiceSchema> &ref_42
     choices:
     - !<!ChoiceValue> 
       value: pink
@@ -361,7 +361,7 @@ schemas: !<!Schemas>
         description: Colors possible
     protocol: !<!Protocols> {}
   constants:
-  - !<!ConstantSchema> &ref_67
+  - !<!ConstantSchema> &ref_68
     type: constant
     value: !<!ConstantValue> 
       value: '2016-02-29'
@@ -371,7 +371,7 @@ schemas: !<!Schemas>
         name: ApiVersion20160229
         description: Api Version (2016-02-29)
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_72
+  - !<!ConstantSchema> &ref_73
     type: constant
     value: !<!ConstantValue> 
       value: application/json
@@ -381,7 +381,7 @@ schemas: !<!Schemas>
         name: ApplicationJson
         description: Content Type 'application/json'
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_58
+  - !<!ConstantSchema> &ref_59
     type: constant
     apiVersions:
     - !<!ApiVersion> 
@@ -395,7 +395,7 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   dictionaries:
-  - !<!DictionarySchema> &ref_23
+  - !<!DictionarySchema> &ref_24
     type: dictionary
     elementType: *ref_1
     language: !<!Languages> 
@@ -403,9 +403,9 @@ schemas: !<!Schemas>
         name: DictionaryWrapperDefaultProgram
         description: Dictionary of <string>
     protocol: !<!Protocols> {}
-  - !<!DictionarySchema> &ref_33
+  - !<!DictionarySchema> &ref_34
     type: dictionary
-    elementType: !<!AnySchema> 
+    elementType: !<!AnySchema> &ref_2
       type: any
       language: !<!Languages> 
         default:
@@ -417,8 +417,10 @@ schemas: !<!Schemas>
         name: SmartSalmon
         description: Dictionary of <any>
     protocol: !<!Protocols> {}
+  any:
+  - *ref_2
   byteArrays:
-  - !<!ByteArraySchema> &ref_21
+  - !<!ByteArraySchema> &ref_22
     type: byte-array
     format: byte
     apiVersions:
@@ -429,7 +431,7 @@ schemas: !<!Schemas>
         name: ByteWrapperField
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ByteArraySchema> &ref_40
+  - !<!ByteArraySchema> &ref_41
     type: byte-array
     format: byte
     apiVersions:
@@ -441,7 +443,7 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   dateTimes:
-  - !<!DateTimeSchema> &ref_16
+  - !<!DateTimeSchema> &ref_17
     type: date-time
     format: date-time
     apiVersions:
@@ -452,7 +454,7 @@ schemas: !<!Schemas>
         name: DatetimeWrapperField
         description: ''
     protocol: !<!Protocols> {}
-  - !<!DateTimeSchema> &ref_17
+  - !<!DateTimeSchema> &ref_18
     type: date-time
     format: date-time
     apiVersions:
@@ -463,7 +465,7 @@ schemas: !<!Schemas>
         name: DatetimeWrapperNow
         description: ''
     protocol: !<!Protocols> {}
-  - !<!DateTimeSchema> &ref_18
+  - !<!DateTimeSchema> &ref_19
     type: date-time
     format: date-time-rfc1123
     apiVersions:
@@ -474,7 +476,7 @@ schemas: !<!Schemas>
         name: Datetimerfc1123WrapperField
         description: ''
     protocol: !<!Protocols> {}
-  - !<!DateTimeSchema> &ref_19
+  - !<!DateTimeSchema> &ref_20
     type: date-time
     format: date-time-rfc1123
     apiVersions:
@@ -485,7 +487,7 @@ schemas: !<!Schemas>
         name: Datetimerfc1123WrapperNow
         description: ''
     protocol: !<!Protocols> {}
-  - !<!DateTimeSchema> &ref_46
+  - !<!DateTimeSchema> &ref_47
     type: date-time
     format: date-time
     apiVersions:
@@ -497,7 +499,7 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   dates:
-  - !<!DateSchema> &ref_14
+  - !<!DateSchema> &ref_15
     type: date
     apiVersions:
     - !<!ApiVersion> 
@@ -507,7 +509,7 @@ schemas: !<!Schemas>
         name: DateWrapperField
         description: ''
     protocol: !<!Protocols> {}
-  - !<!DateSchema> &ref_15
+  - !<!DateSchema> &ref_16
     type: date
     apiVersions:
     - !<!ApiVersion> 
@@ -518,7 +520,7 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   durations:
-  - !<!DurationSchema> &ref_20
+  - !<!DurationSchema> &ref_21
     type: duration
     apiVersions:
     - !<!ApiVersion> 
@@ -529,14 +531,14 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   objects:
-  - !<!ObjectSchema> &ref_69
+  - !<!ObjectSchema> &ref_70
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: *ref_2
+      schema: *ref_3
       serializedName: id
       language: !<!Languages> 
         default:
@@ -544,7 +546,7 @@ schemas: !<!Schemas>
           description: Basic Id
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_3
+      schema: *ref_4
       serializedName: name
       language: !<!Languages> 
         default:
@@ -552,7 +554,7 @@ schemas: !<!Schemas>
           description: Name property with a very long description that does not fit on a single line and a line break.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_4
+      schema: *ref_5
       serializedName: color
       language: !<!Languages> 
         default:
@@ -570,14 +572,14 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_70
+  - !<!ObjectSchema> &ref_71
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: *ref_5
+      schema: *ref_6
       serializedName: status
       language: !<!Languages> 
         default:
@@ -585,7 +587,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_6
+      schema: *ref_7
       serializedName: message
       language: !<!Languages> 
         default:
@@ -602,14 +604,14 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_74
+  - !<!ObjectSchema> &ref_75
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: *ref_5
+      schema: *ref_6
       serializedName: field1
       language: !<!Languages> 
         default:
@@ -617,7 +619,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_5
+      schema: *ref_6
       serializedName: field2
       language: !<!Languages> 
         default:
@@ -635,14 +637,14 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_76
+  - !<!ObjectSchema> &ref_77
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: *ref_7
+      schema: *ref_8
       serializedName: field1
       language: !<!Languages> 
         default:
@@ -650,7 +652,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_7
+      schema: *ref_8
       serializedName: field2
       language: !<!Languages> 
         default:
@@ -668,14 +670,14 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_78
+  - !<!ObjectSchema> &ref_79
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: *ref_8
+      schema: *ref_9
       serializedName: field1
       language: !<!Languages> 
         default:
@@ -683,7 +685,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_8
+      schema: *ref_9
       serializedName: field2
       language: !<!Languages> 
         default:
@@ -701,14 +703,14 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_80
+  - !<!ObjectSchema> &ref_81
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: *ref_9
+      schema: *ref_10
       serializedName: field1
       language: !<!Languages> 
         default:
@@ -716,7 +718,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_9
+      schema: *ref_10
       serializedName: field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose
       language: !<!Languages> 
         default:
@@ -734,14 +736,14 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_82
+  - !<!ObjectSchema> &ref_83
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: *ref_10
+      schema: *ref_11
       serializedName: field_true
       language: !<!Languages> 
         default:
@@ -749,7 +751,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_10
+      schema: *ref_11
       serializedName: field_false
       language: !<!Languages> 
         default:
@@ -767,14 +769,14 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_84
+  - !<!ObjectSchema> &ref_85
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: *ref_11
+      schema: *ref_12
       serializedName: field
       language: !<!Languages> 
         default:
@@ -782,7 +784,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_12
+      schema: *ref_13
       serializedName: empty
       language: !<!Languages> 
         default:
@@ -790,7 +792,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_13
+      schema: *ref_14
       serializedName: 'null'
       language: !<!Languages> 
         default:
@@ -808,14 +810,14 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_86
+  - !<!ObjectSchema> &ref_87
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: *ref_14
+      schema: *ref_15
       serializedName: field
       language: !<!Languages> 
         default:
@@ -823,7 +825,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_15
+      schema: *ref_16
       serializedName: leap
       language: !<!Languages> 
         default:
@@ -841,14 +843,14 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_88
+  - !<!ObjectSchema> &ref_89
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: *ref_16
+      schema: *ref_17
       serializedName: field
       language: !<!Languages> 
         default:
@@ -856,7 +858,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_17
+      schema: *ref_18
       serializedName: now
       language: !<!Languages> 
         default:
@@ -874,14 +876,14 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_90
+  - !<!ObjectSchema> &ref_91
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: *ref_18
+      schema: *ref_19
       serializedName: field
       language: !<!Languages> 
         default:
@@ -889,7 +891,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_19
+      schema: *ref_20
       serializedName: now
       language: !<!Languages> 
         default:
@@ -907,32 +909,7 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_92
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2016-02-29'
-    properties:
-    - !<!Property> 
-      schema: *ref_20
-      serializedName: field
-      language: !<!Languages> 
-        default:
-          name: field
-          description: ''
-      protocol: !<!Protocols> {}
-    serializationFormats:
-    - json
-    usage:
-    - output
-    - input
-    language: !<!Languages> 
-      default:
-        name: DurationWrapper
-        description: ''
-        namespace: ''
-    protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_94
+  - !<!ObjectSchema> &ref_93
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -953,23 +930,48 @@ schemas: !<!Schemas>
     - input
     language: !<!Languages> 
       default:
-        name: ByteWrapper
+        name: DurationWrapper
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_96
+  - !<!ObjectSchema> &ref_95
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_62
+      schema: *ref_22
+      serializedName: field
+      language: !<!Languages> 
+        default:
+          name: field
+          description: ''
+      protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    - input
+    language: !<!Languages> 
+      default:
+        name: ByteWrapper
+        description: ''
+        namespace: ''
+    protocol: !<!Protocols> {}
+  - !<!ObjectSchema> &ref_97
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2016-02-29'
+    properties:
+    - !<!Property> 
+      schema: !<!ArraySchema> &ref_63
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
-        elementType: *ref_22
+        elementType: *ref_23
         language: !<!Languages> 
           default:
             name: ArrayWrapperArray
@@ -992,14 +994,14 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_99
+  - !<!ObjectSchema> &ref_100
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: *ref_23
+      schema: *ref_24
       serializedName: defaultProgram
       language: !<!Languages> 
         default:
@@ -1017,26 +1019,26 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_24
+  - !<!ObjectSchema> &ref_25
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     children: !<!Relations> 
       all:
-      - !<!ObjectSchema> &ref_30
+      - !<!ObjectSchema> &ref_31
         type: object
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
         parents: !<!Relations> 
           all:
-          - *ref_24
+          - *ref_25
           immediate:
-          - *ref_24
+          - *ref_25
         properties:
         - !<!Property> 
-          schema: *ref_25
+          schema: *ref_26
           serializedName: food
           language: !<!Languages> 
             default:
@@ -1054,27 +1056,27 @@ schemas: !<!Schemas>
             description: ''
             namespace: ''
         protocol: !<!Protocols> {}
-      - !<!ObjectSchema> &ref_26
+      - !<!ObjectSchema> &ref_27
         type: object
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
         children: !<!Relations> 
           all:
-          - !<!ObjectSchema> &ref_28
+          - !<!ObjectSchema> &ref_29
             type: object
             apiVersions:
             - !<!ApiVersion> 
               version: '2016-02-29'
             parents: !<!Relations> 
               all:
-              - *ref_26
-              - *ref_24
+              - *ref_27
+              - *ref_25
               immediate:
-              - *ref_26
+              - *ref_27
             properties:
             - !<!Property> 
-              schema: *ref_27
+              schema: *ref_28
               serializedName: breed
               language: !<!Languages> 
                 default:
@@ -1093,15 +1095,15 @@ schemas: !<!Schemas>
                 namespace: ''
             protocol: !<!Protocols> {}
           immediate:
-          - *ref_28
+          - *ref_29
         parents: !<!Relations> 
           all:
-          - *ref_24
+          - *ref_25
           immediate:
-          - *ref_24
+          - *ref_25
         properties:
         - !<!Property> 
-          schema: *ref_29
+          schema: *ref_30
           serializedName: color
           language: !<!Languages> 
             default:
@@ -1109,12 +1111,12 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_63
+          schema: !<!ArraySchema> &ref_64
             type: array
             apiVersions:
             - !<!ApiVersion> 
               version: '2016-02-29'
-            elementType: *ref_30
+            elementType: *ref_31
             language: !<!Languages> 
               default:
                 name: CatHates
@@ -1137,13 +1139,13 @@ schemas: !<!Schemas>
             description: ''
             namespace: ''
         protocol: !<!Protocols> {}
-      - *ref_28
+      - *ref_29
       immediate:
-      - *ref_30
-      - *ref_26
+      - *ref_31
+      - *ref_27
     properties:
     - !<!Property> 
-      schema: *ref_5
+      schema: *ref_6
       serializedName: id
       language: !<!Languages> 
         default:
@@ -1151,7 +1153,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_31
+      schema: *ref_32
       serializedName: name
       language: !<!Languages> 
         default:
@@ -1169,24 +1171,24 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - *ref_26
-  - *ref_30
-  - *ref_28
-  - !<!ObjectSchema> &ref_34
+  - *ref_27
+  - *ref_31
+  - *ref_29
+  - !<!ObjectSchema> &ref_35
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     children: !<!Relations> 
       all:
-      - !<!ObjectSchema> &ref_32
+      - !<!ObjectSchema> &ref_33
         type: object
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
         children: !<!Relations> 
           all:
-          - !<!ObjectSchema> &ref_36
+          - !<!ObjectSchema> &ref_37
             type: object
             apiVersions:
             - !<!ApiVersion> 
@@ -1194,16 +1196,16 @@ schemas: !<!Schemas>
             discriminatorValue: smart_salmon
             parents: !<!Relations> 
               all:
-              - *ref_32
               - *ref_33
               - *ref_34
-              - *ref_33
+              - *ref_35
+              - *ref_34
               immediate:
-              - *ref_32
               - *ref_33
+              - *ref_34
             properties:
             - !<!Property> 
-              schema: *ref_35
+              schema: *ref_36
               serializedName: college_degree
               language: !<!Languages> 
                 default:
@@ -1222,14 +1224,14 @@ schemas: !<!Schemas>
                 namespace: ''
             protocol: !<!Protocols> {}
           immediate:
-          - *ref_36
+          - *ref_37
         discriminator: !<!Discriminator> 
           all:
-            smart_salmon: *ref_36
+            smart_salmon: *ref_37
           immediate:
-            smart_salmon: *ref_36
-          property: !<!Property> &ref_45
-            schema: *ref_37
+            smart_salmon: *ref_37
+          property: !<!Property> &ref_46
+            schema: *ref_38
             isDiscriminator: true
             required: true
             serializedName: fishtype
@@ -1241,12 +1243,12 @@ schemas: !<!Schemas>
         discriminatorValue: salmon
         parents: !<!Relations> 
           all:
-          - *ref_34
+          - *ref_35
           immediate:
-          - *ref_34
+          - *ref_35
         properties:
         - !<!Property> 
-          schema: *ref_38
+          schema: *ref_39
           serializedName: location
           language: !<!Languages> 
             default:
@@ -1254,7 +1256,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: *ref_10
+          schema: *ref_11
           serializedName: iswild
           language: !<!Languages> 
             default:
@@ -1272,15 +1274,15 @@ schemas: !<!Schemas>
             description: ''
             namespace: ''
         protocol: !<!Protocols> {}
-      - *ref_36
-      - !<!ObjectSchema> &ref_39
+      - *ref_37
+      - !<!ObjectSchema> &ref_40
         type: object
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
         children: !<!Relations> 
           all:
-          - !<!ObjectSchema> &ref_42
+          - !<!ObjectSchema> &ref_43
             type: object
             apiVersions:
             - !<!ApiVersion> 
@@ -1288,13 +1290,13 @@ schemas: !<!Schemas>
             discriminatorValue: sawshark
             parents: !<!Relations> 
               all:
-              - *ref_39
-              - *ref_34
+              - *ref_40
+              - *ref_35
               immediate:
-              - *ref_39
+              - *ref_40
             properties:
             - !<!Property> 
-              schema: *ref_40
+              schema: *ref_41
               serializedName: picture
               language: !<!Languages> 
                 default:
@@ -1312,7 +1314,7 @@ schemas: !<!Schemas>
                 description: ''
                 namespace: ''
             protocol: !<!Protocols> {}
-          - !<!ObjectSchema> &ref_43
+          - !<!ObjectSchema> &ref_44
             type: object
             apiVersions:
             - !<!ApiVersion> 
@@ -1320,13 +1322,13 @@ schemas: !<!Schemas>
             discriminatorValue: goblin
             parents: !<!Relations> 
               all:
-              - *ref_39
-              - *ref_34
+              - *ref_40
+              - *ref_35
               immediate:
-              - *ref_39
+              - *ref_40
             properties:
             - !<!Property> 
-              schema: *ref_5
+              schema: *ref_6
               serializedName: jawsize
               language: !<!Languages> 
                 default:
@@ -1334,7 +1336,7 @@ schemas: !<!Schemas>
                   description: ''
               protocol: !<!Protocols> {}
             - !<!Property> 
-              schema: *ref_41
+              schema: *ref_42
               serializedName: color
               language: !<!Languages> 
                 default:
@@ -1354,7 +1356,7 @@ schemas: !<!Schemas>
                 description: ''
                 namespace: ''
             protocol: !<!Protocols> {}
-          - !<!ObjectSchema> &ref_44
+          - !<!ObjectSchema> &ref_45
             type: object
             apiVersions:
             - !<!ApiVersion> 
@@ -1362,10 +1364,10 @@ schemas: !<!Schemas>
             discriminatorValue: cookiecuttershark
             parents: !<!Relations> 
               all:
-              - *ref_39
-              - *ref_34
+              - *ref_40
+              - *ref_35
               immediate:
-              - *ref_39
+              - *ref_40
             serializationFormats:
             - json
             usage:
@@ -1378,28 +1380,28 @@ schemas: !<!Schemas>
                 namespace: ''
             protocol: !<!Protocols> {}
           immediate:
-          - *ref_42
           - *ref_43
           - *ref_44
+          - *ref_45
         discriminator: !<!Discriminator> 
           all:
-            cookiecuttershark: *ref_44
-            goblin: *ref_43
-            sawshark: *ref_42
+            cookiecuttershark: *ref_45
+            goblin: *ref_44
+            sawshark: *ref_43
           immediate:
-            cookiecuttershark: *ref_44
-            goblin: *ref_43
-            sawshark: *ref_42
-          property: *ref_45
+            cookiecuttershark: *ref_45
+            goblin: *ref_44
+            sawshark: *ref_43
+          property: *ref_46
         discriminatorValue: shark
         parents: !<!Relations> 
           all:
-          - *ref_34
+          - *ref_35
           immediate:
-          - *ref_34
+          - *ref_35
         properties:
         - !<!Property> 
-          schema: *ref_5
+          schema: *ref_6
           required: false
           serializedName: age
           language: !<!Languages> 
@@ -1408,7 +1410,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: *ref_46
+          schema: *ref_47
           required: true
           serializedName: birthday
           language: !<!Languages> 
@@ -1427,28 +1429,28 @@ schemas: !<!Schemas>
             description: ''
             namespace: ''
         protocol: !<!Protocols> {}
-      - *ref_42
       - *ref_43
       - *ref_44
+      - *ref_45
       immediate:
-      - *ref_32
-      - *ref_39
+      - *ref_33
+      - *ref_40
     discriminator: !<!Discriminator> 
       all:
-        cookiecuttershark: *ref_44
-        goblin: *ref_43
-        salmon: *ref_32
-        sawshark: *ref_42
-        shark: *ref_39
-        smart_salmon: *ref_36
+        cookiecuttershark: *ref_45
+        goblin: *ref_44
+        salmon: *ref_33
+        sawshark: *ref_43
+        shark: *ref_40
+        smart_salmon: *ref_37
       immediate:
-        salmon: *ref_32
-        shark: *ref_39
-      property: *ref_45
+        salmon: *ref_33
+        shark: *ref_40
+      property: *ref_46
     properties:
-    - *ref_45
+    - *ref_46
     - !<!Property> 
-      schema: *ref_47
+      schema: *ref_48
       required: false
       serializedName: species
       language: !<!Languages> 
@@ -1457,7 +1459,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_8
+      schema: *ref_9
       required: true
       serializedName: length
       language: !<!Languages> 
@@ -1466,12 +1468,12 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_64
+      schema: !<!ArraySchema> &ref_65
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
-        elementType: *ref_34
+        elementType: *ref_35
         language: !<!Languages> 
           default:
             name: FishSiblings
@@ -1495,14 +1497,14 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_48
+  - !<!ObjectSchema> &ref_49
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     children: !<!Relations> 
       all:
-      - !<!ObjectSchema> &ref_50
+      - !<!ObjectSchema> &ref_51
         type: object
         apiVersions:
         - !<!ApiVersion> 
@@ -1510,12 +1512,12 @@ schemas: !<!Schemas>
         discriminatorValue: DotSalmon
         parents: !<!Relations> 
           all:
-          - *ref_48
+          - *ref_49
           immediate:
-          - *ref_48
+          - *ref_49
         properties:
         - !<!Property> 
-          schema: *ref_49
+          schema: *ref_50
           serializedName: location
           language: !<!Languages> 
             default:
@@ -1523,7 +1525,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: *ref_10
+          schema: *ref_11
           serializedName: iswild
           language: !<!Languages> 
             default:
@@ -1541,14 +1543,14 @@ schemas: !<!Schemas>
             namespace: ''
         protocol: !<!Protocols> {}
       immediate:
-      - *ref_50
+      - *ref_51
     discriminator: !<!Discriminator> 
       all:
-        DotSalmon: *ref_50
+        DotSalmon: *ref_51
       immediate:
-        DotSalmon: *ref_50
-      property: !<!Property> &ref_52
-        schema: *ref_51
+        DotSalmon: *ref_51
+      property: !<!Property> &ref_53
+        schema: *ref_52
         isDiscriminator: true
         required: true
         serializedName: fish.type
@@ -1558,9 +1560,9 @@ schemas: !<!Schemas>
             description: ''
         protocol: !<!Protocols> {}
     properties:
-    - *ref_52
+    - *ref_53
     - !<!Property> 
-      schema: *ref_53
+      schema: *ref_54
       required: false
       serializedName: species
       language: !<!Languages> 
@@ -1578,14 +1580,14 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_104
+  - !<!ObjectSchema> &ref_105
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: *ref_50
+      schema: *ref_51
       serializedName: sampleSalmon
       language: !<!Languages> 
         default:
@@ -1593,12 +1595,12 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_65
+      schema: !<!ArraySchema> &ref_66
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
-        elementType: *ref_50
+        elementType: *ref_51
         language: !<!Languages> 
           default:
             name: DotFishMarketSalmons
@@ -1611,7 +1613,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_48
+      schema: *ref_49
       serializedName: sampleFish
       language: !<!Languages> 
         default:
@@ -1619,12 +1621,12 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_66
+      schema: !<!ArraySchema> &ref_67
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: '2016-02-29'
-        elementType: *ref_48
+        elementType: *ref_49
         language: !<!Languages> 
           default:
             name: DotFishMarketFishes
@@ -1646,16 +1648,16 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - *ref_50
-  - *ref_32
-  - !<!ObjectSchema> &ref_109
+  - *ref_51
+  - *ref_33
+  - !<!ObjectSchema> &ref_110
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     properties:
     - !<!Property> 
-      schema: *ref_54
+      schema: *ref_55
       readOnly: true
       serializedName: id
       language: !<!Languages> 
@@ -1664,7 +1666,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_5
+      schema: *ref_6
       serializedName: size
       language: !<!Languages> 
         default:
@@ -1682,14 +1684,14 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_55
+  - !<!ObjectSchema> &ref_56
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2016-02-29'
     children: !<!Relations> 
       all:
-      - !<!ObjectSchema> &ref_57
+      - !<!ObjectSchema> &ref_58
         type: object
         apiVersions:
         - !<!ApiVersion> 
@@ -1697,12 +1699,12 @@ schemas: !<!Schemas>
         discriminatorValue: Kind1
         parents: !<!Relations> 
           all:
-          - *ref_55
+          - *ref_56
           immediate:
-          - *ref_55
+          - *ref_56
         properties:
         - !<!Property> 
-          schema: *ref_56
+          schema: *ref_57
           serializedName: propD1
           language: !<!Languages> 
             default:
@@ -1722,14 +1724,14 @@ schemas: !<!Schemas>
             namespace: ''
         protocol: !<!Protocols> {}
       immediate:
-      - *ref_57
+      - *ref_58
     discriminator: !<!Discriminator> 
       all:
-        Kind1: *ref_57
+        Kind1: *ref_58
       immediate:
-        Kind1: *ref_57
-      property: !<!Property> &ref_59
-        schema: *ref_58
+        Kind1: *ref_58
+      property: !<!Property> &ref_60
+        schema: *ref_59
         isDiscriminator: true
         required: true
         serializedName: kind
@@ -1739,9 +1741,9 @@ schemas: !<!Schemas>
             description: ''
         protocol: !<!Protocols> {}
     properties:
-    - *ref_59
+    - *ref_60
     - !<!Property> 
-      schema: *ref_60
+      schema: *ref_61
       required: false
       serializedName: propB1
       language: !<!Languages> 
@@ -1750,7 +1752,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_61
+      schema: *ref_62
       flattenedNames:
       - helper
       - propBH1
@@ -1771,20 +1773,20 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - *ref_36
-  - *ref_39
-  - *ref_42
+  - *ref_37
+  - *ref_40
   - *ref_43
   - *ref_44
-  - *ref_57
+  - *ref_45
+  - *ref_58
   arrays:
-  - *ref_62
   - *ref_63
   - *ref_64
   - *ref_65
   - *ref_66
+  - *ref_67
 globalParameters:
-- !<!Parameter> &ref_68
+- !<!Parameter> &ref_69
   schema: *ref_0
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
@@ -1799,8 +1801,8 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: uri
-- !<!Parameter> &ref_71
-  schema: *ref_67
+- !<!Parameter> &ref_72
+  schema: *ref_68
   implementation: Client
   required: true
   language: !<!Languages> 
@@ -1820,7 +1822,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -1835,7 +1837,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_69
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -1849,7 +1851,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -1871,14 +1873,15 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
-    - *ref_71
+    - *ref_69
+    - *ref_72
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_72
+        schema: *ref_73
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -1887,8 +1890,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_73
-        schema: *ref_69
+      - !<!Parameter> &ref_74
+        schema: *ref_70
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -1900,7 +1903,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_73
+      - *ref_74
       language: !<!Languages> 
         default:
           name: ''
@@ -1926,7 +1929,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -1948,7 +1951,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -1963,7 +1966,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_69
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -1977,7 +1980,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -1999,7 +2002,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -2014,7 +2017,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_69
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -2028,7 +2031,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -2050,7 +2053,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -2065,7 +2068,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_69
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -2079,7 +2082,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -2101,7 +2104,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -2116,7 +2119,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_69
+      schema: *ref_70
       language: !<!Languages> 
         default:
           name: ''
@@ -2130,7 +2133,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -2160,7 +2163,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -2175,7 +2178,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_74
+      schema: *ref_75
       language: !<!Languages> 
         default:
           name: ''
@@ -2189,7 +2192,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -2211,13 +2214,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_72
+        schema: *ref_73
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2226,8 +2230,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_75
-        schema: *ref_74
+      - !<!Parameter> &ref_76
+        schema: *ref_75
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -2239,7 +2243,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_75
+      - *ref_76
       language: !<!Languages> 
         default:
           name: ''
@@ -2265,7 +2269,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -2287,7 +2291,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -2302,7 +2306,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_76
+      schema: *ref_77
       language: !<!Languages> 
         default:
           name: ''
@@ -2316,7 +2320,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -2338,13 +2342,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_72
+        schema: *ref_73
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2353,8 +2358,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_77
-        schema: *ref_76
+      - !<!Parameter> &ref_78
+        schema: *ref_77
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -2366,7 +2371,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_77
+      - *ref_78
       language: !<!Languages> 
         default:
           name: ''
@@ -2392,7 +2397,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -2414,7 +2419,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -2429,7 +2434,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_78
+      schema: *ref_79
       language: !<!Languages> 
         default:
           name: ''
@@ -2443,7 +2448,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -2465,13 +2470,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_72
+        schema: *ref_73
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2480,8 +2486,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_79
-        schema: *ref_78
+      - !<!Parameter> &ref_80
+        schema: *ref_79
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -2493,7 +2499,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_79
+      - *ref_80
       language: !<!Languages> 
         default:
           name: ''
@@ -2519,7 +2525,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -2541,7 +2547,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -2556,7 +2562,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_80
+      schema: *ref_81
       language: !<!Languages> 
         default:
           name: ''
@@ -2570,7 +2576,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -2592,13 +2598,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_72
+        schema: *ref_73
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2607,8 +2614,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_81
-        schema: *ref_80
+      - !<!Parameter> &ref_82
+        schema: *ref_81
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -2620,7 +2627,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_81
+      - *ref_82
       language: !<!Languages> 
         default:
           name: ''
@@ -2646,7 +2653,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -2668,7 +2675,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -2683,7 +2690,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_82
+      schema: *ref_83
       language: !<!Languages> 
         default:
           name: ''
@@ -2697,7 +2704,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -2719,13 +2726,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_72
+        schema: *ref_73
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2734,8 +2742,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_83
-        schema: *ref_82
+      - !<!Parameter> &ref_84
+        schema: *ref_83
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -2747,7 +2755,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_83
+      - *ref_84
       language: !<!Languages> 
         default:
           name: ''
@@ -2773,7 +2781,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -2795,7 +2803,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -2810,7 +2818,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_84
+      schema: *ref_85
       language: !<!Languages> 
         default:
           name: ''
@@ -2824,7 +2832,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -2846,13 +2854,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_72
+        schema: *ref_73
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2861,8 +2870,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_85
-        schema: *ref_84
+      - !<!Parameter> &ref_86
+        schema: *ref_85
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -2874,7 +2883,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_85
+      - *ref_86
       language: !<!Languages> 
         default:
           name: ''
@@ -2900,7 +2909,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -2922,7 +2931,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -2937,7 +2946,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_86
+      schema: *ref_87
       language: !<!Languages> 
         default:
           name: ''
@@ -2951,7 +2960,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -2973,13 +2982,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_72
+        schema: *ref_73
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2988,8 +2998,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_87
-        schema: *ref_86
+      - !<!Parameter> &ref_88
+        schema: *ref_87
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -3001,7 +3011,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_87
+      - *ref_88
       language: !<!Languages> 
         default:
           name: ''
@@ -3027,7 +3037,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -3049,7 +3059,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -3064,7 +3074,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_88
+      schema: *ref_89
       language: !<!Languages> 
         default:
           name: ''
@@ -3078,7 +3088,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -3100,13 +3110,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_72
+        schema: *ref_73
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3115,8 +3126,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_89
-        schema: *ref_88
+      - !<!Parameter> &ref_90
+        schema: *ref_89
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -3128,7 +3139,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_89
+      - *ref_90
       language: !<!Languages> 
         default:
           name: ''
@@ -3154,7 +3165,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -3176,7 +3187,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -3191,7 +3202,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_90
+      schema: *ref_91
       language: !<!Languages> 
         default:
           name: ''
@@ -3205,7 +3216,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -3227,13 +3238,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_72
+        schema: *ref_73
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3242,8 +3254,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_91
-        schema: *ref_90
+      - !<!Parameter> &ref_92
+        schema: *ref_91
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -3255,7 +3267,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_91
+      - *ref_92
       language: !<!Languages> 
         default:
           name: ''
@@ -3281,7 +3293,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -3303,7 +3315,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -3318,7 +3330,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_92
+      schema: *ref_93
       language: !<!Languages> 
         default:
           name: ''
@@ -3332,7 +3344,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -3354,13 +3366,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_72
+        schema: *ref_73
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3369,8 +3382,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_93
-        schema: *ref_92
+      - !<!Parameter> &ref_94
+        schema: *ref_93
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -3382,7 +3395,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_93
+      - *ref_94
       language: !<!Languages> 
         default:
           name: ''
@@ -3408,7 +3421,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -3430,7 +3443,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -3445,7 +3458,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_94
+      schema: *ref_95
       language: !<!Languages> 
         default:
           name: ''
@@ -3459,7 +3472,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -3481,13 +3494,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_72
+        schema: *ref_73
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3496,8 +3510,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_95
-        schema: *ref_94
+      - !<!Parameter> &ref_96
+        schema: *ref_95
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -3509,7 +3523,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_95
+      - *ref_96
       language: !<!Languages> 
         default:
           name: ''
@@ -3535,7 +3549,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -3565,7 +3579,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -3580,7 +3594,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_96
+      schema: *ref_97
       language: !<!Languages> 
         default:
           name: ''
@@ -3594,7 +3608,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -3616,13 +3630,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_72
+        schema: *ref_73
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3631,8 +3646,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_97
-        schema: *ref_96
+      - !<!Parameter> &ref_98
+        schema: *ref_97
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -3644,7 +3659,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_97
+      - *ref_98
       language: !<!Languages> 
         default:
           name: ''
@@ -3670,7 +3685,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -3692,7 +3707,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -3707,7 +3722,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_96
+      schema: *ref_97
       language: !<!Languages> 
         default:
           name: ''
@@ -3721,7 +3736,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -3743,13 +3758,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_72
+        schema: *ref_73
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3758,8 +3774,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_98
-        schema: *ref_96
+      - !<!Parameter> &ref_99
+        schema: *ref_97
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -3771,7 +3787,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_98
+      - *ref_99
       language: !<!Languages> 
         default:
           name: ''
@@ -3797,7 +3813,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -3819,7 +3835,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -3834,7 +3850,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_96
+      schema: *ref_97
       language: !<!Languages> 
         default:
           name: ''
@@ -3848,7 +3864,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -3878,7 +3894,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -3893,7 +3909,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_99
+      schema: *ref_100
       language: !<!Languages> 
         default:
           name: ''
@@ -3907,7 +3923,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -3929,13 +3945,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_72
+        schema: *ref_73
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3944,8 +3961,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_100
-        schema: *ref_99
+      - !<!Parameter> &ref_101
+        schema: *ref_100
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -3957,7 +3974,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_100
+      - *ref_101
       language: !<!Languages> 
         default:
           name: ''
@@ -3983,7 +4000,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -4005,7 +4022,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -4020,7 +4037,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_99
+      schema: *ref_100
       language: !<!Languages> 
         default:
           name: ''
@@ -4034,7 +4051,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -4056,13 +4073,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_72
+        schema: *ref_73
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4071,8 +4089,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_101
-        schema: *ref_99
+      - !<!Parameter> &ref_102
+        schema: *ref_100
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -4084,7 +4102,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_101
+      - *ref_102
       language: !<!Languages> 
         default:
           name: ''
@@ -4110,7 +4128,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -4132,7 +4150,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -4147,7 +4165,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_99
+      schema: *ref_100
       language: !<!Languages> 
         default:
           name: ''
@@ -4161,7 +4179,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -4183,7 +4201,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -4198,7 +4216,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_99
+      schema: *ref_100
       language: !<!Languages> 
         default:
           name: ''
@@ -4212,7 +4230,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -4242,7 +4260,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -4257,7 +4275,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_28
+      schema: *ref_29
       language: !<!Languages> 
         default:
           name: ''
@@ -4271,7 +4289,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -4293,13 +4311,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_72
+        schema: *ref_73
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4308,8 +4327,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_102
-        schema: *ref_28
+      - !<!Parameter> &ref_103
+        schema: *ref_29
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -4321,7 +4340,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_102
+      - *ref_103
       language: !<!Languages> 
         default:
           name: ''
@@ -4347,7 +4366,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -4377,7 +4396,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -4392,7 +4411,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_34
+      schema: *ref_35
       language: !<!Languages> 
         default:
           name: ''
@@ -4406,7 +4425,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -4428,13 +4447,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_72
+        schema: *ref_73
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4443,8 +4463,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_103
-        schema: *ref_34
+      - !<!Parameter> &ref_104
+        schema: *ref_35
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -4489,7 +4509,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_103
+      - *ref_104
       language: !<!Languages> 
         default:
           name: ''
@@ -4515,7 +4535,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -4537,7 +4557,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -4552,7 +4572,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_48
+      schema: *ref_49
       language: !<!Languages> 
         default:
           name: ''
@@ -4566,7 +4586,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -4588,7 +4608,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -4603,7 +4623,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_104
+      schema: *ref_105
       language: !<!Languages> 
         default:
           name: ''
@@ -4617,7 +4637,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -4639,7 +4659,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -4654,7 +4674,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_104
+      schema: *ref_105
       language: !<!Languages> 
         default:
           name: ''
@@ -4668,7 +4688,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -4690,7 +4710,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -4705,7 +4725,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_32
+      schema: *ref_33
       language: !<!Languages> 
         default:
           name: ''
@@ -4719,7 +4739,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -4741,13 +4761,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_72
+        schema: *ref_73
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4756,8 +4777,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_105
-        schema: *ref_32
+      - !<!Parameter> &ref_106
+        schema: *ref_33
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -4769,7 +4790,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_105
+      - *ref_106
       language: !<!Languages> 
         default:
           name: ''
@@ -4795,7 +4816,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -4817,13 +4838,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_72
+        schema: *ref_73
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4832,8 +4854,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_106
-        schema: *ref_32
+      - !<!Parameter> &ref_107
+        schema: *ref_33
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -4845,7 +4867,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_106
+      - *ref_107
       language: !<!Languages> 
         default:
           name: ''
@@ -4861,7 +4883,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_32
+      schema: *ref_33
       language: !<!Languages> 
         default:
           name: ''
@@ -4875,7 +4897,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -4897,13 +4919,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_72
+        schema: *ref_73
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -4912,8 +4935,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_107
-        schema: *ref_34
+      - !<!Parameter> &ref_108
+        schema: *ref_35
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -4951,7 +4974,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_107
+      - *ref_108
       language: !<!Languages> 
         default:
           name: ''
@@ -4977,7 +5000,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -5007,7 +5030,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -5022,7 +5045,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_34
+      schema: *ref_35
       language: !<!Languages> 
         default:
           name: ''
@@ -5036,7 +5059,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -5058,13 +5081,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_72
+        schema: *ref_73
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -5073,8 +5097,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_108
-        schema: *ref_34
+      - !<!Parameter> &ref_109
+        schema: *ref_35
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -5139,7 +5163,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_108
+      - *ref_109
       language: !<!Languages> 
         default:
           name: ''
@@ -5165,7 +5189,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -5195,7 +5219,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -5210,7 +5234,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_109
+      schema: *ref_110
       language: !<!Languages> 
         default:
           name: ''
@@ -5224,7 +5248,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -5246,13 +5270,14 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_72
+        schema: *ref_73
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -5261,8 +5286,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_110
-        schema: *ref_109
+      - !<!Parameter> &ref_111
+        schema: *ref_110
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -5274,7 +5299,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_110
+      - *ref_111
       language: !<!Languages> 
         default:
           name: ''
@@ -5300,7 +5325,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_70
+      schema: *ref_71
       language: !<!Languages> 
         default:
           name: ''
@@ -5330,7 +5355,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2016-02-29'
     parameters:
-    - *ref_68
+    - *ref_69
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -5345,7 +5370,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_55
+      schema: *ref_56
       language: !<!Languages> 
         default:
           name: ''

@@ -255,6 +255,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_8
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -266,6 +267,7 @@ operationGroups:
       - !<!Parameter> &ref_9
         schema: *ref_7
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: petParam

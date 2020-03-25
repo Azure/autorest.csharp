@@ -43,8 +43,9 @@ namespace CognitiveSearch.Models
         /// <param name="tokenizers"> The tokenizers for the index. </param>
         /// <param name="tokenFilters"> The token filters for the index. </param>
         /// <param name="charFilters"> The character filters for the index. </param>
+        /// <param name="encryptionKey"> A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data in Azure Cognitive Search. Once you have encrypted your data, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019. </param>
         /// <param name="eTag"> The ETag of the index. </param>
-        internal Index(string name, IList<Field> fields, IList<ScoringProfile> scoringProfiles, string defaultScoringProfile, CorsOptions corsOptions, IList<Suggester> suggesters, IList<Analyzer> analyzers, IList<Tokenizer> tokenizers, IList<TokenFilter> tokenFilters, IList<CharFilter> charFilters, string eTag)
+        internal Index(string name, IList<Field> fields, IList<ScoringProfile> scoringProfiles, string defaultScoringProfile, CorsOptions corsOptions, IList<Suggester> suggesters, IList<Analyzer> analyzers, IList<Tokenizer> tokenizers, IList<TokenFilter> tokenFilters, IList<CharFilter> charFilters, EncryptionKey encryptionKey, string eTag)
         {
             Name = name;
             Fields = fields;
@@ -56,6 +57,7 @@ namespace CognitiveSearch.Models
             Tokenizers = tokenizers;
             TokenFilters = tokenFilters;
             CharFilters = charFilters;
+            EncryptionKey = encryptionKey;
             ETag = eTag;
         }
 
@@ -79,6 +81,8 @@ namespace CognitiveSearch.Models
         public IList<TokenFilter> TokenFilters { get; set; }
         /// <summary> The character filters for the index. </summary>
         public IList<CharFilter> CharFilters { get; set; }
+        /// <summary> A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data in Azure Cognitive Search. Once you have encrypted your data, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019. </summary>
+        public EncryptionKey EncryptionKey { get; set; }
         /// <summary> The ETag of the index. </summary>
         public string ETag { get; set; }
     }

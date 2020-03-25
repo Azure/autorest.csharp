@@ -20,19 +20,11 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("counters"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     counters = ServiceCounters.DeserializeServiceCounters(property.Value);
                     continue;
                 }
                 if (property.NameEquals("limits"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     limits = ServiceLimits.DeserializeServiceLimits(property.Value);
                     continue;
                 }

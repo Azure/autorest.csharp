@@ -2509,6 +2509,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_105
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2922,6 +2923,7 @@ operationGroups:
       - !<!Parameter> &ref_121
         schema: *ref_119
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2933,6 +2935,7 @@ operationGroups:
       - !<!Parameter> &ref_122
         schema: *ref_120
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: fileStream
@@ -2965,6 +2968,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_105
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -2976,6 +2980,7 @@ operationGroups:
       - !<!Parameter> &ref_124
         schema: *ref_123
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: fileStream
@@ -3173,6 +3178,7 @@ operationGroups:
       - !<!Parameter> &ref_132
         schema: *ref_119
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3184,6 +3190,7 @@ operationGroups:
       - !<!Parameter> &ref_133
         schema: *ref_131
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: fileStream
@@ -3216,6 +3223,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_105
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3227,6 +3235,7 @@ operationGroups:
       - !<!Parameter> &ref_134
         schema: *ref_123
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: fileStream
@@ -3398,6 +3407,7 @@ operationGroups:
       - !<!Parameter> &ref_139
         schema: *ref_119
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3409,6 +3419,7 @@ operationGroups:
       - !<!Parameter> &ref_140
         schema: *ref_138
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: fileStream
@@ -3441,6 +3452,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_105
         implementation: Method
+        required: true
         language: !<!Languages> 
           default:
             name: contentType
@@ -3452,6 +3464,7 @@ operationGroups:
       - !<!Parameter> &ref_141
         schema: *ref_123
         implementation: Method
+        required: false
         language: !<!Languages> 
           default:
             name: fileStream

@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CognitiveSearch.Models
 {
@@ -13,8 +15,15 @@ namespace CognitiveSearch.Models
     public partial class AutocompleteResult
     {
         /// <summary> Initializes a new instance of AutocompleteResult. </summary>
-        internal AutocompleteResult()
+        /// <param name="results"> The list of returned Autocompleted items. </param>
+        internal AutocompleteResult(IEnumerable<AutocompleteItem> results)
         {
+            if (results == null)
+            {
+                throw new ArgumentNullException(nameof(results));
+            }
+
+            Results = results.ToArray();
         }
 
         /// <summary> Initializes a new instance of AutocompleteResult. </summary>

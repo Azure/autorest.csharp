@@ -22,10 +22,19 @@ namespace CognitiveSearch.Models
         }
 
         private const string EnValue = "en";
+        private const string EsValue = "es";
+        private const string JaValue = "ja";
+        private const string PtValue = "pt";
         private const string ZhValue = "zh";
 
         /// <summary> English. </summary>
         public static ImageAnalysisSkillLanguage En { get; } = new ImageAnalysisSkillLanguage(EnValue);
+        /// <summary> Spanish. </summary>
+        public static ImageAnalysisSkillLanguage Es { get; } = new ImageAnalysisSkillLanguage(EsValue);
+        /// <summary> Japanese. </summary>
+        public static ImageAnalysisSkillLanguage Ja { get; } = new ImageAnalysisSkillLanguage(JaValue);
+        /// <summary> Portuguese. </summary>
+        public static ImageAnalysisSkillLanguage Pt { get; } = new ImageAnalysisSkillLanguage(PtValue);
         /// <summary> Chinese. </summary>
         public static ImageAnalysisSkillLanguage Zh { get; } = new ImageAnalysisSkillLanguage(ZhValue);
         /// <summary> Determines if two <see cref="ImageAnalysisSkillLanguage"/> values are the same. </summary>

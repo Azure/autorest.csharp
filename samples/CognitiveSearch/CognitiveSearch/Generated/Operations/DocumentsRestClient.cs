@@ -19,74 +19,65 @@ namespace CognitiveSearch
 {
     internal partial class DocumentsRestClient
     {
-        private string searchServiceName;
+        private string endpoint;
         private string indexName;
-        private string searchDnsSuffix;
         private string apiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
 
         /// <summary> Initializes a new instance of DocumentsRestClient. </summary>
-        public DocumentsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string searchServiceName, string indexName, string searchDnsSuffix = "search.windows.net", string apiVersion = "2019-05-06")
+        public DocumentsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string indexName, string apiVersion = "2019-05-06-Preview")
         {
-            if (searchServiceName == null)
+            if (endpoint == null)
             {
-                throw new ArgumentNullException(nameof(searchServiceName));
+                throw new ArgumentNullException(nameof(endpoint));
             }
             if (indexName == null)
             {
                 throw new ArgumentNullException(nameof(indexName));
-            }
-            if (searchDnsSuffix == null)
-            {
-                throw new ArgumentNullException(nameof(searchDnsSuffix));
             }
             if (apiVersion == null)
             {
                 throw new ArgumentNullException(nameof(apiVersion));
             }
 
-            this.searchServiceName = searchServiceName;
+            this.endpoint = endpoint;
             this.indexName = indexName;
-            this.searchDnsSuffix = searchDnsSuffix;
             this.apiVersion = apiVersion;
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
 
-        internal HttpMessage CreateCountRequest(Guid? clientRequestId)
+        internal HttpMessage CreateCountRequest(Guid? xMsClientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("https://", false);
-            uri.AppendRaw(searchServiceName, false);
-            uri.AppendRaw(".", false);
-            uri.AppendRaw(searchDnsSuffix, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendRaw("/indexes('", false);
             uri.AppendRaw(indexName, true);
             uri.AppendRaw("')", false);
             uri.AppendPath("/docs/$count", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (clientRequestId != null)
+            if (xMsClientRequestId != null)
             {
-                request.Headers.Add("client-request-id", clientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
             }
             return message;
         }
 
         /// <summary> Queries the number of documents in the index. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<long>> CountAsync(Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<long>> CountAsync(Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DocumentsClient.Count");
             scope.Start();
             try
             {
-                using var message = CreateCountRequest(clientRequestId);
+                using var message = CreateCountRequest(xMsClientRequestId);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -109,15 +100,15 @@ namespace CognitiveSearch
         }
 
         /// <summary> Queries the number of documents in the index. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<long> Count(Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public Response<long> Count(Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DocumentsClient.Count");
             scope.Start();
             try
             {
-                using var message = CreateCountRequest(clientRequestId);
+                using var message = CreateCountRequest(xMsClientRequestId);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -139,16 +130,13 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateSearchGetRequest(string searchText, bool? includeTotalResultCount, IEnumerable<string> facets, string filter, IEnumerable<string> highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, QueryType? queryType, IEnumerable<string> scoringParameters, string scoringProfile, IEnumerable<string> searchFields, SearchMode? searchMode, IEnumerable<string> select, int? skip, int? top, Guid? clientRequestId)
+        internal HttpMessage CreateSearchGetRequest(string searchText, bool? includeTotalResultCount, IEnumerable<string> facets, string filter, IEnumerable<string> highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, QueryType? queryType, IEnumerable<string> scoringParameters, string scoringProfile, IEnumerable<string> searchFields, SearchMode? searchMode, IEnumerable<string> select, int? skip, int? top, Guid? xMsClientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("https://", false);
-            uri.AppendRaw(searchServiceName, false);
-            uri.AppendRaw(".", false);
-            uri.AppendRaw(searchDnsSuffix, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendRaw("/indexes('", false);
             uri.AppendRaw(indexName, true);
             uri.AppendRaw("')", false);
@@ -223,9 +211,9 @@ namespace CognitiveSearch
             }
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (clientRequestId != null)
+            if (xMsClientRequestId != null)
             {
-                request.Headers.Add("client-request-id", clientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
             }
             return message;
         }
@@ -248,15 +236,15 @@ namespace CognitiveSearch
         /// <param name="select"> The list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included. </param>
         /// <param name="skip"> The number of search results to skip. This value cannot be greater than 100,000. If you need to scan documents in sequence, but cannot use $skip due to this limitation, consider using $orderby on a totally-ordered key and $filter with a range query instead. </param>
         /// <param name="top"> The number of search results to retrieve. This can be used in conjunction with $skip to implement client-side paging of search results. If results are truncated due to server-side paging, the response will include a continuation token that can be used to issue another Search request for the next page of results. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SearchDocumentsResult>> SearchGetAsync(string searchText, bool? includeTotalResultCount, IEnumerable<string> facets, string filter, IEnumerable<string> highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, QueryType? queryType, IEnumerable<string> scoringParameters, string scoringProfile, IEnumerable<string> searchFields, SearchMode? searchMode, IEnumerable<string> select, int? skip, int? top, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SearchDocumentsResult>> SearchGetAsync(string searchText, bool? includeTotalResultCount, IEnumerable<string> facets, string filter, IEnumerable<string> highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, QueryType? queryType, IEnumerable<string> scoringParameters, string scoringProfile, IEnumerable<string> searchFields, SearchMode? searchMode, IEnumerable<string> select, int? skip, int? top, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DocumentsClient.SearchGet");
             scope.Start();
             try
             {
-                using var message = CreateSearchGetRequest(searchText, includeTotalResultCount, facets, filter, highlightFields, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, queryType, scoringParameters, scoringProfile, searchFields, searchMode, select, skip, top, clientRequestId);
+                using var message = CreateSearchGetRequest(searchText, includeTotalResultCount, facets, filter, highlightFields, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, queryType, scoringParameters, scoringProfile, searchFields, searchMode, select, skip, top, xMsClientRequestId);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -296,15 +284,15 @@ namespace CognitiveSearch
         /// <param name="select"> The list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included. </param>
         /// <param name="skip"> The number of search results to skip. This value cannot be greater than 100,000. If you need to scan documents in sequence, but cannot use $skip due to this limitation, consider using $orderby on a totally-ordered key and $filter with a range query instead. </param>
         /// <param name="top"> The number of search results to retrieve. This can be used in conjunction with $skip to implement client-side paging of search results. If results are truncated due to server-side paging, the response will include a continuation token that can be used to issue another Search request for the next page of results. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SearchDocumentsResult> SearchGet(string searchText, bool? includeTotalResultCount, IEnumerable<string> facets, string filter, IEnumerable<string> highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, QueryType? queryType, IEnumerable<string> scoringParameters, string scoringProfile, IEnumerable<string> searchFields, SearchMode? searchMode, IEnumerable<string> select, int? skip, int? top, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public Response<SearchDocumentsResult> SearchGet(string searchText, bool? includeTotalResultCount, IEnumerable<string> facets, string filter, IEnumerable<string> highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, QueryType? queryType, IEnumerable<string> scoringParameters, string scoringProfile, IEnumerable<string> searchFields, SearchMode? searchMode, IEnumerable<string> select, int? skip, int? top, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DocumentsClient.SearchGet");
             scope.Start();
             try
             {
-                using var message = CreateSearchGetRequest(searchText, includeTotalResultCount, facets, filter, highlightFields, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, queryType, scoringParameters, scoringProfile, searchFields, searchMode, select, skip, top, clientRequestId);
+                using var message = CreateSearchGetRequest(searchText, includeTotalResultCount, facets, filter, highlightFields, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, queryType, scoringParameters, scoringProfile, searchFields, searchMode, select, skip, top, xMsClientRequestId);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -326,25 +314,22 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateSearchPostRequest(Guid? clientRequestId, SearchRequest searchRequest)
+        internal HttpMessage CreateSearchPostRequest(Guid? xMsClientRequestId, SearchRequest searchRequest)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("https://", false);
-            uri.AppendRaw(searchServiceName, false);
-            uri.AppendRaw(".", false);
-            uri.AppendRaw(searchDnsSuffix, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendRaw("/indexes('", false);
             uri.AppendRaw(indexName, true);
             uri.AppendRaw("')", false);
             uri.AppendPath("/docs/search.post.search", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (clientRequestId != null)
+            if (xMsClientRequestId != null)
             {
-                request.Headers.Add("client-request-id", clientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
             }
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -354,10 +339,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Searches for documents in the index. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="searchRequest"> The definition of the Search request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SearchDocumentsResult>> SearchPostAsync(Guid? clientRequestId, SearchRequest searchRequest, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SearchDocumentsResult>> SearchPostAsync(Guid? xMsClientRequestId, SearchRequest searchRequest, CancellationToken cancellationToken = default)
         {
             if (searchRequest == null)
             {
@@ -368,7 +353,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateSearchPostRequest(clientRequestId, searchRequest);
+                using var message = CreateSearchPostRequest(xMsClientRequestId, searchRequest);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -391,10 +376,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Searches for documents in the index. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="searchRequest"> The definition of the Search request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SearchDocumentsResult> SearchPost(Guid? clientRequestId, SearchRequest searchRequest, CancellationToken cancellationToken = default)
+        public Response<SearchDocumentsResult> SearchPost(Guid? xMsClientRequestId, SearchRequest searchRequest, CancellationToken cancellationToken = default)
         {
             if (searchRequest == null)
             {
@@ -405,7 +390,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateSearchPostRequest(clientRequestId, searchRequest);
+                using var message = CreateSearchPostRequest(xMsClientRequestId, searchRequest);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -427,16 +412,13 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateGetRequest(string key, IEnumerable<string> selectedFields, Guid? clientRequestId)
+        internal HttpMessage CreateGetRequest(string key, IEnumerable<string> selectedFields, Guid? xMsClientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("https://", false);
-            uri.AppendRaw(searchServiceName, false);
-            uri.AppendRaw(".", false);
-            uri.AppendRaw(searchDnsSuffix, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendRaw("/indexes('", false);
             uri.AppendRaw(indexName, true);
             uri.AppendRaw("')", false);
@@ -449,9 +431,9 @@ namespace CognitiveSearch
             }
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (clientRequestId != null)
+            if (xMsClientRequestId != null)
             {
-                request.Headers.Add("client-request-id", clientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
             }
             return message;
         }
@@ -459,9 +441,9 @@ namespace CognitiveSearch
         /// <summary> Retrieves a document from the index. </summary>
         /// <param name="key"> The key of the document to retrieve. </param>
         /// <param name="selectedFields"> List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<object>> GetAsync(string key, IEnumerable<string> selectedFields, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<object>> GetAsync(string key, IEnumerable<string> selectedFields, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -472,7 +454,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateGetRequest(key, selectedFields, clientRequestId);
+                using var message = CreateGetRequest(key, selectedFields, xMsClientRequestId);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -497,9 +479,9 @@ namespace CognitiveSearch
         /// <summary> Retrieves a document from the index. </summary>
         /// <param name="key"> The key of the document to retrieve. </param>
         /// <param name="selectedFields"> List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<object> Get(string key, IEnumerable<string> selectedFields, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public Response<object> Get(string key, IEnumerable<string> selectedFields, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -510,7 +492,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateGetRequest(key, selectedFields, clientRequestId);
+                using var message = CreateGetRequest(key, selectedFields, xMsClientRequestId);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -532,16 +514,13 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateSuggestGetRequest(string searchText, string suggesterName, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, IEnumerable<string> searchFields, IEnumerable<string> select, int? top, Guid? clientRequestId)
+        internal HttpMessage CreateSuggestGetRequest(string searchText, string suggesterName, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, IEnumerable<string> searchFields, IEnumerable<string> select, int? top, Guid? xMsClientRequestId)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("https://", false);
-            uri.AppendRaw(searchServiceName, false);
-            uri.AppendRaw(".", false);
-            uri.AppendRaw(searchDnsSuffix, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendRaw("/indexes('", false);
             uri.AppendRaw(indexName, true);
             uri.AppendRaw("')", false);
@@ -586,9 +565,9 @@ namespace CognitiveSearch
             }
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (clientRequestId != null)
+            if (xMsClientRequestId != null)
             {
-                request.Headers.Add("client-request-id", clientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
             }
             return message;
         }
@@ -605,9 +584,9 @@ namespace CognitiveSearch
         /// <param name="searchFields"> The list of field names to search for the specified search text. Target fields must be included in the specified suggester. </param>
         /// <param name="select"> The list of fields to retrieve. If unspecified, only the key field will be included in the results. </param>
         /// <param name="top"> The number of suggestions to retrieve. The value must be a number between 1 and 100. The default is 5. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SuggestDocumentsResult>> SuggestGetAsync(string searchText, string suggesterName, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, IEnumerable<string> searchFields, IEnumerable<string> select, int? top, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SuggestDocumentsResult>> SuggestGetAsync(string searchText, string suggesterName, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, IEnumerable<string> searchFields, IEnumerable<string> select, int? top, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
             if (searchText == null)
             {
@@ -622,7 +601,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateSuggestGetRequest(searchText, suggesterName, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, searchFields, select, top, clientRequestId);
+                using var message = CreateSuggestGetRequest(searchText, suggesterName, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, searchFields, select, top, xMsClientRequestId);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -656,9 +635,9 @@ namespace CognitiveSearch
         /// <param name="searchFields"> The list of field names to search for the specified search text. Target fields must be included in the specified suggester. </param>
         /// <param name="select"> The list of fields to retrieve. If unspecified, only the key field will be included in the results. </param>
         /// <param name="top"> The number of suggestions to retrieve. The value must be a number between 1 and 100. The default is 5. </param>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SuggestDocumentsResult> SuggestGet(string searchText, string suggesterName, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, IEnumerable<string> searchFields, IEnumerable<string> select, int? top, Guid? clientRequestId, CancellationToken cancellationToken = default)
+        public Response<SuggestDocumentsResult> SuggestGet(string searchText, string suggesterName, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, IEnumerable<string> searchFields, IEnumerable<string> select, int? top, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
         {
             if (searchText == null)
             {
@@ -673,7 +652,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateSuggestGetRequest(searchText, suggesterName, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, searchFields, select, top, clientRequestId);
+                using var message = CreateSuggestGetRequest(searchText, suggesterName, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, searchFields, select, top, xMsClientRequestId);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -695,25 +674,22 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateSuggestPostRequest(Guid? clientRequestId, SuggestRequest suggestRequest)
+        internal HttpMessage CreateSuggestPostRequest(Guid? xMsClientRequestId, SuggestRequest suggestRequest)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("https://", false);
-            uri.AppendRaw(searchServiceName, false);
-            uri.AppendRaw(".", false);
-            uri.AppendRaw(searchDnsSuffix, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendRaw("/indexes('", false);
             uri.AppendRaw(indexName, true);
             uri.AppendRaw("')", false);
             uri.AppendPath("/docs/search.post.suggest", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (clientRequestId != null)
+            if (xMsClientRequestId != null)
             {
-                request.Headers.Add("client-request-id", clientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
             }
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -723,10 +699,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="suggestRequest"> The Suggest request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SuggestDocumentsResult>> SuggestPostAsync(Guid? clientRequestId, SuggestRequest suggestRequest, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SuggestDocumentsResult>> SuggestPostAsync(Guid? xMsClientRequestId, SuggestRequest suggestRequest, CancellationToken cancellationToken = default)
         {
             if (suggestRequest == null)
             {
@@ -737,7 +713,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateSuggestPostRequest(clientRequestId, suggestRequest);
+                using var message = CreateSuggestPostRequest(xMsClientRequestId, suggestRequest);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -760,10 +736,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="suggestRequest"> The Suggest request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SuggestDocumentsResult> SuggestPost(Guid? clientRequestId, SuggestRequest suggestRequest, CancellationToken cancellationToken = default)
+        public Response<SuggestDocumentsResult> SuggestPost(Guid? xMsClientRequestId, SuggestRequest suggestRequest, CancellationToken cancellationToken = default)
         {
             if (suggestRequest == null)
             {
@@ -774,7 +750,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateSuggestPostRequest(clientRequestId, suggestRequest);
+                using var message = CreateSuggestPostRequest(xMsClientRequestId, suggestRequest);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -796,25 +772,22 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateIndexRequest(Guid? clientRequestId, IndexBatch batch)
+        internal HttpMessage CreateIndexRequest(Guid? xMsClientRequestId, IndexBatch batch)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("https://", false);
-            uri.AppendRaw(searchServiceName, false);
-            uri.AppendRaw(".", false);
-            uri.AppendRaw(searchDnsSuffix, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendRaw("/indexes('", false);
             uri.AppendRaw(indexName, true);
             uri.AppendRaw("')", false);
             uri.AppendPath("/docs/search.index", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (clientRequestId != null)
+            if (xMsClientRequestId != null)
             {
-                request.Headers.Add("client-request-id", clientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
             }
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -824,10 +797,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Sends a batch of document write actions to the index. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="batch"> The batch of index actions. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IndexDocumentsResult>> IndexAsync(Guid? clientRequestId, IndexBatch batch, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IndexDocumentsResult>> IndexAsync(Guid? xMsClientRequestId, IndexBatch batch, CancellationToken cancellationToken = default)
         {
             if (batch == null)
             {
@@ -838,7 +811,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateIndexRequest(clientRequestId, batch);
+                using var message = CreateIndexRequest(xMsClientRequestId, batch);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -861,10 +834,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Sends a batch of document write actions to the index. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="batch"> The batch of index actions. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IndexDocumentsResult> Index(Guid? clientRequestId, IndexBatch batch, CancellationToken cancellationToken = default)
+        public Response<IndexDocumentsResult> Index(Guid? xMsClientRequestId, IndexBatch batch, CancellationToken cancellationToken = default)
         {
             if (batch == null)
             {
@@ -875,7 +848,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateIndexRequest(clientRequestId, batch);
+                using var message = CreateIndexRequest(xMsClientRequestId, batch);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -897,16 +870,13 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateAutocompleteGetRequest(Guid? clientRequestId, string searchText, string suggesterName, AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> searchFields, int? top)
+        internal HttpMessage CreateAutocompleteGetRequest(Guid? xMsClientRequestId, string searchText, string suggesterName, AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> searchFields, int? top)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("https://", false);
-            uri.AppendRaw(searchServiceName, false);
-            uri.AppendRaw(".", false);
-            uri.AppendRaw(searchDnsSuffix, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendRaw("/indexes('", false);
             uri.AppendRaw(indexName, true);
             uri.AppendRaw("')", false);
@@ -947,15 +917,15 @@ namespace CognitiveSearch
                 uri.AppendQuery("$top", top.Value, true);
             }
             request.Uri = uri;
-            if (clientRequestId != null)
+            if (xMsClientRequestId != null)
             {
-                request.Headers.Add("client-request-id", clientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
             }
             return message;
         }
 
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="searchText"> The incomplete term which should be auto-completed. </param>
         /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </param>
         /// <param name="autocompleteMode"> Specifies the mode for Autocomplete. The default is &apos;oneTerm&apos;. Use &apos;twoTerms&apos; to get shingles and &apos;oneTermWithContext&apos; to use the current context while producing auto-completed terms. </param>
@@ -967,7 +937,7 @@ namespace CognitiveSearch
         /// <param name="searchFields"> The list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester. </param>
         /// <param name="top"> The number of auto-completed terms to retrieve. This must be a value between 1 and 100. The default is 5. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<AutocompleteResult>> AutocompleteGetAsync(Guid? clientRequestId, string searchText, string suggesterName, AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> searchFields, int? top, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<AutocompleteResult>> AutocompleteGetAsync(Guid? xMsClientRequestId, string searchText, string suggesterName, AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> searchFields, int? top, CancellationToken cancellationToken = default)
         {
             if (searchText == null)
             {
@@ -982,7 +952,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateAutocompleteGetRequest(clientRequestId, searchText, suggesterName, autocompleteMode, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, searchFields, top);
+                using var message = CreateAutocompleteGetRequest(xMsClientRequestId, searchText, suggesterName, autocompleteMode, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, searchFields, top);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1005,7 +975,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="searchText"> The incomplete term which should be auto-completed. </param>
         /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </param>
         /// <param name="autocompleteMode"> Specifies the mode for Autocomplete. The default is &apos;oneTerm&apos;. Use &apos;twoTerms&apos; to get shingles and &apos;oneTermWithContext&apos; to use the current context while producing auto-completed terms. </param>
@@ -1017,7 +987,7 @@ namespace CognitiveSearch
         /// <param name="searchFields"> The list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester. </param>
         /// <param name="top"> The number of auto-completed terms to retrieve. This must be a value between 1 and 100. The default is 5. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<AutocompleteResult> AutocompleteGet(Guid? clientRequestId, string searchText, string suggesterName, AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> searchFields, int? top, CancellationToken cancellationToken = default)
+        public Response<AutocompleteResult> AutocompleteGet(Guid? xMsClientRequestId, string searchText, string suggesterName, AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> searchFields, int? top, CancellationToken cancellationToken = default)
         {
             if (searchText == null)
             {
@@ -1032,7 +1002,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateAutocompleteGetRequest(clientRequestId, searchText, suggesterName, autocompleteMode, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, searchFields, top);
+                using var message = CreateAutocompleteGetRequest(xMsClientRequestId, searchText, suggesterName, autocompleteMode, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, searchFields, top);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -1054,25 +1024,22 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateAutocompletePostRequest(Guid? clientRequestId, AutocompleteRequest autocompleteRequest)
+        internal HttpMessage CreateAutocompletePostRequest(Guid? xMsClientRequestId, AutocompleteRequest autocompleteRequest)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("https://", false);
-            uri.AppendRaw(searchServiceName, false);
-            uri.AppendRaw(".", false);
-            uri.AppendRaw(searchDnsSuffix, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendRaw("/indexes('", false);
             uri.AppendRaw(indexName, true);
             uri.AppendRaw("')", false);
             uri.AppendPath("/docs/search.post.autocomplete", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (clientRequestId != null)
+            if (xMsClientRequestId != null)
             {
-                request.Headers.Add("client-request-id", clientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
             }
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -1082,10 +1049,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="autocompleteRequest"> The definition of the Autocomplete request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<AutocompleteResult>> AutocompletePostAsync(Guid? clientRequestId, AutocompleteRequest autocompleteRequest, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<AutocompleteResult>> AutocompletePostAsync(Guid? xMsClientRequestId, AutocompleteRequest autocompleteRequest, CancellationToken cancellationToken = default)
         {
             if (autocompleteRequest == null)
             {
@@ -1096,7 +1063,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateAutocompletePostRequest(clientRequestId, autocompleteRequest);
+                using var message = CreateAutocompletePostRequest(xMsClientRequestId, autocompleteRequest);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1119,10 +1086,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
-        /// <param name="clientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="autocompleteRequest"> The definition of the Autocomplete request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<AutocompleteResult> AutocompletePost(Guid? clientRequestId, AutocompleteRequest autocompleteRequest, CancellationToken cancellationToken = default)
+        public Response<AutocompleteResult> AutocompletePost(Guid? xMsClientRequestId, AutocompleteRequest autocompleteRequest, CancellationToken cancellationToken = default)
         {
             if (autocompleteRequest == null)
             {
@@ -1133,7 +1100,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateAutocompletePostRequest(clientRequestId, autocompleteRequest);
+                using var message = CreateAutocompletePostRequest(xMsClientRequestId, autocompleteRequest);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

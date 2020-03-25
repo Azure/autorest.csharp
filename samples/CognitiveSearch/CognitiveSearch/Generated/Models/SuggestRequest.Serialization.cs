@@ -45,11 +45,8 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("orderby");
                 writer.WriteStringValue(OrderBy);
             }
-            if (SearchText != null)
-            {
-                writer.WritePropertyName("search");
-                writer.WriteStringValue(SearchText);
-            }
+            writer.WritePropertyName("search");
+            writer.WriteStringValue(SearchText);
             if (SearchFields != null)
             {
                 writer.WritePropertyName("searchFields");
@@ -60,11 +57,8 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("select");
                 writer.WriteStringValue(Select);
             }
-            if (SuggesterName != null)
-            {
-                writer.WritePropertyName("suggesterName");
-                writer.WriteStringValue(SuggesterName);
-            }
+            writer.WritePropertyName("suggesterName");
+            writer.WriteStringValue(SuggesterName);
             if (Top != null)
             {
                 writer.WritePropertyName("top");
