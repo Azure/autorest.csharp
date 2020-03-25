@@ -37,6 +37,10 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("keyValuePairs"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     List<KeyValuePair> array = new List<KeyValuePair>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -47,6 +51,10 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("tables"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     List<DataTable> array = new List<DataTable>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

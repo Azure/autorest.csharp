@@ -62,6 +62,10 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 if (property.NameEquals("addressPrefix"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -72,6 +76,10 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 if (property.NameEquals("nextHopIpAddress"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

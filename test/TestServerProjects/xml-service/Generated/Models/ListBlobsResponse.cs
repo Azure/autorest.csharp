@@ -13,7 +13,6 @@ namespace xml_service.Models
     public partial class ListBlobsResponse
     {
         /// <summary> Initializes a new instance of ListBlobsResponse. </summary>
-        /// <param name="serviceEndpoint"> . </param>
         /// <param name="containerName"> . </param>
         /// <param name="prefix"> . </param>
         /// <param name="marker"> . </param>
@@ -21,12 +20,8 @@ namespace xml_service.Models
         /// <param name="delimiter"> . </param>
         /// <param name="blobs"> . </param>
         /// <param name="nextMarker"> . </param>
-        internal ListBlobsResponse(string serviceEndpoint, string containerName, string prefix, string marker, int maxResults, string delimiter, Blobs blobs, string nextMarker)
+        internal ListBlobsResponse(string containerName, string prefix, string marker, int maxResults, string delimiter, Blobs blobs, string nextMarker)
         {
-            if (serviceEndpoint == null)
-            {
-                throw new ArgumentNullException(nameof(serviceEndpoint));
-            }
             if (containerName == null)
             {
                 throw new ArgumentNullException(nameof(containerName));
@@ -52,6 +47,26 @@ namespace xml_service.Models
                 throw new ArgumentNullException(nameof(nextMarker));
             }
 
+            ContainerName = containerName;
+            Prefix = prefix;
+            Marker = marker;
+            MaxResults = maxResults;
+            Delimiter = delimiter;
+            Blobs = blobs;
+            NextMarker = nextMarker;
+        }
+
+        /// <summary> Initializes a new instance of ListBlobsResponse. </summary>
+        /// <param name="serviceEndpoint"> . </param>
+        /// <param name="containerName"> . </param>
+        /// <param name="prefix"> . </param>
+        /// <param name="marker"> . </param>
+        /// <param name="maxResults"> . </param>
+        /// <param name="delimiter"> . </param>
+        /// <param name="blobs"> . </param>
+        /// <param name="nextMarker"> . </param>
+        internal ListBlobsResponse(string serviceEndpoint, string containerName, string prefix, string marker, int maxResults, string delimiter, Blobs blobs, string nextMarker)
+        {
             ServiceEndpoint = serviceEndpoint;
             ContainerName = containerName;
             Prefix = prefix;

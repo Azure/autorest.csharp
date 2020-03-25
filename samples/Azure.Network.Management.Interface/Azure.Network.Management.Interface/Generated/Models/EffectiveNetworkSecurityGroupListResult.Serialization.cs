@@ -21,6 +21,10 @@ namespace Azure.Network.Management.Interface.Models
             {
                 if (property.NameEquals("value"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     List<EffectiveNetworkSecurityGroup> array = new List<EffectiveNetworkSecurityGroup>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

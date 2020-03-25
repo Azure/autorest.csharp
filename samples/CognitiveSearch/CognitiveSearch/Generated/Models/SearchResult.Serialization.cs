@@ -32,6 +32,10 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("@search.highlights"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {

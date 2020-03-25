@@ -476,12 +476,17 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 finalStateVia);
         }
 
-        private Parameter BuildParameter(RequestParameter requestParameter) => new Parameter(
-            requestParameter.CSharpName(),
-            CreateDescription(requestParameter),
-            TypeFactory.GetInputType(_typeFactory.CreateType(requestParameter.Schema, requestParameter.IsNullable())),
-            ParseConstant(requestParameter),
-            requestParameter.Required == true);
+        private Parameter BuildParameter(RequestParameter requestParameter)
+        {
+            var type = _typeFactory.CreateType(requestParameter.Schema, requestParameter.IsNullable());
+
+            return new Parameter(
+                requestParameter.CSharpName(),
+                CreateDescription(requestParameter),
+                TypeFactory.GetInputType(type),
+                ParseConstant(requestParameter),
+                requestParameter.Required == true);
+        }
 
         private ResponseHeaderGroupType? BuildResponseHeaderModel(Operation operation, ServiceResponse response)
         {

@@ -2106,7 +2106,7 @@ schemas: !<!Schemas>
     properties:
     - !<!Property> 
       schema: *ref_60
-      required: true
+      required: false
       serializedName: ServiceEndpoint
       language: !<!Languages> 
         default:

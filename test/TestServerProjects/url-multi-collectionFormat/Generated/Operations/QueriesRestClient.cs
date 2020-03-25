@@ -42,7 +42,10 @@ namespace url_multi_collectionFormat
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/queries/array/multi/string/null", false);
-            uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+            if (arrayQuery != null)
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+            }
             request.Uri = uri;
             return message;
         }
@@ -107,7 +110,10 @@ namespace url_multi_collectionFormat
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/queries/array/multi/string/empty", false);
-            uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+            if (arrayQuery != null)
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+            }
             request.Uri = uri;
             return message;
         }
@@ -172,7 +178,10 @@ namespace url_multi_collectionFormat
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/queries/array/multi/string/valid", false);
-            uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+            if (arrayQuery != null)
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+            }
             request.Uri = uri;
             return message;
         }

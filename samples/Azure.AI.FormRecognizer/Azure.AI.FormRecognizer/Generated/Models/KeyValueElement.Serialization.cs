@@ -27,6 +27,10 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("boundingBox"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     List<float> array = new List<float>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -37,6 +41,10 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("elements"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

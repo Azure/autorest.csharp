@@ -70,6 +70,10 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 if (property.NameEquals("sourcePortRanges"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -80,6 +84,10 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 if (property.NameEquals("destinationPortRanges"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -108,6 +116,10 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 if (property.NameEquals("sourceAddressPrefixes"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -118,6 +130,10 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 if (property.NameEquals("destinationAddressPrefixes"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -128,6 +144,10 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 if (property.NameEquals("expandedSourceAddressPrefix"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -138,6 +158,10 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 if (property.NameEquals("expandedDestinationAddressPrefix"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

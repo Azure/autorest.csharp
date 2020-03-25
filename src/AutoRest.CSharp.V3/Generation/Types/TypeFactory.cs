@@ -129,13 +129,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
                 {
                     return new CSharpType(
                         typeof(IEnumerable<>),
-                        type.Arguments);
-                }
-
-                if (IsDictionary(type))
-                {
-                    return new CSharpType(
-                        type.FrameworkType,
+                        isNullable: type.IsNullable,
                         type.Arguments);
                 }
             }
@@ -151,6 +145,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
                 {
                     return new CSharpType(
                         typeof(IReadOnlyList<>),
+                        isNullable: type.IsNullable,
                         type.Arguments);
                 }
 
@@ -158,6 +153,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
                 {
                     return new CSharpType(
                         typeof(IReadOnlyDictionary<,>),
+                        isNullable: type.IsNullable,
                         type.Arguments);
                 }
             }

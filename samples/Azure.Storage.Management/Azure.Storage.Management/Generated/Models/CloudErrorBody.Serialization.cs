@@ -50,6 +50,10 @@ namespace Azure.Storage.Management.Models
                 }
                 if (property.NameEquals("details"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     List<CloudErrorBody> array = new List<CloudErrorBody>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
