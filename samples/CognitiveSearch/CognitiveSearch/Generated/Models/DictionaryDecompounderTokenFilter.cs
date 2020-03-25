@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CognitiveSearch.Models
 {
@@ -15,9 +17,18 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of DictionaryDecompounderTokenFilter. </summary>
         /// <param name="wordList"> The list of words to match against. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        public DictionaryDecompounderTokenFilter(IList<string> wordList, string name) : base(name)
+        public DictionaryDecompounderTokenFilter(IEnumerable<string> wordList, string name) : base(name)
         {
-            WordList = wordList;
+            if (wordList == null)
+            {
+                throw new ArgumentNullException(nameof(wordList));
+            }
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            WordList = wordList.ToArray();
             OdataType = "#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter";
         }
 

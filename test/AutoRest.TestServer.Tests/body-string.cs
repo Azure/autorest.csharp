@@ -70,14 +70,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V1, "returns 400")]
-        public Task string_null1() => Test(async (host, pipeline) =>
-        {
-            var result = await new StringClient(ClientDiagnostics, pipeline, host).PutNullAsync();
-            Assert.AreEqual(200, result.Status);
-        });
-
-        [Test]
         public Task GetStringEmpty() => Test(async (host, pipeline) =>
         {
             var result = await new StringClient(ClientDiagnostics, pipeline, host).GetEmptyAsync();
@@ -87,15 +79,15 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PutStringEmpty() => Test(async (host, pipeline) =>
         {
-            var result = await new StringClient(ClientDiagnostics, pipeline, host).PutEmptyAsync();
+            var result = await new StringClient(ClientDiagnostics, pipeline, host).PutEmptyAsync("");
             Assert.AreEqual(200, result.Status);
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V1, "Test server aborts the connection")]
+        [Ignore("We are sending null in a body but should be doing a null check")]
         public Task PutStringNull() => Test(async (host, pipeline) =>
         {
-            var result = await new StringClient(ClientDiagnostics, pipeline, host).PutNullAsync();
+            var result = await new StringClient(ClientDiagnostics, pipeline, host).PutNullAsync(null);
             Assert.AreEqual(200, result.Status);
         });
 

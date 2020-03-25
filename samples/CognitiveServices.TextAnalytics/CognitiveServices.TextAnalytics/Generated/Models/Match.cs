@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace CognitiveServices.TextAnalytics.Models
 {
     /// <summary> The Match. </summary>
@@ -17,6 +19,11 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="length"> Length (in Unicode characters) for the entity match text. </param>
         internal Match(double score, string text, int offset, int length)
         {
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+
             Score = score;
             Text = text;
             Offset = offset;

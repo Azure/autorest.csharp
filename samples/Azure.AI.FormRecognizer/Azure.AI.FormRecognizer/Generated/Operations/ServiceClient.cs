@@ -252,7 +252,6 @@ namespace Azure.AI.FormRecognizer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<ModelInfo> GetCustomModelsAsync(Enum0? op, CancellationToken cancellationToken = default)
         {
-
             async Task<Page<ModelInfo>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await RestClient.GetCustomModelsAsync(op, cancellationToken).ConfigureAwait(false);
@@ -271,7 +270,6 @@ namespace Azure.AI.FormRecognizer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<ModelInfo> GetCustomModels(Enum0? op, CancellationToken cancellationToken = default)
         {
-
             Page<ModelInfo> FirstPageFunc(int? pageSizeHint)
             {
                 var response = RestClient.GetCustomModels(op, cancellationToken);

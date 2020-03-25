@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace Azure.Storage.Tables.Models
 {
     /// <summary> signed identifier. </summary>
@@ -15,6 +17,15 @@ namespace Azure.Storage.Tables.Models
         /// <param name="accessPolicy"> The access policy. </param>
         public SignedIdentifier(string id, AccessPolicy accessPolicy)
         {
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            if (accessPolicy == null)
+            {
+                throw new ArgumentNullException(nameof(accessPolicy));
+            }
+
             Id = id;
             AccessPolicy = accessPolicy;
         }

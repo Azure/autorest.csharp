@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Request parameter to train a new custom model. </summary>
@@ -14,6 +16,11 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="source"> Source path containing the training documents. </param>
         public TrainRequest(string source)
         {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
             Source = source;
         }
 

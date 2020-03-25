@@ -105,10 +105,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     false
                 );
 
-                var initializer = new ObjectPropertyInitializer(property, deserializationParameter);
-
                 serializationConstructorParameters.Add(deserializationParameter);
-                initializers.Add(initializer);
+                initializers.Add(new ObjectPropertyInitializer(property, deserializationParameter));
 
                 // Only required properties that are not discriminators go into default ctor
                 // For structs all properties become required
@@ -142,13 +140,13 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 var defaultCtorParameter = new Parameter(
                     property.Declaration.Name.ToVariableName(),
                     property.Description,
-                    property.Declaration.Type,
+                    TypeFactory.GetInputType(property.Declaration.Type),
                     defaultValue,
-                    false
+                    true
                 );
 
                 defaultCtorParameters.Add(defaultCtorParameter);
-                defaultCtorInitializers.Add(initializer);
+                defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, defaultCtorParameter));
             }
 
             ObjectTypeConstructor? baseCtor = null;
@@ -194,7 +192,9 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 baseCtor);
 
             // Skip serialization ctor if they are the same
-            if (defaultCtorParameters.Count != serializationConstructorParameters.Count)
+            if (!defaultCtorParameters
+                    .Select(p => p.Type)
+                    .SequenceEqual(serializationConstructorParameters.Select(p => p.Type)))
             {
                 yield return new ObjectTypeConstructor(
                     BuilderHelpers.CreateMemberDeclaration(Type.Name, Type, "internal", null),
@@ -324,12 +324,14 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                      property.Required == true ||
                      !_objectSchema.IsInput);
 
-                var typeFlags = _objectSchema.IsInput ? TypeFlags.Normal : TypeFlags.Output;
-
                 CSharpType type = _typeFactory.CreateType(
                     property.Schema,
-                    property.IsNullable(),
-                    typeFlags);
+                    property.IsNullable());
+
+                if (!_objectSchema.IsInput)
+                {
+                    type = TypeFactory.GetOutputType(type);
+                }
 
                 var accessibility = property.IsDiscriminator == true ? "internal" : "public";
 

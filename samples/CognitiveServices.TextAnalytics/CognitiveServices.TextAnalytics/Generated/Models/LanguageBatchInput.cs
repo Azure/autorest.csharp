@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -14,7 +16,19 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         /// <summary> Initializes a new instance of LanguageBatchInput. </summary>
         /// <param name="documents"> . </param>
-        public LanguageBatchInput(IList<LanguageInput> documents)
+        public LanguageBatchInput(IEnumerable<LanguageInput> documents)
+        {
+            if (documents == null)
+            {
+                throw new ArgumentNullException(nameof(documents));
+            }
+
+            Documents = documents.ToArray();
+        }
+
+        /// <summary> Initializes a new instance of LanguageBatchInput. </summary>
+        /// <param name="documents"> . </param>
+        internal LanguageBatchInput(IList<LanguageInput> documents)
         {
             Documents = documents;
         }

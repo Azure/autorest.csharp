@@ -282,7 +282,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetMultiplePagesAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePages");
             scope.Start();
             try
@@ -316,7 +315,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetMultiplePages(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePages");
             scope.Start();
             try
@@ -374,7 +372,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<OdataProductResult>> GetOdataMultiplePagesAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetOdataMultiplePages");
             scope.Start();
             try
@@ -408,7 +405,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<OdataProductResult> GetOdataMultiplePages(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetOdataMultiplePages");
             scope.Start();
             try
@@ -468,7 +464,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetMultiplePagesWithOffsetAsync(string clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesWithOffset");
             scope.Start();
             try
@@ -503,7 +498,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetMultiplePagesWithOffset(string clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesWithOffset");
             scope.Start();
             try
@@ -1113,7 +1107,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetMultiplePagesLROAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
             scope.Start();
             try
@@ -1142,7 +1135,6 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetMultiplePagesLRO(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
             scope.Start();
             try

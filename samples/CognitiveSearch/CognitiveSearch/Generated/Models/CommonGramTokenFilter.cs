@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CognitiveSearch.Models
 {
@@ -15,9 +17,18 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of CommonGramTokenFilter. </summary>
         /// <param name="commonWords"> The set of common words. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        public CommonGramTokenFilter(IList<string> commonWords, string name) : base(name)
+        public CommonGramTokenFilter(IEnumerable<string> commonWords, string name) : base(name)
         {
-            CommonWords = commonWords;
+            if (commonWords == null)
+            {
+                throw new ArgumentNullException(nameof(commonWords));
+            }
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            CommonWords = commonWords.ToArray();
             OdataType = "#Microsoft.Azure.Search.CommonGramTokenFilter";
         }
 

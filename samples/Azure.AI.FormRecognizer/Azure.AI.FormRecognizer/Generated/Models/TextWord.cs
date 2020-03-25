@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Azure.AI.FormRecognizer.Models
 {
@@ -15,10 +17,19 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> Initializes a new instance of TextWord. </summary>
         /// <param name="text"> The text content of the word. </param>
         /// <param name="boundingBox"> Bounding box of an extracted word. </param>
-        internal TextWord(string text, IReadOnlyList<float> boundingBox)
+        internal TextWord(string text, IEnumerable<float> boundingBox)
         {
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+            if (boundingBox == null)
+            {
+                throw new ArgumentNullException(nameof(boundingBox));
+            }
+
             Text = text;
-            BoundingBox = boundingBox;
+            BoundingBox = boundingBox.ToArray();
         }
 
         /// <summary> Initializes a new instance of TextWord. </summary>

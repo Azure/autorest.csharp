@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace Azure.Storage.Management.Models
 {
     /// <summary> IP rule with specific IP or IP range in CIDR format. </summary>
@@ -14,6 +16,11 @@ namespace Azure.Storage.Management.Models
         /// <param name="iPAddressOrRange"> Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed. </param>
         public IPRule(string iPAddressOrRange)
         {
+            if (iPAddressOrRange == null)
+            {
+                throw new ArgumentNullException(nameof(iPAddressOrRange));
+            }
+
             IPAddressOrRange = iPAddressOrRange;
         }
 

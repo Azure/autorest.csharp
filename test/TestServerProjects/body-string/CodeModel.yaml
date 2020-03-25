@@ -20,6 +20,16 @@ schemas: !<!Schemas>
         name: String
         description: simple string
     protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_6
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+    protocol: !<!Protocols> {}
   - !<!StringSchema> &ref_2
     type: string
     apiVersions:
@@ -39,16 +49,6 @@ schemas: !<!Schemas>
       default:
         name: RefColorConstantField1
         description: Sample string.
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_12
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    language: !<!Languages> 
-      default:
-        name: String
-        description: ''
     protocol: !<!Protocols> {}
   sealedChoices:
   - !<!SealedChoiceSchema> &ref_18
@@ -82,20 +82,7 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   constants:
-  - !<!ConstantSchema> 
-    type: constant
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    value: !<!ConstantValue> 
-      value: null
-    valueType: *ref_0
-    language: !<!Languages> 
-      default:
-        name: Constant1
-        description: ''
-    protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_7
+  - !<!ConstantSchema> &ref_8
     type: constant
     value: !<!ConstantValue> 
       value: application/json
@@ -105,13 +92,26 @@ schemas: !<!Schemas>
         name: ApplicationJson
         description: Content Type 'application/json'
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_8
+  - !<!ConstantSchema> 
     type: constant
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     value: !<!ConstantValue> 
-      value: null
+      value: 啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant2
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_11
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: 啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
     valueType: *ref_0
     language: !<!Languages> 
       default:
@@ -124,76 +124,24 @@ schemas: !<!Schemas>
     - !<!ApiVersion> 
       version: 1.0.0
     value: !<!ConstantValue> 
-      value: ''
+      value: '    Now is the time for all good men to come to the aid of their country    '
     valueType: *ref_0
     language: !<!Languages> 
       default:
         name: Constant4
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_9
+  - !<!ConstantSchema> &ref_12
     type: constant
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     value: !<!ConstantValue> 
-      value: ''
+      value: '    Now is the time for all good men to come to the aid of their country    '
     valueType: *ref_0
     language: !<!Languages> 
       default:
         name: Constant5
-        description: ''
-    protocol: !<!Protocols> {}
-  - !<!ConstantSchema> 
-    type: constant
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    value: !<!ConstantValue> 
-      value: 啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
-    valueType: *ref_0
-    language: !<!Languages> 
-      default:
-        name: Constant6
-        description: ''
-    protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_10
-    type: constant
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    value: !<!ConstantValue> 
-      value: 啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
-    valueType: *ref_0
-    language: !<!Languages> 
-      default:
-        name: Constant7
-        description: ''
-    protocol: !<!Protocols> {}
-  - !<!ConstantSchema> 
-    type: constant
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    value: !<!ConstantValue> 
-      value: '    Now is the time for all good men to come to the aid of their country    '
-    valueType: *ref_0
-    language: !<!Languages> 
-      default:
-        name: Constant8
-        description: ''
-    protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_11
-    type: constant
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    value: !<!ConstantValue> 
-      value: '    Now is the time for all good men to come to the aid of their country    '
-    valueType: *ref_0
-    language: !<!Languages> 
-      default:
-        name: Constant9
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_3
@@ -255,7 +203,7 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   objects:
-  - !<!ObjectSchema> &ref_6
+  - !<!ObjectSchema> &ref_7
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -362,7 +310,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_0
+      schema: *ref_6
       language: !<!Languages> 
         default:
           name: ''
@@ -376,7 +324,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -403,7 +351,7 @@ operationGroups:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_7
+        schema: *ref_8
         implementation: Method
         language: !<!Languages> 
           default:
@@ -413,8 +361,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
-        schema: *ref_8
+      - !<!Parameter> &ref_9
+        schema: *ref_6
         implementation: Method
         language: !<!Languages> 
           default:
@@ -424,7 +372,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
-      signatureParameters: []
+      signatureParameters:
+      - *ref_9
       language: !<!Languages> 
         default:
           name: ''
@@ -450,7 +399,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -487,7 +436,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_0
+      schema: *ref_6
       language: !<!Languages> 
         default:
           name: ''
@@ -501,7 +450,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -528,7 +477,7 @@ operationGroups:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_7
+        schema: *ref_8
         implementation: Method
         language: !<!Languages> 
           default:
@@ -538,8 +487,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> 
-        schema: *ref_9
+      - !<!Parameter> &ref_10
+        schema: *ref_6
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -550,7 +499,8 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
-      signatureParameters: []
+      signatureParameters:
+      - *ref_10
       language: !<!Languages> 
         default:
           name: ''
@@ -576,7 +526,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -627,7 +577,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -654,7 +604,7 @@ operationGroups:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_7
+        schema: *ref_8
         implementation: Method
         language: !<!Languages> 
           default:
@@ -665,7 +615,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - !<!Parameter> 
-        schema: *ref_10
+        schema: *ref_11
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -702,7 +652,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -753,7 +703,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -780,7 +730,7 @@ operationGroups:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_7
+        schema: *ref_8
         implementation: Method
         language: !<!Languages> 
           default:
@@ -791,7 +741,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - !<!Parameter> 
-        schema: *ref_11
+        schema: *ref_12
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -828,7 +778,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -865,7 +815,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_12
+      schema: *ref_6
       language: !<!Languages> 
         default:
           name: ''
@@ -879,7 +829,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -930,7 +880,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -981,7 +931,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -1008,7 +958,7 @@ operationGroups:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_7
+        schema: *ref_8
         implementation: Method
         language: !<!Languages> 
           default:
@@ -1057,7 +1007,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -1108,7 +1058,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -1167,7 +1117,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -1194,7 +1144,7 @@ operationGroups:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_7
+        schema: *ref_8
         implementation: Method
         language: !<!Languages> 
           default:
@@ -1243,7 +1193,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -1294,7 +1244,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -1321,7 +1271,7 @@ operationGroups:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_7
+        schema: *ref_8
         implementation: Method
         language: !<!Languages> 
           default:
@@ -1370,7 +1320,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -1421,7 +1371,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
@@ -1448,7 +1398,7 @@ operationGroups:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_7
+        schema: *ref_8
         implementation: Method
         language: !<!Languages> 
           default:
@@ -1497,7 +1447,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''

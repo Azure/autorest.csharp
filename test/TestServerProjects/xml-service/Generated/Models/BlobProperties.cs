@@ -17,6 +17,11 @@ namespace xml_service.Models
         /// <param name="etag"> . </param>
         internal BlobProperties(DateTimeOffset lastModified, string etag)
         {
+            if (etag == null)
+            {
+                throw new ArgumentNullException(nameof(etag));
+            }
+
             LastModified = lastModified;
             Etag = etag;
         }

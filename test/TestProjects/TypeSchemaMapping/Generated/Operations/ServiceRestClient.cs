@@ -55,7 +55,6 @@ namespace TypeSchemaMapping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<CustomizedModel>> OperationAsync(CustomizedModel body, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ServiceClient.Operation");
             scope.Start();
             try
@@ -86,7 +85,6 @@ namespace TypeSchemaMapping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<CustomizedModel> Operation(CustomizedModel body, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ServiceClient.Operation");
             scope.Start();
             try
@@ -133,7 +131,6 @@ namespace TypeSchemaMapping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<RenamedModelStruct>> OperationStructAsync(RenamedModelStruct? body, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ServiceClient.OperationStruct");
             scope.Start();
             try
@@ -164,7 +161,6 @@ namespace TypeSchemaMapping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<RenamedModelStruct> OperationStruct(RenamedModelStruct? body, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("ServiceClient.OperationStruct");
             scope.Start();
             try

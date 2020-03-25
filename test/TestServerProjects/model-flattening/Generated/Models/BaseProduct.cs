@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace model_flattening.Models
 {
     /// <summary> The product documentation. </summary>
@@ -14,6 +16,11 @@ namespace model_flattening.Models
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         public BaseProduct(string productId)
         {
+            if (productId == null)
+            {
+                throw new ArgumentNullException(nameof(productId));
+            }
+
             ProductId = productId;
         }
 

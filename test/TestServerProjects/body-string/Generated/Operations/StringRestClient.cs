@@ -106,7 +106,7 @@ namespace body_string
             }
         }
 
-        internal HttpMessage CreatePutNullRequest()
+        internal HttpMessage CreatePutNullRequest(string stringBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -117,20 +117,21 @@ namespace body_string
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue((string)null);
+            content.JsonWriter.WriteStringValue(stringBody);
             request.Content = content;
             return message;
         }
 
         /// <summary> Set string value null. </summary>
+        /// <param name="stringBody"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutNullAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutNullAsync(string stringBody, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("StringClient.PutNull");
             scope.Start();
             try
             {
-                using var message = CreatePutNullRequest();
+                using var message = CreatePutNullRequest(stringBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -148,14 +149,15 @@ namespace body_string
         }
 
         /// <summary> Set string value null. </summary>
+        /// <param name="stringBody"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutNull(CancellationToken cancellationToken = default)
+        public Response PutNull(string stringBody, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("StringClient.PutNull");
             scope.Start();
             try
             {
-                using var message = CreatePutNullRequest();
+                using var message = CreatePutNullRequest(stringBody);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -244,7 +246,7 @@ namespace body_string
             }
         }
 
-        internal HttpMessage CreatePutEmptyRequest()
+        internal HttpMessage CreatePutEmptyRequest(string stringBody)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -255,20 +257,26 @@ namespace body_string
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue("");
+            content.JsonWriter.WriteStringValue(stringBody);
             request.Content = content;
             return message;
         }
 
         /// <summary> Set string value empty &apos;&apos;. </summary>
+        /// <param name="stringBody"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutEmptyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutEmptyAsync(string stringBody, CancellationToken cancellationToken = default)
         {
+            if (stringBody == null)
+            {
+                throw new ArgumentNullException(nameof(stringBody));
+            }
+
             using var scope = clientDiagnostics.CreateScope("StringClient.PutEmpty");
             scope.Start();
             try
             {
-                using var message = CreatePutEmptyRequest();
+                using var message = CreatePutEmptyRequest(stringBody);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -286,14 +294,20 @@ namespace body_string
         }
 
         /// <summary> Set string value empty &apos;&apos;. </summary>
+        /// <param name="stringBody"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutEmpty(CancellationToken cancellationToken = default)
+        public Response PutEmpty(string stringBody, CancellationToken cancellationToken = default)
         {
+            if (stringBody == null)
+            {
+                throw new ArgumentNullException(nameof(stringBody));
+            }
+
             using var scope = clientDiagnostics.CreateScope("StringClient.PutEmpty");
             scope.Start();
             try
             {
-                using var message = CreatePutEmptyRequest();
+                using var message = CreatePutEmptyRequest(stringBody);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace CognitiveSearch.Models
 {
     /// <summary> Abstract base class for tokenizers. </summary>
@@ -14,6 +16,11 @@ namespace CognitiveSearch.Models
         /// <param name="name"> The name of the tokenizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         public Tokenizer(string name)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             Name = name;
             OdataType = null;
         }

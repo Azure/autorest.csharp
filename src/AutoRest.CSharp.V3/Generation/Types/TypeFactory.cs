@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Models.Types;
 
@@ -18,19 +19,19 @@ namespace AutoRest.CSharp.V3.Generation.Types
             _library = library;
         }
 
-        public CSharpType CreateType(Schema schema, bool isNullable, TypeFlags typeFlags = TypeFlags.Normal) => schema switch
+        public CSharpType CreateType(Schema schema, bool isNullable) => schema switch
         {
-            ConstantSchema constantSchema => CreateType(constantSchema.ValueType, isNullable, typeFlags),
+            ConstantSchema constantSchema => CreateType(constantSchema.ValueType, isNullable),
             BinarySchema _ => new CSharpType(typeof(Stream), isNullable),
             ByteArraySchema _ => new CSharpType(typeof(byte[]), isNullable),
             ArraySchema array => new CSharpType(
-                GetListType(typeFlags),
+                typeof(IList<>),
                 isNullable,
-                CreateType(array.ElementType, false, typeFlags)),
+                CreateType(array.ElementType, false)),
             DictionarySchema dictionary => new CSharpType(
-                GetDictionaryType(typeFlags),
+                typeof(IDictionary<,>),
                 isNullable,
-                new CSharpType(typeof(string)), CreateType(dictionary.ElementType, false, typeFlags)),
+                new CSharpType(typeof(string)), CreateType(dictionary.ElementType, false)),
             NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
             _ when ToFrameworkType(schema.Type) is Type type => new CSharpType(type, isNullable),
             _ => _library.FindTypeForSchema(schema).Type.WithNullable(isNullable)
@@ -85,28 +86,6 @@ namespace AutoRest.CSharp.V3.Generation.Types
                    type.FrameworkType == typeof(IList<>);
         }
 
-        private static Type GetListType(TypeFlags typeFlags)
-        {
-            return typeFlags switch
-            {
-                TypeFlags.Normal => typeof(IList<>),
-                TypeFlags.Input => typeof(IEnumerable<>),
-                TypeFlags.Output => typeof(IReadOnlyList<>),
-                _ => throw new NotSupportedException(typeFlags.ToString())
-            };
-        }
-
-        private static Type GetDictionaryType(TypeFlags typeFlags)
-        {
-            return typeFlags switch
-            {
-                TypeFlags.Normal => typeof(IDictionary<,>),
-                TypeFlags.Input => typeof(IDictionary<,>),
-                TypeFlags.Output => typeof(IReadOnlyDictionary<,>),
-                _ => throw new NotSupportedException(typeFlags.ToString())
-            };
-        }
-
         private static Type? ToFrameworkType(AllSchemaTypes schemaType) => schemaType switch
         {
             AllSchemaTypes.Boolean => typeof(bool),
@@ -141,5 +120,45 @@ namespace AutoRest.CSharp.V3.Generation.Types
                 _ => typeof(int)
             }
         };
+
+        public static CSharpType GetInputType(CSharpType type)
+        {
+            if (type.IsFrameworkType)
+            {
+                if (IsList(type))
+                {
+                    return new CSharpType(
+                        typeof(IEnumerable<>),
+                        isNullable: type.IsNullable,
+                        type.Arguments);
+                }
+            }
+
+            return type;
+        }
+
+        public static CSharpType GetOutputType(CSharpType type)
+        {
+            if (type.IsFrameworkType)
+            {
+                if (IsList(type))
+                {
+                    return new CSharpType(
+                        typeof(IReadOnlyList<>),
+                        isNullable: type.IsNullable,
+                        type.Arguments);
+                }
+
+                if (IsDictionary(type))
+                {
+                    return new CSharpType(
+                        typeof(IReadOnlyDictionary<,>),
+                        isNullable: type.IsNullable,
+                        type.Arguments);
+                }
+            }
+
+            return type;
+        }
     }
 }

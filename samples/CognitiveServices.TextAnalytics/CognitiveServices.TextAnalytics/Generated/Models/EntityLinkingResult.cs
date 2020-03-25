@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -16,10 +18,23 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="documents"> Response by document. </param>
         /// <param name="errors"> Errors by document id. </param>
         /// <param name="modelVersion"> This field indicates which model is used for scoring. </param>
-        internal EntityLinkingResult(IReadOnlyList<DocumentLinkedEntities> documents, IReadOnlyList<DocumentError> errors, string modelVersion)
+        internal EntityLinkingResult(IEnumerable<DocumentLinkedEntities> documents, IEnumerable<DocumentError> errors, string modelVersion)
         {
-            Documents = documents;
-            Errors = errors;
+            if (documents == null)
+            {
+                throw new ArgumentNullException(nameof(documents));
+            }
+            if (errors == null)
+            {
+                throw new ArgumentNullException(nameof(errors));
+            }
+            if (modelVersion == null)
+            {
+                throw new ArgumentNullException(nameof(modelVersion));
+            }
+
+            Documents = documents.ToArray();
+            Errors = errors.ToArray();
             ModelVersion = modelVersion;
         }
 

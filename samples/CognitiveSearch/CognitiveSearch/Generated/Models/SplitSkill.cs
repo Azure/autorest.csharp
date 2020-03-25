@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
@@ -15,8 +16,17 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of SplitSkill. </summary>
         /// <param name="inputs"> Inputs of the skills could be a column in the source data set, or the output of an upstream skill. </param>
         /// <param name="outputs"> The output of a skill is either a field in a search index, or a value that can be consumed as an input by another skill. </param>
-        public SplitSkill(IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs) : base(inputs, outputs)
+        public SplitSkill(IEnumerable<InputFieldMappingEntry> inputs, IEnumerable<OutputFieldMappingEntry> outputs) : base(inputs, outputs)
         {
+            if (inputs == null)
+            {
+                throw new ArgumentNullException(nameof(inputs));
+            }
+            if (outputs == null)
+            {
+                throw new ArgumentNullException(nameof(outputs));
+            }
+
             OdataType = "#Microsoft.Skills.Text.SplitSkill";
         }
 

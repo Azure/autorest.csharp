@@ -269,7 +269,6 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<Key> GetKeysAsync(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
-
             async Task<Page<Key>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await RestClient.GetKeysAsync(name, after, acceptDatetime, cancellationToken).ConfigureAwait(false);
@@ -290,7 +289,6 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<Key> GetKeys(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
-
             Page<Key> FirstPageFunc(int? pageSizeHint)
             {
                 var response = RestClient.GetKeys(name, after, acceptDatetime, cancellationToken);
@@ -313,7 +311,6 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<KeyValue> GetKeyValuesAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select, CancellationToken cancellationToken = default)
         {
-
             async Task<Page<KeyValue>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await RestClient.GetKeyValuesAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
@@ -336,7 +333,6 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<KeyValue> GetKeyValues(string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select, CancellationToken cancellationToken = default)
         {
-
             Page<KeyValue> FirstPageFunc(int? pageSizeHint)
             {
                 var response = RestClient.GetKeyValues(key, label, after, acceptDatetime, select, cancellationToken);
@@ -358,7 +354,6 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<Label> GetLabelsAsync(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
-
             async Task<Page<Label>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await RestClient.GetLabelsAsync(name, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
@@ -380,7 +375,6 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<Label> GetLabels(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
-
             Page<Label> FirstPageFunc(int? pageSizeHint)
             {
                 var response = RestClient.GetLabels(name, after, acceptDatetime, select, cancellationToken);
@@ -403,7 +397,6 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<KeyValue> GetRevisionsAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
         {
-
             async Task<Page<KeyValue>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await RestClient.GetRevisionsAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
@@ -426,7 +419,6 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<KeyValue> GetRevisions(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
         {
-
             Page<KeyValue> FirstPageFunc(int? pageSizeHint)
             {
                 var response = RestClient.GetRevisions(key, label, after, acceptDatetime, select, cancellationToken);

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace CognitiveServices.TextAnalytics.Models
 {
     /// <summary> The Entity. </summary>
@@ -18,6 +20,15 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="score"> Confidence score between 0 and 1 of the extracted entity. </param>
         internal Entity(string text, string type, int offset, int length, double score)
         {
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
             Text = text;
             Type = type;
             Offset = offset;

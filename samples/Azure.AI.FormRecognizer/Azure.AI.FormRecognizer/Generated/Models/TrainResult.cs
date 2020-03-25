@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Azure.AI.FormRecognizer.Models
 {
@@ -14,9 +16,14 @@ namespace Azure.AI.FormRecognizer.Models
     {
         /// <summary> Initializes a new instance of TrainResult. </summary>
         /// <param name="trainingDocuments"> List of the documents used to train the model and any errors reported in each document. </param>
-        internal TrainResult(IReadOnlyList<TrainingDocumentInfo> trainingDocuments)
+        internal TrainResult(IEnumerable<TrainingDocumentInfo> trainingDocuments)
         {
-            TrainingDocuments = trainingDocuments;
+            if (trainingDocuments == null)
+            {
+                throw new ArgumentNullException(nameof(trainingDocuments));
+            }
+
+            TrainingDocuments = trainingDocuments.ToArray();
         }
 
         /// <summary> Initializes a new instance of TrainResult. </summary>

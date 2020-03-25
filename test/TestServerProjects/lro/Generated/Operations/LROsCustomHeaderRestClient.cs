@@ -55,7 +55,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutAsyncRetrySucceededAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderClient.PutAsyncRetrySucceeded");
             scope.Start();
             try
@@ -82,7 +81,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutAsyncRetrySucceeded(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderClient.PutAsyncRetrySucceeded");
             scope.Start();
             try
@@ -125,7 +123,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Put201CreatingSucceeded200Async(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderClient.Put201CreatingSucceeded200");
             scope.Start();
             try
@@ -153,7 +150,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put201CreatingSucceeded200(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderClient.Put201CreatingSucceeded200");
             scope.Start();
             try
@@ -197,7 +193,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post202Retry200Async(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderClient.Post202Retry200");
             scope.Start();
             try
@@ -224,7 +219,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post202Retry200(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderClient.Post202Retry200");
             scope.Start();
             try
@@ -267,7 +261,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostAsyncRetrySucceededAsync(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderClient.PostAsyncRetrySucceeded");
             scope.Start();
             try
@@ -294,7 +287,6 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostAsyncRetrySucceeded(Product product, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("LROsCustomHeaderClient.PostAsyncRetrySucceeded");
             scope.Start();
             try

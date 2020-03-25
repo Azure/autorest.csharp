@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace Azure.Storage.Management.Models
 {
     /// <summary> An object that wraps the Lifecycle rule. Each rule is uniquely defined by name. </summary>
@@ -15,6 +17,15 @@ namespace Azure.Storage.Management.Models
         /// <param name="definition"> An object that defines the Lifecycle rule. </param>
         public ManagementPolicyRule(string name, ManagementPolicyDefinition definition)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (definition == null)
+            {
+                throw new ArgumentNullException(nameof(definition));
+            }
+
             Name = name;
             Type = "Lifecycle";
             Definition = definition;

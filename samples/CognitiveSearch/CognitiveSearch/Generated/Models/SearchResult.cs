@@ -23,7 +23,7 @@ namespace CognitiveSearch.Models
         /// <param name="score"> The relevance score of the document compared to other documents returned by the query. </param>
         /// <param name="highlights"> Text fragments from the document that indicate the matching search terms, organized by each applicable field; null if hit highlighting was not enabled for the query. </param>
         /// <param name="additionalProperties"> . </param>
-        internal SearchResult(double? score, IReadOnlyDictionary<string, IReadOnlyList<string>> highlights, IReadOnlyDictionary<string, object> additionalProperties)
+        internal SearchResult(double? score, IReadOnlyDictionary<string, IList<string>> highlights, IReadOnlyDictionary<string, object> additionalProperties)
         {
             Score = score;
             Highlights = highlights;
@@ -33,7 +33,7 @@ namespace CognitiveSearch.Models
         /// <summary> The relevance score of the document compared to other documents returned by the query. </summary>
         public double? Score { get; }
         /// <summary> Text fragments from the document that indicate the matching search terms, organized by each applicable field; null if hit highlighting was not enabled for the query. </summary>
-        public IReadOnlyDictionary<string, IReadOnlyList<string>> Highlights { get; }
+        public IReadOnlyDictionary<string, IList<string>> Highlights { get; }
         internal IReadOnlyDictionary<string, object> AdditionalProperties { get; }
         /// <inheritdoc />
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator() => AdditionalProperties.GetEnumerator();

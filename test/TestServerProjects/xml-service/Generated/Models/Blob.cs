@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace xml_service.Models
@@ -19,6 +20,19 @@ namespace xml_service.Models
         /// <param name="properties"> Properties of a blob. </param>
         internal Blob(string name, bool deleted, string snapshot, BlobProperties properties)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (snapshot == null)
+            {
+                throw new ArgumentNullException(nameof(snapshot));
+            }
+            if (properties == null)
+            {
+                throw new ArgumentNullException(nameof(properties));
+            }
+
             Name = name;
             Deleted = deleted;
             Snapshot = snapshot;

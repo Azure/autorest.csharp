@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace CognitiveServices.TextAnalytics.Models
@@ -17,6 +18,11 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="message"> Error message. </param>
         internal InnerError(InnerErrorCodeValue code, string message)
         {
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
+
             Code = code;
             Message = message;
         }

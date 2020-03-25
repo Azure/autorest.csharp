@@ -374,7 +374,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             if (response is SchemaResponse schemaResponse)
             {
                 Schema schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
-                CSharpType responseType = _typeFactory.CreateType(schema, isNullable: false, TypeFlags.Output);
+                CSharpType responseType = TypeFactory.GetOutputType(_typeFactory.CreateType(schema, isNullable: false));
 
                 ObjectSerialization serialization = _serializationBuilder.Build(response.HttpResponse.KnownMediaType, schema, responseType);
 
@@ -476,12 +476,17 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 finalStateVia);
         }
 
-        private Parameter BuildParameter(RequestParameter requestParameter) => new Parameter(
-            requestParameter.CSharpName(),
-            CreateDescription(requestParameter),
-            _typeFactory.CreateType(requestParameter.Schema, requestParameter.IsNullable(), TypeFlags.Input),
-            ParseConstant(requestParameter),
-            requestParameter.Required == true);
+        private Parameter BuildParameter(RequestParameter requestParameter)
+        {
+            var type = _typeFactory.CreateType(requestParameter.Schema, requestParameter.IsNullable());
+
+            return new Parameter(
+                requestParameter.CSharpName(),
+                CreateDescription(requestParameter),
+                TypeFactory.GetInputType(type),
+                ParseConstant(requestParameter),
+                requestParameter.Required == true);
+        }
 
         private ResponseHeaderGroupType? BuildResponseHeaderModel(Operation operation, ServiceResponse response)
         {

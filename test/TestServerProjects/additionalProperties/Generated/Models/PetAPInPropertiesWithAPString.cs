@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -18,6 +19,11 @@ namespace additionalProperties.Models
         /// <param name="odataLocation"> . </param>
         public PetAPInPropertiesWithAPString(int id, string odataLocation)
         {
+            if (odataLocation == null)
+            {
+                throw new ArgumentNullException(nameof(odataLocation));
+            }
+
             Id = id;
             OdataLocation = odataLocation;
             MoreAdditionalProperties = new Dictionary<string, string>();

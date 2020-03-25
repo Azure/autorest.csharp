@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CognitiveSearch.Models
 {
@@ -15,9 +17,18 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of MappingCharFilter. </summary>
         /// <param name="mappings"> A list of mappings of the following format: &quot;a=&gt;b&quot; (all occurrences of the character &quot;a&quot; will be replaced with character &quot;b&quot;). </param>
         /// <param name="name"> The name of the char filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        public MappingCharFilter(IList<string> mappings, string name) : base(name)
+        public MappingCharFilter(IEnumerable<string> mappings, string name) : base(name)
         {
-            Mappings = mappings;
+            if (mappings == null)
+            {
+                throw new ArgumentNullException(nameof(mappings));
+            }
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            Mappings = mappings.ToArray();
             OdataType = "#Microsoft.Azure.Search.MappingCharFilter";
         }
 

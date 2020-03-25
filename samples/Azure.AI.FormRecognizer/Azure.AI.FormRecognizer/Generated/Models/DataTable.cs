@@ -5,13 +5,31 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Information about the extracted table contained in a page. </summary>
     public partial class DataTable
     {
+        /// <summary> Initializes a new instance of DataTable. </summary>
+        /// <param name="rows"> Number of rows. </param>
+        /// <param name="columns"> Number of columns. </param>
+        /// <param name="cells"> List of cells contained in the table. </param>
+        internal DataTable(int rows, int columns, IEnumerable<DataTableCell> cells)
+        {
+            if (cells == null)
+            {
+                throw new ArgumentNullException(nameof(cells));
+            }
+
+            Rows = rows;
+            Columns = columns;
+            Cells = cells.ToArray();
+        }
+
         /// <summary> Initializes a new instance of DataTable. </summary>
         /// <param name="rows"> Number of rows. </param>
         /// <param name="columns"> Number of columns. </param>

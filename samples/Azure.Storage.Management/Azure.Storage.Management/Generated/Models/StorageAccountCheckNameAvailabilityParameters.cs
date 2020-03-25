@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace Azure.Storage.Management.Models
 {
     /// <summary> The parameters used to check the availability of the storage account name. </summary>
@@ -14,6 +16,11 @@ namespace Azure.Storage.Management.Models
         /// <param name="name"> The storage account name. </param>
         public StorageAccountCheckNameAvailabilityParameters(string name)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             Name = name;
             Type = "Microsoft.Storage/storageAccounts";
         }

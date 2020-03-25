@@ -343,7 +343,6 @@ namespace body_date
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMaxDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DateClient.PutMaxDate");
             scope.Start();
             try
@@ -370,7 +369,6 @@ namespace body_date
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutMaxDate(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DateClient.PutMaxDate");
             scope.Start();
             try
@@ -485,7 +483,6 @@ namespace body_date
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMinDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DateClient.PutMinDate");
             scope.Start();
             try
@@ -512,7 +509,6 @@ namespace body_date
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutMinDate(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
-
             using var scope = clientDiagnostics.CreateScope("DateClient.PutMinDate");
             scope.Start();
             try

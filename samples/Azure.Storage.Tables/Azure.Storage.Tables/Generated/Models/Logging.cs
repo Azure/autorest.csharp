@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace Azure.Storage.Tables.Models
 {
     /// <summary> Azure Analytics Logging settings. </summary>
@@ -18,6 +20,15 @@ namespace Azure.Storage.Tables.Models
         /// <param name="retentionPolicy"> the retention policy. </param>
         public Logging(string version, bool delete, bool read, bool write, RetentionPolicy retentionPolicy)
         {
+            if (version == null)
+            {
+                throw new ArgumentNullException(nameof(version));
+            }
+            if (retentionPolicy == null)
+            {
+                throw new ArgumentNullException(nameof(retentionPolicy));
+            }
+
             Version = version;
             Delete = delete;
             Read = read;

@@ -17,8 +17,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
     internal class CodeWriter
     {
         private const int DefaultLength = 1024;
-        private const char NewLineChar = '\n';
         private static readonly string _newLine = "\n";
+        private static readonly string _braceNewLine = "{\n";
 
         private readonly List<string> _usingNamespaces = new List<string>();
 
@@ -319,11 +319,19 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             AppendRaw(str);
 
-            if (!CurrentLine.IsEmpty ||
-                !PreviousLine.SequenceEqual(_newLine))
+            var previousLine = PreviousLine;
+
+            if (previousLine.Contains('{'))
             {
-                AppendRaw(_newLine);
+
             }
+            if (CurrentLine.IsEmpty &&
+                (previousLine.SequenceEqual(_newLine) || previousLine.EndsWith(_braceNewLine)))
+            {
+                return this;
+            }
+
+            AppendRaw(_newLine);
 
             return this;
         }
@@ -355,7 +363,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             return this;
         }
 
-        public string ToFormattedCode()
+        public override string ToString()
         {
             if (_position == 0)
             {
@@ -392,8 +400,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             return builder.ToString();
         }
-
-        public override string? ToString() => _builder.ToString();
 
         internal class CodeWriterScope : IDisposable
         {

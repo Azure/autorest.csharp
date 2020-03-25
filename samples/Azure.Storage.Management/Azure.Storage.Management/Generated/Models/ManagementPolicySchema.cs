@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Azure.Storage.Management.Models
 {
@@ -14,7 +16,19 @@ namespace Azure.Storage.Management.Models
     {
         /// <summary> Initializes a new instance of ManagementPolicySchema. </summary>
         /// <param name="rules"> The Storage Account ManagementPolicies Rules. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
-        public ManagementPolicySchema(IList<ManagementPolicyRule> rules)
+        public ManagementPolicySchema(IEnumerable<ManagementPolicyRule> rules)
+        {
+            if (rules == null)
+            {
+                throw new ArgumentNullException(nameof(rules));
+            }
+
+            Rules = rules.ToArray();
+        }
+
+        /// <summary> Initializes a new instance of ManagementPolicySchema. </summary>
+        /// <param name="rules"> The Storage Account ManagementPolicies Rules. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
+        internal ManagementPolicySchema(IList<ManagementPolicyRule> rules)
         {
             Rules = rules;
         }

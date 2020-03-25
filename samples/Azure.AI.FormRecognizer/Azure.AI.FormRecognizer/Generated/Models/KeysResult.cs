@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace Azure.AI.FormRecognizer.Models
@@ -14,12 +15,17 @@ namespace Azure.AI.FormRecognizer.Models
     {
         /// <summary> Initializes a new instance of KeysResult. </summary>
         /// <param name="clusters"> Object mapping clusterIds to a list of keys. </param>
-        internal KeysResult(IReadOnlyDictionary<string, IReadOnlyList<string>> clusters)
+        internal KeysResult(IReadOnlyDictionary<string, IList<string>> clusters)
         {
+            if (clusters == null)
+            {
+                throw new ArgumentNullException(nameof(clusters));
+            }
+
             Clusters = clusters;
         }
 
         /// <summary> Object mapping clusterIds to a list of keys. </summary>
-        public IReadOnlyDictionary<string, IReadOnlyList<string>> Clusters { get; }
+        public IReadOnlyDictionary<string, IList<string>> Clusters { get; }
     }
 }

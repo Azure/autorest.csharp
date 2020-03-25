@@ -16,6 +16,11 @@ namespace Azure.Storage.Management.Models
         /// <param name="canonicalizedResource"> The canonical path to the signed resource. </param>
         public ServiceSasParameters(string canonicalizedResource)
         {
+            if (canonicalizedResource == null)
+            {
+                throw new ArgumentNullException(nameof(canonicalizedResource));
+            }
+
             CanonicalizedResource = canonicalizedResource;
         }
 

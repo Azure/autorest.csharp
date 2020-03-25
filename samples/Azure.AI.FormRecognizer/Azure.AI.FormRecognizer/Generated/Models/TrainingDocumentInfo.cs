@@ -5,13 +5,37 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Report for a custom model training document. </summary>
     public partial class TrainingDocumentInfo
     {
+        /// <summary> Initializes a new instance of TrainingDocumentInfo. </summary>
+        /// <param name="documentName"> Training document name. </param>
+        /// <param name="pages"> Total number of pages trained. </param>
+        /// <param name="errors"> List of errors. </param>
+        /// <param name="status"> Status of the training operation. </param>
+        internal TrainingDocumentInfo(string documentName, int pages, IEnumerable<ErrorInformation> errors, TrainStatus status)
+        {
+            if (documentName == null)
+            {
+                throw new ArgumentNullException(nameof(documentName));
+            }
+            if (errors == null)
+            {
+                throw new ArgumentNullException(nameof(errors));
+            }
+
+            DocumentName = documentName;
+            Pages = pages;
+            Errors = errors.ToArray();
+            Status = status;
+        }
+
         /// <summary> Initializes a new instance of TrainingDocumentInfo. </summary>
         /// <param name="documentName"> Training document name. </param>
         /// <param name="pages"> Total number of pages trained. </param>

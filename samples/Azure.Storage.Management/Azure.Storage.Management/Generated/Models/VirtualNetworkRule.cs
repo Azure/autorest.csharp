@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace Azure.Storage.Management.Models
 {
     /// <summary> Virtual Network rule. </summary>
@@ -14,6 +16,11 @@ namespace Azure.Storage.Management.Models
         /// <param name="virtualNetworkResourceId"> Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}. </param>
         public VirtualNetworkRule(string virtualNetworkResourceId)
         {
+            if (virtualNetworkResourceId == null)
+            {
+                throw new ArgumentNullException(nameof(virtualNetworkResourceId));
+            }
+
             VirtualNetworkResourceId = virtualNetworkResourceId;
         }
 

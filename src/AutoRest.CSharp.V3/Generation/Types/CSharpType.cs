@@ -54,6 +54,24 @@ namespace AutoRest.CSharp.V3.Generation.Types
         public ITypeProvider Implementation => _implementation ?? throw new InvalidOperationException("Not implemented type");
         public bool IsNullable { get; }
 
+        protected bool Equals(CSharpType other)
+        {
+            return Equals(_implementation, other._implementation) && Equals(_type, other._type) && Arguments.SequenceEqual(other.Arguments);
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((CSharpType) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(_implementation, _type, Arguments);
+        }
+
         public CSharpType WithNullable(bool isNullable) => IsFrameworkType
             ? new CSharpType(FrameworkType, isNullable, Arguments)
             : new CSharpType(Implementation, Namespace, Name, IsValueType, isNullable);

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace Azure.Storage.Management.Models
 {
     /// <summary> Blob range. </summary>
@@ -15,6 +17,15 @@ namespace Azure.Storage.Management.Models
         /// <param name="endRange"> Blob end range. Empty means account end. </param>
         public BlobRestoreRange(string startRange, string endRange)
         {
+            if (startRange == null)
+            {
+                throw new ArgumentNullException(nameof(startRange));
+            }
+            if (endRange == null)
+            {
+                throw new ArgumentNullException(nameof(endRange));
+            }
+
             StartRange = startRange;
             EndRange = endRange;
         }

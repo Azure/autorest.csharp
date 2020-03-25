@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace Azure.Storage.Management.Models
@@ -16,6 +17,11 @@ namespace Azure.Storage.Management.Models
         /// <param name="location"> The geo-location where the resource lives. </param>
         public TrackedResource(string location)
         {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
             Location = location;
         }
 

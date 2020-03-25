@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Azure.AI.FormRecognizer.Models
 {
@@ -15,10 +17,19 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> Initializes a new instance of AnalyzeResult. </summary>
         /// <param name="version"> Version of schema used for this result. </param>
         /// <param name="readResults"> Text extracted from the input. </param>
-        internal AnalyzeResult(string version, IReadOnlyList<ReadResult> readResults)
+        internal AnalyzeResult(string version, IEnumerable<ReadResult> readResults)
         {
+            if (version == null)
+            {
+                throw new ArgumentNullException(nameof(version));
+            }
+            if (readResults == null)
+            {
+                throw new ArgumentNullException(nameof(readResults));
+            }
+
             Version = version;
-            ReadResults = readResults;
+            ReadResults = readResults.ToArray();
         }
 
         /// <summary> Initializes a new instance of AnalyzeResult. </summary>

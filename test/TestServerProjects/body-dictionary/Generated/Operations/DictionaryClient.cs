@@ -802,70 +802,70 @@ namespace body_dictionary
 
         /// <summary> Get a null array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyDictionary<string, IReadOnlyList<string>>>> GetArrayNullAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyDictionary<string, IList<string>>>> GetArrayNullAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetArrayNullAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Get a null array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyDictionary<string, IReadOnlyList<string>>> GetArrayNull(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyDictionary<string, IList<string>>> GetArrayNull(CancellationToken cancellationToken = default)
         {
             return RestClient.GetArrayNull(cancellationToken);
         }
 
         /// <summary> Get an empty dictionary {}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyDictionary<string, IReadOnlyList<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyDictionary<string, IList<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetArrayEmptyAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Get an empty dictionary {}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyDictionary<string, IReadOnlyList<string>>> GetArrayEmpty(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyDictionary<string, IList<string>>> GetArrayEmpty(CancellationToken cancellationToken = default)
         {
             return RestClient.GetArrayEmpty(cancellationToken);
         }
 
         /// <summary> Get an dictionary of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: null, &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyDictionary<string, IReadOnlyList<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyDictionary<string, IList<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetArrayItemNullAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Get an dictionary of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: null, &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyDictionary<string, IReadOnlyList<string>>> GetArrayItemNull(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyDictionary<string, IList<string>>> GetArrayItemNull(CancellationToken cancellationToken = default)
         {
             return RestClient.GetArrayItemNull(cancellationToken);
         }
 
         /// <summary> Get an array of array of strings [{&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyDictionary<string, IReadOnlyList<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyDictionary<string, IList<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetArrayItemEmptyAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Get an array of array of strings [{&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyDictionary<string, IReadOnlyList<string>>> GetArrayItemEmpty(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyDictionary<string, IList<string>>> GetArrayItemEmpty(CancellationToken cancellationToken = default)
         {
             return RestClient.GetArrayItemEmpty(cancellationToken);
         }
 
         /// <summary> Get an array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyDictionary<string, IReadOnlyList<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyDictionary<string, IList<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.GetArrayValidAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Get an array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyDictionary<string, IReadOnlyList<string>>> GetArrayValid(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyDictionary<string, IList<string>>> GetArrayValid(CancellationToken cancellationToken = default)
         {
             return RestClient.GetArrayValid(cancellationToken);
         }
@@ -873,7 +873,7 @@ namespace body_dictionary
         /// <summary> Put An array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="arrayBody"> The DictionaryOfpaths1Dxz488DictionaryArrayValidPutRequestbodyContentApplicationJsonSchemaAdditionalproperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutArrayValidAsync(IDictionary<string, IEnumerable<string>> arrayBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutArrayValidAsync(IDictionary<string, IList<string>> arrayBody, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutArrayValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
         }
@@ -881,7 +881,7 @@ namespace body_dictionary
         /// <summary> Put An array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="arrayBody"> The DictionaryOfpaths1Dxz488DictionaryArrayValidPutRequestbodyContentApplicationJsonSchemaAdditionalproperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutArrayValid(IDictionary<string, IEnumerable<string>> arrayBody, CancellationToken cancellationToken = default)
+        public virtual Response PutArrayValid(IDictionary<string, IList<string>> arrayBody, CancellationToken cancellationToken = default)
         {
             return RestClient.PutArrayValid(arrayBody, cancellationToken);
         }

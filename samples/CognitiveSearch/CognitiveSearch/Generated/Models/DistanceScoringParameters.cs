@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace CognitiveSearch.Models
 {
     /// <summary> Provides parameter values to a distance scoring function. </summary>
@@ -15,6 +17,11 @@ namespace CognitiveSearch.Models
         /// <param name="boostingDistance"> The distance in kilometers from the reference location where the boosting range ends. </param>
         public DistanceScoringParameters(string referencePointParameter, double boostingDistance)
         {
+            if (referencePointParameter == null)
+            {
+                throw new ArgumentNullException(nameof(referencePointParameter));
+            }
+
             ReferencePointParameter = referencePointParameter;
             BoostingDistance = boostingDistance;
         }

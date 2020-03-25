@@ -197,12 +197,17 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Append($")");
                 }
 
+                writer.Line();
+
                 using (writer.Scope())
                 {
+                    writer.WriteParameterNullChecks(constructor.Parameters);
+
                     foreach (var initializer in constructor.Initializers)
                     {
                         writer.Append($"{initializer.Property.Declaration.Name} = ")
-                            .WriteReferenceOrConstant(initializer.Value);
+                            .WriteReferenceOrConstant(initializer.Value)
+                            .WriteConversion(initializer.Value.Type, initializer.Property.Declaration.Type);
 
                         // Check if the parameter is for discriminator and apply a default
                         if (initializer.Property == schema.Discriminator?.Property &&

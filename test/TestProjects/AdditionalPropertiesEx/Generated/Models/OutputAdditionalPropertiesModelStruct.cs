@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -18,6 +19,11 @@ namespace AdditionalPropertiesEx.Models
         /// <param name="additionalProperties"> . </param>
         internal OutputAdditionalPropertiesModelStruct(int id, IReadOnlyDictionary<string, string> additionalProperties)
         {
+            if (additionalProperties == null)
+            {
+                throw new ArgumentNullException(nameof(additionalProperties));
+            }
+
             Id = id;
             AdditionalProperties = additionalProperties;
         }

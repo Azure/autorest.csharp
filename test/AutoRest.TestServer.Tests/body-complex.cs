@@ -1041,6 +1041,14 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
+        public void InputSchemasHaveOneCtor()
+        {
+            Assert.AreEqual(1, typeof(Shark)
+                .GetConstructors(BindingFlags.Instance | BindingFlags.Public)
+                .Length);
+        }
+
+        [Test]
         public void OutputSchemaCtorIsInternal()
         {
             Assert.NotNull(typeof(Error)

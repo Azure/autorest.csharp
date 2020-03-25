@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace CognitiveSearch.Models
 {
     /// <summary> Provides parameter values to a tag scoring function. </summary>
@@ -14,6 +16,11 @@ namespace CognitiveSearch.Models
         /// <param name="tagsParameter"> The name of the parameter passed in search queries to specify the list of tags to compare against the target field. </param>
         public TagScoringParameters(string tagsParameter)
         {
+            if (tagsParameter == null)
+            {
+                throw new ArgumentNullException(nameof(tagsParameter));
+            }
+
             TagsParameter = tagsParameter;
         }
 

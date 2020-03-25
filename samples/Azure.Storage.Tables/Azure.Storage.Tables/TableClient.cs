@@ -35,7 +35,7 @@ namespace Azure.Storage.Tables
             return await _tableOperations.UpdateEntityAsync(_operationTimeout, string.Empty, _format, _table, partitionKey, rowKey, entity, cancellationToken);
         }
 
-        public AsyncPageable<IReadOnlyDictionary<string, object>> QueryAsync(string select = null, string filter = null, int? limit = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<IDictionary<string, object>> QueryAsync(string select = null, string filter = null, int? limit = null, CancellationToken cancellationToken = default)
         {
             return PageableHelpers.CreateAsyncEnumerable(async tableName =>
             {

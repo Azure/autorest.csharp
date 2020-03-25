@@ -49,8 +49,8 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 serializeWriter.WriteSerialization(serializerCodeWriter, model);
 
                 var name = model.Type.Name;
-                project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToFormattedCode());
-                project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToFormattedCode());
+                project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
+                project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
             }
 
             foreach (var client in context.Library.RestClients)
@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 var restCodeWriter = new CodeWriter();
                 restClientWriter.WriteClient(restCodeWriter, client);
 
-                project.AddGeneratedFile($"Operations/{client.Type.Name}.cs", restCodeWriter.ToFormattedCode());
+                project.AddGeneratedFile($"Operations/{client.Type.Name}.cs", restCodeWriter.ToString());
 
                 var headerModels = client.Methods.Select(m => m.Response.HeaderModel).OfType<ResponseHeaderGroupType>().Distinct();
                 foreach (ResponseHeaderGroupType responseHeaderModel in headerModels)
@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                     var headerModelCodeWriter = new CodeWriter();
                     headerModelModelWriter.WriteHeaderModel(headerModelCodeWriter, responseHeaderModel);
 
-                    project.AddGeneratedFile($"Operations/{responseHeaderModel.Type.Name}.cs", headerModelCodeWriter.ToFormattedCode());
+                    project.AddGeneratedFile($"Operations/{responseHeaderModel.Type.Name}.cs", headerModelCodeWriter.ToString());
                 }
             }
 
@@ -75,7 +75,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 var codeWriter = new CodeWriter();
                 clientWriter.WriteClient(codeWriter, client);
 
-                project.AddGeneratedFile($"Operations/{client.Type.Name}.cs", codeWriter.ToFormattedCode());
+                project.AddGeneratedFile($"Operations/{client.Type.Name}.cs", codeWriter.ToString());
             }
 
             await foreach (var file in project.GetGeneratedFilesAsync())
