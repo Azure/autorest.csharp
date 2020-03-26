@@ -105,6 +105,10 @@
           "$ref": "#/definitions/Deprecation",
           "description": "deprecation information -- ie, when this aspect doesn't apply and why"
         },
+        "origin": {
+          "description": "where did this aspect come from (jsonpath or 'modelerfour:<soemthing>')",
+          "type": "string"
+        },
         "externalDocs": {
           "$ref": "#/definitions/ExternalDocumentation",
           "description": "External Documentation Links"
@@ -934,6 +938,10 @@
         "deprecated": {
           "$ref": "#/definitions/Deprecation",
           "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "origin": {
+          "description": "where did this aspect come from (jsonpath or 'modelerfour:<soemthing>')",
+          "type": "string"
         },
         "externalDocs": {
           "$ref": "#/definitions/ExternalDocumentation",
@@ -2069,6 +2077,10 @@
           "$ref": "#/definitions/Deprecation",
           "description": "deprecation information -- ie, when this aspect doesn't apply and why"
         },
+        "origin": {
+          "description": "where did this aspect come from (jsonpath or 'modelerfour:<soemthing>')",
+          "type": "string"
+        },
         "externalDocs": {
           "$ref": "#/definitions/ExternalDocumentation",
           "description": "External Documentation Links"
@@ -3051,6 +3063,10 @@
         "deprecated": {
           "$ref": "#/definitions/Deprecation",
           "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+        },
+        "origin": {
+          "description": "where did this aspect come from (jsonpath or 'modelerfour:<soemthing>')",
+          "type": "string"
         },
         "externalDocs": {
           "$ref": "#/definitions/ExternalDocumentation",

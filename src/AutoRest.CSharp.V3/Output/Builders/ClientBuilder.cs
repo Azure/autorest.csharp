@@ -215,10 +215,24 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     }
                     else
                     {
-                        constantOrReference = parameter = BuildParameter(requestParameter);
+                        parameter = BuildParameter(requestParameter);
+
+                        if (requestParameter.GroupedBy is RequestParameter groupedByParameter)
+                        {
+                            var groupModel = (ObjectType)_typeFactory.CreateType(groupedByParameter.Schema, false).Implementation;
+                            var property = groupModel.GetPropertyForGroupedParameter(requestParameter);
+
+                            constantOrReference = new Reference($"{groupedByParameter.CSharpName()}.{property.Declaration.Name}", property.Declaration.Type);
+                        }
+                        else
+                        {
+                            constantOrReference = parameter;
+                        }
                     }
 
-                    if (parameter != null && requestParameter.Flattened != true)
+                    if (parameter != null &&
+                        requestParameter.Flattened != true &&
+                        requestParameter.GroupedBy == null)
                     {
                         methodParameters.Add(requestParameter, parameter);
                     }

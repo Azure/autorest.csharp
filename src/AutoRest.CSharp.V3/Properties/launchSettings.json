@@ -28,6 +28,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\Azure.Storage.Tables\\Azure.Storage.Tables\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\Azure.Storage.Tables\\Azure.Storage.Tables --namespace=Azure.Storage.Tables --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
     },
+    "azure-parameter-grouping": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\azure-parameter-grouping\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\azure-parameter-grouping --namespace=azure_parameter_grouping --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
     "body-array": {
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-array\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-array --namespace=body_array --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"

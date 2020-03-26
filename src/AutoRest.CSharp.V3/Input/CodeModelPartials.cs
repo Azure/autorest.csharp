@@ -95,6 +95,11 @@ namespace AutoRest.CSharp.V3.Input
         public bool IsOutput => Usage.Contains(SchemaContext.Output);
     }
 
+    // redefined manually to inherit from ObjectSchema
+    internal partial class GroupSchema : ObjectSchema
+    {
+    }
+
     internal partial class Schema
     {
         public string? XmlName => Serialization?.Xml?.Name;

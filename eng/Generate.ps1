@@ -52,7 +52,7 @@ $configurationPath = Join-Path $repoRoot 'readme.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
 $testNames =
     'additionalProperties',
-    #'azure-parameter-grouping',
+    'azure-parameter-grouping',
     #'azure-special-properties',
     'body-array',
     'body-boolean',
