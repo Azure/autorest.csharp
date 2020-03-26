@@ -148,16 +148,23 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 switch (operation.Request.Body)
                 {
                     case SchemaRequestBody body:
-                        WriteSerializeContent(
-                            writer,
-                            request,
-                            body.Serialization,
-                            w => WriteConstantOrParameter(w, body.Value, ignoreNullability: true));
+                        using (WriteValueNullCheck(writer, body.Value))
+                        {
+                            WriteSerializeContent(
+                                writer,
+                                request,
+                                body.Serialization,
+                                w => WriteConstantOrParameter(w, body.Value, ignoreNullability: true));
+                        }
+
                         break;
                     case BinaryRequestBody binaryBody:
-                        writer.Append($"{request}.Content = {typeof(RequestContent)}.Create(");
-                        WriteConstantOrParameter(writer, binaryBody.Value);
-                        writer.Line($");");
+                        using (WriteValueNullCheck(writer, binaryBody.Value))
+                        {
+                            writer.Append($"{request}.Content = {typeof(RequestContent)}.Create(");
+                            WriteConstantOrParameter(writer, binaryBody.Value);
+                            writer.Line($");");
+                        }
                         break;
                     case FlattenedSchemaRequestBody flattenedSchemaRequestBody:
                         var modelVariable = new CodeWriterDeclaration("model");

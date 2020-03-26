@@ -637,15 +637,18 @@ namespace Azure.Storage.Tables
             }
             request.Headers.Add("DataServiceVersion", "3.0");
             request.Headers.Add("Content-Type", "application/json;odata=fullmetadata");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartObject();
-            foreach (var item in tableEntityProperties)
+            if (tableEntityProperties != null)
             {
-                content.JsonWriter.WritePropertyName(item.Key);
-                content.JsonWriter.WriteObjectValue(item.Value);
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartObject();
+                foreach (var item in tableEntityProperties)
+                {
+                    content.JsonWriter.WritePropertyName(item.Key);
+                    content.JsonWriter.WriteObjectValue(item.Value);
+                }
+                content.JsonWriter.WriteEndObject();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndObject();
-            request.Content = content;
             return message;
         }
 
@@ -888,15 +891,18 @@ namespace Azure.Storage.Tables
             }
             request.Headers.Add("DataServiceVersion", "3.0");
             request.Headers.Add("Content-Type", "application/json;odata=fullmetadata");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartObject();
-            foreach (var item in tableEntityProperties)
+            if (tableEntityProperties != null)
             {
-                content.JsonWriter.WritePropertyName(item.Key);
-                content.JsonWriter.WriteObjectValue(item.Value);
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartObject();
+                foreach (var item in tableEntityProperties)
+                {
+                    content.JsonWriter.WritePropertyName(item.Key);
+                    content.JsonWriter.WriteObjectValue(item.Value);
+                }
+                content.JsonWriter.WriteEndObject();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndObject();
-            request.Content = content;
             return message;
         }
 
@@ -1130,14 +1136,17 @@ namespace Azure.Storage.Tables
                 request.Headers.Add("x-ms-client-request-id", requestId);
             }
             request.Headers.Add("Content-Type", "application/xml");
-            using var content = new XmlWriterContent();
-            content.XmlWriter.WriteStartElement("SignedIdentifiers");
-            foreach (var item in tableAcl)
+            if (tableAcl != null)
             {
-                content.XmlWriter.WriteObjectValue(item, "SignedIdentifier");
+                using var content = new XmlWriterContent();
+                content.XmlWriter.WriteStartElement("SignedIdentifiers");
+                foreach (var item in tableAcl)
+                {
+                    content.XmlWriter.WriteObjectValue(item, "SignedIdentifier");
+                }
+                content.XmlWriter.WriteEndElement();
+                request.Content = content;
             }
-            content.XmlWriter.WriteEndElement();
-            request.Content = content;
             return message;
         }
 

@@ -46,14 +46,17 @@ namespace model_flattening
             uri.AppendPath("/model-flatten/array", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartArray();
-            foreach (var item in resourceArray)
+            if (resourceArray != null)
             {
-                content.JsonWriter.WriteObjectValue(item);
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in resourceArray)
+                {
+                    content.JsonWriter.WriteObjectValue(item);
+                }
+                content.JsonWriter.WriteEndArray();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndArray();
-            request.Content = content;
             return message;
         }
 
@@ -201,14 +204,17 @@ namespace model_flattening
             uri.AppendPath("/model-flatten/wrappedarray", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartArray();
-            foreach (var item in resourceArray)
+            if (resourceArray != null)
             {
-                content.JsonWriter.WriteObjectValue(item);
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in resourceArray)
+                {
+                    content.JsonWriter.WriteObjectValue(item);
+                }
+                content.JsonWriter.WriteEndArray();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndArray();
-            request.Content = content;
             return message;
         }
 
@@ -356,15 +362,18 @@ namespace model_flattening
             uri.AppendPath("/model-flatten/dictionary", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartObject();
-            foreach (var item in resourceDictionary)
+            if (resourceDictionary != null)
             {
-                content.JsonWriter.WritePropertyName(item.Key);
-                content.JsonWriter.WriteObjectValue(item.Value);
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartObject();
+                foreach (var item in resourceDictionary)
+                {
+                    content.JsonWriter.WritePropertyName(item.Key);
+                    content.JsonWriter.WriteObjectValue(item.Value);
+                }
+                content.JsonWriter.WriteEndObject();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndObject();
-            request.Content = content;
             return message;
         }
 
@@ -512,9 +521,12 @@ namespace model_flattening
             uri.AppendPath("/model-flatten/resourcecollection", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(resourceComplexObject);
-            request.Content = content;
+            if (resourceComplexObject != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(resourceComplexObject);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -652,9 +664,12 @@ namespace model_flattening
             uri.AppendPath("/model-flatten/customFlattening", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(simpleBodyProduct);
-            request.Content = content;
+            if (simpleBodyProduct != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(simpleBodyProduct);
+                request.Content = content;
+            }
             return message;
         }
 
