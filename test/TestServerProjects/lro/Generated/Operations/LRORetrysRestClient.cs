@@ -44,9 +44,12 @@ namespace lro
             uri.AppendPath("/lro/retryerror/put/201/creating/succeeded/200", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(product);
-            request.Content = content;
+            if (product != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -114,9 +117,12 @@ namespace lro
             uri.AppendPath("/lro/retryerror/putasync/retry/succeeded", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(product);
-            request.Content = content;
+            if (product != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -370,9 +376,12 @@ namespace lro
             uri.AppendPath("/lro/retryerror/post/202/retry/200", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(product);
-            request.Content = content;
+            if (product != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -438,9 +447,12 @@ namespace lro
             uri.AppendPath("/lro/retryerror/postasync/retry/succeeded", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(product);
-            request.Content = content;
+            if (product != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
             return message;
         }
 

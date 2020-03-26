@@ -44,9 +44,12 @@ namespace lro
             uri.AppendPath("/lro/nonretryerror/put/400", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(product);
-            request.Content = content;
+            if (product != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -114,9 +117,12 @@ namespace lro
             uri.AppendPath("/lro/nonretryerror/put/201/creating/400", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(product);
-            request.Content = content;
+            if (product != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -184,9 +190,12 @@ namespace lro
             uri.AppendPath("/lro/nonretryerror/put/201/creating/400/invalidjson", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(product);
-            request.Content = content;
+            if (product != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -254,9 +263,12 @@ namespace lro
             uri.AppendPath("/lro/nonretryerror/putasync/retry/400", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(product);
-            request.Content = content;
+            if (product != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -508,9 +520,12 @@ namespace lro
             uri.AppendPath("/lro/nonretryerror/post/400", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(product);
-            request.Content = content;
+            if (product != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -576,9 +591,12 @@ namespace lro
             uri.AppendPath("/lro/nonretryerror/post/202/retry/400", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(product);
-            request.Content = content;
+            if (product != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -644,9 +662,12 @@ namespace lro
             uri.AppendPath("/lro/nonretryerror/postasync/retry/400", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(product);
-            request.Content = content;
+            if (product != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -712,9 +733,12 @@ namespace lro
             uri.AppendPath("/lro/error/put/201/noprovisioningstatepayload", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(product);
-            request.Content = content;
+            if (product != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -782,9 +806,12 @@ namespace lro
             uri.AppendPath("/lro/error/putasync/retry/nostatus", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(product);
-            request.Content = content;
+            if (product != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -850,9 +877,12 @@ namespace lro
             uri.AppendPath("/lro/error/putasync/retry/nostatuspayload", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(product);
-            request.Content = content;
+            if (product != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -1042,9 +1072,12 @@ namespace lro
             uri.AppendPath("/lro/error/post/202/nolocation", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(product);
-            request.Content = content;
+            if (product != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -1110,9 +1143,12 @@ namespace lro
             uri.AppendPath("/lro/error/postasync/retry/nopayload", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(product);
-            request.Content = content;
+            if (product != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -1178,9 +1214,12 @@ namespace lro
             uri.AppendPath("/lro/error/put/200/invalidjson", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(product);
-            request.Content = content;
+            if (product != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -1246,9 +1285,12 @@ namespace lro
             uri.AppendPath("/lro/error/putasync/retry/invalidheader", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(product);
-            request.Content = content;
+            if (product != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -1314,9 +1356,12 @@ namespace lro
             uri.AppendPath("/lro/error/putasync/retry/invalidjsonpolling", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(product);
-            request.Content = content;
+            if (product != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -1568,9 +1613,12 @@ namespace lro
             uri.AppendPath("/lro/error/post/202/retry/invalidheader", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(product);
-            request.Content = content;
+            if (product != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -1636,9 +1684,12 @@ namespace lro
             uri.AppendPath("/lro/error/postasync/retry/invalidheader", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(product);
-            request.Content = content;
+            if (product != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -1704,9 +1755,12 @@ namespace lro
             uri.AppendPath("/lro/error/postasync/retry/invalidjsonpolling", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(product);
-            request.Content = content;
+            if (product != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
             return message;
         }
 
