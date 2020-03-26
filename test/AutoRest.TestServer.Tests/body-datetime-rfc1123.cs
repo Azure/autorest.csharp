@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using body_datetime_rfc1123;
@@ -42,11 +43,9 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/300")]
-        public Task GetDateTimeRfc1123Null() => Test(async (host, pipeline) =>
+        public Task GetDateTimeRfc1123Null() => Test((host, pipeline) =>
         {
-            var result = await new Datetimerfc1123Client(ClientDiagnostics, pipeline, host).GetNullAsync();
-            Assert.AreEqual(null, result.Value);
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () =>  await new Datetimerfc1123Client(ClientDiagnostics, pipeline, host).GetNullAsync());
         });
 
         [Test]

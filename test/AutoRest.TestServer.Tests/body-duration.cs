@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
@@ -26,11 +27,9 @@ namespace AutoRest.TestServer.Tests
         public Task GetDurationNegative() => Test(async (host, pipeline) => { await Task.FromException(new Exception()); });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/300")]
-        public Task GetDurationNull() => Test(async (host, pipeline) =>
+        public Task GetDurationNull() => Test((host, pipeline) =>
         {
-            var result = await new DurationClient(ClientDiagnostics, pipeline, host).GetNullAsync();
-            Assert.AreEqual(null, result.Value);
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new DurationClient(ClientDiagnostics, pipeline, host).GetNullAsync());
         });
 
         [Test]
