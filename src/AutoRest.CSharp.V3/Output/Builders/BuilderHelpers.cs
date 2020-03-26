@@ -86,7 +86,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
         {
             if (existingMember != null)
             {
-
                 // Not reading the return type information of existing members yet
                 return new MemberDeclarationOptions(
                     SyntaxFacts.GetText(existingMember.DeclaredAccessibility),
