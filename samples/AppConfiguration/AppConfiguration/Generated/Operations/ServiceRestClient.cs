@@ -585,9 +585,12 @@ namespace AppConfiguration
                 request.Headers.Add("If-None-Match", ifNoneMatch);
             }
             request.Headers.Add("Content-Type", "application/vnd.microsoft.appconfig.kv+json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(entity);
-            request.Content = content;
+            if (entity != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(entity);
+                request.Content = content;
+            }
             return message;
         }
 
