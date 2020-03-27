@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -45,14 +46,14 @@ namespace httpInfrastructure
 
         /// <summary> Return 300 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<object>> Get300Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<string>>> Get300Async(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get300Async(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Return 300 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<object> Get300(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<string>> Get300(CancellationToken cancellationToken = default)
         {
             return RestClient.Get300(cancellationToken);
         }

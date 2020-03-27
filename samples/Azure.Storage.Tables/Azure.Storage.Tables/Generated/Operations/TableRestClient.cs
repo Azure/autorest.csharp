@@ -179,7 +179,7 @@ namespace Azure.Storage.Tables
         /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="tableProperties"> The Table properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<object, CreateHeaders>> CreateAsync(string requestId, ResponseFormat? format, TableProperties tableProperties, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<TableResponse, CreateHeaders>> CreateAsync(string requestId, ResponseFormat? format, TableProperties tableProperties, CancellationToken cancellationToken = default)
         {
             if (tableProperties == null)
             {
@@ -200,10 +200,10 @@ namespace Azure.Storage.Tables
                             TableResponse value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = TableResponse.DeserializeTableResponse(document.RootElement);
-                            return ResponseWithHeaders.FromValue<object, CreateHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     case 204:
-                        return ResponseWithHeaders.FromValue<object, CreateHeaders>(null, headers, message.Response);
+                        return ResponseWithHeaders.FromValue<TableResponse, CreateHeaders>(null, headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -220,7 +220,7 @@ namespace Azure.Storage.Tables
         /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="tableProperties"> The Table properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<object, CreateHeaders> Create(string requestId, ResponseFormat? format, TableProperties tableProperties, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableResponse, CreateHeaders> Create(string requestId, ResponseFormat? format, TableProperties tableProperties, CancellationToken cancellationToken = default)
         {
             if (tableProperties == null)
             {
@@ -241,10 +241,10 @@ namespace Azure.Storage.Tables
                             TableResponse value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = TableResponse.DeserializeTableResponse(document.RootElement);
-                            return ResponseWithHeaders.FromValue<object, CreateHeaders>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     case 204:
-                        return ResponseWithHeaders.FromValue<object, CreateHeaders>(null, headers, message.Response);
+                        return ResponseWithHeaders.FromValue<TableResponse, CreateHeaders>(null, headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }

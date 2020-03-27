@@ -49,7 +49,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<object>> Get200Model204NoModelDefaultError200ValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<MyException>> Get200Model204NoModelDefaultError200ValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError200Valid");
             scope.Start();
@@ -64,10 +64,10 @@ namespace httpInfrastructure
                             MyException value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue<object>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     case 204:
-                        return Response.FromValue<object>(null, message.Response);
+                        return Response.FromValue<MyException>(null, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -81,7 +81,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<object> Get200Model204NoModelDefaultError200Valid(CancellationToken cancellationToken = default)
+        public Response<MyException> Get200Model204NoModelDefaultError200Valid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError200Valid");
             scope.Start();
@@ -96,10 +96,10 @@ namespace httpInfrastructure
                             MyException value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue<object>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     case 204:
-                        return Response.FromValue<object>(null, message.Response);
+                        return Response.FromValue<MyException>(null, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -125,7 +125,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 204 response with no payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<object>> Get200Model204NoModelDefaultError204ValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<MyException>> Get200Model204NoModelDefaultError204ValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError204Valid");
             scope.Start();
@@ -140,10 +140,10 @@ namespace httpInfrastructure
                             MyException value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue<object>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     case 204:
-                        return Response.FromValue<object>(null, message.Response);
+                        return Response.FromValue<MyException>(null, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -157,7 +157,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 204 response with no payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<object> Get200Model204NoModelDefaultError204Valid(CancellationToken cancellationToken = default)
+        public Response<MyException> Get200Model204NoModelDefaultError204Valid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError204Valid");
             scope.Start();
@@ -172,10 +172,10 @@ namespace httpInfrastructure
                             MyException value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue<object>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     case 204:
-                        return Response.FromValue<object>(null, message.Response);
+                        return Response.FromValue<MyException>(null, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -201,7 +201,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<object>> Get200Model204NoModelDefaultError201InvalidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<MyException>> Get200Model204NoModelDefaultError201InvalidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError201Invalid");
             scope.Start();
@@ -216,10 +216,10 @@ namespace httpInfrastructure
                             MyException value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue<object>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     case 204:
-                        return Response.FromValue<object>(null, message.Response);
+                        return Response.FromValue<MyException>(null, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -233,7 +233,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<object> Get200Model204NoModelDefaultError201Invalid(CancellationToken cancellationToken = default)
+        public Response<MyException> Get200Model204NoModelDefaultError201Invalid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError201Invalid");
             scope.Start();
@@ -248,10 +248,10 @@ namespace httpInfrastructure
                             MyException value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue<object>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     case 204:
-                        return Response.FromValue<object>(null, message.Response);
+                        return Response.FromValue<MyException>(null, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -277,7 +277,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 202 response with no payload:. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<object>> Get200Model204NoModelDefaultError202NoneAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<MyException>> Get200Model204NoModelDefaultError202NoneAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError202None");
             scope.Start();
@@ -292,10 +292,10 @@ namespace httpInfrastructure
                             MyException value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue<object>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     case 204:
-                        return Response.FromValue<object>(null, message.Response);
+                        return Response.FromValue<MyException>(null, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -309,7 +309,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 202 response with no payload:. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<object> Get200Model204NoModelDefaultError202None(CancellationToken cancellationToken = default)
+        public Response<MyException> Get200Model204NoModelDefaultError202None(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError202None");
             scope.Start();
@@ -324,10 +324,10 @@ namespace httpInfrastructure
                             MyException value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue<object>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     case 204:
-                        return Response.FromValue<object>(null, message.Response);
+                        return Response.FromValue<MyException>(null, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -353,7 +353,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<object>> Get200Model204NoModelDefaultError400ValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<MyException>> Get200Model204NoModelDefaultError400ValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError400Valid");
             scope.Start();
@@ -368,10 +368,10 @@ namespace httpInfrastructure
                             MyException value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue<object>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     case 204:
-                        return Response.FromValue<object>(null, message.Response);
+                        return Response.FromValue<MyException>(null, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -385,7 +385,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<object> Get200Model204NoModelDefaultError400Valid(CancellationToken cancellationToken = default)
+        public Response<MyException> Get200Model204NoModelDefaultError400Valid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError400Valid");
             scope.Start();
@@ -400,10 +400,10 @@ namespace httpInfrastructure
                             MyException value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue<object>(value, message.Response);
+                            return Response.FromValue(value, message.Response);
                         }
                     case 204:
-                        return Response.FromValue<object>(null, message.Response);
+                        return Response.FromValue<MyException>(null, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }

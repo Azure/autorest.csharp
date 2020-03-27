@@ -114,7 +114,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 300 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<object, Get300Headers>> Get300Async(CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<IReadOnlyList<string>, Get300Headers>> Get300Async(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Get300");
             scope.Start();
@@ -126,7 +126,7 @@ namespace httpInfrastructure
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return ResponseWithHeaders.FromValue<object, Get300Headers>(null, headers, message.Response);
+                        return ResponseWithHeaders.FromValue<IReadOnlyList<string>, Get300Headers>(null, headers, message.Response);
                     case 300:
                         {
                             IReadOnlyList<string> value = default;
@@ -137,7 +137,7 @@ namespace httpInfrastructure
                                 array.Add(item.GetString());
                             }
                             value = array;
-                            return ResponseWithHeaders.FromValue<object, Get300Headers>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -152,7 +152,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 300 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<object, Get300Headers> Get300(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<IReadOnlyList<string>, Get300Headers> Get300(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Get300");
             scope.Start();
@@ -164,7 +164,7 @@ namespace httpInfrastructure
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return ResponseWithHeaders.FromValue<object, Get300Headers>(null, headers, message.Response);
+                        return ResponseWithHeaders.FromValue<IReadOnlyList<string>, Get300Headers>(null, headers, message.Response);
                     case 300:
                         {
                             IReadOnlyList<string> value = default;
@@ -175,7 +175,7 @@ namespace httpInfrastructure
                                 array.Add(item.GetString());
                             }
                             value = array;
-                            return ResponseWithHeaders.FromValue<object, Get300Headers>(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
