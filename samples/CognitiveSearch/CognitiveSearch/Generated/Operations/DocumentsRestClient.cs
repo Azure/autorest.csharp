@@ -816,6 +816,7 @@ namespace CognitiveSearch
                 switch (message.Response.Status)
                 {
                     case 200:
+                    case 207:
                         {
                             IndexDocumentsResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
@@ -853,6 +854,7 @@ namespace CognitiveSearch
                 switch (message.Response.Status)
                 {
                     case 200:
+                    case 207:
                         {
                             IndexDocumentsResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);

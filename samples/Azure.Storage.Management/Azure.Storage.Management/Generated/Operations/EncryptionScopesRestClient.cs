@@ -105,6 +105,7 @@ namespace Azure.Storage.Management
                 switch (message.Response.Status)
                 {
                     case 200:
+                    case 201:
                         {
                             EncryptionScope value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
@@ -156,6 +157,7 @@ namespace Azure.Storage.Management
                 switch (message.Response.Status)
                 {
                     case 200:
+                    case 201:
                         {
                             EncryptionScope value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);

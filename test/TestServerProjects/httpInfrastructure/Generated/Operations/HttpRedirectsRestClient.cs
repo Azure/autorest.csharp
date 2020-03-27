@@ -125,6 +125,8 @@ namespace httpInfrastructure
                 var headers = new Get300Headers(message.Response);
                 switch (message.Response.Status)
                 {
+                    case 200:
+                        return ResponseWithHeaders.FromValue<object, Get300Headers>(null, headers, message.Response);
                     case 300:
                         {
                             IReadOnlyList<string> value = default;
@@ -137,8 +139,6 @@ namespace httpInfrastructure
                             value = array;
                             return ResponseWithHeaders.FromValue<object, Get300Headers>(value, headers, message.Response);
                         }
-                    case 200:
-                        return ResponseWithHeaders.FromValue<object, Get300Headers>(null, headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -163,6 +163,8 @@ namespace httpInfrastructure
                 var headers = new Get300Headers(message.Response);
                 switch (message.Response.Status)
                 {
+                    case 200:
+                        return ResponseWithHeaders.FromValue<object, Get300Headers>(null, headers, message.Response);
                     case 300:
                         {
                             IReadOnlyList<string> value = default;
@@ -175,8 +177,6 @@ namespace httpInfrastructure
                             value = array;
                             return ResponseWithHeaders.FromValue<object, Get300Headers>(value, headers, message.Response);
                         }
-                    case 200:
-                        return ResponseWithHeaders.FromValue<object, Get300Headers>(null, headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }

@@ -309,6 +309,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
             string operationName = operation.CSharpName();
 
+            ResponseHeaderGroupType? responseHeaderModel = null;
             List<Response> clientResponse = new List<Response>();
 
             if (operation.IsLongRunning)
@@ -335,9 +336,10 @@ namespace AutoRest.CSharp.V3.Output.Builders
                         response.HttpResponse.IntStatusCodes.ToArray()
                     ));
                 }
+
+                responseHeaderModel = BuildResponseHeaderModel(operation);
             }
 
-            var responseHeaderModel = BuildResponseHeaderModel(operation);
             var responseType = ReduceResponses(clientResponse);
 
             return new RestClientMethod(
@@ -355,30 +357,29 @@ namespace AutoRest.CSharp.V3.Output.Builders
         // Merges operations without response types types together
         private CSharpType? ReduceResponses(List<Response> responses)
         {
-            var noBodyResponses = responses.Where(r => r.ResponseBody == null).ToArray();
-
-            if (noBodyResponses.Any())
+            foreach (var typeGroup in responses.GroupBy(r=> r.ResponseBody))
             {
-                foreach (var noBodyResponse in noBodyResponses)
+                foreach (var individualResponse in typeGroup)
                 {
-                    responses.Remove(noBodyResponse);
+                    responses.Remove(individualResponse);
                 }
 
                 responses.Add(new Response(
-                    null,
-                    noBodyResponses.SelectMany(r=>r.StatusCodes).ToArray()));
+                    typeGroup.Key,
+                    typeGroup.SelectMany(r=>r.StatusCodes).Distinct().ToArray()));
             }
 
-            if (responses.Count == 0)
-            {
-                return null;
-            }
-            if (responses.Count == 1)
-            {
-                return responses.Single().ResponseBody?.Type;
-            }
+            var bodyTypes = responses.Select(r => r.ResponseBody?.Type)
+                .OfType<CSharpType>()
+                .Distinct()
+                .ToArray();
 
-            return typeof(object);
+            return bodyTypes.Length switch
+            {
+                0 => null,
+                1 => bodyTypes[0],
+                _ => typeof(object)
+            };
         }
 
         private ResponseBody? BuildResponseBody(ServiceResponse response)
@@ -506,6 +507,9 @@ namespace AutoRest.CSharp.V3.Output.Builders
         {
             var httpResponseHeaders = operation.Responses.SelectMany(r => r.HttpResponse.Headers)
                 .Where(h => !_knownResponseHeaders.Contains(h.Header, StringComparer.InvariantCultureIgnoreCase))
+                .GroupBy(h => h.Header)
+                // Take first header definition with any particular name
+                .Select(h => h.First())
                 .ToArray();
 
             if (!httpResponseHeaders.Any())

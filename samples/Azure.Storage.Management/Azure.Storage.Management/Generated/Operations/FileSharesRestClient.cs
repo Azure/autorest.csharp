@@ -221,6 +221,7 @@ namespace Azure.Storage.Management
                 switch (message.Response.Status)
                 {
                     case 200:
+                    case 201:
                         {
                             FileShare value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
@@ -269,6 +270,7 @@ namespace Azure.Storage.Management
                 switch (message.Response.Status)
                 {
                     case 200:
+                    case 201:
                         {
                             FileShare value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
@@ -572,6 +574,7 @@ namespace Azure.Storage.Management
                 switch (message.Response.Status)
                 {
                     case 200:
+                    case 204:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -613,6 +616,7 @@ namespace Azure.Storage.Management
                 switch (message.Response.Status)
                 {
                     case 200:
+                    case 204:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

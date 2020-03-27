@@ -60,7 +60,7 @@ namespace Azure.Storage.Tables
         /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="tableProperties"> The Table properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<TableResponse>> CreateAsync(string requestId, ResponseFormat? format, TableProperties tableProperties, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<object>> CreateAsync(string requestId, ResponseFormat? format, TableProperties tableProperties, CancellationToken cancellationToken = default)
         {
             return await RestClient.CreateAsync(requestId, format, tableProperties, cancellationToken).ConfigureAwait(false);
         }
@@ -70,7 +70,7 @@ namespace Azure.Storage.Tables
         /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="tableProperties"> The Table properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<TableResponse> Create(string requestId, ResponseFormat? format, TableProperties tableProperties, CancellationToken cancellationToken = default)
+        public virtual Response<object> Create(string requestId, ResponseFormat? format, TableProperties tableProperties, CancellationToken cancellationToken = default)
         {
             return RestClient.Create(requestId, format, tableProperties, cancellationToken);
         }

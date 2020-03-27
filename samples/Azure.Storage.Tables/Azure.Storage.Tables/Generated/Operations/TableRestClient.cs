@@ -91,6 +91,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateQueryRequest(requestId, format, top, select, filter);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new QueryHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -98,7 +99,6 @@ namespace Azure.Storage.Tables
                             TableQueryResponse value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = TableQueryResponse.DeserializeTableQueryResponse(document.RootElement);
-                            var headers = new QueryHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -127,6 +127,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateQueryRequest(requestId, format, top, select, filter);
                 pipeline.Send(message, cancellationToken);
+                var headers = new QueryHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -134,7 +135,6 @@ namespace Azure.Storage.Tables
                             TableQueryResponse value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = TableQueryResponse.DeserializeTableQueryResponse(document.RootElement);
-                            var headers = new QueryHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -179,7 +179,7 @@ namespace Azure.Storage.Tables
         /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="tableProperties"> The Table properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableResponse, CreateHeaders>> CreateAsync(string requestId, ResponseFormat? format, TableProperties tableProperties, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<object, CreateHeaders>> CreateAsync(string requestId, ResponseFormat? format, TableProperties tableProperties, CancellationToken cancellationToken = default)
         {
             if (tableProperties == null)
             {
@@ -192,6 +192,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateCreateRequest(requestId, format, tableProperties);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new CreateHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 201:
@@ -199,9 +200,10 @@ namespace Azure.Storage.Tables
                             TableResponse value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = TableResponse.DeserializeTableResponse(document.RootElement);
-                            var headers = new CreateHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue<object, CreateHeaders>(value, headers, message.Response);
                         }
+                    case 204:
+                        return ResponseWithHeaders.FromValue<object, CreateHeaders>(null, headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -218,7 +220,7 @@ namespace Azure.Storage.Tables
         /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="tableProperties"> The Table properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<TableResponse, CreateHeaders> Create(string requestId, ResponseFormat? format, TableProperties tableProperties, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<object, CreateHeaders> Create(string requestId, ResponseFormat? format, TableProperties tableProperties, CancellationToken cancellationToken = default)
         {
             if (tableProperties == null)
             {
@@ -231,6 +233,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateCreateRequest(requestId, format, tableProperties);
                 pipeline.Send(message, cancellationToken);
+                var headers = new CreateHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 201:
@@ -238,9 +241,10 @@ namespace Azure.Storage.Tables
                             TableResponse value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = TableResponse.DeserializeTableResponse(document.RootElement);
-                            var headers = new CreateHeaders(message.Response);
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            return ResponseWithHeaders.FromValue<object, CreateHeaders>(value, headers, message.Response);
                         }
+                    case 204:
+                        return ResponseWithHeaders.FromValue<object, CreateHeaders>(null, headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -288,10 +292,10 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateDeleteRequest(requestId, table);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new DeleteHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 204:
-                        var headers = new DeleteHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -321,10 +325,10 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateDeleteRequest(requestId, table);
                 pipeline.Send(message, cancellationToken);
+                var headers = new DeleteHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 204:
-                        var headers = new DeleteHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -399,6 +403,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateQueryEntitiesRequest(timeout, requestId, format, top, select, filter, table);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new QueryEntitiesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -406,7 +411,6 @@ namespace Azure.Storage.Tables
                             TableEntityQueryResponse value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
-                            var headers = new QueryEntitiesHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -442,6 +446,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateQueryEntitiesRequest(timeout, requestId, format, top, select, filter, table);
                 pipeline.Send(message, cancellationToken);
+                var headers = new QueryEntitiesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -449,7 +454,6 @@ namespace Azure.Storage.Tables
                             TableEntityQueryResponse value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
-                            var headers = new QueryEntitiesHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -534,6 +538,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateQueryEntitiesWithPartitionAndRowKeyRequest(timeout, requestId, format, select, filter, table, partitionKey, rowKey);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new QueryEntitiesWithPartitionAndRowKeyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -541,7 +546,6 @@ namespace Azure.Storage.Tables
                             TableEntityQueryResponse value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
-                            var headers = new QueryEntitiesWithPartitionAndRowKeyHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -586,6 +590,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateQueryEntitiesWithPartitionAndRowKeyRequest(timeout, requestId, format, select, filter, table, partitionKey, rowKey);
                 pipeline.Send(message, cancellationToken);
+                var headers = new QueryEntitiesWithPartitionAndRowKeyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -593,7 +598,6 @@ namespace Azure.Storage.Tables
                             TableEntityQueryResponse value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
-                            var headers = new QueryEntitiesWithPartitionAndRowKeyHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -682,10 +686,10 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateUpdateEntityRequest(timeout, requestId, format, table, partitionKey, rowKey, tableEntityProperties);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new UpdateEntityHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new UpdateEntityHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -728,10 +732,10 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateUpdateEntityRequest(timeout, requestId, format, table, partitionKey, rowKey, tableEntityProperties);
                 pipeline.Send(message, cancellationToken);
+                var headers = new UpdateEntityHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new UpdateEntityHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -805,10 +809,10 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateDeleteEntityRequest(timeout, requestId, format, table, partitionKey, rowKey);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new DeleteEntityHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 204:
-                        var headers = new DeleteEntityHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -850,10 +854,10 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateDeleteEntityRequest(timeout, requestId, format, table, partitionKey, rowKey);
                 pipeline.Send(message, cancellationToken);
+                var headers = new DeleteEntityHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 204:
-                        var headers = new DeleteEntityHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -926,6 +930,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateInsertEntityRequest(timeout, requestId, format, table, tableEntityProperties);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new InsertEntityHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 201:
@@ -938,7 +943,6 @@ namespace Azure.Storage.Tables
                                 dictionary.Add(property.Name, property.Value.GetObject());
                             }
                             value = dictionary;
-                            var headers = new InsertEntityHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -972,6 +976,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateInsertEntityRequest(timeout, requestId, format, table, tableEntityProperties);
                 pipeline.Send(message, cancellationToken);
+                var headers = new InsertEntityHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 201:
@@ -984,7 +989,6 @@ namespace Azure.Storage.Tables
                                 dictionary.Add(property.Name, property.Value.GetObject());
                             }
                             value = dictionary;
-                            var headers = new InsertEntityHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -1039,6 +1043,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateGetAccessPolicyRequest(timeout, requestId, table);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new GetAccessPolicyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1054,7 +1059,6 @@ namespace Azure.Storage.Tables
                                 }
                                 value = array;
                             }
-                            var headers = new GetAccessPolicyHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -1086,6 +1090,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateGetAccessPolicyRequest(timeout, requestId, table);
                 pipeline.Send(message, cancellationToken);
+                var headers = new GetAccessPolicyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1101,7 +1106,6 @@ namespace Azure.Storage.Tables
                                 }
                                 value = array;
                             }
-                            var headers = new GetAccessPolicyHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -1169,10 +1173,10 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateSetAccessPolicyRequest(timeout, requestId, table, tableAcl);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new SetAccessPolicyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 204:
-                        var headers = new SetAccessPolicyHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1204,10 +1208,10 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateSetAccessPolicyRequest(timeout, requestId, table, tableAcl);
                 pipeline.Send(message, cancellationToken);
+                var headers = new SetAccessPolicyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 204:
-                        var headers = new SetAccessPolicyHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

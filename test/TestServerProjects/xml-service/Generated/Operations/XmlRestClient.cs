@@ -683,10 +683,10 @@ namespace xml_service
             {
                 using var message = CreateGetHeadersRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new GetHeadersHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new GetHeadersHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -709,10 +709,10 @@ namespace xml_service
             {
                 using var message = CreateGetHeadersRequest();
                 pipeline.Send(message, cancellationToken);
+                var headers = new GetHeadersHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new GetHeadersHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

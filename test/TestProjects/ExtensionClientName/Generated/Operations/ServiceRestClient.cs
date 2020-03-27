@@ -77,6 +77,7 @@ namespace ExtensionClientName
             {
                 using var message = CreateRenamedOperationRequest(renamedPathParameter, renamedQueryParameter, renamedBodyParameter);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new RenamedOperationHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -84,7 +85,6 @@ namespace ExtensionClientName
                             RenamedSchema value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = RenamedSchema.DeserializeRenamedSchema(document.RootElement);
-                            var headers = new RenamedOperationHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -123,6 +123,7 @@ namespace ExtensionClientName
             {
                 using var message = CreateRenamedOperationRequest(renamedPathParameter, renamedQueryParameter, renamedBodyParameter);
                 pipeline.Send(message, cancellationToken);
+                var headers = new RenamedOperationHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -130,7 +131,6 @@ namespace ExtensionClientName
                             RenamedSchema value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = RenamedSchema.DeserializeRenamedSchema(document.RootElement);
-                            var headers = new RenamedOperationHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
