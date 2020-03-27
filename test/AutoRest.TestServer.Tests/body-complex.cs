@@ -68,13 +68,9 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/300")]
-        public Task GetComplexBasicInvalid() => Test(async (host, pipeline) =>
+        public void GetComplexBasicInvalid() => Test((host, pipeline) =>
         {
-            var result = await new BasicClient(ClientDiagnostics, pipeline, host).GetInvalidAsync();
-            Assert.AreEqual(null, result.Value.Name);
-            Assert.AreEqual(null, result.Value.Id);
-            Assert.AreEqual(null, result.Value.Color);
+            Assert.Throws(Is.InstanceOf<Exception>(), async () => await new BasicClient(ClientDiagnostics, pipeline, host).GetInvalidAsync());
         });
 
         [Test]
