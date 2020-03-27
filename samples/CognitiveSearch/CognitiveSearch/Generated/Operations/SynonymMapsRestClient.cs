@@ -41,7 +41,7 @@ namespace CognitiveSearch
             this.pipeline = pipeline;
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string synonymMapName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, SynonymMap synonymMap)
+        internal HttpMessage CreateCreateOrUpdateRequest(string synonymMapName, SynonymMap synonymMap, RequestOptions requestOptions, AccessCondition accessCondition)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -53,17 +53,17 @@ namespace CognitiveSearch
             uri.AppendPath("')", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
-            if (ifMatch != null)
+            if (accessCondition?.IfMatch != null)
             {
-                request.Headers.Add("If-Match", ifMatch);
+                request.Headers.Add("If-Match", accessCondition.IfMatch);
             }
-            if (ifNoneMatch != null)
+            if (accessCondition?.IfNoneMatch != null)
             {
-                request.Headers.Add("If-None-Match", ifNoneMatch);
+                request.Headers.Add("If-None-Match", accessCondition.IfNoneMatch);
             }
             request.Headers.Add("Prefer", "return=representation");
             request.Headers.Add("Content-Type", "application/json");
@@ -75,12 +75,11 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new synonym map or updates a synonym map if it already exists. </summary>
         /// <param name="synonymMapName"> The name of the synonym map to create or update. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
-        /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="synonymMap"> The definition of the synonym map to create or update. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
+        /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SynonymMap>> CreateOrUpdateAsync(string synonymMapName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, SynonymMap synonymMap, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SynonymMap>> CreateOrUpdateAsync(string synonymMapName, SynonymMap synonymMap, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
         {
             if (synonymMapName == null)
             {
@@ -95,7 +94,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateOrUpdateRequest(synonymMapName, xMsClientRequestId, ifMatch, ifNoneMatch, synonymMap);
+                using var message = CreateCreateOrUpdateRequest(synonymMapName, synonymMap, requestOptions, accessCondition);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -119,12 +118,11 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new synonym map or updates a synonym map if it already exists. </summary>
         /// <param name="synonymMapName"> The name of the synonym map to create or update. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
-        /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="synonymMap"> The definition of the synonym map to create or update. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
+        /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SynonymMap> CreateOrUpdate(string synonymMapName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, SynonymMap synonymMap, CancellationToken cancellationToken = default)
+        public Response<SynonymMap> CreateOrUpdate(string synonymMapName, SynonymMap synonymMap, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
         {
             if (synonymMapName == null)
             {
@@ -139,7 +137,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateOrUpdateRequest(synonymMapName, xMsClientRequestId, ifMatch, ifNoneMatch, synonymMap);
+                using var message = CreateCreateOrUpdateRequest(synonymMapName, synonymMap, requestOptions, accessCondition);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -161,7 +159,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string synonymMapName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch)
+        internal HttpMessage CreateDeleteRequest(string synonymMapName, RequestOptions requestOptions, AccessCondition accessCondition)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -173,28 +171,27 @@ namespace CognitiveSearch
             uri.AppendPath("')", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
-            if (ifMatch != null)
+            if (accessCondition?.IfMatch != null)
             {
-                request.Headers.Add("If-Match", ifMatch);
+                request.Headers.Add("If-Match", accessCondition.IfMatch);
             }
-            if (ifNoneMatch != null)
+            if (accessCondition?.IfNoneMatch != null)
             {
-                request.Headers.Add("If-None-Match", ifNoneMatch);
+                request.Headers.Add("If-None-Match", accessCondition.IfNoneMatch);
             }
             return message;
         }
 
         /// <summary> Deletes a synonym map. </summary>
         /// <param name="synonymMapName"> The name of the synonym map to delete. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
-        /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
+        /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteAsync(string synonymMapName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> DeleteAsync(string synonymMapName, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
         {
             if (synonymMapName == null)
             {
@@ -205,7 +202,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateDeleteRequest(synonymMapName, xMsClientRequestId, ifMatch, ifNoneMatch);
+                using var message = CreateDeleteRequest(synonymMapName, requestOptions, accessCondition);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -224,11 +221,10 @@ namespace CognitiveSearch
 
         /// <summary> Deletes a synonym map. </summary>
         /// <param name="synonymMapName"> The name of the synonym map to delete. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
-        /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
+        /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete(string synonymMapName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public Response Delete(string synonymMapName, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
         {
             if (synonymMapName == null)
             {
@@ -239,7 +235,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateDeleteRequest(synonymMapName, xMsClientRequestId, ifMatch, ifNoneMatch);
+                using var message = CreateDeleteRequest(synonymMapName, requestOptions, accessCondition);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -256,7 +252,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateGetRequest(string synonymMapName, Guid? xMsClientRequestId)
+        internal HttpMessage CreateGetRequest(string synonymMapName, RequestOptions requestOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -268,18 +264,18 @@ namespace CognitiveSearch
             uri.AppendPath("')", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
             return message;
         }
 
         /// <summary> Retrieves a synonym map definition. </summary>
         /// <param name="synonymMapName"> The name of the synonym map to retrieve. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SynonymMap>> GetAsync(string synonymMapName, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SynonymMap>> GetAsync(string synonymMapName, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (synonymMapName == null)
             {
@@ -290,7 +286,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateGetRequest(synonymMapName, xMsClientRequestId);
+                using var message = CreateGetRequest(synonymMapName, requestOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -314,9 +310,9 @@ namespace CognitiveSearch
 
         /// <summary> Retrieves a synonym map definition. </summary>
         /// <param name="synonymMapName"> The name of the synonym map to retrieve. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SynonymMap> Get(string synonymMapName, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public Response<SynonymMap> Get(string synonymMapName, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (synonymMapName == null)
             {
@@ -327,7 +323,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateGetRequest(synonymMapName, xMsClientRequestId);
+                using var message = CreateGetRequest(synonymMapName, requestOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -349,7 +345,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateListRequest(string select, Guid? xMsClientRequestId)
+        internal HttpMessage CreateListRequest(string select, RequestOptions requestOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -363,24 +359,24 @@ namespace CognitiveSearch
             }
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
             return message;
         }
 
         /// <summary> Lists all synonym maps available for a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the synonym maps to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ListSynonymMapsResult>> ListAsync(string select, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ListSynonymMapsResult>> ListAsync(string select, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("SynonymMapsClient.List");
             scope.Start();
             try
             {
-                using var message = CreateListRequest(select, xMsClientRequestId);
+                using var message = CreateListRequest(select, requestOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -404,15 +400,15 @@ namespace CognitiveSearch
 
         /// <summary> Lists all synonym maps available for a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the synonym maps to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ListSynonymMapsResult> List(string select, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public Response<ListSynonymMapsResult> List(string select, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("SynonymMapsClient.List");
             scope.Start();
             try
             {
-                using var message = CreateListRequest(select, xMsClientRequestId);
+                using var message = CreateListRequest(select, requestOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -434,7 +430,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateCreateRequest(Guid? xMsClientRequestId, SynonymMap synonymMap)
+        internal HttpMessage CreateCreateRequest(SynonymMap synonymMap, RequestOptions requestOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -444,9 +440,9 @@ namespace CognitiveSearch
             uri.AppendPath("/synonymmaps", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -456,10 +452,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Creates a new synonym map. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="synonymMap"> The definition of the synonym map to create. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SynonymMap>> CreateAsync(Guid? xMsClientRequestId, SynonymMap synonymMap, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SynonymMap>> CreateAsync(SynonymMap synonymMap, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (synonymMap == null)
             {
@@ -470,7 +466,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateRequest(xMsClientRequestId, synonymMap);
+                using var message = CreateCreateRequest(synonymMap, requestOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -493,10 +489,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Creates a new synonym map. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="synonymMap"> The definition of the synonym map to create. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SynonymMap> Create(Guid? xMsClientRequestId, SynonymMap synonymMap, CancellationToken cancellationToken = default)
+        public Response<SynonymMap> Create(SynonymMap synonymMap, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (synonymMap == null)
             {
@@ -507,7 +503,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateRequest(xMsClientRequestId, synonymMap);
+                using var message = CreateCreateRequest(synonymMap, requestOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

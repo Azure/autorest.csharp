@@ -191,6 +191,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             Dictionary<string, PathSegment> pathParameters = new Dictionary<string, PathSegment>();
             List<QueryParameter> query = new List<QueryParameter>();
             List<RequestHeader> headers = new List<RequestHeader>();
+            Dictionary<RequestParameter, ReferenceOrConstant> allParameters = new Dictionary<RequestParameter, ReferenceOrConstant>();
             Dictionary<RequestParameter, Parameter> methodParameters = new Dictionary<RequestParameter, Parameter>();
 
             RequestBody? body = null;
@@ -229,6 +230,8 @@ namespace AutoRest.CSharp.V3.Output.Builders
                             constantOrReference = parameter;
                         }
                     }
+
+                    allParameters.Add(requestParameter, constantOrReference);
 
                     if (parameter != null &&
                         requestParameter.Flattened != true &&
@@ -295,7 +298,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                         List<ObjectPropertyInitializer> initializationMap = new List<ObjectPropertyInitializer>();
                         foreach (var virtualParameter in virtualParameters)
                         {
-                            var actualParameter = methodParameters[virtualParameter];
+                            var actualParameter = allParameters[virtualParameter];
 
                             initializationMap.Add(new ObjectPropertyInitializer(
                                 objectType.GetPropertyForSchemaProperty(virtualParameter.TargetProperty, true),
@@ -410,8 +413,10 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 typeof(string),
                 null,
                 true);
-            var headerParameterNames = method.Request.Headers.Where(h => !h.Value.IsConstant).Select(h => h.Value.Reference.Name).ToArray();
-            var parameters = method.Parameters.Where(p =>  headerParameterNames.Contains(p.Name)).Append(nextPageUrlParameter).ToArray();
+            List<Parameter> parameters = new List<Parameter>();
+            parameters.Add(nextPageUrlParameter);
+            parameters.AddRange(method.Parameters.Where(p => p.Name != nextPageUrlParameter.Name));
+
             var request = new Request(
                 method.Request.HttpMethod,
                 new[] { new PathSegment(nextPageUrlParameter, false, SerializationFormat.Default),  },
@@ -425,7 +430,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 $"{method.Name}NextPage",
                 method.Description,
                 request,
-                parameters,
+                parameters.ToArray(),
                 method.Response,
                 method.Diagnostics);
         }

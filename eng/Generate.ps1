@@ -1,5 +1,5 @@
 #Requires -Version 6.0
-param($name, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$noProjectBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true)
+param($name, [switch]$continue, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$noProjectBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true)
 
 $ErrorActionPreference = 'Stop'
 
@@ -163,7 +163,19 @@ if (!$noBuild)
     dotnet build $autorestPluginProject
 }
 
-$keys = if (![string]::IsNullOrWhiteSpace($name)) { $name } else { $swaggerDefinitions.Keys }
+$keys = $swaggerDefinitions.Keys;
+if (![string]::IsNullOrWhiteSpace($name))
+{ 
+    if ($continue)
+    {
+        $keys = $keys.Where({$_ -eq $name},'SkipUntil') 
+        Write-Host "Continuing with $keys"
+    }
+    else
+    {
+        $keys = $name
+    }
+}
 
 foreach ($key in $keys)
 {

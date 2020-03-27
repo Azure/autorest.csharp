@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -33,102 +32,98 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new datasource or updates a datasource if it already exists. </summary>
         /// <param name="dataSourceName"> The name of the datasource to create or update. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
-        /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="dataSource"> The definition of the datasource to create or update. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
+        /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, DataSource dataSource, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, DataSource dataSource, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
         {
-            return await RestClient.CreateOrUpdateAsync(dataSourceName, xMsClientRequestId, ifMatch, ifNoneMatch, dataSource, cancellationToken).ConfigureAwait(false);
+            return await RestClient.CreateOrUpdateAsync(dataSourceName, dataSource, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Creates a new datasource or updates a datasource if it already exists. </summary>
         /// <param name="dataSourceName"> The name of the datasource to create or update. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
-        /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="dataSource"> The definition of the datasource to create or update. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
+        /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DataSource> CreateOrUpdate(string dataSourceName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, DataSource dataSource, CancellationToken cancellationToken = default)
+        public virtual Response<DataSource> CreateOrUpdate(string dataSourceName, DataSource dataSource, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
         {
-            return RestClient.CreateOrUpdate(dataSourceName, xMsClientRequestId, ifMatch, ifNoneMatch, dataSource, cancellationToken);
+            return RestClient.CreateOrUpdate(dataSourceName, dataSource, requestOptions, accessCondition, cancellationToken);
         }
 
         /// <summary> Deletes a datasource. </summary>
         /// <param name="dataSourceName"> The name of the datasource to delete. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
-        /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
+        /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DeleteAsync(string dataSourceName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DeleteAsync(string dataSourceName, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
         {
-            return await RestClient.DeleteAsync(dataSourceName, xMsClientRequestId, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
+            return await RestClient.DeleteAsync(dataSourceName, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Deletes a datasource. </summary>
         /// <param name="dataSourceName"> The name of the datasource to delete. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
-        /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
+        /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Delete(string dataSourceName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public virtual Response Delete(string dataSourceName, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
         {
-            return RestClient.Delete(dataSourceName, xMsClientRequestId, ifMatch, ifNoneMatch, cancellationToken);
+            return RestClient.Delete(dataSourceName, requestOptions, accessCondition, cancellationToken);
         }
 
         /// <summary> Retrieves a datasource definition. </summary>
         /// <param name="dataSourceName"> The name of the datasource to retrieve. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DataSource>> GetAsync(string dataSourceName, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DataSource>> GetAsync(string dataSourceName, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetAsync(dataSourceName, xMsClientRequestId, cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetAsync(dataSourceName, requestOptions, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Retrieves a datasource definition. </summary>
         /// <param name="dataSourceName"> The name of the datasource to retrieve. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DataSource> Get(string dataSourceName, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public virtual Response<DataSource> Get(string dataSourceName, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
-            return RestClient.Get(dataSourceName, xMsClientRequestId, cancellationToken);
+            return RestClient.Get(dataSourceName, requestOptions, cancellationToken);
         }
 
         /// <summary> Lists all datasources available for a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<ListDataSourcesResult>> ListAsync(string select, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ListDataSourcesResult>> ListAsync(string select, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
-            return await RestClient.ListAsync(select, xMsClientRequestId, cancellationToken).ConfigureAwait(false);
+            return await RestClient.ListAsync(select, requestOptions, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Lists all datasources available for a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ListDataSourcesResult> List(string select, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public virtual Response<ListDataSourcesResult> List(string select, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
-            return RestClient.List(select, xMsClientRequestId, cancellationToken);
+            return RestClient.List(select, requestOptions, cancellationToken);
         }
 
         /// <summary> Creates a new datasource. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="dataSource"> The definition of the datasource to create. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DataSource>> CreateAsync(Guid? xMsClientRequestId, DataSource dataSource, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DataSource>> CreateAsync(DataSource dataSource, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
-            return await RestClient.CreateAsync(xMsClientRequestId, dataSource, cancellationToken).ConfigureAwait(false);
+            return await RestClient.CreateAsync(dataSource, requestOptions, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Creates a new datasource. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="dataSource"> The definition of the datasource to create. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DataSource> Create(Guid? xMsClientRequestId, DataSource dataSource, CancellationToken cancellationToken = default)
+        public virtual Response<DataSource> Create(DataSource dataSource, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
-            return RestClient.Create(xMsClientRequestId, dataSource, cancellationToken);
+            return RestClient.Create(dataSource, requestOptions, cancellationToken);
         }
     }
 }

@@ -1073,7 +1073,7 @@ namespace Azure.AI.FormRecognizer
             }
         }
 
-        internal HttpMessage CreateGetCustomModelsNextPageRequest(string nextLink)
+        internal HttpMessage CreateGetCustomModelsNextPageRequest(string nextLink, Enum0? op)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1086,8 +1086,9 @@ namespace Azure.AI.FormRecognizer
 
         /// <summary> Get information about all custom models. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="op"> Specify whether to return summary or full list of models. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Models.Models>> GetCustomModelsNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Models.Models>> GetCustomModelsNextPageAsync(string nextLink, Enum0? op, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1098,7 +1099,7 @@ namespace Azure.AI.FormRecognizer
             scope.Start();
             try
             {
-                using var message = CreateGetCustomModelsNextPageRequest(nextLink);
+                using var message = CreateGetCustomModelsNextPageRequest(nextLink, op);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1122,8 +1123,9 @@ namespace Azure.AI.FormRecognizer
 
         /// <summary> Get information about all custom models. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="op"> Specify whether to return summary or full list of models. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Models.Models> GetCustomModelsNextPage(string nextLink, CancellationToken cancellationToken = default)
+        public Response<Models.Models> GetCustomModelsNextPage(string nextLink, Enum0? op, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1134,7 +1136,7 @@ namespace Azure.AI.FormRecognizer
             scope.Start();
             try
             {
-                using var message = CreateGetCustomModelsNextPageRequest(nextLink);
+                using var message = CreateGetCustomModelsNextPageRequest(nextLink, op);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

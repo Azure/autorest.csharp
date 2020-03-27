@@ -31,7 +31,7 @@ namespace Azure.Storage.Tables
         {
             return PageableHelpers.CreateAsyncEnumerable(async _ =>
             {
-                var response = await _tableOperations.RestClient.QueryAsync(null, _format, null, null, null, cancellationToken);
+                var response = await _tableOperations.RestClient.QueryAsync(null, new QueryOptions() { Format = _format }, cancellationToken);
                 return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
             }, (_, __) => throw new NotImplementedException());
         }

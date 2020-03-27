@@ -43,12 +43,12 @@ namespace azure_parameter_grouping
             uri.AppendRaw(host, false);
             uri.AppendPath("/parameterGrouping/postRequired/", false);
             uri.AppendPath(parameterGroupingPostRequiredParameters.Path, true);
-            if (parameterGroupingPostRequiredParameters.Query != null)
+            if (parameterGroupingPostRequiredParameters?.Query != null)
             {
                 uri.AppendQuery("query", parameterGroupingPostRequiredParameters.Query.Value, true);
             }
             request.Uri = uri;
-            if (parameterGroupingPostRequiredParameters.CustomHeader != null)
+            if (parameterGroupingPostRequiredParameters?.CustomHeader != null)
             {
                 request.Headers.Add("customHeader", parameterGroupingPostRequiredParameters.CustomHeader);
             }
@@ -129,12 +129,12 @@ namespace azure_parameter_grouping
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/parameterGrouping/postOptional", false);
-            if (parameterGroupingPostOptionalParameters.Query != null)
+            if (parameterGroupingPostOptionalParameters?.Query != null)
             {
                 uri.AppendQuery("query", parameterGroupingPostOptionalParameters.Query.Value, true);
             }
             request.Uri = uri;
-            if (parameterGroupingPostOptionalParameters.CustomHeader != null)
+            if (parameterGroupingPostOptionalParameters?.CustomHeader != null)
             {
                 request.Headers.Add("customHeader", parameterGroupingPostOptionalParameters.CustomHeader);
             }
@@ -201,20 +201,20 @@ namespace azure_parameter_grouping
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/parameterGrouping/postMultipleParameterGroups", false);
-            if (firstParameterGroup.QueryOne != null)
+            if (firstParameterGroup?.QueryOne != null)
             {
                 uri.AppendQuery("query-one", firstParameterGroup.QueryOne.Value, true);
             }
-            if (parameterGroupingPostMultiParamGroupsSecondParamGroup.QueryTwo != null)
+            if (parameterGroupingPostMultiParamGroupsSecondParamGroup?.QueryTwo != null)
             {
                 uri.AppendQuery("query-two", parameterGroupingPostMultiParamGroupsSecondParamGroup.QueryTwo.Value, true);
             }
             request.Uri = uri;
-            if (firstParameterGroup.HeaderOne != null)
+            if (firstParameterGroup?.HeaderOne != null)
             {
                 request.Headers.Add("header-one", firstParameterGroup.HeaderOne);
             }
-            if (parameterGroupingPostMultiParamGroupsSecondParamGroup.HeaderTwo != null)
+            if (parameterGroupingPostMultiParamGroupsSecondParamGroup?.HeaderTwo != null)
             {
                 request.Headers.Add("header-two", parameterGroupingPostMultiParamGroupsSecondParamGroup.HeaderTwo);
             }
@@ -283,12 +283,12 @@ namespace azure_parameter_grouping
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/parameterGrouping/sharedParameterGroupObject", false);
-            if (firstParameterGroup.QueryOne != null)
+            if (firstParameterGroup?.QueryOne != null)
             {
                 uri.AppendQuery("query-one", firstParameterGroup.QueryOne.Value, true);
             }
             request.Uri = uri;
-            if (firstParameterGroup.HeaderOne != null)
+            if (firstParameterGroup?.HeaderOne != null)
             {
                 request.Headers.Add("header-one", firstParameterGroup.HeaderOne);
             }

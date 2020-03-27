@@ -41,7 +41,7 @@ namespace CognitiveSearch
             this.pipeline = pipeline;
         }
 
-        internal HttpMessage CreateGetServiceStatisticsRequest(Guid? xMsClientRequestId)
+        internal HttpMessage CreateGetServiceStatisticsRequest(RequestOptions requestOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -51,23 +51,23 @@ namespace CognitiveSearch
             uri.AppendPath("/servicestats", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
             return message;
         }
 
         /// <summary> Gets service level statistics for a search service. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ServiceStatistics>> GetServiceStatisticsAsync(Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ServiceStatistics>> GetServiceStatisticsAsync(RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetServiceStatistics");
             scope.Start();
             try
             {
-                using var message = CreateGetServiceStatisticsRequest(xMsClientRequestId);
+                using var message = CreateGetServiceStatisticsRequest(requestOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -90,15 +90,15 @@ namespace CognitiveSearch
         }
 
         /// <summary> Gets service level statistics for a search service. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ServiceStatistics> GetServiceStatistics(Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public Response<ServiceStatistics> GetServiceStatistics(RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetServiceStatistics");
             scope.Start();
             try
             {
-                using var message = CreateGetServiceStatisticsRequest(xMsClientRequestId);
+                using var message = CreateGetServiceStatisticsRequest(requestOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

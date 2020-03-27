@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -32,19 +31,19 @@ namespace CognitiveSearch
         }
 
         /// <summary> Gets service level statistics for a search service. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<ServiceStatistics>> GetServiceStatisticsAsync(Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ServiceStatistics>> GetServiceStatisticsAsync(RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetServiceStatisticsAsync(xMsClientRequestId, cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetServiceStatisticsAsync(requestOptions, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Gets service level statistics for a search service. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ServiceStatistics> GetServiceStatistics(Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public virtual Response<ServiceStatistics> GetServiceStatistics(RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetServiceStatistics(xMsClientRequestId, cancellationToken);
+            return RestClient.GetServiceStatistics(requestOptions, cancellationToken);
         }
     }
 }

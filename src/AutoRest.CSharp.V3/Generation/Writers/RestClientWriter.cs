@@ -365,7 +365,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             var type = value.Type;
             if (type.IsNullable)
             {
-                return writer.Scope($"if ({value.Reference.Name} != null)");
+                // turn "object.Property" into "object?.Property"
+                var parts = value.Reference.Name.Split(".");
+                var conditionalName = string.Join("?.", parts);
+
+                return writer.Scope($"if ({conditionalName} != null)");
             }
 
             return default;
