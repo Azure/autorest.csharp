@@ -75,7 +75,7 @@ namespace Azure.Network.Management.Interface
             }
             async Task<Page<NetworkInterfaceTapConfiguration>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.ListNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                var response = await RestClient.ListNextPageAsync(nextLink, resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -103,7 +103,7 @@ namespace Azure.Network.Management.Interface
             }
             Page<NetworkInterfaceTapConfiguration> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.ListNextPage(nextLink, cancellationToken);
+                var response = RestClient.ListNextPage(nextLink, resourceGroupName, networkInterfaceName, cancellationToken);
                 return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);

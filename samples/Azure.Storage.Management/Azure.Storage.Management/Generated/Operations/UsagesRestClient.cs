@@ -136,7 +136,7 @@ namespace Azure.Storage.Management
             }
         }
 
-        internal HttpMessage CreateListByLocationNextPageRequest(string nextLink)
+        internal HttpMessage CreateListByLocationNextPageRequest(string nextLink, string location)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -149,19 +149,24 @@ namespace Azure.Storage.Management
 
         /// <summary> Gets the current usage count and the limit for the resources of the location under the subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="location"> The location of the Azure Storage resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<UsageListResult>> ListByLocationNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<UsageListResult>> ListByLocationNextPageAsync(string nextLink, string location, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
             }
 
             using var scope = clientDiagnostics.CreateScope("UsagesClient.ListByLocation");
             scope.Start();
             try
             {
-                using var message = CreateListByLocationNextPageRequest(nextLink);
+                using var message = CreateListByLocationNextPageRequest(nextLink, location);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -185,19 +190,24 @@ namespace Azure.Storage.Management
 
         /// <summary> Gets the current usage count and the limit for the resources of the location under the subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="location"> The location of the Azure Storage resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<UsageListResult> ListByLocationNextPage(string nextLink, CancellationToken cancellationToken = default)
+        public Response<UsageListResult> ListByLocationNextPage(string nextLink, string location, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
             }
 
             using var scope = clientDiagnostics.CreateScope("UsagesClient.ListByLocation");
             scope.Start();
             try
             {
-                using var message = CreateListByLocationNextPageRequest(nextLink);
+                using var message = CreateListByLocationNextPageRequest(nextLink, location);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

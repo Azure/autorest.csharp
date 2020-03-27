@@ -4,7 +4,7 @@ info: !<!Info>
   title: paging
 schemas: !<!Schemas> 
   numbers:
-  - !<!NumberSchema> &ref_1
+  - !<!NumberSchema> &ref_15
     type: integer
     precision: 32
     language: !<!Languages> 
@@ -12,7 +12,7 @@ schemas: !<!Schemas>
         name: Integer
         description: ''
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_16
+  - !<!NumberSchema> &ref_1
     type: integer
     apiVersions:
     - !<!ApiVersion> 
@@ -23,7 +23,7 @@ schemas: !<!Schemas>
         name: Integer
         description: ''
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_17
+  - !<!NumberSchema> &ref_3
     type: integer
     apiVersions:
     - !<!ApiVersion> 
@@ -43,7 +43,7 @@ schemas: !<!Schemas>
         name: String
         description: simple string
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_2
+  - !<!StringSchema> &ref_16
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -53,7 +53,7 @@ schemas: !<!Schemas>
         name: ProductPropertiesName
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_3
+  - !<!StringSchema> &ref_17
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -63,7 +63,7 @@ schemas: !<!Schemas>
         name: ProductResultValueNextLink
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_6
+  - !<!StringSchema> &ref_20
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -73,7 +73,7 @@ schemas: !<!Schemas>
         name: ProductResultNextLink
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_15
+  - !<!StringSchema> &ref_9
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -83,7 +83,7 @@ schemas: !<!Schemas>
         name: String
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_7
+  - !<!StringSchema> &ref_21
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -94,7 +94,7 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   choices:
-  - !<!ChoiceSchema> &ref_8
+  - !<!ChoiceSchema> &ref_22
     choices:
     - !<!ChoiceValue> 
       value: Succeeded
@@ -172,34 +172,393 @@ schemas: !<!Schemas>
         name: OperationResultStatus
         description: The status of the request
     protocol: !<!Protocols> {}
+  groups:
+  - !<!GroupSchema> &ref_2
+    type: group
+    properties:
+    - !<!GroupProperty> 
+      schema: *ref_1
+      originalParameter:
+      - !<!Parameter> &ref_29
+        schema: *ref_1
+        groupedBy: !<!Parameter> &ref_4
+          schema: *ref_2
+          implementation: Method
+          language: !<!Languages> 
+            default:
+              name: pagingGetMultiplePagesOptions
+              description: Parameter group
+          protocol: !<!Protocols> {}
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: maxresults
+            description: Sets the maximum number of items to return in the response.
+            serializedName: maxresults
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      serializedName: maxresults
+      language: !<!Languages> 
+        default:
+          name: maxresults
+          description: Sets the maximum number of items to return in the response.
+      protocol: !<!Protocols> {}
+    - !<!GroupProperty> 
+      schema: *ref_3
+      originalParameter:
+      - !<!Parameter> &ref_30
+        schema: *ref_3
+        groupedBy: *ref_4
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: timeout
+            description: 'Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.'
+            serializedName: timeout
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      serializedName: timeout
+      language: !<!Languages> 
+        default:
+          name: timeout
+          description: 'Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.'
+      protocol: !<!Protocols> {}
+    usage:
+    - input
+    language: !<!Languages> 
+      default:
+        name: PagingGetMultiplePagesOptions
+        description: Parameter group
+    protocol: !<!Protocols> {}
+  - !<!GroupSchema> &ref_5
+    type: group
+    properties:
+    - !<!GroupProperty> 
+      schema: *ref_1
+      originalParameter:
+      - !<!Parameter> &ref_32
+        schema: *ref_1
+        groupedBy: !<!Parameter> &ref_6
+          schema: *ref_5
+          implementation: Method
+          language: !<!Languages> 
+            default:
+              name: pagingGetOdataMultiplePagesOptions
+              description: Parameter group
+          protocol: !<!Protocols> {}
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: maxresults
+            description: Sets the maximum number of items to return in the response.
+            serializedName: maxresults
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      serializedName: maxresults
+      language: !<!Languages> 
+        default:
+          name: maxresults
+          description: Sets the maximum number of items to return in the response.
+      protocol: !<!Protocols> {}
+    - !<!GroupProperty> 
+      schema: *ref_3
+      originalParameter:
+      - !<!Parameter> &ref_33
+        schema: *ref_3
+        groupedBy: *ref_6
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: timeout
+            description: 'Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.'
+            serializedName: timeout
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      serializedName: timeout
+      language: !<!Languages> 
+        default:
+          name: timeout
+          description: 'Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.'
+      protocol: !<!Protocols> {}
+    usage:
+    - input
+    language: !<!Languages> 
+      default:
+        name: PagingGetOdataMultiplePagesOptions
+        description: Parameter group
+    protocol: !<!Protocols> {}
+  - !<!GroupSchema> &ref_7
+    type: group
+    properties:
+    - !<!GroupProperty> 
+      schema: *ref_1
+      originalParameter:
+      - !<!Parameter> &ref_36
+        schema: *ref_1
+        groupedBy: !<!Parameter> &ref_8
+          schema: *ref_7
+          implementation: Method
+          required: true
+          language: !<!Languages> 
+            default:
+              name: pagingGetMultiplePagesWithOffsetOptions
+              description: Parameter group
+          protocol: !<!Protocols> {}
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: maxresults
+            description: Sets the maximum number of items to return in the response.
+            serializedName: maxresults
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      serializedName: maxresults
+      language: !<!Languages> 
+        default:
+          name: maxresults
+          description: Sets the maximum number of items to return in the response.
+      protocol: !<!Protocols> {}
+    - !<!GroupProperty> 
+      schema: *ref_1
+      originalParameter:
+      - !<!Parameter> &ref_37
+        schema: *ref_1
+        groupedBy: *ref_8
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: offset
+            description: Offset of return value
+            serializedName: offset
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      required: true
+      serializedName: offset
+      language: !<!Languages> 
+        default:
+          name: offset
+          description: Offset of return value
+      protocol: !<!Protocols> {}
+    - !<!GroupProperty> 
+      schema: *ref_3
+      originalParameter:
+      - !<!Parameter> &ref_38
+        schema: *ref_3
+        groupedBy: *ref_8
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: timeout
+            description: 'Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.'
+            serializedName: timeout
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      serializedName: timeout
+      language: !<!Languages> 
+        default:
+          name: timeout
+          description: 'Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.'
+      protocol: !<!Protocols> {}
+    usage:
+    - input
+    language: !<!Languages> 
+      default:
+        name: PagingGetMultiplePagesWithOffsetOptions
+        description: Parameter group
+    protocol: !<!Protocols> {}
+  - !<!GroupSchema> &ref_10
+    type: group
+    properties:
+    - !<!GroupProperty> 
+      schema: *ref_9
+      originalParameter:
+      - !<!Parameter> &ref_46
+        schema: *ref_9
+        groupedBy: !<!Parameter> &ref_11
+          schema: *ref_10
+          implementation: Method
+          required: true
+          language: !<!Languages> 
+            default:
+              name: customParameterGroup
+              description: Parameter group
+          protocol: !<!Protocols> {}
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: apiVersion
+            description: Sets the api version to use.
+            serializedName: api_version
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      - !<!Parameter> &ref_48
+        schema: *ref_9
+        groupedBy: !<!Parameter> &ref_12
+          schema: *ref_10
+          implementation: Method
+          required: true
+          language: !<!Languages> 
+            default:
+              name: customParameterGroup
+              description: Parameter group
+          protocol: !<!Protocols> {}
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: apiVersion
+            description: Sets the api version to use.
+            serializedName: api_version
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: query
+      required: true
+      serializedName: api_version
+      language: !<!Languages> 
+        default:
+          name: apiVersion
+          description: Sets the api version to use.
+      protocol: !<!Protocols> {}
+    - !<!GroupProperty> 
+      schema: *ref_9
+      originalParameter:
+      - !<!Parameter> &ref_47
+        schema: *ref_9
+        groupedBy: *ref_11
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: tenant
+            description: Sets the tenant to use.
+            serializedName: tenant
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      - !<!Parameter> &ref_49
+        schema: *ref_9
+        groupedBy: *ref_12
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: tenant
+            description: Sets the tenant to use.
+            serializedName: tenant
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      required: true
+      serializedName: tenant
+      language: !<!Languages> 
+        default:
+          name: tenant
+          description: Sets the tenant to use.
+      protocol: !<!Protocols> {}
+    usage:
+    - input
+    language: !<!Languages> 
+      default:
+        name: CustomParameterGroup
+        description: Parameter group
+    protocol: !<!Protocols> {}
+  - !<!GroupSchema> &ref_13
+    type: group
+    properties:
+    - !<!GroupProperty> 
+      schema: *ref_1
+      originalParameter:
+      - !<!Parameter> &ref_52
+        schema: *ref_1
+        groupedBy: !<!Parameter> &ref_14
+          schema: *ref_13
+          implementation: Method
+          language: !<!Languages> 
+            default:
+              name: pagingGetMultiplePagesLroOptions
+              description: Parameter group
+          protocol: !<!Protocols> {}
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: maxresults
+            description: Sets the maximum number of items to return in the response.
+            serializedName: maxresults
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      serializedName: maxresults
+      language: !<!Languages> 
+        default:
+          name: maxresults
+          description: Sets the maximum number of items to return in the response.
+      protocol: !<!Protocols> {}
+    - !<!GroupProperty> 
+      schema: *ref_3
+      originalParameter:
+      - !<!Parameter> &ref_53
+        schema: *ref_3
+        groupedBy: *ref_14
+        implementation: Method
+        language: !<!Languages> 
+          default:
+            name: timeout
+            description: 'Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.'
+            serializedName: timeout
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      serializedName: timeout
+      language: !<!Languages> 
+        default:
+          name: timeout
+          description: 'Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.'
+      protocol: !<!Protocols> {}
+    usage:
+    - input
+    language: !<!Languages> 
+      default:
+        name: PagingGetMultiplePagesLroOptions
+        description: Parameter group
+    protocol: !<!Protocols> {}
   objects:
-  - !<!ObjectSchema> &ref_13
+  - !<!ObjectSchema> &ref_27
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_9
+      schema: !<!ArraySchema> &ref_23
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
-        elementType: !<!ObjectSchema> &ref_4
+        elementType: !<!ObjectSchema> &ref_18
           type: object
           apiVersions:
           - !<!ApiVersion> 
             version: 1.0.0
           properties:
           - !<!Property> 
-            schema: !<!ObjectSchema> &ref_5
+            schema: !<!ObjectSchema> &ref_19
               type: object
               apiVersions:
               - !<!ApiVersion> 
                 version: 1.0.0
               properties:
               - !<!Property> 
-                schema: *ref_1
+                schema: *ref_15
                 serializedName: id
                 language: !<!Languages> 
                   default:
@@ -207,7 +566,7 @@ schemas: !<!Schemas>
                     description: ''
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: *ref_2
+                schema: *ref_16
                 serializedName: name
                 language: !<!Languages> 
                   default:
@@ -252,7 +611,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_3
+      schema: *ref_17
       serializedName: nextLink
       language: !<!Languages> 
         default:
@@ -269,21 +628,21 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - *ref_4
-  - *ref_5
-  - !<!ObjectSchema> &ref_14
+  - *ref_18
+  - *ref_19
+  - !<!ObjectSchema> &ref_28
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_10
+      schema: !<!ArraySchema> &ref_24
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
-        elementType: *ref_4
+        elementType: *ref_18
         language: !<!Languages> 
           default:
             name: ProductResultValues
@@ -296,7 +655,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_6
+      schema: *ref_20
       serializedName: nextLink
       language: !<!Languages> 
         default:
@@ -313,19 +672,19 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_24
+  - !<!ObjectSchema> &ref_35
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_11
+      schema: !<!ArraySchema> &ref_25
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
-        elementType: *ref_4
+        elementType: *ref_18
         language: !<!Languages> 
           default:
             name: OdataProductResultValues
@@ -338,7 +697,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_7
+      schema: *ref_21
       serializedName: odata.nextLink
       language: !<!Languages> 
         default:
@@ -362,7 +721,7 @@ schemas: !<!Schemas>
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: *ref_8
+      schema: *ref_22
       serializedName: status
       language: !<!Languages> 
         default:
@@ -376,11 +735,11 @@ schemas: !<!Schemas>
         namespace: ''
     protocol: !<!Protocols> {}
   arrays:
-  - *ref_9
-  - *ref_10
-  - *ref_11
+  - *ref_23
+  - *ref_24
+  - *ref_25
 globalParameters:
-- !<!Parameter> &ref_12
+- !<!Parameter> &ref_26
   schema: *ref_0
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
@@ -404,7 +763,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_12
+    - *ref_26
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -419,7 +778,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_13
+      schema: *ref_27
       language: !<!Languages> 
         default:
           name: ''
@@ -456,7 +815,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_12
+    - *ref_26
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -471,7 +830,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_14
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -510,7 +869,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_12
+    - *ref_26
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -525,7 +884,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_14
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -564,9 +923,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_12
-    - !<!Parameter> &ref_18
-      schema: *ref_15
+    - *ref_26
+    - !<!Parameter> &ref_31
+      schema: *ref_9
       implementation: Method
       language: !<!Languages> 
         default:
@@ -576,36 +935,14 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: header
-    - !<!Parameter> &ref_19
-      schema: *ref_16
-      implementation: Method
-      extensions:
-        x-ms-parameter-grouping:
-          postfix: Options
-      language: !<!Languages> 
-        default:
-          name: maxresults
-          description: Sets the maximum number of items to return in the response.
-          serializedName: maxresults
-      protocol: !<!Protocols> 
-        http: !<!HttpParameter> 
-          in: header
-    - !<!Parameter> &ref_20
-      schema: *ref_17
-      implementation: Method
-      extensions:
-        x-ms-parameter-grouping:
-          postfix: Options
-      language: !<!Languages> 
-        default:
-          name: timeout
-          description: 'Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.'
-          serializedName: timeout
-      protocol: !<!Protocols> 
-        http: !<!HttpParameter> 
-          in: header
+    - *ref_29
+    - *ref_30
     requests:
     - !<!Request> 
+      parameters:
+      - *ref_4
+      signatureParameters:
+      - *ref_4
       language: !<!Languages> 
         default:
           name: ''
@@ -616,12 +953,10 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_18
-    - *ref_19
-    - *ref_20
+    - *ref_31
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_14
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -660,9 +995,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_12
-    - !<!Parameter> &ref_21
-      schema: *ref_15
+    - *ref_26
+    - !<!Parameter> &ref_34
+      schema: *ref_9
       implementation: Method
       language: !<!Languages> 
         default:
@@ -672,36 +1007,14 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: header
-    - !<!Parameter> &ref_22
-      schema: *ref_16
-      implementation: Method
-      extensions:
-        x-ms-parameter-grouping:
-          postfix: Options
-      language: !<!Languages> 
-        default:
-          name: maxresults
-          description: Sets the maximum number of items to return in the response.
-          serializedName: maxresults
-      protocol: !<!Protocols> 
-        http: !<!HttpParameter> 
-          in: header
-    - !<!Parameter> &ref_23
-      schema: *ref_17
-      implementation: Method
-      extensions:
-        x-ms-parameter-grouping:
-          postfix: Options
-      language: !<!Languages> 
-        default:
-          name: timeout
-          description: 'Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.'
-          serializedName: timeout
-      protocol: !<!Protocols> 
-        http: !<!HttpParameter> 
-          in: header
+    - *ref_32
+    - *ref_33
     requests:
     - !<!Request> 
+      parameters:
+      - *ref_6
+      signatureParameters:
+      - *ref_6
       language: !<!Languages> 
         default:
           name: ''
@@ -712,12 +1025,10 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_21
-    - *ref_22
-    - *ref_23
+    - *ref_34
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_24
+      schema: *ref_35
       language: !<!Languages> 
         default:
           name: ''
@@ -756,9 +1067,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_12
-    - !<!Parameter> &ref_25
-      schema: *ref_15
+    - *ref_26
+    - !<!Parameter> &ref_39
+      schema: *ref_9
       implementation: Method
       language: !<!Languages> 
         default:
@@ -768,51 +1079,15 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: header
-    - !<!Parameter> &ref_26
-      schema: *ref_16
-      implementation: Method
-      extensions:
-        x-ms-parameter-grouping:
-          postfix: Options
-      language: !<!Languages> 
-        default:
-          name: maxresults
-          description: Sets the maximum number of items to return in the response.
-          serializedName: maxresults
-      protocol: !<!Protocols> 
-        http: !<!HttpParameter> 
-          in: header
-    - !<!Parameter> &ref_27
-      schema: *ref_16
-      implementation: Method
-      required: true
-      extensions:
-        x-ms-parameter-grouping:
-          postfix: Options
-      language: !<!Languages> 
-        default:
-          name: offset
-          description: Offset of return value
-          serializedName: offset
-      protocol: !<!Protocols> 
-        http: !<!HttpParameter> 
-          in: path
-    - !<!Parameter> &ref_28
-      schema: *ref_17
-      implementation: Method
-      extensions:
-        x-ms-parameter-grouping:
-          postfix: Options
-      language: !<!Languages> 
-        default:
-          name: timeout
-          description: 'Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.'
-          serializedName: timeout
-      protocol: !<!Protocols> 
-        http: !<!HttpParameter> 
-          in: header
+    - *ref_36
+    - *ref_37
+    - *ref_38
     requests:
     - !<!Request> 
+      parameters:
+      - *ref_8
+      signatureParameters:
+      - *ref_8
       language: !<!Languages> 
         default:
           name: ''
@@ -823,13 +1098,10 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_25
-    - *ref_26
-    - *ref_27
-    - *ref_28
+    - *ref_39
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_14
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -868,7 +1140,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_12
+    - *ref_26
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -883,7 +1155,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_14
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -922,7 +1194,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_12
+    - *ref_26
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -937,7 +1209,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_14
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -976,7 +1248,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_12
+    - *ref_26
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -991,7 +1263,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_14
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -1030,7 +1302,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_12
+    - *ref_26
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -1045,7 +1317,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_14
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -1084,7 +1356,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_12
+    - *ref_26
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -1099,7 +1371,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_14
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -1138,9 +1410,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_12
-    - !<!Parameter> &ref_29
-      schema: *ref_15
+    - *ref_26
+    - !<!Parameter> &ref_40
+      schema: *ref_9
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -1151,8 +1423,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: query
-    - !<!Parameter> &ref_30
-      schema: *ref_15
+    - !<!Parameter> &ref_41
+      schema: *ref_9
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -1175,11 +1447,11 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_29
-    - *ref_30
+    - *ref_40
+    - *ref_41
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_24
+      schema: *ref_35
       language: !<!Languages> 
         default:
           name: ''
@@ -1215,14 +1487,14 @@ operationGroups:
           itemName: values
           member: NextFragment
           nextLinkName: odata.nextLink
-          nextLinkOperation: !<!Operation> &ref_34
+          nextLinkOperation: !<!Operation> &ref_45
             apiVersions:
             - !<!ApiVersion> 
               version: 1.0.0
             parameters:
-            - *ref_12
-            - !<!Parameter> &ref_31
-              schema: *ref_15
+            - *ref_26
+            - !<!Parameter> &ref_42
+              schema: *ref_9
               implementation: Method
               required: true
               language: !<!Languages> 
@@ -1233,8 +1505,8 @@ operationGroups:
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: query
-            - !<!Parameter> &ref_32
-              schema: *ref_15
+            - !<!Parameter> &ref_43
+              schema: *ref_9
               implementation: Method
               required: true
               language: !<!Languages> 
@@ -1245,8 +1517,8 @@ operationGroups:
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: path
-            - !<!Parameter> &ref_33
-              schema: *ref_15
+            - !<!Parameter> &ref_44
+              schema: *ref_9
               implementation: Method
               required: true
               extensions:
@@ -1271,12 +1543,12 @@ operationGroups:
                   method: get
                   uri: '{$host}'
             signatureParameters:
-            - *ref_31
-            - *ref_32
-            - *ref_33
+            - *ref_42
+            - *ref_43
+            - *ref_44
             responses:
             - !<!SchemaResponse> 
-              schema: *ref_24
+              schema: *ref_35
               language: !<!Languages> 
                 default:
                   name: ''
@@ -1312,7 +1584,7 @@ operationGroups:
                   itemName: values
                   member: NextFragment
                   nextLinkName: odata.nextLink
-                  nextLinkOperation: *ref_34
+                  nextLinkOperation: *ref_45
             protocol: !<!Protocols> {}
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1320,39 +1592,15 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_12
-    - !<!Parameter> &ref_35
-      schema: *ref_15
-      implementation: Method
-      required: true
-      extensions:
-        x-ms-parameter-grouping:
-          name: custom-parameter-group
-      language: !<!Languages> 
-        default:
-          name: apiVersion
-          description: Sets the api version to use.
-          serializedName: api_version
-      protocol: !<!Protocols> 
-        http: !<!HttpParameter> 
-          in: query
-    - !<!Parameter> &ref_36
-      schema: *ref_15
-      implementation: Method
-      required: true
-      extensions:
-        x-ms-parameter-grouping:
-          name: custom-parameter-group
-      language: !<!Languages> 
-        default:
-          name: tenant
-          description: Sets the tenant to use.
-          serializedName: tenant
-      protocol: !<!Protocols> 
-        http: !<!HttpParameter> 
-          in: path
+    - *ref_26
+    - *ref_46
+    - *ref_47
     requests:
     - !<!Request> 
+      parameters:
+      - *ref_11
+      signatureParameters:
+      - *ref_11
       language: !<!Languages> 
         default:
           name: ''
@@ -1362,12 +1610,10 @@ operationGroups:
           path: '/paging/multiple/fragmentwithgrouping/{tenant}'
           method: get
           uri: '{$host}'
-    signatureParameters:
-    - *ref_35
-    - *ref_36
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_24
+      schema: *ref_35
       language: !<!Languages> 
         default:
           name: ''
@@ -1403,44 +1649,16 @@ operationGroups:
           itemName: values
           member: NextFragmentWithGrouping
           nextLinkName: odata.nextLink
-          nextLinkOperation: !<!Operation> &ref_40
+          nextLinkOperation: !<!Operation> &ref_51
             apiVersions:
             - !<!ApiVersion> 
               version: 1.0.0
             parameters:
-            - *ref_12
-            - !<!Parameter> &ref_37
-              schema: *ref_15
-              implementation: Method
-              required: true
-              extensions:
-                x-ms-parameter-grouping:
-                  name: custom-parameter-group
-              language: !<!Languages> 
-                default:
-                  name: apiVersion
-                  description: Sets the api version to use.
-                  serializedName: api_version
-              protocol: !<!Protocols> 
-                http: !<!HttpParameter> 
-                  in: query
-            - !<!Parameter> &ref_38
-              schema: *ref_15
-              implementation: Method
-              required: true
-              extensions:
-                x-ms-parameter-grouping:
-                  name: custom-parameter-group
-              language: !<!Languages> 
-                default:
-                  name: tenant
-                  description: Sets the tenant to use.
-                  serializedName: tenant
-              protocol: !<!Protocols> 
-                http: !<!HttpParameter> 
-                  in: path
-            - !<!Parameter> &ref_39
-              schema: *ref_15
+            - *ref_26
+            - *ref_48
+            - *ref_49
+            - !<!Parameter> &ref_50
+              schema: *ref_9
               implementation: Method
               required: true
               extensions:
@@ -1455,6 +1673,10 @@ operationGroups:
                   in: path
             requests:
             - !<!Request> 
+              parameters:
+              - *ref_12
+              signatureParameters:
+              - *ref_12
               language: !<!Languages> 
                 default:
                   name: ''
@@ -1465,12 +1687,10 @@ operationGroups:
                   method: get
                   uri: '{$host}'
             signatureParameters:
-            - *ref_37
-            - *ref_38
-            - *ref_39
+            - *ref_50
             responses:
             - !<!SchemaResponse> 
-              schema: *ref_24
+              schema: *ref_35
               language: !<!Languages> 
                 default:
                   name: ''
@@ -1506,7 +1726,7 @@ operationGroups:
                   itemName: values
                   member: NextFragmentWithGrouping
                   nextLinkName: odata.nextLink
-                  nextLinkOperation: *ref_40
+                  nextLinkOperation: *ref_51
             protocol: !<!Protocols> {}
     protocol: !<!Protocols> {}
   - !<!Operation> 
@@ -1514,9 +1734,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_12
-    - !<!Parameter> &ref_41
-      schema: *ref_15
+    - *ref_26
+    - !<!Parameter> &ref_54
+      schema: *ref_9
       implementation: Method
       language: !<!Languages> 
         default:
@@ -1526,36 +1746,14 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: header
-    - !<!Parameter> &ref_42
-      schema: *ref_16
-      implementation: Method
-      extensions:
-        x-ms-parameter-grouping:
-          postfix: Options
-      language: !<!Languages> 
-        default:
-          name: maxresults
-          description: Sets the maximum number of items to return in the response.
-          serializedName: maxresults
-      protocol: !<!Protocols> 
-        http: !<!HttpParameter> 
-          in: header
-    - !<!Parameter> &ref_43
-      schema: *ref_17
-      implementation: Method
-      extensions:
-        x-ms-parameter-grouping:
-          postfix: Options
-      language: !<!Languages> 
-        default:
-          name: timeout
-          description: 'Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.'
-          serializedName: timeout
-      protocol: !<!Protocols> 
-        http: !<!HttpParameter> 
-          in: header
+    - *ref_52
+    - *ref_53
     requests:
     - !<!Request> 
+      parameters:
+      - *ref_14
+      signatureParameters:
+      - *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -1566,12 +1764,10 @@ operationGroups:
           method: post
           uri: '{$host}'
     signatureParameters:
-    - *ref_41
-    - *ref_42
-    - *ref_43
+    - *ref_54
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_14
+      schema: *ref_28
       language: !<!Languages> 
         default:
           name: ''
@@ -1606,8 +1802,8 @@ operationGroups:
           itemName: values
           nextLinkName: nextLink
     protocol: !<!Protocols> {}
-  - *ref_34
-  - *ref_40
+  - *ref_45
+  - *ref_51
   language: !<!Languages> 
     default:
       name: Paging

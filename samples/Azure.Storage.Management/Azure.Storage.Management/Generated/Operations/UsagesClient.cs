@@ -49,7 +49,7 @@ namespace Azure.Storage.Management
             }
             async Task<Page<Usage>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.ListByLocationNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                var response = await RestClient.ListByLocationNextPageAsync(nextLink, location, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -72,7 +72,7 @@ namespace Azure.Storage.Management
             }
             Page<Usage> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.ListByLocationNextPage(nextLink, cancellationToken);
+                var response = RestClient.ListByLocationNextPage(nextLink, location, cancellationToken);
                 return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);

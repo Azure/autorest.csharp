@@ -64,7 +64,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         {
             var allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
                 .Concat(_codeModel.Schemas.SealedChoices)
-                .Concat(_codeModel.Schemas.Objects);
+                .Concat(_codeModel.Schemas.Objects)
+                .Concat(_codeModel.Schemas.Groups);
 
             return allSchemas.ToDictionary(schema => schema, BuildModel);
         }

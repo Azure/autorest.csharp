@@ -9,6 +9,7 @@ modelerfour:
   always-create-content-type-parameter: true
   flatten-models: true
   flatten-payloads: true
+  group-parameters: true
 pipeline:
   csharpgen:
     input: modelerfour/identity
