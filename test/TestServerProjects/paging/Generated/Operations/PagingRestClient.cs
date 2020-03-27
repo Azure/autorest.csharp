@@ -251,7 +251,7 @@ namespace paging
             }
         }
 
-        internal HttpMessage CreateGetMultiplePagesRequest(string clientRequestId, int? maxresults, int? timeout)
+        internal HttpMessage CreateGetMultiplePagesRequest(string clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -264,29 +264,28 @@ namespace paging
             {
                 request.Headers.Add("client-request-id", clientRequestId);
             }
-            if (maxresults != null)
+            if (pagingGetMultiplePagesOptions?.Maxresults != null)
             {
-                request.Headers.Add("maxresults", maxresults.Value);
+                request.Headers.Add("maxresults", pagingGetMultiplePagesOptions.Maxresults.Value);
             }
-            if (timeout != null)
+            if (pagingGetMultiplePagesOptions?.Timeout != null)
             {
-                request.Headers.Add("timeout", timeout.Value);
+                request.Headers.Add("timeout", pagingGetMultiplePagesOptions.Timeout.Value);
             }
             return message;
         }
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="pagingGetMultiplePagesOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesAsync(string clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePages");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesRequest(clientRequestId, maxresults, timeout);
+                using var message = CreateGetMultiplePagesRequest(clientRequestId, pagingGetMultiplePagesOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -310,16 +309,15 @@ namespace paging
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="pagingGetMultiplePagesOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ProductResult> GetMultiplePages(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePages(string clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePages");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesRequest(clientRequestId, maxresults, timeout);
+                using var message = CreateGetMultiplePagesRequest(clientRequestId, pagingGetMultiplePagesOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -341,7 +339,7 @@ namespace paging
             }
         }
 
-        internal HttpMessage CreateGetOdataMultiplePagesRequest(string clientRequestId, int? maxresults, int? timeout)
+        internal HttpMessage CreateGetOdataMultiplePagesRequest(string clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -354,29 +352,28 @@ namespace paging
             {
                 request.Headers.Add("client-request-id", clientRequestId);
             }
-            if (maxresults != null)
+            if (pagingGetOdataMultiplePagesOptions?.Maxresults != null)
             {
-                request.Headers.Add("maxresults", maxresults.Value);
+                request.Headers.Add("maxresults", pagingGetOdataMultiplePagesOptions.Maxresults.Value);
             }
-            if (timeout != null)
+            if (pagingGetOdataMultiplePagesOptions?.Timeout != null)
             {
-                request.Headers.Add("timeout", timeout.Value);
+                request.Headers.Add("timeout", pagingGetOdataMultiplePagesOptions.Timeout.Value);
             }
             return message;
         }
 
         /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="pagingGetOdataMultiplePagesOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<OdataProductResult>> GetOdataMultiplePagesAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<OdataProductResult>> GetOdataMultiplePagesAsync(string clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetOdataMultiplePages");
             scope.Start();
             try
             {
-                using var message = CreateGetOdataMultiplePagesRequest(clientRequestId, maxresults, timeout);
+                using var message = CreateGetOdataMultiplePagesRequest(clientRequestId, pagingGetOdataMultiplePagesOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -400,16 +397,15 @@ namespace paging
 
         /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="pagingGetOdataMultiplePagesOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<OdataProductResult> GetOdataMultiplePages(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public Response<OdataProductResult> GetOdataMultiplePages(string clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetOdataMultiplePages");
             scope.Start();
             try
             {
-                using var message = CreateGetOdataMultiplePagesRequest(clientRequestId, maxresults, timeout);
+                using var message = CreateGetOdataMultiplePagesRequest(clientRequestId, pagingGetOdataMultiplePagesOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -431,7 +427,7 @@ namespace paging
             }
         }
 
-        internal HttpMessage CreateGetMultiplePagesWithOffsetRequest(string clientRequestId, int? maxresults, int offset, int? timeout)
+        internal HttpMessage CreateGetMultiplePagesWithOffsetRequest(string clientRequestId, PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -439,36 +435,39 @@ namespace paging
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paging/multiple/withpath/", false);
-            uri.AppendPath(offset, true);
+            uri.AppendPath(pagingGetMultiplePagesWithOffsetOptions.Offset, true);
             request.Uri = uri;
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
             }
-            if (maxresults != null)
+            if (pagingGetMultiplePagesWithOffsetOptions?.Maxresults != null)
             {
-                request.Headers.Add("maxresults", maxresults.Value);
+                request.Headers.Add("maxresults", pagingGetMultiplePagesWithOffsetOptions.Maxresults.Value);
             }
-            if (timeout != null)
+            if (pagingGetMultiplePagesWithOffsetOptions?.Timeout != null)
             {
-                request.Headers.Add("timeout", timeout.Value);
+                request.Headers.Add("timeout", pagingGetMultiplePagesWithOffsetOptions.Timeout.Value);
             }
             return message;
         }
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="offset"> Offset of return value. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="pagingGetMultiplePagesWithOffsetOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesWithOffsetAsync(string clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesWithOffsetAsync(string clientRequestId, PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, CancellationToken cancellationToken = default)
         {
+            if (pagingGetMultiplePagesWithOffsetOptions == null)
+            {
+                throw new ArgumentNullException(nameof(pagingGetMultiplePagesWithOffsetOptions));
+            }
+
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesWithOffset");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesWithOffsetRequest(clientRequestId, maxresults, offset, timeout);
+                using var message = CreateGetMultiplePagesWithOffsetRequest(clientRequestId, pagingGetMultiplePagesWithOffsetOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -492,17 +491,20 @@ namespace paging
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="offset"> Offset of return value. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="pagingGetMultiplePagesWithOffsetOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ProductResult> GetMultiplePagesWithOffset(string clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePagesWithOffset(string clientRequestId, PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, CancellationToken cancellationToken = default)
         {
+            if (pagingGetMultiplePagesWithOffsetOptions == null)
+            {
+                throw new ArgumentNullException(nameof(pagingGetMultiplePagesWithOffsetOptions));
+            }
+
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesWithOffset");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesWithOffsetRequest(clientRequestId, maxresults, offset, timeout);
+                using var message = CreateGetMultiplePagesWithOffsetRequest(clientRequestId, pagingGetMultiplePagesWithOffsetOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -980,7 +982,7 @@ namespace paging
             }
         }
 
-        internal HttpMessage CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(string apiVersion, string tenant)
+        internal HttpMessage CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(CustomParameterGroup customParameterGroup)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -988,32 +990,27 @@ namespace paging
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
-            uri.AppendPath(tenant, true);
-            uri.AppendQuery("api_version", apiVersion, true);
+            uri.AppendPath(customParameterGroup.Tenant, true);
+            uri.AppendQuery("api_version", customParameterGroup.ApiVersion, true);
             request.Uri = uri;
             return message;
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<OdataProductResult>> GetMultiplePagesFragmentWithGroupingNextLinkAsync(string apiVersion, string tenant, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<OdataProductResult>> GetMultiplePagesFragmentWithGroupingNextLinkAsync(CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default)
         {
-            if (apiVersion == null)
+            if (customParameterGroup == null)
             {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
+                throw new ArgumentNullException(nameof(customParameterGroup));
             }
 
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(apiVersion, tenant);
+                using var message = CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(customParameterGroup);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1036,25 +1033,20 @@ namespace paging
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<OdataProductResult> GetMultiplePagesFragmentWithGroupingNextLink(string apiVersion, string tenant, CancellationToken cancellationToken = default)
+        public Response<OdataProductResult> GetMultiplePagesFragmentWithGroupingNextLink(CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default)
         {
-            if (apiVersion == null)
+            if (customParameterGroup == null)
             {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
+                throw new ArgumentNullException(nameof(customParameterGroup));
             }
 
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(apiVersion, tenant);
+                using var message = CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(customParameterGroup);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -1076,7 +1068,7 @@ namespace paging
             }
         }
 
-        internal HttpMessage CreateGetMultiplePagesLRORequest(string clientRequestId, int? maxresults, int? timeout)
+        internal HttpMessage CreateGetMultiplePagesLRORequest(string clientRequestId, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1089,29 +1081,28 @@ namespace paging
             {
                 request.Headers.Add("client-request-id", clientRequestId);
             }
-            if (maxresults != null)
+            if (pagingGetMultiplePagesLroOptions?.Maxresults != null)
             {
-                request.Headers.Add("maxresults", maxresults.Value);
+                request.Headers.Add("maxresults", pagingGetMultiplePagesLroOptions.Maxresults.Value);
             }
-            if (timeout != null)
+            if (pagingGetMultiplePagesLroOptions?.Timeout != null)
             {
-                request.Headers.Add("timeout", timeout.Value);
+                request.Headers.Add("timeout", pagingGetMultiplePagesLroOptions.Timeout.Value);
             }
             return message;
         }
 
         /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="pagingGetMultiplePagesLroOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetMultiplePagesLROAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> GetMultiplePagesLROAsync(string clientRequestId, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
+                using var message = CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1130,16 +1121,15 @@ namespace paging
 
         /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="pagingGetMultiplePagesLroOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response GetMultiplePagesLRO(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public Response GetMultiplePagesLRO(string clientRequestId, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
+                using var message = CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -1264,7 +1254,7 @@ namespace paging
             }
         }
 
-        internal HttpMessage CreateNextFragmentWithGroupingRequest(string apiVersion, string tenant, string nextLink)
+        internal HttpMessage CreateNextFragmentWithGroupingRequest(string nextLink, CustomParameterGroup customParameterGroup)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1272,39 +1262,34 @@ namespace paging
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
-            uri.AppendPath(tenant, true);
+            uri.AppendPath(customParameterGroup.Tenant, true);
             uri.AppendPath("/", false);
             uri.AppendPath(nextLink, false);
-            uri.AppendQuery("api_version", apiVersion, true);
+            uri.AppendQuery("api_version", customParameterGroup.ApiVersion, true);
             request.Uri = uri;
             return message;
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
+        /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<OdataProductResult>> NextFragmentWithGroupingAsync(string apiVersion, string tenant, string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<OdataProductResult>> NextFragmentWithGroupingAsync(string nextLink, CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default)
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (customParameterGroup == null)
+            {
+                throw new ArgumentNullException(nameof(customParameterGroup));
             }
 
             using var scope = clientDiagnostics.CreateScope("PagingClient.NextFragmentWithGrouping");
             scope.Start();
             try
             {
-                using var message = CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink);
+                using var message = CreateNextFragmentWithGroupingRequest(nextLink, customParameterGroup);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1327,30 +1312,25 @@ namespace paging
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
+        /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<OdataProductResult> NextFragmentWithGrouping(string apiVersion, string tenant, string nextLink, CancellationToken cancellationToken = default)
+        public Response<OdataProductResult> NextFragmentWithGrouping(string nextLink, CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default)
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (customParameterGroup == null)
+            {
+                throw new ArgumentNullException(nameof(customParameterGroup));
             }
 
             using var scope = clientDiagnostics.CreateScope("PagingClient.NextFragmentWithGrouping");
             scope.Start();
             try
             {
-                using var message = CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink);
+                using var message = CreateNextFragmentWithGroupingRequest(nextLink, customParameterGroup);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -1621,7 +1601,7 @@ namespace paging
             }
         }
 
-        internal HttpMessage CreateGetMultiplePagesNextPageRequest(string clientRequestId, int? maxresults, int? timeout, string nextLink)
+        internal HttpMessage CreateGetMultiplePagesNextPageRequest(string nextLink, string clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1633,24 +1613,23 @@ namespace paging
             {
                 request.Headers.Add("client-request-id", clientRequestId);
             }
-            if (maxresults != null)
+            if (pagingGetMultiplePagesOptions?.Maxresults != null)
             {
-                request.Headers.Add("maxresults", maxresults.Value);
+                request.Headers.Add("maxresults", pagingGetMultiplePagesOptions.Maxresults.Value);
             }
-            if (timeout != null)
+            if (pagingGetMultiplePagesOptions?.Timeout != null)
             {
-                request.Headers.Add("timeout", timeout.Value);
+                request.Headers.Add("timeout", pagingGetMultiplePagesOptions.Timeout.Value);
             }
             return message;
         }
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="pagingGetMultiplePagesOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesNextPageAsync(string clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesNextPageAsync(string nextLink, string clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1661,7 +1640,7 @@ namespace paging
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesNextPageRequest(clientRequestId, maxresults, timeout, nextLink);
+                using var message = CreateGetMultiplePagesNextPageRequest(nextLink, clientRequestId, pagingGetMultiplePagesOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1684,12 +1663,11 @@ namespace paging
         }
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="pagingGetMultiplePagesOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ProductResult> GetMultiplePagesNextPage(string clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePagesNextPage(string nextLink, string clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1700,7 +1678,7 @@ namespace paging
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesNextPageRequest(clientRequestId, maxresults, timeout, nextLink);
+                using var message = CreateGetMultiplePagesNextPageRequest(nextLink, clientRequestId, pagingGetMultiplePagesOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -1722,7 +1700,7 @@ namespace paging
             }
         }
 
-        internal HttpMessage CreateGetOdataMultiplePagesNextPageRequest(string clientRequestId, int? maxresults, int? timeout, string nextLink)
+        internal HttpMessage CreateGetOdataMultiplePagesNextPageRequest(string nextLink, string clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1734,24 +1712,23 @@ namespace paging
             {
                 request.Headers.Add("client-request-id", clientRequestId);
             }
-            if (maxresults != null)
+            if (pagingGetOdataMultiplePagesOptions?.Maxresults != null)
             {
-                request.Headers.Add("maxresults", maxresults.Value);
+                request.Headers.Add("maxresults", pagingGetOdataMultiplePagesOptions.Maxresults.Value);
             }
-            if (timeout != null)
+            if (pagingGetOdataMultiplePagesOptions?.Timeout != null)
             {
-                request.Headers.Add("timeout", timeout.Value);
+                request.Headers.Add("timeout", pagingGetOdataMultiplePagesOptions.Timeout.Value);
             }
             return message;
         }
 
         /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="pagingGetOdataMultiplePagesOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<OdataProductResult>> GetOdataMultiplePagesNextPageAsync(string clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<OdataProductResult>> GetOdataMultiplePagesNextPageAsync(string nextLink, string clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1762,7 +1739,7 @@ namespace paging
             scope.Start();
             try
             {
-                using var message = CreateGetOdataMultiplePagesNextPageRequest(clientRequestId, maxresults, timeout, nextLink);
+                using var message = CreateGetOdataMultiplePagesNextPageRequest(nextLink, clientRequestId, pagingGetOdataMultiplePagesOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1785,12 +1762,11 @@ namespace paging
         }
 
         /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="pagingGetOdataMultiplePagesOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<OdataProductResult> GetOdataMultiplePagesNextPage(string clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
+        public Response<OdataProductResult> GetOdataMultiplePagesNextPage(string nextLink, string clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1801,7 +1777,7 @@ namespace paging
             scope.Start();
             try
             {
-                using var message = CreateGetOdataMultiplePagesNextPageRequest(clientRequestId, maxresults, timeout, nextLink);
+                using var message = CreateGetOdataMultiplePagesNextPageRequest(nextLink, clientRequestId, pagingGetOdataMultiplePagesOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -1823,7 +1799,7 @@ namespace paging
             }
         }
 
-        internal HttpMessage CreateGetMultiplePagesWithOffsetNextPageRequest(string clientRequestId, int? maxresults, int? timeout, string nextLink)
+        internal HttpMessage CreateGetMultiplePagesWithOffsetNextPageRequest(string nextLink, string clientRequestId, PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1835,35 +1811,38 @@ namespace paging
             {
                 request.Headers.Add("client-request-id", clientRequestId);
             }
-            if (maxresults != null)
+            if (pagingGetMultiplePagesWithOffsetOptions?.Maxresults != null)
             {
-                request.Headers.Add("maxresults", maxresults.Value);
+                request.Headers.Add("maxresults", pagingGetMultiplePagesWithOffsetOptions.Maxresults.Value);
             }
-            if (timeout != null)
+            if (pagingGetMultiplePagesWithOffsetOptions?.Timeout != null)
             {
-                request.Headers.Add("timeout", timeout.Value);
+                request.Headers.Add("timeout", pagingGetMultiplePagesWithOffsetOptions.Timeout.Value);
             }
             return message;
         }
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="pagingGetMultiplePagesWithOffsetOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesWithOffsetNextPageAsync(string clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ProductResult>> GetMultiplePagesWithOffsetNextPageAsync(string nextLink, string clientRequestId, PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (pagingGetMultiplePagesWithOffsetOptions == null)
+            {
+                throw new ArgumentNullException(nameof(pagingGetMultiplePagesWithOffsetOptions));
             }
 
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesWithOffset");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesWithOffsetNextPageRequest(clientRequestId, maxresults, timeout, nextLink);
+                using var message = CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, clientRequestId, pagingGetMultiplePagesWithOffsetOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1886,23 +1865,26 @@ namespace paging
         }
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="pagingGetMultiplePagesWithOffsetOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ProductResult> GetMultiplePagesWithOffsetNextPage(string clientRequestId, int? maxresults, int? timeout, string nextLink, CancellationToken cancellationToken = default)
+        public Response<ProductResult> GetMultiplePagesWithOffsetNextPage(string nextLink, string clientRequestId, PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (pagingGetMultiplePagesWithOffsetOptions == null)
+            {
+                throw new ArgumentNullException(nameof(pagingGetMultiplePagesWithOffsetOptions));
             }
 
             using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesWithOffset");
             scope.Start();
             try
             {
-                using var message = CreateGetMultiplePagesWithOffsetNextPageRequest(clientRequestId, maxresults, timeout, nextLink);
+                using var message = CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, clientRequestId, pagingGetMultiplePagesWithOffsetOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -2339,7 +2321,7 @@ namespace paging
             }
         }
 
-        internal HttpMessage CreateNextFragmentNextPageRequest(string nextLink)
+        internal HttpMessage CreateNextFragmentNextPageRequest(string nextLink, string apiVersion, string tenant)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -2352,19 +2334,29 @@ namespace paging
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
+        /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<OdataProductResult>> NextFragmentNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<OdataProductResult>> NextFragmentNextPageAsync(string nextLink, string apiVersion, string tenant, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
             }
 
             using var scope = clientDiagnostics.CreateScope("PagingClient.NextFragment");
             scope.Start();
             try
             {
-                using var message = CreateNextFragmentNextPageRequest(nextLink);
+                using var message = CreateNextFragmentNextPageRequest(nextLink, apiVersion, tenant);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -2388,19 +2380,29 @@ namespace paging
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
+        /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<OdataProductResult> NextFragmentNextPage(string nextLink, CancellationToken cancellationToken = default)
+        public Response<OdataProductResult> NextFragmentNextPage(string nextLink, string apiVersion, string tenant, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
             }
 
             using var scope = clientDiagnostics.CreateScope("PagingClient.NextFragment");
             scope.Start();
             try
             {
-                using var message = CreateNextFragmentNextPageRequest(nextLink);
+                using var message = CreateNextFragmentNextPageRequest(nextLink, apiVersion, tenant);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -2422,7 +2424,7 @@ namespace paging
             }
         }
 
-        internal HttpMessage CreateNextFragmentWithGroupingNextPageRequest(string nextLink)
+        internal HttpMessage CreateNextFragmentWithGroupingNextPageRequest(string nextLink, CustomParameterGroup customParameterGroup)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -2435,19 +2437,24 @@ namespace paging
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<OdataProductResult>> NextFragmentWithGroupingNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<OdataProductResult>> NextFragmentWithGroupingNextPageAsync(string nextLink, CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (customParameterGroup == null)
+            {
+                throw new ArgumentNullException(nameof(customParameterGroup));
             }
 
             using var scope = clientDiagnostics.CreateScope("PagingClient.NextFragmentWithGrouping");
             scope.Start();
             try
             {
-                using var message = CreateNextFragmentWithGroupingNextPageRequest(nextLink);
+                using var message = CreateNextFragmentWithGroupingNextPageRequest(nextLink, customParameterGroup);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -2471,19 +2478,24 @@ namespace paging
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<OdataProductResult> NextFragmentWithGroupingNextPage(string nextLink, CancellationToken cancellationToken = default)
+        public Response<OdataProductResult> NextFragmentWithGroupingNextPage(string nextLink, CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (customParameterGroup == null)
+            {
+                throw new ArgumentNullException(nameof(customParameterGroup));
             }
 
             using var scope = clientDiagnostics.CreateScope("PagingClient.NextFragmentWithGrouping");
             scope.Start();
             try
             {
-                using var message = CreateNextFragmentWithGroupingNextPageRequest(nextLink);
+                using var message = CreateNextFragmentWithGroupingNextPageRequest(nextLink, customParameterGroup);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

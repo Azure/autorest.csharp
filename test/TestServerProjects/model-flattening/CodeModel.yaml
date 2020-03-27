@@ -4,7 +4,7 @@ info: !<!Info>
   title: model-flattening
 schemas: !<!Schemas> 
   numbers:
-  - !<!NumberSchema> &ref_13
+  - !<!NumberSchema> &ref_29
     type: integer
     precision: 32
     language: !<!Languages> 
@@ -70,7 +70,7 @@ schemas: !<!Schemas>
         name: ResourceName
         description: Resource Name
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_14
+  - !<!StringSchema> &ref_30
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -110,7 +110,7 @@ schemas: !<!Schemas>
         name: FlattenedProductPropertiesProvisioningState
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_16
+  - !<!StringSchema> &ref_32
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -120,7 +120,7 @@ schemas: !<!Schemas>
         name: WrappedProductValue
         description: the product value
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_24
+  - !<!StringSchema> &ref_15
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -130,7 +130,7 @@ schemas: !<!Schemas>
         name: ProductId
         description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_25
+  - !<!StringSchema> &ref_16
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -140,7 +140,7 @@ schemas: !<!Schemas>
         name: Description
         description: Description of product.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_19
+  - !<!StringSchema> &ref_18
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -150,7 +150,7 @@ schemas: !<!Schemas>
         name: SimpleProductPropertiesMaxProductDisplayName
         description: Display name of product.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_21
+  - !<!StringSchema> &ref_20
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -160,7 +160,7 @@ schemas: !<!Schemas>
         name: GenericUrlGenericValue
         description: Generic URL value.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_22
+  - !<!StringSchema> &ref_21
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -250,7 +250,7 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   constants:
-  - !<!ConstantSchema> &ref_32
+  - !<!ConstantSchema> &ref_40
     type: constant
     value: !<!ConstantValue> 
       value: application/json
@@ -260,7 +260,7 @@ schemas: !<!Schemas>
         name: ApplicationJson
         description: Content Type 'application/json'
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_20
+  - !<!ConstantSchema> &ref_19
     type: constant
     apiVersions:
     - !<!ApiVersion> 
@@ -282,7 +282,7 @@ schemas: !<!Schemas>
         name: ResourceTags
         description: Dictionary of <string>
     protocol: !<!Protocols> {}
-  - !<!DictionarySchema> &ref_39
+  - !<!DictionarySchema> &ref_47
     type: dictionary
     elementType: !<!ObjectSchema> &ref_2
       type: object
@@ -420,7 +420,7 @@ schemas: !<!Schemas>
         name: DictionaryOfFlattenedProduct
         description: Dictionary of <FlattenedProduct>
     protocol: !<!Protocols> {}
-  - !<!DictionarySchema> &ref_41
+  - !<!DictionarySchema> &ref_49
     type: dictionary
     elementType: *ref_2
     language: !<!Languages> 
@@ -428,7 +428,7 @@ schemas: !<!Schemas>
         name: DictionaryOfFlattenedProduct
         description: Dictionary of <FlattenedProduct>
     protocol: !<!Protocols> {}
-  - !<!DictionarySchema> &ref_17
+  - !<!DictionarySchema> &ref_33
     type: dictionary
     elementType: *ref_2
     language: !<!Languages> 
@@ -436,174 +436,94 @@ schemas: !<!Schemas>
         name: ResourceCollectionDictionaryofresources
         description: Dictionary of <FlattenedProduct>
     protocol: !<!Protocols> {}
-  objects:
-  - *ref_8
-  - !<!ObjectSchema> &ref_15
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
+  groups:
+  - !<!GroupSchema> &ref_13
+    type: group
     properties:
-    - !<!Property> 
-      schema: *ref_13
-      serializedName: status
-      language: !<!Languages> 
-        default:
-          name: status
-          description: ''
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_14
-      serializedName: message
-      language: !<!Languages> 
-        default:
-          name: message
-          description: ''
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_15
-      serializedName: parentError
-      language: !<!Languages> 
-        default:
-          name: parentError
-          description: ''
-      protocol: !<!Protocols> {}
-    serializationFormats:
-    - json
-    usage:
-    - output
-    language: !<!Languages> 
-      default:
-        name: Error
-        description: ''
-        namespace: ''
-    protocol: !<!Protocols> {}
-  - *ref_2
-  - !<!ObjectSchema> &ref_28
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    properties:
-    - !<!Property> 
-      schema: *ref_16
-      serializedName: value
-      language: !<!Languages> 
-        default:
-          name: value
-          description: the product value
-      protocol: !<!Protocols> {}
-    serializationFormats:
-    - json
-    usage:
-    - input
-    - output
-    extensions:
-      x-ms-flattened: true
-    language: !<!Languages> 
-      default:
-        name: WrappedProduct
-        description: The wrapped produc.
-        namespace: ''
-    protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_29
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    properties:
-    - !<!Property> 
-      schema: *ref_16
-      flattenedNames:
-      - property
-      - value
-      serializedName: value
-      language: !<!Languages> 
-        default:
-          name: value
-          description: the product value
-      protocol: !<!Protocols> {}
-    serializationFormats:
-    - json
-    usage:
-    - output
-    language: !<!Languages> 
-      default:
-        name: ProductWrapper
-        description: The wrapped produc.
-        namespace: ''
-    protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_42
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    properties:
-    - !<!Property> 
-      schema: *ref_2
-      serializedName: productresource
-      language: !<!Languages> 
-        default:
-          name: productresource
-          description: Flattened product.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: !<!ArraySchema> &ref_30
-        type: array
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        elementType: *ref_2
+    - !<!GroupProperty> 
+      schema: *ref_1
+      originalParameter:
+      - !<!Parameter> &ref_60
+        schema: *ref_1
+        groupedBy: !<!Parameter> &ref_22
+          schema: *ref_13
+          implementation: Method
+          required: true
+          language: !<!Languages> 
+            default:
+              name: flattenParameterGroup
+              description: Parameter group
+          protocol: !<!Protocols> {}
+        implementation: Method
+        required: true
         language: !<!Languages> 
           default:
-            name: ResourceCollectionArrayofresources
-            description: Array of FlattenedProduct
-        protocol: !<!Protocols> {}
-      serializedName: arrayofresources
+            name: name
+            description: Product name with value 'groupproduct'
+            serializedName: name
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: path
+      required: true
+      serializedName: name
       language: !<!Languages> 
         default:
-          name: arrayofresources
-          description: ''
+          name: name
+          description: Product name with value 'groupproduct'
       protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_17
-      serializedName: dictionaryofresources
-      language: !<!Languages> 
-        default:
-          name: dictionaryofresources
-          description: Dictionary of <FlattenedProduct>
-      protocol: !<!Protocols> {}
-    serializationFormats:
-    - json
-    usage:
-    - input
-    - output
-    language: !<!Languages> 
-      default:
-        name: ResourceCollection
-        description: ''
-        namespace: ''
-    protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_18
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    children: !<!Relations> 
-      all:
-      - !<!ObjectSchema> &ref_23
+    - !<!GroupProperty> 
+      schema: !<!ObjectSchema> &ref_14
         type: object
         apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
         parents: !<!Relations> 
           all:
-          - *ref_18
+          - !<!ObjectSchema> &ref_17
+            type: object
+            apiVersions:
+            - !<!ApiVersion> 
+              version: 1.0.0
+            children: !<!Relations> 
+              all:
+              - *ref_14
+              immediate:
+              - *ref_14
+            properties:
+            - !<!Property> &ref_24
+              schema: *ref_15
+              required: true
+              serializedName: base_product_id
+              language: !<!Languages> 
+                default:
+                  name: productId
+                  description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
+              protocol: !<!Protocols> {}
+            - !<!Property> &ref_25
+              schema: *ref_16
+              required: false
+              serializedName: base_product_description
+              language: !<!Languages> 
+                default:
+                  name: description
+                  description: Description of product.
+              protocol: !<!Protocols> {}
+            serializationFormats:
+            - json
+            usage:
+            - input
+            - output
+            language: !<!Languages> 
+              default:
+                name: BaseProduct
+                description: The product documentation.
+                namespace: ''
+            protocol: !<!Protocols> {}
           immediate:
-          - *ref_18
+          - *ref_17
         properties:
-        - !<!Property> &ref_48
-          schema: *ref_19
+        - !<!Property> &ref_26
+          schema: *ref_18
           flattenedNames:
           - details
           - max_product_display_name
@@ -613,8 +533,8 @@ schemas: !<!Schemas>
               name: maxProductDisplayName
               description: Display name of product.
           protocol: !<!Protocols> {}
-        - !<!Property> &ref_49
-          schema: *ref_20
+        - !<!Property> &ref_54
+          schema: *ref_19
           flattenedNames:
           - details
           - max_product_capacity
@@ -624,8 +544,8 @@ schemas: !<!Schemas>
               name: capacity
               description: 'Capacity of product. For example, 4 people.'
           protocol: !<!Protocols> {}
-        - !<!Property> &ref_50
-          schema: *ref_21
+        - !<!Property> &ref_27
+          schema: *ref_20
           flattenedNames:
           - details
           - max_product_image
@@ -636,8 +556,8 @@ schemas: !<!Schemas>
               name: genericValue
               description: Generic URL value.
           protocol: !<!Protocols> {}
-        - !<!Property> &ref_51
-          schema: *ref_22
+        - !<!Property> &ref_28
+          schema: *ref_21
           flattenedNames:
           - details
           - max_product_image
@@ -659,26 +579,282 @@ schemas: !<!Schemas>
             description: The product documentation.
             namespace: ''
         protocol: !<!Protocols> {}
-      immediate:
-      - *ref_23
-    properties:
-    - !<!Property> &ref_46
-      schema: *ref_24
+      originalParameter:
+      - !<!Parameter> &ref_23
+        schema: *ref_14
+        flattened: true
+        groupedBy: *ref_22
+        implementation: Method
+        required: false
+        extensions:
+          x-ms-client-flatten: true
+        language: !<!Languages> 
+          default:
+            name: simpleBodyProduct
+            description: Simple body product to put
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      required: false
+      serializedName: SimpleBodyProduct
+      language: !<!Languages> 
+        default:
+          name: simpleBodyProduct
+          description: Simple body product to put
+      protocol: !<!Protocols> {}
+    - !<!GroupProperty> 
+      schema: *ref_15
+      originalParameter:
+      - !<!VirtualParameter> &ref_61
+        schema: *ref_15
+        groupedBy: *ref_22
+        implementation: Method
+        originalParameter: *ref_23
+        pathToProperty: []
+        required: true
+        targetProperty: *ref_24
+        language: !<!Languages> 
+          default:
+            name: productId
+            description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
+        protocol: !<!Protocols> {}
       required: true
-      serializedName: base_product_id
+      serializedName: productId
       language: !<!Languages> 
         default:
           name: productId
           description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
       protocol: !<!Protocols> {}
-    - !<!Property> &ref_47
-      schema: *ref_25
+    - !<!GroupProperty> 
+      schema: *ref_16
+      originalParameter:
+      - !<!VirtualParameter> &ref_62
+        schema: *ref_16
+        groupedBy: *ref_22
+        implementation: Method
+        originalParameter: *ref_23
+        pathToProperty: []
+        required: false
+        targetProperty: *ref_25
+        language: !<!Languages> 
+          default:
+            name: description
+            description: Description of product.
+        protocol: !<!Protocols> {}
       required: false
-      serializedName: base_product_description
+      serializedName: description
       language: !<!Languages> 
         default:
           name: description
           description: Description of product.
+      protocol: !<!Protocols> {}
+    - !<!GroupProperty> 
+      schema: *ref_18
+      originalParameter:
+      - !<!VirtualParameter> &ref_63
+        schema: *ref_18
+        groupedBy: *ref_22
+        implementation: Method
+        originalParameter: *ref_23
+        pathToProperty: []
+        targetProperty: *ref_26
+        language: !<!Languages> 
+          default:
+            name: maxProductDisplayName
+            description: Display name of product.
+        protocol: !<!Protocols> {}
+      serializedName: max_product_display_name
+      language: !<!Languages> 
+        default:
+          name: maxProductDisplayName
+          description: Display name of product.
+      protocol: !<!Protocols> {}
+    - !<!GroupProperty> 
+      schema: *ref_20
+      originalParameter:
+      - !<!VirtualParameter> &ref_64
+        schema: *ref_20
+        groupedBy: *ref_22
+        implementation: Method
+        originalParameter: *ref_23
+        pathToProperty: []
+        targetProperty: *ref_27
+        language: !<!Languages> 
+          default:
+            name: genericValue
+            description: Generic URL value.
+        protocol: !<!Protocols> {}
+      serializedName: generic_value
+      language: !<!Languages> 
+        default:
+          name: genericValue
+          description: Generic URL value.
+      protocol: !<!Protocols> {}
+    - !<!GroupProperty> 
+      schema: *ref_21
+      originalParameter:
+      - !<!VirtualParameter> &ref_65
+        schema: *ref_21
+        groupedBy: *ref_22
+        implementation: Method
+        originalParameter: *ref_23
+        pathToProperty: []
+        targetProperty: *ref_28
+        language: !<!Languages> 
+          default:
+            name: odataValue
+            description: URL value.
+        protocol: !<!Protocols> {}
+      serializedName: '@odata.value'
+      language: !<!Languages> 
+        default:
+          name: odataValue
+          description: URL value.
+      protocol: !<!Protocols> {}
+    usage:
+    - input
+    language: !<!Languages> 
+      default:
+        name: FlattenParameterGroup
+        description: Parameter group
+    protocol: !<!Protocols> {}
+  objects:
+  - *ref_8
+  - !<!ObjectSchema> &ref_31
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: *ref_29
+      serializedName: status
+      language: !<!Languages> 
+        default:
+          name: status
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_30
+      serializedName: message
+      language: !<!Languages> 
+        default:
+          name: message
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_31
+      serializedName: parentError
+      language: !<!Languages> 
+        default:
+          name: parentError
+          description: ''
+      protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    language: !<!Languages> 
+      default:
+        name: Error
+        description: ''
+        namespace: ''
+    protocol: !<!Protocols> {}
+  - *ref_2
+  - !<!ObjectSchema> &ref_36
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: *ref_32
+      serializedName: value
+      language: !<!Languages> 
+        default:
+          name: value
+          description: the product value
+      protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - input
+    - output
+    extensions:
+      x-ms-flattened: true
+    language: !<!Languages> 
+      default:
+        name: WrappedProduct
+        description: The wrapped produc.
+        namespace: ''
+    protocol: !<!Protocols> {}
+  - !<!ObjectSchema> &ref_37
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: *ref_32
+      flattenedNames:
+      - property
+      - value
+      serializedName: value
+      language: !<!Languages> 
+        default:
+          name: value
+          description: the product value
+      protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    language: !<!Languages> 
+      default:
+        name: ProductWrapper
+        description: The wrapped produc.
+        namespace: ''
+    protocol: !<!Protocols> {}
+  - !<!ObjectSchema> &ref_50
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: *ref_2
+      serializedName: productresource
+      language: !<!Languages> 
+        default:
+          name: productresource
+          description: Flattened product.
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!ArraySchema> &ref_38
+        type: array
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        elementType: *ref_2
+        language: !<!Languages> 
+          default:
+            name: ResourceCollectionArrayofresources
+            description: Array of FlattenedProduct
+        protocol: !<!Protocols> {}
+      serializedName: arrayofresources
+      language: !<!Languages> 
+        default:
+          name: arrayofresources
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_33
+      serializedName: dictionaryofresources
+      language: !<!Languages> 
+        default:
+          name: dictionaryofresources
+          description: Dictionary of <FlattenedProduct>
       protocol: !<!Protocols> {}
     serializationFormats:
     - json
@@ -687,31 +863,32 @@ schemas: !<!Schemas>
     - output
     language: !<!Languages> 
       default:
-        name: BaseProduct
-        description: The product documentation.
+        name: ResourceCollection
+        description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - *ref_23
-  - !<!ObjectSchema> &ref_26
+  - *ref_17
+  - *ref_14
+  - !<!ObjectSchema> &ref_34
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     children: !<!Relations> 
       all:
-      - !<!ObjectSchema> &ref_27
+      - !<!ObjectSchema> &ref_35
         type: object
         apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
         parents: !<!Relations> 
           all:
-          - *ref_26
+          - *ref_34
           immediate:
-          - *ref_26
+          - *ref_34
         properties:
         - !<!Property> 
-          schema: *ref_22
+          schema: *ref_21
           serializedName: '@odata.value'
           language: !<!Languages> 
             default:
@@ -732,10 +909,10 @@ schemas: !<!Schemas>
             namespace: ''
         protocol: !<!Protocols> {}
       immediate:
-      - *ref_27
+      - *ref_35
     properties:
     - !<!Property> 
-      schema: *ref_21
+      schema: *ref_20
       serializedName: generic_value
       language: !<!Languages> 
         default:
@@ -753,9 +930,9 @@ schemas: !<!Schemas>
         description: The Generic URL.
         namespace: ''
     protocol: !<!Protocols> {}
-  - *ref_27
+  - *ref_35
   arrays:
-  - !<!ArraySchema> &ref_33
+  - !<!ArraySchema> &ref_41
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -766,7 +943,7 @@ schemas: !<!Schemas>
         name: ArrayOfResource
         description: Array of Resource
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_35
+  - !<!ArraySchema> &ref_43
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -777,31 +954,31 @@ schemas: !<!Schemas>
         name: ArrayOfFlattenedProduct
         description: Array of FlattenedProduct
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_36
+  - !<!ArraySchema> &ref_44
     type: array
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    elementType: *ref_28
+    elementType: *ref_36
     language: !<!Languages> 
       default:
         name: ArrayOfWrappedProduct
         description: Array of WrappedProduct
     protocol: !<!Protocols> {}
-  - !<!ArraySchema> &ref_38
+  - !<!ArraySchema> &ref_46
     type: array
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
-    elementType: *ref_29
+    elementType: *ref_37
     language: !<!Languages> 
       default:
         name: ArrayOfProductWrapper
         description: Array of ProductWrapper
     protocol: !<!Protocols> {}
-  - *ref_30
+  - *ref_38
 globalParameters:
-- !<!Parameter> &ref_31
+- !<!Parameter> &ref_39
   schema: *ref_0
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
@@ -825,12 +1002,12 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_31
+    - *ref_39
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_32
+        schema: *ref_40
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -841,8 +1018,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_34
-        schema: *ref_33
+      - !<!Parameter> &ref_42
+        schema: *ref_41
         implementation: Method
         required: false
         language: !<!Languages> 
@@ -854,7 +1031,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_34
+      - *ref_42
       language: !<!Languages> 
         default:
           name: ''
@@ -880,7 +1057,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_15
+      schema: *ref_31
       language: !<!Languages> 
         default:
           name: ''
@@ -902,7 +1079,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_31
+    - *ref_39
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -917,7 +1094,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_35
+      schema: *ref_43
       language: !<!Languages> 
         default:
           name: ''
@@ -931,7 +1108,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_15
+      schema: *ref_31
       language: !<!Languages> 
         default:
           name: ''
@@ -953,12 +1130,12 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_31
+    - *ref_39
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_32
+        schema: *ref_40
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -969,8 +1146,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_37
-        schema: *ref_36
+      - !<!Parameter> &ref_45
+        schema: *ref_44
         implementation: Method
         required: false
         language: !<!Languages> 
@@ -982,7 +1159,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_37
+      - *ref_45
       language: !<!Languages> 
         default:
           name: ''
@@ -1008,7 +1185,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_15
+      schema: *ref_31
       language: !<!Languages> 
         default:
           name: ''
@@ -1030,7 +1207,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_31
+    - *ref_39
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -1045,7 +1222,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_38
+      schema: *ref_46
       language: !<!Languages> 
         default:
           name: ''
@@ -1059,7 +1236,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_15
+      schema: *ref_31
       language: !<!Languages> 
         default:
           name: ''
@@ -1081,12 +1258,12 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_31
+    - *ref_39
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_32
+        schema: *ref_40
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -1097,8 +1274,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_40
-        schema: *ref_39
+      - !<!Parameter> &ref_48
+        schema: *ref_47
         implementation: Method
         required: false
         language: !<!Languages> 
@@ -1110,7 +1287,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_40
+      - *ref_48
       language: !<!Languages> 
         default:
           name: ''
@@ -1136,7 +1313,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_15
+      schema: *ref_31
       language: !<!Languages> 
         default:
           name: ''
@@ -1158,7 +1335,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_31
+    - *ref_39
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -1173,7 +1350,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_41
+      schema: *ref_49
       language: !<!Languages> 
         default:
           name: ''
@@ -1187,7 +1364,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_15
+      schema: *ref_31
       language: !<!Languages> 
         default:
           name: ''
@@ -1209,12 +1386,12 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_31
+    - *ref_39
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_32
+        schema: *ref_40
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -1225,8 +1402,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_43
-        schema: *ref_42
+      - !<!Parameter> &ref_51
+        schema: *ref_50
         implementation: Method
         required: false
         language: !<!Languages> 
@@ -1238,7 +1415,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_43
+      - *ref_51
       language: !<!Languages> 
         default:
           name: ''
@@ -1264,7 +1441,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_15
+      schema: *ref_31
       language: !<!Languages> 
         default:
           name: ''
@@ -1286,7 +1463,7 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_31
+    - *ref_39
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -1301,7 +1478,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_42
+      schema: *ref_50
       language: !<!Languages> 
         default:
           name: ''
@@ -1315,7 +1492,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_15
+      schema: *ref_31
       language: !<!Languages> 
         default:
           name: ''
@@ -1337,12 +1514,12 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_31
+    - *ref_39
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_32
+        schema: *ref_40
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -1353,8 +1530,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_44
-        schema: *ref_23
+      - !<!Parameter> &ref_52
+        schema: *ref_14
         implementation: Method
         required: false
         language: !<!Languages> 
@@ -1366,7 +1543,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_44
+      - *ref_52
       language: !<!Languages> 
         default:
           name: ''
@@ -1382,7 +1559,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_23
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -1396,7 +1573,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_15
+      schema: *ref_31
       language: !<!Languages> 
         default:
           name: ''
@@ -1418,12 +1595,12 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_31
+    - *ref_39
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_32
+        schema: *ref_40
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -1434,8 +1611,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_45
-        schema: *ref_23
+      - !<!Parameter> &ref_53
+        schema: *ref_14
         flattened: true
         implementation: Method
         required: false
@@ -1449,80 +1626,80 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
-      - !<!VirtualParameter> &ref_52
-        schema: *ref_24
+      - !<!VirtualParameter> &ref_55
+        schema: *ref_15
         implementation: Method
-        originalParameter: *ref_45
+        originalParameter: *ref_53
         pathToProperty: []
         required: true
-        targetProperty: *ref_46
+        targetProperty: *ref_24
         language: !<!Languages> 
           default:
             name: productId
             description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
         protocol: !<!Protocols> {}
-      - !<!VirtualParameter> &ref_53
-        schema: *ref_25
+      - !<!VirtualParameter> &ref_56
+        schema: *ref_16
         implementation: Method
-        originalParameter: *ref_45
+        originalParameter: *ref_53
         pathToProperty: []
         required: false
-        targetProperty: *ref_47
+        targetProperty: *ref_25
         language: !<!Languages> 
           default:
             name: description
             description: Description of product.
         protocol: !<!Protocols> {}
-      - !<!VirtualParameter> &ref_54
-        schema: *ref_19
+      - !<!VirtualParameter> &ref_57
+        schema: *ref_18
         implementation: Method
-        originalParameter: *ref_45
+        originalParameter: *ref_53
         pathToProperty: []
-        targetProperty: *ref_48
+        targetProperty: *ref_26
         language: !<!Languages> 
           default:
             name: maxProductDisplayName
             description: Display name of product.
         protocol: !<!Protocols> {}
       - !<!VirtualParameter> 
-        schema: *ref_20
+        schema: *ref_19
         implementation: Method
-        originalParameter: *ref_45
+        originalParameter: *ref_53
         pathToProperty: []
-        targetProperty: *ref_49
+        targetProperty: *ref_54
         language: !<!Languages> 
           default:
             name: capacity
             description: 'Capacity of product. For example, 4 people.'
         protocol: !<!Protocols> {}
-      - !<!VirtualParameter> &ref_55
-        schema: *ref_21
+      - !<!VirtualParameter> &ref_58
+        schema: *ref_20
         implementation: Method
-        originalParameter: *ref_45
+        originalParameter: *ref_53
         pathToProperty: []
-        targetProperty: *ref_50
+        targetProperty: *ref_27
         language: !<!Languages> 
           default:
             name: genericValue
             description: Generic URL value.
         protocol: !<!Protocols> {}
-      - !<!VirtualParameter> &ref_56
-        schema: *ref_22
+      - !<!VirtualParameter> &ref_59
+        schema: *ref_21
         implementation: Method
-        originalParameter: *ref_45
+        originalParameter: *ref_53
         pathToProperty: []
-        targetProperty: *ref_51
+        targetProperty: *ref_28
         language: !<!Languages> 
           default:
             name: odataValue
             description: URL value.
         protocol: !<!Protocols> {}
       signatureParameters:
-      - *ref_52
-      - *ref_53
-      - *ref_54
       - *ref_55
       - *ref_56
+      - *ref_57
+      - *ref_58
+      - *ref_59
       language: !<!Languages> 
         default:
           name: ''
@@ -1538,7 +1715,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_23
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -1552,7 +1729,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_15
+      schema: *ref_31
       language: !<!Languages> 
         default:
           name: ''
@@ -1574,27 +1751,13 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_31
-    - !<!Parameter> &ref_64
-      schema: *ref_1
-      implementation: Method
-      required: true
-      extensions:
-        x-ms-parameter-grouping:
-          name: flatten-parameter-group
-      language: !<!Languages> 
-        default:
-          name: name
-          description: Product name with value 'groupproduct'
-          serializedName: name
-      protocol: !<!Protocols> 
-        http: !<!HttpParameter> 
-          in: path
+    - *ref_39
+    - *ref_60
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_32
+        schema: *ref_40
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -1605,109 +1768,29 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_57
-        schema: *ref_23
-        flattened: true
-        implementation: Method
-        required: false
-        extensions:
-          x-ms-client-flatten: true
-          x-ms-parameter-grouping: &ref_58
-            name: flatten-parameter-group
-        language: !<!Languages> 
-          default:
-            name: simpleBodyProduct
-            description: Simple body product to put
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: body
-            style: json
-      - !<!VirtualParameter> &ref_59
-        schema: *ref_24
-        implementation: Method
-        originalParameter: *ref_57
-        pathToProperty: []
-        required: true
-        targetProperty: *ref_46
-        extensions:
-          x-ms-parameter-grouping: *ref_58
-        language: !<!Languages> 
-          default:
-            name: productId
-            description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
-        protocol: !<!Protocols> {}
-      - !<!VirtualParameter> &ref_60
-        schema: *ref_25
-        implementation: Method
-        originalParameter: *ref_57
-        pathToProperty: []
-        required: false
-        targetProperty: *ref_47
-        extensions:
-          x-ms-parameter-grouping: *ref_58
-        language: !<!Languages> 
-          default:
-            name: description
-            description: Description of product.
-        protocol: !<!Protocols> {}
-      - !<!VirtualParameter> &ref_61
+      - *ref_23
+      - *ref_61
+      - *ref_62
+      - *ref_63
+      - !<!VirtualParameter> 
         schema: *ref_19
         implementation: Method
-        originalParameter: *ref_57
+        originalParameter: *ref_23
         pathToProperty: []
-        targetProperty: *ref_48
+        targetProperty: *ref_54
         extensions:
-          x-ms-parameter-grouping: *ref_58
-        language: !<!Languages> 
-          default:
-            name: maxProductDisplayName
-            description: Display name of product.
-        protocol: !<!Protocols> {}
-      - !<!VirtualParameter> 
-        schema: *ref_20
-        implementation: Method
-        originalParameter: *ref_57
-        pathToProperty: []
-        targetProperty: *ref_49
-        extensions:
-          x-ms-parameter-grouping: *ref_58
+          x-ms-parameter-grouping:
+            name: flatten-parameter-group
         language: !<!Languages> 
           default:
             name: capacity
             description: 'Capacity of product. For example, 4 people.'
         protocol: !<!Protocols> {}
-      - !<!VirtualParameter> &ref_62
-        schema: *ref_21
-        implementation: Method
-        originalParameter: *ref_57
-        pathToProperty: []
-        targetProperty: *ref_50
-        extensions:
-          x-ms-parameter-grouping: *ref_58
-        language: !<!Languages> 
-          default:
-            name: genericValue
-            description: Generic URL value.
-        protocol: !<!Protocols> {}
-      - !<!VirtualParameter> &ref_63
-        schema: *ref_22
-        implementation: Method
-        originalParameter: *ref_57
-        pathToProperty: []
-        targetProperty: *ref_51
-        extensions:
-          x-ms-parameter-grouping: *ref_58
-        language: !<!Languages> 
-          default:
-            name: odataValue
-            description: URL value.
-        protocol: !<!Protocols> {}
+      - *ref_64
+      - *ref_65
+      - *ref_22
       signatureParameters:
-      - *ref_59
-      - *ref_60
-      - *ref_61
-      - *ref_62
-      - *ref_63
+      - *ref_22
       language: !<!Languages> 
         default:
           name: ''
@@ -1720,11 +1803,10 @@ operationGroups:
           mediaTypes:
           - application/json
           uri: '{$host}'
-    signatureParameters:
-    - *ref_64
+    signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_23
+      schema: *ref_14
       language: !<!Languages> 
         default:
           name: ''
@@ -1738,7 +1820,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_15
+      schema: *ref_31
       language: !<!Languages> 
         default:
           name: ''

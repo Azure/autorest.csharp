@@ -41,7 +41,7 @@ namespace CognitiveSearch
             this.pipeline = pipeline;
         }
 
-        internal HttpMessage CreateResetRequest(string indexerName, Guid? xMsClientRequestId)
+        internal HttpMessage CreateResetRequest(string indexerName, RequestOptions requestOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -53,18 +53,18 @@ namespace CognitiveSearch
             uri.AppendPath("')/search.reset", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
             return message;
         }
 
         /// <summary> Resets the change tracking state associated with an indexer. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ResetAsync(string indexerName, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ResetAsync(string indexerName, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -75,7 +75,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateResetRequest(indexerName, xMsClientRequestId);
+                using var message = CreateResetRequest(indexerName, requestOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -94,9 +94,9 @@ namespace CognitiveSearch
 
         /// <summary> Resets the change tracking state associated with an indexer. </summary>
         /// <param name="indexerName"> The name of the indexer to reset. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Reset(string indexerName, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public Response Reset(string indexerName, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -107,7 +107,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateResetRequest(indexerName, xMsClientRequestId);
+                using var message = CreateResetRequest(indexerName, requestOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -124,7 +124,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateRunRequest(string indexerName, Guid? xMsClientRequestId)
+        internal HttpMessage CreateRunRequest(string indexerName, RequestOptions requestOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -136,18 +136,18 @@ namespace CognitiveSearch
             uri.AppendPath("')/search.run", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
             return message;
         }
 
         /// <summary> Runs an indexer on-demand. </summary>
         /// <param name="indexerName"> The name of the indexer to run. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> RunAsync(string indexerName, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> RunAsync(string indexerName, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -158,7 +158,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateRunRequest(indexerName, xMsClientRequestId);
+                using var message = CreateRunRequest(indexerName, requestOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -177,9 +177,9 @@ namespace CognitiveSearch
 
         /// <summary> Runs an indexer on-demand. </summary>
         /// <param name="indexerName"> The name of the indexer to run. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Run(string indexerName, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public Response Run(string indexerName, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -190,7 +190,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateRunRequest(indexerName, xMsClientRequestId);
+                using var message = CreateRunRequest(indexerName, requestOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -207,7 +207,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string indexerName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, Indexer indexer)
+        internal HttpMessage CreateCreateOrUpdateRequest(string indexerName, Indexer indexer, RequestOptions requestOptions, AccessCondition accessCondition)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -219,17 +219,17 @@ namespace CognitiveSearch
             uri.AppendPath("')", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
-            if (ifMatch != null)
+            if (accessCondition?.IfMatch != null)
             {
-                request.Headers.Add("If-Match", ifMatch);
+                request.Headers.Add("If-Match", accessCondition.IfMatch);
             }
-            if (ifNoneMatch != null)
+            if (accessCondition?.IfNoneMatch != null)
             {
-                request.Headers.Add("If-None-Match", ifNoneMatch);
+                request.Headers.Add("If-None-Match", accessCondition.IfNoneMatch);
             }
             request.Headers.Add("Prefer", "return=representation");
             request.Headers.Add("Content-Type", "application/json");
@@ -241,12 +241,11 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new indexer or updates an indexer if it already exists. </summary>
         /// <param name="indexerName"> The name of the indexer to create or update. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
-        /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="indexer"> The definition of the indexer to create or update. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
+        /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Indexer>> CreateOrUpdateAsync(string indexerName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, Indexer indexer, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Indexer>> CreateOrUpdateAsync(string indexerName, Indexer indexer, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -261,7 +260,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateOrUpdateRequest(indexerName, xMsClientRequestId, ifMatch, ifNoneMatch, indexer);
+                using var message = CreateCreateOrUpdateRequest(indexerName, indexer, requestOptions, accessCondition);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -286,12 +285,11 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new indexer or updates an indexer if it already exists. </summary>
         /// <param name="indexerName"> The name of the indexer to create or update. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
-        /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="indexer"> The definition of the indexer to create or update. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
+        /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Indexer> CreateOrUpdate(string indexerName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, Indexer indexer, CancellationToken cancellationToken = default)
+        public Response<Indexer> CreateOrUpdate(string indexerName, Indexer indexer, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -306,7 +304,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateOrUpdateRequest(indexerName, xMsClientRequestId, ifMatch, ifNoneMatch, indexer);
+                using var message = CreateCreateOrUpdateRequest(indexerName, indexer, requestOptions, accessCondition);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -329,7 +327,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string indexerName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch)
+        internal HttpMessage CreateDeleteRequest(string indexerName, RequestOptions requestOptions, AccessCondition accessCondition)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -341,28 +339,27 @@ namespace CognitiveSearch
             uri.AppendPath("')", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
-            if (ifMatch != null)
+            if (accessCondition?.IfMatch != null)
             {
-                request.Headers.Add("If-Match", ifMatch);
+                request.Headers.Add("If-Match", accessCondition.IfMatch);
             }
-            if (ifNoneMatch != null)
+            if (accessCondition?.IfNoneMatch != null)
             {
-                request.Headers.Add("If-None-Match", ifNoneMatch);
+                request.Headers.Add("If-None-Match", accessCondition.IfNoneMatch);
             }
             return message;
         }
 
         /// <summary> Deletes an indexer. </summary>
         /// <param name="indexerName"> The name of the indexer to delete. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
-        /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
+        /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteAsync(string indexerName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> DeleteAsync(string indexerName, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -373,7 +370,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateDeleteRequest(indexerName, xMsClientRequestId, ifMatch, ifNoneMatch);
+                using var message = CreateDeleteRequest(indexerName, requestOptions, accessCondition);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -393,11 +390,10 @@ namespace CognitiveSearch
 
         /// <summary> Deletes an indexer. </summary>
         /// <param name="indexerName"> The name of the indexer to delete. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
-        /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
+        /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete(string indexerName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public Response Delete(string indexerName, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -408,7 +404,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateDeleteRequest(indexerName, xMsClientRequestId, ifMatch, ifNoneMatch);
+                using var message = CreateDeleteRequest(indexerName, requestOptions, accessCondition);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -426,7 +422,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateGetRequest(string indexerName, Guid? xMsClientRequestId)
+        internal HttpMessage CreateGetRequest(string indexerName, RequestOptions requestOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -438,18 +434,18 @@ namespace CognitiveSearch
             uri.AppendPath("')", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
             return message;
         }
 
         /// <summary> Retrieves an indexer definition. </summary>
         /// <param name="indexerName"> The name of the indexer to retrieve. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Indexer>> GetAsync(string indexerName, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Indexer>> GetAsync(string indexerName, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -460,7 +456,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateGetRequest(indexerName, xMsClientRequestId);
+                using var message = CreateGetRequest(indexerName, requestOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -484,9 +480,9 @@ namespace CognitiveSearch
 
         /// <summary> Retrieves an indexer definition. </summary>
         /// <param name="indexerName"> The name of the indexer to retrieve. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Indexer> Get(string indexerName, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public Response<Indexer> Get(string indexerName, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -497,7 +493,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateGetRequest(indexerName, xMsClientRequestId);
+                using var message = CreateGetRequest(indexerName, requestOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -519,7 +515,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateListRequest(string select, Guid? xMsClientRequestId)
+        internal HttpMessage CreateListRequest(string select, RequestOptions requestOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -533,24 +529,24 @@ namespace CognitiveSearch
             }
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
             return message;
         }
 
         /// <summary> Lists all indexers available for a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the indexers to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ListIndexersResult>> ListAsync(string select, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ListIndexersResult>> ListAsync(string select, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("IndexersClient.List");
             scope.Start();
             try
             {
-                using var message = CreateListRequest(select, xMsClientRequestId);
+                using var message = CreateListRequest(select, requestOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -574,15 +570,15 @@ namespace CognitiveSearch
 
         /// <summary> Lists all indexers available for a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the indexers to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ListIndexersResult> List(string select, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public Response<ListIndexersResult> List(string select, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("IndexersClient.List");
             scope.Start();
             try
             {
-                using var message = CreateListRequest(select, xMsClientRequestId);
+                using var message = CreateListRequest(select, requestOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -604,7 +600,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateCreateRequest(Guid? xMsClientRequestId, Indexer indexer)
+        internal HttpMessage CreateCreateRequest(Indexer indexer, RequestOptions requestOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -614,9 +610,9 @@ namespace CognitiveSearch
             uri.AppendPath("/indexers", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -626,10 +622,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Creates a new indexer. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="indexer"> The definition of the indexer to create. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Indexer>> CreateAsync(Guid? xMsClientRequestId, Indexer indexer, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Indexer>> CreateAsync(Indexer indexer, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (indexer == null)
             {
@@ -640,7 +636,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateRequest(xMsClientRequestId, indexer);
+                using var message = CreateCreateRequest(indexer, requestOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -663,10 +659,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Creates a new indexer. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="indexer"> The definition of the indexer to create. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Indexer> Create(Guid? xMsClientRequestId, Indexer indexer, CancellationToken cancellationToken = default)
+        public Response<Indexer> Create(Indexer indexer, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (indexer == null)
             {
@@ -677,7 +673,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateRequest(xMsClientRequestId, indexer);
+                using var message = CreateCreateRequest(indexer, requestOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -699,7 +695,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateGetStatusRequest(string indexerName, Guid? xMsClientRequestId)
+        internal HttpMessage CreateGetStatusRequest(string indexerName, RequestOptions requestOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -711,18 +707,18 @@ namespace CognitiveSearch
             uri.AppendPath("')/search.status", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
             return message;
         }
 
         /// <summary> Returns the current status and execution history of an indexer. </summary>
         /// <param name="indexerName"> The name of the indexer for which to retrieve status. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IndexerExecutionInfo>> GetStatusAsync(string indexerName, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IndexerExecutionInfo>> GetStatusAsync(string indexerName, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -733,7 +729,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateGetStatusRequest(indexerName, xMsClientRequestId);
+                using var message = CreateGetStatusRequest(indexerName, requestOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -757,9 +753,9 @@ namespace CognitiveSearch
 
         /// <summary> Returns the current status and execution history of an indexer. </summary>
         /// <param name="indexerName"> The name of the indexer for which to retrieve status. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IndexerExecutionInfo> GetStatus(string indexerName, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public Response<IndexerExecutionInfo> GetStatus(string indexerName, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -770,7 +766,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateGetStatusRequest(indexerName, xMsClientRequestId);
+                using var message = CreateGetStatusRequest(indexerName, requestOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

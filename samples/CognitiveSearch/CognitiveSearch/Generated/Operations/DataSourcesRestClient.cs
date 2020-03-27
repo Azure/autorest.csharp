@@ -41,7 +41,7 @@ namespace CognitiveSearch
             this.pipeline = pipeline;
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string dataSourceName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, DataSource dataSource)
+        internal HttpMessage CreateCreateOrUpdateRequest(string dataSourceName, DataSource dataSource, RequestOptions requestOptions, AccessCondition accessCondition)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -53,17 +53,17 @@ namespace CognitiveSearch
             uri.AppendPath("')", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
-            if (ifMatch != null)
+            if (accessCondition?.IfMatch != null)
             {
-                request.Headers.Add("If-Match", ifMatch);
+                request.Headers.Add("If-Match", accessCondition.IfMatch);
             }
-            if (ifNoneMatch != null)
+            if (accessCondition?.IfNoneMatch != null)
             {
-                request.Headers.Add("If-None-Match", ifNoneMatch);
+                request.Headers.Add("If-None-Match", accessCondition.IfNoneMatch);
             }
             request.Headers.Add("Prefer", "return=representation");
             request.Headers.Add("Content-Type", "application/json");
@@ -75,12 +75,11 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new datasource or updates a datasource if it already exists. </summary>
         /// <param name="dataSourceName"> The name of the datasource to create or update. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
-        /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="dataSource"> The definition of the datasource to create or update. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
+        /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, DataSource dataSource, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, DataSource dataSource, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
         {
             if (dataSourceName == null)
             {
@@ -95,7 +94,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateOrUpdateRequest(dataSourceName, xMsClientRequestId, ifMatch, ifNoneMatch, dataSource);
+                using var message = CreateCreateOrUpdateRequest(dataSourceName, dataSource, requestOptions, accessCondition);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -120,12 +119,11 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new datasource or updates a datasource if it already exists. </summary>
         /// <param name="dataSourceName"> The name of the datasource to create or update. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
-        /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="dataSource"> The definition of the datasource to create or update. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
+        /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<DataSource> CreateOrUpdate(string dataSourceName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, DataSource dataSource, CancellationToken cancellationToken = default)
+        public Response<DataSource> CreateOrUpdate(string dataSourceName, DataSource dataSource, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
         {
             if (dataSourceName == null)
             {
@@ -140,7 +138,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateOrUpdateRequest(dataSourceName, xMsClientRequestId, ifMatch, ifNoneMatch, dataSource);
+                using var message = CreateCreateOrUpdateRequest(dataSourceName, dataSource, requestOptions, accessCondition);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -163,7 +161,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string dataSourceName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch)
+        internal HttpMessage CreateDeleteRequest(string dataSourceName, RequestOptions requestOptions, AccessCondition accessCondition)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -175,28 +173,27 @@ namespace CognitiveSearch
             uri.AppendPath("')", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
-            if (ifMatch != null)
+            if (accessCondition?.IfMatch != null)
             {
-                request.Headers.Add("If-Match", ifMatch);
+                request.Headers.Add("If-Match", accessCondition.IfMatch);
             }
-            if (ifNoneMatch != null)
+            if (accessCondition?.IfNoneMatch != null)
             {
-                request.Headers.Add("If-None-Match", ifNoneMatch);
+                request.Headers.Add("If-None-Match", accessCondition.IfNoneMatch);
             }
             return message;
         }
 
         /// <summary> Deletes a datasource. </summary>
         /// <param name="dataSourceName"> The name of the datasource to delete. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
-        /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
+        /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteAsync(string dataSourceName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> DeleteAsync(string dataSourceName, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
         {
             if (dataSourceName == null)
             {
@@ -207,7 +204,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateDeleteRequest(dataSourceName, xMsClientRequestId, ifMatch, ifNoneMatch);
+                using var message = CreateDeleteRequest(dataSourceName, requestOptions, accessCondition);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -227,11 +224,10 @@ namespace CognitiveSearch
 
         /// <summary> Deletes a datasource. </summary>
         /// <param name="dataSourceName"> The name of the datasource to delete. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
-        /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
+        /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete(string dataSourceName, Guid? xMsClientRequestId, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public Response Delete(string dataSourceName, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
         {
             if (dataSourceName == null)
             {
@@ -242,7 +238,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateDeleteRequest(dataSourceName, xMsClientRequestId, ifMatch, ifNoneMatch);
+                using var message = CreateDeleteRequest(dataSourceName, requestOptions, accessCondition);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -260,7 +256,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateGetRequest(string dataSourceName, Guid? xMsClientRequestId)
+        internal HttpMessage CreateGetRequest(string dataSourceName, RequestOptions requestOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -272,18 +268,18 @@ namespace CognitiveSearch
             uri.AppendPath("')", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
             return message;
         }
 
         /// <summary> Retrieves a datasource definition. </summary>
         /// <param name="dataSourceName"> The name of the datasource to retrieve. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DataSource>> GetAsync(string dataSourceName, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DataSource>> GetAsync(string dataSourceName, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (dataSourceName == null)
             {
@@ -294,7 +290,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateGetRequest(dataSourceName, xMsClientRequestId);
+                using var message = CreateGetRequest(dataSourceName, requestOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -318,9 +314,9 @@ namespace CognitiveSearch
 
         /// <summary> Retrieves a datasource definition. </summary>
         /// <param name="dataSourceName"> The name of the datasource to retrieve. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<DataSource> Get(string dataSourceName, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public Response<DataSource> Get(string dataSourceName, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (dataSourceName == null)
             {
@@ -331,7 +327,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateGetRequest(dataSourceName, xMsClientRequestId);
+                using var message = CreateGetRequest(dataSourceName, requestOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -353,7 +349,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateListRequest(string select, Guid? xMsClientRequestId)
+        internal HttpMessage CreateListRequest(string select, RequestOptions requestOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -367,24 +363,24 @@ namespace CognitiveSearch
             }
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
             return message;
         }
 
         /// <summary> Lists all datasources available for a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ListDataSourcesResult>> ListAsync(string select, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ListDataSourcesResult>> ListAsync(string select, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DataSourcesClient.List");
             scope.Start();
             try
             {
-                using var message = CreateListRequest(select, xMsClientRequestId);
+                using var message = CreateListRequest(select, requestOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -408,15 +404,15 @@ namespace CognitiveSearch
 
         /// <summary> Lists all datasources available for a search service. </summary>
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ListDataSourcesResult> List(string select, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public Response<ListDataSourcesResult> List(string select, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DataSourcesClient.List");
             scope.Start();
             try
             {
-                using var message = CreateListRequest(select, xMsClientRequestId);
+                using var message = CreateListRequest(select, requestOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -438,7 +434,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateCreateRequest(Guid? xMsClientRequestId, DataSource dataSource)
+        internal HttpMessage CreateCreateRequest(DataSource dataSource, RequestOptions requestOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -448,9 +444,9 @@ namespace CognitiveSearch
             uri.AppendPath("/datasources", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -460,10 +456,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Creates a new datasource. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="dataSource"> The definition of the datasource to create. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DataSource>> CreateAsync(Guid? xMsClientRequestId, DataSource dataSource, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DataSource>> CreateAsync(DataSource dataSource, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (dataSource == null)
             {
@@ -474,7 +470,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateRequest(xMsClientRequestId, dataSource);
+                using var message = CreateCreateRequest(dataSource, requestOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -497,10 +493,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Creates a new datasource. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="dataSource"> The definition of the datasource to create. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<DataSource> Create(Guid? xMsClientRequestId, DataSource dataSource, CancellationToken cancellationToken = default)
+        public Response<DataSource> Create(DataSource dataSource, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (dataSource == null)
             {
@@ -511,7 +507,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateCreateRequest(xMsClientRequestId, dataSource);
+                using var message = CreateCreateRequest(dataSource, requestOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

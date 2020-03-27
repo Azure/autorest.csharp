@@ -1520,7 +1520,7 @@ namespace AppConfiguration
             }
         }
 
-        internal HttpMessage CreateGetKeysNextPageRequest(string acceptDatetime, string nextLink)
+        internal HttpMessage CreateGetKeysNextPageRequest(string nextLink, string name, string after, string acceptDatetime)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1540,10 +1540,12 @@ namespace AppConfiguration
         }
 
         /// <summary> Gets a list of keys. </summary>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="name"> A filter for the name of the returned keys. </param>
+        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
+        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyListResult, GetKeysHeaders>> GetKeysNextPageAsync(string acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyListResult, GetKeysHeaders>> GetKeysNextPageAsync(string nextLink, string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1554,7 +1556,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                using var message = CreateGetKeysNextPageRequest(acceptDatetime, nextLink);
+                using var message = CreateGetKeysNextPageRequest(nextLink, name, after, acceptDatetime);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new GetKeysHeaders(message.Response);
                 switch (message.Response.Status)
@@ -1578,10 +1580,12 @@ namespace AppConfiguration
         }
 
         /// <summary> Gets a list of keys. </summary>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="name"> A filter for the name of the returned keys. </param>
+        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
+        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyListResult, GetKeysHeaders> GetKeysNextPage(string acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyListResult, GetKeysHeaders> GetKeysNextPage(string nextLink, string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1592,7 +1596,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                using var message = CreateGetKeysNextPageRequest(acceptDatetime, nextLink);
+                using var message = CreateGetKeysNextPageRequest(nextLink, name, after, acceptDatetime);
                 pipeline.Send(message, cancellationToken);
                 var headers = new GetKeysHeaders(message.Response);
                 switch (message.Response.Status)
@@ -1615,7 +1619,7 @@ namespace AppConfiguration
             }
         }
 
-        internal HttpMessage CreateGetKeyValuesNextPageRequest(string acceptDatetime, string nextLink)
+        internal HttpMessage CreateGetKeyValuesNextPageRequest(string nextLink, string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1635,10 +1639,14 @@ namespace AppConfiguration
         }
 
         /// <summary> Gets a list of key-values. </summary>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="key"> A filter used to match keys. </param>
+        /// <param name="label"> A filter used to match labels. </param>
+        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
+        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders>> GetKeyValuesNextPageAsync(string acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders>> GetKeyValuesNextPageAsync(string nextLink, string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1649,7 +1657,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                using var message = CreateGetKeyValuesNextPageRequest(acceptDatetime, nextLink);
+                using var message = CreateGetKeyValuesNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new GetKeyValuesHeaders(message.Response);
                 switch (message.Response.Status)
@@ -1673,10 +1681,14 @@ namespace AppConfiguration
         }
 
         /// <summary> Gets a list of key-values. </summary>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="key"> A filter used to match keys. </param>
+        /// <param name="label"> A filter used to match labels. </param>
+        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
+        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders> GetKeyValuesNextPage(string acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders> GetKeyValuesNextPage(string nextLink, string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1687,7 +1699,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                using var message = CreateGetKeyValuesNextPageRequest(acceptDatetime, nextLink);
+                using var message = CreateGetKeyValuesNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
                 pipeline.Send(message, cancellationToken);
                 var headers = new GetKeyValuesHeaders(message.Response);
                 switch (message.Response.Status)
@@ -1710,7 +1722,7 @@ namespace AppConfiguration
             }
         }
 
-        internal HttpMessage CreateGetLabelsNextPageRequest(string acceptDatetime, string nextLink)
+        internal HttpMessage CreateGetLabelsNextPageRequest(string nextLink, string name, string after, string acceptDatetime, IEnumerable<string> select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1730,10 +1742,13 @@ namespace AppConfiguration
         }
 
         /// <summary> Gets a list of labels. </summary>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="name"> A filter for the name of the returned labels. </param>
+        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
+        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<LabelListResult, GetLabelsHeaders>> GetLabelsNextPageAsync(string acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<LabelListResult, GetLabelsHeaders>> GetLabelsNextPageAsync(string nextLink, string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1744,7 +1759,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                using var message = CreateGetLabelsNextPageRequest(acceptDatetime, nextLink);
+                using var message = CreateGetLabelsNextPageRequest(nextLink, name, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new GetLabelsHeaders(message.Response);
                 switch (message.Response.Status)
@@ -1768,10 +1783,13 @@ namespace AppConfiguration
         }
 
         /// <summary> Gets a list of labels. </summary>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="name"> A filter for the name of the returned labels. </param>
+        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
+        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<LabelListResult, GetLabelsHeaders> GetLabelsNextPage(string acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LabelListResult, GetLabelsHeaders> GetLabelsNextPage(string nextLink, string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1782,7 +1800,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                using var message = CreateGetLabelsNextPageRequest(acceptDatetime, nextLink);
+                using var message = CreateGetLabelsNextPageRequest(nextLink, name, after, acceptDatetime, select);
                 pipeline.Send(message, cancellationToken);
                 var headers = new GetLabelsHeaders(message.Response);
                 switch (message.Response.Status)
@@ -1805,7 +1823,7 @@ namespace AppConfiguration
             }
         }
 
-        internal HttpMessage CreateGetRevisionsNextPageRequest(string acceptDatetime, string nextLink)
+        internal HttpMessage CreateGetRevisionsNextPageRequest(string nextLink, string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1825,10 +1843,14 @@ namespace AppConfiguration
         }
 
         /// <summary> Gets a list of key-value revisions. </summary>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="key"> A filter used to match keys. </param>
+        /// <param name="label"> A filter used to match labels. </param>
+        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
+        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders>> GetRevisionsNextPageAsync(string acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders>> GetRevisionsNextPageAsync(string nextLink, string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1839,7 +1861,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                using var message = CreateGetRevisionsNextPageRequest(acceptDatetime, nextLink);
+                using var message = CreateGetRevisionsNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new GetRevisionsHeaders(message.Response);
                 switch (message.Response.Status)
@@ -1863,10 +1885,14 @@ namespace AppConfiguration
         }
 
         /// <summary> Gets a list of key-value revisions. </summary>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="key"> A filter used to match keys. </param>
+        /// <param name="label"> A filter used to match labels. </param>
+        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
+        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders> GetRevisionsNextPage(string acceptDatetime, string nextLink, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders> GetRevisionsNextPage(string nextLink, string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1877,7 +1903,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                using var message = CreateGetRevisionsNextPageRequest(acceptDatetime, nextLink);
+                using var message = CreateGetRevisionsNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
                 pipeline.Send(message, cancellationToken);
                 var headers = new GetRevisionsHeaders(message.Response);
                 switch (message.Response.Status)

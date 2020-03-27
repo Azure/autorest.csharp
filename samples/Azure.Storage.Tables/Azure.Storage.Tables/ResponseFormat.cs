@@ -3,7 +3,7 @@
 namespace Azure.Storage.Tables
 {
     [CodeGenSchema("Enum0")]
-    internal partial struct ResponseFormat
+    public partial struct ResponseFormat
     {
     }
 }

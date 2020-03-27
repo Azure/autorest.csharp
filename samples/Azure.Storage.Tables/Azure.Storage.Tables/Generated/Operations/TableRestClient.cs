@@ -42,7 +42,7 @@ namespace Azure.Storage.Tables
             this.pipeline = pipeline;
         }
 
-        internal HttpMessage CreateQueryRequest(string requestId, ResponseFormat? format, int? top, string select, string filter)
+        internal HttpMessage CreateQueryRequest(string requestId, QueryOptions queryOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -50,21 +50,21 @@ namespace Azure.Storage.Tables
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(url, false);
             uri.AppendPath("/Tables", false);
-            if (format != null)
+            if (queryOptions?.Format != null)
             {
-                uri.AppendQuery("$format", format.Value.ToString(), true);
+                uri.AppendQuery("$format", queryOptions.Format.Value.ToString(), true);
             }
-            if (top != null)
+            if (queryOptions?.Top != null)
             {
-                uri.AppendQuery("$top", top.Value, true);
+                uri.AppendQuery("$top", queryOptions.Top.Value, true);
             }
-            if (select != null)
+            if (queryOptions?.Select != null)
             {
-                uri.AppendQuery("$select", select, true);
+                uri.AppendQuery("$select", queryOptions.Select, true);
             }
-            if (filter != null)
+            if (queryOptions?.Filter != null)
             {
-                uri.AppendQuery("$filter", filter, true);
+                uri.AppendQuery("$filter", queryOptions.Filter, true);
             }
             request.Uri = uri;
             request.Headers.Add("x-ms-version", version);
@@ -78,18 +78,15 @@ namespace Azure.Storage.Tables
 
         /// <summary> Queries tables under the given account. </summary>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
-        /// <param name="top"> Maximum number of records to return. </param>
-        /// <param name="select"> Select expression using OData notation. Limits the columns on each record to just those requested, e.g. &quot;$select=PolicyAssignmentId, ResourceId&quot;. </param>
-        /// <param name="filter"> OData filter expression. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableQueryResponse, QueryHeaders>> QueryAsync(string requestId, ResponseFormat? format, int? top, string select, string filter, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<TableQueryResponse, QueryHeaders>> QueryAsync(string requestId, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("TableClient.Query");
             scope.Start();
             try
             {
-                using var message = CreateQueryRequest(requestId, format, top, select, filter);
+                using var message = CreateQueryRequest(requestId, queryOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new QueryHeaders(message.Response);
                 switch (message.Response.Status)
@@ -114,18 +111,15 @@ namespace Azure.Storage.Tables
 
         /// <summary> Queries tables under the given account. </summary>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
-        /// <param name="top"> Maximum number of records to return. </param>
-        /// <param name="select"> Select expression using OData notation. Limits the columns on each record to just those requested, e.g. &quot;$select=PolicyAssignmentId, ResourceId&quot;. </param>
-        /// <param name="filter"> OData filter expression. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<TableQueryResponse, QueryHeaders> Query(string requestId, ResponseFormat? format, int? top, string select, string filter, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableQueryResponse, QueryHeaders> Query(string requestId, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("TableClient.Query");
             scope.Start();
             try
             {
-                using var message = CreateQueryRequest(requestId, format, top, select, filter);
+                using var message = CreateQueryRequest(requestId, queryOptions);
                 pipeline.Send(message, cancellationToken);
                 var headers = new QueryHeaders(message.Response);
                 switch (message.Response.Status)
@@ -148,7 +142,7 @@ namespace Azure.Storage.Tables
             }
         }
 
-        internal HttpMessage CreateCreateRequest(string requestId, ResponseFormat? format, TableProperties tableProperties)
+        internal HttpMessage CreateCreateRequest(string requestId, TableProperties tableProperties, QueryOptions queryOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -156,9 +150,9 @@ namespace Azure.Storage.Tables
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(url, false);
             uri.AppendPath("/Tables", false);
-            if (format != null)
+            if (queryOptions?.Format != null)
             {
-                uri.AppendQuery("$format", format.Value.ToString(), true);
+                uri.AppendQuery("$format", queryOptions.Format.Value.ToString(), true);
             }
             request.Uri = uri;
             request.Headers.Add("x-ms-version", version);
@@ -176,10 +170,10 @@ namespace Azure.Storage.Tables
 
         /// <summary> Creates a new table under the given account. </summary>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="tableProperties"> The Table properties. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableResponse, CreateHeaders>> CreateAsync(string requestId, ResponseFormat? format, TableProperties tableProperties, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<TableResponse, CreateHeaders>> CreateAsync(string requestId, TableProperties tableProperties, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
             if (tableProperties == null)
             {
@@ -190,7 +184,7 @@ namespace Azure.Storage.Tables
             scope.Start();
             try
             {
-                using var message = CreateCreateRequest(requestId, format, tableProperties);
+                using var message = CreateCreateRequest(requestId, tableProperties, queryOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new CreateHeaders(message.Response);
                 switch (message.Response.Status)
@@ -217,10 +211,10 @@ namespace Azure.Storage.Tables
 
         /// <summary> Creates a new table under the given account. </summary>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="tableProperties"> The Table properties. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<TableResponse, CreateHeaders> Create(string requestId, ResponseFormat? format, TableProperties tableProperties, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableResponse, CreateHeaders> Create(string requestId, TableProperties tableProperties, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
             if (tableProperties == null)
             {
@@ -231,7 +225,7 @@ namespace Azure.Storage.Tables
             scope.Start();
             try
             {
-                using var message = CreateCreateRequest(requestId, format, tableProperties);
+                using var message = CreateCreateRequest(requestId, tableProperties, queryOptions);
                 pipeline.Send(message, cancellationToken);
                 var headers = new CreateHeaders(message.Response);
                 switch (message.Response.Status)
@@ -341,7 +335,7 @@ namespace Azure.Storage.Tables
             }
         }
 
-        internal HttpMessage CreateQueryEntitiesRequest(int? timeout, string requestId, ResponseFormat? format, int? top, string select, string filter, string table)
+        internal HttpMessage CreateQueryEntitiesRequest(int? timeout, string requestId, string table, QueryOptions queryOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -355,21 +349,21 @@ namespace Azure.Storage.Tables
             {
                 uri.AppendQuery("timeout", timeout.Value, true);
             }
-            if (format != null)
+            if (queryOptions?.Format != null)
             {
-                uri.AppendQuery("$format", format.Value.ToString(), true);
+                uri.AppendQuery("$format", queryOptions.Format.Value.ToString(), true);
             }
-            if (top != null)
+            if (queryOptions?.Top != null)
             {
-                uri.AppendQuery("$top", top.Value, true);
+                uri.AppendQuery("$top", queryOptions.Top.Value, true);
             }
-            if (select != null)
+            if (queryOptions?.Select != null)
             {
-                uri.AppendQuery("$select", select, true);
+                uri.AppendQuery("$select", queryOptions.Select, true);
             }
-            if (filter != null)
+            if (queryOptions?.Filter != null)
             {
-                uri.AppendQuery("$filter", filter, true);
+                uri.AppendQuery("$filter", queryOptions.Filter, true);
             }
             request.Uri = uri;
             request.Headers.Add("x-ms-version", version);
@@ -384,13 +378,10 @@ namespace Azure.Storage.Tables
         /// <summary> Queries entities in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
-        /// <param name="top"> Maximum number of records to return. </param>
-        /// <param name="select"> Select expression using OData notation. Limits the columns on each record to just those requested, e.g. &quot;$select=PolicyAssignmentId, ResourceId&quot;. </param>
-        /// <param name="filter"> OData filter expression. </param>
         /// <param name="table"> The name of the table. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableEntityQueryResponse, QueryEntitiesHeaders>> QueryEntitiesAsync(int? timeout, string requestId, ResponseFormat? format, int? top, string select, string filter, string table, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<TableEntityQueryResponse, QueryEntitiesHeaders>> QueryEntitiesAsync(int? timeout, string requestId, string table, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -401,7 +392,7 @@ namespace Azure.Storage.Tables
             scope.Start();
             try
             {
-                using var message = CreateQueryEntitiesRequest(timeout, requestId, format, top, select, filter, table);
+                using var message = CreateQueryEntitiesRequest(timeout, requestId, table, queryOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new QueryEntitiesHeaders(message.Response);
                 switch (message.Response.Status)
@@ -427,13 +418,10 @@ namespace Azure.Storage.Tables
         /// <summary> Queries entities in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
-        /// <param name="top"> Maximum number of records to return. </param>
-        /// <param name="select"> Select expression using OData notation. Limits the columns on each record to just those requested, e.g. &quot;$select=PolicyAssignmentId, ResourceId&quot;. </param>
-        /// <param name="filter"> OData filter expression. </param>
         /// <param name="table"> The name of the table. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<TableEntityQueryResponse, QueryEntitiesHeaders> QueryEntities(int? timeout, string requestId, ResponseFormat? format, int? top, string select, string filter, string table, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableEntityQueryResponse, QueryEntitiesHeaders> QueryEntities(int? timeout, string requestId, string table, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -444,7 +432,7 @@ namespace Azure.Storage.Tables
             scope.Start();
             try
             {
-                using var message = CreateQueryEntitiesRequest(timeout, requestId, format, top, select, filter, table);
+                using var message = CreateQueryEntitiesRequest(timeout, requestId, table, queryOptions);
                 pipeline.Send(message, cancellationToken);
                 var headers = new QueryEntitiesHeaders(message.Response);
                 switch (message.Response.Status)
@@ -467,7 +455,7 @@ namespace Azure.Storage.Tables
             }
         }
 
-        internal HttpMessage CreateQueryEntitiesWithPartitionAndRowKeyRequest(int? timeout, string requestId, ResponseFormat? format, string select, string filter, string table, string partitionKey, string rowKey)
+        internal HttpMessage CreateQueryEntitiesWithPartitionAndRowKeyRequest(int? timeout, string requestId, string table, string partitionKey, string rowKey, QueryOptions queryOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -485,17 +473,17 @@ namespace Azure.Storage.Tables
             {
                 uri.AppendQuery("timeout", timeout.Value, true);
             }
-            if (format != null)
+            if (queryOptions?.Format != null)
             {
-                uri.AppendQuery("$format", format.Value.ToString(), true);
+                uri.AppendQuery("$format", queryOptions.Format.Value.ToString(), true);
             }
-            if (select != null)
+            if (queryOptions?.Select != null)
             {
-                uri.AppendQuery("$select", select, true);
+                uri.AppendQuery("$select", queryOptions.Select, true);
             }
-            if (filter != null)
+            if (queryOptions?.Filter != null)
             {
-                uri.AppendQuery("$filter", filter, true);
+                uri.AppendQuery("$filter", queryOptions.Filter, true);
             }
             request.Uri = uri;
             request.Headers.Add("x-ms-version", version);
@@ -510,14 +498,12 @@ namespace Azure.Storage.Tables
         /// <summary> Queries entities in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
-        /// <param name="select"> Select expression using OData notation. Limits the columns on each record to just those requested, e.g. &quot;$select=PolicyAssignmentId, ResourceId&quot;. </param>
-        /// <param name="filter"> OData filter expression. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="partitionKey"> The partition key of the entity. </param>
         /// <param name="rowKey"> The row key of the entity. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableEntityQueryResponse, QueryEntitiesWithPartitionAndRowKeyHeaders>> QueryEntitiesWithPartitionAndRowKeyAsync(int? timeout, string requestId, ResponseFormat? format, string select, string filter, string table, string partitionKey, string rowKey, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<TableEntityQueryResponse, QueryEntitiesWithPartitionAndRowKeyHeaders>> QueryEntitiesWithPartitionAndRowKeyAsync(int? timeout, string requestId, string table, string partitionKey, string rowKey, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -536,7 +522,7 @@ namespace Azure.Storage.Tables
             scope.Start();
             try
             {
-                using var message = CreateQueryEntitiesWithPartitionAndRowKeyRequest(timeout, requestId, format, select, filter, table, partitionKey, rowKey);
+                using var message = CreateQueryEntitiesWithPartitionAndRowKeyRequest(timeout, requestId, table, partitionKey, rowKey, queryOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new QueryEntitiesWithPartitionAndRowKeyHeaders(message.Response);
                 switch (message.Response.Status)
@@ -562,14 +548,12 @@ namespace Azure.Storage.Tables
         /// <summary> Queries entities in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
-        /// <param name="select"> Select expression using OData notation. Limits the columns on each record to just those requested, e.g. &quot;$select=PolicyAssignmentId, ResourceId&quot;. </param>
-        /// <param name="filter"> OData filter expression. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="partitionKey"> The partition key of the entity. </param>
         /// <param name="rowKey"> The row key of the entity. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<TableEntityQueryResponse, QueryEntitiesWithPartitionAndRowKeyHeaders> QueryEntitiesWithPartitionAndRowKey(int? timeout, string requestId, ResponseFormat? format, string select, string filter, string table, string partitionKey, string rowKey, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableEntityQueryResponse, QueryEntitiesWithPartitionAndRowKeyHeaders> QueryEntitiesWithPartitionAndRowKey(int? timeout, string requestId, string table, string partitionKey, string rowKey, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -588,7 +572,7 @@ namespace Azure.Storage.Tables
             scope.Start();
             try
             {
-                using var message = CreateQueryEntitiesWithPartitionAndRowKeyRequest(timeout, requestId, format, select, filter, table, partitionKey, rowKey);
+                using var message = CreateQueryEntitiesWithPartitionAndRowKeyRequest(timeout, requestId, table, partitionKey, rowKey, queryOptions);
                 pipeline.Send(message, cancellationToken);
                 var headers = new QueryEntitiesWithPartitionAndRowKeyHeaders(message.Response);
                 switch (message.Response.Status)
@@ -611,7 +595,7 @@ namespace Azure.Storage.Tables
             }
         }
 
-        internal HttpMessage CreateUpdateEntityRequest(int? timeout, string requestId, ResponseFormat? format, string table, string partitionKey, string rowKey, IDictionary<string, object> tableEntityProperties)
+        internal HttpMessage CreateUpdateEntityRequest(int? timeout, string requestId, string table, string partitionKey, string rowKey, IDictionary<string, object> tableEntityProperties, QueryOptions queryOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -629,9 +613,9 @@ namespace Azure.Storage.Tables
             {
                 uri.AppendQuery("timeout", timeout.Value, true);
             }
-            if (format != null)
+            if (queryOptions?.Format != null)
             {
-                uri.AppendQuery("$format", format.Value.ToString(), true);
+                uri.AppendQuery("$format", queryOptions.Format.Value.ToString(), true);
             }
             request.Uri = uri;
             request.Headers.Add("x-ms-version", version);
@@ -659,13 +643,13 @@ namespace Azure.Storage.Tables
         /// <summary> Update entity in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="partitionKey"> The partition key of the entity. </param>
         /// <param name="rowKey"> The row key of the entity. </param>
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<UpdateEntityHeaders>> UpdateEntityAsync(int? timeout, string requestId, ResponseFormat? format, string table, string partitionKey, string rowKey, IDictionary<string, object> tableEntityProperties, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<UpdateEntityHeaders>> UpdateEntityAsync(int? timeout, string requestId, string table, string partitionKey, string rowKey, IDictionary<string, object> tableEntityProperties, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -684,7 +668,7 @@ namespace Azure.Storage.Tables
             scope.Start();
             try
             {
-                using var message = CreateUpdateEntityRequest(timeout, requestId, format, table, partitionKey, rowKey, tableEntityProperties);
+                using var message = CreateUpdateEntityRequest(timeout, requestId, table, partitionKey, rowKey, tableEntityProperties, queryOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new UpdateEntityHeaders(message.Response);
                 switch (message.Response.Status)
@@ -705,13 +689,13 @@ namespace Azure.Storage.Tables
         /// <summary> Update entity in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="partitionKey"> The partition key of the entity. </param>
         /// <param name="rowKey"> The row key of the entity. </param>
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<UpdateEntityHeaders> UpdateEntity(int? timeout, string requestId, ResponseFormat? format, string table, string partitionKey, string rowKey, IDictionary<string, object> tableEntityProperties, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<UpdateEntityHeaders> UpdateEntity(int? timeout, string requestId, string table, string partitionKey, string rowKey, IDictionary<string, object> tableEntityProperties, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -730,7 +714,7 @@ namespace Azure.Storage.Tables
             scope.Start();
             try
             {
-                using var message = CreateUpdateEntityRequest(timeout, requestId, format, table, partitionKey, rowKey, tableEntityProperties);
+                using var message = CreateUpdateEntityRequest(timeout, requestId, table, partitionKey, rowKey, tableEntityProperties, queryOptions);
                 pipeline.Send(message, cancellationToken);
                 var headers = new UpdateEntityHeaders(message.Response);
                 switch (message.Response.Status)
@@ -748,7 +732,7 @@ namespace Azure.Storage.Tables
             }
         }
 
-        internal HttpMessage CreateDeleteEntityRequest(int? timeout, string requestId, ResponseFormat? format, string table, string partitionKey, string rowKey)
+        internal HttpMessage CreateDeleteEntityRequest(int? timeout, string requestId, string table, string partitionKey, string rowKey, QueryOptions queryOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -766,9 +750,9 @@ namespace Azure.Storage.Tables
             {
                 uri.AppendQuery("timeout", timeout.Value, true);
             }
-            if (format != null)
+            if (queryOptions?.Format != null)
             {
-                uri.AppendQuery("$format", format.Value.ToString(), true);
+                uri.AppendQuery("$format", queryOptions.Format.Value.ToString(), true);
             }
             request.Uri = uri;
             request.Headers.Add("x-ms-version", version);
@@ -783,12 +767,12 @@ namespace Azure.Storage.Tables
         /// <summary> Deletes the specified entity in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="partitionKey"> The partition key of the entity. </param>
         /// <param name="rowKey"> The row key of the entity. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<DeleteEntityHeaders>> DeleteEntityAsync(int? timeout, string requestId, ResponseFormat? format, string table, string partitionKey, string rowKey, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<DeleteEntityHeaders>> DeleteEntityAsync(int? timeout, string requestId, string table, string partitionKey, string rowKey, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -807,7 +791,7 @@ namespace Azure.Storage.Tables
             scope.Start();
             try
             {
-                using var message = CreateDeleteEntityRequest(timeout, requestId, format, table, partitionKey, rowKey);
+                using var message = CreateDeleteEntityRequest(timeout, requestId, table, partitionKey, rowKey, queryOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new DeleteEntityHeaders(message.Response);
                 switch (message.Response.Status)
@@ -828,12 +812,12 @@ namespace Azure.Storage.Tables
         /// <summary> Deletes the specified entity in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="partitionKey"> The partition key of the entity. </param>
         /// <param name="rowKey"> The row key of the entity. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<DeleteEntityHeaders> DeleteEntity(int? timeout, string requestId, ResponseFormat? format, string table, string partitionKey, string rowKey, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<DeleteEntityHeaders> DeleteEntity(int? timeout, string requestId, string table, string partitionKey, string rowKey, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -852,7 +836,7 @@ namespace Azure.Storage.Tables
             scope.Start();
             try
             {
-                using var message = CreateDeleteEntityRequest(timeout, requestId, format, table, partitionKey, rowKey);
+                using var message = CreateDeleteEntityRequest(timeout, requestId, table, partitionKey, rowKey, queryOptions);
                 pipeline.Send(message, cancellationToken);
                 var headers = new DeleteEntityHeaders(message.Response);
                 switch (message.Response.Status)
@@ -870,7 +854,7 @@ namespace Azure.Storage.Tables
             }
         }
 
-        internal HttpMessage CreateInsertEntityRequest(int? timeout, string requestId, ResponseFormat? format, string table, IDictionary<string, object> tableEntityProperties)
+        internal HttpMessage CreateInsertEntityRequest(int? timeout, string requestId, string table, IDictionary<string, object> tableEntityProperties, QueryOptions queryOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -883,9 +867,9 @@ namespace Azure.Storage.Tables
             {
                 uri.AppendQuery("timeout", timeout.Value, true);
             }
-            if (format != null)
+            if (queryOptions?.Format != null)
             {
-                uri.AppendQuery("$format", format.Value.ToString(), true);
+                uri.AppendQuery("$format", queryOptions.Format.Value.ToString(), true);
             }
             request.Uri = uri;
             request.Headers.Add("x-ms-version", version);
@@ -913,11 +897,11 @@ namespace Azure.Storage.Tables
         /// <summary> Insert entity in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<IReadOnlyDictionary<string, object>, InsertEntityHeaders>> InsertEntityAsync(int? timeout, string requestId, ResponseFormat? format, string table, IDictionary<string, object> tableEntityProperties, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<IReadOnlyDictionary<string, object>, InsertEntityHeaders>> InsertEntityAsync(int? timeout, string requestId, string table, IDictionary<string, object> tableEntityProperties, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -928,7 +912,7 @@ namespace Azure.Storage.Tables
             scope.Start();
             try
             {
-                using var message = CreateInsertEntityRequest(timeout, requestId, format, table, tableEntityProperties);
+                using var message = CreateInsertEntityRequest(timeout, requestId, table, tableEntityProperties, queryOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new InsertEntityHeaders(message.Response);
                 switch (message.Response.Status)
@@ -959,11 +943,11 @@ namespace Azure.Storage.Tables
         /// <summary> Insert entity in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<IReadOnlyDictionary<string, object>, InsertEntityHeaders> InsertEntity(int? timeout, string requestId, ResponseFormat? format, string table, IDictionary<string, object> tableEntityProperties, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<IReadOnlyDictionary<string, object>, InsertEntityHeaders> InsertEntity(int? timeout, string requestId, string table, IDictionary<string, object> tableEntityProperties, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -974,7 +958,7 @@ namespace Azure.Storage.Tables
             scope.Start();
             try
             {
-                using var message = CreateInsertEntityRequest(timeout, requestId, format, table, tableEntityProperties);
+                using var message = CreateInsertEntityRequest(timeout, requestId, table, tableEntityProperties, queryOptions);
                 pipeline.Send(message, cancellationToken);
                 var headers = new InsertEntityHeaders(message.Response);
                 switch (message.Response.Status)

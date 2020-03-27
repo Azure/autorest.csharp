@@ -33,46 +33,40 @@ namespace Azure.Storage.Tables
 
         /// <summary> Queries tables under the given account. </summary>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
-        /// <param name="top"> Maximum number of records to return. </param>
-        /// <param name="select"> Select expression using OData notation. Limits the columns on each record to just those requested, e.g. &quot;$select=PolicyAssignmentId, ResourceId&quot;. </param>
-        /// <param name="filter"> OData filter expression. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<TableQueryResponse>> QueryAsync(string requestId, ResponseFormat? format, int? top, string select, string filter, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TableQueryResponse>> QueryAsync(string requestId, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
-            return await RestClient.QueryAsync(requestId, format, top, select, filter, cancellationToken).ConfigureAwait(false);
+            return await RestClient.QueryAsync(requestId, queryOptions, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Queries tables under the given account. </summary>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
-        /// <param name="top"> Maximum number of records to return. </param>
-        /// <param name="select"> Select expression using OData notation. Limits the columns on each record to just those requested, e.g. &quot;$select=PolicyAssignmentId, ResourceId&quot;. </param>
-        /// <param name="filter"> OData filter expression. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<TableQueryResponse> Query(string requestId, ResponseFormat? format, int? top, string select, string filter, CancellationToken cancellationToken = default)
+        public virtual Response<TableQueryResponse> Query(string requestId, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
-            return RestClient.Query(requestId, format, top, select, filter, cancellationToken);
+            return RestClient.Query(requestId, queryOptions, cancellationToken);
         }
 
         /// <summary> Creates a new table under the given account. </summary>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="tableProperties"> The Table properties. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<TableResponse>> CreateAsync(string requestId, ResponseFormat? format, TableProperties tableProperties, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TableResponse>> CreateAsync(string requestId, TableProperties tableProperties, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
-            return await RestClient.CreateAsync(requestId, format, tableProperties, cancellationToken).ConfigureAwait(false);
+            return await RestClient.CreateAsync(requestId, tableProperties, queryOptions, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Creates a new table under the given account. </summary>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="tableProperties"> The Table properties. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<TableResponse> Create(string requestId, ResponseFormat? format, TableProperties tableProperties, CancellationToken cancellationToken = default)
+        public virtual Response<TableResponse> Create(string requestId, TableProperties tableProperties, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
-            return RestClient.Create(requestId, format, tableProperties, cancellationToken);
+            return RestClient.Create(requestId, tableProperties, queryOptions, cancellationToken);
         }
 
         /// <summary> Operation permanently deletes the specified table. </summary>
@@ -96,137 +90,127 @@ namespace Azure.Storage.Tables
         /// <summary> Queries entities in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
-        /// <param name="top"> Maximum number of records to return. </param>
-        /// <param name="select"> Select expression using OData notation. Limits the columns on each record to just those requested, e.g. &quot;$select=PolicyAssignmentId, ResourceId&quot;. </param>
-        /// <param name="filter"> OData filter expression. </param>
         /// <param name="table"> The name of the table. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<TableEntityQueryResponse>> QueryEntitiesAsync(int? timeout, string requestId, ResponseFormat? format, int? top, string select, string filter, string table, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TableEntityQueryResponse>> QueryEntitiesAsync(int? timeout, string requestId, string table, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
-            return await RestClient.QueryEntitiesAsync(timeout, requestId, format, top, select, filter, table, cancellationToken).ConfigureAwait(false);
+            return await RestClient.QueryEntitiesAsync(timeout, requestId, table, queryOptions, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Queries entities in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
-        /// <param name="top"> Maximum number of records to return. </param>
-        /// <param name="select"> Select expression using OData notation. Limits the columns on each record to just those requested, e.g. &quot;$select=PolicyAssignmentId, ResourceId&quot;. </param>
-        /// <param name="filter"> OData filter expression. </param>
         /// <param name="table"> The name of the table. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<TableEntityQueryResponse> QueryEntities(int? timeout, string requestId, ResponseFormat? format, int? top, string select, string filter, string table, CancellationToken cancellationToken = default)
+        public virtual Response<TableEntityQueryResponse> QueryEntities(int? timeout, string requestId, string table, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
-            return RestClient.QueryEntities(timeout, requestId, format, top, select, filter, table, cancellationToken);
+            return RestClient.QueryEntities(timeout, requestId, table, queryOptions, cancellationToken);
         }
 
         /// <summary> Queries entities in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
-        /// <param name="select"> Select expression using OData notation. Limits the columns on each record to just those requested, e.g. &quot;$select=PolicyAssignmentId, ResourceId&quot;. </param>
-        /// <param name="filter"> OData filter expression. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="partitionKey"> The partition key of the entity. </param>
         /// <param name="rowKey"> The row key of the entity. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<TableEntityQueryResponse>> QueryEntitiesWithPartitionAndRowKeyAsync(int? timeout, string requestId, ResponseFormat? format, string select, string filter, string table, string partitionKey, string rowKey, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TableEntityQueryResponse>> QueryEntitiesWithPartitionAndRowKeyAsync(int? timeout, string requestId, string table, string partitionKey, string rowKey, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
-            return await RestClient.QueryEntitiesWithPartitionAndRowKeyAsync(timeout, requestId, format, select, filter, table, partitionKey, rowKey, cancellationToken).ConfigureAwait(false);
+            return await RestClient.QueryEntitiesWithPartitionAndRowKeyAsync(timeout, requestId, table, partitionKey, rowKey, queryOptions, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Queries entities in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
-        /// <param name="select"> Select expression using OData notation. Limits the columns on each record to just those requested, e.g. &quot;$select=PolicyAssignmentId, ResourceId&quot;. </param>
-        /// <param name="filter"> OData filter expression. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="partitionKey"> The partition key of the entity. </param>
         /// <param name="rowKey"> The row key of the entity. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<TableEntityQueryResponse> QueryEntitiesWithPartitionAndRowKey(int? timeout, string requestId, ResponseFormat? format, string select, string filter, string table, string partitionKey, string rowKey, CancellationToken cancellationToken = default)
+        public virtual Response<TableEntityQueryResponse> QueryEntitiesWithPartitionAndRowKey(int? timeout, string requestId, string table, string partitionKey, string rowKey, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
-            return RestClient.QueryEntitiesWithPartitionAndRowKey(timeout, requestId, format, select, filter, table, partitionKey, rowKey, cancellationToken);
+            return RestClient.QueryEntitiesWithPartitionAndRowKey(timeout, requestId, table, partitionKey, rowKey, queryOptions, cancellationToken);
         }
 
         /// <summary> Update entity in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="partitionKey"> The partition key of the entity. </param>
         /// <param name="rowKey"> The row key of the entity. </param>
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> UpdateEntityAsync(int? timeout, string requestId, ResponseFormat? format, string table, string partitionKey, string rowKey, IDictionary<string, object> tableEntityProperties, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> UpdateEntityAsync(int? timeout, string requestId, string table, string partitionKey, string rowKey, IDictionary<string, object> tableEntityProperties, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
-            return (await RestClient.UpdateEntityAsync(timeout, requestId, format, table, partitionKey, rowKey, tableEntityProperties, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+            return (await RestClient.UpdateEntityAsync(timeout, requestId, table, partitionKey, rowKey, tableEntityProperties, queryOptions, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
 
         /// <summary> Update entity in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="partitionKey"> The partition key of the entity. </param>
         /// <param name="rowKey"> The row key of the entity. </param>
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response UpdateEntity(int? timeout, string requestId, ResponseFormat? format, string table, string partitionKey, string rowKey, IDictionary<string, object> tableEntityProperties, CancellationToken cancellationToken = default)
+        public virtual Response UpdateEntity(int? timeout, string requestId, string table, string partitionKey, string rowKey, IDictionary<string, object> tableEntityProperties, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
-            return RestClient.UpdateEntity(timeout, requestId, format, table, partitionKey, rowKey, tableEntityProperties, cancellationToken).GetRawResponse();
+            return RestClient.UpdateEntity(timeout, requestId, table, partitionKey, rowKey, tableEntityProperties, queryOptions, cancellationToken).GetRawResponse();
         }
 
         /// <summary> Deletes the specified entity in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="partitionKey"> The partition key of the entity. </param>
         /// <param name="rowKey"> The row key of the entity. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DeleteEntityAsync(int? timeout, string requestId, ResponseFormat? format, string table, string partitionKey, string rowKey, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DeleteEntityAsync(int? timeout, string requestId, string table, string partitionKey, string rowKey, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
-            return (await RestClient.DeleteEntityAsync(timeout, requestId, format, table, partitionKey, rowKey, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+            return (await RestClient.DeleteEntityAsync(timeout, requestId, table, partitionKey, rowKey, queryOptions, cancellationToken).ConfigureAwait(false)).GetRawResponse();
         }
 
         /// <summary> Deletes the specified entity in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="partitionKey"> The partition key of the entity. </param>
         /// <param name="rowKey"> The row key of the entity. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response DeleteEntity(int? timeout, string requestId, ResponseFormat? format, string table, string partitionKey, string rowKey, CancellationToken cancellationToken = default)
+        public virtual Response DeleteEntity(int? timeout, string requestId, string table, string partitionKey, string rowKey, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
-            return RestClient.DeleteEntity(timeout, requestId, format, table, partitionKey, rowKey, cancellationToken).GetRawResponse();
+            return RestClient.DeleteEntity(timeout, requestId, table, partitionKey, rowKey, queryOptions, cancellationToken).GetRawResponse();
         }
 
         /// <summary> Insert entity in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyDictionary<string, object>>> InsertEntityAsync(int? timeout, string requestId, ResponseFormat? format, string table, IDictionary<string, object> tableEntityProperties, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyDictionary<string, object>>> InsertEntityAsync(int? timeout, string requestId, string table, IDictionary<string, object> tableEntityProperties, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
-            return await RestClient.InsertEntityAsync(timeout, requestId, format, table, tableEntityProperties, cancellationToken).ConfigureAwait(false);
+            return await RestClient.InsertEntityAsync(timeout, requestId, table, tableEntityProperties, queryOptions, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Insert entity in a table. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
-        /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="table"> The name of the table. </param>
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
+        /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyDictionary<string, object>> InsertEntity(int? timeout, string requestId, ResponseFormat? format, string table, IDictionary<string, object> tableEntityProperties, CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyDictionary<string, object>> InsertEntity(int? timeout, string requestId, string table, IDictionary<string, object> tableEntityProperties, QueryOptions queryOptions, CancellationToken cancellationToken = default)
         {
-            return RestClient.InsertEntity(timeout, requestId, format, table, tableEntityProperties, cancellationToken);
+            return RestClient.InsertEntity(timeout, requestId, table, tableEntityProperties, queryOptions, cancellationToken);
         }
 
         /// <summary> Retrieves details about any stored access policies specified on the table that may be used wit Shared Access Signatures. </summary>
