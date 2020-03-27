@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Diagnostics;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
@@ -602,11 +603,9 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Empty response handling: https://github.com/Azure/autorest.csharp/issues/300")]
-        public Task ResponsesScenarioH200MatchingNone() => Test(async (host, pipeline) =>
+        public Task ResponsesScenarioH200MatchingNone() => Test((host, pipeline) =>
         {
-            var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200ModelA200NoneAsync();
-            Assert.AreEqual(null, result.Value);
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200ModelA200NoneAsync());
         });
 
         [Test]
@@ -634,11 +633,9 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Empty response handling: https://github.com/Azure/autorest.csharp/issues/300")]
-        public Task ResponsesScenarioH400NonMatchingNone() => Test(async (host, pipeline) =>
+        public Task ResponsesScenarioH400NonMatchingNone() => Test((host, pipeline) =>
         {
-            var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200ModelA400NoneAsync();
-            Assert.AreEqual(null, result.Value);
+            Assert.ThrowsAsync(Is.InstanceOf<RequestFailedException>(), async () => await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200ModelA400NoneAsync());
         });
 
         [Test]
@@ -650,11 +647,9 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
-        public Task ResponsesScenarioNoModelErrorBody() => Test(async (host, pipeline) =>
+        public Task ResponsesScenarioNoModelErrorBody() => Test((host, pipeline) =>
         {
-            var result = await new HttpFailureClient(ClientDiagnostics, pipeline, host).GetNoModelErrorAsync();
-            Assert.AreEqual(true, result.Value);
+            Assert.ThrowsAsync(Is.InstanceOf<RequestFailedException>(), async () => await new HttpFailureClient(ClientDiagnostics, pipeline, host).GetNoModelErrorAsync());
         });
     }
 }
