@@ -173,13 +173,14 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PutModelFlattenCustomGroupedParameter() => Test(async (host, pipeline) =>
         {
-            var result = await new ServiceClient(ClientDiagnostics, pipeline, host).PutSimpleProductWithGroupingAsync("groupproduct",
-                productId: "123",
-                description: "product description",
-                maxProductDisplayName: "max name",
-                null,
-                capacity: "Large",
-                odataValue: "http://foo");
+            var result = await new ServiceClient(ClientDiagnostics, pipeline, host).PutSimpleProductWithGroupingAsync(
+                new FlattenParameterGroup("groupproduct", productId: "123")
+                {
+                    Description = "product description",
+                    MaxProductDisplayName = "max name",
+                    OdataValue = "http://foo"
+                },
+                capacity: "Large");
             Assert.AreEqual("123", result.Value.ProductId);
             Assert.AreEqual("product description", result.Value.Description);
             Assert.AreEqual("max name", result.Value.MaxProductDisplayName);
