@@ -30,7 +30,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Requires multiple media types handling: https://github.com/Azure/autorest.csharp/issues/522")]
         public Task MediaTypePdf() => Test(async (host, pipeline) =>
         {
             await using var value = new MemoryStream(Encoding.UTF8.GetBytes("PDF"));
