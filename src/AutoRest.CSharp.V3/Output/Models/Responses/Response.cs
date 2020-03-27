@@ -5,15 +5,13 @@ namespace AutoRest.CSharp.V3.Output.Models.Responses
 {
     internal class Response
     {
-        public Response(ResponseBody? responseBody, int[] successfulStatusCodes, ResponseHeaderGroupType? headerModel)
+        public Response(ResponseBody? responseBody, int[] statusCodes)
         {
             ResponseBody = responseBody;
-            SuccessfulStatusCodes = successfulStatusCodes;
-            HeaderModel = headerModel;
+            StatusCodes = statusCodes;
         }
 
         public ResponseBody? ResponseBody { get; }
-        public int[] SuccessfulStatusCodes { get; }
-        public ResponseHeaderGroupType? HeaderModel { get; }
+        public int[] StatusCodes { get; }
     }
 }

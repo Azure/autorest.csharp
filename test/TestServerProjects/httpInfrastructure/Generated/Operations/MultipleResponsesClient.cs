@@ -32,168 +32,168 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<MyException>> Get200Model204NoModelDefaultError200ValidAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<object>> Get200Model204NoModelDefaultError200ValidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get200Model204NoModelDefaultError200ValidAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<MyException> Get200Model204NoModelDefaultError200Valid(CancellationToken cancellationToken = default)
+        public virtual Response<object> Get200Model204NoModelDefaultError200Valid(CancellationToken cancellationToken = default)
         {
             return RestClient.Get200Model204NoModelDefaultError200Valid(cancellationToken);
         }
 
         /// <summary> Send a 204 response with no payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<MyException>> Get200Model204NoModelDefaultError204ValidAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<object>> Get200Model204NoModelDefaultError204ValidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get200Model204NoModelDefaultError204ValidAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Send a 204 response with no payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<MyException> Get200Model204NoModelDefaultError204Valid(CancellationToken cancellationToken = default)
+        public virtual Response<object> Get200Model204NoModelDefaultError204Valid(CancellationToken cancellationToken = default)
         {
             return RestClient.Get200Model204NoModelDefaultError204Valid(cancellationToken);
         }
 
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<MyException>> Get200Model204NoModelDefaultError201InvalidAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<object>> Get200Model204NoModelDefaultError201InvalidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get200Model204NoModelDefaultError201InvalidAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<MyException> Get200Model204NoModelDefaultError201Invalid(CancellationToken cancellationToken = default)
+        public virtual Response<object> Get200Model204NoModelDefaultError201Invalid(CancellationToken cancellationToken = default)
         {
             return RestClient.Get200Model204NoModelDefaultError201Invalid(cancellationToken);
         }
 
         /// <summary> Send a 202 response with no payload:. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<MyException>> Get200Model204NoModelDefaultError202NoneAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<object>> Get200Model204NoModelDefaultError202NoneAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get200Model204NoModelDefaultError202NoneAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Send a 202 response with no payload:. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<MyException> Get200Model204NoModelDefaultError202None(CancellationToken cancellationToken = default)
+        public virtual Response<object> Get200Model204NoModelDefaultError202None(CancellationToken cancellationToken = default)
         {
             return RestClient.Get200Model204NoModelDefaultError202None(cancellationToken);
         }
 
         /// <summary> Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<MyException>> Get200Model204NoModelDefaultError400ValidAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<object>> Get200Model204NoModelDefaultError400ValidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get200Model204NoModelDefaultError400ValidAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<MyException> Get200Model204NoModelDefaultError400Valid(CancellationToken cancellationToken = default)
+        public virtual Response<object> Get200Model204NoModelDefaultError400Valid(CancellationToken cancellationToken = default)
         {
             return RestClient.Get200Model204NoModelDefaultError400Valid(cancellationToken);
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<MyException>> Get200Model201ModelDefaultError200ValidAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<object>> Get200Model201ModelDefaultError200ValidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get200Model201ModelDefaultError200ValidAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<MyException> Get200Model201ModelDefaultError200Valid(CancellationToken cancellationToken = default)
+        public virtual Response<object> Get200Model201ModelDefaultError200Valid(CancellationToken cancellationToken = default)
         {
             return RestClient.Get200Model201ModelDefaultError200Valid(cancellationToken);
         }
 
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<MyException>> Get200Model201ModelDefaultError201ValidAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<object>> Get200Model201ModelDefaultError201ValidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get200Model201ModelDefaultError201ValidAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<MyException> Get200Model201ModelDefaultError201Valid(CancellationToken cancellationToken = default)
+        public virtual Response<object> Get200Model201ModelDefaultError201Valid(CancellationToken cancellationToken = default)
         {
             return RestClient.Get200Model201ModelDefaultError201Valid(cancellationToken);
         }
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<MyException>> Get200Model201ModelDefaultError400ValidAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<object>> Get200Model201ModelDefaultError400ValidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get200Model201ModelDefaultError400ValidAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<MyException> Get200Model201ModelDefaultError400Valid(CancellationToken cancellationToken = default)
+        public virtual Response<object> Get200Model201ModelDefaultError400Valid(CancellationToken cancellationToken = default)
         {
             return RestClient.Get200Model201ModelDefaultError400Valid(cancellationToken);
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<MyException>> Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<object>> Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<MyException> Get200ModelA201ModelC404ModelDDefaultError200Valid(CancellationToken cancellationToken = default)
+        public virtual Response<object> Get200ModelA201ModelC404ModelDDefaultError200Valid(CancellationToken cancellationToken = default)
         {
             return RestClient.Get200ModelA201ModelC404ModelDDefaultError200Valid(cancellationToken);
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<MyException>> Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<object>> Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<MyException> Get200ModelA201ModelC404ModelDDefaultError201Valid(CancellationToken cancellationToken = default)
+        public virtual Response<object> Get200ModelA201ModelC404ModelDDefaultError201Valid(CancellationToken cancellationToken = default)
         {
             return RestClient.Get200ModelA201ModelC404ModelDDefaultError201Valid(cancellationToken);
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<MyException>> Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<object>> Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<MyException> Get200ModelA201ModelC404ModelDDefaultError404Valid(CancellationToken cancellationToken = default)
+        public virtual Response<object> Get200ModelA201ModelC404ModelDDefaultError404Valid(CancellationToken cancellationToken = default)
         {
             return RestClient.Get200ModelA201ModelC404ModelDDefaultError404Valid(cancellationToken);
         }
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<MyException>> Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<object>> Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(CancellationToken cancellationToken = default)
         {
             return await RestClient.Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<MyException> Get200ModelA201ModelC404ModelDDefaultError400Valid(CancellationToken cancellationToken = default)
+        public virtual Response<object> Get200ModelA201ModelC404ModelDDefaultError400Valid(CancellationToken cancellationToken = default)
         {
             return RestClient.Get200ModelA201ModelC404ModelDDefaultError400Valid(cancellationToken);
         }

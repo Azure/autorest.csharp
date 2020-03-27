@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                         nextPageMethods.Add(nextPageMethod);
                     }
 
-                    if (!(method.Response.ResponseBody is ObjectResponseBody objectResponseBody))
+                    if (!(method.Responses.Single().ResponseBody is ObjectResponseBody objectResponseBody))
                     {
                         throw new InvalidOperationException($"Method {method.Name} has to have a return value");
                     }
@@ -307,65 +307,78 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 body
             );
 
-            ResponseBody? responseBody = null;
-            ResponseHeaderGroupType? responseHeaderModel = null;
             string operationName = operation.CSharpName();
 
-            //TODO: Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413
-            ServiceResponse? response = null;
-
-            // if operation is a long-running operation than we're generating an initial call here so find a response with non 200/204 code
-            // fallback to the first on otherwise
+            List<Response> clientResponse = new List<Response>();
 
             if (operation.IsLongRunning)
             {
-                response = operation.LongRunningInitialResponse;
-            }
-
-            response ??= operation.Responses.FirstOrDefault();
-
-            Response clientResponse;
-            if (response != null)
-            {
+                // If operation is a long-running operation than we're generating an initial call here so find a response with non 200/204 code
                 // Ignore response body and headers for LROs as the ArmOperationHelpers figures out them dynamically
-                if (!operation.IsLongRunning)
-                {
-                    responseBody = BuildResponseBody(response);
-
-                    responseHeaderModel = BuildResponseHeaderModel(operation, response);
-                }
-
-                var responseCodes = new HashSet<int>(response.HttpResponse.IntStatusCodes);
-
                 // Long running operations can respond with both initial or final status code
-                if (operation.IsLongRunning)
-                {
-                    foreach (var statusCode in operation.LongRunningFinalResponse.HttpResponse.IntStatusCodes)
-                    {
-                        responseCodes.Add(statusCode);
-                    }
-                }
 
-                clientResponse = new Response(
-                    responseBody,
-                    responseCodes.ToArray(),
-                    responseHeaderModel
-                );
+                clientResponse.Add(new Response(
+                    null,
+                    operation.LongRunningInitialResponse.HttpResponse.IntStatusCodes.ToArray()
+                ));
+                clientResponse.Add(new Response(
+                    null,
+                    operation.LongRunningFinalResponse.HttpResponse.IntStatusCodes.ToArray()
+                ));
             }
             else
             {
-                // Special case for httpInfrastructure testServer swagger, service method always fails
-                clientResponse = new Response(null, Array.Empty<int>(), null);
+                foreach (var response in operation.Responses)
+                {
+                    clientResponse.Add(new Response(
+                        BuildResponseBody(response),
+                        response.HttpResponse.IntStatusCodes.ToArray()
+                    ));
+                }
             }
+
+            var responseHeaderModel = BuildResponseHeaderModel(operation);
+            var responseType = ReduceResponses(clientResponse);
 
             return new RestClientMethod(
                 operationName,
                 BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
+                responseType,
                 request,
                 OrderParameters(methodParameters.Values),
-                clientResponse,
+                clientResponse.ToArray(),
+                responseHeaderModel,
                 new Diagnostic($"{clientName}.{operationName}", Array.Empty<DiagnosticAttribute>())
             );
+        }
+
+        // Merges operations without response types types together
+        private CSharpType? ReduceResponses(List<Response> responses)
+        {
+            var noBodyResponses = responses.Where(r => r.ResponseBody == null).ToArray();
+
+            if (noBodyResponses.Any())
+            {
+                foreach (var noBodyResponse in noBodyResponses)
+                {
+                    responses.Remove(noBodyResponse);
+                }
+
+                responses.Add(new Response(
+                    null,
+                    noBodyResponses.SelectMany(r=>r.StatusCodes).ToArray()));
+            }
+
+            if (responses.Count == 0)
+            {
+                return null;
+            }
+            if (responses.Count == 1)
+            {
+                return responses.Single().ResponseBody?.Type;
+            }
+
+            return typeof(object);
         }
 
         private ResponseBody? BuildResponseBody(ServiceResponse response)
@@ -410,9 +423,11 @@ namespace AutoRest.CSharp.V3.Output.Builders
             return new RestClientMethod(
                 $"{method.Name}NextPage",
                 method.Description,
+                method.ReturnType,
                 request,
                 parameters,
-                method.Response,
+                method.Responses,
+                method.HeaderModel,
                 method.Diagnostics);
         }
 
@@ -469,8 +484,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             return new LongRunningOperation(
                 startMethod,
                 new Response(BuildResponseBody(finalResponse),
-                    finalResponse.HttpResponse.IntStatusCodes,
-                    BuildResponseHeaderModel(operation, finalResponse)),
+                    finalResponse.HttpResponse.IntStatusCodes),
                 name,
                 new[] { originalResponseParameter, httpMessageParameter },
                 finalStateVia);
@@ -488,9 +502,9 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 requestParameter.Required == true);
         }
 
-        private ResponseHeaderGroupType? BuildResponseHeaderModel(Operation operation, ServiceResponse response)
+        private ResponseHeaderGroupType? BuildResponseHeaderModel(Operation operation)
         {
-            var httpResponseHeaders = response.HttpResponse.Headers
+            var httpResponseHeaders = operation.Responses.SelectMany(r => r.HttpResponse.Headers)
                 .Where(h => !_knownResponseHeaders.Contains(h.Header, StringComparer.InvariantCultureIgnoreCase))
                 .ToArray();
 
