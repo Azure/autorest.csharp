@@ -1251,6 +1251,7 @@ namespace httpInfrastructure
                 switch (message.Response.Status)
                 {
                     case 204:
+                    case 404:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1276,6 +1277,7 @@ namespace httpInfrastructure
                 switch (message.Response.Status)
                 {
                     case 204:
+                    case 404:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

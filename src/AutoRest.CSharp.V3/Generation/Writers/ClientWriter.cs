@@ -60,8 +60,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, bool async)
         {
-            var responseBody = clientMethod.RestClientMethod.Response.ResponseBody;
-            CSharpType? bodyType = responseBody?.Type;
+            CSharpType? bodyType = clientMethod.RestClientMethod.ReturnType;
             CSharpType responseType = bodyType != null ?
                 new CSharpType(typeof(Response<>), bodyType) :
                 typeof(Response);
@@ -110,7 +109,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 writer.Append($")");
 
-                if (bodyType == null && clientMethod.RestClientMethod.Response.HeaderModel != null)
+                if (bodyType == null && clientMethod.RestClientMethod.HeaderModel != null)
                 {
                     writer.Append($".GetRawResponse()");
                 }

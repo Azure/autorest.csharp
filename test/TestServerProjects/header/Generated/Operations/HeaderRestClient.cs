@@ -131,10 +131,10 @@ namespace header
             {
                 using var message = CreateResponseExistingKeyRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new ResponseExistingKeyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseExistingKeyHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -157,10 +157,10 @@ namespace header
             {
                 using var message = CreateResponseExistingKeyRequest();
                 pipeline.Send(message, cancellationToken);
+                var headers = new ResponseExistingKeyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseExistingKeyHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -270,10 +270,10 @@ namespace header
             {
                 using var message = CreateResponseProtectedKeyRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new ResponseProtectedKeyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseProtectedKeyHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -296,10 +296,10 @@ namespace header
             {
                 using var message = CreateResponseProtectedKeyRequest();
                 pipeline.Send(message, cancellationToken);
+                var headers = new ResponseProtectedKeyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseProtectedKeyHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -419,10 +419,10 @@ namespace header
             {
                 using var message = CreateResponseIntegerRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new ResponseIntegerHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseIntegerHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -451,10 +451,10 @@ namespace header
             {
                 using var message = CreateResponseIntegerRequest(scenario);
                 pipeline.Send(message, cancellationToken);
+                var headers = new ResponseIntegerHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseIntegerHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -574,10 +574,10 @@ namespace header
             {
                 using var message = CreateResponseLongRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new ResponseLongHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseLongHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -606,10 +606,10 @@ namespace header
             {
                 using var message = CreateResponseLongRequest(scenario);
                 pipeline.Send(message, cancellationToken);
+                var headers = new ResponseLongHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseLongHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -729,10 +729,10 @@ namespace header
             {
                 using var message = CreateResponseFloatRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new ResponseFloatHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseFloatHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -761,10 +761,10 @@ namespace header
             {
                 using var message = CreateResponseFloatRequest(scenario);
                 pipeline.Send(message, cancellationToken);
+                var headers = new ResponseFloatHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseFloatHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -884,10 +884,10 @@ namespace header
             {
                 using var message = CreateResponseDoubleRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new ResponseDoubleHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseDoubleHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -916,10 +916,10 @@ namespace header
             {
                 using var message = CreateResponseDoubleRequest(scenario);
                 pipeline.Send(message, cancellationToken);
+                var headers = new ResponseDoubleHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseDoubleHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1039,10 +1039,10 @@ namespace header
             {
                 using var message = CreateResponseBoolRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new ResponseBoolHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseBoolHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1071,10 +1071,10 @@ namespace header
             {
                 using var message = CreateResponseBoolRequest(scenario);
                 pipeline.Send(message, cancellationToken);
+                var headers = new ResponseBoolHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseBoolHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1197,10 +1197,10 @@ namespace header
             {
                 using var message = CreateResponseStringRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new ResponseStringHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseStringHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1229,10 +1229,10 @@ namespace header
             {
                 using var message = CreateResponseStringRequest(scenario);
                 pipeline.Send(message, cancellationToken);
+                var headers = new ResponseStringHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseStringHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1352,10 +1352,10 @@ namespace header
             {
                 using var message = CreateResponseDateRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new ResponseDateHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseDateHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1384,10 +1384,10 @@ namespace header
             {
                 using var message = CreateResponseDateRequest(scenario);
                 pipeline.Send(message, cancellationToken);
+                var headers = new ResponseDateHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseDateHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1507,10 +1507,10 @@ namespace header
             {
                 using var message = CreateResponseDatetimeRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new ResponseDatetimeHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseDatetimeHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1539,10 +1539,10 @@ namespace header
             {
                 using var message = CreateResponseDatetimeRequest(scenario);
                 pipeline.Send(message, cancellationToken);
+                var headers = new ResponseDatetimeHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseDatetimeHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1665,10 +1665,10 @@ namespace header
             {
                 using var message = CreateResponseDatetimeRfc1123Request(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new ResponseDatetimeRfc1123Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseDatetimeRfc1123Headers(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1697,10 +1697,10 @@ namespace header
             {
                 using var message = CreateResponseDatetimeRfc1123Request(scenario);
                 pipeline.Send(message, cancellationToken);
+                var headers = new ResponseDatetimeRfc1123Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseDatetimeRfc1123Headers(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1820,10 +1820,10 @@ namespace header
             {
                 using var message = CreateResponseDurationRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new ResponseDurationHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseDurationHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1852,10 +1852,10 @@ namespace header
             {
                 using var message = CreateResponseDurationRequest(scenario);
                 pipeline.Send(message, cancellationToken);
+                var headers = new ResponseDurationHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseDurationHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1983,10 +1983,10 @@ namespace header
             {
                 using var message = CreateResponseByteRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new ResponseByteHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseByteHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2015,10 +2015,10 @@ namespace header
             {
                 using var message = CreateResponseByteRequest(scenario);
                 pipeline.Send(message, cancellationToken);
+                var headers = new ResponseByteHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseByteHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -2141,10 +2141,10 @@ namespace header
             {
                 using var message = CreateResponseEnumRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new ResponseEnumHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseEnumHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -2173,10 +2173,10 @@ namespace header
             {
                 using var message = CreateResponseEnumRequest(scenario);
                 pipeline.Send(message, cancellationToken);
+                var headers = new ResponseEnumHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new ResponseEnumHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

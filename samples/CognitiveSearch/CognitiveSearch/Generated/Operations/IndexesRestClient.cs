@@ -284,6 +284,7 @@ namespace CognitiveSearch
                 switch (message.Response.Status)
                 {
                     case 200:
+                    case 201:
                         {
                             Models.Index value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
@@ -328,6 +329,7 @@ namespace CognitiveSearch
                 switch (message.Response.Status)
                 {
                     case 200:
+                    case 201:
                         {
                             Models.Index value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
@@ -393,6 +395,7 @@ namespace CognitiveSearch
                 switch (message.Response.Status)
                 {
                     case 204:
+                    case 404:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -426,6 +429,7 @@ namespace CognitiveSearch
                 switch (message.Response.Status)
                 {
                     case 204:
+                    case 404:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

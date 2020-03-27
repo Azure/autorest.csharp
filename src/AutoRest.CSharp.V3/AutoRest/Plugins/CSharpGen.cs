@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
 
                 project.AddGeneratedFile($"Operations/{client.Type.Name}.cs", restCodeWriter.ToString());
 
-                var headerModels = client.Methods.Select(m => m.Response.HeaderModel).OfType<ResponseHeaderGroupType>().Distinct();
+                var headerModels = client.Methods.Select(m => m.HeaderModel).OfType<ResponseHeaderGroupType>().Distinct();
                 foreach (ResponseHeaderGroupType responseHeaderModel in headerModels)
                 {
                     var headerModelCodeWriter = new CodeWriter();

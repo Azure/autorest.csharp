@@ -85,6 +85,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetKeysRequest(name, after, acceptDatetime);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new GetKeysHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -92,7 +93,6 @@ namespace AppConfiguration
                             KeyListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = KeyListResult.DeserializeKeyListResult(document.RootElement);
-                            var headers = new GetKeysHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -119,6 +119,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetKeysRequest(name, after, acceptDatetime);
                 pipeline.Send(message, cancellationToken);
+                var headers = new GetKeysHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -126,7 +127,6 @@ namespace AppConfiguration
                             KeyListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = KeyListResult.DeserializeKeyListResult(document.RootElement);
-                            var headers = new GetKeysHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -182,10 +182,10 @@ namespace AppConfiguration
             {
                 using var message = CreateCheckKeysRequest(name, after, acceptDatetime);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new CheckKeysHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new CheckKeysHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -211,10 +211,10 @@ namespace AppConfiguration
             {
                 using var message = CreateCheckKeysRequest(name, after, acceptDatetime);
                 pipeline.Send(message, cancellationToken);
+                var headers = new CheckKeysHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new CheckKeysHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -279,6 +279,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetKeyValuesRequest(key, label, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new GetKeyValuesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -286,7 +287,6 @@ namespace AppConfiguration
                             KeyValueListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                            var headers = new GetKeyValuesHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -315,6 +315,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetKeyValuesRequest(key, label, after, acceptDatetime, select);
                 pipeline.Send(message, cancellationToken);
+                var headers = new GetKeyValuesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -322,7 +323,6 @@ namespace AppConfiguration
                             KeyValueListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                            var headers = new GetKeyValuesHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -388,10 +388,10 @@ namespace AppConfiguration
             {
                 using var message = CreateCheckKeyValuesRequest(key, label, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new CheckKeyValuesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new CheckKeyValuesHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -419,10 +419,10 @@ namespace AppConfiguration
             {
                 using var message = CreateCheckKeyValuesRequest(key, label, after, acceptDatetime, select);
                 pipeline.Send(message, cancellationToken);
+                var headers = new CheckKeyValuesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new CheckKeyValuesHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -494,6 +494,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new GetKeyValueHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -501,7 +502,6 @@ namespace AppConfiguration
                             KeyValue value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = KeyValue.DeserializeKeyValue(document.RootElement);
-                            var headers = new GetKeyValueHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -536,6 +536,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
                 pipeline.Send(message, cancellationToken);
+                var headers = new GetKeyValueHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -543,7 +544,6 @@ namespace AppConfiguration
                             KeyValue value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = KeyValue.DeserializeKeyValue(document.RootElement);
-                            var headers = new GetKeyValueHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -614,6 +614,7 @@ namespace AppConfiguration
             {
                 using var message = CreatePutKeyValueRequest(key, label, ifMatch, ifNoneMatch, entity);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new PutKeyValueHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -621,7 +622,6 @@ namespace AppConfiguration
                             KeyValue value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = KeyValue.DeserializeKeyValue(document.RootElement);
-                            var headers = new PutKeyValueHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -655,6 +655,7 @@ namespace AppConfiguration
             {
                 using var message = CreatePutKeyValueRequest(key, label, ifMatch, ifNoneMatch, entity);
                 pipeline.Send(message, cancellationToken);
+                var headers = new PutKeyValueHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -662,7 +663,6 @@ namespace AppConfiguration
                             KeyValue value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = KeyValue.DeserializeKeyValue(document.RootElement);
-                            var headers = new PutKeyValueHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -720,6 +720,7 @@ namespace AppConfiguration
             {
                 using var message = CreateDeleteKeyValueRequest(key, label, ifMatch);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new DeleteKeyValueHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -727,9 +728,10 @@ namespace AppConfiguration
                             KeyValue value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = KeyValue.DeserializeKeyValue(document.RootElement);
-                            var headers = new DeleteKeyValueHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
+                    case 204:
+                        return ResponseWithHeaders.FromValue<KeyValue, DeleteKeyValueHeaders>(null, headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -759,6 +761,7 @@ namespace AppConfiguration
             {
                 using var message = CreateDeleteKeyValueRequest(key, label, ifMatch);
                 pipeline.Send(message, cancellationToken);
+                var headers = new DeleteKeyValueHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -766,9 +769,10 @@ namespace AppConfiguration
                             KeyValue value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = KeyValue.DeserializeKeyValue(document.RootElement);
-                            var headers = new DeleteKeyValueHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
+                    case 204:
+                        return ResponseWithHeaders.FromValue<KeyValue, DeleteKeyValueHeaders>(null, headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -839,10 +843,10 @@ namespace AppConfiguration
             {
                 using var message = CreateCheckKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new CheckKeyValueHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new CheckKeyValueHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -876,10 +880,10 @@ namespace AppConfiguration
             {
                 using var message = CreateCheckKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
                 pipeline.Send(message, cancellationToken);
+                var headers = new CheckKeyValueHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new CheckKeyValueHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -939,6 +943,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetLabelsRequest(name, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new GetLabelsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -946,7 +951,6 @@ namespace AppConfiguration
                             LabelListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = LabelListResult.DeserializeLabelListResult(document.RootElement);
-                            var headers = new GetLabelsHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -974,6 +978,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetLabelsRequest(name, after, acceptDatetime, select);
                 pipeline.Send(message, cancellationToken);
+                var headers = new GetLabelsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -981,7 +986,6 @@ namespace AppConfiguration
                             LabelListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = LabelListResult.DeserializeLabelListResult(document.RootElement);
-                            var headers = new GetLabelsHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -1042,10 +1046,10 @@ namespace AppConfiguration
             {
                 using var message = CreateCheckLabelsRequest(name, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new CheckLabelsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new CheckLabelsHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1072,10 +1076,10 @@ namespace AppConfiguration
             {
                 using var message = CreateCheckLabelsRequest(name, after, acceptDatetime, select);
                 pipeline.Send(message, cancellationToken);
+                var headers = new CheckLabelsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new CheckLabelsHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1137,6 +1141,7 @@ namespace AppConfiguration
             {
                 using var message = CreatePutLockRequest(key, label, ifMatch, ifNoneMatch);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new PutLockHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1144,7 +1149,6 @@ namespace AppConfiguration
                             KeyValue value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = KeyValue.DeserializeKeyValue(document.RootElement);
-                            var headers = new PutLockHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -1177,6 +1181,7 @@ namespace AppConfiguration
             {
                 using var message = CreatePutLockRequest(key, label, ifMatch, ifNoneMatch);
                 pipeline.Send(message, cancellationToken);
+                var headers = new PutLockHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1184,7 +1189,6 @@ namespace AppConfiguration
                             KeyValue value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = KeyValue.DeserializeKeyValue(document.RootElement);
-                            var headers = new PutLockHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -1247,6 +1251,7 @@ namespace AppConfiguration
             {
                 using var message = CreateDeleteLockRequest(key, label, ifMatch, ifNoneMatch);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new DeleteLockHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1254,7 +1259,6 @@ namespace AppConfiguration
                             KeyValue value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = KeyValue.DeserializeKeyValue(document.RootElement);
-                            var headers = new DeleteLockHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -1287,6 +1291,7 @@ namespace AppConfiguration
             {
                 using var message = CreateDeleteLockRequest(key, label, ifMatch, ifNoneMatch);
                 pipeline.Send(message, cancellationToken);
+                var headers = new DeleteLockHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1294,7 +1299,6 @@ namespace AppConfiguration
                             KeyValue value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = KeyValue.DeserializeKeyValue(document.RootElement);
-                            var headers = new DeleteLockHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -1360,6 +1364,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetRevisionsRequest(key, label, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new GetRevisionsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1367,7 +1372,6 @@ namespace AppConfiguration
                             KeyValueListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                            var headers = new GetRevisionsHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -1396,6 +1400,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetRevisionsRequest(key, label, after, acceptDatetime, select);
                 pipeline.Send(message, cancellationToken);
+                var headers = new GetRevisionsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1403,7 +1408,6 @@ namespace AppConfiguration
                             KeyValueListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                            var headers = new GetRevisionsHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -1469,10 +1473,10 @@ namespace AppConfiguration
             {
                 using var message = CreateCheckRevisionsRequest(key, label, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new CheckRevisionsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new CheckRevisionsHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1500,10 +1504,10 @@ namespace AppConfiguration
             {
                 using var message = CreateCheckRevisionsRequest(key, label, after, acceptDatetime, select);
                 pipeline.Send(message, cancellationToken);
+                var headers = new CheckRevisionsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        var headers = new CheckRevisionsHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1554,6 +1558,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetKeysNextPageRequest(nextLink, name, after, acceptDatetime);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new GetKeysHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1561,7 +1566,6 @@ namespace AppConfiguration
                             KeyListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = KeyListResult.DeserializeKeyListResult(document.RootElement);
-                            var headers = new GetKeysHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -1594,6 +1598,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetKeysNextPageRequest(nextLink, name, after, acceptDatetime);
                 pipeline.Send(message, cancellationToken);
+                var headers = new GetKeysHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1601,7 +1606,6 @@ namespace AppConfiguration
                             KeyListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = KeyListResult.DeserializeKeyListResult(document.RootElement);
-                            var headers = new GetKeysHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -1655,6 +1659,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetKeyValuesNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new GetKeyValuesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1662,7 +1667,6 @@ namespace AppConfiguration
                             KeyValueListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                            var headers = new GetKeyValuesHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -1697,6 +1701,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetKeyValuesNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
                 pipeline.Send(message, cancellationToken);
+                var headers = new GetKeyValuesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1704,7 +1709,6 @@ namespace AppConfiguration
                             KeyValueListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                            var headers = new GetKeyValuesHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -1757,6 +1761,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetLabelsNextPageRequest(nextLink, name, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new GetLabelsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1764,7 +1769,6 @@ namespace AppConfiguration
                             LabelListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = LabelListResult.DeserializeLabelListResult(document.RootElement);
-                            var headers = new GetLabelsHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -1798,6 +1802,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetLabelsNextPageRequest(nextLink, name, after, acceptDatetime, select);
                 pipeline.Send(message, cancellationToken);
+                var headers = new GetLabelsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1805,7 +1810,6 @@ namespace AppConfiguration
                             LabelListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = LabelListResult.DeserializeLabelListResult(document.RootElement);
-                            var headers = new GetLabelsHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -1859,6 +1863,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetRevisionsNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new GetRevisionsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1866,7 +1871,6 @@ namespace AppConfiguration
                             KeyValueListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                            var headers = new GetRevisionsHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -1901,6 +1905,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetRevisionsNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
                 pipeline.Send(message, cancellationToken);
+                var headers = new GetRevisionsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1908,7 +1913,6 @@ namespace AppConfiguration
                             KeyValueListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                            var headers = new GetRevisionsHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
