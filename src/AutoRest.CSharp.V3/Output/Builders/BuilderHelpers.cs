@@ -90,16 +90,14 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 return new MemberDeclarationOptions(
                     SyntaxFacts.GetText(existingMember.DeclaredAccessibility),
                     existingMember.Name,
-                    defaultType,
-                    isUserDefined: true
+                    defaultType
                 );
             }
             // Not reading the return type information of existing members yet
             return new MemberDeclarationOptions(
                 defaultAccessibility,
                 defaultName,
-                defaultType,
-                isUserDefined: false
+                defaultType
                 );
         }
 

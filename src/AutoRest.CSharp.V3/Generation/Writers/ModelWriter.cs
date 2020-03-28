@@ -77,16 +77,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (var property in schema.Properties)
                     {
-                        if (property.Declaration.IsUserDefined)
-                        {
-                            continue;
-                        }
-
                         writer.WriteXmlDocumentationSummary(property.Description);
 
                         CSharpType propertyType = property.Declaration.Type;
                         writer.Append($"{property.Declaration.Accessibility} {propertyType} {property.Declaration.Name:D}");
-                        writer.AppendRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
+                        writer.LineRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
 
                         writer.Line();
                     }
@@ -170,15 +165,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             foreach (var constructor in schema.Constructors)
             {
-                if (constructor.Declaration.IsUserDefined) continue;
-
                 writer.WriteXmlDocumentationSummary($"Initializes a new instance of {schema.Declaration.Name}");
                 foreach (var parameter in constructor.Parameters)
                 {
                     writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
                 }
 
-                writer.Append($"{constructor.Declaration.Accessibility} {constructor.Declaration.Name}(");
+                writer.Append($"{constructor.Declaration.Accessibility} {schema.Declaration.Name}(");
                 foreach (var parameter in constructor.Parameters)
                 {
                     writer.WriteParameter(parameter);
@@ -239,10 +232,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     foreach (EnumTypeValue value in schema.Values)
                     {
-                        if (value.Declaration.IsUserDefined)
-                        {
-                            continue;
-                        }
                         writer.WriteXmlDocumentationSummary(value.Description);
                         writer.Line($"{value.Declaration.Name},");
                     }
@@ -280,10 +269,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (var choice in schema.Values)
                     {
-                        if (choice.Declaration.IsUserDefined)
-                        {
-                            continue;
-                        }
                         writer.WriteXmlDocumentationSummary(choice.Description);
                         writer.Append($"public static {cs} {choice.Declaration.Name}").AppendRaw("{ get; }").Append($" = new {cs}({choice.Declaration.Name}Value);").Line();
                     }

@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Azure.Core;
 
 namespace NamespaceForEnums
@@ -10,5 +11,10 @@ namespace NamespaceForEnums
         [CodeGenSchemaMember("Tuesday")]
         public static CustomDaysOfWeek FancyTuesday { get; } = new CustomDaysOfWeek(FancyTuesdayValue);
 
+        /// <inheritdoc />
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override int GetHashCode() => _value?.GetHashCode() ?? 0;
+        /// <inheritdoc />
+        public override string ToString() => _value;
     }
 }
