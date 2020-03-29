@@ -5,15 +5,15 @@ using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.V3.Input.Source
 {
-    public class ClientTypeMapping
+    public class TypeMapping
     {
-        public ClientTypeMapping(string operationGroupName, INamedTypeSymbol existingType)
+        public TypeMapping(string originalName, INamedTypeSymbol existingType)
         {
-            OperationGroupName = operationGroupName;
+            OriginalName = originalName;
             ExistingType = existingType;
         }
 
-        public string OperationGroupName { get; }
+        public string OriginalName { get; }
         public INamedTypeSymbol ExistingType { get; }
     }
 }

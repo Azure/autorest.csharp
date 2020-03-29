@@ -5,10 +5,10 @@ using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    [CodeGenSchema("InnerError")]
+    [CodeGenModel("InnerError")]
     public partial class InnerError
     {
-        [CodeGenSchemaMember("innerError")]
+        [CodeGenMember("innerError")]
         public InnerError Inner { get; set; }
     }
 }

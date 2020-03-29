@@ -2,7 +2,7 @@ using Azure.Core;
 
 namespace CustomNamespace
 {
-    [CodeGenSchema("Model")]
+    [CodeGenModel("Model")]
     internal partial class CustomizedModel: BaseClassForCustomizedModel
     {
         // overrides auto-generated default ctor
@@ -10,7 +10,7 @@ namespace CustomNamespace
         {
         }
 
-        [CodeGenSchemaMember("ModelProperty")]
-        internal string CustomizedStringProperty { get; set; }
+        [CodeGenMember("ModelProperty")]
+        internal int? CustomizedStringProperty { get; set; }
     }
 }
