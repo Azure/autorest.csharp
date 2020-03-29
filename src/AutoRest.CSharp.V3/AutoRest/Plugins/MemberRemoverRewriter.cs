@@ -91,12 +91,12 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             if (symbol != null)
             {
                 INamedTypeSymbol? containingType = symbol.ContainingType;
+                IMethodSymbol? methodSymbol = symbol as IMethodSymbol;
 
                 var suppressions = GetSupressions(symbol.ContainingType);
-
                 if (suppressions != null)
                 {
-                    var name = symbol is IMethodSymbol ? symbol.ToDisplayString(SymbolDisplayFormat) : symbol.Name;
+                    var name = methodSymbol != null ? symbol.ToDisplayString(SymbolDisplayFormat) : symbol.Name;
                     if (suppressions.Contains(name))
                     {
                         return true;
@@ -111,7 +111,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                         if (!member.Equals(symbol) &&
                             member.DeclaringSyntaxReferences.Any())
                         {
-                            if (symbol is IMethodSymbol methodSymbol &&
+                            if (methodSymbol != null &&
                                 member is IMethodSymbol memberMethodSymbol &&
                                 !methodSymbol.Parameters.SequenceEqual(memberMethodSymbol.Parameters, (s1, s2) => s1.Type.Equals(s2.Type)))
                             {
@@ -122,6 +122,13 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                         }
                     }
 
+                    // Skip traversing parents for constructors and explicit interface implementations
+                    if (methodSymbol != null &&
+                        (methodSymbol.MethodKind == MethodKind.Constructor ||
+                         !methodSymbol.ExplicitInterfaceImplementations.IsEmpty))
+                    {
+                        break;
+                    }
                     containingType = containingType.BaseType;
                 }
             }

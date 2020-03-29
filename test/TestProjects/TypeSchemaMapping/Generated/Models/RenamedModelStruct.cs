@@ -36,10 +36,8 @@ namespace CustomNamespace
             Fruit = fruit;
             DaysOfWeek = daysOfWeek;
         }
-
         /// <summary> Fruit. </summary>
         public CustomFruitEnum? Fruit { get; }
-
         /// <summary> Day of week. </summary>
         public CustomDaysOfWeek? DaysOfWeek { get; }
     }

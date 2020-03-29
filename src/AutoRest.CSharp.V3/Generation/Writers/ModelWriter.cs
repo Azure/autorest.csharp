@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                         CSharpType propertyType = property.Declaration.Type;
                         writer.Append($"{property.Declaration.Accessibility} {propertyType} {property.Declaration.Name:D}");
-                        writer.LineRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
+                        writer.AppendRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
 
                         writer.Line();
                     }
@@ -251,7 +251,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 var implementType = new CSharpType(typeof(IEquatable<>), cs);
                 using (writer.Scope($"{schema.Declaration.Accessibility} readonly partial struct {name}: {implementType}"))
                 {
-                    writer.Line($"private readonly string? _value;");
+                    writer.Line($"private readonly {typeof(string)} _value;");
                     writer.Line();
 
                     writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{name}\"/> values are the same.");
@@ -285,7 +285,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     writer.WriteXmlDocumentationInheritDoc();
                     WriteEditorBrowsableFalse(writer);
-                    writer.Line($"public override bool Equals(object? obj) => obj is {cs} other && Equals(other);");
+                    writer.Line($"public override bool Equals({typeof(object)} obj) => obj is {cs} other && Equals(other);");
 
                     writer.WriteXmlDocumentationInheritDoc();
                     writer.Line($"public bool Equals({cs} other) => string.Equals(_value, other._value, {typeof(StringComparison)}.Ordinal);");
@@ -296,7 +296,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Line($"public override int GetHashCode() => _value?.GetHashCode() ?? 0;");
 
                     writer.WriteXmlDocumentationInheritDoc();
-                    writer.Line($"public override string? ToString() => _value;");
+                    writer.Line($"public override {typeof(string)} ToString() => _value;");
                 }
             }
         }
