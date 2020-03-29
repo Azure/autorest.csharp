@@ -18,6 +18,11 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> Initializes a new instance of PublicIPAddress. </summary>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> Resource name. </param>
+        /// <param name="type"> Resource type. </param>
+        /// <param name="location"> Resource location. </param>
+        /// <param name="tags"> Resource tags. </param>
         /// <param name="sku"> The public IP address SKU. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="zones"> A list of availability zones denoting the IP allocated for the resource needs to come from. </param>
@@ -32,12 +37,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="idleTimeoutInMinutes"> The idle timeout of the public IP address. </param>
         /// <param name="resourceGuid"> The resource GUID property of the public IP address resource. </param>
         /// <param name="provisioningState"> The provisioning state of the public IP address resource. </param>
-        /// <param name="id"> Resource ID. </param>
-        /// <param name="name"> Resource name. </param>
-        /// <param name="type"> Resource type. </param>
-        /// <param name="location"> Resource location. </param>
-        /// <param name="tags"> Resource tags. </param>
-        internal PublicIPAddress(PublicIPAddressSku sku, string etag, IList<string> zones, IPAllocationMethod? publicIPAllocationMethod, IPVersion? publicIPAddressVersion, IPConfiguration ipConfiguration, PublicIPAddressDnsSettings dnsSettings, DdosSettings ddosSettings, IList<IpTag> ipTags, string ipAddress, SubResource publicIPPrefix, int? idleTimeoutInMinutes, string resourceGuid, ProvisioningState? provisioningState, string id, string name, string type, string location, IDictionary<string, string> tags) : base(id, name, type, location, tags)
+        internal PublicIPAddress(string id, string name, string type, string location, IDictionary<string, string> tags, PublicIPAddressSku sku, string etag, IList<string> zones, IPAllocationMethod? publicIPAllocationMethod, IPVersion? publicIPAddressVersion, IPConfiguration ipConfiguration, PublicIPAddressDnsSettings dnsSettings, DdosSettings ddosSettings, IList<IpTag> ipTags, string ipAddress, SubResource publicIPPrefix, int? idleTimeoutInMinutes, string resourceGuid, ProvisioningState? provisioningState) : base(id, name, type, location, tags)
         {
             Sku = sku;
             Etag = etag;

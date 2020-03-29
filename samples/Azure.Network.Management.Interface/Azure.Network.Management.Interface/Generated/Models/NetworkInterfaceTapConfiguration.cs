@@ -16,13 +16,13 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> Initializes a new instance of NetworkInterfaceTapConfiguration. </summary>
+        /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="type"> Sub Resource type. </param>
         /// <param name="virtualNetworkTap"> The reference to the Virtual Network Tap resource. </param>
         /// <param name="provisioningState"> The provisioning state of the network interface tap configuration resource. </param>
-        /// <param name="id"> Resource ID. </param>
-        internal NetworkInterfaceTapConfiguration(string name, string etag, string type, VirtualNetworkTap virtualNetworkTap, ProvisioningState? provisioningState, string id) : base(id)
+        internal NetworkInterfaceTapConfiguration(string id, string name, string etag, string type, VirtualNetworkTap virtualNetworkTap, ProvisioningState? provisioningState) : base(id)
         {
             Name = name;
             Etag = etag;

@@ -18,6 +18,7 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> Initializes a new instance of OutboundRule. </summary>
+        /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within the set of outbound rules used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="type"> Type of the resource. </param>
@@ -28,8 +29,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="protocol"> The protocol for the outbound rule in load balancer. </param>
         /// <param name="enableTcpReset"> Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP. </param>
         /// <param name="idleTimeoutInMinutes"> The timeout for the TCP idle connection. </param>
-        /// <param name="id"> Resource ID. </param>
-        internal OutboundRule(string name, string etag, string type, int? allocatedOutboundPorts, IList<SubResource> frontendIPConfigurations, SubResource backendAddressPool, ProvisioningState? provisioningState, LoadBalancerOutboundRuleProtocol? protocol, bool? enableTcpReset, int? idleTimeoutInMinutes, string id) : base(id)
+        internal OutboundRule(string id, string name, string etag, string type, int? allocatedOutboundPorts, IList<SubResource> frontendIPConfigurations, SubResource backendAddressPool, ProvisioningState? provisioningState, LoadBalancerOutboundRuleProtocol? protocol, bool? enableTcpReset, int? idleTimeoutInMinutes) : base(id)
         {
             Name = name;
             Etag = etag;

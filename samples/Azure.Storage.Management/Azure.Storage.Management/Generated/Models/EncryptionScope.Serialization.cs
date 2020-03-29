@@ -154,7 +154,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            return new EncryptionScope(source, state, creationTime, lastModifiedTime, keyVaultProperties, id, name, type);
+            return new EncryptionScope(id, name, type, source, state, creationTime, lastModifiedTime, keyVaultProperties);
         }
     }
 }

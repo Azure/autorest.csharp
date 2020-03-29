@@ -54,7 +54,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new UaxUrlEmailTokenizer(maxTokenLength, odatatype, name);
+            return new UaxUrlEmailTokenizer(odatatype, name, maxTokenLength);
         }
     }
 }

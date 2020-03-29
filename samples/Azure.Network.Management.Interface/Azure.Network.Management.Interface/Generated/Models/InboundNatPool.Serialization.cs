@@ -228,7 +228,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new InboundNatPool(name, etag, type, frontendIPConfiguration, protocol, frontendPortRangeStart, frontendPortRangeEnd, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, provisioningState, id);
+            return new InboundNatPool(id, name, etag, type, frontendIPConfiguration, protocol, frontendPortRangeStart, frontendPortRangeEnd, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, provisioningState);
         }
     }
 }

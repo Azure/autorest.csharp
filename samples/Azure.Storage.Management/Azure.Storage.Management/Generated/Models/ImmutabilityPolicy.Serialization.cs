@@ -138,7 +138,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            return new ImmutabilityPolicy(immutabilityPeriodSinceCreationInDays, state, allowProtectedAppendWrites, etag, id, name, type);
+            return new ImmutabilityPolicy(id, name, type, etag, immutabilityPeriodSinceCreationInDays, state, allowProtectedAppendWrites);
         }
     }
 }

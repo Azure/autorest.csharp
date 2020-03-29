@@ -88,7 +88,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SynonymTokenFilter(synonyms, ignoreCase, expand, odatatype, name);
+            return new SynonymTokenFilter(odatatype, name, synonyms, ignoreCase, expand);
         }
     }
 }

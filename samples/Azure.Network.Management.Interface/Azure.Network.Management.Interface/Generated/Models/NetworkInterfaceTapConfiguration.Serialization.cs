@@ -123,7 +123,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterfaceTapConfiguration(name, etag, type, virtualNetworkTap, provisioningState, id);
+            return new NetworkInterfaceTapConfiguration(id, name, etag, type, virtualNetworkTap, provisioningState);
         }
     }
 }

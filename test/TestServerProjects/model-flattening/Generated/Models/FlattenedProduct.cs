@@ -18,16 +18,16 @@ namespace model_flattening.Models
         }
 
         /// <summary> Initializes a new instance of FlattenedProduct. </summary>
-        /// <param name="pName"> . </param>
-        /// <param name="typePropertiesType"> . </param>
-        /// <param name="provisioningStateValues"> . </param>
-        /// <param name="provisioningState"> . </param>
         /// <param name="id"> Resource Id. </param>
         /// <param name="type"> Resource Type. </param>
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
         /// <param name="location"> Resource Location. </param>
         /// <param name="name"> Resource Name. </param>
-        internal FlattenedProduct(string pName, string typePropertiesType, FlattenedProductPropertiesProvisioningStateValues? provisioningStateValues, string provisioningState, string id, string type, IDictionary<string, string> tags, string location, string name) : base(id, type, tags, location, name)
+        /// <param name="pName"> . </param>
+        /// <param name="typePropertiesType"> . </param>
+        /// <param name="provisioningStateValues"> . </param>
+        /// <param name="provisioningState"> . </param>
+        internal FlattenedProduct(string id, string type, IDictionary<string, string> tags, string location, string name, string pName, string typePropertiesType, FlattenedProductPropertiesProvisioningStateValues? provisioningStateValues, string provisioningState) : base(id, type, tags, location, name)
         {
             PName = pName;
             TypePropertiesType = typePropertiesType;

@@ -17,10 +17,10 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> Initializes a new instance of SoftDeleteColumnDeletionDetectionPolicy. </summary>
+        /// <param name="odataType"> Identifies the concrete type of the data deletion detection policy. </param>
         /// <param name="softDeleteColumnName"> The name of the column to use for soft-deletion detection. </param>
         /// <param name="softDeleteMarkerValue"> The marker value that identifies an item as deleted. </param>
-        /// <param name="odataType"> Identifies the concrete type of the data deletion detection policy. </param>
-        internal SoftDeleteColumnDeletionDetectionPolicy(string softDeleteColumnName, string softDeleteMarkerValue, string odataType) : base(odataType)
+        internal SoftDeleteColumnDeletionDetectionPolicy(string odataType, string softDeleteColumnName, string softDeleteMarkerValue) : base(odataType)
         {
             SoftDeleteColumnName = softDeleteColumnName;
             SoftDeleteMarkerValue = softDeleteMarkerValue;

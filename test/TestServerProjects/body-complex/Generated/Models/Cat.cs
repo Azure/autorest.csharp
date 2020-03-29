@@ -18,11 +18,11 @@ namespace body_complex.Models
         }
 
         /// <summary> Initializes a new instance of Cat. </summary>
-        /// <param name="color"> . </param>
-        /// <param name="hates"> . </param>
         /// <param name="id"> . </param>
         /// <param name="name"> . </param>
-        internal Cat(string color, IList<Dog> hates, int? id, string name) : base(id, name)
+        /// <param name="color"> . </param>
+        /// <param name="hates"> . </param>
+        internal Cat(int? id, string name, string color, IList<Dog> hates) : base(id, name)
         {
             Color = color;
             Hates = hates;

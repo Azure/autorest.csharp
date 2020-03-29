@@ -26,9 +26,9 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> Initializes a new instance of HighWaterMarkChangeDetectionPolicy. </summary>
-        /// <param name="highWaterMarkColumnName"> The name of the high water mark column. </param>
         /// <param name="odataType"> Identifies the concrete type of the data change detection policy. </param>
-        internal HighWaterMarkChangeDetectionPolicy(string highWaterMarkColumnName, string odataType) : base(odataType)
+        /// <param name="highWaterMarkColumnName"> The name of the high water mark column. </param>
+        internal HighWaterMarkChangeDetectionPolicy(string odataType, string highWaterMarkColumnName) : base(odataType)
         {
             HighWaterMarkColumnName = highWaterMarkColumnName;
             OdataType = odataType ?? "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy";

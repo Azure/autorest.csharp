@@ -22,15 +22,15 @@ namespace body_complex.Models
         }
 
         /// <summary> Initializes a new instance of SmartSalmon. </summary>
-        /// <param name="collegeDegree"> . </param>
-        /// <param name="additionalProperties"> . </param>
-        /// <param name="location"> . </param>
-        /// <param name="iswild"> . </param>
         /// <param name="fishtype"> . </param>
         /// <param name="species"> . </param>
         /// <param name="length"> . </param>
         /// <param name="siblings"> . </param>
-        internal SmartSalmon(string collegeDegree, IDictionary<string, object> additionalProperties, string location, bool? iswild, string fishtype, string species, float length, IList<Fish> siblings) : base(location, iswild, fishtype, species, length, siblings)
+        /// <param name="location"> . </param>
+        /// <param name="iswild"> . </param>
+        /// <param name="collegeDegree"> . </param>
+        /// <param name="additionalProperties"> . </param>
+        internal SmartSalmon(string fishtype, string species, float length, IList<Fish> siblings, string location, bool? iswild, string collegeDegree, IDictionary<string, object> additionalProperties) : base(fishtype, species, length, siblings, location, iswild)
         {
             CollegeDegree = collegeDegree;
             AdditionalProperties = additionalProperties;

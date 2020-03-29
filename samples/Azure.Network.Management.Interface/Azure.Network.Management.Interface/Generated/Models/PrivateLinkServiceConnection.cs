@@ -18,6 +18,7 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> Initializes a new instance of PrivateLinkServiceConnection. </summary>
+        /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="type"> The resource type. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -26,8 +27,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="groupIds"> The ID(s) of the group(s) obtained from the remote resource that this private endpoint should connect to. </param>
         /// <param name="requestMessage"> A message passed to the owner of the remote resource with this connection request. Restricted to 140 chars. </param>
         /// <param name="privateLinkServiceConnectionState"> A collection of read-only information about the state of the connection to the remote resource. </param>
-        /// <param name="id"> Resource ID. </param>
-        internal PrivateLinkServiceConnection(string name, string type, string etag, ProvisioningState? provisioningState, string privateLinkServiceId, IList<string> groupIds, string requestMessage, PrivateLinkServiceConnectionState privateLinkServiceConnectionState, string id) : base(id)
+        internal PrivateLinkServiceConnection(string id, string name, string type, string etag, ProvisioningState? provisioningState, string privateLinkServiceId, IList<string> groupIds, string requestMessage, PrivateLinkServiceConnectionState privateLinkServiceConnectionState) : base(id)
         {
             Name = name;
             Type = type;

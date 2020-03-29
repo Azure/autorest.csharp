@@ -16,11 +16,11 @@ namespace Azure.Storage.Management.Models
         }
 
         /// <summary> Initializes a new instance of AzureEntityResource. </summary>
-        /// <param name="etag"> Resource Etag. </param>
         /// <param name="id"> Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </param>
         /// <param name="name"> The name of the resource. </param>
         /// <param name="type"> The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts. </param>
-        internal AzureEntityResource(string etag, string id, string name, string type) : base(id, name, type)
+        /// <param name="etag"> Resource Etag. </param>
+        internal AzureEntityResource(string id, string name, string type, string etag) : base(id, name, type)
         {
             Etag = etag;
         }

@@ -208,7 +208,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new WebApiSkill(uri, httpHeaders, httpMethod, timeout, batchSize, degreeOfParallelism, odatatype, name, description, context, inputs, outputs);
+            return new WebApiSkill(odatatype, name, description, context, inputs, outputs, uri, httpHeaders, httpMethod, timeout, batchSize, degreeOfParallelism);
         }
     }
 }

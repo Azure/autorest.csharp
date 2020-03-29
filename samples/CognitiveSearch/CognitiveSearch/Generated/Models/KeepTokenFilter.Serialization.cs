@@ -73,7 +73,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new KeepTokenFilter(keepWords, keepWordsCase, odatatype, name);
+            return new KeepTokenFilter(odatatype, name, keepWords, keepWordsCase);
         }
     }
 }

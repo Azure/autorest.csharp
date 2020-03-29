@@ -745,7 +745,7 @@ namespace model_flattening
             uri.AppendPath("/model-flatten/customFlattening", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new SimpleProduct(maxProductDisplayName, capacity, genericValue, odataValue, productId, description);
+            var model = new SimpleProduct(productId, description, maxProductDisplayName, capacity, genericValue, odataValue);
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
@@ -846,7 +846,7 @@ namespace model_flattening
             uri.AppendPath("/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new SimpleProduct(flattenParameterGroup.MaxProductDisplayName, capacity, flattenParameterGroup.GenericValue, flattenParameterGroup.OdataValue, flattenParameterGroup.ProductId, flattenParameterGroup.Description);
+            var model = new SimpleProduct(flattenParameterGroup.ProductId, flattenParameterGroup.Description, flattenParameterGroup.MaxProductDisplayName, capacity, flattenParameterGroup.GenericValue, flattenParameterGroup.OdataValue);
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
             request.Content = content;

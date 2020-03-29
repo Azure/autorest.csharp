@@ -16,14 +16,14 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> Initializes a new instance of Route. </summary>
+        /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="addressPrefix"> The destination CIDR to which the route applies. </param>
         /// <param name="nextHopType"> The type of Azure hop the packet should be sent to. </param>
         /// <param name="nextHopIpAddress"> The IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance. </param>
         /// <param name="provisioningState"> The provisioning state of the route resource. </param>
-        /// <param name="id"> Resource ID. </param>
-        internal Route(string name, string etag, string addressPrefix, RouteNextHopType? nextHopType, string nextHopIpAddress, ProvisioningState? provisioningState, string id) : base(id)
+        internal Route(string id, string name, string etag, string addressPrefix, RouteNextHopType? nextHopType, string nextHopIpAddress, ProvisioningState? provisioningState) : base(id)
         {
             Name = name;
             Etag = etag;

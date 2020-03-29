@@ -199,7 +199,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new BackendAddressPool(name, etag, type, backendIPConfigurations, loadBalancingRules, outboundRule, outboundRules, provisioningState, id);
+            return new BackendAddressPool(id, name, etag, type, backendIPConfigurations, loadBalancingRules, outboundRule, outboundRules, provisioningState);
         }
     }
 }

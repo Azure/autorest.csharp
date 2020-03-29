@@ -360,7 +360,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterface(etag, virtualMachine, networkSecurityGroup, privateEndpoint, ipConfigurations, tapConfigurations, dnsSettings, macAddress, primary, enableAcceleratedNetworking, enableIPForwarding, hostedWorkloads, resourceGuid, provisioningState, id, name, type, location, tags);
+            return new NetworkInterface(id, name, type, location, tags, etag, virtualMachine, networkSecurityGroup, privateEndpoint, ipConfigurations, tapConfigurations, dnsSettings, macAddress, primary, enableAcceleratedNetworking, enableIPForwarding, hostedWorkloads, resourceGuid, provisioningState);
         }
     }
 }

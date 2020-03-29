@@ -123,7 +123,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new IPConfigurationProfile(name, type, etag, subnet, provisioningState, id);
+            return new IPConfigurationProfile(id, name, type, etag, subnet, provisioningState);
         }
     }
 }

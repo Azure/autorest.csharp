@@ -14,22 +14,22 @@ namespace body_complex.Models
     public partial class Sawshark : Shark
     {
         /// <summary> Initializes a new instance of Sawshark. </summary>
-        /// <param name="birthday"> . </param>
         /// <param name="length"> . </param>
-        public Sawshark(DateTimeOffset birthday, float length) : base(birthday, length)
+        /// <param name="birthday"> . </param>
+        public Sawshark(float length, DateTimeOffset birthday) : base(length, birthday)
         {
             Fishtype = "sawshark";
         }
 
         /// <summary> Initializes a new instance of Sawshark. </summary>
-        /// <param name="picture"> . </param>
-        /// <param name="age"> . </param>
-        /// <param name="birthday"> . </param>
         /// <param name="fishtype"> . </param>
         /// <param name="species"> . </param>
         /// <param name="length"> . </param>
         /// <param name="siblings"> . </param>
-        internal Sawshark(byte[] picture, int? age, DateTimeOffset birthday, string fishtype, string species, float length, IList<Fish> siblings) : base(age, birthday, fishtype, species, length, siblings)
+        /// <param name="age"> . </param>
+        /// <param name="birthday"> . </param>
+        /// <param name="picture"> . </param>
+        internal Sawshark(string fishtype, string species, float length, IList<Fish> siblings, int? age, DateTimeOffset birthday, byte[] picture) : base(fishtype, species, length, siblings, age, birthday)
         {
             Picture = picture;
             Fishtype = fishtype ?? "sawshark";
