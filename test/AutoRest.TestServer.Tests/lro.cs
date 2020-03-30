@@ -104,47 +104,35 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Handle empty response body: https://github.com/Azure/autorest.csharp/issues/300")]
         public Task LRODelete200() => Test(async (host, pipeline) =>
         {
             var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartDelete202Retry200Async();
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", result.Value.Id);
-            Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+            // Empty response body
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
         });
 
         [Test]
-        [Ignore("Handle empty response body: https://github.com/Azure/autorest.csharp/issues/300")]
         public Task LRODelete200_Sync() => Test((host, pipeline) =>
         {
             var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartDelete202Retry200();
-            var result = WaitForCompletion(operation);
-            Assert.AreEqual("100", result.Value.Id);
-            Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+            // Empty response body
+            Assert.Throws(Is.InstanceOf<JsonException>(), () => WaitForCompletion(operation));
         });
 
         [Test]
-        [Ignore("Handle empty response body: https://github.com/Azure/autorest.csharp/issues/300")]
         public Task LRODelete204() => Test(async (host, pipeline) =>
         {
             var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartDelete202NoRetry204Async();
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", result.Value.Id);
-            Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+            // Empty response body
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
         });
 
         [Test]
-        [Ignore("Handle empty response body: https://github.com/Azure/autorest.csharp/issues/300")]
         public Task LRODelete204_Sync() => Test((host, pipeline) =>
         {
             var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartDelete202NoRetry204();
-            var result = WaitForCompletion(operation);
-            Assert.AreEqual("100", result.Value.Id);
-            Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+            // Empty response body
+            Assert.Throws(Is.InstanceOf<JsonException>(), () => WaitForCompletion(operation));
         });
 
         [Test]
