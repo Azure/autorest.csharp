@@ -15,22 +15,13 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
     internal class MemberRemoverRewriter : CSharpSyntaxRewriter
     {
         private readonly SemanticModel _semanticModel;
-        private readonly Dictionary<INamedTypeSymbol, HashSet<string>> _suppressionCache;
+        private readonly Dictionary<INamedTypeSymbol, List<Supression>> _suppressionCache;
         private readonly INamedTypeSymbol _suppressAttribute;
-
-        private static readonly SymbolDisplayFormat SymbolDisplayFormat = new SymbolDisplayFormat(
-            SymbolDisplayGlobalNamespaceStyle.Omitted,
-            SymbolDisplayTypeQualificationStyle.NameOnly,
-            SymbolDisplayGenericsOptions.None,
-            SymbolDisplayMemberOptions.IncludeParameters,
-            SymbolDisplayDelegateStyle.NameOnly,
-            SymbolDisplayExtensionMethodStyle.StaticMethod,
-            SymbolDisplayParameterOptions.IncludeType);
 
         public MemberRemoverRewriter(SemanticModel semanticModel)
         {
             _semanticModel = semanticModel;
-            _suppressionCache = new Dictionary<INamedTypeSymbol, HashSet<string>>();
+            _suppressionCache = new Dictionary<INamedTypeSymbol, List<Supression>>();
             _suppressAttribute = semanticModel.Compilation.GetTypeByMetadataName(typeof(CodeGenSuppressAttribute).FullName!)!;
         }
 
@@ -62,7 +53,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             return ShouldRemove(symbol) ? null : base.VisitFieldDeclaration(node);
         }
 
-        private HashSet<string>? GetSupressions(INamedTypeSymbol namedTypeSymbol)
+        private List<Supression>? GetSupressions(INamedTypeSymbol namedTypeSymbol)
         {
             if (_suppressionCache.TryGetValue(namedTypeSymbol, out var suppressions))
             {
@@ -73,9 +64,10 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             {
                 if (attributeData.AttributeClass.Equals(_suppressAttribute))
                 {
-                    suppressions ??= new HashSet<string>();
-                    var name = attributeData.ConstructorArguments.Single().Value as string;
-                    suppressions.Add(name!);
+                    suppressions ??= new List<Supression>();
+                    var name = attributeData.ConstructorArguments[0].Value as string;
+                    var parameterTypes = attributeData.ConstructorArguments[1].Values.Select(v => (ISymbol?)v.Value).ToArray();
+                    suppressions.Add(new Supression(name, parameterTypes));
                 }
             }
 
@@ -96,10 +88,12 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 var suppressions = GetSupressions(symbol.ContainingType);
                 if (suppressions != null)
                 {
-                    var name = methodSymbol != null ? symbol.ToDisplayString(SymbolDisplayFormat) : symbol.Name;
-                    if (suppressions.Contains(name))
+                    foreach (var suppression in suppressions)
                     {
-                        return true;
+                        if (suppression.Matches(symbol))
+                        {
+                            return true;
+                        }
                     }
                 }
 
@@ -134,6 +128,38 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             }
 
             return false;
+        }
+
+        private readonly struct Supression
+        {
+            private readonly string? _name;
+            private readonly ISymbol?[] _types;
+
+            public Supression(string? name, ISymbol?[] types)
+            {
+                _name = name;
+                _types = types;
+            }
+
+            public bool Matches(ISymbol symbol)
+            {
+                if (symbol is IMethodSymbol methodSymbol)
+                {
+                    string name = methodSymbol.Name;
+                    // Use friendly name for ctors
+                    if (methodSymbol.MethodKind == MethodKind.Constructor)
+                    {
+                        name = methodSymbol.ContainingType.Name;
+                    }
+
+                    return  symbol.Name == name &&
+                            _types.SequenceEqual(methodSymbol.Parameters.Select(p => p.Type));
+                }
+                else
+                {
+                    return symbol.Name == _name;
+                }
+            }
         }
     }
 }

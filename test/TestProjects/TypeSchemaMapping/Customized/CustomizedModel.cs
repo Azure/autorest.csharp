@@ -5,7 +5,7 @@ using NamespaceForEnums;
 namespace CustomNamespace
 {
     [CodeGenSchema("Model")]
-    [CodeGenSuppress("CustomizedModel(CustomFruitEnum, CustomDaysOfWeek)")]
+    [CodeGenSuppress("CustomizedModel", typeof(CustomFruitEnum), typeof(CustomDaysOfWeek))]
     internal partial class CustomizedModel: BaseClassForCustomizedModel
     {
         /// <summary> Initializes a new instance of CustomizedModel. </summary>
