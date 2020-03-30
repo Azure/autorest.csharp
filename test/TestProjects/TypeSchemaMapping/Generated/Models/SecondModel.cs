@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using NamespaceForEnums;
 
 namespace TypeSchemaMapping.Models
 {
@@ -20,10 +21,12 @@ namespace TypeSchemaMapping.Models
         /// <summary> Initializes a new instance of SecondModel. </summary>
         /// <param name="intProperty"> . </param>
         /// <param name="dictionaryProperty"> . </param>
-        internal SecondModel(int intProperty, IReadOnlyDictionary<string, string> dictionaryProperty)
+        /// <param name="daysOfWeek"> Day of week. </param>
+        internal SecondModel(int intProperty, IReadOnlyDictionary<string, string> dictionaryProperty, CustomDaysOfWeek? daysOfWeek)
         {
             IntProperty = intProperty;
             DictionaryProperty = dictionaryProperty;
+            DaysOfWeek = daysOfWeek;
         }
     }
 }

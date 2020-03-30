@@ -192,7 +192,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
 
             foreach (var model in _library.Models)
             {
-                if (symbol.Name == model.Type.Name)
+                if (namedTypeSymbol.Name == model.Type.Name)
                 {
                     return model.Type.WithNullable(nullable);
                 }

@@ -97,6 +97,23 @@
           "additionalProperties": {
             "type": "integer"
           }
+        },
+        "DaysOfWeek": {
+          "type": "string",
+          "description": "Day of week",
+          "enum": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "x-ms-enum": {
+            "name": "DaysOfWeek",
+            "modelAsString": true
+          }
         }
       }
     },

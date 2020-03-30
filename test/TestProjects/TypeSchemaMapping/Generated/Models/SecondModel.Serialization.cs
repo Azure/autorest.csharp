@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using NamespaceForEnums;
 
 namespace TypeSchemaMapping.Models
 {
@@ -29,6 +30,11 @@ namespace TypeSchemaMapping.Models
                 }
                 writer.WriteEndObject();
             }
+            if (DaysOfWeek != null)
+            {
+                writer.WritePropertyName("DaysOfWeek");
+                writer.WriteStringValue(DaysOfWeek.Value.ToString());
+            }
             writer.WriteEndObject();
         }
 
@@ -36,6 +42,7 @@ namespace TypeSchemaMapping.Models
         {
             int stringProperty = default;
             IReadOnlyDictionary<string, string> dictionaryProperty = default;
+            CustomDaysOfWeek? daysOfWeek = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("StringProperty"))
@@ -57,8 +64,17 @@ namespace TypeSchemaMapping.Models
                     dictionaryProperty = dictionary;
                     continue;
                 }
+                if (property.NameEquals("DaysOfWeek"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    daysOfWeek = new CustomDaysOfWeek(property.Value.GetString());
+                    continue;
+                }
             }
-            return new SecondModel(stringProperty, dictionaryProperty);
+            return new SecondModel(stringProperty, dictionaryProperty, daysOfWeek);
         }
     }
 }

@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using Azure.Core;
+using NamespaceForEnums;
 
 namespace TypeSchemaMapping.Models
 {
@@ -16,5 +17,8 @@ namespace TypeSchemaMapping.Models
         // Need CodeGenMember because we are renaming
         [CodeGenMember("StringProperty")]
         public int IntProperty { get; set; }
+
+        /// <summary> Day of week. </summary>
+        public CustomDaysOfWeek? DaysOfWeek { get; set; }
     }
 }
