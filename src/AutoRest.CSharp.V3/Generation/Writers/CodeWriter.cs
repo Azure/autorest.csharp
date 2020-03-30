@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal class CodeWriter
     {
-        private const int DefaultLength = 1;
+        private const int DefaultLength = 1024;
         private static readonly string _newLine = "\n";
         private static readonly string _braceNewLine = "{\n";
 
