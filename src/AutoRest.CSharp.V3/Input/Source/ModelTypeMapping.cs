@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.V3.Input.Source
         public ModelTypeMapping(INamedTypeSymbol memberAttribute, string originalName, INamedTypeSymbol existingType): base(originalName, existingType)
         {
             List<SourceMemberMapping> memberMappings = new List<SourceMemberMapping>();
-            foreach (var member in GetMembers(existingType))
+            foreach (ISymbol member in GetMembers(existingType))
             {
                 if (SourceInputModel.TryGetName(member, memberAttribute, out var schemaMemberName))
                 {

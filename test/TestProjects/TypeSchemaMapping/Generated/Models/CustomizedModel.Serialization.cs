@@ -16,10 +16,10 @@ namespace CustomNamespace
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (CustomizedStringProperty != null)
+            if (PropertyRenamedAndTypeChanged != null)
             {
                 writer.WritePropertyName("ModelProperty");
-                writer.WriteNumberValue(CustomizedStringProperty.Value);
+                writer.WriteNumberValue(PropertyRenamedAndTypeChanged.Value);
             }
             writer.WritePropertyName("Fruit");
             writer.WriteStringValue(CustomizedFancyField.ToSerialString());

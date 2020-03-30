@@ -11,6 +11,6 @@ namespace CustomNamespace
         }
 
         [CodeGenMember("ModelProperty")]
-        internal int? CustomizedStringProperty { get; set; }
+        internal int? PropertyRenamedAndTypeChanged { get; set; }
     }
 }

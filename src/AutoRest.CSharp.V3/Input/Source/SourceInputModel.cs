@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.V3.Input.Source
             _schemaMemberNameAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenMemberAttribute).FullName!)!;
             _clientAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenClientAttribute).FullName!)!;
 
-            var assembly = _compilation.Assembly;
+            IAssemblySymbol assembly = _compilation.Assembly;
 
             var definedSchemas = new List<ModelTypeMapping>();
             var definedClients = new List<TypeMapping>();
@@ -91,9 +91,8 @@ namespace AutoRest.CSharp.V3.Input.Source
         internal static bool TryGetName(ISymbol symbol, INamedTypeSymbol attributeType, [NotNullWhen(true)] out string? name)
         {
             name = null;
-#pragma warning disable RS1024
-            var attribute = symbol.GetAttributes().SingleOrDefault(a => a.AttributeClass.Equals(attributeType));
-#pragma warning restore
+
+            var attribute = symbol.GetAttributes().SingleOrDefault(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, attributeType));
             if (attribute == null)
             {
                 return false;
