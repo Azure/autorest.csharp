@@ -11,7 +11,7 @@ schemas: !<!Schemas>
         name: String
         description: simple string
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_2
+  - !<!StringSchema> &ref_5
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -21,8 +21,91 @@ schemas: !<!Schemas>
         name: String
         description: ''
     protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_1
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ClassIn
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_2
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ClassAs
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_3
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ClassNamespace
+        description: ''
+    protocol: !<!Protocols> {}
+  constants:
+  - !<!ConstantSchema> &ref_6
+    type: constant
+    value: !<!ConstantValue> 
+      value: application/json
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: ApplicationJson
+        description: Content Type 'application/json'
+    protocol: !<!Protocols> {}
+  objects:
+  - !<!ObjectSchema> &ref_7
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: *ref_1
+      serializedName: in
+      language: !<!Languages> 
+        default:
+          name: in
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_2
+      serializedName: as
+      language: !<!Languages> 
+        default:
+          name: as
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_3
+      serializedName: namespace
+      language: !<!Languages> 
+        default:
+          name: namespace
+          description: ''
+      protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - input
+    - output
+    language: !<!Languages> 
+      default:
+        name: Class
+        description: ''
+        namespace: ''
+    protocol: !<!Protocols> {}
 globalParameters:
-- !<!Parameter> &ref_1
+- !<!Parameter> &ref_4
   schema: *ref_0
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
@@ -46,9 +129,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_1
-    - !<!Parameter> &ref_3
-      schema: *ref_2
+    - *ref_4
+    - !<!Parameter> &ref_9
+      schema: *ref_5
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -59,8 +142,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: query
-    - !<!Parameter> &ref_4
-      schema: *ref_2
+    - !<!Parameter> &ref_10
+      schema: *ref_5
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -71,8 +154,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: query
-    - !<!Parameter> &ref_5
-      schema: *ref_2
+    - !<!Parameter> &ref_11
+      schema: *ref_5
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -83,8 +166,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: query
-    - !<!Parameter> &ref_6
-      schema: *ref_2
+    - !<!Parameter> &ref_12
+      schema: *ref_5
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -97,28 +180,62 @@ operationGroups:
           in: query
     requests:
     - !<!Request> 
+      parameters:
+      - !<!Parameter> 
+        schema: *ref_6
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_8
+        schema: *ref_7
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: class
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters:
+      - *ref_8
       language: !<!Languages> 
         default:
           name: ''
           description: ''
       protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
+        http: !<!HttpWithBodyRequest> 
           path: /originalOperation
           method: patch
+          knownMediaType: json
+          mediaTypes:
+          - application/json
           uri: '{$host}'
     signatureParameters:
-    - *ref_3
-    - *ref_4
-    - *ref_5
-    - *ref_6
+    - *ref_9
+    - *ref_10
+    - *ref_11
+    - *ref_12
     responses:
-    - !<!Response> 
+    - !<!SchemaResponse> 
+      schema: *ref_7
       language: !<!Languages> 
         default:
           name: ''
           description: ''
       protocol: !<!Protocols> 
         http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
           statusCodes:
           - '200'
     language: !<!Languages> 

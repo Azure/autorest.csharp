@@ -43,12 +43,39 @@
             "in": "query",
             "required": true,
             "type": "string"
+          },
+          {
+            "required": true,
+            "in": "body",
+            "name" : "class",
+            "schema": {
+              "$ref": "#/definitions/class"
+            }
           }
         ],
         "responses": {
           "200": {
+            "schema": {
+              "$ref": "#/definitions/class"
+            },
             "description": ""
           }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "class": {
+      "type":  "object",
+      "properties": {
+        "in": {
+          "type": "string"
+        },
+        "as": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
         }
       }
     }
