@@ -152,8 +152,8 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                         name = methodSymbol.ContainingType.Name;
                     }
 
-                    return  symbol.Name == name &&
-                            _types.SequenceEqual(methodSymbol.Parameters.Select(p => p.Type));
+                    return  _name == name &&
+                            _types.SequenceEqual(methodSymbol.Parameters.Select(p => p.Type), SymbolEqualityComparer.Default);
                 }
                 else
                 {
