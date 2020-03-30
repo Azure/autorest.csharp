@@ -31,7 +31,7 @@ namespace AutoRest.TestServer.Tests
         {
             var modelType = typeof(SecondModel);
 
-            Assert.AreEqual(2, modelType.GetProperties().Length);
+            Assert.AreEqual(3, modelType.GetProperties().Length);
             Assert.AreEqual(1, modelType.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic).Length);
             Assert.AreEqual(1, modelType.GetConstructors(BindingFlags.Instance | BindingFlags.Public).Length);
         }
