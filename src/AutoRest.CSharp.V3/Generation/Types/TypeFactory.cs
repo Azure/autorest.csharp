@@ -85,7 +85,8 @@ namespace AutoRest.CSharp.V3.Generation.Types
         {
             return type.FrameworkType == typeof(IEnumerable<>) ||
                    type.FrameworkType == typeof(IReadOnlyList<>) ||
-                   type.FrameworkType == typeof(IList<>);
+                   type.FrameworkType == typeof(IList<>) ||
+                   type.FrameworkType == typeof(ICollection<>);
         }
 
         private static Type? ToFrameworkType(AllSchemaTypes schemaType) => schemaType switch
