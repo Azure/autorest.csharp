@@ -117,7 +117,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new Salmon(location, iswild, fishtype, species, length, siblings);
+            return new Salmon(fishtype, species, length, siblings, location, iswild);
         }
     }
 }

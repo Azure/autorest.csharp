@@ -179,7 +179,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new PrivateLinkServiceConnection(name, type, etag, provisioningState, privateLinkServiceId, groupIds, requestMessage, privateLinkServiceConnectionState, id);
+            return new PrivateLinkServiceConnection(id, name, type, etag, provisioningState, privateLinkServiceId, groupIds, requestMessage, privateLinkServiceConnectionState);
         }
     }
 }

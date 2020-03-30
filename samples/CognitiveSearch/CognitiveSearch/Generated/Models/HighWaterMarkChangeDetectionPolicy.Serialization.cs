@@ -39,7 +39,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new HighWaterMarkChangeDetectionPolicy(highWaterMarkColumnName, odatatype);
+            return new HighWaterMarkChangeDetectionPolicy(odatatype, highWaterMarkColumnName);
         }
     }
 }

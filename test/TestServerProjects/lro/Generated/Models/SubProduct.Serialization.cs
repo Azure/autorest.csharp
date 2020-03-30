@@ -78,7 +78,7 @@ namespace lro.Models
                     continue;
                 }
             }
-            return new SubProduct(provisioningState, provisioningStateValues, id);
+            return new SubProduct(id, provisioningState, provisioningStateValues);
         }
     }
 }

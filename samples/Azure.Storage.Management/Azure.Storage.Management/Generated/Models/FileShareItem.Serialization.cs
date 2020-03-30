@@ -151,7 +151,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            return new FileShareItem(lastModifiedTime, metadata, shareQuota, etag, id, name, type);
+            return new FileShareItem(id, name, type, etag, lastModifiedTime, metadata, shareQuota);
         }
     }
 }

@@ -47,7 +47,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new StemmerTokenFilter(language, odatatype, name);
+            return new StemmerTokenFilter(odatatype, name, language);
         }
     }
 }

@@ -14,22 +14,22 @@ namespace body_complex.Models
     public partial class Shark : Fish
     {
         /// <summary> Initializes a new instance of Shark. </summary>
-        /// <param name="birthday"> . </param>
         /// <param name="length"> . </param>
-        public Shark(DateTimeOffset birthday, float length) : base(length)
+        /// <param name="birthday"> . </param>
+        public Shark(float length, DateTimeOffset birthday) : base(length)
         {
             Birthday = birthday;
             Fishtype = "shark";
         }
 
         /// <summary> Initializes a new instance of Shark. </summary>
-        /// <param name="age"> . </param>
-        /// <param name="birthday"> . </param>
         /// <param name="fishtype"> . </param>
         /// <param name="species"> . </param>
         /// <param name="length"> . </param>
         /// <param name="siblings"> . </param>
-        internal Shark(int? age, DateTimeOffset birthday, string fishtype, string species, float length, IList<Fish> siblings) : base(fishtype, species, length, siblings)
+        /// <param name="age"> . </param>
+        /// <param name="birthday"> . </param>
+        internal Shark(string fishtype, string species, float length, IList<Fish> siblings, int? age, DateTimeOffset birthday) : base(fishtype, species, length, siblings)
         {
             Age = age;
             Birthday = birthday;

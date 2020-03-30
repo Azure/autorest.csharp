@@ -286,7 +286,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            return new ListContainerItem(defaultEncryptionScope, denyEncryptionScopeOverride, publicAccess, lastModifiedTime, leaseStatus, leaseState, leaseDuration, metadata, immutabilityPolicy, legalHold, hasLegalHold, hasImmutabilityPolicy, etag, id, name, type);
+            return new ListContainerItem(id, name, type, etag, defaultEncryptionScope, denyEncryptionScopeOverride, publicAccess, lastModifiedTime, leaseStatus, leaseState, leaseDuration, metadata, immutabilityPolicy, legalHold, hasLegalHold, hasImmutabilityPolicy);
         }
     }
 }

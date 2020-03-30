@@ -499,7 +499,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            return new StorageAccount(sku, kind, identity, provisioningState, primaryEndpoints, primaryLocation, statusOfPrimary, lastGeoFailoverTime, secondaryLocation, statusOfSecondary, creationTime, customDomain, secondaryEndpoints, encryption, accessTier, azureFilesIdentityBasedAuthentication, supportsHttpsTrafficOnly, networkAcls, isHnsEnabled, geoReplicationStats, failoverInProgress, largeFileSharesState, privateEndpointConnections, routingPreference, blobRestoreStatus, tags, location, id, name, type);
+            return new StorageAccount(id, name, type, tags, location, sku, kind, identity, provisioningState, primaryEndpoints, primaryLocation, statusOfPrimary, lastGeoFailoverTime, secondaryLocation, statusOfSecondary, creationTime, customDomain, secondaryEndpoints, encryption, accessTier, azureFilesIdentityBasedAuthentication, supportsHttpsTrafficOnly, networkAcls, isHnsEnabled, geoReplicationStats, failoverInProgress, largeFileSharesState, privateEndpointConnections, routingPreference, blobRestoreStatus);
         }
     }
 }

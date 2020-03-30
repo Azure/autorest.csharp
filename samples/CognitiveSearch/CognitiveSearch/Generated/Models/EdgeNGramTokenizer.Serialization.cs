@@ -95,7 +95,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new EdgeNGramTokenizer(minGram, maxGram, tokenChars, odatatype, name);
+            return new EdgeNGramTokenizer(odatatype, name, minGram, maxGram, tokenChars);
         }
     }
 }

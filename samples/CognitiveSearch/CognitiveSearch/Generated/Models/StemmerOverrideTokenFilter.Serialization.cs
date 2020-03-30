@@ -58,7 +58,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new StemmerOverrideTokenFilter(rules, odatatype, name);
+            return new StemmerOverrideTokenFilter(odatatype, name, rules);
         }
     }
 }

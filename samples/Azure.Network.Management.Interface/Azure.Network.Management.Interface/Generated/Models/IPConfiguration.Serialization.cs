@@ -153,7 +153,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new IPConfiguration(name, etag, privateIPAddress, privateIPAllocationMethod, subnet, publicIPAddress, provisioningState, id);
+            return new IPConfiguration(id, name, etag, privateIPAddress, privateIPAllocationMethod, subnet, publicIPAddress, provisioningState);
         }
     }
 }

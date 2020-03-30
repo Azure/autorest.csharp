@@ -143,7 +143,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new MergeSkill(insertPreTag, insertPostTag, odatatype, name, description, context, inputs, outputs);
+            return new MergeSkill(odatatype, name, description, context, inputs, outputs, insertPreTag, insertPostTag);
         }
     }
 }

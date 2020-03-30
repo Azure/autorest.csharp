@@ -68,7 +68,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new Dog(food, id, name);
+            return new Dog(id, name, food);
         }
     }
 }

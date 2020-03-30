@@ -13,11 +13,15 @@ namespace CognitiveSearch.Models
     public partial class PatternReplaceTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of PatternReplaceTokenFilter. </summary>
+        /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="pattern"> A regular expression pattern. </param>
         /// <param name="replacement"> The replacement text. </param>
-        /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        public PatternReplaceTokenFilter(string pattern, string replacement, string name) : base(name)
+        public PatternReplaceTokenFilter(string name, string pattern, string replacement) : base(name)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
             if (pattern == null)
             {
                 throw new ArgumentNullException(nameof(pattern));
@@ -26,10 +30,6 @@ namespace CognitiveSearch.Models
             {
                 throw new ArgumentNullException(nameof(replacement));
             }
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
 
             Pattern = pattern;
             Replacement = replacement;
@@ -37,11 +37,11 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> Initializes a new instance of PatternReplaceTokenFilter. </summary>
-        /// <param name="pattern"> A regular expression pattern. </param>
-        /// <param name="replacement"> The replacement text. </param>
         /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal PatternReplaceTokenFilter(string pattern, string replacement, string odataType, string name) : base(odataType, name)
+        /// <param name="pattern"> A regular expression pattern. </param>
+        /// <param name="replacement"> The replacement text. </param>
+        internal PatternReplaceTokenFilter(string odataType, string name, string pattern, string replacement) : base(odataType, name)
         {
             Pattern = pattern;
             Replacement = replacement;

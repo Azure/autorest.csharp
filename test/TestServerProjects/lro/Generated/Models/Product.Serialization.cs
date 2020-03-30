@@ -150,7 +150,7 @@ namespace lro.Models
                     continue;
                 }
             }
-            return new Product(provisioningState, provisioningStateValues, id, type, tags, location, name);
+            return new Product(id, type, tags, location, name, provisioningState, provisioningStateValues);
         }
     }
 }

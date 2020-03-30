@@ -240,7 +240,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new PrivateEndpoint(etag, subnet, networkInterfaces, provisioningState, privateLinkServiceConnections, manualPrivateLinkServiceConnections, id, name, type, location, tags);
+            return new PrivateEndpoint(id, name, type, location, tags, etag, subnet, networkInterfaces, provisioningState, privateLinkServiceConnections, manualPrivateLinkServiceConnections);
         }
     }
 }

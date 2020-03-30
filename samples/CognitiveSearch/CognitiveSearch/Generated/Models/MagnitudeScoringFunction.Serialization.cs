@@ -70,7 +70,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new MagnitudeScoringFunction(magnitude, type, fieldName, boost, interpolation);
+            return new MagnitudeScoringFunction(type, fieldName, boost, interpolation, magnitude);
         }
     }
 }

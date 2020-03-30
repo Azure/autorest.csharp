@@ -215,7 +215,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new RouteTable(etag, routes, subnets, disableBgpRoutePropagation, provisioningState, id, name, type, location, tags);
+            return new RouteTable(id, name, type, location, tags, etag, routes, subnets, disableBgpRoutePropagation, provisioningState);
         }
     }
 }
