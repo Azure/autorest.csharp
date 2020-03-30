@@ -183,7 +183,9 @@ namespace AutoRest.CSharp.V3.Utilities
                 case "unsafe":
                 case "ushort":
                 case "using":
-                case "value":
+                // `value` technically is a contextual keyword but we never generate setters or indexers
+                // and escaping it in all other cases doesn't make sense
+                // case "value":
                 case "var":
                 case "virtual":
                 case "void":
