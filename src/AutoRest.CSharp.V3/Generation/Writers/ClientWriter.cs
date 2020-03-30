@@ -98,7 +98,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.Append($"RestClient.{CreateMethodName(clientMethod.RestClientMethod.Name, async)}(");
                 foreach (var parameter in clientMethod.RestClientMethod.Parameters)
                 {
-                    writer.Append($"{parameter.Name}, ");
+                    writer.Append($"{parameter.Name:I}, ");
                 }
                 writer.Append($"cancellationToken)");
 

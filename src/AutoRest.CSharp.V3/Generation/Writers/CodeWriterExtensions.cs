@@ -46,9 +46,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 CSharpType cs = parameter.Type;
                 if (parameter.IsRequired && (cs.IsNullable || !cs.IsValueType))
                 {
-                    using (writer.Scope($"if ({parameter.Name} == null)"))
+                    using (writer.Scope($"if ({parameter.Name:I} == null)"))
                     {
-                        writer.Line($"throw new {typeof(ArgumentNullException)}(nameof({parameter.Name}));");
+                        writer.Line($"throw new {typeof(ArgumentNullException)}(nameof({parameter.Name:I}));");
                     }
                 }
             }
@@ -129,7 +129,21 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
             else
             {
-                writer.AppendRaw(value.Reference.Name);
+                var parts = value.Reference.Name.Split(".");
+
+                bool first = true;
+                foreach (var part in parts)
+                {
+                    if (first)
+                    {
+                        first = false;
+                    }
+                    else
+                    {
+                        writer.AppendRaw(".");
+                    }
+                    writer.Identifier(part);
+                }
             }
 
             return writer;

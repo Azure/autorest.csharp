@@ -574,7 +574,7 @@ namespace NameConflicts.Models
             string @get = default;
             string @global = default;
             string @goto = default;
-            string @group = default;
+            string group = default;
             string @if = default;
             string @implicit = default;
             string @in = default;
@@ -594,7 +594,7 @@ namespace NameConflicts.Models
             string @object = default;
             string @on = default;
             string @operator = default;
-            string @orderby = default;
+            string orderby = default;
             string @out = default;
             string @override = default;
             string @params = default;
@@ -608,7 +608,7 @@ namespace NameConflicts.Models
             string @return = default;
             string @sbyte = default;
             string @sealed = default;
-            string @select = default;
+            string select = default;
             string @set = default;
             string @short = default;
             string @sizeof = default;
@@ -997,7 +997,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    @group = property.Value.GetString();
+                    group = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("if"))
@@ -1177,7 +1177,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    @orderby = property.Value.GetString();
+                    orderby = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("out"))
@@ -1303,7 +1303,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    @select = property.Value.GetString();
+                    select = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("set"))
@@ -1568,7 +1568,7 @@ namespace NameConflicts.Models
                     continue;
                 }
             }
-            return new Class(@abstract, @add, @alias, @as, @ascending, @async, @await, @base, @bool, @break, @by, @byte, @catch, @char, @checked, @const, @continue, @decimal, @default, @delegate, @descending, @do, @double, @dynamic, @else, @enum, @event, @explicit, @extern, @false, @finally, @fixed, @float, @for, @foreach, @from, @get, @global, @goto, @group, @if, @implicit, @in, @int, @interface, @internal, @into, @is, @join, @let, @lock, @long, @nameof, @namespace, @new, @null, @object, @on, @operator, @orderby, @out, @override, @params, @partial, @private, @protected, @public, @readonly, @ref, @remove, @return, @sbyte, @sealed, @select, @set, @short, @sizeof, @stackalloc, @static, @string, @struct, @switch, @this, @throw, @true, @try, @typeof, @uint, @ulong, @unchecked, @unmanaged, @unsafe, @ushort, @using, value, @var, @virtual, @void, @volatile, @when, @where, @while, @yield);
+            return new Class(@abstract, @add, @alias, @as, @ascending, @async, @await, @base, @bool, @break, @by, @byte, @catch, @char, @checked, @const, @continue, @decimal, @default, @delegate, @descending, @do, @double, @dynamic, @else, @enum, @event, @explicit, @extern, @false, @finally, @fixed, @float, @for, @foreach, @from, @get, @global, @goto, group, @if, @implicit, @in, @int, @interface, @internal, @into, @is, @join, @let, @lock, @long, @nameof, @namespace, @new, @null, @object, @on, @operator, orderby, @out, @override, @params, @partial, @private, @protected, @public, @readonly, @ref, @remove, @return, @sbyte, @sealed, select, @set, @short, @sizeof, @stackalloc, @static, @string, @struct, @switch, @this, @throw, @true, @try, @typeof, @uint, @ulong, @unchecked, @unmanaged, @unsafe, @ushort, @using, value, @var, @virtual, @void, @volatile, @when, @where, @while, @yield);
         }
     }
 }

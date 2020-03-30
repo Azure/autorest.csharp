@@ -21,13 +21,10 @@ namespace AutoRest.CSharp.V3.Utilities
         private static string? RemoveNonWordCharacters(this string? text) => !text.IsNullOrEmpty() ? Regex.Replace(text, @"\W+", String.Empty) : text;
         [return: NotNullIfNotNull("text")]
         private static string? PrependUnderscoreIfNumbers(this string? text) => Regex.IsMatch(text ?? String.Empty, @"^\d") ? $"_{text}" : text;
-        [return: NotNullIfNotNull("text")]
-        private static string EscapeKeyword(this string text) => IsCSharpKeyword(text) ? "@" + text : text;
-
         [return: NotNullIfNotNull("name")]
         public static string ToCleanName(this string name) => name.ToPascalCase().RemoveNonWordCharacters().PrependUnderscoreIfNumbers();
         [return: NotNullIfNotNull("name")]
-        public static string? ToVariableName(this string? name) => name?.ToCamelCase().RemoveNonWordCharacters().PrependUnderscoreIfNumbers().EscapeKeyword();
+        public static string? ToVariableName(this string? name) => name?.ToCamelCase().RemoveNonWordCharacters().PrependUnderscoreIfNumbers();
 
         public static IEnumerable<(string Text, bool IsLiteral)> GetPathParts(string? path)
         {
@@ -82,7 +79,7 @@ namespace AutoRest.CSharp.V3.Utilities
             }
         }
 
-        private static bool IsCSharpKeyword(this string? name)
+        public static bool IsCSharpKeyword(string? name)
         {
             switch (name)
             {
@@ -128,7 +125,8 @@ namespace AutoRest.CSharp.V3.Utilities
                 case "get":
                 case "global":
                 case "goto":
-                case "group":
+                // `group` is a contextual to linq queries that we don't generate
+                //case "group":
                 case "if":
                 case "implicit":
                 case "in":
@@ -148,7 +146,8 @@ namespace AutoRest.CSharp.V3.Utilities
                 case "object":
                 case "on":
                 case "operator":
-                case "orderby":
+                // `orderby` is a contextual to linq queries that we don't generate
+                //case "orderby":
                 case "out":
                 case "override":
                 case "params":
@@ -162,7 +161,8 @@ namespace AutoRest.CSharp.V3.Utilities
                 case "return":
                 case "sbyte":
                 case "sealed":
-                case "select":
+                // `select` is a contextual to linq queries that we don't generate
+                // case "select":
                 case "set":
                 case "short":
                 case "sizeof":
@@ -183,8 +183,7 @@ namespace AutoRest.CSharp.V3.Utilities
                 case "unsafe":
                 case "ushort":
                 case "using":
-                // `value` technically is a contextual keyword but we never generate setters or indexers
-                // and escaping it in all other cases doesn't make sense
+                // `value` is a contextual to getters that we don't generate
                 // case "value":
                 case "var":
                 case "virtual":
