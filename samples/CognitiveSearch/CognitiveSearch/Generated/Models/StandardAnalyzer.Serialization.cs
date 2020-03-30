@@ -80,7 +80,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new StandardAnalyzer(maxTokenLength, stopwords, odatatype, name);
+            return new StandardAnalyzer(odatatype, name, maxTokenLength, stopwords);
         }
     }
 }

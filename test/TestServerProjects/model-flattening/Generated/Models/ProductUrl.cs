@@ -16,9 +16,9 @@ namespace model_flattening.Models
         }
 
         /// <summary> Initializes a new instance of ProductUrl. </summary>
-        /// <param name="odataValue"> URL value. </param>
         /// <param name="genericValue"> Generic URL value. </param>
-        internal ProductUrl(string odataValue, string genericValue) : base(genericValue)
+        /// <param name="odataValue"> URL value. </param>
+        internal ProductUrl(string genericValue, string odataValue) : base(genericValue)
         {
             OdataValue = odataValue;
         }

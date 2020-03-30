@@ -123,7 +123,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            return new PrivateEndpointConnection(privateEndpoint, privateLinkServiceConnectionState, provisioningState, id, name, type);
+            return new PrivateEndpointConnection(id, name, type, privateEndpoint, privateLinkServiceConnectionState, provisioningState);
         }
     }
 }

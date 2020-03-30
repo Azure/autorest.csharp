@@ -235,7 +235,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new VirtualNetworkTap(etag, networkInterfaceTapConfigurations, resourceGuid, provisioningState, destinationNetworkInterfaceIPConfiguration, destinationLoadBalancerFrontEndIPConfiguration, destinationPort, id, name, type, location, tags);
+            return new VirtualNetworkTap(id, name, type, location, tags, etag, networkInterfaceTapConfigurations, resourceGuid, provisioningState, destinationNetworkInterfaceIPConfiguration, destinationLoadBalancerFrontEndIPConfiguration, destinationPort);
         }
     }
 }

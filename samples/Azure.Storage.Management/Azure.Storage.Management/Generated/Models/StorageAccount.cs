@@ -24,6 +24,11 @@ namespace Azure.Storage.Management.Models
         }
 
         /// <summary> Initializes a new instance of StorageAccount. </summary>
+        /// <param name="id"> Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </param>
+        /// <param name="name"> The name of the resource. </param>
+        /// <param name="type"> The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts. </param>
+        /// <param name="tags"> Resource tags. </param>
+        /// <param name="location"> The geo-location where the resource lives. </param>
         /// <param name="sku"> Gets the SKU. </param>
         /// <param name="kind"> Gets the Kind. </param>
         /// <param name="identity"> The identity of the resource. </param>
@@ -49,12 +54,7 @@ namespace Azure.Storage.Management.Models
         /// <param name="privateEndpointConnections"> List of private endpoint connection associated with the specified storage account. </param>
         /// <param name="routingPreference"> Maintains information about the network routing choice opted by the user for data transfer. </param>
         /// <param name="blobRestoreStatus"> Blob restore status. </param>
-        /// <param name="tags"> Resource tags. </param>
-        /// <param name="location"> The geo-location where the resource lives. </param>
-        /// <param name="id"> Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </param>
-        /// <param name="name"> The name of the resource. </param>
-        /// <param name="type"> The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts. </param>
-        internal StorageAccount(Sku sku, Kind? kind, Identity identity, ProvisioningState? provisioningState, Endpoints primaryEndpoints, string primaryLocation, AccountStatus? statusOfPrimary, DateTimeOffset? lastGeoFailoverTime, string secondaryLocation, AccountStatus? statusOfSecondary, DateTimeOffset? creationTime, CustomDomain customDomain, Endpoints secondaryEndpoints, Encryption encryption, AccessTier? accessTier, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication, bool? enableHttpsTrafficOnly, NetworkRuleSet networkRuleSet, bool? isHnsEnabled, GeoReplicationStats geoReplicationStats, bool? failoverInProgress, LargeFileSharesState? largeFileSharesState, IList<PrivateEndpointConnection> privateEndpointConnections, RoutingPreference routingPreference, BlobRestoreStatus blobRestoreStatus, IDictionary<string, string> tags, string location, string id, string name, string type) : base(tags, location, id, name, type)
+        internal StorageAccount(string id, string name, string type, IDictionary<string, string> tags, string location, Sku sku, Kind? kind, Identity identity, ProvisioningState? provisioningState, Endpoints primaryEndpoints, string primaryLocation, AccountStatus? statusOfPrimary, DateTimeOffset? lastGeoFailoverTime, string secondaryLocation, AccountStatus? statusOfSecondary, DateTimeOffset? creationTime, CustomDomain customDomain, Endpoints secondaryEndpoints, Encryption encryption, AccessTier? accessTier, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication, bool? enableHttpsTrafficOnly, NetworkRuleSet networkRuleSet, bool? isHnsEnabled, GeoReplicationStats geoReplicationStats, bool? failoverInProgress, LargeFileSharesState? largeFileSharesState, IList<PrivateEndpointConnection> privateEndpointConnections, RoutingPreference routingPreference, BlobRestoreStatus blobRestoreStatus) : base(id, name, type, tags, location)
         {
             Sku = sku;
             Kind = kind;

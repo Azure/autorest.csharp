@@ -18,6 +18,7 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> Initializes a new instance of FrontendIPConfiguration. </summary>
+        /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within the set of frontend IP configurations used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="type"> Type of the resource. </param>
@@ -33,8 +34,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="publicIPAddress"> The reference to the Public IP resource. </param>
         /// <param name="publicIPPrefix"> The reference to the Public IP Prefix resource. </param>
         /// <param name="provisioningState"> The provisioning state of the frontend IP configuration resource. </param>
-        /// <param name="id"> Resource ID. </param>
-        internal FrontendIPConfiguration(string name, string etag, string type, IList<string> zones, IList<SubResource> inboundNatRules, IList<SubResource> inboundNatPools, IList<SubResource> outboundRules, IList<SubResource> loadBalancingRules, string privateIPAddress, IPAllocationMethod? privateIPAllocationMethod, IPVersion? privateIPAddressVersion, Subnet subnet, PublicIPAddress publicIPAddress, SubResource publicIPPrefix, ProvisioningState? provisioningState, string id) : base(id)
+        internal FrontendIPConfiguration(string id, string name, string etag, string type, IList<string> zones, IList<SubResource> inboundNatRules, IList<SubResource> inboundNatPools, IList<SubResource> outboundRules, IList<SubResource> loadBalancingRules, string privateIPAddress, IPAllocationMethod? privateIPAllocationMethod, IPVersion? privateIPAddressVersion, Subnet subnet, PublicIPAddress publicIPAddress, SubResource publicIPPrefix, ProvisioningState? provisioningState) : base(id)
         {
             Name = name;
             Etag = etag;

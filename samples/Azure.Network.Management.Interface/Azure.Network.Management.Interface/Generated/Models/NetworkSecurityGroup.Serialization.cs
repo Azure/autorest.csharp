@@ -265,7 +265,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkSecurityGroup(etag, securityRules, defaultSecurityRules, networkInterfaces, subnets, resourceGuid, provisioningState, id, name, type, location, tags);
+            return new NetworkSecurityGroup(id, name, type, location, tags, etag, securityRules, defaultSecurityRules, networkInterfaces, subnets, resourceGuid, provisioningState);
         }
     }
 }

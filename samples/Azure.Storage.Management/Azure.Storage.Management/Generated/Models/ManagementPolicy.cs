@@ -18,12 +18,12 @@ namespace Azure.Storage.Management.Models
         }
 
         /// <summary> Initializes a new instance of ManagementPolicy. </summary>
-        /// <param name="lastModifiedTime"> Returns the date and time the ManagementPolicies was last modified. </param>
-        /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
         /// <param name="id"> Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </param>
         /// <param name="name"> The name of the resource. </param>
         /// <param name="type"> The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts. </param>
-        internal ManagementPolicy(DateTimeOffset? lastModifiedTime, ManagementPolicySchema policy, string id, string name, string type) : base(id, name, type)
+        /// <param name="lastModifiedTime"> Returns the date and time the ManagementPolicies was last modified. </param>
+        /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
+        internal ManagementPolicy(string id, string name, string type, DateTimeOffset? lastModifiedTime, ManagementPolicySchema policy) : base(id, name, type)
         {
             LastModifiedTime = lastModifiedTime;
             Policy = policy;

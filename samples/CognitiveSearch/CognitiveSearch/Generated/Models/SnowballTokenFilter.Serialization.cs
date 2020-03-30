@@ -47,7 +47,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SnowballTokenFilter(language, odatatype, name);
+            return new SnowballTokenFilter(odatatype, name, language);
         }
     }
 }

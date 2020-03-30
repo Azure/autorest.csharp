@@ -149,7 +149,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ServiceEndpointPolicyDefinition(name, etag, description, service, serviceResources, provisioningState, id);
+            return new ServiceEndpointPolicyDefinition(id, name, etag, description, service, serviceResources, provisioningState);
         }
     }
 }

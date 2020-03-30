@@ -20,13 +20,13 @@ namespace body_complex.Models
         }
 
         /// <summary> Initializes a new instance of Salmon. </summary>
-        /// <param name="location"> . </param>
-        /// <param name="iswild"> . </param>
         /// <param name="fishtype"> . </param>
         /// <param name="species"> . </param>
         /// <param name="length"> . </param>
         /// <param name="siblings"> . </param>
-        internal Salmon(string location, bool? iswild, string fishtype, string species, float length, IList<Fish> siblings) : base(fishtype, species, length, siblings)
+        /// <param name="location"> . </param>
+        /// <param name="iswild"> . </param>
+        internal Salmon(string fishtype, string species, float length, IList<Fish> siblings, string location, bool? iswild) : base(fishtype, species, length, siblings)
         {
             Location = location;
             Iswild = iswild;

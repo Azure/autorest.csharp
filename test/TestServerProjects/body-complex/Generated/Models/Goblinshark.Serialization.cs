@@ -134,7 +134,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new Goblinshark(jawsize, color, age, birthday, fishtype, species, length, siblings);
+            return new Goblinshark(fishtype, species, length, siblings, age, birthday, jawsize, color);
         }
     }
 }

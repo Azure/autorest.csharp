@@ -209,7 +209,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new OutboundRule(name, etag, type, allocatedOutboundPorts, frontendIPConfigurations, backendAddressPool, provisioningState, protocol, enableTcpReset, idleTimeoutInMinutes, id);
+            return new OutboundRule(id, name, etag, type, allocatedOutboundPorts, frontendIPConfigurations, backendAddressPool, provisioningState, protocol, enableTcpReset, idleTimeoutInMinutes);
         }
     }
 }

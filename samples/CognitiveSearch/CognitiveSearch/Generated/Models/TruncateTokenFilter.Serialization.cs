@@ -54,7 +54,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new TruncateTokenFilter(length, odatatype, name);
+            return new TruncateTokenFilter(odatatype, name, length);
         }
     }
 }

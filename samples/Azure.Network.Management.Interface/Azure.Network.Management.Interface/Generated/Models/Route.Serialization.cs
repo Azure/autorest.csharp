@@ -138,7 +138,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new Route(name, etag, addressPrefix, nextHopType, nextHopIpAddress, provisioningState, id);
+            return new Route(id, name, etag, addressPrefix, nextHopType, nextHopIpAddress, provisioningState);
         }
     }
 }

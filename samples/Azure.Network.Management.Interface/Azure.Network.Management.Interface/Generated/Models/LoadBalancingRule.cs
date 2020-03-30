@@ -16,6 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> Initializes a new instance of LoadBalancingRule. </summary>
+        /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within the set of load balancing rules used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="type"> Type of the resource. </param>
@@ -31,8 +32,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="enableTcpReset"> Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP. </param>
         /// <param name="disableOutboundSnat"> Configures SNAT for the VMs in the backend pool to use the publicIP address specified in the frontend of the load balancing rule. </param>
         /// <param name="provisioningState"> The provisioning state of the load balancing rule resource. </param>
-        /// <param name="id"> Resource ID. </param>
-        internal LoadBalancingRule(string name, string etag, string type, SubResource frontendIPConfiguration, SubResource backendAddressPool, SubResource probe, TransportProtocol? protocol, LoadDistribution? loadDistribution, int? frontendPort, int? backendPort, int? idleTimeoutInMinutes, bool? enableFloatingIP, bool? enableTcpReset, bool? disableOutboundSnat, ProvisioningState? provisioningState, string id) : base(id)
+        internal LoadBalancingRule(string id, string name, string etag, string type, SubResource frontendIPConfiguration, SubResource backendAddressPool, SubResource probe, TransportProtocol? protocol, LoadDistribution? loadDistribution, int? frontendPort, int? backendPort, int? idleTimeoutInMinutes, bool? enableFloatingIP, bool? enableTcpReset, bool? disableOutboundSnat, ProvisioningState? provisioningState) : base(id)
         {
             Name = name;
             Etag = etag;

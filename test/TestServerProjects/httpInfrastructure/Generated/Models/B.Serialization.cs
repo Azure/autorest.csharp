@@ -37,7 +37,7 @@ namespace httpInfrastructure.Models
                     continue;
                 }
             }
-            return new B(textStatusCode, statusCode);
+            return new B(statusCode, textStatusCode);
         }
     }
 }

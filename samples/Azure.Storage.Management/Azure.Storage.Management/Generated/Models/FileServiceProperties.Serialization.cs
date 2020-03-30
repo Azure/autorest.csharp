@@ -123,7 +123,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            return new FileServiceProperties(sku, cors, shareDeleteRetentionPolicy, id, name, type);
+            return new FileServiceProperties(id, name, type, sku, cors, shareDeleteRetentionPolicy);
         }
     }
 }

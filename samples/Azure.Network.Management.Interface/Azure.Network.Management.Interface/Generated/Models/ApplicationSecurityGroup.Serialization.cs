@@ -165,7 +165,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ApplicationSecurityGroup(etag, resourceGuid, provisioningState, id, name, type, location, tags);
+            return new ApplicationSecurityGroup(id, name, type, location, tags, etag, resourceGuid, provisioningState);
         }
     }
 }

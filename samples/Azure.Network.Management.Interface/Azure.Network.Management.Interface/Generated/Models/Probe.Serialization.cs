@@ -209,7 +209,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new Probe(name, etag, type, loadBalancingRules, protocol, port, intervalInSeconds, numberOfProbes, requestPath, provisioningState, id);
+            return new Probe(id, name, etag, type, loadBalancingRules, protocol, port, intervalInSeconds, numberOfProbes, requestPath, provisioningState);
         }
     }
 }

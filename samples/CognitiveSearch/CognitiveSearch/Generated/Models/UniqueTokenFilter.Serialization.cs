@@ -54,7 +54,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new UniqueTokenFilter(onlyOnSamePosition, odatatype, name);
+            return new UniqueTokenFilter(odatatype, name, onlyOnSamePosition);
         }
     }
 }

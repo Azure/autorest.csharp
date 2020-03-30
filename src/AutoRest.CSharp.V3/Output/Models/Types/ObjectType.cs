@@ -97,6 +97,17 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             List<ObjectPropertyInitializer> initializers = new List<ObjectPropertyInitializer>();
             List<ObjectPropertyInitializer> defaultCtorInitializers = new List<ObjectPropertyInitializer>();
 
+            ObjectTypeConstructor? baseCtor = null;
+            ObjectTypeConstructor? baseSerializationCtor = null;
+            if (Inherits != null && !Inherits.IsFrameworkType && Inherits.Implementation is ObjectType objectType)
+            {
+                baseCtor = objectType.Constructors.First();
+                baseSerializationCtor = objectType.Constructors.Last();
+
+                defaultCtorParameters.AddRange(baseCtor.Parameters);
+                serializationConstructorParameters.AddRange(baseSerializationCtor.Parameters);
+            }
+
             foreach (var property in Properties)
             {
                 var deserializationParameter = new Parameter(
@@ -151,16 +162,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, defaultCtorParameter));
             }
 
-            ObjectTypeConstructor? baseCtor = null;
-            ObjectTypeConstructor? baseSerializationCtor = null;
-            if (Inherits != null && !Inherits.IsFrameworkType && Inherits.Implementation is ObjectType objectType)
-            {
-                baseCtor = objectType.Constructors.First();
-                baseSerializationCtor = objectType.Constructors.Last();
-
-                defaultCtorParameters.AddRange(baseCtor.Parameters);
-                serializationConstructorParameters.AddRange(baseSerializationCtor.Parameters);
-            }
 
             if (Discriminator != null)
             {

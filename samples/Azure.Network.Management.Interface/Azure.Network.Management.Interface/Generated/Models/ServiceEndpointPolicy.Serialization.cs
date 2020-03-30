@@ -215,7 +215,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ServiceEndpointPolicy(etag, serviceEndpointPolicyDefinitions, subnets, resourceGuid, provisioningState, id, name, type, location, tags);
+            return new ServiceEndpointPolicy(id, name, type, location, tags, etag, serviceEndpointPolicyDefinitions, subnets, resourceGuid, provisioningState);
         }
     }
 }

@@ -84,7 +84,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new MicrosoftLanguageStemmingTokenizer(maxTokenLength, isSearchTokenizer, language, odatatype, name);
+            return new MicrosoftLanguageStemmingTokenizer(odatatype, name, maxTokenLength, isSearchTokenizer, language);
         }
     }
 }

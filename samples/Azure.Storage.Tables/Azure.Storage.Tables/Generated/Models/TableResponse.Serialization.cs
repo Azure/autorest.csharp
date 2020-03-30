@@ -67,7 +67,7 @@ namespace Azure.Storage.Tables.Models
                     continue;
                 }
             }
-            return new TableResponse(odatametadata, tableName, odatatype, odataid, odataeditLink);
+            return new TableResponse(tableName, odatatype, odataid, odataeditLink, odatametadata);
         }
     }
 }

@@ -16,6 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> Initializes a new instance of ResourceNavigationLink. </summary>
+        /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="resourceNavigationLinkId"> Resource navigation link identifier. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -23,8 +24,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="linkedResourceType"> Resource type of the linked resource. </param>
         /// <param name="link"> Link to the external resource. </param>
         /// <param name="provisioningState"> The provisioning state of the resource navigation link resource. </param>
-        /// <param name="id"> Resource ID. </param>
-        internal ResourceNavigationLink(string name, string resourceNavigationLinkId, string etag, string type, string linkedResourceType, string link, ProvisioningState? provisioningState, string id) : base(id)
+        internal ResourceNavigationLink(string id, string name, string resourceNavigationLinkId, string etag, string type, string linkedResourceType, string link, ProvisioningState? provisioningState) : base(id)
         {
             Name = name;
             ResourceNavigationLinkId = resourceNavigationLinkId;

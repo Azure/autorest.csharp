@@ -134,7 +134,7 @@ namespace body_complex.Models
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new SmartSalmon(collegeDegree, additionalProperties, location, iswild, fishtype, species, length, siblings);
+            return new SmartSalmon(fishtype, species, length, siblings, location, iswild, collegeDegree, additionalProperties);
         }
     }
 }

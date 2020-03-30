@@ -180,7 +180,7 @@ namespace model_flattening.Models
                     continue;
                 }
             }
-            return new FlattenedProduct(pname, type0, provisioningStateValues, provisioningState, id, type, tags, location, name);
+            return new FlattenedProduct(id, type, tags, location, name, pname, type0, provisioningStateValues, provisioningState);
         }
     }
 }

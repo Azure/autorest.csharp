@@ -83,7 +83,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            return new AzureEntityResource(etag, id, name, type);
+            return new AzureEntityResource(id, name, type, etag);
         }
     }
 }
