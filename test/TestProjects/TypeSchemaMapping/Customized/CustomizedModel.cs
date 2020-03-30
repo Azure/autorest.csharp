@@ -8,41 +8,15 @@ namespace CustomNamespace
     [CodeGenSuppress("CustomizedModel", typeof(CustomFruitEnum), typeof(CustomDaysOfWeek))]
     internal partial class CustomizedModel: BaseClassForCustomizedModel
     {
-        /// <summary> Initializes a new instance of CustomizedModel. </summary>
-        /// <param name="customizedStringProperty"> A description about the set of tags. </param>
-        /// <param name="customizedFancyField"> Fruit. </param>
-        /// <param name="daysOfWeek"> Day of week. </param>
-        internal CustomizedModel(string customizedStringProperty, CustomFruitEnum customizedFancyField, CustomDaysOfWeek daysOfWeek)
-        {
-            CustomizedStringProperty = customizedStringProperty;
-            CustomizedFancyField = customizedFancyField;
-            DaysOfWeek = daysOfWeek;
-        }
-
         /// <summary> Day of week. </summary>
         public CustomDaysOfWeek DaysOfWeek { get; }
 
         [CodeGenMember("ModelProperty")]
         internal int? PropertyRenamedAndTypeChanged { get; set; }
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (CustomizedStringProperty != null)
-            {
-                writer.WritePropertyName("ModelProperty");
-                writer.WriteStringValue(CustomizedStringProperty);
-            }
-            writer.WritePropertyName("Fruit");
-            writer.WriteStringValue(CustomizedFancyField.ToSerialString());
-            writer.WritePropertyName("DaysOfWeek");
-            writer.WriteStringValue(DaysOfWeek.ToString());
-            writer.WriteEndObject();
-        }
-
         internal static CustomizedModel DeserializeCustomizedModel(JsonElement element)
         {
-            string modelProperty = default;
+            int? propertyRenamedAndTypeChanged = default;
             CustomFruitEnum fruit = default;
             CustomDaysOfWeek daysOfWeek = default;
             foreach (var property in element.EnumerateObject())
@@ -53,7 +27,7 @@ namespace CustomNamespace
                     {
                         continue;
                     }
-                    modelProperty = property.Value.GetString();
+                    propertyRenamedAndTypeChanged = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("Fruit"))
@@ -67,7 +41,7 @@ namespace CustomNamespace
                     continue;
                 }
             }
-            return new CustomizedModel(modelProperty, fruit, daysOfWeek);
+            return new CustomizedModel(propertyRenamedAndTypeChanged, fruit, daysOfWeek);
         }
     }
 }

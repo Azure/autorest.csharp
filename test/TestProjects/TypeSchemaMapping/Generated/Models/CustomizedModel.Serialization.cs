@@ -13,5 +13,19 @@ namespace CustomNamespace
 {
     internal partial class CustomizedModel : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            if (PropertyRenamedAndTypeChanged != null)
+            {
+                writer.WritePropertyName("ModelProperty");
+                writer.WriteNumberValue(PropertyRenamedAndTypeChanged.Value);
+            }
+            writer.WritePropertyName("Fruit");
+            writer.WriteStringValue(CustomizedFancyField.ToSerialString());
+            writer.WritePropertyName("DaysOfWeek");
+            writer.WriteStringValue(DaysOfWeek.ToString());
+            writer.WriteEndObject();
+        }
     }
 }
