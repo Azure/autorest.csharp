@@ -307,7 +307,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             if (_builder.Length - _position < space)
             {
-                var newBuilder = ArrayPool<char>.Shared.Rent(_builder.Length * 2);
+                var newBuilder = ArrayPool<char>.Shared.Rent(Math.Max(_builder.Length + space, _builder.Length * 2));
                 _builder.AsSpan().CopyTo(newBuilder);
 
                 ArrayPool<char>.Shared.Return(_builder);
