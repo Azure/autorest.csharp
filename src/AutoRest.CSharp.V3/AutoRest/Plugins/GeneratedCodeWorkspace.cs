@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             generatedCodeProject = generatedCodeProject
                 .AddMetadataReferences(references)
                 .WithCompilationOptions(new CSharpCompilationOptions(
-                OutputKind.DynamicallyLinkedLibrary, nullableContextOptions: NullableContextOptions.Annotations));
+                OutputKind.DynamicallyLinkedLibrary, nullableContextOptions: NullableContextOptions.Disable));
 
             var generatedCodeDirectory = Path.Combine(projectDirectory, "Generated");
 

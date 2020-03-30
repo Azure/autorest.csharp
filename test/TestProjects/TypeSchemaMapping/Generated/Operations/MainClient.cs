@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 using TypeSchemaMapping;
+using TypeSchemaMapping.Models;
 
 namespace CustomNamespace
 {
@@ -56,6 +57,20 @@ namespace CustomNamespace
         public virtual Response<RenamedModelStruct> OperationStruct(RenamedModelStruct? body, CancellationToken cancellationToken = default)
         {
             return RestClient.OperationStruct(body, cancellationToken);
+        }
+
+        /// <param name="body"> The SecondModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<SecondModel>> OperationSecondModelAsync(SecondModel body, CancellationToken cancellationToken = default)
+        {
+            return await RestClient.OperationSecondModelAsync(body, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <param name="body"> The SecondModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<SecondModel> OperationSecondModel(SecondModel body, CancellationToken cancellationToken = default)
+        {
+            return RestClient.OperationSecondModel(body, cancellationToken);
         }
     }
 }

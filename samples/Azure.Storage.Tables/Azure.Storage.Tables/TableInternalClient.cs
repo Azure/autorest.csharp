@@ -5,7 +5,7 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables
 {
-    [CodeGenClient("Table")]
+    [CodeGenClient("TableClient")]
     internal partial class TableInternalClient
     {
     }

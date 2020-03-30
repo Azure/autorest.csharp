@@ -4,7 +4,7 @@ using NamespaceForEnums;
 
 namespace CustomNamespace
 {
-    [CodeGenSchema("Model")]
+    [CodeGenModel("Model")]
     [CodeGenSuppress("CustomizedModel", typeof(CustomFruitEnum), typeof(CustomDaysOfWeek))]
     internal partial class CustomizedModel: BaseClassForCustomizedModel
     {
@@ -22,8 +22,8 @@ namespace CustomNamespace
         /// <summary> Day of week. </summary>
         public CustomDaysOfWeek DaysOfWeek { get; }
 
-        [CodeGenSchemaMember("ModelProperty")]
-        internal string CustomizedStringProperty { get; }
+        [CodeGenMember("ModelProperty")]
+        internal int? PropertyRenamedAndTypeChanged { get; set; }
 
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

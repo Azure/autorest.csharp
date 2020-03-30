@@ -3,12 +3,12 @@ using Azure.Core;
 
 namespace NamespaceForEnums
 {
-    [CodeGenSchema("DaysOfWeek")]
+    [CodeGenModel("DaysOfWeek")]
     internal partial struct CustomDaysOfWeek
     {
-        [CodeGenSchemaMember("Monday")]
+        [CodeGenMember("Monday")]
         public static CustomDaysOfWeek FancyMonday { get; } = new CustomDaysOfWeek(FancyMondayValue);
-        [CodeGenSchemaMember("Tuesday")]
+        [CodeGenMember("Tuesday")]
         public static CustomDaysOfWeek FancyTuesday { get; } = new CustomDaysOfWeek(FancyTuesdayValue);
 
         /// <inheritdoc />

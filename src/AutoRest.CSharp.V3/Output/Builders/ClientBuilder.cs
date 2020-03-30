@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.V3.Generation.Types;
@@ -16,7 +15,6 @@ using AutoRest.CSharp.V3.Output.Models.Shared;
 using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
 using Azure.Core;
-using Microsoft.CodeAnalysis;
 using AzureResponse = Azure.Response;
 using Diagnostic = AutoRest.CSharp.V3.Output.Models.Requests.Diagnostic;
 using Request = AutoRest.CSharp.V3.Output.Models.Requests.Request;
@@ -140,7 +138,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 OrderParameters(clientParameters.Values),
                 methods);
 
-            var existingClient = _context.SourceInputModel.FindForOperationGroup(operationGroup.Key);
+            var existingClient = _context.SourceInputModel.FindForClient(_context.DefaultNamespace, clientName);
             var client = new Client(
                 BuilderHelpers.CreateTypeAttributes(clientName, _context.DefaultNamespace, "public", existingClient?.ExistingType),
                 BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description),

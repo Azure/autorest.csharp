@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
         {
             Directory.CreateDirectory(configuration.OutputFolder);
             var project = GeneratedCodeWorkspace.Create(configuration.OutputFolder, configuration.SharedSourceFolder);
-            var sourceInputModel = SourceInputModelBuilder.Build(await project.GetCompilationAsync());
+            var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
 
             var context = new BuildContext(codeModel, configuration, sourceInputModel);
 

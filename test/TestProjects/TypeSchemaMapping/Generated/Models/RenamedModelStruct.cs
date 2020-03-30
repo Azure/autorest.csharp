@@ -14,7 +14,7 @@ namespace CustomNamespace
     internal readonly partial struct RenamedModelStruct
     {
         /// <summary> Initializes a new instance of RenamedModelStruct. </summary>
-        /// <param name="customizedFlattenedStringProperty"> A description about the set of tags. </param>
+        /// <param name="customizedFlattenedStringProperty"> . </param>
         /// <param name="fruit"> Fruit. </param>
         /// <param name="daysOfWeek"> Day of week. </param>
         public RenamedModelStruct(string customizedFlattenedStringProperty, CustomFruitEnum? fruit, CustomDaysOfWeek? daysOfWeek)

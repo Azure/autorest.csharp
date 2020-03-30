@@ -6,10 +6,10 @@ using Azure.Core;
 namespace CustomNamespace
 {
 #pragma warning disable CS0282 // ignore struct ordering warning
-    [CodeGenSchema("ModelStruct")]
+    [CodeGenModel("ModelStruct")]
     internal partial struct RenamedModelStruct
     {
-        [CodeGenSchemaMember("ModelProperty")]
+        [CodeGenMember("ModelProperty")]
         private string CustomizedFlattenedStringProperty { get; }
     }
 }

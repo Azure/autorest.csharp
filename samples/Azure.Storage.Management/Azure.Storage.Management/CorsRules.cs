@@ -6,10 +6,10 @@ using Azure.Core;
 
 namespace Azure.Storage.Management.Models
 {
-    [CodeGenSchema("CorsRules")]
+    [CodeGenModel("CorsRules")]
     public partial class CorsRules
     {
-        [CodeGenSchemaMember("corsRules")]
+        [CodeGenMember("corsRules")]
         public ICollection<CorsRule> Rules { get; set; }
     }
 }
