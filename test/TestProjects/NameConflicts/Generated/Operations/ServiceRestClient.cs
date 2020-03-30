@@ -6,11 +6,13 @@
 #nullable disable
 
 using System;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using NameConflicts.Models;
 
 namespace NameConflicts
 {
@@ -33,7 +35,7 @@ namespace NameConflicts
             this.pipeline = pipeline;
         }
 
-        internal HttpMessage CreateOperationRequest(string request, string message, string scope, string uri)
+        internal HttpMessage CreateOperationRequest(string request, string message, string scope, string uri, Class @class)
         {
             var message0 = pipeline.CreateMessage();
             var request0 = message0.Request;
@@ -46,6 +48,10 @@ namespace NameConflicts
             uri0.AppendQuery("scope", scope, true);
             uri0.AppendQuery("uri", uri, true);
             request0.Uri = uri0;
+            request0.Headers.Add("Content-Type", "application/json");
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(@class);
+            request0.Content = content;
             return message0;
         }
 
@@ -53,8 +59,9 @@ namespace NameConflicts
         /// <param name="message"> The String to use. </param>
         /// <param name="scope"> The String to use. </param>
         /// <param name="uri"> The String to use. </param>
+        /// <param name="class"> The Class to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> OperationAsync(string request, string message, string scope, string uri, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Class>> OperationAsync(string request, string message, string scope, string uri, Class @class, CancellationToken cancellationToken = default)
         {
             if (request == null)
             {
@@ -72,17 +79,26 @@ namespace NameConflicts
             {
                 throw new ArgumentNullException(nameof(uri));
             }
+            if (@class == null)
+            {
+                throw new ArgumentNullException(nameof(@class));
+            }
 
             using var scope0 = clientDiagnostics.CreateScope("ServiceClient.Operation");
             scope0.Start();
             try
             {
-                using var message0 = CreateOperationRequest(request, message, scope, uri);
+                using var message0 = CreateOperationRequest(request, message, scope, uri, @class);
                 await pipeline.SendAsync(message0, cancellationToken).ConfigureAwait(false);
                 switch (message0.Response.Status)
                 {
                     case 200:
-                        return message0.Response;
+                        {
+                            Class value = default;
+                            using var document = await JsonDocument.ParseAsync(message0.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            value = Class.DeserializeClass(document.RootElement);
+                            return Response.FromValue(value, message0.Response);
+                        }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message0.Response).ConfigureAwait(false);
                 }
@@ -98,8 +114,9 @@ namespace NameConflicts
         /// <param name="message"> The String to use. </param>
         /// <param name="scope"> The String to use. </param>
         /// <param name="uri"> The String to use. </param>
+        /// <param name="class"> The Class to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Operation(string request, string message, string scope, string uri, CancellationToken cancellationToken = default)
+        public Response<Class> Operation(string request, string message, string scope, string uri, Class @class, CancellationToken cancellationToken = default)
         {
             if (request == null)
             {
@@ -117,17 +134,26 @@ namespace NameConflicts
             {
                 throw new ArgumentNullException(nameof(uri));
             }
+            if (@class == null)
+            {
+                throw new ArgumentNullException(nameof(@class));
+            }
 
             using var scope0 = clientDiagnostics.CreateScope("ServiceClient.Operation");
             scope0.Start();
             try
             {
-                using var message0 = CreateOperationRequest(request, message, scope, uri);
+                using var message0 = CreateOperationRequest(request, message, scope, uri, @class);
                 pipeline.Send(message0, cancellationToken);
                 switch (message0.Response.Status)
                 {
                     case 200:
-                        return message0.Response;
+                        {
+                            Class value = default;
+                            using var document = JsonDocument.Parse(message0.Response.ContentStream);
+                            value = Class.DeserializeClass(document.RootElement);
+                            return Response.FromValue(value, message0.Response);
+                        }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message0.Response);
                 }

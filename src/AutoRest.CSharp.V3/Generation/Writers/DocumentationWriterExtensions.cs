@@ -24,11 +24,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         public static CodeWriter WriteXmlDocumentationParameter(this CodeWriter writer, string name, string? text)
         {
-            // TODO: Doesn't feel like a great place for this
-            if (name.StartsWith("@"))
-            {
-                name = name.Substring(1);
-            }
             return writer.WriteDocumentationLines($"<param name=\"{name}\">", "</param>", text, skipWhenEmpty: false);
         }
 

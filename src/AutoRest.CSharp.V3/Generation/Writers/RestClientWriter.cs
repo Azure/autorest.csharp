@@ -286,7 +286,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (Parameter parameter in parameters)
                     {
-                        writer.Append($"{parameter.Name}, ");
+                        writer.Append($"{parameter.Name:I}, ");
                     }
 
                     writer.RemoveTrailingComma();
@@ -321,7 +321,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
             else
             {
-                writer.AppendRaw(constantOrReference.Reference.Name);
+                writer.Identifier(constantOrReference.Reference.Name);
                 if (!ignoreNullability)
                 {
                     writer.AppendNullableValue(constantOrReference.Type);
@@ -365,9 +365,23 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 // turn "object.Property" into "object?.Property"
                 var parts = value.Reference.Name.Split(".");
-                var conditionalName = string.Join("?.", parts);
 
-                return writer.Scope($"if ({conditionalName} != null)");
+                writer.Append($"if (");
+                bool first = true;
+                foreach (var part in parts)
+                {
+                    if (first)
+                    {
+                        first = false;
+                    }
+                    else
+                    {
+                        writer.AppendRaw("?.");
+                    }
+                    writer.Identifier(part);
+                }
+
+                return writer.Line($" != null)").Scope();
             }
 
             return default;
