@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using body_datetime;
@@ -43,11 +44,9 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/300")]
-        public Task GetDateTimeNull() => Test(async (host, pipeline) =>
+        public Task GetDateTimeNull() => Test((host, pipeline) =>
         {
-            var result = await new DatetimeClient(ClientDiagnostics, pipeline, host).GetNullAsync();
-            Assert.AreEqual(null, result.Value);
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new DatetimeClient(ClientDiagnostics, pipeline, host).GetNullAsync());
         });
 
         [Test]

@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace Azure.Storage.Tables
 {
     /// <summary> The Enum0. </summary>
-    internal readonly partial struct ResponseFormat : IEquatable<ResponseFormat>
+    public readonly partial struct ResponseFormat : IEquatable<ResponseFormat>
     {
         private readonly string _value;
 

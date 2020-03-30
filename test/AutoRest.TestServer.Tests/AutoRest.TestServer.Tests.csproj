@@ -33,6 +33,10 @@
       <LinkBase>TestProjects</LinkBase>
       <Link>TestProjects\TypeSchemaMapping\Customized\RenamedModelStruct.cs</Link>
     </Compile>
+    <Compile Update="..\TestProjects\TypeSchemaMapping\Customized\SecondModel.cs">
+      <LinkBase>TestProjects</LinkBase>
+      <Link>TestProjects\TypeSchemaMapping\Customized\SecondModel.cs</Link>
+    </Compile>
   </ItemGroup>
 
 </Project>

@@ -129,7 +129,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new ShingleTokenFilter(maxShingleSize, minShingleSize, outputUnigrams, outputUnigramsIfNoShingles, tokenSeparator, filterToken, odatatype, name);
+            return new ShingleTokenFilter(odatatype, name, maxShingleSize, minShingleSize, outputUnigrams, outputUnigramsIfNoShingles, tokenSeparator, filterToken);
         }
     }
 }

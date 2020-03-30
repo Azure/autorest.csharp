@@ -46,14 +46,17 @@ namespace model_flattening
             uri.AppendPath("/model-flatten/array", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartArray();
-            foreach (var item in resourceArray)
+            if (resourceArray != null)
             {
-                content.JsonWriter.WriteObjectValue(item);
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in resourceArray)
+                {
+                    content.JsonWriter.WriteObjectValue(item);
+                }
+                content.JsonWriter.WriteEndArray();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndArray();
-            request.Content = content;
             return message;
         }
 
@@ -201,14 +204,17 @@ namespace model_flattening
             uri.AppendPath("/model-flatten/wrappedarray", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartArray();
-            foreach (var item in resourceArray)
+            if (resourceArray != null)
             {
-                content.JsonWriter.WriteObjectValue(item);
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in resourceArray)
+                {
+                    content.JsonWriter.WriteObjectValue(item);
+                }
+                content.JsonWriter.WriteEndArray();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndArray();
-            request.Content = content;
             return message;
         }
 
@@ -356,15 +362,18 @@ namespace model_flattening
             uri.AppendPath("/model-flatten/dictionary", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartObject();
-            foreach (var item in resourceDictionary)
+            if (resourceDictionary != null)
             {
-                content.JsonWriter.WritePropertyName(item.Key);
-                content.JsonWriter.WriteObjectValue(item.Value);
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartObject();
+                foreach (var item in resourceDictionary)
+                {
+                    content.JsonWriter.WritePropertyName(item.Key);
+                    content.JsonWriter.WriteObjectValue(item.Value);
+                }
+                content.JsonWriter.WriteEndObject();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndObject();
-            request.Content = content;
             return message;
         }
 
@@ -512,9 +521,12 @@ namespace model_flattening
             uri.AppendPath("/model-flatten/resourcecollection", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(resourceComplexObject);
-            request.Content = content;
+            if (resourceComplexObject != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(resourceComplexObject);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -652,9 +664,12 @@ namespace model_flattening
             uri.AppendPath("/model-flatten/customFlattening", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(simpleBodyProduct);
-            request.Content = content;
+            if (simpleBodyProduct != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(simpleBodyProduct);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -730,7 +745,7 @@ namespace model_flattening
             uri.AppendPath("/model-flatten/customFlattening", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new SimpleProduct(maxProductDisplayName, capacity, genericValue, odataValue, productId, description);
+            var model = new SimpleProduct(productId, description, maxProductDisplayName, capacity, genericValue, odataValue);
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
@@ -819,7 +834,7 @@ namespace model_flattening
             }
         }
 
-        internal HttpMessage CreatePutSimpleProductWithGroupingRequest(string name, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity)
+        internal HttpMessage CreatePutSimpleProductWithGroupingRequest(FlattenParameterGroup flattenParameterGroup, string capacity)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -827,11 +842,11 @@ namespace model_flattening
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/model-flatten/customFlattening/parametergrouping/", false);
-            uri.AppendPath(name, true);
+            uri.AppendPath(flattenParameterGroup.Name, true);
             uri.AppendPath("/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new SimpleProduct(maxProductDisplayName, capacity, genericValue, odataValue, productId, description);
+            var model = new SimpleProduct(flattenParameterGroup.ProductId, flattenParameterGroup.Description, flattenParameterGroup.MaxProductDisplayName, capacity, flattenParameterGroup.GenericValue, flattenParameterGroup.OdataValue);
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
@@ -839,30 +854,21 @@ namespace model_flattening
         }
 
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
-        /// <param name="name"> Product name with value &apos;groupproduct&apos;. </param>
-        /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
-        /// <param name="description"> Description of product. </param>
-        /// <param name="maxProductDisplayName"> Display name of product. </param>
-        /// <param name="genericValue"> Generic URL value. </param>
-        /// <param name="odataValue"> URL value. </param>
+        /// <param name="flattenParameterGroup"> Parameter group. </param>
         /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SimpleProduct>> PutSimpleProductWithGroupingAsync(string name, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity = "Large", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SimpleProduct>> PutSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, string capacity = "Large", CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (flattenParameterGroup == null)
             {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (productId == null)
-            {
-                throw new ArgumentNullException(nameof(productId));
+                throw new ArgumentNullException(nameof(flattenParameterGroup));
             }
 
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutSimpleProductWithGrouping");
             scope.Start();
             try
             {
-                using var message = CreatePutSimpleProductWithGroupingRequest(name, productId, description, maxProductDisplayName, genericValue, odataValue, capacity);
+                using var message = CreatePutSimpleProductWithGroupingRequest(flattenParameterGroup, capacity);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -885,30 +891,21 @@ namespace model_flattening
         }
 
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
-        /// <param name="name"> Product name with value &apos;groupproduct&apos;. </param>
-        /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
-        /// <param name="description"> Description of product. </param>
-        /// <param name="maxProductDisplayName"> Display name of product. </param>
-        /// <param name="genericValue"> Generic URL value. </param>
-        /// <param name="odataValue"> URL value. </param>
+        /// <param name="flattenParameterGroup"> Parameter group. </param>
         /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SimpleProduct> PutSimpleProductWithGrouping(string name, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity = "Large", CancellationToken cancellationToken = default)
+        public Response<SimpleProduct> PutSimpleProductWithGrouping(FlattenParameterGroup flattenParameterGroup, string capacity = "Large", CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (flattenParameterGroup == null)
             {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (productId == null)
-            {
-                throw new ArgumentNullException(nameof(productId));
+                throw new ArgumentNullException(nameof(flattenParameterGroup));
             }
 
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutSimpleProductWithGrouping");
             scope.Start();
             try
             {
-                using var message = CreatePutSimpleProductWithGroupingRequest(name, productId, description, maxProductDisplayName, genericValue, odataValue, capacity);
+                using var message = CreatePutSimpleProductWithGroupingRequest(flattenParameterGroup, capacity);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

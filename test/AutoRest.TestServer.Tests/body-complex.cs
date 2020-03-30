@@ -68,13 +68,9 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/300")]
-        public Task GetComplexBasicInvalid() => Test(async (host, pipeline) =>
+        public void GetComplexBasicInvalid() => Test((host, pipeline) =>
         {
-            var result = await new BasicClient(ClientDiagnostics, pipeline, host).GetInvalidAsync();
-            Assert.AreEqual(null, result.Value.Name);
-            Assert.AreEqual(null, result.Value.Id);
-            Assert.AreEqual(null, result.Value.Color);
+            Assert.Throws(Is.InstanceOf<Exception>(), async () => await new BasicClient(ClientDiagnostics, pipeline, host).GetInvalidAsync());
         });
 
         [Test]
@@ -544,18 +540,18 @@ namespace AutoRest.TestServer.Tests
                 Species = "king",
                 Siblings = new[]
                 {
-                    new Shark(DateTimeOffset.Parse("2012-01-05T01:00:00Z"), 20)
+                    new Shark(20, DateTimeOffset.Parse("2012-01-05T01:00:00Z"))
                     {
                         Age = 6,
                         Species = "predator"
                     },
-                    new Sawshark(DateTimeOffset.Parse("1900-01-05T01:00:00Z"), 10)
+                    new Sawshark(10, DateTimeOffset.Parse("1900-01-05T01:00:00Z"))
                     {
                         Age = 105,
                         Picture = new byte[] {255, 255, 255, 255, 254},
                         Species = "dangerous"
                     },
-                    new Goblinshark(DateTimeOffset.Parse("2015-08-08T00:00:00Z"), 30)
+                    new Goblinshark(30, DateTimeOffset.Parse("2015-08-08T00:00:00Z"))
                     {
                         Age = 1,
                         Species = "scary",
@@ -627,18 +623,18 @@ namespace AutoRest.TestServer.Tests
                 Species = "king",
                 Siblings = new[]
                 {
-                    new Shark(DateTimeOffset.Parse("2012-01-05T01:00:00Z"), 20)
+                    new Shark(20, DateTimeOffset.Parse("2012-01-05T01:00:00Z"))
                     {
                         Age = 6,
                         Species = "predator"
                     },
-                    new Sawshark(DateTimeOffset.Parse("1900-01-05T01:00:00Z"), 10)
+                    new Sawshark(10, DateTimeOffset.Parse("1900-01-05T01:00:00Z"))
                     {
                         Age = 105,
                         Picture = new byte[] {255, 255, 255, 255, 254},
                         Species = "dangerous"
                     },
-                    new Goblinshark(DateTimeOffset.Parse("2015-08-08T00:00:00Z"), 30)
+                    new Goblinshark(30, DateTimeOffset.Parse("2015-08-08T00:00:00Z"))
                     {
                         Age = 1,
                         Species = "scary",
@@ -667,18 +663,18 @@ namespace AutoRest.TestServer.Tests
                 Species = "king",
                 Siblings = new[]
                 {
-                    new Shark(DateTimeOffset.Parse("2012-01-05T01:00:00Z"), 20)
+                    new Shark(20, DateTimeOffset.Parse("2012-01-05T01:00:00Z"))
                     {
                         Age = 6,
                         Species = "predator"
                     },
-                    new Sawshark(DateTimeOffset.Parse("1900-01-05T01:00:00Z"), 10)
+                    new Sawshark(10, DateTimeOffset.Parse("1900-01-05T01:00:00Z"))
                     {
                         Age = 105,
                         Picture = new byte[] {255, 255, 255, 255, 254},
                         Species = "dangerous"
                     },
-                    new Goblinshark(DateTimeOffset.Parse("2015-08-08T00:00:00Z"), 30)
+                    new Goblinshark(30, DateTimeOffset.Parse("2015-08-08T00:00:00Z"))
                     {
                         Age = 1,
                         Species = "scary",
@@ -918,7 +914,7 @@ namespace AutoRest.TestServer.Tests
                 Species = "king",
                 Siblings = new[]
                 {
-                    new Shark(DateTimeOffset.Parse("2012-01-05T01:00:00Z"), 20)
+                    new Shark(20, DateTimeOffset.Parse("2012-01-05T01:00:00Z"))
                     {
                         Age = 6,
                         Species = "predator",
@@ -931,12 +927,12 @@ namespace AutoRest.TestServer.Tests
                                 Species = "coho",
                                 Siblings = new[]
                                 {
-                                    new Shark(DateTimeOffset.Parse("2012-01-05T01:00:00Z"), 20)
+                                    new Shark(20, DateTimeOffset.Parse("2012-01-05T01:00:00Z"))
                                     {
                                         Age = 6,
                                         Species = "predator",
                                     },
-                                    new Sawshark(DateTimeOffset.Parse("1900-01-05T01:00:00Z"), 10)
+                                    new Sawshark(10, DateTimeOffset.Parse("1900-01-05T01:00:00Z"))
                                     {
                                         Age = 105,
                                         Picture = new byte[] {255, 255, 255, 255, 254},
@@ -945,7 +941,7 @@ namespace AutoRest.TestServer.Tests
                                 }
                             },
 
-                            new Sawshark(DateTimeOffset.Parse("1900-01-05T01:00:00Z"), 10)
+                            new Sawshark(10, DateTimeOffset.Parse("1900-01-05T01:00:00Z"))
                             {
                                 Age = 105,
                                 Picture = new byte[] {255, 255, 255, 255, 254},
@@ -954,7 +950,7 @@ namespace AutoRest.TestServer.Tests
                             },
                         }
                     },
-                    new Sawshark(DateTimeOffset.Parse("1900-01-05T01:00:00Z"), 10)
+                    new Sawshark(10, DateTimeOffset.Parse("1900-01-05T01:00:00Z"))
                     {
                         Age = 105,
                         Picture = new byte[] {255, 255, 255, 255, 254},

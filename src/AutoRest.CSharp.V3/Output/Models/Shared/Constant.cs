@@ -4,6 +4,7 @@
 using System;
 using System.Diagnostics;
 using AutoRest.CSharp.V3.Generation.Types;
+using AutoRest.CSharp.V3.Output.Models.Requests;
 
 
 namespace AutoRest.CSharp.V3.Output.Models.Shared
@@ -54,6 +55,11 @@ namespace AutoRest.CSharp.V3.Output.Models.Shared
         public static Constant NewInstanceOf(CSharpType type)
         {
             return new Constant(NewInstanceSentinel, type);
+        }
+
+        public static Constant Default(CSharpType type)
+        {
+            return new Constant(null, type);
         }
     }
 }

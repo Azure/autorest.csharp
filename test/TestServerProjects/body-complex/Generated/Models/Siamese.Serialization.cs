@@ -109,7 +109,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new Siamese(breed, color, hates, id, name);
+            return new Siamese(id, name, color, hates, breed);
         }
     }
 }

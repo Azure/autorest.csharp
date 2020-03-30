@@ -55,7 +55,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new PatternReplaceTokenFilter(pattern, replacement, odatatype, name);
+            return new PatternReplaceTokenFilter(odatatype, name, pattern, replacement);
         }
     }
 }

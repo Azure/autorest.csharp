@@ -66,6 +66,8 @@ namespace httpInfrastructure
                             value = MyException.DeserializeMyException(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
+                    case 204:
+                        return Response.FromValue<MyException>(null, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -96,6 +98,8 @@ namespace httpInfrastructure
                             value = MyException.DeserializeMyException(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
+                    case 204:
+                        return Response.FromValue<MyException>(null, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -138,6 +142,8 @@ namespace httpInfrastructure
                             value = MyException.DeserializeMyException(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
+                    case 204:
+                        return Response.FromValue<MyException>(null, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -168,6 +174,8 @@ namespace httpInfrastructure
                             value = MyException.DeserializeMyException(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
+                    case 204:
+                        return Response.FromValue<MyException>(null, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -210,6 +218,8 @@ namespace httpInfrastructure
                             value = MyException.DeserializeMyException(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
+                    case 204:
+                        return Response.FromValue<MyException>(null, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -240,6 +250,8 @@ namespace httpInfrastructure
                             value = MyException.DeserializeMyException(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
+                    case 204:
+                        return Response.FromValue<MyException>(null, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -282,6 +294,8 @@ namespace httpInfrastructure
                             value = MyException.DeserializeMyException(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
+                    case 204:
+                        return Response.FromValue<MyException>(null, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -312,6 +326,8 @@ namespace httpInfrastructure
                             value = MyException.DeserializeMyException(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
+                    case 204:
+                        return Response.FromValue<MyException>(null, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -354,6 +370,8 @@ namespace httpInfrastructure
                             value = MyException.DeserializeMyException(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
+                    case 204:
+                        return Response.FromValue<MyException>(null, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -384,6 +402,8 @@ namespace httpInfrastructure
                             value = MyException.DeserializeMyException(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
+                    case 204:
+                        return Response.FromValue<MyException>(null, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -409,7 +429,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<MyException>> Get200Model201ModelDefaultError200ValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<object>> Get200Model201ModelDefaultError200ValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError200Valid");
             scope.Start();
@@ -424,7 +444,14 @@ namespace httpInfrastructure
                             MyException value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<object>(value, message.Response);
+                        }
+                    case 201:
+                        {
+                            B value = default;
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            value = B.DeserializeB(document.RootElement);
+                            return Response.FromValue<object>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -439,7 +466,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<MyException> Get200Model201ModelDefaultError200Valid(CancellationToken cancellationToken = default)
+        public Response<object> Get200Model201ModelDefaultError200Valid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError200Valid");
             scope.Start();
@@ -454,7 +481,14 @@ namespace httpInfrastructure
                             MyException value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<object>(value, message.Response);
+                        }
+                    case 201:
+                        {
+                            B value = default;
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            value = B.DeserializeB(document.RootElement);
+                            return Response.FromValue<object>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -481,7 +515,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<MyException>> Get200Model201ModelDefaultError201ValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<object>> Get200Model201ModelDefaultError201ValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError201Valid");
             scope.Start();
@@ -496,7 +530,14 @@ namespace httpInfrastructure
                             MyException value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<object>(value, message.Response);
+                        }
+                    case 201:
+                        {
+                            B value = default;
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            value = B.DeserializeB(document.RootElement);
+                            return Response.FromValue<object>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -511,7 +552,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<MyException> Get200Model201ModelDefaultError201Valid(CancellationToken cancellationToken = default)
+        public Response<object> Get200Model201ModelDefaultError201Valid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError201Valid");
             scope.Start();
@@ -526,7 +567,14 @@ namespace httpInfrastructure
                             MyException value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<object>(value, message.Response);
+                        }
+                    case 201:
+                        {
+                            B value = default;
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            value = B.DeserializeB(document.RootElement);
+                            return Response.FromValue<object>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -553,7 +601,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<MyException>> Get200Model201ModelDefaultError400ValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<object>> Get200Model201ModelDefaultError400ValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError400Valid");
             scope.Start();
@@ -568,7 +616,14 @@ namespace httpInfrastructure
                             MyException value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<object>(value, message.Response);
+                        }
+                    case 201:
+                        {
+                            B value = default;
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            value = B.DeserializeB(document.RootElement);
+                            return Response.FromValue<object>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -583,7 +638,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<MyException> Get200Model201ModelDefaultError400Valid(CancellationToken cancellationToken = default)
+        public Response<object> Get200Model201ModelDefaultError400Valid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError400Valid");
             scope.Start();
@@ -598,7 +653,14 @@ namespace httpInfrastructure
                             MyException value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<object>(value, message.Response);
+                        }
+                    case 201:
+                        {
+                            B value = default;
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            value = B.DeserializeB(document.RootElement);
+                            return Response.FromValue<object>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -625,7 +687,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<MyException>> Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<object>> Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError200Valid");
             scope.Start();
@@ -640,7 +702,21 @@ namespace httpInfrastructure
                             MyException value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<object>(value, message.Response);
+                        }
+                    case 201:
+                        {
+                            C value = default;
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            value = C.DeserializeC(document.RootElement);
+                            return Response.FromValue<object>(value, message.Response);
+                        }
+                    case 404:
+                        {
+                            D value = default;
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            value = D.DeserializeD(document.RootElement);
+                            return Response.FromValue<object>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -655,7 +731,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<MyException> Get200ModelA201ModelC404ModelDDefaultError200Valid(CancellationToken cancellationToken = default)
+        public Response<object> Get200ModelA201ModelC404ModelDDefaultError200Valid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError200Valid");
             scope.Start();
@@ -670,7 +746,21 @@ namespace httpInfrastructure
                             MyException value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<object>(value, message.Response);
+                        }
+                    case 201:
+                        {
+                            C value = default;
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            value = C.DeserializeC(document.RootElement);
+                            return Response.FromValue<object>(value, message.Response);
+                        }
+                    case 404:
+                        {
+                            D value = default;
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            value = D.DeserializeD(document.RootElement);
+                            return Response.FromValue<object>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -697,7 +787,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<MyException>> Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<object>> Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError201Valid");
             scope.Start();
@@ -712,7 +802,21 @@ namespace httpInfrastructure
                             MyException value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<object>(value, message.Response);
+                        }
+                    case 201:
+                        {
+                            C value = default;
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            value = C.DeserializeC(document.RootElement);
+                            return Response.FromValue<object>(value, message.Response);
+                        }
+                    case 404:
+                        {
+                            D value = default;
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            value = D.DeserializeD(document.RootElement);
+                            return Response.FromValue<object>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -727,7 +831,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<MyException> Get200ModelA201ModelC404ModelDDefaultError201Valid(CancellationToken cancellationToken = default)
+        public Response<object> Get200ModelA201ModelC404ModelDDefaultError201Valid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError201Valid");
             scope.Start();
@@ -742,7 +846,21 @@ namespace httpInfrastructure
                             MyException value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<object>(value, message.Response);
+                        }
+                    case 201:
+                        {
+                            C value = default;
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            value = C.DeserializeC(document.RootElement);
+                            return Response.FromValue<object>(value, message.Response);
+                        }
+                    case 404:
+                        {
+                            D value = default;
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            value = D.DeserializeD(document.RootElement);
+                            return Response.FromValue<object>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -769,7 +887,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<MyException>> Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<object>> Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError404Valid");
             scope.Start();
@@ -784,7 +902,21 @@ namespace httpInfrastructure
                             MyException value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<object>(value, message.Response);
+                        }
+                    case 201:
+                        {
+                            C value = default;
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            value = C.DeserializeC(document.RootElement);
+                            return Response.FromValue<object>(value, message.Response);
+                        }
+                    case 404:
+                        {
+                            D value = default;
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            value = D.DeserializeD(document.RootElement);
+                            return Response.FromValue<object>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -799,7 +931,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<MyException> Get200ModelA201ModelC404ModelDDefaultError404Valid(CancellationToken cancellationToken = default)
+        public Response<object> Get200ModelA201ModelC404ModelDDefaultError404Valid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError404Valid");
             scope.Start();
@@ -814,7 +946,21 @@ namespace httpInfrastructure
                             MyException value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<object>(value, message.Response);
+                        }
+                    case 201:
+                        {
+                            C value = default;
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            value = C.DeserializeC(document.RootElement);
+                            return Response.FromValue<object>(value, message.Response);
+                        }
+                    case 404:
+                        {
+                            D value = default;
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            value = D.DeserializeD(document.RootElement);
+                            return Response.FromValue<object>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -841,7 +987,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<MyException>> Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Response<object>> Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError400Valid");
             scope.Start();
@@ -856,7 +1002,21 @@ namespace httpInfrastructure
                             MyException value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<object>(value, message.Response);
+                        }
+                    case 201:
+                        {
+                            C value = default;
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            value = C.DeserializeC(document.RootElement);
+                            return Response.FromValue<object>(value, message.Response);
+                        }
+                    case 404:
+                        {
+                            D value = default;
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            value = D.DeserializeD(document.RootElement);
+                            return Response.FromValue<object>(value, message.Response);
                         }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -871,7 +1031,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<MyException> Get200ModelA201ModelC404ModelDDefaultError400Valid(CancellationToken cancellationToken = default)
+        public Response<object> Get200ModelA201ModelC404ModelDDefaultError400Valid(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError400Valid");
             scope.Start();
@@ -886,7 +1046,21 @@ namespace httpInfrastructure
                             MyException value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = MyException.DeserializeMyException(document.RootElement);
-                            return Response.FromValue(value, message.Response);
+                            return Response.FromValue<object>(value, message.Response);
+                        }
+                    case 201:
+                        {
+                            C value = default;
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            value = C.DeserializeC(document.RootElement);
+                            return Response.FromValue<object>(value, message.Response);
+                        }
+                    case 404:
+                        {
+                            D value = default;
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            value = D.DeserializeD(document.RootElement);
+                            return Response.FromValue<object>(value, message.Response);
                         }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -924,6 +1098,7 @@ namespace httpInfrastructure
                 switch (message.Response.Status)
                 {
                     case 202:
+                    case 204:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -949,6 +1124,7 @@ namespace httpInfrastructure
                 switch (message.Response.Status)
                 {
                     case 202:
+                    case 204:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -986,6 +1162,7 @@ namespace httpInfrastructure
                 switch (message.Response.Status)
                 {
                     case 202:
+                    case 204:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1011,6 +1188,7 @@ namespace httpInfrastructure
                 switch (message.Response.Status)
                 {
                     case 202:
+                    case 204:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1048,6 +1226,7 @@ namespace httpInfrastructure
                 switch (message.Response.Status)
                 {
                     case 202:
+                    case 204:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1073,6 +1252,7 @@ namespace httpInfrastructure
                 switch (message.Response.Status)
                 {
                     case 202:
+                    case 204:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1110,6 +1290,7 @@ namespace httpInfrastructure
                 switch (message.Response.Status)
                 {
                     case 202:
+                    case 204:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1135,6 +1316,7 @@ namespace httpInfrastructure
                 switch (message.Response.Status)
                 {
                     case 202:
+                    case 204:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1172,6 +1354,7 @@ namespace httpInfrastructure
                 switch (message.Response.Status)
                 {
                     case 202:
+                    case 204:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1197,6 +1380,7 @@ namespace httpInfrastructure
                 switch (message.Response.Status)
                 {
                     case 202:
+                    case 204:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1234,6 +1418,7 @@ namespace httpInfrastructure
                 switch (message.Response.Status)
                 {
                     case 202:
+                    case 204:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1259,6 +1444,7 @@ namespace httpInfrastructure
                 switch (message.Response.Status)
                 {
                     case 202:
+                    case 204:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1296,6 +1482,7 @@ namespace httpInfrastructure
                 switch (message.Response.Status)
                 {
                     case 202:
+                    case 204:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -1321,6 +1508,7 @@ namespace httpInfrastructure
                 switch (message.Response.Status)
                 {
                     case 202:
+                    case 204:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);

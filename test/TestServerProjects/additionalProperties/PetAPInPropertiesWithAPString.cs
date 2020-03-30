@@ -3,10 +3,10 @@ using Azure.Core;
 
 namespace additionalProperties.Models
 {
-    [CodeGenSchema("PetAPInPropertiesWithAPString")]
+    [CodeGenModel("PetAPInPropertiesWithAPString")]
     public partial class PetAPInPropertiesWithAPString
     {
-        [CodeGenSchemaMember("$AdditionalProperties")]
+        [CodeGenMember("$AdditionalProperties")]
         internal IDictionary<string, string> MoreAdditionalProperties { get; set; } = new Dictionary<string, string>();
     }
 }

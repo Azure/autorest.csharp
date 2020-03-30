@@ -13,6 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using CustomNamespace;
+using TypeSchemaMapping.Models;
 
 namespace TypeSchemaMapping
 {
@@ -45,9 +46,12 @@ namespace TypeSchemaMapping
             uri.AppendPath("/Operation/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(body);
-            request.Content = content;
+            if (body != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(body);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -121,9 +125,12 @@ namespace TypeSchemaMapping
             uri.AppendPath("/OperationStruct/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(body);
-            request.Content = content;
+            if (body != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(body);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -174,6 +181,85 @@ namespace TypeSchemaMapping
                             RenamedModelStruct value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
                             value = RenamedModelStruct.DeserializeRenamedModelStruct(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        internal HttpMessage CreateOperationSecondModelRequest(SecondModel body)
+        {
+            var message = pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Patch;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/OperationSecondModel", false);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            if (body != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(body);
+                request.Content = content;
+            }
+            return message;
+        }
+
+        /// <param name="body"> The SecondModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response<SecondModel>> OperationSecondModelAsync(SecondModel body, CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.OperationSecondModel");
+            scope.Start();
+            try
+            {
+                using var message = CreateOperationSecondModelRequest(body);
+                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            SecondModel value = default;
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            value = SecondModel.DeserializeSecondModel(document.RootElement);
+                            return Response.FromValue(value, message.Response);
+                        }
+                    default:
+                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="body"> The SecondModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<SecondModel> OperationSecondModel(SecondModel body, CancellationToken cancellationToken = default)
+        {
+            using var scope = clientDiagnostics.CreateScope("ServiceClient.OperationSecondModel");
+            scope.Start();
+            try
+            {
+                using var message = CreateOperationSecondModelRequest(body);
+                pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        {
+                            SecondModel value = default;
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            value = SecondModel.DeserializeSecondModel(document.RootElement);
                             return Response.FromValue(value, message.Response);
                         }
                     default:

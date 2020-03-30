@@ -53,7 +53,7 @@ namespace model_flattening.Models
                     continue;
                 }
             }
-            return new ProductUrl(odatavalue, genericValue);
+            return new ProductUrl(genericValue, odatavalue);
         }
     }
 }

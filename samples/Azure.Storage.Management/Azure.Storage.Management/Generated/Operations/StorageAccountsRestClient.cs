@@ -299,6 +299,7 @@ namespace Azure.Storage.Management
                 switch (message.Response.Status)
                 {
                     case 200:
+                    case 204:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -335,6 +336,7 @@ namespace Azure.Storage.Management
                 switch (message.Response.Status)
                 {
                     case 200:
+                    case 204:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1556,7 +1558,7 @@ namespace Azure.Storage.Management
             }
         }
 
-        internal HttpMessage CreateListByResourceGroupNextPageRequest(string nextLink)
+        internal HttpMessage CreateListByResourceGroupNextPageRequest(string nextLink, string resourceGroupName)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1569,19 +1571,24 @@ namespace Azure.Storage.Management
 
         /// <summary> Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<StorageAccountListResult>> ListByResourceGroupNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<StorageAccountListResult>> ListByResourceGroupNextPageAsync(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
             using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.ListByResourceGroup");
             scope.Start();
             try
             {
-                using var message = CreateListByResourceGroupNextPageRequest(nextLink);
+                using var message = CreateListByResourceGroupNextPageRequest(nextLink, resourceGroupName);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1605,19 +1612,24 @@ namespace Azure.Storage.Management
 
         /// <summary> Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<StorageAccountListResult> ListByResourceGroupNextPage(string nextLink, CancellationToken cancellationToken = default)
+        public Response<StorageAccountListResult> ListByResourceGroupNextPage(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
             using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.ListByResourceGroup");
             scope.Start();
             try
             {
-                using var message = CreateListByResourceGroupNextPageRequest(nextLink);
+                using var message = CreateListByResourceGroupNextPageRequest(nextLink, resourceGroupName);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

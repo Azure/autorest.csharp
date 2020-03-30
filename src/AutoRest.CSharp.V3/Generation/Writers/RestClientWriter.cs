@@ -148,16 +148,23 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 switch (operation.Request.Body)
                 {
                     case SchemaRequestBody body:
-                        WriteSerializeContent(
-                            writer,
-                            request,
-                            body.Serialization,
-                            w => WriteConstantOrParameter(w, body.Value, ignoreNullability: true));
+                        using (WriteValueNullCheck(writer, body.Value))
+                        {
+                            WriteSerializeContent(
+                                writer,
+                                request,
+                                body.Serialization,
+                                w => WriteConstantOrParameter(w, body.Value, ignoreNullability: true));
+                        }
+
                         break;
                     case BinaryRequestBody binaryBody:
-                        writer.Append($"{request}.Content = {typeof(RequestContent)}.Create(");
-                        WriteConstantOrParameter(writer, binaryBody.Value);
-                        writer.Line($");");
+                        using (WriteValueNullCheck(writer, binaryBody.Value))
+                        {
+                            writer.Append($"{request}.Content = {typeof(RequestContent)}.Create(");
+                            WriteConstantOrParameter(writer, binaryBody.Value);
+                            writer.Line($");");
+                        }
                         break;
                     case FlattenedSchemaRequestBody flattenedSchemaRequestBody:
                         var modelVariable = new CodeWriterDeclaration("model");
@@ -227,10 +234,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             using var methodScope = writer.AmbientScope();
 
-            //TODO: Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413
-            var responseBody = operation.Response.ResponseBody;
-            CSharpType? bodyType = responseBody?.Type;
-            CSharpType? headerModelType = operation.Response.HeaderModel?.Type;
+            CSharpType? bodyType = operation.ReturnType;
+            CSharpType? headerModelType = operation.HeaderModel?.Type;
             CSharpType responseType = bodyType switch
             {
                 null when headerModelType != null => new CSharpType(typeof(ResponseWithHeaders<>), headerModelType),
@@ -281,7 +286,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (Parameter parameter in parameters)
                     {
-                        writer.Append($"{parameter.Name}, ");
+                        writer.Append($"{parameter.Name:I}, ");
                     }
 
                     writer.RemoveTrailingComma();
@@ -296,7 +301,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         writer.Line($"pipeline.Send({messageVariable}, cancellationToken);");
                     }
 
-                    WriteStatusCodeSwitch(writer, messageVariable, responseBody, headerModelType, operation, async);
+                    WriteStatusCodeSwitch(writer, messageVariable, operation, async);
                 }
 
                 using (writer.Scope($"catch ({typeof(Exception)} e)"))
@@ -316,7 +321,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
             else
             {
-                writer.AppendRaw(constantOrReference.Reference.Name);
+                writer.Identifier(constantOrReference.Reference.Name);
                 if (!ignoreNullability)
                 {
                     writer.AppendNullableValue(constantOrReference.Type);
@@ -358,7 +363,25 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             var type = value.Type;
             if (type.IsNullable)
             {
-                return writer.Scope($"if ({value.Reference.Name} != null)");
+                // turn "object.Property" into "object?.Property"
+                var parts = value.Reference.Name.Split(".");
+
+                writer.Append($"if (");
+                bool first = true;
+                foreach (var part in parts)
+                {
+                    if (first)
+                    {
+                        first = false;
+                    }
+                    else
+                    {
+                        writer.AppendRaw("?.");
+                    }
+                    writer.Identifier(part);
+                }
+
+                return writer.Line($" != null)").Scope();
             }
 
             return default;
@@ -421,55 +444,105 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         }
 
         //TODO: Do multiple status codes
-        private void WriteStatusCodeSwitch(CodeWriter writer, CodeWriterDeclaration message, ResponseBody? responseBody, CSharpType? headersModelType, RestClientMethod operation, bool async)
+        private void WriteStatusCodeSwitch(CodeWriter writer, CodeWriterDeclaration message, RestClientMethod operation, bool async)
         {
             string responseVariable = $"{message.ActualName}.Response";
+
+            var returnType = operation.ReturnType;
+            var headersModelType = operation.HeaderModel?.Type;
+
+            ReturnKind kind;
+
+            if (returnType != null && headersModelType != null)
+            {
+                kind = ReturnKind.HeadersAndValue;
+            }
+            else if (headersModelType != null)
+            {
+                kind = ReturnKind.Headers;
+            }
+            else if (returnType != null)
+            {
+                kind = ReturnKind.Value;
+            }
+            else
+            {
+                kind = ReturnKind.Response;
+            }
+
+            if (headersModelType != null)
+            {
+                writer.Line($"var headers = new {headersModelType}({responseVariable});");
+            }
+
             using (writer.Scope($"switch ({responseVariable}.Status)"))
             {
-                var statusCodes = operation.Response.SuccessfulStatusCodes;
-                foreach (var statusCode in statusCodes)
+                foreach (var response in operation.Responses)
                 {
-                    writer.Line($"case {statusCode}:");
-                }
+                    var responseBody = response.ResponseBody;
+                    var statusCodes = response.StatusCodes;
 
-                using (responseBody != null ? writer.Scope() : default)
-                {
-                    string valueVariable = "value";
-                    if (responseBody is ObjectResponseBody objectResponseBody)
+                    foreach (var statusCode in statusCodes)
                     {
-                        writer.Line($"{responseBody.Type} {valueVariable:D} = default;");
-                        writer.WriteDeserializationForMethods(
-                            objectResponseBody.Serialization,
-                            async,
-                            (w, v) => w.Line($"{valueVariable} = {v};"),
-                            responseVariable);
-                    }
-                    else if (responseBody is StreamResponseBody _)
-                    {
-                        writer.Line($"var {valueVariable:D} = {message}.ExtractResponseContent();");
+                        writer.Line($"case {statusCode}:");
                     }
 
-                    if (headersModelType != null)
+                    using (responseBody != null ? writer.Scope() : default)
                     {
-                        writer.Line($"var headers = new {headersModelType}({responseVariable});");
-                    }
+                        ReferenceOrConstant value = default;
 
-                    switch (responseBody)
-                    {
-                        case null when headersModelType != null:
-                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue(headers, {responseVariable});");
-                            break;
-                        case { } when headersModelType != null:
-                            writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue({valueVariable}, headers, {responseVariable});");
-                            break;
-                        case { }:
-                            writer.Append($"return {typeof(Response)}.FromValue({valueVariable}, {responseVariable});");
-                            break;
-                        case null when !statusCodes.Any():
-                            break;
-                        case null:
-                            writer.Append($"return {responseVariable};");
-                            break;
+                        var valueVariable = new CodeWriterDeclaration("value");
+                        if (responseBody is ObjectResponseBody objectResponseBody)
+                        {
+                            writer.Line($"{responseBody.Type} {valueVariable:D} = default;");
+                            writer.WriteDeserializationForMethods(
+                                objectResponseBody.Serialization,
+                                async,
+                                (w, v) => w.Line($"{valueVariable} = {v};"),
+                                responseVariable);
+                            value = new Reference(valueVariable.ActualName, responseBody.Type);
+                        }
+                        else if (responseBody is StreamResponseBody _)
+                        {
+                            writer.Line($"var {valueVariable:D} = {message}.ExtractResponseContent();");
+                            value = new Reference(valueVariable.ActualName, responseBody.Type);
+                        }
+                        else if (returnType != null)
+                        {
+                            value = Constant.Default(returnType.WithNullable(true));
+                        }
+
+                        switch (kind)
+                        {
+                            case ReturnKind.Response:
+                                writer.Append($"return {responseVariable};");
+                                break;
+                            case ReturnKind.Headers:
+                                writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue(headers, {responseVariable});");
+                                break;
+                            case ReturnKind.HeadersAndValue:
+                                writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue");
+                                if (!Equals(responseBody?.Type, operation.ReturnType))
+                                {
+                                    writer.Append($"<{operation.ReturnType}, {headersModelType}>");
+                                }
+                                writer.Append($"(");
+                                writer.WriteReferenceOrConstant(value);
+                                writer.Append($", headers, {responseVariable});");
+                                break;
+                            case ReturnKind.Value:
+                                writer.Append($"return {typeof(Response)}.FromValue");
+                                if (!Equals(responseBody?.Type, operation.ReturnType))
+                                {
+                                    writer.Append($"<{operation.ReturnType}>");
+                                }
+                                writer.Append($"(");
+                                writer.WriteReferenceOrConstant(value);
+                                writer.Append($", {responseVariable});");
+                                break;
+                            default:
+                                throw new ArgumentOutOfRangeException();
+                        }
                     }
                 }
 
@@ -483,6 +556,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Line($"throw clientDiagnostics.CreateRequestFailedException({responseVariable});");
                 }
             }
+        }
+
+        private enum ReturnKind
+        {
+            Response,
+            Headers,
+            HeadersAndValue,
+            Value
         }
     }
 }

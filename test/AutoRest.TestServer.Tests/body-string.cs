@@ -84,7 +84,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("We are sending null in a body but should be doing a null check")]
         public Task PutStringNull() => Test(async (host, pipeline) =>
         {
             var result = await new StringClient(ClientDiagnostics, pipeline, host).PutNullAsync(null);

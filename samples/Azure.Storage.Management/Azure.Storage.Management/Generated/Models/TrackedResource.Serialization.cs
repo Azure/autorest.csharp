@@ -103,7 +103,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            return new TrackedResource(tags, location, id, name, type);
+            return new TrackedResource(id, name, type, tags, location);
         }
     }
 }

@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
         {
             Directory.CreateDirectory(configuration.OutputFolder);
             var project = GeneratedCodeWorkspace.Create(configuration.OutputFolder, configuration.SharedSourceFolder);
-            var sourceInputModel = SourceInputModelBuilder.Build(await project.GetCompilationAsync());
+            var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
 
             var context = new BuildContext(codeModel, configuration, sourceInputModel);
 
@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
 
                 project.AddGeneratedFile($"Operations/{client.Type.Name}.cs", restCodeWriter.ToString());
 
-                var headerModels = client.Methods.Select(m => m.Response.HeaderModel).OfType<ResponseHeaderGroupType>().Distinct();
+                var headerModels = client.Methods.Select(m => m.HeaderModel).OfType<ResponseHeaderGroupType>().Distinct();
                 foreach (ResponseHeaderGroupType responseHeaderModel in headerModels)
                 {
                     var headerModelCodeWriter = new CodeWriter();

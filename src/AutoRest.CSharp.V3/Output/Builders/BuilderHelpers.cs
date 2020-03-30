@@ -82,24 +82,27 @@ namespace AutoRest.CSharp.V3.Output.Builders
             return new TypeDeclarationOptions(defaultName,defaultNamespace, defaultAccessibility, false);
         }
 
-        public static MemberDeclarationOptions CreateMemberDeclaration(string defaultName, CSharpType defaultType, string defaultAccessibility, ISymbol? existingMember)
+        public static MemberDeclarationOptions CreateMemberDeclaration(string defaultName, CSharpType defaultType, string defaultAccessibility, ISymbol? existingMember, TypeFactory typeFactory)
         {
             if (existingMember != null)
             {
+                var newType = existingMember switch
+                {
+                    IPropertySymbol propertySymbol => typeFactory.CreateType(propertySymbol.Type),
+                    IFieldSymbol propertySymbol => typeFactory.CreateType(propertySymbol.Type),
+                    _ => defaultType
+                };
                 // Not reading the return type information of existing members yet
                 return new MemberDeclarationOptions(
                     SyntaxFacts.GetText(existingMember.DeclaredAccessibility),
                     existingMember.Name,
-                    defaultType,
-                    isUserDefined: true
+                    newType
                 );
             }
-            // Not reading the return type information of existing members yet
             return new MemberDeclarationOptions(
                 defaultAccessibility,
                 defaultName,
-                defaultType,
-                isUserDefined: false
+                defaultType
                 );
         }
 

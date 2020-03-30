@@ -898,7 +898,7 @@ namespace Azure.Network.Management.Interface
             }
         }
 
-        internal HttpMessage CreateListNextPageRequest(string nextLink)
+        internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -911,19 +911,24 @@ namespace Azure.Network.Management.Interface
 
         /// <summary> Gets all network interfaces in a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<NetworkInterfaceListResult>> ListNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<NetworkInterfaceListResult>> ListNextPageAsync(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
             using var scope = clientDiagnostics.CreateScope("NetworkInterfacesClient.List");
             scope.Start();
             try
             {
-                using var message = CreateListNextPageRequest(nextLink);
+                using var message = CreateListNextPageRequest(nextLink, resourceGroupName);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -947,19 +952,24 @@ namespace Azure.Network.Management.Interface
 
         /// <summary> Gets all network interfaces in a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<NetworkInterfaceListResult> ListNextPage(string nextLink, CancellationToken cancellationToken = default)
+        public Response<NetworkInterfaceListResult> ListNextPage(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
             using var scope = clientDiagnostics.CreateScope("NetworkInterfacesClient.List");
             scope.Start();
             try
             {
-                using var message = CreateListNextPageRequest(nextLink);
+                using var message = CreateListNextPageRequest(nextLink, resourceGroupName);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

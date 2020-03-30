@@ -7,13 +7,13 @@ namespace AutoRest.CSharp.V3.Input.Source
 {
     public class SourceMemberMapping
     {
-        public SourceMemberMapping(string schemaName, ISymbol existingMember)
+        public SourceMemberMapping(string originalName, ISymbol existingMember)
         {
-            SchemaName = schemaName;
+            OriginalName = originalName;
             ExistingMember = existingMember;
         }
 
-        public string SchemaName { get; }
+        public string OriginalName { get; }
         public ISymbol ExistingMember { get; }
     }
 }

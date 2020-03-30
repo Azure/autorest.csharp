@@ -86,7 +86,7 @@ namespace additionalProperties.Models
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new CatAPTrue(friendly, id, name, status, additionalProperties);
+            return new CatAPTrue(id, name, status, additionalProperties, friendly);
         }
     }
 }

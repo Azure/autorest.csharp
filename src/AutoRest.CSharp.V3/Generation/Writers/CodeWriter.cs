@@ -70,6 +70,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             const string literalFormatString = ":L";
             const string declarationFormatString = ":D"; // :D :)
+            const string identifierFormatString = ":I";
             foreach ((string Text, bool IsLiteral) part in StringExtensions.GetPathParts(formattableString.Format))
             {
                 string text = part.Text;
@@ -88,6 +89,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 var argument = formattableString.GetArgument(index);
                 var isLiteral = text.EndsWith(literalFormatString);
                 var isDeclaration = text.EndsWith(declarationFormatString);
+                var isIdentifier = text.EndsWith(identifierFormatString);
                 switch (argument)
                 {
                     case CodeWriterDelegate d:
@@ -106,7 +108,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         }
                         else
                         {
-                            AppendRaw(declaration.ActualName);
+                            Identifier(declaration.ActualName);
                         }
                         break;
                     default:
@@ -126,6 +128,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         if (isDeclaration)
                         {
                             Declaration(s);
+                        }
+                        else if (isIdentifier)
+                        {
+                            Identifier(s);
                         }
                         else
                         {
@@ -307,7 +313,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             if (_builder.Length - _position < space)
             {
-                var newBuilder = ArrayPool<char>.Shared.Rent(_builder.Length * 2);
+                var newBuilder = ArrayPool<char>.Shared.Rent(Math.Max(_builder.Length + space, _builder.Length * 2));
                 _builder.AsSpan().CopyTo(newBuilder);
 
                 ArrayPool<char>.Shared.Return(_builder);
@@ -344,11 +350,20 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             return this;
         }
 
+        public CodeWriter Identifier(string identifier)
+        {
+            if (StringExtensions.IsCSharpKeyword(identifier))
+            {
+                AppendRaw("@");
+            }
+            return AppendRaw(identifier);
+        }
+
         private CodeWriter Declaration(string declaration)
         {
             _scopes.Peek().Identifiers.Add(declaration);
 
-            return AppendRaw(declaration);
+            return Identifier(declaration);
         }
 
         public CodeWriter Declaration(CodeWriterDeclaration declaration)

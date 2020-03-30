@@ -179,7 +179,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ServiceAssociationLink(name, etag, type, linkedResourceType, link, provisioningState, allowDelete, locations, id);
+            return new ServiceAssociationLink(id, name, etag, type, linkedResourceType, link, provisioningState, allowDelete, locations);
         }
     }
 }

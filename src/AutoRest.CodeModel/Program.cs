@@ -33,7 +33,8 @@ namespace AutoRest.CodeModel
                 TypeAccessModifier = "internal",
                 TypeNameGenerator = new CustomTypeNameGenerator(),
                 PropertyNameGenerator = new CustomPropertyNameGenerator(),
-                EnumNameGenerator = new CustomEnumNameGenerator()
+                EnumNameGenerator = new CustomEnumNameGenerator(),
+                ExcludedTypeNames = new[] { "GroupSchema" }
             };
             var rawFile = new CSharpGenerator(schema, settings).GenerateFile();
             var cleanFile = String.Join(Environment.NewLine, rawFile.ToLines()

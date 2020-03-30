@@ -94,7 +94,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new Cat(color, hates, id, name);
+            return new Cat(id, name, color, hates);
         }
     }
 }

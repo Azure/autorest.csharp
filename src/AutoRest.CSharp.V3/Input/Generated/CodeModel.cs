@@ -99,6 +99,10 @@ namespace AutoRest.CSharp.V3.Input
         [YamlDotNet.Serialization.YamlMember(Alias = "deprecated")]
         public Deprecation? Deprecated { get; set; }
 
+        /// <summary>where did this aspect come from (jsonpath or 'modelerfour:&lt;soemthing&gt;')</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "origin")]
+        public string? Origin { get; set; }
+
         /// <summary>External Documentation Links</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "externalDocs")]
         public ExternalDocumentation? ExternalDocs { get; set; }
@@ -858,6 +862,10 @@ namespace AutoRest.CSharp.V3.Input
         [YamlDotNet.Serialization.YamlMember(Alias = "deprecated")]
         public Deprecation? Deprecated { get; set; }
 
+        /// <summary>where did this aspect come from (jsonpath or 'modelerfour:&lt;soemthing&gt;')</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "origin")]
+        public string? Origin { get; set; }
+
         /// <summary>External Documentation Links</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "externalDocs")]
         public ExternalDocumentation? ExternalDocs { get; set; }
@@ -1011,24 +1019,6 @@ namespace AutoRest.CSharp.V3.Input
         [YamlDotNet.Serialization.YamlMember(Alias = "originalParameter")]
         [System.ComponentModel.DataAnnotations.Required]
         public System.Collections.Generic.ICollection<RequestParameter> OriginalParameter { get; set; } = new System.Collections.ObjectModel.Collection<RequestParameter>();
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class GroupSchema : Schema
-    {
-        [YamlDotNet.Serialization.YamlMember(Alias = "properties")]
-        [System.ComponentModel.DataAnnotations.Required]
-        public System.Collections.Generic.ICollection<GroupProperty> Properties { get; set; } = new System.Collections.ObjectModel.Collection<GroupProperty>();
-
-        /// <summary>contexts in which the schema is used</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "usage")]
-        [System.ComponentModel.DataAnnotations.Required]
-        public System.Collections.Generic.ICollection<SchemaContext> Usage { get; set; } = new System.Collections.ObjectModel.Collection<SchemaContext>();
-
-        /// <summary>Known media types in which this schema can be serialized</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "serializationFormats")]
-        [System.ComponentModel.DataAnnotations.Required]
-        public System.Collections.Generic.ICollection<KnownMediaType> SerializationFormats { get; set; } = new System.Collections.ObjectModel.Collection<KnownMediaType>();
     }
 
     /// <summary>a schema that represents a type with child properties.</summary>
@@ -1559,6 +1549,10 @@ namespace AutoRest.CSharp.V3.Input
         /// <summary>deprecation information -- ie, when this aspect doesn't apply and why</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "deprecated")]
         public Deprecation? Deprecated { get; set; }
+
+        /// <summary>where did this aspect come from (jsonpath or 'modelerfour:&lt;soemthing&gt;')</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "origin")]
+        public string? Origin { get; set; }
 
         /// <summary>External Documentation Links</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "externalDocs")]
@@ -2432,6 +2426,10 @@ namespace AutoRest.CSharp.V3.Input
         /// <summary>deprecation information -- ie, when this aspect doesn't apply and why</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "deprecated")]
         public Deprecation? Deprecated { get; set; }
+
+        /// <summary>where did this aspect come from (jsonpath or 'modelerfour:&lt;soemthing&gt;')</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "origin")]
+        public string? Origin { get; set; }
 
         /// <summary>External Documentation Links</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "externalDocs")]

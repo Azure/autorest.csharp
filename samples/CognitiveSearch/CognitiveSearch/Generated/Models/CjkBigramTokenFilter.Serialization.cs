@@ -80,7 +80,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new CjkBigramTokenFilter(ignoreScripts, outputUnigrams, odatatype, name);
+            return new CjkBigramTokenFilter(odatatype, name, ignoreScripts, outputUnigrams);
         }
     }
 }

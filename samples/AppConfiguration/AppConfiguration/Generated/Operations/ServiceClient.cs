@@ -276,7 +276,7 @@ namespace AppConfiguration
             }
             async Task<Page<Key>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetKeysNextPageAsync(acceptDatetime, nextLink, cancellationToken).ConfigureAwait(false);
+                var response = await RestClient.GetKeysNextPageAsync(nextLink, name, after, acceptDatetime, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -296,7 +296,7 @@ namespace AppConfiguration
             }
             Page<Key> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetKeysNextPage(acceptDatetime, nextLink, cancellationToken);
+                var response = RestClient.GetKeysNextPage(nextLink, name, after, acceptDatetime, cancellationToken);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
@@ -318,7 +318,7 @@ namespace AppConfiguration
             }
             async Task<Page<KeyValue>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetKeyValuesNextPageAsync(acceptDatetime, nextLink, cancellationToken).ConfigureAwait(false);
+                var response = await RestClient.GetKeyValuesNextPageAsync(nextLink, key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -340,7 +340,7 @@ namespace AppConfiguration
             }
             Page<KeyValue> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetKeyValuesNextPage(acceptDatetime, nextLink, cancellationToken);
+                var response = RestClient.GetKeyValuesNextPage(nextLink, key, label, after, acceptDatetime, select, cancellationToken);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
@@ -361,7 +361,7 @@ namespace AppConfiguration
             }
             async Task<Page<Label>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetLabelsNextPageAsync(acceptDatetime, nextLink, cancellationToken).ConfigureAwait(false);
+                var response = await RestClient.GetLabelsNextPageAsync(nextLink, name, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -382,7 +382,7 @@ namespace AppConfiguration
             }
             Page<Label> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetLabelsNextPage(acceptDatetime, nextLink, cancellationToken);
+                var response = RestClient.GetLabelsNextPage(nextLink, name, after, acceptDatetime, select, cancellationToken);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
@@ -404,7 +404,7 @@ namespace AppConfiguration
             }
             async Task<Page<KeyValue>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetRevisionsNextPageAsync(acceptDatetime, nextLink, cancellationToken).ConfigureAwait(false);
+                var response = await RestClient.GetRevisionsNextPageAsync(nextLink, key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -426,7 +426,7 @@ namespace AppConfiguration
             }
             Page<KeyValue> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetRevisionsNextPage(acceptDatetime, nextLink, cancellationToken);
+                var response = RestClient.GetRevisionsNextPage(nextLink, key, label, after, acceptDatetime, select, cancellationToken);
                 return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);

@@ -18,6 +18,7 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> Initializes a new instance of BackendAddressPool. </summary>
+        /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within the set of backend address pools used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="type"> Type of the resource. </param>
@@ -26,8 +27,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="outboundRule"> A reference to an outbound rule that uses this backend address pool. </param>
         /// <param name="outboundRules"> An array of references to outbound rules that use this backend address pool. </param>
         /// <param name="provisioningState"> The provisioning state of the backend address pool resource. </param>
-        /// <param name="id"> Resource ID. </param>
-        internal BackendAddressPool(string name, string etag, string type, IList<NetworkInterfaceIPConfiguration> backendIPConfigurations, IList<SubResource> loadBalancingRules, SubResource outboundRule, IList<SubResource> outboundRules, ProvisioningState? provisioningState, string id) : base(id)
+        internal BackendAddressPool(string id, string name, string etag, string type, IList<NetworkInterfaceIPConfiguration> backendIPConfigurations, IList<SubResource> loadBalancingRules, SubResource outboundRule, IList<SubResource> outboundRules, ProvisioningState? provisioningState) : base(id)
         {
             Name = name;
             Etag = etag;

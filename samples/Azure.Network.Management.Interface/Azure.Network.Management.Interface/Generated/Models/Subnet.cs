@@ -18,6 +18,7 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> Initializes a new instance of Subnet. </summary>
+        /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="addressPrefix"> The address prefix for the subnet. </param>
@@ -37,8 +38,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="provisioningState"> The provisioning state of the subnet resource. </param>
         /// <param name="privateEndpointNetworkPolicies"> Enable or Disable apply network policies on private end point in the subnet. </param>
         /// <param name="privateLinkServiceNetworkPolicies"> Enable or Disable apply network policies on private link service in the subnet. </param>
-        /// <param name="id"> Resource ID. </param>
-        internal Subnet(string name, string etag, string addressPrefix, IList<string> addressPrefixes, NetworkSecurityGroup networkSecurityGroup, RouteTable routeTable, SubResource natGateway, IList<ServiceEndpointPropertiesFormat> serviceEndpoints, IList<ServiceEndpointPolicy> serviceEndpointPolicies, IList<PrivateEndpoint> privateEndpoints, IList<IPConfiguration> ipConfigurations, IList<IPConfigurationProfile> ipConfigurationProfiles, IList<ResourceNavigationLink> resourceNavigationLinks, IList<ServiceAssociationLink> serviceAssociationLinks, IList<Delegation> delegations, string purpose, ProvisioningState? provisioningState, string privateEndpointNetworkPolicies, string privateLinkServiceNetworkPolicies, string id) : base(id)
+        internal Subnet(string id, string name, string etag, string addressPrefix, IList<string> addressPrefixes, NetworkSecurityGroup networkSecurityGroup, RouteTable routeTable, SubResource natGateway, IList<ServiceEndpointPropertiesFormat> serviceEndpoints, IList<ServiceEndpointPolicy> serviceEndpointPolicies, IList<PrivateEndpoint> privateEndpoints, IList<IPConfiguration> ipConfigurations, IList<IPConfigurationProfile> ipConfigurationProfiles, IList<ResourceNavigationLink> resourceNavigationLinks, IList<ServiceAssociationLink> serviceAssociationLinks, IList<Delegation> delegations, string purpose, ProvisioningState? provisioningState, string privateEndpointNetworkPolicies, string privateLinkServiceNetworkPolicies) : base(id)
         {
             Name = name;
             Etag = etag;

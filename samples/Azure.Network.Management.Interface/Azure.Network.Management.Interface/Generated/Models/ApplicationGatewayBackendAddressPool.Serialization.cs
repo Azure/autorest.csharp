@@ -159,7 +159,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ApplicationGatewayBackendAddressPool(name, etag, type, backendIPConfigurations, backendAddresses, provisioningState, id);
+            return new ApplicationGatewayBackendAddressPool(id, name, etag, type, backendIPConfigurations, backendAddresses, provisioningState);
         }
     }
 }

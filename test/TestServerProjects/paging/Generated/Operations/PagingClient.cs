@@ -137,19 +137,18 @@ namespace paging
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="pagingGetMultiplePagesOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual AsyncPageable<Product> GetMultiplePagesAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<Product> GetMultiplePagesAsync(string clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, CancellationToken cancellationToken = default)
         {
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetMultiplePagesAsync(clientRequestId, maxresults, timeout, cancellationToken).ConfigureAwait(false);
+                var response = await RestClient.GetMultiplePagesAsync(clientRequestId, pagingGetMultiplePagesOptions, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetMultiplePagesNextPageAsync(clientRequestId, maxresults, timeout, nextLink, cancellationToken).ConfigureAwait(false);
+                var response = await RestClient.GetMultiplePagesNextPageAsync(nextLink, clientRequestId, pagingGetMultiplePagesOptions, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -157,19 +156,18 @@ namespace paging
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="pagingGetMultiplePagesOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Pageable<Product> GetMultiplePages(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public virtual Pageable<Product> GetMultiplePages(string clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, CancellationToken cancellationToken = default)
         {
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetMultiplePages(clientRequestId, maxresults, timeout, cancellationToken);
+                var response = RestClient.GetMultiplePages(clientRequestId, pagingGetMultiplePagesOptions, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetMultiplePagesNextPage(clientRequestId, maxresults, timeout, nextLink, cancellationToken);
+                var response = RestClient.GetMultiplePagesNextPage(nextLink, clientRequestId, pagingGetMultiplePagesOptions, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
@@ -177,19 +175,18 @@ namespace paging
 
         /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="pagingGetOdataMultiplePagesOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual AsyncPageable<Product> GetOdataMultiplePagesAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<Product> GetOdataMultiplePagesAsync(string clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, CancellationToken cancellationToken = default)
         {
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetOdataMultiplePagesAsync(clientRequestId, maxresults, timeout, cancellationToken).ConfigureAwait(false);
+                var response = await RestClient.GetOdataMultiplePagesAsync(clientRequestId, pagingGetOdataMultiplePagesOptions, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetOdataMultiplePagesNextPageAsync(clientRequestId, maxresults, timeout, nextLink, cancellationToken).ConfigureAwait(false);
+                var response = await RestClient.GetOdataMultiplePagesNextPageAsync(nextLink, clientRequestId, pagingGetOdataMultiplePagesOptions, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -197,19 +194,18 @@ namespace paging
 
         /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="pagingGetOdataMultiplePagesOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Pageable<Product> GetOdataMultiplePages(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public virtual Pageable<Product> GetOdataMultiplePages(string clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, CancellationToken cancellationToken = default)
         {
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetOdataMultiplePages(clientRequestId, maxresults, timeout, cancellationToken);
+                var response = RestClient.GetOdataMultiplePages(clientRequestId, pagingGetOdataMultiplePagesOptions, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetOdataMultiplePagesNextPage(clientRequestId, maxresults, timeout, nextLink, cancellationToken);
+                var response = RestClient.GetOdataMultiplePagesNextPage(nextLink, clientRequestId, pagingGetOdataMultiplePagesOptions, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
@@ -217,20 +213,23 @@ namespace paging
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="offset"> Offset of return value. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="pagingGetMultiplePagesWithOffsetOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual AsyncPageable<Product> GetMultiplePagesWithOffsetAsync(string clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<Product> GetMultiplePagesWithOffsetAsync(string clientRequestId, PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, CancellationToken cancellationToken = default)
         {
+            if (pagingGetMultiplePagesWithOffsetOptions == null)
+            {
+                throw new ArgumentNullException(nameof(pagingGetMultiplePagesWithOffsetOptions));
+            }
+
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetMultiplePagesWithOffsetAsync(clientRequestId, maxresults, offset, timeout, cancellationToken).ConfigureAwait(false);
+                var response = await RestClient.GetMultiplePagesWithOffsetAsync(clientRequestId, pagingGetMultiplePagesWithOffsetOptions, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetMultiplePagesWithOffsetNextPageAsync(clientRequestId, maxresults, timeout, nextLink, cancellationToken).ConfigureAwait(false);
+                var response = await RestClient.GetMultiplePagesWithOffsetNextPageAsync(nextLink, clientRequestId, pagingGetMultiplePagesWithOffsetOptions, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -238,20 +237,23 @@ namespace paging
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="offset"> Offset of return value. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="pagingGetMultiplePagesWithOffsetOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Pageable<Product> GetMultiplePagesWithOffset(string clientRequestId, int? maxresults, int offset, int? timeout, CancellationToken cancellationToken = default)
+        public virtual Pageable<Product> GetMultiplePagesWithOffset(string clientRequestId, PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, CancellationToken cancellationToken = default)
         {
+            if (pagingGetMultiplePagesWithOffsetOptions == null)
+            {
+                throw new ArgumentNullException(nameof(pagingGetMultiplePagesWithOffsetOptions));
+            }
+
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetMultiplePagesWithOffset(clientRequestId, maxresults, offset, timeout, cancellationToken);
+                var response = RestClient.GetMultiplePagesWithOffset(clientRequestId, pagingGetMultiplePagesWithOffsetOptions, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetMultiplePagesWithOffsetNextPage(clientRequestId, maxresults, timeout, nextLink, cancellationToken);
+                var response = RestClient.GetMultiplePagesWithOffsetNextPage(nextLink, clientRequestId, pagingGetMultiplePagesWithOffsetOptions, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
@@ -484,56 +486,46 @@ namespace paging
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual AsyncPageable<Product> GetMultiplePagesFragmentWithGroupingNextLinkAsync(string apiVersion, string tenant, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<Product> GetMultiplePagesFragmentWithGroupingNextLinkAsync(CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default)
         {
-            if (apiVersion == null)
+            if (customParameterGroup == null)
             {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
+                throw new ArgumentNullException(nameof(customParameterGroup));
             }
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetMultiplePagesFragmentWithGroupingNextLinkAsync(apiVersion, tenant, cancellationToken).ConfigureAwait(false);
+                var response = await RestClient.GetMultiplePagesFragmentWithGroupingNextLinkAsync(customParameterGroup, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.NextFragmentWithGroupingAsync(apiVersion, tenant, nextLink, cancellationToken).ConfigureAwait(false);
+                var response = await RestClient.NextFragmentWithGroupingAsync(nextLink, customParameterGroup, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Pageable<Product> GetMultiplePagesFragmentWithGroupingNextLink(string apiVersion, string tenant, CancellationToken cancellationToken = default)
+        public virtual Pageable<Product> GetMultiplePagesFragmentWithGroupingNextLink(CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default)
         {
-            if (apiVersion == null)
+            if (customParameterGroup == null)
             {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
+                throw new ArgumentNullException(nameof(customParameterGroup));
             }
 
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetMultiplePagesFragmentWithGroupingNextLink(apiVersion, tenant, cancellationToken);
+                var response = RestClient.GetMultiplePagesFragmentWithGroupingNextLink(customParameterGroup, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.NextFragmentWithGrouping(apiVersion, tenant, nextLink, cancellationToken);
+                var response = RestClient.NextFragmentWithGrouping(nextLink, customParameterGroup, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
@@ -566,7 +558,7 @@ namespace paging
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.NextFragmentNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                var response = await RestClient.NextFragmentNextPageAsync(nextLink, apiVersion, tenant, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
@@ -599,73 +591,63 @@ namespace paging
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.NextFragmentNextPage(nextLink, cancellationToken);
+                var response = RestClient.NextFragmentNextPage(nextLink, apiVersion, tenant, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
+        /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual AsyncPageable<Product> NextFragmentWithGroupingAsync(string apiVersion, string tenant, string nextLink, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<Product> NextFragmentWithGroupingAsync(string nextLink, CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default)
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
+            if (customParameterGroup == null)
+            {
+                throw new ArgumentNullException(nameof(customParameterGroup));
+            }
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.NextFragmentWithGroupingAsync(apiVersion, tenant, nextLink, cancellationToken).ConfigureAwait(false);
+                var response = await RestClient.NextFragmentWithGroupingAsync(nextLink, customParameterGroup, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.NextFragmentWithGroupingNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                var response = await RestClient.NextFragmentWithGroupingNextPageAsync(nextLink, customParameterGroup, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
+        /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Pageable<Product> NextFragmentWithGrouping(string apiVersion, string tenant, string nextLink, CancellationToken cancellationToken = default)
+        public virtual Pageable<Product> NextFragmentWithGrouping(string nextLink, CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default)
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
+            if (customParameterGroup == null)
+            {
+                throw new ArgumentNullException(nameof(customParameterGroup));
+            }
 
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.NextFragmentWithGrouping(apiVersion, tenant, nextLink, cancellationToken);
+                var response = RestClient.NextFragmentWithGrouping(nextLink, customParameterGroup, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.NextFragmentWithGroupingNextPage(nextLink, cancellationToken);
+                var response = RestClient.NextFragmentWithGroupingNextPage(nextLink, customParameterGroup, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
@@ -700,24 +682,22 @@ namespace paging
 
         /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="pagingGetMultiplePagesLroOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Operation<ProductResult>> StartGetMultiplePagesLROAsync(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Operation<ProductResult>> StartGetMultiplePagesLROAsync(string clientRequestId, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions, CancellationToken cancellationToken = default)
         {
-            var originalResponse = await RestClient.GetMultiplePagesLROAsync(clientRequestId, maxresults, timeout, cancellationToken).ConfigureAwait(false);
-            return CreateGetMultiplePagesLRO(originalResponse, () => RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout));
+            var originalResponse = await RestClient.GetMultiplePagesLROAsync(clientRequestId, pagingGetMultiplePagesLroOptions, cancellationToken).ConfigureAwait(false);
+            return CreateGetMultiplePagesLRO(originalResponse, () => RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions));
         }
 
         /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="pagingGetMultiplePagesLroOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Operation<ProductResult> StartGetMultiplePagesLRO(string clientRequestId, int? maxresults, int? timeout, CancellationToken cancellationToken = default)
+        public virtual Operation<ProductResult> StartGetMultiplePagesLRO(string clientRequestId, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions, CancellationToken cancellationToken = default)
         {
-            var originalResponse = RestClient.GetMultiplePagesLRO(clientRequestId, maxresults, timeout, cancellationToken);
-            return CreateGetMultiplePagesLRO(originalResponse, () => RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout));
+            var originalResponse = RestClient.GetMultiplePagesLRO(clientRequestId, pagingGetMultiplePagesLroOptions, cancellationToken);
+            return CreateGetMultiplePagesLRO(originalResponse, () => RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions));
         }
     }
 }

@@ -194,31 +194,21 @@ namespace model_flattening
         }
 
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
-        /// <param name="name"> Product name with value &apos;groupproduct&apos;. </param>
-        /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
-        /// <param name="description"> Description of product. </param>
-        /// <param name="maxProductDisplayName"> Display name of product. </param>
-        /// <param name="genericValue"> Generic URL value. </param>
-        /// <param name="odataValue"> URL value. </param>
+        /// <param name="flattenParameterGroup"> Parameter group. </param>
         /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SimpleProduct>> PutSimpleProductWithGroupingAsync(string name, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity = "Large", CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SimpleProduct>> PutSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, string capacity = "Large", CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutSimpleProductWithGroupingAsync(name, productId, description, maxProductDisplayName, genericValue, odataValue, capacity, cancellationToken).ConfigureAwait(false);
+            return await RestClient.PutSimpleProductWithGroupingAsync(flattenParameterGroup, capacity, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
-        /// <param name="name"> Product name with value &apos;groupproduct&apos;. </param>
-        /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
-        /// <param name="description"> Description of product. </param>
-        /// <param name="maxProductDisplayName"> Display name of product. </param>
-        /// <param name="genericValue"> Generic URL value. </param>
-        /// <param name="odataValue"> URL value. </param>
+        /// <param name="flattenParameterGroup"> Parameter group. </param>
         /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SimpleProduct> PutSimpleProductWithGrouping(string name, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity = "Large", CancellationToken cancellationToken = default)
+        public virtual Response<SimpleProduct> PutSimpleProductWithGrouping(FlattenParameterGroup flattenParameterGroup, string capacity = "Large", CancellationToken cancellationToken = default)
         {
-            return RestClient.PutSimpleProductWithGrouping(name, productId, description, maxProductDisplayName, genericValue, odataValue, capacity, cancellationToken);
+            return RestClient.PutSimpleProductWithGrouping(flattenParameterGroup, capacity, cancellationToken);
         }
     }
 }

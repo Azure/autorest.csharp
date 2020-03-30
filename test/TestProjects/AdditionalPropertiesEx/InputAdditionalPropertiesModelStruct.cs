@@ -5,7 +5,7 @@ using Azure.Core;
 
 namespace AdditionalPropertiesEx.Models
 {
-    [CodeGenSchema("InputAdditionalPropertiesModelStruct")]
+    [CodeGenModel("InputAdditionalPropertiesModelStruct")]
     public partial struct InputAdditionalPropertiesModelStruct
     {
     }

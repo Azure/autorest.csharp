@@ -70,7 +70,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new TagScoringFunction(tag, type, fieldName, boost, interpolation);
+            return new TagScoringFunction(type, fieldName, boost, interpolation, tag);
         }
     }
 }

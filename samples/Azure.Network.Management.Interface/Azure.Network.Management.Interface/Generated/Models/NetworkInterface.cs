@@ -18,6 +18,11 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> Initializes a new instance of NetworkInterface. </summary>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> Resource name. </param>
+        /// <param name="type"> Resource type. </param>
+        /// <param name="location"> Resource location. </param>
+        /// <param name="tags"> Resource tags. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="virtualMachine"> The reference to a virtual machine. </param>
         /// <param name="networkSecurityGroup"> The reference to the NetworkSecurityGroup resource. </param>
@@ -32,12 +37,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="hostedWorkloads"> A list of references to linked BareMetal resources. </param>
         /// <param name="resourceGuid"> The resource GUID property of the network interface resource. </param>
         /// <param name="provisioningState"> The provisioning state of the network interface resource. </param>
-        /// <param name="id"> Resource ID. </param>
-        /// <param name="name"> Resource name. </param>
-        /// <param name="type"> Resource type. </param>
-        /// <param name="location"> Resource location. </param>
-        /// <param name="tags"> Resource tags. </param>
-        internal NetworkInterface(string etag, SubResource virtualMachine, NetworkSecurityGroup networkSecurityGroup, PrivateEndpoint privateEndpoint, IList<NetworkInterfaceIPConfiguration> ipConfigurations, IList<NetworkInterfaceTapConfiguration> tapConfigurations, NetworkInterfaceDnsSettings dnsSettings, string macAddress, bool? primary, bool? enableAcceleratedNetworking, bool? enableIPForwarding, IList<string> hostedWorkloads, string resourceGuid, ProvisioningState? provisioningState, string id, string name, string type, string location, IDictionary<string, string> tags) : base(id, name, type, location, tags)
+        internal NetworkInterface(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, SubResource virtualMachine, NetworkSecurityGroup networkSecurityGroup, PrivateEndpoint privateEndpoint, IList<NetworkInterfaceIPConfiguration> ipConfigurations, IList<NetworkInterfaceTapConfiguration> tapConfigurations, NetworkInterfaceDnsSettings dnsSettings, string macAddress, bool? primary, bool? enableAcceleratedNetworking, bool? enableIPForwarding, IList<string> hostedWorkloads, string resourceGuid, ProvisioningState? provisioningState) : base(id, name, type, location, tags)
         {
             Etag = etag;
             VirtualMachine = virtualMachine;

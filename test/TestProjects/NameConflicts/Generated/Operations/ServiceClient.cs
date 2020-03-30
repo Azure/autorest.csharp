@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using NameConflicts.Models;
 
 namespace NameConflicts
 {
@@ -33,20 +34,22 @@ namespace NameConflicts
         /// <param name="message"> The String to use. </param>
         /// <param name="scope"> The String to use. </param>
         /// <param name="uri"> The String to use. </param>
+        /// <param name="class"> The Class to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> OperationAsync(string request, string message, string scope, string uri, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Class>> OperationAsync(string request, string message, string scope, string uri, Class @class, CancellationToken cancellationToken = default)
         {
-            return await RestClient.OperationAsync(request, message, scope, uri, cancellationToken).ConfigureAwait(false);
+            return await RestClient.OperationAsync(request, message, scope, uri, @class, cancellationToken).ConfigureAwait(false);
         }
 
         /// <param name="request"> The String to use. </param>
         /// <param name="message"> The String to use. </param>
         /// <param name="scope"> The String to use. </param>
         /// <param name="uri"> The String to use. </param>
+        /// <param name="class"> The Class to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Operation(string request, string message, string scope, string uri, CancellationToken cancellationToken = default)
+        public virtual Response<Class> Operation(string request, string message, string scope, string uri, Class @class, CancellationToken cancellationToken = default)
         {
-            return RestClient.Operation(request, message, scope, uri, cancellationToken);
+            return RestClient.Operation(request, message, scope, uri, @class, cancellationToken);
         }
     }
 }

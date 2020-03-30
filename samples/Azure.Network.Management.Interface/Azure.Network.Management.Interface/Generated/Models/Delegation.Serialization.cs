@@ -134,7 +134,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new Delegation(name, etag, serviceName, actions, provisioningState, id);
+            return new Delegation(id, name, etag, serviceName, actions, provisioningState);
         }
     }
 }

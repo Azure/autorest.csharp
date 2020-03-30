@@ -859,7 +859,6 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(null, result.Value.ProvisioningState);
         });
 
-        // Note: This test changes if https://github.com/Azure/autorest.csharp/issues/300 is implemented.
         [Test]
         public Task LROPostSuccededNoBody() => Test(async (host, pipeline) =>
         {
@@ -868,7 +867,6 @@ namespace AutoRest.TestServer.Tests
             Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
         });
 
-        // Note: This test changes if https://github.com/Azure/autorest.csharp/issues/300 is implemented.
         [Test]
         public Task LROPostSuccededNoBody_Sync() => Test((host, pipeline) =>
         {

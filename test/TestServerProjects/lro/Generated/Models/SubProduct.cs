@@ -16,10 +16,10 @@ namespace lro.Models
         }
 
         /// <summary> Initializes a new instance of SubProduct. </summary>
+        /// <param name="id"> Sub Resource Id. </param>
         /// <param name="provisioningState"> . </param>
         /// <param name="provisioningStateValues"> . </param>
-        /// <param name="id"> Sub Resource Id. </param>
-        internal SubProduct(string provisioningState, SubProductPropertiesProvisioningStateValues? provisioningStateValues, string id) : base(id)
+        internal SubProduct(string id, string provisioningState, SubProductPropertiesProvisioningStateValues? provisioningStateValues) : base(id)
         {
             ProvisioningState = provisioningState;
             ProvisioningStateValues = provisioningStateValues;

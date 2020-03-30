@@ -113,7 +113,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new Shark(age, birthday, fishtype, species, length, siblings);
+            return new Shark(fishtype, species, length, siblings, age, birthday);
         }
     }
 }

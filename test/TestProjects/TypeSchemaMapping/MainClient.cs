@@ -5,7 +5,7 @@ using Azure.Core;
 
 namespace CustomNamespace
 {
-    [CodeGenClient("")]
+    [CodeGenClient("ServiceClient")]
     internal partial class MainClient
     {
     }

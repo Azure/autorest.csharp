@@ -162,7 +162,7 @@ namespace Azure.Storage.Management
             }
         }
 
-        internal HttpMessage CreateCreateRequest(string resourceGroupName, string accountName, string containerName, PublicAccess? publicAccess, IDictionary<string, string> metadata)
+        internal HttpMessage CreateCreateRequest(string resourceGroupName, string accountName, string containerName, BlobContainer blobContainer)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -180,13 +180,8 @@ namespace Azure.Storage.Management
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new BlobContainer()
-            {
-                PublicAccess = publicAccess,
-                Metadata = metadata
-            };
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteObjectValue(blobContainer);
             request.Content = content;
             return message;
         }
@@ -195,10 +190,9 @@ namespace Azure.Storage.Management
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
-        /// <param name="publicAccess"> Specifies whether data in the container may be accessed publicly and the level of access. </param>
-        /// <param name="metadata"> A name-value pair to associate with the container as metadata. </param>
+        /// <param name="blobContainer"> Properties of the blob container to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<BlobContainer>> CreateAsync(string resourceGroupName, string accountName, string containerName, PublicAccess? publicAccess, IDictionary<string, string> metadata, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<BlobContainer>> CreateAsync(string resourceGroupName, string accountName, string containerName, BlobContainer blobContainer, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -212,16 +206,21 @@ namespace Azure.Storage.Management
             {
                 throw new ArgumentNullException(nameof(containerName));
             }
+            if (blobContainer == null)
+            {
+                throw new ArgumentNullException(nameof(blobContainer));
+            }
 
             using var scope = clientDiagnostics.CreateScope("BlobContainersClient.Create");
             scope.Start();
             try
             {
-                using var message = CreateCreateRequest(resourceGroupName, accountName, containerName, publicAccess, metadata);
+                using var message = CreateCreateRequest(resourceGroupName, accountName, containerName, blobContainer);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
+                    case 201:
                         {
                             BlobContainer value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
@@ -243,10 +242,9 @@ namespace Azure.Storage.Management
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
-        /// <param name="publicAccess"> Specifies whether data in the container may be accessed publicly and the level of access. </param>
-        /// <param name="metadata"> A name-value pair to associate with the container as metadata. </param>
+        /// <param name="blobContainer"> Properties of the blob container to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<BlobContainer> Create(string resourceGroupName, string accountName, string containerName, PublicAccess? publicAccess, IDictionary<string, string> metadata, CancellationToken cancellationToken = default)
+        public Response<BlobContainer> Create(string resourceGroupName, string accountName, string containerName, BlobContainer blobContainer, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -260,16 +258,21 @@ namespace Azure.Storage.Management
             {
                 throw new ArgumentNullException(nameof(containerName));
             }
+            if (blobContainer == null)
+            {
+                throw new ArgumentNullException(nameof(blobContainer));
+            }
 
             using var scope = clientDiagnostics.CreateScope("BlobContainersClient.Create");
             scope.Start();
             try
             {
-                using var message = CreateCreateRequest(resourceGroupName, accountName, containerName, publicAccess, metadata);
+                using var message = CreateCreateRequest(resourceGroupName, accountName, containerName, blobContainer);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
+                    case 201:
                         {
                             BlobContainer value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
@@ -287,7 +290,7 @@ namespace Azure.Storage.Management
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string resourceGroupName, string accountName, string containerName, PublicAccess? publicAccess, IDictionary<string, string> metadata)
+        internal HttpMessage CreateUpdateRequest(string resourceGroupName, string accountName, string containerName, BlobContainer blobContainer)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -305,13 +308,8 @@ namespace Azure.Storage.Management
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new BlobContainer()
-            {
-                PublicAccess = publicAccess,
-                Metadata = metadata
-            };
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteObjectValue(blobContainer);
             request.Content = content;
             return message;
         }
@@ -320,10 +318,9 @@ namespace Azure.Storage.Management
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
-        /// <param name="publicAccess"> Specifies whether data in the container may be accessed publicly and the level of access. </param>
-        /// <param name="metadata"> A name-value pair to associate with the container as metadata. </param>
+        /// <param name="blobContainer"> Properties to update for the blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<BlobContainer>> UpdateAsync(string resourceGroupName, string accountName, string containerName, PublicAccess? publicAccess, IDictionary<string, string> metadata, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<BlobContainer>> UpdateAsync(string resourceGroupName, string accountName, string containerName, BlobContainer blobContainer, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -337,12 +334,16 @@ namespace Azure.Storage.Management
             {
                 throw new ArgumentNullException(nameof(containerName));
             }
+            if (blobContainer == null)
+            {
+                throw new ArgumentNullException(nameof(blobContainer));
+            }
 
             using var scope = clientDiagnostics.CreateScope("BlobContainersClient.Update");
             scope.Start();
             try
             {
-                using var message = CreateUpdateRequest(resourceGroupName, accountName, containerName, publicAccess, metadata);
+                using var message = CreateUpdateRequest(resourceGroupName, accountName, containerName, blobContainer);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -368,10 +369,9 @@ namespace Azure.Storage.Management
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
-        /// <param name="publicAccess"> Specifies whether data in the container may be accessed publicly and the level of access. </param>
-        /// <param name="metadata"> A name-value pair to associate with the container as metadata. </param>
+        /// <param name="blobContainer"> Properties to update for the blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<BlobContainer> Update(string resourceGroupName, string accountName, string containerName, PublicAccess? publicAccess, IDictionary<string, string> metadata, CancellationToken cancellationToken = default)
+        public Response<BlobContainer> Update(string resourceGroupName, string accountName, string containerName, BlobContainer blobContainer, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -385,12 +385,16 @@ namespace Azure.Storage.Management
             {
                 throw new ArgumentNullException(nameof(containerName));
             }
+            if (blobContainer == null)
+            {
+                throw new ArgumentNullException(nameof(blobContainer));
+            }
 
             using var scope = clientDiagnostics.CreateScope("BlobContainersClient.Update");
             scope.Start();
             try
             {
-                using var message = CreateUpdateRequest(resourceGroupName, accountName, containerName, publicAccess, metadata);
+                using var message = CreateUpdateRequest(resourceGroupName, accountName, containerName, blobContainer);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -573,6 +577,7 @@ namespace Azure.Storage.Management
                 switch (message.Response.Status)
                 {
                     case 200:
+                    case 204:
                         return message.Response;
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -614,6 +619,7 @@ namespace Azure.Storage.Management
                 switch (message.Response.Status)
                 {
                     case 200:
+                    case 204:
                         return message.Response;
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -1540,9 +1546,12 @@ namespace Azure.Storage.Management
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
-            request.Content = content;
+            if (parameters != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(parameters);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -1640,7 +1649,7 @@ namespace Azure.Storage.Management
             }
         }
 
-        internal HttpMessage CreateListNextPageRequest(string nextLink)
+        internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName, string accountName, string maxpagesize, string filter)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1653,19 +1662,31 @@ namespace Azure.Storage.Management
 
         /// <summary> Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
+        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
+        /// <param name="filter"> Optional. When specified, only container names starting with the filter will be listed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ListContainerItems>> ListNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ListContainerItems>> ListNextPageAsync(string nextLink, string resourceGroupName, string accountName, string maxpagesize, string filter, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (accountName == null)
+            {
+                throw new ArgumentNullException(nameof(accountName));
             }
 
             using var scope = clientDiagnostics.CreateScope("BlobContainersClient.List");
             scope.Start();
             try
             {
-                using var message = CreateListNextPageRequest(nextLink);
+                using var message = CreateListNextPageRequest(nextLink, resourceGroupName, accountName, maxpagesize, filter);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1689,19 +1710,31 @@ namespace Azure.Storage.Management
 
         /// <summary> Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
+        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
+        /// <param name="filter"> Optional. When specified, only container names starting with the filter will be listed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ListContainerItems> ListNextPage(string nextLink, CancellationToken cancellationToken = default)
+        public Response<ListContainerItems> ListNextPage(string nextLink, string resourceGroupName, string accountName, string maxpagesize, string filter, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (accountName == null)
+            {
+                throw new ArgumentNullException(nameof(accountName));
             }
 
             using var scope = clientDiagnostics.CreateScope("BlobContainersClient.List");
             scope.Start();
             try
             {
-                using var message = CreateListNextPageRequest(nextLink);
+                using var message = CreateListNextPageRequest(nextLink, resourceGroupName, accountName, maxpagesize, filter);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

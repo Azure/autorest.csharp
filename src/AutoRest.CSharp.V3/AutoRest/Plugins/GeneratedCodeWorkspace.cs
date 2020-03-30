@@ -11,7 +11,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Simplification;
-using Microsoft.CodeAnalysis.Text;
 
 namespace AutoRest.CSharp.V3.AutoRest.Plugins
 {
@@ -35,8 +34,15 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             var document = _project.AddDocument(GeneratedFolder + "/" + name, text, GeneratedFolders);
             var root = document.GetSyntaxRootAsync().Result;
             Debug.Assert(root != null);
+
+            var compilation = document.Project.GetCompilationAsync().GetAwaiter().GetResult();
+            Debug.Assert(compilation != null);
+
+            var rewriter = new MemberRemoverRewriter(compilation.GetSemanticModel(root.SyntaxTree));
+            root = rewriter.Visit(root);
             root = root.WithAdditionalAnnotations(Simplifier.Annotation);
-            _project = document.WithSyntaxRoot(root).Project;
+            document = document.WithSyntaxRoot(root);
+            _project = document.Project;
         }
 
         public async IAsyncEnumerable<(string Name, string Text)> GetGeneratedFilesAsync()
@@ -89,7 +95,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             generatedCodeProject = generatedCodeProject
                 .AddMetadataReferences(references)
                 .WithCompilationOptions(new CSharpCompilationOptions(
-                OutputKind.DynamicallyLinkedLibrary, nullableContextOptions: NullableContextOptions.Annotations));
+                OutputKind.DynamicallyLinkedLibrary, nullableContextOptions: NullableContextOptions.Disable));
 
             var generatedCodeDirectory = Path.Combine(projectDirectory, "Generated");
 

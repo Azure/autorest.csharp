@@ -65,7 +65,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new ElisionTokenFilter(articles, odatatype, name);
+            return new ElisionTokenFilter(odatatype, name, articles);
         }
     }
 }

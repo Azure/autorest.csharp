@@ -54,7 +54,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new KeywordTokenizer(bufferSize, odatatype, name);
+            return new KeywordTokenizer(odatatype, name, bufferSize);
         }
     }
 }

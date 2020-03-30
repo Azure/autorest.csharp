@@ -213,7 +213,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            return new BlobServiceProperties(sku, cors, defaultServiceVersion, deleteRetentionPolicy, isVersioningEnabled, automaticSnapshotPolicyEnabled, changeFeed, restorePolicy, containerDeleteRetentionPolicy, id, name, type);
+            return new BlobServiceProperties(id, name, type, sku, cors, defaultServiceVersion, deleteRetentionPolicy, isVersioningEnabled, automaticSnapshotPolicyEnabled, changeFeed, restorePolicy, containerDeleteRetentionPolicy);
         }
     }
 }

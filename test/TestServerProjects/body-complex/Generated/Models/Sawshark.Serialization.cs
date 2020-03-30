@@ -119,7 +119,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new Sawshark(picture, age, birthday, fishtype, species, length, siblings);
+            return new Sawshark(fishtype, species, length, siblings, age, birthday, picture);
         }
     }
 }

@@ -16,10 +16,10 @@ namespace body_complex.Models
         }
 
         /// <summary> Initializes a new instance of Dog. </summary>
-        /// <param name="food"> . </param>
         /// <param name="id"> . </param>
         /// <param name="name"> . </param>
-        internal Dog(string food, int? id, string name) : base(id, name)
+        /// <param name="food"> . </param>
+        internal Dog(int? id, string name, string food) : base(id, name)
         {
             Food = food;
         }

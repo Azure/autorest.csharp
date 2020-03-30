@@ -2,11 +2,13 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Diagnostics;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using httpInfrastructure;
+using httpInfrastructure.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
@@ -176,7 +178,11 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task HttpRedirect300Get() => TestStatus(async (host, pipeline) =>
-            await new HttpRedirectsClient(ClientDiagnostics, pipeline, host).Get300Async());
+        {
+            var result = await new HttpRedirectsClient(ClientDiagnostics, pipeline, host).Get300Async();
+
+            return result.GetRawResponse();
+        });
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "404 error")]
@@ -388,101 +394,93 @@ namespace AutoRest.TestServer.Tests
             await new HttpSuccessClient(ClientDiagnostics, pipeline, host).Put204Async());
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
-        public Task HttpSuccess404Head() => TestStatus(async (host, pipeline) =>
-            await new HttpSuccessClient(ClientDiagnostics, pipeline, host).Head404Async());
+        public Task HttpSuccess404Head() => Test(async (host, pipeline) =>
+        {
+            var response = await new HttpSuccessClient(ClientDiagnostics, pipeline, host).Head404Async();
+
+            // 404 is considered success in this test
+            Assert.AreEqual(404, response.Status);
+        });
 
         [Test]
         public Task ResponsesScenarioA200MatchingModel() => Test(async (host, pipeline) =>
         {
             var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200Model204NoModelDefaultError200ValidAsync();
-            Assert.AreEqual("200", result.Value.StatusCode);
+            Assert.AreEqual("200", ((MyException)result.Value).StatusCode);
         });
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
-        public Task ResponsesScenarioA201DefaultNoModel() => Test(async (host, pipeline) =>
+        public Task ResponsesScenarioA201DefaultNoModel() => Test((host, pipeline) =>
         {
-            var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200Model204NoModelDefaultError201InvalidAsync();
-            Assert.AreEqual("201", result.Value.StatusCode);
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200Model204NoModelDefaultError201InvalidAsync());
         });
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
-        public Task ResponsesScenarioA202DefaultNoModel() => Test(async (host, pipeline) =>
+        public Task ResponsesScenarioA202DefaultNoModel() => Test((host, pipeline) =>
         {
-            var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200Model204NoModelDefaultError202NoneAsync();
-            Assert.AreEqual("202", result.Value.StatusCode);
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200Model204NoModelDefaultError202NoneAsync());
         });
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task ResponsesScenarioA204MatchingNoModel() => Test(async (host, pipeline) =>
         {
             var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200Model204NoModelDefaultError204ValidAsync();
-            Assert.AreEqual("204", result.Value.StatusCode);
+            Assert.Null(result.Value);
         });
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
-        public Task ResponsesScenarioA400DefaultModel() => Test(async (host, pipeline) =>
+        public Task ResponsesScenarioA400DefaultModel() => Test((host, pipeline) =>
         {
-            var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200Model204NoModelDefaultError400ValidAsync();
-            Assert.AreEqual("400", result.Value.StatusCode);
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200Model204NoModelDefaultError400ValidAsync());
         });
 
         [Test]
         public Task ResponsesScenarioB200MatchingModel() => Test(async (host, pipeline) =>
         {
             var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200Model201ModelDefaultError200ValidAsync();
-            Assert.AreEqual("200", result.Value.StatusCode);
+            Assert.AreEqual("200", ((MyException)result.Value).StatusCode);
         });
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task ResponsesScenarioB201MatchingModel() => Test(async (host, pipeline) =>
         {
             var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200Model201ModelDefaultError201ValidAsync();
-            Assert.AreEqual("201", result.Value.StatusCode);
+            Assert.AreEqual("201", ((B)result.Value).StatusCode);
         });
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
-        public Task ResponsesScenarioB400DefaultModel() => Test(async (host, pipeline) =>
+        public Task ResponsesScenarioB400DefaultModel() => Test((host, pipeline) =>
         {
-            var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200Model201ModelDefaultError400ValidAsync();
-            Assert.AreEqual("400", result.Value.StatusCode);
+            var exception = Assert.ThrowsAsync<RequestFailedException>(async () => await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200Model201ModelDefaultError400ValidAsync());
+            Assert.AreEqual(400, exception.Status);
         });
 
         [Test]
         public Task ResponsesScenarioC200MatchingModel() => Test(async (host, pipeline) =>
         {
             var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200ModelA201ModelC404ModelDDefaultError200ValidAsync();
-            Assert.AreEqual("200", result.Value.StatusCode);
+            Assert.AreEqual("200", ((MyException)result.Value).StatusCode);
         });
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task ResponsesScenarioC201MatchingModel() => Test(async (host, pipeline) =>
         {
             var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200ModelA201ModelC404ModelDDefaultError201ValidAsync();
-            Assert.AreEqual("201", result.Value.StatusCode);
+            Assert.AreEqual("201", ((C)result.Value).HttpCode);
         });
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
-        public Task ResponsesScenarioC400DefaultModel() => Test(async (host, pipeline) =>
+        public Task ResponsesScenarioC400DefaultModel() => Test((host, pipeline) =>
         {
-            var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200ModelA201ModelC404ModelDDefaultError400ValidAsync();
-            Assert.AreEqual("400", result.Value.StatusCode);
+            var exception = Assert.ThrowsAsync<RequestFailedException>(async () => await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200ModelA201ModelC404ModelDDefaultError400ValidAsync());
+            Assert.AreEqual(400, exception.Status);
         });
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task ResponsesScenarioC404MatchingModel() => Test(async (host, pipeline) =>
         {
             var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200ModelA201ModelC404ModelDDefaultError404ValidAsync();
-            Assert.AreEqual("404", result.Value.StatusCode);
+            Assert.AreEqual("404", ((D)result.Value).HttpStatusCode);
         });
 
         [Test]
@@ -490,16 +488,14 @@ namespace AutoRest.TestServer.Tests
             await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get202None204NoneDefaultError202NoneAsync());
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task ResponsesScenarioD204MatchingNoModel() => TestStatus(async (host, pipeline) =>
             await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get202None204NoneDefaultError204NoneAsync());
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
-        public Task ResponsesScenarioD400DefaultModel() => Test(async (host, pipeline) =>
+        public Task ResponsesScenarioD400DefaultModel() => Test((host, pipeline) =>
         {
-            var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get202None204NoneDefaultError400ValidAsync();
-            Assert.AreEqual(400, result.Status);
+            var exception = Assert.ThrowsAsync<RequestFailedException>(async () => await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get202None204NoneDefaultError400ValidAsync());
+            Assert.AreEqual(400, exception.Status);
         });
 
         [Test]
@@ -508,24 +504,21 @@ namespace AutoRest.TestServer.Tests
             await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get202None204NoneDefaultNone202InvalidAsync());
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task ResponsesScenarioE204MatchingNoModel() => TestStatus(async (host, pipeline) =>
             await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get202None204NoneDefaultNone204NoneAsync());
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
-        public Task ResponsesScenarioE400DefaultInvalid() => Test(async (host, pipeline) =>
+        public Task ResponsesScenarioE400DefaultInvalid() => Test((host, pipeline) =>
         {
-            var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get202None204NoneDefaultNone400InvalidAsync();
-            Assert.AreEqual(400, result.Status);
+            var exception = Assert.ThrowsAsync<RequestFailedException>(async () => await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get202None204NoneDefaultNone400InvalidAsync());
+            Assert.AreEqual(400, exception.Status);
         });
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
-        public Task ResponsesScenarioE400DefaultNoModel() => Test(async (host, pipeline) =>
+        public Task ResponsesScenarioE400DefaultNoModel() => Test((host, pipeline) =>
         {
-            var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get202None204NoneDefaultNone400NoneAsync();
-            Assert.AreEqual(400, result.Status);
+            var exception = Assert.ThrowsAsync<RequestFailedException>(async () => await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get202None204NoneDefaultNone400NoneAsync());
+            Assert.AreEqual(400, exception.Status);
         });
 
         [Test]
@@ -548,19 +541,17 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
-        public Task ResponsesScenarioF400DefaultModel() => Test(async (host, pipeline) =>
+        public Task ResponsesScenarioF400DefaultModel() => Test((host, pipeline) =>
         {
-            var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).GetDefaultModelA400ValidAsync();
-            Assert.AreEqual(400, result.Status);
+            var exception = Assert.ThrowsAsync<RequestFailedException>(async () => await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).GetDefaultModelA400ValidAsync());
+            Assert.AreEqual(400, exception.Status);
         });
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
-        public Task ResponsesScenarioF400DefaultNone() => Test(async (host, pipeline) =>
+        public Task ResponsesScenarioF400DefaultNone() => Test((host, pipeline) =>
         {
-            var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).GetDefaultModelA400NoneAsync();
-            Assert.AreEqual(400, result.Status);
+            var exception = Assert.ThrowsAsync<RequestFailedException>(async () => await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).GetDefaultModelA400NoneAsync());
+            Assert.AreEqual(400, exception.Status);
         });
 
         [Test]
@@ -572,19 +563,17 @@ namespace AutoRest.TestServer.Tests
             await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).GetDefaultNone200NoneAsync());
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
-        public Task ResponsesScenarioG400DefaultInvalid() => Test(async (host, pipeline) =>
+        public Task ResponsesScenarioG400DefaultInvalid() => Test((host, pipeline) =>
         {
-            var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).GetDefaultNone400InvalidAsync();
-            Assert.AreEqual(400, result.Status);
+            var exception = Assert.ThrowsAsync<RequestFailedException>(async () => await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).GetDefaultNone400InvalidAsync());
+            Assert.AreEqual(400, exception.Status);
         });
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
-        public Task ResponsesScenarioG400DefaultNoModel() => Test(async (host, pipeline) =>
+        public Task ResponsesScenarioG400DefaultNoModel() => Test((host, pipeline) =>
         {
-            var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).GetDefaultNone400NoneAsync();
-            Assert.AreEqual(400, result.Status);
+            var exception = Assert.ThrowsAsync<RequestFailedException>(async () => await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).GetDefaultNone400NoneAsync());
+            Assert.AreEqual(400, exception.Status);
         });
 
         [Test]
@@ -602,59 +591,50 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Empty response handling: https://github.com/Azure/autorest.csharp/issues/300")]
-        public Task ResponsesScenarioH200MatchingNone() => Test(async (host, pipeline) =>
+        public Task ResponsesScenarioH200MatchingNone() => Test((host, pipeline) =>
         {
-            var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200ModelA200NoneAsync();
-            Assert.AreEqual(null, result.Value);
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200ModelA200NoneAsync());
         });
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
-        public Task ResponsesScenarioH202NonMatchingModel() => Test(async (host, pipeline) =>
+        public Task ResponsesScenarioH202NonMatchingModel() => Test((host, pipeline) =>
         {
-            var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200ModelA202ValidAsync();
-            Assert.AreEqual("202", result.Value.StatusCode);
+            var exception = Assert.ThrowsAsync<RequestFailedException>(async () => await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200ModelA202ValidAsync());
+            Assert.AreEqual(202, exception.Status);
         });
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
-        public Task ResponsesScenarioH400NonMatchingInvalid() => Test(async (host, pipeline) =>
+        public Task ResponsesScenarioH400NonMatchingInvalid() => Test((host, pipeline) =>
         {
-            var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200ModelA400InvalidAsync();
-            Assert.AreEqual(null, result.Value.StatusCode);
+            var exception = Assert.ThrowsAsync<RequestFailedException>(async () => await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200ModelA400InvalidAsync());
+            Assert.AreEqual(400, exception.Status);
         });
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
-        public Task ResponsesScenarioH400NonMatchingModel() => Test(async (host, pipeline) =>
+        public Task ResponsesScenarioH400NonMatchingModel() => Test((host, pipeline) =>
         {
-            var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200ModelA400ValidAsync();
-            Assert.AreEqual("400", result.Value.StatusCode);
+            var exception = Assert.ThrowsAsync<RequestFailedException>(async () => await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200ModelA400ValidAsync());
+            Assert.AreEqual(400, exception.Status);
         });
 
         [Test]
-        [Ignore("Empty response handling: https://github.com/Azure/autorest.csharp/issues/300")]
-        public Task ResponsesScenarioH400NonMatchingNone() => Test(async (host, pipeline) =>
+        public Task ResponsesScenarioH400NonMatchingNone() => Test((host, pipeline) =>
         {
-            var result = await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200ModelA400NoneAsync();
-            Assert.AreEqual(null, result.Value);
+            Assert.ThrowsAsync(Is.InstanceOf<RequestFailedException>(), async () => await new MultipleResponsesClient(ClientDiagnostics, pipeline, host).Get200ModelA400NoneAsync());
         });
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
-        public Task ResponsesScenarioNoModelEmptyBody() => Test(async (host, pipeline) =>
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
+        public Task ResponsesScenarioNoModelEmptyBody() => Test((host, pipeline) =>
         {
-            var result = await new HttpFailureClient(ClientDiagnostics, pipeline, host).GetNoModelEmptyAsync();
-            Assert.AreEqual(true, result.Value);
+            var exception = Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpFailureClient(ClientDiagnostics, pipeline, host).GetNoModelEmptyAsync());
+            Assert.AreEqual(400, exception.Status);
         });
 
         [Test]
-        [Ignore("Implement multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
-        public Task ResponsesScenarioNoModelErrorBody() => Test(async (host, pipeline) =>
+        public Task ResponsesScenarioNoModelErrorBody() => Test((host, pipeline) =>
         {
-            var result = await new HttpFailureClient(ClientDiagnostics, pipeline, host).GetNoModelErrorAsync();
-            Assert.AreEqual(true, result.Value);
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpFailureClient(ClientDiagnostics, pipeline, host).GetNoModelErrorAsync());
         });
     }
 }

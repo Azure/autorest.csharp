@@ -53,7 +53,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new DotSalmon(location, iswild, fishtype, species);
+            return new DotSalmon(fishtype, species, location, iswild);
         }
     }
 }

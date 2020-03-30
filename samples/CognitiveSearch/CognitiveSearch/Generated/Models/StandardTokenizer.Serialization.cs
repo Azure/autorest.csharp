@@ -54,7 +54,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new StandardTokenizer(maxTokenLength, odatatype, name);
+            return new StandardTokenizer(odatatype, name, maxTokenLength);
         }
     }
 }

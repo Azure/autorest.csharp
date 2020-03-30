@@ -114,7 +114,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new PathHierarchyTokenizerV2(delimiter, replacement, maxTokenLength, reverse, skip, odatatype, name);
+            return new PathHierarchyTokenizerV2(odatatype, name, delimiter, replacement, maxTokenLength, reverse, skip);
         }
     }
 }

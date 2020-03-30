@@ -13,9 +13,9 @@ namespace CognitiveSearch.Models
     public partial class StemmerTokenFilter : TokenFilter
     {
         /// <summary> Initializes a new instance of StemmerTokenFilter. </summary>
-        /// <param name="language"> The language to use. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        public StemmerTokenFilter(StemmerTokenFilterLanguage language, string name) : base(name)
+        /// <param name="language"> The language to use. </param>
+        public StemmerTokenFilter(string name, StemmerTokenFilterLanguage language) : base(name)
         {
             if (name == null)
             {
@@ -27,10 +27,10 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> Initializes a new instance of StemmerTokenFilter. </summary>
-        /// <param name="language"> The language to use. </param>
         /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal StemmerTokenFilter(StemmerTokenFilterLanguage language, string odataType, string name) : base(odataType, name)
+        /// <param name="language"> The language to use. </param>
+        internal StemmerTokenFilter(string odataType, string name, StemmerTokenFilterLanguage language) : base(odataType, name)
         {
             Language = language;
             OdataType = odataType ?? "#Microsoft.Azure.Search.StemmerTokenFilter";

@@ -85,10 +85,10 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateSetPropertiesRequest(timeout, requestId, storageServiceProperties);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new SetPropertiesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 202:
-                        var headers = new SetPropertiesHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -119,10 +119,10 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateSetPropertiesRequest(timeout, requestId, storageServiceProperties);
                 pipeline.Send(message, cancellationToken);
+                var headers = new SetPropertiesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 202:
-                        var headers = new SetPropertiesHeaders(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -170,6 +170,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateGetPropertiesRequest(timeout, requestId);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new GetPropertiesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -180,7 +181,6 @@ namespace Azure.Storage.Tables
                             {
                                 value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServicePropertiesElement);
                             }
-                            var headers = new GetPropertiesHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -206,6 +206,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateGetPropertiesRequest(timeout, requestId);
                 pipeline.Send(message, cancellationToken);
+                var headers = new GetPropertiesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -216,7 +217,6 @@ namespace Azure.Storage.Tables
                             {
                                 value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServicePropertiesElement);
                             }
-                            var headers = new GetPropertiesHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -265,6 +265,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateGetStatisticsRequest(timeout, requestId);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new GetStatisticsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -275,7 +276,6 @@ namespace Azure.Storage.Tables
                             {
                                 value = StorageServiceStats.DeserializeStorageServiceStats(storageServiceStatsElement);
                             }
-                            var headers = new GetStatisticsHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -301,6 +301,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateGetStatisticsRequest(timeout, requestId);
                 pipeline.Send(message, cancellationToken);
+                var headers = new GetStatisticsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -311,7 +312,6 @@ namespace Azure.Storage.Tables
                             {
                                 value = StorageServiceStats.DeserializeStorageServiceStats(storageServiceStatsElement);
                             }
-                            var headers = new GetStatisticsHeaders(message.Response);
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:

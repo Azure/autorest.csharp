@@ -6,6 +6,7 @@ using System.Reflection;
 using NamespaceForEnums;
 using CustomNamespace;
 using NUnit.Framework;
+using TypeSchemaMapping.Models;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -18,11 +19,21 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(false, modelType.IsPublic);
             Assert.AreEqual("CustomNamespace", modelType.Namespace);
 
-            var property = TypeAsserts.HasProperty(modelType, "CustomizedStringProperty", BindingFlags.Instance | BindingFlags.NonPublic);
-            Assert.AreEqual(typeof(string), property.PropertyType);
+            var property = TypeAsserts.HasProperty(modelType, "PropertyRenamedAndTypeChanged", BindingFlags.Instance | BindingFlags.NonPublic);
+            Assert.AreEqual(typeof(int?), property.PropertyType);
 
             var field = TypeAsserts.HasField(modelType, "CustomizedFancyField", BindingFlags.Instance | BindingFlags.NonPublic);
             Assert.AreEqual(typeof(CustomFruitEnum), field.FieldType);
+        }
+
+        [Test]
+        public void ModelsAreMappedUsingClassNameOnly()
+        {
+            var modelType = typeof(SecondModel);
+
+            Assert.AreEqual(2, modelType.GetProperties().Length);
+            Assert.AreEqual(1, modelType.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic).Length);
+            Assert.AreEqual(1, modelType.GetConstructors(BindingFlags.Instance | BindingFlags.Public).Length);
         }
 
         [Test]
@@ -46,13 +57,6 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
-        public void UserDefinedDefaultCtorsOverrideDefault()
-        {
-            var modelType = typeof(CustomizedModel);
-            Assert.NotNull(modelType.GetConstructors().SingleOrDefault(c => !c.IsStatic && !c.GetParameters().Any()));
-        }
-
-        [Test]
         public void StructsAreMappedToSchemas()
         {
             var modelType = typeof(RenamedModelStruct);
@@ -66,6 +70,14 @@ namespace AutoRest.TestServer.Tests
             var field = TypeAsserts.HasProperty(modelType, "Fruit", BindingFlags.Instance | BindingFlags.Public);
             // TODO: Remove nullable after https://github.com/Azure/autorest.modelerfour/issues/231 is done
             Assert.AreEqual(typeof(CustomFruitEnum?), field.PropertyType);
+        }
+
+        [Test]
+        public void MembersAreSuppressed()
+        {
+            var modelType = typeof(CustomizedModel);
+
+            Assert.That(modelType.GetConstructors().Where(c => c.GetParameters().Length == 2), Is.Empty);
         }
     }
 }

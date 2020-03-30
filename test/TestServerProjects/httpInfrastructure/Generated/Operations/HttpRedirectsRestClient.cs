@@ -6,9 +6,10 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -47,7 +48,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 300 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Head300Async(CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<Head300Headers>> Head300Async(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Head300");
             scope.Start();
@@ -55,10 +56,12 @@ namespace httpInfrastructure
             {
                 using var message = CreateHead300Request();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new Head300Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 300:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -72,7 +75,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 300 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Head300(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<Head300Headers> Head300(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Head300");
             scope.Start();
@@ -80,10 +83,12 @@ namespace httpInfrastructure
             {
                 using var message = CreateHead300Request();
                 pipeline.Send(message, cancellationToken);
+                var headers = new Head300Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 300:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -109,7 +114,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 300 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Get300Async(CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<IReadOnlyList<string>, Get300Headers>> Get300Async(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Get300");
             scope.Start();
@@ -117,10 +122,23 @@ namespace httpInfrastructure
             {
                 using var message = CreateGet300Request();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new Get300Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                        return ResponseWithHeaders.FromValue<IReadOnlyList<string>, Get300Headers>(null, headers, message.Response);
+                    case 300:
+                        {
+                            IReadOnlyList<string> value = default;
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            List<string> array = new List<string>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetString());
+                            }
+                            value = array;
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                        }
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -134,7 +152,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 300 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Get300(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<IReadOnlyList<string>, Get300Headers> Get300(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Get300");
             scope.Start();
@@ -142,10 +160,23 @@ namespace httpInfrastructure
             {
                 using var message = CreateGet300Request();
                 pipeline.Send(message, cancellationToken);
+                var headers = new Get300Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                        return ResponseWithHeaders.FromValue<IReadOnlyList<string>, Get300Headers>(null, headers, message.Response);
+                    case 300:
+                        {
+                            IReadOnlyList<string> value = default;
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            List<string> array = new List<string>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetString());
+                            }
+                            value = array;
+                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                        }
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -171,7 +202,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 301 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Head301Async(CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<Head301Headers>> Head301Async(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Head301");
             scope.Start();
@@ -179,10 +210,12 @@ namespace httpInfrastructure
             {
                 using var message = CreateHead301Request();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new Head301Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 301:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -196,7 +229,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 301 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Head301(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<Head301Headers> Head301(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Head301");
             scope.Start();
@@ -204,10 +237,12 @@ namespace httpInfrastructure
             {
                 using var message = CreateHead301Request();
                 pipeline.Send(message, cancellationToken);
+                var headers = new Head301Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 301:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -233,7 +268,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 301 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Get301Async(CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<Get301Headers>> Get301Async(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Get301");
             scope.Start();
@@ -241,10 +276,12 @@ namespace httpInfrastructure
             {
                 using var message = CreateGet301Request();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new Get301Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 301:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -258,7 +295,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 301 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Get301(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<Get301Headers> Get301(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Get301");
             scope.Start();
@@ -266,10 +303,12 @@ namespace httpInfrastructure
             {
                 using var message = CreateGet301Request();
                 pipeline.Send(message, cancellationToken);
+                var headers = new Get301Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 301:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -307,10 +346,10 @@ namespace httpInfrastructure
             {
                 using var message = CreatePut301Request();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new Put301Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 301:
-                        var headers = new Put301Headers(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -333,10 +372,10 @@ namespace httpInfrastructure
             {
                 using var message = CreatePut301Request();
                 pipeline.Send(message, cancellationToken);
+                var headers = new Put301Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 301:
-                        var headers = new Put301Headers(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -363,7 +402,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 302 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Head302Async(CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<Head302Headers>> Head302Async(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Head302");
             scope.Start();
@@ -371,10 +410,12 @@ namespace httpInfrastructure
             {
                 using var message = CreateHead302Request();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new Head302Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 302:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -388,7 +429,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 302 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Head302(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<Head302Headers> Head302(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Head302");
             scope.Start();
@@ -396,10 +437,12 @@ namespace httpInfrastructure
             {
                 using var message = CreateHead302Request();
                 pipeline.Send(message, cancellationToken);
+                var headers = new Head302Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 302:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -425,7 +468,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 302 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Get302Async(CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<Get302Headers>> Get302Async(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Get302");
             scope.Start();
@@ -433,10 +476,12 @@ namespace httpInfrastructure
             {
                 using var message = CreateGet302Request();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new Get302Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 302:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -450,7 +495,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 302 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Get302(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<Get302Headers> Get302(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Get302");
             scope.Start();
@@ -458,10 +503,12 @@ namespace httpInfrastructure
             {
                 using var message = CreateGet302Request();
                 pipeline.Send(message, cancellationToken);
+                var headers = new Get302Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 302:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -499,10 +546,10 @@ namespace httpInfrastructure
             {
                 using var message = CreatePatch302Request();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new Patch302Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 302:
-                        var headers = new Patch302Headers(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -525,10 +572,10 @@ namespace httpInfrastructure
             {
                 using var message = CreatePatch302Request();
                 pipeline.Send(message, cancellationToken);
+                var headers = new Patch302Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 302:
-                        var headers = new Patch302Headers(message.Response);
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -559,7 +606,7 @@ namespace httpInfrastructure
 
         /// <summary> Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Post303Async(CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<Post303Headers>> Post303Async(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Post303");
             scope.Start();
@@ -567,10 +614,12 @@ namespace httpInfrastructure
             {
                 using var message = CreatePost303Request();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new Post303Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 303:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -584,7 +633,7 @@ namespace httpInfrastructure
 
         /// <summary> Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Post303(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<Post303Headers> Post303(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Post303");
             scope.Start();
@@ -592,10 +641,12 @@ namespace httpInfrastructure
             {
                 using var message = CreatePost303Request();
                 pipeline.Send(message, cancellationToken);
+                var headers = new Post303Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 303:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -621,7 +672,7 @@ namespace httpInfrastructure
 
         /// <summary> Redirect with 307, resulting in a 200 success. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Head307Async(CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<Head307Headers>> Head307Async(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Head307");
             scope.Start();
@@ -629,10 +680,12 @@ namespace httpInfrastructure
             {
                 using var message = CreateHead307Request();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new Head307Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 307:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -646,7 +699,7 @@ namespace httpInfrastructure
 
         /// <summary> Redirect with 307, resulting in a 200 success. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Head307(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<Head307Headers> Head307(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Head307");
             scope.Start();
@@ -654,10 +707,12 @@ namespace httpInfrastructure
             {
                 using var message = CreateHead307Request();
                 pipeline.Send(message, cancellationToken);
+                var headers = new Head307Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 307:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -683,7 +738,7 @@ namespace httpInfrastructure
 
         /// <summary> Redirect get with 307, resulting in a 200 success. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Get307Async(CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<Get307Headers>> Get307Async(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Get307");
             scope.Start();
@@ -691,10 +746,12 @@ namespace httpInfrastructure
             {
                 using var message = CreateGet307Request();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new Get307Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 307:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -708,7 +765,7 @@ namespace httpInfrastructure
 
         /// <summary> Redirect get with 307, resulting in a 200 success. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Get307(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<Get307Headers> Get307(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Get307");
             scope.Start();
@@ -716,10 +773,12 @@ namespace httpInfrastructure
             {
                 using var message = CreateGet307Request();
                 pipeline.Send(message, cancellationToken);
+                var headers = new Get307Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 307:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -745,7 +804,7 @@ namespace httpInfrastructure
 
         /// <summary> options redirected with 307, resulting in a 200 after redirect. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Options307Async(CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<Options307Headers>> Options307Async(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Options307");
             scope.Start();
@@ -753,10 +812,12 @@ namespace httpInfrastructure
             {
                 using var message = CreateOptions307Request();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new Options307Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 307:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -770,7 +831,7 @@ namespace httpInfrastructure
 
         /// <summary> options redirected with 307, resulting in a 200 after redirect. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Options307(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<Options307Headers> Options307(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Options307");
             scope.Start();
@@ -778,10 +839,12 @@ namespace httpInfrastructure
             {
                 using var message = CreateOptions307Request();
                 pipeline.Send(message, cancellationToken);
+                var headers = new Options307Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 307:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -811,7 +874,7 @@ namespace httpInfrastructure
 
         /// <summary> Put redirected with 307, resulting in a 200 after redirect. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Put307Async(CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<Put307Headers>> Put307Async(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Put307");
             scope.Start();
@@ -819,10 +882,12 @@ namespace httpInfrastructure
             {
                 using var message = CreatePut307Request();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new Put307Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 307:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -836,7 +901,7 @@ namespace httpInfrastructure
 
         /// <summary> Put redirected with 307, resulting in a 200 after redirect. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Put307(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<Put307Headers> Put307(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Put307");
             scope.Start();
@@ -844,10 +909,12 @@ namespace httpInfrastructure
             {
                 using var message = CreatePut307Request();
                 pipeline.Send(message, cancellationToken);
+                var headers = new Put307Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 307:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -877,7 +944,7 @@ namespace httpInfrastructure
 
         /// <summary> Patch redirected with 307, resulting in a 200 after redirect. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Patch307Async(CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<Patch307Headers>> Patch307Async(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Patch307");
             scope.Start();
@@ -885,10 +952,12 @@ namespace httpInfrastructure
             {
                 using var message = CreatePatch307Request();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new Patch307Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 307:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -902,7 +971,7 @@ namespace httpInfrastructure
 
         /// <summary> Patch redirected with 307, resulting in a 200 after redirect. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Patch307(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<Patch307Headers> Patch307(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Patch307");
             scope.Start();
@@ -910,10 +979,12 @@ namespace httpInfrastructure
             {
                 using var message = CreatePatch307Request();
                 pipeline.Send(message, cancellationToken);
+                var headers = new Patch307Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 307:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -943,7 +1014,7 @@ namespace httpInfrastructure
 
         /// <summary> Post redirected with 307, resulting in a 200 after redirect. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Post307Async(CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<Post307Headers>> Post307Async(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Post307");
             scope.Start();
@@ -951,10 +1022,12 @@ namespace httpInfrastructure
             {
                 using var message = CreatePost307Request();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new Post307Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 307:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -968,7 +1041,7 @@ namespace httpInfrastructure
 
         /// <summary> Post redirected with 307, resulting in a 200 after redirect. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Post307(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<Post307Headers> Post307(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Post307");
             scope.Start();
@@ -976,10 +1049,12 @@ namespace httpInfrastructure
             {
                 using var message = CreatePost307Request();
                 pipeline.Send(message, cancellationToken);
+                var headers = new Post307Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 307:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -1009,7 +1084,7 @@ namespace httpInfrastructure
 
         /// <summary> Delete redirected with 307, resulting in a 200 after redirect. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Delete307Async(CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<Delete307Headers>> Delete307Async(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Delete307");
             scope.Start();
@@ -1017,10 +1092,12 @@ namespace httpInfrastructure
             {
                 using var message = CreateDelete307Request();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                var headers = new Delete307Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 307:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -1034,7 +1111,7 @@ namespace httpInfrastructure
 
         /// <summary> Delete redirected with 307, resulting in a 200 after redirect. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete307(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<Delete307Headers> Delete307(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HttpRedirectsClient.Delete307");
             scope.Start();
@@ -1042,10 +1119,12 @@ namespace httpInfrastructure
             {
                 using var message = CreateDelete307Request();
                 pipeline.Send(message, cancellationToken);
+                var headers = new Delete307Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                    case 307:
+                        return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }

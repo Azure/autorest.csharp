@@ -48,7 +48,7 @@ namespace CognitiveSearch
             this.pipeline = pipeline;
         }
 
-        internal HttpMessage CreateCountRequest(Guid? xMsClientRequestId)
+        internal HttpMessage CreateCountRequest(RequestOptions requestOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -61,23 +61,23 @@ namespace CognitiveSearch
             uri.AppendPath("/docs/$count", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
             return message;
         }
 
         /// <summary> Queries the number of documents in the index. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<long>> CountAsync(Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<long>> CountAsync(RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DocumentsClient.Count");
             scope.Start();
             try
             {
-                using var message = CreateCountRequest(xMsClientRequestId);
+                using var message = CreateCountRequest(requestOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -100,15 +100,15 @@ namespace CognitiveSearch
         }
 
         /// <summary> Queries the number of documents in the index. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<long> Count(Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public Response<long> Count(RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DocumentsClient.Count");
             scope.Start();
             try
             {
-                using var message = CreateCountRequest(xMsClientRequestId);
+                using var message = CreateCountRequest(requestOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -130,7 +130,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateSearchGetRequest(string searchText, bool? includeTotalResultCount, IEnumerable<string> facets, string filter, IEnumerable<string> highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, QueryType? queryType, IEnumerable<string> scoringParameters, string scoringProfile, IEnumerable<string> searchFields, SearchMode? searchMode, IEnumerable<string> select, int? skip, int? top, Guid? xMsClientRequestId)
+        internal HttpMessage CreateSearchGetRequest(string searchText, SearchOptions searchOptions, RequestOptions requestOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -145,106 +145,91 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("search", searchText, true);
             }
-            if (includeTotalResultCount != null)
+            if (searchOptions?.IncludeTotalResultCount != null)
             {
-                uri.AppendQuery("$count", includeTotalResultCount.Value, true);
+                uri.AppendQuery("$count", searchOptions.IncludeTotalResultCount.Value, true);
             }
-            if (facets != null)
+            if (searchOptions?.Facets != null)
             {
-                uri.AppendQueryDelimited("facet", facets, ",", true);
+                uri.AppendQueryDelimited("facet", searchOptions.Facets, ",", true);
             }
-            if (filter != null)
+            if (searchOptions?.Filter != null)
             {
-                uri.AppendQuery("$filter", filter, true);
+                uri.AppendQuery("$filter", searchOptions.Filter, true);
             }
-            if (highlightFields != null)
+            if (searchOptions?.HighlightFields != null)
             {
-                uri.AppendQueryDelimited("highlight", highlightFields, ",", true);
+                uri.AppendQueryDelimited("highlight", searchOptions.HighlightFields, ",", true);
             }
-            if (highlightPostTag != null)
+            if (searchOptions?.HighlightPostTag != null)
             {
-                uri.AppendQuery("highlightPostTag", highlightPostTag, true);
+                uri.AppendQuery("highlightPostTag", searchOptions.HighlightPostTag, true);
             }
-            if (highlightPreTag != null)
+            if (searchOptions?.HighlightPreTag != null)
             {
-                uri.AppendQuery("highlightPreTag", highlightPreTag, true);
+                uri.AppendQuery("highlightPreTag", searchOptions.HighlightPreTag, true);
             }
-            if (minimumCoverage != null)
+            if (searchOptions?.MinimumCoverage != null)
             {
-                uri.AppendQuery("minimumCoverage", minimumCoverage.Value, true);
+                uri.AppendQuery("minimumCoverage", searchOptions.MinimumCoverage.Value, true);
             }
-            if (orderBy != null)
+            if (searchOptions?.OrderBy != null)
             {
-                uri.AppendQueryDelimited("$orderby", orderBy, ",", true);
+                uri.AppendQueryDelimited("$orderby", searchOptions.OrderBy, ",", true);
             }
-            if (queryType != null)
+            if (searchOptions?.QueryType != null)
             {
-                uri.AppendQuery("queryType", queryType.Value.ToSerialString(), true);
+                uri.AppendQuery("queryType", searchOptions.QueryType.Value.ToSerialString(), true);
             }
-            if (scoringParameters != null)
+            if (searchOptions?.ScoringParameters != null)
             {
-                uri.AppendQueryDelimited("scoringParameter", scoringParameters, ",", true);
+                uri.AppendQueryDelimited("scoringParameter", searchOptions.ScoringParameters, ",", true);
             }
-            if (scoringProfile != null)
+            if (searchOptions?.ScoringProfile != null)
             {
-                uri.AppendQuery("scoringProfile", scoringProfile, true);
+                uri.AppendQuery("scoringProfile", searchOptions.ScoringProfile, true);
             }
-            if (searchFields != null)
+            if (searchOptions?.SearchFields != null)
             {
-                uri.AppendQueryDelimited("searchFields", searchFields, ",", true);
+                uri.AppendQueryDelimited("searchFields", searchOptions.SearchFields, ",", true);
             }
-            if (searchMode != null)
+            if (searchOptions?.SearchMode != null)
             {
-                uri.AppendQuery("searchMode", searchMode.Value.ToSerialString(), true);
+                uri.AppendQuery("searchMode", searchOptions.SearchMode.Value.ToSerialString(), true);
             }
-            if (select != null)
+            if (searchOptions?.Select != null)
             {
-                uri.AppendQueryDelimited("$select", select, ",", true);
+                uri.AppendQueryDelimited("$select", searchOptions.Select, ",", true);
             }
-            if (skip != null)
+            if (searchOptions?.Skip != null)
             {
-                uri.AppendQuery("$skip", skip.Value, true);
+                uri.AppendQuery("$skip", searchOptions.Skip.Value, true);
             }
-            if (top != null)
+            if (searchOptions?.Top != null)
             {
-                uri.AppendQuery("$top", top.Value, true);
+                uri.AppendQuery("$top", searchOptions.Top.Value, true);
             }
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
             return message;
         }
 
         /// <summary> Searches for documents in the index. </summary>
         /// <param name="searchText"> A full-text search query expression; Use &quot;*&quot; or omit this parameter to match all documents. </param>
-        /// <param name="includeTotalResultCount"> A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation. </param>
-        /// <param name="facets"> The list of facet expressions to apply to the search query. Each facet expression contains a field name, optionally followed by a comma-separated list of name:value pairs. </param>
-        /// <param name="filter"> The OData $filter expression to apply to the search query. </param>
-        /// <param name="highlightFields"> The list of field names to use for hit highlights. Only searchable fields can be used for hit highlighting. </param>
-        /// <param name="highlightPostTag"> A string tag that is appended to hit highlights. Must be set with highlightPreTag. Default is &amp;lt;/em&amp;gt;. </param>
-        /// <param name="highlightPreTag"> A string tag that is prepended to hit highlights. Must be set with highlightPostTag. Default is &amp;lt;em&amp;gt;. </param>
-        /// <param name="minimumCoverage"> A number between 0 and 100 indicating the percentage of the index that must be covered by a search query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 100. </param>
-        /// <param name="orderBy"> The list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, and desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no OrderBy is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses. </param>
-        /// <param name="queryType"> A value that specifies the syntax of the search query. The default is &apos;simple&apos;. Use &apos;full&apos; if your query uses the Lucene query syntax. </param>
-        /// <param name="scoringParameters"> The list of parameter values to be used in scoring functions (for example, referencePointParameter) using the format name-values. For example, if the scoring profile defines a function with a parameter called &apos;mylocation&apos; the parameter string would be &quot;mylocation--122.2,44.8&quot; (without the quotes). </param>
-        /// <param name="scoringProfile"> The name of a scoring profile to evaluate match scores for matching documents in order to sort the results. </param>
-        /// <param name="searchFields"> The list of field names to which to scope the full-text search. When using fielded search (fieldName:searchExpression) in a full Lucene query, the field names of each fielded search expression take precedence over any field names listed in this parameter. </param>
-        /// <param name="searchMode"> A value that specifies whether any or all of the search terms must be matched in order to count the document as a match. </param>
-        /// <param name="select"> The list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included. </param>
-        /// <param name="skip"> The number of search results to skip. This value cannot be greater than 100,000. If you need to scan documents in sequence, but cannot use $skip due to this limitation, consider using $orderby on a totally-ordered key and $filter with a range query instead. </param>
-        /// <param name="top"> The number of search results to retrieve. This can be used in conjunction with $skip to implement client-side paging of search results. If results are truncated due to server-side paging, the response will include a continuation token that can be used to issue another Search request for the next page of results. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="searchOptions"> Parameter group. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SearchDocumentsResult>> SearchGetAsync(string searchText, bool? includeTotalResultCount, IEnumerable<string> facets, string filter, IEnumerable<string> highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, QueryType? queryType, IEnumerable<string> scoringParameters, string scoringProfile, IEnumerable<string> searchFields, SearchMode? searchMode, IEnumerable<string> select, int? skip, int? top, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SearchDocumentsResult>> SearchGetAsync(string searchText, SearchOptions searchOptions, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DocumentsClient.SearchGet");
             scope.Start();
             try
             {
-                using var message = CreateSearchGetRequest(searchText, includeTotalResultCount, facets, filter, highlightFields, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, queryType, scoringParameters, scoringProfile, searchFields, searchMode, select, skip, top, xMsClientRequestId);
+                using var message = CreateSearchGetRequest(searchText, searchOptions, requestOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -268,31 +253,16 @@ namespace CognitiveSearch
 
         /// <summary> Searches for documents in the index. </summary>
         /// <param name="searchText"> A full-text search query expression; Use &quot;*&quot; or omit this parameter to match all documents. </param>
-        /// <param name="includeTotalResultCount"> A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation. </param>
-        /// <param name="facets"> The list of facet expressions to apply to the search query. Each facet expression contains a field name, optionally followed by a comma-separated list of name:value pairs. </param>
-        /// <param name="filter"> The OData $filter expression to apply to the search query. </param>
-        /// <param name="highlightFields"> The list of field names to use for hit highlights. Only searchable fields can be used for hit highlighting. </param>
-        /// <param name="highlightPostTag"> A string tag that is appended to hit highlights. Must be set with highlightPreTag. Default is &amp;lt;/em&amp;gt;. </param>
-        /// <param name="highlightPreTag"> A string tag that is prepended to hit highlights. Must be set with highlightPostTag. Default is &amp;lt;em&amp;gt;. </param>
-        /// <param name="minimumCoverage"> A number between 0 and 100 indicating the percentage of the index that must be covered by a search query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 100. </param>
-        /// <param name="orderBy"> The list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, and desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no OrderBy is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses. </param>
-        /// <param name="queryType"> A value that specifies the syntax of the search query. The default is &apos;simple&apos;. Use &apos;full&apos; if your query uses the Lucene query syntax. </param>
-        /// <param name="scoringParameters"> The list of parameter values to be used in scoring functions (for example, referencePointParameter) using the format name-values. For example, if the scoring profile defines a function with a parameter called &apos;mylocation&apos; the parameter string would be &quot;mylocation--122.2,44.8&quot; (without the quotes). </param>
-        /// <param name="scoringProfile"> The name of a scoring profile to evaluate match scores for matching documents in order to sort the results. </param>
-        /// <param name="searchFields"> The list of field names to which to scope the full-text search. When using fielded search (fieldName:searchExpression) in a full Lucene query, the field names of each fielded search expression take precedence over any field names listed in this parameter. </param>
-        /// <param name="searchMode"> A value that specifies whether any or all of the search terms must be matched in order to count the document as a match. </param>
-        /// <param name="select"> The list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included. </param>
-        /// <param name="skip"> The number of search results to skip. This value cannot be greater than 100,000. If you need to scan documents in sequence, but cannot use $skip due to this limitation, consider using $orderby on a totally-ordered key and $filter with a range query instead. </param>
-        /// <param name="top"> The number of search results to retrieve. This can be used in conjunction with $skip to implement client-side paging of search results. If results are truncated due to server-side paging, the response will include a continuation token that can be used to issue another Search request for the next page of results. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="searchOptions"> Parameter group. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SearchDocumentsResult> SearchGet(string searchText, bool? includeTotalResultCount, IEnumerable<string> facets, string filter, IEnumerable<string> highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, QueryType? queryType, IEnumerable<string> scoringParameters, string scoringProfile, IEnumerable<string> searchFields, SearchMode? searchMode, IEnumerable<string> select, int? skip, int? top, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public Response<SearchDocumentsResult> SearchGet(string searchText, SearchOptions searchOptions, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DocumentsClient.SearchGet");
             scope.Start();
             try
             {
-                using var message = CreateSearchGetRequest(searchText, includeTotalResultCount, facets, filter, highlightFields, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, queryType, scoringParameters, scoringProfile, searchFields, searchMode, select, skip, top, xMsClientRequestId);
+                using var message = CreateSearchGetRequest(searchText, searchOptions, requestOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -314,7 +284,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateSearchPostRequest(Guid? xMsClientRequestId, SearchRequest searchRequest)
+        internal HttpMessage CreateSearchPostRequest(SearchRequest searchRequest, RequestOptions requestOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -327,9 +297,9 @@ namespace CognitiveSearch
             uri.AppendPath("/docs/search.post.search", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -339,10 +309,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Searches for documents in the index. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="searchRequest"> The definition of the Search request. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SearchDocumentsResult>> SearchPostAsync(Guid? xMsClientRequestId, SearchRequest searchRequest, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SearchDocumentsResult>> SearchPostAsync(SearchRequest searchRequest, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (searchRequest == null)
             {
@@ -353,7 +323,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateSearchPostRequest(xMsClientRequestId, searchRequest);
+                using var message = CreateSearchPostRequest(searchRequest, requestOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -376,10 +346,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Searches for documents in the index. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="searchRequest"> The definition of the Search request. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SearchDocumentsResult> SearchPost(Guid? xMsClientRequestId, SearchRequest searchRequest, CancellationToken cancellationToken = default)
+        public Response<SearchDocumentsResult> SearchPost(SearchRequest searchRequest, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (searchRequest == null)
             {
@@ -390,7 +360,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateSearchPostRequest(xMsClientRequestId, searchRequest);
+                using var message = CreateSearchPostRequest(searchRequest, requestOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -412,7 +382,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateGetRequest(string key, IEnumerable<string> selectedFields, Guid? xMsClientRequestId)
+        internal HttpMessage CreateGetRequest(string key, IEnumerable<string> selectedFields, RequestOptions requestOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -431,9 +401,9 @@ namespace CognitiveSearch
             }
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
             return message;
         }
@@ -441,9 +411,9 @@ namespace CognitiveSearch
         /// <summary> Retrieves a document from the index. </summary>
         /// <param name="key"> The key of the document to retrieve. </param>
         /// <param name="selectedFields"> List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<object>> GetAsync(string key, IEnumerable<string> selectedFields, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<object>> GetAsync(string key, IEnumerable<string> selectedFields, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -454,7 +424,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateGetRequest(key, selectedFields, xMsClientRequestId);
+                using var message = CreateGetRequest(key, selectedFields, requestOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -479,9 +449,9 @@ namespace CognitiveSearch
         /// <summary> Retrieves a document from the index. </summary>
         /// <param name="key"> The key of the document to retrieve. </param>
         /// <param name="selectedFields"> List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<object> Get(string key, IEnumerable<string> selectedFields, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public Response<object> Get(string key, IEnumerable<string> selectedFields, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -492,7 +462,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateGetRequest(key, selectedFields, xMsClientRequestId);
+                using var message = CreateGetRequest(key, selectedFields, requestOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -514,7 +484,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateSuggestGetRequest(string searchText, string suggesterName, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, IEnumerable<string> searchFields, IEnumerable<string> select, int? top, Guid? xMsClientRequestId)
+        internal HttpMessage CreateSuggestGetRequest(string searchText, string suggesterName, SuggestOptions suggestOptions, RequestOptions requestOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -527,47 +497,47 @@ namespace CognitiveSearch
             uri.AppendPath("/docs/search.suggest", false);
             uri.AppendQuery("search", searchText, true);
             uri.AppendQuery("suggesterName", suggesterName, true);
-            if (filter != null)
+            if (suggestOptions?.Filter != null)
             {
-                uri.AppendQuery("$filter", filter, true);
+                uri.AppendQuery("$filter", suggestOptions.Filter, true);
             }
-            if (useFuzzyMatching != null)
+            if (suggestOptions?.UseFuzzyMatching != null)
             {
-                uri.AppendQuery("fuzzy", useFuzzyMatching.Value, true);
+                uri.AppendQuery("fuzzy", suggestOptions.UseFuzzyMatching.Value, true);
             }
-            if (highlightPostTag != null)
+            if (suggestOptions?.HighlightPostTag != null)
             {
-                uri.AppendQuery("highlightPostTag", highlightPostTag, true);
+                uri.AppendQuery("highlightPostTag", suggestOptions.HighlightPostTag, true);
             }
-            if (highlightPreTag != null)
+            if (suggestOptions?.HighlightPreTag != null)
             {
-                uri.AppendQuery("highlightPreTag", highlightPreTag, true);
+                uri.AppendQuery("highlightPreTag", suggestOptions.HighlightPreTag, true);
             }
-            if (minimumCoverage != null)
+            if (suggestOptions?.MinimumCoverage != null)
             {
-                uri.AppendQuery("minimumCoverage", minimumCoverage.Value, true);
+                uri.AppendQuery("minimumCoverage", suggestOptions.MinimumCoverage.Value, true);
             }
-            if (orderBy != null)
+            if (suggestOptions?.OrderBy != null)
             {
-                uri.AppendQueryDelimited("$orderby", orderBy, ",", true);
+                uri.AppendQueryDelimited("$orderby", suggestOptions.OrderBy, ",", true);
             }
-            if (searchFields != null)
+            if (suggestOptions?.SearchFields != null)
             {
-                uri.AppendQueryDelimited("searchFields", searchFields, ",", true);
+                uri.AppendQueryDelimited("searchFields", suggestOptions.SearchFields, ",", true);
             }
-            if (select != null)
+            if (suggestOptions?.Select != null)
             {
-                uri.AppendQueryDelimited("$select", select, ",", true);
+                uri.AppendQueryDelimited("$select", suggestOptions.Select, ",", true);
             }
-            if (top != null)
+            if (suggestOptions?.Top != null)
             {
-                uri.AppendQuery("$top", top.Value, true);
+                uri.AppendQuery("$top", suggestOptions.Top.Value, true);
             }
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
             return message;
         }
@@ -575,18 +545,10 @@ namespace CognitiveSearch
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
         /// <param name="searchText"> The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters. </param>
         /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </param>
-        /// <param name="filter"> An OData expression that filters the documents considered for suggestions. </param>
-        /// <param name="useFuzzyMatching"> A value indicating whether to use fuzzy matching for the suggestions query. Default is false. When set to true, the query will find terms even if there&apos;s a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy suggestions queries are slower and consume more resources. </param>
-        /// <param name="highlightPostTag"> A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting of suggestions is disabled. </param>
-        /// <param name="highlightPreTag"> A string tag that is prepended to hit highlights. Must be set with highlightPostTag. If omitted, hit highlighting of suggestions is disabled. </param>
-        /// <param name="minimumCoverage"> A number between 0 and 100 indicating the percentage of the index that must be covered by a suggestions query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80. </param>
-        /// <param name="orderBy"> The list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses. </param>
-        /// <param name="searchFields"> The list of field names to search for the specified search text. Target fields must be included in the specified suggester. </param>
-        /// <param name="select"> The list of fields to retrieve. If unspecified, only the key field will be included in the results. </param>
-        /// <param name="top"> The number of suggestions to retrieve. The value must be a number between 1 and 100. The default is 5. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="suggestOptions"> Parameter group. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SuggestDocumentsResult>> SuggestGetAsync(string searchText, string suggesterName, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, IEnumerable<string> searchFields, IEnumerable<string> select, int? top, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SuggestDocumentsResult>> SuggestGetAsync(string searchText, string suggesterName, SuggestOptions suggestOptions, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (searchText == null)
             {
@@ -601,7 +563,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateSuggestGetRequest(searchText, suggesterName, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, searchFields, select, top, xMsClientRequestId);
+                using var message = CreateSuggestGetRequest(searchText, suggesterName, suggestOptions, requestOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -626,18 +588,10 @@ namespace CognitiveSearch
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
         /// <param name="searchText"> The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters. </param>
         /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </param>
-        /// <param name="filter"> An OData expression that filters the documents considered for suggestions. </param>
-        /// <param name="useFuzzyMatching"> A value indicating whether to use fuzzy matching for the suggestions query. Default is false. When set to true, the query will find terms even if there&apos;s a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy suggestions queries are slower and consume more resources. </param>
-        /// <param name="highlightPostTag"> A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting of suggestions is disabled. </param>
-        /// <param name="highlightPreTag"> A string tag that is prepended to hit highlights. Must be set with highlightPostTag. If omitted, hit highlighting of suggestions is disabled. </param>
-        /// <param name="minimumCoverage"> A number between 0 and 100 indicating the percentage of the index that must be covered by a suggestions query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80. </param>
-        /// <param name="orderBy"> The list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses. </param>
-        /// <param name="searchFields"> The list of field names to search for the specified search text. Target fields must be included in the specified suggester. </param>
-        /// <param name="select"> The list of fields to retrieve. If unspecified, only the key field will be included in the results. </param>
-        /// <param name="top"> The number of suggestions to retrieve. The value must be a number between 1 and 100. The default is 5. </param>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
+        /// <param name="suggestOptions"> Parameter group. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SuggestDocumentsResult> SuggestGet(string searchText, string suggesterName, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> orderBy, IEnumerable<string> searchFields, IEnumerable<string> select, int? top, Guid? xMsClientRequestId, CancellationToken cancellationToken = default)
+        public Response<SuggestDocumentsResult> SuggestGet(string searchText, string suggesterName, SuggestOptions suggestOptions, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (searchText == null)
             {
@@ -652,7 +606,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateSuggestGetRequest(searchText, suggesterName, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, searchFields, select, top, xMsClientRequestId);
+                using var message = CreateSuggestGetRequest(searchText, suggesterName, suggestOptions, requestOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -674,7 +628,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateSuggestPostRequest(Guid? xMsClientRequestId, SuggestRequest suggestRequest)
+        internal HttpMessage CreateSuggestPostRequest(SuggestRequest suggestRequest, RequestOptions requestOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -687,9 +641,9 @@ namespace CognitiveSearch
             uri.AppendPath("/docs/search.post.suggest", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -699,10 +653,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="suggestRequest"> The Suggest request. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SuggestDocumentsResult>> SuggestPostAsync(Guid? xMsClientRequestId, SuggestRequest suggestRequest, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SuggestDocumentsResult>> SuggestPostAsync(SuggestRequest suggestRequest, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (suggestRequest == null)
             {
@@ -713,7 +667,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateSuggestPostRequest(xMsClientRequestId, suggestRequest);
+                using var message = CreateSuggestPostRequest(suggestRequest, requestOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -736,10 +690,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="suggestRequest"> The Suggest request. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SuggestDocumentsResult> SuggestPost(Guid? xMsClientRequestId, SuggestRequest suggestRequest, CancellationToken cancellationToken = default)
+        public Response<SuggestDocumentsResult> SuggestPost(SuggestRequest suggestRequest, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (suggestRequest == null)
             {
@@ -750,7 +704,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateSuggestPostRequest(xMsClientRequestId, suggestRequest);
+                using var message = CreateSuggestPostRequest(suggestRequest, requestOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -772,7 +726,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateIndexRequest(Guid? xMsClientRequestId, IndexBatch batch)
+        internal HttpMessage CreateIndexRequest(IndexBatch batch, RequestOptions requestOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -785,9 +739,9 @@ namespace CognitiveSearch
             uri.AppendPath("/docs/search.index", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -797,10 +751,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Sends a batch of document write actions to the index. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="batch"> The batch of index actions. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IndexDocumentsResult>> IndexAsync(Guid? xMsClientRequestId, IndexBatch batch, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IndexDocumentsResult>> IndexAsync(IndexBatch batch, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (batch == null)
             {
@@ -811,11 +765,12 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateIndexRequest(xMsClientRequestId, batch);
+                using var message = CreateIndexRequest(batch, requestOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
+                    case 207:
                         {
                             IndexDocumentsResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
@@ -834,10 +789,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Sends a batch of document write actions to the index. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="batch"> The batch of index actions. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IndexDocumentsResult> Index(Guid? xMsClientRequestId, IndexBatch batch, CancellationToken cancellationToken = default)
+        public Response<IndexDocumentsResult> Index(IndexBatch batch, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (batch == null)
             {
@@ -848,11 +803,12 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateIndexRequest(xMsClientRequestId, batch);
+                using var message = CreateIndexRequest(batch, requestOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
+                    case 207:
                         {
                             IndexDocumentsResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
@@ -870,7 +826,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateAutocompleteGetRequest(Guid? xMsClientRequestId, string searchText, string suggesterName, AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> searchFields, int? top)
+        internal HttpMessage CreateAutocompleteGetRequest(string searchText, string suggesterName, RequestOptions requestOptions, AutocompleteOptions autocompleteOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -884,60 +840,53 @@ namespace CognitiveSearch
             uri.AppendQuery("api-version", apiVersion, true);
             uri.AppendQuery("search", searchText, true);
             uri.AppendQuery("suggesterName", suggesterName, true);
-            if (autocompleteMode != null)
+            if (autocompleteOptions?.AutocompleteMode != null)
             {
-                uri.AppendQuery("autocompleteMode", autocompleteMode.Value.ToSerialString(), true);
+                uri.AppendQuery("autocompleteMode", autocompleteOptions.AutocompleteMode.Value.ToSerialString(), true);
             }
-            if (filter != null)
+            if (autocompleteOptions?.Filter != null)
             {
-                uri.AppendQuery("$filter", filter, true);
+                uri.AppendQuery("$filter", autocompleteOptions.Filter, true);
             }
-            if (useFuzzyMatching != null)
+            if (autocompleteOptions?.UseFuzzyMatching != null)
             {
-                uri.AppendQuery("fuzzy", useFuzzyMatching.Value, true);
+                uri.AppendQuery("fuzzy", autocompleteOptions.UseFuzzyMatching.Value, true);
             }
-            if (highlightPostTag != null)
+            if (autocompleteOptions?.HighlightPostTag != null)
             {
-                uri.AppendQuery("highlightPostTag", highlightPostTag, true);
+                uri.AppendQuery("highlightPostTag", autocompleteOptions.HighlightPostTag, true);
             }
-            if (highlightPreTag != null)
+            if (autocompleteOptions?.HighlightPreTag != null)
             {
-                uri.AppendQuery("highlightPreTag", highlightPreTag, true);
+                uri.AppendQuery("highlightPreTag", autocompleteOptions.HighlightPreTag, true);
             }
-            if (minimumCoverage != null)
+            if (autocompleteOptions?.MinimumCoverage != null)
             {
-                uri.AppendQuery("minimumCoverage", minimumCoverage.Value, true);
+                uri.AppendQuery("minimumCoverage", autocompleteOptions.MinimumCoverage.Value, true);
             }
-            if (searchFields != null)
+            if (autocompleteOptions?.SearchFields != null)
             {
-                uri.AppendQueryDelimited("searchFields", searchFields, ",", true);
+                uri.AppendQueryDelimited("searchFields", autocompleteOptions.SearchFields, ",", true);
             }
-            if (top != null)
+            if (autocompleteOptions?.Top != null)
             {
-                uri.AppendQuery("$top", top.Value, true);
+                uri.AppendQuery("$top", autocompleteOptions.Top.Value, true);
             }
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
             return message;
         }
 
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="searchText"> The incomplete term which should be auto-completed. </param>
         /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </param>
-        /// <param name="autocompleteMode"> Specifies the mode for Autocomplete. The default is &apos;oneTerm&apos;. Use &apos;twoTerms&apos; to get shingles and &apos;oneTermWithContext&apos; to use the current context while producing auto-completed terms. </param>
-        /// <param name="filter"> An OData expression that filters the documents used to produce completed terms for the Autocomplete result. </param>
-        /// <param name="useFuzzyMatching"> A value indicating whether to use fuzzy matching for the autocomplete query. Default is false. When set to true, the query will find terms even if there&apos;s a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources. </param>
-        /// <param name="highlightPostTag"> A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting is disabled. </param>
-        /// <param name="highlightPreTag"> A string tag that is prepended to hit highlights. Must be set with highlightPostTag. If omitted, hit highlighting is disabled. </param>
-        /// <param name="minimumCoverage"> A number between 0 and 100 indicating the percentage of the index that must be covered by an autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80. </param>
-        /// <param name="searchFields"> The list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester. </param>
-        /// <param name="top"> The number of auto-completed terms to retrieve. This must be a value between 1 and 100. The default is 5. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
+        /// <param name="autocompleteOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<AutocompleteResult>> AutocompleteGetAsync(Guid? xMsClientRequestId, string searchText, string suggesterName, AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> searchFields, int? top, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<AutocompleteResult>> AutocompleteGetAsync(string searchText, string suggesterName, RequestOptions requestOptions, AutocompleteOptions autocompleteOptions, CancellationToken cancellationToken = default)
         {
             if (searchText == null)
             {
@@ -952,7 +901,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateAutocompleteGetRequest(xMsClientRequestId, searchText, suggesterName, autocompleteMode, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, searchFields, top);
+                using var message = CreateAutocompleteGetRequest(searchText, suggesterName, requestOptions, autocompleteOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -975,19 +924,12 @@ namespace CognitiveSearch
         }
 
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="searchText"> The incomplete term which should be auto-completed. </param>
         /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </param>
-        /// <param name="autocompleteMode"> Specifies the mode for Autocomplete. The default is &apos;oneTerm&apos;. Use &apos;twoTerms&apos; to get shingles and &apos;oneTermWithContext&apos; to use the current context while producing auto-completed terms. </param>
-        /// <param name="filter"> An OData expression that filters the documents used to produce completed terms for the Autocomplete result. </param>
-        /// <param name="useFuzzyMatching"> A value indicating whether to use fuzzy matching for the autocomplete query. Default is false. When set to true, the query will find terms even if there&apos;s a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources. </param>
-        /// <param name="highlightPostTag"> A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting is disabled. </param>
-        /// <param name="highlightPreTag"> A string tag that is prepended to hit highlights. Must be set with highlightPostTag. If omitted, hit highlighting is disabled. </param>
-        /// <param name="minimumCoverage"> A number between 0 and 100 indicating the percentage of the index that must be covered by an autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80. </param>
-        /// <param name="searchFields"> The list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester. </param>
-        /// <param name="top"> The number of auto-completed terms to retrieve. This must be a value between 1 and 100. The default is 5. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
+        /// <param name="autocompleteOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<AutocompleteResult> AutocompleteGet(Guid? xMsClientRequestId, string searchText, string suggesterName, AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IEnumerable<string> searchFields, int? top, CancellationToken cancellationToken = default)
+        public Response<AutocompleteResult> AutocompleteGet(string searchText, string suggesterName, RequestOptions requestOptions, AutocompleteOptions autocompleteOptions, CancellationToken cancellationToken = default)
         {
             if (searchText == null)
             {
@@ -1002,7 +944,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateAutocompleteGetRequest(xMsClientRequestId, searchText, suggesterName, autocompleteMode, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, searchFields, top);
+                using var message = CreateAutocompleteGetRequest(searchText, suggesterName, requestOptions, autocompleteOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
@@ -1024,7 +966,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateAutocompletePostRequest(Guid? xMsClientRequestId, AutocompleteRequest autocompleteRequest)
+        internal HttpMessage CreateAutocompletePostRequest(AutocompleteRequest autocompleteRequest, RequestOptions requestOptions)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -1037,9 +979,9 @@ namespace CognitiveSearch
             uri.AppendPath("/docs/search.post.autocomplete", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (xMsClientRequestId != null)
+            if (requestOptions?.XMsClientRequestId != null)
             {
-                request.Headers.Add("x-ms-client-request-id", xMsClientRequestId.Value);
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -1049,10 +991,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="autocompleteRequest"> The definition of the Autocomplete request. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<AutocompleteResult>> AutocompletePostAsync(Guid? xMsClientRequestId, AutocompleteRequest autocompleteRequest, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<AutocompleteResult>> AutocompletePostAsync(AutocompleteRequest autocompleteRequest, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (autocompleteRequest == null)
             {
@@ -1063,7 +1005,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateAutocompletePostRequest(xMsClientRequestId, autocompleteRequest);
+                using var message = CreateAutocompletePostRequest(autocompleteRequest, requestOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -1086,10 +1028,10 @@ namespace CognitiveSearch
         }
 
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="autocompleteRequest"> The definition of the Autocomplete request. </param>
+        /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<AutocompleteResult> AutocompletePost(Guid? xMsClientRequestId, AutocompleteRequest autocompleteRequest, CancellationToken cancellationToken = default)
+        public Response<AutocompleteResult> AutocompletePost(AutocompleteRequest autocompleteRequest, RequestOptions requestOptions, CancellationToken cancellationToken = default)
         {
             if (autocompleteRequest == null)
             {
@@ -1100,7 +1042,7 @@ namespace CognitiveSearch
             scope.Start();
             try
             {
-                using var message = CreateAutocompletePostRequest(xMsClientRequestId, autocompleteRequest);
+                using var message = CreateAutocompletePostRequest(autocompleteRequest, requestOptions);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

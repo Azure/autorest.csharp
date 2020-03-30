@@ -18,14 +18,14 @@ namespace lro.Models
         }
 
         /// <summary> Initializes a new instance of Product. </summary>
-        /// <param name="provisioningState"> . </param>
-        /// <param name="provisioningStateValues"> . </param>
         /// <param name="id"> Resource Id. </param>
         /// <param name="type"> Resource Type. </param>
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
         /// <param name="location"> Resource Location. </param>
         /// <param name="name"> Resource Name. </param>
-        internal Product(string provisioningState, ProductPropertiesProvisioningStateValues? provisioningStateValues, string id, string type, IDictionary<string, string> tags, string location, string name) : base(id, type, tags, location, name)
+        /// <param name="provisioningState"> . </param>
+        /// <param name="provisioningStateValues"> . </param>
+        internal Product(string id, string type, IDictionary<string, string> tags, string location, string name, string provisioningState, ProductPropertiesProvisioningStateValues? provisioningStateValues) : base(id, type, tags, location, name)
         {
             ProvisioningState = provisioningState;
             ProvisioningStateValues = provisioningStateValues;

@@ -260,7 +260,7 @@ namespace Azure.Network.Management.Interface
             }
         }
 
-        internal HttpMessage CreateListNextPageRequest(string nextLink)
+        internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName, string networkInterfaceName)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -273,19 +273,29 @@ namespace Azure.Network.Management.Interface
 
         /// <summary> Get all ip configurations in a network interface. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<NetworkInterfaceIPConfigurationListResult>> ListNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<NetworkInterfaceIPConfigurationListResult>> ListNextPageAsync(string nextLink, string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (networkInterfaceName == null)
+            {
+                throw new ArgumentNullException(nameof(networkInterfaceName));
             }
 
             using var scope = clientDiagnostics.CreateScope("NetworkInterfaceIPConfigurationsClient.List");
             scope.Start();
             try
             {
-                using var message = CreateListNextPageRequest(nextLink);
+                using var message = CreateListNextPageRequest(nextLink, resourceGroupName, networkInterfaceName);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -309,19 +319,29 @@ namespace Azure.Network.Management.Interface
 
         /// <summary> Get all ip configurations in a network interface. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<NetworkInterfaceIPConfigurationListResult> ListNextPage(string nextLink, CancellationToken cancellationToken = default)
+        public Response<NetworkInterfaceIPConfigurationListResult> ListNextPage(string nextLink, string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (networkInterfaceName == null)
+            {
+                throw new ArgumentNullException(nameof(networkInterfaceName));
             }
 
             using var scope = clientDiagnostics.CreateScope("NetworkInterfaceIPConfigurationsClient.List");
             scope.Start();
             try
             {
-                using var message = CreateListNextPageRequest(nextLink);
+                using var message = CreateListNextPageRequest(nextLink, resourceGroupName, networkInterfaceName);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

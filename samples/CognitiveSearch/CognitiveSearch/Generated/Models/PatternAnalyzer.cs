@@ -26,13 +26,13 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> Initializes a new instance of PatternAnalyzer. </summary>
+        /// <param name="odataType"> Identifies the concrete type of the analyzer. </param>
+        /// <param name="name"> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="lowerCaseTerms"> A value indicating whether terms should be lower-cased. Default is true. </param>
         /// <param name="pattern"> A regular expression pattern to match token separators. Default is an expression that matches one or more whitespace characters. </param>
         /// <param name="flags"> Regular expression flags. </param>
         /// <param name="stopwords"> A list of stopwords. </param>
-        /// <param name="odataType"> Identifies the concrete type of the analyzer. </param>
-        /// <param name="name"> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal PatternAnalyzer(bool? lowerCaseTerms, string pattern, RegexFlags? flags, IList<string> stopwords, string odataType, string name) : base(odataType, name)
+        internal PatternAnalyzer(string odataType, string name, bool? lowerCaseTerms, string pattern, RegexFlags? flags, IList<string> stopwords) : base(odataType, name)
         {
             LowerCaseTerms = lowerCaseTerms;
             Pattern = pattern;

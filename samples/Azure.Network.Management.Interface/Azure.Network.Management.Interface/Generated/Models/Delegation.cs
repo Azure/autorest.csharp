@@ -18,13 +18,13 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> Initializes a new instance of Delegation. </summary>
+        /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a subnet. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="serviceName"> The name of the service to whom the subnet should be delegated (e.g. Microsoft.Sql/servers). </param>
         /// <param name="actions"> The actions permitted to the service upon delegation. </param>
         /// <param name="provisioningState"> The provisioning state of the service delegation resource. </param>
-        /// <param name="id"> Resource ID. </param>
-        internal Delegation(string name, string etag, string serviceName, IList<string> actions, ProvisioningState? provisioningState, string id) : base(id)
+        internal Delegation(string id, string name, string etag, string serviceName, IList<string> actions, ProvisioningState? provisioningState) : base(id)
         {
             Name = name;
             Etag = etag;

@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.V3.Generation.Types;
@@ -16,7 +15,6 @@ using AutoRest.CSharp.V3.Output.Models.Shared;
 using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
 using Azure.Core;
-using Microsoft.CodeAnalysis;
 using AzureResponse = Azure.Response;
 using Diagnostic = AutoRest.CSharp.V3.Output.Models.Requests.Diagnostic;
 using Request = AutoRest.CSharp.V3.Output.Models.Requests.Request;
@@ -57,6 +55,8 @@ namespace AutoRest.CSharp.V3.Output.Builders
             List<OperationMethod> operationMethods = new List<OperationMethod>();
             foreach (Operation operation in operationGroup.Operations)
             {
+                var responseHeaderModel = BuildResponseHeaderModel(operation);
+
                 foreach (ServiceRequest serviceRequest in operation.Requests)
                 {
                     HttpRequest? httpRequest = serviceRequest.Protocol.Http as HttpRequest;
@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                         continue;
                     }
 
-                    RestClientMethod method = BuildMethod(operation, clientName, clientParameters, httpRequest, serviceRequest.Parameters);
+                    RestClientMethod method = BuildMethod(operation, clientName, clientParameters, httpRequest, serviceRequest.Parameters, responseHeaderModel);
                     operationMethods.Add(new OperationMethod(operation, method));
                 }
             }
@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                         nextPageMethods.Add(nextPageMethod);
                     }
 
-                    if (!(method.Response.ResponseBody is ObjectResponseBody objectResponseBody))
+                    if (!(method.Responses.Single().ResponseBody is ObjectResponseBody objectResponseBody))
                     {
                         throw new InvalidOperationException($"Method {method.Name} has to have a return value");
                     }
@@ -138,7 +138,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 OrderParameters(clientParameters.Values),
                 methods);
 
-            var existingClient = _context.SourceInputModel.FindForOperationGroup(operationGroup.Key);
+            var existingClient = _context.SourceInputModel.FindForClient(_context.DefaultNamespace, clientName);
             var client = new Client(
                 BuilderHelpers.CreateTypeAttributes(clientName, _context.DefaultNamespace, "public", existingClient?.ExistingType),
                 BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description),
@@ -184,13 +184,14 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
 
-        private RestClientMethod BuildMethod(Operation operation, string clientName, IReadOnlyDictionary<string, Parameter> clientParameters, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters)
+        private RestClientMethod BuildMethod(Operation operation, string clientName, IReadOnlyDictionary<string, Parameter> clientParameters, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, ResponseHeaderGroupType? responseHeaderModel)
         {
             HttpWithBodyRequest? httpRequestWithBody = httpRequest as HttpWithBodyRequest;
             Dictionary<string, PathSegment> uriParameters = new Dictionary<string, PathSegment>();
             Dictionary<string, PathSegment> pathParameters = new Dictionary<string, PathSegment>();
             List<QueryParameter> query = new List<QueryParameter>();
             List<RequestHeader> headers = new List<RequestHeader>();
+            Dictionary<RequestParameter, ReferenceOrConstant> allParameters = new Dictionary<RequestParameter, ReferenceOrConstant>();
             Dictionary<RequestParameter, Parameter> methodParameters = new Dictionary<RequestParameter, Parameter>();
 
             RequestBody? body = null;
@@ -215,10 +216,26 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     }
                     else
                     {
-                        constantOrReference = parameter = BuildParameter(requestParameter);
+                        parameter = BuildParameter(requestParameter);
+
+                        if (requestParameter.GroupedBy is RequestParameter groupedByParameter)
+                        {
+                            var groupModel = (ObjectType)_typeFactory.CreateType(groupedByParameter.Schema, false).Implementation;
+                            var property = groupModel.GetPropertyForGroupedParameter(requestParameter);
+
+                            constantOrReference = new Reference($"{groupedByParameter.CSharpName()}.{property.Declaration.Name}", property.Declaration.Type);
+                        }
+                        else
+                        {
+                            constantOrReference = parameter;
+                        }
                     }
 
-                    if (parameter != null && requestParameter.Flattened != true)
+                    allParameters.Add(requestParameter, constantOrReference);
+
+                    if (parameter != null &&
+                        requestParameter.Flattened != true &&
+                        requestParameter.GroupedBy == null)
                     {
                         methodParameters.Add(requestParameter, parameter);
                     }
@@ -281,7 +298,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                         List<ObjectPropertyInitializer> initializationMap = new List<ObjectPropertyInitializer>();
                         foreach (var virtualParameter in virtualParameters)
                         {
-                            var actualParameter = methodParameters[virtualParameter];
+                            var actualParameter = allParameters[virtualParameter];
 
                             initializationMap.Add(new ObjectPropertyInitializer(
                                 objectType.GetPropertyForSchemaProperty(virtualParameter.TargetProperty, true),
@@ -307,65 +324,78 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 body
             );
 
-            ResponseBody? responseBody = null;
-            ResponseHeaderGroupType? responseHeaderModel = null;
             string operationName = operation.CSharpName();
 
-            //TODO: Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413
-            ServiceResponse? response = null;
-
-            // if operation is a long-running operation than we're generating an initial call here so find a response with non 200/204 code
-            // fallback to the first on otherwise
+            List<Response> clientResponse = new List<Response>();
 
             if (operation.IsLongRunning)
             {
-                response = operation.LongRunningInitialResponse;
-            }
-
-            response ??= operation.Responses.FirstOrDefault();
-
-            Response clientResponse;
-            if (response != null)
-            {
+                // If operation is a long-running operation than we're generating an initial call here so find a response with non 200/204 code
                 // Ignore response body and headers for LROs as the ArmOperationHelpers figures out them dynamically
-                if (!operation.IsLongRunning)
-                {
-                    responseBody = BuildResponseBody(response);
-
-                    responseHeaderModel = BuildResponseHeaderModel(operation, response);
-                }
-
-                var responseCodes = new HashSet<int>(response.HttpResponse.IntStatusCodes);
-
                 // Long running operations can respond with both initial or final status code
-                if (operation.IsLongRunning)
-                {
-                    foreach (var statusCode in operation.LongRunningFinalResponse.HttpResponse.IntStatusCodes)
-                    {
-                        responseCodes.Add(statusCode);
-                    }
-                }
 
-                clientResponse = new Response(
-                    responseBody,
-                    responseCodes.ToArray(),
-                    responseHeaderModel
-                );
+                clientResponse.Add(new Response(
+                    null,
+                    operation.LongRunningInitialResponse.HttpResponse.IntStatusCodes.ToArray()
+                ));
+                clientResponse.Add(new Response(
+                    null,
+                    operation.LongRunningFinalResponse.HttpResponse.IntStatusCodes.ToArray()
+                ));
+                responseHeaderModel = null;
             }
             else
             {
-                // Special case for httpInfrastructure testServer swagger, service method always fails
-                clientResponse = new Response(null, Array.Empty<int>(), null);
+                foreach (var response in operation.Responses)
+                {
+                    clientResponse.Add(new Response(
+                        BuildResponseBody(response),
+                        response.HttpResponse.IntStatusCodes.ToArray()
+                    ));
+                }
+
             }
+
+            var responseType = ReduceResponses(clientResponse);
 
             return new RestClientMethod(
                 operationName,
                 BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
+                responseType,
                 request,
                 OrderParameters(methodParameters.Values),
-                clientResponse,
+                clientResponse.ToArray(),
+                responseHeaderModel,
                 new Diagnostic($"{clientName}.{operationName}", Array.Empty<DiagnosticAttribute>())
             );
+        }
+
+        // Merges operations without response types types together
+        private CSharpType? ReduceResponses(List<Response> responses)
+        {
+            foreach (var typeGroup in responses.GroupBy(r=> r.ResponseBody))
+            {
+                foreach (var individualResponse in typeGroup)
+                {
+                    responses.Remove(individualResponse);
+                }
+
+                responses.Add(new Response(
+                    typeGroup.Key,
+                    typeGroup.SelectMany(r=>r.StatusCodes).Distinct().ToArray()));
+            }
+
+            var bodyTypes = responses.Select(r => r.ResponseBody?.Type)
+                .OfType<CSharpType>()
+                .Distinct()
+                .ToArray();
+
+            return bodyTypes.Length switch
+            {
+                0 => null,
+                1 => bodyTypes[0],
+                _ => typeof(object)
+            };
         }
 
         private ResponseBody? BuildResponseBody(ServiceResponse response)
@@ -396,8 +426,10 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 typeof(string),
                 null,
                 true);
-            var headerParameterNames = method.Request.Headers.Where(h => !h.Value.IsConstant).Select(h => h.Value.Reference.Name).ToArray();
-            var parameters = method.Parameters.Where(p =>  headerParameterNames.Contains(p.Name)).Append(nextPageUrlParameter).ToArray();
+            List<Parameter> parameters = new List<Parameter>();
+            parameters.Add(nextPageUrlParameter);
+            parameters.AddRange(method.Parameters.Where(p => p.Name != nextPageUrlParameter.Name));
+
             var request = new Request(
                 method.Request.HttpMethod,
                 new[] { new PathSegment(nextPageUrlParameter, false, SerializationFormat.Default),  },
@@ -410,9 +442,11 @@ namespace AutoRest.CSharp.V3.Output.Builders
             return new RestClientMethod(
                 $"{method.Name}NextPage",
                 method.Description,
+                method.ReturnType,
                 request,
-                parameters,
-                method.Response,
+                parameters.ToArray(),
+                method.Responses,
+                method.HeaderModel,
                 method.Diagnostics);
         }
 
@@ -469,8 +503,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             return new LongRunningOperation(
                 startMethod,
                 new Response(BuildResponseBody(finalResponse),
-                    finalResponse.HttpResponse.IntStatusCodes,
-                    BuildResponseHeaderModel(operation, finalResponse)),
+                    finalResponse.HttpResponse.IntStatusCodes),
                 name,
                 new[] { originalResponseParameter, httpMessageParameter },
                 finalStateVia);
@@ -488,10 +521,13 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 requestParameter.Required == true);
         }
 
-        private ResponseHeaderGroupType? BuildResponseHeaderModel(Operation operation, ServiceResponse response)
+        private ResponseHeaderGroupType? BuildResponseHeaderModel(Operation operation)
         {
-            var httpResponseHeaders = response.HttpResponse.Headers
+            var httpResponseHeaders = operation.Responses.SelectMany(r => r.HttpResponse.Headers)
                 .Where(h => !_knownResponseHeaders.Contains(h.Header, StringComparer.InvariantCultureIgnoreCase))
+                .GroupBy(h => h.Header)
+                // Take first header definition with any particular name
+                .Select(h => h.First())
                 .ToArray();
 
             if (!httpResponseHeaders.Any())

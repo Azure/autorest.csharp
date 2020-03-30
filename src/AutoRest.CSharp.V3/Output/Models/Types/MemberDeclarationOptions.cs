@@ -7,17 +7,15 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 {
     internal class MemberDeclarationOptions
     {
-        public MemberDeclarationOptions(string accessibility, string name, CSharpType type, bool isUserDefined)
+        public MemberDeclarationOptions(string accessibility, string name, CSharpType type)
         {
             Accessibility = accessibility;
             Name = name;
             Type = type;
-            IsUserDefined = isUserDefined;
         }
 
         public string Accessibility { get; }
         public string Name { get; }
         public CSharpType Type { get; }
-        public bool IsUserDefined { get; }
     }
 }

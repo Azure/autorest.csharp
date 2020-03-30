@@ -109,7 +109,7 @@ namespace Azure.Storage.Management.Models
                     continue;
                 }
             }
-            return new ManagementPolicy(lastModifiedTime, policy, id, name, type);
+            return new ManagementPolicy(id, name, type, lastModifiedTime, policy);
         }
     }
 }

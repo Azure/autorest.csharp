@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Input;
+using AutoRest.CSharp.V3.Input.Source;
 using AutoRest.CSharp.V3.Output.Builders;
 using Microsoft.CodeAnalysis;
 
@@ -13,6 +14,11 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 {
     internal class EnumType : ISchemaType
     {
+        private readonly BuildContext _context;
+        private readonly IEnumerable<ChoiceValue> _choices;
+        private readonly ModelTypeMapping? _typeMapping;
+        private IList<EnumTypeValue>? _values;
+
         public EnumType(ChoiceSchema schema, BuildContext context)
             : this(schema, context, schema.Choices, true)
         {
@@ -25,16 +31,20 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         private EnumType(Schema schema, BuildContext context, IEnumerable<ChoiceValue> choices, bool isStringBased)
         {
-            var typeMapping = context.SourceInputModel.FindForSchema(schema.Name);
-            if (typeMapping != null)
+            _context = context;
+            _choices = choices;
+
+            var name = schema.CSharpName();
+            _typeMapping = context.SourceInputModel.FindForModel($"{context.DefaultNamespace}.Models", name);
+            if (_typeMapping != null)
             {
-                isStringBased = typeMapping.ExistingType.TypeKind switch
+                isStringBased = _typeMapping.ExistingType.TypeKind switch
                 {
                     TypeKind.Enum => false,
                     TypeKind.Struct => true,
                     _ => throw new InvalidOperationException(
-                        $"{typeMapping.ExistingType.ToDisplayString()} cannot be mapped to enum," +
-                        $" expected enum or struct got {typeMapping.ExistingType.TypeKind}")
+                        $"{_typeMapping.ExistingType.ToDisplayString()} cannot be mapped to enum," +
+                        $" expected enum or struct got {_typeMapping.ExistingType.TypeKind}")
                 };
             }
 
@@ -42,36 +52,41 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
             Schema = schema;
             Declaration = BuilderHelpers.CreateTypeAttributes(
-                schema.CSharpName(),
+                name,
                 $"{context.DefaultNamespace}.Models",
                 "public",
-                typeMapping?.ExistingType,
+                _typeMapping?.ExistingType,
                 existingTypeOverrides
                 );
 
             Type = new CSharpType(this, Declaration.Namespace, Declaration.Name, isValueType: true);
             Description = BuilderHelpers.CreateDescription(schema);
-
-            var values = new List<EnumTypeValue>();
-            foreach (var c in choices)
-            {
-                var memberMapping = typeMapping?.GetMemberForSchema(c.Language.Default.Name);
-                values.Add(new EnumTypeValue(
-                    BuilderHelpers.CreateMemberDeclaration(c.CSharpName(), Type, "public", memberMapping?.ExistingMember),
-                    CreateDescription(c),
-                    BuilderHelpers.StringConstant(c.Value)));
-            }
-
-            Values = values;
             IsStringBased = isStringBased;
         }
+
 
         public bool IsStringBased { get; }
         public Schema Schema { get; }
         public TypeDeclarationOptions Declaration { get; }
         public string? Description { get; }
-        public IList<EnumTypeValue> Values { get; }
+        public IList<EnumTypeValue> Values => _values ??= BuildValues();
         public CSharpType Type { get; }
+
+        private List<EnumTypeValue> BuildValues()
+        {
+            var values = new List<EnumTypeValue>();
+            foreach (var c in _choices)
+            {
+                var name = c.CSharpName();
+                var memberMapping = _typeMapping?.GetForMember(name);
+                values.Add(new EnumTypeValue(
+                    BuilderHelpers.CreateMemberDeclaration(name, Type, "public", memberMapping?.ExistingMember, _context.TypeFactory),
+                    CreateDescription(c),
+                    BuilderHelpers.StringConstant(c.Value)));
+            }
+
+            return values;
+        }
 
         private static string CreateDescription(ChoiceValue choiceValue)
         {

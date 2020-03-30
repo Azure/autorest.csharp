@@ -18,17 +18,17 @@ namespace Azure.Network.Management.Interface.Models
         }
 
         /// <summary> Initializes a new instance of RouteTable. </summary>
-        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="routes"> Collection of routes contained within a route table. </param>
-        /// <param name="subnets"> A collection of references to subnets. </param>
-        /// <param name="disableBgpRoutePropagation"> Whether to disable the routes learned by BGP on that route table. True means disable. </param>
-        /// <param name="provisioningState"> The provisioning state of the route table resource. </param>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        internal RouteTable(string etag, IList<Route> routes, IList<Subnet> subnets, bool? disableBgpRoutePropagation, ProvisioningState? provisioningState, string id, string name, string type, string location, IDictionary<string, string> tags) : base(id, name, type, location, tags)
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="routes"> Collection of routes contained within a route table. </param>
+        /// <param name="subnets"> A collection of references to subnets. </param>
+        /// <param name="disableBgpRoutePropagation"> Whether to disable the routes learned by BGP on that route table. True means disable. </param>
+        /// <param name="provisioningState"> The provisioning state of the route table resource. </param>
+        internal RouteTable(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, IList<Route> routes, IList<Subnet> subnets, bool? disableBgpRoutePropagation, ProvisioningState? provisioningState) : base(id, name, type, location, tags)
         {
             Etag = etag;
             Routes = routes;

@@ -73,7 +73,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new PatternCaptureTokenFilter(patterns, preserveOriginal, odatatype, name);
+            return new PatternCaptureTokenFilter(odatatype, name, patterns, preserveOriginal);
         }
     }
 }
