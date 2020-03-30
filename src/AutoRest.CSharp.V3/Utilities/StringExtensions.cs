@@ -86,6 +86,7 @@ namespace AutoRest.CSharp.V3.Utilities
         {
             switch (name)
             {
+                case "abstract":
                 case "add":
                 case "alias":
                 case "as":
