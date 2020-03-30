@@ -77,11 +77,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (var property in schema.Properties)
                     {
-                        if (property.Declaration.IsUserDefined)
-                        {
-                            continue;
-                        }
-
                         writer.WriteXmlDocumentationSummary(property.Description);
 
                         CSharpType propertyType = property.Declaration.Type;
@@ -170,15 +165,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             foreach (var constructor in schema.Constructors)
             {
-                if (constructor.Declaration.IsUserDefined) continue;
-
                 writer.WriteXmlDocumentationSummary($"Initializes a new instance of {schema.Declaration.Name}");
                 foreach (var parameter in constructor.Parameters)
                 {
                     writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
                 }
 
-                writer.Append($"{constructor.Declaration.Accessibility} {constructor.Declaration.Name}(");
+                writer.Append($"{constructor.Declaration.Accessibility} {schema.Declaration.Name}(");
                 foreach (var parameter in constructor.Parameters)
                 {
                     writer.WriteParameter(parameter);
@@ -239,10 +232,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     foreach (EnumTypeValue value in schema.Values)
                     {
-                        if (value.Declaration.IsUserDefined)
-                        {
-                            continue;
-                        }
                         writer.WriteXmlDocumentationSummary(value.Description);
                         writer.Line($"{value.Declaration.Name},");
                     }
@@ -262,7 +251,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 var implementType = new CSharpType(typeof(IEquatable<>), cs);
                 using (writer.Scope($"{schema.Declaration.Accessibility} readonly partial struct {name}: {implementType}"))
                 {
-                    writer.Line($"private readonly string? _value;");
+                    writer.Line($"private readonly {typeof(string)} _value;");
                     writer.Line();
 
                     writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{name}\"/> values are the same.");
@@ -280,10 +269,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (var choice in schema.Values)
                     {
-                        if (choice.Declaration.IsUserDefined)
-                        {
-                            continue;
-                        }
                         writer.WriteXmlDocumentationSummary(choice.Description);
                         writer.Append($"public static {cs} {choice.Declaration.Name}").AppendRaw("{ get; }").Append($" = new {cs}({choice.Declaration.Name}Value);").Line();
                     }
@@ -300,7 +285,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     writer.WriteXmlDocumentationInheritDoc();
                     WriteEditorBrowsableFalse(writer);
-                    writer.Line($"public override bool Equals(object? obj) => obj is {cs} other && Equals(other);");
+                    writer.Line($"public override bool Equals({typeof(object)} obj) => obj is {cs} other && Equals(other);");
 
                     writer.WriteXmlDocumentationInheritDoc();
                     writer.Line($"public bool Equals({cs} other) => string.Equals(_value, other._value, {typeof(StringComparison)}.Ordinal);");
@@ -311,7 +296,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Line($"public override int GetHashCode() => _value?.GetHashCode() ?? 0;");
 
                     writer.WriteXmlDocumentationInheritDoc();
-                    writer.Line($"public override string? ToString() => _value;");
+                    writer.Line($"public override {typeof(string)} ToString() => _value;");
                 }
             }
         }

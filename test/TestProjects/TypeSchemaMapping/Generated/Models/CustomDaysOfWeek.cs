@@ -28,7 +28,6 @@ namespace NamespaceForEnums
         private const string FridayValue = "Friday";
         private const string SaturdayValue = "Saturday";
         private const string SundayValue = "Sunday";
-
         /// <summary> Wednesday. </summary>
         public static CustomDaysOfWeek Wednesday { get; } = new CustomDaysOfWeek(WednesdayValue);
         /// <summary> Thursday. </summary>
@@ -51,11 +50,5 @@ namespace NamespaceForEnums
         public override bool Equals(object obj) => obj is CustomDaysOfWeek other && Equals(other);
         /// <inheritdoc />
         public bool Equals(CustomDaysOfWeek other) => string.Equals(_value, other._value, StringComparison.Ordinal);
-
-        /// <inheritdoc />
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public override int GetHashCode() => _value?.GetHashCode() ?? 0;
-        /// <inheritdoc />
-        public override string ToString() => _value;
     }
 }

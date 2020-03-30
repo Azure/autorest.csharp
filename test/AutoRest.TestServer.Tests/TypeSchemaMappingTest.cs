@@ -57,13 +57,6 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
-        public void UserDefinedDefaultCtorsOverrideDefault()
-        {
-            var modelType = typeof(CustomizedModel);
-            Assert.NotNull(modelType.GetConstructors().SingleOrDefault(c => !c.IsStatic && !c.GetParameters().Any()));
-        }
-
-        [Test]
         public void StructsAreMappedToSchemas()
         {
             var modelType = typeof(RenamedModelStruct);
@@ -77,6 +70,14 @@ namespace AutoRest.TestServer.Tests
             var field = TypeAsserts.HasProperty(modelType, "Fruit", BindingFlags.Instance | BindingFlags.Public);
             // TODO: Remove nullable after https://github.com/Azure/autorest.modelerfour/issues/231 is done
             Assert.AreEqual(typeof(CustomFruitEnum?), field.PropertyType);
+        }
+
+        [Test]
+        public void MembersAreSuppressed()
+        {
+            var modelType = typeof(CustomizedModel);
+
+            Assert.That(modelType.GetConstructors().Where(c => c.GetParameters().Length == 2), Is.Empty);
         }
     }
 }

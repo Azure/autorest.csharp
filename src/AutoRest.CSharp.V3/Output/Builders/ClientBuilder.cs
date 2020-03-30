@@ -55,6 +55,8 @@ namespace AutoRest.CSharp.V3.Output.Builders
             List<OperationMethod> operationMethods = new List<OperationMethod>();
             foreach (Operation operation in operationGroup.Operations)
             {
+                var responseHeaderModel = BuildResponseHeaderModel(operation);
+
                 foreach (ServiceRequest serviceRequest in operation.Requests)
                 {
                     HttpRequest? httpRequest = serviceRequest.Protocol.Http as HttpRequest;
@@ -64,7 +66,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                         continue;
                     }
 
-                    RestClientMethod method = BuildMethod(operation, clientName, clientParameters, httpRequest, serviceRequest.Parameters);
+                    RestClientMethod method = BuildMethod(operation, clientName, clientParameters, httpRequest, serviceRequest.Parameters, responseHeaderModel);
                     operationMethods.Add(new OperationMethod(operation, method));
                 }
             }
@@ -182,7 +184,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
 
-        private RestClientMethod BuildMethod(Operation operation, string clientName, IReadOnlyDictionary<string, Parameter> clientParameters, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters)
+        private RestClientMethod BuildMethod(Operation operation, string clientName, IReadOnlyDictionary<string, Parameter> clientParameters, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, ResponseHeaderGroupType? responseHeaderModel)
         {
             HttpWithBodyRequest? httpRequestWithBody = httpRequest as HttpWithBodyRequest;
             Dictionary<string, PathSegment> uriParameters = new Dictionary<string, PathSegment>();
@@ -324,7 +326,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
             string operationName = operation.CSharpName();
 
-            ResponseHeaderGroupType? responseHeaderModel = null;
             List<Response> clientResponse = new List<Response>();
 
             if (operation.IsLongRunning)
@@ -341,6 +342,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     null,
                     operation.LongRunningFinalResponse.HttpResponse.IntStatusCodes.ToArray()
                 ));
+                responseHeaderModel = null;
             }
             else
             {
@@ -352,7 +354,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     ));
                 }
 
-                responseHeaderModel = BuildResponseHeaderModel(operation);
             }
 
             var responseType = ReduceResponses(clientResponse);

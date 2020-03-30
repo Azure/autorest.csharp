@@ -27,35 +27,5 @@ namespace CustomNamespace
             writer.WriteStringValue(DaysOfWeek.ToString());
             writer.WriteEndObject();
         }
-
-        internal static CustomizedModel DeserializeCustomizedModel(JsonElement element)
-        {
-            int? modelProperty = default;
-            CustomFruitEnum fruit = default;
-            CustomDaysOfWeek daysOfWeek = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("ModelProperty"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    modelProperty = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("Fruit"))
-                {
-                    fruit = property.Value.GetString().ToCustomFruitEnum();
-                    continue;
-                }
-                if (property.NameEquals("DaysOfWeek"))
-                {
-                    daysOfWeek = new CustomDaysOfWeek(property.Value.GetString());
-                    continue;
-                }
-            }
-            return new CustomizedModel(modelProperty, fruit, daysOfWeek);
-        }
     }
 }
