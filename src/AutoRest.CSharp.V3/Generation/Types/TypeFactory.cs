@@ -5,8 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Models.Types;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.V3.Generation.Types
 {
@@ -83,7 +85,8 @@ namespace AutoRest.CSharp.V3.Generation.Types
         {
             return type.FrameworkType == typeof(IEnumerable<>) ||
                    type.FrameworkType == typeof(IReadOnlyList<>) ||
-                   type.FrameworkType == typeof(IList<>);
+                   type.FrameworkType == typeof(IList<>) ||
+                   type.FrameworkType == typeof(ICollection<>);
         }
 
         private static Type? ToFrameworkType(AllSchemaTypes schemaType) => schemaType switch
@@ -159,6 +162,64 @@ namespace AutoRest.CSharp.V3.Generation.Types
             }
 
             return type;
+        }
+
+        public CSharpType CreateType(ITypeSymbol symbol)
+        {
+            INamedTypeSymbol? namedTypeSymbol = symbol as INamedTypeSymbol;
+            if (namedTypeSymbol == null)
+            {
+                throw new InvalidCastException($"Unexpected type {symbol}");
+            }
+
+            bool nullable;
+            if (namedTypeSymbol.ConstructedFrom.SpecialType == SpecialType.System_Nullable_T)
+            {
+                nullable = true;
+                namedTypeSymbol = (INamedTypeSymbol)namedTypeSymbol.TypeArguments[0];
+            }
+            else
+            {
+                nullable = symbol.NullableAnnotation != NullableAnnotation.NotAnnotated;
+            }
+
+            var existingType = Type.GetType(GetFullMetadataName(namedTypeSymbol));
+            if (existingType != null)
+            {
+                var arguments = namedTypeSymbol.TypeArguments.Select(a => CreateType(a)).ToArray();
+                return new CSharpType(existingType, nullable, arguments);
+            }
+
+            foreach (var model in _library.Models)
+            {
+                if (symbol.Name == model.Type.Name)
+                {
+                    return model.Type.WithNullable(nullable);
+                }
+            }
+
+            throw new InvalidOperationException($"Unable to find a model or framework type that corresponds to {symbol}");
+        }
+
+        private string GetFullMetadataName(ISymbol namedTypeSymbol)
+        {
+            StringBuilder builder = new StringBuilder();
+
+            GetFullMetadataName(builder, namedTypeSymbol);
+
+            return builder.ToString();
+        }
+
+        private void GetFullMetadataName(StringBuilder builder, ISymbol symbol)
+        {
+            if (symbol.ContainingNamespace != null &&
+                !symbol.ContainingNamespace.IsGlobalNamespace)
+            {
+                GetFullMetadataName(builder, symbol.ContainingNamespace);
+                builder.Append(".");
+            }
+
+            builder.Append(symbol.MetadataName);
         }
     }
 }

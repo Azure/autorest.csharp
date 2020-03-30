@@ -35,14 +35,16 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         public ObjectType(ObjectSchema objectSchema, BuildContext context)
         {
             _objectSchema = objectSchema;
-            _sourceTypeMapping = context.SourceInputModel.FindForSchema(_objectSchema.Name);
             _typeFactory = context.TypeFactory;
             _serializationBuilder = new SerializationBuilder();
 
             Schema = objectSchema;
+            var name = objectSchema.CSharpName();
+            var ns = $"{context.DefaultNamespace}.Models";
+            _sourceTypeMapping = context.SourceInputModel.FindForModel(ns, name);
             Declaration = BuilderHelpers.CreateTypeAttributes(
-                objectSchema.CSharpName(),
-                $"{context.DefaultNamespace}.Models",
+                name,
+                ns,
                 "public",
                 _sourceTypeMapping?.ExistingType);
 
@@ -74,10 +76,10 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     return _additionalPropertiesProperty;
                 }
 
-                SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetMemberForSchema("$AdditionalProperties");
+                SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember("$AdditionalProperties");
 
                 _additionalPropertiesProperty = new ObjectTypeProperty(
-                    BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "internal", memberMapping?.ExistingMember),
+                    BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "internal", memberMapping?.ExistingMember, _typeFactory),
                     string.Empty,
                     true,
                     null);
@@ -186,7 +188,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     Type,
                     // inputs have public ctor by default
                     _objectSchema.IsInput ? "public" : "internal",
-                    _sourceTypeMapping?.DefaultConstructor),
+                    _sourceTypeMapping?.DefaultConstructor,
+                    _typeFactory),
                 defaultCtorParameters.ToArray(),
                 defaultCtorInitializers.ToArray(),
                 baseCtor);
@@ -197,7 +200,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     .SequenceEqual(serializationConstructorParameters.Select(p => p.Type)))
             {
                 yield return new ObjectTypeConstructor(
-                    BuilderHelpers.CreateMemberDeclaration(Type.Name, Type, "internal", null),
+                    BuilderHelpers.CreateMemberDeclaration(Type.Name, Type, "internal", null, _typeFactory),
                     serializationConstructorParameters.ToArray(),
                     initializers.ToArray(),
                     baseSerializationCtor
@@ -328,7 +331,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         {
             foreach (Property property in _objectSchema.Properties!)
             {
-                SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetMemberForSchema(property.SerializedName);
+                var name = property.CSharpName();
+                SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
                 bool isReadOnly =
                     IsStruct ||
                     property.IsDiscriminator != true &&
@@ -348,7 +352,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 var accessibility = property.IsDiscriminator == true ? "internal" : "public";
 
                 yield return new ObjectTypeProperty(
-                    BuilderHelpers.CreateMemberDeclaration(property.CSharpName(), type, accessibility, memberMapping?.ExistingMember),
+                    BuilderHelpers.CreateMemberDeclaration(name, type, accessibility, memberMapping?.ExistingMember, _typeFactory),
                     BuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
                     isReadOnly,
                     property);

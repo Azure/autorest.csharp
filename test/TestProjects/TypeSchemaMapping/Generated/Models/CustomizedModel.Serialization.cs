@@ -16,10 +16,10 @@ namespace CustomNamespace
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (CustomizedStringProperty != null)
+            if (PropertyRenamedAndTypeChanged != null)
             {
                 writer.WritePropertyName("ModelProperty");
-                writer.WriteStringValue(CustomizedStringProperty);
+                writer.WriteNumberValue(PropertyRenamedAndTypeChanged.Value);
             }
             writer.WritePropertyName("Fruit");
             writer.WriteStringValue(CustomizedFancyField.ToSerialString());
@@ -30,7 +30,7 @@ namespace CustomNamespace
 
         internal static CustomizedModel DeserializeCustomizedModel(JsonElement element)
         {
-            string modelProperty = default;
+            int? modelProperty = default;
             CustomFruitEnum fruit = default;
             CustomDaysOfWeek daysOfWeek = default;
             foreach (var property in element.EnumerateObject())
@@ -41,7 +41,7 @@ namespace CustomNamespace
                     {
                         continue;
                     }
-                    modelProperty = property.Value.GetString();
+                    modelProperty = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("Fruit"))

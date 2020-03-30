@@ -31,7 +31,7 @@ namespace Azure.Storage.Management.Models
 
         internal static CorsRules DeserializeCorsRules(JsonElement element)
         {
-            IList<CorsRule> corsRules = default;
+            ICollection<CorsRule> corsRules = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("corsRules"))

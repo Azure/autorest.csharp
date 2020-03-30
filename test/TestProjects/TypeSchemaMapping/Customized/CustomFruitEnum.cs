@@ -2,10 +2,10 @@ using Azure.Core;
 
 namespace NamespaceForEnums
 {
-    [CodeGenSchema("Fruit")]
+    [CodeGenModel("Fruit")]
     internal enum CustomFruitEnum
     {
-        [CodeGenSchemaMember("apple")]
+        [CodeGenMember("apple")]
         Apple2,
         Pear
     }

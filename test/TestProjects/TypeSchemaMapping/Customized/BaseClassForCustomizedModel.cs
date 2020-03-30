@@ -5,7 +5,7 @@ namespace CustomNamespace
 {
     internal class BaseClassForCustomizedModel
     {
-        [CodeGenSchemaMember("Fruit")]
+        [CodeGenMember("Fruit")]
         internal CustomFruitEnum CustomizedFancyField;
     }
 }

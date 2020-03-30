@@ -5,10 +5,10 @@ using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    [CodeGenSchema("ResourceNavigationLink")]
+    [CodeGenModel("ResourceNavigationLink")]
     public partial class ResourceNavigationLink : SubResource
     {
-        [CodeGenSchemaMember("id")]
+        [CodeGenMember("id")]
         public string ResourceNavigationLinkId { get; internal set; }
     }
 }

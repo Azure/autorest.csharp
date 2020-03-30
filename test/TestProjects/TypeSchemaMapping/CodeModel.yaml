@@ -3,6 +3,18 @@ info: !<!Info>
   description: Schema mapping
   title: TypeSchemaMapping
 schemas: !<!Schemas> 
+  numbers:
+  - !<!NumberSchema> &ref_1
+    type: integer
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    precision: 32
+    language: !<!Languages> 
+      default:
+        name: Integer
+        description: ''
+    protocol: !<!Protocols> {}
   strings:
   - !<!StringSchema> &ref_0
     type: string
@@ -11,7 +23,7 @@ schemas: !<!Schemas>
         name: String
         description: simple string
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_1
+  - !<!StringSchema> &ref_2
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -19,10 +31,20 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: ModelProperty
-        description: A description about the set of tags.
+        description: .
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_5
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: SecondModelStringProperty
+        description: .
     protocol: !<!Protocols> {}
   choices:
-  - !<!ChoiceSchema> &ref_2
+  - !<!ChoiceSchema> &ref_3
     choices:
     - !<!ChoiceValue> 
       value: apple
@@ -46,7 +68,7 @@ schemas: !<!Schemas>
         name: Fruit
         description: Fruit
     protocol: !<!Protocols> {}
-  - !<!ChoiceSchema> &ref_3
+  - !<!ChoiceSchema> &ref_4
     choices:
     - !<!ChoiceValue> 
       value: Monday
@@ -101,7 +123,7 @@ schemas: !<!Schemas>
         description: Day of week
     protocol: !<!Protocols> {}
   constants:
-  - !<!ConstantSchema> &ref_5
+  - !<!ConstantSchema> &ref_8
     type: constant
     value: !<!ConstantValue> 
       value: application/json
@@ -111,24 +133,33 @@ schemas: !<!Schemas>
         name: ApplicationJson
         description: Content Type 'application/json'
     protocol: !<!Protocols> {}
+  dictionaries:
+  - !<!DictionarySchema> &ref_6
+    type: dictionary
+    elementType: *ref_1
+    language: !<!Languages> 
+      default:
+        name: SecondModelDictionaryProperty
+        description: .
+    protocol: !<!Protocols> {}
   objects:
-  - !<!ObjectSchema> &ref_6
+  - !<!ObjectSchema> &ref_9
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: *ref_1
+      schema: *ref_2
       required: false
       serializedName: ModelProperty
       language: !<!Languages> 
         default:
           name: modelProperty
-          description: A description about the set of tags.
+          description: .
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_2
+      schema: *ref_3
       required: true
       serializedName: Fruit
       language: !<!Languages> 
@@ -137,7 +168,7 @@ schemas: !<!Schemas>
           description: Fruit
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_3
+      schema: *ref_4
       required: true
       serializedName: DaysOfWeek
       language: !<!Languages> 
@@ -158,14 +189,14 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_8
+  - !<!ObjectSchema> &ref_11
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     properties:
     - !<!Property> 
-      schema: *ref_1
+      schema: *ref_2
       flattenedNames:
       - ModelProperty
       - ModelProperty
@@ -173,10 +204,10 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: modelProperty
-          description: A description about the set of tags.
+          description: .
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_2
+      schema: *ref_3
       flattenedNames:
       - ModelProperty
       - Fruit
@@ -187,7 +218,7 @@ schemas: !<!Schemas>
           description: Fruit
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_3
+      schema: *ref_4
       flattenedNames:
       - ModelProperty
       - DaysOfWeek
@@ -208,8 +239,41 @@ schemas: !<!Schemas>
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
+  - !<!ObjectSchema> &ref_13
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    properties:
+    - !<!Property> 
+      schema: *ref_5
+      serializedName: StringProperty
+      language: !<!Languages> 
+        default:
+          name: stringProperty
+          description: .
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_6
+      serializedName: DictionaryProperty
+      language: !<!Languages> 
+        default:
+          name: dictionaryProperty
+          description: .
+      protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - input
+    - output
+    language: !<!Languages> 
+      default:
+        name: SecondModel
+        description: ''
+        namespace: ''
+    protocol: !<!Protocols> {}
 globalParameters:
-- !<!Parameter> &ref_4
+- !<!Parameter> &ref_7
   schema: *ref_0
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
@@ -233,12 +297,12 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_4
+    - *ref_7
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_5
+        schema: *ref_8
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -249,8 +313,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_7
-        schema: *ref_6
+      - !<!Parameter> &ref_10
+        schema: *ref_9
         implementation: Method
         required: false
         language: !<!Languages> 
@@ -262,7 +326,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_7
+      - *ref_10
       language: !<!Languages> 
         default:
           name: ''
@@ -278,7 +342,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_9
       language: !<!Languages> 
         default:
           name: ''
@@ -300,12 +364,12 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_4
+    - *ref_7
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_5
+        schema: *ref_8
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -316,8 +380,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_9
-        schema: *ref_8
+      - !<!Parameter> &ref_12
+        schema: *ref_11
         implementation: Method
         required: false
         language: !<!Languages> 
@@ -329,7 +393,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_9
+      - *ref_12
       language: !<!Languages> 
         default:
           name: ''
@@ -345,7 +409,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_8
+      schema: *ref_11
       language: !<!Languages> 
         default:
           name: ''
@@ -360,6 +424,73 @@ operationGroups:
     language: !<!Languages> 
       default:
         name: OperationStruct
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    parameters:
+    - *ref_7
+    requests:
+    - !<!Request> 
+      parameters:
+      - !<!Parameter> 
+        schema: *ref_8
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_14
+        schema: *ref_13
+        implementation: Method
+        required: false
+        language: !<!Languages> 
+          default:
+            name: body
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters:
+      - *ref_14
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /OperationSecondModel
+          method: patch
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    signatureParameters: []
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_13
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    language: !<!Languages> 
+      default:
+        name: OperationSecondModel
         description: ''
     protocol: !<!Protocols> {}
   language: !<!Languages> 
