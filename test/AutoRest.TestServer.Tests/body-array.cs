@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
@@ -34,21 +35,18 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/366")]
         public Task GetArrayArrayItemNull() => Test(async (host, pipeline) =>
         {
             var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetArrayItemNullAsync();
 
-            Assert.IsNull(result.Value.Single());
+            CollectionAssert.AreEqual(new[] { new object[] { "1", "2", "3" }, null, new object[] { "7", "8", "9" } }, result.Value);
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/289")]
-        public Task GetArrayArrayNull() => Test(async (host, pipeline) =>
+        public Task GetArrayArrayNull() => Test((host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetArrayNullAsync();
-
-            Assert.IsNull(result.Value);
+            // Empty response body
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetArrayNullAsync());
         });
 
         [Test]
@@ -126,17 +124,15 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(null, values[1].Integer);
             Assert.AreEqual(null, values[1].String);
 
-
             Assert.AreEqual(5, values[2].Integer);
             Assert.AreEqual("6", values[2].String);
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/366")]
+        //[Ignore("https://github.com/Azure/autorest.csharp/issues/366")]
         public Task GetArrayComplexItemNull() => Test(async (host, pipeline) =>
         {
             var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetComplexItemNullAsync();
-
             var values = result.Value.ToArray();
 
             Assert.AreEqual(3, values.Length);
@@ -144,7 +140,6 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("2", values[0].String);
 
             Assert.AreEqual(null, values[1]);
-
 
             Assert.AreEqual(5, values[2].Integer);
             Assert.AreEqual("6", values[2].String);
