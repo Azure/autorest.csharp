@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
 
             foreach (var attributeData in namedTypeSymbol.GetAttributes())
             {
-                if (attributeData.AttributeClass.Equals(_suppressAttribute))
+                if (attributeData.AttributeClass?.Equals(_suppressAttribute) == true)
                 {
                     suppressions ??= new List<Supression>();
                     var name = attributeData.ConstructorArguments[0].Value as string;

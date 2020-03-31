@@ -35,11 +35,6 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             var root = document.GetSyntaxRootAsync().Result;
             Debug.Assert(root != null);
 
-            var compilation = document.Project.GetCompilationAsync().GetAwaiter().GetResult();
-            Debug.Assert(compilation != null);
-
-            var rewriter = new MemberRemoverRewriter(compilation.GetSemanticModel(root.SyntaxTree));
-            root = rewriter.Visit(root);
             root = root.WithAdditionalAnnotations(Simplifier.Annotation);
             document = document.WithSyntaxRoot(root);
             _project = document.Project;
@@ -70,6 +65,16 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
 
         private static async Task<Document> ProcessDocument(Document document)
         {
+            var compilation = document.Project.GetCompilationAsync().GetAwaiter().GetResult();
+            Debug.Assert(compilation != null);
+
+            var syntaxTree = await document.GetSyntaxTreeAsync();
+            if (syntaxTree != null)
+            {
+                var rewriter = new MemberRemoverRewriter(compilation.GetSemanticModel(syntaxTree));
+                document = document.WithSyntaxRoot(rewriter.Visit(await syntaxTree.GetRootAsync()));
+            }
+
             document = await Simplifier.ReduceAsync(document);
             document = await Formatter.FormatAsync(document);
             return document;
