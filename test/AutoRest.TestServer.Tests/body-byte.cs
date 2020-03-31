@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using body_byte;
@@ -32,10 +33,10 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/289")]
-        public Task GetByteNull() => Test(async (host, pipeline) =>
+        public Task GetByteNull() => Test((host, pipeline) =>
         {
-            Assert.Null(await new ByteClient(ClientDiagnostics, pipeline, host).GetNullAsync());
+            // Empty response body
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new ByteClient(ClientDiagnostics, pipeline, host).GetNullAsync());
         });
 
         [Test]

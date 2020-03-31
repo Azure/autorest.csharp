@@ -37,7 +37,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Null collection items: https://github.com/Azure/autorest.csharp/issues/366")]
         public Task GetDictionaryArrayItemNull() => Test(async (host, pipeline) =>
         {
             var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetArrayItemNullAsync();
@@ -50,11 +49,10 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Null responses: https://github.com/Azure/autorest.csharp/issues/289")]
-        public Task GetDictionaryArrayNull() => Test(async (host, pipeline) =>
+        public Task GetDictionaryArrayNull() => Test((host, pipeline) =>
         {
-            var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetArrayNullAsync();
-            Assert.IsNull(result.Value);
+            // Empty response body
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new DictionaryClient(ClientDiagnostics, pipeline, host).GetArrayNullAsync());
         });
 
         [Test]
@@ -96,16 +94,10 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Null collection items: https://github.com/Azure/autorest.csharp/issues/366")]
-        public Task GetDictionaryBooleanWithNull() => Test(async (host, pipeline) =>
+        public Task GetDictionaryBooleanWithNull() => Test((host, pipeline) =>
         {
-            var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetBooleanInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, bool?>
-            {
-                { "0", true },
-                { "1", null },
-                { "2", false }
-            }, result.Value);
+            // Non-nullable item type
+            Assert.ThrowsAsync<InvalidOperationException>(async () => await new DictionaryClient(ClientDiagnostics, pipeline, host).GetBooleanInvalidNullAsync());
         });
 
         [Test]
@@ -127,7 +119,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Null collection items: https://github.com/Azure/autorest.csharp/issues/366")]
         public Task GetDictionaryByteWithNull() => Test(async (host, pipeline) =>
         {
             var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
@@ -165,7 +156,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Null collection items: https://github.com/Azure/autorest.csharp/issues/366")]
         public Task GetDictionaryComplexItemNull() => Test(async (host, pipeline) =>
         {
             var value = new Dictionary<string, Widget>
@@ -184,11 +174,10 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Null responses: https://github.com/Azure/autorest.csharp/issues/289")]
-        public Task GetDictionaryComplexNull() => Test(async (host, pipeline) =>
+        public Task GetDictionaryComplexNull() => Test((host, pipeline) =>
         {
-            var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetComplexNullAsync();
-            Assert.IsNull(result.Value);
+            // Empty response body
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new DictionaryClient(ClientDiagnostics, pipeline, host).GetComplexNullAsync());
         });
 
         [Test]
@@ -241,15 +230,10 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Null collection items: https://github.com/Azure/autorest.csharp/issues/366")]
-        public Task GetDictionaryDateTimeWithNull() => Test(async (host, pipeline) =>
+        public Task GetDictionaryDateTimeWithNull() => Test((host, pipeline) =>
         {
-            var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetDateTimeInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, DateTimeOffset?>
-            {
-                { "0", DateTimeOffset.Parse("2000-12-01t00:00:01z") },
-                { "1", null }
-            }, result.Value);
+            // Non-nullable item type
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await new DictionaryClient(ClientDiagnostics, pipeline, host).GetDateTimeInvalidNullAsync());
         });
 
         [Test]
@@ -271,16 +255,10 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Null collection items: https://github.com/Azure/autorest.csharp/issues/366")]
-        public Task GetDictionaryDateWithNull() => Test(async (host, pipeline) =>
+        public Task GetDictionaryDateWithNull() => Test((host, pipeline) =>
         {
-            var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetDateInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, DateTimeOffset?>
-            {
-                { "0", DateTimeOffset.Parse("2012-01-01") },
-                { "1", null },
-                { "2", DateTimeOffset.Parse("1776-07-04") }
-            }, result.Value);
+            // Non-nullable item type
+            Assert.ThrowsAsync<InvalidOperationException>(async () => await new DictionaryClient(ClientDiagnostics, pipeline, host).GetDateInvalidNullAsync());
         });
 
         [Test]
@@ -291,7 +269,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        //TODO: Passes but has a bug: https://github.com/Azure/autorest.modelerfour/issues/106
         public Task GetDictionaryDictionaryItemEmpty() => Test(async (host, pipeline) =>
         {
             var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetDictionaryItemEmptyAsync();
@@ -304,7 +281,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Passes because of this bug: https://github.com/Azure/autorest.modelerfour/issues/106, but should fail because of null collection items: https://github.com/Azure/autorest.csharp/issues/366")]
         public Task GetDictionaryDictionaryItemNull() => Test(async (host, pipeline) =>
         {
             var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetDictionaryItemNullAsync();
@@ -317,15 +293,13 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Null responses: https://github.com/Azure/autorest.csharp/issues/289")]
-        public Task GetDictionaryDictionaryNull() => Test(async (host, pipeline) =>
+        public Task GetDictionaryDictionaryNull() => Test((host, pipeline) =>
         {
-            var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetDictionaryNullAsync();
-            Assert.IsNull(result.Value);
+            // Empty response body
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new DictionaryClient(ClientDiagnostics, pipeline, host).GetDictionaryNullAsync());
         });
 
         [Test]
-        //TODO: Passes but has a bug: https://github.com/Azure/autorest.modelerfour/issues/106
         public Task GetDictionaryDictionaryValid() => Test(async (host, pipeline) =>
         {
             var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetDictionaryValidAsync();
@@ -350,16 +324,10 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Null collection items: https://github.com/Azure/autorest.csharp/issues/366")]
-        public Task GetDictionaryDoubleWithNull() => Test(async (host, pipeline) =>
+        public Task GetDictionaryDoubleWithNull() => Test((host, pipeline) =>
         {
-            var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetDoubleInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, double?>
-            {
-                { "0", 0d },
-                { "1", null },
-                { "2", -1.2e20d }
-            }, result.Value);
+            // Non-nullable item type
+            Assert.ThrowsAsync<InvalidOperationException>(async () => await new DictionaryClient(ClientDiagnostics, pipeline, host).GetDoubleInvalidNullAsync());
         });
 
         [Test]
@@ -399,16 +367,10 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Null collection items: https://github.com/Azure/autorest.csharp/issues/366")]
-        public Task GetDictionaryFloatWithNull() => Test(async (host, pipeline) =>
+        public Task GetDictionaryFloatWithNull() => Test((host, pipeline) =>
         {
-            var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetFloatInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, float?>
-            {
-                { "0", 0f },
-                { "1", null },
-                { "2", -1.2e20f }
-            }, result.Value);
+            // Non-nullable item type
+            Assert.ThrowsAsync<InvalidOperationException>(async () => await new DictionaryClient(ClientDiagnostics, pipeline, host).GetFloatInvalidNullAsync());
         });
 
         [Test]
@@ -431,16 +393,10 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Null collection items: https://github.com/Azure/autorest.csharp/issues/366")]
-        public Task GetDictionaryIntegerWithNull() => Test(async (host, pipeline) =>
+        public Task GetDictionaryIntegerWithNull() => Test((host, pipeline) =>
         {
-            var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetIntInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, int?>
-            {
-                { "0", 1 },
-                { "1", null },
-                { "2", 0 }
-            }, result.Value);
+            // Non-nullable item type
+            Assert.ThrowsAsync<InvalidOperationException>(async () => await new DictionaryClient(ClientDiagnostics, pipeline, host).GetIntInvalidNullAsync());
         });
 
         [Test]
@@ -479,16 +435,10 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Null collection items: https://github.com/Azure/autorest.csharp/issues/366")]
-        public Task GetDictionaryLongWithNull() => Test(async (host, pipeline) =>
+        public Task GetDictionaryLongWithNull() => Test((host, pipeline) =>
         {
-            var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetLongInvalidNullAsync();
-            CollectionAssert.AreEqual(new Dictionary<string, long?>
-            {
-                { "0", 1L },
-                { "1", null },
-                { "2", 0L }
-            }, result.Value);
+            // Non-nullable item type
+            Assert.ThrowsAsync<InvalidOperationException>(async () => await new DictionaryClient(ClientDiagnostics, pipeline, host).GetLongInvalidNullAsync());
         });
 
         [Test]
