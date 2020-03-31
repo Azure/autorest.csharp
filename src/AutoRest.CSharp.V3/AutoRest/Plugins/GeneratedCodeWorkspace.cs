@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
 
         private static async Task<Document> ProcessDocument(Document document)
         {
-            var compilation = document.Project.GetCompilationAsync().GetAwaiter().GetResult();
+            var compilation = await document.Project.GetCompilationAsync();
             Debug.Assert(compilation != null);
 
             var syntaxTree = await document.GetSyntaxTreeAsync();
