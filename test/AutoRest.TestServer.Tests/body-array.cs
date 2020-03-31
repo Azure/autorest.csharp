@@ -129,7 +129,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        //[Ignore("https://github.com/Azure/autorest.csharp/issues/366")]
         public Task GetArrayComplexItemNull() => Test(async (host, pipeline) =>
         {
             var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetComplexItemNullAsync();
@@ -146,8 +145,11 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/289")]
-        public Task GetArrayComplexNull() => Test(async (host, pipeline) => { await Task.FromException(new Exception()); });
+        public Task GetArrayComplexNull() => Test((host, pipeline) =>
+        {
+            // Empty response body
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetComplexNullAsync());
+        });
 
         [Test]
         public Task GetArrayComplexValid() => Test(async (host, pipeline) =>
@@ -250,10 +252,9 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/366")]
         public Task GetArrayDictionaryItemNull() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetDictionaryItemEmptyAsync();
+            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetDictionaryItemNullAsync();
 
             var values = result.Value.ToArray();
 
@@ -265,10 +266,10 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/289")]
-        public Task GetArrayDictionaryNull() => Test(async (host, pipeline) =>
+        public Task GetArrayDictionaryNull() => Test((host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetDictionaryNullAsync();
+            // Empty response body
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetDictionaryNullAsync());
         });
 
         [Test]
@@ -400,8 +401,11 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/289")]
-        public Task GetArrayNull() => Test(async (host, pipeline) => { await Task.FromException(new Exception()); });
+        public Task GetArrayNull() => Test((host, pipeline) =>
+        {
+            // Empty response body
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetNullAsync());
+        });
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "no match")]

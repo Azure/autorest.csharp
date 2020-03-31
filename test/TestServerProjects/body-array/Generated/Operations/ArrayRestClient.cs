@@ -2299,7 +2299,14 @@ namespace body_array
                                 List<string> array = new List<string>();
                                 foreach (var item in document.RootElement.EnumerateArray())
                                 {
-                                    array.Add(item.GetString());
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(item.GetString());
+                                    }
                                 }
                                 value = array;
                             }
@@ -2341,7 +2348,14 @@ namespace body_array
                                 List<string> array = new List<string>();
                                 foreach (var item in document.RootElement.EnumerateArray())
                                 {
-                                    array.Add(item.GetString());
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(item.GetString());
+                                    }
                                 }
                                 value = array;
                             }
@@ -2836,7 +2850,14 @@ namespace body_array
                                 List<string> array = new List<string>();
                                 foreach (var item in document.RootElement.EnumerateArray())
                                 {
-                                    array.Add(item.GetString());
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(item.GetString());
+                                    }
                                 }
                                 value = array;
                             }
@@ -2878,7 +2899,14 @@ namespace body_array
                                 List<string> array = new List<string>();
                                 foreach (var item in document.RootElement.EnumerateArray())
                                 {
-                                    array.Add(item.GetString());
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(item.GetString());
+                                    }
                                 }
                                 value = array;
                             }
@@ -2932,7 +2960,14 @@ namespace body_array
                                 List<string> array = new List<string>();
                                 foreach (var item in document.RootElement.EnumerateArray())
                                 {
-                                    array.Add(item.GetString());
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(item.GetString());
+                                    }
                                 }
                                 value = array;
                             }
@@ -2974,7 +3009,14 @@ namespace body_array
                                 List<string> array = new List<string>();
                                 foreach (var item in document.RootElement.EnumerateArray())
                                 {
-                                    array.Add(item.GetString());
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(item.GetString());
+                                    }
                                 }
                                 value = array;
                             }
@@ -4403,7 +4445,14 @@ namespace body_array
                                 List<byte[]> array = new List<byte[]>();
                                 foreach (var item in document.RootElement.EnumerateArray())
                                 {
-                                    array.Add(item.GetBytesFromBase64());
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(item.GetBytesFromBase64());
+                                    }
                                 }
                                 value = array;
                             }
@@ -4445,7 +4494,14 @@ namespace body_array
                                 List<byte[]> array = new List<byte[]>();
                                 foreach (var item in document.RootElement.EnumerateArray())
                                 {
-                                    array.Add(item.GetBytesFromBase64());
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(item.GetBytesFromBase64());
+                                    }
                                 }
                                 value = array;
                             }
@@ -4582,7 +4638,14 @@ namespace body_array
                                 List<byte[]> array = new List<byte[]>();
                                 foreach (var item in document.RootElement.EnumerateArray())
                                 {
-                                    array.Add(item.GetBytesFromBase64());
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(item.GetBytesFromBase64());
+                                    }
                                 }
                                 value = array;
                             }
@@ -4624,7 +4687,14 @@ namespace body_array
                                 List<byte[]> array = new List<byte[]>();
                                 foreach (var item in document.RootElement.EnumerateArray())
                                 {
-                                    array.Add(item.GetBytesFromBase64());
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(item.GetBytesFromBase64());
+                                    }
                                 }
                                 value = array;
                             }
@@ -4678,7 +4748,14 @@ namespace body_array
                                 List<byte[]> array = new List<byte[]>();
                                 foreach (var item in document.RootElement.EnumerateArray())
                                 {
-                                    array.Add(item.GetBytesFromBase64("U"));
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(item.GetBytesFromBase64("U"));
+                                    }
                                 }
                                 value = array;
                             }
@@ -4720,7 +4797,14 @@ namespace body_array
                                 List<byte[]> array = new List<byte[]>();
                                 foreach (var item in document.RootElement.EnumerateArray())
                                 {
-                                    array.Add(item.GetBytesFromBase64("U"));
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(item.GetBytesFromBase64("U"));
+                                    }
                                 }
                                 value = array;
                             }
@@ -4774,7 +4858,14 @@ namespace body_array
                                 List<Product> array = new List<Product>();
                                 foreach (var item in document.RootElement.EnumerateArray())
                                 {
-                                    array.Add(Product.DeserializeProduct(item));
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(Product.DeserializeProduct(item));
+                                    }
                                 }
                                 value = array;
                             }
@@ -4816,7 +4907,14 @@ namespace body_array
                                 List<Product> array = new List<Product>();
                                 foreach (var item in document.RootElement.EnumerateArray())
                                 {
-                                    array.Add(Product.DeserializeProduct(item));
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(Product.DeserializeProduct(item));
+                                    }
                                 }
                                 value = array;
                             }
@@ -4870,7 +4968,14 @@ namespace body_array
                                 List<Product> array = new List<Product>();
                                 foreach (var item in document.RootElement.EnumerateArray())
                                 {
-                                    array.Add(Product.DeserializeProduct(item));
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(Product.DeserializeProduct(item));
+                                    }
                                 }
                                 value = array;
                             }
@@ -4912,7 +5017,14 @@ namespace body_array
                                 List<Product> array = new List<Product>();
                                 foreach (var item in document.RootElement.EnumerateArray())
                                 {
-                                    array.Add(Product.DeserializeProduct(item));
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(Product.DeserializeProduct(item));
+                                    }
                                 }
                                 value = array;
                             }
@@ -4966,7 +5078,14 @@ namespace body_array
                                 List<Product> array = new List<Product>();
                                 foreach (var item in document.RootElement.EnumerateArray())
                                 {
-                                    array.Add(Product.DeserializeProduct(item));
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(Product.DeserializeProduct(item));
+                                    }
                                 }
                                 value = array;
                             }
@@ -5008,7 +5127,14 @@ namespace body_array
                                 List<Product> array = new List<Product>();
                                 foreach (var item in document.RootElement.EnumerateArray())
                                 {
-                                    array.Add(Product.DeserializeProduct(item));
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(Product.DeserializeProduct(item));
+                                    }
                                 }
                                 value = array;
                             }
@@ -5062,7 +5188,14 @@ namespace body_array
                                 List<Product> array = new List<Product>();
                                 foreach (var item in document.RootElement.EnumerateArray())
                                 {
-                                    array.Add(Product.DeserializeProduct(item));
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(Product.DeserializeProduct(item));
+                                    }
                                 }
                                 value = array;
                             }
@@ -5104,7 +5237,14 @@ namespace body_array
                                 List<Product> array = new List<Product>();
                                 foreach (var item in document.RootElement.EnumerateArray())
                                 {
-                                    array.Add(Product.DeserializeProduct(item));
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(Product.DeserializeProduct(item));
+                                    }
                                 }
                                 value = array;
                             }
@@ -5158,7 +5298,14 @@ namespace body_array
                                 List<Product> array = new List<Product>();
                                 foreach (var item in document.RootElement.EnumerateArray())
                                 {
-                                    array.Add(Product.DeserializeProduct(item));
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(Product.DeserializeProduct(item));
+                                    }
                                 }
                                 value = array;
                             }
@@ -5200,7 +5347,14 @@ namespace body_array
                                 List<Product> array = new List<Product>();
                                 foreach (var item in document.RootElement.EnumerateArray())
                                 {
-                                    array.Add(Product.DeserializeProduct(item));
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(Product.DeserializeProduct(item));
+                                    }
                                 }
                                 value = array;
                             }
@@ -5346,7 +5500,14 @@ namespace body_array
                                         List<string> array0 = new List<string>();
                                         foreach (var item0 in item.EnumerateArray())
                                         {
-                                            array0.Add(item0.GetString());
+                                            if (item0.ValueKind == JsonValueKind.Null)
+                                            {
+                                                array0.Add(null);
+                                            }
+                                            else
+                                            {
+                                                array0.Add(item0.GetString());
+                                            }
                                         }
                                         array.Add(array0);
                                     }
@@ -5400,7 +5561,14 @@ namespace body_array
                                         List<string> array0 = new List<string>();
                                         foreach (var item0 in item.EnumerateArray())
                                         {
-                                            array0.Add(item0.GetString());
+                                            if (item0.ValueKind == JsonValueKind.Null)
+                                            {
+                                                array0.Add(null);
+                                            }
+                                            else
+                                            {
+                                                array0.Add(item0.GetString());
+                                            }
                                         }
                                         array.Add(array0);
                                     }
@@ -5466,7 +5634,14 @@ namespace body_array
                                         List<string> array0 = new List<string>();
                                         foreach (var item0 in item.EnumerateArray())
                                         {
-                                            array0.Add(item0.GetString());
+                                            if (item0.ValueKind == JsonValueKind.Null)
+                                            {
+                                                array0.Add(null);
+                                            }
+                                            else
+                                            {
+                                                array0.Add(item0.GetString());
+                                            }
                                         }
                                         array.Add(array0);
                                     }
@@ -5520,7 +5695,14 @@ namespace body_array
                                         List<string> array0 = new List<string>();
                                         foreach (var item0 in item.EnumerateArray())
                                         {
-                                            array0.Add(item0.GetString());
+                                            if (item0.ValueKind == JsonValueKind.Null)
+                                            {
+                                                array0.Add(null);
+                                            }
+                                            else
+                                            {
+                                                array0.Add(item0.GetString());
+                                            }
                                         }
                                         array.Add(array0);
                                     }
@@ -5586,7 +5768,14 @@ namespace body_array
                                         List<string> array0 = new List<string>();
                                         foreach (var item0 in item.EnumerateArray())
                                         {
-                                            array0.Add(item0.GetString());
+                                            if (item0.ValueKind == JsonValueKind.Null)
+                                            {
+                                                array0.Add(null);
+                                            }
+                                            else
+                                            {
+                                                array0.Add(item0.GetString());
+                                            }
                                         }
                                         array.Add(array0);
                                     }
@@ -5640,7 +5829,14 @@ namespace body_array
                                         List<string> array0 = new List<string>();
                                         foreach (var item0 in item.EnumerateArray())
                                         {
-                                            array0.Add(item0.GetString());
+                                            if (item0.ValueKind == JsonValueKind.Null)
+                                            {
+                                                array0.Add(null);
+                                            }
+                                            else
+                                            {
+                                                array0.Add(item0.GetString());
+                                            }
                                         }
                                         array.Add(array0);
                                     }
@@ -5706,7 +5902,14 @@ namespace body_array
                                         List<string> array0 = new List<string>();
                                         foreach (var item0 in item.EnumerateArray())
                                         {
-                                            array0.Add(item0.GetString());
+                                            if (item0.ValueKind == JsonValueKind.Null)
+                                            {
+                                                array0.Add(null);
+                                            }
+                                            else
+                                            {
+                                                array0.Add(item0.GetString());
+                                            }
                                         }
                                         array.Add(array0);
                                     }
@@ -5760,7 +5963,14 @@ namespace body_array
                                         List<string> array0 = new List<string>();
                                         foreach (var item0 in item.EnumerateArray())
                                         {
-                                            array0.Add(item0.GetString());
+                                            if (item0.ValueKind == JsonValueKind.Null)
+                                            {
+                                                array0.Add(null);
+                                            }
+                                            else
+                                            {
+                                                array0.Add(item0.GetString());
+                                            }
                                         }
                                         array.Add(array0);
                                     }
@@ -5826,7 +6036,14 @@ namespace body_array
                                         List<string> array0 = new List<string>();
                                         foreach (var item0 in item.EnumerateArray())
                                         {
-                                            array0.Add(item0.GetString());
+                                            if (item0.ValueKind == JsonValueKind.Null)
+                                            {
+                                                array0.Add(null);
+                                            }
+                                            else
+                                            {
+                                                array0.Add(item0.GetString());
+                                            }
                                         }
                                         array.Add(array0);
                                     }
@@ -5880,7 +6097,14 @@ namespace body_array
                                         List<string> array0 = new List<string>();
                                         foreach (var item0 in item.EnumerateArray())
                                         {
-                                            array0.Add(item0.GetString());
+                                            if (item0.ValueKind == JsonValueKind.Null)
+                                            {
+                                                array0.Add(null);
+                                            }
+                                            else
+                                            {
+                                                array0.Add(item0.GetString());
+                                            }
                                         }
                                         array.Add(array0);
                                     }
@@ -6034,7 +6258,14 @@ namespace body_array
                                         Dictionary<string, string> dictionary = new Dictionary<string, string>();
                                         foreach (var property in item.EnumerateObject())
                                         {
-                                            dictionary.Add(property.Name, property.Value.GetString());
+                                            if (property.Value.ValueKind == JsonValueKind.Null)
+                                            {
+                                                dictionary.Add(property.Name, null);
+                                            }
+                                            else
+                                            {
+                                                dictionary.Add(property.Name, property.Value.GetString());
+                                            }
                                         }
                                         array.Add(dictionary);
                                     }
@@ -6088,7 +6319,14 @@ namespace body_array
                                         Dictionary<string, string> dictionary = new Dictionary<string, string>();
                                         foreach (var property in item.EnumerateObject())
                                         {
-                                            dictionary.Add(property.Name, property.Value.GetString());
+                                            if (property.Value.ValueKind == JsonValueKind.Null)
+                                            {
+                                                dictionary.Add(property.Name, null);
+                                            }
+                                            else
+                                            {
+                                                dictionary.Add(property.Name, property.Value.GetString());
+                                            }
                                         }
                                         array.Add(dictionary);
                                     }
@@ -6154,7 +6392,14 @@ namespace body_array
                                         Dictionary<string, string> dictionary = new Dictionary<string, string>();
                                         foreach (var property in item.EnumerateObject())
                                         {
-                                            dictionary.Add(property.Name, property.Value.GetString());
+                                            if (property.Value.ValueKind == JsonValueKind.Null)
+                                            {
+                                                dictionary.Add(property.Name, null);
+                                            }
+                                            else
+                                            {
+                                                dictionary.Add(property.Name, property.Value.GetString());
+                                            }
                                         }
                                         array.Add(dictionary);
                                     }
@@ -6208,7 +6453,14 @@ namespace body_array
                                         Dictionary<string, string> dictionary = new Dictionary<string, string>();
                                         foreach (var property in item.EnumerateObject())
                                         {
-                                            dictionary.Add(property.Name, property.Value.GetString());
+                                            if (property.Value.ValueKind == JsonValueKind.Null)
+                                            {
+                                                dictionary.Add(property.Name, null);
+                                            }
+                                            else
+                                            {
+                                                dictionary.Add(property.Name, property.Value.GetString());
+                                            }
                                         }
                                         array.Add(dictionary);
                                     }
@@ -6274,7 +6526,14 @@ namespace body_array
                                         Dictionary<string, string> dictionary = new Dictionary<string, string>();
                                         foreach (var property in item.EnumerateObject())
                                         {
-                                            dictionary.Add(property.Name, property.Value.GetString());
+                                            if (property.Value.ValueKind == JsonValueKind.Null)
+                                            {
+                                                dictionary.Add(property.Name, null);
+                                            }
+                                            else
+                                            {
+                                                dictionary.Add(property.Name, property.Value.GetString());
+                                            }
                                         }
                                         array.Add(dictionary);
                                     }
@@ -6328,7 +6587,14 @@ namespace body_array
                                         Dictionary<string, string> dictionary = new Dictionary<string, string>();
                                         foreach (var property in item.EnumerateObject())
                                         {
-                                            dictionary.Add(property.Name, property.Value.GetString());
+                                            if (property.Value.ValueKind == JsonValueKind.Null)
+                                            {
+                                                dictionary.Add(property.Name, null);
+                                            }
+                                            else
+                                            {
+                                                dictionary.Add(property.Name, property.Value.GetString());
+                                            }
                                         }
                                         array.Add(dictionary);
                                     }
@@ -6394,7 +6660,14 @@ namespace body_array
                                         Dictionary<string, string> dictionary = new Dictionary<string, string>();
                                         foreach (var property in item.EnumerateObject())
                                         {
-                                            dictionary.Add(property.Name, property.Value.GetString());
+                                            if (property.Value.ValueKind == JsonValueKind.Null)
+                                            {
+                                                dictionary.Add(property.Name, null);
+                                            }
+                                            else
+                                            {
+                                                dictionary.Add(property.Name, property.Value.GetString());
+                                            }
                                         }
                                         array.Add(dictionary);
                                     }
@@ -6448,7 +6721,14 @@ namespace body_array
                                         Dictionary<string, string> dictionary = new Dictionary<string, string>();
                                         foreach (var property in item.EnumerateObject())
                                         {
-                                            dictionary.Add(property.Name, property.Value.GetString());
+                                            if (property.Value.ValueKind == JsonValueKind.Null)
+                                            {
+                                                dictionary.Add(property.Name, null);
+                                            }
+                                            else
+                                            {
+                                                dictionary.Add(property.Name, property.Value.GetString());
+                                            }
                                         }
                                         array.Add(dictionary);
                                     }
@@ -6514,7 +6794,14 @@ namespace body_array
                                         Dictionary<string, string> dictionary = new Dictionary<string, string>();
                                         foreach (var property in item.EnumerateObject())
                                         {
-                                            dictionary.Add(property.Name, property.Value.GetString());
+                                            if (property.Value.ValueKind == JsonValueKind.Null)
+                                            {
+                                                dictionary.Add(property.Name, null);
+                                            }
+                                            else
+                                            {
+                                                dictionary.Add(property.Name, property.Value.GetString());
+                                            }
                                         }
                                         array.Add(dictionary);
                                     }
@@ -6568,7 +6855,14 @@ namespace body_array
                                         Dictionary<string, string> dictionary = new Dictionary<string, string>();
                                         foreach (var property in item.EnumerateObject())
                                         {
-                                            dictionary.Add(property.Name, property.Value.GetString());
+                                            if (property.Value.ValueKind == JsonValueKind.Null)
+                                            {
+                                                dictionary.Add(property.Name, null);
+                                            }
+                                            else
+                                            {
+                                                dictionary.Add(property.Name, property.Value.GetString());
+                                            }
                                         }
                                         array.Add(dictionary);
                                     }

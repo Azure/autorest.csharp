@@ -40,7 +40,14 @@ namespace body_array.Models
                     {
                         continue;
                     }
-                    integer = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        integer = null;
+                    }
+                    else
+                    {
+                        integer = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("string"))
@@ -49,7 +56,14 @@ namespace body_array.Models
                     {
                         continue;
                     }
-                    @string = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        @string = null;
+                    }
+                    else
+                    {
+                        @string = property.Value.GetString();
+                    }
                     continue;
                 }
             }
