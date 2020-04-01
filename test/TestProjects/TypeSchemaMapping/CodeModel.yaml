@@ -261,6 +261,14 @@ schemas: !<!Schemas>
           name: dictionaryProperty
           description: .
       protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_4
+      serializedName: DaysOfWeek
+      language: !<!Languages> 
+        default:
+          name: daysOfWeek
+          description: Day of week
+      protocol: !<!Protocols> {}
     serializationFormats:
     - json
     usage:

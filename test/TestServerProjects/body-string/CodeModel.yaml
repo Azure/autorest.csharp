@@ -98,20 +98,20 @@ schemas: !<!Schemas>
     - !<!ApiVersion> 
       version: 1.0.0
     value: !<!ConstantValue> 
-      value: 啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
+      value: ''
     valueType: *ref_0
     language: !<!Languages> 
       default:
         name: Constant2
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_11
+  - !<!ConstantSchema> &ref_10
     type: constant
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
     value: !<!ConstantValue> 
-      value: 啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
+      value: ''
     valueType: *ref_0
     language: !<!Languages> 
       default:
@@ -124,11 +124,37 @@ schemas: !<!Schemas>
     - !<!ApiVersion> 
       version: 1.0.0
     value: !<!ConstantValue> 
-      value: '    Now is the time for all good men to come to the aid of their country    '
+      value: 啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
     valueType: *ref_0
     language: !<!Languages> 
       default:
         name: Constant4
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_11
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: 啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant5
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> 
+    type: constant
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    value: !<!ConstantValue> 
+      value: '    Now is the time for all good men to come to the aid of their country    '
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant6
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_12
@@ -141,7 +167,7 @@ schemas: !<!Schemas>
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: Constant5
+        name: Constant7
         description: ''
     protocol: !<!Protocols> {}
   - !<!ConstantSchema> &ref_3
@@ -438,7 +464,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_6
+      schema: *ref_0
       language: !<!Languages> 
         default:
           name: ''
@@ -490,8 +516,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_10
-        schema: *ref_6
+      - !<!Parameter> 
+        schema: *ref_10
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -502,8 +528,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
-      signatureParameters:
-      - *ref_10
+      signatureParameters: []
       language: !<!Languages> 
         default:
           name: ''
