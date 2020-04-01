@@ -23,7 +23,14 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    name = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        name = null;
+                    }
+                    else
+                    {
+                        name = property.Value.GetString();
+                    }
                     continue;
                 }
             }

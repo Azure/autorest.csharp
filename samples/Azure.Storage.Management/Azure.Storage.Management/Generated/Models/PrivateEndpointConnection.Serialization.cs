@@ -67,7 +67,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    id = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        id = null;
+                    }
+                    else
+                    {
+                        id = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -76,7 +83,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    name = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        name = null;
+                    }
+                    else
+                    {
+                        name = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -85,7 +99,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    type = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        type = null;
+                    }
+                    else
+                    {
+                        type = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -98,7 +119,14 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            privateEndpoint = PrivateEndpoint.DeserializePrivateEndpoint(property0.Value);
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                privateEndpoint = null;
+                            }
+                            else
+                            {
+                                privateEndpoint = PrivateEndpoint.DeserializePrivateEndpoint(property0.Value);
+                            }
                             continue;
                         }
                         if (property0.NameEquals("privateLinkServiceConnectionState"))
@@ -107,7 +135,14 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            privateLinkServiceConnectionState = PrivateLinkServiceConnectionState.DeserializePrivateLinkServiceConnectionState(property0.Value);
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                privateLinkServiceConnectionState = null;
+                            }
+                            else
+                            {
+                                privateLinkServiceConnectionState = PrivateLinkServiceConnectionState.DeserializePrivateLinkServiceConnectionState(property0.Value);
+                            }
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -116,7 +151,14 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            provisioningState = new PrivateEndpointConnectionProvisioningState(property0.Value.GetString());
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                provisioningState = null;
+                            }
+                            else
+                            {
+                                provisioningState = new PrivateEndpointConnectionProvisioningState(property0.Value.GetString());
+                            }
                             continue;
                         }
                     }

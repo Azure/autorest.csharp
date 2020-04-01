@@ -26,7 +26,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    unit = property.Value.GetString().ToUsageUnit();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        unit = null;
+                    }
+                    else
+                    {
+                        unit = property.Value.GetString().ToUsageUnit();
+                    }
                     continue;
                 }
                 if (property.NameEquals("currentValue"))
@@ -35,7 +42,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    currentValue = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        currentValue = null;
+                    }
+                    else
+                    {
+                        currentValue = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("limit"))
@@ -44,7 +58,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    limit = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        limit = null;
+                    }
+                    else
+                    {
+                        limit = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -53,7 +74,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    name = UsageName.DeserializeUsageName(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        name = null;
+                    }
+                    else
+                    {
+                        name = UsageName.DeserializeUsageName(property.Value);
+                    }
                     continue;
                 }
             }

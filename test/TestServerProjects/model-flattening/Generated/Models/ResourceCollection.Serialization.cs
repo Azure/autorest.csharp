@@ -58,7 +58,14 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    productresource = FlattenedProduct.DeserializeFlattenedProduct(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        productresource = null;
+                    }
+                    else
+                    {
+                        productresource = FlattenedProduct.DeserializeFlattenedProduct(property.Value);
+                    }
                     continue;
                 }
                 if (property.NameEquals("arrayofresources"))
@@ -67,12 +74,26 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    List<FlattenedProduct> array = new List<FlattenedProduct>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
+                        arrayofresources = null;
                     }
-                    arrayofresources = array;
+                    else
+                    {
+                        List<FlattenedProduct> array = new List<FlattenedProduct>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
+                            }
+                        }
+                        arrayofresources = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("dictionaryofresources"))
@@ -81,12 +102,26 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();
-                    foreach (var property0 in property.Value.EnumerateObject())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        dictionary.Add(property0.Name, FlattenedProduct.DeserializeFlattenedProduct(property0.Value));
+                        dictionaryofresources = null;
                     }
-                    dictionaryofresources = dictionary;
+                    else
+                    {
+                        Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();
+                        foreach (var property0 in property.Value.EnumerateObject())
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                dictionary.Add(property0.Name, null);
+                            }
+                            else
+                            {
+                                dictionary.Add(property0.Name, FlattenedProduct.DeserializeFlattenedProduct(property0.Value));
+                            }
+                        }
+                        dictionaryofresources = dictionary;
+                    }
                     continue;
                 }
             }

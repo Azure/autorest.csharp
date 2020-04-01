@@ -52,12 +52,19 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    List<CjkBigramTokenFilterScripts> array = new List<CjkBigramTokenFilterScripts>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(item.GetString().ToCjkBigramTokenFilterScripts());
+                        ignoreScripts = null;
                     }
-                    ignoreScripts = array;
+                    else
+                    {
+                        List<CjkBigramTokenFilterScripts> array = new List<CjkBigramTokenFilterScripts>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(item.GetString().ToCjkBigramTokenFilterScripts());
+                        }
+                        ignoreScripts = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("outputUnigrams"))
@@ -66,7 +73,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    outputUnigrams = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        outputUnigrams = null;
+                    }
+                    else
+                    {
+                        outputUnigrams = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))

@@ -54,7 +54,14 @@ namespace CustomNamespace
                             {
                                 continue;
                             }
-                            modelProperty = property0.Value.GetString();
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                modelProperty = null;
+                            }
+                            else
+                            {
+                                modelProperty = property0.Value.GetString();
+                            }
                             continue;
                         }
                         if (property0.NameEquals("Fruit"))
@@ -63,7 +70,14 @@ namespace CustomNamespace
                             {
                                 continue;
                             }
-                            fruit = property0.Value.GetString().ToCustomFruitEnum();
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                fruit = null;
+                            }
+                            else
+                            {
+                                fruit = property0.Value.GetString().ToCustomFruitEnum();
+                            }
                             continue;
                         }
                         if (property0.NameEquals("DaysOfWeek"))
@@ -72,7 +86,14 @@ namespace CustomNamespace
                             {
                                 continue;
                             }
-                            daysOfWeek = new CustomDaysOfWeek(property0.Value.GetString());
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                daysOfWeek = null;
+                            }
+                            else
+                            {
+                                daysOfWeek = new CustomDaysOfWeek(property0.Value.GetString());
+                            }
                             continue;
                         }
                     }

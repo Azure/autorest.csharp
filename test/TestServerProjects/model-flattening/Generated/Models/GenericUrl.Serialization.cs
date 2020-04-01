@@ -34,7 +34,14 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    genericValue = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        genericValue = null;
+                    }
+                    else
+                    {
+                        genericValue = property.Value.GetString();
+                    }
                     continue;
                 }
             }

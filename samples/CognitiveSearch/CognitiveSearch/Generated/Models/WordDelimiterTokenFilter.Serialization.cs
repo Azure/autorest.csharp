@@ -100,7 +100,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    generateWordParts = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        generateWordParts = null;
+                    }
+                    else
+                    {
+                        generateWordParts = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("generateNumberParts"))
@@ -109,7 +116,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    generateNumberParts = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        generateNumberParts = null;
+                    }
+                    else
+                    {
+                        generateNumberParts = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("catenateWords"))
@@ -118,7 +132,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    catenateWords = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        catenateWords = null;
+                    }
+                    else
+                    {
+                        catenateWords = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("catenateNumbers"))
@@ -127,7 +148,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    catenateNumbers = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        catenateNumbers = null;
+                    }
+                    else
+                    {
+                        catenateNumbers = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("catenateAll"))
@@ -136,7 +164,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    catenateAll = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        catenateAll = null;
+                    }
+                    else
+                    {
+                        catenateAll = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("splitOnCaseChange"))
@@ -145,7 +180,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    splitOnCaseChange = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        splitOnCaseChange = null;
+                    }
+                    else
+                    {
+                        splitOnCaseChange = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("preserveOriginal"))
@@ -154,7 +196,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    preserveOriginal = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        preserveOriginal = null;
+                    }
+                    else
+                    {
+                        preserveOriginal = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("splitOnNumerics"))
@@ -163,7 +212,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    splitOnNumerics = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        splitOnNumerics = null;
+                    }
+                    else
+                    {
+                        splitOnNumerics = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("stemEnglishPossessive"))
@@ -172,7 +228,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    stemEnglishPossessive = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        stemEnglishPossessive = null;
+                    }
+                    else
+                    {
+                        stemEnglishPossessive = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("protectedWords"))
@@ -181,12 +244,26 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    List<string> array = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(item.GetString());
+                        protectedWords = null;
                     }
-                    protectedWords = array;
+                    else
+                    {
+                        List<string> array = new List<string>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(item.GetString());
+                            }
+                        }
+                        protectedWords = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))

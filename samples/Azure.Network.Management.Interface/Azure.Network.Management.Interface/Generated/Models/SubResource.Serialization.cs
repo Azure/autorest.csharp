@@ -34,7 +34,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    id = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        id = null;
+                    }
+                    else
+                    {
+                        id = property.Value.GetString();
+                    }
                     continue;
                 }
             }

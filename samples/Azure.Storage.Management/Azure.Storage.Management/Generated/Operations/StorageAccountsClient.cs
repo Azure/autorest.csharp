@@ -304,12 +304,26 @@ namespace Azure.Storage.Management
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                return StorageAccount.DeserializeStorageAccount(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return StorageAccount.DeserializeStorageAccount(document.RootElement);
+                }
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                return StorageAccount.DeserializeStorageAccount(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return StorageAccount.DeserializeStorageAccount(document.RootElement);
+                }
             });
         }
 
@@ -434,12 +448,26 @@ namespace Azure.Storage.Management
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                return BlobRestoreStatus.DeserializeBlobRestoreStatus(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return BlobRestoreStatus.DeserializeBlobRestoreStatus(document.RootElement);
+                }
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                return BlobRestoreStatus.DeserializeBlobRestoreStatus(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return BlobRestoreStatus.DeserializeBlobRestoreStatus(document.RootElement);
+                }
             });
         }
 

@@ -40,7 +40,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    preserveOriginal = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        preserveOriginal = null;
+                    }
+                    else
+                    {
+                        preserveOriginal = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))

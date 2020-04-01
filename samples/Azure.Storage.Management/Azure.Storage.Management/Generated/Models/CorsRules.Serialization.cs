@@ -40,12 +40,26 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    List<CorsRule> array = new List<CorsRule>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(CorsRule.DeserializeCorsRule(item));
+                        corsRules = null;
                     }
-                    corsRules = array;
+                    else
+                    {
+                        List<CorsRule> array = new List<CorsRule>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(CorsRule.DeserializeCorsRule(item));
+                            }
+                        }
+                        corsRules = array;
+                    }
                     continue;
                 }
             }

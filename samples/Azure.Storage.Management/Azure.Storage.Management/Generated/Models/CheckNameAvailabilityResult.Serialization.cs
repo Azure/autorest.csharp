@@ -25,7 +25,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    nameAvailable = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        nameAvailable = null;
+                    }
+                    else
+                    {
+                        nameAvailable = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("reason"))
@@ -34,7 +41,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    reason = property.Value.GetString().ToReason();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        reason = null;
+                    }
+                    else
+                    {
+                        reason = property.Value.GetString().ToReason();
+                    }
                     continue;
                 }
                 if (property.NameEquals("message"))
@@ -43,7 +57,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    message = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        message = null;
+                    }
+                    else
+                    {
+                        message = property.Value.GetString();
+                    }
                     continue;
                 }
             }

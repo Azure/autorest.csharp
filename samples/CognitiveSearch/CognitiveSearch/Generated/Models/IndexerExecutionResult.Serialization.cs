@@ -39,7 +39,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    errorMessage = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        errorMessage = null;
+                    }
+                    else
+                    {
+                        errorMessage = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("startTime"))
@@ -48,7 +55,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    startTime = property.Value.GetDateTimeOffset("S");
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        startTime = null;
+                    }
+                    else
+                    {
+                        startTime = property.Value.GetDateTimeOffset("S");
+                    }
                     continue;
                 }
                 if (property.NameEquals("endTime"))
@@ -57,7 +71,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    endTime = property.Value.GetDateTimeOffset("S");
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        endTime = null;
+                    }
+                    else
+                    {
+                        endTime = property.Value.GetDateTimeOffset("S");
+                    }
                     continue;
                 }
                 if (property.NameEquals("errors"))
@@ -65,7 +86,14 @@ namespace CognitiveSearch.Models
                     List<ItemError> array = new List<ItemError>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ItemError.DeserializeItemError(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ItemError.DeserializeItemError(item));
+                        }
                     }
                     errors = array;
                     continue;
@@ -75,7 +103,14 @@ namespace CognitiveSearch.Models
                     List<ItemWarning> array = new List<ItemWarning>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ItemWarning.DeserializeItemWarning(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ItemWarning.DeserializeItemWarning(item));
+                        }
                     }
                     warnings = array;
                     continue;
@@ -96,7 +131,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    initialTrackingState = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        initialTrackingState = null;
+                    }
+                    else
+                    {
+                        initialTrackingState = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("finalTrackingState"))
@@ -105,7 +147,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    finalTrackingState = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        finalTrackingState = null;
+                    }
+                    else
+                    {
+                        finalTrackingState = property.Value.GetString();
+                    }
                     continue;
                 }
             }

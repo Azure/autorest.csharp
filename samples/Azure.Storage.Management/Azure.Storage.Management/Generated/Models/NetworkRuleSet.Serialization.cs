@@ -60,7 +60,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    bypass = new Bypass(property.Value.GetString());
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        bypass = null;
+                    }
+                    else
+                    {
+                        bypass = new Bypass(property.Value.GetString());
+                    }
                     continue;
                 }
                 if (property.NameEquals("virtualNetworkRules"))
@@ -69,12 +76,26 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    List<VirtualNetworkRule> array = new List<VirtualNetworkRule>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(VirtualNetworkRule.DeserializeVirtualNetworkRule(item));
+                        virtualNetworkRules = null;
                     }
-                    virtualNetworkRules = array;
+                    else
+                    {
+                        List<VirtualNetworkRule> array = new List<VirtualNetworkRule>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(VirtualNetworkRule.DeserializeVirtualNetworkRule(item));
+                            }
+                        }
+                        virtualNetworkRules = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("ipRules"))
@@ -83,12 +104,26 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    List<IPRule> array = new List<IPRule>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(IPRule.DeserializeIPRule(item));
+                        ipRules = null;
                     }
-                    ipRules = array;
+                    else
+                    {
+                        List<IPRule> array = new List<IPRule>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(IPRule.DeserializeIPRule(item));
+                            }
+                        }
+                        ipRules = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("defaultAction"))

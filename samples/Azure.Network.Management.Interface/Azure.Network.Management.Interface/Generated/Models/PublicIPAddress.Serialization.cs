@@ -162,7 +162,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    sku = PublicIPAddressSku.DeserializePublicIPAddressSku(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        sku = null;
+                    }
+                    else
+                    {
+                        sku = PublicIPAddressSku.DeserializePublicIPAddressSku(property.Value);
+                    }
                     continue;
                 }
                 if (property.NameEquals("etag"))
@@ -171,7 +178,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    etag = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        etag = null;
+                    }
+                    else
+                    {
+                        etag = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("zones"))
@@ -180,12 +194,26 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    List<string> array = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(item.GetString());
+                        zones = null;
                     }
-                    zones = array;
+                    else
+                    {
+                        List<string> array = new List<string>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(item.GetString());
+                            }
+                        }
+                        zones = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -194,7 +222,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    id = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        id = null;
+                    }
+                    else
+                    {
+                        id = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -203,7 +238,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    name = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        name = null;
+                    }
+                    else
+                    {
+                        name = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -212,7 +254,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    type = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        type = null;
+                    }
+                    else
+                    {
+                        type = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("location"))
@@ -221,7 +270,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    location = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        location = null;
+                    }
+                    else
+                    {
+                        location = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -230,12 +286,26 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                    foreach (var property0 in property.Value.EnumerateObject())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        dictionary.Add(property0.Name, property0.Value.GetString());
+                        tags = null;
                     }
-                    tags = dictionary;
+                    else
+                    {
+                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                        foreach (var property0 in property.Value.EnumerateObject())
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                dictionary.Add(property0.Name, null);
+                            }
+                            else
+                            {
+                                dictionary.Add(property0.Name, property0.Value.GetString());
+                            }
+                        }
+                        tags = dictionary;
+                    }
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -248,7 +318,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            publicIPAllocationMethod = new IPAllocationMethod(property0.Value.GetString());
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                publicIPAllocationMethod = null;
+                            }
+                            else
+                            {
+                                publicIPAllocationMethod = new IPAllocationMethod(property0.Value.GetString());
+                            }
                             continue;
                         }
                         if (property0.NameEquals("publicIPAddressVersion"))
@@ -257,7 +334,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            publicIPAddressVersion = new IPVersion(property0.Value.GetString());
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                publicIPAddressVersion = null;
+                            }
+                            else
+                            {
+                                publicIPAddressVersion = new IPVersion(property0.Value.GetString());
+                            }
                             continue;
                         }
                         if (property0.NameEquals("ipConfiguration"))
@@ -266,7 +350,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            ipConfiguration = IPConfiguration.DeserializeIPConfiguration(property0.Value);
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                ipConfiguration = null;
+                            }
+                            else
+                            {
+                                ipConfiguration = IPConfiguration.DeserializeIPConfiguration(property0.Value);
+                            }
                             continue;
                         }
                         if (property0.NameEquals("dnsSettings"))
@@ -275,7 +366,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            dnsSettings = PublicIPAddressDnsSettings.DeserializePublicIPAddressDnsSettings(property0.Value);
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                dnsSettings = null;
+                            }
+                            else
+                            {
+                                dnsSettings = PublicIPAddressDnsSettings.DeserializePublicIPAddressDnsSettings(property0.Value);
+                            }
                             continue;
                         }
                         if (property0.NameEquals("ddosSettings"))
@@ -284,7 +382,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            ddosSettings = DdosSettings.DeserializeDdosSettings(property0.Value);
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                ddosSettings = null;
+                            }
+                            else
+                            {
+                                ddosSettings = DdosSettings.DeserializeDdosSettings(property0.Value);
+                            }
                             continue;
                         }
                         if (property0.NameEquals("ipTags"))
@@ -293,12 +398,26 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            List<IpTag> array = new List<IpTag>();
-                            foreach (var item in property0.Value.EnumerateArray())
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                array.Add(IpTag.DeserializeIpTag(item));
+                                ipTags = null;
                             }
-                            ipTags = array;
+                            else
+                            {
+                                List<IpTag> array = new List<IpTag>();
+                                foreach (var item in property0.Value.EnumerateArray())
+                                {
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(IpTag.DeserializeIpTag(item));
+                                    }
+                                }
+                                ipTags = array;
+                            }
                             continue;
                         }
                         if (property0.NameEquals("ipAddress"))
@@ -307,7 +426,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            ipAddress = property0.Value.GetString();
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                ipAddress = null;
+                            }
+                            else
+                            {
+                                ipAddress = property0.Value.GetString();
+                            }
                             continue;
                         }
                         if (property0.NameEquals("publicIPPrefix"))
@@ -316,7 +442,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            publicIPPrefix = SubResource.DeserializeSubResource(property0.Value);
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                publicIPPrefix = null;
+                            }
+                            else
+                            {
+                                publicIPPrefix = SubResource.DeserializeSubResource(property0.Value);
+                            }
                             continue;
                         }
                         if (property0.NameEquals("idleTimeoutInMinutes"))
@@ -325,7 +458,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            idleTimeoutInMinutes = property0.Value.GetInt32();
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                idleTimeoutInMinutes = null;
+                            }
+                            else
+                            {
+                                idleTimeoutInMinutes = property0.Value.GetInt32();
+                            }
                             continue;
                         }
                         if (property0.NameEquals("resourceGuid"))
@@ -334,7 +474,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            resourceGuid = property0.Value.GetString();
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                resourceGuid = null;
+                            }
+                            else
+                            {
+                                resourceGuid = property0.Value.GetString();
+                            }
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -343,7 +490,14 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            provisioningState = new ProvisioningState(property0.Value.GetString());
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                provisioningState = null;
+                            }
+                            else
+                            {
+                                provisioningState = new ProvisioningState(property0.Value.GetString());
+                            }
                             continue;
                         }
                     }

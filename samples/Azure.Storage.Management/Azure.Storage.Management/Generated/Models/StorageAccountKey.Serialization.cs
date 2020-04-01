@@ -25,7 +25,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    keyName = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        keyName = null;
+                    }
+                    else
+                    {
+                        keyName = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("value"))
@@ -34,7 +41,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    value = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        value = null;
+                    }
+                    else
+                    {
+                        value = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("permissions"))
@@ -43,7 +57,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    permissions = property.Value.GetString().ToKeyPermission();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        permissions = null;
+                    }
+                    else
+                    {
+                        permissions = property.Value.GetString().ToKeyPermission();
+                    }
                     continue;
                 }
             }

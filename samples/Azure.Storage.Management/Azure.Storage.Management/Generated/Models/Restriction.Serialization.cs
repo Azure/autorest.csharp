@@ -26,7 +26,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    type = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        type = null;
+                    }
+                    else
+                    {
+                        type = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("values"))
@@ -35,12 +42,26 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    List<string> array = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(item.GetString());
+                        values = null;
                     }
-                    values = array;
+                    else
+                    {
+                        List<string> array = new List<string>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(item.GetString());
+                            }
+                        }
+                        values = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("reasonCode"))
@@ -49,7 +70,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    reasonCode = new ReasonCode(property.Value.GetString());
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        reasonCode = null;
+                    }
+                    else
+                    {
+                        reasonCode = new ReasonCode(property.Value.GetString());
+                    }
                     continue;
                 }
             }

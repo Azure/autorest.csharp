@@ -69,7 +69,14 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    species = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        species = null;
+                    }
+                    else
+                    {
+                        species = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("length"))
@@ -83,12 +90,26 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    List<Fish> array = new List<Fish>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(DeserializeFish(item));
+                        siblings = null;
                     }
-                    siblings = array;
+                    else
+                    {
+                        List<Fish> array = new List<Fish>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(DeserializeFish(item));
+                            }
+                        }
+                        siblings = array;
+                    }
                     continue;
                 }
             }

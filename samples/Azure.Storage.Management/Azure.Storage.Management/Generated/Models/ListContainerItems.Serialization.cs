@@ -25,12 +25,26 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    List<ListContainerItem> array = new List<ListContainerItem>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(ListContainerItem.DeserializeListContainerItem(item));
+                        value = null;
                     }
-                    value = array;
+                    else
+                    {
+                        List<ListContainerItem> array = new List<ListContainerItem>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(ListContainerItem.DeserializeListContainerItem(item));
+                            }
+                        }
+                        value = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("nextLink"))
@@ -39,7 +53,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    nextLink = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        nextLink = null;
+                    }
+                    else
+                    {
+                        nextLink = property.Value.GetString();
+                    }
                     continue;
                 }
             }

@@ -49,7 +49,14 @@ namespace lro.Models
                     {
                         continue;
                     }
-                    id = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        id = null;
+                    }
+                    else
+                    {
+                        id = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -62,7 +69,14 @@ namespace lro.Models
                             {
                                 continue;
                             }
-                            provisioningState = property0.Value.GetString();
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                provisioningState = null;
+                            }
+                            else
+                            {
+                                provisioningState = property0.Value.GetString();
+                            }
                             continue;
                         }
                         if (property0.NameEquals("provisioningStateValues"))
@@ -71,7 +85,14 @@ namespace lro.Models
                             {
                                 continue;
                             }
-                            provisioningStateValues = new SubProductPropertiesProvisioningStateValues(property0.Value.GetString());
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                provisioningStateValues = null;
+                            }
+                            else
+                            {
+                                provisioningStateValues = new SubProductPropertiesProvisioningStateValues(property0.Value.GetString());
+                            }
                             continue;
                         }
                     }

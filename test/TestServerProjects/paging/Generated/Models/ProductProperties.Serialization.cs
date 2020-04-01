@@ -24,7 +24,14 @@ namespace paging.Models
                     {
                         continue;
                     }
-                    id = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        id = null;
+                    }
+                    else
+                    {
+                        id = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -33,7 +40,14 @@ namespace paging.Models
                     {
                         continue;
                     }
-                    name = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        name = null;
+                    }
+                    else
+                    {
+                        name = property.Value.GetString();
+                    }
                     continue;
                 }
             }

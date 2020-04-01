@@ -70,12 +70,26 @@ namespace validation.Models
                     {
                         continue;
                     }
-                    List<string> array = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(item.GetString());
+                        displayNames = null;
                     }
-                    displayNames = array;
+                    else
+                    {
+                        List<string> array = new List<string>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(item.GetString());
+                            }
+                        }
+                        displayNames = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("capacity"))
@@ -84,7 +98,14 @@ namespace validation.Models
                     {
                         continue;
                     }
-                    capacity = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        capacity = null;
+                    }
+                    else
+                    {
+                        capacity = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("image"))
@@ -93,7 +114,14 @@ namespace validation.Models
                     {
                         continue;
                     }
-                    image = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        image = null;
+                    }
+                    else
+                    {
+                        image = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("child"))
@@ -122,7 +150,14 @@ namespace validation.Models
                     {
                         continue;
                     }
-                    constStringAsEnum = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        constStringAsEnum = null;
+                    }
+                    else
+                    {
+                        constStringAsEnum = property.Value.GetString();
+                    }
                     continue;
                 }
             }

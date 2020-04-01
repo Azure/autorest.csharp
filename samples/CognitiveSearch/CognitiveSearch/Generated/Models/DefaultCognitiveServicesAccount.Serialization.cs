@@ -42,7 +42,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    description = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        description = null;
+                    }
+                    else
+                    {
+                        description = property.Value.GetString();
+                    }
                     continue;
                 }
             }

@@ -41,7 +41,14 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    field = property.Value.GetDateTimeOffset("D");
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        field = null;
+                    }
+                    else
+                    {
+                        field = property.Value.GetDateTimeOffset("D");
+                    }
                     continue;
                 }
                 if (property.NameEquals("leap"))
@@ -50,7 +57,14 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    leap = property.Value.GetDateTimeOffset("D");
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        leap = null;
+                    }
+                    else
+                    {
+                        leap = property.Value.GetDateTimeOffset("D");
+                    }
                     continue;
                 }
             }

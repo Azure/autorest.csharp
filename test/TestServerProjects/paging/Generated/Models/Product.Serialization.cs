@@ -23,7 +23,14 @@ namespace paging.Models
                     {
                         continue;
                     }
-                    properties = ProductProperties.DeserializeProductProperties(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        properties = null;
+                    }
+                    else
+                    {
+                        properties = ProductProperties.DeserializeProductProperties(property.Value);
+                    }
                     continue;
                 }
             }

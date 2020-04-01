@@ -59,7 +59,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    keyname = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        keyname = null;
+                    }
+                    else
+                    {
+                        keyname = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("keyversion"))
@@ -68,7 +75,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    keyversion = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        keyversion = null;
+                    }
+                    else
+                    {
+                        keyversion = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("keyvaulturi"))
@@ -77,7 +91,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    keyvaulturi = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        keyvaulturi = null;
+                    }
+                    else
+                    {
+                        keyvaulturi = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("currentVersionedKeyIdentifier"))
@@ -86,7 +107,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    currentVersionedKeyIdentifier = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        currentVersionedKeyIdentifier = null;
+                    }
+                    else
+                    {
+                        currentVersionedKeyIdentifier = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("lastKeyRotationTimestamp"))
@@ -95,7 +123,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    lastKeyRotationTimestamp = property.Value.GetDateTimeOffset("S");
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        lastKeyRotationTimestamp = null;
+                    }
+                    else
+                    {
+                        lastKeyRotationTimestamp = property.Value.GetDateTimeOffset("S");
+                    }
                     continue;
                 }
             }

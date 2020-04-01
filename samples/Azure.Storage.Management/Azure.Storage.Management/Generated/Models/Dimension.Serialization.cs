@@ -24,7 +24,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    name = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        name = null;
+                    }
+                    else
+                    {
+                        name = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("displayName"))
@@ -33,7 +40,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    displayName = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        displayName = null;
+                    }
+                    else
+                    {
+                        displayName = property.Value.GetString();
+                    }
                     continue;
                 }
             }

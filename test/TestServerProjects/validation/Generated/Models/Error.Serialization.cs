@@ -25,7 +25,14 @@ namespace validation.Models
                     {
                         continue;
                     }
-                    code = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        code = null;
+                    }
+                    else
+                    {
+                        code = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("message"))
@@ -34,7 +41,14 @@ namespace validation.Models
                     {
                         continue;
                     }
-                    message = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        message = null;
+                    }
+                    else
+                    {
+                        message = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("fields"))
@@ -43,7 +57,14 @@ namespace validation.Models
                     {
                         continue;
                     }
-                    fields = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        fields = null;
+                    }
+                    else
+                    {
+                        fields = property.Value.GetString();
+                    }
                     continue;
                 }
             }

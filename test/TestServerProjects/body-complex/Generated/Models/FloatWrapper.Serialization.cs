@@ -40,7 +40,14 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    field1 = property.Value.GetSingle();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        field1 = null;
+                    }
+                    else
+                    {
+                        field1 = property.Value.GetSingle();
+                    }
                     continue;
                 }
                 if (property.NameEquals("field2"))
@@ -49,7 +56,14 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    field2 = property.Value.GetSingle();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        field2 = null;
+                    }
+                    else
+                    {
+                        field2 = property.Value.GetSingle();
+                    }
                     continue;
                 }
             }

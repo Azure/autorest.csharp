@@ -46,7 +46,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    encoder = property.Value.GetString().ToPhoneticEncoder();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        encoder = null;
+                    }
+                    else
+                    {
+                        encoder = property.Value.GetString().ToPhoneticEncoder();
+                    }
                     continue;
                 }
                 if (property.NameEquals("replace"))
@@ -55,7 +62,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    replace = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        replace = null;
+                    }
+                    else
+                    {
+                        replace = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))

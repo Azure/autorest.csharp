@@ -40,7 +40,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    ipTagType = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        ipTagType = null;
+                    }
+                    else
+                    {
+                        ipTagType = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("tag"))
@@ -49,7 +56,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    tag = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        tag = null;
+                    }
+                    else
+                    {
+                        tag = property.Value.GetString();
+                    }
                     continue;
                 }
             }

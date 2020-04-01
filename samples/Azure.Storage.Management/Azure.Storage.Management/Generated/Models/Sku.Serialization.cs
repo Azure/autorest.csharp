@@ -42,7 +42,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    tier = property.Value.GetString().ToSkuTier();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        tier = null;
+                    }
+                    else
+                    {
+                        tier = property.Value.GetString().ToSkuTier();
+                    }
                     continue;
                 }
             }

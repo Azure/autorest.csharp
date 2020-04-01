@@ -58,7 +58,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    accessCredentials = AzureActiveDirectoryApplicationCredentials.DeserializeAzureActiveDirectoryApplicationCredentials(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        accessCredentials = null;
+                    }
+                    else
+                    {
+                        accessCredentials = AzureActiveDirectoryApplicationCredentials.DeserializeAzureActiveDirectoryApplicationCredentials(property.Value);
+                    }
                     continue;
                 }
             }

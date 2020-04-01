@@ -43,7 +43,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    startTime = property.Value.GetDateTimeOffset("S");
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        startTime = null;
+                    }
+                    else
+                    {
+                        startTime = property.Value.GetDateTimeOffset("S");
+                    }
                     continue;
                 }
             }

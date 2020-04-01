@@ -111,12 +111,26 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                    foreach (var property0 in property.Value.EnumerateObject())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        dictionary.Add(property0.Name, property0.Value.GetString());
+                        httpHeaders = null;
                     }
-                    httpHeaders = dictionary;
+                    else
+                    {
+                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                        foreach (var property0 in property.Value.EnumerateObject())
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                dictionary.Add(property0.Name, null);
+                            }
+                            else
+                            {
+                                dictionary.Add(property0.Name, property0.Value.GetString());
+                            }
+                        }
+                        httpHeaders = dictionary;
+                    }
                     continue;
                 }
                 if (property.NameEquals("httpMethod"))
@@ -125,7 +139,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    httpMethod = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        httpMethod = null;
+                    }
+                    else
+                    {
+                        httpMethod = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("timeout"))
@@ -134,7 +155,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    timeout = property.Value.GetTimeSpan("P");
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        timeout = null;
+                    }
+                    else
+                    {
+                        timeout = property.Value.GetTimeSpan("P");
+                    }
                     continue;
                 }
                 if (property.NameEquals("batchSize"))
@@ -143,7 +171,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    batchSize = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        batchSize = null;
+                    }
+                    else
+                    {
+                        batchSize = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("degreeOfParallelism"))
@@ -152,7 +187,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    degreeOfParallelism = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        degreeOfParallelism = null;
+                    }
+                    else
+                    {
+                        degreeOfParallelism = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))
@@ -166,7 +208,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    name = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        name = null;
+                    }
+                    else
+                    {
+                        name = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("description"))
@@ -175,7 +224,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    description = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        description = null;
+                    }
+                    else
+                    {
+                        description = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("context"))
@@ -184,7 +240,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    context = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        context = null;
+                    }
+                    else
+                    {
+                        context = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("inputs"))
@@ -192,7 +255,14 @@ namespace CognitiveSearch.Models
                     List<InputFieldMappingEntry> array = new List<InputFieldMappingEntry>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(InputFieldMappingEntry.DeserializeInputFieldMappingEntry(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(InputFieldMappingEntry.DeserializeInputFieldMappingEntry(item));
+                        }
                     }
                     inputs = array;
                     continue;
@@ -202,7 +272,14 @@ namespace CognitiveSearch.Models
                     List<OutputFieldMappingEntry> array = new List<OutputFieldMappingEntry>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(OutputFieldMappingEntry.DeserializeOutputFieldMappingEntry(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(OutputFieldMappingEntry.DeserializeOutputFieldMappingEntry(item));
+                        }
                     }
                     outputs = array;
                     continue;

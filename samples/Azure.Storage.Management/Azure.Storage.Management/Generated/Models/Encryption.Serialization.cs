@@ -43,7 +43,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    services = EncryptionServices.DeserializeEncryptionServices(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        services = null;
+                    }
+                    else
+                    {
+                        services = EncryptionServices.DeserializeEncryptionServices(property.Value);
+                    }
                     continue;
                 }
                 if (property.NameEquals("keySource"))
@@ -57,7 +64,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    keyvaultproperties = KeyVaultProperties.DeserializeKeyVaultProperties(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        keyvaultproperties = null;
+                    }
+                    else
+                    {
+                        keyvaultproperties = KeyVaultProperties.DeserializeKeyVaultProperties(property.Value);
+                    }
                     continue;
                 }
             }

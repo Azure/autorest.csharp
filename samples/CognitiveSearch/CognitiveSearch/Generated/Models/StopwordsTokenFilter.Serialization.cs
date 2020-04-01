@@ -64,12 +64,26 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    List<string> array = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(item.GetString());
+                        stopwords = null;
                     }
-                    stopwords = array;
+                    else
+                    {
+                        List<string> array = new List<string>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(item.GetString());
+                            }
+                        }
+                        stopwords = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("stopwordsList"))
@@ -78,7 +92,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    stopwordsList = property.Value.GetString().ToStopwordsList();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        stopwordsList = null;
+                    }
+                    else
+                    {
+                        stopwordsList = property.Value.GetString().ToStopwordsList();
+                    }
                     continue;
                 }
                 if (property.NameEquals("ignoreCase"))
@@ -87,7 +108,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    ignoreCase = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        ignoreCase = null;
+                    }
+                    else
+                    {
+                        ignoreCase = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("removeTrailing"))
@@ -96,7 +124,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    removeTrailing = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        removeTrailing = null;
+                    }
+                    else
+                    {
+                        removeTrailing = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))

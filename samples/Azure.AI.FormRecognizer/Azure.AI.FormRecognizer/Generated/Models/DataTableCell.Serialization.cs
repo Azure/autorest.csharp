@@ -43,7 +43,14 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    rowSpan = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        rowSpan = null;
+                    }
+                    else
+                    {
+                        rowSpan = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("columnSpan"))
@@ -52,7 +59,14 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    columnSpan = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        columnSpan = null;
+                    }
+                    else
+                    {
+                        columnSpan = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("text"))
@@ -81,12 +95,26 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    List<string> array = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(item.GetString());
+                        elements = null;
                     }
-                    elements = array;
+                    else
+                    {
+                        List<string> array = new List<string>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(item.GetString());
+                            }
+                        }
+                        elements = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("isHeader"))
@@ -95,7 +123,14 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    isHeader = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        isHeader = null;
+                    }
+                    else
+                    {
+                        isHeader = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("isFooter"))
@@ -104,7 +139,14 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    isFooter = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        isFooter = null;
+                    }
+                    else
+                    {
+                        isFooter = property.Value.GetBoolean();
+                    }
                     continue;
                 }
             }

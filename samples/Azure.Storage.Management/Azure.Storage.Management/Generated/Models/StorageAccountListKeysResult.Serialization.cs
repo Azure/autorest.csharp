@@ -24,12 +24,26 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    List<StorageAccountKey> array = new List<StorageAccountKey>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(StorageAccountKey.DeserializeStorageAccountKey(item));
+                        keys = null;
                     }
-                    keys = array;
+                    else
+                    {
+                        List<StorageAccountKey> array = new List<StorageAccountKey>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(StorageAccountKey.DeserializeStorageAccountKey(item));
+                            }
+                        }
+                        keys = array;
+                    }
                     continue;
                 }
             }

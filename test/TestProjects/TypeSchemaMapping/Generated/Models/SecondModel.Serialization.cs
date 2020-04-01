@@ -56,12 +56,26 @@ namespace TypeSchemaMapping.Models
                     {
                         continue;
                     }
-                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                    foreach (var property0 in property.Value.EnumerateObject())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        dictionary.Add(property0.Name, property0.Value.GetString());
+                        dictionaryProperty = null;
                     }
-                    dictionaryProperty = dictionary;
+                    else
+                    {
+                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                        foreach (var property0 in property.Value.EnumerateObject())
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                dictionary.Add(property0.Name, null);
+                            }
+                            else
+                            {
+                                dictionary.Add(property0.Name, property0.Value.GetString());
+                            }
+                        }
+                        dictionaryProperty = dictionary;
+                    }
                     continue;
                 }
                 if (property.NameEquals("DaysOfWeek"))
@@ -70,7 +84,14 @@ namespace TypeSchemaMapping.Models
                     {
                         continue;
                     }
-                    daysOfWeek = new CustomDaysOfWeek(property.Value.GetString());
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        daysOfWeek = null;
+                    }
+                    else
+                    {
+                        daysOfWeek = new CustomDaysOfWeek(property.Value.GetString());
+                    }
                     continue;
                 }
             }

@@ -40,7 +40,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    baseBlob = ManagementPolicyBaseBlob.DeserializeManagementPolicyBaseBlob(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        baseBlob = null;
+                    }
+                    else
+                    {
+                        baseBlob = ManagementPolicyBaseBlob.DeserializeManagementPolicyBaseBlob(property.Value);
+                    }
                     continue;
                 }
                 if (property.NameEquals("snapshot"))
@@ -49,7 +56,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    snapshot = ManagementPolicySnapShot.DeserializeManagementPolicySnapShot(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        snapshot = null;
+                    }
+                    else
+                    {
+                        snapshot = ManagementPolicySnapShot.DeserializeManagementPolicySnapShot(property.Value);
+                    }
                     continue;
                 }
             }

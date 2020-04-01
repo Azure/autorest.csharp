@@ -46,7 +46,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    hasLegalHold = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        hasLegalHold = null;
+                    }
+                    else
+                    {
+                        hasLegalHold = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -55,12 +62,26 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    List<TagProperty> array = new List<TagProperty>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(TagProperty.DeserializeTagProperty(item));
+                        tags = null;
                     }
-                    tags = array;
+                    else
+                    {
+                        List<TagProperty> array = new List<TagProperty>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(TagProperty.DeserializeTagProperty(item));
+                            }
+                        }
+                        tags = array;
+                    }
                     continue;
                 }
             }

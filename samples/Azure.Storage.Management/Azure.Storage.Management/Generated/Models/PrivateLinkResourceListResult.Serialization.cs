@@ -24,12 +24,26 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    List<PrivateLinkResource> array = new List<PrivateLinkResource>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(PrivateLinkResource.DeserializePrivateLinkResource(item));
+                        value = null;
                     }
-                    value = array;
+                    else
+                    {
+                        List<PrivateLinkResource> array = new List<PrivateLinkResource>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(PrivateLinkResource.DeserializePrivateLinkResource(item));
+                            }
+                        }
+                        value = array;
+                    }
                     continue;
                 }
             }

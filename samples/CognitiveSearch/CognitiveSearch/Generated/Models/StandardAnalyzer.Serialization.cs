@@ -52,7 +52,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    maxTokenLength = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        maxTokenLength = null;
+                    }
+                    else
+                    {
+                        maxTokenLength = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("stopwords"))
@@ -61,12 +68,26 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    List<string> array = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(item.GetString());
+                        stopwords = null;
                     }
-                    stopwords = array;
+                    else
+                    {
+                        List<string> array = new List<string>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(item.GetString());
+                            }
+                        }
+                        stopwords = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))

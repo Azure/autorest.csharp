@@ -38,12 +38,26 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                    foreach (var property0 in property.Value.EnumerateObject())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        dictionary.Add(property0.Name, property0.Value.GetString());
+                        details = null;
                     }
-                    details = dictionary;
+                    else
+                    {
+                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                        foreach (var property0 in property.Value.EnumerateObject())
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                dictionary.Add(property0.Name, null);
+                            }
+                            else
+                            {
+                                dictionary.Add(property0.Name, property0.Value.GetString());
+                            }
+                        }
+                        details = dictionary;
+                    }
                     continue;
                 }
                 if (property.NameEquals("target"))
@@ -52,7 +66,14 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    target = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        target = null;
+                    }
+                    else
+                    {
+                        target = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("innerError"))
@@ -61,7 +82,14 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    innerError = DeserializeInnerError(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        innerError = null;
+                    }
+                    else
+                    {
+                        innerError = DeserializeInnerError(property.Value);
+                    }
                     continue;
                 }
             }

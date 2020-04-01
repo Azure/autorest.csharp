@@ -72,7 +72,14 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    baseProductDescription = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        baseProductDescription = null;
+                    }
+                    else
+                    {
+                        baseProductDescription = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("details"))
@@ -85,7 +92,14 @@ namespace model_flattening.Models
                             {
                                 continue;
                             }
-                            maxProductDisplayName = property0.Value.GetString();
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                maxProductDisplayName = null;
+                            }
+                            else
+                            {
+                                maxProductDisplayName = property0.Value.GetString();
+                            }
                             continue;
                         }
                         if (property0.NameEquals("max_product_capacity"))
@@ -94,7 +108,14 @@ namespace model_flattening.Models
                             {
                                 continue;
                             }
-                            maxProductCapacity = property0.Value.GetString();
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                maxProductCapacity = null;
+                            }
+                            else
+                            {
+                                maxProductCapacity = property0.Value.GetString();
+                            }
                             continue;
                         }
                         if (property0.NameEquals("max_product_image"))
@@ -107,7 +128,14 @@ namespace model_flattening.Models
                                     {
                                         continue;
                                     }
-                                    genericValue = property1.Value.GetString();
+                                    if (property1.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        genericValue = null;
+                                    }
+                                    else
+                                    {
+                                        genericValue = property1.Value.GetString();
+                                    }
                                     continue;
                                 }
                                 if (property1.NameEquals("@odata.value"))
@@ -116,7 +144,14 @@ namespace model_flattening.Models
                                     {
                                         continue;
                                     }
-                                    odatavalue = property1.Value.GetString();
+                                    if (property1.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        odatavalue = null;
+                                    }
+                                    else
+                                    {
+                                        odatavalue = property1.Value.GetString();
+                                    }
                                     continue;
                                 }
                             }

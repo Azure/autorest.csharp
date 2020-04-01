@@ -46,7 +46,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    maxTokenCount = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        maxTokenCount = null;
+                    }
+                    else
+                    {
+                        maxTokenCount = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("consumeAllTokens"))
@@ -55,7 +62,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    consumeAllTokens = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        consumeAllTokens = null;
+                    }
+                    else
+                    {
+                        consumeAllTokens = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))

@@ -52,7 +52,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    service = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        service = null;
+                    }
+                    else
+                    {
+                        service = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("locations"))
@@ -61,12 +68,26 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    List<string> array = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(item.GetString());
+                        locations = null;
                     }
-                    locations = array;
+                    else
+                    {
+                        List<string> array = new List<string>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(item.GetString());
+                            }
+                        }
+                        locations = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("provisioningState"))
@@ -75,7 +96,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    provisioningState = new ProvisioningState(property.Value.GetString());
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        provisioningState = null;
+                    }
+                    else
+                    {
+                        provisioningState = new ProvisioningState(property.Value.GetString());
+                    }
                     continue;
                 }
             }

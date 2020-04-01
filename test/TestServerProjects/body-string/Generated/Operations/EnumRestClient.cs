@@ -343,7 +343,14 @@ namespace body_string
                         {
                             RefColorConstant value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = RefColorConstant.DeserializeRefColorConstant(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = RefColorConstant.DeserializeRefColorConstant(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -373,7 +380,14 @@ namespace body_string
                         {
                             RefColorConstant value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = RefColorConstant.DeserializeRefColorConstant(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = RefColorConstant.DeserializeRefColorConstant(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:

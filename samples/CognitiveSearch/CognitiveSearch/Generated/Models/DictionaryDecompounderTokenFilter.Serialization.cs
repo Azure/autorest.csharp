@@ -66,7 +66,14 @@ namespace CognitiveSearch.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetString());
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(item.GetString());
+                        }
                     }
                     wordList = array;
                     continue;
@@ -77,7 +84,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    minWordSize = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        minWordSize = null;
+                    }
+                    else
+                    {
+                        minWordSize = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("minSubwordSize"))
@@ -86,7 +100,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    minSubwordSize = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        minSubwordSize = null;
+                    }
+                    else
+                    {
+                        minSubwordSize = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("maxSubwordSize"))
@@ -95,7 +116,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    maxSubwordSize = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        maxSubwordSize = null;
+                    }
+                    else
+                    {
+                        maxSubwordSize = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("onlyLongestMatch"))
@@ -104,7 +132,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    onlyLongestMatch = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        onlyLongestMatch = null;
+                    }
+                    else
+                    {
+                        onlyLongestMatch = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))

@@ -29,7 +29,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    odatacount = property.Value.GetInt64();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        odatacount = null;
+                    }
+                    else
+                    {
+                        odatacount = property.Value.GetInt64();
+                    }
                     continue;
                 }
                 if (property.NameEquals("@search.coverage"))
@@ -38,7 +45,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    searchcoverage = property.Value.GetDouble();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        searchcoverage = null;
+                    }
+                    else
+                    {
+                        searchcoverage = property.Value.GetDouble();
+                    }
                     continue;
                 }
                 if (property.NameEquals("@search.facets"))
@@ -47,17 +61,38 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    Dictionary<string, IList<FacetResult>> dictionary = new Dictionary<string, IList<FacetResult>>();
-                    foreach (var property0 in property.Value.EnumerateObject())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        List<FacetResult> array = new List<FacetResult>();
-                        foreach (var item in property0.Value.EnumerateArray())
-                        {
-                            array.Add(FacetResult.DeserializeFacetResult(item));
-                        }
-                        dictionary.Add(property0.Name, array);
+                        searchfacets = null;
                     }
-                    searchfacets = dictionary;
+                    else
+                    {
+                        Dictionary<string, IList<FacetResult>> dictionary = new Dictionary<string, IList<FacetResult>>();
+                        foreach (var property0 in property.Value.EnumerateObject())
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                dictionary.Add(property0.Name, null);
+                            }
+                            else
+                            {
+                                List<FacetResult> array = new List<FacetResult>();
+                                foreach (var item in property0.Value.EnumerateArray())
+                                {
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(FacetResult.DeserializeFacetResult(item));
+                                    }
+                                }
+                                dictionary.Add(property0.Name, array);
+                            }
+                        }
+                        searchfacets = dictionary;
+                    }
                     continue;
                 }
                 if (property.NameEquals("@search.nextPageParameters"))
@@ -66,7 +101,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    searchnextPageParameters = SearchRequest.DeserializeSearchRequest(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        searchnextPageParameters = null;
+                    }
+                    else
+                    {
+                        searchnextPageParameters = SearchRequest.DeserializeSearchRequest(property.Value);
+                    }
                     continue;
                 }
                 if (property.NameEquals("value"))
@@ -74,7 +116,14 @@ namespace CognitiveSearch.Models
                     List<SearchResult> array = new List<SearchResult>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(SearchResult.DeserializeSearchResult(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(SearchResult.DeserializeSearchResult(item));
+                        }
                     }
                     value = array;
                     continue;
@@ -85,7 +134,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    odatanextLink = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        odatanextLink = null;
+                    }
+                    else
+                    {
+                        odatanextLink = property.Value.GetString();
+                    }
                     continue;
                 }
             }

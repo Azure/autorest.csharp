@@ -26,7 +26,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    provider = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        provider = null;
+                    }
+                    else
+                    {
+                        provider = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("resource"))
@@ -35,7 +42,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    resource = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        resource = null;
+                    }
+                    else
+                    {
+                        resource = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("operation"))
@@ -44,7 +58,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    operation = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        operation = null;
+                    }
+                    else
+                    {
+                        operation = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("description"))
@@ -53,7 +74,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    description = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        description = null;
+                    }
+                    else
+                    {
+                        description = property.Value.GetString();
+                    }
                     continue;
                 }
             }

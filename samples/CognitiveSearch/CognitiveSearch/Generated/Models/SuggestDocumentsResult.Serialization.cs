@@ -24,7 +24,14 @@ namespace CognitiveSearch.Models
                     List<SuggestResult> array = new List<SuggestResult>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(SuggestResult.DeserializeSuggestResult(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(SuggestResult.DeserializeSuggestResult(item));
+                        }
                     }
                     value = array;
                     continue;
@@ -35,7 +42,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    searchcoverage = property.Value.GetDouble();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        searchcoverage = null;
+                    }
+                    else
+                    {
+                        searchcoverage = property.Value.GetDouble();
+                    }
                     continue;
                 }
             }

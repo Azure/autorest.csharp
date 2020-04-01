@@ -25,12 +25,26 @@ namespace custom_baseUrl_paging.Models
                     {
                         continue;
                     }
-                    List<Product> array = new List<Product>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(Product.DeserializeProduct(item));
+                        values = null;
                     }
-                    values = array;
+                    else
+                    {
+                        List<Product> array = new List<Product>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(Product.DeserializeProduct(item));
+                            }
+                        }
+                        values = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("nextLink"))
@@ -39,7 +53,14 @@ namespace custom_baseUrl_paging.Models
                     {
                         continue;
                     }
-                    nextLink = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        nextLink = null;
+                    }
+                    else
+                    {
+                        nextLink = property.Value.GetString();
+                    }
                     continue;
                 }
             }

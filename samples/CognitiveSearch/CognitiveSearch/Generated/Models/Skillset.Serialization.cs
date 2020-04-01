@@ -64,7 +64,14 @@ namespace CognitiveSearch.Models
                     List<Skill> array = new List<Skill>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Skill.DeserializeSkill(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Skill.DeserializeSkill(item));
+                        }
                     }
                     skills = array;
                     continue;
@@ -75,7 +82,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    cognitiveServices = CognitiveServicesAccount.DeserializeCognitiveServicesAccount(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        cognitiveServices = null;
+                    }
+                    else
+                    {
+                        cognitiveServices = CognitiveServicesAccount.DeserializeCognitiveServicesAccount(property.Value);
+                    }
                     continue;
                 }
                 if (property.NameEquals("@odata.etag"))
@@ -84,7 +98,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    odataetag = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        odataetag = null;
+                    }
+                    else
+                    {
+                        odataetag = property.Value.GetString();
+                    }
                     continue;
                 }
             }

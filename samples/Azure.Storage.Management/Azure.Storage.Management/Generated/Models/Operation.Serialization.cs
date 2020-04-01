@@ -26,7 +26,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    name = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        name = null;
+                    }
+                    else
+                    {
+                        name = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("display"))
@@ -35,7 +42,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    display = OperationDisplay.DeserializeOperationDisplay(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        display = null;
+                    }
+                    else
+                    {
+                        display = OperationDisplay.DeserializeOperationDisplay(property.Value);
+                    }
                     continue;
                 }
                 if (property.NameEquals("origin"))
@@ -44,7 +58,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    origin = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        origin = null;
+                    }
+                    else
+                    {
+                        origin = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -57,7 +78,14 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            serviceSpecification = ServiceSpecification.DeserializeServiceSpecification(property0.Value);
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                serviceSpecification = null;
+                            }
+                            else
+                            {
+                                serviceSpecification = ServiceSpecification.DeserializeServiceSpecification(property0.Value);
+                            }
                             continue;
                         }
                     }

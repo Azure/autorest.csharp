@@ -24,7 +24,14 @@ namespace custom_baseUrl_more_options.Models
                     {
                         continue;
                     }
-                    status = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        status = null;
+                    }
+                    else
+                    {
+                        status = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("message"))
@@ -33,7 +40,14 @@ namespace custom_baseUrl_more_options.Models
                     {
                         continue;
                     }
-                    message = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        message = null;
+                    }
+                    else
+                    {
+                        message = property.Value.GetString();
+                    }
                     continue;
                 }
             }

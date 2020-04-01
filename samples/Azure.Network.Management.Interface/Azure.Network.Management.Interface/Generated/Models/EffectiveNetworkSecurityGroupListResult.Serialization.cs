@@ -25,12 +25,26 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    List<EffectiveNetworkSecurityGroup> array = new List<EffectiveNetworkSecurityGroup>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(EffectiveNetworkSecurityGroup.DeserializeEffectiveNetworkSecurityGroup(item));
+                        value = null;
                     }
-                    value = array;
+                    else
+                    {
+                        List<EffectiveNetworkSecurityGroup> array = new List<EffectiveNetworkSecurityGroup>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(EffectiveNetworkSecurityGroup.DeserializeEffectiveNetworkSecurityGroup(item));
+                            }
+                        }
+                        value = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("nextLink"))
@@ -39,7 +53,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    nextLink = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        nextLink = null;
+                    }
+                    else
+                    {
+                        nextLink = property.Value.GetString();
+                    }
                     continue;
                 }
             }

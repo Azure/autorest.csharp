@@ -46,7 +46,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    domainNameLabel = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        domainNameLabel = null;
+                    }
+                    else
+                    {
+                        domainNameLabel = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("fqdn"))
@@ -55,7 +62,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    fqdn = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        fqdn = null;
+                    }
+                    else
+                    {
+                        fqdn = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("reverseFqdn"))
@@ -64,7 +78,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    reverseFqdn = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        reverseFqdn = null;
+                    }
+                    else
+                    {
+                        reverseFqdn = property.Value.GetString();
+                    }
                     continue;
                 }
             }

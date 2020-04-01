@@ -34,7 +34,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    delete = DateAfterCreation.DeserializeDateAfterCreation(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        delete = null;
+                    }
+                    else
+                    {
+                        delete = DateAfterCreation.DeserializeDateAfterCreation(property.Value);
+                    }
                     continue;
                 }
             }

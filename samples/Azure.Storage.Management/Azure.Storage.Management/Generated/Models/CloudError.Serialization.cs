@@ -23,7 +23,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    error = CloudErrorBody.DeserializeCloudErrorBody(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        error = null;
+                    }
+                    else
+                    {
+                        error = CloudErrorBody.DeserializeCloudErrorBody(property.Value);
+                    }
                     continue;
                 }
             }

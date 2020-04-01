@@ -25,12 +25,26 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    List<Label> array = new List<Label>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(Label.DeserializeLabel(item));
+                        items = null;
                     }
-                    items = array;
+                    else
+                    {
+                        List<Label> array = new List<Label>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(Label.DeserializeLabel(item));
+                            }
+                        }
+                        items = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("@nextLink"))
@@ -39,7 +53,14 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    nextLink = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        nextLink = null;
+                    }
+                    else
+                    {
+                        nextLink = property.Value.GetString();
+                    }
                     continue;
                 }
             }

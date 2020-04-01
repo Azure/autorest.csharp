@@ -40,7 +40,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    fqdn = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        fqdn = null;
+                    }
+                    else
+                    {
+                        fqdn = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("ipAddress"))
@@ -49,7 +56,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    ipAddress = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        ipAddress = null;
+                    }
+                    else
+                    {
+                        ipAddress = property.Value.GetString();
+                    }
                     continue;
                 }
             }

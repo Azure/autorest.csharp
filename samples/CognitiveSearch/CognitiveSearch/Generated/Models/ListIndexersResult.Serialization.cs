@@ -23,7 +23,14 @@ namespace CognitiveSearch.Models
                     List<Indexer> array = new List<Indexer>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Indexer.DeserializeIndexer(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Indexer.DeserializeIndexer(item));
+                        }
                     }
                     value = array;
                     continue;

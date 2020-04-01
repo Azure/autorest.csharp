@@ -38,7 +38,14 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    statistics = DocumentStatistics.DeserializeDocumentStatistics(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        statistics = null;
+                    }
+                    else
+                    {
+                        statistics = DocumentStatistics.DeserializeDocumentStatistics(property.Value);
+                    }
                     continue;
                 }
                 if (property.NameEquals("documentScores"))
@@ -51,7 +58,14 @@ namespace CognitiveServices.TextAnalytics.Models
                     List<SentenceSentiment> array = new List<SentenceSentiment>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(SentenceSentiment.DeserializeSentenceSentiment(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(SentenceSentiment.DeserializeSentenceSentiment(item));
+                        }
                     }
                     sentences = array;
                     continue;

@@ -26,7 +26,14 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    label = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        label = null;
+                    }
+                    else
+                    {
+                        label = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("key"))

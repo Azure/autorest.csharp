@@ -57,7 +57,14 @@ namespace additionalProperties.Models
                     {
                         continue;
                     }
-                    friendly = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        friendly = null;
+                    }
+                    else
+                    {
+                        friendly = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -71,7 +78,14 @@ namespace additionalProperties.Models
                     {
                         continue;
                     }
-                    name = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        name = null;
+                    }
+                    else
+                    {
+                        name = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("status"))
@@ -80,10 +94,24 @@ namespace additionalProperties.Models
                     {
                         continue;
                     }
-                    status = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        status = null;
+                    }
+                    else
+                    {
+                        status = property.Value.GetBoolean();
+                    }
                     continue;
                 }
-                additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, null);
+                }
+                else
+                {
+                    additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
+                }
             }
             additionalProperties = additionalPropertiesDictionary;
             return new CatAPTrue(id, name, status, additionalProperties, friendly);

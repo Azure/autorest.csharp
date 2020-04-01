@@ -25,7 +25,14 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    odatametadata = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        odatametadata = null;
+                    }
+                    else
+                    {
+                        odatametadata = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("value"))
@@ -34,12 +41,26 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    List<TableResponseProperties> array = new List<TableResponseProperties>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(TableResponseProperties.DeserializeTableResponseProperties(item));
+                        value = null;
                     }
-                    value = array;
+                    else
+                    {
+                        List<TableResponseProperties> array = new List<TableResponseProperties>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(TableResponseProperties.DeserializeTableResponseProperties(item));
+                            }
+                        }
+                        value = array;
+                    }
                     continue;
                 }
             }

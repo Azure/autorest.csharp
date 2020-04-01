@@ -52,7 +52,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    groupId = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        groupId = null;
+                    }
+                    else
+                    {
+                        groupId = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("requiredMemberName"))
@@ -61,7 +68,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    requiredMemberName = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        requiredMemberName = null;
+                    }
+                    else
+                    {
+                        requiredMemberName = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("fqdns"))
@@ -70,12 +84,26 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    List<string> array = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(item.GetString());
+                        fqdns = null;
                     }
-                    fqdns = array;
+                    else
+                    {
+                        List<string> array = new List<string>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(item.GetString());
+                            }
+                        }
+                        fqdns = array;
+                    }
                     continue;
                 }
             }

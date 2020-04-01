@@ -42,7 +42,14 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    baseProductDescription = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        baseProductDescription = null;
+                    }
+                    else
+                    {
+                        baseProductDescription = property.Value.GetString();
+                    }
                     continue;
                 }
             }

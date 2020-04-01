@@ -26,7 +26,14 @@ namespace Azure.AI.FormRecognizer.Models
                     List<TrainingDocumentInfo> array = new List<TrainingDocumentInfo>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(TrainingDocumentInfo.DeserializeTrainingDocumentInfo(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(TrainingDocumentInfo.DeserializeTrainingDocumentInfo(item));
+                        }
                     }
                     trainingDocuments = array;
                     continue;
@@ -37,12 +44,26 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    List<FormFieldsReport> array = new List<FormFieldsReport>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(FormFieldsReport.DeserializeFormFieldsReport(item));
+                        fields = null;
                     }
-                    fields = array;
+                    else
+                    {
+                        List<FormFieldsReport> array = new List<FormFieldsReport>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(FormFieldsReport.DeserializeFormFieldsReport(item));
+                            }
+                        }
+                        fields = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("averageModelAccuracy"))
@@ -51,7 +72,14 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    averageModelAccuracy = property.Value.GetSingle();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        averageModelAccuracy = null;
+                    }
+                    else
+                    {
+                        averageModelAccuracy = property.Value.GetSingle();
+                    }
                     continue;
                 }
                 if (property.NameEquals("errors"))
@@ -60,12 +88,26 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    List<ErrorInformation> array = new List<ErrorInformation>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(ErrorInformation.DeserializeErrorInformation(item));
+                        errors = null;
                     }
-                    errors = array;
+                    else
+                    {
+                        List<ErrorInformation> array = new List<ErrorInformation>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(ErrorInformation.DeserializeErrorInformation(item));
+                            }
+                        }
+                        errors = array;
+                    }
                     continue;
                 }
             }

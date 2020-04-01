@@ -226,12 +226,26 @@ namespace Azure.Network.Management.Interface
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                return NetworkInterface.DeserializeNetworkInterface(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return NetworkInterface.DeserializeNetworkInterface(document.RootElement);
+                }
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                return NetworkInterface.DeserializeNetworkInterface(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return NetworkInterface.DeserializeNetworkInterface(document.RootElement);
+                }
             });
         }
 
@@ -301,12 +315,26 @@ namespace Azure.Network.Management.Interface
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                return EffectiveRouteListResult.DeserializeEffectiveRouteListResult(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return EffectiveRouteListResult.DeserializeEffectiveRouteListResult(document.RootElement);
+                }
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                return EffectiveRouteListResult.DeserializeEffectiveRouteListResult(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return EffectiveRouteListResult.DeserializeEffectiveRouteListResult(document.RootElement);
+                }
             });
         }
 
@@ -366,12 +394,26 @@ namespace Azure.Network.Management.Interface
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                return EffectiveNetworkSecurityGroupListResult.DeserializeEffectiveNetworkSecurityGroupListResult(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return EffectiveNetworkSecurityGroupListResult.DeserializeEffectiveNetworkSecurityGroupListResult(document.RootElement);
+                }
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                return EffectiveNetworkSecurityGroupListResult.DeserializeEffectiveNetworkSecurityGroupListResult(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return EffectiveNetworkSecurityGroupListResult.DeserializeEffectiveNetworkSecurityGroupListResult(document.RootElement);
+                }
             });
         }
 

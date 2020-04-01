@@ -135,7 +135,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    etag = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        etag = null;
+                    }
+                    else
+                    {
+                        etag = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -144,7 +151,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    id = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        id = null;
+                    }
+                    else
+                    {
+                        id = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -153,7 +167,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    name = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        name = null;
+                    }
+                    else
+                    {
+                        name = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -162,7 +183,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    type = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        type = null;
+                    }
+                    else
+                    {
+                        type = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -175,7 +203,14 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            defaultEncryptionScope = property0.Value.GetString();
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                defaultEncryptionScope = null;
+                            }
+                            else
+                            {
+                                defaultEncryptionScope = property0.Value.GetString();
+                            }
                             continue;
                         }
                         if (property0.NameEquals("denyEncryptionScopeOverride"))
@@ -184,7 +219,14 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            denyEncryptionScopeOverride = property0.Value.GetBoolean();
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                denyEncryptionScopeOverride = null;
+                            }
+                            else
+                            {
+                                denyEncryptionScopeOverride = property0.Value.GetBoolean();
+                            }
                             continue;
                         }
                         if (property0.NameEquals("publicAccess"))
@@ -193,7 +235,14 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            publicAccess = property0.Value.GetString().ToPublicAccess();
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                publicAccess = null;
+                            }
+                            else
+                            {
+                                publicAccess = property0.Value.GetString().ToPublicAccess();
+                            }
                             continue;
                         }
                         if (property0.NameEquals("lastModifiedTime"))
@@ -202,7 +251,14 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            lastModifiedTime = property0.Value.GetDateTimeOffset("S");
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                lastModifiedTime = null;
+                            }
+                            else
+                            {
+                                lastModifiedTime = property0.Value.GetDateTimeOffset("S");
+                            }
                             continue;
                         }
                         if (property0.NameEquals("leaseStatus"))
@@ -211,7 +267,14 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            leaseStatus = new LeaseStatus(property0.Value.GetString());
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                leaseStatus = null;
+                            }
+                            else
+                            {
+                                leaseStatus = new LeaseStatus(property0.Value.GetString());
+                            }
                             continue;
                         }
                         if (property0.NameEquals("leaseState"))
@@ -220,7 +283,14 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            leaseState = new LeaseState(property0.Value.GetString());
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                leaseState = null;
+                            }
+                            else
+                            {
+                                leaseState = new LeaseState(property0.Value.GetString());
+                            }
                             continue;
                         }
                         if (property0.NameEquals("leaseDuration"))
@@ -229,7 +299,14 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            leaseDuration = new LeaseDuration(property0.Value.GetString());
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                leaseDuration = null;
+                            }
+                            else
+                            {
+                                leaseDuration = new LeaseDuration(property0.Value.GetString());
+                            }
                             continue;
                         }
                         if (property0.NameEquals("metadata"))
@@ -238,12 +315,26 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property1 in property0.Value.EnumerateObject())
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property1.Name, property1.Value.GetString());
+                                metadata = null;
                             }
-                            metadata = dictionary;
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property1 in property0.Value.EnumerateObject())
+                                {
+                                    if (property1.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property1.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property1.Name, property1.Value.GetString());
+                                    }
+                                }
+                                metadata = dictionary;
+                            }
                             continue;
                         }
                         if (property0.NameEquals("immutabilityPolicy"))
@@ -252,7 +343,14 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            immutabilityPolicy = ImmutabilityPolicyProperties.DeserializeImmutabilityPolicyProperties(property0.Value);
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                immutabilityPolicy = null;
+                            }
+                            else
+                            {
+                                immutabilityPolicy = ImmutabilityPolicyProperties.DeserializeImmutabilityPolicyProperties(property0.Value);
+                            }
                             continue;
                         }
                         if (property0.NameEquals("legalHold"))
@@ -261,7 +359,14 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            legalHold = LegalHoldProperties.DeserializeLegalHoldProperties(property0.Value);
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                legalHold = null;
+                            }
+                            else
+                            {
+                                legalHold = LegalHoldProperties.DeserializeLegalHoldProperties(property0.Value);
+                            }
                             continue;
                         }
                         if (property0.NameEquals("hasLegalHold"))
@@ -270,7 +375,14 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            hasLegalHold = property0.Value.GetBoolean();
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                hasLegalHold = null;
+                            }
+                            else
+                            {
+                                hasLegalHold = property0.Value.GetBoolean();
+                            }
                             continue;
                         }
                         if (property0.NameEquals("hasImmutabilityPolicy"))
@@ -279,7 +391,14 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            hasImmutabilityPolicy = property0.Value.GetBoolean();
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                hasImmutabilityPolicy = null;
+                            }
+                            else
+                            {
+                                hasImmutabilityPolicy = property0.Value.GetBoolean();
+                            }
                             continue;
                         }
                     }

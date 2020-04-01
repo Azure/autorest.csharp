@@ -30,7 +30,14 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    keys = KeysResult.DeserializeKeysResult(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        keys = null;
+                    }
+                    else
+                    {
+                        keys = KeysResult.DeserializeKeysResult(property.Value);
+                    }
                     continue;
                 }
                 if (property.NameEquals("trainResult"))
@@ -39,7 +46,14 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    trainResult = TrainResult.DeserializeTrainResult(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        trainResult = null;
+                    }
+                    else
+                    {
+                        trainResult = TrainResult.DeserializeTrainResult(property.Value);
+                    }
                     continue;
                 }
             }

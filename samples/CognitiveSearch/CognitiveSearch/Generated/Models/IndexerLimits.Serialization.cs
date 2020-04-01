@@ -26,7 +26,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    maxRunTime = property.Value.GetTimeSpan("P");
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        maxRunTime = null;
+                    }
+                    else
+                    {
+                        maxRunTime = property.Value.GetTimeSpan("P");
+                    }
                     continue;
                 }
                 if (property.NameEquals("maxDocumentExtractionSize"))
@@ -35,7 +42,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    maxDocumentExtractionSize = property.Value.GetInt64();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        maxDocumentExtractionSize = null;
+                    }
+                    else
+                    {
+                        maxDocumentExtractionSize = property.Value.GetInt64();
+                    }
                     continue;
                 }
                 if (property.NameEquals("maxDocumentContentCharactersToExtract"))
@@ -44,7 +58,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    maxDocumentContentCharactersToExtract = property.Value.GetInt64();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        maxDocumentContentCharactersToExtract = null;
+                    }
+                    else
+                    {
+                        maxDocumentContentCharactersToExtract = property.Value.GetInt64();
+                    }
                     continue;
                 }
             }

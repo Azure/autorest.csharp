@@ -32,7 +32,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    name = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        name = null;
+                    }
+                    else
+                    {
+                        name = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("displayName"))
@@ -41,7 +48,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    displayName = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        displayName = null;
+                    }
+                    else
+                    {
+                        displayName = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("displayDescription"))
@@ -50,7 +64,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    displayDescription = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        displayDescription = null;
+                    }
+                    else
+                    {
+                        displayDescription = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("unit"))
@@ -59,7 +80,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    unit = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        unit = null;
+                    }
+                    else
+                    {
+                        unit = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("dimensions"))
@@ -68,12 +96,26 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    List<Dimension> array = new List<Dimension>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(Dimension.DeserializeDimension(item));
+                        dimensions = null;
                     }
-                    dimensions = array;
+                    else
+                    {
+                        List<Dimension> array = new List<Dimension>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(Dimension.DeserializeDimension(item));
+                            }
+                        }
+                        dimensions = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("aggregationType"))
@@ -82,7 +124,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    aggregationType = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        aggregationType = null;
+                    }
+                    else
+                    {
+                        aggregationType = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("fillGapWithZero"))
@@ -91,7 +140,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    fillGapWithZero = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        fillGapWithZero = null;
+                    }
+                    else
+                    {
+                        fillGapWithZero = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("category"))
@@ -100,7 +156,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    category = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        category = null;
+                    }
+                    else
+                    {
+                        category = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("resourceIdDimensionNameOverride"))
@@ -109,7 +172,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    resourceIdDimensionNameOverride = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        resourceIdDimensionNameOverride = null;
+                    }
+                    else
+                    {
+                        resourceIdDimensionNameOverride = property.Value.GetString();
+                    }
                     continue;
                 }
             }

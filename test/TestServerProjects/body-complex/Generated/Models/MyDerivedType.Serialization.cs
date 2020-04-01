@@ -26,7 +26,14 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    propD1 = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        propD1 = null;
+                    }
+                    else
+                    {
+                        propD1 = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("kind"))
@@ -40,7 +47,14 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    propB1 = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        propB1 = null;
+                    }
+                    else
+                    {
+                        propB1 = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("helper"))
@@ -53,7 +67,14 @@ namespace body_complex.Models
                             {
                                 continue;
                             }
-                            propBH1 = property0.Value.GetString();
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                propBH1 = null;
+                            }
+                            else
+                            {
+                                propBH1 = property0.Value.GetString();
+                            }
                             continue;
                         }
                     }

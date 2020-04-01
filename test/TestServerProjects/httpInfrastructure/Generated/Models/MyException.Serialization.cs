@@ -23,7 +23,14 @@ namespace httpInfrastructure.Models
                     {
                         continue;
                     }
-                    statusCode = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        statusCode = null;
+                    }
+                    else
+                    {
+                        statusCode = property.Value.GetString();
+                    }
                     continue;
                 }
             }

@@ -61,7 +61,14 @@ namespace additionalProperties.Models
                     {
                         continue;
                     }
-                    name = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        name = null;
+                    }
+                    else
+                    {
+                        name = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("status"))
@@ -70,7 +77,14 @@ namespace additionalProperties.Models
                     {
                         continue;
                     }
-                    status = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        status = null;
+                    }
+                    else
+                    {
+                        status = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("additionalProperties"))
@@ -79,12 +93,19 @@ namespace additionalProperties.Models
                     {
                         continue;
                     }
-                    Dictionary<string, float> dictionary = new Dictionary<string, float>();
-                    foreach (var property0 in property.Value.EnumerateObject())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        dictionary.Add(property0.Name, property0.Value.GetSingle());
+                        additionalProperties = null;
                     }
-                    additionalProperties = dictionary;
+                    else
+                    {
+                        Dictionary<string, float> dictionary = new Dictionary<string, float>();
+                        foreach (var property0 in property.Value.EnumerateObject())
+                        {
+                            dictionary.Add(property0.Name, property0.Value.GetSingle());
+                        }
+                        additionalProperties = dictionary;
+                    }
                     continue;
                 }
             }

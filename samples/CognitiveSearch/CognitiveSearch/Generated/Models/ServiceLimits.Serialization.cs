@@ -26,7 +26,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    maxFieldsPerIndex = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        maxFieldsPerIndex = null;
+                    }
+                    else
+                    {
+                        maxFieldsPerIndex = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("maxFieldNestingDepthPerIndex"))
@@ -35,7 +42,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    maxFieldNestingDepthPerIndex = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        maxFieldNestingDepthPerIndex = null;
+                    }
+                    else
+                    {
+                        maxFieldNestingDepthPerIndex = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("maxComplexCollectionFieldsPerIndex"))
@@ -44,7 +58,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    maxComplexCollectionFieldsPerIndex = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        maxComplexCollectionFieldsPerIndex = null;
+                    }
+                    else
+                    {
+                        maxComplexCollectionFieldsPerIndex = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("maxComplexObjectsInCollectionsPerDocument"))
@@ -53,7 +74,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    maxComplexObjectsInCollectionsPerDocument = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        maxComplexObjectsInCollectionsPerDocument = null;
+                    }
+                    else
+                    {
+                        maxComplexObjectsInCollectionsPerDocument = property.Value.GetInt32();
+                    }
                     continue;
                 }
             }

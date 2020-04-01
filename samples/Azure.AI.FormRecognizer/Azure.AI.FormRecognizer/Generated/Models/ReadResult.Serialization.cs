@@ -55,7 +55,14 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    language = new Language(property.Value.GetString());
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        language = null;
+                    }
+                    else
+                    {
+                        language = new Language(property.Value.GetString());
+                    }
                     continue;
                 }
                 if (property.NameEquals("lines"))
@@ -64,12 +71,26 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    List<TextLine> array = new List<TextLine>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(TextLine.DeserializeTextLine(item));
+                        lines = null;
                     }
-                    lines = array;
+                    else
+                    {
+                        List<TextLine> array = new List<TextLine>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(TextLine.DeserializeTextLine(item));
+                            }
+                        }
+                        lines = array;
+                    }
                     continue;
                 }
             }

@@ -46,7 +46,14 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    id = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        id = null;
+                    }
+                    else
+                    {
+                        id = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -55,7 +62,14 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    name = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        name = null;
+                    }
+                    else
+                    {
+                        name = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("color"))
@@ -64,7 +78,14 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    color = new CMYKColors(property.Value.GetString());
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        color = null;
+                    }
+                    else
+                    {
+                        color = new CMYKColors(property.Value.GetString());
+                    }
                     continue;
                 }
             }

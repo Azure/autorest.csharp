@@ -92,7 +92,14 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    id = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        id = null;
+                    }
+                    else
+                    {
+                        id = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -101,7 +108,14 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    type = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        type = null;
+                    }
+                    else
+                    {
+                        type = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -110,12 +124,26 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                    foreach (var property0 in property.Value.EnumerateObject())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        dictionary.Add(property0.Name, property0.Value.GetString());
+                        tags = null;
                     }
-                    tags = dictionary;
+                    else
+                    {
+                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                        foreach (var property0 in property.Value.EnumerateObject())
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                dictionary.Add(property0.Name, null);
+                            }
+                            else
+                            {
+                                dictionary.Add(property0.Name, property0.Value.GetString());
+                            }
+                        }
+                        tags = dictionary;
+                    }
                     continue;
                 }
                 if (property.NameEquals("location"))
@@ -124,7 +152,14 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    location = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        location = null;
+                    }
+                    else
+                    {
+                        location = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -133,7 +168,14 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    name = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        name = null;
+                    }
+                    else
+                    {
+                        name = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -146,7 +188,14 @@ namespace model_flattening.Models
                             {
                                 continue;
                             }
-                            pname = property0.Value.GetString();
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                pname = null;
+                            }
+                            else
+                            {
+                                pname = property0.Value.GetString();
+                            }
                             continue;
                         }
                         if (property0.NameEquals("type"))
@@ -155,7 +204,14 @@ namespace model_flattening.Models
                             {
                                 continue;
                             }
-                            type0 = property0.Value.GetString();
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                type0 = null;
+                            }
+                            else
+                            {
+                                type0 = property0.Value.GetString();
+                            }
                             continue;
                         }
                         if (property0.NameEquals("provisioningStateValues"))
@@ -164,7 +220,14 @@ namespace model_flattening.Models
                             {
                                 continue;
                             }
-                            provisioningStateValues = new FlattenedProductPropertiesProvisioningStateValues(property0.Value.GetString());
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                provisioningStateValues = null;
+                            }
+                            else
+                            {
+                                provisioningStateValues = new FlattenedProductPropertiesProvisioningStateValues(property0.Value.GetString());
+                            }
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -173,7 +236,14 @@ namespace model_flattening.Models
                             {
                                 continue;
                             }
-                            provisioningState = property0.Value.GetString();
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                provisioningState = null;
+                            }
+                            else
+                            {
+                                provisioningState = property0.Value.GetString();
+                            }
                             continue;
                         }
                     }

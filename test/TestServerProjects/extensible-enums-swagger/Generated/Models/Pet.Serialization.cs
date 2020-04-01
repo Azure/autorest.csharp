@@ -43,7 +43,14 @@ namespace extensible_enums_swagger.Models
                     {
                         continue;
                     }
-                    name = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        name = null;
+                    }
+                    else
+                    {
+                        name = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("DaysOfWeek"))
@@ -52,7 +59,14 @@ namespace extensible_enums_swagger.Models
                     {
                         continue;
                     }
-                    daysOfWeek = new DaysOfWeekExtensibleEnum(property.Value.GetString());
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        daysOfWeek = null;
+                    }
+                    else
+                    {
+                        daysOfWeek = new DaysOfWeekExtensibleEnum(property.Value.GetString());
+                    }
                     continue;
                 }
                 if (property.NameEquals("IntEnum"))

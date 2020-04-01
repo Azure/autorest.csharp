@@ -27,7 +27,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    code = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        code = null;
+                    }
+                    else
+                    {
+                        code = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("message"))
@@ -36,7 +43,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    message = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        message = null;
+                    }
+                    else
+                    {
+                        message = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("target"))
@@ -45,7 +59,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    target = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        target = null;
+                    }
+                    else
+                    {
+                        target = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("details"))
@@ -54,12 +75,26 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    List<CloudErrorBody> array = new List<CloudErrorBody>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(DeserializeCloudErrorBody(item));
+                        details = null;
                     }
-                    details = array;
+                    else
+                    {
+                        List<CloudErrorBody> array = new List<CloudErrorBody>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(DeserializeCloudErrorBody(item));
+                            }
+                        }
+                        details = array;
+                    }
                     continue;
                 }
             }

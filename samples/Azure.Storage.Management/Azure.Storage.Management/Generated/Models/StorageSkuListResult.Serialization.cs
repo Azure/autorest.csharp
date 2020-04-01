@@ -24,12 +24,26 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    List<SkuInformation> array = new List<SkuInformation>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(SkuInformation.DeserializeSkuInformation(item));
+                        value = null;
                     }
-                    value = array;
+                    else
+                    {
+                        List<SkuInformation> array = new List<SkuInformation>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(SkuInformation.DeserializeSkuInformation(item));
+                            }
+                        }
+                        value = array;
+                    }
                     continue;
                 }
             }

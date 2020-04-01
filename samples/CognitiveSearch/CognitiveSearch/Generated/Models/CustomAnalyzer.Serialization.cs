@@ -65,12 +65,19 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    List<TokenFilterName> array = new List<TokenFilterName>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(new TokenFilterName(item.GetString()));
+                        tokenFilters = null;
                     }
-                    tokenFilters = array;
+                    else
+                    {
+                        List<TokenFilterName> array = new List<TokenFilterName>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            array.Add(new TokenFilterName(item.GetString()));
+                        }
+                        tokenFilters = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("charFilters"))
@@ -79,12 +86,26 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    List<string> array = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(item.GetString());
+                        charFilters = null;
                     }
-                    charFilters = array;
+                    else
+                    {
+                        List<string> array = new List<string>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(item.GetString());
+                            }
+                        }
+                        charFilters = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))

@@ -85,7 +85,14 @@ namespace CognitiveSearch
                         {
                             Models.Index value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = Models.Index.DeserializeIndex(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = Models.Index.DeserializeIndex(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -122,7 +129,14 @@ namespace CognitiveSearch
                         {
                             Models.Index value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = Models.Index.DeserializeIndex(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = Models.Index.DeserializeIndex(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -175,7 +189,14 @@ namespace CognitiveSearch
                         {
                             ListIndexesResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = ListIndexesResult.DeserializeListIndexesResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = ListIndexesResult.DeserializeListIndexesResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -207,7 +228,14 @@ namespace CognitiveSearch
                         {
                             ListIndexesResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = ListIndexesResult.DeserializeListIndexesResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = ListIndexesResult.DeserializeListIndexesResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -288,7 +316,14 @@ namespace CognitiveSearch
                         {
                             Models.Index value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = Models.Index.DeserializeIndex(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = Models.Index.DeserializeIndex(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -333,7 +368,14 @@ namespace CognitiveSearch
                         {
                             Models.Index value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = Models.Index.DeserializeIndex(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = Models.Index.DeserializeIndex(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -484,7 +526,14 @@ namespace CognitiveSearch
                         {
                             Models.Index value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = Models.Index.DeserializeIndex(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = Models.Index.DeserializeIndex(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -521,7 +570,14 @@ namespace CognitiveSearch
                         {
                             Models.Index value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = Models.Index.DeserializeIndex(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = Models.Index.DeserializeIndex(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -577,7 +633,14 @@ namespace CognitiveSearch
                         {
                             GetIndexStatisticsResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = GetIndexStatisticsResult.DeserializeGetIndexStatisticsResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = GetIndexStatisticsResult.DeserializeGetIndexStatisticsResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -614,7 +677,14 @@ namespace CognitiveSearch
                         {
                             GetIndexStatisticsResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = GetIndexStatisticsResult.DeserializeGetIndexStatisticsResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = GetIndexStatisticsResult.DeserializeGetIndexStatisticsResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -679,7 +749,14 @@ namespace CognitiveSearch
                         {
                             AnalyzeResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = AnalyzeResult.DeserializeAnalyzeResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = AnalyzeResult.DeserializeAnalyzeResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -721,7 +798,14 @@ namespace CognitiveSearch
                         {
                             AnalyzeResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = AnalyzeResult.DeserializeAnalyzeResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = AnalyzeResult.DeserializeAnalyzeResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:

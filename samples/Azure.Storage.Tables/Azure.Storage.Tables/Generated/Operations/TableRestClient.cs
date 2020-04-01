@@ -95,7 +95,14 @@ namespace Azure.Storage.Tables
                         {
                             TableQueryResponse value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = TableQueryResponse.DeserializeTableQueryResponse(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = TableQueryResponse.DeserializeTableQueryResponse(document.RootElement);
+                            }
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -128,7 +135,14 @@ namespace Azure.Storage.Tables
                         {
                             TableQueryResponse value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = TableQueryResponse.DeserializeTableQueryResponse(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = TableQueryResponse.DeserializeTableQueryResponse(document.RootElement);
+                            }
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -193,7 +207,14 @@ namespace Azure.Storage.Tables
                         {
                             TableResponse value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = TableResponse.DeserializeTableResponse(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = TableResponse.DeserializeTableResponse(document.RootElement);
+                            }
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     case 204:
@@ -234,7 +255,14 @@ namespace Azure.Storage.Tables
                         {
                             TableResponse value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = TableResponse.DeserializeTableResponse(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = TableResponse.DeserializeTableResponse(document.RootElement);
+                            }
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     case 204:
@@ -401,7 +429,14 @@ namespace Azure.Storage.Tables
                         {
                             TableEntityQueryResponse value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
+                            }
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -441,7 +476,14 @@ namespace Azure.Storage.Tables
                         {
                             TableEntityQueryResponse value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
+                            }
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -531,7 +573,14 @@ namespace Azure.Storage.Tables
                         {
                             TableEntityQueryResponse value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
+                            }
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -581,7 +630,14 @@ namespace Azure.Storage.Tables
                         {
                             TableEntityQueryResponse value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
+                            }
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -921,12 +977,26 @@ namespace Azure.Storage.Tables
                         {
                             IReadOnlyDictionary<string, object> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetObject());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetObject());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
@@ -967,12 +1037,26 @@ namespace Azure.Storage.Tables
                         {
                             IReadOnlyDictionary<string, object> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetObject());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetObject());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:

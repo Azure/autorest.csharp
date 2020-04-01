@@ -46,7 +46,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    routingChoice = new RoutingChoice(property.Value.GetString());
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        routingChoice = null;
+                    }
+                    else
+                    {
+                        routingChoice = new RoutingChoice(property.Value.GetString());
+                    }
                     continue;
                 }
                 if (property.NameEquals("publishMicrosoftEndpoints"))
@@ -55,7 +62,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    publishMicrosoftEndpoints = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        publishMicrosoftEndpoints = null;
+                    }
+                    else
+                    {
+                        publishMicrosoftEndpoints = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("publishInternetEndpoints"))
@@ -64,7 +78,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    publishInternetEndpoints = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        publishInternetEndpoints = null;
+                    }
+                    else
+                    {
+                        publishInternetEndpoints = property.Value.GetBoolean();
+                    }
                     continue;
                 }
             }

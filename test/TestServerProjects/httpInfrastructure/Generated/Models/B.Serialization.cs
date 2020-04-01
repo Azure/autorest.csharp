@@ -24,7 +24,14 @@ namespace httpInfrastructure.Models
                     {
                         continue;
                     }
-                    textStatusCode = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        textStatusCode = null;
+                    }
+                    else
+                    {
+                        textStatusCode = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("statusCode"))
@@ -33,7 +40,14 @@ namespace httpInfrastructure.Models
                     {
                         continue;
                     }
-                    statusCode = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        statusCode = null;
+                    }
+                    else
+                    {
+                        statusCode = property.Value.GetString();
+                    }
                     continue;
                 }
             }

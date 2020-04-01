@@ -26,7 +26,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    code = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        code = null;
+                    }
+                    else
+                    {
+                        code = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("message"))
@@ -40,12 +47,26 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    List<SearchError> array = new List<SearchError>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(DeserializeSearchError(item));
+                        details = null;
                     }
-                    details = array;
+                    else
+                    {
+                        List<SearchError> array = new List<SearchError>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(DeserializeSearchError(item));
+                            }
+                        }
+                        details = array;
+                    }
                     continue;
                 }
             }

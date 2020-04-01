@@ -35,7 +35,14 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    field = property.Value.GetTimeSpan("P");
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        field = null;
+                    }
+                    else
+                    {
+                        field = property.Value.GetTimeSpan("P");
+                    }
                     continue;
                 }
             }

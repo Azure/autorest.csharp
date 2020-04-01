@@ -96,7 +96,14 @@ namespace NameConflicts
                         {
                             Class value = default;
                             using var document = await JsonDocument.ParseAsync(message0.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = Class.DeserializeClass(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = Class.DeserializeClass(document.RootElement);
+                            }
                             return Response.FromValue(value, message0.Response);
                         }
                     default:
@@ -151,7 +158,14 @@ namespace NameConflicts
                         {
                             Class value = default;
                             using var document = JsonDocument.Parse(message0.Response.ContentStream);
-                            value = Class.DeserializeClass(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = Class.DeserializeClass(document.RootElement);
+                            }
                             return Response.FromValue(value, message0.Response);
                         }
                     default:

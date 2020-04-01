@@ -62,7 +62,14 @@ namespace body_complex
                         {
                             MyBaseType value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = MyBaseType.DeserializeMyBaseType(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = MyBaseType.DeserializeMyBaseType(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -91,7 +98,14 @@ namespace body_complex
                         {
                             MyBaseType value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = MyBaseType.DeserializeMyBaseType(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = MyBaseType.DeserializeMyBaseType(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:

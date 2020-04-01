@@ -26,7 +26,14 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    summary = ModelsSummary.DeserializeModelsSummary(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        summary = null;
+                    }
+                    else
+                    {
+                        summary = ModelsSummary.DeserializeModelsSummary(property.Value);
+                    }
                     continue;
                 }
                 if (property.NameEquals("modelList"))
@@ -35,12 +42,26 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    List<ModelInfo> array = new List<ModelInfo>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(ModelInfo.DeserializeModelInfo(item));
+                        modelList = null;
                     }
-                    modelList = array;
+                    else
+                    {
+                        List<ModelInfo> array = new List<ModelInfo>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(ModelInfo.DeserializeModelInfo(item));
+                            }
+                        }
+                        modelList = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("nextLink"))
@@ -49,7 +70,14 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    nextLink = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        nextLink = null;
+                    }
+                    else
+                    {
+                        nextLink = property.Value.GetString();
+                    }
                     continue;
                 }
             }

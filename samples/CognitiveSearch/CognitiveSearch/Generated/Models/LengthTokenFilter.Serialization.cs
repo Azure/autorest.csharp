@@ -46,7 +46,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    min = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        min = null;
+                    }
+                    else
+                    {
+                        min = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("max"))
@@ -55,7 +62,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    max = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        max = null;
+                    }
+                    else
+                    {
+                        max = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))

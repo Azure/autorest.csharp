@@ -76,7 +76,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    blob = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        blob = null;
+                    }
+                    else
+                    {
+                        blob = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("queue"))
@@ -85,7 +92,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    queue = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        queue = null;
+                    }
+                    else
+                    {
+                        queue = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("table"))
@@ -94,7 +108,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    table = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        table = null;
+                    }
+                    else
+                    {
+                        table = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("file"))
@@ -103,7 +124,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    file = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        file = null;
+                    }
+                    else
+                    {
+                        file = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("web"))
@@ -112,7 +140,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    web = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        web = null;
+                    }
+                    else
+                    {
+                        web = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("dfs"))
@@ -121,7 +156,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    dfs = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        dfs = null;
+                    }
+                    else
+                    {
+                        dfs = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("microsoftEndpoints"))
@@ -130,7 +172,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    microsoftEndpoints = StorageAccountMicrosoftEndpoints.DeserializeStorageAccountMicrosoftEndpoints(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        microsoftEndpoints = null;
+                    }
+                    else
+                    {
+                        microsoftEndpoints = StorageAccountMicrosoftEndpoints.DeserializeStorageAccountMicrosoftEndpoints(property.Value);
+                    }
                     continue;
                 }
                 if (property.NameEquals("internetEndpoints"))
@@ -139,7 +188,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    internetEndpoints = StorageAccountInternetEndpoints.DeserializeStorageAccountInternetEndpoints(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        internetEndpoints = null;
+                    }
+                    else
+                    {
+                        internetEndpoints = StorageAccountInternetEndpoints.DeserializeStorageAccountInternetEndpoints(property.Value);
+                    }
                     continue;
                 }
             }

@@ -33,7 +33,14 @@ namespace CognitiveServices.TextAnalytics.Models
                     List<Match> array = new List<Match>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Match.DeserializeMatch(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Match.DeserializeMatch(item));
+                        }
                     }
                     matches = array;
                     continue;
@@ -49,7 +56,14 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    id = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        id = null;
+                    }
+                    else
+                    {
+                        id = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("url"))

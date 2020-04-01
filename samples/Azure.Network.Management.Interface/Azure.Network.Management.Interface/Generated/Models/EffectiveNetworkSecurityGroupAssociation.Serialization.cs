@@ -24,7 +24,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    subnet = SubResource.DeserializeSubResource(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        subnet = null;
+                    }
+                    else
+                    {
+                        subnet = SubResource.DeserializeSubResource(property.Value);
+                    }
                     continue;
                 }
                 if (property.NameEquals("networkInterface"))
@@ -33,7 +40,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    networkInterface = SubResource.DeserializeSubResource(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        networkInterface = null;
+                    }
+                    else
+                    {
+                        networkInterface = SubResource.DeserializeSubResource(property.Value);
+                    }
                     continue;
                 }
             }

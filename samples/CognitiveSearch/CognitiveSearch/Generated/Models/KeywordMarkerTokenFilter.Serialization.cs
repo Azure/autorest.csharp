@@ -48,7 +48,14 @@ namespace CognitiveSearch.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetString());
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(item.GetString());
+                        }
                     }
                     keywords = array;
                     continue;
@@ -59,7 +66,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    ignoreCase = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        ignoreCase = null;
+                    }
+                    else
+                    {
+                        ignoreCase = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))

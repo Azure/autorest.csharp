@@ -101,7 +101,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    description = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        description = null;
+                    }
+                    else
+                    {
+                        description = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("dataSourceName"))
@@ -115,7 +122,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    skillsetName = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        skillsetName = null;
+                    }
+                    else
+                    {
+                        skillsetName = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("targetIndexName"))
@@ -129,7 +143,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    schedule = IndexingSchedule.DeserializeIndexingSchedule(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        schedule = null;
+                    }
+                    else
+                    {
+                        schedule = IndexingSchedule.DeserializeIndexingSchedule(property.Value);
+                    }
                     continue;
                 }
                 if (property.NameEquals("parameters"))
@@ -138,7 +159,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    parameters = IndexingParameters.DeserializeIndexingParameters(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        parameters = null;
+                    }
+                    else
+                    {
+                        parameters = IndexingParameters.DeserializeIndexingParameters(property.Value);
+                    }
                     continue;
                 }
                 if (property.NameEquals("fieldMappings"))
@@ -147,12 +175,26 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    List<FieldMapping> array = new List<FieldMapping>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(FieldMapping.DeserializeFieldMapping(item));
+                        fieldMappings = null;
                     }
-                    fieldMappings = array;
+                    else
+                    {
+                        List<FieldMapping> array = new List<FieldMapping>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(FieldMapping.DeserializeFieldMapping(item));
+                            }
+                        }
+                        fieldMappings = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("outputFieldMappings"))
@@ -161,12 +203,26 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    List<FieldMapping> array = new List<FieldMapping>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(FieldMapping.DeserializeFieldMapping(item));
+                        outputFieldMappings = null;
                     }
-                    outputFieldMappings = array;
+                    else
+                    {
+                        List<FieldMapping> array = new List<FieldMapping>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(FieldMapping.DeserializeFieldMapping(item));
+                            }
+                        }
+                        outputFieldMappings = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("disabled"))
@@ -175,7 +231,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    disabled = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        disabled = null;
+                    }
+                    else
+                    {
+                        disabled = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("@odata.etag"))
@@ -184,7 +247,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    odataetag = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        odataetag = null;
+                    }
+                    else
+                    {
+                        odataetag = property.Value.GetString();
+                    }
                     continue;
                 }
             }

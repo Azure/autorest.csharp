@@ -69,12 +69,26 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    List<string> array = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(item.GetString());
+                        dnsServers = null;
                     }
-                    dnsServers = array;
+                    else
+                    {
+                        List<string> array = new List<string>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(item.GetString());
+                            }
+                        }
+                        dnsServers = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("appliedDnsServers"))
@@ -83,12 +97,26 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    List<string> array = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(item.GetString());
+                        appliedDnsServers = null;
                     }
-                    appliedDnsServers = array;
+                    else
+                    {
+                        List<string> array = new List<string>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(item.GetString());
+                            }
+                        }
+                        appliedDnsServers = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("internalDnsNameLabel"))
@@ -97,7 +125,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    internalDnsNameLabel = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        internalDnsNameLabel = null;
+                    }
+                    else
+                    {
+                        internalDnsNameLabel = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("internalFqdn"))
@@ -106,7 +141,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    internalFqdn = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        internalFqdn = null;
+                    }
+                    else
+                    {
+                        internalFqdn = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("internalDomainNameSuffix"))
@@ -115,7 +157,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    internalDomainNameSuffix = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        internalDomainNameSuffix = null;
+                    }
+                    else
+                    {
+                        internalDomainNameSuffix = property.Value.GetString();
+                    }
                     continue;
                 }
             }

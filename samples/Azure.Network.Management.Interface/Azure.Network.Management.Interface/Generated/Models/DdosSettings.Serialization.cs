@@ -46,7 +46,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    ddosCustomPolicy = SubResource.DeserializeSubResource(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        ddosCustomPolicy = null;
+                    }
+                    else
+                    {
+                        ddosCustomPolicy = SubResource.DeserializeSubResource(property.Value);
+                    }
                     continue;
                 }
                 if (property.NameEquals("protectionCoverage"))
@@ -55,7 +62,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    protectionCoverage = new DdosSettingsProtectionCoverage(property.Value.GetString());
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        protectionCoverage = null;
+                    }
+                    else
+                    {
+                        protectionCoverage = new DdosSettingsProtectionCoverage(property.Value.GetString());
+                    }
                     continue;
                 }
                 if (property.NameEquals("protectedIP"))
@@ -64,7 +78,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    protectedIP = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        protectedIP = null;
+                    }
+                    else
+                    {
+                        protectedIP = property.Value.GetBoolean();
+                    }
                     continue;
                 }
             }

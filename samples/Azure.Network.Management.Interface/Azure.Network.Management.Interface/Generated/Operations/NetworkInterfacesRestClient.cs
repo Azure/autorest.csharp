@@ -189,7 +189,14 @@ namespace Azure.Network.Management.Interface
                         {
                             NetworkInterface value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = NetworkInterface.DeserializeNetworkInterface(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = NetworkInterface.DeserializeNetworkInterface(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -231,7 +238,14 @@ namespace Azure.Network.Management.Interface
                         {
                             NetworkInterface value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = NetworkInterface.DeserializeNetworkInterface(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = NetworkInterface.DeserializeNetworkInterface(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -405,7 +419,14 @@ namespace Azure.Network.Management.Interface
                         {
                             NetworkInterface value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = NetworkInterface.DeserializeNetworkInterface(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = NetworkInterface.DeserializeNetworkInterface(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -451,7 +472,14 @@ namespace Azure.Network.Management.Interface
                         {
                             NetworkInterface value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = NetworkInterface.DeserializeNetworkInterface(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = NetworkInterface.DeserializeNetworkInterface(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -496,7 +524,14 @@ namespace Azure.Network.Management.Interface
                         {
                             NetworkInterfaceListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = NetworkInterfaceListResult.DeserializeNetworkInterfaceListResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = NetworkInterfaceListResult.DeserializeNetworkInterfaceListResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -526,7 +561,14 @@ namespace Azure.Network.Management.Interface
                         {
                             NetworkInterfaceListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = NetworkInterfaceListResult.DeserializeNetworkInterfaceListResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = NetworkInterfaceListResult.DeserializeNetworkInterfaceListResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -579,7 +621,14 @@ namespace Azure.Network.Management.Interface
                         {
                             NetworkInterfaceListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = NetworkInterfaceListResult.DeserializeNetworkInterfaceListResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = NetworkInterfaceListResult.DeserializeNetworkInterfaceListResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -615,7 +664,14 @@ namespace Azure.Network.Management.Interface
                         {
                             NetworkInterfaceListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = NetworkInterfaceListResult.DeserializeNetworkInterfaceListResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = NetworkInterfaceListResult.DeserializeNetworkInterfaceListResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -848,7 +904,14 @@ namespace Azure.Network.Management.Interface
                         {
                             NetworkInterfaceListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = NetworkInterfaceListResult.DeserializeNetworkInterfaceListResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = NetworkInterfaceListResult.DeserializeNetworkInterfaceListResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -884,7 +947,14 @@ namespace Azure.Network.Management.Interface
                         {
                             NetworkInterfaceListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = NetworkInterfaceListResult.DeserializeNetworkInterfaceListResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = NetworkInterfaceListResult.DeserializeNetworkInterfaceListResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -936,7 +1006,14 @@ namespace Azure.Network.Management.Interface
                         {
                             NetworkInterfaceListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = NetworkInterfaceListResult.DeserializeNetworkInterfaceListResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = NetworkInterfaceListResult.DeserializeNetworkInterfaceListResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -977,7 +1054,14 @@ namespace Azure.Network.Management.Interface
                         {
                             NetworkInterfaceListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = NetworkInterfaceListResult.DeserializeNetworkInterfaceListResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = NetworkInterfaceListResult.DeserializeNetworkInterfaceListResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:

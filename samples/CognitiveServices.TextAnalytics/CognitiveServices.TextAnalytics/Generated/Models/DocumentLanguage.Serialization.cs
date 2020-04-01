@@ -30,7 +30,14 @@ namespace CognitiveServices.TextAnalytics.Models
                     List<DetectedLanguage> array = new List<DetectedLanguage>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DetectedLanguage.DeserializeDetectedLanguage(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DetectedLanguage.DeserializeDetectedLanguage(item));
+                        }
                     }
                     detectedLanguages = array;
                     continue;
@@ -41,7 +48,14 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    statistics = DocumentStatistics.DeserializeDocumentStatistics(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        statistics = null;
+                    }
+                    else
+                    {
+                        statistics = DocumentStatistics.DeserializeDocumentStatistics(property.Value);
+                    }
                     continue;
                 }
             }

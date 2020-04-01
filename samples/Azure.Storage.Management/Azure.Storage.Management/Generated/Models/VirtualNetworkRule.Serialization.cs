@@ -48,7 +48,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    action = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        action = null;
+                    }
+                    else
+                    {
+                        action = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("state"))
@@ -57,7 +64,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    state = property.Value.GetString().ToState();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        state = null;
+                    }
+                    else
+                    {
+                        state = property.Value.GetString().ToState();
+                    }
                     continue;
                 }
             }

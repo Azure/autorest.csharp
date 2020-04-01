@@ -48,7 +48,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    targetFieldName = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        targetFieldName = null;
+                    }
+                    else
+                    {
+                        targetFieldName = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("mappingFunction"))
@@ -57,7 +64,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    mappingFunction = FieldMappingFunction.DeserializeFieldMappingFunction(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        mappingFunction = null;
+                    }
+                    else
+                    {
+                        mappingFunction = FieldMappingFunction.DeserializeFieldMappingFunction(property.Value);
+                    }
                     continue;
                 }
             }

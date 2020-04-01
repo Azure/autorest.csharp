@@ -43,7 +43,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    hasLegalHold = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        hasLegalHold = null;
+                    }
+                    else
+                    {
+                        hasLegalHold = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -51,7 +58,14 @@ namespace Azure.Storage.Management.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetString());
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(item.GetString());
+                        }
                     }
                     tags = array;
                     continue;

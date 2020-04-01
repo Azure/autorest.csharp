@@ -27,7 +27,14 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    sampleSalmon = DotSalmon.DeserializeDotSalmon(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        sampleSalmon = null;
+                    }
+                    else
+                    {
+                        sampleSalmon = DotSalmon.DeserializeDotSalmon(property.Value);
+                    }
                     continue;
                 }
                 if (property.NameEquals("salmons"))
@@ -36,12 +43,26 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    List<DotSalmon> array = new List<DotSalmon>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(DotSalmon.DeserializeDotSalmon(item));
+                        salmons = null;
                     }
-                    salmons = array;
+                    else
+                    {
+                        List<DotSalmon> array = new List<DotSalmon>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(DotSalmon.DeserializeDotSalmon(item));
+                            }
+                        }
+                        salmons = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("sampleFish"))
@@ -50,7 +71,14 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    sampleFish = DotFish.DeserializeDotFish(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        sampleFish = null;
+                    }
+                    else
+                    {
+                        sampleFish = DotFish.DeserializeDotFish(property.Value);
+                    }
                     continue;
                 }
                 if (property.NameEquals("fishes"))
@@ -59,12 +87,26 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    List<DotFish> array = new List<DotFish>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(DotFish.DeserializeDotFish(item));
+                        fishes = null;
                     }
-                    fishes = array;
+                    else
+                    {
+                        List<DotFish> array = new List<DotFish>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(DotFish.DeserializeDotFish(item));
+                            }
+                        }
+                        fishes = array;
+                    }
                     continue;
                 }
             }

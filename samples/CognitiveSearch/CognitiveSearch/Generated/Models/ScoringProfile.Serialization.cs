@@ -60,7 +60,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    text = TextWeights.DeserializeTextWeights(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        text = null;
+                    }
+                    else
+                    {
+                        text = TextWeights.DeserializeTextWeights(property.Value);
+                    }
                     continue;
                 }
                 if (property.NameEquals("functions"))
@@ -69,12 +76,26 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    List<ScoringFunction> array = new List<ScoringFunction>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(ScoringFunction.DeserializeScoringFunction(item));
+                        functions = null;
                     }
-                    functions = array;
+                    else
+                    {
+                        List<ScoringFunction> array = new List<ScoringFunction>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(ScoringFunction.DeserializeScoringFunction(item));
+                            }
+                        }
+                        functions = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("functionAggregation"))
@@ -83,7 +104,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    functionAggregation = property.Value.GetString().ToScoringFunctionAggregation();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        functionAggregation = null;
+                    }
+                    else
+                    {
+                        functionAggregation = property.Value.GetString().ToScoringFunctionAggregation();
+                    }
                     continue;
                 }
             }

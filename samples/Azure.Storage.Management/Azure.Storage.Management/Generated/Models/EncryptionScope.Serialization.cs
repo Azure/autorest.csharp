@@ -80,7 +80,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    id = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        id = null;
+                    }
+                    else
+                    {
+                        id = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -89,7 +96,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    name = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        name = null;
+                    }
+                    else
+                    {
+                        name = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -98,7 +112,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    type = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        type = null;
+                    }
+                    else
+                    {
+                        type = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -111,7 +132,14 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            source = new EncryptionScopeSource(property0.Value.GetString());
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                source = null;
+                            }
+                            else
+                            {
+                                source = new EncryptionScopeSource(property0.Value.GetString());
+                            }
                             continue;
                         }
                         if (property0.NameEquals("state"))
@@ -120,7 +148,14 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            state = new EncryptionScopeState(property0.Value.GetString());
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                state = null;
+                            }
+                            else
+                            {
+                                state = new EncryptionScopeState(property0.Value.GetString());
+                            }
                             continue;
                         }
                         if (property0.NameEquals("creationTime"))
@@ -129,7 +164,14 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            creationTime = property0.Value.GetDateTimeOffset("S");
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                creationTime = null;
+                            }
+                            else
+                            {
+                                creationTime = property0.Value.GetDateTimeOffset("S");
+                            }
                             continue;
                         }
                         if (property0.NameEquals("lastModifiedTime"))
@@ -138,7 +180,14 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            lastModifiedTime = property0.Value.GetDateTimeOffset("S");
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                lastModifiedTime = null;
+                            }
+                            else
+                            {
+                                lastModifiedTime = property0.Value.GetDateTimeOffset("S");
+                            }
                             continue;
                         }
                         if (property0.NameEquals("keyVaultProperties"))
@@ -147,7 +196,14 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            keyVaultProperties = EncryptionScopeKeyVaultProperties.DeserializeEncryptionScopeKeyVaultProperties(property0.Value);
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                keyVaultProperties = null;
+                            }
+                            else
+                            {
+                                keyVaultProperties = EncryptionScopeKeyVaultProperties.DeserializeEncryptionScopeKeyVaultProperties(property0.Value);
+                            }
                             continue;
                         }
                     }

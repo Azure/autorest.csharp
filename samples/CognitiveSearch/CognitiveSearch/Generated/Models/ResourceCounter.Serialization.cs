@@ -29,7 +29,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    quota = property.Value.GetInt64();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        quota = null;
+                    }
+                    else
+                    {
+                        quota = property.Value.GetInt64();
+                    }
                     continue;
                 }
             }

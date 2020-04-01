@@ -30,7 +30,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    name = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        name = null;
+                    }
+                    else
+                    {
+                        name = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("disableBgpRoutePropagation"))
@@ -39,7 +46,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    disableBgpRoutePropagation = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        disableBgpRoutePropagation = null;
+                    }
+                    else
+                    {
+                        disableBgpRoutePropagation = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("source"))
@@ -48,7 +62,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    source = new EffectiveRouteSource(property.Value.GetString());
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        source = null;
+                    }
+                    else
+                    {
+                        source = new EffectiveRouteSource(property.Value.GetString());
+                    }
                     continue;
                 }
                 if (property.NameEquals("state"))
@@ -57,7 +78,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    state = new EffectiveRouteState(property.Value.GetString());
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        state = null;
+                    }
+                    else
+                    {
+                        state = new EffectiveRouteState(property.Value.GetString());
+                    }
                     continue;
                 }
                 if (property.NameEquals("addressPrefix"))
@@ -66,12 +94,26 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    List<string> array = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(item.GetString());
+                        addressPrefix = null;
                     }
-                    addressPrefix = array;
+                    else
+                    {
+                        List<string> array = new List<string>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(item.GetString());
+                            }
+                        }
+                        addressPrefix = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("nextHopIpAddress"))
@@ -80,12 +122,26 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    List<string> array = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(item.GetString());
+                        nextHopIpAddress = null;
                     }
-                    nextHopIpAddress = array;
+                    else
+                    {
+                        List<string> array = new List<string>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(item.GetString());
+                            }
+                        }
+                        nextHopIpAddress = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("nextHopType"))
@@ -94,7 +150,14 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    nextHopType = new RouteNextHopType(property.Value.GetString());
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        nextHopType = null;
+                    }
+                    else
+                    {
+                        nextHopType = new RouteNextHopType(property.Value.GetString());
+                    }
                     continue;
                 }
             }

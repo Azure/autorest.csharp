@@ -32,7 +32,14 @@ namespace Azure.AI.FormRecognizer.Models
                     List<ReadResult> array = new List<ReadResult>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ReadResult.DeserializeReadResult(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ReadResult.DeserializeReadResult(item));
+                        }
                     }
                     readResults = array;
                     continue;
@@ -43,12 +50,26 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    List<PageResult> array = new List<PageResult>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(PageResult.DeserializePageResult(item));
+                        pageResults = null;
                     }
-                    pageResults = array;
+                    else
+                    {
+                        List<PageResult> array = new List<PageResult>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(PageResult.DeserializePageResult(item));
+                            }
+                        }
+                        pageResults = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("documentResults"))
@@ -57,12 +78,26 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    List<DocumentResult> array = new List<DocumentResult>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(DocumentResult.DeserializeDocumentResult(item));
+                        documentResults = null;
                     }
-                    documentResults = array;
+                    else
+                    {
+                        List<DocumentResult> array = new List<DocumentResult>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(DocumentResult.DeserializeDocumentResult(item));
+                            }
+                        }
+                        documentResults = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("errors"))
@@ -71,12 +106,26 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    List<ErrorInformation> array = new List<ErrorInformation>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(ErrorInformation.DeserializeErrorInformation(item));
+                        errors = null;
                     }
-                    errors = array;
+                    else
+                    {
+                        List<ErrorInformation> array = new List<ErrorInformation>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(ErrorInformation.DeserializeErrorInformation(item));
+                            }
+                        }
+                        errors = array;
+                    }
                     continue;
                 }
             }

@@ -71,7 +71,14 @@ namespace custom_baseUrl_paging
                         {
                             ProductResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = ProductResult.DeserializeProductResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -107,7 +114,14 @@ namespace custom_baseUrl_paging
                         {
                             ProductResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = ProductResult.DeserializeProductResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -157,7 +171,14 @@ namespace custom_baseUrl_paging
                         {
                             ProductResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = ProductResult.DeserializeProductResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -193,7 +214,14 @@ namespace custom_baseUrl_paging
                         {
                             ProductResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = ProductResult.DeserializeProductResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -249,7 +277,14 @@ namespace custom_baseUrl_paging
                         {
                             ProductResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = ProductResult.DeserializeProductResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -290,7 +325,14 @@ namespace custom_baseUrl_paging
                         {
                             ProductResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = ProductResult.DeserializeProductResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -342,7 +384,14 @@ namespace custom_baseUrl_paging
                         {
                             ProductResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = ProductResult.DeserializeProductResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -383,7 +432,14 @@ namespace custom_baseUrl_paging
                         {
                             ProductResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = ProductResult.DeserializeProductResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -435,7 +491,14 @@ namespace custom_baseUrl_paging
                         {
                             ProductResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = ProductResult.DeserializeProductResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -476,7 +539,14 @@ namespace custom_baseUrl_paging
                         {
                             ProductResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = ProductResult.DeserializeProductResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:

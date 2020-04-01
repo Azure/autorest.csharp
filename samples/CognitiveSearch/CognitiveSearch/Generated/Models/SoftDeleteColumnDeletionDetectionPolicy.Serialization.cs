@@ -43,7 +43,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    softDeleteColumnName = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        softDeleteColumnName = null;
+                    }
+                    else
+                    {
+                        softDeleteColumnName = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("softDeleteMarkerValue"))
@@ -52,7 +59,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    softDeleteMarkerValue = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        softDeleteMarkerValue = null;
+                    }
+                    else
+                    {
+                        softDeleteMarkerValue = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))

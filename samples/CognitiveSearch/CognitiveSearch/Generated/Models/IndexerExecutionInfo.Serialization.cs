@@ -32,7 +32,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    lastResult = IndexerExecutionResult.DeserializeIndexerExecutionResult(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        lastResult = null;
+                    }
+                    else
+                    {
+                        lastResult = IndexerExecutionResult.DeserializeIndexerExecutionResult(property.Value);
+                    }
                     continue;
                 }
                 if (property.NameEquals("executionHistory"))
@@ -40,7 +47,14 @@ namespace CognitiveSearch.Models
                     List<IndexerExecutionResult> array = new List<IndexerExecutionResult>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(IndexerExecutionResult.DeserializeIndexerExecutionResult(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(IndexerExecutionResult.DeserializeIndexerExecutionResult(item));
+                        }
                     }
                     executionHistory = array;
                     continue;

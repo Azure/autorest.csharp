@@ -64,7 +64,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    encryptionKey = EncryptionKey.DeserializeEncryptionKey(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        encryptionKey = null;
+                    }
+                    else
+                    {
+                        encryptionKey = EncryptionKey.DeserializeEncryptionKey(property.Value);
+                    }
                     continue;
                 }
                 if (property.NameEquals("@odata.etag"))
@@ -73,7 +80,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    odataetag = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        odataetag = null;
+                    }
+                    else
+                    {
+                        odataetag = property.Value.GetString();
+                    }
                     continue;
                 }
             }

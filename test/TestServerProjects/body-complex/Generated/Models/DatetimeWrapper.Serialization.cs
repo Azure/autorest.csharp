@@ -41,7 +41,14 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    field = property.Value.GetDateTimeOffset("S");
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        field = null;
+                    }
+                    else
+                    {
+                        field = property.Value.GetDateTimeOffset("S");
+                    }
                     continue;
                 }
                 if (property.NameEquals("now"))
@@ -50,7 +57,14 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    now = property.Value.GetDateTimeOffset("S");
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        now = null;
+                    }
+                    else
+                    {
+                        now = property.Value.GetDateTimeOffset("S");
+                    }
                     continue;
                 }
             }

@@ -26,7 +26,14 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    tableName = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        tableName = null;
+                    }
+                    else
+                    {
+                        tableName = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("odata.type"))
@@ -35,7 +42,14 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    odatatype = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        odatatype = null;
+                    }
+                    else
+                    {
+                        odatatype = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("odata.id"))
@@ -44,7 +58,14 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    odataid = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        odataid = null;
+                    }
+                    else
+                    {
+                        odataid = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("odata.editLink"))
@@ -53,7 +74,14 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    odataeditLink = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        odataeditLink = null;
+                    }
+                    else
+                    {
+                        odataeditLink = property.Value.GetString();
+                    }
                     continue;
                 }
             }

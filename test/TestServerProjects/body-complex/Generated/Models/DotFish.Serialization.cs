@@ -36,7 +36,14 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    species = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        species = null;
+                    }
+                    else
+                    {
+                        species = property.Value.GetString();
+                    }
                     continue;
                 }
             }

@@ -42,7 +42,14 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    language = new Language(property.Value.GetString());
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        language = null;
+                    }
+                    else
+                    {
+                        language = new Language(property.Value.GetString());
+                    }
                     continue;
                 }
                 if (property.NameEquals("words"))
@@ -50,7 +57,14 @@ namespace Azure.AI.FormRecognizer.Models
                     List<TextWord> array = new List<TextWord>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(TextWord.DeserializeTextWord(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(TextWord.DeserializeTextWord(item));
+                        }
                     }
                     words = array;
                     continue;

@@ -32,7 +32,14 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    clusterId = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        clusterId = null;
+                    }
+                    else
+                    {
+                        clusterId = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("keyValuePairs"))
@@ -41,12 +48,26 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    List<KeyValuePair> array = new List<KeyValuePair>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(KeyValuePair.DeserializeKeyValuePair(item));
+                        keyValuePairs = null;
                     }
-                    keyValuePairs = array;
+                    else
+                    {
+                        List<KeyValuePair> array = new List<KeyValuePair>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(KeyValuePair.DeserializeKeyValuePair(item));
+                            }
+                        }
+                        keyValuePairs = array;
+                    }
                     continue;
                 }
                 if (property.NameEquals("tables"))
@@ -55,12 +76,26 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    List<DataTable> array = new List<DataTable>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(DataTable.DeserializeDataTable(item));
+                        tables = null;
                     }
-                    tables = array;
+                    else
+                    {
+                        List<DataTable> array = new List<DataTable>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(DataTable.DeserializeDataTable(item));
+                            }
+                        }
+                        tables = array;
+                    }
                     continue;
                 }
             }

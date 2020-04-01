@@ -64,7 +64,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    delimiter = property.Value.GetChar();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        delimiter = null;
+                    }
+                    else
+                    {
+                        delimiter = property.Value.GetChar();
+                    }
                     continue;
                 }
                 if (property.NameEquals("replacement"))
@@ -73,7 +80,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    replacement = property.Value.GetChar();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        replacement = null;
+                    }
+                    else
+                    {
+                        replacement = property.Value.GetChar();
+                    }
                     continue;
                 }
                 if (property.NameEquals("maxTokenLength"))
@@ -82,7 +96,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    maxTokenLength = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        maxTokenLength = null;
+                    }
+                    else
+                    {
+                        maxTokenLength = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("reverse"))
@@ -91,7 +112,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    reverse = property.Value.GetBoolean();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        reverse = null;
+                    }
+                    else
+                    {
+                        reverse = property.Value.GetBoolean();
+                    }
                     continue;
                 }
                 if (property.NameEquals("skip"))
@@ -100,7 +128,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    skip = property.Value.GetInt32();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        skip = null;
+                    }
+                    else
+                    {
+                        skip = property.Value.GetInt32();
+                    }
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))

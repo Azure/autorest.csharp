@@ -60,7 +60,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    source = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        source = null;
+                    }
+                    else
+                    {
+                        source = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("sourceContext"))
@@ -69,7 +76,14 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    sourceContext = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        sourceContext = null;
+                    }
+                    else
+                    {
+                        sourceContext = property.Value.GetString();
+                    }
                     continue;
                 }
                 if (property.NameEquals("inputs"))
@@ -78,12 +92,26 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    List<InputFieldMappingEntry> array = new List<InputFieldMappingEntry>();
-                    foreach (var item in property.Value.EnumerateArray())
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        array.Add(DeserializeInputFieldMappingEntry(item));
+                        inputs = null;
                     }
-                    inputs = array;
+                    else
+                    {
+                        List<InputFieldMappingEntry> array = new List<InputFieldMappingEntry>();
+                        foreach (var item in property.Value.EnumerateArray())
+                        {
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(DeserializeInputFieldMappingEntry(item));
+                            }
+                        }
+                        inputs = array;
+                    }
                     continue;
                 }
             }

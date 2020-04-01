@@ -42,7 +42,14 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    activeDirectoryProperties = ActiveDirectoryProperties.DeserializeActiveDirectoryProperties(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        activeDirectoryProperties = null;
+                    }
+                    else
+                    {
+                        activeDirectoryProperties = ActiveDirectoryProperties.DeserializeActiveDirectoryProperties(property.Value);
+                    }
                     continue;
                 }
             }
