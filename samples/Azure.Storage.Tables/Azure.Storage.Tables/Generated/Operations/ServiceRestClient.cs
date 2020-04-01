@@ -72,7 +72,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="storageServiceProperties"> The StorageService properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<SetPropertiesHeaders>> SetPropertiesAsync(int? timeout, string requestId, StorageServiceProperties storageServiceProperties, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<ServiceSetPropertiesHeaders>> SetPropertiesAsync(int? timeout, string requestId, StorageServiceProperties storageServiceProperties, CancellationToken cancellationToken = default)
         {
             if (storageServiceProperties == null)
             {
@@ -85,7 +85,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateSetPropertiesRequest(timeout, requestId, storageServiceProperties);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new SetPropertiesHeaders(message.Response);
+                var headers = new ServiceSetPropertiesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 202:
@@ -106,7 +106,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="storageServiceProperties"> The StorageService properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<SetPropertiesHeaders> SetProperties(int? timeout, string requestId, StorageServiceProperties storageServiceProperties, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<ServiceSetPropertiesHeaders> SetProperties(int? timeout, string requestId, StorageServiceProperties storageServiceProperties, CancellationToken cancellationToken = default)
         {
             if (storageServiceProperties == null)
             {
@@ -119,7 +119,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateSetPropertiesRequest(timeout, requestId, storageServiceProperties);
                 pipeline.Send(message, cancellationToken);
-                var headers = new SetPropertiesHeaders(message.Response);
+                var headers = new ServiceSetPropertiesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 202:
@@ -162,7 +162,7 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<StorageServiceProperties, GetPropertiesHeaders>> GetPropertiesAsync(int? timeout, string requestId, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<StorageServiceProperties, ServiceGetPropertiesHeaders>> GetPropertiesAsync(int? timeout, string requestId, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetProperties");
             scope.Start();
@@ -170,7 +170,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateGetPropertiesRequest(timeout, requestId);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new GetPropertiesHeaders(message.Response);
+                var headers = new ServiceGetPropertiesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -198,7 +198,7 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<StorageServiceProperties, GetPropertiesHeaders> GetProperties(int? timeout, string requestId, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<StorageServiceProperties, ServiceGetPropertiesHeaders> GetProperties(int? timeout, string requestId, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetProperties");
             scope.Start();
@@ -206,7 +206,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateGetPropertiesRequest(timeout, requestId);
                 pipeline.Send(message, cancellationToken);
-                var headers = new GetPropertiesHeaders(message.Response);
+                var headers = new ServiceGetPropertiesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -257,7 +257,7 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<StorageServiceStats, GetStatisticsHeaders>> GetStatisticsAsync(int? timeout, string requestId, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<StorageServiceStats, ServiceGetStatisticsHeaders>> GetStatisticsAsync(int? timeout, string requestId, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetStatistics");
             scope.Start();
@@ -265,7 +265,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateGetStatisticsRequest(timeout, requestId);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new GetStatisticsHeaders(message.Response);
+                var headers = new ServiceGetStatisticsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -293,7 +293,7 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<StorageServiceStats, GetStatisticsHeaders> GetStatistics(int? timeout, string requestId, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<StorageServiceStats, ServiceGetStatisticsHeaders> GetStatistics(int? timeout, string requestId, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetStatistics");
             scope.Start();
@@ -301,7 +301,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateGetStatisticsRequest(timeout, requestId);
                 pipeline.Send(message, cancellationToken);
-                var headers = new GetStatisticsHeaders(message.Response);
+                var headers = new ServiceGetStatisticsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:

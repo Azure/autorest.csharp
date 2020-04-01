@@ -56,7 +56,7 @@ namespace ExtensionClientName
         /// <param name="renamedQueryParameter"> The String to use. </param>
         /// <param name="renamedBodyParameter"> The RenamedSchema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<RenamedSchema, RenamedOperationHeaders>> RenamedOperationAsync(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<RenamedSchema, ServiceRenamedOperationHeaders>> RenamedOperationAsync(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
         {
             if (renamedPathParameter == null)
             {
@@ -77,7 +77,7 @@ namespace ExtensionClientName
             {
                 using var message = CreateRenamedOperationRequest(renamedPathParameter, renamedQueryParameter, renamedBodyParameter);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new RenamedOperationHeaders(message.Response);
+                var headers = new ServiceRenamedOperationHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -102,7 +102,7 @@ namespace ExtensionClientName
         /// <param name="renamedQueryParameter"> The String to use. </param>
         /// <param name="renamedBodyParameter"> The RenamedSchema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<RenamedSchema, RenamedOperationHeaders> RenamedOperation(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<RenamedSchema, ServiceRenamedOperationHeaders> RenamedOperation(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
         {
             if (renamedPathParameter == null)
             {
@@ -123,7 +123,7 @@ namespace ExtensionClientName
             {
                 using var message = CreateRenamedOperationRequest(renamedPathParameter, renamedQueryParameter, renamedBodyParameter);
                 pipeline.Send(message, cancellationToken);
-                var headers = new RenamedOperationHeaders(message.Response);
+                var headers = new ServiceRenamedOperationHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:

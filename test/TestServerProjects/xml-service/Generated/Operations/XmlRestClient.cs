@@ -675,7 +675,7 @@ namespace xml_service
 
         /// <summary> Get strongly-typed response headers. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<GetHeadersHeaders>> GetHeadersAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<XmlGetHeadersHeaders>> GetHeadersAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetHeaders");
             scope.Start();
@@ -683,7 +683,7 @@ namespace xml_service
             {
                 using var message = CreateGetHeadersRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new GetHeadersHeaders(message.Response);
+                var headers = new XmlGetHeadersHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -701,7 +701,7 @@ namespace xml_service
 
         /// <summary> Get strongly-typed response headers. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<GetHeadersHeaders> GetHeaders(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<XmlGetHeadersHeaders> GetHeaders(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("XmlClient.GetHeaders");
             scope.Start();
@@ -709,7 +709,7 @@ namespace xml_service
             {
                 using var message = CreateGetHeadersRequest();
                 pipeline.Send(message, cancellationToken);
-                var headers = new GetHeadersHeaders(message.Response);
+                var headers = new XmlGetHeadersHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
