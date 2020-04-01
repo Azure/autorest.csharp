@@ -79,7 +79,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PutStringEmpty() => Test(async (host, pipeline) =>
         {
-            var result = await new StringClient(ClientDiagnostics, pipeline, host).PutEmptyAsync("");
+            var result = await new StringClient(ClientDiagnostics, pipeline, host).PutEmptyAsync();
             Assert.AreEqual(200, result.Status);
         });
 
