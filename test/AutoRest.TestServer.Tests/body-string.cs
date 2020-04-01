@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using body_string;
@@ -21,19 +22,17 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("deserializer fails")]
-        public Task GetStringNotProvided() => Test(async (host, pipeline) =>
+        public Task GetStringNotProvided() => Test((host, pipeline) =>
         {
-            var result = await new StringClient(ClientDiagnostics, pipeline, host).GetNotProvidedAsync();
-            Assert.AreEqual("", result.Value);
+            // Empty response body
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new StringClient(ClientDiagnostics, pipeline, host).GetNotProvidedAsync());
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/289")]
-        public Task GetStringNullBase64UrlEncoding() => Test(async (host, pipeline) =>
+        public Task GetStringNullBase64UrlEncoding() => Test((host, pipeline) =>
         {
-            var result = await new StringClient(ClientDiagnostics, pipeline, host).GetNullBase64UrlEncodedAsync();
-            Assert.AreEqual(new byte[] { }, result.Value);
+            // Empty response body
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new StringClient(ClientDiagnostics, pipeline, host).GetNullBase64UrlEncodedAsync());
         });
 
         [Test]
@@ -62,11 +61,10 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Deserializer fails")]
-        public Task GetStringNull() => Test(async (host, pipeline) =>
+        public Task GetStringNull() => Test((host, pipeline) =>
         {
-            var result = await new StringClient(ClientDiagnostics, pipeline, host).GetNullAsync();
-            Assert.AreEqual(null, result.Value);
+            // Empty response body
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new StringClient(ClientDiagnostics, pipeline, host).GetNullAsync());
         });
 
         [Test]
@@ -102,14 +100,6 @@ namespace AutoRest.TestServer.Tests
         {
             var result = await new StringClient(ClientDiagnostics, pipeline, host).PutWhitespaceAsync();
             Assert.AreEqual(200, result.Status);
-        });
-
-        [Test]
-        [Ignore("Deserializer fails")]
-        public Task GetNotProvided() => Test(async (host, pipeline) =>
-        {
-            var result = await new StringClient(ClientDiagnostics, pipeline, host).GetNotProvidedAsync();
-            Assert.AreEqual("", result.Value);
         });
 
         [Test]

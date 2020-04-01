@@ -448,11 +448,10 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Null responses: https://github.com/Azure/autorest.csharp/issues/289")]
-        public Task GetDictionaryNull() => Test(async (host, pipeline) =>
+        public Task GetDictionaryNull() => Test((host, pipeline) =>
         {
-            var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetNullAsync();
-            Assert.IsNull(result.Value);
+            // Empty response body
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new DictionaryClient(ClientDiagnostics, pipeline, host).GetNullAsync());
         });
 
         [Test]
