@@ -25,14 +25,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        odatametadata = null;
-                    }
-                    else
-                    {
-                        odatametadata = property.Value.GetString();
-                    }
+                    odatametadata = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("value"))
@@ -41,26 +34,19 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<TableResponseProperties> array = new List<TableResponseProperties>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        value = null;
-                    }
-                    else
-                    {
-                        List<TableResponseProperties> array = new List<TableResponseProperties>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(TableResponseProperties.DeserializeTableResponseProperties(item));
-                            }
+                            array.Add(null);
                         }
-                        value = array;
+                        else
+                        {
+                            array.Add(TableResponseProperties.DeserializeTableResponseProperties(item));
+                        }
                     }
+                    value = array;
                     continue;
                 }
             }

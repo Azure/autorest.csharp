@@ -56,14 +56,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        id = null;
-                    }
-                    else
-                    {
-                        id = property.Value.GetString();
-                    }
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("url"))

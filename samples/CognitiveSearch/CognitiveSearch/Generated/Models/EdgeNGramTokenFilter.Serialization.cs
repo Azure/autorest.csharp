@@ -52,14 +52,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        minGram = null;
-                    }
-                    else
-                    {
-                        minGram = property.Value.GetInt32();
-                    }
+                    minGram = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("maxGram"))
@@ -68,14 +61,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        maxGram = null;
-                    }
-                    else
-                    {
-                        maxGram = property.Value.GetInt32();
-                    }
+                    maxGram = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("side"))
@@ -84,14 +70,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        side = null;
-                    }
-                    else
-                    {
-                        side = property.Value.GetString().ToEdgeNGramTokenFilterSide();
-                    }
+                    side = property.Value.GetString().ToEdgeNGramTokenFilterSide();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))

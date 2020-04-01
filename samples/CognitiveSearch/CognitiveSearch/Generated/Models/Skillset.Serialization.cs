@@ -82,14 +82,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        cognitiveServices = null;
-                    }
-                    else
-                    {
-                        cognitiveServices = CognitiveServicesAccount.DeserializeCognitiveServicesAccount(property.Value);
-                    }
+                    cognitiveServices = CognitiveServicesAccount.DeserializeCognitiveServicesAccount(property.Value);
                     continue;
                 }
                 if (property.NameEquals("@odata.etag"))
@@ -98,14 +91,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        odataetag = null;
-                    }
-                    else
-                    {
-                        odataetag = property.Value.GetString();
-                    }
+                    odataetag = property.Value.GetString();
                     continue;
                 }
             }

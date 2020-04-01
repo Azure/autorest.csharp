@@ -42,14 +42,7 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        analyzeResult = null;
-                    }
-                    else
-                    {
-                        analyzeResult = AnalyzeResult.DeserializeAnalyzeResult(property.Value);
-                    }
+                    analyzeResult = AnalyzeResult.DeserializeAnalyzeResult(property.Value);
                     continue;
                 }
             }

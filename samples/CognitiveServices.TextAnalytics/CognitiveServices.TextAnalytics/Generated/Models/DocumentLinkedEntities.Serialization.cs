@@ -48,14 +48,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        statistics = null;
-                    }
-                    else
-                    {
-                        statistics = DocumentStatistics.DeserializeDocumentStatistics(property.Value);
-                    }
+                    statistics = DocumentStatistics.DeserializeDocumentStatistics(property.Value);
                     continue;
                 }
             }

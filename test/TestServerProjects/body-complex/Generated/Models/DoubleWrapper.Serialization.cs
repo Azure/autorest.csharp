@@ -40,14 +40,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        field1 = null;
-                    }
-                    else
-                    {
-                        field1 = property.Value.GetDouble();
-                    }
+                    field1 = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose"))
@@ -56,14 +49,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = null;
-                    }
-                    else
-                    {
-                        field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = property.Value.GetDouble();
-                    }
+                    field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = property.Value.GetDouble();
                     continue;
                 }
             }

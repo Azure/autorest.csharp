@@ -25,14 +25,7 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        status = null;
-                    }
-                    else
-                    {
-                        status = property.Value.GetInt32();
-                    }
+                    status = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("message"))
@@ -41,14 +34,7 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        message = null;
-                    }
-                    else
-                    {
-                        message = property.Value.GetString();
-                    }
+                    message = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("parentError"))
@@ -57,14 +43,7 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        parentError = null;
-                    }
-                    else
-                    {
-                        parentError = DeserializeError(property.Value);
-                    }
+                    parentError = DeserializeError(property.Value);
                     continue;
                 }
             }

@@ -40,14 +40,7 @@ namespace lro.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        name = null;
-                    }
-                    else
-                    {
-                        name = property.Value.GetString();
-                    }
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -56,14 +49,7 @@ namespace lro.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        id = null;
-                    }
-                    else
-                    {
-                        id = property.Value.GetString();
-                    }
+                    id = property.Value.GetString();
                     continue;
                 }
             }

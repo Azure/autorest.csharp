@@ -67,14 +67,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        name = null;
-                    }
-                    else
-                    {
-                        name = property.Value.GetString();
-                    }
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("etag"))
@@ -83,14 +76,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        etag = null;
-                    }
-                    else
-                    {
-                        etag = property.Value.GetString();
-                    }
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -99,14 +85,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        type = null;
-                    }
-                    else
-                    {
-                        type = property.Value.GetString();
-                    }
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -115,14 +94,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        id = null;
-                    }
-                    else
-                    {
-                        id = property.Value.GetString();
-                    }
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -135,14 +107,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                virtualNetworkTap = null;
-                            }
-                            else
-                            {
-                                virtualNetworkTap = VirtualNetworkTap.DeserializeVirtualNetworkTap(property0.Value);
-                            }
+                            virtualNetworkTap = VirtualNetworkTap.DeserializeVirtualNetworkTap(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -151,14 +116,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                provisioningState = null;
-                            }
-                            else
-                            {
-                                provisioningState = new ProvisioningState(property0.Value.GetString());
-                            }
+                            provisioningState = new ProvisioningState(property0.Value.GetString());
                             continue;
                         }
                     }

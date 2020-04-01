@@ -26,14 +26,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        provider = null;
-                    }
-                    else
-                    {
-                        provider = property.Value.GetString();
-                    }
+                    provider = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("resource"))
@@ -42,14 +35,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        resource = null;
-                    }
-                    else
-                    {
-                        resource = property.Value.GetString();
-                    }
+                    resource = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("operation"))
@@ -58,14 +44,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        operation = null;
-                    }
-                    else
-                    {
-                        operation = property.Value.GetString();
-                    }
+                    operation = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("description"))
@@ -74,14 +53,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        description = null;
-                    }
-                    else
-                    {
-                        description = property.Value.GetString();
-                    }
+                    description = property.Value.GetString();
                     continue;
                 }
             }

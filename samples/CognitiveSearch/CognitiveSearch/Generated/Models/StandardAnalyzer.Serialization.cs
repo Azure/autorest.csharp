@@ -52,14 +52,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        maxTokenLength = null;
-                    }
-                    else
-                    {
-                        maxTokenLength = property.Value.GetInt32();
-                    }
+                    maxTokenLength = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("stopwords"))
@@ -68,26 +61,19 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        stopwords = null;
-                    }
-                    else
-                    {
-                        List<string> array = new List<string>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(item.GetString());
-                            }
+                            array.Add(null);
                         }
-                        stopwords = array;
+                        else
+                        {
+                            array.Add(item.GetString());
+                        }
                     }
+                    stopwords = array;
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))

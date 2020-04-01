@@ -24,14 +24,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        leaseId = null;
-                    }
-                    else
-                    {
-                        leaseId = property.Value.GetString();
-                    }
+                    leaseId = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("leaseTimeSeconds"))
@@ -40,14 +33,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        leaseTimeSeconds = null;
-                    }
-                    else
-                    {
-                        leaseTimeSeconds = property.Value.GetString();
-                    }
+                    leaseTimeSeconds = property.Value.GetString();
                     continue;
                 }
             }

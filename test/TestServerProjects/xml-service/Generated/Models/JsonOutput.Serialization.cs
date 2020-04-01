@@ -23,14 +23,7 @@ namespace xml_service.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        id = null;
-                    }
-                    else
-                    {
-                        id = property.Value.GetInt32();
-                    }
+                    id = property.Value.GetInt32();
                     continue;
                 }
             }

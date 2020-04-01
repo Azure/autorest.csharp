@@ -48,26 +48,19 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        prefixMatch = null;
-                    }
-                    else
-                    {
-                        List<string> array = new List<string>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(item.GetString());
-                            }
+                            array.Add(null);
                         }
-                        prefixMatch = array;
+                        else
+                        {
+                            array.Add(item.GetString());
+                        }
                     }
+                    prefixMatch = array;
                     continue;
                 }
                 if (property.NameEquals("blobTypes"))

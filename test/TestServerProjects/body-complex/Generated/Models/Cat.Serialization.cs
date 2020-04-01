@@ -58,14 +58,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        color = null;
-                    }
-                    else
-                    {
-                        color = property.Value.GetString();
-                    }
+                    color = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("hates"))
@@ -74,26 +67,19 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<Dog> array = new List<Dog>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        hates = null;
-                    }
-                    else
-                    {
-                        List<Dog> array = new List<Dog>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(Dog.DeserializeDog(item));
-                            }
+                            array.Add(null);
                         }
-                        hates = array;
+                        else
+                        {
+                            array.Add(Dog.DeserializeDog(item));
+                        }
                     }
+                    hates = array;
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -102,14 +88,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        id = null;
-                    }
-                    else
-                    {
-                        id = property.Value.GetInt32();
-                    }
+                    id = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -118,14 +97,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        name = null;
-                    }
-                    else
-                    {
-                        name = property.Value.GetString();
-                    }
+                    name = property.Value.GetString();
                     continue;
                 }
             }

@@ -52,14 +52,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        blob = null;
-                    }
-                    else
-                    {
-                        blob = property.Value.GetString();
-                    }
+                    blob = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("file"))
@@ -68,14 +61,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        file = null;
-                    }
-                    else
-                    {
-                        file = property.Value.GetString();
-                    }
+                    file = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("web"))
@@ -84,14 +70,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        web = null;
-                    }
-                    else
-                    {
-                        web = property.Value.GetString();
-                    }
+                    web = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("dfs"))
@@ -100,14 +79,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        dfs = null;
-                    }
-                    else
-                    {
-                        dfs = property.Value.GetString();
-                    }
+                    dfs = property.Value.GetString();
                     continue;
                 }
             }

@@ -84,14 +84,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        minWordSize = null;
-                    }
-                    else
-                    {
-                        minWordSize = property.Value.GetInt32();
-                    }
+                    minWordSize = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("minSubwordSize"))
@@ -100,14 +93,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        minSubwordSize = null;
-                    }
-                    else
-                    {
-                        minSubwordSize = property.Value.GetInt32();
-                    }
+                    minSubwordSize = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("maxSubwordSize"))
@@ -116,14 +102,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        maxSubwordSize = null;
-                    }
-                    else
-                    {
-                        maxSubwordSize = property.Value.GetInt32();
-                    }
+                    maxSubwordSize = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("onlyLongestMatch"))
@@ -132,14 +111,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        onlyLongestMatch = null;
-                    }
-                    else
-                    {
-                        onlyLongestMatch = property.Value.GetBoolean();
-                    }
+                    onlyLongestMatch = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))

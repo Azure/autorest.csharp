@@ -44,26 +44,19 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<FormFieldsReport> array = new List<FormFieldsReport>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        fields = null;
-                    }
-                    else
-                    {
-                        List<FormFieldsReport> array = new List<FormFieldsReport>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(FormFieldsReport.DeserializeFormFieldsReport(item));
-                            }
+                            array.Add(null);
                         }
-                        fields = array;
+                        else
+                        {
+                            array.Add(FormFieldsReport.DeserializeFormFieldsReport(item));
+                        }
                     }
+                    fields = array;
                     continue;
                 }
                 if (property.NameEquals("averageModelAccuracy"))
@@ -72,14 +65,7 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        averageModelAccuracy = null;
-                    }
-                    else
-                    {
-                        averageModelAccuracy = property.Value.GetSingle();
-                    }
+                    averageModelAccuracy = property.Value.GetSingle();
                     continue;
                 }
                 if (property.NameEquals("errors"))
@@ -88,26 +74,19 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<ErrorInformation> array = new List<ErrorInformation>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        errors = null;
-                    }
-                    else
-                    {
-                        List<ErrorInformation> array = new List<ErrorInformation>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(ErrorInformation.DeserializeErrorInformation(item));
-                            }
+                            array.Add(null);
                         }
-                        errors = array;
+                        else
+                        {
+                            array.Add(ErrorInformation.DeserializeErrorInformation(item));
+                        }
                     }
+                    errors = array;
                     continue;
                 }
             }

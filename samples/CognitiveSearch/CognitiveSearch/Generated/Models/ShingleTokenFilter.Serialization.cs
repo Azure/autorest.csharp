@@ -70,14 +70,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        maxShingleSize = null;
-                    }
-                    else
-                    {
-                        maxShingleSize = property.Value.GetInt32();
-                    }
+                    maxShingleSize = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("minShingleSize"))
@@ -86,14 +79,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        minShingleSize = null;
-                    }
-                    else
-                    {
-                        minShingleSize = property.Value.GetInt32();
-                    }
+                    minShingleSize = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("outputUnigrams"))
@@ -102,14 +88,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        outputUnigrams = null;
-                    }
-                    else
-                    {
-                        outputUnigrams = property.Value.GetBoolean();
-                    }
+                    outputUnigrams = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("outputUnigramsIfNoShingles"))
@@ -118,14 +97,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        outputUnigramsIfNoShingles = null;
-                    }
-                    else
-                    {
-                        outputUnigramsIfNoShingles = property.Value.GetBoolean();
-                    }
+                    outputUnigramsIfNoShingles = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("tokenSeparator"))
@@ -134,14 +106,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        tokenSeparator = null;
-                    }
-                    else
-                    {
-                        tokenSeparator = property.Value.GetString();
-                    }
+                    tokenSeparator = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("filterToken"))
@@ -150,14 +115,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        filterToken = null;
-                    }
-                    else
-                    {
-                        filterToken = property.Value.GetString();
-                    }
+                    filterToken = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))

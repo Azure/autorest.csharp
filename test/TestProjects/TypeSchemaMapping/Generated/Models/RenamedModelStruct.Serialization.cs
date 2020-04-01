@@ -54,14 +54,7 @@ namespace CustomNamespace
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                modelProperty = null;
-                            }
-                            else
-                            {
-                                modelProperty = property0.Value.GetString();
-                            }
+                            modelProperty = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("Fruit"))
@@ -70,14 +63,7 @@ namespace CustomNamespace
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                fruit = null;
-                            }
-                            else
-                            {
-                                fruit = property0.Value.GetString().ToCustomFruitEnum();
-                            }
+                            fruit = property0.Value.GetString().ToCustomFruitEnum();
                             continue;
                         }
                         if (property0.NameEquals("DaysOfWeek"))
@@ -86,14 +72,7 @@ namespace CustomNamespace
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                daysOfWeek = null;
-                            }
-                            else
-                            {
-                                daysOfWeek = new CustomDaysOfWeek(property0.Value.GetString());
-                            }
+                            daysOfWeek = new CustomDaysOfWeek(property0.Value.GetString());
                             continue;
                         }
                     }

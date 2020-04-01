@@ -38,14 +38,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        subtype = null;
-                    }
-                    else
-                    {
-                        subtype = property.Value.GetString();
-                    }
+                    subtype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("offset"))

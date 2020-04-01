@@ -31,19 +31,12 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<float> array = new List<float>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        boundingBox = null;
+                        array.Add(item.GetSingle());
                     }
-                    else
-                    {
-                        List<float> array = new List<float>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(item.GetSingle());
-                        }
-                        boundingBox = array;
-                    }
+                    boundingBox = array;
                     continue;
                 }
                 if (property.NameEquals("elements"))
@@ -52,26 +45,19 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        elements = null;
-                    }
-                    else
-                    {
-                        List<string> array = new List<string>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(item.GetString());
-                            }
+                            array.Add(null);
                         }
-                        elements = array;
+                        else
+                        {
+                            array.Add(item.GetString());
+                        }
                     }
+                    elements = array;
                     continue;
                 }
             }

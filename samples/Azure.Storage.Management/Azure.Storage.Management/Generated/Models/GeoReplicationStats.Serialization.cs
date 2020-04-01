@@ -47,14 +47,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        status = null;
-                    }
-                    else
-                    {
-                        status = new GeoReplicationStatus(property.Value.GetString());
-                    }
+                    status = new GeoReplicationStatus(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("lastSyncTime"))
@@ -63,14 +56,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        lastSyncTime = null;
-                    }
-                    else
-                    {
-                        lastSyncTime = property.Value.GetDateTimeOffset("S");
-                    }
+                    lastSyncTime = property.Value.GetDateTimeOffset("S");
                     continue;
                 }
                 if (property.NameEquals("canFailover"))
@@ -79,14 +65,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        canFailover = null;
-                    }
-                    else
-                    {
-                        canFailover = property.Value.GetBoolean();
-                    }
+                    canFailover = property.Value.GetBoolean();
                     continue;
                 }
             }

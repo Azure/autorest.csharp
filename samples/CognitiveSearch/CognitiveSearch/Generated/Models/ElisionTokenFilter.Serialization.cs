@@ -46,26 +46,19 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        articles = null;
-                    }
-                    else
-                    {
-                        List<string> array = new List<string>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(item.GetString());
-                            }
+                            array.Add(null);
                         }
-                        articles = array;
+                        else
+                        {
+                            array.Add(item.GetString());
+                        }
                     }
+                    articles = array;
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))

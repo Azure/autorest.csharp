@@ -169,14 +169,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        sku = null;
-                    }
-                    else
-                    {
-                        sku = LoadBalancerSku.DeserializeLoadBalancerSku(property.Value);
-                    }
+                    sku = LoadBalancerSku.DeserializeLoadBalancerSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("etag"))
@@ -185,14 +178,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        etag = null;
-                    }
-                    else
-                    {
-                        etag = property.Value.GetString();
-                    }
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -201,14 +187,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        id = null;
-                    }
-                    else
-                    {
-                        id = property.Value.GetString();
-                    }
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -217,14 +196,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        name = null;
-                    }
-                    else
-                    {
-                        name = property.Value.GetString();
-                    }
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -233,14 +205,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        type = null;
-                    }
-                    else
-                    {
-                        type = property.Value.GetString();
-                    }
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("location"))
@@ -249,14 +214,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        location = null;
-                    }
-                    else
-                    {
-                        location = property.Value.GetString();
-                    }
+                    location = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -265,26 +223,19 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        tags = null;
-                    }
-                    else
-                    {
-                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                        foreach (var property0 in property.Value.EnumerateObject())
+                        if (property0.Value.ValueKind == JsonValueKind.Null)
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                dictionary.Add(property0.Name, null);
-                            }
-                            else
-                            {
-                                dictionary.Add(property0.Name, property0.Value.GetString());
-                            }
+                            dictionary.Add(property0.Name, null);
                         }
-                        tags = dictionary;
+                        else
+                        {
+                            dictionary.Add(property0.Name, property0.Value.GetString());
+                        }
                     }
+                    tags = dictionary;
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -297,26 +248,19 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            List<FrontendIPConfiguration> array = new List<FrontendIPConfiguration>();
+                            foreach (var item in property0.Value.EnumerateArray())
                             {
-                                frontendIPConfigurations = null;
-                            }
-                            else
-                            {
-                                List<FrontendIPConfiguration> array = new List<FrontendIPConfiguration>();
-                                foreach (var item in property0.Value.EnumerateArray())
+                                if (item.ValueKind == JsonValueKind.Null)
                                 {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(FrontendIPConfiguration.DeserializeFrontendIPConfiguration(item));
-                                    }
+                                    array.Add(null);
                                 }
-                                frontendIPConfigurations = array;
+                                else
+                                {
+                                    array.Add(FrontendIPConfiguration.DeserializeFrontendIPConfiguration(item));
+                                }
                             }
+                            frontendIPConfigurations = array;
                             continue;
                         }
                         if (property0.NameEquals("backendAddressPools"))
@@ -325,26 +269,19 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            List<BackendAddressPool> array = new List<BackendAddressPool>();
+                            foreach (var item in property0.Value.EnumerateArray())
                             {
-                                backendAddressPools = null;
-                            }
-                            else
-                            {
-                                List<BackendAddressPool> array = new List<BackendAddressPool>();
-                                foreach (var item in property0.Value.EnumerateArray())
+                                if (item.ValueKind == JsonValueKind.Null)
                                 {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(BackendAddressPool.DeserializeBackendAddressPool(item));
-                                    }
+                                    array.Add(null);
                                 }
-                                backendAddressPools = array;
+                                else
+                                {
+                                    array.Add(BackendAddressPool.DeserializeBackendAddressPool(item));
+                                }
                             }
+                            backendAddressPools = array;
                             continue;
                         }
                         if (property0.NameEquals("loadBalancingRules"))
@@ -353,26 +290,19 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            List<LoadBalancingRule> array = new List<LoadBalancingRule>();
+                            foreach (var item in property0.Value.EnumerateArray())
                             {
-                                loadBalancingRules = null;
-                            }
-                            else
-                            {
-                                List<LoadBalancingRule> array = new List<LoadBalancingRule>();
-                                foreach (var item in property0.Value.EnumerateArray())
+                                if (item.ValueKind == JsonValueKind.Null)
                                 {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(LoadBalancingRule.DeserializeLoadBalancingRule(item));
-                                    }
+                                    array.Add(null);
                                 }
-                                loadBalancingRules = array;
+                                else
+                                {
+                                    array.Add(LoadBalancingRule.DeserializeLoadBalancingRule(item));
+                                }
                             }
+                            loadBalancingRules = array;
                             continue;
                         }
                         if (property0.NameEquals("probes"))
@@ -381,26 +311,19 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            List<Probe> array = new List<Probe>();
+                            foreach (var item in property0.Value.EnumerateArray())
                             {
-                                probes = null;
-                            }
-                            else
-                            {
-                                List<Probe> array = new List<Probe>();
-                                foreach (var item in property0.Value.EnumerateArray())
+                                if (item.ValueKind == JsonValueKind.Null)
                                 {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(Probe.DeserializeProbe(item));
-                                    }
+                                    array.Add(null);
                                 }
-                                probes = array;
+                                else
+                                {
+                                    array.Add(Probe.DeserializeProbe(item));
+                                }
                             }
+                            probes = array;
                             continue;
                         }
                         if (property0.NameEquals("inboundNatRules"))
@@ -409,26 +332,19 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            List<InboundNatRule> array = new List<InboundNatRule>();
+                            foreach (var item in property0.Value.EnumerateArray())
                             {
-                                inboundNatRules = null;
-                            }
-                            else
-                            {
-                                List<InboundNatRule> array = new List<InboundNatRule>();
-                                foreach (var item in property0.Value.EnumerateArray())
+                                if (item.ValueKind == JsonValueKind.Null)
                                 {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(InboundNatRule.DeserializeInboundNatRule(item));
-                                    }
+                                    array.Add(null);
                                 }
-                                inboundNatRules = array;
+                                else
+                                {
+                                    array.Add(InboundNatRule.DeserializeInboundNatRule(item));
+                                }
                             }
+                            inboundNatRules = array;
                             continue;
                         }
                         if (property0.NameEquals("inboundNatPools"))
@@ -437,26 +353,19 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            List<InboundNatPool> array = new List<InboundNatPool>();
+                            foreach (var item in property0.Value.EnumerateArray())
                             {
-                                inboundNatPools = null;
-                            }
-                            else
-                            {
-                                List<InboundNatPool> array = new List<InboundNatPool>();
-                                foreach (var item in property0.Value.EnumerateArray())
+                                if (item.ValueKind == JsonValueKind.Null)
                                 {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(InboundNatPool.DeserializeInboundNatPool(item));
-                                    }
+                                    array.Add(null);
                                 }
-                                inboundNatPools = array;
+                                else
+                                {
+                                    array.Add(InboundNatPool.DeserializeInboundNatPool(item));
+                                }
                             }
+                            inboundNatPools = array;
                             continue;
                         }
                         if (property0.NameEquals("outboundRules"))
@@ -465,26 +374,19 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            List<OutboundRule> array = new List<OutboundRule>();
+                            foreach (var item in property0.Value.EnumerateArray())
                             {
-                                outboundRules = null;
-                            }
-                            else
-                            {
-                                List<OutboundRule> array = new List<OutboundRule>();
-                                foreach (var item in property0.Value.EnumerateArray())
+                                if (item.ValueKind == JsonValueKind.Null)
                                 {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(OutboundRule.DeserializeOutboundRule(item));
-                                    }
+                                    array.Add(null);
                                 }
-                                outboundRules = array;
+                                else
+                                {
+                                    array.Add(OutboundRule.DeserializeOutboundRule(item));
+                                }
                             }
+                            outboundRules = array;
                             continue;
                         }
                         if (property0.NameEquals("resourceGuid"))
@@ -493,14 +395,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                resourceGuid = null;
-                            }
-                            else
-                            {
-                                resourceGuid = property0.Value.GetString();
-                            }
+                            resourceGuid = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -509,14 +404,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                provisioningState = null;
-                            }
-                            else
-                            {
-                                provisioningState = new ProvisioningState(property0.Value.GetString());
-                            }
+                            provisioningState = new ProvisioningState(property0.Value.GetString());
                             continue;
                         }
                     }

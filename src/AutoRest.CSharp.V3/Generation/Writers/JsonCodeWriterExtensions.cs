@@ -231,7 +231,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                     property.ValueSerialization,
                                     (w, v) => w.Line($"{propertyVariables[property.Property]} = {v};"),
                                     w => w.Append($"{itemVariable.ActualName}.Value"),
-                                    hasNullableType);
+                                    writeNullHandling: false);
                             }
                             else
                             {
@@ -310,11 +310,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         }
 
         private static void DeserializeIntoVariable(this CodeWriter writer, JsonSerialization serialization, Action<CodeWriter, CodeWriterDelegate> valueCallback,
-            CodeWriterDelegate element, bool? isNullable = null)
+            CodeWriterDelegate element, bool? writeNullHandling = null)
         {
             void WriteNullableScope(Action writeContent)
             {
-                if (isNullable == true)
+                if (writeNullHandling == true)
                 {
                     using (writer.Scope($"if ({element}.ValueKind == {typeof(JsonValueKind)}.Null)"))
                     {
@@ -334,7 +334,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             switch (serialization)
             {
                 case JsonArraySerialization array:
-                    isNullable ??= true;
+                    writeNullHandling ??= true;
                     WriteNullableScope(() =>
                     {
                         var arrayVariable = new CodeWriterDeclaration("array");
@@ -354,7 +354,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     });
                     return;
                 case JsonDictionarySerialization dictionary:
-                    isNullable ??= true;
+                    writeNullHandling ??= true;
                     WriteNullableScope(() =>
                     {
                         var dictionaryVariable = new CodeWriterDeclaration("dictionary");
@@ -374,7 +374,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     });
                     return;
                 case JsonValueSerialization valueSerialization:
-                    isNullable ??= valueSerialization.Type.IsNullable || !valueSerialization.Type.IsValueType;
+                    writeNullHandling ??= valueSerialization.Type.IsNullable || !valueSerialization.Type.IsValueType;
                     WriteNullableScope(() => valueCallback(writer, w => w.DeserializeValue(valueSerialization, element)));
                     return;
             }

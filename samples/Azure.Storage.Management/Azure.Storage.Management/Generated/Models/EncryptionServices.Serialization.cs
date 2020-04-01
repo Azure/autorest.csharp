@@ -52,14 +52,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        blob = null;
-                    }
-                    else
-                    {
-                        blob = EncryptionService.DeserializeEncryptionService(property.Value);
-                    }
+                    blob = EncryptionService.DeserializeEncryptionService(property.Value);
                     continue;
                 }
                 if (property.NameEquals("file"))
@@ -68,14 +61,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        file = null;
-                    }
-                    else
-                    {
-                        file = EncryptionService.DeserializeEncryptionService(property.Value);
-                    }
+                    file = EncryptionService.DeserializeEncryptionService(property.Value);
                     continue;
                 }
                 if (property.NameEquals("table"))
@@ -84,14 +70,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        table = null;
-                    }
-                    else
-                    {
-                        table = EncryptionService.DeserializeEncryptionService(property.Value);
-                    }
+                    table = EncryptionService.DeserializeEncryptionService(property.Value);
                     continue;
                 }
                 if (property.NameEquals("queue"))
@@ -100,14 +79,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        queue = null;
-                    }
-                    else
-                    {
-                        queue = EncryptionService.DeserializeEncryptionService(property.Value);
-                    }
+                    queue = EncryptionService.DeserializeEncryptionService(property.Value);
                     continue;
                 }
             }

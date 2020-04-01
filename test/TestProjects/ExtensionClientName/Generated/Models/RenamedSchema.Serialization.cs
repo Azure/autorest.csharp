@@ -47,26 +47,19 @@ namespace ExtensionClientName.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        originalProperty = null;
-                    }
-                    else
-                    {
-                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                        foreach (var property0 in property.Value.EnumerateObject())
+                        if (property0.Value.ValueKind == JsonValueKind.Null)
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                dictionary.Add(property0.Name, null);
-                            }
-                            else
-                            {
-                                dictionary.Add(property0.Name, property0.Value.GetString());
-                            }
+                            dictionary.Add(property0.Name, null);
                         }
-                        originalProperty = dictionary;
+                        else
+                        {
+                            dictionary.Add(property0.Name, property0.Value.GetString());
+                        }
                     }
+                    originalProperty = dictionary;
                     continue;
                 }
                 if (property.NameEquals("originalPropertyString"))
@@ -75,14 +68,7 @@ namespace ExtensionClientName.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        originalPropertyString = null;
-                    }
-                    else
-                    {
-                        originalPropertyString = property.Value.GetString();
-                    }
+                    originalPropertyString = property.Value.GetString();
                     continue;
                 }
             }

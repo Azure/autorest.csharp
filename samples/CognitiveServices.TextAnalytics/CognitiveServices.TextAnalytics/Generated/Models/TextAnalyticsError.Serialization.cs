@@ -38,14 +38,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        target = null;
-                    }
-                    else
-                    {
-                        target = property.Value.GetString();
-                    }
+                    target = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("innerError"))
@@ -54,14 +47,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        innerError = null;
-                    }
-                    else
-                    {
-                        innerError = InnerError.DeserializeInnerError(property.Value);
-                    }
+                    innerError = InnerError.DeserializeInnerError(property.Value);
                     continue;
                 }
                 if (property.NameEquals("details"))
@@ -70,26 +56,19 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<TextAnalyticsError> array = new List<TextAnalyticsError>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        details = null;
-                    }
-                    else
-                    {
-                        List<TextAnalyticsError> array = new List<TextAnalyticsError>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(DeserializeTextAnalyticsError(item));
-                            }
+                            array.Add(null);
                         }
-                        details = array;
+                        else
+                        {
+                            array.Add(DeserializeTextAnalyticsError(item));
+                        }
                     }
+                    details = array;
                     continue;
                 }
             }

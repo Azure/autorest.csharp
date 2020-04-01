@@ -60,14 +60,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        maxAgeInSeconds = null;
-                    }
-                    else
-                    {
-                        maxAgeInSeconds = property.Value.GetInt64();
-                    }
+                    maxAgeInSeconds = property.Value.GetInt64();
                     continue;
                 }
             }

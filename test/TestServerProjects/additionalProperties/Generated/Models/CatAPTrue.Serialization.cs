@@ -57,14 +57,7 @@ namespace additionalProperties.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        friendly = null;
-                    }
-                    else
-                    {
-                        friendly = property.Value.GetBoolean();
-                    }
+                    friendly = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -78,14 +71,7 @@ namespace additionalProperties.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        name = null;
-                    }
-                    else
-                    {
-                        name = property.Value.GetString();
-                    }
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("status"))
@@ -94,14 +80,7 @@ namespace additionalProperties.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        status = null;
-                    }
-                    else
-                    {
-                        status = property.Value.GetBoolean();
-                    }
+                    status = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.Value.ValueKind == JsonValueKind.Null)

@@ -52,14 +52,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        groupId = null;
-                    }
-                    else
-                    {
-                        groupId = property.Value.GetString();
-                    }
+                    groupId = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("requiredMemberName"))
@@ -68,14 +61,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        requiredMemberName = null;
-                    }
-                    else
-                    {
-                        requiredMemberName = property.Value.GetString();
-                    }
+                    requiredMemberName = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("fqdns"))
@@ -84,26 +70,19 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        fqdns = null;
-                    }
-                    else
-                    {
-                        List<string> array = new List<string>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(item.GetString());
-                            }
+                            array.Add(null);
                         }
-                        fqdns = array;
+                        else
+                        {
+                            array.Add(item.GetString());
+                        }
                     }
+                    fqdns = array;
                     continue;
                 }
             }

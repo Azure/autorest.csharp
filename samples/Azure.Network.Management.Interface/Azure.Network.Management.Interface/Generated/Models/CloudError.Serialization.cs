@@ -23,14 +23,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        error = null;
-                    }
-                    else
-                    {
-                        error = CloudErrorBody.DeserializeCloudErrorBody(property.Value);
-                    }
+                    error = CloudErrorBody.DeserializeCloudErrorBody(property.Value);
                     continue;
                 }
             }

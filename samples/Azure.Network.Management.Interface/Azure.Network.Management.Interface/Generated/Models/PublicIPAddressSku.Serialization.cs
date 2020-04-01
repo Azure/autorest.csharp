@@ -34,14 +34,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        name = null;
-                    }
-                    else
-                    {
-                        name = new PublicIPAddressSkuName(property.Value.GetString());
-                    }
+                    name = new PublicIPAddressSkuName(property.Value.GetString());
                     continue;
                 }
             }

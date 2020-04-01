@@ -32,14 +32,7 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        clusterId = null;
-                    }
-                    else
-                    {
-                        clusterId = property.Value.GetInt32();
-                    }
+                    clusterId = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("keyValuePairs"))
@@ -48,26 +41,19 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<KeyValuePair> array = new List<KeyValuePair>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        keyValuePairs = null;
-                    }
-                    else
-                    {
-                        List<KeyValuePair> array = new List<KeyValuePair>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(KeyValuePair.DeserializeKeyValuePair(item));
-                            }
+                            array.Add(null);
                         }
-                        keyValuePairs = array;
+                        else
+                        {
+                            array.Add(KeyValuePair.DeserializeKeyValuePair(item));
+                        }
                     }
+                    keyValuePairs = array;
                     continue;
                 }
                 if (property.NameEquals("tables"))
@@ -76,26 +62,19 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<DataTable> array = new List<DataTable>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        tables = null;
-                    }
-                    else
-                    {
-                        List<DataTable> array = new List<DataTable>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(DataTable.DeserializeDataTable(item));
-                            }
+                            array.Add(null);
                         }
-                        tables = array;
+                        else
+                        {
+                            array.Add(DataTable.DeserializeDataTable(item));
+                        }
                     }
+                    tables = array;
                     continue;
                 }
             }

@@ -42,14 +42,7 @@ namespace body_string.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        field1 = null;
-                    }
-                    else
-                    {
-                        field1 = property.Value.GetString();
-                    }
+                    field1 = property.Value.GetString();
                     continue;
                 }
             }

@@ -40,14 +40,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        fieldTrue = null;
-                    }
-                    else
-                    {
-                        fieldTrue = property.Value.GetBoolean();
-                    }
+                    fieldTrue = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("field_false"))
@@ -56,14 +49,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        fieldFalse = null;
-                    }
-                    else
-                    {
-                        fieldFalse = property.Value.GetBoolean();
-                    }
+                    fieldFalse = property.Value.GetBoolean();
                     continue;
                 }
             }

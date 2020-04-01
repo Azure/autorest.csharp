@@ -24,26 +24,19 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<MetricSpecification> array = new List<MetricSpecification>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        metricSpecifications = null;
-                    }
-                    else
-                    {
-                        List<MetricSpecification> array = new List<MetricSpecification>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(MetricSpecification.DeserializeMetricSpecification(item));
-                            }
+                            array.Add(null);
                         }
-                        metricSpecifications = array;
+                        else
+                        {
+                            array.Add(MetricSpecification.DeserializeMetricSpecification(item));
+                        }
                     }
+                    metricSpecifications = array;
                     continue;
                 }
             }

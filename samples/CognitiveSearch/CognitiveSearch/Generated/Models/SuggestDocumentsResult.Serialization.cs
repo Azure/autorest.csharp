@@ -42,14 +42,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        searchcoverage = null;
-                    }
-                    else
-                    {
-                        searchcoverage = property.Value.GetDouble();
-                    }
+                    searchcoverage = property.Value.GetDouble();
                     continue;
                 }
             }

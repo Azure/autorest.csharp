@@ -49,26 +49,19 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                    foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        parameters = null;
-                    }
-                    else
-                    {
-                        Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                        foreach (var property0 in property.Value.EnumerateObject())
+                        if (property0.Value.ValueKind == JsonValueKind.Null)
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                dictionary.Add(property0.Name, null);
-                            }
-                            else
-                            {
-                                dictionary.Add(property0.Name, property0.Value.GetObject());
-                            }
+                            dictionary.Add(property0.Name, null);
                         }
-                        parameters = dictionary;
+                        else
+                        {
+                            dictionary.Add(property0.Name, property0.Value.GetObject());
+                        }
                     }
+                    parameters = dictionary;
                     continue;
                 }
             }

@@ -23,14 +23,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        accountSasToken = null;
-                    }
-                    else
-                    {
-                        accountSasToken = property.Value.GetString();
-                    }
+                    accountSasToken = property.Value.GetString();
                     continue;
                 }
             }

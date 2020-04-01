@@ -67,14 +67,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        etag = null;
-                    }
-                    else
-                    {
-                        etag = property.Value.GetString();
-                    }
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("updateHistory"))
@@ -83,26 +76,19 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<UpdateHistoryProperty> array = new List<UpdateHistoryProperty>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        updateHistory = null;
-                    }
-                    else
-                    {
-                        List<UpdateHistoryProperty> array = new List<UpdateHistoryProperty>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(UpdateHistoryProperty.DeserializeUpdateHistoryProperty(item));
-                            }
+                            array.Add(null);
                         }
-                        updateHistory = array;
+                        else
+                        {
+                            array.Add(UpdateHistoryProperty.DeserializeUpdateHistoryProperty(item));
+                        }
                     }
+                    updateHistory = array;
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -115,14 +101,7 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                immutabilityPeriodSinceCreationInDays = null;
-                            }
-                            else
-                            {
-                                immutabilityPeriodSinceCreationInDays = property0.Value.GetInt32();
-                            }
+                            immutabilityPeriodSinceCreationInDays = property0.Value.GetInt32();
                             continue;
                         }
                         if (property0.NameEquals("state"))
@@ -131,14 +110,7 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                state = null;
-                            }
-                            else
-                            {
-                                state = new ImmutabilityPolicyState(property0.Value.GetString());
-                            }
+                            state = new ImmutabilityPolicyState(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("allowProtectedAppendWrites"))
@@ -147,14 +119,7 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                allowProtectedAppendWrites = null;
-                            }
-                            else
-                            {
-                                allowProtectedAppendWrites = property0.Value.GetBoolean();
-                            }
+                            allowProtectedAppendWrites = property0.Value.GetBoolean();
                             continue;
                         }
                     }

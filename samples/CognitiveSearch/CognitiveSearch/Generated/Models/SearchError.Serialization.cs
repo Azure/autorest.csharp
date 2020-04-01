@@ -26,14 +26,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        code = null;
-                    }
-                    else
-                    {
-                        code = property.Value.GetString();
-                    }
+                    code = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("message"))
@@ -47,26 +40,19 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<SearchError> array = new List<SearchError>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        details = null;
-                    }
-                    else
-                    {
-                        List<SearchError> array = new List<SearchError>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(DeserializeSearchError(item));
-                            }
+                            array.Add(null);
                         }
-                        details = array;
+                        else
+                        {
+                            array.Add(DeserializeSearchError(item));
+                        }
                     }
+                    details = array;
                     continue;
                 }
             }

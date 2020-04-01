@@ -39,14 +39,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        errorMessage = null;
-                    }
-                    else
-                    {
-                        errorMessage = property.Value.GetString();
-                    }
+                    errorMessage = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("startTime"))
@@ -55,14 +48,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        startTime = null;
-                    }
-                    else
-                    {
-                        startTime = property.Value.GetDateTimeOffset("S");
-                    }
+                    startTime = property.Value.GetDateTimeOffset("S");
                     continue;
                 }
                 if (property.NameEquals("endTime"))
@@ -71,14 +57,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        endTime = null;
-                    }
-                    else
-                    {
-                        endTime = property.Value.GetDateTimeOffset("S");
-                    }
+                    endTime = property.Value.GetDateTimeOffset("S");
                     continue;
                 }
                 if (property.NameEquals("errors"))
@@ -131,14 +110,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        initialTrackingState = null;
-                    }
-                    else
-                    {
-                        initialTrackingState = property.Value.GetString();
-                    }
+                    initialTrackingState = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("finalTrackingState"))
@@ -147,14 +119,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        finalTrackingState = null;
-                    }
-                    else
-                    {
-                        finalTrackingState = property.Value.GetString();
-                    }
+                    finalTrackingState = property.Value.GetString();
                     continue;
                 }
             }

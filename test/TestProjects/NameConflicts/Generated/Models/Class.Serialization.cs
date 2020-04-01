@@ -646,14 +646,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @abstract = null;
-                    }
-                    else
-                    {
-                        @abstract = property.Value.GetString();
-                    }
+                    @abstract = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("add"))
@@ -662,14 +655,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @add = null;
-                    }
-                    else
-                    {
-                        @add = property.Value.GetString();
-                    }
+                    @add = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("alias"))
@@ -678,14 +664,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @alias = null;
-                    }
-                    else
-                    {
-                        @alias = property.Value.GetString();
-                    }
+                    @alias = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("as"))
@@ -694,14 +673,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @as = null;
-                    }
-                    else
-                    {
-                        @as = property.Value.GetString();
-                    }
+                    @as = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("ascending"))
@@ -710,14 +682,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @ascending = null;
-                    }
-                    else
-                    {
-                        @ascending = property.Value.GetString();
-                    }
+                    @ascending = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("async"))
@@ -726,14 +691,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @async = null;
-                    }
-                    else
-                    {
-                        @async = property.Value.GetString();
-                    }
+                    @async = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("await"))
@@ -742,14 +700,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @await = null;
-                    }
-                    else
-                    {
-                        @await = property.Value.GetString();
-                    }
+                    @await = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("base"))
@@ -758,14 +709,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @base = null;
-                    }
-                    else
-                    {
-                        @base = property.Value.GetString();
-                    }
+                    @base = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("bool"))
@@ -774,14 +718,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @bool = null;
-                    }
-                    else
-                    {
-                        @bool = property.Value.GetString();
-                    }
+                    @bool = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("break"))
@@ -790,14 +727,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @break = null;
-                    }
-                    else
-                    {
-                        @break = property.Value.GetString();
-                    }
+                    @break = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("by"))
@@ -806,14 +736,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @by = null;
-                    }
-                    else
-                    {
-                        @by = property.Value.GetString();
-                    }
+                    @by = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("byte"))
@@ -822,14 +745,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @byte = null;
-                    }
-                    else
-                    {
-                        @byte = property.Value.GetString();
-                    }
+                    @byte = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("catch"))
@@ -838,14 +754,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @catch = null;
-                    }
-                    else
-                    {
-                        @catch = property.Value.GetString();
-                    }
+                    @catch = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("char"))
@@ -854,14 +763,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @char = null;
-                    }
-                    else
-                    {
-                        @char = property.Value.GetString();
-                    }
+                    @char = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("checked"))
@@ -870,14 +772,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @checked = null;
-                    }
-                    else
-                    {
-                        @checked = property.Value.GetString();
-                    }
+                    @checked = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("const"))
@@ -886,14 +781,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @const = null;
-                    }
-                    else
-                    {
-                        @const = property.Value.GetString();
-                    }
+                    @const = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("continue"))
@@ -902,14 +790,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @continue = null;
-                    }
-                    else
-                    {
-                        @continue = property.Value.GetString();
-                    }
+                    @continue = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("decimal"))
@@ -918,14 +799,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @decimal = null;
-                    }
-                    else
-                    {
-                        @decimal = property.Value.GetString();
-                    }
+                    @decimal = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("default"))
@@ -934,14 +808,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @default = null;
-                    }
-                    else
-                    {
-                        @default = property.Value.GetString();
-                    }
+                    @default = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("delegate"))
@@ -950,14 +817,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @delegate = null;
-                    }
-                    else
-                    {
-                        @delegate = property.Value.GetString();
-                    }
+                    @delegate = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("descending"))
@@ -966,14 +826,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @descending = null;
-                    }
-                    else
-                    {
-                        @descending = property.Value.GetString();
-                    }
+                    @descending = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("do"))
@@ -982,14 +835,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @do = null;
-                    }
-                    else
-                    {
-                        @do = property.Value.GetString();
-                    }
+                    @do = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("double"))
@@ -998,14 +844,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @double = null;
-                    }
-                    else
-                    {
-                        @double = property.Value.GetString();
-                    }
+                    @double = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("dynamic"))
@@ -1014,14 +853,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @dynamic = null;
-                    }
-                    else
-                    {
-                        @dynamic = property.Value.GetString();
-                    }
+                    @dynamic = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("else"))
@@ -1030,14 +862,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @else = null;
-                    }
-                    else
-                    {
-                        @else = property.Value.GetString();
-                    }
+                    @else = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("enum"))
@@ -1046,14 +871,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @enum = null;
-                    }
-                    else
-                    {
-                        @enum = property.Value.GetString();
-                    }
+                    @enum = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("event"))
@@ -1062,14 +880,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @event = null;
-                    }
-                    else
-                    {
-                        @event = property.Value.GetString();
-                    }
+                    @event = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("explicit"))
@@ -1078,14 +889,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @explicit = null;
-                    }
-                    else
-                    {
-                        @explicit = property.Value.GetString();
-                    }
+                    @explicit = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("extern"))
@@ -1094,14 +898,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @extern = null;
-                    }
-                    else
-                    {
-                        @extern = property.Value.GetString();
-                    }
+                    @extern = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("false"))
@@ -1110,14 +907,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @false = null;
-                    }
-                    else
-                    {
-                        @false = property.Value.GetString();
-                    }
+                    @false = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("finally"))
@@ -1126,14 +916,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @finally = null;
-                    }
-                    else
-                    {
-                        @finally = property.Value.GetString();
-                    }
+                    @finally = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("fixed"))
@@ -1142,14 +925,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @fixed = null;
-                    }
-                    else
-                    {
-                        @fixed = property.Value.GetString();
-                    }
+                    @fixed = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("float"))
@@ -1158,14 +934,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @float = null;
-                    }
-                    else
-                    {
-                        @float = property.Value.GetString();
-                    }
+                    @float = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("for"))
@@ -1174,14 +943,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @for = null;
-                    }
-                    else
-                    {
-                        @for = property.Value.GetString();
-                    }
+                    @for = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("foreach"))
@@ -1190,14 +952,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @foreach = null;
-                    }
-                    else
-                    {
-                        @foreach = property.Value.GetString();
-                    }
+                    @foreach = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("from"))
@@ -1206,14 +961,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @from = null;
-                    }
-                    else
-                    {
-                        @from = property.Value.GetString();
-                    }
+                    @from = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("get"))
@@ -1222,14 +970,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @get = null;
-                    }
-                    else
-                    {
-                        @get = property.Value.GetString();
-                    }
+                    @get = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("global"))
@@ -1238,14 +979,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @global = null;
-                    }
-                    else
-                    {
-                        @global = property.Value.GetString();
-                    }
+                    @global = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("goto"))
@@ -1254,14 +988,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @goto = null;
-                    }
-                    else
-                    {
-                        @goto = property.Value.GetString();
-                    }
+                    @goto = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("group"))
@@ -1270,14 +997,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        group = null;
-                    }
-                    else
-                    {
-                        group = property.Value.GetString();
-                    }
+                    group = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("if"))
@@ -1286,14 +1006,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @if = null;
-                    }
-                    else
-                    {
-                        @if = property.Value.GetString();
-                    }
+                    @if = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("implicit"))
@@ -1302,14 +1015,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @implicit = null;
-                    }
-                    else
-                    {
-                        @implicit = property.Value.GetString();
-                    }
+                    @implicit = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("in"))
@@ -1318,14 +1024,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @in = null;
-                    }
-                    else
-                    {
-                        @in = property.Value.GetString();
-                    }
+                    @in = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("int"))
@@ -1334,14 +1033,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @int = null;
-                    }
-                    else
-                    {
-                        @int = property.Value.GetString();
-                    }
+                    @int = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("interface"))
@@ -1350,14 +1042,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @interface = null;
-                    }
-                    else
-                    {
-                        @interface = property.Value.GetString();
-                    }
+                    @interface = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("internal"))
@@ -1366,14 +1051,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @internal = null;
-                    }
-                    else
-                    {
-                        @internal = property.Value.GetString();
-                    }
+                    @internal = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("into"))
@@ -1382,14 +1060,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @into = null;
-                    }
-                    else
-                    {
-                        @into = property.Value.GetString();
-                    }
+                    @into = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("is"))
@@ -1398,14 +1069,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @is = null;
-                    }
-                    else
-                    {
-                        @is = property.Value.GetString();
-                    }
+                    @is = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("join"))
@@ -1414,14 +1078,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @join = null;
-                    }
-                    else
-                    {
-                        @join = property.Value.GetString();
-                    }
+                    @join = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("let"))
@@ -1430,14 +1087,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @let = null;
-                    }
-                    else
-                    {
-                        @let = property.Value.GetString();
-                    }
+                    @let = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("lock"))
@@ -1446,14 +1096,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @lock = null;
-                    }
-                    else
-                    {
-                        @lock = property.Value.GetString();
-                    }
+                    @lock = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("long"))
@@ -1462,14 +1105,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @long = null;
-                    }
-                    else
-                    {
-                        @long = property.Value.GetString();
-                    }
+                    @long = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("nameof"))
@@ -1478,14 +1114,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @nameof = null;
-                    }
-                    else
-                    {
-                        @nameof = property.Value.GetString();
-                    }
+                    @nameof = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("namespace"))
@@ -1494,14 +1123,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @namespace = null;
-                    }
-                    else
-                    {
-                        @namespace = property.Value.GetString();
-                    }
+                    @namespace = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("new"))
@@ -1510,14 +1132,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @new = null;
-                    }
-                    else
-                    {
-                        @new = property.Value.GetString();
-                    }
+                    @new = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("null"))
@@ -1526,14 +1141,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @null = null;
-                    }
-                    else
-                    {
-                        @null = property.Value.GetString();
-                    }
+                    @null = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("object"))
@@ -1542,14 +1150,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @object = null;
-                    }
-                    else
-                    {
-                        @object = property.Value.GetString();
-                    }
+                    @object = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("on"))
@@ -1558,14 +1159,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @on = null;
-                    }
-                    else
-                    {
-                        @on = property.Value.GetString();
-                    }
+                    @on = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("operator"))
@@ -1574,14 +1168,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @operator = null;
-                    }
-                    else
-                    {
-                        @operator = property.Value.GetString();
-                    }
+                    @operator = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("orderby"))
@@ -1590,14 +1177,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        orderby = null;
-                    }
-                    else
-                    {
-                        orderby = property.Value.GetString();
-                    }
+                    orderby = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("out"))
@@ -1606,14 +1186,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @out = null;
-                    }
-                    else
-                    {
-                        @out = property.Value.GetString();
-                    }
+                    @out = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("override"))
@@ -1622,14 +1195,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @override = null;
-                    }
-                    else
-                    {
-                        @override = property.Value.GetString();
-                    }
+                    @override = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("params"))
@@ -1638,14 +1204,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @params = null;
-                    }
-                    else
-                    {
-                        @params = property.Value.GetString();
-                    }
+                    @params = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("partial"))
@@ -1654,14 +1213,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @partial = null;
-                    }
-                    else
-                    {
-                        @partial = property.Value.GetString();
-                    }
+                    @partial = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("private"))
@@ -1670,14 +1222,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @private = null;
-                    }
-                    else
-                    {
-                        @private = property.Value.GetString();
-                    }
+                    @private = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("protected"))
@@ -1686,14 +1231,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @protected = null;
-                    }
-                    else
-                    {
-                        @protected = property.Value.GetString();
-                    }
+                    @protected = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("public"))
@@ -1702,14 +1240,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @public = null;
-                    }
-                    else
-                    {
-                        @public = property.Value.GetString();
-                    }
+                    @public = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("readonly"))
@@ -1718,14 +1249,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @readonly = null;
-                    }
-                    else
-                    {
-                        @readonly = property.Value.GetString();
-                    }
+                    @readonly = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("ref"))
@@ -1734,14 +1258,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @ref = null;
-                    }
-                    else
-                    {
-                        @ref = property.Value.GetString();
-                    }
+                    @ref = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("remove"))
@@ -1750,14 +1267,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @remove = null;
-                    }
-                    else
-                    {
-                        @remove = property.Value.GetString();
-                    }
+                    @remove = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("return"))
@@ -1766,14 +1276,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @return = null;
-                    }
-                    else
-                    {
-                        @return = property.Value.GetString();
-                    }
+                    @return = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("sbyte"))
@@ -1782,14 +1285,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @sbyte = null;
-                    }
-                    else
-                    {
-                        @sbyte = property.Value.GetString();
-                    }
+                    @sbyte = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("sealed"))
@@ -1798,14 +1294,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @sealed = null;
-                    }
-                    else
-                    {
-                        @sealed = property.Value.GetString();
-                    }
+                    @sealed = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("select"))
@@ -1814,14 +1303,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        select = null;
-                    }
-                    else
-                    {
-                        select = property.Value.GetString();
-                    }
+                    select = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("set"))
@@ -1830,14 +1312,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @set = null;
-                    }
-                    else
-                    {
-                        @set = property.Value.GetString();
-                    }
+                    @set = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("short"))
@@ -1846,14 +1321,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @short = null;
-                    }
-                    else
-                    {
-                        @short = property.Value.GetString();
-                    }
+                    @short = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("sizeof"))
@@ -1862,14 +1330,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @sizeof = null;
-                    }
-                    else
-                    {
-                        @sizeof = property.Value.GetString();
-                    }
+                    @sizeof = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("stackalloc"))
@@ -1878,14 +1339,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @stackalloc = null;
-                    }
-                    else
-                    {
-                        @stackalloc = property.Value.GetString();
-                    }
+                    @stackalloc = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("static"))
@@ -1894,14 +1348,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @static = null;
-                    }
-                    else
-                    {
-                        @static = property.Value.GetString();
-                    }
+                    @static = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("string"))
@@ -1910,14 +1357,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @string = null;
-                    }
-                    else
-                    {
-                        @string = property.Value.GetString();
-                    }
+                    @string = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("struct"))
@@ -1926,14 +1366,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @struct = null;
-                    }
-                    else
-                    {
-                        @struct = property.Value.GetString();
-                    }
+                    @struct = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("switch"))
@@ -1942,14 +1375,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @switch = null;
-                    }
-                    else
-                    {
-                        @switch = property.Value.GetString();
-                    }
+                    @switch = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("this"))
@@ -1958,14 +1384,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @this = null;
-                    }
-                    else
-                    {
-                        @this = property.Value.GetString();
-                    }
+                    @this = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("throw"))
@@ -1974,14 +1393,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @throw = null;
-                    }
-                    else
-                    {
-                        @throw = property.Value.GetString();
-                    }
+                    @throw = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("true"))
@@ -1990,14 +1402,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @true = null;
-                    }
-                    else
-                    {
-                        @true = property.Value.GetString();
-                    }
+                    @true = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("try"))
@@ -2006,14 +1411,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @try = null;
-                    }
-                    else
-                    {
-                        @try = property.Value.GetString();
-                    }
+                    @try = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("typeof"))
@@ -2022,14 +1420,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @typeof = null;
-                    }
-                    else
-                    {
-                        @typeof = property.Value.GetString();
-                    }
+                    @typeof = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("uint"))
@@ -2038,14 +1429,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @uint = null;
-                    }
-                    else
-                    {
-                        @uint = property.Value.GetString();
-                    }
+                    @uint = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("ulong"))
@@ -2054,14 +1438,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @ulong = null;
-                    }
-                    else
-                    {
-                        @ulong = property.Value.GetString();
-                    }
+                    @ulong = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("unchecked"))
@@ -2070,14 +1447,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @unchecked = null;
-                    }
-                    else
-                    {
-                        @unchecked = property.Value.GetString();
-                    }
+                    @unchecked = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("unmanaged"))
@@ -2086,14 +1456,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @unmanaged = null;
-                    }
-                    else
-                    {
-                        @unmanaged = property.Value.GetString();
-                    }
+                    @unmanaged = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("unsafe"))
@@ -2102,14 +1465,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @unsafe = null;
-                    }
-                    else
-                    {
-                        @unsafe = property.Value.GetString();
-                    }
+                    @unsafe = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("ushort"))
@@ -2118,14 +1474,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @ushort = null;
-                    }
-                    else
-                    {
-                        @ushort = property.Value.GetString();
-                    }
+                    @ushort = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("using"))
@@ -2134,14 +1483,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @using = null;
-                    }
-                    else
-                    {
-                        @using = property.Value.GetString();
-                    }
+                    @using = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("value"))
@@ -2150,14 +1492,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        value = null;
-                    }
-                    else
-                    {
-                        value = property.Value.GetString();
-                    }
+                    value = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("var"))
@@ -2166,14 +1501,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @var = null;
-                    }
-                    else
-                    {
-                        @var = property.Value.GetString();
-                    }
+                    @var = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("virtual"))
@@ -2182,14 +1510,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @virtual = null;
-                    }
-                    else
-                    {
-                        @virtual = property.Value.GetString();
-                    }
+                    @virtual = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("void"))
@@ -2198,14 +1519,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @void = null;
-                    }
-                    else
-                    {
-                        @void = property.Value.GetString();
-                    }
+                    @void = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("volatile"))
@@ -2214,14 +1528,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @volatile = null;
-                    }
-                    else
-                    {
-                        @volatile = property.Value.GetString();
-                    }
+                    @volatile = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("when"))
@@ -2230,14 +1537,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @when = null;
-                    }
-                    else
-                    {
-                        @when = property.Value.GetString();
-                    }
+                    @when = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("where"))
@@ -2246,14 +1546,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @where = null;
-                    }
-                    else
-                    {
-                        @where = property.Value.GetString();
-                    }
+                    @where = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("while"))
@@ -2262,14 +1555,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @while = null;
-                    }
-                    else
-                    {
-                        @while = property.Value.GetString();
-                    }
+                    @while = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("yield"))
@@ -2278,14 +1564,7 @@ namespace NameConflicts.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @yield = null;
-                    }
-                    else
-                    {
-                        @yield = property.Value.GetString();
-                    }
+                    @yield = property.Value.GetString();
                     continue;
                 }
             }

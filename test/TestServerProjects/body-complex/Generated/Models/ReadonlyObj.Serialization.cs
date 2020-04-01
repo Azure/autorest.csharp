@@ -40,14 +40,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        id = null;
-                    }
-                    else
-                    {
-                        id = property.Value.GetString();
-                    }
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("size"))
@@ -56,14 +49,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        size = null;
-                    }
-                    else
-                    {
-                        size = property.Value.GetInt32();
-                    }
+                    size = property.Value.GetInt32();
                     continue;
                 }
             }

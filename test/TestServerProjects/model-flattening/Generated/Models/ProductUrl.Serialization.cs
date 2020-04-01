@@ -40,14 +40,7 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        odatavalue = null;
-                    }
-                    else
-                    {
-                        odatavalue = property.Value.GetString();
-                    }
+                    odatavalue = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("generic_value"))
@@ -56,14 +49,7 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        genericValue = null;
-                    }
-                    else
-                    {
-                        genericValue = property.Value.GetString();
-                    }
+                    genericValue = property.Value.GetString();
                     continue;
                 }
             }

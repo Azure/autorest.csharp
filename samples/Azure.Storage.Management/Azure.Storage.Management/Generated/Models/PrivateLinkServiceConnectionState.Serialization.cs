@@ -46,14 +46,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        status = null;
-                    }
-                    else
-                    {
-                        status = new PrivateEndpointServiceConnectionStatus(property.Value.GetString());
-                    }
+                    status = new PrivateEndpointServiceConnectionStatus(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("description"))
@@ -62,14 +55,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        description = null;
-                    }
-                    else
-                    {
-                        description = property.Value.GetString();
-                    }
+                    description = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("actionRequired"))
@@ -78,14 +64,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        actionRequired = null;
-                    }
-                    else
-                    {
-                        actionRequired = property.Value.GetString();
-                    }
+                    actionRequired = property.Value.GetString();
                     continue;
                 }
             }

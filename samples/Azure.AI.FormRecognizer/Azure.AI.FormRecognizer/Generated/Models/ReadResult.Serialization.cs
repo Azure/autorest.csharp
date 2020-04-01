@@ -55,14 +55,7 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        language = null;
-                    }
-                    else
-                    {
-                        language = new Language(property.Value.GetString());
-                    }
+                    language = new Language(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("lines"))
@@ -71,26 +64,19 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<TextLine> array = new List<TextLine>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        lines = null;
-                    }
-                    else
-                    {
-                        List<TextLine> array = new List<TextLine>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(TextLine.DeserializeTextLine(item));
-                            }
+                            array.Add(null);
                         }
-                        lines = array;
+                        else
+                        {
+                            array.Add(TextLine.DeserializeTextLine(item));
+                        }
                     }
+                    lines = array;
                     continue;
                 }
             }

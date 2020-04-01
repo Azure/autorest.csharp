@@ -52,14 +52,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        status = null;
-                    }
-                    else
-                    {
-                        status = new BlobRestoreProgressStatus(property.Value.GetString());
-                    }
+                    status = new BlobRestoreProgressStatus(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("failureReason"))
@@ -68,14 +61,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        failureReason = null;
-                    }
-                    else
-                    {
-                        failureReason = property.Value.GetString();
-                    }
+                    failureReason = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("restoreId"))
@@ -84,14 +70,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        restoreId = null;
-                    }
-                    else
-                    {
-                        restoreId = property.Value.GetString();
-                    }
+                    restoreId = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("parameters"))
@@ -100,14 +79,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        parameters = null;
-                    }
-                    else
-                    {
-                        parameters = BlobRestoreParameters.DeserializeBlobRestoreParameters(property.Value);
-                    }
+                    parameters = BlobRestoreParameters.DeserializeBlobRestoreParameters(property.Value);
                     continue;
                 }
             }

@@ -26,14 +26,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        count = null;
-                    }
-                    else
-                    {
-                        count = property.Value.GetInt64();
-                    }
+                    count = property.Value.GetInt64();
                     continue;
                 }
                 if (property.Value.ValueKind == JsonValueKind.Null)

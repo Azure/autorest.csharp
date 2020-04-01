@@ -34,14 +34,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        keyUri = null;
-                    }
-                    else
-                    {
-                        keyUri = property.Value.GetString();
-                    }
+                    keyUri = property.Value.GetString();
                     continue;
                 }
             }

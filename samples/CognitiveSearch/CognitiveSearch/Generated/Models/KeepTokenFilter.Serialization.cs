@@ -66,14 +66,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        keepWordsCase = null;
-                    }
-                    else
-                    {
-                        keepWordsCase = property.Value.GetBoolean();
-                    }
+                    keepWordsCase = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))

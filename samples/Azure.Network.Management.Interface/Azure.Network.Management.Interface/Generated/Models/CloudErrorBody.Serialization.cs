@@ -27,14 +27,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        code = null;
-                    }
-                    else
-                    {
-                        code = property.Value.GetString();
-                    }
+                    code = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("message"))
@@ -43,14 +36,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        message = null;
-                    }
-                    else
-                    {
-                        message = property.Value.GetString();
-                    }
+                    message = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("target"))
@@ -59,14 +45,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        target = null;
-                    }
-                    else
-                    {
-                        target = property.Value.GetString();
-                    }
+                    target = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("details"))
@@ -75,26 +54,19 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<CloudErrorBody> array = new List<CloudErrorBody>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        details = null;
-                    }
-                    else
-                    {
-                        List<CloudErrorBody> array = new List<CloudErrorBody>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(DeserializeCloudErrorBody(item));
-                            }
+                            array.Add(null);
                         }
-                        details = array;
+                        else
+                        {
+                            array.Add(DeserializeCloudErrorBody(item));
+                        }
                     }
+                    details = array;
                     continue;
                 }
             }

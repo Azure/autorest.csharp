@@ -24,14 +24,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        status = null;
-                    }
-                    else
-                    {
-                        status = property.Value.GetInt32();
-                    }
+                    status = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("message"))
@@ -40,14 +33,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        message = null;
-                    }
-                    else
-                    {
-                        message = property.Value.GetString();
-                    }
+                    message = property.Value.GetString();
                     continue;
                 }
             }

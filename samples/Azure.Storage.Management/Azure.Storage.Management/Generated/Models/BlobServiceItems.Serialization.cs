@@ -24,26 +24,19 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<BlobServiceProperties> array = new List<BlobServiceProperties>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        value = null;
-                    }
-                    else
-                    {
-                        List<BlobServiceProperties> array = new List<BlobServiceProperties>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(BlobServiceProperties.DeserializeBlobServiceProperties(item));
-                            }
+                            array.Add(null);
                         }
-                        value = array;
+                        else
+                        {
+                            array.Add(BlobServiceProperties.DeserializeBlobServiceProperties(item));
+                        }
                     }
+                    value = array;
                     continue;
                 }
             }

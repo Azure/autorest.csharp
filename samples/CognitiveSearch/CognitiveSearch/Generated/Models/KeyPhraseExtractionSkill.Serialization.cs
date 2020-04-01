@@ -78,14 +78,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        defaultLanguageCode = null;
-                    }
-                    else
-                    {
-                        defaultLanguageCode = new KeyPhraseExtractionSkillLanguage(property.Value.GetString());
-                    }
+                    defaultLanguageCode = new KeyPhraseExtractionSkillLanguage(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("maxKeyPhraseCount"))
@@ -94,14 +87,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        maxKeyPhraseCount = null;
-                    }
-                    else
-                    {
-                        maxKeyPhraseCount = property.Value.GetInt32();
-                    }
+                    maxKeyPhraseCount = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))
@@ -115,14 +101,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        name = null;
-                    }
-                    else
-                    {
-                        name = property.Value.GetString();
-                    }
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("description"))
@@ -131,14 +110,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        description = null;
-                    }
-                    else
-                    {
-                        description = property.Value.GetString();
-                    }
+                    description = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("context"))
@@ -147,14 +119,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        context = null;
-                    }
-                    else
-                    {
-                        context = property.Value.GetString();
-                    }
+                    context = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("inputs"))

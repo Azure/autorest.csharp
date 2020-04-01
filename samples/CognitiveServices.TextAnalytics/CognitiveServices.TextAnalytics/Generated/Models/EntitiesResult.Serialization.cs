@@ -61,14 +61,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        statistics = null;
-                    }
-                    else
-                    {
-                        statistics = RequestStatistics.DeserializeRequestStatistics(property.Value);
-                    }
+                    statistics = RequestStatistics.DeserializeRequestStatistics(property.Value);
                     continue;
                 }
                 if (property.NameEquals("modelVersion"))

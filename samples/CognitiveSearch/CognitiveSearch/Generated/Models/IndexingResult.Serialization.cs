@@ -31,14 +31,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        errorMessage = null;
-                    }
-                    else
-                    {
-                        errorMessage = property.Value.GetString();
-                    }
+                    errorMessage = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("status"))

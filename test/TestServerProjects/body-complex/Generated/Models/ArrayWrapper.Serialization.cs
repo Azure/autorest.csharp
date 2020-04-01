@@ -40,26 +40,19 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<string> array0 = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        array = null;
-                    }
-                    else
-                    {
-                        List<string> array0 = new List<string>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array0.Add(null);
-                            }
-                            else
-                            {
-                                array0.Add(item.GetString());
-                            }
+                            array0.Add(null);
                         }
-                        array = array0;
+                        else
+                        {
+                            array0.Add(item.GetString());
+                        }
                     }
+                    array = array0;
                     continue;
                 }
             }

@@ -52,14 +52,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        maxTokenLength = null;
-                    }
-                    else
-                    {
-                        maxTokenLength = property.Value.GetInt32();
-                    }
+                    maxTokenLength = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("isSearchTokenizer"))
@@ -68,14 +61,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        isSearchTokenizer = null;
-                    }
-                    else
-                    {
-                        isSearchTokenizer = property.Value.GetBoolean();
-                    }
+                    isSearchTokenizer = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("language"))
@@ -84,14 +70,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        language = null;
-                    }
-                    else
-                    {
-                        language = property.Value.GetString().ToMicrosoftTokenizerLanguage();
-                    }
+                    language = property.Value.GetString().ToMicrosoftTokenizerLanguage();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))

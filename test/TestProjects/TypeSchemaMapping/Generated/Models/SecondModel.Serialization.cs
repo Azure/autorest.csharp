@@ -56,26 +56,19 @@ namespace TypeSchemaMapping.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionaryProperty = null;
-                    }
-                    else
-                    {
-                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                        foreach (var property0 in property.Value.EnumerateObject())
+                        if (property0.Value.ValueKind == JsonValueKind.Null)
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                dictionary.Add(property0.Name, null);
-                            }
-                            else
-                            {
-                                dictionary.Add(property0.Name, property0.Value.GetString());
-                            }
+                            dictionary.Add(property0.Name, null);
                         }
-                        dictionaryProperty = dictionary;
+                        else
+                        {
+                            dictionary.Add(property0.Name, property0.Value.GetString());
+                        }
                     }
+                    dictionaryProperty = dictionary;
                     continue;
                 }
                 if (property.NameEquals("DaysOfWeek"))
@@ -84,14 +77,7 @@ namespace TypeSchemaMapping.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        daysOfWeek = null;
-                    }
-                    else
-                    {
-                        daysOfWeek = new CustomDaysOfWeek(property.Value.GetString());
-                    }
+                    daysOfWeek = new CustomDaysOfWeek(property.Value.GetString());
                     continue;
                 }
             }

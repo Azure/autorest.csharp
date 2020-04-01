@@ -65,14 +65,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        update = null;
-                    }
-                    else
-                    {
-                        update = new ImmutabilityPolicyUpdateType(property.Value.GetString());
-                    }
+                    update = new ImmutabilityPolicyUpdateType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("immutabilityPeriodSinceCreationInDays"))
@@ -81,14 +74,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        immutabilityPeriodSinceCreationInDays = null;
-                    }
-                    else
-                    {
-                        immutabilityPeriodSinceCreationInDays = property.Value.GetInt32();
-                    }
+                    immutabilityPeriodSinceCreationInDays = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("timestamp"))
@@ -97,14 +83,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        timestamp = null;
-                    }
-                    else
-                    {
-                        timestamp = property.Value.GetDateTimeOffset("S");
-                    }
+                    timestamp = property.Value.GetDateTimeOffset("S");
                     continue;
                 }
                 if (property.NameEquals("objectIdentifier"))
@@ -113,14 +92,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        objectIdentifier = null;
-                    }
-                    else
-                    {
-                        objectIdentifier = property.Value.GetString();
-                    }
+                    objectIdentifier = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("tenantId"))
@@ -129,14 +101,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        tenantId = null;
-                    }
-                    else
-                    {
-                        tenantId = property.Value.GetString();
-                    }
+                    tenantId = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("upn"))
@@ -145,14 +110,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        upn = null;
-                    }
-                    else
-                    {
-                        upn = property.Value.GetString();
-                    }
+                    upn = property.Value.GetString();
                     continue;
                 }
             }

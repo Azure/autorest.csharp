@@ -46,14 +46,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        field = null;
-                    }
-                    else
-                    {
-                        field = property.Value.GetString();
-                    }
+                    field = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("empty"))
@@ -62,14 +55,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        empty = null;
-                    }
-                    else
-                    {
-                        empty = property.Value.GetString();
-                    }
+                    empty = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("null"))
@@ -78,14 +64,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @null = null;
-                    }
-                    else
-                    {
-                        @null = property.Value.GetString();
-                    }
+                    @null = property.Value.GetString();
                     continue;
                 }
             }

@@ -46,14 +46,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        status = null;
-                    }
-                    else
-                    {
-                        status = property.Value.GetString();
-                    }
+                    status = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("description"))
@@ -62,14 +55,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        description = null;
-                    }
-                    else
-                    {
-                        description = property.Value.GetString();
-                    }
+                    description = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("actionsRequired"))
@@ -78,14 +64,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        actionsRequired = null;
-                    }
-                    else
-                    {
-                        actionsRequired = property.Value.GetString();
-                    }
+                    actionsRequired = property.Value.GetString();
                     continue;
                 }
             }

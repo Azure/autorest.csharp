@@ -30,14 +30,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        name = null;
-                    }
-                    else
-                    {
-                        name = property.Value.GetString();
-                    }
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("disableBgpRoutePropagation"))
@@ -46,14 +39,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        disableBgpRoutePropagation = null;
-                    }
-                    else
-                    {
-                        disableBgpRoutePropagation = property.Value.GetBoolean();
-                    }
+                    disableBgpRoutePropagation = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("source"))
@@ -62,14 +48,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        source = null;
-                    }
-                    else
-                    {
-                        source = new EffectiveRouteSource(property.Value.GetString());
-                    }
+                    source = new EffectiveRouteSource(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("state"))
@@ -78,14 +57,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        state = null;
-                    }
-                    else
-                    {
-                        state = new EffectiveRouteState(property.Value.GetString());
-                    }
+                    state = new EffectiveRouteState(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("addressPrefix"))
@@ -94,26 +66,19 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        addressPrefix = null;
-                    }
-                    else
-                    {
-                        List<string> array = new List<string>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(item.GetString());
-                            }
+                            array.Add(null);
                         }
-                        addressPrefix = array;
+                        else
+                        {
+                            array.Add(item.GetString());
+                        }
                     }
+                    addressPrefix = array;
                     continue;
                 }
                 if (property.NameEquals("nextHopIpAddress"))
@@ -122,26 +87,19 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        nextHopIpAddress = null;
-                    }
-                    else
-                    {
-                        List<string> array = new List<string>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(item.GetString());
-                            }
+                            array.Add(null);
                         }
-                        nextHopIpAddress = array;
+                        else
+                        {
+                            array.Add(item.GetString());
+                        }
                     }
+                    nextHopIpAddress = array;
                     continue;
                 }
                 if (property.NameEquals("nextHopType"))
@@ -150,14 +108,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        nextHopType = null;
-                    }
-                    else
-                    {
-                        nextHopType = new RouteNextHopType(property.Value.GetString());
-                    }
+                    nextHopType = new RouteNextHopType(property.Value.GetString());
                     continue;
                 }
             }

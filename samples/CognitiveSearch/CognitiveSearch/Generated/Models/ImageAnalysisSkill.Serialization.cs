@@ -94,14 +94,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        defaultLanguageCode = null;
-                    }
-                    else
-                    {
-                        defaultLanguageCode = new ImageAnalysisSkillLanguage(property.Value.GetString());
-                    }
+                    defaultLanguageCode = new ImageAnalysisSkillLanguage(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("visualFeatures"))
@@ -110,19 +103,12 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<VisualFeature> array = new List<VisualFeature>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        visualFeatures = null;
+                        array.Add(item.GetString().ToVisualFeature());
                     }
-                    else
-                    {
-                        List<VisualFeature> array = new List<VisualFeature>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(item.GetString().ToVisualFeature());
-                        }
-                        visualFeatures = array;
-                    }
+                    visualFeatures = array;
                     continue;
                 }
                 if (property.NameEquals("details"))
@@ -131,19 +117,12 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<ImageDetail> array = new List<ImageDetail>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        details = null;
+                        array.Add(item.GetString().ToImageDetail());
                     }
-                    else
-                    {
-                        List<ImageDetail> array = new List<ImageDetail>();
-                        foreach (var item in property.Value.EnumerateArray())
-                        {
-                            array.Add(item.GetString().ToImageDetail());
-                        }
-                        details = array;
-                    }
+                    details = array;
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))
@@ -157,14 +136,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        name = null;
-                    }
-                    else
-                    {
-                        name = property.Value.GetString();
-                    }
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("description"))
@@ -173,14 +145,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        description = null;
-                    }
-                    else
-                    {
-                        description = property.Value.GetString();
-                    }
+                    description = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("context"))
@@ -189,14 +154,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        context = null;
-                    }
-                    else
-                    {
-                        context = property.Value.GetString();
-                    }
+                    context = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("inputs"))

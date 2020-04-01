@@ -27,14 +27,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        networkSecurityGroup = null;
-                    }
-                    else
-                    {
-                        networkSecurityGroup = SubResource.DeserializeSubResource(property.Value);
-                    }
+                    networkSecurityGroup = SubResource.DeserializeSubResource(property.Value);
                     continue;
                 }
                 if (property.NameEquals("association"))
@@ -43,14 +36,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        association = null;
-                    }
-                    else
-                    {
-                        association = EffectiveNetworkSecurityGroupAssociation.DeserializeEffectiveNetworkSecurityGroupAssociation(property.Value);
-                    }
+                    association = EffectiveNetworkSecurityGroupAssociation.DeserializeEffectiveNetworkSecurityGroupAssociation(property.Value);
                     continue;
                 }
                 if (property.NameEquals("effectiveSecurityRules"))
@@ -59,26 +45,19 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<EffectiveNetworkSecurityRule> array = new List<EffectiveNetworkSecurityRule>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        effectiveSecurityRules = null;
-                    }
-                    else
-                    {
-                        List<EffectiveNetworkSecurityRule> array = new List<EffectiveNetworkSecurityRule>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(EffectiveNetworkSecurityRule.DeserializeEffectiveNetworkSecurityRule(item));
-                            }
+                            array.Add(null);
                         }
-                        effectiveSecurityRules = array;
+                        else
+                        {
+                            array.Add(EffectiveNetworkSecurityRule.DeserializeEffectiveNetworkSecurityRule(item));
+                        }
                     }
+                    effectiveSecurityRules = array;
                     continue;
                 }
                 if (property.NameEquals("tagMap"))
@@ -87,14 +66,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        tagMap = null;
-                    }
-                    else
-                    {
-                        tagMap = property.Value.GetString();
-                    }
+                    tagMap = property.Value.GetString();
                     continue;
                 }
             }

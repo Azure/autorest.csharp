@@ -50,14 +50,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        constantBoostBeyondRange = null;
-                    }
-                    else
-                    {
-                        constantBoostBeyondRange = property.Value.GetBoolean();
-                    }
+                    constantBoostBeyondRange = property.Value.GetBoolean();
                     continue;
                 }
             }

@@ -25,26 +25,19 @@ namespace custom_baseUrl_paging.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<Product> array = new List<Product>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        values = null;
-                    }
-                    else
-                    {
-                        List<Product> array = new List<Product>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(Product.DeserializeProduct(item));
-                            }
+                            array.Add(null);
                         }
-                        values = array;
+                        else
+                        {
+                            array.Add(Product.DeserializeProduct(item));
+                        }
                     }
+                    values = array;
                     continue;
                 }
                 if (property.NameEquals("nextLink"))
@@ -53,14 +46,7 @@ namespace custom_baseUrl_paging.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        nextLink = null;
-                    }
-                    else
-                    {
-                        nextLink = property.Value.GetString();
-                    }
+                    nextLink = property.Value.GetString();
                     continue;
                 }
             }

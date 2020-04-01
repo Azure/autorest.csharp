@@ -153,14 +153,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        name = null;
-                    }
-                    else
-                    {
-                        name = property.Value.GetString();
-                    }
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("etag"))
@@ -169,14 +162,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        etag = null;
-                    }
-                    else
-                    {
-                        etag = property.Value.GetString();
-                    }
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -185,14 +171,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        id = null;
-                    }
-                    else
-                    {
-                        id = property.Value.GetString();
-                    }
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -205,26 +184,19 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            List<VirtualNetworkTap> array = new List<VirtualNetworkTap>();
+                            foreach (var item in property0.Value.EnumerateArray())
                             {
-                                virtualNetworkTaps = null;
-                            }
-                            else
-                            {
-                                List<VirtualNetworkTap> array = new List<VirtualNetworkTap>();
-                                foreach (var item in property0.Value.EnumerateArray())
+                                if (item.ValueKind == JsonValueKind.Null)
                                 {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(VirtualNetworkTap.DeserializeVirtualNetworkTap(item));
-                                    }
+                                    array.Add(null);
                                 }
-                                virtualNetworkTaps = array;
+                                else
+                                {
+                                    array.Add(VirtualNetworkTap.DeserializeVirtualNetworkTap(item));
+                                }
                             }
+                            virtualNetworkTaps = array;
                             continue;
                         }
                         if (property0.NameEquals("applicationGatewayBackendAddressPools"))
@@ -233,26 +205,19 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            List<ApplicationGatewayBackendAddressPool> array = new List<ApplicationGatewayBackendAddressPool>();
+                            foreach (var item in property0.Value.EnumerateArray())
                             {
-                                applicationGatewayBackendAddressPools = null;
-                            }
-                            else
-                            {
-                                List<ApplicationGatewayBackendAddressPool> array = new List<ApplicationGatewayBackendAddressPool>();
-                                foreach (var item in property0.Value.EnumerateArray())
+                                if (item.ValueKind == JsonValueKind.Null)
                                 {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(ApplicationGatewayBackendAddressPool.DeserializeApplicationGatewayBackendAddressPool(item));
-                                    }
+                                    array.Add(null);
                                 }
-                                applicationGatewayBackendAddressPools = array;
+                                else
+                                {
+                                    array.Add(ApplicationGatewayBackendAddressPool.DeserializeApplicationGatewayBackendAddressPool(item));
+                                }
                             }
+                            applicationGatewayBackendAddressPools = array;
                             continue;
                         }
                         if (property0.NameEquals("loadBalancerBackendAddressPools"))
@@ -261,26 +226,19 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            List<BackendAddressPool> array = new List<BackendAddressPool>();
+                            foreach (var item in property0.Value.EnumerateArray())
                             {
-                                loadBalancerBackendAddressPools = null;
-                            }
-                            else
-                            {
-                                List<BackendAddressPool> array = new List<BackendAddressPool>();
-                                foreach (var item in property0.Value.EnumerateArray())
+                                if (item.ValueKind == JsonValueKind.Null)
                                 {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(BackendAddressPool.DeserializeBackendAddressPool(item));
-                                    }
+                                    array.Add(null);
                                 }
-                                loadBalancerBackendAddressPools = array;
+                                else
+                                {
+                                    array.Add(BackendAddressPool.DeserializeBackendAddressPool(item));
+                                }
                             }
+                            loadBalancerBackendAddressPools = array;
                             continue;
                         }
                         if (property0.NameEquals("loadBalancerInboundNatRules"))
@@ -289,26 +247,19 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            List<InboundNatRule> array = new List<InboundNatRule>();
+                            foreach (var item in property0.Value.EnumerateArray())
                             {
-                                loadBalancerInboundNatRules = null;
-                            }
-                            else
-                            {
-                                List<InboundNatRule> array = new List<InboundNatRule>();
-                                foreach (var item in property0.Value.EnumerateArray())
+                                if (item.ValueKind == JsonValueKind.Null)
                                 {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(InboundNatRule.DeserializeInboundNatRule(item));
-                                    }
+                                    array.Add(null);
                                 }
-                                loadBalancerInboundNatRules = array;
+                                else
+                                {
+                                    array.Add(InboundNatRule.DeserializeInboundNatRule(item));
+                                }
                             }
+                            loadBalancerInboundNatRules = array;
                             continue;
                         }
                         if (property0.NameEquals("privateIPAddress"))
@@ -317,14 +268,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                privateIPAddress = null;
-                            }
-                            else
-                            {
-                                privateIPAddress = property0.Value.GetString();
-                            }
+                            privateIPAddress = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("privateIPAllocationMethod"))
@@ -333,14 +277,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                privateIPAllocationMethod = null;
-                            }
-                            else
-                            {
-                                privateIPAllocationMethod = new IPAllocationMethod(property0.Value.GetString());
-                            }
+                            privateIPAllocationMethod = new IPAllocationMethod(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("privateIPAddressVersion"))
@@ -349,14 +286,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                privateIPAddressVersion = null;
-                            }
-                            else
-                            {
-                                privateIPAddressVersion = new IPVersion(property0.Value.GetString());
-                            }
+                            privateIPAddressVersion = new IPVersion(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("subnet"))
@@ -365,14 +295,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                subnet = null;
-                            }
-                            else
-                            {
-                                subnet = Subnet.DeserializeSubnet(property0.Value);
-                            }
+                            subnet = Subnet.DeserializeSubnet(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("primary"))
@@ -381,14 +304,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                primary = null;
-                            }
-                            else
-                            {
-                                primary = property0.Value.GetBoolean();
-                            }
+                            primary = property0.Value.GetBoolean();
                             continue;
                         }
                         if (property0.NameEquals("publicIPAddress"))
@@ -397,14 +313,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                publicIPAddress = null;
-                            }
-                            else
-                            {
-                                publicIPAddress = PublicIPAddress.DeserializePublicIPAddress(property0.Value);
-                            }
+                            publicIPAddress = PublicIPAddress.DeserializePublicIPAddress(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("applicationSecurityGroups"))
@@ -413,26 +322,19 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            List<ApplicationSecurityGroup> array = new List<ApplicationSecurityGroup>();
+                            foreach (var item in property0.Value.EnumerateArray())
                             {
-                                applicationSecurityGroups = null;
-                            }
-                            else
-                            {
-                                List<ApplicationSecurityGroup> array = new List<ApplicationSecurityGroup>();
-                                foreach (var item in property0.Value.EnumerateArray())
+                                if (item.ValueKind == JsonValueKind.Null)
                                 {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(ApplicationSecurityGroup.DeserializeApplicationSecurityGroup(item));
-                                    }
+                                    array.Add(null);
                                 }
-                                applicationSecurityGroups = array;
+                                else
+                                {
+                                    array.Add(ApplicationSecurityGroup.DeserializeApplicationSecurityGroup(item));
+                                }
                             }
+                            applicationSecurityGroups = array;
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -441,14 +343,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                provisioningState = null;
-                            }
-                            else
-                            {
-                                provisioningState = new ProvisioningState(property0.Value.GetString());
-                            }
+                            provisioningState = new ProvisioningState(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("privateLinkConnectionProperties"))
@@ -457,14 +352,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                privateLinkConnectionProperties = null;
-                            }
-                            else
-                            {
-                                privateLinkConnectionProperties = NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties.DeserializeNetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(property0.Value);
-                            }
+                            privateLinkConnectionProperties = NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties.DeserializeNetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(property0.Value);
                             continue;
                         }
                     }

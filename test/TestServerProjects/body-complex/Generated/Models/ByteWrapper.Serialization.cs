@@ -35,14 +35,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        field = null;
-                    }
-                    else
-                    {
-                        field = property.Value.GetBytesFromBase64();
-                    }
+                    field = property.Value.GetBytesFromBase64();
                     continue;
                 }
             }

@@ -24,14 +24,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        message = null;
-                    }
-                    else
-                    {
-                        message = property.Value.GetString();
-                    }
+                    message = property.Value.GetString();
                     continue;
                 }
             }

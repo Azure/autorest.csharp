@@ -46,14 +46,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        tierToCool = null;
-                    }
-                    else
-                    {
-                        tierToCool = DateAfterModification.DeserializeDateAfterModification(property.Value);
-                    }
+                    tierToCool = DateAfterModification.DeserializeDateAfterModification(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tierToArchive"))
@@ -62,14 +55,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        tierToArchive = null;
-                    }
-                    else
-                    {
-                        tierToArchive = DateAfterModification.DeserializeDateAfterModification(property.Value);
-                    }
+                    tierToArchive = DateAfterModification.DeserializeDateAfterModification(property.Value);
                     continue;
                 }
                 if (property.NameEquals("delete"))
@@ -78,14 +64,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        delete = null;
-                    }
-                    else
-                    {
-                        delete = DateAfterModification.DeserializeDateAfterModification(property.Value);
-                    }
+                    delete = DateAfterModification.DeserializeDateAfterModification(property.Value);
                     continue;
                 }
             }

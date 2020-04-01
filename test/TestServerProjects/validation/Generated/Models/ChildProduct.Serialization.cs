@@ -42,14 +42,7 @@ namespace validation.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        count = null;
-                    }
-                    else
-                    {
-                        count = property.Value.GetInt32();
-                    }
+                    count = property.Value.GetInt32();
                     continue;
                 }
             }

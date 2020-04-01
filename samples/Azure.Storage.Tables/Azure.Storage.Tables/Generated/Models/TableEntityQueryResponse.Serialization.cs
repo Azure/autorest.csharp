@@ -25,14 +25,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        odatametadata = null;
-                    }
-                    else
-                    {
-                        odatametadata = property.Value.GetString();
-                    }
+                    odatametadata = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("value"))
@@ -41,38 +34,31 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<IDictionary<string, object>> array = new List<IDictionary<string, object>>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        value = null;
-                    }
-                    else
-                    {
-                        List<IDictionary<string, object>> array = new List<IDictionary<string, object>>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                                foreach (var property0 in item.EnumerateObject())
-                                {
-                                    if (property0.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property0.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property0.Name, property0.Value.GetObject());
-                                    }
-                                }
-                                array.Add(dictionary);
-                            }
+                            array.Add(null);
                         }
-                        value = array;
+                        else
+                        {
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                            foreach (var property0 in item.EnumerateObject())
+                            {
+                                if (property0.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property0.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property0.Name, property0.Value.GetObject());
+                                }
+                            }
+                            array.Add(dictionary);
+                        }
                     }
+                    value = array;
                     continue;
                 }
             }

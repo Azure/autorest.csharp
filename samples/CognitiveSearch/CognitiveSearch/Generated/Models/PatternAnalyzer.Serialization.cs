@@ -64,14 +64,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        lowercase = null;
-                    }
-                    else
-                    {
-                        lowercase = property.Value.GetBoolean();
-                    }
+                    lowercase = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("pattern"))
@@ -80,14 +73,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        pattern = null;
-                    }
-                    else
-                    {
-                        pattern = property.Value.GetString();
-                    }
+                    pattern = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("flags"))
@@ -96,14 +82,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        flags = null;
-                    }
-                    else
-                    {
-                        flags = new RegexFlags(property.Value.GetString());
-                    }
+                    flags = new RegexFlags(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("stopwords"))
@@ -112,26 +91,19 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        stopwords = null;
-                    }
-                    else
-                    {
-                        List<string> array = new List<string>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(item.GetString());
-                            }
+                            array.Add(null);
                         }
-                        stopwords = array;
+                        else
+                        {
+                            array.Add(item.GetString());
+                        }
                     }
+                    stopwords = array;
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))

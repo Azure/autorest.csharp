@@ -27,14 +27,7 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        type = null;
-                    }
-                    else
-                    {
-                        type = property.Value.GetString();
-                    }
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("title"))
@@ -43,14 +36,7 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        title = null;
-                    }
-                    else
-                    {
-                        title = property.Value.GetString();
-                    }
+                    title = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -59,14 +45,7 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        name = null;
-                    }
-                    else
-                    {
-                        name = property.Value.GetString();
-                    }
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("detail"))
@@ -75,14 +54,7 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        detail = null;
-                    }
-                    else
-                    {
-                        detail = property.Value.GetString();
-                    }
+                    detail = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("status"))
@@ -91,14 +63,7 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        status = null;
-                    }
-                    else
-                    {
-                        status = property.Value.GetInt32();
-                    }
+                    status = property.Value.GetInt32();
                     continue;
                 }
             }

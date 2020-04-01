@@ -52,14 +52,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        service = null;
-                    }
-                    else
-                    {
-                        service = property.Value.GetString();
-                    }
+                    service = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("locations"))
@@ -68,26 +61,19 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        locations = null;
-                    }
-                    else
-                    {
-                        List<string> array = new List<string>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(item.GetString());
-                            }
+                            array.Add(null);
                         }
-                        locations = array;
+                        else
+                        {
+                            array.Add(item.GetString());
+                        }
                     }
+                    locations = array;
                     continue;
                 }
                 if (property.NameEquals("provisioningState"))
@@ -96,14 +82,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        provisioningState = null;
-                    }
-                    else
-                    {
-                        provisioningState = new ProvisioningState(property.Value.GetString());
-                    }
+                    provisioningState = new ProvisioningState(property.Value.GetString());
                     continue;
                 }
             }

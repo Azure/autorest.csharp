@@ -121,14 +121,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        key = null;
-                    }
-                    else
-                    {
-                        key = property.Value.GetBoolean();
-                    }
+                    key = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("retrievable"))
@@ -137,14 +130,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        retrievable = null;
-                    }
-                    else
-                    {
-                        retrievable = property.Value.GetBoolean();
-                    }
+                    retrievable = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("searchable"))
@@ -153,14 +139,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        searchable = null;
-                    }
-                    else
-                    {
-                        searchable = property.Value.GetBoolean();
-                    }
+                    searchable = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("filterable"))
@@ -169,14 +148,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        filterable = null;
-                    }
-                    else
-                    {
-                        filterable = property.Value.GetBoolean();
-                    }
+                    filterable = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("sortable"))
@@ -185,14 +157,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        sortable = null;
-                    }
-                    else
-                    {
-                        sortable = property.Value.GetBoolean();
-                    }
+                    sortable = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("facetable"))
@@ -201,14 +166,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        facetable = null;
-                    }
-                    else
-                    {
-                        facetable = property.Value.GetBoolean();
-                    }
+                    facetable = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("analyzer"))
@@ -217,14 +175,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        analyzer = null;
-                    }
-                    else
-                    {
-                        analyzer = new AnalyzerName(property.Value.GetString());
-                    }
+                    analyzer = new AnalyzerName(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("searchAnalyzer"))
@@ -233,14 +184,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        searchAnalyzer = null;
-                    }
-                    else
-                    {
-                        searchAnalyzer = new AnalyzerName(property.Value.GetString());
-                    }
+                    searchAnalyzer = new AnalyzerName(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("indexAnalyzer"))
@@ -249,14 +193,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        indexAnalyzer = null;
-                    }
-                    else
-                    {
-                        indexAnalyzer = new AnalyzerName(property.Value.GetString());
-                    }
+                    indexAnalyzer = new AnalyzerName(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("synonymMaps"))
@@ -265,26 +202,19 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        synonymMaps = null;
-                    }
-                    else
-                    {
-                        List<string> array = new List<string>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(item.GetString());
-                            }
+                            array.Add(null);
                         }
-                        synonymMaps = array;
+                        else
+                        {
+                            array.Add(item.GetString());
+                        }
                     }
+                    synonymMaps = array;
                     continue;
                 }
                 if (property.NameEquals("fields"))
@@ -293,26 +223,19 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<Field> array = new List<Field>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        fields = null;
-                    }
-                    else
-                    {
-                        List<Field> array = new List<Field>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(DeserializeField(item));
-                            }
+                            array.Add(null);
                         }
-                        fields = array;
+                        else
+                        {
+                            array.Add(DeserializeField(item));
+                        }
                     }
+                    fields = array;
                     continue;
                 }
             }

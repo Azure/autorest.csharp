@@ -59,14 +59,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        tag = null;
-                    }
-                    else
-                    {
-                        tag = property.Value.GetString();
-                    }
+                    tag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("timestamp"))
@@ -75,14 +68,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        timestamp = null;
-                    }
-                    else
-                    {
-                        timestamp = property.Value.GetDateTimeOffset("S");
-                    }
+                    timestamp = property.Value.GetDateTimeOffset("S");
                     continue;
                 }
                 if (property.NameEquals("objectIdentifier"))
@@ -91,14 +77,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        objectIdentifier = null;
-                    }
-                    else
-                    {
-                        objectIdentifier = property.Value.GetString();
-                    }
+                    objectIdentifier = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("tenantId"))
@@ -107,14 +86,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        tenantId = null;
-                    }
-                    else
-                    {
-                        tenantId = property.Value.GetString();
-                    }
+                    tenantId = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("upn"))
@@ -123,14 +95,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        upn = null;
-                    }
-                    else
-                    {
-                        upn = property.Value.GetString();
-                    }
+                    upn = property.Value.GetString();
                     continue;
                 }
             }

@@ -28,14 +28,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        key = null;
-                    }
-                    else
-                    {
-                        key = property.Value.GetString();
-                    }
+                    key = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("errorMessage"))
@@ -54,14 +47,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        name = null;
-                    }
-                    else
-                    {
-                        name = property.Value.GetString();
-                    }
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("details"))
@@ -70,14 +56,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        details = null;
-                    }
-                    else
-                    {
-                        details = property.Value.GetString();
-                    }
+                    details = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("documentationLink"))
@@ -86,14 +65,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        documentationLink = null;
-                    }
-                    else
-                    {
-                        documentationLink = property.Value.GetString();
-                    }
+                    documentationLink = property.Value.GetString();
                     continue;
                 }
             }

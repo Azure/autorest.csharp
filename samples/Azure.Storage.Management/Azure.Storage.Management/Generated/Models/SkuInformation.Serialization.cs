@@ -35,14 +35,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        tier = null;
-                    }
-                    else
-                    {
-                        tier = property.Value.GetString().ToSkuTier();
-                    }
+                    tier = property.Value.GetString().ToSkuTier();
                     continue;
                 }
                 if (property.NameEquals("resourceType"))
@@ -51,14 +44,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        resourceType = null;
-                    }
-                    else
-                    {
-                        resourceType = property.Value.GetString();
-                    }
+                    resourceType = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("kind"))
@@ -67,14 +53,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        kind = null;
-                    }
-                    else
-                    {
-                        kind = new Kind(property.Value.GetString());
-                    }
+                    kind = new Kind(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("locations"))
@@ -83,26 +62,19 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        locations = null;
-                    }
-                    else
-                    {
-                        List<string> array = new List<string>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(item.GetString());
-                            }
+                            array.Add(null);
                         }
-                        locations = array;
+                        else
+                        {
+                            array.Add(item.GetString());
+                        }
                     }
+                    locations = array;
                     continue;
                 }
                 if (property.NameEquals("capabilities"))
@@ -111,26 +83,19 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<SKUCapability> array = new List<SKUCapability>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        capabilities = null;
-                    }
-                    else
-                    {
-                        List<SKUCapability> array = new List<SKUCapability>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(SKUCapability.DeserializeSKUCapability(item));
-                            }
+                            array.Add(null);
                         }
-                        capabilities = array;
+                        else
+                        {
+                            array.Add(SKUCapability.DeserializeSKUCapability(item));
+                        }
                     }
+                    capabilities = array;
                     continue;
                 }
                 if (property.NameEquals("restrictions"))
@@ -139,26 +104,19 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<Restriction> array = new List<Restriction>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        restrictions = null;
-                    }
-                    else
-                    {
-                        List<Restriction> array = new List<Restriction>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(Restriction.DeserializeRestriction(item));
-                            }
+                            array.Add(null);
                         }
-                        restrictions = array;
+                        else
+                        {
+                            array.Add(Restriction.DeserializeRestriction(item));
+                        }
                     }
+                    restrictions = array;
                     continue;
                 }
             }

@@ -78,14 +78,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        id = null;
-                    }
-                    else
-                    {
-                        id = property.Value.GetString();
-                    }
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -94,14 +87,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        name = null;
-                    }
-                    else
-                    {
-                        name = property.Value.GetString();
-                    }
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
@@ -110,14 +96,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        type = null;
-                    }
-                    else
-                    {
-                        type = property.Value.GetString();
-                    }
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -130,14 +109,7 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                groupId = null;
-                            }
-                            else
-                            {
-                                groupId = property0.Value.GetString();
-                            }
+                            groupId = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("requiredMembers"))
@@ -146,26 +118,19 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            List<string> array = new List<string>();
+                            foreach (var item in property0.Value.EnumerateArray())
                             {
-                                requiredMembers = null;
-                            }
-                            else
-                            {
-                                List<string> array = new List<string>();
-                                foreach (var item in property0.Value.EnumerateArray())
+                                if (item.ValueKind == JsonValueKind.Null)
                                 {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(item.GetString());
-                                    }
+                                    array.Add(null);
                                 }
-                                requiredMembers = array;
+                                else
+                                {
+                                    array.Add(item.GetString());
+                                }
                             }
+                            requiredMembers = array;
                             continue;
                         }
                         if (property0.NameEquals("requiredZoneNames"))
@@ -174,26 +139,19 @@ namespace Azure.Storage.Management.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            List<string> array = new List<string>();
+                            foreach (var item in property0.Value.EnumerateArray())
                             {
-                                requiredZoneNames = null;
-                            }
-                            else
-                            {
-                                List<string> array = new List<string>();
-                                foreach (var item in property0.Value.EnumerateArray())
+                                if (item.ValueKind == JsonValueKind.Null)
                                 {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(item.GetString());
-                                    }
+                                    array.Add(null);
                                 }
-                                requiredZoneNames = array;
+                                else
+                                {
+                                    array.Add(item.GetString());
+                                }
                             }
+                            requiredZoneNames = array;
                             continue;
                         }
                     }

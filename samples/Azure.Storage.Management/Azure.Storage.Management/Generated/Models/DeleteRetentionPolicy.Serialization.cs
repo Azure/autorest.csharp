@@ -40,14 +40,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        enabled = null;
-                    }
-                    else
-                    {
-                        enabled = property.Value.GetBoolean();
-                    }
+                    enabled = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("days"))
@@ -56,14 +49,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        days = null;
-                    }
-                    else
-                    {
-                        days = property.Value.GetInt32();
-                    }
+                    days = property.Value.GetInt32();
                     continue;
                 }
             }

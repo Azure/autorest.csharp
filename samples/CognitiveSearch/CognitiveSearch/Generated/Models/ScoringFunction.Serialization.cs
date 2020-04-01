@@ -68,14 +68,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        interpolation = null;
-                    }
-                    else
-                    {
-                        interpolation = property.Value.GetString().ToScoringFunctionInterpolation();
-                    }
+                    interpolation = property.Value.GetString().ToScoringFunctionInterpolation();
                     continue;
                 }
             }

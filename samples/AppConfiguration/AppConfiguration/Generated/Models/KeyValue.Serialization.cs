@@ -84,14 +84,7 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        key = null;
-                    }
-                    else
-                    {
-                        key = property.Value.GetString();
-                    }
+                    key = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("label"))
@@ -100,14 +93,7 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        label = null;
-                    }
-                    else
-                    {
-                        label = property.Value.GetString();
-                    }
+                    label = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("content_type"))
@@ -116,14 +102,7 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        contentType = null;
-                    }
-                    else
-                    {
-                        contentType = property.Value.GetString();
-                    }
+                    contentType = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("value"))
@@ -132,14 +111,7 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        value = null;
-                    }
-                    else
-                    {
-                        value = property.Value.GetString();
-                    }
+                    value = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("last_modified"))
@@ -148,14 +120,7 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        lastModified = null;
-                    }
-                    else
-                    {
-                        lastModified = property.Value.GetDateTimeOffset("S");
-                    }
+                    lastModified = property.Value.GetDateTimeOffset("S");
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -164,26 +129,19 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        tags = null;
-                    }
-                    else
-                    {
-                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                        foreach (var property0 in property.Value.EnumerateObject())
+                        if (property0.Value.ValueKind == JsonValueKind.Null)
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                dictionary.Add(property0.Name, null);
-                            }
-                            else
-                            {
-                                dictionary.Add(property0.Name, property0.Value.GetString());
-                            }
+                            dictionary.Add(property0.Name, null);
                         }
-                        tags = dictionary;
+                        else
+                        {
+                            dictionary.Add(property0.Name, property0.Value.GetString());
+                        }
                     }
+                    tags = dictionary;
                     continue;
                 }
                 if (property.NameEquals("locked"))
@@ -192,14 +150,7 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        locked = null;
-                    }
-                    else
-                    {
-                        locked = property.Value.GetBoolean();
-                    }
+                    locked = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("etag"))
@@ -208,14 +159,7 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        etag = null;
-                    }
-                    else
-                    {
-                        etag = property.Value.GetString();
-                    }
+                    etag = property.Value.GetString();
                     continue;
                 }
             }

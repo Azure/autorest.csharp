@@ -34,14 +34,7 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        value = null;
-                    }
-                    else
-                    {
-                        value = property.Value.GetString();
-                    }
+                    value = property.Value.GetString();
                     continue;
                 }
             }

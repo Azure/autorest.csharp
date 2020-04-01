@@ -40,14 +40,7 @@ namespace body_dictionary.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        integer = null;
-                    }
-                    else
-                    {
-                        integer = property.Value.GetInt32();
-                    }
+                    integer = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("string"))
@@ -56,14 +49,7 @@ namespace body_dictionary.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        @string = null;
-                    }
-                    else
-                    {
-                        @string = property.Value.GetString();
-                    }
+                    @string = property.Value.GetString();
                     continue;
                 }
             }

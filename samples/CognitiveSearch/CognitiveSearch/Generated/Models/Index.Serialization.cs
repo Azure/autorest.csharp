@@ -152,26 +152,19 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<ScoringProfile> array = new List<ScoringProfile>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        scoringProfiles = null;
-                    }
-                    else
-                    {
-                        List<ScoringProfile> array = new List<ScoringProfile>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(ScoringProfile.DeserializeScoringProfile(item));
-                            }
+                            array.Add(null);
                         }
-                        scoringProfiles = array;
+                        else
+                        {
+                            array.Add(ScoringProfile.DeserializeScoringProfile(item));
+                        }
                     }
+                    scoringProfiles = array;
                     continue;
                 }
                 if (property.NameEquals("defaultScoringProfile"))
@@ -180,14 +173,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        defaultScoringProfile = null;
-                    }
-                    else
-                    {
-                        defaultScoringProfile = property.Value.GetString();
-                    }
+                    defaultScoringProfile = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("corsOptions"))
@@ -196,14 +182,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        corsOptions = null;
-                    }
-                    else
-                    {
-                        corsOptions = CorsOptions.DeserializeCorsOptions(property.Value);
-                    }
+                    corsOptions = CorsOptions.DeserializeCorsOptions(property.Value);
                     continue;
                 }
                 if (property.NameEquals("suggesters"))
@@ -212,26 +191,19 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<Suggester> array = new List<Suggester>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        suggesters = null;
-                    }
-                    else
-                    {
-                        List<Suggester> array = new List<Suggester>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(Suggester.DeserializeSuggester(item));
-                            }
+                            array.Add(null);
                         }
-                        suggesters = array;
+                        else
+                        {
+                            array.Add(Suggester.DeserializeSuggester(item));
+                        }
                     }
+                    suggesters = array;
                     continue;
                 }
                 if (property.NameEquals("analyzers"))
@@ -240,26 +212,19 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<Analyzer> array = new List<Analyzer>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        analyzers = null;
-                    }
-                    else
-                    {
-                        List<Analyzer> array = new List<Analyzer>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(Analyzer.DeserializeAnalyzer(item));
-                            }
+                            array.Add(null);
                         }
-                        analyzers = array;
+                        else
+                        {
+                            array.Add(Analyzer.DeserializeAnalyzer(item));
+                        }
                     }
+                    analyzers = array;
                     continue;
                 }
                 if (property.NameEquals("tokenizers"))
@@ -268,26 +233,19 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<Tokenizer> array = new List<Tokenizer>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        tokenizers = null;
-                    }
-                    else
-                    {
-                        List<Tokenizer> array = new List<Tokenizer>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(Tokenizer.DeserializeTokenizer(item));
-                            }
+                            array.Add(null);
                         }
-                        tokenizers = array;
+                        else
+                        {
+                            array.Add(Tokenizer.DeserializeTokenizer(item));
+                        }
                     }
+                    tokenizers = array;
                     continue;
                 }
                 if (property.NameEquals("tokenFilters"))
@@ -296,26 +254,19 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<TokenFilter> array = new List<TokenFilter>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        tokenFilters = null;
-                    }
-                    else
-                    {
-                        List<TokenFilter> array = new List<TokenFilter>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(TokenFilter.DeserializeTokenFilter(item));
-                            }
+                            array.Add(null);
                         }
-                        tokenFilters = array;
+                        else
+                        {
+                            array.Add(TokenFilter.DeserializeTokenFilter(item));
+                        }
                     }
+                    tokenFilters = array;
                     continue;
                 }
                 if (property.NameEquals("charFilters"))
@@ -324,26 +275,19 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<CharFilter> array = new List<CharFilter>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        charFilters = null;
-                    }
-                    else
-                    {
-                        List<CharFilter> array = new List<CharFilter>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(CharFilter.DeserializeCharFilter(item));
-                            }
+                            array.Add(null);
                         }
-                        charFilters = array;
+                        else
+                        {
+                            array.Add(CharFilter.DeserializeCharFilter(item));
+                        }
                     }
+                    charFilters = array;
                     continue;
                 }
                 if (property.NameEquals("encryptionKey"))
@@ -352,14 +296,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        encryptionKey = null;
-                    }
-                    else
-                    {
-                        encryptionKey = EncryptionKey.DeserializeEncryptionKey(property.Value);
-                    }
+                    encryptionKey = EncryptionKey.DeserializeEncryptionKey(property.Value);
                     continue;
                 }
                 if (property.NameEquals("@odata.etag"))
@@ -368,14 +305,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        odataetag = null;
-                    }
-                    else
-                    {
-                        odataetag = property.Value.GetString();
-                    }
+                    odataetag = property.Value.GetString();
                     continue;
                 }
             }

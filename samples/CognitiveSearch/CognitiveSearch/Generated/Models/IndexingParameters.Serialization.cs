@@ -59,14 +59,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        batchSize = null;
-                    }
-                    else
-                    {
-                        batchSize = property.Value.GetInt32();
-                    }
+                    batchSize = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("maxFailedItems"))
@@ -75,14 +68,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        maxFailedItems = null;
-                    }
-                    else
-                    {
-                        maxFailedItems = property.Value.GetInt32();
-                    }
+                    maxFailedItems = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("maxFailedItemsPerBatch"))
@@ -91,14 +77,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        maxFailedItemsPerBatch = null;
-                    }
-                    else
-                    {
-                        maxFailedItemsPerBatch = property.Value.GetInt32();
-                    }
+                    maxFailedItemsPerBatch = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("configuration"))
@@ -107,26 +86,19 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                    foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        configuration = null;
-                    }
-                    else
-                    {
-                        Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                        foreach (var property0 in property.Value.EnumerateObject())
+                        if (property0.Value.ValueKind == JsonValueKind.Null)
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                dictionary.Add(property0.Name, null);
-                            }
-                            else
-                            {
-                                dictionary.Add(property0.Name, property0.Value.GetObject());
-                            }
+                            dictionary.Add(property0.Name, null);
                         }
-                        configuration = dictionary;
+                        else
+                        {
+                            dictionary.Add(property0.Name, property0.Value.GetObject());
+                        }
                     }
+                    configuration = dictionary;
                     continue;
                 }
             }

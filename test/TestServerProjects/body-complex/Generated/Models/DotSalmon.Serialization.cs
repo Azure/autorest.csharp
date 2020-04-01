@@ -26,14 +26,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        location = null;
-                    }
-                    else
-                    {
-                        location = property.Value.GetString();
-                    }
+                    location = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("iswild"))
@@ -42,14 +35,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        iswild = null;
-                    }
-                    else
-                    {
-                        iswild = property.Value.GetBoolean();
-                    }
+                    iswild = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("fish.type"))
@@ -63,14 +49,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        species = null;
-                    }
-                    else
-                    {
-                        species = property.Value.GetString();
-                    }
+                    species = property.Value.GetString();
                     continue;
                 }
             }

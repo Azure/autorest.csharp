@@ -47,14 +47,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        enabled = null;
-                    }
-                    else
-                    {
-                        enabled = property.Value.GetBoolean();
-                    }
+                    enabled = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("lastEnabledTime"))
@@ -63,14 +56,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        lastEnabledTime = null;
-                    }
-                    else
-                    {
-                        lastEnabledTime = property.Value.GetDateTimeOffset("S");
-                    }
+                    lastEnabledTime = property.Value.GetDateTimeOffset("S");
                     continue;
                 }
                 if (property.NameEquals("keyType"))
@@ -79,14 +65,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        keyType = null;
-                    }
-                    else
-                    {
-                        keyType = new KeyType(property.Value.GetString());
-                    }
+                    keyType = new KeyType(property.Value.GetString());
                     continue;
                 }
             }

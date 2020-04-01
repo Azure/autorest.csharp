@@ -42,14 +42,7 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        language = null;
-                    }
-                    else
-                    {
-                        language = new Language(property.Value.GetString());
-                    }
+                    language = new Language(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("words"))

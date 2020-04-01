@@ -197,14 +197,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        name = null;
-                    }
-                    else
-                    {
-                        name = property.Value.GetString();
-                    }
+                    name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("etag"))
@@ -213,14 +206,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        etag = null;
-                    }
-                    else
-                    {
-                        etag = property.Value.GetString();
-                    }
+                    etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -229,14 +215,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        id = null;
-                    }
-                    else
-                    {
-                        id = property.Value.GetString();
-                    }
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -249,14 +228,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                addressPrefix = null;
-                            }
-                            else
-                            {
-                                addressPrefix = property0.Value.GetString();
-                            }
+                            addressPrefix = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("addressPrefixes"))
@@ -265,26 +237,19 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            List<string> array = new List<string>();
+                            foreach (var item in property0.Value.EnumerateArray())
                             {
-                                addressPrefixes = null;
-                            }
-                            else
-                            {
-                                List<string> array = new List<string>();
-                                foreach (var item in property0.Value.EnumerateArray())
+                                if (item.ValueKind == JsonValueKind.Null)
                                 {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(item.GetString());
-                                    }
+                                    array.Add(null);
                                 }
-                                addressPrefixes = array;
+                                else
+                                {
+                                    array.Add(item.GetString());
+                                }
                             }
+                            addressPrefixes = array;
                             continue;
                         }
                         if (property0.NameEquals("networkSecurityGroup"))
@@ -293,14 +258,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                networkSecurityGroup = null;
-                            }
-                            else
-                            {
-                                networkSecurityGroup = NetworkSecurityGroup.DeserializeNetworkSecurityGroup(property0.Value);
-                            }
+                            networkSecurityGroup = NetworkSecurityGroup.DeserializeNetworkSecurityGroup(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("routeTable"))
@@ -309,14 +267,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                routeTable = null;
-                            }
-                            else
-                            {
-                                routeTable = RouteTable.DeserializeRouteTable(property0.Value);
-                            }
+                            routeTable = RouteTable.DeserializeRouteTable(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("natGateway"))
@@ -325,14 +276,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                natGateway = null;
-                            }
-                            else
-                            {
-                                natGateway = DeserializeSubResource(property0.Value);
-                            }
+                            natGateway = DeserializeSubResource(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("serviceEndpoints"))
@@ -341,26 +285,19 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            List<ServiceEndpointPropertiesFormat> array = new List<ServiceEndpointPropertiesFormat>();
+                            foreach (var item in property0.Value.EnumerateArray())
                             {
-                                serviceEndpoints = null;
-                            }
-                            else
-                            {
-                                List<ServiceEndpointPropertiesFormat> array = new List<ServiceEndpointPropertiesFormat>();
-                                foreach (var item in property0.Value.EnumerateArray())
+                                if (item.ValueKind == JsonValueKind.Null)
                                 {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(ServiceEndpointPropertiesFormat.DeserializeServiceEndpointPropertiesFormat(item));
-                                    }
+                                    array.Add(null);
                                 }
-                                serviceEndpoints = array;
+                                else
+                                {
+                                    array.Add(ServiceEndpointPropertiesFormat.DeserializeServiceEndpointPropertiesFormat(item));
+                                }
                             }
+                            serviceEndpoints = array;
                             continue;
                         }
                         if (property0.NameEquals("serviceEndpointPolicies"))
@@ -369,26 +306,19 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            List<ServiceEndpointPolicy> array = new List<ServiceEndpointPolicy>();
+                            foreach (var item in property0.Value.EnumerateArray())
                             {
-                                serviceEndpointPolicies = null;
-                            }
-                            else
-                            {
-                                List<ServiceEndpointPolicy> array = new List<ServiceEndpointPolicy>();
-                                foreach (var item in property0.Value.EnumerateArray())
+                                if (item.ValueKind == JsonValueKind.Null)
                                 {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(ServiceEndpointPolicy.DeserializeServiceEndpointPolicy(item));
-                                    }
+                                    array.Add(null);
                                 }
-                                serviceEndpointPolicies = array;
+                                else
+                                {
+                                    array.Add(ServiceEndpointPolicy.DeserializeServiceEndpointPolicy(item));
+                                }
                             }
+                            serviceEndpointPolicies = array;
                             continue;
                         }
                         if (property0.NameEquals("privateEndpoints"))
@@ -397,26 +327,19 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            List<PrivateEndpoint> array = new List<PrivateEndpoint>();
+                            foreach (var item in property0.Value.EnumerateArray())
                             {
-                                privateEndpoints = null;
-                            }
-                            else
-                            {
-                                List<PrivateEndpoint> array = new List<PrivateEndpoint>();
-                                foreach (var item in property0.Value.EnumerateArray())
+                                if (item.ValueKind == JsonValueKind.Null)
                                 {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(PrivateEndpoint.DeserializePrivateEndpoint(item));
-                                    }
+                                    array.Add(null);
                                 }
-                                privateEndpoints = array;
+                                else
+                                {
+                                    array.Add(PrivateEndpoint.DeserializePrivateEndpoint(item));
+                                }
                             }
+                            privateEndpoints = array;
                             continue;
                         }
                         if (property0.NameEquals("ipConfigurations"))
@@ -425,26 +348,19 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            List<IPConfiguration> array = new List<IPConfiguration>();
+                            foreach (var item in property0.Value.EnumerateArray())
                             {
-                                ipConfigurations = null;
-                            }
-                            else
-                            {
-                                List<IPConfiguration> array = new List<IPConfiguration>();
-                                foreach (var item in property0.Value.EnumerateArray())
+                                if (item.ValueKind == JsonValueKind.Null)
                                 {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(IPConfiguration.DeserializeIPConfiguration(item));
-                                    }
+                                    array.Add(null);
                                 }
-                                ipConfigurations = array;
+                                else
+                                {
+                                    array.Add(IPConfiguration.DeserializeIPConfiguration(item));
+                                }
                             }
+                            ipConfigurations = array;
                             continue;
                         }
                         if (property0.NameEquals("ipConfigurationProfiles"))
@@ -453,26 +369,19 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            List<IPConfigurationProfile> array = new List<IPConfigurationProfile>();
+                            foreach (var item in property0.Value.EnumerateArray())
                             {
-                                ipConfigurationProfiles = null;
-                            }
-                            else
-                            {
-                                List<IPConfigurationProfile> array = new List<IPConfigurationProfile>();
-                                foreach (var item in property0.Value.EnumerateArray())
+                                if (item.ValueKind == JsonValueKind.Null)
                                 {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(IPConfigurationProfile.DeserializeIPConfigurationProfile(item));
-                                    }
+                                    array.Add(null);
                                 }
-                                ipConfigurationProfiles = array;
+                                else
+                                {
+                                    array.Add(IPConfigurationProfile.DeserializeIPConfigurationProfile(item));
+                                }
                             }
+                            ipConfigurationProfiles = array;
                             continue;
                         }
                         if (property0.NameEquals("resourceNavigationLinks"))
@@ -481,26 +390,19 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            List<ResourceNavigationLink> array = new List<ResourceNavigationLink>();
+                            foreach (var item in property0.Value.EnumerateArray())
                             {
-                                resourceNavigationLinks = null;
-                            }
-                            else
-                            {
-                                List<ResourceNavigationLink> array = new List<ResourceNavigationLink>();
-                                foreach (var item in property0.Value.EnumerateArray())
+                                if (item.ValueKind == JsonValueKind.Null)
                                 {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(ResourceNavigationLink.DeserializeResourceNavigationLink(item));
-                                    }
+                                    array.Add(null);
                                 }
-                                resourceNavigationLinks = array;
+                                else
+                                {
+                                    array.Add(ResourceNavigationLink.DeserializeResourceNavigationLink(item));
+                                }
                             }
+                            resourceNavigationLinks = array;
                             continue;
                         }
                         if (property0.NameEquals("serviceAssociationLinks"))
@@ -509,26 +411,19 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            List<ServiceAssociationLink> array = new List<ServiceAssociationLink>();
+                            foreach (var item in property0.Value.EnumerateArray())
                             {
-                                serviceAssociationLinks = null;
-                            }
-                            else
-                            {
-                                List<ServiceAssociationLink> array = new List<ServiceAssociationLink>();
-                                foreach (var item in property0.Value.EnumerateArray())
+                                if (item.ValueKind == JsonValueKind.Null)
                                 {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(ServiceAssociationLink.DeserializeServiceAssociationLink(item));
-                                    }
+                                    array.Add(null);
                                 }
-                                serviceAssociationLinks = array;
+                                else
+                                {
+                                    array.Add(ServiceAssociationLink.DeserializeServiceAssociationLink(item));
+                                }
                             }
+                            serviceAssociationLinks = array;
                             continue;
                         }
                         if (property0.NameEquals("delegations"))
@@ -537,26 +432,19 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            List<Delegation> array = new List<Delegation>();
+                            foreach (var item in property0.Value.EnumerateArray())
                             {
-                                delegations = null;
-                            }
-                            else
-                            {
-                                List<Delegation> array = new List<Delegation>();
-                                foreach (var item in property0.Value.EnumerateArray())
+                                if (item.ValueKind == JsonValueKind.Null)
                                 {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(Delegation.DeserializeDelegation(item));
-                                    }
+                                    array.Add(null);
                                 }
-                                delegations = array;
+                                else
+                                {
+                                    array.Add(Delegation.DeserializeDelegation(item));
+                                }
                             }
+                            delegations = array;
                             continue;
                         }
                         if (property0.NameEquals("purpose"))
@@ -565,14 +453,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                purpose = null;
-                            }
-                            else
-                            {
-                                purpose = property0.Value.GetString();
-                            }
+                            purpose = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -581,14 +462,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                provisioningState = null;
-                            }
-                            else
-                            {
-                                provisioningState = new ProvisioningState(property0.Value.GetString());
-                            }
+                            provisioningState = new ProvisioningState(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("privateEndpointNetworkPolicies"))
@@ -597,14 +471,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                privateEndpointNetworkPolicies = null;
-                            }
-                            else
-                            {
-                                privateEndpointNetworkPolicies = property0.Value.GetString();
-                            }
+                            privateEndpointNetworkPolicies = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("privateLinkServiceNetworkPolicies"))
@@ -613,14 +480,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                privateLinkServiceNetworkPolicies = null;
-                            }
-                            else
-                            {
-                                privateLinkServiceNetworkPolicies = property0.Value.GetString();
-                            }
+                            privateLinkServiceNetworkPolicies = property0.Value.GetString();
                             continue;
                         }
                     }

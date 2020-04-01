@@ -43,14 +43,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        principalId = null;
-                    }
-                    else
-                    {
-                        principalId = property.Value.GetString();
-                    }
+                    principalId = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("tenantId"))
@@ -59,14 +52,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        tenantId = null;
-                    }
-                    else
-                    {
-                        tenantId = property.Value.GetString();
-                    }
+                    tenantId = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))

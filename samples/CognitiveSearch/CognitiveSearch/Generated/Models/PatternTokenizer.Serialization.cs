@@ -52,14 +52,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        pattern = null;
-                    }
-                    else
-                    {
-                        pattern = property.Value.GetString();
-                    }
+                    pattern = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("flags"))
@@ -68,14 +61,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        flags = null;
-                    }
-                    else
-                    {
-                        flags = new RegexFlags(property.Value.GetString());
-                    }
+                    flags = new RegexFlags(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("group"))
@@ -84,14 +70,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        group = null;
-                    }
-                    else
-                    {
-                        group = property.Value.GetInt32();
-                    }
+                    group = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))

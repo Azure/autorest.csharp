@@ -24,14 +24,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        value = null;
-                    }
-                    else
-                    {
-                        value = property.Value.GetString();
-                    }
+                    value = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("localizedValue"))
@@ -40,14 +33,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        localizedValue = null;
-                    }
-                    else
-                    {
-                        localizedValue = property.Value.GetString();
-                    }
+                    localizedValue = property.Value.GetString();
                     continue;
                 }
             }

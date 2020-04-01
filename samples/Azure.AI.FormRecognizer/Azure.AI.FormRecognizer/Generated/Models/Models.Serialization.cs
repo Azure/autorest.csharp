@@ -26,14 +26,7 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        summary = null;
-                    }
-                    else
-                    {
-                        summary = ModelsSummary.DeserializeModelsSummary(property.Value);
-                    }
+                    summary = ModelsSummary.DeserializeModelsSummary(property.Value);
                     continue;
                 }
                 if (property.NameEquals("modelList"))
@@ -42,26 +35,19 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    List<ModelInfo> array = new List<ModelInfo>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        modelList = null;
-                    }
-                    else
-                    {
-                        List<ModelInfo> array = new List<ModelInfo>();
-                        foreach (var item in property.Value.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(ModelInfo.DeserializeModelInfo(item));
-                            }
+                            array.Add(null);
                         }
-                        modelList = array;
+                        else
+                        {
+                            array.Add(ModelInfo.DeserializeModelInfo(item));
+                        }
                     }
+                    modelList = array;
                     continue;
                 }
                 if (property.NameEquals("nextLink"))
@@ -70,14 +56,7 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        nextLink = null;
-                    }
-                    else
-                    {
-                        nextLink = property.Value.GetString();
-                    }
+                    nextLink = property.Value.GetString();
                     continue;
                 }
             }

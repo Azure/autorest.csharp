@@ -43,14 +43,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        hasLegalHold = null;
-                    }
-                    else
-                    {
-                        hasLegalHold = property.Value.GetBoolean();
-                    }
+                    hasLegalHold = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("tags"))

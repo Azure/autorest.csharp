@@ -72,14 +72,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        ignoreCase = null;
-                    }
-                    else
-                    {
-                        ignoreCase = property.Value.GetBoolean();
-                    }
+                    ignoreCase = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("queryMode"))
@@ -88,14 +81,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        queryMode = null;
-                    }
-                    else
-                    {
-                        queryMode = property.Value.GetBoolean();
-                    }
+                    queryMode = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("@odata.type"))

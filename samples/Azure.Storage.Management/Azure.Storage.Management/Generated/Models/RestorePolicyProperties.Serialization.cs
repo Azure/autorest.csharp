@@ -42,14 +42,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        days = null;
-                    }
-                    else
-                    {
-                        days = property.Value.GetInt32();
-                    }
+                    days = property.Value.GetInt32();
                     continue;
                 }
             }

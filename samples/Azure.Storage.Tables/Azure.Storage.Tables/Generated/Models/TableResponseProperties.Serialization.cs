@@ -26,14 +26,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        tableName = null;
-                    }
-                    else
-                    {
-                        tableName = property.Value.GetString();
-                    }
+                    tableName = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("odata.type"))
@@ -42,14 +35,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        odatatype = null;
-                    }
-                    else
-                    {
-                        odatatype = property.Value.GetString();
-                    }
+                    odatatype = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("odata.id"))
@@ -58,14 +44,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        odataid = null;
-                    }
-                    else
-                    {
-                        odataid = property.Value.GetString();
-                    }
+                    odataid = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("odata.editLink"))
@@ -74,14 +53,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        odataeditLink = null;
-                    }
-                    else
-                    {
-                        odataeditLink = property.Value.GetString();
-                    }
+                    odataeditLink = property.Value.GetString();
                     continue;
                 }
             }

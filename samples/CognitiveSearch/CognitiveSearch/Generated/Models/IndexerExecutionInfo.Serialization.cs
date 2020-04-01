@@ -32,14 +32,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        lastResult = null;
-                    }
-                    else
-                    {
-                        lastResult = IndexerExecutionResult.DeserializeIndexerExecutionResult(property.Value);
-                    }
+                    lastResult = IndexerExecutionResult.DeserializeIndexerExecutionResult(property.Value);
                     continue;
                 }
                 if (property.NameEquals("executionHistory"))

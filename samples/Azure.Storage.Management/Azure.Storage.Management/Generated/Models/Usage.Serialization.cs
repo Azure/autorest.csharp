@@ -26,14 +26,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        unit = null;
-                    }
-                    else
-                    {
-                        unit = property.Value.GetString().ToUsageUnit();
-                    }
+                    unit = property.Value.GetString().ToUsageUnit();
                     continue;
                 }
                 if (property.NameEquals("currentValue"))
@@ -42,14 +35,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        currentValue = null;
-                    }
-                    else
-                    {
-                        currentValue = property.Value.GetInt32();
-                    }
+                    currentValue = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("limit"))
@@ -58,14 +44,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        limit = null;
-                    }
-                    else
-                    {
-                        limit = property.Value.GetInt32();
-                    }
+                    limit = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -74,14 +53,7 @@ namespace Azure.Storage.Management.Models
                     {
                         continue;
                     }
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        name = null;
-                    }
-                    else
-                    {
-                        name = UsageName.DeserializeUsageName(property.Value);
-                    }
+                    name = UsageName.DeserializeUsageName(property.Value);
                     continue;
                 }
             }
