@@ -713,8 +713,7 @@ namespace AutoRest.TestServer.Tests
             var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
             Assert.AreEqual("100", result.Value.Id);
             Assert.AreEqual("foo", result.Value.Name);
-            // Final GET does not return provisioning state
-            Assert.AreEqual(null, result.Value.ProvisioningState);
+            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
         });
 
         [Test]
@@ -725,8 +724,7 @@ namespace AutoRest.TestServer.Tests
             var result = WaitForCompletion(operation);
             Assert.AreEqual("100", result.Value.Id);
             Assert.AreEqual("foo", result.Value.Name);
-            // Final GET does not return provisioning state
-            Assert.AreEqual(null, result.Value.ProvisioningState);
+            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
         });
 
         [Test]
@@ -769,8 +767,7 @@ namespace AutoRest.TestServer.Tests
             var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
             Assert.AreEqual("100", result.Value.Id);
             Assert.AreEqual("foo", result.Value.Name);
-            // Final GET does not return provisioning state
-            Assert.AreEqual(null, result.Value.ProvisioningState);
+            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
         });
 
         [Test]
@@ -781,8 +778,7 @@ namespace AutoRest.TestServer.Tests
             var result = WaitForCompletion(operation);
             Assert.AreEqual("100", result.Value.Id);
             Assert.AreEqual("foo", result.Value.Name);
-            // Final GET does not return provisioning state
-            Assert.AreEqual(null, result.Value.ProvisioningState);
+            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
         });
 
         [Test]
@@ -806,25 +802,23 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("[OUTDATED TEST] Defaults to Location, which this test is explicitly testing the opposite")]
         public Task LROPostDoubleHeadersFinalAzureHeaderGetDefault() => Test(async (host, pipeline) =>
         {
             var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartPostDoubleHeadersFinalAzureHeaderGetDefaultAsync();
             var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
             Assert.AreEqual("100", result.Value.Id);
             Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+            Assert.AreEqual(null, result.Value.ProvisioningState);
         });
 
         [Test]
-        [Ignore("[OUTDATED TEST] Defaults to Location, which this test is explicitly testing the opposite")]
         public Task LROPostDoubleHeadersFinalAzureHeaderGetDefault_Sync() => Test((host, pipeline) =>
         {
             var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartPostDoubleHeadersFinalAzureHeaderGetDefault();
             var result = WaitForCompletion(operation);
             Assert.AreEqual("100", result.Value.Id);
             Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+            Assert.AreEqual(null, result.Value.ProvisioningState);
         });
 
         [Test]
