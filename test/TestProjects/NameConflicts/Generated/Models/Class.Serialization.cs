@@ -530,6 +530,11 @@ namespace NameConflicts.Models
                 writer.WritePropertyName("yield");
                 writer.WriteStringValue(Yield);
             }
+            if (System != null)
+            {
+                writer.WritePropertyName("System");
+                writer.WriteStringValue(System.Value.ToString());
+            }
             writer.WriteEndObject();
         }
 
@@ -638,6 +643,7 @@ namespace NameConflicts.Models
             string @where = default;
             string @while = default;
             string @yield = default;
+            SystemEnum? system = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("abstract"))
@@ -1567,8 +1573,17 @@ namespace NameConflicts.Models
                     @yield = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("System"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    system = new SystemEnum(property.Value.GetString());
+                    continue;
+                }
             }
-            return new Class(@abstract, @add, @alias, @as, @ascending, @async, @await, @base, @bool, @break, @by, @byte, @catch, @char, @checked, @const, @continue, @decimal, @default, @delegate, @descending, @do, @double, @dynamic, @else, @enum, @event, @explicit, @extern, @false, @finally, @fixed, @float, @for, @foreach, @from, @get, @global, @goto, group, @if, @implicit, @in, @int, @interface, @internal, @into, @is, @join, @let, @lock, @long, @nameof, @namespace, @new, @null, @object, @on, @operator, orderby, @out, @override, @params, @partial, @private, @protected, @public, @readonly, @ref, @remove, @return, @sbyte, @sealed, select, @set, @short, @sizeof, @stackalloc, @static, @string, @struct, @switch, @this, @throw, @true, @try, @typeof, @uint, @ulong, @unchecked, @unmanaged, @unsafe, @ushort, @using, value, @var, @virtual, @void, @volatile, @when, @where, @while, @yield);
+            return new Class(@abstract, @add, @alias, @as, @ascending, @async, @await, @base, @bool, @break, @by, @byte, @catch, @char, @checked, @const, @continue, @decimal, @default, @delegate, @descending, @do, @double, @dynamic, @else, @enum, @event, @explicit, @extern, @false, @finally, @fixed, @float, @for, @foreach, @from, @get, @global, @goto, group, @if, @implicit, @in, @int, @interface, @internal, @into, @is, @join, @let, @lock, @long, @nameof, @namespace, @new, @null, @object, @on, @operator, orderby, @out, @override, @params, @partial, @private, @protected, @public, @readonly, @ref, @remove, @return, @sbyte, @sealed, select, @set, @short, @sizeof, @stackalloc, @static, @string, @struct, @switch, @this, @throw, @true, @try, @typeof, @uint, @ulong, @unchecked, @unmanaged, @unsafe, @ushort, @using, value, @var, @virtual, @void, @volatile, @when, @where, @while, @yield, system);
         }
     }
 }

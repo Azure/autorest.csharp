@@ -119,7 +119,8 @@ namespace NameConflicts.Models
         /// <param name="where"> . </param>
         /// <param name="while"> . </param>
         /// <param name="yield"> . </param>
-        internal Class(string @abstract, string @add, string @alias, string @as, string @ascending, string @async, string @await, string @base, string @bool, string @break, string @by, string @byte, string @catch, string @char, string @checked, string @const, string @continue, string @decimal, string @default, string @delegate, string @descending, string @do, string @double, string @dynamic, string @else, string @enum, string @event, string @explicit, string @extern, string @false, string @finally, string @fixed, string @float, string @for, string @foreach, string @from, string @get, string @global, string @goto, string group, string @if, string @implicit, string @in, string @int, string @interface, string @internal, string @into, string @is, string @join, string @let, string @lock, string @long, string @nameof, string @namespace, string @new, string nullProperty, string @object, string @on, string @operator, string orderby, string @out, string @override, string @params, string @partial, string @private, string @protected, string @public, string @readonly, string @ref, string @remove, string @return, string @sbyte, string @sealed, string select, string @set, string @short, string @sizeof, string @stackalloc, string @static, string @string, string @struct, string @switch, string @this, string @throw, string @true, string @try, string @typeof, string @uint, string @ulong, string @unchecked, string @unmanaged, string @unsafe, string @ushort, string @using, string value, string @var, string @virtual, string @void, string @volatile, string @when, string @where, string @while, string @yield)
+        /// <param name="system"> . </param>
+        internal Class(string @abstract, string @add, string @alias, string @as, string @ascending, string @async, string @await, string @base, string @bool, string @break, string @by, string @byte, string @catch, string @char, string @checked, string @const, string @continue, string @decimal, string @default, string @delegate, string @descending, string @do, string @double, string @dynamic, string @else, string @enum, string @event, string @explicit, string @extern, string @false, string @finally, string @fixed, string @float, string @for, string @foreach, string @from, string @get, string @global, string @goto, string group, string @if, string @implicit, string @in, string @int, string @interface, string @internal, string @into, string @is, string @join, string @let, string @lock, string @long, string @nameof, string @namespace, string @new, string nullProperty, string @object, string @on, string @operator, string orderby, string @out, string @override, string @params, string @partial, string @private, string @protected, string @public, string @readonly, string @ref, string @remove, string @return, string @sbyte, string @sealed, string select, string @set, string @short, string @sizeof, string @stackalloc, string @static, string @string, string @struct, string @switch, string @this, string @throw, string @true, string @try, string @typeof, string @uint, string @ulong, string @unchecked, string @unmanaged, string @unsafe, string @ushort, string @using, string value, string @var, string @virtual, string @void, string @volatile, string @when, string @where, string @while, string @yield, SystemEnum? system)
         {
             Abstract = @abstract;
             Add = @add;
@@ -224,6 +225,7 @@ namespace NameConflicts.Models
             Where = @where;
             While = @while;
             Yield = @yield;
+            System = system;
         }
 
         public string Abstract { get; set; }
@@ -329,5 +331,6 @@ namespace NameConflicts.Models
         public string Where { get; set; }
         public string While { get; set; }
         public string Yield { get; set; }
+        public SystemEnum? System { get; set; }
     }
 }
