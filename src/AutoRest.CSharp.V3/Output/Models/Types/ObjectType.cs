@@ -333,6 +333,12 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             foreach (Property property in _objectSchema.Properties!)
             {
                 var name = property.CSharpName();
+                // Resolve property-type name conflicts
+                // TODO: we might eventually need a more generic version of this logic
+                if (name == Type.Name)
+                {
+                    name += "Value";
+                }
                 SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
                 bool isReadOnly =
                     IsStruct ||
