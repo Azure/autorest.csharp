@@ -123,7 +123,7 @@ namespace header
 
         /// <summary> Get a response with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<ResponseExistingKeyHeaders>> ResponseExistingKeyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<HeaderResponseExistingKeyHeaders>> ResponseExistingKeyAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
             scope.Start();
@@ -131,7 +131,7 @@ namespace header
             {
                 using var message = CreateResponseExistingKeyRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ResponseExistingKeyHeaders(message.Response);
+                var headers = new HeaderResponseExistingKeyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -149,7 +149,7 @@ namespace header
 
         /// <summary> Get a response with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ResponseExistingKeyHeaders> ResponseExistingKey(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<HeaderResponseExistingKeyHeaders> ResponseExistingKey(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
             scope.Start();
@@ -157,7 +157,7 @@ namespace header
             {
                 using var message = CreateResponseExistingKeyRequest();
                 pipeline.Send(message, cancellationToken);
-                var headers = new ResponseExistingKeyHeaders(message.Response);
+                var headers = new HeaderResponseExistingKeyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -262,7 +262,7 @@ namespace header
 
         /// <summary> Get a response with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<ResponseProtectedKeyHeaders>> ResponseProtectedKeyAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<HeaderResponseProtectedKeyHeaders>> ResponseProtectedKeyAsync(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
             scope.Start();
@@ -270,7 +270,7 @@ namespace header
             {
                 using var message = CreateResponseProtectedKeyRequest();
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ResponseProtectedKeyHeaders(message.Response);
+                var headers = new HeaderResponseProtectedKeyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -288,7 +288,7 @@ namespace header
 
         /// <summary> Get a response with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ResponseProtectedKeyHeaders> ResponseProtectedKey(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<HeaderResponseProtectedKeyHeaders> ResponseProtectedKey(CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
             scope.Start();
@@ -296,7 +296,7 @@ namespace header
             {
                 using var message = CreateResponseProtectedKeyRequest();
                 pipeline.Send(message, cancellationToken);
-                var headers = new ResponseProtectedKeyHeaders(message.Response);
+                var headers = new HeaderResponseProtectedKeyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -406,7 +406,7 @@ namespace header
         /// <summary> Get a response with header value &quot;value&quot;: 1 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<ResponseIntegerHeaders>> ResponseIntegerAsync(string scenario, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<HeaderResponseIntegerHeaders>> ResponseIntegerAsync(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -419,7 +419,7 @@ namespace header
             {
                 using var message = CreateResponseIntegerRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ResponseIntegerHeaders(message.Response);
+                var headers = new HeaderResponseIntegerHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -438,7 +438,7 @@ namespace header
         /// <summary> Get a response with header value &quot;value&quot;: 1 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ResponseIntegerHeaders> ResponseInteger(string scenario, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<HeaderResponseIntegerHeaders> ResponseInteger(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -451,7 +451,7 @@ namespace header
             {
                 using var message = CreateResponseIntegerRequest(scenario);
                 pipeline.Send(message, cancellationToken);
-                var headers = new ResponseIntegerHeaders(message.Response);
+                var headers = new HeaderResponseIntegerHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -561,7 +561,7 @@ namespace header
         /// <summary> Get a response with header value &quot;value&quot;: 105 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<ResponseLongHeaders>> ResponseLongAsync(string scenario, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<HeaderResponseLongHeaders>> ResponseLongAsync(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -574,7 +574,7 @@ namespace header
             {
                 using var message = CreateResponseLongRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ResponseLongHeaders(message.Response);
+                var headers = new HeaderResponseLongHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -593,7 +593,7 @@ namespace header
         /// <summary> Get a response with header value &quot;value&quot;: 105 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ResponseLongHeaders> ResponseLong(string scenario, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<HeaderResponseLongHeaders> ResponseLong(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -606,7 +606,7 @@ namespace header
             {
                 using var message = CreateResponseLongRequest(scenario);
                 pipeline.Send(message, cancellationToken);
-                var headers = new ResponseLongHeaders(message.Response);
+                var headers = new HeaderResponseLongHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -716,7 +716,7 @@ namespace header
         /// <summary> Get a response with header value &quot;value&quot;: 0.07 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<ResponseFloatHeaders>> ResponseFloatAsync(string scenario, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<HeaderResponseFloatHeaders>> ResponseFloatAsync(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -729,7 +729,7 @@ namespace header
             {
                 using var message = CreateResponseFloatRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ResponseFloatHeaders(message.Response);
+                var headers = new HeaderResponseFloatHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -748,7 +748,7 @@ namespace header
         /// <summary> Get a response with header value &quot;value&quot;: 0.07 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ResponseFloatHeaders> ResponseFloat(string scenario, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<HeaderResponseFloatHeaders> ResponseFloat(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -761,7 +761,7 @@ namespace header
             {
                 using var message = CreateResponseFloatRequest(scenario);
                 pipeline.Send(message, cancellationToken);
-                var headers = new ResponseFloatHeaders(message.Response);
+                var headers = new HeaderResponseFloatHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -871,7 +871,7 @@ namespace header
         /// <summary> Get a response with header value &quot;value&quot;: 7e120 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<ResponseDoubleHeaders>> ResponseDoubleAsync(string scenario, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<HeaderResponseDoubleHeaders>> ResponseDoubleAsync(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -884,7 +884,7 @@ namespace header
             {
                 using var message = CreateResponseDoubleRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ResponseDoubleHeaders(message.Response);
+                var headers = new HeaderResponseDoubleHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -903,7 +903,7 @@ namespace header
         /// <summary> Get a response with header value &quot;value&quot;: 7e120 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ResponseDoubleHeaders> ResponseDouble(string scenario, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<HeaderResponseDoubleHeaders> ResponseDouble(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -916,7 +916,7 @@ namespace header
             {
                 using var message = CreateResponseDoubleRequest(scenario);
                 pipeline.Send(message, cancellationToken);
-                var headers = new ResponseDoubleHeaders(message.Response);
+                var headers = new HeaderResponseDoubleHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1026,7 +1026,7 @@ namespace header
         /// <summary> Get a response with header value &quot;value&quot;: true or false. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<ResponseBoolHeaders>> ResponseBoolAsync(string scenario, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<HeaderResponseBoolHeaders>> ResponseBoolAsync(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -1039,7 +1039,7 @@ namespace header
             {
                 using var message = CreateResponseBoolRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ResponseBoolHeaders(message.Response);
+                var headers = new HeaderResponseBoolHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1058,7 +1058,7 @@ namespace header
         /// <summary> Get a response with header value &quot;value&quot;: true or false. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ResponseBoolHeaders> ResponseBool(string scenario, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<HeaderResponseBoolHeaders> ResponseBool(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -1071,7 +1071,7 @@ namespace header
             {
                 using var message = CreateResponseBoolRequest(scenario);
                 pipeline.Send(message, cancellationToken);
-                var headers = new ResponseBoolHeaders(message.Response);
+                var headers = new HeaderResponseBoolHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1184,7 +1184,7 @@ namespace header
         /// <summary> Get a response with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<ResponseStringHeaders>> ResponseStringAsync(string scenario, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<HeaderResponseStringHeaders>> ResponseStringAsync(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -1197,7 +1197,7 @@ namespace header
             {
                 using var message = CreateResponseStringRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ResponseStringHeaders(message.Response);
+                var headers = new HeaderResponseStringHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1216,7 +1216,7 @@ namespace header
         /// <summary> Get a response with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ResponseStringHeaders> ResponseString(string scenario, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<HeaderResponseStringHeaders> ResponseString(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -1229,7 +1229,7 @@ namespace header
             {
                 using var message = CreateResponseStringRequest(scenario);
                 pipeline.Send(message, cancellationToken);
-                var headers = new ResponseStringHeaders(message.Response);
+                var headers = new HeaderResponseStringHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1339,7 +1339,7 @@ namespace header
         /// <summary> Get a response with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<ResponseDateHeaders>> ResponseDateAsync(string scenario, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<HeaderResponseDateHeaders>> ResponseDateAsync(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -1352,7 +1352,7 @@ namespace header
             {
                 using var message = CreateResponseDateRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ResponseDateHeaders(message.Response);
+                var headers = new HeaderResponseDateHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1371,7 +1371,7 @@ namespace header
         /// <summary> Get a response with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ResponseDateHeaders> ResponseDate(string scenario, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<HeaderResponseDateHeaders> ResponseDate(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -1384,7 +1384,7 @@ namespace header
             {
                 using var message = CreateResponseDateRequest(scenario);
                 pipeline.Send(message, cancellationToken);
-                var headers = new ResponseDateHeaders(message.Response);
+                var headers = new HeaderResponseDateHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1494,7 +1494,7 @@ namespace header
         /// <summary> Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<ResponseDatetimeHeaders>> ResponseDatetimeAsync(string scenario, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<HeaderResponseDatetimeHeaders>> ResponseDatetimeAsync(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -1507,7 +1507,7 @@ namespace header
             {
                 using var message = CreateResponseDatetimeRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ResponseDatetimeHeaders(message.Response);
+                var headers = new HeaderResponseDatetimeHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1526,7 +1526,7 @@ namespace header
         /// <summary> Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ResponseDatetimeHeaders> ResponseDatetime(string scenario, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<HeaderResponseDatetimeHeaders> ResponseDatetime(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -1539,7 +1539,7 @@ namespace header
             {
                 using var message = CreateResponseDatetimeRequest(scenario);
                 pipeline.Send(message, cancellationToken);
-                var headers = new ResponseDatetimeHeaders(message.Response);
+                var headers = new HeaderResponseDatetimeHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1652,7 +1652,7 @@ namespace header
         /// <summary> Get a response with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<ResponseDatetimeRfc1123Headers>> ResponseDatetimeRfc1123Async(string scenario, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<HeaderResponseDatetimeRfc1123Headers>> ResponseDatetimeRfc1123Async(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -1665,7 +1665,7 @@ namespace header
             {
                 using var message = CreateResponseDatetimeRfc1123Request(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ResponseDatetimeRfc1123Headers(message.Response);
+                var headers = new HeaderResponseDatetimeRfc1123Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1684,7 +1684,7 @@ namespace header
         /// <summary> Get a response with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ResponseDatetimeRfc1123Headers> ResponseDatetimeRfc1123(string scenario, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<HeaderResponseDatetimeRfc1123Headers> ResponseDatetimeRfc1123(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -1697,7 +1697,7 @@ namespace header
             {
                 using var message = CreateResponseDatetimeRfc1123Request(scenario);
                 pipeline.Send(message, cancellationToken);
-                var headers = new ResponseDatetimeRfc1123Headers(message.Response);
+                var headers = new HeaderResponseDatetimeRfc1123Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1807,7 +1807,7 @@ namespace header
         /// <summary> Get a response with header values &quot;P123DT22H14M12.011S&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<ResponseDurationHeaders>> ResponseDurationAsync(string scenario, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<HeaderResponseDurationHeaders>> ResponseDurationAsync(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -1820,7 +1820,7 @@ namespace header
             {
                 using var message = CreateResponseDurationRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ResponseDurationHeaders(message.Response);
+                var headers = new HeaderResponseDurationHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1839,7 +1839,7 @@ namespace header
         /// <summary> Get a response with header values &quot;P123DT22H14M12.011S&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ResponseDurationHeaders> ResponseDuration(string scenario, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<HeaderResponseDurationHeaders> ResponseDuration(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -1852,7 +1852,7 @@ namespace header
             {
                 using var message = CreateResponseDurationRequest(scenario);
                 pipeline.Send(message, cancellationToken);
-                var headers = new ResponseDurationHeaders(message.Response);
+                var headers = new HeaderResponseDurationHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1970,7 +1970,7 @@ namespace header
         /// <summary> Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<ResponseByteHeaders>> ResponseByteAsync(string scenario, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<HeaderResponseByteHeaders>> ResponseByteAsync(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -1983,7 +1983,7 @@ namespace header
             {
                 using var message = CreateResponseByteRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ResponseByteHeaders(message.Response);
+                var headers = new HeaderResponseByteHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2002,7 +2002,7 @@ namespace header
         /// <summary> Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ResponseByteHeaders> ResponseByte(string scenario, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<HeaderResponseByteHeaders> ResponseByte(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -2015,7 +2015,7 @@ namespace header
             {
                 using var message = CreateResponseByteRequest(scenario);
                 pipeline.Send(message, cancellationToken);
-                var headers = new ResponseByteHeaders(message.Response);
+                var headers = new HeaderResponseByteHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2128,7 +2128,7 @@ namespace header
         /// <summary> Get a response with header values &quot;GREY&quot; or null. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<ResponseEnumHeaders>> ResponseEnumAsync(string scenario, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<HeaderResponseEnumHeaders>> ResponseEnumAsync(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -2141,7 +2141,7 @@ namespace header
             {
                 using var message = CreateResponseEnumRequest(scenario);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ResponseEnumHeaders(message.Response);
+                var headers = new HeaderResponseEnumHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2160,7 +2160,7 @@ namespace header
         /// <summary> Get a response with header values &quot;GREY&quot; or null. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ResponseEnumHeaders> ResponseEnum(string scenario, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<HeaderResponseEnumHeaders> ResponseEnum(string scenario, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -2173,7 +2173,7 @@ namespace header
             {
                 using var message = CreateResponseEnumRequest(scenario);
                 pipeline.Send(message, cancellationToken);
-                var headers = new ResponseEnumHeaders(message.Response);
+                var headers = new HeaderResponseEnumHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:

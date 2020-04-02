@@ -80,7 +80,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableQueryResponse, QueryHeaders>> QueryAsync(string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<TableQueryResponse, TableQueryHeaders>> QueryAsync(string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("TableClient.Query");
             scope.Start();
@@ -88,7 +88,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateQueryRequest(requestId, queryOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new QueryHeaders(message.Response);
+                var headers = new TableQueryHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -113,7 +113,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<TableQueryResponse, QueryHeaders> Query(string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableQueryResponse, TableQueryHeaders> Query(string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("TableClient.Query");
             scope.Start();
@@ -121,7 +121,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateQueryRequest(requestId, queryOptions);
                 pipeline.Send(message, cancellationToken);
-                var headers = new QueryHeaders(message.Response);
+                var headers = new TableQueryHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -173,7 +173,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableResponse, CreateHeaders>> CreateAsync(TableProperties tableProperties, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<TableResponse, TableCreateHeaders>> CreateAsync(TableProperties tableProperties, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (tableProperties == null)
             {
@@ -186,7 +186,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateCreateRequest(tableProperties, requestId, queryOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new CreateHeaders(message.Response);
+                var headers = new TableCreateHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 201:
@@ -197,7 +197,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     case 204:
-                        return ResponseWithHeaders.FromValue<TableResponse, CreateHeaders>(null, headers, message.Response);
+                        return ResponseWithHeaders.FromValue<TableResponse, TableCreateHeaders>(null, headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -214,7 +214,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<TableResponse, CreateHeaders> Create(TableProperties tableProperties, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableResponse, TableCreateHeaders> Create(TableProperties tableProperties, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (tableProperties == null)
             {
@@ -227,7 +227,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateCreateRequest(tableProperties, requestId, queryOptions);
                 pipeline.Send(message, cancellationToken);
-                var headers = new CreateHeaders(message.Response);
+                var headers = new TableCreateHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 201:
@@ -238,7 +238,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     case 204:
-                        return ResponseWithHeaders.FromValue<TableResponse, CreateHeaders>(null, headers, message.Response);
+                        return ResponseWithHeaders.FromValue<TableResponse, TableCreateHeaders>(null, headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -273,7 +273,7 @@ namespace Azure.Storage.Tables
         /// <param name="table"> The name of the table. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<DeleteHeaders>> DeleteAsync(string table, string requestId = null, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<TableDeleteHeaders>> DeleteAsync(string table, string requestId = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -286,7 +286,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateDeleteRequest(table, requestId);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new DeleteHeaders(message.Response);
+                var headers = new TableDeleteHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 204:
@@ -306,7 +306,7 @@ namespace Azure.Storage.Tables
         /// <param name="table"> The name of the table. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<DeleteHeaders> Delete(string table, string requestId = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableDeleteHeaders> Delete(string table, string requestId = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -319,7 +319,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateDeleteRequest(table, requestId);
                 pipeline.Send(message, cancellationToken);
-                var headers = new DeleteHeaders(message.Response);
+                var headers = new TableDeleteHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 204:
@@ -381,7 +381,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableEntityQueryResponse, QueryEntitiesHeaders>> QueryEntitiesAsync(string table, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<TableEntityQueryResponse, TableQueryEntitiesHeaders>> QueryEntitiesAsync(string table, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -394,7 +394,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateQueryEntitiesRequest(table, timeout, requestId, queryOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new QueryEntitiesHeaders(message.Response);
+                var headers = new TableQueryEntitiesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -421,7 +421,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<TableEntityQueryResponse, QueryEntitiesHeaders> QueryEntities(string table, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableEntityQueryResponse, TableQueryEntitiesHeaders> QueryEntities(string table, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -434,7 +434,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateQueryEntitiesRequest(table, timeout, requestId, queryOptions);
                 pipeline.Send(message, cancellationToken);
-                var headers = new QueryEntitiesHeaders(message.Response);
+                var headers = new TableQueryEntitiesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -503,7 +503,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableEntityQueryResponse, QueryEntitiesWithPartitionAndRowKeyHeaders>> QueryEntitiesWithPartitionAndRowKeyAsync(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<TableEntityQueryResponse, TableQueryEntitiesWithPartitionAndRowKeyHeaders>> QueryEntitiesWithPartitionAndRowKeyAsync(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -524,7 +524,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateQueryEntitiesWithPartitionAndRowKeyRequest(table, partitionKey, rowKey, timeout, requestId, queryOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new QueryEntitiesWithPartitionAndRowKeyHeaders(message.Response);
+                var headers = new TableQueryEntitiesWithPartitionAndRowKeyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -553,7 +553,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<TableEntityQueryResponse, QueryEntitiesWithPartitionAndRowKeyHeaders> QueryEntitiesWithPartitionAndRowKey(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableEntityQueryResponse, TableQueryEntitiesWithPartitionAndRowKeyHeaders> QueryEntitiesWithPartitionAndRowKey(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -574,7 +574,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateQueryEntitiesWithPartitionAndRowKeyRequest(table, partitionKey, rowKey, timeout, requestId, queryOptions);
                 pipeline.Send(message, cancellationToken);
-                var headers = new QueryEntitiesWithPartitionAndRowKeyHeaders(message.Response);
+                var headers = new TableQueryEntitiesWithPartitionAndRowKeyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -649,7 +649,7 @@ namespace Azure.Storage.Tables
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<UpdateEntityHeaders>> UpdateEntityAsync(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<TableUpdateEntityHeaders>> UpdateEntityAsync(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -670,7 +670,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateUpdateEntityRequest(table, partitionKey, rowKey, timeout, requestId, tableEntityProperties, queryOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new UpdateEntityHeaders(message.Response);
+                var headers = new TableUpdateEntityHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -695,7 +695,7 @@ namespace Azure.Storage.Tables
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<UpdateEntityHeaders> UpdateEntity(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableUpdateEntityHeaders> UpdateEntity(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -716,7 +716,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateUpdateEntityRequest(table, partitionKey, rowKey, timeout, requestId, tableEntityProperties, queryOptions);
                 pipeline.Send(message, cancellationToken);
-                var headers = new UpdateEntityHeaders(message.Response);
+                var headers = new TableUpdateEntityHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -772,7 +772,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<DeleteEntityHeaders>> DeleteEntityAsync(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<TableDeleteEntityHeaders>> DeleteEntityAsync(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -793,7 +793,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateDeleteEntityRequest(table, partitionKey, rowKey, timeout, requestId, queryOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new DeleteEntityHeaders(message.Response);
+                var headers = new TableDeleteEntityHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 204:
@@ -817,7 +817,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<DeleteEntityHeaders> DeleteEntity(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableDeleteEntityHeaders> DeleteEntity(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -838,7 +838,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateDeleteEntityRequest(table, partitionKey, rowKey, timeout, requestId, queryOptions);
                 pipeline.Send(message, cancellationToken);
-                var headers = new DeleteEntityHeaders(message.Response);
+                var headers = new TableDeleteEntityHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 204:
@@ -901,7 +901,7 @@ namespace Azure.Storage.Tables
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<IReadOnlyDictionary<string, object>, InsertEntityHeaders>> InsertEntityAsync(string table, int? timeout = null, string requestId = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<IReadOnlyDictionary<string, object>, TableInsertEntityHeaders>> InsertEntityAsync(string table, int? timeout = null, string requestId = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -914,7 +914,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateInsertEntityRequest(table, timeout, requestId, tableEntityProperties, queryOptions);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new InsertEntityHeaders(message.Response);
+                var headers = new TableInsertEntityHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 201:
@@ -947,7 +947,7 @@ namespace Azure.Storage.Tables
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<IReadOnlyDictionary<string, object>, InsertEntityHeaders> InsertEntity(string table, int? timeout = null, string requestId = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<IReadOnlyDictionary<string, object>, TableInsertEntityHeaders> InsertEntity(string table, int? timeout = null, string requestId = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -960,7 +960,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateInsertEntityRequest(table, timeout, requestId, tableEntityProperties, queryOptions);
                 pipeline.Send(message, cancellationToken);
-                var headers = new InsertEntityHeaders(message.Response);
+                var headers = new TableInsertEntityHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 201:
@@ -1014,7 +1014,7 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<IReadOnlyList<SignedIdentifier>, GetAccessPolicyHeaders>> GetAccessPolicyAsync(string table, int? timeout = null, string requestId = null, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<IReadOnlyList<SignedIdentifier>, TableGetAccessPolicyHeaders>> GetAccessPolicyAsync(string table, int? timeout = null, string requestId = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -1027,7 +1027,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateGetAccessPolicyRequest(table, timeout, requestId);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new GetAccessPolicyHeaders(message.Response);
+                var headers = new TableGetAccessPolicyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1061,7 +1061,7 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<IReadOnlyList<SignedIdentifier>, GetAccessPolicyHeaders> GetAccessPolicy(string table, int? timeout = null, string requestId = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<IReadOnlyList<SignedIdentifier>, TableGetAccessPolicyHeaders> GetAccessPolicy(string table, int? timeout = null, string requestId = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -1074,7 +1074,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateGetAccessPolicyRequest(table, timeout, requestId);
                 pipeline.Send(message, cancellationToken);
-                var headers = new GetAccessPolicyHeaders(message.Response);
+                var headers = new TableGetAccessPolicyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1144,7 +1144,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="tableAcl"> the acls for the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<SetAccessPolicyHeaders>> SetAccessPolicyAsync(string table, int? timeout = null, string requestId = null, IEnumerable<SignedIdentifier> tableAcl = null, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<TableSetAccessPolicyHeaders>> SetAccessPolicyAsync(string table, int? timeout = null, string requestId = null, IEnumerable<SignedIdentifier> tableAcl = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -1157,7 +1157,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateSetAccessPolicyRequest(table, timeout, requestId, tableAcl);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new SetAccessPolicyHeaders(message.Response);
+                var headers = new TableSetAccessPolicyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 204:
@@ -1179,7 +1179,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="tableAcl"> the acls for the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<SetAccessPolicyHeaders> SetAccessPolicy(string table, int? timeout = null, string requestId = null, IEnumerable<SignedIdentifier> tableAcl = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableSetAccessPolicyHeaders> SetAccessPolicy(string table, int? timeout = null, string requestId = null, IEnumerable<SignedIdentifier> tableAcl = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -1192,7 +1192,7 @@ namespace Azure.Storage.Tables
             {
                 using var message = CreateSetAccessPolicyRequest(table, timeout, requestId, tableAcl);
                 pipeline.Send(message, cancellationToken);
-                var headers = new SetAccessPolicyHeaders(message.Response);
+                var headers = new TableSetAccessPolicyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 204:

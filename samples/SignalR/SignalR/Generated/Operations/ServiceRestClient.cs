@@ -697,7 +697,7 @@ namespace SignalR
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="reason"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> CloseConnectionAsync(string hub, string connectionId, string reason, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> CloseConnectionAsync(string hub, string connectionId, string reason = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -734,7 +734,7 @@ namespace SignalR
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="reason"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response CloseConnection(string hub, string connectionId, string reason, CancellationToken cancellationToken = default)
+        public Response CloseConnection(string hub, string connectionId, string reason = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1090,7 +1090,7 @@ namespace SignalR
         /// <param name="user"> The String to use. </param>
         /// <param name="ttl"> Specifies the seconds that the user exists in the group. If not set, the user lives in the group forever. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> AddUserToGroupAsync(string hub, string group, string user, int? ttl, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> AddUserToGroupAsync(string hub, string group, string user, int? ttl = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1132,7 +1132,7 @@ namespace SignalR
         /// <param name="user"> The String to use. </param>
         /// <param name="ttl"> Specifies the seconds that the user exists in the group. If not set, the user lives in the group forever. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response AddUserToGroup(string hub, string group, string user, int? ttl, CancellationToken cancellationToken = default)
+        public Response AddUserToGroup(string hub, string group, string user, int? ttl = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
