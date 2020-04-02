@@ -166,7 +166,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="expand"> Expands referenced resources. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<NetworkInterface>> GetAsync(string resourceGroupName, string networkInterfaceName, string expand, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<NetworkInterface>> GetAsync(string resourceGroupName, string networkInterfaceName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -208,7 +208,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="expand"> Expands referenced resources. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<NetworkInterface> Get(string resourceGroupName, string networkInterfaceName, string expand, CancellationToken cancellationToken = default)
+        public Response<NetworkInterface> Get(string resourceGroupName, string networkInterfaceName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {

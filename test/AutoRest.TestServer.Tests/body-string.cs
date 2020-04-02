@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using body_string;
@@ -79,7 +81,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PutStringEmpty() => Test(async (host, pipeline) =>
         {
-            var result = await new StringClient(ClientDiagnostics, pipeline, host).PutEmptyAsync("");
+            var result = await new StringClient(ClientDiagnostics, pipeline, host).PutEmptyAsync();
             Assert.AreEqual(200, result.Status);
         });
 
@@ -144,5 +146,14 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PutEnumNotExpandable() => TestStatus(async (host, pipeline) =>
             await new EnumClient(ClientDiagnostics, pipeline, host).PutNotExpandableAsync( Colors.RedColor));
+
+        [Test]
+        public void NonRequiredParameterHasDefaultValue()
+        {
+            var method = TypeAsserts.HasPublicInstanceMethod(typeof(StringClient), "PutNull");
+
+            var parameter = method.GetParameters().Single(p => p.Name == "stringBody");
+            Assert.True(parameter.HasDefaultValue);
+        }
     }
 }

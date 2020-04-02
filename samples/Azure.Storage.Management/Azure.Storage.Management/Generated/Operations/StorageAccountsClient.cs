@@ -75,7 +75,7 @@ namespace Azure.Storage.Management
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<StorageAccount>> GetPropertiesAsync(string resourceGroupName, string accountName, StorageAccountExpand? expand, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<StorageAccount>> GetPropertiesAsync(string resourceGroupName, string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetPropertiesAsync(resourceGroupName, accountName, expand, cancellationToken).ConfigureAwait(false);
         }
@@ -85,7 +85,7 @@ namespace Azure.Storage.Management
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<StorageAccount> GetProperties(string resourceGroupName, string accountName, StorageAccountExpand? expand, CancellationToken cancellationToken = default)
+        public virtual Response<StorageAccount> GetProperties(string resourceGroupName, string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
             return RestClient.GetProperties(resourceGroupName, accountName, expand, cancellationToken);
         }

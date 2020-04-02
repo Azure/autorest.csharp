@@ -1,0 +1,1200 @@
+!<!CodeModel> 
+info: !<!Info> 
+  title: SignalR
+schemas: !<!Schemas> 
+  numbers:
+  - !<!NumberSchema> &ref_31
+    type: integer
+    apiVersions:
+    - !<!ApiVersion> 
+      version: v1
+    precision: 32
+    language: !<!Languages> 
+      default:
+        name: Integer
+        description: ''
+    protocol: !<!Protocols> {}
+  strings:
+  - !<!StringSchema> &ref_0
+    type: string
+    language: !<!Languages> 
+      default:
+        name: String
+        description: simple string
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_1
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: v1
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+    protocol: !<!Protocols> {}
+  constants:
+  - !<!ConstantSchema> &ref_4
+    type: constant
+    value: !<!ConstantValue> 
+      value: application/octet-stream
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: ApplicationOctetStream
+        description: Content Type 'application/octet-stream'
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_7
+    type: constant
+    value: !<!ConstantValue> 
+      value: text/plain
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: TextPlain
+        description: Content Type 'text/plain'
+    protocol: !<!Protocols> {}
+  binaries:
+  - !<!BinarySchema> &ref_5
+    type: binary
+    apiVersions:
+    - !<!ApiVersion> 
+      version: v1
+    language: !<!Languages> 
+      default:
+        name: binary
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!BinarySchema> &ref_10
+    type: binary
+    apiVersions:
+    - !<!ApiVersion> 
+      version: v1
+    language: !<!Languages> 
+      default:
+        name: binary
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!BinarySchema> &ref_15
+    type: binary
+    apiVersions:
+    - !<!ApiVersion> 
+      version: v1
+    language: !<!Languages> 
+      default:
+        name: binary
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!BinarySchema> &ref_23
+    type: binary
+    apiVersions:
+    - !<!ApiVersion> 
+      version: v1
+    language: !<!Languages> 
+      default:
+        name: binary
+        description: ''
+    protocol: !<!Protocols> {}
+globalParameters:
+- !<!Parameter> &ref_3
+  schema: *ref_1
+  implementation: Client
+  required: true
+  extensions:
+    x-ms-priority: 0
+  language: !<!Languages> 
+    default:
+      name: ApiVersion
+      description: Client Api Version.
+      serializedName: api-version
+  protocol: !<!Protocols> 
+    http: !<!HttpParameter> 
+      in: header
+- !<!Parameter> &ref_2
+  schema: *ref_0
+  clientDefaultValue: ''
+  implementation: Client
+  required: true
+  extensions:
+    x-ms-skip-url-encoding: true
+  language: !<!Languages> 
+    default:
+      name: $host
+      description: server parameter
+      serializedName: $host
+  protocol: !<!Protocols> 
+    http: !<!HttpParameter> 
+      in: uri
+operationGroups:
+- !<!OperationGroup> 
+  $key: ''
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: v1
+    parameters:
+    - *ref_2
+    - *ref_3
+    requests:
+    - !<!Request> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /api/v1/health
+          method: get
+          uri: '{$host}'
+    signatureParameters: []
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    language: !<!Languages> 
+      default:
+        name: GetServiceHealth
+        description: Check the health of the service
+        summary: Check the health of the service
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: v1
+    parameters:
+    - *ref_2
+    - !<!Parameter> &ref_9
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: hub
+          description: The hub is the logic isolation for connections
+          serializedName: hub
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    requests:
+    - !<!Request> 
+      parameters:
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Upload file type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_6
+        schema: *ref_5
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: data
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: binary
+      signatureParameters:
+      - *ref_6
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpBinaryRequest> 
+          path: '/ws/api/v1/hubs/{hub}'
+          method: post
+          binary: true
+          knownMediaType: binary
+          mediaTypes:
+          - application/octet-stream
+          uri: '{$host}'
+    - !<!Request> 
+      parameters:
+      - !<!Parameter> 
+        schema: *ref_7
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Upload file type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_8
+        schema: *ref_0
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: data
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: binary
+      signatureParameters:
+      - *ref_8
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpBinaryRequest> 
+          path: '/ws/api/v1/hubs/{hub}'
+          method: post
+          binary: true
+          knownMediaType: text
+          mediaTypes:
+          - text/plain
+          uri: '{$host}'
+    signatureParameters:
+    - *ref_9
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    language: !<!Languages> 
+      default:
+        name: SendToHub
+        description: Broadcast content inside request body to all the connected connection in the same hub
+        summary: Broadcast content inside request body to all the connected connection in the same hub
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: v1
+    parameters:
+    - *ref_2
+    - !<!Parameter> &ref_13
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: hub
+          description: ''
+          serializedName: hub
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_14
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: id
+          description: The user identity
+          serializedName: id
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    requests:
+    - !<!Request> 
+      parameters:
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Upload file type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_11
+        schema: *ref_10
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: data
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: binary
+      signatureParameters:
+      - *ref_11
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpBinaryRequest> 
+          path: '/ws/api/v1/hubs/{hub}/users/{id}'
+          method: post
+          binary: true
+          knownMediaType: binary
+          mediaTypes:
+          - application/octet-stream
+          uri: '{$host}'
+    - !<!Request> 
+      parameters:
+      - !<!Parameter> 
+        schema: *ref_7
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Upload file type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_12
+        schema: *ref_0
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: data
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: binary
+      signatureParameters:
+      - *ref_12
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpBinaryRequest> 
+          path: '/ws/api/v1/hubs/{hub}/users/{id}'
+          method: post
+          binary: true
+          knownMediaType: text
+          mediaTypes:
+          - text/plain
+          uri: '{$host}'
+    signatureParameters:
+    - *ref_13
+    - *ref_14
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    language: !<!Languages> 
+      default:
+        name: SendToUser
+        description: Send content inside request body to the specific user
+        summary: Send content inside request body to the specific user
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: v1
+    parameters:
+    - *ref_2
+    - !<!Parameter> &ref_18
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: hub
+          description: ''
+          serializedName: hub
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_19
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: connectionId
+          description: ''
+          serializedName: connectionId
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    requests:
+    - !<!Request> 
+      parameters:
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Upload file type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_16
+        schema: *ref_15
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: data
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: binary
+      signatureParameters:
+      - *ref_16
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpBinaryRequest> 
+          path: '/ws/api/v1/hubs/{hub}/connections/{connectionId}'
+          method: post
+          binary: true
+          knownMediaType: binary
+          mediaTypes:
+          - application/octet-stream
+          uri: '{$host}'
+    - !<!Request> 
+      parameters:
+      - !<!Parameter> 
+        schema: *ref_7
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Upload file type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_17
+        schema: *ref_0
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: data
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: binary
+      signatureParameters:
+      - *ref_17
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpBinaryRequest> 
+          path: '/ws/api/v1/hubs/{hub}/connections/{connectionId}'
+          method: post
+          binary: true
+          knownMediaType: text
+          mediaTypes:
+          - text/plain
+          uri: '{$host}'
+    signatureParameters:
+    - *ref_18
+    - *ref_19
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    language: !<!Languages> 
+      default:
+        name: SendToConnection
+        description: Send content inside request body to the specific connection
+        summary: Send content inside request body to the specific connection
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: v1
+    parameters:
+    - *ref_2
+    - !<!Parameter> &ref_20
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: hub
+          description: ''
+          serializedName: hub
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_21
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: connectionId
+          description: ''
+          serializedName: connectionId
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_22
+      schema: *ref_1
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: reason
+          description: ''
+          serializedName: reason
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    requests:
+    - !<!Request> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/ws/api/v1/hubs/{hub}/connections/{connectionId}'
+          method: delete
+          uri: '{$host}'
+    signatureParameters:
+    - *ref_20
+    - *ref_21
+    - *ref_22
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    language: !<!Languages> 
+      default:
+        name: CloseConnection
+        description: Close the client connection
+        summary: Close the client connection
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: v1
+    parameters:
+    - *ref_2
+    - !<!Parameter> &ref_26
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: hub
+          description: ''
+          serializedName: hub
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_27
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: group
+          description: ''
+          serializedName: group
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    requests:
+    - !<!Request> 
+      parameters:
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Upload file type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_24
+        schema: *ref_23
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: data
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: binary
+      signatureParameters:
+      - *ref_24
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpBinaryRequest> 
+          path: '/ws/api/v1/hubs/{hub}/groups/{group}'
+          method: post
+          binary: true
+          knownMediaType: binary
+          mediaTypes:
+          - application/octet-stream
+          uri: '{$host}'
+    - !<!Request> 
+      parameters:
+      - !<!Parameter> 
+        schema: *ref_7
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Upload file type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_25
+        schema: *ref_0
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: data
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: binary
+      signatureParameters:
+      - *ref_25
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpBinaryRequest> 
+          path: '/ws/api/v1/hubs/{hub}/groups/{group}'
+          method: post
+          binary: true
+          knownMediaType: text
+          mediaTypes:
+          - text/plain
+          uri: '{$host}'
+    signatureParameters:
+    - *ref_26
+    - *ref_27
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    language: !<!Languages> 
+      default:
+        name: SendToGroup
+        description: Send content inside request body to a group of connections
+        summary: Send content inside request body to a group of connections
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: v1
+    parameters:
+    - *ref_2
+    - !<!Parameter> &ref_28
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: hub
+          description: ''
+          serializedName: hub
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_29
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: group
+          description: ''
+          serializedName: group
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_30
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: user
+          description: ''
+          serializedName: user
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    requests:
+    - !<!Request> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/ws/api/v1/hubs/{hub}/groups/{group}/users/{user}'
+          method: get
+          uri: '{$host}'
+    signatureParameters:
+    - *ref_28
+    - *ref_29
+    - *ref_30
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    language: !<!Languages> 
+      default:
+        name: GetUserInGroup
+        description: Check if the user is in the specified group
+        summary: Check if the user is in the specified group
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: v1
+    parameters:
+    - *ref_2
+    - !<!Parameter> &ref_32
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: hub
+          description: ''
+          serializedName: hub
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_33
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: group
+          description: ''
+          serializedName: group
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_34
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: user
+          description: ''
+          serializedName: user
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_35
+      schema: *ref_31
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: ttl
+          description: 'Specifies the seconds that the user exists in the group. If not set, the user lives in the group forever.'
+          serializedName: ttl
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    requests:
+    - !<!Request> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/ws/api/v1/hubs/{hub}/groups/{group}/users/{user}'
+          method: put
+          uri: '{$host}'
+    signatureParameters:
+    - *ref_32
+    - *ref_33
+    - *ref_34
+    - *ref_35
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    language: !<!Languages> 
+      default:
+        name: AddUserToGroup
+        description: Add the user to the specified group
+        summary: Add the user to the specified group
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: v1
+    parameters:
+    - *ref_2
+    - !<!Parameter> &ref_36
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: hub
+          description: ''
+          serializedName: hub
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_37
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: group
+          description: ''
+          serializedName: group
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_38
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: user
+          description: ''
+          serializedName: user
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    requests:
+    - !<!Request> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/ws/api/v1/hubs/{hub}/groups/{group}/users/{user}'
+          method: delete
+          uri: '{$host}'
+    signatureParameters:
+    - *ref_36
+    - *ref_37
+    - *ref_38
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    language: !<!Languages> 
+      default:
+        name: RemoveUserFromGroup
+        description: Remove all the connections belong to the specified user from the group
+        summary: Remove all the connections belong to the specified user from the group
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: v1
+    parameters:
+    - *ref_2
+    - !<!Parameter> &ref_39
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: hub
+          description: ''
+          serializedName: hub
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_40
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: group
+          description: ''
+          serializedName: group
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_41
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: connectionId
+          description: ''
+          serializedName: connectionId
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    requests:
+    - !<!Request> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/ws/api/v1/hubs/{hub}/groups/{group}/connections/{connectionId}'
+          method: put
+          uri: '{$host}'
+    signatureParameters:
+    - *ref_39
+    - *ref_40
+    - *ref_41
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    language: !<!Languages> 
+      default:
+        name: AddConnectionToGroup
+        description: Add the connection to the group
+        summary: Add the connection to the group
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: v1
+    parameters:
+    - *ref_2
+    - !<!Parameter> &ref_42
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: hub
+          description: ''
+          serializedName: hub
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_43
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: group
+          description: ''
+          serializedName: group
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_44
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: connectionId
+          description: ''
+          serializedName: connectionId
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    requests:
+    - !<!Request> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/ws/api/v1/hubs/{hub}/groups/{group}/connections/{connectionId}'
+          method: delete
+          uri: '{$host}'
+    signatureParameters:
+    - *ref_42
+    - *ref_43
+    - *ref_44
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    language: !<!Languages> 
+      default:
+        name: RemoveConnectionToGroup
+        description: Remove the connection from the group
+        summary: Remove the connection from the group
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: v1
+    parameters:
+    - *ref_2
+    - !<!Parameter> &ref_45
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: hub
+          description: ''
+          serializedName: hub
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_46
+      schema: *ref_1
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: user
+          description: ''
+          serializedName: user
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    requests:
+    - !<!Request> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/ws/api/v1/hubs/{hub}/users/{user}/groups'
+          method: delete
+          uri: '{$host}'
+    signatureParameters:
+    - *ref_45
+    - *ref_46
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    language: !<!Languages> 
+      default:
+        name: RemoveAllUserGroups
+        description: Remove the user from all groups
+        summary: Remove the user from all groups
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: ''
+      description: ''
+  protocol: !<!Protocols> {}
+language: !<!Languages> 
+  default:
+    name: SignalR
+    description: ''
+protocol: !<!Protocols> 
+  http: !<!HttpModel> {}

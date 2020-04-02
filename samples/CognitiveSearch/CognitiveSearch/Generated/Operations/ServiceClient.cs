@@ -33,7 +33,7 @@ namespace CognitiveSearch
         /// <summary> Gets service level statistics for a search service. </summary>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<ServiceStatistics>> GetServiceStatisticsAsync(RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ServiceStatistics>> GetServiceStatisticsAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetServiceStatisticsAsync(requestOptions, cancellationToken).ConfigureAwait(false);
         }
@@ -41,7 +41,7 @@ namespace CognitiveSearch
         /// <summary> Gets service level statistics for a search service. </summary>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ServiceStatistics> GetServiceStatistics(RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual Response<ServiceStatistics> GetServiceStatistics(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return RestClient.GetServiceStatistics(requestOptions, cancellationToken);
         }

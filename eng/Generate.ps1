@@ -110,6 +110,7 @@ foreach ($directory in Get-ChildItem $testSwaggerPath -Directory)
 }
 # Sample configuration
 $projectNames =
+    'SignalR',
     'AppConfiguration',
     'CognitiveServices.TextAnalytics',
     'CognitiveSearch',

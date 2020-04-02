@@ -104,51 +104,38 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LRODelete200() => Test(async (host, pipeline) =>
         {
             var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartDelete202Retry200Async();
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", result.Value.Id);
-            Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+            // Empty response body
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LRODelete200_Sync() => Test((host, pipeline) =>
         {
             var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartDelete202Retry200();
-            var result = WaitForCompletion(operation);
-            Assert.AreEqual("100", result.Value.Id);
-            Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+            // Empty response body
+            Assert.Throws(Is.InstanceOf<JsonException>(), () => WaitForCompletion(operation));
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LRODelete204() => Test(async (host, pipeline) =>
         {
             var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartDelete202NoRetry204Async();
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", result.Value.Id);
-            Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+            // Empty response body
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LRODelete204_Sync() => Test((host, pipeline) =>
         {
             var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartDelete202NoRetry204();
-            var result = WaitForCompletion(operation);
-            Assert.AreEqual("100", result.Value.Id);
-            Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+            // Empty response body
+            Assert.Throws(Is.InstanceOf<JsonException>(), () => WaitForCompletion(operation));
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LRODeleteAsyncNoHeaderInRetry() => TestStatus(async (host, pipeline) =>
         {
             var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartDeleteAsyncNoHeaderInRetryAsync();
@@ -156,7 +143,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LRODeleteAsyncNoHeaderInRetry_Sync() => TestStatus((host, pipeline) =>
         {
             var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartDeleteAsyncNoHeaderInRetry();
@@ -248,51 +234,46 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LRODeleteProvisioningCanceled() => Test(async (host, pipeline) =>
         {
             var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartDeleteProvisioning202Deletingcanceled200Async();
             var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
             Assert.AreEqual("100", result.Value.Id);
             Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+            Assert.AreEqual("Canceled", result.Value.ProvisioningState);
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LRODeleteProvisioningCanceled_Sync() => Test((host, pipeline) =>
         {
             var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartDeleteProvisioning202Deletingcanceled200();
             var result = WaitForCompletion(operation);
             Assert.AreEqual("100", result.Value.Id);
             Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+            Assert.AreEqual("Canceled", result.Value.ProvisioningState);
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LRODeleteProvisioningFailed() => Test(async (host, pipeline) =>
         {
             var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartDeleteProvisioning202DeletingFailed200Async();
             var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
             Assert.AreEqual("100", result.Value.Id);
             Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+            Assert.AreEqual("Failed", result.Value.ProvisioningState);
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LRODeleteProvisioningFailed_Sync() => Test((host, pipeline) =>
         {
             var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartDeleteProvisioning202DeletingFailed200();
             var result = WaitForCompletion(operation);
             Assert.AreEqual("100", result.Value.Id);
             Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+            Assert.AreEqual("Failed", result.Value.ProvisioningState);
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LRODeleteProvisioningSucceededWithBody() => Test(async (host, pipeline) =>
         {
             var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartDeleteProvisioning202Accepted200SucceededAsync();
@@ -303,7 +284,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LRODeleteProvisioningSucceededWithBody_Sync() => Test((host, pipeline) =>
         {
             var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartDeleteProvisioning202Accepted200Succeeded();
@@ -480,27 +460,19 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LROErrorPut201NoProvisioningStatePayload() => Test(async (host, pipeline) =>
         {
             var value = new Product();
             var operation = await new LrosaDsClient(ClientDiagnostics, pipeline, host).StartPutError201NoProvisioningStatePayloadAsync(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", result.Value.Id);
-            Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LROErrorPut201NoProvisioningStatePayload_Sync() => Test((host, pipeline) =>
         {
             var value = new Product();
             var operation = new LrosaDsClient(ClientDiagnostics, pipeline, host).StartPutError201NoProvisioningStatePayload(value);
-            var result = WaitForCompletion(operation);
-            Assert.AreEqual("100", result.Value.Id);
-            Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
         });
 
         [Test]
@@ -670,7 +642,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LRONonRetryPut201Creating400InvalidJson() => Test(async (host, pipeline) =>
         {
             var value = new Product();
@@ -679,7 +650,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LRONonRetryPut201Creating400InvalidJson_Sync() => Test((host, pipeline) =>
         {
             var value = new Product();
@@ -736,7 +706,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LROPostAsyncNoRetrySucceeded() => Test(async (host, pipeline) =>
         {
             var value = new Product();
@@ -748,7 +717,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LROPostAsyncNoRetrySucceeded_Sync() => Test((host, pipeline) =>
         {
             var value = new Product();
@@ -792,7 +760,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LROPostAsyncRetrySucceeded() => Test(async (host, pipeline) =>
         {
             var value = new Product();
@@ -804,7 +771,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LROPostAsyncRetrySucceeded_Sync() => Test((host, pipeline) =>
         {
             var value = new Product();
@@ -836,25 +802,23 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("[OUTDATED TEST] Defaults to Location, which this test is explicitly testing the opposite")]
         public Task LROPostDoubleHeadersFinalAzureHeaderGetDefault() => Test(async (host, pipeline) =>
         {
             var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartPostDoubleHeadersFinalAzureHeaderGetDefaultAsync();
             var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
             Assert.AreEqual("100", result.Value.Id);
             Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+            Assert.AreEqual(null, result.Value.ProvisioningState);
         });
 
         [Test]
-        [Ignore("[OUTDATED TEST] Defaults to Location, which this test is explicitly testing the opposite")]
         public Task LROPostDoubleHeadersFinalAzureHeaderGetDefault_Sync() => Test((host, pipeline) =>
         {
             var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartPostDoubleHeadersFinalAzureHeaderGetDefault();
             var result = WaitForCompletion(operation);
             Assert.AreEqual("100", result.Value.Id);
             Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+            Assert.AreEqual(null, result.Value.ProvisioningState);
         });
 
         [Test]
@@ -1068,27 +1032,19 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LROPutFailed() => Test(async (host, pipeline) =>
         {
             var value = new Product();
             var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartPut201CreatingFailed200Async(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", result.Value.Id);
-            Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Failed", result.Value.ProvisioningState);
+            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
         });
 
         [Test]
-        [Ignore("Handle multiple responses: https://github.com/Azure/autorest.csharp/issues/413")]
         public Task LROPutFailed_Sync() => Test((host, pipeline) =>
         {
             var value = new Product();
             var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartPut201CreatingFailed200(value);
-            var result = WaitForCompletion(operation);
-            Assert.AreEqual("100", result.Value.Id);
-            Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual("Failed", result.Value.ProvisioningState);
+            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
         });
 
         [Test]

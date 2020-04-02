@@ -140,6 +140,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\paging\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\paging --namespace=paging --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
     },
+    "SignalR": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\SignalR\\SignalR\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\SignalR\\SignalR --namespace=SignalR --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
     "TypeSchemaMapping": {
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestProjects\\TypeSchemaMapping\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestProjects\\TypeSchemaMapping --namespace=TypeSchemaMapping --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
