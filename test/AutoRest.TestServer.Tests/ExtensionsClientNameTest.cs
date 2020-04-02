@@ -30,7 +30,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void HeaderTypesAreRenamed()
         {
-            Assert.AreEqual("RenamedOperationHeaders", typeof(ServiceRenamedOperationHeaders).Name);
+            Assert.AreEqual("ServiceRenamedOperationHeaders", typeof(ServiceRenamedOperationHeaders).Name);
         }
     }
 }
