@@ -33,6 +33,7 @@ namespace NameConflicts.Models
         /// <param name="checked"> . </param>
         /// <param name="const"> . </param>
         /// <param name="continue"> . </param>
+        /// <param name="classValue"> . </param>
         /// <param name="decimal"> . </param>
         /// <param name="default"> . </param>
         /// <param name="delegate"> . </param>
@@ -119,7 +120,7 @@ namespace NameConflicts.Models
         /// <param name="where"> . </param>
         /// <param name="while"> . </param>
         /// <param name="yield"> . </param>
-        internal Class(string @abstract, string @add, string @alias, string @as, string @ascending, string @async, string @await, string @base, string @bool, string @break, string @by, string @byte, string @catch, string @char, string @checked, string @const, string @continue, string @decimal, string @default, string @delegate, string @descending, string @do, string @double, string @dynamic, string @else, string @enum, string @event, string @explicit, string @extern, string @false, string @finally, string @fixed, string @float, string @for, string @foreach, string @from, string @get, string @global, string @goto, string group, string @if, string @implicit, string @in, string @int, string @interface, string @internal, string @into, string @is, string @join, string @let, string @lock, string @long, string @nameof, string @namespace, string @new, string nullProperty, string @object, string @on, string @operator, string orderby, string @out, string @override, string @params, string @partial, string @private, string @protected, string @public, string @readonly, string @ref, string @remove, string @return, string @sbyte, string @sealed, string select, string @set, string @short, string @sizeof, string @stackalloc, string @static, string @string, string @struct, string @switch, string @this, string @throw, string @true, string @try, string @typeof, string @uint, string @ulong, string @unchecked, string @unmanaged, string @unsafe, string @ushort, string @using, string value, string @var, string @virtual, string @void, string @volatile, string @when, string @where, string @while, string @yield)
+        internal Class(string @abstract, string @add, string @alias, string @as, string @ascending, string @async, string @await, string @base, string @bool, string @break, string @by, string @byte, string @catch, string @char, string @checked, string @const, string @continue, string classValue, string @decimal, string @default, string @delegate, string @descending, string @do, string @double, string @dynamic, string @else, string @enum, string @event, string @explicit, string @extern, string @false, string @finally, string @fixed, string @float, string @for, string @foreach, string @from, string @get, string @global, string @goto, string group, string @if, string @implicit, string @in, string @int, string @interface, string @internal, string @into, string @is, string @join, string @let, string @lock, string @long, string @nameof, string @namespace, string @new, string nullProperty, string @object, string @on, string @operator, string orderby, string @out, string @override, string @params, string @partial, string @private, string @protected, string @public, string @readonly, string @ref, string @remove, string @return, string @sbyte, string @sealed, string select, string @set, string @short, string @sizeof, string @stackalloc, string @static, string @string, string @struct, string @switch, string @this, string @throw, string @true, string @try, string @typeof, string @uint, string @ulong, string @unchecked, string @unmanaged, string @unsafe, string @ushort, string @using, string value, string @var, string @virtual, string @void, string @volatile, string @when, string @where, string @while, string @yield)
         {
             Abstract = @abstract;
             Add = @add;
@@ -138,6 +139,7 @@ namespace NameConflicts.Models
             Checked = @checked;
             Const = @const;
             Continue = @continue;
+            ClassValue = classValue;
             Decimal = @decimal;
             Default = @default;
             Delegate = @delegate;
@@ -243,6 +245,7 @@ namespace NameConflicts.Models
         public string Checked { get; set; }
         public string Const { get; set; }
         public string Continue { get; set; }
+        public string ClassValue { get; set; }
         public string Decimal { get; set; }
         public string Default { get; set; }
         public string Delegate { get; set; }

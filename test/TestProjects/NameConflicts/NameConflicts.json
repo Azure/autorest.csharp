@@ -85,6 +85,7 @@
         "checked": { "type": "string" },
         "const": { "type": "string" },
         "continue": { "type": "string" },
+        "class": { "type": "string" },
         "decimal": { "type": "string" },
         "default": { "type": "string" },
         "delegate": { "type": "string" },
