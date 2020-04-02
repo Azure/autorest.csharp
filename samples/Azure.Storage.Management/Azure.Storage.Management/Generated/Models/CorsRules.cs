@@ -18,10 +18,13 @@ namespace Azure.Storage.Management.Models
         }
 
         /// <summary> Initializes a new instance of CorsRules. </summary>
-        /// <param name="rules"> The List of CORS rules. You can include up to five CorsRule elements in the request. </param>
-        internal CorsRules(ICollection<CorsRule> rules)
+        /// <param name="corsRulesValue"> The List of CORS rules. You can include up to five CorsRule elements in the request. </param>
+        internal CorsRules(IList<CorsRule> corsRulesValue)
         {
-            Rules = rules;
+            CorsRulesValue = corsRulesValue;
         }
+
+        /// <summary> The List of CORS rules. You can include up to five CorsRule elements in the request. </summary>
+        public IList<CorsRule> CorsRulesValue { get; set; }
     }
 }
