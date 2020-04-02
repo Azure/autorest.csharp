@@ -513,12 +513,18 @@ namespace AutoRest.CSharp.V3.Output.Builders
         {
             var type = _typeFactory.CreateType(requestParameter.Schema, requestParameter.IsNullable());
 
+            var isRequired = requestParameter.Required == true;
+            var defaultValue = ParseConstant(requestParameter);
+            if (!isRequired && defaultValue == null)
+            {
+                defaultValue = Constant.Default(type);
+            }
             return new Parameter(
                 requestParameter.CSharpName(),
                 CreateDescription(requestParameter),
                 TypeFactory.GetInputType(type),
-                ParseConstant(requestParameter),
-                requestParameter.Required == true);
+                defaultValue,
+                isRequired);
         }
 
         private ResponseHeaderGroupType? BuildResponseHeaderModel(Operation operation)

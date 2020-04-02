@@ -46,14 +46,14 @@ namespace extensible_enums_swagger
 
         /// <param name="petParam"> The Pet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Pet>> AddPetAsync(Pet petParam, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Pet>> AddPetAsync(Pet petParam = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.AddPetAsync(petParam, cancellationToken).ConfigureAwait(false);
         }
 
         /// <param name="petParam"> The Pet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Pet> AddPet(Pet petParam, CancellationToken cancellationToken = default)
+        public virtual Response<Pet> AddPet(Pet petParam = null, CancellationToken cancellationToken = default)
         {
             return RestClient.AddPet(petParam, cancellationToken);
         }

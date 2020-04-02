@@ -63,7 +63,7 @@ namespace model_flattening
         /// <summary> Put External Resource as an Array. </summary>
         /// <param name="resourceArray"> External Resource as an Array to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutArrayAsync(IEnumerable<Resource> resourceArray, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutArrayAsync(IEnumerable<Resource> resourceArray = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutArray");
             scope.Start();
@@ -89,7 +89,7 @@ namespace model_flattening
         /// <summary> Put External Resource as an Array. </summary>
         /// <param name="resourceArray"> External Resource as an Array to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutArray(IEnumerable<Resource> resourceArray, CancellationToken cancellationToken = default)
+        public Response PutArray(IEnumerable<Resource> resourceArray = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutArray");
             scope.Start();
@@ -221,7 +221,7 @@ namespace model_flattening
         /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
         /// <param name="resourceArray"> External Resource as an Array to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutWrappedArrayAsync(IEnumerable<WrappedProduct> resourceArray, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutWrappedArrayAsync(IEnumerable<WrappedProduct> resourceArray = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutWrappedArray");
             scope.Start();
@@ -247,7 +247,7 @@ namespace model_flattening
         /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
         /// <param name="resourceArray"> External Resource as an Array to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutWrappedArray(IEnumerable<WrappedProduct> resourceArray, CancellationToken cancellationToken = default)
+        public Response PutWrappedArray(IEnumerable<WrappedProduct> resourceArray = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutWrappedArray");
             scope.Start();
@@ -380,7 +380,7 @@ namespace model_flattening
         /// <summary> Put External Resource as a Dictionary. </summary>
         /// <param name="resourceDictionary"> External Resource as a Dictionary to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutDictionaryAsync(IDictionary<string, FlattenedProduct> resourceDictionary, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutDictionaryAsync(IDictionary<string, FlattenedProduct> resourceDictionary = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutDictionary");
             scope.Start();
@@ -406,7 +406,7 @@ namespace model_flattening
         /// <summary> Put External Resource as a Dictionary. </summary>
         /// <param name="resourceDictionary"> External Resource as a Dictionary to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutDictionary(IDictionary<string, FlattenedProduct> resourceDictionary, CancellationToken cancellationToken = default)
+        public Response PutDictionary(IDictionary<string, FlattenedProduct> resourceDictionary = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutDictionary");
             scope.Start();
@@ -533,7 +533,7 @@ namespace model_flattening
         /// <summary> Put External Resource as a ResourceCollection. </summary>
         /// <param name="resourceComplexObject"> External Resource as a ResourceCollection to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutResourceCollectionAsync(ResourceCollection resourceComplexObject, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutResourceCollectionAsync(ResourceCollection resourceComplexObject = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutResourceCollection");
             scope.Start();
@@ -559,7 +559,7 @@ namespace model_flattening
         /// <summary> Put External Resource as a ResourceCollection. </summary>
         /// <param name="resourceComplexObject"> External Resource as a ResourceCollection to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutResourceCollection(ResourceCollection resourceComplexObject, CancellationToken cancellationToken = default)
+        public Response PutResourceCollection(ResourceCollection resourceComplexObject = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutResourceCollection");
             scope.Start();
@@ -676,7 +676,7 @@ namespace model_flattening
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
         /// <param name="simpleBodyProduct"> Simple body product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SimpleProduct>> PutSimpleProductAsync(SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SimpleProduct>> PutSimpleProductAsync(SimpleProduct simpleBodyProduct = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutSimpleProduct");
             scope.Start();
@@ -707,7 +707,7 @@ namespace model_flattening
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
         /// <param name="simpleBodyProduct"> Simple body product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SimpleProduct> PutSimpleProduct(SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
+        public Response<SimpleProduct> PutSimpleProduct(SimpleProduct simpleBodyProduct = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.PutSimpleProduct");
             scope.Start();
@@ -735,7 +735,7 @@ namespace model_flattening
             }
         }
 
-        internal HttpMessage CreatePostFlattenedSimpleProductRequest(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity)
+        internal HttpMessage CreatePostFlattenedSimpleProductRequest(string productId, string description, string maxProductDisplayName, string capacity, string genericValue, string odataValue)
         {
             var message = pipeline.CreateMessage();
             var request = message.Request;
@@ -756,11 +756,11 @@ namespace model_flattening
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         /// <param name="description"> Description of product. </param>
         /// <param name="maxProductDisplayName"> Display name of product. </param>
+        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
-        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity = "Large", CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(string productId, string description = null, string maxProductDisplayName = null, string capacity = "Large", string genericValue = null, string odataValue = null, CancellationToken cancellationToken = default)
         {
             if (productId == null)
             {
@@ -771,7 +771,7 @@ namespace model_flattening
             scope.Start();
             try
             {
-                using var message = CreatePostFlattenedSimpleProductRequest(productId, description, maxProductDisplayName, genericValue, odataValue, capacity);
+                using var message = CreatePostFlattenedSimpleProductRequest(productId, description, maxProductDisplayName, capacity, genericValue, odataValue);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
@@ -797,11 +797,11 @@ namespace model_flattening
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         /// <param name="description"> Description of product. </param>
         /// <param name="maxProductDisplayName"> Display name of product. </param>
+        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
-        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SimpleProduct> PostFlattenedSimpleProduct(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity = "Large", CancellationToken cancellationToken = default)
+        public Response<SimpleProduct> PostFlattenedSimpleProduct(string productId, string description = null, string maxProductDisplayName = null, string capacity = "Large", string genericValue = null, string odataValue = null, CancellationToken cancellationToken = default)
         {
             if (productId == null)
             {
@@ -812,7 +812,7 @@ namespace model_flattening
             scope.Start();
             try
             {
-                using var message = CreatePostFlattenedSimpleProductRequest(productId, description, maxProductDisplayName, genericValue, odataValue, capacity);
+                using var message = CreatePostFlattenedSimpleProductRequest(productId, description, maxProductDisplayName, capacity, genericValue, odataValue);
                 pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {

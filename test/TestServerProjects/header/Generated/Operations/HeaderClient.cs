@@ -265,7 +265,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ParamStringAsync(string scenario, string value, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ParamStringAsync(string scenario, string value = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.ParamStringAsync(scenario, value, cancellationToken).ConfigureAwait(false);
         }
@@ -274,7 +274,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response ParamString(string scenario, string value, CancellationToken cancellationToken = default)
+        public virtual Response ParamString(string scenario, string value = null, CancellationToken cancellationToken = default)
         {
             return RestClient.ParamString(scenario, value, cancellationToken);
         }
@@ -367,7 +367,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ParamDatetimeRfc1123Async(string scenario, DateTimeOffset? value, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ParamDatetimeRfc1123Async(string scenario, DateTimeOffset? value = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.ParamDatetimeRfc1123Async(scenario, value, cancellationToken).ConfigureAwait(false);
         }
@@ -376,7 +376,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response ParamDatetimeRfc1123(string scenario, DateTimeOffset? value, CancellationToken cancellationToken = default)
+        public virtual Response ParamDatetimeRfc1123(string scenario, DateTimeOffset? value = null, CancellationToken cancellationToken = default)
         {
             return RestClient.ParamDatetimeRfc1123(scenario, value, cancellationToken);
         }
@@ -469,7 +469,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ParamEnumAsync(string scenario, GreyscaleColors? value, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ParamEnumAsync(string scenario, GreyscaleColors? value = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.ParamEnumAsync(scenario, value, cancellationToken).ConfigureAwait(false);
         }
@@ -478,7 +478,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response ParamEnum(string scenario, GreyscaleColors? value, CancellationToken cancellationToken = default)
+        public virtual Response ParamEnum(string scenario, GreyscaleColors? value = null, CancellationToken cancellationToken = default)
         {
             return RestClient.ParamEnum(scenario, value, cancellationToken);
         }

@@ -139,7 +139,7 @@ namespace paging
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="pagingGetMultiplePagesOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual AsyncPageable<Product> GetMultiplePagesAsync(string clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<Product> GetMultiplePagesAsync(string clientRequestId = null, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
@@ -158,7 +158,7 @@ namespace paging
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="pagingGetMultiplePagesOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Pageable<Product> GetMultiplePages(string clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, CancellationToken cancellationToken = default)
+        public virtual Pageable<Product> GetMultiplePages(string clientRequestId = null, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null, CancellationToken cancellationToken = default)
         {
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
@@ -177,7 +177,7 @@ namespace paging
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="pagingGetOdataMultiplePagesOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual AsyncPageable<Product> GetOdataMultiplePagesAsync(string clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<Product> GetOdataMultiplePagesAsync(string clientRequestId = null, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
@@ -196,7 +196,7 @@ namespace paging
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="pagingGetOdataMultiplePagesOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Pageable<Product> GetOdataMultiplePages(string clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, CancellationToken cancellationToken = default)
+        public virtual Pageable<Product> GetOdataMultiplePages(string clientRequestId = null, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = null, CancellationToken cancellationToken = default)
         {
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
@@ -212,10 +212,10 @@ namespace paging
         }
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="pagingGetMultiplePagesWithOffsetOptions"> Parameter group. </param>
+        /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual AsyncPageable<Product> GetMultiplePagesWithOffsetAsync(string clientRequestId, PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<Product> GetMultiplePagesWithOffsetAsync(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, string clientRequestId = null, CancellationToken cancellationToken = default)
         {
             if (pagingGetMultiplePagesWithOffsetOptions == null)
             {
@@ -224,22 +224,22 @@ namespace paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetMultiplePagesWithOffsetAsync(clientRequestId, pagingGetMultiplePagesWithOffsetOptions, cancellationToken).ConfigureAwait(false);
+                var response = await RestClient.GetMultiplePagesWithOffsetAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetMultiplePagesWithOffsetNextPageAsync(nextLink, clientRequestId, pagingGetMultiplePagesWithOffsetOptions, cancellationToken).ConfigureAwait(false);
+                var response = await RestClient.GetMultiplePagesWithOffsetNextPageAsync(nextLink, pagingGetMultiplePagesWithOffsetOptions, clientRequestId, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="pagingGetMultiplePagesWithOffsetOptions"> Parameter group. </param>
+        /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Pageable<Product> GetMultiplePagesWithOffset(string clientRequestId, PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, CancellationToken cancellationToken = default)
+        public virtual Pageable<Product> GetMultiplePagesWithOffset(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, string clientRequestId = null, CancellationToken cancellationToken = default)
         {
             if (pagingGetMultiplePagesWithOffsetOptions == null)
             {
@@ -248,12 +248,12 @@ namespace paging
 
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetMultiplePagesWithOffset(clientRequestId, pagingGetMultiplePagesWithOffsetOptions, cancellationToken);
+                var response = RestClient.GetMultiplePagesWithOffset(pagingGetMultiplePagesWithOffsetOptions, clientRequestId, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetMultiplePagesWithOffsetNextPage(nextLink, clientRequestId, pagingGetMultiplePagesWithOffsetOptions, cancellationToken);
+                var response = RestClient.GetMultiplePagesWithOffsetNextPage(nextLink, pagingGetMultiplePagesWithOffsetOptions, clientRequestId, cancellationToken);
                 return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
@@ -684,7 +684,7 @@ namespace paging
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="pagingGetMultiplePagesLroOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Operation<ProductResult>> StartGetMultiplePagesLROAsync(string clientRequestId, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<Operation<ProductResult>> StartGetMultiplePagesLROAsync(string clientRequestId = null, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null, CancellationToken cancellationToken = default)
         {
             var originalResponse = await RestClient.GetMultiplePagesLROAsync(clientRequestId, pagingGetMultiplePagesLroOptions, cancellationToken).ConfigureAwait(false);
             return CreateGetMultiplePagesLRO(originalResponse, () => RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions));
@@ -694,7 +694,7 @@ namespace paging
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="pagingGetMultiplePagesLroOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Operation<ProductResult> StartGetMultiplePagesLRO(string clientRequestId, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions, CancellationToken cancellationToken = default)
+        public virtual Operation<ProductResult> StartGetMultiplePagesLRO(string clientRequestId = null, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null, CancellationToken cancellationToken = default)
         {
             var originalResponse = RestClient.GetMultiplePagesLRO(clientRequestId, pagingGetMultiplePagesLroOptions, cancellationToken);
             return CreateGetMultiplePagesLRO(originalResponse, () => RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions));

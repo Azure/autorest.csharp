@@ -1108,7 +1108,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ParamStringAsync(string scenario, string value, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ParamStringAsync(string scenario, string value = null, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -1140,7 +1140,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ParamString(string scenario, string value, CancellationToken cancellationToken = default)
+        public Response ParamString(string scenario, string value = null, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -1576,7 +1576,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ParamDatetimeRfc1123Async(string scenario, DateTimeOffset? value, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ParamDatetimeRfc1123Async(string scenario, DateTimeOffset? value = null, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -1608,7 +1608,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ParamDatetimeRfc1123(string scenario, DateTimeOffset? value, CancellationToken cancellationToken = default)
+        public Response ParamDatetimeRfc1123(string scenario, DateTimeOffset? value = null, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -2052,7 +2052,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ParamEnumAsync(string scenario, GreyscaleColors? value, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ParamEnumAsync(string scenario, GreyscaleColors? value = null, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -2084,7 +2084,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ParamEnum(string scenario, GreyscaleColors? value, CancellationToken cancellationToken = default)
+        public Response ParamEnum(string scenario, GreyscaleColors? value = null, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {

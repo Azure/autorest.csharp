@@ -118,7 +118,7 @@ namespace AutoRest.TestServer.Tests
                 productId: "123",
                 description: "product description",
                 maxProductDisplayName: "max name",
-                null,
+                genericValue: null,
                 capacity: "Large",
                 odataValue: "http://foo");
             Assert.AreEqual("123", result.Value.ProductId);

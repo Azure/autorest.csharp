@@ -34,7 +34,7 @@ namespace CognitiveSearch
         /// <summary> Queries the number of documents in the index. </summary>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<long>> CountAsync(RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<long>> CountAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.CountAsync(requestOptions, cancellationToken).ConfigureAwait(false);
         }
@@ -42,7 +42,7 @@ namespace CognitiveSearch
         /// <summary> Queries the number of documents in the index. </summary>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<long> Count(RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual Response<long> Count(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return RestClient.Count(requestOptions, cancellationToken);
         }
@@ -52,7 +52,7 @@ namespace CognitiveSearch
         /// <param name="searchOptions"> Parameter group. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SearchDocumentsResult>> SearchGetAsync(string searchText, SearchOptions searchOptions, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SearchDocumentsResult>> SearchGetAsync(string searchText = null, SearchOptions searchOptions = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.SearchGetAsync(searchText, searchOptions, requestOptions, cancellationToken).ConfigureAwait(false);
         }
@@ -62,7 +62,7 @@ namespace CognitiveSearch
         /// <param name="searchOptions"> Parameter group. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SearchDocumentsResult> SearchGet(string searchText, SearchOptions searchOptions, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual Response<SearchDocumentsResult> SearchGet(string searchText = null, SearchOptions searchOptions = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return RestClient.SearchGet(searchText, searchOptions, requestOptions, cancellationToken);
         }
@@ -71,7 +71,7 @@ namespace CognitiveSearch
         /// <param name="searchRequest"> The definition of the Search request. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SearchDocumentsResult>> SearchPostAsync(SearchRequest searchRequest, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SearchDocumentsResult>> SearchPostAsync(SearchRequest searchRequest, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.SearchPostAsync(searchRequest, requestOptions, cancellationToken).ConfigureAwait(false);
         }
@@ -80,7 +80,7 @@ namespace CognitiveSearch
         /// <param name="searchRequest"> The definition of the Search request. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SearchDocumentsResult> SearchPost(SearchRequest searchRequest, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual Response<SearchDocumentsResult> SearchPost(SearchRequest searchRequest, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return RestClient.SearchPost(searchRequest, requestOptions, cancellationToken);
         }
@@ -90,7 +90,7 @@ namespace CognitiveSearch
         /// <param name="selectedFields"> List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<object>> GetAsync(string key, IEnumerable<string> selectedFields, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<object>> GetAsync(string key, IEnumerable<string> selectedFields = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetAsync(key, selectedFields, requestOptions, cancellationToken).ConfigureAwait(false);
         }
@@ -100,7 +100,7 @@ namespace CognitiveSearch
         /// <param name="selectedFields"> List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<object> Get(string key, IEnumerable<string> selectedFields, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual Response<object> Get(string key, IEnumerable<string> selectedFields = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return RestClient.Get(key, selectedFields, requestOptions, cancellationToken);
         }
@@ -111,7 +111,7 @@ namespace CognitiveSearch
         /// <param name="suggestOptions"> Parameter group. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SuggestDocumentsResult>> SuggestGetAsync(string searchText, string suggesterName, SuggestOptions suggestOptions, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SuggestDocumentsResult>> SuggestGetAsync(string searchText, string suggesterName, SuggestOptions suggestOptions = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.SuggestGetAsync(searchText, suggesterName, suggestOptions, requestOptions, cancellationToken).ConfigureAwait(false);
         }
@@ -122,7 +122,7 @@ namespace CognitiveSearch
         /// <param name="suggestOptions"> Parameter group. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SuggestDocumentsResult> SuggestGet(string searchText, string suggesterName, SuggestOptions suggestOptions, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual Response<SuggestDocumentsResult> SuggestGet(string searchText, string suggesterName, SuggestOptions suggestOptions = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return RestClient.SuggestGet(searchText, suggesterName, suggestOptions, requestOptions, cancellationToken);
         }
@@ -131,7 +131,7 @@ namespace CognitiveSearch
         /// <param name="suggestRequest"> The Suggest request. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SuggestDocumentsResult>> SuggestPostAsync(SuggestRequest suggestRequest, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SuggestDocumentsResult>> SuggestPostAsync(SuggestRequest suggestRequest, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.SuggestPostAsync(suggestRequest, requestOptions, cancellationToken).ConfigureAwait(false);
         }
@@ -140,7 +140,7 @@ namespace CognitiveSearch
         /// <param name="suggestRequest"> The Suggest request. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SuggestDocumentsResult> SuggestPost(SuggestRequest suggestRequest, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual Response<SuggestDocumentsResult> SuggestPost(SuggestRequest suggestRequest, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return RestClient.SuggestPost(suggestRequest, requestOptions, cancellationToken);
         }
@@ -149,7 +149,7 @@ namespace CognitiveSearch
         /// <param name="batch"> The batch of index actions. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IndexDocumentsResult>> IndexAsync(IndexBatch batch, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IndexDocumentsResult>> IndexAsync(IndexBatch batch, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.IndexAsync(batch, requestOptions, cancellationToken).ConfigureAwait(false);
         }
@@ -158,7 +158,7 @@ namespace CognitiveSearch
         /// <param name="batch"> The batch of index actions. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IndexDocumentsResult> Index(IndexBatch batch, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual Response<IndexDocumentsResult> Index(IndexBatch batch, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return RestClient.Index(batch, requestOptions, cancellationToken);
         }
@@ -169,7 +169,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="autocompleteOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<AutocompleteResult>> AutocompleteGetAsync(string searchText, string suggesterName, RequestOptions requestOptions, AutocompleteOptions autocompleteOptions, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AutocompleteResult>> AutocompleteGetAsync(string searchText, string suggesterName, RequestOptions requestOptions = null, AutocompleteOptions autocompleteOptions = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.AutocompleteGetAsync(searchText, suggesterName, requestOptions, autocompleteOptions, cancellationToken).ConfigureAwait(false);
         }
@@ -180,7 +180,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="autocompleteOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<AutocompleteResult> AutocompleteGet(string searchText, string suggesterName, RequestOptions requestOptions, AutocompleteOptions autocompleteOptions, CancellationToken cancellationToken = default)
+        public virtual Response<AutocompleteResult> AutocompleteGet(string searchText, string suggesterName, RequestOptions requestOptions = null, AutocompleteOptions autocompleteOptions = null, CancellationToken cancellationToken = default)
         {
             return RestClient.AutocompleteGet(searchText, suggesterName, requestOptions, autocompleteOptions, cancellationToken);
         }
@@ -189,7 +189,7 @@ namespace CognitiveSearch
         /// <param name="autocompleteRequest"> The definition of the Autocomplete request. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<AutocompleteResult>> AutocompletePostAsync(AutocompleteRequest autocompleteRequest, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AutocompleteResult>> AutocompletePostAsync(AutocompleteRequest autocompleteRequest, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.AutocompletePostAsync(autocompleteRequest, requestOptions, cancellationToken).ConfigureAwait(false);
         }
@@ -198,7 +198,7 @@ namespace CognitiveSearch
         /// <param name="autocompleteRequest"> The definition of the Autocomplete request. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<AutocompleteResult> AutocompletePost(AutocompleteRequest autocompleteRequest, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual Response<AutocompleteResult> AutocompletePost(AutocompleteRequest autocompleteRequest, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return RestClient.AutocompletePost(autocompleteRequest, requestOptions, cancellationToken);
         }

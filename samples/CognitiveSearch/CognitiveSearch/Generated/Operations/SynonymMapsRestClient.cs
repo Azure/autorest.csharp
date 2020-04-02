@@ -79,7 +79,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SynonymMap>> CreateOrUpdateAsync(string synonymMapName, SynonymMap synonymMap, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SynonymMap>> CreateOrUpdateAsync(string synonymMapName, SynonymMap synonymMap, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (synonymMapName == null)
             {
@@ -123,7 +123,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SynonymMap> CreateOrUpdate(string synonymMapName, SynonymMap synonymMap, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
+        public Response<SynonymMap> CreateOrUpdate(string synonymMapName, SynonymMap synonymMap, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (synonymMapName == null)
             {
@@ -193,7 +193,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteAsync(string synonymMapName, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> DeleteAsync(string synonymMapName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (synonymMapName == null)
             {
@@ -227,7 +227,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete(string synonymMapName, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
+        public Response Delete(string synonymMapName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (synonymMapName == null)
             {
@@ -279,7 +279,7 @@ namespace CognitiveSearch
         /// <param name="synonymMapName"> The name of the synonym map to retrieve. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SynonymMap>> GetAsync(string synonymMapName, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SynonymMap>> GetAsync(string synonymMapName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (synonymMapName == null)
             {
@@ -316,7 +316,7 @@ namespace CognitiveSearch
         /// <param name="synonymMapName"> The name of the synonym map to retrieve. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SynonymMap> Get(string synonymMapName, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public Response<SynonymMap> Get(string synonymMapName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (synonymMapName == null)
             {
@@ -374,7 +374,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the synonym maps to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ListSynonymMapsResult>> ListAsync(string select, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ListSynonymMapsResult>> ListAsync(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("SynonymMapsClient.List");
             scope.Start();
@@ -406,7 +406,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the synonym maps to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ListSynonymMapsResult> List(string select, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public Response<ListSynonymMapsResult> List(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("SynonymMapsClient.List");
             scope.Start();
@@ -459,7 +459,7 @@ namespace CognitiveSearch
         /// <param name="synonymMap"> The definition of the synonym map to create. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SynonymMap>> CreateAsync(SynonymMap synonymMap, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SynonymMap>> CreateAsync(SynonymMap synonymMap, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (synonymMap == null)
             {
@@ -496,7 +496,7 @@ namespace CognitiveSearch
         /// <param name="synonymMap"> The definition of the synonym map to create. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SynonymMap> Create(SynonymMap synonymMap, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public Response<SynonymMap> Create(SynonymMap synonymMap, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (synonymMap == null)
             {

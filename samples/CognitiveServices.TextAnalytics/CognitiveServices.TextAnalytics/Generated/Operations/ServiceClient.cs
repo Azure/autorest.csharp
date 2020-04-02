@@ -31,129 +31,129 @@ namespace CognitiveServices.TextAnalytics
         }
 
         /// <summary> The API returns a list of general named entities in a given document. For the list of supported entity types, check &lt;a href=&quot;https://aka.ms/taner&quot;&gt;Supported Entity Types in Text Analytics API&lt;/a&gt;. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </summary>
+        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<EntitiesResult>> EntitiesRecognitionGeneralAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<EntitiesResult>> EntitiesRecognitionGeneralAsync(MultiLanguageBatchInput input, string modelVersion = null, bool? showStats = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.EntitiesRecognitionGeneralAsync(modelVersion, showStats, input, cancellationToken).ConfigureAwait(false);
+            return await RestClient.EntitiesRecognitionGeneralAsync(input, modelVersion, showStats, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> The API returns a list of general named entities in a given document. For the list of supported entity types, check &lt;a href=&quot;https://aka.ms/taner&quot;&gt;Supported Entity Types in Text Analytics API&lt;/a&gt;. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </summary>
+        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<EntitiesResult> EntitiesRecognitionGeneral(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
+        public virtual Response<EntitiesResult> EntitiesRecognitionGeneral(MultiLanguageBatchInput input, string modelVersion = null, bool? showStats = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.EntitiesRecognitionGeneral(modelVersion, showStats, input, cancellationToken);
+            return RestClient.EntitiesRecognitionGeneral(input, modelVersion, showStats, cancellationToken);
         }
 
         /// <summary>
         /// The API returns a list of entities with personal information (\&quot;SSN\&quot;, \&quot;Bank Account\&quot; etc) in the document. For the list of supported entity types, check &lt;a href=&quot;https://aka.ms/tanerpii&quot;&gt;Supported Entity Types in Text Analytics API&lt;/a&gt;. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages.
         /// .
         /// </summary>
+        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<EntitiesResult>> EntitiesRecognitionPiiAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<EntitiesResult>> EntitiesRecognitionPiiAsync(MultiLanguageBatchInput input, string modelVersion = null, bool? showStats = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.EntitiesRecognitionPiiAsync(modelVersion, showStats, input, cancellationToken).ConfigureAwait(false);
+            return await RestClient.EntitiesRecognitionPiiAsync(input, modelVersion, showStats, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
         /// The API returns a list of entities with personal information (\&quot;SSN\&quot;, \&quot;Bank Account\&quot; etc) in the document. For the list of supported entity types, check &lt;a href=&quot;https://aka.ms/tanerpii&quot;&gt;Supported Entity Types in Text Analytics API&lt;/a&gt;. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages.
         /// .
         /// </summary>
+        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<EntitiesResult> EntitiesRecognitionPii(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
+        public virtual Response<EntitiesResult> EntitiesRecognitionPii(MultiLanguageBatchInput input, string modelVersion = null, bool? showStats = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.EntitiesRecognitionPii(modelVersion, showStats, input, cancellationToken);
+            return RestClient.EntitiesRecognitionPii(input, modelVersion, showStats, cancellationToken);
         }
 
         /// <summary> The API returns a list of recognized entities with links to a well-known knowledge base. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </summary>
+        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<EntityLinkingResult>> EntitiesLinkingAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<EntityLinkingResult>> EntitiesLinkingAsync(MultiLanguageBatchInput input, string modelVersion = null, bool? showStats = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.EntitiesLinkingAsync(modelVersion, showStats, input, cancellationToken).ConfigureAwait(false);
+            return await RestClient.EntitiesLinkingAsync(input, modelVersion, showStats, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> The API returns a list of recognized entities with links to a well-known knowledge base. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </summary>
+        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<EntityLinkingResult> EntitiesLinking(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
+        public virtual Response<EntityLinkingResult> EntitiesLinking(MultiLanguageBatchInput input, string modelVersion = null, bool? showStats = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.EntitiesLinking(modelVersion, showStats, input, cancellationToken);
+            return RestClient.EntitiesLinking(input, modelVersion, showStats, cancellationToken);
         }
 
         /// <summary> The API returns a list of strings denoting the key phrases in the input text. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </summary>
+        /// <param name="input"> Collection of documents to analyze. Documents can now contain a language field to indicate the text language. </param>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="input"> Collection of documents to analyze. Documents can now contain a language field to indicate the text language. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<KeyPhraseResult>> KeyPhrasesAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<KeyPhraseResult>> KeyPhrasesAsync(MultiLanguageBatchInput input, string modelVersion = null, bool? showStats = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.KeyPhrasesAsync(modelVersion, showStats, input, cancellationToken).ConfigureAwait(false);
+            return await RestClient.KeyPhrasesAsync(input, modelVersion, showStats, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> The API returns a list of strings denoting the key phrases in the input text. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </summary>
-        /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
-        /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="input"> Collection of documents to analyze. Documents can now contain a language field to indicate the text language. </param>
+        /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
+        /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<KeyPhraseResult> KeyPhrases(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
+        public virtual Response<KeyPhraseResult> KeyPhrases(MultiLanguageBatchInput input, string modelVersion = null, bool? showStats = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.KeyPhrases(modelVersion, showStats, input, cancellationToken);
+            return RestClient.KeyPhrases(input, modelVersion, showStats, cancellationToken);
         }
 
         /// <summary> The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </summary>
+        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<LanguageResult>> LanguagesAsync(string modelVersion, bool? showStats, LanguageBatchInput input, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<LanguageResult>> LanguagesAsync(LanguageBatchInput input, string modelVersion = null, bool? showStats = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.LanguagesAsync(modelVersion, showStats, input, cancellationToken).ConfigureAwait(false);
+            return await RestClient.LanguagesAsync(input, modelVersion, showStats, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </summary>
+        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<LanguageResult> Languages(string modelVersion, bool? showStats, LanguageBatchInput input, CancellationToken cancellationToken = default)
+        public virtual Response<LanguageResult> Languages(LanguageBatchInput input, string modelVersion = null, bool? showStats = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.Languages(modelVersion, showStats, input, cancellationToken);
+            return RestClient.Languages(input, modelVersion, showStats, cancellationToken);
         }
 
         /// <summary> The API returns a sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral) for the document and each sentence within it. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </summary>
+        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SentimentResponse>> SentimentAsync(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SentimentResponse>> SentimentAsync(MultiLanguageBatchInput input, string modelVersion = null, bool? showStats = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.SentimentAsync(modelVersion, showStats, input, cancellationToken).ConfigureAwait(false);
+            return await RestClient.SentimentAsync(input, modelVersion, showStats, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> The API returns a sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral) for the document and each sentence within it. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </summary>
+        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
         /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="input"> Collection of documents to analyze. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SentimentResponse> Sentiment(string modelVersion, bool? showStats, MultiLanguageBatchInput input, CancellationToken cancellationToken = default)
+        public virtual Response<SentimentResponse> Sentiment(MultiLanguageBatchInput input, string modelVersion = null, bool? showStats = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.Sentiment(modelVersion, showStats, input, cancellationToken);
+            return RestClient.Sentiment(input, modelVersion, showStats, cancellationToken);
         }
     }
 }

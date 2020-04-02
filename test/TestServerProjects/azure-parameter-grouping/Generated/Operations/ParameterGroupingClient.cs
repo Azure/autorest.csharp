@@ -49,7 +49,7 @@ namespace azure_parameter_grouping
         /// <summary> Post a bunch of optional parameters grouped. </summary>
         /// <param name="parameterGroupingPostOptionalParameters"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PostOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PostOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.PostOptionalAsync(parameterGroupingPostOptionalParameters, cancellationToken).ConfigureAwait(false);
         }
@@ -57,7 +57,7 @@ namespace azure_parameter_grouping
         /// <summary> Post a bunch of optional parameters grouped. </summary>
         /// <param name="parameterGroupingPostOptionalParameters"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PostOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, CancellationToken cancellationToken = default)
+        public virtual Response PostOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = null, CancellationToken cancellationToken = default)
         {
             return RestClient.PostOptional(parameterGroupingPostOptionalParameters, cancellationToken);
         }
@@ -66,7 +66,7 @@ namespace azure_parameter_grouping
         /// <param name="firstParameterGroup"> Parameter group. </param>
         /// <param name="parameterGroupingPostMultiParamGroupsSecondParamGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PostMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PostMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup = null, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.PostMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup, cancellationToken).ConfigureAwait(false);
         }
@@ -75,7 +75,7 @@ namespace azure_parameter_grouping
         /// <param name="firstParameterGroup"> Parameter group. </param>
         /// <param name="parameterGroupingPostMultiParamGroupsSecondParamGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PostMultiParamGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup, CancellationToken cancellationToken = default)
+        public virtual Response PostMultiParamGroups(FirstParameterGroup firstParameterGroup = null, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = null, CancellationToken cancellationToken = default)
         {
             return RestClient.PostMultiParamGroups(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup, cancellationToken);
         }
@@ -83,7 +83,7 @@ namespace azure_parameter_grouping
         /// <summary> Post parameters with a shared parameter group object. </summary>
         /// <param name="firstParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PostSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PostSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.PostSharedParameterGroupObjectAsync(firstParameterGroup, cancellationToken).ConfigureAwait(false);
         }
@@ -91,7 +91,7 @@ namespace azure_parameter_grouping
         /// <summary> Post parameters with a shared parameter group object. </summary>
         /// <param name="firstParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PostSharedParameterGroupObject(FirstParameterGroup firstParameterGroup, CancellationToken cancellationToken = default)
+        public virtual Response PostSharedParameterGroupObject(FirstParameterGroup firstParameterGroup = null, CancellationToken cancellationToken = default)
         {
             return RestClient.PostSharedParameterGroupObject(firstParameterGroup, cancellationToken);
         }

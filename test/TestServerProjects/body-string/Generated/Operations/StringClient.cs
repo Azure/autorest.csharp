@@ -47,7 +47,7 @@ namespace body_string
         /// <summary> Set string value null. </summary>
         /// <param name="stringBody"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutNullAsync(string stringBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutNullAsync(string stringBody = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutNullAsync(stringBody, cancellationToken).ConfigureAwait(false);
         }
@@ -55,7 +55,7 @@ namespace body_string
         /// <summary> Set string value null. </summary>
         /// <param name="stringBody"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutNull(string stringBody, CancellationToken cancellationToken = default)
+        public virtual Response PutNull(string stringBody = null, CancellationToken cancellationToken = default)
         {
             return RestClient.PutNull(stringBody, cancellationToken);
         }
