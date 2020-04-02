@@ -165,7 +165,7 @@ namespace SignalR
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="reason"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> CloseConnectionAsync(string hub, string connectionId, string reason, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> CloseConnectionAsync(string hub, string connectionId, string reason = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.CloseConnectionAsync(hub, connectionId, reason, cancellationToken).ConfigureAwait(false);
         }
@@ -175,7 +175,7 @@ namespace SignalR
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="reason"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response CloseConnection(string hub, string connectionId, string reason, CancellationToken cancellationToken = default)
+        public virtual Response CloseConnection(string hub, string connectionId, string reason = null, CancellationToken cancellationToken = default)
         {
             return RestClient.CloseConnection(hub, connectionId, reason, cancellationToken);
         }
@@ -246,7 +246,7 @@ namespace SignalR
         /// <param name="user"> The String to use. </param>
         /// <param name="ttl"> Specifies the seconds that the user exists in the group. If not set, the user lives in the group forever. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> AddUserToGroupAsync(string hub, string group, string user, int? ttl, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> AddUserToGroupAsync(string hub, string group, string user, int? ttl = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.AddUserToGroupAsync(hub, group, user, ttl, cancellationToken).ConfigureAwait(false);
         }
@@ -257,7 +257,7 @@ namespace SignalR
         /// <param name="user"> The String to use. </param>
         /// <param name="ttl"> Specifies the seconds that the user exists in the group. If not set, the user lives in the group forever. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response AddUserToGroup(string hub, string group, string user, int? ttl, CancellationToken cancellationToken = default)
+        public virtual Response AddUserToGroup(string hub, string group, string user, int? ttl = null, CancellationToken cancellationToken = default)
         {
             return RestClient.AddUserToGroup(hub, group, user, ttl, cancellationToken);
         }
