@@ -40,7 +40,7 @@ namespace Azure.Storage.Management
         /// <param name="metadata"> A name-value pair to associate with the share as metadata. </param>
         /// <param name="shareQuota"> The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<FileShare>> CreateAsync(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata, int? shareQuota, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FileShare>> CreateAsync(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata = null, int? shareQuota = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.CreateAsync(resourceGroupName, accountName, shareName, metadata, shareQuota, cancellationToken).ConfigureAwait(false);
         }
@@ -52,7 +52,7 @@ namespace Azure.Storage.Management
         /// <param name="metadata"> A name-value pair to associate with the share as metadata. </param>
         /// <param name="shareQuota"> The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<FileShare> Create(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata, int? shareQuota, CancellationToken cancellationToken = default)
+        public virtual Response<FileShare> Create(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata = null, int? shareQuota = null, CancellationToken cancellationToken = default)
         {
             return RestClient.Create(resourceGroupName, accountName, shareName, metadata, shareQuota, cancellationToken);
         }
@@ -64,7 +64,7 @@ namespace Azure.Storage.Management
         /// <param name="metadata"> A name-value pair to associate with the share as metadata. </param>
         /// <param name="shareQuota"> The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<FileShare>> UpdateAsync(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata, int? shareQuota, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FileShare>> UpdateAsync(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata = null, int? shareQuota = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.UpdateAsync(resourceGroupName, accountName, shareName, metadata, shareQuota, cancellationToken).ConfigureAwait(false);
         }
@@ -76,7 +76,7 @@ namespace Azure.Storage.Management
         /// <param name="metadata"> A name-value pair to associate with the share as metadata. </param>
         /// <param name="shareQuota"> The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<FileShare> Update(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata, int? shareQuota, CancellationToken cancellationToken = default)
+        public virtual Response<FileShare> Update(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata = null, int? shareQuota = null, CancellationToken cancellationToken = default)
         {
             return RestClient.Update(resourceGroupName, accountName, shareName, metadata, shareQuota, cancellationToken);
         }
@@ -127,7 +127,7 @@ namespace Azure.Storage.Management
         /// <param name="maxpagesize"> Optional. Specified maximum number of shares that can be included in the list. </param>
         /// <param name="filter"> Optional. When specified, only share names starting with the filter will be listed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual AsyncPageable<FileShareItem> ListAsync(string resourceGroupName, string accountName, string maxpagesize, string filter, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<FileShareItem> ListAsync(string resourceGroupName, string accountName, string maxpagesize = null, string filter = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -157,7 +157,7 @@ namespace Azure.Storage.Management
         /// <param name="maxpagesize"> Optional. Specified maximum number of shares that can be included in the list. </param>
         /// <param name="filter"> Optional. When specified, only share names starting with the filter will be listed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Pageable<FileShareItem> List(string resourceGroupName, string accountName, string maxpagesize, string filter, CancellationToken cancellationToken = default)
+        public virtual Pageable<FileShareItem> List(string resourceGroupName, string accountName, string maxpagesize = null, string filter = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {

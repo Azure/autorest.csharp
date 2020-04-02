@@ -146,7 +146,7 @@ namespace media_types
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<string>> AnalyzeBodyAsync(SourcePath input, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<string>> AnalyzeBodyAsync(SourcePath input = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeBody");
             scope.Start();
@@ -177,7 +177,7 @@ namespace media_types
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<string> AnalyzeBody(SourcePath input, CancellationToken cancellationToken = default)
+        public Response<string> AnalyzeBody(SourcePath input = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.AnalyzeBody");
             scope.Start();

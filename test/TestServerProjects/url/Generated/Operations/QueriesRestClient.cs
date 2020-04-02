@@ -180,7 +180,7 @@ namespace url
         /// <summary> Get null Boolean value on query (query string should be absent). </summary>
         /// <param name="boolQuery"> null boolean value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetBooleanNullAsync(bool? boolQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> GetBooleanNullAsync(bool? boolQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
             scope.Start();
@@ -206,7 +206,7 @@ namespace url
         /// <summary> Get null Boolean value on query (query string should be absent). </summary>
         /// <param name="boolQuery"> null boolean value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response GetBooleanNull(bool? boolQuery, CancellationToken cancellationToken = default)
+        public Response GetBooleanNull(bool? boolQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
             scope.Start();
@@ -374,7 +374,7 @@ namespace url
         /// <summary> Get null integer value (no query parameter). </summary>
         /// <param name="intQuery"> null integer value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetIntNullAsync(int? intQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> GetIntNullAsync(int? intQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.GetIntNull");
             scope.Start();
@@ -400,7 +400,7 @@ namespace url
         /// <summary> Get null integer value (no query parameter). </summary>
         /// <param name="intQuery"> null integer value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response GetIntNull(int? intQuery, CancellationToken cancellationToken = default)
+        public Response GetIntNull(int? intQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.GetIntNull");
             scope.Start();
@@ -568,7 +568,7 @@ namespace url
         /// <summary> Get &apos;null 64 bit integer value (no query param in uri). </summary>
         /// <param name="longQuery"> null 64 bit integer value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetLongNullAsync(long? longQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> GetLongNullAsync(long? longQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.GetLongNull");
             scope.Start();
@@ -594,7 +594,7 @@ namespace url
         /// <summary> Get &apos;null 64 bit integer value (no query param in uri). </summary>
         /// <param name="longQuery"> null 64 bit integer value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response GetLongNull(long? longQuery, CancellationToken cancellationToken = default)
+        public Response GetLongNull(long? longQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.GetLongNull");
             scope.Start();
@@ -762,7 +762,7 @@ namespace url
         /// <summary> Get null numeric value (no query parameter). </summary>
         /// <param name="floatQuery"> null numeric value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> FloatNullAsync(float? floatQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> FloatNullAsync(float? floatQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.FloatNull");
             scope.Start();
@@ -788,7 +788,7 @@ namespace url
         /// <summary> Get null numeric value (no query parameter). </summary>
         /// <param name="floatQuery"> null numeric value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response FloatNull(float? floatQuery, CancellationToken cancellationToken = default)
+        public Response FloatNull(float? floatQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.FloatNull");
             scope.Start();
@@ -956,7 +956,7 @@ namespace url
         /// <summary> Get null numeric value (no query parameter). </summary>
         /// <param name="doubleQuery"> null numeric value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DoubleNullAsync(double? doubleQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> DoubleNullAsync(double? doubleQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.DoubleNull");
             scope.Start();
@@ -982,7 +982,7 @@ namespace url
         /// <summary> Get null numeric value (no query parameter). </summary>
         /// <param name="doubleQuery"> null numeric value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response DoubleNull(double? doubleQuery, CancellationToken cancellationToken = default)
+        public Response DoubleNull(double? doubleQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.DoubleNull");
             scope.Start();
@@ -1213,7 +1213,7 @@ namespace url
         /// <summary> Get null (no query parameter in url). </summary>
         /// <param name="stringQuery"> null string value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> StringNullAsync(string stringQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> StringNullAsync(string stringQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.StringNull");
             scope.Start();
@@ -1239,7 +1239,7 @@ namespace url
         /// <summary> Get null (no query parameter in url). </summary>
         /// <param name="stringQuery"> null string value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response StringNull(string stringQuery, CancellationToken cancellationToken = default)
+        public Response StringNull(string stringQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.StringNull");
             scope.Start();
@@ -1281,7 +1281,7 @@ namespace url
         /// <summary> Get using uri with query parameter &apos;green color&apos;. </summary>
         /// <param name="enumQuery"> &apos;green color&apos; enum value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> EnumValidAsync(UriColor? enumQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> EnumValidAsync(UriColor? enumQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.EnumValid");
             scope.Start();
@@ -1307,7 +1307,7 @@ namespace url
         /// <summary> Get using uri with query parameter &apos;green color&apos;. </summary>
         /// <param name="enumQuery"> &apos;green color&apos; enum value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response EnumValid(UriColor? enumQuery, CancellationToken cancellationToken = default)
+        public Response EnumValid(UriColor? enumQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.EnumValid");
             scope.Start();
@@ -1349,7 +1349,7 @@ namespace url
         /// <summary> Get null (no query parameter in url). </summary>
         /// <param name="enumQuery"> null string value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> EnumNullAsync(UriColor? enumQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> EnumNullAsync(UriColor? enumQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.EnumNull");
             scope.Start();
@@ -1375,7 +1375,7 @@ namespace url
         /// <summary> Get null (no query parameter in url). </summary>
         /// <param name="enumQuery"> null string value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response EnumNull(UriColor? enumQuery, CancellationToken cancellationToken = default)
+        public Response EnumNull(UriColor? enumQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.EnumNull");
             scope.Start();
@@ -1417,7 +1417,7 @@ namespace url
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
         /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ByteMultiByteAsync(byte[] byteQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ByteMultiByteAsync(byte[] byteQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
             scope.Start();
@@ -1443,7 +1443,7 @@ namespace url
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
         /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ByteMultiByte(byte[] byteQuery, CancellationToken cancellationToken = default)
+        public Response ByteMultiByte(byte[] byteQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
             scope.Start();
@@ -1548,7 +1548,7 @@ namespace url
         /// <summary> Get null as byte array (no query parameters in uri). </summary>
         /// <param name="byteQuery"> null as byte array (no query parameters in uri). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ByteNullAsync(byte[] byteQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ByteNullAsync(byte[] byteQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ByteNull");
             scope.Start();
@@ -1574,7 +1574,7 @@ namespace url
         /// <summary> Get null as byte array (no query parameters in uri). </summary>
         /// <param name="byteQuery"> null as byte array (no query parameters in uri). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ByteNull(byte[] byteQuery, CancellationToken cancellationToken = default)
+        public Response ByteNull(byte[] byteQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ByteNull");
             scope.Start();
@@ -1679,7 +1679,7 @@ namespace url
         /// <summary> Get null as date - this should result in no query parameters in uri. </summary>
         /// <param name="dateQuery"> null as date (no query parameters in uri). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DateNullAsync(DateTimeOffset? dateQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> DateNullAsync(DateTimeOffset? dateQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.DateNull");
             scope.Start();
@@ -1705,7 +1705,7 @@ namespace url
         /// <summary> Get null as date - this should result in no query parameters in uri. </summary>
         /// <param name="dateQuery"> null as date (no query parameters in uri). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response DateNull(DateTimeOffset? dateQuery, CancellationToken cancellationToken = default)
+        public Response DateNull(DateTimeOffset? dateQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.DateNull");
             scope.Start();
@@ -1810,7 +1810,7 @@ namespace url
         /// <summary> Get null as date-time, should result in no query parameters in uri. </summary>
         /// <param name="dateTimeQuery"> null as date-time (no query parameters). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DateTimeNullAsync(DateTimeOffset? dateTimeQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> DateTimeNullAsync(DateTimeOffset? dateTimeQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
             scope.Start();
@@ -1836,7 +1836,7 @@ namespace url
         /// <summary> Get null as date-time, should result in no query parameters in uri. </summary>
         /// <param name="dateTimeQuery"> null as date-time (no query parameters). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response DateTimeNull(DateTimeOffset? dateTimeQuery, CancellationToken cancellationToken = default)
+        public Response DateTimeNull(DateTimeOffset? dateTimeQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
             scope.Start();
@@ -1878,7 +1878,7 @@ namespace url
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayStringCsvValidAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringCsvValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
             scope.Start();
@@ -1904,7 +1904,7 @@ namespace url
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ArrayStringCsvValid(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
+        public Response ArrayStringCsvValid(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
             scope.Start();
@@ -1946,7 +1946,7 @@ namespace url
         /// <summary> Get a null array of string using the csv-array format. </summary>
         /// <param name="arrayQuery"> a null array of string using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayStringCsvNullAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringCsvNullAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
             scope.Start();
@@ -1972,7 +1972,7 @@ namespace url
         /// <summary> Get a null array of string using the csv-array format. </summary>
         /// <param name="arrayQuery"> a null array of string using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ArrayStringCsvNull(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
+        public Response ArrayStringCsvNull(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
             scope.Start();
@@ -2014,7 +2014,7 @@ namespace url
         /// <summary> Get an empty array [] of string using the csv-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayStringCsvEmptyAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringCsvEmptyAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
             scope.Start();
@@ -2040,7 +2040,7 @@ namespace url
         /// <summary> Get an empty array [] of string using the csv-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ArrayStringCsvEmpty(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
+        public Response ArrayStringCsvEmpty(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
             scope.Start();
@@ -2082,7 +2082,7 @@ namespace url
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayStringSsvValidAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringSsvValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
             scope.Start();
@@ -2108,7 +2108,7 @@ namespace url
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ArrayStringSsvValid(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
+        public Response ArrayStringSsvValid(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
             scope.Start();
@@ -2150,7 +2150,7 @@ namespace url
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayStringTsvValidAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringTsvValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
             scope.Start();
@@ -2176,7 +2176,7 @@ namespace url
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ArrayStringTsvValid(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
+        public Response ArrayStringTsvValid(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
             scope.Start();
@@ -2218,7 +2218,7 @@ namespace url
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayStringPipesValidAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> ArrayStringPipesValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
             scope.Start();
@@ -2244,7 +2244,7 @@ namespace url
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ArrayStringPipesValid(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
+        public Response ArrayStringPipesValid(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
             scope.Start();

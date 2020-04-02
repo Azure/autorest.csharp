@@ -36,7 +36,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, DataSource dataSource, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, DataSource dataSource, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.CreateOrUpdateAsync(dataSourceName, dataSource, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
         }
@@ -47,7 +47,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DataSource> CreateOrUpdate(string dataSourceName, DataSource dataSource, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
+        public virtual Response<DataSource> CreateOrUpdate(string dataSourceName, DataSource dataSource, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             return RestClient.CreateOrUpdate(dataSourceName, dataSource, requestOptions, accessCondition, cancellationToken);
         }
@@ -57,7 +57,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DeleteAsync(string dataSourceName, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DeleteAsync(string dataSourceName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.DeleteAsync(dataSourceName, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
         }
@@ -67,7 +67,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Delete(string dataSourceName, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
+        public virtual Response Delete(string dataSourceName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             return RestClient.Delete(dataSourceName, requestOptions, accessCondition, cancellationToken);
         }
@@ -76,7 +76,7 @@ namespace CognitiveSearch
         /// <param name="dataSourceName"> The name of the datasource to retrieve. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DataSource>> GetAsync(string dataSourceName, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DataSource>> GetAsync(string dataSourceName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetAsync(dataSourceName, requestOptions, cancellationToken).ConfigureAwait(false);
         }
@@ -85,7 +85,7 @@ namespace CognitiveSearch
         /// <param name="dataSourceName"> The name of the datasource to retrieve. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DataSource> Get(string dataSourceName, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual Response<DataSource> Get(string dataSourceName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return RestClient.Get(dataSourceName, requestOptions, cancellationToken);
         }
@@ -94,7 +94,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<ListDataSourcesResult>> ListAsync(string select, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ListDataSourcesResult>> ListAsync(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.ListAsync(select, requestOptions, cancellationToken).ConfigureAwait(false);
         }
@@ -103,7 +103,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ListDataSourcesResult> List(string select, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual Response<ListDataSourcesResult> List(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return RestClient.List(select, requestOptions, cancellationToken);
         }
@@ -112,7 +112,7 @@ namespace CognitiveSearch
         /// <param name="dataSource"> The definition of the datasource to create. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DataSource>> CreateAsync(DataSource dataSource, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DataSource>> CreateAsync(DataSource dataSource, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.CreateAsync(dataSource, requestOptions, cancellationToken).ConfigureAwait(false);
         }
@@ -121,7 +121,7 @@ namespace CognitiveSearch
         /// <param name="dataSource"> The definition of the datasource to create. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DataSource> Create(DataSource dataSource, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual Response<DataSource> Create(DataSource dataSource, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return RestClient.Create(dataSource, requestOptions, cancellationToken);
         }

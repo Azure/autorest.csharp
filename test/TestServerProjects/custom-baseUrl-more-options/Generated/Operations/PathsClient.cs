@@ -35,7 +35,7 @@ namespace custom_baseUrl_more_options
         /// <param name="keyName"> The key name with value &apos;key1&apos;. </param>
         /// <param name="keyVersion"> The key version. Default value &apos;v1&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetEmptyAsync(string vault, string secret, string keyName, string keyVersion, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetEmptyAsync(string vault, string secret, string keyName, string keyVersion = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetEmptyAsync(vault, secret, keyName, keyVersion, cancellationToken).ConfigureAwait(false);
         }
@@ -46,7 +46,7 @@ namespace custom_baseUrl_more_options
         /// <param name="keyName"> The key name with value &apos;key1&apos;. </param>
         /// <param name="keyVersion"> The key version. Default value &apos;v1&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetEmpty(string vault, string secret, string keyName, string keyVersion, CancellationToken cancellationToken = default)
+        public virtual Response GetEmpty(string vault, string secret, string keyName, string keyVersion = null, CancellationToken cancellationToken = default)
         {
             return RestClient.GetEmpty(vault, secret, keyName, keyVersion, cancellationToken);
         }

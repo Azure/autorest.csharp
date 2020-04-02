@@ -53,7 +53,7 @@ namespace validation
         /// <param name="id"> Required int multiple of 10 from 100 to 1000. </param>
         /// <param name="body"> The Product to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Product>> ValidationOfBodyAsync(string resourceGroupName, int id, Product body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Product>> ValidationOfBodyAsync(string resourceGroupName, int id, Product body = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.ValidationOfBodyAsync(resourceGroupName, id, body, cancellationToken).ConfigureAwait(false);
         }
@@ -63,7 +63,7 @@ namespace validation
         /// <param name="id"> Required int multiple of 10 from 100 to 1000. </param>
         /// <param name="body"> The Product to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Product> ValidationOfBody(string resourceGroupName, int id, Product body, CancellationToken cancellationToken = default)
+        public virtual Response<Product> ValidationOfBody(string resourceGroupName, int id, Product body = null, CancellationToken cancellationToken = default)
         {
             return RestClient.ValidationOfBody(resourceGroupName, id, body, cancellationToken);
         }
@@ -82,14 +82,14 @@ namespace validation
 
         /// <param name="body"> The Product to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Product>> PostWithConstantInBodyAsync(Product body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Product>> PostWithConstantInBodyAsync(Product body = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.PostWithConstantInBodyAsync(body, cancellationToken).ConfigureAwait(false);
         }
 
         /// <param name="body"> The Product to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Product> PostWithConstantInBody(Product body, CancellationToken cancellationToken = default)
+        public virtual Response<Product> PostWithConstantInBody(Product body = null, CancellationToken cancellationToken = default)
         {
             return RestClient.PostWithConstantInBody(body, cancellationToken);
         }

@@ -376,7 +376,7 @@ namespace Azure.Storage.Management
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<StorageAccount>> GetPropertiesAsync(string resourceGroupName, string accountName, StorageAccountExpand? expand, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<StorageAccount>> GetPropertiesAsync(string resourceGroupName, string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -418,7 +418,7 @@ namespace Azure.Storage.Management
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<StorageAccount> GetProperties(string resourceGroupName, string accountName, StorageAccountExpand? expand, CancellationToken cancellationToken = default)
+        public Response<StorageAccount> GetProperties(string resourceGroupName, string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {

@@ -34,7 +34,7 @@ namespace CognitiveSearch
         /// <param name="index"> The definition of the index to create. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Index>> CreateAsync(Index index, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Index>> CreateAsync(Index index, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.CreateAsync(index, requestOptions, cancellationToken).ConfigureAwait(false);
         }
@@ -43,7 +43,7 @@ namespace CognitiveSearch
         /// <param name="index"> The definition of the index to create. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Index> Create(Index index, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual Response<Index> Create(Index index, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return RestClient.Create(index, requestOptions, cancellationToken);
         }
@@ -52,7 +52,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<ListIndexesResult>> ListAsync(string select, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ListIndexesResult>> ListAsync(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.ListAsync(select, requestOptions, cancellationToken).ConfigureAwait(false);
         }
@@ -61,33 +61,33 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ListIndexesResult> List(string select, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual Response<ListIndexesResult> List(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return RestClient.List(select, requestOptions, cancellationToken);
         }
 
         /// <summary> Creates a new search index or updates an index if it already exists. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
-        /// <param name="allowIndexDowntime"> Allows new analyzers, tokenizers, token filters, or char filters to be added to an index by taking the index offline for at least a few seconds. This temporarily causes indexing and query requests to fail. Performance and write availability of the index can be impaired for several minutes after the index is updated, or longer for very large indexes. </param>
         /// <param name="index"> The definition of the index to create or update. </param>
+        /// <param name="allowIndexDowntime"> Allows new analyzers, tokenizers, token filters, or char filters to be added to an index by taking the index offline for at least a few seconds. This temporarily causes indexing and query requests to fail. Performance and write availability of the index can be impaired for several minutes after the index is updated, or longer for very large indexes. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Index>> CreateOrUpdateAsync(string indexName, bool? allowIndexDowntime, Index index, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Index>> CreateOrUpdateAsync(string indexName, Index index, bool? allowIndexDowntime = null, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.CreateOrUpdateAsync(indexName, allowIndexDowntime, index, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+            return await RestClient.CreateOrUpdateAsync(indexName, index, allowIndexDowntime, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Creates a new search index or updates an index if it already exists. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
-        /// <param name="allowIndexDowntime"> Allows new analyzers, tokenizers, token filters, or char filters to be added to an index by taking the index offline for at least a few seconds. This temporarily causes indexing and query requests to fail. Performance and write availability of the index can be impaired for several minutes after the index is updated, or longer for very large indexes. </param>
         /// <param name="index"> The definition of the index to create or update. </param>
+        /// <param name="allowIndexDowntime"> Allows new analyzers, tokenizers, token filters, or char filters to be added to an index by taking the index offline for at least a few seconds. This temporarily causes indexing and query requests to fail. Performance and write availability of the index can be impaired for several minutes after the index is updated, or longer for very large indexes. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Index> CreateOrUpdate(string indexName, bool? allowIndexDowntime, Index index, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
+        public virtual Response<Index> CreateOrUpdate(string indexName, Index index, bool? allowIndexDowntime = null, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.CreateOrUpdate(indexName, allowIndexDowntime, index, requestOptions, accessCondition, cancellationToken);
+            return RestClient.CreateOrUpdate(indexName, index, allowIndexDowntime, requestOptions, accessCondition, cancellationToken);
         }
 
         /// <summary> Deletes a search index and all the documents it contains. </summary>
@@ -95,7 +95,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DeleteAsync(string indexName, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DeleteAsync(string indexName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.DeleteAsync(indexName, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
         }
@@ -105,7 +105,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Delete(string indexName, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
+        public virtual Response Delete(string indexName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             return RestClient.Delete(indexName, requestOptions, accessCondition, cancellationToken);
         }
@@ -114,7 +114,7 @@ namespace CognitiveSearch
         /// <param name="indexName"> The name of the index to retrieve. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Index>> GetAsync(string indexName, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Index>> GetAsync(string indexName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetAsync(indexName, requestOptions, cancellationToken).ConfigureAwait(false);
         }
@@ -123,7 +123,7 @@ namespace CognitiveSearch
         /// <param name="indexName"> The name of the index to retrieve. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Index> Get(string indexName, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual Response<Index> Get(string indexName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return RestClient.Get(indexName, requestOptions, cancellationToken);
         }
@@ -132,7 +132,7 @@ namespace CognitiveSearch
         /// <param name="indexName"> The name of the index for which to retrieve statistics. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<GetIndexStatisticsResult>> GetStatisticsAsync(string indexName, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetIndexStatisticsResult>> GetStatisticsAsync(string indexName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetStatisticsAsync(indexName, requestOptions, cancellationToken).ConfigureAwait(false);
         }
@@ -141,7 +141,7 @@ namespace CognitiveSearch
         /// <param name="indexName"> The name of the index for which to retrieve statistics. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<GetIndexStatisticsResult> GetStatistics(string indexName, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual Response<GetIndexStatisticsResult> GetStatistics(string indexName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return RestClient.GetStatistics(indexName, requestOptions, cancellationToken);
         }
@@ -151,7 +151,7 @@ namespace CognitiveSearch
         /// <param name="request"> The text and analyzer or analysis components to test. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<AnalyzeResult>> AnalyzeAsync(string indexName, AnalyzeRequest request, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AnalyzeResult>> AnalyzeAsync(string indexName, AnalyzeRequest request, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.AnalyzeAsync(indexName, request, requestOptions, cancellationToken).ConfigureAwait(false);
         }
@@ -161,7 +161,7 @@ namespace CognitiveSearch
         /// <param name="request"> The text and analyzer or analysis components to test. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<AnalyzeResult> Analyze(string indexName, AnalyzeRequest request, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public virtual Response<AnalyzeResult> Analyze(string indexName, AnalyzeRequest request, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return RestClient.Analyze(indexName, request, requestOptions, cancellationToken);
         }

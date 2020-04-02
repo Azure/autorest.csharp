@@ -34,7 +34,7 @@ namespace model_flattening
         /// <summary> Put External Resource as an Array. </summary>
         /// <param name="resourceArray"> External Resource as an Array to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutArrayAsync(IEnumerable<Resource> resourceArray, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutArrayAsync(IEnumerable<Resource> resourceArray = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutArrayAsync(resourceArray, cancellationToken).ConfigureAwait(false);
         }
@@ -42,7 +42,7 @@ namespace model_flattening
         /// <summary> Put External Resource as an Array. </summary>
         /// <param name="resourceArray"> External Resource as an Array to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutArray(IEnumerable<Resource> resourceArray, CancellationToken cancellationToken = default)
+        public virtual Response PutArray(IEnumerable<Resource> resourceArray = null, CancellationToken cancellationToken = default)
         {
             return RestClient.PutArray(resourceArray, cancellationToken);
         }
@@ -64,7 +64,7 @@ namespace model_flattening
         /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
         /// <param name="resourceArray"> External Resource as an Array to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutWrappedArrayAsync(IEnumerable<WrappedProduct> resourceArray, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutWrappedArrayAsync(IEnumerable<WrappedProduct> resourceArray = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutWrappedArrayAsync(resourceArray, cancellationToken).ConfigureAwait(false);
         }
@@ -72,7 +72,7 @@ namespace model_flattening
         /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
         /// <param name="resourceArray"> External Resource as an Array to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutWrappedArray(IEnumerable<WrappedProduct> resourceArray, CancellationToken cancellationToken = default)
+        public virtual Response PutWrappedArray(IEnumerable<WrappedProduct> resourceArray = null, CancellationToken cancellationToken = default)
         {
             return RestClient.PutWrappedArray(resourceArray, cancellationToken);
         }
@@ -94,7 +94,7 @@ namespace model_flattening
         /// <summary> Put External Resource as a Dictionary. </summary>
         /// <param name="resourceDictionary"> External Resource as a Dictionary to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutDictionaryAsync(IDictionary<string, FlattenedProduct> resourceDictionary, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutDictionaryAsync(IDictionary<string, FlattenedProduct> resourceDictionary = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutDictionaryAsync(resourceDictionary, cancellationToken).ConfigureAwait(false);
         }
@@ -102,7 +102,7 @@ namespace model_flattening
         /// <summary> Put External Resource as a Dictionary. </summary>
         /// <param name="resourceDictionary"> External Resource as a Dictionary to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutDictionary(IDictionary<string, FlattenedProduct> resourceDictionary, CancellationToken cancellationToken = default)
+        public virtual Response PutDictionary(IDictionary<string, FlattenedProduct> resourceDictionary = null, CancellationToken cancellationToken = default)
         {
             return RestClient.PutDictionary(resourceDictionary, cancellationToken);
         }
@@ -124,7 +124,7 @@ namespace model_flattening
         /// <summary> Put External Resource as a ResourceCollection. </summary>
         /// <param name="resourceComplexObject"> External Resource as a ResourceCollection to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutResourceCollectionAsync(ResourceCollection resourceComplexObject, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutResourceCollectionAsync(ResourceCollection resourceComplexObject = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutResourceCollectionAsync(resourceComplexObject, cancellationToken).ConfigureAwait(false);
         }
@@ -132,7 +132,7 @@ namespace model_flattening
         /// <summary> Put External Resource as a ResourceCollection. </summary>
         /// <param name="resourceComplexObject"> External Resource as a ResourceCollection to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutResourceCollection(ResourceCollection resourceComplexObject, CancellationToken cancellationToken = default)
+        public virtual Response PutResourceCollection(ResourceCollection resourceComplexObject = null, CancellationToken cancellationToken = default)
         {
             return RestClient.PutResourceCollection(resourceComplexObject, cancellationToken);
         }
@@ -154,7 +154,7 @@ namespace model_flattening
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
         /// <param name="simpleBodyProduct"> Simple body product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SimpleProduct>> PutSimpleProductAsync(SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SimpleProduct>> PutSimpleProductAsync(SimpleProduct simpleBodyProduct = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.PutSimpleProductAsync(simpleBodyProduct, cancellationToken).ConfigureAwait(false);
         }
@@ -162,7 +162,7 @@ namespace model_flattening
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
         /// <param name="simpleBodyProduct"> Simple body product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SimpleProduct> PutSimpleProduct(SimpleProduct simpleBodyProduct, CancellationToken cancellationToken = default)
+        public virtual Response<SimpleProduct> PutSimpleProduct(SimpleProduct simpleBodyProduct = null, CancellationToken cancellationToken = default)
         {
             return RestClient.PutSimpleProduct(simpleBodyProduct, cancellationToken);
         }
@@ -171,26 +171,26 @@ namespace model_flattening
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         /// <param name="description"> Description of product. </param>
         /// <param name="maxProductDisplayName"> Display name of product. </param>
+        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
-        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity = "Large", CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(string productId, string description = null, string maxProductDisplayName = null, string capacity = "Large", string genericValue = null, string odataValue = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PostFlattenedSimpleProductAsync(productId, description, maxProductDisplayName, genericValue, odataValue, capacity, cancellationToken).ConfigureAwait(false);
+            return await RestClient.PostFlattenedSimpleProductAsync(productId, description, maxProductDisplayName, capacity, genericValue, odataValue, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Put Flattened Simple Product with client flattening true on the parameter. </summary>
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         /// <param name="description"> Description of product. </param>
         /// <param name="maxProductDisplayName"> Display name of product. </param>
+        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
-        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SimpleProduct> PostFlattenedSimpleProduct(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue, string capacity = "Large", CancellationToken cancellationToken = default)
+        public virtual Response<SimpleProduct> PostFlattenedSimpleProduct(string productId, string description = null, string maxProductDisplayName = null, string capacity = "Large", string genericValue = null, string odataValue = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.PostFlattenedSimpleProduct(productId, description, maxProductDisplayName, genericValue, odataValue, capacity, cancellationToken);
+            return RestClient.PostFlattenedSimpleProduct(productId, description, maxProductDisplayName, capacity, genericValue, odataValue, cancellationToken);
         }
 
         /// <summary> Put Simple Product with client flattening true on the model. </summary>

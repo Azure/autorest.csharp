@@ -71,7 +71,7 @@ namespace CognitiveSearch
         /// <summary> Queries the number of documents in the index. </summary>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<long>> CountAsync(RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<long>> CountAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DocumentsClient.Count");
             scope.Start();
@@ -102,7 +102,7 @@ namespace CognitiveSearch
         /// <summary> Queries the number of documents in the index. </summary>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<long> Count(RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public Response<long> Count(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DocumentsClient.Count");
             scope.Start();
@@ -223,7 +223,7 @@ namespace CognitiveSearch
         /// <param name="searchOptions"> Parameter group. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SearchDocumentsResult>> SearchGetAsync(string searchText, SearchOptions searchOptions, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SearchDocumentsResult>> SearchGetAsync(string searchText = null, SearchOptions searchOptions = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DocumentsClient.SearchGet");
             scope.Start();
@@ -256,7 +256,7 @@ namespace CognitiveSearch
         /// <param name="searchOptions"> Parameter group. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SearchDocumentsResult> SearchGet(string searchText, SearchOptions searchOptions, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public Response<SearchDocumentsResult> SearchGet(string searchText = null, SearchOptions searchOptions = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DocumentsClient.SearchGet");
             scope.Start();
@@ -312,7 +312,7 @@ namespace CognitiveSearch
         /// <param name="searchRequest"> The definition of the Search request. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SearchDocumentsResult>> SearchPostAsync(SearchRequest searchRequest, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SearchDocumentsResult>> SearchPostAsync(SearchRequest searchRequest, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (searchRequest == null)
             {
@@ -349,7 +349,7 @@ namespace CognitiveSearch
         /// <param name="searchRequest"> The definition of the Search request. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SearchDocumentsResult> SearchPost(SearchRequest searchRequest, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public Response<SearchDocumentsResult> SearchPost(SearchRequest searchRequest, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (searchRequest == null)
             {
@@ -413,7 +413,7 @@ namespace CognitiveSearch
         /// <param name="selectedFields"> List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<object>> GetAsync(string key, IEnumerable<string> selectedFields, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<object>> GetAsync(string key, IEnumerable<string> selectedFields = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -451,7 +451,7 @@ namespace CognitiveSearch
         /// <param name="selectedFields"> List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<object> Get(string key, IEnumerable<string> selectedFields, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public Response<object> Get(string key, IEnumerable<string> selectedFields = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -548,7 +548,7 @@ namespace CognitiveSearch
         /// <param name="suggestOptions"> Parameter group. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SuggestDocumentsResult>> SuggestGetAsync(string searchText, string suggesterName, SuggestOptions suggestOptions, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SuggestDocumentsResult>> SuggestGetAsync(string searchText, string suggesterName, SuggestOptions suggestOptions = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (searchText == null)
             {
@@ -591,7 +591,7 @@ namespace CognitiveSearch
         /// <param name="suggestOptions"> Parameter group. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SuggestDocumentsResult> SuggestGet(string searchText, string suggesterName, SuggestOptions suggestOptions, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public Response<SuggestDocumentsResult> SuggestGet(string searchText, string suggesterName, SuggestOptions suggestOptions = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (searchText == null)
             {
@@ -656,7 +656,7 @@ namespace CognitiveSearch
         /// <param name="suggestRequest"> The Suggest request. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SuggestDocumentsResult>> SuggestPostAsync(SuggestRequest suggestRequest, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SuggestDocumentsResult>> SuggestPostAsync(SuggestRequest suggestRequest, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (suggestRequest == null)
             {
@@ -693,7 +693,7 @@ namespace CognitiveSearch
         /// <param name="suggestRequest"> The Suggest request. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SuggestDocumentsResult> SuggestPost(SuggestRequest suggestRequest, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public Response<SuggestDocumentsResult> SuggestPost(SuggestRequest suggestRequest, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (suggestRequest == null)
             {
@@ -754,7 +754,7 @@ namespace CognitiveSearch
         /// <param name="batch"> The batch of index actions. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IndexDocumentsResult>> IndexAsync(IndexBatch batch, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<IndexDocumentsResult>> IndexAsync(IndexBatch batch, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (batch == null)
             {
@@ -792,7 +792,7 @@ namespace CognitiveSearch
         /// <param name="batch"> The batch of index actions. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IndexDocumentsResult> Index(IndexBatch batch, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public Response<IndexDocumentsResult> Index(IndexBatch batch, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (batch == null)
             {
@@ -886,7 +886,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="autocompleteOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<AutocompleteResult>> AutocompleteGetAsync(string searchText, string suggesterName, RequestOptions requestOptions, AutocompleteOptions autocompleteOptions, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<AutocompleteResult>> AutocompleteGetAsync(string searchText, string suggesterName, RequestOptions requestOptions = null, AutocompleteOptions autocompleteOptions = null, CancellationToken cancellationToken = default)
         {
             if (searchText == null)
             {
@@ -929,7 +929,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="autocompleteOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<AutocompleteResult> AutocompleteGet(string searchText, string suggesterName, RequestOptions requestOptions, AutocompleteOptions autocompleteOptions, CancellationToken cancellationToken = default)
+        public Response<AutocompleteResult> AutocompleteGet(string searchText, string suggesterName, RequestOptions requestOptions = null, AutocompleteOptions autocompleteOptions = null, CancellationToken cancellationToken = default)
         {
             if (searchText == null)
             {
@@ -994,7 +994,7 @@ namespace CognitiveSearch
         /// <param name="autocompleteRequest"> The definition of the Autocomplete request. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<AutocompleteResult>> AutocompletePostAsync(AutocompleteRequest autocompleteRequest, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<AutocompleteResult>> AutocompletePostAsync(AutocompleteRequest autocompleteRequest, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (autocompleteRequest == null)
             {
@@ -1031,7 +1031,7 @@ namespace CognitiveSearch
         /// <param name="autocompleteRequest"> The definition of the Autocomplete request. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<AutocompleteResult> AutocompletePost(AutocompleteRequest autocompleteRequest, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public Response<AutocompleteResult> AutocompletePost(AutocompleteRequest autocompleteRequest, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (autocompleteRequest == null)
             {
