@@ -77,7 +77,7 @@ $testNames =
     'lro',
     'media_types',
     'model-flattening',
-    'non-string-enum',
+    #'non-string-enum',
     'paging',
     #'required-optional',
     'url',
