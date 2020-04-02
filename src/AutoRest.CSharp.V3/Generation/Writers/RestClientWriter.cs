@@ -166,11 +166,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             writer.Line($");");
                         }
                         break;
-                    case TextRequestBody binaryBody:
-                        using (WriteValueNullCheck(writer, binaryBody.Value))
+                    case TextRequestBody textBody:
+                        using (WriteValueNullCheck(writer, textBody.Value))
                         {
                             writer.Append($"{request}.Content = new {typeof(StringRequestContent)}(");
-                            WriteConstantOrParameter(writer, binaryBody.Value);
+                            WriteConstantOrParameter(writer, textBody.Value);
                             writer.Line($");");
                         }
                         break;
