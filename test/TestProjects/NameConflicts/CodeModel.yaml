@@ -11,7 +11,7 @@ schemas: !<!Schemas>
         name: String
         description: simple string
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_105
+  - !<!StringSchema> &ref_106
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1051,8 +1051,33 @@ schemas: !<!Schemas>
         name: ClassYield
         description: ''
     protocol: !<!Protocols> {}
+  choices:
+  - !<!ChoiceSchema> &ref_104
+    choices:
+    - !<!ChoiceValue> 
+      value: System
+      language:
+        default:
+          name: System
+          description: ''
+    - !<!ChoiceValue> 
+      value: System.Text.Json
+      language:
+        default:
+          name: SystemTextJson
+          description: ''
+    type: choice
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    choiceType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: SystemEnum
+        description: ''
+    protocol: !<!Protocols> {}
   constants:
-  - !<!ConstantSchema> &ref_106
+  - !<!ConstantSchema> &ref_107
     type: constant
     value: !<!ConstantValue> 
       value: application/json
@@ -1063,7 +1088,7 @@ schemas: !<!Schemas>
         description: Content Type 'application/json'
     protocol: !<!Protocols> {}
   objects:
-  - !<!ObjectSchema> &ref_107
+  - !<!ObjectSchema> &ref_108
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -1893,6 +1918,14 @@ schemas: !<!Schemas>
           name: yield
           description: ''
       protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_104
+      serializedName: System
+      language: !<!Languages> 
+        default:
+          name: system
+          description: ''
+      protocol: !<!Protocols> {}
     serializationFormats:
     - json
     usage:
@@ -1905,7 +1938,7 @@ schemas: !<!Schemas>
         namespace: ''
     protocol: !<!Protocols> {}
 globalParameters:
-- !<!Parameter> &ref_104
+- !<!Parameter> &ref_105
   schema: *ref_0
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
@@ -1929,9 +1962,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_104
-    - !<!Parameter> &ref_109
-      schema: *ref_105
+    - *ref_105
+    - !<!Parameter> &ref_110
+      schema: *ref_106
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -1942,8 +1975,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: query
-    - !<!Parameter> &ref_110
-      schema: *ref_105
+    - !<!Parameter> &ref_111
+      schema: *ref_106
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -1954,8 +1987,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: query
-    - !<!Parameter> &ref_111
-      schema: *ref_105
+    - !<!Parameter> &ref_112
+      schema: *ref_106
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -1966,8 +1999,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: query
-    - !<!Parameter> &ref_112
-      schema: *ref_105
+    - !<!Parameter> &ref_113
+      schema: *ref_106
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -1982,7 +2015,7 @@ operationGroups:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_106
+        schema: *ref_107
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -1993,8 +2026,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_108
-        schema: *ref_107
+      - !<!Parameter> &ref_109
+        schema: *ref_108
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -2006,7 +2039,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_108
+      - *ref_109
       language: !<!Languages> 
         default:
           name: ''
@@ -2020,13 +2053,13 @@ operationGroups:
           - application/json
           uri: '{$host}'
     signatureParameters:
-    - *ref_109
     - *ref_110
     - *ref_111
     - *ref_112
+    - *ref_113
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_107
+      schema: *ref_108
       language: !<!Languages> 
         default:
           name: ''
