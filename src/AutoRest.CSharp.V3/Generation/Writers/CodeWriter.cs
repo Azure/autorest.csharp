@@ -190,6 +190,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 UseNamespace(type.Namespace);
 
+                AppendRaw("global::");
                 AppendRaw(type.Namespace);
                 AppendRaw(".");
                 AppendRaw(type.Name);

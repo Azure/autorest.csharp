@@ -75,19 +75,17 @@ namespace body_string
         }
 
         /// <summary> Set string value empty &apos;&apos;. </summary>
-        /// <param name="stringBody"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutEmptyAsync(string stringBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutEmptyAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutEmptyAsync(stringBody, cancellationToken).ConfigureAwait(false);
+            return await RestClient.PutEmptyAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Set string value empty &apos;&apos;. </summary>
-        /// <param name="stringBody"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutEmpty(string stringBody, CancellationToken cancellationToken = default)
+        public virtual Response PutEmpty(CancellationToken cancellationToken = default)
         {
-            return RestClient.PutEmpty(stringBody, cancellationToken);
+            return RestClient.PutEmpty(cancellationToken);
         }
 
         /// <summary> Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
