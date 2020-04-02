@@ -282,6 +282,10 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 {
                     body = new BinaryRequestBody(bodyParameterValue);
                 }
+                else if (httpRequestWithBody.KnownMediaType == KnownMediaType.Text)
+                {
+                    body = new TextRequestBody(bodyParameterValue);
+                }
                 else
                 {
                     var serialization = _serializationBuilder.Build(
