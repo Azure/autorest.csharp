@@ -15,7 +15,7 @@
 ## Configuration
 ```yaml
 # autorest-core version
-version: 3.0.6262
+version: 3.0.6268
 shared-source-folder: $(this-folder)/src/assets
 save-code-model: true
 use: $(this-folder)/artifacts/bin/AutoRest.CSharp.V3/Debug/netcoreapp3.0/
