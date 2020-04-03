@@ -1,53 +1,19 @@
-#Requires -Version 6.0
-param($name, [switch]$continue, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$noProjectBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true)
+#Requires -Version 7.0
+param($name, [switch]$continue, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true, [String[]]$Exclude = "SmokeTests", $parallel = 5)
+
+Import-Module "$PSScriptRoot\Generation.psm1" -DisableNameChecking -Force;
 
 $ErrorActionPreference = 'Stop'
 
-function Invoke($command)
-{
-    Write-Host "> $command"
-    pushd $repoRoot
-    cmd /c "$command 2>&1"
-    popd
-    
-    if($LastExitCode -ne 0)
-    {
-        Write-Error "Command failed to execute: $command"
-    }
-}
-
-function Invoke-AutoRest($baseOutput, $title, $autoRestArguments)
-{
-    $outputPath = Join-Path $baseOutput $title
-    $namespace = $title.Replace('-', '_')
-    $command = "$script:autorestBinary $script:debugFlags $autoRestArguments --title=$title --namespace=$namespace --output-folder=$outputPath"
-
-    if ($fast)
-    {
-        $codeModel = Join-Path $baseOutput $title "CodeModel.yaml"
-        $command = "dotnet run --project $script:autorestPluginProject --no-build -- --plugin=csharpgen --title=$title --namespace=$namespace --standalone --input-file=$codeModel --output-folder=$outputPath --shared-source-folder=$script:sharedSource --save-code-model=true"
-    }
-
-    if ($clean)
-    {
-        Get-ChildItem $outputPath -Filter Generated -Directory -Recurse | Get-ChildItem -File -Recurse | Remove-Item -Force
-    }
-
-    Invoke $command
-}
-
 # General configuration
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
-$debugFlags = if (-not $noDebug) { '--debug', '--verbose' }
 
 $swaggerDefinitions = @{};
 
 # Test server test configuration
-$autorestBinary = Join-Path $repoRoot 'node_modules' '.bin' 'autorest-beta'
+$autorestPluginProject = (Get-AutorestProject)
 $testServerDirectory = Join-Path $repoRoot 'test' 'TestServerProjects'
 $sharedSource = Join-Path $repoRoot 'src' 'assets'
-$autorestPluginProject = Resolve-Path (Join-Path $repoRoot 'src' 'AutoRest.CSharp.V3')
-$launchSettings = Join-Path $autorestPluginProject 'Properties' 'launchSettings.json'
 $configurationPath = Join-Path $repoRoot 'readme.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
 $testNames =
@@ -86,27 +52,34 @@ $testNames =
     #'xms-error-responses',
     'url-multi-collectionFormat';
 
-foreach ($testName in $testNames)
+if (!($Exclude -contains "TestServer"))
 {
-    $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
-    $swaggerDefinitions[$testName] = @{
-        'title'=$testName;
-        'output'=$testServerDirectory;
-        'arguments'="--require=$configurationPath --input-file=$inputFile"
+    foreach ($testName in $testNames)
+    {
+        $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
+        $swaggerDefinitions[$testName] = @{
+            'title'=$testName;
+            'output'=$testServerDirectory;
+            'arguments'="--require=$configurationPath --input-file=$inputFile"
+        }
     }
 }
 
-# Local test projects
-$testSwaggerPath = Join-Path $repoRoot 'test' 'TestProjects'
 
-foreach ($directory in Get-ChildItem $testSwaggerPath -Directory)
+if (!($Exclude -contains "TestProjects"))
 {
-    $testName = $directory.Name
-    $inputFile = Join-Path $directory "$testName.json"
-    $swaggerDefinitions[$testName] = @{
-        'title'=$testName;
-        'output'=$testSwaggerPath;
-        'arguments'="--require=$configurationPath --input-file=$inputFile"
+    # Local test projects
+    $testSwaggerPath = Join-Path $repoRoot 'test' 'TestProjects'
+
+    foreach ($directory in Get-ChildItem $testSwaggerPath -Directory)
+    {
+        $testName = $directory.Name
+        $inputFile = Join-Path $directory "$testName.json"
+        $swaggerDefinitions[$testName] = @{
+            'title'=$testName;
+            'output'=$testSwaggerPath;
+            'arguments'="--require=$configurationPath --input-file=$inputFile"
+        }
     }
 }
 # Sample configuration
@@ -120,20 +93,44 @@ $projectNames =
     'Azure.Storage.Management',
     'Azure.Network.Management.Interface'
 
-foreach ($projectName in $projectNames)
+if (!($Exclude -contains "Samples"))
 {
-    $projectDirectory = Join-Path $repoRoot 'samples' $projectName
-    $configurationPath = Join-Path $projectDirectory 'readme.md'
+    foreach ($projectName in $projectNames)
+    {
+        $projectDirectory = Join-Path $repoRoot 'samples' $projectName
+        $sampleConfigurationPath = Join-Path $projectDirectory 'readme.md'
 
-    $swaggerDefinitions[$projectName] = @{
-        'title'=$projectName;
-        'output'=$projectDirectory;
-        'arguments'="--require=$configurationPath"
+        $swaggerDefinitions[$projectName] = @{
+            'title'=$projectName;
+            'output'=$projectDirectory;
+            'arguments'="--require=$sampleConfigurationPath"
+        }
+    }
+}
+
+# Smoke tests
+if (!($Exclude -contains "SmokeTests"))
+{
+    foreach ($input in Get-Content (Join-Path $PSScriptRoot "SmokeTestInputs.txt"))
+    {
+        if ($input -match "^[^#].*?specification/([\w-]+(/[\w-]+)+)/readme.md")
+        {
+            $projectName = $Matches[1].Replace("/", "-");
+
+            $projectDirectory = Join-Path $repoRoot 'samples' 'smoketests' $projectName
+
+            $swaggerDefinitions[$projectName] = @{
+                'title'=$projectName;
+                'output'=$projectDirectory;
+                'arguments'="--require=$configurationPath $input"
+            }
+        }
     }
 }
 
 if ($updateLaunchSettings)
 {
+    $launchSettings = Join-Path $autorestPluginProject 'Properties' 'launchSettings.json'
     $settings = @{
         'profiles' = [ordered]@{}
     };
@@ -157,15 +154,15 @@ if ($updateLaunchSettings)
 
 if ($reset -or $env:TF_BUILD)
 {
-    Invoke "$script:autorestBinary --reset"
+    Autorest-Reset;
 }
 
 if (!$noBuild)
 {
-    dotnet build $autorestPluginProject
+    Invoke "dotnet build $autorestPluginProject"
 }
 
-$keys = $swaggerDefinitions.Keys;
+$keys = $swaggerDefinitions.Keys | Sort-Object;
 if (![string]::IsNullOrWhiteSpace($name))
 { 
     if ($continue)
@@ -179,14 +176,8 @@ if (![string]::IsNullOrWhiteSpace($name))
     }
 }
 
-foreach ($key in $keys)
-{
-    $definition = $swaggerDefinitions[$key];
-    Invoke-AutoRest $definition.output $definition.title $definition.arguments
-    $projectPath = Join-Path $definition.output $definition.title;
-    if (!$noProjectBuild)
-    {
-        Invoke "dotnet build $projectPath --verbosity quiet /nologo"
-    }
-}
+$keys | %{ $swaggerDefinitions[$_] } | ForEach-Object -Parallel {
+    Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
+    Invoke-Autorest $_.output $_.title $_.arguments $using:sharedSource $using:fast $using:clean;
+} -ThrottleLimit $parallel
 
