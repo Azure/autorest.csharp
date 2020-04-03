@@ -47,7 +47,7 @@ jobs:
           condition: succeeded()
           failOnStderr: false
           displayName: 'Publish to GitHub and coverage report'
-  - job: Smoke test
+  - job: SmokeTest
     variables:
       DotNetCoreSDKVersion: 3.0.100
     pool:
