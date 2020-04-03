@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
@@ -134,5 +136,14 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PutEnumNotExpandable() => TestStatus(async (host, pipeline) =>
             await new EnumClient(ClientDiagnostics, pipeline, host).PutNotExpandableAsync( Colors.RedColor));
+
+        [Test]
+        public void NonRequiredParameterHasDefaultValue()
+        {
+            var method = TypeAsserts.HasPublicInstanceMethod(typeof(StringClient), "PutNull");
+
+            var parameter = method.GetParameters().Single(p => p.Name == "stringBody");
+            Assert.True(parameter.HasDefaultValue);
+        }
     }
 }

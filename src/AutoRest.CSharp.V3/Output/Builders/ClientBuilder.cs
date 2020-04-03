@@ -44,7 +44,8 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         public (Client Client, RestClient RestClient) BuildClient(OperationGroup operationGroup)
         {
-            var clientName = GetClientName(operationGroup, "Client");
+            var clientPrefix = GetClientName(operationGroup);
+            var clientName = clientPrefix + "Client";
 
             var clientParameters = operationGroup.Operations
                 .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
@@ -55,7 +56,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             List<OperationMethod> operationMethods = new List<OperationMethod>();
             foreach (Operation operation in operationGroup.Operations)
             {
-                var responseHeaderModel = BuildResponseHeaderModel(operation);
+                var responseHeaderModel = BuildResponseHeaderModel(clientPrefix, operation);
 
                 foreach (ServiceRequest serviceRequest in operation.Requests)
                 {
@@ -133,7 +134,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             RestClientMethod[] methods = operationMethods.Select(om => om.Method).Concat(nextPageMethods).ToArray();
 
             var restClient = new RestClient(
-                BuilderHelpers.CreateTypeAttributes(GetClientName(operationGroup, "RestClient"), _context.DefaultNamespace, "internal"),
+                BuilderHelpers.CreateTypeAttributes(clientPrefix + "RestClient", _context.DefaultNamespace, "internal"),
                 operationGroup.Language.Default.Description,
                 OrderParameters(clientParameters.Values),
                 methods);
@@ -150,7 +151,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             return (client, restClient);
         }
 
-        private string GetClientName(OperationGroup operationGroup, string suffix)
+        private string GetClientName(OperationGroup operationGroup)
         {
             var name = operationGroup.Language.Default.Name;
             name = string.IsNullOrEmpty(name) ? "Service" : name.ToCleanName();
@@ -161,7 +162,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 name = name.Substring(0, name.Length - operationsSuffix.Length);
             }
 
-            return name + suffix;
+            return name;
         }
 
         private class OperationMethod
@@ -281,6 +282,10 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 if (httpRequestWithBody.KnownMediaType == KnownMediaType.Binary)
                 {
                     body = new BinaryRequestBody(bodyParameterValue);
+                }
+                else if (httpRequestWithBody.KnownMediaType == KnownMediaType.Text)
+                {
+                    body = new TextRequestBody(bodyParameterValue);
                 }
                 else
                 {
@@ -513,15 +518,21 @@ namespace AutoRest.CSharp.V3.Output.Builders
         {
             var type = _typeFactory.CreateType(requestParameter.Schema, requestParameter.IsNullable());
 
+            var isRequired = requestParameter.Required == true;
+            var defaultValue = ParseConstant(requestParameter);
+            if (!isRequired && defaultValue == null)
+            {
+                defaultValue = Constant.Default(type);
+            }
             return new Parameter(
                 requestParameter.CSharpName(),
                 CreateDescription(requestParameter),
                 TypeFactory.GetInputType(type),
-                ParseConstant(requestParameter),
-                requestParameter.Required == true);
+                defaultValue,
+                isRequired);
         }
 
-        private ResponseHeaderGroupType? BuildResponseHeaderModel(Operation operation)
+        private ResponseHeaderGroupType? BuildResponseHeaderModel(string clientName, Operation operation)
         {
             var httpResponseHeaders = operation.Responses.SelectMany(r => r.HttpResponse.Headers)
                 .Where(h => !_knownResponseHeaders.Contains(h.Header, StringComparer.InvariantCultureIgnoreCase))
@@ -541,7 +552,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             string operationName = operation.CSharpName();
 
             return new ResponseHeaderGroupType(
-                BuilderHelpers.CreateTypeAttributes(operationName + "Headers", _context.DefaultNamespace, "internal"),
+                BuilderHelpers.CreateTypeAttributes(clientName + operationName + "Headers", _context.DefaultNamespace, "internal"),
                 $"Header model for {operationName}",
                 httpResponseHeaders.Select(CreateResponseHeader).ToArray()
                 );

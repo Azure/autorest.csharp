@@ -166,6 +166,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             writer.Line($");");
                         }
                         break;
+                    case TextRequestBody textBody:
+                        using (WriteValueNullCheck(writer, textBody.Value))
+                        {
+                            writer.Append($"{request}.Content = new {typeof(StringRequestContent)}(");
+                            WriteConstantOrParameter(writer, textBody.Value);
+                            writer.Line($");");
+                        }
+                        break;
                     case FlattenedSchemaRequestBody flattenedSchemaRequestBody:
                         var modelVariable = new CodeWriterDeclaration("model");
                         writer.Append($"var {modelVariable:D} = ")

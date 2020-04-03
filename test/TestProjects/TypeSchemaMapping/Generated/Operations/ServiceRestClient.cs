@@ -57,7 +57,7 @@ namespace TypeSchemaMapping
 
         /// <param name="body"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<CustomizedModel>> OperationAsync(CustomizedModel body, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<CustomizedModel>> OperationAsync(CustomizedModel body = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.Operation");
             scope.Start();
@@ -94,7 +94,7 @@ namespace TypeSchemaMapping
 
         /// <param name="body"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<CustomizedModel> Operation(CustomizedModel body, CancellationToken cancellationToken = default)
+        public Response<CustomizedModel> Operation(CustomizedModel body = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.Operation");
             scope.Start();
@@ -150,7 +150,7 @@ namespace TypeSchemaMapping
 
         /// <param name="body"> The ModelStruct to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<RenamedModelStruct>> OperationStructAsync(RenamedModelStruct? body, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<RenamedModelStruct>> OperationStructAsync(RenamedModelStruct? body = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.OperationStruct");
             scope.Start();
@@ -180,7 +180,7 @@ namespace TypeSchemaMapping
 
         /// <param name="body"> The ModelStruct to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<RenamedModelStruct> OperationStruct(RenamedModelStruct? body, CancellationToken cancellationToken = default)
+        public Response<RenamedModelStruct> OperationStruct(RenamedModelStruct? body = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.OperationStruct");
             scope.Start();
@@ -229,7 +229,7 @@ namespace TypeSchemaMapping
 
         /// <param name="body"> The SecondModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SecondModel>> OperationSecondModelAsync(SecondModel body, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<SecondModel>> OperationSecondModelAsync(SecondModel body = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.OperationSecondModel");
             scope.Start();
@@ -266,7 +266,7 @@ namespace TypeSchemaMapping
 
         /// <param name="body"> The SecondModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SecondModel> OperationSecondModel(SecondModel body, CancellationToken cancellationToken = default)
+        public Response<SecondModel> OperationSecondModel(SecondModel body = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.OperationSecondModel");
             scope.Start();

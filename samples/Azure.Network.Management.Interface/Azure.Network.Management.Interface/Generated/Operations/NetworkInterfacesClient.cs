@@ -38,7 +38,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="expand"> Expands referenced resources. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<NetworkInterface>> GetAsync(string resourceGroupName, string networkInterfaceName, string expand, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<NetworkInterface>> GetAsync(string resourceGroupName, string networkInterfaceName, string expand = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.GetAsync(resourceGroupName, networkInterfaceName, expand, cancellationToken).ConfigureAwait(false);
         }
@@ -48,7 +48,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="expand"> Expands referenced resources. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<NetworkInterface> Get(string resourceGroupName, string networkInterfaceName, string expand, CancellationToken cancellationToken = default)
+        public virtual Response<NetworkInterface> Get(string resourceGroupName, string networkInterfaceName, string expand = null, CancellationToken cancellationToken = default)
         {
             return RestClient.Get(resourceGroupName, networkInterfaceName, expand, cancellationToken);
         }

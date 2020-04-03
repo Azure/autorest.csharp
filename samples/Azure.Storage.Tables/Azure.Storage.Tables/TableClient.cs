@@ -11,7 +11,6 @@ namespace Azure.Storage.Tables
     {
         private readonly string _table;
         private readonly ResponseFormat _format;
-        private readonly int _operationTimeout;
         private readonly TableInternalClient _tableOperations;
 
         internal TableClient(string table, TableInternalClient tableOperations)
@@ -19,13 +18,14 @@ namespace Azure.Storage.Tables
             _tableOperations = tableOperations;
             _table = table;
             _format = ResponseFormat.ApplicationJsonOdataFullmetadata;
-            _operationTimeout = 100;
         }
 
         public async Task<Response<IReadOnlyDictionary<string, object>>> InsertAsync(IDictionary<string, object> entity, CancellationToken cancellationToken = default)
         {
             Response<IReadOnlyDictionary<string, object>> response =
-                await _tableOperations.InsertEntityAsync(_operationTimeout, string.Empty,_table, entity, new QueryOptions() { Format = _format }, cancellationToken)
+                await _tableOperations.InsertEntityAsync(_table,
+                        tableEntityProperties: entity,
+                        queryOptions: new QueryOptions() { Format = _format },cancellationToken: cancellationToken)
                     .ConfigureAwait(false);
 
             return response;
@@ -33,14 +33,19 @@ namespace Azure.Storage.Tables
 
         public async Task<Response> UpdateAsync(string partitionKey, string rowKey, IDictionary<string, object> entity, CancellationToken cancellationToken= default)
         {
-            return await _tableOperations.UpdateEntityAsync(_operationTimeout, string.Empty, _table, partitionKey, rowKey, entity, new QueryOptions() { Format = _format }, cancellationToken);
+            return await _tableOperations.UpdateEntityAsync(_table, partitionKey, rowKey,
+                tableEntityProperties: entity,
+                queryOptions:new QueryOptions() { Format = _format },
+                cancellationToken: cancellationToken);
         }
 
         public AsyncPageable<IDictionary<string, object>> QueryAsync(string select = null, string filter = null, int? limit = null, CancellationToken cancellationToken = default)
         {
             return PageableHelpers.CreateAsyncEnumerable(async tableName =>
             {
-                var response = await _tableOperations.RestClient.QueryEntitiesAsync(_operationTimeout, string.Empty, _table,  new QueryOptions() { Format = _format, Top = limit, Filter = filter, Select = @select},  cancellationToken);
+                var response = await _tableOperations.RestClient.QueryEntitiesAsync(_table,
+                    queryOptions: new QueryOptions() { Format = _format, Top = limit, Filter = filter, Select = @select},
+                    cancellationToken: cancellationToken);
                 return Page.FromValues(response.Value.Value, response.Headers.XMsContinuationNextTableName, response.GetRawResponse());
             },(_, __) => throw new NotImplementedException());
         }

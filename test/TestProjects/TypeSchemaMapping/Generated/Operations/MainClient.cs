@@ -33,42 +33,42 @@ namespace CustomNamespace
 
         /// <param name="body"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<CustomizedModel>> OperationAsync(CustomizedModel body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<CustomizedModel>> OperationAsync(CustomizedModel body = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.OperationAsync(body, cancellationToken).ConfigureAwait(false);
         }
 
         /// <param name="body"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<CustomizedModel> Operation(CustomizedModel body, CancellationToken cancellationToken = default)
+        public virtual Response<CustomizedModel> Operation(CustomizedModel body = null, CancellationToken cancellationToken = default)
         {
             return RestClient.Operation(body, cancellationToken);
         }
 
         /// <param name="body"> The ModelStruct to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<RenamedModelStruct>> OperationStructAsync(RenamedModelStruct? body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RenamedModelStruct>> OperationStructAsync(RenamedModelStruct? body = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.OperationStructAsync(body, cancellationToken).ConfigureAwait(false);
         }
 
         /// <param name="body"> The ModelStruct to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<RenamedModelStruct> OperationStruct(RenamedModelStruct? body, CancellationToken cancellationToken = default)
+        public virtual Response<RenamedModelStruct> OperationStruct(RenamedModelStruct? body = null, CancellationToken cancellationToken = default)
         {
             return RestClient.OperationStruct(body, cancellationToken);
         }
 
         /// <param name="body"> The SecondModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SecondModel>> OperationSecondModelAsync(SecondModel body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SecondModel>> OperationSecondModelAsync(SecondModel body = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.OperationSecondModelAsync(body, cancellationToken).ConfigureAwait(false);
         }
 
         /// <param name="body"> The SecondModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SecondModel> OperationSecondModel(SecondModel body, CancellationToken cancellationToken = default)
+        public virtual Response<SecondModel> OperationSecondModel(SecondModel body = null, CancellationToken cancellationToken = default)
         {
             return RestClient.OperationSecondModel(body, cancellationToken);
         }

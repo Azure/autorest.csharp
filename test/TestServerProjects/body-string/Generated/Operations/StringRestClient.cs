@@ -142,7 +142,7 @@ namespace body_string
         /// <summary> Set string value null. </summary>
         /// <param name="stringBody"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutNullAsync(string stringBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutNullAsync(string stringBody = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("StringClient.PutNull");
             scope.Start();
@@ -168,7 +168,7 @@ namespace body_string
         /// <summary> Set string value null. </summary>
         /// <param name="stringBody"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutNull(string stringBody, CancellationToken cancellationToken = default)
+        public Response PutNull(string stringBody = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("StringClient.PutNull");
             scope.Start();

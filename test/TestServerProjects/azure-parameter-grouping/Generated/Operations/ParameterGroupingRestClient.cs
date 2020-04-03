@@ -144,7 +144,7 @@ namespace azure_parameter_grouping
         /// <summary> Post a bunch of optional parameters grouped. </summary>
         /// <param name="parameterGroupingPostOptionalParameters"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PostOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ParameterGroupingClient.PostOptional");
             scope.Start();
@@ -170,7 +170,7 @@ namespace azure_parameter_grouping
         /// <summary> Post a bunch of optional parameters grouped. </summary>
         /// <param name="parameterGroupingPostOptionalParameters"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PostOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, CancellationToken cancellationToken = default)
+        public Response PostOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ParameterGroupingClient.PostOptional");
             scope.Start();
@@ -225,7 +225,7 @@ namespace azure_parameter_grouping
         /// <param name="firstParameterGroup"> Parameter group. </param>
         /// <param name="parameterGroupingPostMultiParamGroupsSecondParamGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PostMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup = null, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ParameterGroupingClient.PostMultiParamGroups");
             scope.Start();
@@ -252,7 +252,7 @@ namespace azure_parameter_grouping
         /// <param name="firstParameterGroup"> Parameter group. </param>
         /// <param name="parameterGroupingPostMultiParamGroupsSecondParamGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PostMultiParamGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup, CancellationToken cancellationToken = default)
+        public Response PostMultiParamGroups(FirstParameterGroup firstParameterGroup = null, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ParameterGroupingClient.PostMultiParamGroups");
             scope.Start();
@@ -298,7 +298,7 @@ namespace azure_parameter_grouping
         /// <summary> Post parameters with a shared parameter group object. </summary>
         /// <param name="firstParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PostSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ParameterGroupingClient.PostSharedParameterGroupObject");
             scope.Start();
@@ -324,7 +324,7 @@ namespace azure_parameter_grouping
         /// <summary> Post parameters with a shared parameter group object. </summary>
         /// <param name="firstParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PostSharedParameterGroupObject(FirstParameterGroup firstParameterGroup, CancellationToken cancellationToken = default)
+        public Response PostSharedParameterGroupObject(FirstParameterGroup firstParameterGroup = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ParameterGroupingClient.PostSharedParameterGroupObject");
             scope.Start();

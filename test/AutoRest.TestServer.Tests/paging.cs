@@ -352,14 +352,14 @@ namespace AutoRest.TestServer.Tests
             var product = "Product";
             var offset = 100;
             var linkPart = $"/paging/multiple/withpath/page/{offset}/";
-            var result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetMultiplePagesWithOffsetAsync(null,new PagingGetMultiplePagesWithOffsetOptions(offset));
+            var result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetMultiplePagesWithOffsetAsync(new PagingGetMultiplePagesWithOffsetOptions(offset));
             var resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
             while (resultPage.ContinuationToken != null)
             {
                 Assert.AreEqual(id, resultPage.Values.First().Properties.Id);
                 Assert.AreEqual(product, resultPage.Values.First().Properties.Name);
                 StringAssert.EndsWith($"{linkPart}{++pageNumber}", resultPage.ContinuationToken);
-                result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetMultiplePagesWithOffsetNextPageAsync(resultPage.ContinuationToken, null, new PagingGetMultiplePagesWithOffsetOptions(offset));
+                result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetMultiplePagesWithOffsetNextPageAsync(resultPage.ContinuationToken, new PagingGetMultiplePagesWithOffsetOptions(offset));
                 resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
                 if (product == "Product")
                 {
@@ -376,7 +376,7 @@ namespace AutoRest.TestServer.Tests
             id = 1;
             pageNumber = 1;
             product = "Product";
-            var pageableAsync = new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesWithOffsetAsync(null, new PagingGetMultiplePagesWithOffsetOptions(offset));
+            var pageableAsync = new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesWithOffsetAsync(new PagingGetMultiplePagesWithOffsetOptions(offset));
             await foreach (var page in pageableAsync.AsPages())
             {
                 Assert.AreEqual(id, page.Values.First().Properties.Id);
@@ -402,7 +402,7 @@ namespace AutoRest.TestServer.Tests
             id = 1;
             pageNumber = 1;
             product = "Product";
-            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesWithOffset(null, new PagingGetMultiplePagesWithOffsetOptions(offset));
+            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesWithOffset(new PagingGetMultiplePagesWithOffsetOptions(offset));
             foreach (var page in pageable.AsPages())
             {
                 Assert.AreEqual(id, page.Values.First().Properties.Id);

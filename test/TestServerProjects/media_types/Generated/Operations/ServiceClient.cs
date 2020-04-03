@@ -52,7 +52,7 @@ namespace media_types
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<string>> AnalyzeBodyAsync(SourcePath input, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<string>> AnalyzeBodyAsync(SourcePath input = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.AnalyzeBodyAsync(input, cancellationToken).ConfigureAwait(false);
         }
@@ -60,7 +60,7 @@ namespace media_types
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<string> AnalyzeBody(SourcePath input, CancellationToken cancellationToken = default)
+        public virtual Response<string> AnalyzeBody(SourcePath input = null, CancellationToken cancellationToken = default)
         {
             return RestClient.AnalyzeBody(input, cancellationToken);
         }

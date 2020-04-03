@@ -77,6 +77,7 @@ $testNames =
     'lro',
     'media_types',
     'model-flattening',
+    #'non-string-enum',
     'paging',
     #'required-optional',
     'url',
@@ -110,6 +111,7 @@ foreach ($directory in Get-ChildItem $testSwaggerPath -Directory)
 }
 # Sample configuration
 $projectNames =
+    'SignalR',
     'AppConfiguration',
     'CognitiveServices.TextAnalytics',
     'CognitiveSearch',

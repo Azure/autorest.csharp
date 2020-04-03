@@ -81,7 +81,7 @@ namespace Azure.Storage.Management
         /// <param name="maxpagesize"> Optional. Specified maximum number of shares that can be included in the list. </param>
         /// <param name="filter"> Optional. When specified, only share names starting with the filter will be listed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<FileShareItems>> ListAsync(string resourceGroupName, string accountName, string maxpagesize, string filter, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<FileShareItems>> ListAsync(string resourceGroupName, string accountName, string maxpagesize = null, string filter = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -131,7 +131,7 @@ namespace Azure.Storage.Management
         /// <param name="maxpagesize"> Optional. Specified maximum number of shares that can be included in the list. </param>
         /// <param name="filter"> Optional. When specified, only share names starting with the filter will be listed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<FileShareItems> List(string resourceGroupName, string accountName, string maxpagesize, string filter, CancellationToken cancellationToken = default)
+        public Response<FileShareItems> List(string resourceGroupName, string accountName, string maxpagesize = null, string filter = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -211,7 +211,7 @@ namespace Azure.Storage.Management
         /// <param name="metadata"> A name-value pair to associate with the share as metadata. </param>
         /// <param name="shareQuota"> The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<FileShare>> CreateAsync(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata, int? shareQuota, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<FileShare>> CreateAsync(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata = null, int? shareQuota = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -267,7 +267,7 @@ namespace Azure.Storage.Management
         /// <param name="metadata"> A name-value pair to associate with the share as metadata. </param>
         /// <param name="shareQuota"> The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<FileShare> Create(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata, int? shareQuota, CancellationToken cancellationToken = default)
+        public Response<FileShare> Create(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata = null, int? shareQuota = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -352,7 +352,7 @@ namespace Azure.Storage.Management
         /// <param name="metadata"> A name-value pair to associate with the share as metadata. </param>
         /// <param name="shareQuota"> The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<FileShare>> UpdateAsync(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata, int? shareQuota, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<FileShare>> UpdateAsync(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata = null, int? shareQuota = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -407,7 +407,7 @@ namespace Azure.Storage.Management
         /// <param name="metadata"> A name-value pair to associate with the share as metadata. </param>
         /// <param name="shareQuota"> The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<FileShare> Update(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata, int? shareQuota, CancellationToken cancellationToken = default)
+        public Response<FileShare> Update(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata = null, int? shareQuota = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -703,7 +703,7 @@ namespace Azure.Storage.Management
         /// <param name="maxpagesize"> Optional. Specified maximum number of shares that can be included in the list. </param>
         /// <param name="filter"> Optional. When specified, only share names starting with the filter will be listed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<FileShareItems>> ListNextPageAsync(string nextLink, string resourceGroupName, string accountName, string maxpagesize, string filter, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<FileShareItems>> ListNextPageAsync(string nextLink, string resourceGroupName, string accountName, string maxpagesize = null, string filter = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -758,7 +758,7 @@ namespace Azure.Storage.Management
         /// <param name="maxpagesize"> Optional. Specified maximum number of shares that can be included in the list. </param>
         /// <param name="filter"> Optional. When specified, only share names starting with the filter will be listed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<FileShareItems> ListNextPage(string nextLink, string resourceGroupName, string accountName, string maxpagesize, string filter, CancellationToken cancellationToken = default)
+        public Response<FileShareItems> ListNextPage(string nextLink, string resourceGroupName, string accountName, string maxpagesize = null, string filter = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {

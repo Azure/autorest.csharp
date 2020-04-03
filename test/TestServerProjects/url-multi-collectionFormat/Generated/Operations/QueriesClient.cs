@@ -33,7 +33,7 @@ namespace url_multi_collectionFormat
         /// <summary> Get a null array of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ArrayStringMultiNullAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ArrayStringMultiNullAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.ArrayStringMultiNullAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
         }
@@ -41,7 +41,7 @@ namespace url_multi_collectionFormat
         /// <summary> Get a null array of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response ArrayStringMultiNull(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
+        public virtual Response ArrayStringMultiNull(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             return RestClient.ArrayStringMultiNull(arrayQuery, cancellationToken);
         }
@@ -49,7 +49,7 @@ namespace url_multi_collectionFormat
         /// <summary> Get an empty array [] of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ArrayStringMultiEmptyAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ArrayStringMultiEmptyAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.ArrayStringMultiEmptyAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
         }
@@ -57,7 +57,7 @@ namespace url_multi_collectionFormat
         /// <summary> Get an empty array [] of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response ArrayStringMultiEmpty(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
+        public virtual Response ArrayStringMultiEmpty(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             return RestClient.ArrayStringMultiEmpty(arrayQuery, cancellationToken);
         }
@@ -65,7 +65,7 @@ namespace url_multi_collectionFormat
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ArrayStringMultiValidAsync(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ArrayStringMultiValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             return await RestClient.ArrayStringMultiValidAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
         }
@@ -73,7 +73,7 @@ namespace url_multi_collectionFormat
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response ArrayStringMultiValid(IEnumerable<string> arrayQuery, CancellationToken cancellationToken = default)
+        public virtual Response ArrayStringMultiValid(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             return RestClient.ArrayStringMultiValid(arrayQuery, cancellationToken);
         }

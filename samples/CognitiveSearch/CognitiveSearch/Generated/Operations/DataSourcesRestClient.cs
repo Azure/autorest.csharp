@@ -79,7 +79,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, DataSource dataSource, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, DataSource dataSource, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (dataSourceName == null)
             {
@@ -130,7 +130,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<DataSource> CreateOrUpdate(string dataSourceName, DataSource dataSource, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
+        public Response<DataSource> CreateOrUpdate(string dataSourceName, DataSource dataSource, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (dataSourceName == null)
             {
@@ -207,7 +207,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteAsync(string dataSourceName, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> DeleteAsync(string dataSourceName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (dataSourceName == null)
             {
@@ -241,7 +241,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete(string dataSourceName, RequestOptions requestOptions, AccessCondition accessCondition, CancellationToken cancellationToken = default)
+        public Response Delete(string dataSourceName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (dataSourceName == null)
             {
@@ -293,7 +293,7 @@ namespace CognitiveSearch
         /// <param name="dataSourceName"> The name of the datasource to retrieve. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DataSource>> GetAsync(string dataSourceName, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DataSource>> GetAsync(string dataSourceName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (dataSourceName == null)
             {
@@ -337,7 +337,7 @@ namespace CognitiveSearch
         /// <param name="dataSourceName"> The name of the datasource to retrieve. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<DataSource> Get(string dataSourceName, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public Response<DataSource> Get(string dataSourceName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (dataSourceName == null)
             {
@@ -402,7 +402,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ListDataSourcesResult>> ListAsync(string select, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<ListDataSourcesResult>> ListAsync(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DataSourcesClient.List");
             scope.Start();
@@ -441,7 +441,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ListDataSourcesResult> List(string select, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public Response<ListDataSourcesResult> List(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("DataSourcesClient.List");
             scope.Start();
@@ -501,7 +501,7 @@ namespace CognitiveSearch
         /// <param name="dataSource"> The definition of the datasource to create. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DataSource>> CreateAsync(DataSource dataSource, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<DataSource>> CreateAsync(DataSource dataSource, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (dataSource == null)
             {
@@ -545,7 +545,7 @@ namespace CognitiveSearch
         /// <param name="dataSource"> The definition of the datasource to create. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<DataSource> Create(DataSource dataSource, RequestOptions requestOptions, CancellationToken cancellationToken = default)
+        public Response<DataSource> Create(DataSource dataSource, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (dataSource == null)
             {

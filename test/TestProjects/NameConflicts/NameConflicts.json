@@ -85,6 +85,7 @@
         "checked": { "type": "string" },
         "const": { "type": "string" },
         "continue": { "type": "string" },
+        "class": { "type": "string" },
         "decimal": { "type": "string" },
         "default": { "type": "string" },
         "delegate": { "type": "string" },
@@ -170,7 +171,18 @@
         "when": { "type": "string" },
         "where": { "type": "string" },
         "while": { "type": "string" },
-        "yield": { "type": "string" }
+        "yield": { "type": "string" },
+        "System": {
+          "type": "string",
+          "enum": [
+            "System",
+            "System.Text.Json"
+          ],
+          "x-ms-enum": {
+            "name": "SystemEnum",
+            "modelAsString": true
+          }
+        }
       }
     }
   }

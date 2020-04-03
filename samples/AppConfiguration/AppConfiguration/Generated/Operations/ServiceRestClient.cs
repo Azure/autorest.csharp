@@ -18,14 +18,14 @@ namespace AppConfiguration
 {
     internal partial class ServiceRestClient
     {
-        private string syncToken;
         private string host;
+        private string syncToken;
         private string apiVersion;
         private ClientDiagnostics clientDiagnostics;
         private HttpPipeline pipeline;
 
         /// <summary> Initializes a new instance of ServiceRestClient. </summary>
-        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string syncToken, string host = "", string apiVersion = "1.0")
+        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "", string syncToken = null, string apiVersion = "1.0")
         {
             if (host == null)
             {
@@ -36,8 +36,8 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(apiVersion));
             }
 
-            this.syncToken = syncToken;
             this.host = host;
+            this.syncToken = syncToken;
             this.apiVersion = apiVersion;
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
@@ -77,7 +77,7 @@ namespace AppConfiguration
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyListResult, GetKeysHeaders>> GetKeysAsync(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyListResult, ServiceGetKeysHeaders>> GetKeysAsync(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeys");
             scope.Start();
@@ -85,7 +85,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetKeysRequest(name, after, acceptDatetime);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new GetKeysHeaders(message.Response);
+                var headers = new ServiceGetKeysHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -118,7 +118,7 @@ namespace AppConfiguration
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyListResult, GetKeysHeaders> GetKeys(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyListResult, ServiceGetKeysHeaders> GetKeys(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeys");
             scope.Start();
@@ -126,7 +126,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetKeysRequest(name, after, acceptDatetime);
                 pipeline.Send(message, cancellationToken);
-                var headers = new GetKeysHeaders(message.Response);
+                var headers = new ServiceGetKeysHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -188,7 +188,7 @@ namespace AppConfiguration
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<CheckKeysHeaders>> CheckKeysAsync(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<ServiceCheckKeysHeaders>> CheckKeysAsync(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckKeys");
             scope.Start();
@@ -196,7 +196,7 @@ namespace AppConfiguration
             {
                 using var message = CreateCheckKeysRequest(name, after, acceptDatetime);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new CheckKeysHeaders(message.Response);
+                var headers = new ServiceCheckKeysHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -217,7 +217,7 @@ namespace AppConfiguration
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<CheckKeysHeaders> CheckKeys(string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<ServiceCheckKeysHeaders> CheckKeys(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckKeys");
             scope.Start();
@@ -225,7 +225,7 @@ namespace AppConfiguration
             {
                 using var message = CreateCheckKeysRequest(name, after, acceptDatetime);
                 pipeline.Send(message, cancellationToken);
-                var headers = new CheckKeysHeaders(message.Response);
+                var headers = new ServiceCheckKeysHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -285,7 +285,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders>> GetKeyValuesAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyValueListResult, ServiceGetKeyValuesHeaders>> GetKeyValuesAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Get6ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
             scope.Start();
@@ -293,7 +293,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetKeyValuesRequest(key, label, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new GetKeyValuesHeaders(message.Response);
+                var headers = new ServiceGetKeyValuesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -328,7 +328,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders> GetKeyValues(string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValueListResult, ServiceGetKeyValuesHeaders> GetKeyValues(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Get6ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
             scope.Start();
@@ -336,7 +336,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetKeyValuesRequest(key, label, after, acceptDatetime, select);
                 pipeline.Send(message, cancellationToken);
-                var headers = new GetKeyValuesHeaders(message.Response);
+                var headers = new ServiceGetKeyValuesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -408,7 +408,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<CheckKeyValuesHeaders>> CheckKeyValuesAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Head6ItemsItem> select, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<ServiceCheckKeyValuesHeaders>> CheckKeyValuesAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Head6ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckKeyValues");
             scope.Start();
@@ -416,7 +416,7 @@ namespace AppConfiguration
             {
                 using var message = CreateCheckKeyValuesRequest(key, label, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new CheckKeyValuesHeaders(message.Response);
+                var headers = new ServiceCheckKeyValuesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -439,7 +439,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<CheckKeyValuesHeaders> CheckKeyValues(string key, string label, string after, string acceptDatetime, IEnumerable<Head6ItemsItem> select, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<ServiceCheckKeyValuesHeaders> CheckKeyValues(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Head6ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckKeyValues");
             scope.Start();
@@ -447,7 +447,7 @@ namespace AppConfiguration
             {
                 using var message = CreateCheckKeyValuesRequest(key, label, after, acceptDatetime, select);
                 pipeline.Send(message, cancellationToken);
-                var headers = new CheckKeyValuesHeaders(message.Response);
+                var headers = new ServiceCheckKeyValuesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -509,7 +509,7 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValue, GetKeyValueHeaders>> GetKeyValueAsync(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Get7ItemsItem> select, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyValue, ServiceGetKeyValueHeaders>> GetKeyValueAsync(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Get7ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -522,7 +522,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new GetKeyValueHeaders(message.Response);
+                var headers = new ServiceGetKeyValueHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -558,7 +558,7 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValue, GetKeyValueHeaders> GetKeyValue(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Get7ItemsItem> select, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValue, ServiceGetKeyValueHeaders> GetKeyValue(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Get7ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -571,7 +571,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
                 pipeline.Send(message, cancellationToken);
-                var headers = new GetKeyValueHeaders(message.Response);
+                var headers = new ServiceGetKeyValueHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -643,7 +643,7 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="entity"> The key-value to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValue, PutKeyValueHeaders>> PutKeyValueAsync(string key, string label, string ifMatch, string ifNoneMatch, KeyValue entity, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyValue, ServicePutKeyValueHeaders>> PutKeyValueAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, KeyValue entity = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -656,7 +656,7 @@ namespace AppConfiguration
             {
                 using var message = CreatePutKeyValueRequest(key, label, ifMatch, ifNoneMatch, entity);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new PutKeyValueHeaders(message.Response);
+                var headers = new ServicePutKeyValueHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -691,7 +691,7 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="entity"> The key-value to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValue, PutKeyValueHeaders> PutKeyValue(string key, string label, string ifMatch, string ifNoneMatch, KeyValue entity, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValue, ServicePutKeyValueHeaders> PutKeyValue(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, KeyValue entity = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -704,7 +704,7 @@ namespace AppConfiguration
             {
                 using var message = CreatePutKeyValueRequest(key, label, ifMatch, ifNoneMatch, entity);
                 pipeline.Send(message, cancellationToken);
-                var headers = new PutKeyValueHeaders(message.Response);
+                var headers = new ServicePutKeyValueHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -763,7 +763,7 @@ namespace AppConfiguration
         /// <param name="label"> The label of the key-value to delete. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValue, DeleteKeyValueHeaders>> DeleteKeyValueAsync(string key, string label, string ifMatch, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyValue, ServiceDeleteKeyValueHeaders>> DeleteKeyValueAsync(string key, string label = null, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -776,7 +776,7 @@ namespace AppConfiguration
             {
                 using var message = CreateDeleteKeyValueRequest(key, label, ifMatch);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new DeleteKeyValueHeaders(message.Response);
+                var headers = new ServiceDeleteKeyValueHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -794,7 +794,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     case 204:
-                        return ResponseWithHeaders.FromValue<KeyValue, DeleteKeyValueHeaders>(null, headers, message.Response);
+                        return ResponseWithHeaders.FromValue<KeyValue, ServiceDeleteKeyValueHeaders>(null, headers, message.Response);
                     default:
                         throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -811,7 +811,7 @@ namespace AppConfiguration
         /// <param name="label"> The label of the key-value to delete. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValue, DeleteKeyValueHeaders> DeleteKeyValue(string key, string label, string ifMatch, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValue, ServiceDeleteKeyValueHeaders> DeleteKeyValue(string key, string label = null, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -824,7 +824,7 @@ namespace AppConfiguration
             {
                 using var message = CreateDeleteKeyValueRequest(key, label, ifMatch);
                 pipeline.Send(message, cancellationToken);
-                var headers = new DeleteKeyValueHeaders(message.Response);
+                var headers = new ServiceDeleteKeyValueHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -842,7 +842,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     case 204:
-                        return ResponseWithHeaders.FromValue<KeyValue, DeleteKeyValueHeaders>(null, headers, message.Response);
+                        return ResponseWithHeaders.FromValue<KeyValue, ServiceDeleteKeyValueHeaders>(null, headers, message.Response);
                     default:
                         throw clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -900,7 +900,7 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<CheckKeyValueHeaders>> CheckKeyValueAsync(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Head7ItemsItem> select, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<ServiceCheckKeyValueHeaders>> CheckKeyValueAsync(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Head7ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -913,7 +913,7 @@ namespace AppConfiguration
             {
                 using var message = CreateCheckKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new CheckKeyValueHeaders(message.Response);
+                var headers = new ServiceCheckKeyValueHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -937,7 +937,7 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<CheckKeyValueHeaders> CheckKeyValue(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Head7ItemsItem> select, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<ServiceCheckKeyValueHeaders> CheckKeyValue(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Head7ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -950,7 +950,7 @@ namespace AppConfiguration
             {
                 using var message = CreateCheckKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
                 pipeline.Send(message, cancellationToken);
-                var headers = new CheckKeyValueHeaders(message.Response);
+                var headers = new ServiceCheckKeyValueHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1005,7 +1005,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<LabelListResult, GetLabelsHeaders>> GetLabelsAsync(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<LabelListResult, ServiceGetLabelsHeaders>> GetLabelsAsync(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetLabels");
             scope.Start();
@@ -1013,7 +1013,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetLabelsRequest(name, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new GetLabelsHeaders(message.Response);
+                var headers = new ServiceGetLabelsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1047,7 +1047,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<LabelListResult, GetLabelsHeaders> GetLabels(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LabelListResult, ServiceGetLabelsHeaders> GetLabels(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetLabels");
             scope.Start();
@@ -1055,7 +1055,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetLabelsRequest(name, after, acceptDatetime, select);
                 pipeline.Send(message, cancellationToken);
-                var headers = new GetLabelsHeaders(message.Response);
+                var headers = new ServiceGetLabelsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1122,7 +1122,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<CheckLabelsHeaders>> CheckLabelsAsync(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<ServiceCheckLabelsHeaders>> CheckLabelsAsync(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckLabels");
             scope.Start();
@@ -1130,7 +1130,7 @@ namespace AppConfiguration
             {
                 using var message = CreateCheckLabelsRequest(name, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new CheckLabelsHeaders(message.Response);
+                var headers = new ServiceCheckLabelsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1152,7 +1152,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<CheckLabelsHeaders> CheckLabels(string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<ServiceCheckLabelsHeaders> CheckLabels(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckLabels");
             scope.Start();
@@ -1160,7 +1160,7 @@ namespace AppConfiguration
             {
                 using var message = CreateCheckLabelsRequest(name, after, acceptDatetime, select);
                 pipeline.Send(message, cancellationToken);
-                var headers = new CheckLabelsHeaders(message.Response);
+                var headers = new ServiceCheckLabelsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1212,7 +1212,7 @@ namespace AppConfiguration
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValue, PutLockHeaders>> PutLockAsync(string key, string label, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyValue, ServicePutLockHeaders>> PutLockAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -1225,7 +1225,7 @@ namespace AppConfiguration
             {
                 using var message = CreatePutLockRequest(key, label, ifMatch, ifNoneMatch);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new PutLockHeaders(message.Response);
+                var headers = new ServicePutLockHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1259,7 +1259,7 @@ namespace AppConfiguration
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValue, PutLockHeaders> PutLock(string key, string label, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValue, ServicePutLockHeaders> PutLock(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -1272,7 +1272,7 @@ namespace AppConfiguration
             {
                 using var message = CreatePutLockRequest(key, label, ifMatch, ifNoneMatch);
                 pipeline.Send(message, cancellationToken);
-                var headers = new PutLockHeaders(message.Response);
+                var headers = new ServicePutLockHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1336,7 +1336,7 @@ namespace AppConfiguration
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValue, DeleteLockHeaders>> DeleteLockAsync(string key, string label, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyValue, ServiceDeleteLockHeaders>> DeleteLockAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -1349,7 +1349,7 @@ namespace AppConfiguration
             {
                 using var message = CreateDeleteLockRequest(key, label, ifMatch, ifNoneMatch);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new DeleteLockHeaders(message.Response);
+                var headers = new ServiceDeleteLockHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1383,7 +1383,7 @@ namespace AppConfiguration
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValue, DeleteLockHeaders> DeleteLock(string key, string label, string ifMatch, string ifNoneMatch, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValue, ServiceDeleteLockHeaders> DeleteLock(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -1396,7 +1396,7 @@ namespace AppConfiguration
             {
                 using var message = CreateDeleteLockRequest(key, label, ifMatch, ifNoneMatch);
                 pipeline.Send(message, cancellationToken);
-                var headers = new DeleteLockHeaders(message.Response);
+                var headers = new ServiceDeleteLockHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1468,7 +1468,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders>> GetRevisionsAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyValueListResult, ServiceGetRevisionsHeaders>> GetRevisionsAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum4> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
             scope.Start();
@@ -1476,7 +1476,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetRevisionsRequest(key, label, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new GetRevisionsHeaders(message.Response);
+                var headers = new ServiceGetRevisionsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1511,7 +1511,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders> GetRevisions(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValueListResult, ServiceGetRevisionsHeaders> GetRevisions(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum4> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
             scope.Start();
@@ -1519,7 +1519,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetRevisionsRequest(key, label, after, acceptDatetime, select);
                 pipeline.Send(message, cancellationToken);
-                var headers = new GetRevisionsHeaders(message.Response);
+                var headers = new ServiceGetRevisionsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1591,7 +1591,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<CheckRevisionsHeaders>> CheckRevisionsAsync(string key, string label, string after, string acceptDatetime, IEnumerable<Enum5> select, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<ServiceCheckRevisionsHeaders>> CheckRevisionsAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum5> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckRevisions");
             scope.Start();
@@ -1599,7 +1599,7 @@ namespace AppConfiguration
             {
                 using var message = CreateCheckRevisionsRequest(key, label, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new CheckRevisionsHeaders(message.Response);
+                var headers = new ServiceCheckRevisionsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1622,7 +1622,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<CheckRevisionsHeaders> CheckRevisions(string key, string label, string after, string acceptDatetime, IEnumerable<Enum5> select, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<ServiceCheckRevisionsHeaders> CheckRevisions(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum5> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckRevisions");
             scope.Start();
@@ -1630,7 +1630,7 @@ namespace AppConfiguration
             {
                 using var message = CreateCheckRevisionsRequest(key, label, after, acceptDatetime, select);
                 pipeline.Send(message, cancellationToken);
-                var headers = new CheckRevisionsHeaders(message.Response);
+                var headers = new ServiceCheckRevisionsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1671,7 +1671,7 @@ namespace AppConfiguration
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyListResult, GetKeysHeaders>> GetKeysNextPageAsync(string nextLink, string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyListResult, ServiceGetKeysHeaders>> GetKeysNextPageAsync(string nextLink, string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1684,7 +1684,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetKeysNextPageRequest(nextLink, name, after, acceptDatetime);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new GetKeysHeaders(message.Response);
+                var headers = new ServiceGetKeysHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1718,7 +1718,7 @@ namespace AppConfiguration
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyListResult, GetKeysHeaders> GetKeysNextPage(string nextLink, string name, string after, string acceptDatetime, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyListResult, ServiceGetKeysHeaders> GetKeysNextPage(string nextLink, string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1731,7 +1731,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetKeysNextPageRequest(nextLink, name, after, acceptDatetime);
                 pipeline.Send(message, cancellationToken);
-                var headers = new GetKeysHeaders(message.Response);
+                var headers = new ServiceGetKeysHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1786,7 +1786,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders>> GetKeyValuesNextPageAsync(string nextLink, string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyValueListResult, ServiceGetKeyValuesHeaders>> GetKeyValuesNextPageAsync(string nextLink, string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Get6ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1799,7 +1799,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetKeyValuesNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new GetKeyValuesHeaders(message.Response);
+                var headers = new ServiceGetKeyValuesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1835,7 +1835,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValueListResult, GetKeyValuesHeaders> GetKeyValuesNextPage(string nextLink, string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValueListResult, ServiceGetKeyValuesHeaders> GetKeyValuesNextPage(string nextLink, string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Get6ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1848,7 +1848,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetKeyValuesNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
                 pipeline.Send(message, cancellationToken);
-                var headers = new GetKeyValuesHeaders(message.Response);
+                var headers = new ServiceGetKeyValuesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1902,7 +1902,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<LabelListResult, GetLabelsHeaders>> GetLabelsNextPageAsync(string nextLink, string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<LabelListResult, ServiceGetLabelsHeaders>> GetLabelsNextPageAsync(string nextLink, string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1915,7 +1915,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetLabelsNextPageRequest(nextLink, name, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new GetLabelsHeaders(message.Response);
+                var headers = new ServiceGetLabelsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1950,7 +1950,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<LabelListResult, GetLabelsHeaders> GetLabelsNextPage(string nextLink, string name, string after, string acceptDatetime, IEnumerable<string> select, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LabelListResult, ServiceGetLabelsHeaders> GetLabelsNextPage(string nextLink, string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1963,7 +1963,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetLabelsNextPageRequest(nextLink, name, after, acceptDatetime, select);
                 pipeline.Send(message, cancellationToken);
-                var headers = new GetLabelsHeaders(message.Response);
+                var headers = new ServiceGetLabelsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2018,7 +2018,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders>> GetRevisionsNextPageAsync(string nextLink, string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<KeyValueListResult, ServiceGetRevisionsHeaders>> GetRevisionsNextPageAsync(string nextLink, string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum4> select = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -2031,7 +2031,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetRevisionsNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
                 await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new GetRevisionsHeaders(message.Response);
+                var headers = new ServiceGetRevisionsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2067,7 +2067,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValueListResult, GetRevisionsHeaders> GetRevisionsNextPage(string nextLink, string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValueListResult, ServiceGetRevisionsHeaders> GetRevisionsNextPage(string nextLink, string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum4> select = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -2080,7 +2080,7 @@ namespace AppConfiguration
             {
                 using var message = CreateGetRevisionsNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
                 pipeline.Send(message, cancellationToken);
-                var headers = new GetRevisionsHeaders(message.Response);
+                var headers = new ServiceGetRevisionsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:

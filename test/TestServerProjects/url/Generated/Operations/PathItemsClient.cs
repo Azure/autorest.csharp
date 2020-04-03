@@ -22,99 +22,99 @@ namespace url
         {
         }
         /// <summary> Initializes a new instance of PathItemsClient. </summary>
-        internal PathItemsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string globalStringPath, string globalStringQuery, string host = "http://localhost:3000")
+        internal PathItemsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string globalStringPath, string host = "http://localhost:3000", string globalStringQuery = null)
         {
-            RestClient = new PathItemsRestClient(clientDiagnostics, pipeline, globalStringPath, globalStringQuery, host);
+            RestClient = new PathItemsRestClient(clientDiagnostics, pipeline, globalStringPath, host, globalStringQuery);
             this.clientDiagnostics = clientDiagnostics;
             this.pipeline = pipeline;
         }
 
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=&apos;globalStringQuery&apos;, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=&apos;localStringQuery&apos;. </summary>
         /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
-        /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
+        /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetAllWithValuesAsync(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetAllWithValuesAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetAllWithValuesAsync(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery, cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetAllWithValuesAsync(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=&apos;globalStringQuery&apos;, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=&apos;localStringQuery&apos;. </summary>
         /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
-        /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
+        /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetAllWithValues(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
+        public virtual Response GetAllWithValues(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetAllWithValues(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery, cancellationToken);
+            return RestClient.GetAllWithValues(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, cancellationToken);
         }
 
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=null, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=&apos;localStringQuery&apos;. </summary>
         /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
-        /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
+        /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetGlobalQueryNullAsync(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetGlobalQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetGlobalQueryNullAsync(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery, cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetGlobalQueryNullAsync(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=null, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=&apos;localStringQuery&apos;. </summary>
         /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
-        /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
+        /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetGlobalQueryNull(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
+        public virtual Response GetGlobalQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetGlobalQueryNull(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery, cancellationToken);
+            return RestClient.GetGlobalQueryNull(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, cancellationToken);
         }
 
         /// <summary> send globalStringPath=globalStringPath, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=null, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=null. </summary>
         /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
-        /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
+        /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringQuery"> should contain null value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetGlobalAndLocalQueryNullAsync(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetGlobalAndLocalQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetGlobalAndLocalQueryNullAsync(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery, cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetGlobalAndLocalQueryNullAsync(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> send globalStringPath=globalStringPath, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=null, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=null. </summary>
         /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
-        /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
+        /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringQuery"> should contain null value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetGlobalAndLocalQueryNull(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
+        public virtual Response GetGlobalAndLocalQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetGlobalAndLocalQueryNull(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery, cancellationToken);
+            return RestClient.GetGlobalAndLocalQueryNull(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, cancellationToken);
         }
 
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=&apos;globalStringQuery&apos;, pathItemStringQuery=null, localStringQuery=null. </summary>
         /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
-        /// <param name="pathItemStringQuery"> should contain value null. </param>
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
+        /// <param name="pathItemStringQuery"> should contain value null. </param>
         /// <param name="localStringQuery"> should contain value null. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetLocalPathItemQueryNullAsync(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetLocalPathItemQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetLocalPathItemQueryNullAsync(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery, cancellationToken).ConfigureAwait(false);
+            return await RestClient.GetLocalPathItemQueryNullAsync(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=&apos;globalStringQuery&apos;, pathItemStringQuery=null, localStringQuery=null. </summary>
         /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
-        /// <param name="pathItemStringQuery"> should contain value null. </param>
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
+        /// <param name="pathItemStringQuery"> should contain value null. </param>
         /// <param name="localStringQuery"> should contain value null. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetLocalPathItemQueryNull(string pathItemStringPath, string pathItemStringQuery, string localStringPath, string localStringQuery, CancellationToken cancellationToken = default)
+        public virtual Response GetLocalPathItemQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetLocalPathItemQueryNull(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery, cancellationToken);
+            return RestClient.GetLocalPathItemQueryNull(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, cancellationToken);
         }
     }
 }

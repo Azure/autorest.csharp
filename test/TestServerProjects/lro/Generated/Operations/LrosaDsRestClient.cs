@@ -56,7 +56,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 400 to the initial request. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutNonRetry400Async(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutNonRetry400Async(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry400");
             scope.Start();
@@ -83,7 +83,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 400 to the initial request. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutNonRetry400(Product product, CancellationToken cancellationToken = default)
+        public Response PutNonRetry400(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry400");
             scope.Start();
@@ -129,7 +129,7 @@ namespace lro
         /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutNonRetry201Creating400Async(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutNonRetry201Creating400Async(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400");
             scope.Start();
@@ -156,7 +156,7 @@ namespace lro
         /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutNonRetry201Creating400(Product product, CancellationToken cancellationToken = default)
+        public Response PutNonRetry201Creating400(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400");
             scope.Start();
@@ -202,7 +202,7 @@ namespace lro
         /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutNonRetry201Creating400InvalidJsonAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutNonRetry201Creating400InvalidJsonAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400InvalidJson");
             scope.Start();
@@ -229,7 +229,7 @@ namespace lro
         /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutNonRetry201Creating400InvalidJson(Product product, CancellationToken cancellationToken = default)
+        public Response PutNonRetry201Creating400InvalidJson(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400InvalidJson");
             scope.Start();
@@ -275,7 +275,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutAsyncRelativeRetry400Async(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutAsyncRelativeRetry400Async(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetry400");
             scope.Start();
@@ -301,7 +301,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutAsyncRelativeRetry400(Product product, CancellationToken cancellationToken = default)
+        public Response PutAsyncRelativeRetry400(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetry400");
             scope.Start();
@@ -532,7 +532,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 400 with no error body. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostNonRetry400Async(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PostNonRetry400Async(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostNonRetry400");
             scope.Start();
@@ -558,7 +558,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 400 with no error body. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PostNonRetry400(Product product, CancellationToken cancellationToken = default)
+        public Response PostNonRetry400(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostNonRetry400");
             scope.Start();
@@ -603,7 +603,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 with a location header. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Post202NonRetry400Async(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> Post202NonRetry400Async(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Post202NonRetry400");
             scope.Start();
@@ -629,7 +629,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 with a location header. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Post202NonRetry400(Product product, CancellationToken cancellationToken = default)
+        public Response Post202NonRetry400(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Post202NonRetry400");
             scope.Start();
@@ -674,7 +674,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostAsyncRelativeRetry400Async(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PostAsyncRelativeRetry400Async(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetry400");
             scope.Start();
@@ -700,7 +700,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PostAsyncRelativeRetry400(Product product, CancellationToken cancellationToken = default)
+        public Response PostAsyncRelativeRetry400(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetry400");
             scope.Start();
@@ -745,7 +745,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 201 to the initial request with no payload. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutError201NoProvisioningStatePayloadAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutError201NoProvisioningStatePayloadAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutError201NoProvisioningStatePayload");
             scope.Start();
@@ -772,7 +772,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 201 to the initial request with no payload. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutError201NoProvisioningStatePayload(Product product, CancellationToken cancellationToken = default)
+        public Response PutError201NoProvisioningStatePayload(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutError201NoProvisioningStatePayload");
             scope.Start();
@@ -818,7 +818,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutAsyncRelativeRetryNoStatusAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutAsyncRelativeRetryNoStatusAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatus");
             scope.Start();
@@ -844,7 +844,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutAsyncRelativeRetryNoStatus(Product product, CancellationToken cancellationToken = default)
+        public Response PutAsyncRelativeRetryNoStatus(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatus");
             scope.Start();
@@ -889,7 +889,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutAsyncRelativeRetryNoStatusPayloadAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutAsyncRelativeRetryNoStatusPayloadAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload");
             scope.Start();
@@ -915,7 +915,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutAsyncRelativeRetryNoStatusPayload(Product product, CancellationToken cancellationToken = default)
+        public Response PutAsyncRelativeRetryNoStatusPayload(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload");
             scope.Start();
@@ -1084,7 +1084,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, without a location header. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Post202NoLocationAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> Post202NoLocationAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Post202NoLocation");
             scope.Start();
@@ -1110,7 +1110,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, without a location header. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Post202NoLocation(Product product, CancellationToken cancellationToken = default)
+        public Response Post202NoLocation(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Post202NoLocation");
             scope.Start();
@@ -1155,7 +1155,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostAsyncRelativeRetryNoPayloadAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PostAsyncRelativeRetryNoPayloadAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryNoPayload");
             scope.Start();
@@ -1181,7 +1181,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PostAsyncRelativeRetryNoPayload(Product product, CancellationToken cancellationToken = default)
+        public Response PostAsyncRelativeRetryNoPayload(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryNoPayload");
             scope.Start();
@@ -1226,7 +1226,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Put200InvalidJsonAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> Put200InvalidJsonAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Put200InvalidJson");
             scope.Start();
@@ -1252,7 +1252,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Put200InvalidJson(Product product, CancellationToken cancellationToken = default)
+        public Response Put200InvalidJson(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Put200InvalidJson");
             scope.Start();
@@ -1297,7 +1297,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutAsyncRelativeRetryInvalidHeaderAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutAsyncRelativeRetryInvalidHeaderAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidHeader");
             scope.Start();
@@ -1323,7 +1323,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutAsyncRelativeRetryInvalidHeader(Product product, CancellationToken cancellationToken = default)
+        public Response PutAsyncRelativeRetryInvalidHeader(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidHeader");
             scope.Start();
@@ -1368,7 +1368,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutAsyncRelativeRetryInvalidJsonPollingAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PutAsyncRelativeRetryInvalidJsonPollingAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
@@ -1394,7 +1394,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutAsyncRelativeRetryInvalidJsonPolling(Product product, CancellationToken cancellationToken = default)
+        public Response PutAsyncRelativeRetryInvalidJsonPolling(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
@@ -1625,7 +1625,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Post202RetryInvalidHeaderAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> Post202RetryInvalidHeaderAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Post202RetryInvalidHeader");
             scope.Start();
@@ -1651,7 +1651,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Post202RetryInvalidHeader(Product product, CancellationToken cancellationToken = default)
+        public Response Post202RetryInvalidHeader(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Post202RetryInvalidHeader");
             scope.Start();
@@ -1696,7 +1696,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostAsyncRelativeRetryInvalidHeaderAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PostAsyncRelativeRetryInvalidHeaderAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidHeader");
             scope.Start();
@@ -1722,7 +1722,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PostAsyncRelativeRetryInvalidHeader(Product product, CancellationToken cancellationToken = default)
+        public Response PostAsyncRelativeRetryInvalidHeader(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidHeader");
             scope.Start();
@@ -1767,7 +1767,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostAsyncRelativeRetryInvalidJsonPollingAsync(Product product, CancellationToken cancellationToken = default)
+        public async ValueTask<Response> PostAsyncRelativeRetryInvalidJsonPollingAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
@@ -1793,7 +1793,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PostAsyncRelativeRetryInvalidJsonPolling(Product product, CancellationToken cancellationToken = default)
+        public Response PostAsyncRelativeRetryInvalidJsonPolling(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
