@@ -151,7 +151,14 @@ namespace Azure.AI.FormRecognizer
                         {
                             Models.Models value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = Models.Models.DeserializeModels(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = Models.Models.DeserializeModels(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -182,7 +189,14 @@ namespace Azure.AI.FormRecognizer
                         {
                             Models.Models value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = Models.Models.DeserializeModels(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = Models.Models.DeserializeModels(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -232,7 +246,14 @@ namespace Azure.AI.FormRecognizer
                         {
                             Model value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = Model.DeserializeModel(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = Model.DeserializeModel(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -264,7 +285,14 @@ namespace Azure.AI.FormRecognizer
                         {
                             Model value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = Model.DeserializeModel(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = Model.DeserializeModel(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -553,7 +581,14 @@ namespace Azure.AI.FormRecognizer
                         {
                             AnalyzeOperationResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = AnalyzeOperationResult.DeserializeAnalyzeOperationResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = AnalyzeOperationResult.DeserializeAnalyzeOperationResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -585,7 +620,14 @@ namespace Azure.AI.FormRecognizer
                         {
                             AnalyzeOperationResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = AnalyzeOperationResult.DeserializeAnalyzeOperationResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = AnalyzeOperationResult.DeserializeAnalyzeOperationResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -797,7 +839,14 @@ namespace Azure.AI.FormRecognizer
                         {
                             AnalyzeOperationResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = AnalyzeOperationResult.DeserializeAnalyzeOperationResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = AnalyzeOperationResult.DeserializeAnalyzeOperationResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -828,7 +877,14 @@ namespace Azure.AI.FormRecognizer
                         {
                             AnalyzeOperationResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = AnalyzeOperationResult.DeserializeAnalyzeOperationResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = AnalyzeOperationResult.DeserializeAnalyzeOperationResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1028,7 +1084,14 @@ namespace Azure.AI.FormRecognizer
                         {
                             AnalyzeOperationResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = AnalyzeOperationResult.DeserializeAnalyzeOperationResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = AnalyzeOperationResult.DeserializeAnalyzeOperationResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1059,7 +1122,14 @@ namespace Azure.AI.FormRecognizer
                         {
                             AnalyzeOperationResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = AnalyzeOperationResult.DeserializeAnalyzeOperationResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = AnalyzeOperationResult.DeserializeAnalyzeOperationResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1107,7 +1177,14 @@ namespace Azure.AI.FormRecognizer
                         {
                             Models.Models value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = Models.Models.DeserializeModels(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = Models.Models.DeserializeModels(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1144,7 +1221,14 @@ namespace Azure.AI.FormRecognizer
                         {
                             Models.Models value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = Models.Models.DeserializeModels(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = Models.Models.DeserializeModels(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:

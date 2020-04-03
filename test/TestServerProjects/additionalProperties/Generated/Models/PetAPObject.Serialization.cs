@@ -68,7 +68,14 @@ namespace additionalProperties.Models
                     status = property.Value.GetBoolean();
                     continue;
                 }
-                additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, null);
+                }
+                else
+                {
+                    additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
+                }
             }
             additionalProperties = additionalPropertiesDictionary;
             return new PetAPObject(id, name, status, additionalProperties);

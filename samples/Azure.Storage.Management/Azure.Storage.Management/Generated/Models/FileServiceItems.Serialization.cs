@@ -27,7 +27,14 @@ namespace Azure.Storage.Management.Models
                     List<FileServiceProperties> array = new List<FileServiceProperties>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FileServiceProperties.DeserializeFileServiceProperties(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(FileServiceProperties.DeserializeFileServiceProperties(item));
+                        }
                     }
                     value = array;
                     continue;

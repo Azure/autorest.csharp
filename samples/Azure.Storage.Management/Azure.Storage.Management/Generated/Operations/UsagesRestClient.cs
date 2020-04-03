@@ -86,7 +86,14 @@ namespace Azure.Storage.Management
                         {
                             UsageListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = UsageListResult.DeserializeUsageListResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = UsageListResult.DeserializeUsageListResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -122,7 +129,14 @@ namespace Azure.Storage.Management
                         {
                             UsageListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = UsageListResult.DeserializeUsageListResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = UsageListResult.DeserializeUsageListResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -174,7 +188,14 @@ namespace Azure.Storage.Management
                         {
                             UsageListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = UsageListResult.DeserializeUsageListResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = UsageListResult.DeserializeUsageListResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -215,7 +236,14 @@ namespace Azure.Storage.Management
                         {
                             UsageListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = UsageListResult.DeserializeUsageListResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = UsageListResult.DeserializeUsageListResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:

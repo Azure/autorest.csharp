@@ -178,7 +178,14 @@ namespace Azure.Network.Management.Interface.Models
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, property0.Value.GetString());
+                        if (property0.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            dictionary.Add(property0.Name, null);
+                        }
+                        else
+                        {
+                            dictionary.Add(property0.Name, property0.Value.GetString());
+                        }
                     }
                     tags = dictionary;
                     continue;
@@ -196,7 +203,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<SecurityRule> array = new List<SecurityRule>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(SecurityRule.DeserializeSecurityRule(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(SecurityRule.DeserializeSecurityRule(item));
+                                }
                             }
                             securityRules = array;
                             continue;
@@ -210,7 +224,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<SecurityRule> array = new List<SecurityRule>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(SecurityRule.DeserializeSecurityRule(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(SecurityRule.DeserializeSecurityRule(item));
+                                }
                             }
                             defaultSecurityRules = array;
                             continue;
@@ -224,7 +245,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<NetworkInterface> array = new List<NetworkInterface>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(NetworkInterface.DeserializeNetworkInterface(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(NetworkInterface.DeserializeNetworkInterface(item));
+                                }
                             }
                             networkInterfaces = array;
                             continue;
@@ -238,7 +266,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<Subnet> array = new List<Subnet>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(Subnet.DeserializeSubnet(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(Subnet.DeserializeSubnet(item));
+                                }
                             }
                             subnets = array;
                             continue;

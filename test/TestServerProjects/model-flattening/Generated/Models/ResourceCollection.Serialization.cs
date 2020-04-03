@@ -70,7 +70,14 @@ namespace model_flattening.Models
                     List<FlattenedProduct> array = new List<FlattenedProduct>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
+                        }
                     }
                     arrayofresources = array;
                     continue;
@@ -84,7 +91,14 @@ namespace model_flattening.Models
                     Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, FlattenedProduct.DeserializeFlattenedProduct(property0.Value));
+                        if (property0.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            dictionary.Add(property0.Name, null);
+                        }
+                        else
+                        {
+                            dictionary.Add(property0.Name, FlattenedProduct.DeserializeFlattenedProduct(property0.Value));
+                        }
                     }
                     dictionaryofresources = dictionary;
                     continue;

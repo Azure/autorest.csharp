@@ -27,11 +27,10 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Nullable return types are not implemented")]
-        public Task GetBoolNull() => Test(async (host, pipeline) =>
+        public Task GetBoolNull() => Test((host, pipeline) =>
         {
-            var result = await new BoolClient(ClientDiagnostics, pipeline, host).GetNullAsync();
-            Assert.False(result.Value);
+            // Empty response body
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new BoolClient(ClientDiagnostics, pipeline, host).GetNullAsync());
         });
 
         [Test]

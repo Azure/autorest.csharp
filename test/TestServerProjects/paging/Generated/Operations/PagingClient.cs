@@ -671,12 +671,26 @@ namespace paging
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                return ProductResult.DeserializeProductResult(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return ProductResult.DeserializeProductResult(document.RootElement);
+                }
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                return ProductResult.DeserializeProductResult(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return ProductResult.DeserializeProductResult(document.RootElement);
+                }
             });
         }
 

@@ -84,7 +84,14 @@ namespace CognitiveServices.TextAnalytics
                         {
                             EntitiesResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -122,7 +129,14 @@ namespace CognitiveServices.TextAnalytics
                         {
                             EntitiesResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -188,7 +202,14 @@ namespace CognitiveServices.TextAnalytics
                         {
                             EntitiesResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -229,7 +250,14 @@ namespace CognitiveServices.TextAnalytics
                         {
                             EntitiesResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -292,7 +320,14 @@ namespace CognitiveServices.TextAnalytics
                         {
                             EntityLinkingResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = EntityLinkingResult.DeserializeEntityLinkingResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = EntityLinkingResult.DeserializeEntityLinkingResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -330,7 +365,14 @@ namespace CognitiveServices.TextAnalytics
                         {
                             EntityLinkingResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = EntityLinkingResult.DeserializeEntityLinkingResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = EntityLinkingResult.DeserializeEntityLinkingResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -393,7 +435,14 @@ namespace CognitiveServices.TextAnalytics
                         {
                             KeyPhraseResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = KeyPhraseResult.DeserializeKeyPhraseResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = KeyPhraseResult.DeserializeKeyPhraseResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -431,7 +480,14 @@ namespace CognitiveServices.TextAnalytics
                         {
                             KeyPhraseResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = KeyPhraseResult.DeserializeKeyPhraseResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = KeyPhraseResult.DeserializeKeyPhraseResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -494,7 +550,14 @@ namespace CognitiveServices.TextAnalytics
                         {
                             LanguageResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = LanguageResult.DeserializeLanguageResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = LanguageResult.DeserializeLanguageResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -532,7 +595,14 @@ namespace CognitiveServices.TextAnalytics
                         {
                             LanguageResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = LanguageResult.DeserializeLanguageResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = LanguageResult.DeserializeLanguageResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -595,7 +665,14 @@ namespace CognitiveServices.TextAnalytics
                         {
                             SentimentResponse value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = SentimentResponse.DeserializeSentimentResponse(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = SentimentResponse.DeserializeSentimentResponse(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -633,7 +710,14 @@ namespace CognitiveServices.TextAnalytics
                         {
                             SentimentResponse value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = SentimentResponse.DeserializeSentimentResponse(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = SentimentResponse.DeserializeSentimentResponse(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:

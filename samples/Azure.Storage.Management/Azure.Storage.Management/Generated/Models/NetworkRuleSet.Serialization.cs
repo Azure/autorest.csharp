@@ -72,7 +72,14 @@ namespace Azure.Storage.Management.Models
                     List<VirtualNetworkRule> array = new List<VirtualNetworkRule>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualNetworkRule.DeserializeVirtualNetworkRule(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(VirtualNetworkRule.DeserializeVirtualNetworkRule(item));
+                        }
                     }
                     virtualNetworkRules = array;
                     continue;
@@ -86,7 +93,14 @@ namespace Azure.Storage.Management.Models
                     List<IPRule> array = new List<IPRule>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(IPRule.DeserializeIPRule(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(IPRule.DeserializeIPRule(item));
+                        }
                     }
                     ipRules = array;
                     continue;

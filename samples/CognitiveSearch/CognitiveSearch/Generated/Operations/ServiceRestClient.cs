@@ -75,7 +75,14 @@ namespace CognitiveSearch
                         {
                             ServiceStatistics value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = ServiceStatistics.DeserializeServiceStatistics(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = ServiceStatistics.DeserializeServiceStatistics(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -106,7 +113,14 @@ namespace CognitiveSearch
                         {
                             ServiceStatistics value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = ServiceStatistics.DeserializeServiceStatistics(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = ServiceStatistics.DeserializeServiceStatistics(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:

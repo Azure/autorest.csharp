@@ -28,7 +28,14 @@ namespace Azure.Network.Management.Interface.Models
                     List<EffectiveNetworkSecurityGroup> array = new List<EffectiveNetworkSecurityGroup>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(EffectiveNetworkSecurityGroup.DeserializeEffectiveNetworkSecurityGroup(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(EffectiveNetworkSecurityGroup.DeserializeEffectiveNetworkSecurityGroup(item));
+                        }
                     }
                     value = array;
                     continue;

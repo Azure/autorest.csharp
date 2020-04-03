@@ -30,7 +30,14 @@ namespace CognitiveServices.TextAnalytics.Models
                     List<LinkedEntity> array = new List<LinkedEntity>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(LinkedEntity.DeserializeLinkedEntity(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(LinkedEntity.DeserializeLinkedEntity(item));
+                        }
                     }
                     entities = array;
                     continue;

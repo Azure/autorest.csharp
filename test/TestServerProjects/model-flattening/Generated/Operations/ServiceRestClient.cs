@@ -140,12 +140,26 @@ namespace model_flattening
                         {
                             IReadOnlyList<FlattenedProduct> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            List<FlattenedProduct> array = new List<FlattenedProduct>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                array.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
+                                value = null;
                             }
-                            value = array;
+                            else
+                            {
+                                List<FlattenedProduct> array = new List<FlattenedProduct>();
+                                foreach (var item in document.RootElement.EnumerateArray())
+                                {
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
+                                    }
+                                }
+                                value = array;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -175,12 +189,26 @@ namespace model_flattening
                         {
                             IReadOnlyList<FlattenedProduct> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            List<FlattenedProduct> array = new List<FlattenedProduct>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                array.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
+                                value = null;
                             }
-                            value = array;
+                            else
+                            {
+                                List<FlattenedProduct> array = new List<FlattenedProduct>();
+                                foreach (var item in document.RootElement.EnumerateArray())
+                                {
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
+                                    }
+                                }
+                                value = array;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -298,12 +326,26 @@ namespace model_flattening
                         {
                             IReadOnlyList<ProductWrapper> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            List<ProductWrapper> array = new List<ProductWrapper>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                array.Add(ProductWrapper.DeserializeProductWrapper(item));
+                                value = null;
                             }
-                            value = array;
+                            else
+                            {
+                                List<ProductWrapper> array = new List<ProductWrapper>();
+                                foreach (var item in document.RootElement.EnumerateArray())
+                                {
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(ProductWrapper.DeserializeProductWrapper(item));
+                                    }
+                                }
+                                value = array;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -333,12 +375,26 @@ namespace model_flattening
                         {
                             IReadOnlyList<ProductWrapper> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            List<ProductWrapper> array = new List<ProductWrapper>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                array.Add(ProductWrapper.DeserializeProductWrapper(item));
+                                value = null;
                             }
-                            value = array;
+                            else
+                            {
+                                List<ProductWrapper> array = new List<ProductWrapper>();
+                                foreach (var item in document.RootElement.EnumerateArray())
+                                {
+                                    if (item.ValueKind == JsonValueKind.Null)
+                                    {
+                                        array.Add(null);
+                                    }
+                                    else
+                                    {
+                                        array.Add(ProductWrapper.DeserializeProductWrapper(item));
+                                    }
+                                }
+                                value = array;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -457,12 +513,26 @@ namespace model_flattening
                         {
                             IReadOnlyDictionary<string, FlattenedProduct> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, FlattenedProduct.DeserializeFlattenedProduct(property.Value));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, FlattenedProduct.DeserializeFlattenedProduct(property.Value));
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -492,12 +562,26 @@ namespace model_flattening
                         {
                             IReadOnlyDictionary<string, FlattenedProduct> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, FlattenedProduct.DeserializeFlattenedProduct(property.Value));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, FlattenedProduct.DeserializeFlattenedProduct(property.Value));
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -610,7 +694,14 @@ namespace model_flattening
                         {
                             ResourceCollection value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = ResourceCollection.DeserializeResourceCollection(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = ResourceCollection.DeserializeResourceCollection(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -640,7 +731,14 @@ namespace model_flattening
                         {
                             ResourceCollection value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = ResourceCollection.DeserializeResourceCollection(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = ResourceCollection.DeserializeResourceCollection(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -690,7 +788,14 @@ namespace model_flattening
                         {
                             SimpleProduct value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -721,7 +826,14 @@ namespace model_flattening
                         {
                             SimpleProduct value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -779,7 +891,14 @@ namespace model_flattening
                         {
                             SimpleProduct value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -820,7 +939,14 @@ namespace model_flattening
                         {
                             SimpleProduct value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -876,7 +1002,14 @@ namespace model_flattening
                         {
                             SimpleProduct value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -913,7 +1046,14 @@ namespace model_flattening
                         {
                             SimpleProduct value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:

@@ -59,15 +59,15 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         [Ignore("Might not apply")]
-        public Task UrlUrlDateNullAsync() => TestStatus(async (host, pipeline) => await new PathsClient(ClientDiagnostics, pipeline, host).DateNullAsync( new DateTime()));
+        public Task UrlUrlDateNullAsync() => TestStatus(async (host, pipeline) => await new PathsClient(ClientDiagnostics, pipeline, host).DateNullAsync(new DateTime()));
 
         [Test]
         [Ignore("Might not apply")]
-        public Task UrlEnumNullAsync() => TestStatus(async (host, pipeline) => await new PathsClient(ClientDiagnostics, pipeline, host).EnumNullAsync( new UriColor()));
+        public Task UrlEnumNullAsync() => TestStatus(async (host, pipeline) => await new PathsClient(ClientDiagnostics, pipeline, host).EnumNullAsync(new UriColor()));
 
         [Test]
         [Ignore("Might not apply")]
-        public Task UrlDateTimeNullAsync() => TestStatus(async (host, pipeline) => await new PathsClient(ClientDiagnostics, pipeline, host).DateTimeNullAsync( new DateTime()));
+        public Task UrlDateTimeNullAsync() => TestStatus(async (host, pipeline) => await new PathsClient(ClientDiagnostics, pipeline, host).DateTimeNullAsync(new DateTime()));
 
         [Test]
         public Task UrlPathsDateValid() => TestStatus(async (host, pipeline) => await new PathsClient(ClientDiagnostics, pipeline, host).DateValidAsync());

@@ -56,7 +56,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Line();
         }
 
-
         public static void WriteConstant(this CodeWriter writer, Constant constant)
         {
             if (constant.Value == null)

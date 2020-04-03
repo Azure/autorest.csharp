@@ -103,7 +103,14 @@ namespace CognitiveSearch
                         {
                             SynonymMap value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = SynonymMap.DeserializeSynonymMap(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = SynonymMap.DeserializeSynonymMap(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -147,7 +154,14 @@ namespace CognitiveSearch
                         {
                             SynonymMap value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = SynonymMap.DeserializeSynonymMap(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = SynonymMap.DeserializeSynonymMap(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -298,7 +312,14 @@ namespace CognitiveSearch
                         {
                             SynonymMap value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = SynonymMap.DeserializeSynonymMap(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = SynonymMap.DeserializeSynonymMap(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -335,7 +356,14 @@ namespace CognitiveSearch
                         {
                             SynonymMap value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = SynonymMap.DeserializeSynonymMap(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = SynonymMap.DeserializeSynonymMap(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -388,7 +416,14 @@ namespace CognitiveSearch
                         {
                             ListSynonymMapsResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = ListSynonymMapsResult.DeserializeListSynonymMapsResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = ListSynonymMapsResult.DeserializeListSynonymMapsResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -420,7 +455,14 @@ namespace CognitiveSearch
                         {
                             ListSynonymMapsResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = ListSynonymMapsResult.DeserializeListSynonymMapsResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = ListSynonymMapsResult.DeserializeListSynonymMapsResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -478,7 +520,14 @@ namespace CognitiveSearch
                         {
                             SynonymMap value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = SynonymMap.DeserializeSynonymMap(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = SynonymMap.DeserializeSynonymMap(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -515,7 +564,14 @@ namespace CognitiveSearch
                         {
                             SynonymMap value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = SynonymMap.DeserializeSynonymMap(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = SynonymMap.DeserializeSynonymMap(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:

@@ -13,8 +13,8 @@ namespace Azure.Storage.Management.Models
     public partial class BlobRestoreRange
     {
         /// <summary> Initializes a new instance of BlobRestoreRange. </summary>
-        /// <param name="startRange"> Blob start range. Empty means account start. </param>
-        /// <param name="endRange"> Blob end range. Empty means account end. </param>
+        /// <param name="startRange"> Blob start range. This is inclusive. Empty means account start. </param>
+        /// <param name="endRange"> Blob end range. This is exclusive. Empty means account end. </param>
         public BlobRestoreRange(string startRange, string endRange)
         {
             if (startRange == null)
@@ -30,9 +30,9 @@ namespace Azure.Storage.Management.Models
             EndRange = endRange;
         }
 
-        /// <summary> Blob start range. Empty means account start. </summary>
+        /// <summary> Blob start range. This is inclusive. Empty means account start. </summary>
         public string StartRange { get; }
-        /// <summary> Blob end range. Empty means account end. </summary>
+        /// <summary> Blob end range. This is exclusive. Empty means account end. </summary>
         public string EndRange { get; }
     }
 }

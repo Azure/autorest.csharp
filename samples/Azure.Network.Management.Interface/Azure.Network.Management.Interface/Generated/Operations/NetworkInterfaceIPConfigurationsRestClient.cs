@@ -93,7 +93,14 @@ namespace Azure.Network.Management.Interface
                         {
                             NetworkInterfaceIPConfigurationListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = NetworkInterfaceIPConfigurationListResult.DeserializeNetworkInterfaceIPConfigurationListResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = NetworkInterfaceIPConfigurationListResult.DeserializeNetworkInterfaceIPConfigurationListResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -134,7 +141,14 @@ namespace Azure.Network.Management.Interface
                         {
                             NetworkInterfaceIPConfigurationListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = NetworkInterfaceIPConfigurationListResult.DeserializeNetworkInterfaceIPConfigurationListResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = NetworkInterfaceIPConfigurationListResult.DeserializeNetworkInterfaceIPConfigurationListResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -200,7 +214,14 @@ namespace Azure.Network.Management.Interface
                         {
                             NetworkInterfaceIPConfiguration value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -246,7 +267,14 @@ namespace Azure.Network.Management.Interface
                         {
                             NetworkInterfaceIPConfiguration value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -303,7 +331,14 @@ namespace Azure.Network.Management.Interface
                         {
                             NetworkInterfaceIPConfigurationListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = NetworkInterfaceIPConfigurationListResult.DeserializeNetworkInterfaceIPConfigurationListResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = NetworkInterfaceIPConfigurationListResult.DeserializeNetworkInterfaceIPConfigurationListResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -349,7 +384,14 @@ namespace Azure.Network.Management.Interface
                         {
                             NetworkInterfaceIPConfigurationListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = NetworkInterfaceIPConfigurationListResult.DeserializeNetworkInterfaceIPConfigurationListResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = NetworkInterfaceIPConfigurationListResult.DeserializeNetworkInterfaceIPConfigurationListResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:

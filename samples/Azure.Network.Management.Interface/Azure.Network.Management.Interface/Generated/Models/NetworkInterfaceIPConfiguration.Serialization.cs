@@ -187,7 +187,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<VirtualNetworkTap> array = new List<VirtualNetworkTap>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(VirtualNetworkTap.DeserializeVirtualNetworkTap(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(VirtualNetworkTap.DeserializeVirtualNetworkTap(item));
+                                }
                             }
                             virtualNetworkTaps = array;
                             continue;
@@ -201,7 +208,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<ApplicationGatewayBackendAddressPool> array = new List<ApplicationGatewayBackendAddressPool>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ApplicationGatewayBackendAddressPool.DeserializeApplicationGatewayBackendAddressPool(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(ApplicationGatewayBackendAddressPool.DeserializeApplicationGatewayBackendAddressPool(item));
+                                }
                             }
                             applicationGatewayBackendAddressPools = array;
                             continue;
@@ -215,7 +229,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<BackendAddressPool> array = new List<BackendAddressPool>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(BackendAddressPool.DeserializeBackendAddressPool(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(BackendAddressPool.DeserializeBackendAddressPool(item));
+                                }
                             }
                             loadBalancerBackendAddressPools = array;
                             continue;
@@ -229,7 +250,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<InboundNatRule> array = new List<InboundNatRule>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(InboundNatRule.DeserializeInboundNatRule(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(InboundNatRule.DeserializeInboundNatRule(item));
+                                }
                             }
                             loadBalancerInboundNatRules = array;
                             continue;
@@ -297,7 +325,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<ApplicationSecurityGroup> array = new List<ApplicationSecurityGroup>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ApplicationSecurityGroup.DeserializeApplicationSecurityGroup(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(ApplicationSecurityGroup.DeserializeApplicationSecurityGroup(item));
+                                }
                             }
                             applicationSecurityGroups = array;
                             continue;

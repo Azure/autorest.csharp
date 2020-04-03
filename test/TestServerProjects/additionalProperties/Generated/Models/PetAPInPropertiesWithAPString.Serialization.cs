@@ -102,7 +102,14 @@ namespace additionalProperties.Models
                     additionalProperties = dictionary;
                     continue;
                 }
-                additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, null);
+                }
+                else
+                {
+                    additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
+                }
             }
             moreAdditionalProperties = additionalPropertiesDictionary;
             return new PetAPInPropertiesWithAPString(id, name, status, odatalocation, additionalProperties, moreAdditionalProperties);

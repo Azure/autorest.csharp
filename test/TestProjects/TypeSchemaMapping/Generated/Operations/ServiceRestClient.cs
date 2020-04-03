@@ -71,7 +71,14 @@ namespace TypeSchemaMapping
                         {
                             CustomizedModel value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = CustomizedModel.DeserializeCustomizedModel(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = CustomizedModel.DeserializeCustomizedModel(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -101,7 +108,14 @@ namespace TypeSchemaMapping
                         {
                             CustomizedModel value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = CustomizedModel.DeserializeCustomizedModel(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = CustomizedModel.DeserializeCustomizedModel(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -229,7 +243,14 @@ namespace TypeSchemaMapping
                         {
                             SecondModel value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = SecondModel.DeserializeSecondModel(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = SecondModel.DeserializeSecondModel(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -259,7 +280,14 @@ namespace TypeSchemaMapping
                         {
                             SecondModel value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = SecondModel.DeserializeSecondModel(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = SecondModel.DeserializeSecondModel(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:

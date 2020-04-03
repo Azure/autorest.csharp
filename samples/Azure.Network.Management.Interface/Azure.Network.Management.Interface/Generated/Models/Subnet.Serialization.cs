@@ -240,7 +240,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<string> array = new List<string>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(item.GetString());
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(item.GetString());
+                                }
                             }
                             addressPrefixes = array;
                             continue;
@@ -281,7 +288,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<ServiceEndpointPropertiesFormat> array = new List<ServiceEndpointPropertiesFormat>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ServiceEndpointPropertiesFormat.DeserializeServiceEndpointPropertiesFormat(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(ServiceEndpointPropertiesFormat.DeserializeServiceEndpointPropertiesFormat(item));
+                                }
                             }
                             serviceEndpoints = array;
                             continue;
@@ -295,7 +309,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<ServiceEndpointPolicy> array = new List<ServiceEndpointPolicy>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ServiceEndpointPolicy.DeserializeServiceEndpointPolicy(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(ServiceEndpointPolicy.DeserializeServiceEndpointPolicy(item));
+                                }
                             }
                             serviceEndpointPolicies = array;
                             continue;
@@ -309,7 +330,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<PrivateEndpoint> array = new List<PrivateEndpoint>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(PrivateEndpoint.DeserializePrivateEndpoint(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(PrivateEndpoint.DeserializePrivateEndpoint(item));
+                                }
                             }
                             privateEndpoints = array;
                             continue;
@@ -323,7 +351,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<IPConfiguration> array = new List<IPConfiguration>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(IPConfiguration.DeserializeIPConfiguration(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(IPConfiguration.DeserializeIPConfiguration(item));
+                                }
                             }
                             ipConfigurations = array;
                             continue;
@@ -337,7 +372,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<IPConfigurationProfile> array = new List<IPConfigurationProfile>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(IPConfigurationProfile.DeserializeIPConfigurationProfile(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(IPConfigurationProfile.DeserializeIPConfigurationProfile(item));
+                                }
                             }
                             ipConfigurationProfiles = array;
                             continue;
@@ -351,7 +393,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<ResourceNavigationLink> array = new List<ResourceNavigationLink>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ResourceNavigationLink.DeserializeResourceNavigationLink(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(ResourceNavigationLink.DeserializeResourceNavigationLink(item));
+                                }
                             }
                             resourceNavigationLinks = array;
                             continue;
@@ -365,7 +414,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<ServiceAssociationLink> array = new List<ServiceAssociationLink>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ServiceAssociationLink.DeserializeServiceAssociationLink(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(ServiceAssociationLink.DeserializeServiceAssociationLink(item));
+                                }
                             }
                             serviceAssociationLinks = array;
                             continue;
@@ -379,7 +435,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<Delegation> array = new List<Delegation>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(Delegation.DeserializeDelegation(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(Delegation.DeserializeDelegation(item));
+                                }
                             }
                             delegations = array;
                             continue;

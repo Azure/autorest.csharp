@@ -251,7 +251,14 @@ namespace Azure.Storage.Management.Models
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, property0.Value.GetString());
+                        if (property0.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            dictionary.Add(property0.Name, null);
+                        }
+                        else
+                        {
+                            dictionary.Add(property0.Name, property0.Value.GetString());
+                        }
                     }
                     tags = dictionary;
                     continue;
@@ -472,7 +479,14 @@ namespace Azure.Storage.Management.Models
                             List<PrivateEndpointConnection> array = new List<PrivateEndpointConnection>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(PrivateEndpointConnection.DeserializePrivateEndpointConnection(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(PrivateEndpointConnection.DeserializePrivateEndpointConnection(item));
+                                }
                             }
                             privateEndpointConnections = array;
                             continue;

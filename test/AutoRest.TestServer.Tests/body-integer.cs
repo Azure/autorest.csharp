@@ -53,21 +53,17 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Nullable return types are not implemented")]
-        public Task GetNullUnixTime() => TestStatus(async (host, pipeline) =>
+        public Task GetNullUnixTime() => Test((host, pipeline) =>
         {
-            var response = await new IntClient(ClientDiagnostics, pipeline, host).GetNullUnixTimeAsync();
-            Assert.AreEqual(null, response.Value);
-            return response.GetRawResponse();
+            // Empty response body
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new IntClient(ClientDiagnostics, pipeline, host).GetNullUnixTimeAsync());
         });
 
         [Test]
-        [Ignore("Nullable return types are not implemented")]
-        public Task GetIntegerNull() => TestStatus(async (host, pipeline) =>
+        public Task GetIntegerNull() => Test((host, pipeline) =>
         {
-            var response = await new IntClient(ClientDiagnostics, pipeline, host).GetNullAsync();
-            Assert.AreEqual(null, response.Value);
-            return response.GetRawResponse();
+            // Empty response body
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new IntClient(ClientDiagnostics, pipeline, host).GetNullAsync());
         });
 
         [Test]

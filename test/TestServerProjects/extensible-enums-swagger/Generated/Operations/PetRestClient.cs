@@ -69,7 +69,14 @@ namespace extensible_enums_swagger
                         {
                             Pet value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = Pet.DeserializePet(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = Pet.DeserializePet(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -104,7 +111,14 @@ namespace extensible_enums_swagger
                         {
                             Pet value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = Pet.DeserializePet(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = Pet.DeserializePet(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -153,7 +167,14 @@ namespace extensible_enums_swagger
                         {
                             Pet value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = Pet.DeserializePet(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = Pet.DeserializePet(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -183,7 +204,14 @@ namespace extensible_enums_swagger
                         {
                             Pet value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = Pet.DeserializePet(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = Pet.DeserializePet(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:

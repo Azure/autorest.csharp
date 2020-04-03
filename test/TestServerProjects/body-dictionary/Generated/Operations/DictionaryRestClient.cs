@@ -64,12 +64,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, int> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetInt32());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetInt32());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -99,12 +106,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, int> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetInt32());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetInt32());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -146,12 +160,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, int> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetInt32());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetInt32());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -181,12 +202,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, int> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetInt32());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetInt32());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -312,12 +340,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, string> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetString());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -347,12 +389,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, string> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetString());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -394,12 +450,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, string> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetString());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -429,12 +499,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, string> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetString());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -476,12 +560,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, string> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetString());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -511,12 +609,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, string> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetString());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -558,12 +670,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, string> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetString());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -593,12 +719,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, string> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetString());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -640,12 +780,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, bool> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetBoolean());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetBoolean());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -675,12 +822,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, bool> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetBoolean());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetBoolean());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -806,12 +960,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, bool> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetBoolean());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetBoolean());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -841,12 +1002,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, bool> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetBoolean());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetBoolean());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -888,12 +1056,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, bool> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetBoolean());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetBoolean());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -923,12 +1098,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, bool> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetBoolean());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetBoolean());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -970,12 +1152,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, int> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetInt32());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetInt32());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1005,12 +1194,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, int> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetInt32());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetInt32());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1136,12 +1332,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, int> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetInt32());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetInt32());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1171,12 +1374,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, int> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetInt32());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetInt32());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1218,12 +1428,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, int> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetInt32());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetInt32());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1253,12 +1470,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, int> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetInt32());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetInt32());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1300,12 +1524,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, long> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, long> dictionary = new Dictionary<string, long>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetInt64());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, long> dictionary = new Dictionary<string, long>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetInt64());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1335,12 +1566,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, long> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, long> dictionary = new Dictionary<string, long>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetInt64());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, long> dictionary = new Dictionary<string, long>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetInt64());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1466,12 +1704,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, long> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, long> dictionary = new Dictionary<string, long>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetInt64());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, long> dictionary = new Dictionary<string, long>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetInt64());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1501,12 +1746,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, long> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, long> dictionary = new Dictionary<string, long>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetInt64());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, long> dictionary = new Dictionary<string, long>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetInt64());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1548,12 +1800,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, long> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, long> dictionary = new Dictionary<string, long>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetInt64());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, long> dictionary = new Dictionary<string, long>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetInt64());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1583,12 +1842,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, long> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, long> dictionary = new Dictionary<string, long>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetInt64());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, long> dictionary = new Dictionary<string, long>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetInt64());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1630,12 +1896,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, float> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, float> dictionary = new Dictionary<string, float>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetSingle());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, float> dictionary = new Dictionary<string, float>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetSingle());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1665,12 +1938,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, float> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, float> dictionary = new Dictionary<string, float>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetSingle());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, float> dictionary = new Dictionary<string, float>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetSingle());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1796,12 +2076,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, float> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, float> dictionary = new Dictionary<string, float>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetSingle());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, float> dictionary = new Dictionary<string, float>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetSingle());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1831,12 +2118,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, float> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, float> dictionary = new Dictionary<string, float>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetSingle());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, float> dictionary = new Dictionary<string, float>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetSingle());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1878,12 +2172,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, float> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, float> dictionary = new Dictionary<string, float>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetSingle());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, float> dictionary = new Dictionary<string, float>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetSingle());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1913,12 +2214,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, float> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, float> dictionary = new Dictionary<string, float>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetSingle());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, float> dictionary = new Dictionary<string, float>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetSingle());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1960,12 +2268,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, double> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, double> dictionary = new Dictionary<string, double>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetDouble());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, double> dictionary = new Dictionary<string, double>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetDouble());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -1995,12 +2310,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, double> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, double> dictionary = new Dictionary<string, double>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetDouble());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, double> dictionary = new Dictionary<string, double>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetDouble());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -2126,12 +2448,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, double> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, double> dictionary = new Dictionary<string, double>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetDouble());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, double> dictionary = new Dictionary<string, double>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetDouble());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -2161,12 +2490,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, double> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, double> dictionary = new Dictionary<string, double>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetDouble());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, double> dictionary = new Dictionary<string, double>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetDouble());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -2208,12 +2544,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, double> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, double> dictionary = new Dictionary<string, double>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetDouble());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, double> dictionary = new Dictionary<string, double>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetDouble());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -2243,12 +2586,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, double> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, double> dictionary = new Dictionary<string, double>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetDouble());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, double> dictionary = new Dictionary<string, double>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetDouble());
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -2290,12 +2640,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, string> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetString());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -2325,12 +2689,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, string> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetString());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -2456,12 +2834,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, string> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetString());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -2491,12 +2883,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, string> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetString());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -2538,12 +2944,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, string> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetString());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -2573,12 +2993,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, string> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetString());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -2620,12 +3054,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, DateTimeOffset> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -2655,12 +3096,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, DateTimeOffset> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -2786,12 +3234,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, DateTimeOffset> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -2821,12 +3276,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, DateTimeOffset> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -2868,12 +3330,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, DateTimeOffset> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -2903,12 +3372,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, DateTimeOffset> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -2950,12 +3426,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, DateTimeOffset> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -2985,12 +3468,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, DateTimeOffset> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -3116,12 +3606,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, DateTimeOffset> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -3151,12 +3648,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, DateTimeOffset> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -3198,12 +3702,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, DateTimeOffset> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -3233,12 +3744,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, DateTimeOffset> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -3280,12 +3798,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, DateTimeOffset> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("R"));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("R"));
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -3315,12 +3840,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, DateTimeOffset> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("R"));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("R"));
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -3446,12 +3978,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, TimeSpan> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, TimeSpan> dictionary = new Dictionary<string, TimeSpan>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetTimeSpan("P"));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, TimeSpan> dictionary = new Dictionary<string, TimeSpan>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetTimeSpan("P"));
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -3481,12 +4020,19 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, TimeSpan> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, TimeSpan> dictionary = new Dictionary<string, TimeSpan>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetTimeSpan("P"));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, TimeSpan> dictionary = new Dictionary<string, TimeSpan>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetTimeSpan("P"));
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -3612,12 +4158,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, byte[]> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -3647,12 +4207,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, byte[]> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -3778,12 +4352,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, byte[]> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -3813,12 +4401,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, byte[]> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -3860,12 +4462,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, byte[]> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetBytesFromBase64("U"));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetBytesFromBase64("U"));
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -3895,12 +4511,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, byte[]> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetBytesFromBase64("U"));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetBytesFromBase64("U"));
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -3942,12 +4572,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, Widget> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -3977,12 +4621,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, Widget> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -4024,12 +4682,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, Widget> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -4059,12 +4731,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, Widget> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -4106,12 +4792,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, Widget> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -4141,12 +4841,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, Widget> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -4188,12 +4902,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, Widget> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -4223,12 +4951,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, Widget> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -4270,12 +5012,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, Widget> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -4305,12 +5061,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, Widget> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -4436,17 +5206,38 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, IList<string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                List<string> array = new List<string>();
-                                foreach (var item in property.Value.EnumerateArray())
-                                {
-                                    array.Add(item.GetString());
-                                }
-                                dictionary.Add(property.Name, array);
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        List<string> array = new List<string>();
+                                        foreach (var item in property.Value.EnumerateArray())
+                                        {
+                                            if (item.ValueKind == JsonValueKind.Null)
+                                            {
+                                                array.Add(null);
+                                            }
+                                            else
+                                            {
+                                                array.Add(item.GetString());
+                                            }
+                                        }
+                                        dictionary.Add(property.Name, array);
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -4476,17 +5267,38 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, IList<string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                List<string> array = new List<string>();
-                                foreach (var item in property.Value.EnumerateArray())
-                                {
-                                    array.Add(item.GetString());
-                                }
-                                dictionary.Add(property.Name, array);
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        List<string> array = new List<string>();
+                                        foreach (var item in property.Value.EnumerateArray())
+                                        {
+                                            if (item.ValueKind == JsonValueKind.Null)
+                                            {
+                                                array.Add(null);
+                                            }
+                                            else
+                                            {
+                                                array.Add(item.GetString());
+                                            }
+                                        }
+                                        dictionary.Add(property.Name, array);
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -4528,17 +5340,38 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, IList<string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                List<string> array = new List<string>();
-                                foreach (var item in property.Value.EnumerateArray())
-                                {
-                                    array.Add(item.GetString());
-                                }
-                                dictionary.Add(property.Name, array);
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        List<string> array = new List<string>();
+                                        foreach (var item in property.Value.EnumerateArray())
+                                        {
+                                            if (item.ValueKind == JsonValueKind.Null)
+                                            {
+                                                array.Add(null);
+                                            }
+                                            else
+                                            {
+                                                array.Add(item.GetString());
+                                            }
+                                        }
+                                        dictionary.Add(property.Name, array);
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -4568,17 +5401,38 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, IList<string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                List<string> array = new List<string>();
-                                foreach (var item in property.Value.EnumerateArray())
-                                {
-                                    array.Add(item.GetString());
-                                }
-                                dictionary.Add(property.Name, array);
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        List<string> array = new List<string>();
+                                        foreach (var item in property.Value.EnumerateArray())
+                                        {
+                                            if (item.ValueKind == JsonValueKind.Null)
+                                            {
+                                                array.Add(null);
+                                            }
+                                            else
+                                            {
+                                                array.Add(item.GetString());
+                                            }
+                                        }
+                                        dictionary.Add(property.Name, array);
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -4620,17 +5474,38 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, IList<string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                List<string> array = new List<string>();
-                                foreach (var item in property.Value.EnumerateArray())
-                                {
-                                    array.Add(item.GetString());
-                                }
-                                dictionary.Add(property.Name, array);
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        List<string> array = new List<string>();
+                                        foreach (var item in property.Value.EnumerateArray())
+                                        {
+                                            if (item.ValueKind == JsonValueKind.Null)
+                                            {
+                                                array.Add(null);
+                                            }
+                                            else
+                                            {
+                                                array.Add(item.GetString());
+                                            }
+                                        }
+                                        dictionary.Add(property.Name, array);
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -4660,17 +5535,38 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, IList<string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                List<string> array = new List<string>();
-                                foreach (var item in property.Value.EnumerateArray())
-                                {
-                                    array.Add(item.GetString());
-                                }
-                                dictionary.Add(property.Name, array);
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        List<string> array = new List<string>();
+                                        foreach (var item in property.Value.EnumerateArray())
+                                        {
+                                            if (item.ValueKind == JsonValueKind.Null)
+                                            {
+                                                array.Add(null);
+                                            }
+                                            else
+                                            {
+                                                array.Add(item.GetString());
+                                            }
+                                        }
+                                        dictionary.Add(property.Name, array);
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -4712,17 +5608,38 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, IList<string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                List<string> array = new List<string>();
-                                foreach (var item in property.Value.EnumerateArray())
-                                {
-                                    array.Add(item.GetString());
-                                }
-                                dictionary.Add(property.Name, array);
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        List<string> array = new List<string>();
+                                        foreach (var item in property.Value.EnumerateArray())
+                                        {
+                                            if (item.ValueKind == JsonValueKind.Null)
+                                            {
+                                                array.Add(null);
+                                            }
+                                            else
+                                            {
+                                                array.Add(item.GetString());
+                                            }
+                                        }
+                                        dictionary.Add(property.Name, array);
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -4752,17 +5669,38 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, IList<string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                List<string> array = new List<string>();
-                                foreach (var item in property.Value.EnumerateArray())
-                                {
-                                    array.Add(item.GetString());
-                                }
-                                dictionary.Add(property.Name, array);
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        List<string> array = new List<string>();
+                                        foreach (var item in property.Value.EnumerateArray())
+                                        {
+                                            if (item.ValueKind == JsonValueKind.Null)
+                                            {
+                                                array.Add(null);
+                                            }
+                                            else
+                                            {
+                                                array.Add(item.GetString());
+                                            }
+                                        }
+                                        dictionary.Add(property.Name, array);
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -4804,17 +5742,38 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, IList<string>> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                List<string> array = new List<string>();
-                                foreach (var item in property.Value.EnumerateArray())
-                                {
-                                    array.Add(item.GetString());
-                                }
-                                dictionary.Add(property.Name, array);
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        List<string> array = new List<string>();
+                                        foreach (var item in property.Value.EnumerateArray())
+                                        {
+                                            if (item.ValueKind == JsonValueKind.Null)
+                                            {
+                                                array.Add(null);
+                                            }
+                                            else
+                                            {
+                                                array.Add(item.GetString());
+                                            }
+                                        }
+                                        dictionary.Add(property.Name, array);
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -4844,17 +5803,38 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, IList<string>> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                List<string> array = new List<string>();
-                                foreach (var item in property.Value.EnumerateArray())
-                                {
-                                    array.Add(item.GetString());
-                                }
-                                dictionary.Add(property.Name, array);
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        List<string> array = new List<string>();
+                                        foreach (var item in property.Value.EnumerateArray())
+                                        {
+                                            if (item.ValueKind == JsonValueKind.Null)
+                                            {
+                                                array.Add(null);
+                                            }
+                                            else
+                                            {
+                                                array.Add(item.GetString());
+                                            }
+                                        }
+                                        dictionary.Add(property.Name, array);
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -4985,12 +5965,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, object> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetObject());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetObject());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -5020,12 +6014,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, object> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetObject());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetObject());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -5067,12 +6075,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, object> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetObject());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetObject());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -5102,12 +6124,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, object> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetObject());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetObject());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -5149,12 +6185,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, object> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetObject());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetObject());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -5184,12 +6234,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, object> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetObject());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetObject());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -5231,12 +6295,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, object> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetObject());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetObject());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -5266,12 +6344,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, object> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetObject());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetObject());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -5313,12 +6405,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, object> value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetObject());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetObject());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -5348,12 +6454,26 @@ namespace body_dictionary
                         {
                             IReadOnlyDictionary<string, object> value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                            foreach (var property in document.RootElement.EnumerateObject())
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetObject());
+                                value = null;
                             }
-                            value = dictionary;
+                            else
+                            {
+                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                                foreach (var property in document.RootElement.EnumerateObject())
+                                {
+                                    if (property.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        dictionary.Add(property.Name, null);
+                                    }
+                                    else
+                                    {
+                                        dictionary.Add(property.Name, property.Value.GetObject());
+                                    }
+                                }
+                                value = dictionary;
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:

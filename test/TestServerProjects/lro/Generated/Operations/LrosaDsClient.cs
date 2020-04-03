@@ -51,12 +51,26 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                return Product.DeserializeProduct(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return Product.DeserializeProduct(document.RootElement);
+                }
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                return Product.DeserializeProduct(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return Product.DeserializeProduct(document.RootElement);
+                }
             });
         }
 
@@ -96,12 +110,26 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                return Product.DeserializeProduct(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return Product.DeserializeProduct(document.RootElement);
+                }
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                return Product.DeserializeProduct(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return Product.DeserializeProduct(document.RootElement);
+                }
             });
         }
 
@@ -141,12 +169,26 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                return Product.DeserializeProduct(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return Product.DeserializeProduct(document.RootElement);
+                }
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                return Product.DeserializeProduct(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return Product.DeserializeProduct(document.RootElement);
+                }
             });
         }
 
@@ -186,12 +228,26 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                return Product.DeserializeProduct(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return Product.DeserializeProduct(document.RootElement);
+                }
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                return Product.DeserializeProduct(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return Product.DeserializeProduct(document.RootElement);
+                }
             });
         }
 
@@ -435,12 +491,26 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                return Product.DeserializeProduct(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return Product.DeserializeProduct(document.RootElement);
+                }
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                return Product.DeserializeProduct(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return Product.DeserializeProduct(document.RootElement);
+                }
             });
         }
 
@@ -480,12 +550,26 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                return Product.DeserializeProduct(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return Product.DeserializeProduct(document.RootElement);
+                }
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                return Product.DeserializeProduct(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return Product.DeserializeProduct(document.RootElement);
+                }
             });
         }
 
@@ -525,12 +609,26 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                return Product.DeserializeProduct(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return Product.DeserializeProduct(document.RootElement);
+                }
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                return Product.DeserializeProduct(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return Product.DeserializeProduct(document.RootElement);
+                }
             });
         }
 
@@ -706,12 +804,26 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                return Product.DeserializeProduct(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return Product.DeserializeProduct(document.RootElement);
+                }
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                return Product.DeserializeProduct(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return Product.DeserializeProduct(document.RootElement);
+                }
             });
         }
 
@@ -751,12 +863,26 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                return Product.DeserializeProduct(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return Product.DeserializeProduct(document.RootElement);
+                }
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                return Product.DeserializeProduct(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return Product.DeserializeProduct(document.RootElement);
+                }
             });
         }
 
@@ -796,12 +922,26 @@ namespace lro
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                return Product.DeserializeProduct(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return Product.DeserializeProduct(document.RootElement);
+                }
             },
             async (response, cancellationToken) =>
             {
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                return Product.DeserializeProduct(document.RootElement);
+                if (document.RootElement.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return Product.DeserializeProduct(document.RootElement);
+                }
             });
         }
 

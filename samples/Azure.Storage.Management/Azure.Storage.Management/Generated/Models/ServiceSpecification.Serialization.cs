@@ -27,7 +27,14 @@ namespace Azure.Storage.Management.Models
                     List<MetricSpecification> array = new List<MetricSpecification>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(MetricSpecification.DeserializeMetricSpecification(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(MetricSpecification.DeserializeMetricSpecification(item));
+                        }
                     }
                     metricSpecifications = array;
                     continue;

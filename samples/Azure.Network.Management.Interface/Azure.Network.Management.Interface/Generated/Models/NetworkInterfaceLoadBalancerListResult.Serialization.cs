@@ -28,7 +28,14 @@ namespace Azure.Network.Management.Interface.Models
                     List<LoadBalancer> array = new List<LoadBalancer>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(LoadBalancer.DeserializeLoadBalancer(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(LoadBalancer.DeserializeLoadBalancer(item));
+                        }
                     }
                     value = array;
                     continue;

@@ -63,7 +63,14 @@ namespace body_complex
                         {
                             Fish value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = Fish.DeserializeFish(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = Fish.DeserializeFish(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -93,7 +100,14 @@ namespace body_complex
                         {
                             Fish value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = Fish.DeserializeFish(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = Fish.DeserializeFish(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:

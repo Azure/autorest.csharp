@@ -149,12 +149,10 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("No support for null results")]
-        public Task GetNumberNull() => TestStatus(async (host, pipeline) =>
+        public Task GetNumberNull() => Test((host, pipeline) =>
         {
-            var response = await new NumberClient(ClientDiagnostics, pipeline, host).GetNullAsync();
-            Assert.Null(response.Value);
-            return response.GetRawResponse();
+            // Empty response body
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new NumberClient(ClientDiagnostics, pipeline, host).GetNullAsync());
         });
     }
 }

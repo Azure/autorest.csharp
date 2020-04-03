@@ -28,7 +28,14 @@ namespace AppConfiguration.Models
                     List<Label> array = new List<Label>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Label.DeserializeLabel(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Label.DeserializeLabel(item));
+                        }
                     }
                     items = array;
                     continue;

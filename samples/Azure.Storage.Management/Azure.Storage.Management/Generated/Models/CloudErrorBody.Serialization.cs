@@ -57,7 +57,14 @@ namespace Azure.Storage.Management.Models
                     List<CloudErrorBody> array = new List<CloudErrorBody>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeCloudErrorBody(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DeserializeCloudErrorBody(item));
+                        }
                     }
                     details = array;
                     continue;

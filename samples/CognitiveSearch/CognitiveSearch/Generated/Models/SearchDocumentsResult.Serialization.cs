@@ -50,12 +50,26 @@ namespace CognitiveSearch.Models
                     Dictionary<string, IList<FacetResult>> dictionary = new Dictionary<string, IList<FacetResult>>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        List<FacetResult> array = new List<FacetResult>();
-                        foreach (var item in property0.Value.EnumerateArray())
+                        if (property0.Value.ValueKind == JsonValueKind.Null)
                         {
-                            array.Add(FacetResult.DeserializeFacetResult(item));
+                            dictionary.Add(property0.Name, null);
                         }
-                        dictionary.Add(property0.Name, array);
+                        else
+                        {
+                            List<FacetResult> array = new List<FacetResult>();
+                            foreach (var item in property0.Value.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(FacetResult.DeserializeFacetResult(item));
+                                }
+                            }
+                            dictionary.Add(property0.Name, array);
+                        }
                     }
                     searchfacets = dictionary;
                     continue;
@@ -74,7 +88,14 @@ namespace CognitiveSearch.Models
                     List<SearchResult> array = new List<SearchResult>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(SearchResult.DeserializeSearchResult(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(SearchResult.DeserializeSearchResult(item));
+                        }
                     }
                     value = array;
                     continue;

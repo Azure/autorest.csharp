@@ -28,7 +28,14 @@ namespace Azure.Network.Management.Interface.Models
                     List<EffectiveRoute> array = new List<EffectiveRoute>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(EffectiveRoute.DeserializeEffectiveRoute(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(EffectiveRoute.DeserializeEffectiveRoute(item));
+                        }
                     }
                     value = array;
                     continue;

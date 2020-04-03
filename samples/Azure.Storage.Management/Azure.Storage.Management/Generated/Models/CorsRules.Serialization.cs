@@ -43,7 +43,14 @@ namespace Azure.Storage.Management.Models
                     List<CorsRule> array = new List<CorsRule>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CorsRule.DeserializeCorsRule(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(CorsRule.DeserializeCorsRule(item));
+                        }
                     }
                     corsRules = array;
                     continue;

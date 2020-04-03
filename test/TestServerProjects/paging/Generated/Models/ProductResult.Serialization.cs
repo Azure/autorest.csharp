@@ -28,7 +28,14 @@ namespace paging.Models
                     List<Product> array = new List<Product>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Product.DeserializeProduct(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Product.DeserializeProduct(item));
+                        }
                     }
                     values = array;
                     continue;

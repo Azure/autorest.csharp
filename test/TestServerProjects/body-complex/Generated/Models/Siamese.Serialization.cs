@@ -85,7 +85,14 @@ namespace body_complex.Models
                     List<Dog> array = new List<Dog>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Dog.DeserializeDog(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Dog.DeserializeDog(item));
+                        }
                     }
                     hates = array;
                     continue;

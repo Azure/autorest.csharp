@@ -71,7 +71,14 @@ namespace Azure.Storage.Management.Models
                     List<Dimension> array = new List<Dimension>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Dimension.DeserializeDimension(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Dimension.DeserializeDimension(item));
+                        }
                     }
                     dimensions = array;
                     continue;

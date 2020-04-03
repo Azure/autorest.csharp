@@ -2306,7 +2306,14 @@ namespace xml_service
                         {
                             JsonOutput value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = Models.JsonOutput.DeserializeJsonOutput(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = Models.JsonOutput.DeserializeJsonOutput(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -2336,7 +2343,14 @@ namespace xml_service
                         {
                             JsonOutput value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = Models.JsonOutput.DeserializeJsonOutput(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = Models.JsonOutput.DeserializeJsonOutput(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:

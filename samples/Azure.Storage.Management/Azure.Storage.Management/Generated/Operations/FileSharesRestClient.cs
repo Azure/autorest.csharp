@@ -104,7 +104,14 @@ namespace Azure.Storage.Management
                         {
                             FileShareItems value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = FileShareItems.DeserializeFileShareItems(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = FileShareItems.DeserializeFileShareItems(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -147,7 +154,14 @@ namespace Azure.Storage.Management
                         {
                             FileShareItems value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = FileShareItems.DeserializeFileShareItems(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = FileShareItems.DeserializeFileShareItems(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -225,7 +239,14 @@ namespace Azure.Storage.Management
                         {
                             FileShare value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = FileShare.DeserializeFileShare(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = FileShare.DeserializeFileShare(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -274,7 +295,14 @@ namespace Azure.Storage.Management
                         {
                             FileShare value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = FileShare.DeserializeFileShare(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = FileShare.DeserializeFileShare(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -351,7 +379,14 @@ namespace Azure.Storage.Management
                         {
                             FileShare value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = FileShare.DeserializeFileShare(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = FileShare.DeserializeFileShare(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -399,7 +434,14 @@ namespace Azure.Storage.Management
                         {
                             FileShare value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = FileShare.DeserializeFileShare(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = FileShare.DeserializeFileShare(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -465,7 +507,14 @@ namespace Azure.Storage.Management
                         {
                             FileShare value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = FileShare.DeserializeFileShare(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = FileShare.DeserializeFileShare(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -511,7 +560,14 @@ namespace Azure.Storage.Management
                         {
                             FileShare value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = FileShare.DeserializeFileShare(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = FileShare.DeserializeFileShare(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -674,7 +730,14 @@ namespace Azure.Storage.Management
                         {
                             FileShareItems value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = FileShareItems.DeserializeFileShareItems(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = FileShareItems.DeserializeFileShareItems(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -722,7 +785,14 @@ namespace Azure.Storage.Management
                         {
                             FileShareItems value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = FileShareItems.DeserializeFileShareItems(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = FileShareItems.DeserializeFileShareItems(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:

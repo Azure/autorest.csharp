@@ -43,7 +43,14 @@ namespace CognitiveSearch.Models
                     List<IndexSearchError> array = new List<IndexSearchError>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeIndexSearchError(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DeserializeIndexSearchError(item));
+                        }
                     }
                     details = array;
                     continue;

@@ -63,7 +63,14 @@ namespace body_complex
                         {
                             DictionaryWrapper value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -93,7 +100,14 @@ namespace body_complex
                         {
                             DictionaryWrapper value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -213,7 +227,14 @@ namespace body_complex
                         {
                             DictionaryWrapper value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -243,7 +264,14 @@ namespace body_complex
                         {
                             DictionaryWrapper value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -363,7 +391,14 @@ namespace body_complex
                         {
                             DictionaryWrapper value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -393,7 +428,14 @@ namespace body_complex
                         {
                             DictionaryWrapper value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -435,7 +477,14 @@ namespace body_complex
                         {
                             DictionaryWrapper value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -465,7 +514,14 @@ namespace body_complex
                         {
                             DictionaryWrapper value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = DictionaryWrapper.DeserializeDictionaryWrapper(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:

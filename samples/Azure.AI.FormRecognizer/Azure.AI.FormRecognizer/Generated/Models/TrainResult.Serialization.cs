@@ -26,7 +26,14 @@ namespace Azure.AI.FormRecognizer.Models
                     List<TrainingDocumentInfo> array = new List<TrainingDocumentInfo>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(TrainingDocumentInfo.DeserializeTrainingDocumentInfo(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(TrainingDocumentInfo.DeserializeTrainingDocumentInfo(item));
+                        }
                     }
                     trainingDocuments = array;
                     continue;
@@ -40,7 +47,14 @@ namespace Azure.AI.FormRecognizer.Models
                     List<FormFieldsReport> array = new List<FormFieldsReport>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FormFieldsReport.DeserializeFormFieldsReport(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(FormFieldsReport.DeserializeFormFieldsReport(item));
+                        }
                     }
                     fields = array;
                     continue;
@@ -63,7 +77,14 @@ namespace Azure.AI.FormRecognizer.Models
                     List<ErrorInformation> array = new List<ErrorInformation>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ErrorInformation.DeserializeErrorInformation(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ErrorInformation.DeserializeErrorInformation(item));
+                        }
                     }
                     errors = array;
                     continue;

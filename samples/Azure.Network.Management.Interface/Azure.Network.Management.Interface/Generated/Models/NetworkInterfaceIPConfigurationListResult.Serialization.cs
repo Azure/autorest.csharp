@@ -28,7 +28,14 @@ namespace Azure.Network.Management.Interface.Models
                     List<NetworkInterfaceIPConfiguration> array = new List<NetworkInterfaceIPConfiguration>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(item));
+                        }
                     }
                     value = array;
                     continue;

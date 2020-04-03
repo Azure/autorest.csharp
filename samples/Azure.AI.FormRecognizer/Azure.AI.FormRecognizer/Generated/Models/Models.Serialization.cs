@@ -38,7 +38,14 @@ namespace Azure.AI.FormRecognizer.Models
                     List<ModelInfo> array = new List<ModelInfo>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ModelInfo.DeserializeModelInfo(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ModelInfo.DeserializeModelInfo(item));
+                        }
                     }
                     modelList = array;
                     continue;

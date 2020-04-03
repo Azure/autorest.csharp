@@ -28,7 +28,14 @@ namespace Azure.Network.Management.Interface.Models
                     List<NetworkInterface> array = new List<NetworkInterface>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(NetworkInterface.DeserializeNetworkInterface(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(NetworkInterface.DeserializeNetworkInterface(item));
+                        }
                     }
                     value = array;
                     continue;

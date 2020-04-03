@@ -134,7 +134,14 @@ namespace CognitiveSearch.Models
                     List<Field> array = new List<Field>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Field.DeserializeField(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Field.DeserializeField(item));
+                        }
                     }
                     fields = array;
                     continue;
@@ -148,7 +155,14 @@ namespace CognitiveSearch.Models
                     List<ScoringProfile> array = new List<ScoringProfile>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ScoringProfile.DeserializeScoringProfile(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ScoringProfile.DeserializeScoringProfile(item));
+                        }
                     }
                     scoringProfiles = array;
                     continue;
@@ -180,7 +194,14 @@ namespace CognitiveSearch.Models
                     List<Suggester> array = new List<Suggester>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Suggester.DeserializeSuggester(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Suggester.DeserializeSuggester(item));
+                        }
                     }
                     suggesters = array;
                     continue;
@@ -194,7 +215,14 @@ namespace CognitiveSearch.Models
                     List<Analyzer> array = new List<Analyzer>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Analyzer.DeserializeAnalyzer(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Analyzer.DeserializeAnalyzer(item));
+                        }
                     }
                     analyzers = array;
                     continue;
@@ -208,7 +236,14 @@ namespace CognitiveSearch.Models
                     List<Tokenizer> array = new List<Tokenizer>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Tokenizer.DeserializeTokenizer(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Tokenizer.DeserializeTokenizer(item));
+                        }
                     }
                     tokenizers = array;
                     continue;
@@ -222,7 +257,14 @@ namespace CognitiveSearch.Models
                     List<TokenFilter> array = new List<TokenFilter>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(TokenFilter.DeserializeTokenFilter(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(TokenFilter.DeserializeTokenFilter(item));
+                        }
                     }
                     tokenFilters = array;
                     continue;
@@ -236,7 +278,14 @@ namespace CognitiveSearch.Models
                     List<CharFilter> array = new List<CharFilter>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CharFilter.DeserializeCharFilter(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(CharFilter.DeserializeCharFilter(item));
+                        }
                     }
                     charFilters = array;
                     continue;

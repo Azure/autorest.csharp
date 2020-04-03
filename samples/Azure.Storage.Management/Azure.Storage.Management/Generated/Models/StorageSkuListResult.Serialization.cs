@@ -27,7 +27,14 @@ namespace Azure.Storage.Management.Models
                     List<SkuInformation> array = new List<SkuInformation>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(SkuInformation.DeserializeSkuInformation(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(SkuInformation.DeserializeSkuInformation(item));
+                        }
                     }
                     value = array;
                     continue;

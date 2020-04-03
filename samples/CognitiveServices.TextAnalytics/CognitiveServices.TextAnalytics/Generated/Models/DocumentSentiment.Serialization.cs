@@ -51,7 +51,14 @@ namespace CognitiveServices.TextAnalytics.Models
                     List<SentenceSentiment> array = new List<SentenceSentiment>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(SentenceSentiment.DeserializeSentenceSentiment(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(SentenceSentiment.DeserializeSentenceSentiment(item));
+                        }
                     }
                     sentences = array;
                     continue;

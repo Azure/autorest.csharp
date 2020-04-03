@@ -33,7 +33,14 @@ namespace CognitiveSearch.Models
                     List<AutocompleteItem> array = new List<AutocompleteItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(AutocompleteItem.DeserializeAutocompleteItem(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(AutocompleteItem.DeserializeAutocompleteItem(item));
+                        }
                     }
                     value = array;
                     continue;

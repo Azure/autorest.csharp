@@ -226,7 +226,14 @@ namespace Azure.Network.Management.Interface.Models
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, property0.Value.GetString());
+                        if (property0.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            dictionary.Add(property0.Name, null);
+                        }
+                        else
+                        {
+                            dictionary.Add(property0.Name, property0.Value.GetString());
+                        }
                     }
                     tags = dictionary;
                     continue;
@@ -244,7 +251,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<FrontendIPConfiguration> array = new List<FrontendIPConfiguration>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(FrontendIPConfiguration.DeserializeFrontendIPConfiguration(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(FrontendIPConfiguration.DeserializeFrontendIPConfiguration(item));
+                                }
                             }
                             frontendIPConfigurations = array;
                             continue;
@@ -258,7 +272,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<BackendAddressPool> array = new List<BackendAddressPool>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(BackendAddressPool.DeserializeBackendAddressPool(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(BackendAddressPool.DeserializeBackendAddressPool(item));
+                                }
                             }
                             backendAddressPools = array;
                             continue;
@@ -272,7 +293,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<LoadBalancingRule> array = new List<LoadBalancingRule>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(LoadBalancingRule.DeserializeLoadBalancingRule(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(LoadBalancingRule.DeserializeLoadBalancingRule(item));
+                                }
                             }
                             loadBalancingRules = array;
                             continue;
@@ -286,7 +314,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<Probe> array = new List<Probe>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(Probe.DeserializeProbe(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(Probe.DeserializeProbe(item));
+                                }
                             }
                             probes = array;
                             continue;
@@ -300,7 +335,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<InboundNatRule> array = new List<InboundNatRule>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(InboundNatRule.DeserializeInboundNatRule(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(InboundNatRule.DeserializeInboundNatRule(item));
+                                }
                             }
                             inboundNatRules = array;
                             continue;
@@ -314,7 +356,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<InboundNatPool> array = new List<InboundNatPool>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(InboundNatPool.DeserializeInboundNatPool(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(InboundNatPool.DeserializeInboundNatPool(item));
+                                }
                             }
                             inboundNatPools = array;
                             continue;
@@ -328,7 +377,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<OutboundRule> array = new List<OutboundRule>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(OutboundRule.DeserializeOutboundRule(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(OutboundRule.DeserializeOutboundRule(item));
+                                }
                             }
                             outboundRules = array;
                             continue;

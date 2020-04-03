@@ -109,7 +109,14 @@ namespace Azure.Storage.Management
                         {
                             EncryptionScope value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -161,7 +168,14 @@ namespace Azure.Storage.Management
                         {
                             EncryptionScope value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -236,7 +250,14 @@ namespace Azure.Storage.Management
                         {
                             EncryptionScope value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -287,7 +308,14 @@ namespace Azure.Storage.Management
                         {
                             EncryptionScope value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -353,7 +381,14 @@ namespace Azure.Storage.Management
                         {
                             EncryptionScope value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -399,7 +434,14 @@ namespace Azure.Storage.Management
                         {
                             EncryptionScope value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -459,7 +501,14 @@ namespace Azure.Storage.Management
                         {
                             EncryptionScopeListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = EncryptionScopeListResult.DeserializeEncryptionScopeListResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = EncryptionScopeListResult.DeserializeEncryptionScopeListResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -500,7 +549,14 @@ namespace Azure.Storage.Management
                         {
                             EncryptionScopeListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = EncryptionScopeListResult.DeserializeEncryptionScopeListResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = EncryptionScopeListResult.DeserializeEncryptionScopeListResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -557,7 +613,14 @@ namespace Azure.Storage.Management
                         {
                             EncryptionScopeListResult value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = EncryptionScopeListResult.DeserializeEncryptionScopeListResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = EncryptionScopeListResult.DeserializeEncryptionScopeListResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -603,7 +666,14 @@ namespace Azure.Storage.Management
                         {
                             EncryptionScopeListResult value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = EncryptionScopeListResult.DeserializeEncryptionScopeListResult(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = EncryptionScopeListResult.DeserializeEncryptionScopeListResult(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:

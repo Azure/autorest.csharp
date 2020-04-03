@@ -141,7 +141,14 @@ namespace AdditionalPropertiesEx
                         {
                             OutputAdditionalPropertiesModel value = default;
                             using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = OutputAdditionalPropertiesModel.DeserializeOutputAdditionalPropertiesModel(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = OutputAdditionalPropertiesModel.DeserializeOutputAdditionalPropertiesModel(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:
@@ -171,7 +178,14 @@ namespace AdditionalPropertiesEx
                         {
                             OutputAdditionalPropertiesModel value = default;
                             using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = OutputAdditionalPropertiesModel.DeserializeOutputAdditionalPropertiesModel(document.RootElement);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = OutputAdditionalPropertiesModel.DeserializeOutputAdditionalPropertiesModel(document.RootElement);
+                            }
                             return Response.FromValue(value, message.Response);
                         }
                     default:

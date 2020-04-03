@@ -28,7 +28,14 @@ namespace AppConfiguration.Models
                     List<KeyValue> array = new List<KeyValue>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(KeyValue.DeserializeKeyValue(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(KeyValue.DeserializeKeyValue(item));
+                        }
                     }
                     items = array;
                     continue;

@@ -79,7 +79,14 @@ namespace Azure.Storage.Management.Models
                     List<UpdateHistoryProperty> array = new List<UpdateHistoryProperty>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(UpdateHistoryProperty.DeserializeUpdateHistoryProperty(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(UpdateHistoryProperty.DeserializeUpdateHistoryProperty(item));
+                        }
                     }
                     updateHistory = array;
                     continue;

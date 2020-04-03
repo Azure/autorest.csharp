@@ -37,7 +37,14 @@ namespace Azure.Storage.Tables.Models
                     List<TableResponseProperties> array = new List<TableResponseProperties>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(TableResponseProperties.DeserializeTableResponseProperties(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(TableResponseProperties.DeserializeTableResponseProperties(item));
+                        }
                     }
                     value = array;
                     continue;

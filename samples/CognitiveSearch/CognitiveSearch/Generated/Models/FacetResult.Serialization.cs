@@ -29,7 +29,14 @@ namespace CognitiveSearch.Models
                     count = property.Value.GetInt64();
                     continue;
                 }
-                additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, null);
+                }
+                else
+                {
+                    additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
+                }
             }
             additionalProperties = additionalPropertiesDictionary;
             return new FacetResult(count, additionalProperties);

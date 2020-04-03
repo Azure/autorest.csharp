@@ -150,7 +150,14 @@ namespace CognitiveSearch.Models
                     List<FieldMapping> array = new List<FieldMapping>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FieldMapping.DeserializeFieldMapping(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(FieldMapping.DeserializeFieldMapping(item));
+                        }
                     }
                     fieldMappings = array;
                     continue;
@@ -164,7 +171,14 @@ namespace CognitiveSearch.Models
                     List<FieldMapping> array = new List<FieldMapping>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FieldMapping.DeserializeFieldMapping(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(FieldMapping.DeserializeFieldMapping(item));
+                        }
                     }
                     outputFieldMappings = array;
                     continue;

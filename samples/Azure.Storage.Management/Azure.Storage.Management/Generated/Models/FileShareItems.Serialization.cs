@@ -28,7 +28,14 @@ namespace Azure.Storage.Management.Models
                     List<FileShareItem> array = new List<FileShareItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FileShareItem.DeserializeFileShareItem(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(FileShareItem.DeserializeFileShareItem(item));
+                        }
                     }
                     value = array;
                     continue;

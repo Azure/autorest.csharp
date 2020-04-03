@@ -99,7 +99,14 @@ namespace Azure.AI.FormRecognizer.Models
                     List<FieldValue> array = new List<FieldValue>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeFieldValue(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DeserializeFieldValue(item));
+                        }
                     }
                     valueArray = array;
                     continue;
@@ -113,7 +120,14 @@ namespace Azure.AI.FormRecognizer.Models
                     Dictionary<string, FieldValue> dictionary = new Dictionary<string, FieldValue>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, DeserializeFieldValue(property0.Value));
+                        if (property0.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            dictionary.Add(property0.Name, null);
+                        }
+                        else
+                        {
+                            dictionary.Add(property0.Name, DeserializeFieldValue(property0.Value));
+                        }
                     }
                     valueObject = dictionary;
                     continue;
@@ -159,7 +173,14 @@ namespace Azure.AI.FormRecognizer.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetString());
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(item.GetString());
+                        }
                     }
                     elements = array;
                     continue;

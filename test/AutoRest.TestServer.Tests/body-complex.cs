@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
@@ -49,13 +50,10 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/299")]
-        public Task GetComplexBasicNotProvided() => Test(async (host, pipeline) =>
+        public Task GetComplexBasicNotProvided() => Test((host, pipeline) =>
         {
-            var result = await new BasicClient(ClientDiagnostics, pipeline, host).GetNotProvidedAsync();
-            Assert.AreEqual(null, result.Value.Name);
-            Assert.AreEqual(null, result.Value.Id);
-            Assert.AreEqual(null, result.Value.Color);
+            // Empty response body
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new BasicClient(ClientDiagnostics, pipeline, host).GetNotProvidedAsync());
         });
 
         [Test]

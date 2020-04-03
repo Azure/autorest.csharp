@@ -27,7 +27,14 @@ namespace Azure.Storage.Management.Models
                     List<Operation> array = new List<Operation>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Operation.DeserializeOperation(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Operation.DeserializeOperation(item));
+                        }
                     }
                     value = array;
                     continue;
