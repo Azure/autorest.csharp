@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -22,6 +23,11 @@ namespace Azure.Storage.Management.Models
                 writer.WritePropertyName("days");
                 writer.WriteNumberValue(Days.Value);
             }
+            if (LastEnabledTime != null)
+            {
+                writer.WritePropertyName("lastEnabledTime");
+                writer.WriteStringValue(LastEnabledTime.Value, "S");
+            }
             writer.WriteEndObject();
         }
 
@@ -29,6 +35,7 @@ namespace Azure.Storage.Management.Models
         {
             bool enabled = default;
             int? days = default;
+            DateTimeOffset? lastEnabledTime = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("enabled"))
@@ -45,8 +52,17 @@ namespace Azure.Storage.Management.Models
                     days = property.Value.GetInt32();
                     continue;
                 }
+                if (property.NameEquals("lastEnabledTime"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    lastEnabledTime = property.Value.GetDateTimeOffset("S");
+                    continue;
+                }
             }
-            return new RestorePolicyProperties(enabled, days);
+            return new RestorePolicyProperties(enabled, days, lastEnabledTime);
         }
     }
 }
