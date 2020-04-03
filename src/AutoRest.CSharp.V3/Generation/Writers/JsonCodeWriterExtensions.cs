@@ -227,7 +227,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             if (property.Property != null)
                             {
                                 // Reading a property value
-                                writer.DeserializeIntoVariable(
+                                writer.DeserializeIntoVariableWithNullHandling(
                                     property.ValueSerialization,
                                     (w, v) => w.Line($"{propertyVariables[property.Property]} = {v};"),
                                     w => w.Append($"{itemVariable.ActualName}.Value"),
@@ -279,7 +279,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
             else
             {
-                DeserializeIntoVariable(writer, serialization, valueCallback, element);
+                writer.DeserializeIntoVariableWithNullHandling(serialization, valueCallback, element, writeNullHandling: null);
             }
         }
 
@@ -309,73 +309,73 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        private static void DeserializeIntoVariable(this CodeWriter writer, JsonSerialization serialization, Action<CodeWriter, CodeWriterDelegate> valueCallback,
-            CodeWriterDelegate element, bool? writeNullHandling = null)
+        private static void DeserializeIntoVariableWithNullHandling(this CodeWriter writer, JsonSerialization serialization, Action<CodeWriter, CodeWriterDelegate> valueCallback,
+            CodeWriterDelegate element, bool? writeNullHandling)
         {
-            void WriteNullableScope(Action writeContent)
+            if (serialization is JsonArraySerialization || serialization is JsonDictionarySerialization)
             {
-                if (writeNullHandling == true)
-                {
-                    using (writer.Scope($"if ({element}.ValueKind == {typeof(JsonValueKind)}.Null)"))
-                    {
-                        valueCallback(writer, w => w.Append($"null"));
-                    }
-                    using (writer.Scope($"else"))
-                    {
-                        writeContent();
-                    }
-                }
-                else
-                {
-                    writeContent();
-                }
+                writeNullHandling ??= true;
+            }
+            else if (serialization is JsonValueSerialization valueSerialization)
+            {
+                writeNullHandling ??= valueSerialization.Type.IsNullable || !valueSerialization.Type.IsValueType;
             }
 
+            if (writeNullHandling == true)
+            {
+                using (writer.Scope($"if ({element}.ValueKind == {typeof(JsonValueKind)}.Null)"))
+                {
+                    valueCallback(writer, w => w.Append($"null"));
+                }
+                using (writer.Scope($"else"))
+                {
+                    writer.DeserializeIntoVariable(serialization, valueCallback, element);
+                }
+            }
+            else
+            {
+                writer.DeserializeIntoVariable(serialization, valueCallback, element);
+            }
+        }
+
+        private static void DeserializeIntoVariable(this CodeWriter writer, JsonSerialization serialization, Action<CodeWriter, CodeWriterDelegate> valueCallback, CodeWriterDelegate element)
+        {
             switch (serialization)
             {
                 case JsonArraySerialization array:
-                    writeNullHandling ??= true;
-                    WriteNullableScope(() =>
+                    var arrayVariable = new CodeWriterDeclaration("array");
+                    writer.Line($"{array.Type} {arrayVariable:D} = new {array.Type}();");
+
+                    var collectionItemVariable = new CodeWriterDeclaration("item");
+                    writer.Line($"foreach (var {collectionItemVariable:D} in {element}.EnumerateArray())");
+                    using (writer.Scope())
                     {
-                        var arrayVariable = new CodeWriterDeclaration("array");
-                        writer.Line($"{array.Type} {arrayVariable:D} = new {array.Type}();");
+                        writer.DeserializeValue(
+                            array.ValueSerialization,
+                            w => w.Append($"{collectionItemVariable}"),
+                            (w, returnValue) => writer.Append($"{arrayVariable}.Add({returnValue});"));
+                    }
 
-                        var collectionItemVariable = new CodeWriterDeclaration("item");
-                        writer.Line($"foreach (var {collectionItemVariable:D} in {element}.EnumerateArray())");
-                        using (writer.Scope())
-                        {
-                            writer.DeserializeValue(
-                                array.ValueSerialization,
-                                w => w.Append($"{collectionItemVariable}"),
-                                (w, returnValue) => writer.Append($"{arrayVariable}.Add({returnValue});"));
-                        }
-
-                        valueCallback(writer, w => w.Append(arrayVariable));
-                    });
+                    valueCallback(writer, w => w.Append(arrayVariable));
                     return;
                 case JsonDictionarySerialization dictionary:
-                    writeNullHandling ??= true;
-                    WriteNullableScope(() =>
+                    var dictionaryVariable = new CodeWriterDeclaration("dictionary");
+                    writer.Line($"{dictionary.Type} {dictionaryVariable:D} = new {dictionary.Type}();");
+
+                    var dictionaryItemVariable = new CodeWriterDeclaration("property");
+                    writer.Line($"foreach (var {dictionaryItemVariable:D} in {element}.EnumerateObject())");
+                    using (writer.Scope())
                     {
-                        var dictionaryVariable = new CodeWriterDeclaration("dictionary");
-                        writer.Line($"{dictionary.Type} {dictionaryVariable:D} = new {dictionary.Type}();");
+                        writer.DeserializeValue(
+                            dictionary.ValueSerialization,
+                            w => w.Append($"{dictionaryItemVariable}.Value"),
+                            (w, returnValue) => writer.Append($"{dictionaryVariable}.Add({dictionaryItemVariable}.Name, {returnValue});"));
+                    }
 
-                        var dictionaryItemVariable = new CodeWriterDeclaration("property");
-                        writer.Line($"foreach (var {dictionaryItemVariable:D} in {element}.EnumerateObject())");
-                        using (writer.Scope())
-                        {
-                            writer.DeserializeValue(
-                                dictionary.ValueSerialization,
-                                w => w.Append($"{dictionaryItemVariable}.Value"),
-                                (w, returnValue) => writer.Append($"{dictionaryVariable}.Add({dictionaryItemVariable}.Name, {returnValue});"));
-                        }
-
-                        valueCallback(writer, w => w.Append(dictionaryVariable));
-                    });
+                    valueCallback(writer, w => w.Append(dictionaryVariable));
                     return;
                 case JsonValueSerialization valueSerialization:
-                    writeNullHandling ??= valueSerialization.Type.IsNullable || !valueSerialization.Type.IsValueType;
-                    WriteNullableScope(() => valueCallback(writer, w => w.DeserializeValue(valueSerialization, element)));
+                    valueCallback(writer, w => w.DeserializeValue(valueSerialization, element));
                     return;
             }
         }
