@@ -7,7 +7,14 @@ function Invoke($command)
 {
     Write-Host "> $command"
     pushd $repoRoot
-    cmd /c "$command 2>&1"
+    if ($IsLinux)
+    {
+        sh -c "$command 2>&1"
+    }
+    else
+    {
+        cmd /c "$command 2>&1"
+    }
     popd
     
     if($LastExitCode -ne 0)
