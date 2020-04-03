@@ -1,5 +1,5 @@
 #Requires -Version 6.0
-param($name, [switch]$continue, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$noProjectBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true)
+param($name, [switch]$continue, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$noProjectBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true, [String[]]$Exclude = "SmokeTests")
 
 $ErrorActionPreference = 'Stop'
 
@@ -30,7 +30,11 @@ function Invoke-AutoRest($baseOutput, $title, $autoRestArguments)
 
     if ($clean)
     {
-        Get-ChildItem $outputPath -Filter Generated -Directory -Recurse | Get-ChildItem -File -Recurse | Remove-Item -Force
+        if (Test-Path $outputPath)
+        {
+            Get-ChildItem $outputPath -Filter Generated -Directory -Recurse | Get-ChildItem -File -Recurse | Remove-Item -Force
+            New-Item -ItemType Directory -Force -Path $outputPath
+        }
     }
 
     Invoke $command
@@ -86,27 +90,34 @@ $testNames =
     #'xms-error-responses',
     'url-multi-collectionFormat';
 
-foreach ($testName in $testNames)
+if (!($Exclude -contains "TestServer"))
 {
-    $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
-    $swaggerDefinitions[$testName] = @{
-        'title'=$testName;
-        'output'=$testServerDirectory;
-        'arguments'="--require=$configurationPath --input-file=$inputFile"
+    foreach ($testName in $testNames)
+    {
+        $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
+        $swaggerDefinitions[$testName] = @{
+            'title'=$testName;
+            'output'=$testServerDirectory;
+            'arguments'="--require=$configurationPath --input-file=$inputFile"
+        }
     }
 }
 
-# Local test projects
-$testSwaggerPath = Join-Path $repoRoot 'test' 'TestProjects'
 
-foreach ($directory in Get-ChildItem $testSwaggerPath -Directory)
+if (!($Exclude -contains "TestProjects"))
 {
-    $testName = $directory.Name
-    $inputFile = Join-Path $directory "$testName.json"
-    $swaggerDefinitions[$testName] = @{
-        'title'=$testName;
-        'output'=$testSwaggerPath;
-        'arguments'="--require=$configurationPath --input-file=$inputFile"
+    # Local test projects
+    $testSwaggerPath = Join-Path $repoRoot 'test' 'TestProjects'
+
+    foreach ($directory in Get-ChildItem $testSwaggerPath -Directory)
+    {
+        $testName = $directory.Name
+        $inputFile = Join-Path $directory "$testName.json"
+        $swaggerDefinitions[$testName] = @{
+            'title'=$testName;
+            'output'=$testSwaggerPath;
+            'arguments'="--require=$configurationPath --input-file=$inputFile"
+        }
     }
 }
 # Sample configuration
@@ -120,15 +131,38 @@ $projectNames =
     'Azure.Storage.Management',
     'Azure.Network.Management.Interface'
 
-foreach ($projectName in $projectNames)
+if (!($Exclude -contains "Samples"))
 {
-    $projectDirectory = Join-Path $repoRoot 'samples' $projectName
-    $configurationPath = Join-Path $projectDirectory 'readme.md'
+    foreach ($projectName in $projectNames)
+    {
+        $projectDirectory = Join-Path $repoRoot 'samples' $projectName
+        $sampleConfigurationPath = Join-Path $projectDirectory 'readme.md'
 
-    $swaggerDefinitions[$projectName] = @{
-        'title'=$projectName;
-        'output'=$projectDirectory;
-        'arguments'="--require=$configurationPath"
+        $swaggerDefinitions[$projectName] = @{
+            'title'=$projectName;
+            'output'=$projectDirectory;
+            'arguments'="--require=$sampleConfigurationPath"
+        }
+    }
+}
+
+# Smoke tests
+if (!($Exclude -contains "SmokeTests"))
+{
+    foreach ($input in Get-Content (Join-Path $PSScriptRoot "SmokeTestInputs.txt"))
+    {
+        if ($input -match "^[^#].*?specification/([\w-]+(/[\w-]+)+)/readme.md")
+        {
+            $projectName = $Matches[1].Replace("/", "-");
+
+            $projectDirectory = Join-Path $repoRoot 'samples' 'smoketests' $projectName
+
+            $swaggerDefinitions[$projectName] = @{
+                'title'=$projectName;
+                'output'=$projectDirectory;
+                'arguments'="--require=$configurationPath $input"
+            }
+        }
     }
 }
 
@@ -165,7 +199,7 @@ if (!$noBuild)
     dotnet build $autorestPluginProject
 }
 
-$keys = $swaggerDefinitions.Keys;
+$keys = $swaggerDefinitions.Keys | Sort-Object;
 if (![string]::IsNullOrWhiteSpace($name))
 { 
     if ($continue)

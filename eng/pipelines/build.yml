@@ -47,3 +47,22 @@ jobs:
           condition: succeeded()
           failOnStderr: false
           displayName: 'Publish to GitHub and coverage report'
+  - job: Smoke test
+    variables:
+      DotNetCoreSDKVersion: 3.0.100
+    pool:
+      vmImage: ubuntu-16.04
+    steps:
+      - task: DotNetCoreInstaller@2
+        displayName: "Use .NET Core sdk $(DotNetCoreSDKVersion)"
+        inputs:
+          version: "$(DotNetCoreSDKVersion)"
+      - task: NodeTool@0
+        displayName: "Install Node 13.x"
+        inputs:
+          versionSpec: '13.x'
+      - script: |
+          npm ci
+        displayName: "Install packages"
+      - pwsh: .\eng\Generate.ps1 -Exclude TestServer,TestProjects,Sample
+        displayName: "Check if code is up-to-date"
