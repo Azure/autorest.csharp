@@ -64,5 +64,5 @@ jobs:
       - script: |
           npm ci
         displayName: "Install packages"
-      - pwsh: .\eng\Generate.ps1 -Exclude TestServer,TestProjects,Sample
+      - pwsh: .\eng\Generate.ps1 -Exclude TestServer,TestProjects,Sample -noDebug
         displayName: "Check if code is up-to-date"
