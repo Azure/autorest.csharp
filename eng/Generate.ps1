@@ -1,51 +1,9 @@
-#Requires -Version 6.0
-param($name, [switch]$continue, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$noProjectBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true, [String[]]$Exclude = "SmokeTests")
+#Requires -Version 7.0
+param($name, [switch]$continue, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true, [String[]]$Exclude = "SmokeTests", $parallel = 1)
+
+Import-Module "$PSScriptRoot\Generation.psm1" -DisableNameChecking;
 
 $ErrorActionPreference = 'Stop'
-
-function Invoke($command)
-{
-    Write-Host "> $command"
-    pushd $repoRoot
-    if ($IsLinux)
-    {
-        sh -c "$command 2>&1"
-    }
-    else
-    {
-        cmd /c "$command 2>&1"
-    }
-    popd
-    
-    if($LastExitCode -ne 0)
-    {
-        Write-Error "Command failed to execute: $command"
-    }
-}
-
-function Invoke-AutoRest($baseOutput, $title, $autoRestArguments)
-{
-    $outputPath = Join-Path $baseOutput $title
-    $namespace = $title.Replace('-', '_')
-    $command = "$script:autorestBinary $script:debugFlags $autoRestArguments --title=$title --namespace=$namespace --output-folder=$outputPath"
-
-    if ($fast)
-    {
-        $codeModel = Join-Path $baseOutput $title "CodeModel.yaml"
-        $command = "dotnet run --project $script:autorestPluginProject --no-build -- --plugin=csharpgen --title=$title --namespace=$namespace --standalone --input-file=$codeModel --output-folder=$outputPath --shared-source-folder=$script:sharedSource --save-code-model=true"
-    }
-
-    if ($clean)
-    {
-        if (Test-Path $outputPath)
-        {
-            Get-ChildItem $outputPath -Filter Generated -Directory -Recurse | Get-ChildItem -File -Recurse | Remove-Item -Force
-            New-Item -ItemType Directory -Force -Path $outputPath
-        }
-    }
-
-    Invoke $command
-}
 
 # General configuration
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
@@ -54,7 +12,6 @@ $debugFlags = if (-not $noDebug) { '--debug', '--verbose' }
 $swaggerDefinitions = @{};
 
 # Test server test configuration
-$autorestBinary = Join-Path $repoRoot 'node_modules' '.bin' 'autorest-beta'
 $testServerDirectory = Join-Path $repoRoot 'test' 'TestServerProjects'
 $sharedSource = Join-Path $repoRoot 'src' 'assets'
 $autorestPluginProject = Resolve-Path (Join-Path $repoRoot 'src' 'AutoRest.CSharp.V3')
@@ -198,7 +155,7 @@ if ($updateLaunchSettings)
 
 if ($reset -or $env:TF_BUILD)
 {
-    Invoke "$script:autorestBinary --reset"
+    Autorest-Reset;
 }
 
 if (!$noBuild)
@@ -220,14 +177,8 @@ if (![string]::IsNullOrWhiteSpace($name))
     }
 }
 
-foreach ($key in $keys)
-{
-    $definition = $swaggerDefinitions[$key];
-    Invoke-AutoRest $definition.output $definition.title $definition.arguments
-    $projectPath = Join-Path $definition.output $definition.title;
-    if (!$noProjectBuild)
-    {
-        Invoke "dotnet build $projectPath --verbosity quiet /nologo"
-    }
-}
+$keys | %{ $swaggerDefinitions[$_] } | ForEach-Object -Parallel {
+    Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
+    Invoke-Autorest $_.output $_.title $_.arguments;
+} -ThrottleLimit $parallel
 

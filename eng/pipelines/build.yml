@@ -64,7 +64,7 @@ jobs:
       - script: |
           npm ci
         displayName: "Install packages"
-      - pwsh: .\eng\Generate.ps1 -Exclude TestServer,TestProjects,Sample -noDebug
+      - pwsh: .\eng\Generate.ps1 -Exclude TestServer,TestProjects,Sample -reset -noDebug -parallel 10
         displayName: "Check if code is up-to-date"
         env:
           DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
