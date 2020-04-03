@@ -227,11 +227,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             if (property.Property != null)
                             {
                                 // Reading a property value
-                                writer.DeserializeIntoVariableWithNullHandling(
+                                writer.DeserializeIntoVariable(
                                     property.ValueSerialization,
                                     (w, v) => w.Line($"{propertyVariables[property.Property]} = {v};"),
-                                    w => w.Append($"{itemVariable.ActualName}.Value"),
-                                    writeNullHandling: false);
+                                    w => w.Append($"{itemVariable.ActualName}.Value"));
                             }
                             else
                             {
@@ -279,7 +278,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
             else
             {
-                writer.DeserializeIntoVariableWithNullHandling(serialization, valueCallback, element, writeNullHandling: null);
+                writer.DeserializeIntoVariableWithNullHandling(serialization, valueCallback, element);
             }
         }
 
@@ -309,19 +308,23 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        private static void DeserializeIntoVariableWithNullHandling(this CodeWriter writer, JsonSerialization serialization, Action<CodeWriter, CodeWriterDelegate> valueCallback,
-            CodeWriterDelegate element, bool? writeNullHandling)
+        private static void DeserializeIntoVariableWithNullHandling(this CodeWriter writer, JsonSerialization serialization, Action<CodeWriter, CodeWriterDelegate> valueCallback, CodeWriterDelegate element)
         {
-            if (serialization is JsonArraySerialization || serialization is JsonDictionarySerialization)
+            CSharpType? type = null;
+            switch (serialization)
             {
-                writeNullHandling ??= true;
-            }
-            else if (serialization is JsonValueSerialization valueSerialization)
-            {
-                writeNullHandling ??= valueSerialization.Type.IsNullable || !valueSerialization.Type.IsValueType;
+                case JsonArraySerialization array:
+                    type = array.Type;
+                    break;
+                case JsonDictionarySerialization dictionary:
+                    type = dictionary.Type;
+                    break;
+                case JsonValueSerialization valueSerialization:
+                    type = valueSerialization.Type;
+                    break;
             }
 
-            if (writeNullHandling == true)
+            if (type != null && (type.IsNullable || !type.IsValueType))
             {
                 using (writer.Scope($"if ({element}.ValueKind == {typeof(JsonValueKind)}.Null)"))
                 {
