@@ -1,21 +1,19 @@
 #Requires -Version 7.0
-param($name, [switch]$continue, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true, [String[]]$Exclude = "SmokeTests", $parallel = 1)
+param($name, [switch]$continue, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true, [String[]]$Exclude = "SmokeTests", $parallel = 5)
 
-Import-Module "$PSScriptRoot\Generation.psm1" -DisableNameChecking;
+Import-Module "$PSScriptRoot\Generation.psm1" -DisableNameChecking -Force;
 
 $ErrorActionPreference = 'Stop'
 
 # General configuration
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
-$debugFlags = if (-not $noDebug) { '--debug', '--verbose' }
 
 $swaggerDefinitions = @{};
 
 # Test server test configuration
+$autorestPluginProject = (Get-AutorestProject)
 $testServerDirectory = Join-Path $repoRoot 'test' 'TestServerProjects'
 $sharedSource = Join-Path $repoRoot 'src' 'assets'
-$autorestPluginProject = Resolve-Path (Join-Path $repoRoot 'src' 'AutoRest.CSharp.V3')
-$launchSettings = Join-Path $autorestPluginProject 'Properties' 'launchSettings.json'
 $configurationPath = Join-Path $repoRoot 'readme.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
 $testNames =
@@ -132,6 +130,7 @@ if (!($Exclude -contains "SmokeTests"))
 
 if ($updateLaunchSettings)
 {
+    $launchSettings = Join-Path $autorestPluginProject 'Properties' 'launchSettings.json'
     $settings = @{
         'profiles' = [ordered]@{}
     };
@@ -160,7 +159,7 @@ if ($reset -or $env:TF_BUILD)
 
 if (!$noBuild)
 {
-    dotnet build $autorestPluginProject
+    Invoke "dotnet build $autorestPluginProject"
 }
 
 $keys = $swaggerDefinitions.Keys | Sort-Object;
@@ -179,6 +178,6 @@ if (![string]::IsNullOrWhiteSpace($name))
 
 $keys | %{ $swaggerDefinitions[$_] } | ForEach-Object -Parallel {
     Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
-    Invoke-Autorest $_.output $_.title $_.arguments;
+    Invoke-Autorest $_.output $_.title $_.arguments $using:sharedSource $using:fast $using:clean;
 } -ThrottleLimit $parallel
 
