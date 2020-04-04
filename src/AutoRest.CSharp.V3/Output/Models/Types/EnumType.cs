@@ -61,6 +61,12 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
             Type = new CSharpType(this, Declaration.Namespace, Declaration.Name, isValueType: true);
             BaseType = context.TypeFactory.CreateType(baseType, false);
+            if (BaseType.FrameworkType == typeof(object))
+            {
+                // https://github.com/Azure/autorest.modelerfour/issues/256
+                BaseType = typeof(string);
+            }
+
             Description = BuilderHelpers.CreateDescription(schema);
             IsExtendable = isExtendable;
         }

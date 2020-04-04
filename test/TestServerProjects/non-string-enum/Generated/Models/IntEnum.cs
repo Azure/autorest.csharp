@@ -7,6 +7,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Globalization;
 
 namespace non_string_enum.Models
 {
@@ -54,6 +55,6 @@ namespace non_string_enum.Models
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override int GetHashCode() => _value.GetHashCode();
         /// <inheritdoc />
-        public override string ToString() => _value.ToString();
+        public override string ToString() => _value.ToString(CultureInfo.InvariantCulture);
     }
 }

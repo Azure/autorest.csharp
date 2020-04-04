@@ -182,6 +182,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 string declaredTypeName = schema.Declaration.Name;
 
+                var isString = schema.BaseType.FrameworkType == typeof(string);
+
                 using (writer.Scope($"internal static class {declaredTypeName}Extensions"))
                 {
                     using (writer.Scope($"public static {schema.BaseType} ToSerialString(this {declaredTypeName} value) => value switch", end: "};"))
@@ -199,7 +201,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     {
                         foreach (EnumTypeValue value in schema.Values)
                         {
-                            writer.Line($"if ({schema.BaseType}.Equals(value, {value.Value.Value:L})) return {declaredTypeName}.{value.Declaration.Name};");
+                            writer.Append($"if ({schema.BaseType}.Equals(value, {value.Value.Value:L}");
+                            if (isString)
+                            {
+                                writer.Append($", {typeof(StringComparison)}.InvariantCultureIgnoreCase");
+                            }
+                            writer.Line($")) return {declaredTypeName}.{value.Declaration.Name};");
                         }
 
                         writer.Line($"throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\");");

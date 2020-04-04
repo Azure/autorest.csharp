@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Types;
@@ -242,7 +243,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             var cs = schema.Type;
             string name = schema.Declaration.Name;
-            var isReferenceType = !schema.BaseType.IsValueType;
+            var isString = schema.BaseType.FrameworkType == typeof(string);
 
             using (writer.Namespace(schema.Declaration.Namespace))
             {
@@ -258,7 +259,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     using (writer.Scope($"public {name}({schema.BaseType} value)"))
                     {
                         writer.Append($"_value = value");
-                        if (isReferenceType)
+                        if (isString)
                         {
                             writer.Append($"?? throw new {typeof(ArgumentNullException)}(nameof(value))");
                         }
@@ -293,13 +294,21 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Line($"public override bool Equals({typeof(object)} obj) => obj is {cs} other && Equals(other);");
 
                     writer.WriteXmlDocumentationInheritDoc();
-                    writer.Line($"public bool Equals({cs} other) => object.Equals(_value, other._value);");
+                    writer.Append($"public bool Equals({cs} other) => ");
+                    if (isString)
+                    {
+                        writer.Line($"{schema.BaseType}.Equals(_value, other._value, {typeof(StringComparison)}.InvariantCultureIgnoreCase);");
+                    }
+                    else
+                    {
+                        writer.Line($"{schema.BaseType}.Equals(_value, other._value);");
+                    }
                     writer.Line();
 
                     writer.WriteXmlDocumentationInheritDoc();
                     WriteEditorBrowsableFalse(writer);
                     writer.Append($"public override int GetHashCode() => ");
-                    if (isReferenceType)
+                    if (isString)
                     {
                         writer.Line($"_value?.GetHashCode() ?? 0;");
                     }
@@ -311,15 +320,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.WriteXmlDocumentationInheritDoc();
                     writer.Append($"public override {typeof(string)} ToString() => ");
 
-                    if (isReferenceType)
+                    if (isString)
                     {
-                        writer.Line($"_value?.ToString();");
+                        writer.Line($"_value;");
                     }
                     else
                     {
-                        writer.Line($"_value.ToString();");
+                        writer.Line($"_value.ToString({typeof(CultureInfo)}.InvariantCulture);");
                     }
-
                 }
             }
         }
