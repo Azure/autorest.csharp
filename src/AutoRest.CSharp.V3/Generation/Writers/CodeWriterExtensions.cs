@@ -113,11 +113,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         public static CodeWriter AppendEnumToString(this CodeWriter writer, EnumType enumType)
         {
-            if (!enumType.IsStringBased)
+            if (!enumType.IsExtendable)
             {
                 writer.UseNamespace(enumType.Type.Namespace);
             }
-            return writer.AppendRaw(enumType.IsStringBased ? ".ToString()" : ".ToSerialString()");
+            return writer.AppendRaw(enumType.IsExtendable ? ".ToString()" : ".ToSerialString()");
         }
 
         public static CodeWriter WriteReferenceOrConstant(this CodeWriter writer, ReferenceOrConstant value)
