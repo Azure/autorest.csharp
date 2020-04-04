@@ -204,7 +204,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                         // Check if the parameter is for discriminator and apply a default
                         if (initializer.Property == schema.Discriminator?.Property &&
-                            !initializer.Value.IsConstant)
+                            !initializer.Value.IsConstant &&
+                            !initializer.Value.Type.IsValueType)
                         {
                             writer.Append($"?? {schema.Discriminator.Value:L}");
                         }
