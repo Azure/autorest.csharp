@@ -1,5 +1,5 @@
 #Requires -Version 7.0
-param($name, [switch]$continue, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true, [String[]]$Exclude = "SmokeTests", $parallel = 5)
+param($name, [switch]$continue, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true, [String[]]$Exclude, [string]$include=$null, $parallel = 5)
 
 Import-Module "$PSScriptRoot\Generation.psm1" -DisableNameChecking -Force;
 
@@ -108,10 +108,9 @@ if (!($Exclude -contains "Samples"))
     }
 }
 
-# Smoke tests
-if (!($Exclude -contains "SmokeTests"))
+if ($include)
 {
-    foreach ($input in Get-Content (Join-Path $PSScriptRoot "SmokeTestInputs.txt"))
+    foreach ($input in Get-Content $include)
     {
         if ($input -match "^[^#].*?specification/([\w-]+(/[\w-]+)+)/readme.md")
         {
