@@ -1253,11 +1253,6 @@ namespace AutoRest.CSharp.V3.Input
     {
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class AnySchema : Schema
-    {
-    }
-
     /// <summary>the full set of schemas for a given service, categorized into convenient collections</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal partial class Schemas

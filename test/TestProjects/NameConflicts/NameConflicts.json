@@ -67,7 +67,7 @@
   "definitions": {
     "struct": {
       "type":  "object",
-      "allOf": [ { "$ref":  "class" } ],
+      "allOf": [ { "$ref":  "#/definitions/class" } ],
       "properties": {
         "1": { "type": "string" }
       }

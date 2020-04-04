@@ -11,7 +11,7 @@ schemas: !<!Schemas>
         name: String
         description: simple string
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_109
+  - !<!StringSchema> &ref_110
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -21,7 +21,7 @@ schemas: !<!Schemas>
         name: String
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_1
+  - !<!StringSchema> &ref_4
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -31,7 +31,7 @@ schemas: !<!Schemas>
         name: ClassAbstract
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_2
+  - !<!StringSchema> &ref_5
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -41,7 +41,7 @@ schemas: !<!Schemas>
         name: ClassAdd
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_3
+  - !<!StringSchema> &ref_6
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -51,7 +51,7 @@ schemas: !<!Schemas>
         name: ClassAlias
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_4
+  - !<!StringSchema> &ref_7
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -61,7 +61,7 @@ schemas: !<!Schemas>
         name: ClassAs
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_5
+  - !<!StringSchema> &ref_8
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -71,7 +71,7 @@ schemas: !<!Schemas>
         name: ClassAscending
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_6
+  - !<!StringSchema> &ref_9
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -81,7 +81,7 @@ schemas: !<!Schemas>
         name: ClassAsync
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_7
+  - !<!StringSchema> &ref_10
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -91,7 +91,7 @@ schemas: !<!Schemas>
         name: ClassAwait
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_8
+  - !<!StringSchema> &ref_11
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -101,7 +101,7 @@ schemas: !<!Schemas>
         name: ClassBase
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_9
+  - !<!StringSchema> &ref_12
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -111,7 +111,7 @@ schemas: !<!Schemas>
         name: ClassBool
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_10
+  - !<!StringSchema> &ref_13
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -121,7 +121,7 @@ schemas: !<!Schemas>
         name: ClassBreak
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_11
+  - !<!StringSchema> &ref_14
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -131,7 +131,7 @@ schemas: !<!Schemas>
         name: ClassBy
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_12
+  - !<!StringSchema> &ref_15
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -141,7 +141,7 @@ schemas: !<!Schemas>
         name: ClassByte
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_13
+  - !<!StringSchema> &ref_16
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -151,7 +151,7 @@ schemas: !<!Schemas>
         name: ClassCatch
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_14
+  - !<!StringSchema> &ref_17
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -161,7 +161,7 @@ schemas: !<!Schemas>
         name: ClassChar
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_15
+  - !<!StringSchema> &ref_18
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -171,7 +171,7 @@ schemas: !<!Schemas>
         name: ClassChecked
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_16
+  - !<!StringSchema> &ref_19
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -181,7 +181,7 @@ schemas: !<!Schemas>
         name: ClassConst
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_17
+  - !<!StringSchema> &ref_20
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -191,7 +191,7 @@ schemas: !<!Schemas>
         name: ClassContinue
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_18
+  - !<!StringSchema> &ref_21
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -201,7 +201,7 @@ schemas: !<!Schemas>
         name: Class
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_19
+  - !<!StringSchema> &ref_22
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -211,7 +211,7 @@ schemas: !<!Schemas>
         name: ClassDecimal
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_20
+  - !<!StringSchema> &ref_23
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -221,7 +221,7 @@ schemas: !<!Schemas>
         name: ClassDefault
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_21
+  - !<!StringSchema> &ref_24
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -231,7 +231,7 @@ schemas: !<!Schemas>
         name: ClassDelegate
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_22
+  - !<!StringSchema> &ref_25
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -241,7 +241,7 @@ schemas: !<!Schemas>
         name: ClassDescending
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_23
+  - !<!StringSchema> &ref_26
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -251,7 +251,7 @@ schemas: !<!Schemas>
         name: ClassDo
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_24
+  - !<!StringSchema> &ref_27
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -261,7 +261,7 @@ schemas: !<!Schemas>
         name: ClassDouble
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_25
+  - !<!StringSchema> &ref_28
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -271,7 +271,7 @@ schemas: !<!Schemas>
         name: ClassDynamic
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_26
+  - !<!StringSchema> &ref_29
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -281,7 +281,7 @@ schemas: !<!Schemas>
         name: ClassElse
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_27
+  - !<!StringSchema> &ref_30
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -291,7 +291,7 @@ schemas: !<!Schemas>
         name: ClassEnum
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_28
+  - !<!StringSchema> &ref_31
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -301,7 +301,7 @@ schemas: !<!Schemas>
         name: ClassEvent
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_29
+  - !<!StringSchema> &ref_32
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -311,7 +311,7 @@ schemas: !<!Schemas>
         name: ClassExplicit
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_30
+  - !<!StringSchema> &ref_33
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -321,7 +321,7 @@ schemas: !<!Schemas>
         name: ClassExtern
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_31
+  - !<!StringSchema> &ref_34
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -331,7 +331,7 @@ schemas: !<!Schemas>
         name: ClassFalse
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_32
+  - !<!StringSchema> &ref_35
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -341,7 +341,7 @@ schemas: !<!Schemas>
         name: ClassFinally
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_33
+  - !<!StringSchema> &ref_36
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -351,7 +351,7 @@ schemas: !<!Schemas>
         name: ClassFixed
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_34
+  - !<!StringSchema> &ref_37
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -361,7 +361,7 @@ schemas: !<!Schemas>
         name: ClassFloat
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_35
+  - !<!StringSchema> &ref_38
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -371,7 +371,7 @@ schemas: !<!Schemas>
         name: ClassFor
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_36
+  - !<!StringSchema> &ref_39
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -381,7 +381,7 @@ schemas: !<!Schemas>
         name: ClassForeach
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_37
+  - !<!StringSchema> &ref_40
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -391,7 +391,7 @@ schemas: !<!Schemas>
         name: ClassFrom
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_38
+  - !<!StringSchema> &ref_41
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -401,7 +401,7 @@ schemas: !<!Schemas>
         name: ClassGet
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_39
+  - !<!StringSchema> &ref_42
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -411,7 +411,7 @@ schemas: !<!Schemas>
         name: ClassGlobal
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_40
+  - !<!StringSchema> &ref_43
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -421,7 +421,7 @@ schemas: !<!Schemas>
         name: ClassGoto
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_41
+  - !<!StringSchema> &ref_44
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -431,7 +431,7 @@ schemas: !<!Schemas>
         name: ClassGroup
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_42
+  - !<!StringSchema> &ref_45
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -441,7 +441,7 @@ schemas: !<!Schemas>
         name: ClassIf
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_43
+  - !<!StringSchema> &ref_46
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -451,7 +451,7 @@ schemas: !<!Schemas>
         name: ClassImplicit
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_44
+  - !<!StringSchema> &ref_47
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -461,7 +461,7 @@ schemas: !<!Schemas>
         name: ClassIn
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_45
+  - !<!StringSchema> &ref_48
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -471,7 +471,7 @@ schemas: !<!Schemas>
         name: ClassInt
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_46
+  - !<!StringSchema> &ref_49
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -481,7 +481,7 @@ schemas: !<!Schemas>
         name: ClassInterface
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_47
+  - !<!StringSchema> &ref_50
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -491,7 +491,7 @@ schemas: !<!Schemas>
         name: ClassInternal
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_48
+  - !<!StringSchema> &ref_51
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -501,7 +501,7 @@ schemas: !<!Schemas>
         name: ClassInto
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_49
+  - !<!StringSchema> &ref_52
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -511,7 +511,7 @@ schemas: !<!Schemas>
         name: ClassIs
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_50
+  - !<!StringSchema> &ref_53
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -521,7 +521,7 @@ schemas: !<!Schemas>
         name: ClassJoin
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_51
+  - !<!StringSchema> &ref_54
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -531,7 +531,7 @@ schemas: !<!Schemas>
         name: ClassLet
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_52
+  - !<!StringSchema> &ref_55
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -541,7 +541,7 @@ schemas: !<!Schemas>
         name: ClassLock
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_53
+  - !<!StringSchema> &ref_56
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -551,7 +551,7 @@ schemas: !<!Schemas>
         name: ClassLong
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_54
+  - !<!StringSchema> &ref_57
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -561,7 +561,7 @@ schemas: !<!Schemas>
         name: ClassNameof
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_55
+  - !<!StringSchema> &ref_58
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -571,7 +571,7 @@ schemas: !<!Schemas>
         name: ClassNamespace
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_56
+  - !<!StringSchema> &ref_59
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -581,7 +581,7 @@ schemas: !<!Schemas>
         name: ClassNew
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_57
+  - !<!StringSchema> &ref_60
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -591,7 +591,7 @@ schemas: !<!Schemas>
         name: ClassNull
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_58
+  - !<!StringSchema> &ref_61
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -601,7 +601,7 @@ schemas: !<!Schemas>
         name: ClassObject
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_59
+  - !<!StringSchema> &ref_62
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -611,7 +611,7 @@ schemas: !<!Schemas>
         name: ClassOn
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_60
+  - !<!StringSchema> &ref_63
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -621,7 +621,7 @@ schemas: !<!Schemas>
         name: ClassOperator
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_61
+  - !<!StringSchema> &ref_64
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -631,7 +631,7 @@ schemas: !<!Schemas>
         name: ClassOrderby
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_62
+  - !<!StringSchema> &ref_65
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -641,7 +641,7 @@ schemas: !<!Schemas>
         name: ClassOut
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_63
+  - !<!StringSchema> &ref_66
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -651,7 +651,7 @@ schemas: !<!Schemas>
         name: ClassOverride
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_64
+  - !<!StringSchema> &ref_67
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -661,7 +661,7 @@ schemas: !<!Schemas>
         name: ClassParams
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_65
+  - !<!StringSchema> &ref_68
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -671,7 +671,7 @@ schemas: !<!Schemas>
         name: ClassPartial
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_66
+  - !<!StringSchema> &ref_69
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -681,7 +681,7 @@ schemas: !<!Schemas>
         name: ClassPrivate
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_67
+  - !<!StringSchema> &ref_70
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -691,7 +691,7 @@ schemas: !<!Schemas>
         name: ClassProtected
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_68
+  - !<!StringSchema> &ref_71
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -701,7 +701,7 @@ schemas: !<!Schemas>
         name: ClassPublic
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_69
+  - !<!StringSchema> &ref_72
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -711,7 +711,7 @@ schemas: !<!Schemas>
         name: ClassReadonly
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_70
+  - !<!StringSchema> &ref_73
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -721,7 +721,7 @@ schemas: !<!Schemas>
         name: ClassRef
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_71
+  - !<!StringSchema> &ref_74
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -731,7 +731,7 @@ schemas: !<!Schemas>
         name: ClassRemove
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_72
+  - !<!StringSchema> &ref_75
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -741,7 +741,7 @@ schemas: !<!Schemas>
         name: ClassReturn
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_73
+  - !<!StringSchema> &ref_76
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -751,7 +751,7 @@ schemas: !<!Schemas>
         name: ClassSbyte
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_74
+  - !<!StringSchema> &ref_77
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -761,7 +761,7 @@ schemas: !<!Schemas>
         name: ClassSealed
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_75
+  - !<!StringSchema> &ref_78
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -771,7 +771,7 @@ schemas: !<!Schemas>
         name: ClassSelect
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_76
+  - !<!StringSchema> &ref_79
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -781,7 +781,7 @@ schemas: !<!Schemas>
         name: ClassSet
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_77
+  - !<!StringSchema> &ref_80
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -791,7 +791,7 @@ schemas: !<!Schemas>
         name: ClassShort
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_78
+  - !<!StringSchema> &ref_81
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -801,7 +801,7 @@ schemas: !<!Schemas>
         name: ClassSizeof
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_79
+  - !<!StringSchema> &ref_82
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -811,7 +811,7 @@ schemas: !<!Schemas>
         name: ClassStackalloc
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_80
+  - !<!StringSchema> &ref_83
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -821,7 +821,7 @@ schemas: !<!Schemas>
         name: ClassStatic
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_81
+  - !<!StringSchema> &ref_84
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -831,7 +831,7 @@ schemas: !<!Schemas>
         name: ClassString
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_82
+  - !<!StringSchema> &ref_85
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -841,7 +841,7 @@ schemas: !<!Schemas>
         name: ClassStruct
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_83
+  - !<!StringSchema> &ref_86
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -851,7 +851,7 @@ schemas: !<!Schemas>
         name: ClassSwitch
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_84
+  - !<!StringSchema> &ref_87
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -861,7 +861,7 @@ schemas: !<!Schemas>
         name: ClassThis
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_85
+  - !<!StringSchema> &ref_88
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -871,7 +871,7 @@ schemas: !<!Schemas>
         name: ClassThrow
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_86
+  - !<!StringSchema> &ref_89
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -881,7 +881,7 @@ schemas: !<!Schemas>
         name: ClassTrue
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_87
+  - !<!StringSchema> &ref_90
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -891,7 +891,7 @@ schemas: !<!Schemas>
         name: ClassTry
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_88
+  - !<!StringSchema> &ref_91
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -901,7 +901,7 @@ schemas: !<!Schemas>
         name: ClassTypeof
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_89
+  - !<!StringSchema> &ref_92
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -911,7 +911,7 @@ schemas: !<!Schemas>
         name: ClassUint
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_90
+  - !<!StringSchema> &ref_93
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -921,7 +921,7 @@ schemas: !<!Schemas>
         name: ClassUlong
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_91
+  - !<!StringSchema> &ref_94
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -931,7 +931,7 @@ schemas: !<!Schemas>
         name: ClassUnchecked
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_92
+  - !<!StringSchema> &ref_95
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -941,7 +941,7 @@ schemas: !<!Schemas>
         name: ClassUnmanaged
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_93
+  - !<!StringSchema> &ref_96
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -951,7 +951,7 @@ schemas: !<!Schemas>
         name: ClassUnsafe
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_94
+  - !<!StringSchema> &ref_97
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -961,7 +961,7 @@ schemas: !<!Schemas>
         name: ClassUshort
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_95
+  - !<!StringSchema> &ref_98
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -971,7 +971,7 @@ schemas: !<!Schemas>
         name: ClassUsing
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_96
+  - !<!StringSchema> &ref_99
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -981,7 +981,7 @@ schemas: !<!Schemas>
         name: ClassValue
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_97
+  - !<!StringSchema> &ref_100
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -991,7 +991,7 @@ schemas: !<!Schemas>
         name: ClassVar
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_98
+  - !<!StringSchema> &ref_101
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1001,7 +1001,7 @@ schemas: !<!Schemas>
         name: ClassVirtual
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_99
+  - !<!StringSchema> &ref_102
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1011,7 +1011,7 @@ schemas: !<!Schemas>
         name: ClassVoid
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_100
+  - !<!StringSchema> &ref_103
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1021,7 +1021,7 @@ schemas: !<!Schemas>
         name: ClassVolatile
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_101
+  - !<!StringSchema> &ref_104
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1031,7 +1031,7 @@ schemas: !<!Schemas>
         name: ClassWhen
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_102
+  - !<!StringSchema> &ref_105
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1041,7 +1041,7 @@ schemas: !<!Schemas>
         name: ClassWhere
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_103
+  - !<!StringSchema> &ref_106
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1051,7 +1051,7 @@ schemas: !<!Schemas>
         name: ClassWhile
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_104
+  - !<!StringSchema> &ref_107
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1061,7 +1061,7 @@ schemas: !<!Schemas>
         name: ClassYield
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_107
+  - !<!StringSchema> &ref_2
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1072,7 +1072,7 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   choices:
-  - !<!ChoiceSchema> &ref_105
+  - !<!ChoiceSchema> &ref_108
     choices:
     - !<!ChoiceValue> 
       value: System
@@ -1097,7 +1097,7 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   constants:
-  - !<!ConstantSchema> &ref_110
+  - !<!ConstantSchema> &ref_111
     type: constant
     value: !<!ConstantValue> 
       value: application/json
@@ -1107,23 +1107,49 @@ schemas: !<!Schemas>
         name: ApplicationJson
         description: Content Type 'application/json'
     protocol: !<!Protocols> {}
-  any:
-  - !<!AnySchema> &ref_106
-    type: any
-    language: !<!Languages> 
-      default:
-        name: any
-        description: Any object
-    protocol: !<!Protocols> {}
   objects:
-  - !<!ObjectSchema> &ref_111
+  - !<!ObjectSchema> &ref_1
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 1.0.0
+    children: !<!Relations> 
+      all:
+      - !<!ObjectSchema> &ref_3
+        type: object
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        parents: !<!Relations> 
+          all:
+          - *ref_1
+          immediate:
+          - *ref_1
+        properties:
+        - !<!Property> 
+          schema: *ref_2
+          serializedName: '1'
+          language: !<!Languages> 
+            default:
+              name: one
+              description: ''
+          protocol: !<!Protocols> {}
+        serializationFormats:
+        - json
+        usage:
+        - output
+        - input
+        language: !<!Languages> 
+          default:
+            name: Struct
+            description: ''
+            namespace: ''
+        protocol: !<!Protocols> {}
+      immediate:
+      - *ref_3
     properties:
     - !<!Property> 
-      schema: *ref_1
+      schema: *ref_4
       serializedName: abstract
       language: !<!Languages> 
         default:
@@ -1131,7 +1157,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_2
+      schema: *ref_5
       serializedName: add
       language: !<!Languages> 
         default:
@@ -1139,7 +1165,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_3
+      schema: *ref_6
       serializedName: alias
       language: !<!Languages> 
         default:
@@ -1147,7 +1173,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_4
+      schema: *ref_7
       serializedName: as
       language: !<!Languages> 
         default:
@@ -1155,7 +1181,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_5
+      schema: *ref_8
       serializedName: ascending
       language: !<!Languages> 
         default:
@@ -1163,7 +1189,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_6
+      schema: *ref_9
       serializedName: async
       language: !<!Languages> 
         default:
@@ -1171,7 +1197,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_7
+      schema: *ref_10
       serializedName: await
       language: !<!Languages> 
         default:
@@ -1179,7 +1205,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_8
+      schema: *ref_11
       serializedName: base
       language: !<!Languages> 
         default:
@@ -1187,7 +1213,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_9
+      schema: *ref_12
       serializedName: bool
       language: !<!Languages> 
         default:
@@ -1195,7 +1221,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_10
+      schema: *ref_13
       serializedName: break
       language: !<!Languages> 
         default:
@@ -1203,7 +1229,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_11
+      schema: *ref_14
       serializedName: by
       language: !<!Languages> 
         default:
@@ -1211,7 +1237,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_12
+      schema: *ref_15
       serializedName: byte
       language: !<!Languages> 
         default:
@@ -1219,7 +1245,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_13
+      schema: *ref_16
       serializedName: catch
       language: !<!Languages> 
         default:
@@ -1227,7 +1253,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_14
+      schema: *ref_17
       serializedName: char
       language: !<!Languages> 
         default:
@@ -1235,7 +1261,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_15
+      schema: *ref_18
       serializedName: checked
       language: !<!Languages> 
         default:
@@ -1243,7 +1269,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_16
+      schema: *ref_19
       serializedName: const
       language: !<!Languages> 
         default:
@@ -1251,7 +1277,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_17
+      schema: *ref_20
       serializedName: continue
       language: !<!Languages> 
         default:
@@ -1259,7 +1285,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_18
+      schema: *ref_21
       serializedName: class
       language: !<!Languages> 
         default:
@@ -1267,7 +1293,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_19
+      schema: *ref_22
       serializedName: decimal
       language: !<!Languages> 
         default:
@@ -1275,7 +1301,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_20
+      schema: *ref_23
       serializedName: default
       language: !<!Languages> 
         default:
@@ -1283,7 +1309,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_21
+      schema: *ref_24
       serializedName: delegate
       language: !<!Languages> 
         default:
@@ -1291,7 +1317,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_22
+      schema: *ref_25
       serializedName: descending
       language: !<!Languages> 
         default:
@@ -1299,7 +1325,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_23
+      schema: *ref_26
       serializedName: do
       language: !<!Languages> 
         default:
@@ -1307,7 +1333,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_24
+      schema: *ref_27
       serializedName: double
       language: !<!Languages> 
         default:
@@ -1315,7 +1341,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_25
+      schema: *ref_28
       serializedName: dynamic
       language: !<!Languages> 
         default:
@@ -1323,7 +1349,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_26
+      schema: *ref_29
       serializedName: else
       language: !<!Languages> 
         default:
@@ -1331,7 +1357,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_27
+      schema: *ref_30
       serializedName: enum
       language: !<!Languages> 
         default:
@@ -1339,7 +1365,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_28
+      schema: *ref_31
       serializedName: event
       language: !<!Languages> 
         default:
@@ -1347,7 +1373,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_29
+      schema: *ref_32
       serializedName: explicit
       language: !<!Languages> 
         default:
@@ -1355,7 +1381,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_30
+      schema: *ref_33
       serializedName: extern
       language: !<!Languages> 
         default:
@@ -1363,7 +1389,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_31
+      schema: *ref_34
       serializedName: 'false'
       language: !<!Languages> 
         default:
@@ -1371,7 +1397,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_32
+      schema: *ref_35
       serializedName: finally
       language: !<!Languages> 
         default:
@@ -1379,7 +1405,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_33
+      schema: *ref_36
       serializedName: fixed
       language: !<!Languages> 
         default:
@@ -1387,7 +1413,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_34
+      schema: *ref_37
       serializedName: float
       language: !<!Languages> 
         default:
@@ -1395,7 +1421,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_35
+      schema: *ref_38
       serializedName: for
       language: !<!Languages> 
         default:
@@ -1403,7 +1429,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_36
+      schema: *ref_39
       serializedName: foreach
       language: !<!Languages> 
         default:
@@ -1411,7 +1437,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_37
+      schema: *ref_40
       serializedName: from
       language: !<!Languages> 
         default:
@@ -1419,7 +1445,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_38
+      schema: *ref_41
       serializedName: get
       language: !<!Languages> 
         default:
@@ -1427,7 +1453,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_39
+      schema: *ref_42
       serializedName: global
       language: !<!Languages> 
         default:
@@ -1435,7 +1461,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_40
+      schema: *ref_43
       serializedName: goto
       language: !<!Languages> 
         default:
@@ -1443,7 +1469,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_41
+      schema: *ref_44
       serializedName: group
       language: !<!Languages> 
         default:
@@ -1451,7 +1477,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_42
+      schema: *ref_45
       serializedName: if
       language: !<!Languages> 
         default:
@@ -1459,7 +1485,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_43
+      schema: *ref_46
       serializedName: implicit
       language: !<!Languages> 
         default:
@@ -1467,7 +1493,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_44
+      schema: *ref_47
       serializedName: in
       language: !<!Languages> 
         default:
@@ -1475,7 +1501,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_45
+      schema: *ref_48
       serializedName: int
       language: !<!Languages> 
         default:
@@ -1483,7 +1509,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_46
+      schema: *ref_49
       serializedName: interface
       language: !<!Languages> 
         default:
@@ -1491,7 +1517,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_47
+      schema: *ref_50
       serializedName: internal
       language: !<!Languages> 
         default:
@@ -1499,7 +1525,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_48
+      schema: *ref_51
       serializedName: into
       language: !<!Languages> 
         default:
@@ -1507,7 +1533,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_49
+      schema: *ref_52
       serializedName: is
       language: !<!Languages> 
         default:
@@ -1515,7 +1541,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_50
+      schema: *ref_53
       serializedName: join
       language: !<!Languages> 
         default:
@@ -1523,7 +1549,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_51
+      schema: *ref_54
       serializedName: let
       language: !<!Languages> 
         default:
@@ -1531,7 +1557,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_52
+      schema: *ref_55
       serializedName: lock
       language: !<!Languages> 
         default:
@@ -1539,7 +1565,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_53
+      schema: *ref_56
       serializedName: long
       language: !<!Languages> 
         default:
@@ -1547,7 +1573,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_54
+      schema: *ref_57
       serializedName: nameof
       language: !<!Languages> 
         default:
@@ -1555,7 +1581,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_55
+      schema: *ref_58
       serializedName: namespace
       language: !<!Languages> 
         default:
@@ -1563,7 +1589,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_56
+      schema: *ref_59
       serializedName: new
       language: !<!Languages> 
         default:
@@ -1571,7 +1597,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_57
+      schema: *ref_60
       serializedName: 'null'
       language: !<!Languages> 
         default:
@@ -1579,7 +1605,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_58
+      schema: *ref_61
       serializedName: object
       language: !<!Languages> 
         default:
@@ -1587,7 +1613,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_59
+      schema: *ref_62
       serializedName: 'on'
       language: !<!Languages> 
         default:
@@ -1595,7 +1621,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_60
+      schema: *ref_63
       serializedName: operator
       language: !<!Languages> 
         default:
@@ -1603,7 +1629,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_61
+      schema: *ref_64
       serializedName: orderby
       language: !<!Languages> 
         default:
@@ -1611,7 +1637,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_62
+      schema: *ref_65
       serializedName: out
       language: !<!Languages> 
         default:
@@ -1619,7 +1645,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_63
+      schema: *ref_66
       serializedName: override
       language: !<!Languages> 
         default:
@@ -1627,7 +1653,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_64
+      schema: *ref_67
       serializedName: params
       language: !<!Languages> 
         default:
@@ -1635,7 +1661,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_65
+      schema: *ref_68
       serializedName: partial
       language: !<!Languages> 
         default:
@@ -1643,7 +1669,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_66
+      schema: *ref_69
       serializedName: private
       language: !<!Languages> 
         default:
@@ -1651,7 +1677,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_67
+      schema: *ref_70
       serializedName: protected
       language: !<!Languages> 
         default:
@@ -1659,7 +1685,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_68
+      schema: *ref_71
       serializedName: public
       language: !<!Languages> 
         default:
@@ -1667,7 +1693,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_69
+      schema: *ref_72
       serializedName: readonly
       language: !<!Languages> 
         default:
@@ -1675,7 +1701,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_70
+      schema: *ref_73
       serializedName: ref
       language: !<!Languages> 
         default:
@@ -1683,7 +1709,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_71
+      schema: *ref_74
       serializedName: remove
       language: !<!Languages> 
         default:
@@ -1691,7 +1717,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_72
+      schema: *ref_75
       serializedName: return
       language: !<!Languages> 
         default:
@@ -1699,7 +1725,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_73
+      schema: *ref_76
       serializedName: sbyte
       language: !<!Languages> 
         default:
@@ -1707,7 +1733,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_74
+      schema: *ref_77
       serializedName: sealed
       language: !<!Languages> 
         default:
@@ -1715,7 +1741,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_75
+      schema: *ref_78
       serializedName: select
       language: !<!Languages> 
         default:
@@ -1723,7 +1749,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_76
+      schema: *ref_79
       serializedName: set
       language: !<!Languages> 
         default:
@@ -1731,7 +1757,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_77
+      schema: *ref_80
       serializedName: short
       language: !<!Languages> 
         default:
@@ -1739,7 +1765,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_78
+      schema: *ref_81
       serializedName: sizeof
       language: !<!Languages> 
         default:
@@ -1747,7 +1773,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_79
+      schema: *ref_82
       serializedName: stackalloc
       language: !<!Languages> 
         default:
@@ -1755,7 +1781,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_80
+      schema: *ref_83
       serializedName: static
       language: !<!Languages> 
         default:
@@ -1763,7 +1789,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_81
+      schema: *ref_84
       serializedName: string
       language: !<!Languages> 
         default:
@@ -1771,7 +1797,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_82
+      schema: *ref_85
       serializedName: struct
       language: !<!Languages> 
         default:
@@ -1779,7 +1805,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_83
+      schema: *ref_86
       serializedName: switch
       language: !<!Languages> 
         default:
@@ -1787,7 +1813,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_84
+      schema: *ref_87
       serializedName: this
       language: !<!Languages> 
         default:
@@ -1795,7 +1821,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_85
+      schema: *ref_88
       serializedName: throw
       language: !<!Languages> 
         default:
@@ -1803,7 +1829,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_86
+      schema: *ref_89
       serializedName: 'true'
       language: !<!Languages> 
         default:
@@ -1811,7 +1837,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_87
+      schema: *ref_90
       serializedName: try
       language: !<!Languages> 
         default:
@@ -1819,7 +1845,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_88
+      schema: *ref_91
       serializedName: typeof
       language: !<!Languages> 
         default:
@@ -1827,7 +1853,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_89
+      schema: *ref_92
       serializedName: uint
       language: !<!Languages> 
         default:
@@ -1835,7 +1861,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_90
+      schema: *ref_93
       serializedName: ulong
       language: !<!Languages> 
         default:
@@ -1843,7 +1869,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_91
+      schema: *ref_94
       serializedName: unchecked
       language: !<!Languages> 
         default:
@@ -1851,7 +1877,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_92
+      schema: *ref_95
       serializedName: unmanaged
       language: !<!Languages> 
         default:
@@ -1859,7 +1885,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_93
+      schema: *ref_96
       serializedName: unsafe
       language: !<!Languages> 
         default:
@@ -1867,7 +1893,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_94
+      schema: *ref_97
       serializedName: ushort
       language: !<!Languages> 
         default:
@@ -1875,7 +1901,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_95
+      schema: *ref_98
       serializedName: using
       language: !<!Languages> 
         default:
@@ -1883,7 +1909,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_96
+      schema: *ref_99
       serializedName: value
       language: !<!Languages> 
         default:
@@ -1891,7 +1917,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_97
+      schema: *ref_100
       serializedName: var
       language: !<!Languages> 
         default:
@@ -1899,7 +1925,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_98
+      schema: *ref_101
       serializedName: virtual
       language: !<!Languages> 
         default:
@@ -1907,7 +1933,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_99
+      schema: *ref_102
       serializedName: void
       language: !<!Languages> 
         default:
@@ -1915,7 +1941,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_100
+      schema: *ref_103
       serializedName: volatile
       language: !<!Languages> 
         default:
@@ -1923,7 +1949,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_101
+      schema: *ref_104
       serializedName: when
       language: !<!Languages> 
         default:
@@ -1931,7 +1957,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_102
+      schema: *ref_105
       serializedName: where
       language: !<!Languages> 
         default:
@@ -1939,7 +1965,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_103
+      schema: *ref_106
       serializedName: while
       language: !<!Languages> 
         default:
@@ -1947,7 +1973,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_104
+      schema: *ref_107
       serializedName: yield
       language: !<!Languages> 
         default:
@@ -1955,7 +1981,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_105
+      schema: *ref_108
       serializedName: System
       language: !<!Languages> 
         default:
@@ -1966,43 +1992,16 @@ schemas: !<!Schemas>
     - json
     usage:
     - input
+    - output
     language: !<!Languages> 
       default:
         name: Class
         description: ''
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_117
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    parents: !<!Relations> 
-      all:
-      - *ref_106
-      immediate:
-      - *ref_106
-    properties:
-    - !<!Property> 
-      schema: *ref_107
-      serializedName: '1'
-      language: !<!Languages> 
-        default:
-          name: one
-          description: ''
-      protocol: !<!Protocols> {}
-    serializationFormats:
-    - json
-    usage:
-    - output
-    language: !<!Languages> 
-      default:
-        name: Struct
-        description: ''
-        namespace: ''
-    protocol: !<!Protocols> {}
+  - *ref_3
 globalParameters:
-- !<!Parameter> &ref_108
+- !<!Parameter> &ref_109
   schema: *ref_0
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
@@ -2026,9 +2025,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_108
+    - *ref_109
     - !<!Parameter> &ref_113
-      schema: *ref_109
+      schema: *ref_110
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -2040,7 +2039,7 @@ operationGroups:
         http: !<!HttpParameter> 
           in: query
     - !<!Parameter> &ref_114
-      schema: *ref_109
+      schema: *ref_110
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -2052,7 +2051,7 @@ operationGroups:
         http: !<!HttpParameter> 
           in: query
     - !<!Parameter> &ref_115
-      schema: *ref_109
+      schema: *ref_110
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -2064,7 +2063,7 @@ operationGroups:
         http: !<!HttpParameter> 
           in: query
     - !<!Parameter> &ref_116
-      schema: *ref_109
+      schema: *ref_110
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -2079,7 +2078,7 @@ operationGroups:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_110
+        schema: *ref_111
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -2091,7 +2090,7 @@ operationGroups:
           http: !<!HttpParameter> 
             in: header
       - !<!Parameter> &ref_112
-        schema: *ref_111
+        schema: *ref_1
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -2123,7 +2122,7 @@ operationGroups:
     - *ref_116
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_117
+      schema: *ref_3
       language: !<!Languages> 
         default:
           name: ''
