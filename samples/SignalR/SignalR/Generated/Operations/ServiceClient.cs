@@ -15,8 +15,8 @@ namespace SignalR
 {
     public partial class ServiceClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal ServiceRestClient RestClient { get; }
         /// <summary> Initializes a new instance of ServiceClient for mocking. </summary>
         protected ServiceClient()
@@ -25,9 +25,9 @@ namespace SignalR
         /// <summary> Initializes a new instance of ServiceClient. </summary>
         internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string apiVersion, string host = "")
         {
-            RestClient = new ServiceRestClient(clientDiagnostics, pipeline, apiVersion, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new ServiceRestClient(_clientDiagnostics, _pipeline, apiVersion, host);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Check the health of the service. </summary>

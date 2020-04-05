@@ -23,6 +23,7 @@ namespace body_complex.Models
         {
             FishType = fishType ?? null;
             Species = species;
+            FishType = fishType ?? null;
         }
 
         internal string FishType { get; set; }

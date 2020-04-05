@@ -15,8 +15,8 @@ namespace validation
 {
     public partial class ServiceClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal ServiceRestClient RestClient { get; }
         /// <summary> Initializes a new instance of ServiceClient for mocking. </summary>
         protected ServiceClient()
@@ -25,9 +25,9 @@ namespace validation
         /// <summary> Initializes a new instance of ServiceClient. </summary>
         internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "http://localhost:3000", string apiVersion = "1.0.0")
         {
-            RestClient = new ServiceRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new ServiceRestClient(_clientDiagnostics, _pipeline, subscriptionId, host, apiVersion);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Validates input parameters on the method. See swagger for details. </summary>

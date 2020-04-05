@@ -35,7 +35,6 @@ namespace CognitiveSearch.Models
             Pattern = pattern;
             Flags = flags;
             Group = group;
-            OdataType = odataType ?? "#Microsoft.Azure.Search.PatternTokenizer";
         }
 
         /// <summary> A regular expression pattern to match token separators. Default is an expression that matches one or more whitespace characters. </summary>

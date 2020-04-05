@@ -15,8 +15,8 @@ namespace body_complex
 {
     public partial class PrimitiveClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal PrimitiveRestClient RestClient { get; }
         /// <summary> Initializes a new instance of PrimitiveClient for mocking. </summary>
         protected PrimitiveClient()
@@ -25,9 +25,9 @@ namespace body_complex
         /// <summary> Initializes a new instance of PrimitiveClient. </summary>
         internal PrimitiveClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new PrimitiveRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new PrimitiveRestClient(_clientDiagnostics, _pipeline, host);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Get complex types with integer properties. </summary>

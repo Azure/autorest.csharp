@@ -15,8 +15,8 @@ namespace body_string
 {
     public partial class EnumClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal EnumRestClient RestClient { get; }
         /// <summary> Initializes a new instance of EnumClient for mocking. </summary>
         protected EnumClient()
@@ -25,9 +25,9 @@ namespace body_string
         /// <summary> Initializes a new instance of EnumClient. </summary>
         internal EnumClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new EnumRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new EnumRestClient(_clientDiagnostics, _pipeline, host);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>

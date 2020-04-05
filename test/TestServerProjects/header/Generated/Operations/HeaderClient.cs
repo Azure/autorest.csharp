@@ -16,8 +16,8 @@ namespace header
 {
     public partial class HeaderClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal HeaderRestClient RestClient { get; }
         /// <summary> Initializes a new instance of HeaderClient for mocking. </summary>
         protected HeaderClient()
@@ -26,9 +26,9 @@ namespace header
         /// <summary> Initializes a new instance of HeaderClient. </summary>
         internal HeaderClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new HeaderRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new HeaderRestClient(_clientDiagnostics, _pipeline, host);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>

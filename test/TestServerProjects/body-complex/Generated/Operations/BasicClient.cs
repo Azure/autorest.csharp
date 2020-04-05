@@ -15,8 +15,8 @@ namespace body_complex
 {
     public partial class BasicClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal BasicRestClient RestClient { get; }
         /// <summary> Initializes a new instance of BasicClient for mocking. </summary>
         protected BasicClient()
@@ -25,9 +25,9 @@ namespace body_complex
         /// <summary> Initializes a new instance of BasicClient. </summary>
         internal BasicClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", string apiVersion = "2016-02-29")
         {
-            RestClient = new BasicRestClient(clientDiagnostics, pipeline, host, apiVersion);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new BasicRestClient(_clientDiagnostics, _pipeline, host, apiVersion);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>

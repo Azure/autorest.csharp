@@ -32,7 +32,6 @@ namespace CognitiveSearch.Models
         internal CognitiveServicesAccountKey(string odataType, string description, string key) : base(odataType, description)
         {
             Key = key;
-            OdataType = odataType ?? "#Microsoft.Azure.Search.CognitiveServicesByKey";
         }
 
         /// <summary> The key used to provision the cognitive service resource attached to a skillset. </summary>

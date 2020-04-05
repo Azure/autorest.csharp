@@ -31,7 +31,6 @@ namespace CognitiveSearch.Models
         internal AsciiFoldingTokenFilter(string odataType, string name, bool? preserveOriginal) : base(odataType, name)
         {
             PreserveOriginal = preserveOriginal;
-            OdataType = odataType ?? "#Microsoft.Azure.Search.AsciiFoldingTokenFilter";
         }
 
         /// <summary> A value indicating whether the original token will be kept. Default is false. </summary>

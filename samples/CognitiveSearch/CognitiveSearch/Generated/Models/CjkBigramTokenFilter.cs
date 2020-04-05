@@ -34,7 +34,6 @@ namespace CognitiveSearch.Models
         {
             IgnoreScripts = ignoreScripts;
             OutputUnigrams = outputUnigrams;
-            OdataType = odataType ?? "#Microsoft.Azure.Search.CjkBigramTokenFilter";
         }
 
         /// <summary> The scripts to ignore. </summary>

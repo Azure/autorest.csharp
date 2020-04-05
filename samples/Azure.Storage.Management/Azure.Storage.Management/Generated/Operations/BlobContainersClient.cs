@@ -18,8 +18,8 @@ namespace Azure.Storage.Management
 {
     public partial class BlobContainersClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal BlobContainersRestClient RestClient { get; }
         /// <summary> Initializes a new instance of BlobContainersClient for mocking. </summary>
         protected BlobContainersClient()
@@ -28,9 +28,9 @@ namespace Azure.Storage.Management
         /// <summary> Initializes a new instance of BlobContainersClient. </summary>
         internal BlobContainersClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
         {
-            RestClient = new BlobContainersRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new BlobContainersRestClient(_clientDiagnostics, _pipeline, subscriptionId, host, apiVersion);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container. </summary>

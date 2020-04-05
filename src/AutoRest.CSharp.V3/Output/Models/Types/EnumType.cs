@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             var values = new List<EnumTypeValue>();
             foreach (var c in _choices)
             {
-                var name = c.CSharpName();
+                var name = BuilderHelpers.DisambiguateName(Type, c.CSharpName());
                 var memberMapping = _typeMapping?.GetForMember(name);
                 values.Add(new EnumTypeValue(
                     BuilderHelpers.CreateMemberDeclaration(name, Type, "public", memberMapping?.ExistingMember, _context.TypeFactory),

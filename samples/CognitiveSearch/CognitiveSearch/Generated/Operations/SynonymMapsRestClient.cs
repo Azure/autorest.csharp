@@ -20,8 +20,8 @@ namespace CognitiveSearch
     {
         private string endpoint;
         private string apiVersion;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of SynonymMapsRestClient. </summary>
         public SynonymMapsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string apiVersion = "2019-05-06-Preview")
@@ -37,13 +37,13 @@ namespace CognitiveSearch
 
             this.endpoint = endpoint;
             this.apiVersion = apiVersion;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateCreateOrUpdateRequest(string synonymMapName, SynonymMap synonymMap, RequestOptions requestOptions, AccessCondition accessCondition)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -90,12 +90,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(synonymMap));
             }
 
-            using var scope = clientDiagnostics.CreateScope("SynonymMapsClient.CreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.CreateOrUpdate");
             scope.Start();
             try
             {
                 using var message = CreateCreateOrUpdateRequest(synonymMapName, synonymMap, requestOptions, accessCondition);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -114,7 +114,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -141,12 +141,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(synonymMap));
             }
 
-            using var scope = clientDiagnostics.CreateScope("SynonymMapsClient.CreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.CreateOrUpdate");
             scope.Start();
             try
             {
                 using var message = CreateCreateOrUpdateRequest(synonymMapName, synonymMap, requestOptions, accessCondition);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -165,7 +165,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -177,7 +177,7 @@ namespace CognitiveSearch
 
         internal HttpMessage CreateDeleteRequest(string synonymMapName, RequestOptions requestOptions, AccessCondition accessCondition)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -214,19 +214,19 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(synonymMapName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("SynonymMapsClient.Delete");
+            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Delete");
             scope.Start();
             try
             {
                 using var message = CreateDeleteRequest(synonymMapName, requestOptions, accessCondition);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 204:
                     case 404:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -248,19 +248,19 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(synonymMapName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("SynonymMapsClient.Delete");
+            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Delete");
             scope.Start();
             try
             {
                 using var message = CreateDeleteRequest(synonymMapName, requestOptions, accessCondition);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 204:
                     case 404:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -272,7 +272,7 @@ namespace CognitiveSearch
 
         internal HttpMessage CreateGetRequest(string synonymMapName, RequestOptions requestOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -300,12 +300,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(synonymMapName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("SynonymMapsClient.Get");
+            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Get");
             scope.Start();
             try
             {
                 using var message = CreateGetRequest(synonymMapName, requestOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -323,7 +323,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -344,12 +344,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(synonymMapName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("SynonymMapsClient.Get");
+            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Get");
             scope.Start();
             try
             {
                 using var message = CreateGetRequest(synonymMapName, requestOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -367,7 +367,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -379,7 +379,7 @@ namespace CognitiveSearch
 
         internal HttpMessage CreateListRequest(string select, RequestOptions requestOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -404,12 +404,12 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ListSynonymMapsResult>> ListAsync(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("SynonymMapsClient.List");
+            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.List");
             scope.Start();
             try
             {
                 using var message = CreateListRequest(select, requestOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -427,7 +427,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -443,12 +443,12 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ListSynonymMapsResult> List(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("SynonymMapsClient.List");
+            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.List");
             scope.Start();
             try
             {
                 using var message = CreateListRequest(select, requestOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -466,7 +466,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -478,7 +478,7 @@ namespace CognitiveSearch
 
         internal HttpMessage CreateCreateRequest(SynonymMap synonymMap, RequestOptions requestOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -508,12 +508,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(synonymMap));
             }
 
-            using var scope = clientDiagnostics.CreateScope("SynonymMapsClient.Create");
+            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Create");
             scope.Start();
             try
             {
                 using var message = CreateCreateRequest(synonymMap, requestOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 201:
@@ -531,7 +531,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -552,12 +552,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(synonymMap));
             }
 
-            using var scope = clientDiagnostics.CreateScope("SynonymMapsClient.Create");
+            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Create");
             scope.Start();
             try
             {
                 using var message = CreateCreateRequest(synonymMap, requestOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 201:
@@ -575,7 +575,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

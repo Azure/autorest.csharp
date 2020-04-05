@@ -15,8 +15,8 @@ namespace extensible_enums_swagger
 {
     public partial class PetClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal PetRestClient RestClient { get; }
         /// <summary> Initializes a new instance of PetClient for mocking. </summary>
         protected PetClient()
@@ -25,9 +25,9 @@ namespace extensible_enums_swagger
         /// <summary> Initializes a new instance of PetClient. </summary>
         internal PetClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new PetRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new PetRestClient(_clientDiagnostics, _pipeline, host);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <param name="petId"> Pet id. </param>

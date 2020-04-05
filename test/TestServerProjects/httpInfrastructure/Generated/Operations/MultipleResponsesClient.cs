@@ -15,8 +15,8 @@ namespace httpInfrastructure
 {
     public partial class MultipleResponsesClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal MultipleResponsesRestClient RestClient { get; }
         /// <summary> Initializes a new instance of MultipleResponsesClient for mocking. </summary>
         protected MultipleResponsesClient()
@@ -25,9 +25,9 @@ namespace httpInfrastructure
         /// <summary> Initializes a new instance of MultipleResponsesClient. </summary>
         internal MultipleResponsesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new MultipleResponsesRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new MultipleResponsesRestClient(_clientDiagnostics, _pipeline, host);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>

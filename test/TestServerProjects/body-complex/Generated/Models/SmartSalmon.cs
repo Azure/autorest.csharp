@@ -34,7 +34,6 @@ namespace body_complex.Models
         {
             CollegeDegree = collegeDegree;
             AdditionalProperties = additionalProperties;
-            Fishtype = fishtype ?? "smart_salmon";
         }
 
         public string CollegeDegree { get; set; }

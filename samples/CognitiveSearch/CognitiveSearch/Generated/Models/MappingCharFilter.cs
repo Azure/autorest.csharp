@@ -39,7 +39,6 @@ namespace CognitiveSearch.Models
         internal MappingCharFilter(string odataType, string name, IList<string> mappings) : base(odataType, name)
         {
             Mappings = mappings;
-            OdataType = odataType ?? "#Microsoft.Azure.Search.MappingCharFilter";
         }
 
         /// <summary> A list of mappings of the following format: &quot;a=&gt;b&quot; (all occurrences of the character &quot;a&quot; will be replaced with character &quot;b&quot;). </summary>

@@ -16,8 +16,8 @@ namespace Azure.Storage.Management
 {
     public partial class OperationsClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal OperationsRestClient RestClient { get; }
         /// <summary> Initializes a new instance of OperationsClient for mocking. </summary>
         protected OperationsClient()
@@ -26,9 +26,9 @@ namespace Azure.Storage.Management
         /// <summary> Initializes a new instance of OperationsClient. </summary>
         internal OperationsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
         {
-            RestClient = new OperationsRestClient(clientDiagnostics, pipeline, host, apiVersion);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new OperationsRestClient(_clientDiagnostics, _pipeline, host, apiVersion);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Lists all of the available Storage Rest API operations. </summary>

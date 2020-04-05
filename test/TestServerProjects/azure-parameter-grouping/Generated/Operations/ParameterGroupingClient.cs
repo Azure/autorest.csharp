@@ -15,8 +15,8 @@ namespace azure_parameter_grouping
 {
     public partial class ParameterGroupingClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal ParameterGroupingRestClient RestClient { get; }
         /// <summary> Initializes a new instance of ParameterGroupingClient for mocking. </summary>
         protected ParameterGroupingClient()
@@ -25,9 +25,9 @@ namespace azure_parameter_grouping
         /// <summary> Initializes a new instance of ParameterGroupingClient. </summary>
         internal ParameterGroupingClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new ParameterGroupingRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new ParameterGroupingRestClient(_clientDiagnostics, _pipeline, host);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Post a bunch of required parameters grouped. </summary>

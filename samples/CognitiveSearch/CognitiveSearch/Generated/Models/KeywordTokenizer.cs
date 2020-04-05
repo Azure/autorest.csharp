@@ -31,7 +31,6 @@ namespace CognitiveSearch.Models
         internal KeywordTokenizer(string odataType, string name, int? bufferSize) : base(odataType, name)
         {
             BufferSize = bufferSize;
-            OdataType = odataType ?? "#Microsoft.Azure.Search.KeywordTokenizer";
         }
 
         /// <summary> The read buffer size in bytes. Default is 256. </summary>

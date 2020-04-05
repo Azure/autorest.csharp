@@ -15,8 +15,8 @@ namespace body_integer
 {
     public partial class IntClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal IntRestClient RestClient { get; }
         /// <summary> Initializes a new instance of IntClient for mocking. </summary>
         protected IntClient()
@@ -25,9 +25,9 @@ namespace body_integer
         /// <summary> Initializes a new instance of IntClient. </summary>
         internal IntClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new IntRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new IntRestClient(_clientDiagnostics, _pipeline, host);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Get null Int value. </summary>

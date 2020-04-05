@@ -35,7 +35,6 @@ namespace CognitiveSearch.Models
             MinGram = minGram;
             MaxGram = maxGram;
             Side = side;
-            OdataType = odataType ?? "#Microsoft.Azure.Search.EdgeNGramTokenFilterV2";
         }
 
         /// <summary> The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram. </summary>

@@ -8,9 +8,37 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestProjects\\AdditionalPropertiesEx\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestProjects\\AdditionalPropertiesEx --namespace=AdditionalPropertiesEx --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
     },
+    "apimanagement-control-plane": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\apimanagement-control-plane\\apimanagement-control-plane\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\apimanagement-control-plane\\apimanagement-control-plane --namespace=apimanagement_control_plane --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "apimanagement-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\apimanagement-resource-manager\\apimanagement-resource-manager\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\apimanagement-resource-manager\\apimanagement-resource-manager --namespace=apimanagement_resource_manager --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
     "AppConfiguration": {
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\AppConfiguration\\AppConfiguration\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\AppConfiguration\\AppConfiguration --namespace=AppConfiguration --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "applicationinsights-data-plane": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\applicationinsights-data-plane\\applicationinsights-data-plane\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\applicationinsights-data-plane\\applicationinsights-data-plane --namespace=applicationinsights_data_plane --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "azsadmin-resource-manager-azurebridge": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\azsadmin-resource-manager-azurebridge\\azsadmin-resource-manager-azurebridge\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\azsadmin-resource-manager-azurebridge\\azsadmin-resource-manager-azurebridge --namespace=azsadmin_resource_manager_azurebridge --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "azsadmin-resource-manager-fabric": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\azsadmin-resource-manager-fabric\\azsadmin-resource-manager-fabric\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\azsadmin-resource-manager-fabric\\azsadmin-resource-manager-fabric --namespace=azsadmin_resource_manager_fabric --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "azsadmin-resource-manager-infrastructureinsights": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\azsadmin-resource-manager-infrastructureinsights\\azsadmin-resource-manager-infrastructureinsights\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\azsadmin-resource-manager-infrastructureinsights\\azsadmin-resource-manager-infrastructureinsights --namespace=azsadmin_resource_manager_infrastructureinsights --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "azsadmin-resource-manager-network": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\azsadmin-resource-manager-network\\azsadmin-resource-manager-network\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\azsadmin-resource-manager-network\\azsadmin-resource-manager-network --namespace=azsadmin_resource_manager_network --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
     },
     "Azure.AI.FormRecognizer": {
       "commandName": "Project",
@@ -28,9 +56,17 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\Azure.Storage.Tables\\Azure.Storage.Tables\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\Azure.Storage.Tables\\Azure.Storage.Tables --namespace=Azure.Storage.Tables --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
     },
+    "azure-kusto-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\azure-kusto-resource-manager\\azure-kusto-resource-manager\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\azure-kusto-resource-manager\\azure-kusto-resource-manager --namespace=azure_kusto_resource_manager --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
     "azure-parameter-grouping": {
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\azure-parameter-grouping\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\azure-parameter-grouping --namespace=azure_parameter_grouping --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "azurestack-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\azurestack-resource-manager\\azurestack-resource-manager\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\azurestack-resource-manager\\azurestack-resource-manager --namespace=azurestack_resource_manager --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
     },
     "body-array": {
       "commandName": "Project",
@@ -92,6 +128,18 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\CognitiveServices.TextAnalytics\\CognitiveServices.TextAnalytics\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\CognitiveServices.TextAnalytics\\CognitiveServices.TextAnalytics --namespace=CognitiveServices.TextAnalytics --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
     },
+    "cognitiveservices-data-plane-LocalSearch": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\cognitiveservices-data-plane-LocalSearch\\cognitiveservices-data-plane-LocalSearch\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\cognitiveservices-data-plane-LocalSearch\\cognitiveservices-data-plane-LocalSearch --namespace=cognitiveservices_data_plane_LocalSearch --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "consumption-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\consumption-resource-manager\\consumption-resource-manager\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\consumption-resource-manager\\consumption-resource-manager --namespace=consumption_resource_manager --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "containerregistry-data-plane": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\containerregistry-data-plane\\containerregistry-data-plane\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\containerregistry-data-plane\\containerregistry-data-plane --namespace=containerregistry_data_plane --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
     "custom-baseUrl": {
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl --namespace=custom_baseUrl --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
@@ -103,6 +151,22 @@
     "custom-baseUrl-paging": {
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-paging\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-paging --namespace=custom_baseUrl_paging --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "databoxedge-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\databoxedge-resource-manager\\databoxedge-resource-manager\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\databoxedge-resource-manager\\databoxedge-resource-manager --namespace=databoxedge_resource_manager --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "databox-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\databox-resource-manager\\databox-resource-manager\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\databox-resource-manager\\databox-resource-manager --namespace=databox_resource_manager --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "datalake-store-data-plane": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\datalake-store-data-plane\\datalake-store-data-plane\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\datalake-store-data-plane\\datalake-store-data-plane --namespace=datalake_store_data_plane --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "eventgrid-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\eventgrid-resource-manager\\eventgrid-resource-manager\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\eventgrid-resource-manager\\eventgrid-resource-manager --namespace=eventgrid_resource_manager --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
     },
     "extensible-enums-swagger": {
       "commandName": "Project",
@@ -120,9 +184,29 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure --namespace=httpInfrastructure --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
     },
+    "intune-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\intune-resource-manager\\intune-resource-manager\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\intune-resource-manager\\intune-resource-manager --namespace=intune_resource_manager --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "keyvault-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\keyvault-resource-manager\\keyvault-resource-manager\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\keyvault-resource-manager\\keyvault-resource-manager --namespace=keyvault_resource_manager --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "logic-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\logic-resource-manager\\logic-resource-manager\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\logic-resource-manager\\logic-resource-manager --namespace=logic_resource_manager --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
     "lro": {
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\lro\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\lro --namespace=lro --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "machinelearningservices-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\machinelearningservices-resource-manager\\machinelearningservices-resource-manager\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\machinelearningservices-resource-manager\\machinelearningservices-resource-manager --namespace=machinelearningservices_resource_manager --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "managednetwork-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\managednetwork-resource-manager\\managednetwork-resource-manager\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\managednetwork-resource-manager\\managednetwork-resource-manager --namespace=managednetwork_resource_manager --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
     },
     "media_types": {
       "commandName": "Project",
@@ -136,13 +220,41 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestProjects\\NameConflicts\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestProjects\\NameConflicts --namespace=NameConflicts --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
     },
+    "network-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\network-resource-manager\\network-resource-manager\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\network-resource-manager\\network-resource-manager --namespace=network_resource_manager --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
     "paging": {
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\paging\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\paging --namespace=paging --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
     },
+    "privatedns-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\privatedns-resource-manager\\privatedns-resource-manager\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\privatedns-resource-manager\\privatedns-resource-manager --namespace=privatedns_resource_manager --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "scheduler-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\scheduler-resource-manager\\scheduler-resource-manager\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\scheduler-resource-manager\\scheduler-resource-manager --namespace=scheduler_resource_manager --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
     "SignalR": {
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\SignalR\\SignalR\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\SignalR\\SignalR --namespace=SignalR --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "signalr-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\signalr-resource-manager\\signalr-resource-manager\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\signalr-resource-manager\\signalr-resource-manager --namespace=signalr_resource_manager --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "synapse-data-plane": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\synapse-data-plane\\synapse-data-plane\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\synapse-data-plane\\synapse-data-plane --namespace=synapse_data_plane --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "synapse-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\synapse-resource-manager\\synapse-resource-manager\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\synapse-resource-manager\\synapse-resource-manager --namespace=synapse_resource_manager --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
+    "timeseriesinsights-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\smoketests\\timeseriesinsights-resource-manager\\timeseriesinsights-resource-manager\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\smoketests\\timeseriesinsights-resource-manager\\timeseriesinsights-resource-manager --namespace=timeseriesinsights_resource_manager --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
     },
     "TypeSchemaMapping": {
       "commandName": "Project",

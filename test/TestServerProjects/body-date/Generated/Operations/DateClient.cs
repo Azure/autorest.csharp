@@ -15,8 +15,8 @@ namespace body_date
 {
     public partial class DateClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal DateRestClient RestClient { get; }
         /// <summary> Initializes a new instance of DateClient for mocking. </summary>
         protected DateClient()
@@ -25,9 +25,9 @@ namespace body_date
         /// <summary> Initializes a new instance of DateClient. </summary>
         internal DateClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new DateRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new DateRestClient(_clientDiagnostics, _pipeline, host);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Get null date value. </summary>

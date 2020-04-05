@@ -16,8 +16,8 @@ namespace xml_service
 {
     public partial class XmlClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal XmlRestClient RestClient { get; }
         /// <summary> Initializes a new instance of XmlClient for mocking. </summary>
         protected XmlClient()
@@ -26,9 +26,9 @@ namespace xml_service
         /// <summary> Initializes a new instance of XmlClient. </summary>
         internal XmlClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new XmlRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new XmlRestClient(_clientDiagnostics, _pipeline, host);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Get a complex type that has a ref to a complex type with no XML node. </summary>

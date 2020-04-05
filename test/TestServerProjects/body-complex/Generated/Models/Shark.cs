@@ -33,7 +33,6 @@ namespace body_complex.Models
         {
             Age = age;
             Birthday = birthday;
-            Fishtype = fishtype ?? "shark";
         }
 
         public int? Age { get; set; }

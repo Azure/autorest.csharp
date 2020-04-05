@@ -38,6 +38,7 @@ namespace CognitiveSearch.Models
             FieldName = fieldName;
             Boost = boost;
             Interpolation = interpolation;
+            Type = type ?? null;
         }
 
         /// <summary> Indicates the type of function to use. Valid values include magnitude, freshness, distance, and tag. The function type must be lower case. </summary>

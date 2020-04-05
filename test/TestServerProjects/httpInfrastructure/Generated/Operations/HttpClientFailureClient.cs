@@ -14,8 +14,8 @@ namespace httpInfrastructure
 {
     public partial class HttpClientFailureClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal HttpClientFailureRestClient RestClient { get; }
         /// <summary> Initializes a new instance of HttpClientFailureClient for mocking. </summary>
         protected HttpClientFailureClient()
@@ -24,9 +24,9 @@ namespace httpInfrastructure
         /// <summary> Initializes a new instance of HttpClientFailureClient. </summary>
         internal HttpClientFailureClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new HttpClientFailureRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new HttpClientFailureRestClient(_clientDiagnostics, _pipeline, host);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>

@@ -45,6 +45,18 @@
             "type": "string"
           },
           {
+            "name": "pipeline",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientDiagnostics",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
             "required": true,
             "in": "body",
             "name" : "class",
@@ -182,7 +194,10 @@
             "name": "SystemEnum",
             "modelAsString": true
           }
-        }
+        },
+        "ToString": { "type": "string" },
+        "Equals": { "type": "string" },
+        "GetHashCode": { "type": "string" }
       }
     }
   }

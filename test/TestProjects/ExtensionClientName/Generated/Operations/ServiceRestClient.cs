@@ -18,8 +18,8 @@ namespace ExtensionClientName
     internal partial class ServiceRestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of ServiceRestClient. </summary>
         public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
@@ -30,13 +30,13 @@ namespace ExtensionClientName
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateRenamedOperationRequest(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -71,12 +71,12 @@ namespace ExtensionClientName
                 throw new ArgumentNullException(nameof(renamedBodyParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.RenamedOperation");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.RenamedOperation");
             scope.Start();
             try
             {
                 using var message = CreateRenamedOperationRequest(renamedPathParameter, renamedQueryParameter, renamedBodyParameter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new ServiceRenamedOperationHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -95,7 +95,7 @@ namespace ExtensionClientName
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -124,12 +124,12 @@ namespace ExtensionClientName
                 throw new ArgumentNullException(nameof(renamedBodyParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.RenamedOperation");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.RenamedOperation");
             scope.Start();
             try
             {
                 using var message = CreateRenamedOperationRequest(renamedPathParameter, renamedQueryParameter, renamedBodyParameter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new ServiceRenamedOperationHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -148,7 +148,7 @@ namespace ExtensionClientName
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

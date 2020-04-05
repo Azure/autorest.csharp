@@ -23,6 +23,7 @@ namespace CognitiveSearch.Models
         {
             OdataType = odataType ?? null;
             Description = description;
+            OdataType = odataType ?? null;
         }
 
         /// <summary> Identifies the concrete type of the cognitive service resource attached to a skillset. </summary>

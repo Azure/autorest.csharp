@@ -20,8 +20,8 @@ namespace CognitiveSearch
     {
         private string endpoint;
         private string apiVersion;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of IndexersRestClient. </summary>
         public IndexersRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string apiVersion = "2019-05-06-Preview")
@@ -37,13 +37,13 @@ namespace CognitiveSearch
 
             this.endpoint = endpoint;
             this.apiVersion = apiVersion;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateResetRequest(string indexerName, RequestOptions requestOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -71,18 +71,18 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(indexerName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("IndexersClient.Reset");
+            using var scope = _clientDiagnostics.CreateScope("IndexersClient.Reset");
             scope.Start();
             try
             {
                 using var message = CreateResetRequest(indexerName, requestOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 204:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -103,18 +103,18 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(indexerName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("IndexersClient.Reset");
+            using var scope = _clientDiagnostics.CreateScope("IndexersClient.Reset");
             scope.Start();
             try
             {
                 using var message = CreateResetRequest(indexerName, requestOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 204:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -126,7 +126,7 @@ namespace CognitiveSearch
 
         internal HttpMessage CreateRunRequest(string indexerName, RequestOptions requestOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -154,18 +154,18 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(indexerName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("IndexersClient.Run");
+            using var scope = _clientDiagnostics.CreateScope("IndexersClient.Run");
             scope.Start();
             try
             {
                 using var message = CreateRunRequest(indexerName, requestOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -186,18 +186,18 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(indexerName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("IndexersClient.Run");
+            using var scope = _clientDiagnostics.CreateScope("IndexersClient.Run");
             scope.Start();
             try
             {
                 using var message = CreateRunRequest(indexerName, requestOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -209,7 +209,7 @@ namespace CognitiveSearch
 
         internal HttpMessage CreateCreateOrUpdateRequest(string indexerName, Indexer indexer, RequestOptions requestOptions, AccessCondition accessCondition)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -256,12 +256,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(indexer));
             }
 
-            using var scope = clientDiagnostics.CreateScope("IndexersClient.CreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("IndexersClient.CreateOrUpdate");
             scope.Start();
             try
             {
                 using var message = CreateCreateOrUpdateRequest(indexerName, indexer, requestOptions, accessCondition);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -280,7 +280,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -307,12 +307,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(indexer));
             }
 
-            using var scope = clientDiagnostics.CreateScope("IndexersClient.CreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("IndexersClient.CreateOrUpdate");
             scope.Start();
             try
             {
                 using var message = CreateCreateOrUpdateRequest(indexerName, indexer, requestOptions, accessCondition);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -331,7 +331,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -343,7 +343,7 @@ namespace CognitiveSearch
 
         internal HttpMessage CreateDeleteRequest(string indexerName, RequestOptions requestOptions, AccessCondition accessCondition)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -380,19 +380,19 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(indexerName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("IndexersClient.Delete");
+            using var scope = _clientDiagnostics.CreateScope("IndexersClient.Delete");
             scope.Start();
             try
             {
                 using var message = CreateDeleteRequest(indexerName, requestOptions, accessCondition);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 204:
                     case 404:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -414,19 +414,19 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(indexerName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("IndexersClient.Delete");
+            using var scope = _clientDiagnostics.CreateScope("IndexersClient.Delete");
             scope.Start();
             try
             {
                 using var message = CreateDeleteRequest(indexerName, requestOptions, accessCondition);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 204:
                     case 404:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -438,7 +438,7 @@ namespace CognitiveSearch
 
         internal HttpMessage CreateGetRequest(string indexerName, RequestOptions requestOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -466,12 +466,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(indexerName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("IndexersClient.Get");
+            using var scope = _clientDiagnostics.CreateScope("IndexersClient.Get");
             scope.Start();
             try
             {
                 using var message = CreateGetRequest(indexerName, requestOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -489,7 +489,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -510,12 +510,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(indexerName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("IndexersClient.Get");
+            using var scope = _clientDiagnostics.CreateScope("IndexersClient.Get");
             scope.Start();
             try
             {
                 using var message = CreateGetRequest(indexerName, requestOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -533,7 +533,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -545,7 +545,7 @@ namespace CognitiveSearch
 
         internal HttpMessage CreateListRequest(string select, RequestOptions requestOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -570,12 +570,12 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ListIndexersResult>> ListAsync(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IndexersClient.List");
+            using var scope = _clientDiagnostics.CreateScope("IndexersClient.List");
             scope.Start();
             try
             {
                 using var message = CreateListRequest(select, requestOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -593,7 +593,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -609,12 +609,12 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ListIndexersResult> List(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IndexersClient.List");
+            using var scope = _clientDiagnostics.CreateScope("IndexersClient.List");
             scope.Start();
             try
             {
                 using var message = CreateListRequest(select, requestOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -632,7 +632,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -644,7 +644,7 @@ namespace CognitiveSearch
 
         internal HttpMessage CreateCreateRequest(Indexer indexer, RequestOptions requestOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -674,12 +674,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(indexer));
             }
 
-            using var scope = clientDiagnostics.CreateScope("IndexersClient.Create");
+            using var scope = _clientDiagnostics.CreateScope("IndexersClient.Create");
             scope.Start();
             try
             {
                 using var message = CreateCreateRequest(indexer, requestOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 201:
@@ -697,7 +697,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -718,12 +718,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(indexer));
             }
 
-            using var scope = clientDiagnostics.CreateScope("IndexersClient.Create");
+            using var scope = _clientDiagnostics.CreateScope("IndexersClient.Create");
             scope.Start();
             try
             {
                 using var message = CreateCreateRequest(indexer, requestOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 201:
@@ -741,7 +741,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -753,7 +753,7 @@ namespace CognitiveSearch
 
         internal HttpMessage CreateGetStatusRequest(string indexerName, RequestOptions requestOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -781,12 +781,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(indexerName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("IndexersClient.GetStatus");
+            using var scope = _clientDiagnostics.CreateScope("IndexersClient.GetStatus");
             scope.Start();
             try
             {
                 using var message = CreateGetStatusRequest(indexerName, requestOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -804,7 +804,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -825,12 +825,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(indexerName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("IndexersClient.GetStatus");
+            using var scope = _clientDiagnostics.CreateScope("IndexersClient.GetStatus");
             scope.Start();
             try
             {
                 using var message = CreateGetStatusRequest(indexerName, requestOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -848,7 +848,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

@@ -43,7 +43,6 @@ namespace CognitiveSearch.Models
         {
             InsertPreTag = insertPreTag;
             InsertPostTag = insertPostTag;
-            OdataType = odataType ?? "#Microsoft.Skills.Text.MergeSkill";
         }
 
         /// <summary> The tag indicates the start of the merged text. By default, the tag is an empty space. </summary>

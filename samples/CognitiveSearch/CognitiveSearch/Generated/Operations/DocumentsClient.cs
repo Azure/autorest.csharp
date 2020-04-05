@@ -16,8 +16,8 @@ namespace CognitiveSearch
 {
     public partial class DocumentsClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal DocumentsRestClient RestClient { get; }
         /// <summary> Initializes a new instance of DocumentsClient for mocking. </summary>
         protected DocumentsClient()
@@ -26,9 +26,9 @@ namespace CognitiveSearch
         /// <summary> Initializes a new instance of DocumentsClient. </summary>
         internal DocumentsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string indexName, string apiVersion = "2019-05-06-Preview")
         {
-            RestClient = new DocumentsRestClient(clientDiagnostics, pipeline, endpoint, indexName, apiVersion);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new DocumentsRestClient(_clientDiagnostics, _pipeline, endpoint, indexName, apiVersion);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Queries the number of documents in the index. </summary>

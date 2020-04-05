@@ -40,7 +40,6 @@ namespace CognitiveSearch.Models
         internal TagScoringFunction(string type, string fieldName, double boost, ScoringFunctionInterpolation? interpolation, TagScoringParameters parameters) : base(type, fieldName, boost, interpolation)
         {
             Parameters = parameters;
-            Type = type ?? "tag";
         }
 
         /// <summary> Parameter values for the tag scoring function. </summary>

@@ -32,7 +32,6 @@ namespace CognitiveSearch.Models
         internal StopAnalyzer(string odataType, string name, IList<string> stopwords) : base(odataType, name)
         {
             Stopwords = stopwords;
-            OdataType = odataType ?? "#Microsoft.Azure.Search.StopAnalyzer";
         }
 
         /// <summary> A list of stopwords. </summary>

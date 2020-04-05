@@ -32,6 +32,7 @@ namespace CognitiveSearch.Models
         {
             OdataType = odataType ?? null;
             Name = name;
+            OdataType = odataType ?? null;
         }
 
         /// <summary> Identifies the concrete type of the tokenizer. </summary>

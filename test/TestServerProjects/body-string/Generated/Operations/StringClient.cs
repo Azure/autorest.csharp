@@ -15,8 +15,8 @@ namespace body_string
 {
     public partial class StringClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal StringRestClient RestClient { get; }
         /// <summary> Initializes a new instance of StringClient for mocking. </summary>
         protected StringClient()
@@ -25,9 +25,9 @@ namespace body_string
         /// <summary> Initializes a new instance of StringClient. </summary>
         internal StringClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new StringRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new StringRestClient(_clientDiagnostics, _pipeline, host);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Get null string value value. </summary>

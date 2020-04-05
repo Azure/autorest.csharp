@@ -15,8 +15,8 @@ namespace AdditionalPropertiesEx
 {
     public partial class APClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal APRestClient RestClient { get; }
         /// <summary> Initializes a new instance of APClient for mocking. </summary>
         protected APClient()
@@ -25,9 +25,9 @@ namespace AdditionalPropertiesEx
         /// <summary> Initializes a new instance of APClient. </summary>
         internal APClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new APRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new APRestClient(_clientDiagnostics, _pipeline, host);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>

@@ -14,8 +14,8 @@ namespace body_number
 {
     public partial class NumberClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal NumberRestClient RestClient { get; }
         /// <summary> Initializes a new instance of NumberClient for mocking. </summary>
         protected NumberClient()
@@ -24,9 +24,9 @@ namespace body_number
         /// <summary> Initializes a new instance of NumberClient. </summary>
         internal NumberClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new NumberRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new NumberRestClient(_clientDiagnostics, _pipeline, host);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Get null Number value. </summary>

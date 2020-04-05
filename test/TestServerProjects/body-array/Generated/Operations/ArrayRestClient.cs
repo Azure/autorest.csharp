@@ -20,8 +20,8 @@ namespace body_array
     internal partial class ArrayRestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of ArrayRestClient. </summary>
         public ArrayRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
@@ -32,13 +32,13 @@ namespace body_array
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateGetNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -52,12 +52,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<int>>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetNull");
             scope.Start();
             try
             {
                 using var message = CreateGetNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -80,7 +80,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -94,12 +94,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<int>> GetNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetNull");
             scope.Start();
             try
             {
                 using var message = CreateGetNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -122,7 +122,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -134,7 +134,7 @@ namespace body_array
 
         internal HttpMessage CreateGetInvalidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -148,12 +148,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<int>>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetInvalid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetInvalid");
             scope.Start();
             try
             {
                 using var message = CreateGetInvalidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -176,7 +176,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -190,12 +190,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<int>> GetInvalid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetInvalid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetInvalid");
             scope.Start();
             try
             {
                 using var message = CreateGetInvalidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -218,7 +218,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -230,7 +230,7 @@ namespace body_array
 
         internal HttpMessage CreateGetEmptyRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -244,12 +244,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<int>>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetEmpty");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetEmptyRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -272,7 +272,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -286,12 +286,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<int>> GetEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetEmpty");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetEmptyRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -314,7 +314,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -326,7 +326,7 @@ namespace body_array
 
         internal HttpMessage CreatePutEmptyRequest(IEnumerable<string> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -355,18 +355,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutEmpty");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEmpty");
             scope.Start();
             try
             {
                 using var message = CreatePutEmptyRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -386,18 +386,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutEmpty");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEmpty");
             scope.Start();
             try
             {
                 using var message = CreatePutEmptyRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -409,7 +409,7 @@ namespace body_array
 
         internal HttpMessage CreateGetBooleanTfftRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -423,12 +423,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<bool>>> GetBooleanTfftAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetBooleanTfft");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanTfft");
             scope.Start();
             try
             {
                 using var message = CreateGetBooleanTfftRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -451,7 +451,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -465,12 +465,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<bool>> GetBooleanTfft(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetBooleanTfft");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanTfft");
             scope.Start();
             try
             {
                 using var message = CreateGetBooleanTfftRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -493,7 +493,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -505,7 +505,7 @@ namespace body_array
 
         internal HttpMessage CreatePutBooleanTfftRequest(IEnumerable<bool> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -534,18 +534,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutBooleanTfft");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutBooleanTfft");
             scope.Start();
             try
             {
                 using var message = CreatePutBooleanTfftRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -565,18 +565,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutBooleanTfft");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutBooleanTfft");
             scope.Start();
             try
             {
                 using var message = CreatePutBooleanTfftRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -588,7 +588,7 @@ namespace body_array
 
         internal HttpMessage CreateGetBooleanInvalidNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -602,12 +602,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<bool>>> GetBooleanInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetBooleanInvalidNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -630,7 +630,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -644,12 +644,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<bool>> GetBooleanInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetBooleanInvalidNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -672,7 +672,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -684,7 +684,7 @@ namespace body_array
 
         internal HttpMessage CreateGetBooleanInvalidStringRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -698,12 +698,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<bool>>> GetBooleanInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidString");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidString");
             scope.Start();
             try
             {
                 using var message = CreateGetBooleanInvalidStringRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -726,7 +726,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -740,12 +740,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<bool>> GetBooleanInvalidString(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidString");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidString");
             scope.Start();
             try
             {
                 using var message = CreateGetBooleanInvalidStringRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -768,7 +768,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -780,7 +780,7 @@ namespace body_array
 
         internal HttpMessage CreateGetIntegerValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -794,12 +794,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<int>>> GetIntegerValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetIntegerValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntegerValid");
             scope.Start();
             try
             {
                 using var message = CreateGetIntegerValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -822,7 +822,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -836,12 +836,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<int>> GetIntegerValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetIntegerValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntegerValid");
             scope.Start();
             try
             {
                 using var message = CreateGetIntegerValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -864,7 +864,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -876,7 +876,7 @@ namespace body_array
 
         internal HttpMessage CreatePutIntegerValidRequest(IEnumerable<int> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -905,18 +905,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutIntegerValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutIntegerValid");
             scope.Start();
             try
             {
                 using var message = CreatePutIntegerValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -936,18 +936,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutIntegerValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutIntegerValid");
             scope.Start();
             try
             {
                 using var message = CreatePutIntegerValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -959,7 +959,7 @@ namespace body_array
 
         internal HttpMessage CreateGetIntInvalidNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -973,12 +973,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<int>>> GetIntInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetIntInvalidNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1001,7 +1001,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1015,12 +1015,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<int>> GetIntInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetIntInvalidNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1043,7 +1043,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1055,7 +1055,7 @@ namespace body_array
 
         internal HttpMessage CreateGetIntInvalidStringRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1069,12 +1069,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<int>>> GetIntInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidString");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidString");
             scope.Start();
             try
             {
                 using var message = CreateGetIntInvalidStringRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1097,7 +1097,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1111,12 +1111,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<int>> GetIntInvalidString(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidString");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidString");
             scope.Start();
             try
             {
                 using var message = CreateGetIntInvalidStringRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1139,7 +1139,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1151,7 +1151,7 @@ namespace body_array
 
         internal HttpMessage CreateGetLongValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1165,12 +1165,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<long>>> GetLongValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetLongValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongValid");
             scope.Start();
             try
             {
                 using var message = CreateGetLongValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1193,7 +1193,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1207,12 +1207,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<long>> GetLongValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetLongValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongValid");
             scope.Start();
             try
             {
                 using var message = CreateGetLongValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1235,7 +1235,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1247,7 +1247,7 @@ namespace body_array
 
         internal HttpMessage CreatePutLongValidRequest(IEnumerable<long> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1276,18 +1276,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutLongValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutLongValid");
             scope.Start();
             try
             {
                 using var message = CreatePutLongValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1307,18 +1307,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutLongValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutLongValid");
             scope.Start();
             try
             {
                 using var message = CreatePutLongValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1330,7 +1330,7 @@ namespace body_array
 
         internal HttpMessage CreateGetLongInvalidNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1344,12 +1344,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<long>>> GetLongInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetLongInvalidNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1372,7 +1372,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1386,12 +1386,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<long>> GetLongInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetLongInvalidNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1414,7 +1414,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1426,7 +1426,7 @@ namespace body_array
 
         internal HttpMessage CreateGetLongInvalidStringRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1440,12 +1440,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<long>>> GetLongInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidString");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidString");
             scope.Start();
             try
             {
                 using var message = CreateGetLongInvalidStringRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1468,7 +1468,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1482,12 +1482,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<long>> GetLongInvalidString(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidString");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidString");
             scope.Start();
             try
             {
                 using var message = CreateGetLongInvalidStringRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1510,7 +1510,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1522,7 +1522,7 @@ namespace body_array
 
         internal HttpMessage CreateGetFloatValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1536,12 +1536,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<float>>> GetFloatValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetFloatValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatValid");
             scope.Start();
             try
             {
                 using var message = CreateGetFloatValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1564,7 +1564,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1578,12 +1578,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<float>> GetFloatValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetFloatValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatValid");
             scope.Start();
             try
             {
                 using var message = CreateGetFloatValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1606,7 +1606,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1618,7 +1618,7 @@ namespace body_array
 
         internal HttpMessage CreatePutFloatValidRequest(IEnumerable<float> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1647,18 +1647,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutFloatValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutFloatValid");
             scope.Start();
             try
             {
                 using var message = CreatePutFloatValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1678,18 +1678,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutFloatValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutFloatValid");
             scope.Start();
             try
             {
                 using var message = CreatePutFloatValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1701,7 +1701,7 @@ namespace body_array
 
         internal HttpMessage CreateGetFloatInvalidNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1715,12 +1715,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<float>>> GetFloatInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetFloatInvalidNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1743,7 +1743,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1757,12 +1757,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<float>> GetFloatInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetFloatInvalidNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1785,7 +1785,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1797,7 +1797,7 @@ namespace body_array
 
         internal HttpMessage CreateGetFloatInvalidStringRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1811,12 +1811,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<float>>> GetFloatInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidString");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidString");
             scope.Start();
             try
             {
                 using var message = CreateGetFloatInvalidStringRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1839,7 +1839,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1853,12 +1853,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<float>> GetFloatInvalidString(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidString");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidString");
             scope.Start();
             try
             {
                 using var message = CreateGetFloatInvalidStringRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1881,7 +1881,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1893,7 +1893,7 @@ namespace body_array
 
         internal HttpMessage CreateGetDoubleValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1907,12 +1907,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<double>>> GetDoubleValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDoubleValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleValid");
             scope.Start();
             try
             {
                 using var message = CreateGetDoubleValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1935,7 +1935,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1949,12 +1949,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<double>> GetDoubleValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDoubleValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleValid");
             scope.Start();
             try
             {
                 using var message = CreateGetDoubleValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1977,7 +1977,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1989,7 +1989,7 @@ namespace body_array
 
         internal HttpMessage CreatePutDoubleValidRequest(IEnumerable<double> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -2018,18 +2018,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutDoubleValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDoubleValid");
             scope.Start();
             try
             {
                 using var message = CreatePutDoubleValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2049,18 +2049,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutDoubleValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDoubleValid");
             scope.Start();
             try
             {
                 using var message = CreatePutDoubleValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2072,7 +2072,7 @@ namespace body_array
 
         internal HttpMessage CreateGetDoubleInvalidNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2086,12 +2086,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<double>>> GetDoubleInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetDoubleInvalidNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2114,7 +2114,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2128,12 +2128,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<double>> GetDoubleInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetDoubleInvalidNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2156,7 +2156,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2168,7 +2168,7 @@ namespace body_array
 
         internal HttpMessage CreateGetDoubleInvalidStringRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2182,12 +2182,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<double>>> GetDoubleInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidString");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidString");
             scope.Start();
             try
             {
                 using var message = CreateGetDoubleInvalidStringRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2210,7 +2210,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2224,12 +2224,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<double>> GetDoubleInvalidString(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidString");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidString");
             scope.Start();
             try
             {
                 using var message = CreateGetDoubleInvalidStringRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2252,7 +2252,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2264,7 +2264,7 @@ namespace body_array
 
         internal HttpMessage CreateGetStringValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2278,12 +2278,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<string>>> GetStringValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetStringValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringValid");
             scope.Start();
             try
             {
                 using var message = CreateGetStringValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2313,7 +2313,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2327,12 +2327,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<string>> GetStringValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetStringValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringValid");
             scope.Start();
             try
             {
                 using var message = CreateGetStringValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2362,7 +2362,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2374,7 +2374,7 @@ namespace body_array
 
         internal HttpMessage CreatePutStringValidRequest(IEnumerable<string> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -2403,18 +2403,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutStringValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutStringValid");
             scope.Start();
             try
             {
                 using var message = CreatePutStringValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2434,18 +2434,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutStringValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutStringValid");
             scope.Start();
             try
             {
                 using var message = CreatePutStringValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2457,7 +2457,7 @@ namespace body_array
 
         internal HttpMessage CreateGetEnumValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2471,12 +2471,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<FooEnum>>> GetEnumValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetEnumValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEnumValid");
             scope.Start();
             try
             {
                 using var message = CreateGetEnumValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2499,7 +2499,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2513,12 +2513,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<FooEnum>> GetEnumValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetEnumValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEnumValid");
             scope.Start();
             try
             {
                 using var message = CreateGetEnumValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2541,7 +2541,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2553,7 +2553,7 @@ namespace body_array
 
         internal HttpMessage CreatePutEnumValidRequest(IEnumerable<FooEnum> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -2582,18 +2582,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutEnumValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEnumValid");
             scope.Start();
             try
             {
                 using var message = CreatePutEnumValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2613,18 +2613,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutEnumValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEnumValid");
             scope.Start();
             try
             {
                 using var message = CreatePutEnumValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2636,7 +2636,7 @@ namespace body_array
 
         internal HttpMessage CreateGetStringEnumValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2650,12 +2650,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<Enum0>>> GetStringEnumValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetStringEnumValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringEnumValid");
             scope.Start();
             try
             {
                 using var message = CreateGetStringEnumValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2678,7 +2678,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2692,12 +2692,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<Enum0>> GetStringEnumValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetStringEnumValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringEnumValid");
             scope.Start();
             try
             {
                 using var message = CreateGetStringEnumValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2720,7 +2720,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2732,7 +2732,7 @@ namespace body_array
 
         internal HttpMessage CreatePutStringEnumValidRequest(IEnumerable<Enum1> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -2761,18 +2761,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutStringEnumValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutStringEnumValid");
             scope.Start();
             try
             {
                 using var message = CreatePutStringEnumValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2792,18 +2792,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutStringEnumValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutStringEnumValid");
             scope.Start();
             try
             {
                 using var message = CreatePutStringEnumValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2815,7 +2815,7 @@ namespace body_array
 
         internal HttpMessage CreateGetStringWithNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2829,12 +2829,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<string>>> GetStringWithNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetStringWithNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringWithNull");
             scope.Start();
             try
             {
                 using var message = CreateGetStringWithNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2864,7 +2864,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2878,12 +2878,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<string>> GetStringWithNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetStringWithNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringWithNull");
             scope.Start();
             try
             {
                 using var message = CreateGetStringWithNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2913,7 +2913,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2925,7 +2925,7 @@ namespace body_array
 
         internal HttpMessage CreateGetStringWithInvalidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2939,12 +2939,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<string>>> GetStringWithInvalidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetStringWithInvalid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringWithInvalid");
             scope.Start();
             try
             {
                 using var message = CreateGetStringWithInvalidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2974,7 +2974,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2988,12 +2988,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<string>> GetStringWithInvalid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetStringWithInvalid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringWithInvalid");
             scope.Start();
             try
             {
                 using var message = CreateGetStringWithInvalidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3023,7 +3023,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3035,7 +3035,7 @@ namespace body_array
 
         internal HttpMessage CreateGetUuidValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3049,12 +3049,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<Guid>>> GetUuidValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetUuidValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetUuidValid");
             scope.Start();
             try
             {
                 using var message = CreateGetUuidValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3077,7 +3077,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3091,12 +3091,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<Guid>> GetUuidValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetUuidValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetUuidValid");
             scope.Start();
             try
             {
                 using var message = CreateGetUuidValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3119,7 +3119,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3131,7 +3131,7 @@ namespace body_array
 
         internal HttpMessage CreatePutUuidValidRequest(IEnumerable<Guid> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -3160,18 +3160,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutUuidValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutUuidValid");
             scope.Start();
             try
             {
                 using var message = CreatePutUuidValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3191,18 +3191,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutUuidValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutUuidValid");
             scope.Start();
             try
             {
                 using var message = CreatePutUuidValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3214,7 +3214,7 @@ namespace body_array
 
         internal HttpMessage CreateGetUuidInvalidCharsRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3228,12 +3228,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<Guid>>> GetUuidInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetUuidInvalidChars");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetUuidInvalidChars");
             scope.Start();
             try
             {
                 using var message = CreateGetUuidInvalidCharsRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3256,7 +3256,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3270,12 +3270,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<Guid>> GetUuidInvalidChars(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetUuidInvalidChars");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetUuidInvalidChars");
             scope.Start();
             try
             {
                 using var message = CreateGetUuidInvalidCharsRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3298,7 +3298,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3310,7 +3310,7 @@ namespace body_array
 
         internal HttpMessage CreateGetDateValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3324,12 +3324,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<DateTimeOffset>>> GetDateValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateValid");
             scope.Start();
             try
             {
                 using var message = CreateGetDateValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3352,7 +3352,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3366,12 +3366,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<DateTimeOffset>> GetDateValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateValid");
             scope.Start();
             try
             {
                 using var message = CreateGetDateValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3394,7 +3394,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3406,7 +3406,7 @@ namespace body_array
 
         internal HttpMessage CreatePutDateValidRequest(IEnumerable<DateTimeOffset> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -3435,18 +3435,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutDateValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateValid");
             scope.Start();
             try
             {
                 using var message = CreatePutDateValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3466,18 +3466,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutDateValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateValid");
             scope.Start();
             try
             {
                 using var message = CreatePutDateValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3489,7 +3489,7 @@ namespace body_array
 
         internal HttpMessage CreateGetDateInvalidNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3503,12 +3503,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<DateTimeOffset>>> GetDateInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetDateInvalidNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3531,7 +3531,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3545,12 +3545,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<DateTimeOffset>> GetDateInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetDateInvalidNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3573,7 +3573,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3585,7 +3585,7 @@ namespace body_array
 
         internal HttpMessage CreateGetDateInvalidCharsRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3599,12 +3599,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<DateTimeOffset>>> GetDateInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidChars");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidChars");
             scope.Start();
             try
             {
                 using var message = CreateGetDateInvalidCharsRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3627,7 +3627,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3641,12 +3641,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<DateTimeOffset>> GetDateInvalidChars(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidChars");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidChars");
             scope.Start();
             try
             {
                 using var message = CreateGetDateInvalidCharsRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3669,7 +3669,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3681,7 +3681,7 @@ namespace body_array
 
         internal HttpMessage CreateGetDateTimeValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3695,12 +3695,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<DateTimeOffset>>> GetDateTimeValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateTimeValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeValid");
             scope.Start();
             try
             {
                 using var message = CreateGetDateTimeValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3723,7 +3723,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3737,12 +3737,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<DateTimeOffset>> GetDateTimeValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateTimeValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeValid");
             scope.Start();
             try
             {
                 using var message = CreateGetDateTimeValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3765,7 +3765,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3777,7 +3777,7 @@ namespace body_array
 
         internal HttpMessage CreatePutDateTimeValidRequest(IEnumerable<DateTimeOffset> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -3806,18 +3806,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutDateTimeValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateTimeValid");
             scope.Start();
             try
             {
                 using var message = CreatePutDateTimeValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3837,18 +3837,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutDateTimeValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateTimeValid");
             scope.Start();
             try
             {
                 using var message = CreatePutDateTimeValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3860,7 +3860,7 @@ namespace body_array
 
         internal HttpMessage CreateGetDateTimeInvalidNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3874,12 +3874,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<DateTimeOffset>>> GetDateTimeInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetDateTimeInvalidNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3902,7 +3902,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3916,12 +3916,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<DateTimeOffset>> GetDateTimeInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetDateTimeInvalidNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3944,7 +3944,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3956,7 +3956,7 @@ namespace body_array
 
         internal HttpMessage CreateGetDateTimeInvalidCharsRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3970,12 +3970,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<DateTimeOffset>>> GetDateTimeInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidChars");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidChars");
             scope.Start();
             try
             {
                 using var message = CreateGetDateTimeInvalidCharsRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3998,7 +3998,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4012,12 +4012,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<DateTimeOffset>> GetDateTimeInvalidChars(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidChars");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidChars");
             scope.Start();
             try
             {
                 using var message = CreateGetDateTimeInvalidCharsRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4040,7 +4040,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4052,7 +4052,7 @@ namespace body_array
 
         internal HttpMessage CreateGetDateTimeRfc1123ValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -4066,12 +4066,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<DateTimeOffset>>> GetDateTimeRfc1123ValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateTimeRfc1123Valid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeRfc1123Valid");
             scope.Start();
             try
             {
                 using var message = CreateGetDateTimeRfc1123ValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4094,7 +4094,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4108,12 +4108,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<DateTimeOffset>> GetDateTimeRfc1123Valid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDateTimeRfc1123Valid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeRfc1123Valid");
             scope.Start();
             try
             {
                 using var message = CreateGetDateTimeRfc1123ValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4136,7 +4136,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4148,7 +4148,7 @@ namespace body_array
 
         internal HttpMessage CreatePutDateTimeRfc1123ValidRequest(IEnumerable<DateTimeOffset> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -4177,18 +4177,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutDateTimeRfc1123Valid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateTimeRfc1123Valid");
             scope.Start();
             try
             {
                 using var message = CreatePutDateTimeRfc1123ValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4208,18 +4208,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutDateTimeRfc1123Valid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateTimeRfc1123Valid");
             scope.Start();
             try
             {
                 using var message = CreatePutDateTimeRfc1123ValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4231,7 +4231,7 @@ namespace body_array
 
         internal HttpMessage CreateGetDurationValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -4245,12 +4245,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<TimeSpan>>> GetDurationValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDurationValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDurationValid");
             scope.Start();
             try
             {
                 using var message = CreateGetDurationValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4273,7 +4273,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4287,12 +4287,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<TimeSpan>> GetDurationValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDurationValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDurationValid");
             scope.Start();
             try
             {
                 using var message = CreateGetDurationValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4315,7 +4315,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4327,7 +4327,7 @@ namespace body_array
 
         internal HttpMessage CreatePutDurationValidRequest(IEnumerable<TimeSpan> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -4356,18 +4356,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutDurationValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDurationValid");
             scope.Start();
             try
             {
                 using var message = CreatePutDurationValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4387,18 +4387,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutDurationValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDurationValid");
             scope.Start();
             try
             {
                 using var message = CreatePutDurationValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4410,7 +4410,7 @@ namespace body_array
 
         internal HttpMessage CreateGetByteValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -4424,12 +4424,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<byte[]>>> GetByteValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetByteValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetByteValid");
             scope.Start();
             try
             {
                 using var message = CreateGetByteValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4459,7 +4459,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4473,12 +4473,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<byte[]>> GetByteValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetByteValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetByteValid");
             scope.Start();
             try
             {
                 using var message = CreateGetByteValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4508,7 +4508,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4520,7 +4520,7 @@ namespace body_array
 
         internal HttpMessage CreatePutByteValidRequest(IEnumerable<byte[]> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -4549,18 +4549,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutByteValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutByteValid");
             scope.Start();
             try
             {
                 using var message = CreatePutByteValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4580,18 +4580,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutByteValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutByteValid");
             scope.Start();
             try
             {
                 using var message = CreatePutByteValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4603,7 +4603,7 @@ namespace body_array
 
         internal HttpMessage CreateGetByteInvalidNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -4617,12 +4617,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<byte[]>>> GetByteInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetByteInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetByteInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetByteInvalidNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4652,7 +4652,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4666,12 +4666,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<byte[]>> GetByteInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetByteInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetByteInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetByteInvalidNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4701,7 +4701,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4713,7 +4713,7 @@ namespace body_array
 
         internal HttpMessage CreateGetBase64UrlRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -4727,12 +4727,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<byte[]>>> GetBase64UrlAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetBase64Url");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBase64Url");
             scope.Start();
             try
             {
                 using var message = CreateGetBase64UrlRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4762,7 +4762,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4776,12 +4776,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<byte[]>> GetBase64Url(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetBase64Url");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBase64Url");
             scope.Start();
             try
             {
                 using var message = CreateGetBase64UrlRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4811,7 +4811,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4823,7 +4823,7 @@ namespace body_array
 
         internal HttpMessage CreateGetComplexNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -4837,12 +4837,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<Product>>> GetComplexNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetComplexNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexNull");
             scope.Start();
             try
             {
                 using var message = CreateGetComplexNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4872,7 +4872,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4886,12 +4886,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<Product>> GetComplexNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetComplexNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexNull");
             scope.Start();
             try
             {
                 using var message = CreateGetComplexNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4921,7 +4921,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4933,7 +4933,7 @@ namespace body_array
 
         internal HttpMessage CreateGetComplexEmptyRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -4947,12 +4947,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<Product>>> GetComplexEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetComplexEmpty");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetComplexEmptyRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4982,7 +4982,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4996,12 +4996,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<Product>> GetComplexEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetComplexEmpty");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetComplexEmptyRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5031,7 +5031,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -5043,7 +5043,7 @@ namespace body_array
 
         internal HttpMessage CreateGetComplexItemNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -5057,12 +5057,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<Product>>> GetComplexItemNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetComplexItemNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexItemNull");
             scope.Start();
             try
             {
                 using var message = CreateGetComplexItemNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5092,7 +5092,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -5106,12 +5106,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<Product>> GetComplexItemNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetComplexItemNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexItemNull");
             scope.Start();
             try
             {
                 using var message = CreateGetComplexItemNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5141,7 +5141,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -5153,7 +5153,7 @@ namespace body_array
 
         internal HttpMessage CreateGetComplexItemEmptyRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -5167,12 +5167,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<Product>>> GetComplexItemEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetComplexItemEmpty");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexItemEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetComplexItemEmptyRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5202,7 +5202,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -5216,12 +5216,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<Product>> GetComplexItemEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetComplexItemEmpty");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexItemEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetComplexItemEmptyRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5251,7 +5251,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -5263,7 +5263,7 @@ namespace body_array
 
         internal HttpMessage CreateGetComplexValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -5277,12 +5277,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<Product>>> GetComplexValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetComplexValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexValid");
             scope.Start();
             try
             {
                 using var message = CreateGetComplexValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5312,7 +5312,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -5326,12 +5326,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<Product>> GetComplexValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetComplexValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexValid");
             scope.Start();
             try
             {
                 using var message = CreateGetComplexValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5361,7 +5361,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -5373,7 +5373,7 @@ namespace body_array
 
         internal HttpMessage CreatePutComplexValidRequest(IEnumerable<Product> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -5402,18 +5402,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutComplexValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutComplexValid");
             scope.Start();
             try
             {
                 using var message = CreatePutComplexValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -5433,18 +5433,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutComplexValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutComplexValid");
             scope.Start();
             try
             {
                 using var message = CreatePutComplexValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -5456,7 +5456,7 @@ namespace body_array
 
         internal HttpMessage CreateGetArrayNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -5470,12 +5470,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<IList<string>>>> GetArrayNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayNull");
             scope.Start();
             try
             {
                 using var message = CreateGetArrayNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5517,7 +5517,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -5531,12 +5531,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<IList<string>>> GetArrayNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayNull");
             scope.Start();
             try
             {
                 using var message = CreateGetArrayNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5578,7 +5578,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -5590,7 +5590,7 @@ namespace body_array
 
         internal HttpMessage CreateGetArrayEmptyRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -5604,12 +5604,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<IList<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayEmpty");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetArrayEmptyRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5651,7 +5651,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -5665,12 +5665,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<IList<string>>> GetArrayEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayEmpty");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetArrayEmptyRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5712,7 +5712,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -5724,7 +5724,7 @@ namespace body_array
 
         internal HttpMessage CreateGetArrayItemNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -5738,12 +5738,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<IList<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayItemNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayItemNull");
             scope.Start();
             try
             {
                 using var message = CreateGetArrayItemNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5785,7 +5785,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -5799,12 +5799,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<IList<string>>> GetArrayItemNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayItemNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayItemNull");
             scope.Start();
             try
             {
                 using var message = CreateGetArrayItemNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5846,7 +5846,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -5858,7 +5858,7 @@ namespace body_array
 
         internal HttpMessage CreateGetArrayItemEmptyRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -5872,12 +5872,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<IList<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayItemEmpty");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayItemEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetArrayItemEmptyRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5919,7 +5919,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -5933,12 +5933,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<IList<string>>> GetArrayItemEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayItemEmpty");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayItemEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetArrayItemEmptyRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5980,7 +5980,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -5992,7 +5992,7 @@ namespace body_array
 
         internal HttpMessage CreateGetArrayValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -6006,12 +6006,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<IList<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayValid");
             scope.Start();
             try
             {
                 using var message = CreateGetArrayValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -6053,7 +6053,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -6067,12 +6067,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<IList<string>>> GetArrayValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetArrayValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayValid");
             scope.Start();
             try
             {
                 using var message = CreateGetArrayValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -6114,7 +6114,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -6126,7 +6126,7 @@ namespace body_array
 
         internal HttpMessage CreatePutArrayValidRequest(IEnumerable<IList<string>> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -6160,18 +6160,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutArrayValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutArrayValid");
             scope.Start();
             try
             {
                 using var message = CreatePutArrayValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -6191,18 +6191,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutArrayValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutArrayValid");
             scope.Start();
             try
             {
                 using var message = CreatePutArrayValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -6214,7 +6214,7 @@ namespace body_array
 
         internal HttpMessage CreateGetDictionaryNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -6228,12 +6228,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryNull");
             scope.Start();
             try
             {
                 using var message = CreateGetDictionaryNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -6275,7 +6275,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -6289,12 +6289,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<IDictionary<string, string>>> GetDictionaryNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryNull");
             scope.Start();
             try
             {
                 using var message = CreateGetDictionaryNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -6336,7 +6336,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -6348,7 +6348,7 @@ namespace body_array
 
         internal HttpMessage CreateGetDictionaryEmptyRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -6362,12 +6362,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryEmpty");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetDictionaryEmptyRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -6409,7 +6409,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -6423,12 +6423,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<IDictionary<string, string>>> GetDictionaryEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryEmpty");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetDictionaryEmptyRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -6470,7 +6470,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -6482,7 +6482,7 @@ namespace body_array
 
         internal HttpMessage CreateGetDictionaryItemNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -6496,12 +6496,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemNull");
             scope.Start();
             try
             {
                 using var message = CreateGetDictionaryItemNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -6543,7 +6543,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -6557,12 +6557,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<IDictionary<string, string>>> GetDictionaryItemNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemNull");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemNull");
             scope.Start();
             try
             {
                 using var message = CreateGetDictionaryItemNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -6604,7 +6604,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -6616,7 +6616,7 @@ namespace body_array
 
         internal HttpMessage CreateGetDictionaryItemEmptyRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -6630,12 +6630,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemEmpty");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetDictionaryItemEmptyRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -6677,7 +6677,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -6691,12 +6691,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<IDictionary<string, string>>> GetDictionaryItemEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemEmpty");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetDictionaryItemEmptyRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -6738,7 +6738,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -6750,7 +6750,7 @@ namespace body_array
 
         internal HttpMessage CreateGetDictionaryValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -6764,12 +6764,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryValid");
             scope.Start();
             try
             {
                 using var message = CreateGetDictionaryValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -6811,7 +6811,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -6825,12 +6825,12 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<IDictionary<string, string>>> GetDictionaryValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetDictionaryValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryValid");
             scope.Start();
             try
             {
                 using var message = CreateGetDictionaryValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -6872,7 +6872,7 @@ namespace body_array
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -6884,7 +6884,7 @@ namespace body_array
 
         internal HttpMessage CreatePutDictionaryValidRequest(IEnumerable<IDictionary<string, string>> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -6919,18 +6919,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutDictionaryValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDictionaryValid");
             scope.Start();
             try
             {
                 using var message = CreatePutDictionaryValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -6950,18 +6950,18 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutDictionaryValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDictionaryValid");
             scope.Start();
             try
             {
                 using var message = CreatePutDictionaryValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

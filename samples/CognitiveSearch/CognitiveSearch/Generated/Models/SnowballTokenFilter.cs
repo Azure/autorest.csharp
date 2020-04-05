@@ -33,7 +33,6 @@ namespace CognitiveSearch.Models
         internal SnowballTokenFilter(string odataType, string name, SnowballTokenFilterLanguage language) : base(odataType, name)
         {
             Language = language;
-            OdataType = odataType ?? "#Microsoft.Azure.Search.SnowballTokenFilter";
         }
 
         /// <summary> The language to use. </summary>

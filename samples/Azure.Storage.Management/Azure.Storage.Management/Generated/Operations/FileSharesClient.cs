@@ -18,8 +18,8 @@ namespace Azure.Storage.Management
 {
     public partial class FileSharesClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal FileSharesRestClient RestClient { get; }
         /// <summary> Initializes a new instance of FileSharesClient for mocking. </summary>
         protected FileSharesClient()
@@ -28,9 +28,9 @@ namespace Azure.Storage.Management
         /// <summary> Initializes a new instance of FileSharesClient. </summary>
         internal FileSharesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
         {
-            RestClient = new FileSharesRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new FileSharesRestClient(_clientDiagnostics, _pipeline, subscriptionId, host, apiVersion);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Creates a new share under the specified account as described by request body. The share resource includes metadata and properties for that share. It does not include a list of the files contained by the share. </summary>

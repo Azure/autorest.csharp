@@ -22,8 +22,8 @@ namespace Azure.Storage.Management
         private string subscriptionId;
         private string host;
         private string apiVersion;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of FileSharesRestClient. </summary>
         public FileSharesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
@@ -44,13 +44,13 @@ namespace Azure.Storage.Management
             this.subscriptionId = subscriptionId;
             this.host = host;
             this.apiVersion = apiVersion;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateListRequest(string resourceGroupName, string accountName, string maxpagesize, string filter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -92,12 +92,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("FileSharesClient.List");
+            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.List");
             scope.Start();
             try
             {
                 using var message = CreateListRequest(resourceGroupName, accountName, maxpagesize, filter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -115,7 +115,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -142,12 +142,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("FileSharesClient.List");
+            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.List");
             scope.Start();
             try
             {
                 using var message = CreateListRequest(resourceGroupName, accountName, maxpagesize, filter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -165,7 +165,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -177,7 +177,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateCreateRequest(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata, int? shareQuota)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -226,12 +226,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(shareName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("FileSharesClient.Create");
+            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Create");
             scope.Start();
             try
             {
                 using var message = CreateCreateRequest(resourceGroupName, accountName, shareName, metadata, shareQuota);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -250,7 +250,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -282,12 +282,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(shareName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("FileSharesClient.Create");
+            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Create");
             scope.Start();
             try
             {
                 using var message = CreateCreateRequest(resourceGroupName, accountName, shareName, metadata, shareQuota);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -306,7 +306,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -318,7 +318,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateUpdateRequest(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata, int? shareQuota)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -367,12 +367,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(shareName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("FileSharesClient.Update");
+            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Update");
             scope.Start();
             try
             {
                 using var message = CreateUpdateRequest(resourceGroupName, accountName, shareName, metadata, shareQuota);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -390,7 +390,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -422,12 +422,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(shareName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("FileSharesClient.Update");
+            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Update");
             scope.Start();
             try
             {
                 using var message = CreateUpdateRequest(resourceGroupName, accountName, shareName, metadata, shareQuota);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -445,7 +445,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -457,7 +457,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateGetRequest(string resourceGroupName, string accountName, string shareName)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -495,12 +495,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(shareName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("FileSharesClient.Get");
+            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Get");
             scope.Start();
             try
             {
                 using var message = CreateGetRequest(resourceGroupName, accountName, shareName);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -518,7 +518,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -548,12 +548,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(shareName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("FileSharesClient.Get");
+            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Get");
             scope.Start();
             try
             {
                 using var message = CreateGetRequest(resourceGroupName, accountName, shareName);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -571,7 +571,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -583,7 +583,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateDeleteRequest(string resourceGroupName, string accountName, string shareName)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -621,19 +621,19 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(shareName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("FileSharesClient.Delete");
+            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Delete");
             scope.Start();
             try
             {
                 using var message = CreateDeleteRequest(resourceGroupName, accountName, shareName);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                     case 204:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -663,19 +663,19 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(shareName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("FileSharesClient.Delete");
+            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Delete");
             scope.Start();
             try
             {
                 using var message = CreateDeleteRequest(resourceGroupName, accountName, shareName);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                     case 204:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -687,7 +687,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName, string accountName, string maxpagesize, string filter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -718,12 +718,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("FileSharesClient.List");
+            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.List");
             scope.Start();
             try
             {
                 using var message = CreateListNextPageRequest(nextLink, resourceGroupName, accountName, maxpagesize, filter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -741,7 +741,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -773,12 +773,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("FileSharesClient.List");
+            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.List");
             scope.Start();
             try
             {
                 using var message = CreateListNextPageRequest(nextLink, resourceGroupName, accountName, maxpagesize, filter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -796,7 +796,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

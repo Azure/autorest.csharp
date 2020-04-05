@@ -23,8 +23,8 @@ namespace Azure.Storage.Management
         private string subscriptionId;
         private string host;
         private string apiVersion;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of BlobContainersRestClient. </summary>
         public BlobContainersRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
@@ -45,13 +45,13 @@ namespace Azure.Storage.Management
             this.subscriptionId = subscriptionId;
             this.host = host;
             this.apiVersion = apiVersion;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateListRequest(string resourceGroupName, string accountName, string maxpagesize, string filter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -93,12 +93,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.List");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.List");
             scope.Start();
             try
             {
                 using var message = CreateListRequest(resourceGroupName, accountName, maxpagesize, filter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -116,7 +116,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -143,12 +143,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.List");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.List");
             scope.Start();
             try
             {
                 using var message = CreateListRequest(resourceGroupName, accountName, maxpagesize, filter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -166,7 +166,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -178,7 +178,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateCreateRequest(string resourceGroupName, string accountName, string containerName, BlobContainer blobContainer)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -225,12 +225,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(blobContainer));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.Create");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Create");
             scope.Start();
             try
             {
                 using var message = CreateCreateRequest(resourceGroupName, accountName, containerName, blobContainer);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -249,7 +249,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -284,12 +284,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(blobContainer));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.Create");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Create");
             scope.Start();
             try
             {
                 using var message = CreateCreateRequest(resourceGroupName, accountName, containerName, blobContainer);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -308,7 +308,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -320,7 +320,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateUpdateRequest(string resourceGroupName, string accountName, string containerName, BlobContainer blobContainer)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -367,12 +367,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(blobContainer));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.Update");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Update");
             scope.Start();
             try
             {
                 using var message = CreateUpdateRequest(resourceGroupName, accountName, containerName, blobContainer);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -390,7 +390,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -425,12 +425,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(blobContainer));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.Update");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Update");
             scope.Start();
             try
             {
                 using var message = CreateUpdateRequest(resourceGroupName, accountName, containerName, blobContainer);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -448,7 +448,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -460,7 +460,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateGetRequest(string resourceGroupName, string accountName, string containerName)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -498,12 +498,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(containerName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.Get");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Get");
             scope.Start();
             try
             {
                 using var message = CreateGetRequest(resourceGroupName, accountName, containerName);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -521,7 +521,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -551,12 +551,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(containerName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.Get");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Get");
             scope.Start();
             try
             {
                 using var message = CreateGetRequest(resourceGroupName, accountName, containerName);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -574,7 +574,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -586,7 +586,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateDeleteRequest(string resourceGroupName, string accountName, string containerName)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -624,19 +624,19 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(containerName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.Delete");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Delete");
             scope.Start();
             try
             {
                 using var message = CreateDeleteRequest(resourceGroupName, accountName, containerName);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                     case 204:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -666,19 +666,19 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(containerName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.Delete");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Delete");
             scope.Start();
             try
             {
                 using var message = CreateDeleteRequest(resourceGroupName, accountName, containerName);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                     case 204:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -690,7 +690,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateSetLegalHoldRequest(string resourceGroupName, string accountName, string containerName, IEnumerable<string> tags)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -739,12 +739,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.SetLegalHold");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.SetLegalHold");
             scope.Start();
             try
             {
                 using var message = CreateSetLegalHoldRequest(resourceGroupName, accountName, containerName, tags);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -762,7 +762,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -797,12 +797,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.SetLegalHold");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.SetLegalHold");
             scope.Start();
             try
             {
                 using var message = CreateSetLegalHoldRequest(resourceGroupName, accountName, containerName, tags);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -820,7 +820,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -832,7 +832,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateClearLegalHoldRequest(string resourceGroupName, string accountName, string containerName, IEnumerable<string> tags)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -881,12 +881,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.ClearLegalHold");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.ClearLegalHold");
             scope.Start();
             try
             {
                 using var message = CreateClearLegalHoldRequest(resourceGroupName, accountName, containerName, tags);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -904,7 +904,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -939,12 +939,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.ClearLegalHold");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.ClearLegalHold");
             scope.Start();
             try
             {
                 using var message = CreateClearLegalHoldRequest(resourceGroupName, accountName, containerName, tags);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -962,7 +962,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -974,7 +974,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateCreateOrUpdateImmutabilityPolicyRequest(string resourceGroupName, string accountName, string containerName, string ifMatch, int? immutabilityPeriodSinceCreationInDays, bool? allowProtectedAppendWrites)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1030,12 +1030,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(containerName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.CreateOrUpdateImmutabilityPolicy");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.CreateOrUpdateImmutabilityPolicy");
             scope.Start();
             try
             {
                 using var message = CreateCreateOrUpdateImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1053,7 +1053,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1086,12 +1086,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(containerName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.CreateOrUpdateImmutabilityPolicy");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.CreateOrUpdateImmutabilityPolicy");
             scope.Start();
             try
             {
                 using var message = CreateCreateOrUpdateImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1109,7 +1109,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1121,7 +1121,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateGetImmutabilityPolicyRequest(string resourceGroupName, string accountName, string containerName, string ifMatch)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1166,12 +1166,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(containerName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.GetImmutabilityPolicy");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.GetImmutabilityPolicy");
             scope.Start();
             try
             {
                 using var message = CreateGetImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1189,7 +1189,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1220,12 +1220,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(containerName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.GetImmutabilityPolicy");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.GetImmutabilityPolicy");
             scope.Start();
             try
             {
                 using var message = CreateGetImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1243,7 +1243,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1255,7 +1255,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateDeleteImmutabilityPolicyRequest(string resourceGroupName, string accountName, string containerName, string ifMatch)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -1301,12 +1301,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(ifMatch));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.DeleteImmutabilityPolicy");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.DeleteImmutabilityPolicy");
             scope.Start();
             try
             {
                 using var message = CreateDeleteImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1324,7 +1324,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1359,12 +1359,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(ifMatch));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.DeleteImmutabilityPolicy");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.DeleteImmutabilityPolicy");
             scope.Start();
             try
             {
                 using var message = CreateDeleteImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1382,7 +1382,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1394,7 +1394,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateLockImmutabilityPolicyRequest(string resourceGroupName, string accountName, string containerName, string ifMatch)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1439,12 +1439,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(ifMatch));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.LockImmutabilityPolicy");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.LockImmutabilityPolicy");
             scope.Start();
             try
             {
                 using var message = CreateLockImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1462,7 +1462,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1497,12 +1497,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(ifMatch));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.LockImmutabilityPolicy");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.LockImmutabilityPolicy");
             scope.Start();
             try
             {
                 using var message = CreateLockImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1520,7 +1520,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1532,7 +1532,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateExtendImmutabilityPolicyRequest(string resourceGroupName, string accountName, string containerName, string ifMatch, int? immutabilityPeriodSinceCreationInDays, bool? allowProtectedAppendWrites)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1588,12 +1588,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(ifMatch));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.ExtendImmutabilityPolicy");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.ExtendImmutabilityPolicy");
             scope.Start();
             try
             {
                 using var message = CreateExtendImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1611,7 +1611,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1648,12 +1648,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(ifMatch));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.ExtendImmutabilityPolicy");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.ExtendImmutabilityPolicy");
             scope.Start();
             try
             {
                 using var message = CreateExtendImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1671,7 +1671,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1683,7 +1683,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateLeaseRequest(string resourceGroupName, string accountName, string containerName, LeaseContainerRequest parameters)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1730,12 +1730,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(containerName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.Lease");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Lease");
             scope.Start();
             try
             {
                 using var message = CreateLeaseRequest(resourceGroupName, accountName, containerName, parameters);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1753,7 +1753,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1784,12 +1784,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(containerName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.Lease");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Lease");
             scope.Start();
             try
             {
                 using var message = CreateLeaseRequest(resourceGroupName, accountName, containerName, parameters);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1807,7 +1807,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1819,7 +1819,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName, string accountName, string maxpagesize, string filter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1850,12 +1850,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.List");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.List");
             scope.Start();
             try
             {
                 using var message = CreateListNextPageRequest(nextLink, resourceGroupName, accountName, maxpagesize, filter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1873,7 +1873,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1905,12 +1905,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("BlobContainersClient.List");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.List");
             scope.Start();
             try
             {
                 using var message = CreateListNextPageRequest(nextLink, resourceGroupName, accountName, maxpagesize, filter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1928,7 +1928,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

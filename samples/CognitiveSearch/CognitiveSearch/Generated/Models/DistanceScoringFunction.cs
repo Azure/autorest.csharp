@@ -40,7 +40,6 @@ namespace CognitiveSearch.Models
         internal DistanceScoringFunction(string type, string fieldName, double boost, ScoringFunctionInterpolation? interpolation, DistanceScoringParameters parameters) : base(type, fieldName, boost, interpolation)
         {
             Parameters = parameters;
-            Type = type ?? "distance";
         }
 
         /// <summary> Parameter values for the distance scoring function. </summary>

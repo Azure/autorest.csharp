@@ -14,8 +14,8 @@ namespace httpInfrastructure
 {
     public partial class HttpFailureClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal HttpFailureRestClient RestClient { get; }
         /// <summary> Initializes a new instance of HttpFailureClient for mocking. </summary>
         protected HttpFailureClient()
@@ -24,9 +24,9 @@ namespace httpInfrastructure
         /// <summary> Initializes a new instance of HttpFailureClient. </summary>
         internal HttpFailureClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new HttpFailureRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new HttpFailureRestClient(_clientDiagnostics, _pipeline, host);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Get empty error form server. </summary>

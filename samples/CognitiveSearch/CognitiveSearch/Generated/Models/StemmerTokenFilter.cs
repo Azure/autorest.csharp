@@ -33,7 +33,6 @@ namespace CognitiveSearch.Models
         internal StemmerTokenFilter(string odataType, string name, StemmerTokenFilterLanguage language) : base(odataType, name)
         {
             Language = language;
-            OdataType = odataType ?? "#Microsoft.Azure.Search.StemmerTokenFilter";
         }
 
         /// <summary> The language to use. </summary>

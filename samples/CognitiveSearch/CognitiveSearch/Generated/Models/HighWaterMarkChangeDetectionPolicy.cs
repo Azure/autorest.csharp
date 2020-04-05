@@ -31,7 +31,6 @@ namespace CognitiveSearch.Models
         internal HighWaterMarkChangeDetectionPolicy(string odataType, string highWaterMarkColumnName) : base(odataType)
         {
             HighWaterMarkColumnName = highWaterMarkColumnName;
-            OdataType = odataType ?? "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy";
         }
 
         /// <summary> The name of the high water mark column. </summary>

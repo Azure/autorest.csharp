@@ -32,7 +32,6 @@ namespace body_complex.Models
         internal Sawshark(string fishtype, string species, float length, IList<Fish> siblings, int? age, DateTimeOffset birthday, byte[] picture) : base(fishtype, species, length, siblings, age, birthday)
         {
             Picture = picture;
-            Fishtype = fishtype ?? "sawshark";
         }
 
         public byte[] Picture { get; set; }

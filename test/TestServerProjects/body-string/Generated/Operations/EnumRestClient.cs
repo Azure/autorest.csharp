@@ -19,8 +19,8 @@ namespace body_string
     internal partial class EnumRestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of EnumRestClient. </summary>
         public EnumRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
@@ -31,13 +31,13 @@ namespace body_string
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateGetNotExpandableRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -51,12 +51,12 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Colors>> GetNotExpandableAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("EnumClient.GetNotExpandable");
+            using var scope = _clientDiagnostics.CreateScope("EnumClient.GetNotExpandable");
             scope.Start();
             try
             {
                 using var message = CreateGetNotExpandableRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -67,7 +67,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -81,12 +81,12 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Colors> GetNotExpandable(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("EnumClient.GetNotExpandable");
+            using var scope = _clientDiagnostics.CreateScope("EnumClient.GetNotExpandable");
             scope.Start();
             try
             {
                 using var message = CreateGetNotExpandableRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -97,7 +97,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -109,7 +109,7 @@ namespace body_string
 
         internal HttpMessage CreatePutNotExpandableRequest(Colors stringBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -128,18 +128,18 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutNotExpandableAsync(Colors stringBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
+            using var scope = _clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
             scope.Start();
             try
             {
                 using var message = CreatePutNotExpandableRequest(stringBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -154,18 +154,18 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutNotExpandable(Colors stringBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
+            using var scope = _clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
             scope.Start();
             try
             {
                 using var message = CreatePutNotExpandableRequest(stringBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -177,7 +177,7 @@ namespace body_string
 
         internal HttpMessage CreateGetReferencedRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -191,12 +191,12 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Colors>> GetReferencedAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("EnumClient.GetReferenced");
+            using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferenced");
             scope.Start();
             try
             {
                 using var message = CreateGetReferencedRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -207,7 +207,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -221,12 +221,12 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Colors> GetReferenced(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("EnumClient.GetReferenced");
+            using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferenced");
             scope.Start();
             try
             {
                 using var message = CreateGetReferencedRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -237,7 +237,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -249,7 +249,7 @@ namespace body_string
 
         internal HttpMessage CreatePutReferencedRequest(Colors enumStringBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -268,18 +268,18 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutReferencedAsync(Colors enumStringBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("EnumClient.PutReferenced");
+            using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferenced");
             scope.Start();
             try
             {
                 using var message = CreatePutReferencedRequest(enumStringBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -294,18 +294,18 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutReferenced(Colors enumStringBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("EnumClient.PutReferenced");
+            using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferenced");
             scope.Start();
             try
             {
                 using var message = CreatePutReferencedRequest(enumStringBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -317,7 +317,7 @@ namespace body_string
 
         internal HttpMessage CreateGetReferencedConstantRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -331,12 +331,12 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<RefColorConstant>> GetReferencedConstantAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("EnumClient.GetReferencedConstant");
+            using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferencedConstant");
             scope.Start();
             try
             {
                 using var message = CreateGetReferencedConstantRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -354,7 +354,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -368,12 +368,12 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<RefColorConstant> GetReferencedConstant(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("EnumClient.GetReferencedConstant");
+            using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferencedConstant");
             scope.Start();
             try
             {
                 using var message = CreateGetReferencedConstantRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -391,7 +391,7 @@ namespace body_string
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -403,7 +403,7 @@ namespace body_string
 
         internal HttpMessage CreatePutReferencedConstantRequest(RefColorConstant enumStringBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -427,18 +427,18 @@ namespace body_string
                 throw new ArgumentNullException(nameof(enumStringBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
+            using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
             scope.Start();
             try
             {
                 using var message = CreatePutReferencedConstantRequest(enumStringBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -458,18 +458,18 @@ namespace body_string
                 throw new ArgumentNullException(nameof(enumStringBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
+            using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
             scope.Start();
             try
             {
                 using var message = CreatePutReferencedConstantRequest(enumStringBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

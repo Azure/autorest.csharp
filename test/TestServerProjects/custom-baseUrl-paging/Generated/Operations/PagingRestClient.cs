@@ -19,8 +19,8 @@ namespace custom_baseUrl_paging
     internal partial class PagingRestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of PagingRestClient. </summary>
         public PagingRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "host")
@@ -31,13 +31,13 @@ namespace custom_baseUrl_paging
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateGetPagesPartialUrlRequest(string accountName)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -59,12 +59,12 @@ namespace custom_baseUrl_paging
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrl");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrl");
             scope.Start();
             try
             {
                 using var message = CreateGetPagesPartialUrlRequest(accountName);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -82,7 +82,7 @@ namespace custom_baseUrl_paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -102,12 +102,12 @@ namespace custom_baseUrl_paging
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrl");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrl");
             scope.Start();
             try
             {
                 using var message = CreateGetPagesPartialUrlRequest(accountName);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -125,7 +125,7 @@ namespace custom_baseUrl_paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -137,7 +137,7 @@ namespace custom_baseUrl_paging
 
         internal HttpMessage CreateGetPagesPartialUrlOperationRequest(string accountName)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -159,12 +159,12 @@ namespace custom_baseUrl_paging
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrlOperation");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrlOperation");
             scope.Start();
             try
             {
                 using var message = CreateGetPagesPartialUrlOperationRequest(accountName);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -182,7 +182,7 @@ namespace custom_baseUrl_paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -202,12 +202,12 @@ namespace custom_baseUrl_paging
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrlOperation");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrlOperation");
             scope.Start();
             try
             {
                 using var message = CreateGetPagesPartialUrlOperationRequest(accountName);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -225,7 +225,7 @@ namespace custom_baseUrl_paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -237,7 +237,7 @@ namespace custom_baseUrl_paging
 
         internal HttpMessage CreateGetPagesPartialUrlOperationNextRequest(string accountName, string nextLink)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -265,12 +265,12 @@ namespace custom_baseUrl_paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrlOperationNext");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrlOperationNext");
             scope.Start();
             try
             {
                 using var message = CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -288,7 +288,7 @@ namespace custom_baseUrl_paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -313,12 +313,12 @@ namespace custom_baseUrl_paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrlOperationNext");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrlOperationNext");
             scope.Start();
             try
             {
                 using var message = CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -336,7 +336,7 @@ namespace custom_baseUrl_paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -348,7 +348,7 @@ namespace custom_baseUrl_paging
 
         internal HttpMessage CreateGetPagesPartialUrlNextPageRequest(string nextLink, string accountName)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -372,12 +372,12 @@ namespace custom_baseUrl_paging
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrl");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrl");
             scope.Start();
             try
             {
                 using var message = CreateGetPagesPartialUrlNextPageRequest(nextLink, accountName);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -395,7 +395,7 @@ namespace custom_baseUrl_paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -420,12 +420,12 @@ namespace custom_baseUrl_paging
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrl");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrl");
             scope.Start();
             try
             {
                 using var message = CreateGetPagesPartialUrlNextPageRequest(nextLink, accountName);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -443,7 +443,7 @@ namespace custom_baseUrl_paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -455,7 +455,7 @@ namespace custom_baseUrl_paging
 
         internal HttpMessage CreateGetPagesPartialUrlOperationNextNextPageRequest(string nextLink, string accountName)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -479,12 +479,12 @@ namespace custom_baseUrl_paging
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrlOperationNext");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrlOperationNext");
             scope.Start();
             try
             {
                 using var message = CreateGetPagesPartialUrlOperationNextNextPageRequest(nextLink, accountName);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -502,7 +502,7 @@ namespace custom_baseUrl_paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -527,12 +527,12 @@ namespace custom_baseUrl_paging
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrlOperationNext");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrlOperationNext");
             scope.Start();
             try
             {
                 using var message = CreateGetPagesPartialUrlOperationNextNextPageRequest(nextLink, accountName);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -550,7 +550,7 @@ namespace custom_baseUrl_paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

@@ -14,8 +14,8 @@ namespace httpInfrastructure
 {
     public partial class HttpServerFailureClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal HttpServerFailureRestClient RestClient { get; }
         /// <summary> Initializes a new instance of HttpServerFailureClient for mocking. </summary>
         protected HttpServerFailureClient()
@@ -24,9 +24,9 @@ namespace httpInfrastructure
         /// <summary> Initializes a new instance of HttpServerFailureClient. </summary>
         internal HttpServerFailureClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new HttpServerFailureRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new HttpServerFailureRestClient(_clientDiagnostics, _pipeline, host);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>

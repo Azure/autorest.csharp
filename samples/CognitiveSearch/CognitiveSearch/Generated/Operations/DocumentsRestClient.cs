@@ -22,8 +22,8 @@ namespace CognitiveSearch
         private string endpoint;
         private string indexName;
         private string apiVersion;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of DocumentsRestClient. </summary>
         public DocumentsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string indexName, string apiVersion = "2019-05-06-Preview")
@@ -44,13 +44,13 @@ namespace CognitiveSearch
             this.endpoint = endpoint;
             this.indexName = indexName;
             this.apiVersion = apiVersion;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateCountRequest(RequestOptions requestOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -73,12 +73,12 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<long>> CountAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DocumentsClient.Count");
+            using var scope = _clientDiagnostics.CreateScope("DocumentsClient.Count");
             scope.Start();
             try
             {
                 using var message = CreateCountRequest(requestOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -89,7 +89,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -104,12 +104,12 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<long> Count(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DocumentsClient.Count");
+            using var scope = _clientDiagnostics.CreateScope("DocumentsClient.Count");
             scope.Start();
             try
             {
                 using var message = CreateCountRequest(requestOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -120,7 +120,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -132,7 +132,7 @@ namespace CognitiveSearch
 
         internal HttpMessage CreateSearchGetRequest(string searchText, SearchOptions searchOptions, RequestOptions requestOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -225,12 +225,12 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<SearchDocumentsResult>> SearchGetAsync(string searchText = null, SearchOptions searchOptions = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DocumentsClient.SearchGet");
+            using var scope = _clientDiagnostics.CreateScope("DocumentsClient.SearchGet");
             scope.Start();
             try
             {
                 using var message = CreateSearchGetRequest(searchText, searchOptions, requestOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -248,7 +248,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -265,12 +265,12 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<SearchDocumentsResult> SearchGet(string searchText = null, SearchOptions searchOptions = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DocumentsClient.SearchGet");
+            using var scope = _clientDiagnostics.CreateScope("DocumentsClient.SearchGet");
             scope.Start();
             try
             {
                 using var message = CreateSearchGetRequest(searchText, searchOptions, requestOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -288,7 +288,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -300,7 +300,7 @@ namespace CognitiveSearch
 
         internal HttpMessage CreateSearchPostRequest(SearchRequest searchRequest, RequestOptions requestOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -333,12 +333,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(searchRequest));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DocumentsClient.SearchPost");
+            using var scope = _clientDiagnostics.CreateScope("DocumentsClient.SearchPost");
             scope.Start();
             try
             {
                 using var message = CreateSearchPostRequest(searchRequest, requestOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -356,7 +356,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -377,12 +377,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(searchRequest));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DocumentsClient.SearchPost");
+            using var scope = _clientDiagnostics.CreateScope("DocumentsClient.SearchPost");
             scope.Start();
             try
             {
                 using var message = CreateSearchPostRequest(searchRequest, requestOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -400,7 +400,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -412,7 +412,7 @@ namespace CognitiveSearch
 
         internal HttpMessage CreateGetRequest(string key, IEnumerable<string> selectedFields, RequestOptions requestOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -448,12 +448,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DocumentsClient.Get");
+            using var scope = _clientDiagnostics.CreateScope("DocumentsClient.Get");
             scope.Start();
             try
             {
                 using var message = CreateGetRequest(key, selectedFields, requestOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -471,7 +471,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -493,12 +493,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DocumentsClient.Get");
+            using var scope = _clientDiagnostics.CreateScope("DocumentsClient.Get");
             scope.Start();
             try
             {
                 using var message = CreateGetRequest(key, selectedFields, requestOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -516,7 +516,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -528,7 +528,7 @@ namespace CognitiveSearch
 
         internal HttpMessage CreateSuggestGetRequest(string searchText, string suggesterName, SuggestOptions suggestOptions, RequestOptions requestOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -601,12 +601,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(suggesterName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DocumentsClient.SuggestGet");
+            using var scope = _clientDiagnostics.CreateScope("DocumentsClient.SuggestGet");
             scope.Start();
             try
             {
                 using var message = CreateSuggestGetRequest(searchText, suggesterName, suggestOptions, requestOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -624,7 +624,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -651,12 +651,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(suggesterName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DocumentsClient.SuggestGet");
+            using var scope = _clientDiagnostics.CreateScope("DocumentsClient.SuggestGet");
             scope.Start();
             try
             {
                 using var message = CreateSuggestGetRequest(searchText, suggesterName, suggestOptions, requestOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -674,7 +674,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -686,7 +686,7 @@ namespace CognitiveSearch
 
         internal HttpMessage CreateSuggestPostRequest(SuggestRequest suggestRequest, RequestOptions requestOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -719,12 +719,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(suggestRequest));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DocumentsClient.SuggestPost");
+            using var scope = _clientDiagnostics.CreateScope("DocumentsClient.SuggestPost");
             scope.Start();
             try
             {
                 using var message = CreateSuggestPostRequest(suggestRequest, requestOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -742,7 +742,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -763,12 +763,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(suggestRequest));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DocumentsClient.SuggestPost");
+            using var scope = _clientDiagnostics.CreateScope("DocumentsClient.SuggestPost");
             scope.Start();
             try
             {
                 using var message = CreateSuggestPostRequest(suggestRequest, requestOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -786,7 +786,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -798,7 +798,7 @@ namespace CognitiveSearch
 
         internal HttpMessage CreateIndexRequest(IndexBatch batch, RequestOptions requestOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -831,12 +831,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(batch));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DocumentsClient.Index");
+            using var scope = _clientDiagnostics.CreateScope("DocumentsClient.Index");
             scope.Start();
             try
             {
                 using var message = CreateIndexRequest(batch, requestOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -855,7 +855,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -876,12 +876,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(batch));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DocumentsClient.Index");
+            using var scope = _clientDiagnostics.CreateScope("DocumentsClient.Index");
             scope.Start();
             try
             {
                 using var message = CreateIndexRequest(batch, requestOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -900,7 +900,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -912,7 +912,7 @@ namespace CognitiveSearch
 
         internal HttpMessage CreateAutocompleteGetRequest(string searchText, string suggesterName, RequestOptions requestOptions, AutocompleteOptions autocompleteOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -981,12 +981,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(suggesterName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DocumentsClient.AutocompleteGet");
+            using var scope = _clientDiagnostics.CreateScope("DocumentsClient.AutocompleteGet");
             scope.Start();
             try
             {
                 using var message = CreateAutocompleteGetRequest(searchText, suggesterName, requestOptions, autocompleteOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1004,7 +1004,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1031,12 +1031,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(suggesterName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DocumentsClient.AutocompleteGet");
+            using var scope = _clientDiagnostics.CreateScope("DocumentsClient.AutocompleteGet");
             scope.Start();
             try
             {
                 using var message = CreateAutocompleteGetRequest(searchText, suggesterName, requestOptions, autocompleteOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1054,7 +1054,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1066,7 +1066,7 @@ namespace CognitiveSearch
 
         internal HttpMessage CreateAutocompletePostRequest(AutocompleteRequest autocompleteRequest, RequestOptions requestOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1099,12 +1099,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(autocompleteRequest));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DocumentsClient.AutocompletePost");
+            using var scope = _clientDiagnostics.CreateScope("DocumentsClient.AutocompletePost");
             scope.Start();
             try
             {
                 using var message = CreateAutocompletePostRequest(autocompleteRequest, requestOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1122,7 +1122,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1143,12 +1143,12 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(autocompleteRequest));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DocumentsClient.AutocompletePost");
+            using var scope = _clientDiagnostics.CreateScope("DocumentsClient.AutocompletePost");
             scope.Start();
             try
             {
                 using var message = CreateAutocompletePostRequest(autocompleteRequest, requestOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1166,7 +1166,7 @@ namespace CognitiveSearch
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

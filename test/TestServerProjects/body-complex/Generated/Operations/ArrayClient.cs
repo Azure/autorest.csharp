@@ -15,8 +15,8 @@ namespace body_complex
 {
     public partial class ArrayClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal ArrayRestClient RestClient { get; }
         /// <summary> Initializes a new instance of ArrayClient for mocking. </summary>
         protected ArrayClient()
@@ -25,9 +25,9 @@ namespace body_complex
         /// <summary> Initializes a new instance of ArrayClient. </summary>
         internal ArrayClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new ArrayRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new ArrayRestClient(_clientDiagnostics, _pipeline, host);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Get complex types with array property. </summary>

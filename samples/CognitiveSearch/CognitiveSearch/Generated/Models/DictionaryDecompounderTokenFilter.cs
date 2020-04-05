@@ -47,7 +47,6 @@ namespace CognitiveSearch.Models
             MinSubwordSize = minSubwordSize;
             MaxSubwordSize = maxSubwordSize;
             OnlyLongestMatch = onlyLongestMatch;
-            OdataType = odataType ?? "#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter";
         }
 
         /// <summary> The list of words to match against. </summary>

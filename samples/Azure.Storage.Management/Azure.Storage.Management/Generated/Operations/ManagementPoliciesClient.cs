@@ -15,8 +15,8 @@ namespace Azure.Storage.Management
 {
     public partial class ManagementPoliciesClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal ManagementPoliciesRestClient RestClient { get; }
         /// <summary> Initializes a new instance of ManagementPoliciesClient for mocking. </summary>
         protected ManagementPoliciesClient()
@@ -25,9 +25,9 @@ namespace Azure.Storage.Management
         /// <summary> Initializes a new instance of ManagementPoliciesClient. </summary>
         internal ManagementPoliciesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
         {
-            RestClient = new ManagementPoliciesRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new ManagementPoliciesRestClient(_clientDiagnostics, _pipeline, subscriptionId, host, apiVersion);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Gets the managementpolicy associated with the specified storage account. </summary>

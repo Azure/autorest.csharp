@@ -108,6 +108,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 serializationConstructorParameters.AddRange(baseSerializationCtor.Parameters);
             }
 
+            Parameter? discriminatorParameter = null;
+
             foreach (var property in Properties)
             {
                 var deserializationParameter = new Parameter(
@@ -121,10 +123,14 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 serializationConstructorParameters.Add(deserializationParameter);
                 initializers.Add(new ObjectPropertyInitializer(property, deserializationParameter));
 
+                if (property == Discriminator?.Property)
+                {
+                    discriminatorParameter = deserializationParameter;
+                    continue;
+                }
                 // Only required properties that are not discriminators go into default ctor
                 // For structs all properties become required
-                if ((!IsStruct && property.SchemaProperty?.Required != true) ||
-                    property == Discriminator?.Property)
+                if ((!IsStruct && property.SchemaProperty?.Required != true))
                 {
                     continue;
                 }
@@ -165,14 +171,12 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
             if (Discriminator != null)
             {
-                // Add discriminator initializer to constructor at every level of hierarchy
-                if (baseSerializationCtor != null)
+                if (discriminatorParameter != null)
                 {
-                    var discriminatorParameter = baseSerializationCtor.FindParameterByInitializedProperty(Discriminator.Property);
-                    Debug.Assert(discriminatorParameter != null);
-
+                    // Add discriminator initializer to constructor at every level of hierarchy
                     initializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorParameter));
                 }
+
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, BuilderHelpers.StringConstant(Discriminator.Value)));
             }
 
@@ -332,13 +336,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         {
             foreach (Property property in _objectSchema.Properties!)
             {
-                var name = property.CSharpName();
-                // Resolve property-type name conflicts
-                // TODO: we might eventually need a more generic version of this logic
-                if (name == Type.Name)
-                {
-                    name += "Value";
-                }
+                var name = BuilderHelpers.DisambiguateName(Type, property.CSharpName());
                 SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
                 bool isReadOnly =
                     IsStruct ||
@@ -370,6 +368,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 yield return additionalPropertiesProperty;
             }
         }
+
 
         private CSharpType? CreateInheritedType()
         {

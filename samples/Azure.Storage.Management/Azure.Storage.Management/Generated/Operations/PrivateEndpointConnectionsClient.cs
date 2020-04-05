@@ -15,8 +15,8 @@ namespace Azure.Storage.Management
 {
     public partial class PrivateEndpointConnectionsClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal PrivateEndpointConnectionsRestClient RestClient { get; }
         /// <summary> Initializes a new instance of PrivateEndpointConnectionsClient for mocking. </summary>
         protected PrivateEndpointConnectionsClient()
@@ -25,9 +25,9 @@ namespace Azure.Storage.Management
         /// <summary> Initializes a new instance of PrivateEndpointConnectionsClient. </summary>
         internal PrivateEndpointConnectionsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
         {
-            RestClient = new PrivateEndpointConnectionsRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new PrivateEndpointConnectionsRestClient(_clientDiagnostics, _pipeline, subscriptionId, host, apiVersion);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Gets the specified private endpoint connection associated with the storage account. </summary>

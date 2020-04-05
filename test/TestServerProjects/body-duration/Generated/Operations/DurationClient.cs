@@ -15,8 +15,8 @@ namespace body_duration
 {
     public partial class DurationClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal DurationRestClient RestClient { get; }
         /// <summary> Initializes a new instance of DurationClient for mocking. </summary>
         protected DurationClient()
@@ -25,9 +25,9 @@ namespace body_duration
         /// <summary> Initializes a new instance of DurationClient. </summary>
         internal DurationClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new DurationRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new DurationRestClient(_clientDiagnostics, _pipeline, host);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Get null duration value. </summary>

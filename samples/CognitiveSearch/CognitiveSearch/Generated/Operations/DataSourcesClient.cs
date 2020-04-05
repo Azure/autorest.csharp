@@ -15,8 +15,8 @@ namespace CognitiveSearch
 {
     public partial class DataSourcesClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal DataSourcesRestClient RestClient { get; }
         /// <summary> Initializes a new instance of DataSourcesClient for mocking. </summary>
         protected DataSourcesClient()
@@ -25,9 +25,9 @@ namespace CognitiveSearch
         /// <summary> Initializes a new instance of DataSourcesClient. </summary>
         internal DataSourcesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string apiVersion = "2019-05-06-Preview")
         {
-            RestClient = new DataSourcesRestClient(clientDiagnostics, pipeline, endpoint, apiVersion);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new DataSourcesRestClient(_clientDiagnostics, _pipeline, endpoint, apiVersion);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Creates a new datasource or updates a datasource if it already exists. </summary>

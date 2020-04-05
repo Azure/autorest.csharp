@@ -17,8 +17,8 @@ namespace httpInfrastructure
     internal partial class HttpClientFailureRestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of HttpClientFailureRestClient. </summary>
         public HttpClientFailureRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
@@ -29,13 +29,13 @@ namespace httpInfrastructure
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateHead400Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -49,16 +49,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Head400Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Head400");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head400");
             scope.Start();
             try
             {
                 using var message = CreateHead400Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -72,16 +72,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Head400(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Head400");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head400");
             scope.Start();
             try
             {
                 using var message = CreateHead400Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -93,7 +93,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateGet400Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -107,16 +107,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Get400Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Get400");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get400");
             scope.Start();
             try
             {
                 using var message = CreateGet400Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -130,16 +130,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Get400(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Get400");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get400");
             scope.Start();
             try
             {
                 using var message = CreateGet400Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -151,7 +151,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateOptions400Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
@@ -165,16 +165,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Options400Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Options400");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Options400");
             scope.Start();
             try
             {
                 using var message = CreateOptions400Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -188,16 +188,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Options400(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Options400");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Options400");
             scope.Start();
             try
             {
                 using var message = CreateOptions400Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -209,7 +209,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePut400Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -227,16 +227,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Put400Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Put400");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put400");
             scope.Start();
             try
             {
                 using var message = CreatePut400Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -250,16 +250,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put400(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Put400");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put400");
             scope.Start();
             try
             {
                 using var message = CreatePut400Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -271,7 +271,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePatch400Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -289,16 +289,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Patch400Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Patch400");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch400");
             scope.Start();
             try
             {
                 using var message = CreatePatch400Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -312,16 +312,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Patch400(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Patch400");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch400");
             scope.Start();
             try
             {
                 using var message = CreatePatch400Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -333,7 +333,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePost400Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -351,16 +351,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post400Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Post400");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post400");
             scope.Start();
             try
             {
                 using var message = CreatePost400Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -374,16 +374,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post400(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Post400");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post400");
             scope.Start();
             try
             {
                 using var message = CreatePost400Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -395,7 +395,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateDelete400Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -413,16 +413,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Delete400Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Delete400");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete400");
             scope.Start();
             try
             {
                 using var message = CreateDelete400Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -436,16 +436,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete400(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Delete400");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete400");
             scope.Start();
             try
             {
                 using var message = CreateDelete400Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -457,7 +457,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateHead401Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -471,16 +471,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Head401Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Head401");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head401");
             scope.Start();
             try
             {
                 using var message = CreateHead401Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -494,16 +494,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Head401(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Head401");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head401");
             scope.Start();
             try
             {
                 using var message = CreateHead401Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -515,7 +515,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateGet402Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -529,16 +529,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Get402Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Get402");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get402");
             scope.Start();
             try
             {
                 using var message = CreateGet402Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -552,16 +552,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Get402(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Get402");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get402");
             scope.Start();
             try
             {
                 using var message = CreateGet402Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -573,7 +573,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateOptions403Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
@@ -587,16 +587,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Options403Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Options403");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Options403");
             scope.Start();
             try
             {
                 using var message = CreateOptions403Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -610,16 +610,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Options403(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Options403");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Options403");
             scope.Start();
             try
             {
                 using var message = CreateOptions403Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -631,7 +631,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateGet403Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -645,16 +645,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Get403Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Get403");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get403");
             scope.Start();
             try
             {
                 using var message = CreateGet403Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -668,16 +668,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Get403(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Get403");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get403");
             scope.Start();
             try
             {
                 using var message = CreateGet403Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -689,7 +689,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePut404Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -707,16 +707,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Put404Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Put404");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put404");
             scope.Start();
             try
             {
                 using var message = CreatePut404Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -730,16 +730,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put404(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Put404");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put404");
             scope.Start();
             try
             {
                 using var message = CreatePut404Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -751,7 +751,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePatch405Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -769,16 +769,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Patch405Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Patch405");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch405");
             scope.Start();
             try
             {
                 using var message = CreatePatch405Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -792,16 +792,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Patch405(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Patch405");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch405");
             scope.Start();
             try
             {
                 using var message = CreatePatch405Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -813,7 +813,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePost406Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -831,16 +831,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post406Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Post406");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post406");
             scope.Start();
             try
             {
                 using var message = CreatePost406Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -854,16 +854,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post406(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Post406");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post406");
             scope.Start();
             try
             {
                 using var message = CreatePost406Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -875,7 +875,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateDelete407Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -893,16 +893,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Delete407Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Delete407");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete407");
             scope.Start();
             try
             {
                 using var message = CreateDelete407Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -916,16 +916,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete407(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Delete407");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete407");
             scope.Start();
             try
             {
                 using var message = CreateDelete407Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -937,7 +937,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePut409Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -955,16 +955,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Put409Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Put409");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put409");
             scope.Start();
             try
             {
                 using var message = CreatePut409Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -978,16 +978,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put409(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Put409");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put409");
             scope.Start();
             try
             {
                 using var message = CreatePut409Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -999,7 +999,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateHead410Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -1013,16 +1013,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Head410Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Head410");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head410");
             scope.Start();
             try
             {
                 using var message = CreateHead410Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1036,16 +1036,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Head410(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Head410");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head410");
             scope.Start();
             try
             {
                 using var message = CreateHead410Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1057,7 +1057,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateGet411Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1071,16 +1071,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Get411Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Get411");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get411");
             scope.Start();
             try
             {
                 using var message = CreateGet411Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1094,16 +1094,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Get411(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Get411");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get411");
             scope.Start();
             try
             {
                 using var message = CreateGet411Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1115,7 +1115,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateOptions412Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
@@ -1129,16 +1129,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Options412Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Options412");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Options412");
             scope.Start();
             try
             {
                 using var message = CreateOptions412Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1152,16 +1152,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Options412(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Options412");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Options412");
             scope.Start();
             try
             {
                 using var message = CreateOptions412Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1173,7 +1173,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateGet412Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1187,16 +1187,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Get412Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Get412");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get412");
             scope.Start();
             try
             {
                 using var message = CreateGet412Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1210,16 +1210,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Get412(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Get412");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get412");
             scope.Start();
             try
             {
                 using var message = CreateGet412Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1231,7 +1231,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePut413Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1249,16 +1249,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Put413Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Put413");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put413");
             scope.Start();
             try
             {
                 using var message = CreatePut413Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1272,16 +1272,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put413(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Put413");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put413");
             scope.Start();
             try
             {
                 using var message = CreatePut413Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1293,7 +1293,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePatch414Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -1311,16 +1311,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Patch414Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Patch414");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch414");
             scope.Start();
             try
             {
                 using var message = CreatePatch414Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1334,16 +1334,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Patch414(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Patch414");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch414");
             scope.Start();
             try
             {
                 using var message = CreatePatch414Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1355,7 +1355,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePost415Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1373,16 +1373,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post415Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Post415");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post415");
             scope.Start();
             try
             {
                 using var message = CreatePost415Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1396,16 +1396,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post415(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Post415");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post415");
             scope.Start();
             try
             {
                 using var message = CreatePost415Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1417,7 +1417,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateGet416Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1431,16 +1431,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Get416Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Get416");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get416");
             scope.Start();
             try
             {
                 using var message = CreateGet416Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1454,16 +1454,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Get416(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Get416");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get416");
             scope.Start();
             try
             {
                 using var message = CreateGet416Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1475,7 +1475,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateDelete417Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -1493,16 +1493,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Delete417Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Delete417");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete417");
             scope.Start();
             try
             {
                 using var message = CreateDelete417Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1516,16 +1516,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete417(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Delete417");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete417");
             scope.Start();
             try
             {
                 using var message = CreateDelete417Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1537,7 +1537,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateHead429Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -1551,16 +1551,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Head429Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Head429");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head429");
             scope.Start();
             try
             {
                 using var message = CreateHead429Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1574,16 +1574,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Head429(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpClientFailureClient.Head429");
+            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head429");
             scope.Start();
             try
             {
                 using var message = CreateHead429Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

@@ -14,8 +14,8 @@ namespace url
 {
     public partial class PathItemsClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal PathItemsRestClient RestClient { get; }
         /// <summary> Initializes a new instance of PathItemsClient for mocking. </summary>
         protected PathItemsClient()
@@ -24,9 +24,9 @@ namespace url
         /// <summary> Initializes a new instance of PathItemsClient. </summary>
         internal PathItemsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string globalStringPath, string host = "http://localhost:3000", string globalStringQuery = null)
         {
-            RestClient = new PathItemsRestClient(clientDiagnostics, pipeline, globalStringPath, host, globalStringQuery);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new PathItemsRestClient(_clientDiagnostics, _pipeline, globalStringPath, host, globalStringQuery);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=&apos;globalStringQuery&apos;, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=&apos;localStringQuery&apos;. </summary>

@@ -17,8 +17,8 @@ namespace Azure.Network.Management.Interface
 {
     public partial class NetworkInterfaceIPConfigurationsClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal NetworkInterfaceIPConfigurationsRestClient RestClient { get; }
         /// <summary> Initializes a new instance of NetworkInterfaceIPConfigurationsClient for mocking. </summary>
         protected NetworkInterfaceIPConfigurationsClient()
@@ -27,9 +27,9 @@ namespace Azure.Network.Management.Interface
         /// <summary> Initializes a new instance of NetworkInterfaceIPConfigurationsClient. </summary>
         internal NetworkInterfaceIPConfigurationsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-11-01")
         {
-            RestClient = new NetworkInterfaceIPConfigurationsRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            RestClient = new NetworkInterfaceIPConfigurationsRestClient(_clientDiagnostics, _pipeline, subscriptionId, host, apiVersion);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Gets the specified network interface ip configuration. </summary>

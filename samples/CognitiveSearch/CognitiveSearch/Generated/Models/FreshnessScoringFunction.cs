@@ -40,7 +40,6 @@ namespace CognitiveSearch.Models
         internal FreshnessScoringFunction(string type, string fieldName, double boost, ScoringFunctionInterpolation? interpolation, FreshnessScoringParameters parameters) : base(type, fieldName, boost, interpolation)
         {
             Parameters = parameters;
-            Type = type ?? "freshness";
         }
 
         /// <summary> Parameter values for the freshness scoring function. </summary>

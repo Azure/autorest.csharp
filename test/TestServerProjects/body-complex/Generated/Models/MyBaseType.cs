@@ -25,6 +25,7 @@ namespace body_complex.Models
             Kind = kind ?? null;
             PropB1 = propB1;
             PropBH1 = propBH1;
+            Kind = kind ?? null;
         }
 
         internal string Kind { get; set; }

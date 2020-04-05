@@ -45,7 +45,6 @@ namespace CognitiveSearch.Models
             TextExtractionAlgorithm = textExtractionAlgorithm;
             DefaultLanguageCode = defaultLanguageCode;
             ShouldDetectOrientation = shouldDetectOrientation;
-            OdataType = odataType ?? "#Microsoft.Skills.Vision.OcrSkill";
         }
 
         /// <summary> A value indicating which algorithm to use for extracting text. Default is printed. </summary>
