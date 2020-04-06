@@ -41,6 +41,7 @@ namespace CognitiveSearch.Models
         {
             KeepWords = keepWords;
             LowerCaseKeepWords = lowerCaseKeepWords;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.KeepTokenFilter";
         }
 
         /// <summary> The list of words to keep. </summary>

@@ -36,6 +36,7 @@ namespace CognitiveSearch.Models
             MinGram = minGram;
             MaxGram = maxGram;
             TokenChars = tokenChars;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.NGramTokenizer";
         }
 
         /// <summary> The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram. </summary>

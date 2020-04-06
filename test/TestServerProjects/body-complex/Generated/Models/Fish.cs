@@ -31,7 +31,6 @@ namespace body_complex.Models
             Species = species;
             Length = length;
             Siblings = siblings;
-            Fishtype = fishtype ?? null;
         }
 
         internal string Fishtype { get; set; }

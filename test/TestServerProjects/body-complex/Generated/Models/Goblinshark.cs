@@ -34,6 +34,7 @@ namespace body_complex.Models
         {
             Jawsize = jawsize;
             Color = color;
+            Fishtype = fishtype ?? "goblin";
         }
 
         public int? Jawsize { get; set; }

@@ -108,8 +108,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 serializationConstructorParameters.AddRange(baseSerializationCtor.Parameters);
             }
 
-            Parameter? discriminatorParameter = null;
-
             foreach (var property in Properties)
             {
                 var deserializationParameter = new Parameter(
@@ -123,14 +121,10 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 serializationConstructorParameters.Add(deserializationParameter);
                 initializers.Add(new ObjectPropertyInitializer(property, deserializationParameter));
 
-                if (property == Discriminator?.Property)
-                {
-                    discriminatorParameter = deserializationParameter;
-                    continue;
-                }
                 // Only required properties that are not discriminators go into default ctor
                 // For structs all properties become required
-                if ((!IsStruct && property.SchemaProperty?.Required != true))
+                if ((!IsStruct && property.SchemaProperty?.Required != true) ||
+                    property == Discriminator?.Property)
                 {
                     continue;
                 }
@@ -171,12 +165,14 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
             if (Discriminator != null)
             {
-                if (discriminatorParameter != null)
+                // Add discriminator initializer to constructor at every level of hierarchy
+                if (baseSerializationCtor != null)
                 {
-                    // Add discriminator initializer to constructor at every level of hierarchy
+                    var discriminatorParameter = baseSerializationCtor.FindParameterByInitializedProperty(Discriminator.Property);
+                    Debug.Assert(discriminatorParameter != null);
+
                     initializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorParameter));
                 }
-
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, BuilderHelpers.StringConstant(Discriminator.Value)));
             }
 

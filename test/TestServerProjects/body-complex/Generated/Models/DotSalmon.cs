@@ -25,6 +25,7 @@ namespace body_complex.Models
         {
             Location = location;
             Iswild = iswild;
+            FishType = fishType ?? "DotSalmon";
         }
 
         public string Location { get; }

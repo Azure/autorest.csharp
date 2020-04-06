@@ -41,6 +41,7 @@ namespace CognitiveSearch.Models
         internal SentimentSkill(string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs, SentimentSkillLanguage? defaultLanguageCode) : base(odataType, name, description, context, inputs, outputs)
         {
             DefaultLanguageCode = defaultLanguageCode;
+            OdataType = odataType ?? "#Microsoft.Skills.Text.SentimentSkill";
         }
 
         /// <summary> A value indicating which language code to use. Default is en. </summary>

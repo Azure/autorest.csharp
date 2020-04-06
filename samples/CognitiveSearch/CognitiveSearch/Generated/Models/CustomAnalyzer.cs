@@ -38,6 +38,7 @@ namespace CognitiveSearch.Models
             Tokenizer = tokenizer;
             TokenFilters = tokenFilters;
             CharFilters = charFilters;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.CustomAnalyzer";
         }
 
         /// <summary> The name of the tokenizer to use to divide continuous text into a sequence of tokens, such as breaking a sentence into words. </summary>

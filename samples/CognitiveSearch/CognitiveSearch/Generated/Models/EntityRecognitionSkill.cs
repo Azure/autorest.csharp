@@ -47,6 +47,7 @@ namespace CognitiveSearch.Models
             DefaultLanguageCode = defaultLanguageCode;
             IncludeTypelessEntities = includeTypelessEntities;
             MinimumPrecision = minimumPrecision;
+            OdataType = odataType ?? "#Microsoft.Skills.Text.EntityRecognitionSkill";
         }
 
         /// <summary> A list of entity categories that should be extracted. </summary>

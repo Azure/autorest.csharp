@@ -57,6 +57,7 @@ namespace CognitiveSearch.Models
             Timeout = timeout;
             BatchSize = batchSize;
             DegreeOfParallelism = degreeOfParallelism;
+            OdataType = odataType ?? "#Microsoft.Skills.Custom.WebApiSkill";
         }
 
         /// <summary> The url for the Web API. </summary>

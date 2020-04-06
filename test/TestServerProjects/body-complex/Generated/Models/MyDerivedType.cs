@@ -24,6 +24,7 @@ namespace body_complex.Models
         internal MyDerivedType(string kind, string propB1, string propBH1, string propD1) : base(kind, propB1, propBH1)
         {
             PropD1 = propD1;
+            Kind = kind ?? "Kind1";
         }
 
         public string PropD1 { get; }

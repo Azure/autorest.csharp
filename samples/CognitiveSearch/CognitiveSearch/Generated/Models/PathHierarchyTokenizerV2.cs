@@ -39,6 +39,7 @@ namespace CognitiveSearch.Models
             MaxTokenLength = maxTokenLength;
             ReverseTokenOrder = reverseTokenOrder;
             NumberOfTokensToSkip = numberOfTokensToSkip;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.PathHierarchyTokenizerV2";
         }
 
         /// <summary> The delimiter character to use. Default is &quot;/&quot;. </summary>

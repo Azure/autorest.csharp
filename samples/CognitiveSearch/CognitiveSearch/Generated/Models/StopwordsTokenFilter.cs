@@ -38,6 +38,7 @@ namespace CognitiveSearch.Models
             StopwordsList = stopwordsList;
             IgnoreCase = ignoreCase;
             RemoveTrailingStopWords = removeTrailingStopWords;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.StopwordsTokenFilter";
         }
 
         /// <summary> The list of stopwords. This property and the stopwords list property cannot both be set. </summary>

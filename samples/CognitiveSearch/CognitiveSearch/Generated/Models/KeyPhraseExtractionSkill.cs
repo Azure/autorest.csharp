@@ -43,6 +43,7 @@ namespace CognitiveSearch.Models
         {
             DefaultLanguageCode = defaultLanguageCode;
             MaxKeyPhraseCount = maxKeyPhraseCount;
+            OdataType = odataType ?? "#Microsoft.Skills.Text.KeyPhraseExtractionSkill";
         }
 
         /// <summary> A value indicating which language code to use. Default is en. </summary>

@@ -45,6 +45,7 @@ namespace CognitiveSearch.Models
             DefaultLanguageCode = defaultLanguageCode;
             VisualFeatures = visualFeatures;
             Details = details;
+            OdataType = odataType ?? "#Microsoft.Skills.Vision.ImageAnalysisSkill";
         }
 
         /// <summary> A value indicating which language code to use. Default is en. </summary>

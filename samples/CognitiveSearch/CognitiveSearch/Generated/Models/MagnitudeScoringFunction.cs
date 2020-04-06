@@ -40,6 +40,7 @@ namespace CognitiveSearch.Models
         internal MagnitudeScoringFunction(string type, string fieldName, double boost, ScoringFunctionInterpolation? interpolation, MagnitudeScoringParameters parameters) : base(type, fieldName, boost, interpolation)
         {
             Parameters = parameters;
+            Type = type ?? "magnitude";
         }
 
         /// <summary> Parameter values for the magnitude scoring function. </summary>

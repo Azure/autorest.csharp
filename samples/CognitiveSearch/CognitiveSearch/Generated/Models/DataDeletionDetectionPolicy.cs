@@ -21,7 +21,6 @@ namespace CognitiveSearch.Models
         internal DataDeletionDetectionPolicy(string odataType)
         {
             OdataType = odataType ?? null;
-            OdataType = odataType ?? null;
         }
 
         /// <summary> Identifies the concrete type of the data deletion detection policy. </summary>

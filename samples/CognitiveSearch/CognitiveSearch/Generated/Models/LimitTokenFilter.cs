@@ -33,6 +33,7 @@ namespace CognitiveSearch.Models
         {
             MaxTokenCount = maxTokenCount;
             ConsumeAllTokens = consumeAllTokens;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.LimitTokenFilter";
         }
 
         /// <summary> The maximum number of tokens to produce. Default is 1. </summary>

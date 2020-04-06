@@ -48,7 +48,6 @@ namespace CognitiveSearch.Models
             Context = context;
             Inputs = inputs;
             Outputs = outputs;
-            OdataType = odataType ?? null;
         }
 
         /// <summary> Identifies the concrete type of the skill. </summary>
