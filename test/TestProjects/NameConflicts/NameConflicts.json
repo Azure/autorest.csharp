@@ -68,7 +68,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/class"
+              "$ref": "#/definitions/struct"
             },
             "description": ""
           }
@@ -77,6 +77,13 @@
     }
   },
   "definitions": {
+    "struct": {
+      "type":  "object",
+      "allOf": [ { "$ref":  "#/definitions/class" } ],
+      "properties": {
+        "1": { "type": "string" }
+      }
+    },
     "class": {
       "type":  "object",
       "properties": {
