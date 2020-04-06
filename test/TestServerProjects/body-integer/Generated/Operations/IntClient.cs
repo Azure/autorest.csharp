@@ -25,7 +25,7 @@ namespace body_integer
         /// <summary> Initializes a new instance of IntClient. </summary>
         internal IntClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new IntRestClient(_clientDiagnostics, _pipeline, host);
+            RestClient = new IntRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

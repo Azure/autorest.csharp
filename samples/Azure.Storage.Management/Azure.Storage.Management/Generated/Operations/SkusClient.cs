@@ -26,7 +26,7 @@ namespace Azure.Storage.Management
         /// <summary> Initializes a new instance of SkusClient. </summary>
         internal SkusClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
         {
-            RestClient = new SkusRestClient(_clientDiagnostics, _pipeline, subscriptionId, host, apiVersion);
+            RestClient = new SkusRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

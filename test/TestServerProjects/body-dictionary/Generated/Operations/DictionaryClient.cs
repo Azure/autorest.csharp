@@ -27,7 +27,7 @@ namespace body_dictionary
         /// <summary> Initializes a new instance of DictionaryClient. </summary>
         internal DictionaryClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new DictionaryRestClient(_clientDiagnostics, _pipeline, host);
+            RestClient = new DictionaryRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

@@ -24,7 +24,7 @@ namespace httpInfrastructure
         /// <summary> Initializes a new instance of HttpRetryClient. </summary>
         internal HttpRetryClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new HttpRetryRestClient(_clientDiagnostics, _pipeline, host);
+            RestClient = new HttpRetryRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

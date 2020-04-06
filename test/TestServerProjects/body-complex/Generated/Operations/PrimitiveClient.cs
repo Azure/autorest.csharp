@@ -25,7 +25,7 @@ namespace body_complex
         /// <summary> Initializes a new instance of PrimitiveClient. </summary>
         internal PrimitiveClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new PrimitiveRestClient(_clientDiagnostics, _pipeline, host);
+            RestClient = new PrimitiveRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

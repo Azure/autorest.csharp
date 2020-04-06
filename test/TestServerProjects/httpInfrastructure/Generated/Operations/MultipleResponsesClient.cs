@@ -25,7 +25,7 @@ namespace httpInfrastructure
         /// <summary> Initializes a new instance of MultipleResponsesClient. </summary>
         internal MultipleResponsesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new MultipleResponsesRestClient(_clientDiagnostics, _pipeline, host);
+            RestClient = new MultipleResponsesRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

@@ -25,7 +25,7 @@ namespace validation
         /// <summary> Initializes a new instance of ServiceClient. </summary>
         internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "http://localhost:3000", string apiVersion = "1.0.0")
         {
-            RestClient = new ServiceRestClient(_clientDiagnostics, _pipeline, subscriptionId, host, apiVersion);
+            RestClient = new ServiceRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

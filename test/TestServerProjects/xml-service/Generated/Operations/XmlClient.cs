@@ -26,7 +26,7 @@ namespace xml_service
         /// <summary> Initializes a new instance of XmlClient. </summary>
         internal XmlClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new XmlRestClient(_clientDiagnostics, _pipeline, host);
+            RestClient = new XmlRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

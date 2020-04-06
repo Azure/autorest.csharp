@@ -25,7 +25,7 @@ namespace CognitiveSearch
         /// <summary> Initializes a new instance of DataSourcesClient. </summary>
         internal DataSourcesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string apiVersion = "2019-05-06-Preview")
         {
-            RestClient = new DataSourcesRestClient(_clientDiagnostics, _pipeline, endpoint, apiVersion);
+            RestClient = new DataSourcesRestClient(clientDiagnostics, pipeline, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

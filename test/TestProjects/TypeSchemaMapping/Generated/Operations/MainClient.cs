@@ -26,7 +26,7 @@ namespace CustomNamespace
         /// <summary> Initializes a new instance of MainClient. </summary>
         internal MainClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new ServiceRestClient(_clientDiagnostics, _pipeline, host);
+            RestClient = new ServiceRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

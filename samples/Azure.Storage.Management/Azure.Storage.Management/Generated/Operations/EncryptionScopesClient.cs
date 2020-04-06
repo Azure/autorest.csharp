@@ -27,7 +27,7 @@ namespace Azure.Storage.Management
         /// <summary> Initializes a new instance of EncryptionScopesClient. </summary>
         internal EncryptionScopesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
         {
-            RestClient = new EncryptionScopesRestClient(_clientDiagnostics, _pipeline, subscriptionId, host, apiVersion);
+            RestClient = new EncryptionScopesRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

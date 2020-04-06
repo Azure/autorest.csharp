@@ -25,7 +25,7 @@ namespace CognitiveSearch
         /// <summary> Initializes a new instance of ServiceClient. </summary>
         internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string apiVersion = "2019-05-06-Preview")
         {
-            RestClient = new ServiceRestClient(_clientDiagnostics, _pipeline, endpoint, apiVersion);
+            RestClient = new ServiceRestClient(clientDiagnostics, pipeline, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

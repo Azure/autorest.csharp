@@ -25,7 +25,7 @@ namespace additionalProperties
         /// <summary> Initializes a new instance of PetsClient. </summary>
         internal PetsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new PetsRestClient(_clientDiagnostics, _pipeline, host);
+            RestClient = new PetsRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

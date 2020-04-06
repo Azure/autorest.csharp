@@ -25,7 +25,7 @@ namespace body_complex
         /// <summary> Initializes a new instance of InheritanceClient. </summary>
         internal InheritanceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new InheritanceRestClient(_clientDiagnostics, _pipeline, host);
+            RestClient = new InheritanceRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
