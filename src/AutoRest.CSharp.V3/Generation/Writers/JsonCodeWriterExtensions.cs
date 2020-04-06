@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Requests;
@@ -292,6 +293,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 if (objectProperty != null)
                 {
                     var propertyDeclaration = new CodeWriterDeclaration(jsonProperty.Name.ToVariableName());
+                    if (propertyVariables.ContainsKey(objectProperty))
+                    {
+
+                    }
                     propertyVariables.Add(objectProperty, propertyDeclaration);
                 }
                 else if (jsonProperty.ValueSerialization is JsonObjectSerialization objectSerialization)

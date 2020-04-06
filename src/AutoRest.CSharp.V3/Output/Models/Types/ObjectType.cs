@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -121,13 +122,15 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 );
 
                 serializationConstructorParameters.Add(deserializationParameter);
-                initializers.Add(new ObjectPropertyInitializer(property, deserializationParameter));
 
                 if (property == Discriminator?.Property)
                 {
                     discriminatorParameter = deserializationParameter;
                     continue;
                 }
+
+                initializers.Add(new ObjectPropertyInitializer(property, deserializationParameter));
+
                 // Only required properties that are not discriminators go into default ctor
                 // For structs all properties become required
                 if ((!IsStruct && property.SchemaProperty?.Required != true))
@@ -334,33 +337,37 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         private IEnumerable<ObjectTypeProperty> BuildProperties()
         {
-            foreach (Property property in _objectSchema.Properties!)
+            foreach (var objectSchema in GetCombinedSchemas())
             {
-                var name = BuilderHelpers.DisambiguateName(Type, property.CSharpName());
-                SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
-                bool isReadOnly =
-                    IsStruct ||
-                    property.IsDiscriminator != true &&
-                    (property.ReadOnly == true ||
-                     property.Required == true ||
-                     !_objectSchema.IsInput);
-
-                CSharpType type = _typeFactory.CreateType(
-                    property.Schema,
-                    property.IsNullable());
-
-                if (!_objectSchema.IsInput)
+                foreach (Property property in objectSchema.Properties!)
                 {
-                    type = TypeFactory.GetOutputType(type);
+                    var name = BuilderHelpers.DisambiguateName(Type, property.CSharpName());
+                               SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
+                    bool isReadOnly =
+                        IsStruct ||
+                        property.IsDiscriminator != true &&
+                        (property.ReadOnly == true ||
+                         property.Required == true ||
+                         !_objectSchema.IsInput);
+
+                    CSharpType type = _typeFactory.CreateType(
+                        property.Schema,
+                        property.IsNullable());
+
+                    if (!_objectSchema.IsInput)
+                    {
+                        type = TypeFactory.GetOutputType(type);
+                    }
+
+                    var accessibility = property.IsDiscriminator == true ? "internal" : "public";
+
+                    yield return new ObjectTypeProperty(
+                        BuilderHelpers.CreateMemberDeclaration(name, type, accessibility, memberMapping?.ExistingMember, _typeFactory),
+                        BuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
+                        isReadOnly,
+                        property);
                 }
 
-                var accessibility = property.IsDiscriminator == true ? "internal" : "public";
-
-                yield return new ObjectTypeProperty(
-                    BuilderHelpers.CreateMemberDeclaration(name, type, accessibility, memberMapping?.ExistingMember, _typeFactory),
-                    BuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
-                    isReadOnly,
-                    property);
             }
 
             if (AdditionalPropertiesProperty is ObjectTypeProperty additionalPropertiesProperty)
@@ -369,19 +376,63 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             }
         }
 
+        // Enumerates all schemas that were merged into this one, excludes the inherited schema
+        private IEnumerable<ObjectSchema> GetCombinedSchemas()
+        {
+            var inherited = EnumerateHierarchy().Select(type => type.Schema).ToHashSet();
+
+            yield return _objectSchema;
+
+            foreach (var parent in _objectSchema.Parents!.All)
+            {
+                if (parent is ObjectSchema objectParent && !inherited.Contains(objectParent))
+                {
+                    // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/257
+                    inherited.Add(parent);
+                    yield return objectParent;
+                }
+            }
+        }
 
         private CSharpType? CreateInheritedType()
         {
-            foreach (ComplexSchema complexSchema in _objectSchema.Parents!.Immediate)
+            var objectSchemas = _objectSchema.Parents!.Immediate.OfType<ObjectSchema>().ToArray();
+
+            ObjectSchema? selectedSchema = null;
+
+            foreach (var objectSchema in objectSchemas)
             {
-                if (complexSchema is ObjectSchema parentObjectSchema)
+                bool skip = false;
+
+                // Filter transitive schemas
+                // https://github.com/Azure/autorest.modelerfour/issues/258
+                foreach (var otherSchema in objectSchemas)
                 {
-                    CSharpType type = _typeFactory.CreateType(parentObjectSchema, false);
-                    Debug.Assert(!type.IsFrameworkType);
-                    return type;
+                    if (otherSchema.Parents!.All.Contains(objectSchema))
+                    {
+                        skip = true;
+                        break;
+                    }
+                }
+
+                if (skip)
+                {
+                    continue;
+                }
+
+                // Take first schema or the one with discriminator
+                if (selectedSchema == null || objectSchema.Discriminator != null)
+                {
+                    selectedSchema = objectSchema;
                 }
             }
 
+            if (selectedSchema != null)
+            {
+                CSharpType type = _typeFactory.CreateType(selectedSchema, false);
+                Debug.Assert(!type.IsFrameworkType);
+                return type;
+            }
             return null;
         }
 
