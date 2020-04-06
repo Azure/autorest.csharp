@@ -389,8 +389,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             {
                 if (parent is ObjectSchema objectParent && !inherited.Contains(objectParent))
                 {
-                    // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/257
-                    inherited.Add(parent);
                     yield return objectParent;
                 }
             }

@@ -60,7 +60,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void MultipleInheritanceResolvedToBaseWithDiscriminatorOthersInlined()
         {
-            var type = typeof(ClassThatInheritsFromBaseClassAndBaseClassWithDiscriminatorAndSomeProperties);
+            var type = typeof(ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties);
             Assert.AreEqual(typeof(BaseClassWithDiscriminator), type.BaseType);
             // public
             Assert.AreEqual(3, type.GetProperties().Length);
@@ -68,18 +68,6 @@ namespace AutoRest.TestServer.Tests
             TypeAsserts.HasProperty(type, "BaseClassProperty", BindingFlags.Instance | BindingFlags.Public);
             TypeAsserts.HasProperty(type, "SomeProperty", BindingFlags.Instance | BindingFlags.Public);
             TypeAsserts.HasProperty(type, "SomeOtherProperty", BindingFlags.Instance | BindingFlags.Public);
-        }
-
-        [Test]
-        public void BaseTypesAreReducedToHighestDependency()
-        {
-            var type = typeof(ClassThatInheritsFromBaseClassAndBaseClassWithDiscriminator);
-            Assert.AreEqual(typeof(BaseClassWithDiscriminator), type.BaseType);
-
-            // public
-            Assert.AreEqual(1, type.GetProperties().Length);
-            TypeAsserts.HasProperty(type, "BaseClassProperty", BindingFlags.Instance | BindingFlags.Public);
-            TypeAsserts.HasProperty(type, "DiscriminatorProperty", BindingFlags.Instance | BindingFlags.NonPublic);
         }
 
         [Test]
@@ -92,8 +80,8 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void DiscriminatorValueIsSetOnSubClassConstruction()
         {
-            var baseClassWithDiscriminator = new ClassThatInheritsFromBaseClassAndBaseClassWithDiscriminatorAndSomeProperties();
-            Assert.AreEqual("ClassThatInheritsFromBaseClassAndBaseClassWithDiscriminatorAndSomeProperties", baseClassWithDiscriminator.DiscriminatorProperty);
+            var baseClassWithDiscriminator = new ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties();
+            Assert.AreEqual("ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties", baseClassWithDiscriminator.DiscriminatorProperty);
         }
     }
 }

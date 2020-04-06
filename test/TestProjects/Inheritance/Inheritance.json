@@ -81,23 +81,9 @@
         }
       ]
     },
-    "ClassThatInheritsFromBaseClassAndBaseClassWithDiscriminator": {
+    "ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties": {
       "type": "object",
       "allOf": [
-        {
-          "$ref": "#/definitions/BaseClass"
-        },
-        {
-          "$ref": "#/definitions/BaseClassWithDiscriminator"
-        }
-      ]
-    },
-    "ClassThatInheritsFromBaseClassAndBaseClassWithDiscriminatorAndSomeProperties": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseClass"
-        },
         {
           "$ref": "#/definitions/BaseClassWithDiscriminator"
         },

@@ -4,7 +4,7 @@ info: !<!Info>
   title: Inheritance
 schemas: !<!Schemas> 
   strings:
-  - !<!StringSchema> &ref_13
+  - !<!StringSchema> &ref_12
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -14,7 +14,7 @@ schemas: !<!Schemas>
         name: BaseClassProperty
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_10
+  - !<!StringSchema> &ref_9
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -77,37 +77,14 @@ schemas: !<!Schemas>
                 description: ''
                 namespace: ''
             protocol: !<!Protocols> {}
-          - !<!ObjectSchema> &ref_9
-            type: object
-            apiVersions:
-            - !<!ApiVersion> 
-              version: 1.0.0
-            discriminatorValue: ClassThatInheritsFromBaseClassAndBaseClassWithDiscriminator
-            parents: !<!Relations> 
-              all:
-              - *ref_1
-              - *ref_0
-              - *ref_1
-              - *ref_0
-              - *ref_1
-              immediate:
-              - *ref_1
-              - *ref_0
-            language: !<!Languages> 
-              default:
-                name: ClassThatInheritsFromBaseClassAndBaseClassWithDiscriminator
-                description: ''
-                namespace: ''
-            protocol: !<!Protocols> {}
           - !<!ObjectSchema> &ref_3
             type: object
             apiVersions:
             - !<!ApiVersion> 
               version: 1.0.0
-            discriminatorValue: ClassThatInheritsFromBaseClassAndBaseClassWithDiscriminatorAndSomeProperties
+            discriminatorValue: ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties
             parents: !<!Relations> 
               all:
-              - *ref_1
               - *ref_0
               - !<!ObjectSchema> &ref_2
                 type: object
@@ -123,8 +100,6 @@ schemas: !<!Schemas>
                       version: 1.0.0
                     parents: !<!Relations> 
                       all:
-                      - *ref_1
-                      - *ref_2
                       - *ref_1
                       - *ref_2
                       immediate:
@@ -143,8 +118,6 @@ schemas: !<!Schemas>
                       version: 1.0.0
                     parents: !<!Relations> 
                       all:
-                      - *ref_1
-                      - *ref_2
                       - *ref_1
                       - *ref_2
                       immediate:
@@ -185,37 +158,27 @@ schemas: !<!Schemas>
                     namespace: ''
                 protocol: !<!Protocols> {}
               - *ref_1
-              - *ref_0
-              - *ref_2
-              - *ref_1
-              - *ref_1
-              - *ref_0
-              - *ref_2
               immediate:
-              - *ref_1
               - *ref_0
               - *ref_2
             language: !<!Languages> 
               default:
-                name: ClassThatInheritsFromBaseClassAndBaseClassWithDiscriminatorAndSomeProperties
+                name: ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties
                 description: ''
                 namespace: ''
             protocol: !<!Protocols> {}
           immediate:
           - *ref_8
-          - *ref_9
           - *ref_3
         discriminator: !<!Discriminator> 
           all:
-            ClassThatInheritsFromBaseClassAndBaseClassWithDiscriminator: *ref_9
-            ClassThatInheritsFromBaseClassAndBaseClassWithDiscriminatorAndSomeProperties: *ref_3
             ClassThatInheritsFromBaseClassWithDiscriminator: *ref_8
+            ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties: *ref_3
           immediate:
-            ClassThatInheritsFromBaseClassAndBaseClassWithDiscriminator: *ref_9
-            ClassThatInheritsFromBaseClassAndBaseClassWithDiscriminatorAndSomeProperties: *ref_3
             ClassThatInheritsFromBaseClassWithDiscriminator: *ref_8
-          property: !<!Property> &ref_11
-            schema: *ref_10
+            ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties: *ref_3
+          property: !<!Property> &ref_10
+            schema: *ref_9
             isDiscriminator: true
             required: true
             serializedName: DiscriminatorProperty
@@ -231,7 +194,7 @@ schemas: !<!Schemas>
           immediate:
           - *ref_1
         properties:
-        - *ref_11
+        - *ref_10
         language: !<!Languages> 
           default:
             name: BaseClassWithDiscriminator
@@ -240,7 +203,7 @@ schemas: !<!Schemas>
         protocol: !<!Protocols> {}
       - *ref_4
       - *ref_5
-      - !<!ObjectSchema> &ref_12
+      - !<!ObjectSchema> &ref_11
         type: object
         apiVersions:
         - !<!ApiVersion> 
@@ -257,20 +220,15 @@ schemas: !<!Schemas>
             namespace: ''
         protocol: !<!Protocols> {}
       - *ref_8
-      - *ref_9
-      - *ref_9
-      - *ref_3
       - *ref_3
       immediate:
       - *ref_0
       - *ref_4
       - *ref_5
-      - *ref_12
-      - *ref_9
-      - *ref_3
+      - *ref_11
     properties:
     - !<!Property> 
-      schema: *ref_13
+      schema: *ref_12
       serializedName: BaseClassProperty
       language: !<!Languages> 
         default:
@@ -287,9 +245,8 @@ schemas: !<!Schemas>
   - *ref_2
   - *ref_4
   - *ref_5
-  - *ref_12
+  - *ref_11
   - *ref_8
-  - *ref_9
   - *ref_3
 operationGroups: []
 language: !<!Languages> 

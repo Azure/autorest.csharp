@@ -216,8 +216,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
         private static IEnumerable<ObjectSchema> EnumerateHierarchy(ObjectSchema schema)
         {
             yield return schema;
-            // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/257
-            foreach (ComplexSchema parent in schema.Parents!.All.Distinct())
+            foreach (ComplexSchema parent in schema.Parents!.All)
             {
                 if (parent is ObjectSchema objectSchema)
                 {
