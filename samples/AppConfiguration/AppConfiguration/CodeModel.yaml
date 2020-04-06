@@ -1283,6 +1283,7 @@ globalParameters:
   schema: *ref_0
   clientDefaultValue: ''
   implementation: Client
+  origin: 'modelerfour:synthesized/host'
   required: true
   extensions:
     x-ms-skip-url-encoding: true
@@ -1297,6 +1298,7 @@ globalParameters:
 - !<!Parameter> &ref_38
   schema: *ref_35
   implementation: Client
+  origin: 'modelerfour:synthesized/api-version'
   required: true
   language: !<!Languages> 
     default:
@@ -1943,6 +1945,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:

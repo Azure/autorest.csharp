@@ -672,6 +672,7 @@ schemas: !<!Schemas>
           name: ImageTiff
           description: Content Type 'image/tiff'
     type: sealed-choice
+    choiceType: *ref_0
     language: !<!Languages> 
       default:
         name: ContentType
@@ -2509,6 +2510,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_105
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -2923,6 +2925,7 @@ operationGroups:
       - !<!Parameter> &ref_121
         schema: *ref_119
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -2968,6 +2971,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_105
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -3178,6 +3182,7 @@ operationGroups:
       - !<!Parameter> &ref_132
         schema: *ref_119
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -3223,6 +3228,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_105
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -3407,6 +3413,7 @@ operationGroups:
       - !<!Parameter> &ref_139
         schema: *ref_119
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -3452,6 +3459,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_105
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
