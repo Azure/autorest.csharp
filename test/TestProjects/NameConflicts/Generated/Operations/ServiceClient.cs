@@ -36,7 +36,7 @@ namespace NameConflicts
         /// <param name="uri"> The String to use. </param>
         /// <param name="class"> The Class to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Class>> OperationAsync(string request, string message, string scope, string uri, Class @class, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Struct>> OperationAsync(string request, string message, string scope, string uri, Class @class, CancellationToken cancellationToken = default)
         {
             return await RestClient.OperationAsync(request, message, scope, uri, @class, cancellationToken).ConfigureAwait(false);
         }
@@ -47,7 +47,7 @@ namespace NameConflicts
         /// <param name="uri"> The String to use. </param>
         /// <param name="class"> The Class to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Class> Operation(string request, string message, string scope, string uri, Class @class, CancellationToken cancellationToken = default)
+        public virtual Response<Struct> Operation(string request, string message, string scope, string uri, Class @class, CancellationToken cancellationToken = default)
         {
             return RestClient.Operation(request, message, scope, uri, @class, cancellationToken);
         }

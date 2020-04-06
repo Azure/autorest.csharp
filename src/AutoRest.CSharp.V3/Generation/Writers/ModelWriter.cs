@@ -184,7 +184,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Append($": base(");
                     foreach (var baseConstructorParameter in constructor.BaseConstructor.Parameters)
                     {
-                        writer.Append($"{baseConstructorParameter.Name}, ");
+                        writer.Append($"{baseConstructorParameter.Name:I}, ");
                     }
                     writer.RemoveTrailingComma();
                     writer.Append($")");
