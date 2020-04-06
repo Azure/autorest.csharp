@@ -398,64 +398,68 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             if (serialization.Type.IsFrameworkType)
             {
-                var frameworkType = serialization.Type.FrameworkType;
-                bool includeFormat = false;
-
-                writer.Append($"{element}.");
-                if (frameworkType == typeof(object))
-                    writer.AppendRaw("GetObject");
-                if (frameworkType == typeof(bool))
-                    writer.AppendRaw("GetBoolean");
-                if (frameworkType == typeof(char))
-                    writer.AppendRaw("GetChar");
-                if (frameworkType == typeof(short))
-                    writer.AppendRaw("GetInt16");
-                if (frameworkType == typeof(int))
-                    writer.AppendRaw("GetInt32");
-                if (frameworkType == typeof(long))
-                    writer.AppendRaw("GetInt64");
-                if (frameworkType == typeof(float))
-                    writer.AppendRaw("GetSingle");
-                if (frameworkType == typeof(double))
-                    writer.AppendRaw("GetDouble");
-                if (frameworkType == typeof(decimal))
-                    writer.AppendRaw("GetDecimal");
-                if (frameworkType == typeof(string))
-                    writer.AppendRaw("GetString");
-                if (frameworkType == typeof(Guid))
-                    writer.AppendRaw("GetGuid");
-
-                if (frameworkType == typeof(byte[]))
-                {
-                    writer.AppendRaw("GetBytesFromBase64");
-                    includeFormat = true;
-                }
-
-                if (frameworkType == typeof(DateTimeOffset))
-                {
-                    writer.AppendRaw("GetDateTimeOffset");
-                    includeFormat = true;
-                }
-
-                if (frameworkType == typeof(TimeSpan))
-                {
-                    writer.AppendRaw("GetTimeSpan");
-                    includeFormat = true;
-                }
-
-                writer.AppendRaw("(");
-
-                if (includeFormat && serialization.Format.ToFormatSpecifier() is string formatString)
-                {
-                    writer.Literal(formatString);
-                }
-
-                writer.AppendRaw(")");
+                DeserializeFrameworkTypeValue(writer, element, serialization.Type.FrameworkType, serialization.Format);
             }
             else
             {
                 writer.DeserializeImplementation(serialization.Type.Implementation, element);
             }
+        }
+
+        private static void DeserializeFrameworkTypeValue(CodeWriter writer, CodeWriterDelegate element, Type frameworkType, SerializationFormat serializationFormat)
+        {
+            bool includeFormat = false;
+
+            writer.Append($"{element}.");
+            if (frameworkType == typeof(object))
+                writer.AppendRaw("GetObject");
+            if (frameworkType == typeof(bool))
+                writer.AppendRaw("GetBoolean");
+            if (frameworkType == typeof(char))
+                writer.AppendRaw("GetChar");
+            if (frameworkType == typeof(short))
+                writer.AppendRaw("GetInt16");
+            if (frameworkType == typeof(int))
+                writer.AppendRaw("GetInt32");
+            if (frameworkType == typeof(long))
+                writer.AppendRaw("GetInt64");
+            if (frameworkType == typeof(float))
+                writer.AppendRaw("GetSingle");
+            if (frameworkType == typeof(double))
+                writer.AppendRaw("GetDouble");
+            if (frameworkType == typeof(decimal))
+                writer.AppendRaw("GetDecimal");
+            if (frameworkType == typeof(string))
+                writer.AppendRaw("GetString");
+            if (frameworkType == typeof(Guid))
+                writer.AppendRaw("GetGuid");
+
+            if (frameworkType == typeof(byte[]))
+            {
+                writer.AppendRaw("GetBytesFromBase64");
+                includeFormat = true;
+            }
+
+            if (frameworkType == typeof(DateTimeOffset))
+            {
+                writer.AppendRaw("GetDateTimeOffset");
+                includeFormat = true;
+            }
+
+            if (frameworkType == typeof(TimeSpan))
+            {
+                writer.AppendRaw("GetTimeSpan");
+                includeFormat = true;
+            }
+
+            writer.AppendRaw("(");
+
+            if (includeFormat && serializationFormat.ToFormatSpecifier() is string formatString)
+            {
+                writer.Literal(formatString);
+            }
+
+            writer.AppendRaw(")");
         }
 
         public static void DeserializeImplementation(this CodeWriter writer, ITypeProvider implementation, CodeWriterDelegate element)
@@ -466,12 +470,15 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Append($"{implementation.Type}.Deserialize{objectType.Declaration.Name}({element})");
                     break;
 
-                case EnumType clientEnum when clientEnum.IsStringBased:
-                    writer.Append($"new {implementation.Type}({element}.GetString())");
+                case EnumType clientEnum when clientEnum.IsExtendable:
+                    writer.Append($"new {implementation.Type}(");
+                    DeserializeFrameworkTypeValue(writer, element, clientEnum.BaseType.FrameworkType, SerializationFormat.Default);
+                    writer.Append($")");
                     break;
 
-                case EnumType clientEnum when !clientEnum.IsStringBased:
-                    writer.Append($"{element}.GetString().To{clientEnum.Declaration.Name}()");
+                case EnumType clientEnum when !clientEnum.IsExtendable:
+                    DeserializeFrameworkTypeValue(writer, element, clientEnum.BaseType.FrameworkType, SerializationFormat.Default);
+                    writer.Append($".To{clientEnum.Declaration.Name}()");
                     break;
             }
         }

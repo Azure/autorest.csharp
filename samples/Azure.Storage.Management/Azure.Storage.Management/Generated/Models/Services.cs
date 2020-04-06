@@ -45,7 +45,7 @@ namespace Azure.Storage.Management.Models
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Equals(object obj) => obj is Services other && Equals(other);
         /// <inheritdoc />
-        public bool Equals(Services other) => string.Equals(_value, other._value, StringComparison.Ordinal);
+        public bool Equals(Services other) => string.Equals(_value, other._value, StringComparison.InvariantCultureIgnoreCase);
 
         /// <inheritdoc />
         [EditorBrowsable(EditorBrowsableState.Never)]

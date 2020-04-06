@@ -42,7 +42,7 @@ namespace Azure.Storage.Tables
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Equals(object obj) => obj is ResponseFormat other && Equals(other);
         /// <inheritdoc />
-        public bool Equals(ResponseFormat other) => string.Equals(_value, other._value, StringComparison.Ordinal);
+        public bool Equals(ResponseFormat other) => string.Equals(_value, other._value, StringComparison.InvariantCultureIgnoreCase);
 
         /// <inheritdoc />
         [EditorBrowsable(EditorBrowsableState.Never)]

@@ -140,6 +140,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestProjects\\NameConflicts\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestProjects\\NameConflicts --namespace=NameConflicts --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
     },
+    "non-string-enum": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\non-string-enum\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\non-string-enum --namespace=non_string_enum --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
     "paging": {
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\paging\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\paging --namespace=paging --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"

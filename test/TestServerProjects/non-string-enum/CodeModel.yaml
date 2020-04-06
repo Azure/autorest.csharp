@@ -1,0 +1,389 @@
+!<!CodeModel> 
+info: !<!Info> 
+  description: Testing non-string enums.
+  title: non-string-enum
+schemas: !<!Schemas> 
+  numbers:
+  - !<!NumberSchema> &ref_0
+    type: integer
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 2.0-preview
+    precision: 32
+    language: !<!Languages> 
+      default:
+        name: IntEnum
+        description: List of integer enums
+    protocol: !<!Protocols> {}
+  - !<!NumberSchema> &ref_1
+    type: number
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 2.0-preview
+    precision: 32
+    language: !<!Languages> 
+      default:
+        name: FloatEnum
+        description: List of float enums
+    protocol: !<!Protocols> {}
+  strings:
+  - !<!StringSchema> &ref_2
+    type: string
+    language: !<!Languages> 
+      default:
+        name: String
+        description: simple string
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_7
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 2.0-preview
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+    protocol: !<!Protocols> {}
+  choices:
+  - !<!ChoiceSchema> &ref_5
+    choices:
+    - !<!ChoiceValue> 
+      value: 200
+      language:
+        default:
+          name: TwoHundred
+          description: ''
+    - !<!ChoiceValue> 
+      value: 403
+      language:
+        default:
+          name: FourHundredThree
+          description: ''
+    - !<!ChoiceValue> 
+      value: 405
+      language:
+        default:
+          name: FourHundredFive
+          description: ''
+    - !<!ChoiceValue> 
+      value: 406
+      language:
+        default:
+          name: FourHundredSix
+          description: ''
+    - !<!ChoiceValue> 
+      value: 429
+      language:
+        default:
+          name: FourHundredTwentyNine
+          description: ''
+    type: choice
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 2.0-preview
+    choiceType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: IntEnum
+        description: List of integer enums
+    protocol: !<!Protocols> {}
+  - !<!ChoiceSchema> &ref_8
+    choices:
+    - !<!ChoiceValue> 
+      value: 200.4
+      language:
+        default:
+          name: TwoHundred4
+          description: ''
+    - !<!ChoiceValue> 
+      value: 403.4
+      language:
+        default:
+          name: FourHundredThree4
+          description: ''
+    - !<!ChoiceValue> 
+      value: 405.3
+      language:
+        default:
+          name: FourHundredFive3
+          description: ''
+    - !<!ChoiceValue> 
+      value: 406.2
+      language:
+        default:
+          name: FourHundredSix2
+          description: ''
+    - !<!ChoiceValue> 
+      value: 429.1
+      language:
+        default:
+          name: FourHundredTwentyNine1
+          description: ''
+    type: choice
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 2.0-preview
+    choiceType: *ref_1
+    language: !<!Languages> 
+      default:
+        name: FloatEnum
+        description: List of float enums
+    protocol: !<!Protocols> {}
+  constants:
+  - !<!ConstantSchema> &ref_4
+    type: constant
+    value: !<!ConstantValue> 
+      value: application/json
+    valueType: *ref_2
+    language: !<!Languages> 
+      default:
+        name: ApplicationJson
+        description: Content Type 'application/json'
+    protocol: !<!Protocols> {}
+globalParameters:
+- !<!Parameter> &ref_3
+  schema: *ref_2
+  clientDefaultValue: 'http://localhost:3000'
+  implementation: Client
+  required: true
+  extensions:
+    x-ms-skip-url-encoding: true
+  language: !<!Languages> 
+    default:
+      name: $host
+      description: server parameter
+      serializedName: $host
+  protocol: !<!Protocols> 
+    http: !<!HttpParameter> 
+      in: uri
+operationGroups:
+- !<!OperationGroup> 
+  $key: Int
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 2.0-preview
+    parameters:
+    - *ref_3
+    requests:
+    - !<!Request> 
+      parameters:
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_6
+        schema: *ref_5
+        implementation: Method
+        required: false
+        language: !<!Languages> 
+          default:
+            name: input
+            description: Input int enum.
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters:
+      - *ref_6
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /nonStringEnums/int/put
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    signatureParameters: []
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_7
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    language: !<!Languages> 
+      default:
+        name: Put
+        description: Put an int enum
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 2.0-preview
+    parameters:
+    - *ref_3
+    requests:
+    - !<!Request> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /nonStringEnums/int/get
+          method: get
+          uri: '{$host}'
+    signatureParameters: []
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    language: !<!Languages> 
+      default:
+        name: Get
+        description: Get an int enum
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: Int
+      description: ''
+  protocol: !<!Protocols> {}
+- !<!OperationGroup> 
+  $key: Float
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 2.0-preview
+    parameters:
+    - *ref_3
+    requests:
+    - !<!Request> 
+      parameters:
+      - !<!Parameter> 
+        schema: *ref_4
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_9
+        schema: *ref_8
+        implementation: Method
+        required: false
+        language: !<!Languages> 
+          default:
+            name: input
+            description: Input float enum.
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters:
+      - *ref_9
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /nonStringEnums/float/put
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    signatureParameters: []
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_7
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    language: !<!Languages> 
+      default:
+        name: Put
+        description: Put a float enum
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 2.0-preview
+    parameters:
+    - *ref_3
+    requests:
+    - !<!Request> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /nonStringEnums/float/get
+          method: get
+          uri: '{$host}'
+    signatureParameters: []
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_8
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    language: !<!Languages> 
+      default:
+        name: Get
+        description: Get a float enum
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: Float
+      description: ''
+  protocol: !<!Protocols> {}
+language: !<!Languages> 
+  default:
+    name: NonStringEnum
+    description: ''
+protocol: !<!Protocols> 
+  http: !<!HttpModel> {}
