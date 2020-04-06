@@ -9,12 +9,12 @@ using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
 {
+    [IgnoreOnTestServer(TestServerVersion.V2, "No record")]
     public class NonStringEnumTests : TestServerTestBase
     {
         public NonStringEnumTests(TestServerVersion version) : base(version, "nonStringEnums") { }
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No record")]
         public Task NonStringEnumsGetFloat() => TestStatus(async (host, pipeline) =>
         {
             var response = await new FloatClient(ClientDiagnostics, pipeline, host).GetAsync();
@@ -23,7 +23,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No record")]
         public Task NonStringEnumsGetInt() => TestStatus(async (host, pipeline) =>
         {
             var response = await new IntClient(ClientDiagnostics, pipeline, host).GetAsync();
@@ -32,7 +31,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No record")]
         public Task NonStringEnumsPostInt() => TestStatus(async (host, pipeline) =>
         {
             var response = await new IntClient(ClientDiagnostics, pipeline, host).PutAsync(IntEnum.TwoHundred);
@@ -41,11 +39,9 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.testserver/issues/161")]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No record")]
         public Task NonStringEnumsPostFloat() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new FloatClient(ClientDiagnostics, pipeline, host).PutAsync(FloatEnum.TwoHundred);
+            var response = await new FloatClient(ClientDiagnostics, pipeline, host).PutAsync(FloatEnum.TwoHundred4);
             Assert.AreEqual("Nice job posting a float enum", response.Value);
             return response.GetRawResponse();
         });

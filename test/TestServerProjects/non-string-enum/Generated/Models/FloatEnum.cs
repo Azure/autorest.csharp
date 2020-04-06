@@ -22,14 +22,14 @@ namespace non_string_enum.Models
             _value = value;
         }
 
-        private const float TwoHundredValue = 200F;
+        private const float TwoHundred4Value = 200.4F;
         private const float FourHundredThree4Value = 403.4F;
         private const float FourHundredFive3Value = 405.3F;
         private const float FourHundredSix2Value = 406.2F;
         private const float FourHundredTwentyNine1Value = 429.1F;
 
-        /// <summary> 200. </summary>
-        public static FloatEnum TwoHundred { get; } = new FloatEnum(TwoHundredValue);
+        /// <summary> 200.4. </summary>
+        public static FloatEnum TwoHundred4 { get; } = new FloatEnum(TwoHundred4Value);
         /// <summary> 403.4. </summary>
         public static FloatEnum FourHundredThree4 { get; } = new FloatEnum(FourHundredThree4Value);
         /// <summary> 405.3. </summary>

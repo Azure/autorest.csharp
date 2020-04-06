@@ -90,10 +90,10 @@ schemas: !<!Schemas>
   - !<!ChoiceSchema> &ref_8
     choices:
     - !<!ChoiceValue> 
-      value: 200
+      value: 200.4
       language:
         default:
-          name: TwoHundred
+          name: TwoHundred4
           description: ''
     - !<!ChoiceValue> 
       value: 403.4
