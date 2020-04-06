@@ -18,8 +18,8 @@ namespace Azure.Network.Management.Interface
 {
     public partial class NetworkInterfaceTapConfigurationsClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal NetworkInterfaceTapConfigurationsRestClient RestClient { get; }
         /// <summary> Initializes a new instance of NetworkInterfaceTapConfigurationsClient for mocking. </summary>
         protected NetworkInterfaceTapConfigurationsClient()
@@ -29,8 +29,8 @@ namespace Azure.Network.Management.Interface
         internal NetworkInterfaceTapConfigurationsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-11-01")
         {
             RestClient = new NetworkInterfaceTapConfigurationsRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Get the specified tap configuration on a network interface. </summary>
@@ -123,7 +123,7 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "NetworkInterfaceTapConfigurationsClient.Delete", OperationFinalStateVia.Location, createOriginalHttpMessage);
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Delete, "NetworkInterfaceTapConfigurationsClient.Delete", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
 
         /// <summary> Deletes the specified tap configuration from the NetworkInterface. </summary>
@@ -188,7 +188,7 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "NetworkInterfaceTapConfigurationsClient.CreateOrUpdate", OperationFinalStateVia.AzureAsyncOperation, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Put, "NetworkInterfaceTapConfigurationsClient.CreateOrUpdate", OperationFinalStateVia.AzureAsyncOperation, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);

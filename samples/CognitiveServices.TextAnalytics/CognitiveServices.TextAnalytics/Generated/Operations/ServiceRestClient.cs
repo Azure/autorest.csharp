@@ -19,8 +19,8 @@ namespace CognitiveServices.TextAnalytics
     internal partial class ServiceRestClient
     {
         private string endpoint;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of ServiceRestClient. </summary>
         public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint)
@@ -31,13 +31,13 @@ namespace CognitiveServices.TextAnalytics
             }
 
             this.endpoint = endpoint;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateEntitiesRecognitionGeneralRequest(MultiLanguageBatchInput input, string modelVersion, bool? showStats)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -72,12 +72,12 @@ namespace CognitiveServices.TextAnalytics
                 throw new ArgumentNullException(nameof(input));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.EntitiesRecognitionGeneral");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.EntitiesRecognitionGeneral");
             scope.Start();
             try
             {
                 using var message = CreateEntitiesRecognitionGeneralRequest(input, modelVersion, showStats);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -95,7 +95,7 @@ namespace CognitiveServices.TextAnalytics
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -117,12 +117,12 @@ namespace CognitiveServices.TextAnalytics
                 throw new ArgumentNullException(nameof(input));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.EntitiesRecognitionGeneral");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.EntitiesRecognitionGeneral");
             scope.Start();
             try
             {
                 using var message = CreateEntitiesRecognitionGeneralRequest(input, modelVersion, showStats);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -140,7 +140,7 @@ namespace CognitiveServices.TextAnalytics
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -152,7 +152,7 @@ namespace CognitiveServices.TextAnalytics
 
         internal HttpMessage CreateEntitiesRecognitionPiiRequest(MultiLanguageBatchInput input, string modelVersion, bool? showStats)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -190,12 +190,12 @@ namespace CognitiveServices.TextAnalytics
                 throw new ArgumentNullException(nameof(input));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.EntitiesRecognitionPii");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.EntitiesRecognitionPii");
             scope.Start();
             try
             {
                 using var message = CreateEntitiesRecognitionPiiRequest(input, modelVersion, showStats);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -213,7 +213,7 @@ namespace CognitiveServices.TextAnalytics
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -238,12 +238,12 @@ namespace CognitiveServices.TextAnalytics
                 throw new ArgumentNullException(nameof(input));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.EntitiesRecognitionPii");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.EntitiesRecognitionPii");
             scope.Start();
             try
             {
                 using var message = CreateEntitiesRecognitionPiiRequest(input, modelVersion, showStats);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -261,7 +261,7 @@ namespace CognitiveServices.TextAnalytics
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -273,7 +273,7 @@ namespace CognitiveServices.TextAnalytics
 
         internal HttpMessage CreateEntitiesLinkingRequest(MultiLanguageBatchInput input, string modelVersion, bool? showStats)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -308,12 +308,12 @@ namespace CognitiveServices.TextAnalytics
                 throw new ArgumentNullException(nameof(input));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.EntitiesLinking");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.EntitiesLinking");
             scope.Start();
             try
             {
                 using var message = CreateEntitiesLinkingRequest(input, modelVersion, showStats);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -331,7 +331,7 @@ namespace CognitiveServices.TextAnalytics
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -353,12 +353,12 @@ namespace CognitiveServices.TextAnalytics
                 throw new ArgumentNullException(nameof(input));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.EntitiesLinking");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.EntitiesLinking");
             scope.Start();
             try
             {
                 using var message = CreateEntitiesLinkingRequest(input, modelVersion, showStats);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -376,7 +376,7 @@ namespace CognitiveServices.TextAnalytics
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -388,7 +388,7 @@ namespace CognitiveServices.TextAnalytics
 
         internal HttpMessage CreateKeyPhrasesRequest(MultiLanguageBatchInput input, string modelVersion, bool? showStats)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -423,12 +423,12 @@ namespace CognitiveServices.TextAnalytics
                 throw new ArgumentNullException(nameof(input));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.KeyPhrases");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.KeyPhrases");
             scope.Start();
             try
             {
                 using var message = CreateKeyPhrasesRequest(input, modelVersion, showStats);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -446,7 +446,7 @@ namespace CognitiveServices.TextAnalytics
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -468,12 +468,12 @@ namespace CognitiveServices.TextAnalytics
                 throw new ArgumentNullException(nameof(input));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.KeyPhrases");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.KeyPhrases");
             scope.Start();
             try
             {
                 using var message = CreateKeyPhrasesRequest(input, modelVersion, showStats);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -491,7 +491,7 @@ namespace CognitiveServices.TextAnalytics
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -503,7 +503,7 @@ namespace CognitiveServices.TextAnalytics
 
         internal HttpMessage CreateLanguagesRequest(LanguageBatchInput input, string modelVersion, bool? showStats)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -538,12 +538,12 @@ namespace CognitiveServices.TextAnalytics
                 throw new ArgumentNullException(nameof(input));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.Languages");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.Languages");
             scope.Start();
             try
             {
                 using var message = CreateLanguagesRequest(input, modelVersion, showStats);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -561,7 +561,7 @@ namespace CognitiveServices.TextAnalytics
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -583,12 +583,12 @@ namespace CognitiveServices.TextAnalytics
                 throw new ArgumentNullException(nameof(input));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.Languages");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.Languages");
             scope.Start();
             try
             {
                 using var message = CreateLanguagesRequest(input, modelVersion, showStats);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -606,7 +606,7 @@ namespace CognitiveServices.TextAnalytics
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -618,7 +618,7 @@ namespace CognitiveServices.TextAnalytics
 
         internal HttpMessage CreateSentimentRequest(MultiLanguageBatchInput input, string modelVersion, bool? showStats)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -653,12 +653,12 @@ namespace CognitiveServices.TextAnalytics
                 throw new ArgumentNullException(nameof(input));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.Sentiment");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.Sentiment");
             scope.Start();
             try
             {
                 using var message = CreateSentimentRequest(input, modelVersion, showStats);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -676,7 +676,7 @@ namespace CognitiveServices.TextAnalytics
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -698,12 +698,12 @@ namespace CognitiveServices.TextAnalytics
                 throw new ArgumentNullException(nameof(input));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.Sentiment");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.Sentiment");
             scope.Start();
             try
             {
                 using var message = CreateSentimentRequest(input, modelVersion, showStats);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -721,7 +721,7 @@ namespace CognitiveServices.TextAnalytics
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

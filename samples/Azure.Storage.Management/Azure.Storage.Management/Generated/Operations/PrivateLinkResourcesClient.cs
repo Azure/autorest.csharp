@@ -15,8 +15,8 @@ namespace Azure.Storage.Management
 {
     public partial class PrivateLinkResourcesClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal PrivateLinkResourcesRestClient RestClient { get; }
         /// <summary> Initializes a new instance of PrivateLinkResourcesClient for mocking. </summary>
         protected PrivateLinkResourcesClient()
@@ -26,8 +26,8 @@ namespace Azure.Storage.Management
         internal PrivateLinkResourcesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
         {
             RestClient = new PrivateLinkResourcesRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Gets the private link resources that need to be created for a storage account. </summary>

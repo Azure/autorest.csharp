@@ -16,8 +16,8 @@ namespace Azure.Storage.Management
 {
     public partial class SkusClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal SkusRestClient RestClient { get; }
         /// <summary> Initializes a new instance of SkusClient for mocking. </summary>
         protected SkusClient()
@@ -27,8 +27,8 @@ namespace Azure.Storage.Management
         internal SkusClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
         {
             RestClient = new SkusRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Lists the available SKUs supported by Microsoft.Storage for given subscription. </summary>

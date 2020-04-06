@@ -15,8 +15,8 @@ namespace body_complex
 {
     public partial class DictionaryClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal DictionaryRestClient RestClient { get; }
         /// <summary> Initializes a new instance of DictionaryClient for mocking. </summary>
         protected DictionaryClient()
@@ -26,8 +26,8 @@ namespace body_complex
         internal DictionaryClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             RestClient = new DictionaryRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Get complex types with dictionary property. </summary>

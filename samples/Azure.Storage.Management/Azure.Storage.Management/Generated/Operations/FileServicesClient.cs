@@ -15,8 +15,8 @@ namespace Azure.Storage.Management
 {
     public partial class FileServicesClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal FileServicesRestClient RestClient { get; }
         /// <summary> Initializes a new instance of FileServicesClient for mocking. </summary>
         protected FileServicesClient()
@@ -26,8 +26,8 @@ namespace Azure.Storage.Management
         internal FileServicesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
         {
             RestClient = new FileServicesRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> List all file services in storage accounts. </summary>

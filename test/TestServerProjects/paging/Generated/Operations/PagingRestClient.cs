@@ -19,8 +19,8 @@ namespace paging
     internal partial class PagingRestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of PagingRestClient. </summary>
         public PagingRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
@@ -31,13 +31,13 @@ namespace paging
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateGetNoItemNamePagesRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -51,12 +51,12 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResultValue>> GetNoItemNamePagesAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetNoItemNamePages");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetNoItemNamePages");
             scope.Start();
             try
             {
                 using var message = CreateGetNoItemNamePagesRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -74,7 +74,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -88,12 +88,12 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResultValue> GetNoItemNamePages(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetNoItemNamePages");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetNoItemNamePages");
             scope.Start();
             try
             {
                 using var message = CreateGetNoItemNamePagesRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -111,7 +111,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -123,7 +123,7 @@ namespace paging
 
         internal HttpMessage CreateGetNullNextLinkNamePagesRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -137,12 +137,12 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetNullNextLinkNamePagesAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetNullNextLinkNamePages");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetNullNextLinkNamePages");
             scope.Start();
             try
             {
                 using var message = CreateGetNullNextLinkNamePagesRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -160,7 +160,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -174,12 +174,12 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetNullNextLinkNamePages(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetNullNextLinkNamePages");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetNullNextLinkNamePages");
             scope.Start();
             try
             {
                 using var message = CreateGetNullNextLinkNamePagesRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -197,7 +197,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -209,7 +209,7 @@ namespace paging
 
         internal HttpMessage CreateGetSinglePagesRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -223,12 +223,12 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetSinglePagesAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetSinglePages");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePages");
             scope.Start();
             try
             {
                 using var message = CreateGetSinglePagesRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -246,7 +246,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -260,12 +260,12 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetSinglePages(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetSinglePages");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePages");
             scope.Start();
             try
             {
                 using var message = CreateGetSinglePagesRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -283,7 +283,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -295,7 +295,7 @@ namespace paging
 
         internal HttpMessage CreateGetMultiplePagesRequest(string clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -323,12 +323,12 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetMultiplePagesAsync(string clientRequestId = null, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePages");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePages");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesRequest(clientRequestId, pagingGetMultiplePagesOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -346,7 +346,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -362,12 +362,12 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetMultiplePages(string clientRequestId = null, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePages");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePages");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesRequest(clientRequestId, pagingGetMultiplePagesOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -385,7 +385,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -397,7 +397,7 @@ namespace paging
 
         internal HttpMessage CreateGetOdataMultiplePagesRequest(string clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -425,12 +425,12 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<OdataProductResult>> GetOdataMultiplePagesAsync(string clientRequestId = null, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetOdataMultiplePages");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetOdataMultiplePages");
             scope.Start();
             try
             {
                 using var message = CreateGetOdataMultiplePagesRequest(clientRequestId, pagingGetOdataMultiplePagesOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -448,7 +448,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -464,12 +464,12 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<OdataProductResult> GetOdataMultiplePages(string clientRequestId = null, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetOdataMultiplePages");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetOdataMultiplePages");
             scope.Start();
             try
             {
                 using var message = CreateGetOdataMultiplePagesRequest(clientRequestId, pagingGetOdataMultiplePagesOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -487,7 +487,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -499,7 +499,7 @@ namespace paging
 
         internal HttpMessage CreateGetMultiplePagesWithOffsetRequest(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, string clientRequestId)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -533,12 +533,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(pagingGetMultiplePagesWithOffsetOptions));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesWithOffset");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesWithOffset");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesWithOffsetRequest(pagingGetMultiplePagesWithOffsetOptions, clientRequestId);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -556,7 +556,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -577,12 +577,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(pagingGetMultiplePagesWithOffsetOptions));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesWithOffset");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesWithOffset");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesWithOffsetRequest(pagingGetMultiplePagesWithOffsetOptions, clientRequestId);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -600,7 +600,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -612,7 +612,7 @@ namespace paging
 
         internal HttpMessage CreateGetMultiplePagesRetryFirstRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -626,12 +626,12 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetMultiplePagesRetryFirstAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetryFirst");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetryFirst");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesRetryFirstRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -649,7 +649,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -663,12 +663,12 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetMultiplePagesRetryFirst(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetryFirst");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetryFirst");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesRetryFirstRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -686,7 +686,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -698,7 +698,7 @@ namespace paging
 
         internal HttpMessage CreateGetMultiplePagesRetrySecondRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -712,12 +712,12 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetMultiplePagesRetrySecondAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetrySecond");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetrySecond");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesRetrySecondRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -735,7 +735,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -749,12 +749,12 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetMultiplePagesRetrySecond(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetrySecond");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetrySecond");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesRetrySecondRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -772,7 +772,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -784,7 +784,7 @@ namespace paging
 
         internal HttpMessage CreateGetSinglePagesFailureRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -798,12 +798,12 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetSinglePagesFailureAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetSinglePagesFailure");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePagesFailure");
             scope.Start();
             try
             {
                 using var message = CreateGetSinglePagesFailureRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -821,7 +821,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -835,12 +835,12 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetSinglePagesFailure(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetSinglePagesFailure");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePagesFailure");
             scope.Start();
             try
             {
                 using var message = CreateGetSinglePagesFailureRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -858,7 +858,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -870,7 +870,7 @@ namespace paging
 
         internal HttpMessage CreateGetMultiplePagesFailureRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -884,12 +884,12 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetMultiplePagesFailureAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailure");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailure");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesFailureRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -907,7 +907,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -921,12 +921,12 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetMultiplePagesFailure(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailure");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailure");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesFailureRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -944,7 +944,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -956,7 +956,7 @@ namespace paging
 
         internal HttpMessage CreateGetMultiplePagesFailureUriRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -970,12 +970,12 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ProductResult>> GetMultiplePagesFailureUriAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailureUri");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailureUri");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesFailureUriRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -993,7 +993,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1007,12 +1007,12 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ProductResult> GetMultiplePagesFailureUri(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailureUri");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailureUri");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesFailureUriRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1030,7 +1030,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1042,7 +1042,7 @@ namespace paging
 
         internal HttpMessage CreateGetMultiplePagesFragmentNextLinkRequest(string apiVersion, string tenant)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1069,12 +1069,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(tenant));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentNextLink");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentNextLink");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesFragmentNextLinkRequest(apiVersion, tenant);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1092,7 +1092,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1117,12 +1117,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(tenant));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentNextLink");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentNextLink");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesFragmentNextLinkRequest(apiVersion, tenant);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1140,7 +1140,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1152,7 +1152,7 @@ namespace paging
 
         internal HttpMessage CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(CustomParameterGroup customParameterGroup)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1174,12 +1174,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(customParameterGroup));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(customParameterGroup);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1197,7 +1197,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1217,12 +1217,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(customParameterGroup));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(customParameterGroup);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1240,7 +1240,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1252,7 +1252,7 @@ namespace paging
 
         internal HttpMessage CreateGetMultiplePagesLRORequest(string clientRequestId, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1280,18 +1280,18 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetMultiplePagesLROAsync(string clientRequestId = null, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1307,18 +1307,18 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetMultiplePagesLRO(string clientRequestId = null, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1330,7 +1330,7 @@ namespace paging
 
         internal HttpMessage CreateNextFragmentRequest(string apiVersion, string tenant, string nextLink)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1364,12 +1364,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.NextFragment");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.NextFragment");
             scope.Start();
             try
             {
                 using var message = CreateNextFragmentRequest(apiVersion, tenant, nextLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1387,7 +1387,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1417,12 +1417,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.NextFragment");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.NextFragment");
             scope.Start();
             try
             {
                 using var message = CreateNextFragmentRequest(apiVersion, tenant, nextLink);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1440,7 +1440,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1452,7 +1452,7 @@ namespace paging
 
         internal HttpMessage CreateNextFragmentWithGroupingRequest(string nextLink, CustomParameterGroup customParameterGroup)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1481,12 +1481,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(customParameterGroup));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.NextFragmentWithGrouping");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.NextFragmentWithGrouping");
             scope.Start();
             try
             {
                 using var message = CreateNextFragmentWithGroupingRequest(nextLink, customParameterGroup);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1504,7 +1504,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1529,12 +1529,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(customParameterGroup));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.NextFragmentWithGrouping");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.NextFragmentWithGrouping");
             scope.Start();
             try
             {
                 using var message = CreateNextFragmentWithGroupingRequest(nextLink, customParameterGroup);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1552,7 +1552,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1564,7 +1564,7 @@ namespace paging
 
         internal HttpMessage CreateGetNoItemNamePagesNextPageRequest(string nextLink)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1583,12 +1583,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetNoItemNamePages");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetNoItemNamePages");
             scope.Start();
             try
             {
                 using var message = CreateGetNoItemNamePagesNextPageRequest(nextLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1606,7 +1606,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1626,12 +1626,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetNoItemNamePages");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetNoItemNamePages");
             scope.Start();
             try
             {
                 using var message = CreateGetNoItemNamePagesNextPageRequest(nextLink);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1649,7 +1649,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1661,7 +1661,7 @@ namespace paging
 
         internal HttpMessage CreateGetNullNextLinkNamePagesNextPageRequest(string nextLink)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1680,12 +1680,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetNullNextLinkNamePages");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetNullNextLinkNamePages");
             scope.Start();
             try
             {
                 using var message = CreateGetNullNextLinkNamePagesNextPageRequest(nextLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1703,7 +1703,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1723,12 +1723,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetNullNextLinkNamePages");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetNullNextLinkNamePages");
             scope.Start();
             try
             {
                 using var message = CreateGetNullNextLinkNamePagesNextPageRequest(nextLink);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1746,7 +1746,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1758,7 +1758,7 @@ namespace paging
 
         internal HttpMessage CreateGetSinglePagesNextPageRequest(string nextLink)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1777,12 +1777,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetSinglePages");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePages");
             scope.Start();
             try
             {
                 using var message = CreateGetSinglePagesNextPageRequest(nextLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1800,7 +1800,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1820,12 +1820,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetSinglePages");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePages");
             scope.Start();
             try
             {
                 using var message = CreateGetSinglePagesNextPageRequest(nextLink);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1843,7 +1843,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1855,7 +1855,7 @@ namespace paging
 
         internal HttpMessage CreateGetMultiplePagesNextPageRequest(string nextLink, string clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1888,12 +1888,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePages");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePages");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesNextPageRequest(nextLink, clientRequestId, pagingGetMultiplePagesOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1911,7 +1911,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1933,12 +1933,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePages");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePages");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesNextPageRequest(nextLink, clientRequestId, pagingGetMultiplePagesOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1956,7 +1956,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1968,7 +1968,7 @@ namespace paging
 
         internal HttpMessage CreateGetOdataMultiplePagesNextPageRequest(string nextLink, string clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2001,12 +2001,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetOdataMultiplePages");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetOdataMultiplePages");
             scope.Start();
             try
             {
                 using var message = CreateGetOdataMultiplePagesNextPageRequest(nextLink, clientRequestId, pagingGetOdataMultiplePagesOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2024,7 +2024,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2046,12 +2046,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetOdataMultiplePages");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetOdataMultiplePages");
             scope.Start();
             try
             {
                 using var message = CreateGetOdataMultiplePagesNextPageRequest(nextLink, clientRequestId, pagingGetOdataMultiplePagesOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2069,7 +2069,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2081,7 +2081,7 @@ namespace paging
 
         internal HttpMessage CreateGetMultiplePagesWithOffsetNextPageRequest(string nextLink, PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, string clientRequestId)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2118,12 +2118,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(pagingGetMultiplePagesWithOffsetOptions));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesWithOffset");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesWithOffset");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, pagingGetMultiplePagesWithOffsetOptions, clientRequestId);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2141,7 +2141,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2167,12 +2167,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(pagingGetMultiplePagesWithOffsetOptions));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesWithOffset");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesWithOffset");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, pagingGetMultiplePagesWithOffsetOptions, clientRequestId);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2190,7 +2190,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2202,7 +2202,7 @@ namespace paging
 
         internal HttpMessage CreateGetMultiplePagesRetryFirstNextPageRequest(string nextLink)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2221,12 +2221,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetryFirst");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetryFirst");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesRetryFirstNextPageRequest(nextLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2244,7 +2244,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2264,12 +2264,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetryFirst");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetryFirst");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesRetryFirstNextPageRequest(nextLink);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2287,7 +2287,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2299,7 +2299,7 @@ namespace paging
 
         internal HttpMessage CreateGetMultiplePagesRetrySecondNextPageRequest(string nextLink)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2318,12 +2318,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetrySecond");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetrySecond");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesRetrySecondNextPageRequest(nextLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2341,7 +2341,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2361,12 +2361,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetrySecond");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetrySecond");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesRetrySecondNextPageRequest(nextLink);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2384,7 +2384,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2396,7 +2396,7 @@ namespace paging
 
         internal HttpMessage CreateGetSinglePagesFailureNextPageRequest(string nextLink)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2415,12 +2415,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetSinglePagesFailure");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePagesFailure");
             scope.Start();
             try
             {
                 using var message = CreateGetSinglePagesFailureNextPageRequest(nextLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2438,7 +2438,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2458,12 +2458,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetSinglePagesFailure");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePagesFailure");
             scope.Start();
             try
             {
                 using var message = CreateGetSinglePagesFailureNextPageRequest(nextLink);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2481,7 +2481,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2493,7 +2493,7 @@ namespace paging
 
         internal HttpMessage CreateGetMultiplePagesFailureNextPageRequest(string nextLink)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2512,12 +2512,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailure");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailure");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesFailureNextPageRequest(nextLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2535,7 +2535,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2555,12 +2555,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailure");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailure");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesFailureNextPageRequest(nextLink);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2578,7 +2578,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2590,7 +2590,7 @@ namespace paging
 
         internal HttpMessage CreateGetMultiplePagesFailureUriNextPageRequest(string nextLink)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2609,12 +2609,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailureUri");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailureUri");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesFailureUriNextPageRequest(nextLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2632,7 +2632,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2652,12 +2652,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailureUri");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailureUri");
             scope.Start();
             try
             {
                 using var message = CreateGetMultiplePagesFailureUriNextPageRequest(nextLink);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2675,7 +2675,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2687,7 +2687,7 @@ namespace paging
 
         internal HttpMessage CreateNextFragmentNextPageRequest(string nextLink, string apiVersion, string tenant)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2716,12 +2716,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(tenant));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.NextFragment");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.NextFragment");
             scope.Start();
             try
             {
                 using var message = CreateNextFragmentNextPageRequest(nextLink, apiVersion, tenant);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2739,7 +2739,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2769,12 +2769,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(tenant));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.NextFragment");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.NextFragment");
             scope.Start();
             try
             {
                 using var message = CreateNextFragmentNextPageRequest(nextLink, apiVersion, tenant);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2792,7 +2792,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2804,7 +2804,7 @@ namespace paging
 
         internal HttpMessage CreateNextFragmentWithGroupingNextPageRequest(string nextLink, CustomParameterGroup customParameterGroup)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2828,12 +2828,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(customParameterGroup));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.NextFragmentWithGrouping");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.NextFragmentWithGrouping");
             scope.Start();
             try
             {
                 using var message = CreateNextFragmentWithGroupingNextPageRequest(nextLink, customParameterGroup);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2851,7 +2851,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2876,12 +2876,12 @@ namespace paging
                 throw new ArgumentNullException(nameof(customParameterGroup));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PagingClient.NextFragmentWithGrouping");
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.NextFragmentWithGrouping");
             scope.Start();
             try
             {
                 using var message = CreateNextFragmentWithGroupingNextPageRequest(nextLink, customParameterGroup);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2899,7 +2899,7 @@ namespace paging
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

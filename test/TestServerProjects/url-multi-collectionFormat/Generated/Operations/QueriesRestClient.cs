@@ -18,8 +18,8 @@ namespace url_multi_collectionFormat
     internal partial class QueriesRestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of QueriesRestClient. </summary>
         public QueriesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
@@ -30,13 +30,13 @@ namespace url_multi_collectionFormat
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateArrayStringMultiNullRequest(IEnumerable<string> arrayQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -55,18 +55,18 @@ namespace url_multi_collectionFormat
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringMultiNullAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiNull");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiNull");
             scope.Start();
             try
             {
                 using var message = CreateArrayStringMultiNullRequest(arrayQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -81,18 +81,18 @@ namespace url_multi_collectionFormat
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringMultiNull(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiNull");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiNull");
             scope.Start();
             try
             {
                 using var message = CreateArrayStringMultiNullRequest(arrayQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -104,7 +104,7 @@ namespace url_multi_collectionFormat
 
         internal HttpMessage CreateArrayStringMultiEmptyRequest(IEnumerable<string> arrayQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -123,18 +123,18 @@ namespace url_multi_collectionFormat
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringMultiEmptyAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiEmpty");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiEmpty");
             scope.Start();
             try
             {
                 using var message = CreateArrayStringMultiEmptyRequest(arrayQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -149,18 +149,18 @@ namespace url_multi_collectionFormat
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringMultiEmpty(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiEmpty");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiEmpty");
             scope.Start();
             try
             {
                 using var message = CreateArrayStringMultiEmptyRequest(arrayQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -172,7 +172,7 @@ namespace url_multi_collectionFormat
 
         internal HttpMessage CreateArrayStringMultiValidRequest(IEnumerable<string> arrayQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -191,18 +191,18 @@ namespace url_multi_collectionFormat
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringMultiValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiValid");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiValid");
             scope.Start();
             try
             {
                 using var message = CreateArrayStringMultiValidRequest(arrayQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -217,18 +217,18 @@ namespace url_multi_collectionFormat
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringMultiValid(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiValid");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiValid");
             scope.Start();
             try
             {
                 using var message = CreateArrayStringMultiValidRequest(arrayQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

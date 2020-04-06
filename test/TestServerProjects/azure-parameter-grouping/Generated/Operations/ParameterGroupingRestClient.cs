@@ -18,8 +18,8 @@ namespace azure_parameter_grouping
     internal partial class ParameterGroupingRestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of ParameterGroupingRestClient. </summary>
         public ParameterGroupingRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
@@ -30,13 +30,13 @@ namespace azure_parameter_grouping
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreatePostRequiredRequest(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -69,18 +69,18 @@ namespace azure_parameter_grouping
                 throw new ArgumentNullException(nameof(parameterGroupingPostRequiredParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ParameterGroupingClient.PostRequired");
+            using var scope = _clientDiagnostics.CreateScope("ParameterGroupingClient.PostRequired");
             scope.Start();
             try
             {
                 using var message = CreatePostRequiredRequest(parameterGroupingPostRequiredParameters);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -100,18 +100,18 @@ namespace azure_parameter_grouping
                 throw new ArgumentNullException(nameof(parameterGroupingPostRequiredParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ParameterGroupingClient.PostRequired");
+            using var scope = _clientDiagnostics.CreateScope("ParameterGroupingClient.PostRequired");
             scope.Start();
             try
             {
                 using var message = CreatePostRequiredRequest(parameterGroupingPostRequiredParameters);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -123,7 +123,7 @@ namespace azure_parameter_grouping
 
         internal HttpMessage CreatePostOptionalRequest(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -146,18 +146,18 @@ namespace azure_parameter_grouping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ParameterGroupingClient.PostOptional");
+            using var scope = _clientDiagnostics.CreateScope("ParameterGroupingClient.PostOptional");
             scope.Start();
             try
             {
                 using var message = CreatePostOptionalRequest(parameterGroupingPostOptionalParameters);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -172,18 +172,18 @@ namespace azure_parameter_grouping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ParameterGroupingClient.PostOptional");
+            using var scope = _clientDiagnostics.CreateScope("ParameterGroupingClient.PostOptional");
             scope.Start();
             try
             {
                 using var message = CreatePostOptionalRequest(parameterGroupingPostOptionalParameters);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -195,7 +195,7 @@ namespace azure_parameter_grouping
 
         internal HttpMessage CreatePostMultiParamGroupsRequest(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -227,18 +227,18 @@ namespace azure_parameter_grouping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup = null, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ParameterGroupingClient.PostMultiParamGroups");
+            using var scope = _clientDiagnostics.CreateScope("ParameterGroupingClient.PostMultiParamGroups");
             scope.Start();
             try
             {
                 using var message = CreatePostMultiParamGroupsRequest(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -254,18 +254,18 @@ namespace azure_parameter_grouping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostMultiParamGroups(FirstParameterGroup firstParameterGroup = null, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ParameterGroupingClient.PostMultiParamGroups");
+            using var scope = _clientDiagnostics.CreateScope("ParameterGroupingClient.PostMultiParamGroups");
             scope.Start();
             try
             {
                 using var message = CreatePostMultiParamGroupsRequest(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -277,7 +277,7 @@ namespace azure_parameter_grouping
 
         internal HttpMessage CreatePostSharedParameterGroupObjectRequest(FirstParameterGroup firstParameterGroup)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -300,18 +300,18 @@ namespace azure_parameter_grouping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ParameterGroupingClient.PostSharedParameterGroupObject");
+            using var scope = _clientDiagnostics.CreateScope("ParameterGroupingClient.PostSharedParameterGroupObject");
             scope.Start();
             try
             {
                 using var message = CreatePostSharedParameterGroupObjectRequest(firstParameterGroup);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -326,18 +326,18 @@ namespace azure_parameter_grouping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostSharedParameterGroupObject(FirstParameterGroup firstParameterGroup = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ParameterGroupingClient.PostSharedParameterGroupObject");
+            using var scope = _clientDiagnostics.CreateScope("ParameterGroupingClient.PostSharedParameterGroupObject");
             scope.Start();
             try
             {
                 using var message = CreatePostSharedParameterGroupObjectRequest(firstParameterGroup);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

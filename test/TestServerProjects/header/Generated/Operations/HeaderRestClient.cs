@@ -18,8 +18,8 @@ namespace header
     internal partial class HeaderRestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of HeaderRestClient. </summary>
         public HeaderRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
@@ -30,13 +30,13 @@ namespace header
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateParamExistingKeyRequest(string userAgent)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -57,18 +57,18 @@ namespace header
                 throw new ArgumentNullException(nameof(userAgent));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
             scope.Start();
             try
             {
                 using var message = CreateParamExistingKeyRequest(userAgent);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -88,18 +88,18 @@ namespace header
                 throw new ArgumentNullException(nameof(userAgent));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
             scope.Start();
             try
             {
                 using var message = CreateParamExistingKeyRequest(userAgent);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -111,7 +111,7 @@ namespace header
 
         internal HttpMessage CreateResponseExistingKeyRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -125,19 +125,19 @@ namespace header
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<HeaderResponseExistingKeyHeaders>> ResponseExistingKeyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
             scope.Start();
             try
             {
                 using var message = CreateResponseExistingKeyRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new HeaderResponseExistingKeyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -151,19 +151,19 @@ namespace header
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<HeaderResponseExistingKeyHeaders> ResponseExistingKey(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
             scope.Start();
             try
             {
                 using var message = CreateResponseExistingKeyRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new HeaderResponseExistingKeyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -175,7 +175,7 @@ namespace header
 
         internal HttpMessage CreateParamProtectedKeyRequest(string contentType)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -196,18 +196,18 @@ namespace header
                 throw new ArgumentNullException(nameof(contentType));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
             scope.Start();
             try
             {
                 using var message = CreateParamProtectedKeyRequest(contentType);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -227,18 +227,18 @@ namespace header
                 throw new ArgumentNullException(nameof(contentType));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
             scope.Start();
             try
             {
                 using var message = CreateParamProtectedKeyRequest(contentType);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -250,7 +250,7 @@ namespace header
 
         internal HttpMessage CreateResponseProtectedKeyRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -264,19 +264,19 @@ namespace header
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<HeaderResponseProtectedKeyHeaders>> ResponseProtectedKeyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
             scope.Start();
             try
             {
                 using var message = CreateResponseProtectedKeyRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new HeaderResponseProtectedKeyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -290,19 +290,19 @@ namespace header
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<HeaderResponseProtectedKeyHeaders> ResponseProtectedKey(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
             scope.Start();
             try
             {
                 using var message = CreateResponseProtectedKeyRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new HeaderResponseProtectedKeyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -314,7 +314,7 @@ namespace header
 
         internal HttpMessage CreateParamIntegerRequest(string scenario, int value)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -337,18 +337,18 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamInteger");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamInteger");
             scope.Start();
             try
             {
                 using var message = CreateParamIntegerRequest(scenario, value);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -369,18 +369,18 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamInteger");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamInteger");
             scope.Start();
             try
             {
                 using var message = CreateParamIntegerRequest(scenario, value);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -392,7 +392,7 @@ namespace header
 
         internal HttpMessage CreateResponseIntegerRequest(string scenario)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -413,19 +413,19 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
             scope.Start();
             try
             {
                 using var message = CreateResponseIntegerRequest(scenario);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new HeaderResponseIntegerHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -445,19 +445,19 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
             scope.Start();
             try
             {
                 using var message = CreateResponseIntegerRequest(scenario);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new HeaderResponseIntegerHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -469,7 +469,7 @@ namespace header
 
         internal HttpMessage CreateParamLongRequest(string scenario, long value)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -492,18 +492,18 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamLong");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamLong");
             scope.Start();
             try
             {
                 using var message = CreateParamLongRequest(scenario, value);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -524,18 +524,18 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamLong");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamLong");
             scope.Start();
             try
             {
                 using var message = CreateParamLongRequest(scenario, value);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -547,7 +547,7 @@ namespace header
 
         internal HttpMessage CreateResponseLongRequest(string scenario)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -568,19 +568,19 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseLong");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseLong");
             scope.Start();
             try
             {
                 using var message = CreateResponseLongRequest(scenario);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new HeaderResponseLongHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -600,19 +600,19 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseLong");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseLong");
             scope.Start();
             try
             {
                 using var message = CreateResponseLongRequest(scenario);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new HeaderResponseLongHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -624,7 +624,7 @@ namespace header
 
         internal HttpMessage CreateParamFloatRequest(string scenario, float value)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -647,18 +647,18 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamFloat");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamFloat");
             scope.Start();
             try
             {
                 using var message = CreateParamFloatRequest(scenario, value);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -679,18 +679,18 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamFloat");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamFloat");
             scope.Start();
             try
             {
                 using var message = CreateParamFloatRequest(scenario, value);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -702,7 +702,7 @@ namespace header
 
         internal HttpMessage CreateResponseFloatRequest(string scenario)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -723,19 +723,19 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
             scope.Start();
             try
             {
                 using var message = CreateResponseFloatRequest(scenario);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new HeaderResponseFloatHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -755,19 +755,19 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
             scope.Start();
             try
             {
                 using var message = CreateResponseFloatRequest(scenario);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new HeaderResponseFloatHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -779,7 +779,7 @@ namespace header
 
         internal HttpMessage CreateParamDoubleRequest(string scenario, double value)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -802,18 +802,18 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamDouble");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDouble");
             scope.Start();
             try
             {
                 using var message = CreateParamDoubleRequest(scenario, value);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -834,18 +834,18 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamDouble");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDouble");
             scope.Start();
             try
             {
                 using var message = CreateParamDoubleRequest(scenario, value);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -857,7 +857,7 @@ namespace header
 
         internal HttpMessage CreateResponseDoubleRequest(string scenario)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -878,19 +878,19 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
             scope.Start();
             try
             {
                 using var message = CreateResponseDoubleRequest(scenario);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new HeaderResponseDoubleHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -910,19 +910,19 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
             scope.Start();
             try
             {
                 using var message = CreateResponseDoubleRequest(scenario);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new HeaderResponseDoubleHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -934,7 +934,7 @@ namespace header
 
         internal HttpMessage CreateParamBoolRequest(string scenario, bool value)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -957,18 +957,18 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamBool");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamBool");
             scope.Start();
             try
             {
                 using var message = CreateParamBoolRequest(scenario, value);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -989,18 +989,18 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamBool");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamBool");
             scope.Start();
             try
             {
                 using var message = CreateParamBoolRequest(scenario, value);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1012,7 +1012,7 @@ namespace header
 
         internal HttpMessage CreateResponseBoolRequest(string scenario)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1033,19 +1033,19 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseBool");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseBool");
             scope.Start();
             try
             {
                 using var message = CreateResponseBoolRequest(scenario);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new HeaderResponseBoolHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1065,19 +1065,19 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseBool");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseBool");
             scope.Start();
             try
             {
                 using var message = CreateResponseBoolRequest(scenario);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new HeaderResponseBoolHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1089,7 +1089,7 @@ namespace header
 
         internal HttpMessage CreateParamStringRequest(string scenario, string value)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1115,18 +1115,18 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamString");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamString");
             scope.Start();
             try
             {
                 using var message = CreateParamStringRequest(scenario, value);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1147,18 +1147,18 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamString");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamString");
             scope.Start();
             try
             {
                 using var message = CreateParamStringRequest(scenario, value);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1170,7 +1170,7 @@ namespace header
 
         internal HttpMessage CreateResponseStringRequest(string scenario)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1191,19 +1191,19 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseString");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseString");
             scope.Start();
             try
             {
                 using var message = CreateResponseStringRequest(scenario);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new HeaderResponseStringHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1223,19 +1223,19 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseString");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseString");
             scope.Start();
             try
             {
                 using var message = CreateResponseStringRequest(scenario);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new HeaderResponseStringHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1247,7 +1247,7 @@ namespace header
 
         internal HttpMessage CreateParamDateRequest(string scenario, DateTimeOffset value)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1270,18 +1270,18 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamDate");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDate");
             scope.Start();
             try
             {
                 using var message = CreateParamDateRequest(scenario, value);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1302,18 +1302,18 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamDate");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDate");
             scope.Start();
             try
             {
                 using var message = CreateParamDateRequest(scenario, value);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1325,7 +1325,7 @@ namespace header
 
         internal HttpMessage CreateResponseDateRequest(string scenario)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1346,19 +1346,19 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseDate");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDate");
             scope.Start();
             try
             {
                 using var message = CreateResponseDateRequest(scenario);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new HeaderResponseDateHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1378,19 +1378,19 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseDate");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDate");
             scope.Start();
             try
             {
                 using var message = CreateResponseDateRequest(scenario);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new HeaderResponseDateHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1402,7 +1402,7 @@ namespace header
 
         internal HttpMessage CreateParamDatetimeRequest(string scenario, DateTimeOffset value)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1425,18 +1425,18 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
             scope.Start();
             try
             {
                 using var message = CreateParamDatetimeRequest(scenario, value);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1457,18 +1457,18 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
             scope.Start();
             try
             {
                 using var message = CreateParamDatetimeRequest(scenario, value);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1480,7 +1480,7 @@ namespace header
 
         internal HttpMessage CreateResponseDatetimeRequest(string scenario)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1501,19 +1501,19 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
             scope.Start();
             try
             {
                 using var message = CreateResponseDatetimeRequest(scenario);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new HeaderResponseDatetimeHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1533,19 +1533,19 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
             scope.Start();
             try
             {
                 using var message = CreateResponseDatetimeRequest(scenario);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new HeaderResponseDatetimeHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1557,7 +1557,7 @@ namespace header
 
         internal HttpMessage CreateParamDatetimeRfc1123Request(string scenario, DateTimeOffset? value)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1583,18 +1583,18 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
             scope.Start();
             try
             {
                 using var message = CreateParamDatetimeRfc1123Request(scenario, value);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1615,18 +1615,18 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
             scope.Start();
             try
             {
                 using var message = CreateParamDatetimeRfc1123Request(scenario, value);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1638,7 +1638,7 @@ namespace header
 
         internal HttpMessage CreateResponseDatetimeRfc1123Request(string scenario)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1659,19 +1659,19 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
             scope.Start();
             try
             {
                 using var message = CreateResponseDatetimeRfc1123Request(scenario);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new HeaderResponseDatetimeRfc1123Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1691,19 +1691,19 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
             scope.Start();
             try
             {
                 using var message = CreateResponseDatetimeRfc1123Request(scenario);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new HeaderResponseDatetimeRfc1123Headers(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1715,7 +1715,7 @@ namespace header
 
         internal HttpMessage CreateParamDurationRequest(string scenario, TimeSpan value)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1738,18 +1738,18 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamDuration");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDuration");
             scope.Start();
             try
             {
                 using var message = CreateParamDurationRequest(scenario, value);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1770,18 +1770,18 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamDuration");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDuration");
             scope.Start();
             try
             {
                 using var message = CreateParamDurationRequest(scenario, value);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1793,7 +1793,7 @@ namespace header
 
         internal HttpMessage CreateResponseDurationRequest(string scenario)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1814,19 +1814,19 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
             scope.Start();
             try
             {
                 using var message = CreateResponseDurationRequest(scenario);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new HeaderResponseDurationHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1846,19 +1846,19 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
             scope.Start();
             try
             {
                 using var message = CreateResponseDurationRequest(scenario);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new HeaderResponseDurationHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1870,7 +1870,7 @@ namespace header
 
         internal HttpMessage CreateParamByteRequest(string scenario, byte[] value)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1897,18 +1897,18 @@ namespace header
                 throw new ArgumentNullException(nameof(value));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamByte");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamByte");
             scope.Start();
             try
             {
                 using var message = CreateParamByteRequest(scenario, value);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1933,18 +1933,18 @@ namespace header
                 throw new ArgumentNullException(nameof(value));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamByte");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamByte");
             scope.Start();
             try
             {
                 using var message = CreateParamByteRequest(scenario, value);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1956,7 +1956,7 @@ namespace header
 
         internal HttpMessage CreateResponseByteRequest(string scenario)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1977,19 +1977,19 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseByte");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseByte");
             scope.Start();
             try
             {
                 using var message = CreateResponseByteRequest(scenario);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new HeaderResponseByteHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2009,19 +2009,19 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseByte");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseByte");
             scope.Start();
             try
             {
                 using var message = CreateResponseByteRequest(scenario);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new HeaderResponseByteHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2033,7 +2033,7 @@ namespace header
 
         internal HttpMessage CreateParamEnumRequest(string scenario, GreyscaleColors? value)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2059,18 +2059,18 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamEnum");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamEnum");
             scope.Start();
             try
             {
                 using var message = CreateParamEnumRequest(scenario, value);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2091,18 +2091,18 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ParamEnum");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamEnum");
             scope.Start();
             try
             {
                 using var message = CreateParamEnumRequest(scenario, value);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2114,7 +2114,7 @@ namespace header
 
         internal HttpMessage CreateResponseEnumRequest(string scenario)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2135,19 +2135,19 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
             scope.Start();
             try
             {
                 using var message = CreateResponseEnumRequest(scenario);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new HeaderResponseEnumHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2167,19 +2167,19 @@ namespace header
                 throw new ArgumentNullException(nameof(scenario));
             }
 
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
             scope.Start();
             try
             {
                 using var message = CreateResponseEnumRequest(scenario);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new HeaderResponseEnumHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2191,7 +2191,7 @@ namespace header
 
         internal HttpMessage CreateCustomRequestIdRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2205,18 +2205,18 @@ namespace header
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> CustomRequestIdAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
             scope.Start();
             try
             {
                 using var message = CreateCustomRequestIdRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2230,18 +2230,18 @@ namespace header
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response CustomRequestId(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
+            using var scope = _clientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
             scope.Start();
             try
             {
                 using var message = CreateCustomRequestIdRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

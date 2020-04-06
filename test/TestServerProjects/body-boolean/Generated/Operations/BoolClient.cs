@@ -14,8 +14,8 @@ namespace body_boolean
 {
     public partial class BoolClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal BoolRestClient RestClient { get; }
         /// <summary> Initializes a new instance of BoolClient for mocking. </summary>
         protected BoolClient()
@@ -25,8 +25,8 @@ namespace body_boolean
         internal BoolClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             RestClient = new BoolRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Get true Boolean value. </summary>

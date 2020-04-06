@@ -15,8 +15,8 @@ namespace body_file
 {
     public partial class FilesClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal FilesRestClient RestClient { get; }
         /// <summary> Initializes a new instance of FilesClient for mocking. </summary>
         protected FilesClient()
@@ -26,8 +26,8 @@ namespace body_file
         internal FilesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             RestClient = new FilesRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Get file. </summary>

@@ -130,8 +130,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteClientFields(CodeWriter writer, Client client)
         {
-            writer.Line($"private readonly {typeof(ClientDiagnostics)} clientDiagnostics;");
-            writer.Line($"private readonly {typeof(HttpPipeline)} pipeline;");
+            writer.Line($"private readonly {typeof(ClientDiagnostics)} _clientDiagnostics;");
+            writer.Line($"private readonly {typeof(HttpPipeline)} _pipeline;");
             writer.Append($"internal {client.RestClient.Type} RestClient").LineRaw(" { get; }");
         }
 
@@ -161,8 +161,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.RemoveTrailingComma();
                 writer.Line($");");
 
-                writer.Line($"this.clientDiagnostics = clientDiagnostics;");
-                writer.Line($"this.pipeline = pipeline;");
+                writer.Line($"_clientDiagnostics = clientDiagnostics;");
+                writer.Line($"_pipeline = pipeline;");
             }
             writer.Line();
         }
@@ -256,7 +256,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.WriteParameterNullChecks(parameters);
 
                 writer.Append($"return {typeof(ArmOperationHelpers)}.Create(");
-                writer.Append($"pipeline, clientDiagnostics, originalResponse, {typeof(RequestMethod)}.{originalMethod.Request.HttpMethod.ToRequestMethodName()}, {originalMethod.Diagnostics.ScopeName:L}, {typeof(OperationFinalStateVia)}.{lroMethod.FinalStateVia}, createOriginalHttpMessage");
+                writer.Append($"_pipeline, _clientDiagnostics, originalResponse, {typeof(RequestMethod)}.{originalMethod.Request.HttpMethod.ToRequestMethodName()}, {originalMethod.Diagnostics.ScopeName:L}, {typeof(OperationFinalStateVia)}.{lroMethod.FinalStateVia}, createOriginalHttpMessage");
 
                 if (responseBodyType != null)
                 {

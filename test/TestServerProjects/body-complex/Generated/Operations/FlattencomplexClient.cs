@@ -15,8 +15,8 @@ namespace body_complex
 {
     public partial class FlattencomplexClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal FlattencomplexRestClient RestClient { get; }
         /// <summary> Initializes a new instance of FlattencomplexClient for mocking. </summary>
         protected FlattencomplexClient()
@@ -26,8 +26,8 @@ namespace body_complex
         internal FlattencomplexClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             RestClient = new FlattencomplexRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>

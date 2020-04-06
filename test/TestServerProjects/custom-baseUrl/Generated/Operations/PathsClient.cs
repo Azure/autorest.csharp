@@ -14,8 +14,8 @@ namespace custom_baseUrl
 {
     public partial class PathsClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal PathsRestClient RestClient { get; }
         /// <summary> Initializes a new instance of PathsClient for mocking. </summary>
         protected PathsClient()
@@ -25,8 +25,8 @@ namespace custom_baseUrl
         internal PathsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "host")
         {
             RestClient = new PathsRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Get a 200 to test a valid base uri. </summary>

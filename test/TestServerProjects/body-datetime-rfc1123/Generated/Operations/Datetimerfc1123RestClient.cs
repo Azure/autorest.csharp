@@ -18,8 +18,8 @@ namespace body_datetime_rfc1123
     internal partial class Datetimerfc1123RestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of Datetimerfc1123RestClient. </summary>
         public Datetimerfc1123RestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
@@ -30,13 +30,13 @@ namespace body_datetime_rfc1123
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateGetNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -50,12 +50,12 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Client.GetNull");
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetNull");
             scope.Start();
             try
             {
                 using var message = CreateGetNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -66,7 +66,7 @@ namespace body_datetime_rfc1123
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -80,12 +80,12 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Client.GetNull");
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetNull");
             scope.Start();
             try
             {
                 using var message = CreateGetNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -96,7 +96,7 @@ namespace body_datetime_rfc1123
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -108,7 +108,7 @@ namespace body_datetime_rfc1123
 
         internal HttpMessage CreateGetInvalidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -122,12 +122,12 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Client.GetInvalid");
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetInvalid");
             scope.Start();
             try
             {
                 using var message = CreateGetInvalidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -138,7 +138,7 @@ namespace body_datetime_rfc1123
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -152,12 +152,12 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetInvalid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Client.GetInvalid");
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetInvalid");
             scope.Start();
             try
             {
                 using var message = CreateGetInvalidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -168,7 +168,7 @@ namespace body_datetime_rfc1123
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -180,7 +180,7 @@ namespace body_datetime_rfc1123
 
         internal HttpMessage CreateGetOverflowRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -194,12 +194,12 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetOverflowAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Client.GetOverflow");
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetOverflow");
             scope.Start();
             try
             {
                 using var message = CreateGetOverflowRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -210,7 +210,7 @@ namespace body_datetime_rfc1123
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -224,12 +224,12 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetOverflow(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Client.GetOverflow");
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetOverflow");
             scope.Start();
             try
             {
                 using var message = CreateGetOverflowRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -240,7 +240,7 @@ namespace body_datetime_rfc1123
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -252,7 +252,7 @@ namespace body_datetime_rfc1123
 
         internal HttpMessage CreateGetUnderflowRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -266,12 +266,12 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUnderflowAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Client.GetUnderflow");
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetUnderflow");
             scope.Start();
             try
             {
                 using var message = CreateGetUnderflowRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -282,7 +282,7 @@ namespace body_datetime_rfc1123
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -296,12 +296,12 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUnderflow(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Client.GetUnderflow");
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetUnderflow");
             scope.Start();
             try
             {
                 using var message = CreateGetUnderflowRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -312,7 +312,7 @@ namespace body_datetime_rfc1123
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -324,7 +324,7 @@ namespace body_datetime_rfc1123
 
         internal HttpMessage CreatePutUtcMaxDateTimeRequest(DateTimeOffset datetimeBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -343,18 +343,18 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUtcMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Client.PutUtcMaxDateTime");
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.PutUtcMaxDateTime");
             scope.Start();
             try
             {
                 using var message = CreatePutUtcMaxDateTimeRequest(datetimeBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -369,18 +369,18 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUtcMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Client.PutUtcMaxDateTime");
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.PutUtcMaxDateTime");
             scope.Start();
             try
             {
                 using var message = CreatePutUtcMaxDateTimeRequest(datetimeBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -392,7 +392,7 @@ namespace body_datetime_rfc1123
 
         internal HttpMessage CreateGetUtcLowercaseMaxDateTimeRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -406,12 +406,12 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUtcLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Client.GetUtcLowercaseMaxDateTime");
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetUtcLowercaseMaxDateTime");
             scope.Start();
             try
             {
                 using var message = CreateGetUtcLowercaseMaxDateTimeRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -422,7 +422,7 @@ namespace body_datetime_rfc1123
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -436,12 +436,12 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUtcLowercaseMaxDateTime(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Client.GetUtcLowercaseMaxDateTime");
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetUtcLowercaseMaxDateTime");
             scope.Start();
             try
             {
                 using var message = CreateGetUtcLowercaseMaxDateTimeRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -452,7 +452,7 @@ namespace body_datetime_rfc1123
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -464,7 +464,7 @@ namespace body_datetime_rfc1123
 
         internal HttpMessage CreateGetUtcUppercaseMaxDateTimeRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -478,12 +478,12 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUtcUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Client.GetUtcUppercaseMaxDateTime");
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetUtcUppercaseMaxDateTime");
             scope.Start();
             try
             {
                 using var message = CreateGetUtcUppercaseMaxDateTimeRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -494,7 +494,7 @@ namespace body_datetime_rfc1123
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -508,12 +508,12 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUtcUppercaseMaxDateTime(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Client.GetUtcUppercaseMaxDateTime");
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetUtcUppercaseMaxDateTime");
             scope.Start();
             try
             {
                 using var message = CreateGetUtcUppercaseMaxDateTimeRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -524,7 +524,7 @@ namespace body_datetime_rfc1123
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -536,7 +536,7 @@ namespace body_datetime_rfc1123
 
         internal HttpMessage CreatePutUtcMinDateTimeRequest(DateTimeOffset datetimeBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -555,18 +555,18 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUtcMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Client.PutUtcMinDateTime");
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.PutUtcMinDateTime");
             scope.Start();
             try
             {
                 using var message = CreatePutUtcMinDateTimeRequest(datetimeBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -581,18 +581,18 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUtcMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Client.PutUtcMinDateTime");
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.PutUtcMinDateTime");
             scope.Start();
             try
             {
                 using var message = CreatePutUtcMinDateTimeRequest(datetimeBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -604,7 +604,7 @@ namespace body_datetime_rfc1123
 
         internal HttpMessage CreateGetUtcMinDateTimeRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -618,12 +618,12 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUtcMinDateTimeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Client.GetUtcMinDateTime");
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetUtcMinDateTime");
             scope.Start();
             try
             {
                 using var message = CreateGetUtcMinDateTimeRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -634,7 +634,7 @@ namespace body_datetime_rfc1123
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -648,12 +648,12 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUtcMinDateTime(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("Datetimerfc1123Client.GetUtcMinDateTime");
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetUtcMinDateTime");
             scope.Start();
             try
             {
                 using var message = CreateGetUtcMinDateTimeRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -664,7 +664,7 @@ namespace body_datetime_rfc1123
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

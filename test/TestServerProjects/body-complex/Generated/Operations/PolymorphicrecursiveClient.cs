@@ -15,8 +15,8 @@ namespace body_complex
 {
     public partial class PolymorphicrecursiveClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal PolymorphicrecursiveRestClient RestClient { get; }
         /// <summary> Initializes a new instance of PolymorphicrecursiveClient for mocking. </summary>
         protected PolymorphicrecursiveClient()
@@ -26,8 +26,8 @@ namespace body_complex
         internal PolymorphicrecursiveClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             RestClient = new PolymorphicrecursiveRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Get complex types that are polymorphic and have recursive references. </summary>
