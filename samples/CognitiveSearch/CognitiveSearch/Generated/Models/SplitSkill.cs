@@ -45,6 +45,7 @@ namespace CognitiveSearch.Models
             DefaultLanguageCode = defaultLanguageCode;
             TextSplitMode = textSplitMode;
             MaximumPageLength = maximumPageLength;
+            OdataType = odataType ?? "#Microsoft.Skills.Text.SplitSkill";
         }
 
         /// <summary> A value indicating which language code to use. Default is en. </summary>

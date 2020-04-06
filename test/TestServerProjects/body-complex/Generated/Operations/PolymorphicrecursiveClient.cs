@@ -25,7 +25,7 @@ namespace body_complex
         /// <summary> Initializes a new instance of PolymorphicrecursiveClient. </summary>
         internal PolymorphicrecursiveClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new PolymorphicrecursiveRestClient(_clientDiagnostics, _pipeline, host);
+            RestClient = new PolymorphicrecursiveRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

@@ -26,7 +26,7 @@ namespace CognitiveSearch
         /// <summary> Initializes a new instance of DocumentsClient. </summary>
         internal DocumentsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string indexName, string apiVersion = "2019-05-06-Preview")
         {
-            RestClient = new DocumentsRestClient(_clientDiagnostics, _pipeline, endpoint, indexName, apiVersion);
+            RestClient = new DocumentsRestClient(clientDiagnostics, pipeline, endpoint, indexName, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

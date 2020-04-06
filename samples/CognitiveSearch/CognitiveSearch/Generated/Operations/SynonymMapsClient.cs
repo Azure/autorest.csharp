@@ -25,7 +25,7 @@ namespace CognitiveSearch
         /// <summary> Initializes a new instance of SynonymMapsClient. </summary>
         internal SynonymMapsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string apiVersion = "2019-05-06-Preview")
         {
-            RestClient = new SynonymMapsRestClient(_clientDiagnostics, _pipeline, endpoint, apiVersion);
+            RestClient = new SynonymMapsRestClient(clientDiagnostics, pipeline, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

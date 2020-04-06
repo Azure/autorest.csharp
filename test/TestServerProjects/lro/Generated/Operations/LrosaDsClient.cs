@@ -28,7 +28,7 @@ namespace lro
         /// <summary> Initializes a new instance of LrosaDsClient. </summary>
         internal LrosaDsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new LrosaDsRestClient(_clientDiagnostics, _pipeline, host);
+            RestClient = new LrosaDsRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

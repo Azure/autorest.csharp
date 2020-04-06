@@ -24,7 +24,7 @@ namespace url
         /// <summary> Initializes a new instance of PathItemsClient. </summary>
         internal PathItemsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string globalStringPath, string host = "http://localhost:3000", string globalStringQuery = null)
         {
-            RestClient = new PathItemsRestClient(_clientDiagnostics, _pipeline, globalStringPath, host, globalStringQuery);
+            RestClient = new PathItemsRestClient(clientDiagnostics, pipeline, globalStringPath, host, globalStringQuery);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

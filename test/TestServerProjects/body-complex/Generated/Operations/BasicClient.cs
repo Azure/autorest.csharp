@@ -25,7 +25,7 @@ namespace body_complex
         /// <summary> Initializes a new instance of BasicClient. </summary>
         internal BasicClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", string apiVersion = "2016-02-29")
         {
-            RestClient = new BasicRestClient(_clientDiagnostics, _pipeline, host, apiVersion);
+            RestClient = new BasicRestClient(clientDiagnostics, pipeline, host, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

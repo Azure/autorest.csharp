@@ -39,6 +39,7 @@ namespace CognitiveSearch.Models
         internal StemmerOverrideTokenFilter(string odataType, string name, IList<string> rules) : base(odataType, name)
         {
             Rules = rules;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.StemmerOverrideTokenFilter";
         }
 
         /// <summary> A list of stemming rules in the following format: &quot;word =&gt; stem&quot;, for example: &quot;ran =&gt; run&quot;. </summary>

@@ -25,7 +25,7 @@ namespace NameConflicts
         /// <summary> Initializes a new instance of ServiceClient. </summary>
         internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new ServiceRestClient(_clientDiagnostics, _pipeline, host);
+            RestClient = new ServiceRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -38,7 +38,7 @@ namespace NameConflicts
         /// <param name="clientDiagnostics"> The String to use. </param>
         /// <param name="class"> The Class to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Class>> OperationAsync(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Struct>> OperationAsync(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
         {
             return await RestClient.OperationAsync(request, message, scope, uri, pipeline, clientDiagnostics, @class, cancellationToken).ConfigureAwait(false);
         }
@@ -51,7 +51,7 @@ namespace NameConflicts
         /// <param name="clientDiagnostics"> The String to use. </param>
         /// <param name="class"> The Class to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Class> Operation(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
+        public virtual Response<Struct> Operation(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
         {
             return RestClient.Operation(request, message, scope, uri, pipeline, clientDiagnostics, @class, cancellationToken);
         }

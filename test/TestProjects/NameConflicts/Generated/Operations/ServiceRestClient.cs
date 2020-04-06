@@ -65,7 +65,7 @@ namespace NameConflicts
         /// <param name="clientDiagnostics"> The String to use. </param>
         /// <param name="class"> The Class to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Class>> OperationAsync(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Struct>> OperationAsync(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
         {
             if (request == null)
             {
@@ -106,7 +106,7 @@ namespace NameConflicts
                 {
                     case 200:
                         {
-                            Class value = default;
+                            Struct value = default;
                             using var document = await JsonDocument.ParseAsync(message0.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                             if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
@@ -114,7 +114,7 @@ namespace NameConflicts
                             }
                             else
                             {
-                                value = Class.DeserializeClass(document.RootElement);
+                                value = Struct.DeserializeStruct(document.RootElement);
                             }
                             return Response.FromValue(value, message0.Response);
                         }
@@ -137,7 +137,7 @@ namespace NameConflicts
         /// <param name="clientDiagnostics"> The String to use. </param>
         /// <param name="class"> The Class to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Class> Operation(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
+        public Response<Struct> Operation(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
         {
             if (request == null)
             {
@@ -178,7 +178,7 @@ namespace NameConflicts
                 {
                     case 200:
                         {
-                            Class value = default;
+                            Struct value = default;
                             using var document = JsonDocument.Parse(message0.Response.ContentStream);
                             if (document.RootElement.ValueKind == JsonValueKind.Null)
                             {
@@ -186,7 +186,7 @@ namespace NameConflicts
                             }
                             else
                             {
-                                value = Class.DeserializeClass(document.RootElement);
+                                value = Struct.DeserializeStruct(document.RootElement);
                             }
                             return Response.FromValue(value, message0.Response);
                         }

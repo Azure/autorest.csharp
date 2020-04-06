@@ -21,6 +21,7 @@ namespace Inheritance.Models
         /// <param name="discriminatorProperty"> . </param>
         internal ClassThatInheritsFromBaseClassAndBaseClassWithDiscriminator(string baseClassProperty, string discriminatorProperty) : base(baseClassProperty, discriminatorProperty)
         {
+            DiscriminatorProperty = discriminatorProperty ?? "ClassThatInheritsFromBaseClassAndBaseClassWithDiscriminator";
         }
     }
 }

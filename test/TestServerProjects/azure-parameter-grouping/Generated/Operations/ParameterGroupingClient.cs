@@ -25,7 +25,7 @@ namespace azure_parameter_grouping
         /// <summary> Initializes a new instance of ParameterGroupingClient. </summary>
         internal ParameterGroupingClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new ParameterGroupingRestClient(_clientDiagnostics, _pipeline, host);
+            RestClient = new ParameterGroupingRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

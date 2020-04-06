@@ -41,6 +41,7 @@ namespace CognitiveSearch.Models
             OutputUnigramsIfNoShingles = outputUnigramsIfNoShingles;
             TokenSeparator = tokenSeparator;
             FilterToken = filterToken;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.ShingleTokenFilter";
         }
 
         /// <summary> The maximum shingle size. Default and minimum value is 2. </summary>

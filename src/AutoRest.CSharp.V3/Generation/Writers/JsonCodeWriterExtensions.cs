@@ -293,10 +293,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 if (objectProperty != null)
                 {
                     var propertyDeclaration = new CodeWriterDeclaration(jsonProperty.Name.ToVariableName());
-                    if (propertyVariables.ContainsKey(objectProperty))
-                    {
-
-                    }
                     propertyVariables.Add(objectProperty, propertyDeclaration);
                 }
                 else if (jsonProperty.ValueSerialization is JsonObjectSerialization objectSerialization)

@@ -25,7 +25,7 @@ namespace CognitiveSearch
         /// <summary> Initializes a new instance of SkillsetsClient. </summary>
         internal SkillsetsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string apiVersion = "2019-05-06-Preview")
         {
-            RestClient = new SkillsetsRestClient(_clientDiagnostics, _pipeline, endpoint, apiVersion);
+            RestClient = new SkillsetsRestClient(clientDiagnostics, pipeline, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

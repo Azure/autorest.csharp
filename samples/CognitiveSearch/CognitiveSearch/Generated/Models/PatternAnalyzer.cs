@@ -38,6 +38,7 @@ namespace CognitiveSearch.Models
             Pattern = pattern;
             Flags = flags;
             Stopwords = stopwords;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.PatternAnalyzer";
         }
 
         /// <summary> A value indicating whether terms should be lower-cased. Default is true. </summary>

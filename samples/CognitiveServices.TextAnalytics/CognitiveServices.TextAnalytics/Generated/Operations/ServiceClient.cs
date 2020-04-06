@@ -25,7 +25,7 @@ namespace CognitiveServices.TextAnalytics
         /// <summary> Initializes a new instance of ServiceClient. </summary>
         internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint)
         {
-            RestClient = new ServiceRestClient(_clientDiagnostics, _pipeline, endpoint);
+            RestClient = new ServiceRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

@@ -34,7 +34,12 @@ namespace AutoRest.CodeModel
                 TypeNameGenerator = new CustomTypeNameGenerator(),
                 PropertyNameGenerator = new CustomPropertyNameGenerator(),
                 EnumNameGenerator = new CustomEnumNameGenerator(),
-                ExcludedTypeNames = new[] { "GroupSchema" }
+                ExcludedTypeNames = new[]
+                {
+                    "GroupSchema",
+                    // Workaround https://github.com/Azure/autorest.modelerfour/issues/255
+                    "AnySchema"
+                }
             };
             var rawFile = new CSharpGenerator(schema, settings).GenerateFile();
             var cleanFile = String.Join(Environment.NewLine, rawFile.ToLines()

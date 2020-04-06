@@ -43,6 +43,7 @@ namespace CognitiveSearch.Models
             CommonWords = commonWords;
             IgnoreCase = ignoreCase;
             UseQueryMode = useQueryMode;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.CommonGramTokenFilter";
         }
 
         /// <summary> The set of common words. </summary>

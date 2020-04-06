@@ -25,7 +25,7 @@ namespace body_file
         /// <summary> Initializes a new instance of FilesClient. </summary>
         internal FilesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new FilesRestClient(_clientDiagnostics, _pipeline, host);
+            RestClient = new FilesRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

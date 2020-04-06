@@ -50,6 +50,7 @@ namespace CognitiveSearch.Models
             SplitOnNumerics = splitOnNumerics;
             StemEnglishPossessive = stemEnglishPossessive;
             ProtectedWords = protectedWords;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.WordDelimiterTokenFilter";
         }
 
         /// <summary> A value indicating whether to generate part words. If set, causes parts of words to be generated; for example &quot;AzureSearch&quot; becomes &quot;Azure&quot; &quot;Search&quot;. Default is true. </summary>

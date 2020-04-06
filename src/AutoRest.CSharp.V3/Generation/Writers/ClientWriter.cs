@@ -153,7 +153,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Line($")");
             using (writer.Scope())
             {
-                writer.Append($"this.RestClient = new {client.RestClient.Type}(_clientDiagnostics, _pipeline, ");
+                writer.Append($"this.RestClient = new {client.RestClient.Type}(clientDiagnostics, pipeline, ");
                 foreach (var parameter in client.RestClient.Parameters)
                 {
                     writer.Append($"{parameter.Name}, ");

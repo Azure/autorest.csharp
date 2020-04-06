@@ -24,7 +24,7 @@ namespace body_boolean
         /// <summary> Initializes a new instance of BoolClient. </summary>
         internal BoolClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new BoolRestClient(_clientDiagnostics, _pipeline, host);
+            RestClient = new BoolRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

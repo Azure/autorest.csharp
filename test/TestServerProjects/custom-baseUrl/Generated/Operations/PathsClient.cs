@@ -24,7 +24,7 @@ namespace custom_baseUrl
         /// <summary> Initializes a new instance of PathsClient. </summary>
         internal PathsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "host")
         {
-            RestClient = new PathsRestClient(_clientDiagnostics, _pipeline, host);
+            RestClient = new PathsRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

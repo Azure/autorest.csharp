@@ -25,7 +25,7 @@ namespace body_string
         /// <summary> Initializes a new instance of EnumClient. </summary>
         internal EnumClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new EnumRestClient(_clientDiagnostics, _pipeline, host);
+            RestClient = new EnumRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

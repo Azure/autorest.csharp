@@ -25,7 +25,7 @@ namespace body_complex
         /// <summary> Initializes a new instance of ArrayClient. </summary>
         internal ArrayClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new ArrayRestClient(_clientDiagnostics, _pipeline, host);
+            RestClient = new ArrayRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

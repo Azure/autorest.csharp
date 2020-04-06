@@ -33,6 +33,7 @@ namespace CognitiveSearch.Models
         {
             Encoder = encoder;
             ReplaceOriginalTokens = replaceOriginalTokens;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.PhoneticTokenFilter";
         }
 
         /// <summary> The phonetic encoder to use. Default is &quot;metaphone&quot;. </summary>

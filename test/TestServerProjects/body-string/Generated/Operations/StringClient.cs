@@ -25,7 +25,7 @@ namespace body_string
         /// <summary> Initializes a new instance of StringClient. </summary>
         internal StringClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new StringRestClient(_clientDiagnostics, _pipeline, host);
+            RestClient = new StringRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

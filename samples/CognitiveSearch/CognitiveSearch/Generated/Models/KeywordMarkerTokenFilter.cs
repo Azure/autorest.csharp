@@ -41,6 +41,7 @@ namespace CognitiveSearch.Models
         {
             Keywords = keywords;
             IgnoreCase = ignoreCase;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.KeywordMarkerTokenFilter";
         }
 
         /// <summary> A list of words to mark as keywords. </summary>

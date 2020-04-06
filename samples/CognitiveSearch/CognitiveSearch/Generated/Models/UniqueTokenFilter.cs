@@ -31,6 +31,7 @@ namespace CognitiveSearch.Models
         internal UniqueTokenFilter(string odataType, string name, bool? onlyOnSamePosition) : base(odataType, name)
         {
             OnlyOnSamePosition = onlyOnSamePosition;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.UniqueTokenFilter";
         }
 
         /// <summary> A value indicating whether to remove duplicates only at the same position. Default is false. </summary>

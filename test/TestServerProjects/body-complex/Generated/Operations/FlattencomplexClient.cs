@@ -25,7 +25,7 @@ namespace body_complex
         /// <summary> Initializes a new instance of FlattencomplexClient. </summary>
         internal FlattencomplexClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new FlattencomplexRestClient(_clientDiagnostics, _pipeline, host);
+            RestClient = new FlattencomplexRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

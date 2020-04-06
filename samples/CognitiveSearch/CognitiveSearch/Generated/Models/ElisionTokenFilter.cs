@@ -32,6 +32,7 @@ namespace CognitiveSearch.Models
         internal ElisionTokenFilter(string odataType, string name, IList<string> articles) : base(odataType, name)
         {
             Articles = articles;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.ElisionTokenFilter";
         }
 
         /// <summary> The set of articles to remove. </summary>

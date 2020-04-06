@@ -25,7 +25,7 @@ namespace SignalR
         /// <summary> Initializes a new instance of ServiceClient. </summary>
         internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string apiVersion, string host = "")
         {
-            RestClient = new ServiceRestClient(_clientDiagnostics, _pipeline, apiVersion, host);
+            RestClient = new ServiceRestClient(clientDiagnostics, pipeline, apiVersion, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

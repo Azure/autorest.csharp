@@ -45,6 +45,7 @@ namespace CognitiveSearch.Models
         {
             Pattern = pattern;
             Replacement = replacement;
+            OdataType = odataType ?? "#Microsoft.Azure.Search.PatternReplaceCharFilter";
         }
 
         /// <summary> A regular expression pattern. </summary>

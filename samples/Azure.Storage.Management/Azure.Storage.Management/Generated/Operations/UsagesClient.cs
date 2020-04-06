@@ -27,7 +27,7 @@ namespace Azure.Storage.Management
         /// <summary> Initializes a new instance of UsagesClient. </summary>
         internal UsagesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
         {
-            RestClient = new UsagesRestClient(_clientDiagnostics, _pipeline, subscriptionId, host, apiVersion);
+            RestClient = new UsagesRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
