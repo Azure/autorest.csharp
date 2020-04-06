@@ -124,12 +124,12 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
                 initializers.Add(new ObjectPropertyInitializer(property, deserializationParameter));
 
+                // Only required properties that are not discriminators go into default ctor
                 if (property == Discriminator?.Property)
                 {
                     ownsDiscriminatorProperty = true;
                     continue;
                 }
-                // Only required properties that are not discriminators go into default ctor
                 // For structs all properties become required
                 if (!IsStruct && property.SchemaProperty?.Required != true)
                 {
@@ -412,9 +412,12 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             foreach (var objectSchema in objectSchemas)
             {
                 // Take first schema or the one with discriminator
-                if (selectedSchema == null || objectSchema.Discriminator != null)
+                selectedSchema ??= objectSchema;
+
+                if (objectSchema.Discriminator != null)
                 {
                     selectedSchema = objectSchema;
+                    break;
                 }
             }
 
