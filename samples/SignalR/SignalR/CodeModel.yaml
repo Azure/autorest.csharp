@@ -113,6 +113,7 @@ globalParameters:
   schema: *ref_0
   clientDefaultValue: ''
   implementation: Client
+  origin: 'modelerfour:synthesized/host'
   required: true
   extensions:
     x-ms-skip-url-encoding: true
@@ -187,6 +188,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_4
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -228,6 +230,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_7
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -318,6 +321,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_4
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -359,6 +363,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_7
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -450,6 +455,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_4
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -491,6 +497,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_7
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -654,6 +661,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_4
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -695,6 +703,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_7
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:

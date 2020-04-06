@@ -2509,6 +2509,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_105
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -2923,6 +2924,7 @@ operationGroups:
       - !<!Parameter> &ref_121
         schema: *ref_119
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -2968,6 +2970,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_105
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -3178,6 +3181,7 @@ operationGroups:
       - !<!Parameter> &ref_132
         schema: *ref_119
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -3223,6 +3227,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_105
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -3407,6 +3412,7 @@ operationGroups:
       - !<!Parameter> &ref_139
         schema: *ref_119
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -3452,6 +3458,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_105
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
