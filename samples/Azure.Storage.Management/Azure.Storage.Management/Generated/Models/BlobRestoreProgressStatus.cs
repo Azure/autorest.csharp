@@ -42,7 +42,7 @@ namespace Azure.Storage.Management.Models
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Equals(object obj) => obj is BlobRestoreProgressStatus other && Equals(other);
         /// <inheritdoc />
-        public bool Equals(BlobRestoreProgressStatus other) => string.Equals(_value, other._value, StringComparison.Ordinal);
+        public bool Equals(BlobRestoreProgressStatus other) => string.Equals(_value, other._value, StringComparison.InvariantCultureIgnoreCase);
 
         /// <inheritdoc />
         [EditorBrowsable(EditorBrowsableState.Never)]

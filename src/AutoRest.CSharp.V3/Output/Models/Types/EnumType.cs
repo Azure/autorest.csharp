@@ -20,16 +20,16 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         private IList<EnumTypeValue>? _values;
 
         public EnumType(ChoiceSchema schema, BuildContext context)
-            : this(schema, context, schema.Choices, true)
+            : this(schema, context, schema.ChoiceType, schema.Choices, true)
         {
         }
 
         public EnumType(SealedChoiceSchema schema, BuildContext context)
-            : this(schema, context, schema.Choices, false)
+            : this(schema, context, schema.ChoiceType, schema.Choices, false)
         {
         }
 
-        private EnumType(Schema schema, BuildContext context, IEnumerable<ChoiceValue> choices, bool isStringBased)
+        private EnumType(Schema schema, BuildContext context, Schema baseType, IEnumerable<ChoiceValue> choices, bool isExtendable)
         {
             _context = context;
             _choices = choices;
@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             _typeMapping = context.SourceInputModel.FindForModel($"{context.DefaultNamespace}.Models", name);
             if (_typeMapping != null)
             {
-                isStringBased = _typeMapping.ExistingType.TypeKind switch
+                isExtendable = _typeMapping.ExistingType.TypeKind switch
                 {
                     TypeKind.Enum => false,
                     TypeKind.Struct => true,
@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 };
             }
 
-            bool existingTypeOverrides = !isStringBased;
+            bool existingTypeOverrides = !isExtendable;
 
             Schema = schema;
             Declaration = BuilderHelpers.CreateTypeAttributes(
@@ -60,12 +60,19 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 );
 
             Type = new CSharpType(this, Declaration.Namespace, Declaration.Name, isValueType: true);
+            BaseType = context.TypeFactory.CreateType(baseType, false);
+            if (BaseType.FrameworkType == typeof(object))
+            {
+                // https://github.com/Azure/autorest.modelerfour/issues/256
+                BaseType = typeof(string);
+            }
+
             Description = BuilderHelpers.CreateDescription(schema);
-            IsStringBased = isStringBased;
+            IsExtendable = isExtendable;
         }
 
-
-        public bool IsStringBased { get; }
+        public CSharpType BaseType { get; }
+        public bool IsExtendable { get; }
         public Schema Schema { get; }
         public TypeDeclarationOptions Declaration { get; }
         public string? Description { get; }
@@ -82,7 +89,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 values.Add(new EnumTypeValue(
                     BuilderHelpers.CreateMemberDeclaration(name, Type, "public", memberMapping?.ExistingMember, _context.TypeFactory),
                     CreateDescription(c),
-                    BuilderHelpers.StringConstant(c.Value)));
+                    BuilderHelpers.ParseConstant(c.Value, BaseType)));
             }
 
             return values;

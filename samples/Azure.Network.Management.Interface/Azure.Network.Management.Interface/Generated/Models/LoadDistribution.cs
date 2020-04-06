@@ -42,7 +42,7 @@ namespace Azure.Network.Management.Interface.Models
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Equals(object obj) => obj is LoadDistribution other && Equals(other);
         /// <inheritdoc />
-        public bool Equals(LoadDistribution other) => string.Equals(_value, other._value, StringComparison.Ordinal);
+        public bool Equals(LoadDistribution other) => string.Equals(_value, other._value, StringComparison.InvariantCultureIgnoreCase);
 
         /// <inheritdoc />
         [EditorBrowsable(EditorBrowsableState.Never)]

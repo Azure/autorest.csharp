@@ -39,7 +39,7 @@ namespace xml_service.Models
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Equals(object obj) => obj is ArchiveStatus other && Equals(other);
         /// <inheritdoc />
-        public bool Equals(ArchiveStatus other) => string.Equals(_value, other._value, StringComparison.Ordinal);
+        public bool Equals(ArchiveStatus other) => string.Equals(_value, other._value, StringComparison.InvariantCultureIgnoreCase);
 
         /// <inheritdoc />
         [EditorBrowsable(EditorBrowsableState.Never)]
