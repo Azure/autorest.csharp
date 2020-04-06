@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 case ObjectType objectSchema:
                     WriteObjectSerialization(writer, objectSchema);
                     break;
-                case EnumType sealedChoiceSchema when !sealedChoiceSchema.IsStringBased:
+                case EnumType sealedChoiceSchema when !sealedChoiceSchema.IsExtendable:
                     WriteSealedChoiceSerialization(writer, sealedChoiceSchema);
                     break;
             }
@@ -182,9 +182,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 string declaredTypeName = schema.Declaration.Name;
 
+                var isString = schema.BaseType.FrameworkType == typeof(string);
+
                 using (writer.Scope($"internal static class {declaredTypeName}Extensions"))
                 {
-                    using (writer.Scope($"public static string ToSerialString(this {declaredTypeName} value) => value switch", end: "};"))
+                    using (writer.Scope($"public static {schema.BaseType} ToSerialString(this {declaredTypeName} value) => value switch", end: "};"))
                     {
                         foreach (EnumTypeValue value in schema.Values)
                         {
@@ -195,11 +197,16 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     }
                     writer.Line();
 
-                    using (writer.Scope($"public static {declaredTypeName} To{declaredTypeName}(this string value)"))
+                    using (writer.Scope($"public static {declaredTypeName} To{declaredTypeName}(this {schema.BaseType} value)"))
                     {
                         foreach (EnumTypeValue value in schema.Values)
                         {
-                            writer.Line($"if ({typeof(string)}.Equals(value, {value.Value.Value:L}, {typeof(StringComparison)}.InvariantCultureIgnoreCase)) return {declaredTypeName}.{value.Declaration.Name};");
+                            writer.Append($"if ({schema.BaseType}.Equals(value, {value.Value.Value:L}");
+                            if (isString)
+                            {
+                                writer.Append($", {typeof(StringComparison)}.InvariantCultureIgnoreCase");
+                            }
+                            writer.Line($")) return {declaredTypeName}.{value.Declaration.Name};");
                         }
 
                         writer.Line($"throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\");");

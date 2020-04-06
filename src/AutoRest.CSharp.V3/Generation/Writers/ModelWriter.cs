@@ -6,11 +6,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.V3.Generation.Types;
-using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Models.Types;
-using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.Generation.Writers
 {
@@ -23,10 +22,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 case ObjectType objectSchema:
                     WriteObjectSchema(writer, objectSchema);
                     break;
-                case EnumType e when e.IsStringBased:
+                case EnumType e when e.IsExtendable:
                     WriteChoiceSchema(writer, e);
                     break;
-                case EnumType e when !e.IsStringBased:
+                case EnumType e when !e.IsExtendable:
                     WriteSealedChoiceSchema(writer, e);
                     break;
                 default:
@@ -245,6 +244,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             var cs = schema.Type;
             string name = schema.Declaration.Name;
+            var isString = schema.BaseType.FrameworkType == typeof(string);
+
             using (writer.Namespace(schema.Declaration.Namespace))
             {
                 writer.WriteXmlDocumentationSummary(schema.Description);
@@ -252,19 +253,24 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 var implementType = new CSharpType(typeof(IEquatable<>), cs);
                 using (writer.Scope($"{schema.Declaration.Accessibility} readonly partial struct {name}: {implementType}"))
                 {
-                    writer.Line($"private readonly {typeof(string)} _value;");
+                    writer.Line($"private readonly {schema.BaseType} _value;");
                     writer.Line();
 
                     writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{name}\"/> values are the same.");
-                    using (writer.Scope($"public {name}(string value)"))
+                    using (writer.Scope($"public {name}({schema.BaseType} value)"))
                     {
-                        writer.Line($"_value = value ?? throw new {typeof(ArgumentNullException)}(nameof(value));");
+                        writer.Append($"_value = value");
+                        if (isString)
+                        {
+                            writer.Append($"?? throw new {typeof(ArgumentNullException)}(nameof(value))");
+                        }
+                        writer.Line($";");
                     }
                     writer.Line();
 
                     foreach (var choice in schema.Values)
                     {
-                        writer.Line($"private const string {choice.Declaration.Name}Value = {choice.Value.Value:L};");
+                        writer.Line($"private const {schema.BaseType} {choice.Declaration.Name}Value = {choice.Value.Value:L};");
                     }
                     writer.Line();
 
@@ -281,7 +287,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Line($"public static bool operator !=({cs} left, {cs} right) => !left.Equals(right);");
 
                     writer.WriteXmlDocumentationSummary($"Converts a string to a <see cref=\"{name}\"/>.");
-                    writer.Line($"public static implicit operator {cs}(string value) => new {cs}(value);");
+                    writer.Line($"public static implicit operator {cs}({schema.BaseType} value) => new {cs}(value);");
                     writer.Line();
 
                     writer.WriteXmlDocumentationInheritDoc();
@@ -289,15 +295,40 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Line($"public override bool Equals({typeof(object)} obj) => obj is {cs} other && Equals(other);");
 
                     writer.WriteXmlDocumentationInheritDoc();
-                    writer.Line($"public bool Equals({cs} other) => string.Equals(_value, other._value, {typeof(StringComparison)}.Ordinal);");
+                    writer.Append($"public bool Equals({cs} other) => ");
+                    if (isString)
+                    {
+                        writer.Line($"{schema.BaseType}.Equals(_value, other._value, {typeof(StringComparison)}.InvariantCultureIgnoreCase);");
+                    }
+                    else
+                    {
+                        writer.Line($"{schema.BaseType}.Equals(_value, other._value);");
+                    }
                     writer.Line();
 
                     writer.WriteXmlDocumentationInheritDoc();
                     WriteEditorBrowsableFalse(writer);
-                    writer.Line($"public override int GetHashCode() => _value?.GetHashCode() ?? 0;");
+                    writer.Append($"public override int GetHashCode() => ");
+                    if (isString)
+                    {
+                        writer.Line($"_value?.GetHashCode() ?? 0;");
+                    }
+                    else
+                    {
+                        writer.Line($"_value.GetHashCode();");
+                    }
 
                     writer.WriteXmlDocumentationInheritDoc();
-                    writer.Line($"public override {typeof(string)} ToString() => _value;");
+                    writer.Append($"public override {typeof(string)} ToString() => ");
+
+                    if (isString)
+                    {
+                        writer.Line($"_value;");
+                    }
+                    else
+                    {
+                        writer.Line($"_value.ToString({typeof(CultureInfo)}.InvariantCulture);");
+                    }
                 }
             }
         }
