@@ -120,6 +120,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure --namespace=httpInfrastructure --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
     },
+    "Inheritance": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestProjects\\Inheritance\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestProjects\\Inheritance --namespace=Inheritance --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
     "lro": {
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\lro\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\lro --namespace=lro --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"

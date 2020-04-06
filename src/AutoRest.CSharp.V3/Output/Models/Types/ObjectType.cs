@@ -396,6 +396,12 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         private CSharpType? CreateInheritedType()
         {
+            var sourceBaseType = _sourceTypeMapping?.ExistingType?.BaseType;
+            if (sourceBaseType != null)
+            {
+                return _typeFactory.CreateType(sourceBaseType);
+            }
+
             var objectSchemas = _objectSchema.Parents!.Immediate.OfType<ObjectSchema>().ToArray();
 
             ObjectSchema? selectedSchema = null;

@@ -28,9 +28,33 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(typeof(BaseClass), type.BaseType);
             // public
             Assert.AreEqual(3, type.GetProperties().Length);
-            TypeAsserts.HasProperty(type, "BaseClassProperty", BindingFlags.Instance | BindingFlags.Public);
-            TypeAsserts.HasProperty(type, "SomeProperty", BindingFlags.Instance | BindingFlags.Public);
-            TypeAsserts.HasProperty(type, "SomeOtherProperty", BindingFlags.Instance | BindingFlags.Public);
+
+            var inheritedProperty = TypeAsserts.HasProperty(type, "BaseClassProperty", BindingFlags.Instance | BindingFlags.Public);
+            Assert.AreEqual(typeof(BaseClass), inheritedProperty.DeclaringType);
+
+            var inlinedProperty = TypeAsserts.HasProperty(type, "SomeProperty", BindingFlags.Instance | BindingFlags.Public);
+            Assert.AreEqual(type, inlinedProperty.DeclaringType);
+
+            inlinedProperty = TypeAsserts.HasProperty(type, "SomeOtherProperty", BindingFlags.Instance | BindingFlags.Public);
+            Assert.AreEqual(type, inlinedProperty.DeclaringType);
+        }
+
+        [Test]
+        public void MultipleInheritanceBaseTypeOverride()
+        {
+            var type = typeof(ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride);
+            Assert.AreEqual(typeof(SomeProperties), type.BaseType);
+            // public
+            Assert.AreEqual(3, type.GetProperties().Length);
+
+            var inlinedProperty = TypeAsserts.HasProperty(type, "BaseClassProperty", BindingFlags.Instance | BindingFlags.Public);
+            Assert.AreEqual(type, inlinedProperty.DeclaringType);
+
+            var inheritedProperty = TypeAsserts.HasProperty(type, "SomeProperty", BindingFlags.Instance | BindingFlags.Public);
+            Assert.AreEqual(typeof(SomeProperties), inheritedProperty.DeclaringType);
+
+            inheritedProperty = TypeAsserts.HasProperty(type, "SomeOtherProperty", BindingFlags.Instance | BindingFlags.Public);
+            Assert.AreEqual(typeof(SomeProperties), inheritedProperty.DeclaringType);
         }
 
         [Test]

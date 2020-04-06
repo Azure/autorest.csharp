@@ -54,6 +54,17 @@
         }
       ]
     },
+    "ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseClass"
+        },
+        {
+          "$ref": "#/definitions/SomeProperties"
+        }
+      ]
+    },
     "ClassThatInheritsFromBaseClass": {
       "type": "object",
       "allOf": [
