@@ -15,8 +15,8 @@ namespace non_string_enum
 {
     public partial class IntClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal IntRestClient RestClient { get; }
         /// <summary> Initializes a new instance of IntClient for mocking. </summary>
         protected IntClient()
@@ -26,8 +26,8 @@ namespace non_string_enum
         internal IntClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             RestClient = new IntRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Put an int enum. </summary>
