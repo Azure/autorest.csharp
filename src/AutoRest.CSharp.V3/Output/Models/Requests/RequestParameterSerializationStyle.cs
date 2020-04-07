@@ -3,7 +3,7 @@
 
 namespace AutoRest.CSharp.V3.Output.Models.Requests
 {
-    internal enum RequestSerializationStyle
+    internal enum RequestParameterSerializationStyle
     {
         Simple,
         PipeDelimited,

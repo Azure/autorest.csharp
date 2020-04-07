@@ -9,10 +9,10 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
     {
         public string Name { get; }
         public ReferenceOrConstant Value { get; }
-        public RequestSerializationStyle SerializationStyle { get; }
+        public RequestParameterSerializationStyle SerializationStyle { get; }
         public SerializationFormat Format { get; }
 
-        public RequestHeader(string name, ReferenceOrConstant value, RequestSerializationStyle serializationStyle, SerializationFormat format = SerializationFormat.Default)
+        public RequestHeader(string name, ReferenceOrConstant value, RequestParameterSerializationStyle serializationStyle, SerializationFormat format = SerializationFormat.Default)
         {
             Name = name;
             Value = value;

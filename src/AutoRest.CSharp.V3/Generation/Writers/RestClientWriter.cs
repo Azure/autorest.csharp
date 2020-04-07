@@ -352,12 +352,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Line($", {segment.Escape:L});");
         }
 
-        private string? GetSerializationStyleDelimiter(RequestSerializationStyle style) => style switch
+        private string? GetSerializationStyleDelimiter(RequestParameterSerializationStyle style) => style switch
         {
-            RequestSerializationStyle.PipeDelimited => "|",
-            RequestSerializationStyle.TabDelimited => "\t",
-            RequestSerializationStyle.SpaceDelimited => " ",
-            RequestSerializationStyle.CommaDelimited => ",",
+            RequestParameterSerializationStyle.PipeDelimited => "|",
+            RequestParameterSerializationStyle.TabDelimited => "\t",
+            RequestParameterSerializationStyle.SpaceDelimited => " ",
+            RequestParameterSerializationStyle.CommaDelimited => ",",
             _ => null
         };
 

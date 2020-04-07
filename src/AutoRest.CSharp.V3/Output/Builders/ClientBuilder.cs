@@ -558,7 +558,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 );
         }
 
-        private static RequestSerializationStyle GetSerializationStyle(HttpParameter httpParameter, Schema valueSchema)
+        private static RequestParameterSerializationStyle GetSerializationStyle(HttpParameter httpParameter, Schema valueSchema)
         {
             Debug.Assert(httpParameter.In == ParameterLocation.Query || httpParameter.In == ParameterLocation.Header);
 
@@ -567,13 +567,13 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 case null:
                 case SerializationStyle.Form:
                 case SerializationStyle.Simple:
-                    return valueSchema is ArraySchema ? RequestSerializationStyle.CommaDelimited : RequestSerializationStyle.Simple;
+                    return valueSchema is ArraySchema ? RequestParameterSerializationStyle.CommaDelimited : RequestParameterSerializationStyle.Simple;
                 case SerializationStyle.PipeDelimited:
-                    return RequestSerializationStyle.PipeDelimited;
+                    return RequestParameterSerializationStyle.PipeDelimited;
                 case SerializationStyle.SpaceDelimited:
-                    return RequestSerializationStyle.SpaceDelimited;
+                    return RequestParameterSerializationStyle.SpaceDelimited;
                 case SerializationStyle.TabDelimited:
-                    return RequestSerializationStyle.TabDelimited;
+                    return RequestParameterSerializationStyle.TabDelimited;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
