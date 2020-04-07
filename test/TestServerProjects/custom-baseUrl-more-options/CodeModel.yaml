@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest
-  title: custom-baseUrl-more-options
+  title: AutoRest Parameterized Custom Host Test Client
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_0
@@ -252,7 +252,7 @@ operationGroups:
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: CustomBaseUrlMoreOptions
+    name: AutoRestParameterizedCustomHostTestClient
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

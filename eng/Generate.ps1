@@ -58,7 +58,7 @@ if (!($Exclude -contains "TestServer"))
     {
         $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
         $swaggerDefinitions[$testName] = @{
-            'title'=$testName;
+            'projectName'=$testName;
             'output'=$testServerDirectory;
             'arguments'="--require=$configurationPath --input-file=$inputFile"
         }
@@ -76,7 +76,7 @@ if (!($Exclude -contains "TestProjects"))
         $testName = $directory.Name
         $inputFile = Join-Path $directory "$testName.json"
         $swaggerDefinitions[$testName] = @{
-            'title'=$testName;
+            'projectName'=$testName;
             'output'=$testSwaggerPath;
             'arguments'="--require=$configurationPath --input-file=$inputFile"
         }
@@ -99,9 +99,8 @@ if (!($Exclude -contains "Samples"))
     {
         $projectDirectory = Join-Path $repoRoot 'samples' $projectName
         $sampleConfigurationPath = Join-Path $projectDirectory 'readme.md'
-
         $swaggerDefinitions[$projectName] = @{
-            'title'=$projectName;
+            'projectName'=$projectName;
             'output'=$projectDirectory;
             'arguments'="--require=$sampleConfigurationPath"
         }
@@ -120,7 +119,7 @@ if (!($Exclude -contains "SmokeTests"))
             $projectDirectory = Join-Path $repoRoot 'samples' 'smoketests' $projectName
 
             $swaggerDefinitions[$projectName] = @{
-                'title'=$projectName;
+                'projectName'=$projectName;
                 'output'=$projectDirectory;
                 'arguments'="--require=$configurationPath $input"
             }
@@ -141,7 +140,7 @@ if ($updateLaunchSettings)
         $definition = $swaggerDefinitions[$key];
         $outputPath = (Join-Path $definition.output $key).Replace($repoRoot, '$(SolutionDir)')
         $codeModel = Join-Path $outputPath 'CodeModel.yaml'
-        $namespace = $definition.title.Replace('-', '_')
+        $namespace = $definition.projectName.Replace('-', '_')
 
         $settings.profiles[$key] = [ordered]@{
             'commandName'='Project';
@@ -178,6 +177,6 @@ if (![string]::IsNullOrWhiteSpace($name))
 
 $keys | %{ $swaggerDefinitions[$_] } | ForEach-Object -Parallel {
     Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
-    Invoke-Autorest $_.output $_.title $_.arguments $using:sharedSource $using:fast $using:clean;
+    Invoke-Autorest $_.output $_.projectName $_.arguments $using:sharedSource $using:fast $using:clean;
 } -ThrottleLimit $parallel
 

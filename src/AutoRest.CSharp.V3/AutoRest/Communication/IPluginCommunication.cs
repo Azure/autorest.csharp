@@ -3,15 +3,15 @@
 
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.AutoRest.Communication.Serialization.Models;
+using AutoRest.CSharp.V3.AutoRest.Plugins;
 
 namespace AutoRest.CSharp.V3.AutoRest.Communication
 {
     internal interface IPluginCommunication
     {
         string PluginName { get; }
-        Task<string> ReadFile(string filename);
-        Task<T> GetValue<T>(string key);
-        Task<string[]> ListInputs(string? artifactType = null);
+        Configuration Configuration { get; }
+        Task<string> GetCodeModel();
         Task WriteFile(string filename, string content, string artifactType, RawSourceMap? sourceMap = null);
         Task Fatal(string text);
     }

@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest
-  title: body-duration
+  title: AutoRest Duration Test Service
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_1
@@ -342,7 +342,7 @@ operationGroups:
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: BodyDuration
+    name: AutoRestDurationTestService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

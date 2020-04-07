@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest. No server backend exists for these tests.
-  title: validation
+  title: AutoRest Validation Test
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_23
@@ -824,7 +824,7 @@ operationGroups:
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: Validation
+    name: AutoRestValidationTest
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

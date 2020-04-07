@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using AutoRest.CSharp.V3.AutoRest.Plugins;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models;
 using AutoRest.CSharp.V3.Output.Models.Requests;
@@ -24,7 +25,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal class ClientWriter
     {
-        public void WriteClient(CodeWriter writer, Client client)
+        public void WriteClient(CodeWriter writer, Client client, Configuration configuration)
         {
             var cs = client.Type;
             var @namespace = cs.Namespace;
@@ -34,7 +35,15 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 using (writer.Scope($"{client.DeclaredType.Accessibility} partial class {cs.Name}"))
                 {
                     WriteClientFields(writer, client);
-                    WriteClientCtors(writer, client);
+
+                    if (configuration.AzureArm)
+                    {
+                        WriteManagementClientCtors(writer, client, configuration);
+                    }
+                    else
+                    {
+                        WriteClientCtors(writer, client);
+                    }
 
                     foreach (var clientMethod in client.Methods)
                     {
@@ -56,6 +65,56 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     }
                 }
             }
+        }
+
+        private void WriteManagementClientCtors(CodeWriter writer, Client client, Configuration configuration)
+        {
+            bool IsHostParameter(Parameter parameter) => string.Equals(parameter.Name, "host", StringComparison.InvariantCultureIgnoreCase);
+            bool IsApiVersionParameter(Parameter parameter) => string.Equals(parameter.Name, "apiVersion", StringComparison.InvariantCultureIgnoreCase);
+
+            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
+            writer.Append($"public {client.Type.Name:D}(");
+            foreach (Parameter parameter in client.RestClient.Parameters)
+            {
+                // Skip host and API Version parameters that would be set later
+                if (IsHostParameter(parameter) || IsApiVersionParameter(parameter))
+                {
+                    continue;
+                }
+
+                writer.WriteParameter(parameter);
+            }
+
+            writer.Append($"{typeof(TokenCredential)} tokenCredential, {configuration.Title}ManagementClientOptions options = null)");
+
+            using (writer.Scope())
+            {
+                writer.Line($"options = new {configuration.Title}ManagementClientOptions();");
+                writer.Line($"_clientDiagnostics = new {typeof(ClientDiagnostics)}(options);");
+                writer.Line($"_pipeline = {typeof(ManagementPipelineBuilder)}.Build(tokenCredential, options);");
+
+                writer.Append($"this.RestClient = new {client.RestClient.Type}(_clientDiagnostics, _pipeline, ");
+
+                foreach (Parameter parameter in client.RestClient.Parameters)
+                {
+                    if (IsHostParameter(parameter))
+                    {
+                        continue;
+                    }
+
+                    if (IsApiVersionParameter(parameter))
+                    {
+                        writer.Append($"options.Version, ");
+                        continue;
+                    }
+
+                    writer.Append($"{parameter.Name:I}, ");
+                }
+                writer.RemoveTrailingComma();
+                writer.Line($");");
+
+            }
+            writer.Line();
         }
 
         private void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, bool async)

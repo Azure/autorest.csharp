@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Long-running Operation for AutoRest
-  title: paging
+  title: AutoRest Paging Test Service
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_15
@@ -1811,7 +1811,7 @@ operationGroups:
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: Paging
+    name: AutoRestPagingTestService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

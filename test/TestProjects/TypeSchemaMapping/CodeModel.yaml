@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Schema mapping
-  title: TypeSchemaMapping
+  title: Schema mapping
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_1
@@ -508,7 +508,7 @@ operationGroups:
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: TypeSchemaMapping
+    name: SchemaMapping
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

@@ -22,16 +22,15 @@ function Invoke($command)
     }
 }
 
-function Invoke-Autorest($baseOutput, $title, $autoRestArguments, $sharedSource, $fast, $clean)
+function Invoke-Autorest($baseOutput, $projectName, $autoRestArguments, $sharedSource, $fast, $clean)
 {
-    $outputPath = Join-Path $baseOutput $title
-    $namespace = $title.Replace('-', '_')
-    $command = "$script:autorestBinary $autoRestArguments --title=$title --namespace=$namespace --output-folder=$outputPath"
+    $outputPath = Join-Path $baseOutput $projectName
+    $namespace = $projectName.Replace('-', '_')
+    $command = "$script:autorestBinary $autoRestArguments --namespace=$namespace --output-folder=$outputPath"
 
     if ($fast)
     {
-        $codeModel = Join-Path $baseOutput $title "CodeModel.yaml"
-        $command = "dotnet run --project $script:AutorestPluginProject --no-build -- --plugin=csharpgen --title=$title --namespace=$namespace --standalone --input-file=$codeModel --output-folder=$outputPath --shared-source-folder=$sharedSource --save-code-model=true"
+        $command = "dotnet run --project $script:AutorestPluginProject --no-build -- --plugin=csharpgen --standalone --output-folder=$outputPath"
     }
 
     if ($clean)

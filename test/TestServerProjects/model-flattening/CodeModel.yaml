@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Resource Flattening for AutoRest
-  title: model-flattening
+  title: AutoRest Resource Flattening Test Service
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_29
@@ -1844,7 +1844,7 @@ operationGroups:
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ModelFlattening
+    name: AutoRestResourceFlatteningTestService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

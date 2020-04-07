@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest
-  title: AdditionalPropertiesEx
+  title: AdditionalPropertiesClient
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_4
@@ -528,7 +528,7 @@ operationGroups:
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: AdditionalPropertiesEx
+    name: AdditionalPropertiesClient
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Resource Flattening for AutoRest
-  title: ExtensionClientName
+  title: AutoRest Parameter Flattening
 schemas: !<!Schemas> 
   strings:
   - !<!StringSchema> &ref_0
@@ -213,7 +213,7 @@ operationGroups:
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: ExtensionClientName
+    name: AutoRestParameterFlattening
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

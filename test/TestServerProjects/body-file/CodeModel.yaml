@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest Swagger BAT
-  title: body-file
+  title: AutoRest Swagger BAT File Service
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_0
@@ -246,7 +246,7 @@ operationGroups:
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: BodyFile
+    name: AutoRestSwaggerBATFileService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

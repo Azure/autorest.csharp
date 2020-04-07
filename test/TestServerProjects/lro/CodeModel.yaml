@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Long-running Operation for AutoRest
-  title: lro
+  title: AutoRest Long-running Operation Test Service
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_11
@@ -8277,7 +8277,7 @@ operationGroups:
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: Lro
+    name: AutoRestLongRunningOperationTestService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

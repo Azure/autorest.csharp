@@ -25,26 +25,19 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
 
         public static async Task<bool> Start(IPluginCommunication autoRest)
         {
-            // AutoRest sends an empty Object as a 'true' value. When the configuration item is not present, it sends a Null value.
-            if ((await autoRest.GetValue<JsonElement?>($"{autoRest.PluginName}.attach")).IsObject())
-            {
-                DebuggerAwaiter.AwaitAttach();
-            }
             try
             {
-                Configuration configuration = new Configuration(autoRest);
+                Configuration configuration = autoRest.Configuration;
 
+                var codeModelYaml = await autoRest.GetCodeModel();
                 IPlugin plugin = Plugins[autoRest.PluginName]();
                 CodeModel codeModel = new CodeModel();
                 if (plugin.DeserializeCodeModel)
                 {
-                    string codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
-                    if (codeModelFileName.IsNullOrEmpty()) throw new Exception("Generator did not receive the code model file.");
 
-                    string codeModelYaml = await autoRest.ReadFile(codeModelFileName);
-
-                    if (configuration.SaveCodeModel)
+                    if (configuration.SaveInputs)
                     {
+                        await autoRest.WriteFile("Configuration.json", HostCommunication.SaveConfiguration(configuration), "source-file-csharp");
                         await autoRest.WriteFile("CodeModel.yaml", codeModelYaml, "source-file-csharp");
                     }
 

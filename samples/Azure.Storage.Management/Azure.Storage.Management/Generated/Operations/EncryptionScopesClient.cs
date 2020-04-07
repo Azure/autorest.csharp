@@ -20,16 +20,13 @@ namespace Azure.Storage.Management
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal EncryptionScopesRestClient RestClient { get; }
-        /// <summary> Initializes a new instance of EncryptionScopesClient for mocking. </summary>
-        protected EncryptionScopesClient()
-        {
-        }
         /// <summary> Initializes a new instance of EncryptionScopesClient. </summary>
-        internal EncryptionScopesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
+        public EncryptionScopesClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
         {
-            RestClient = new EncryptionScopesRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
-            _clientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
+            options = new StorageManagementClientOptions();
+            _clientDiagnostics = new ClientDiagnostics(options);
+            _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
+            RestClient = new EncryptionScopesRestClient(_clientDiagnostics, _pipeline, subscriptionId, options.Version);
         }
 
         /// <summary> Synchronously creates or updates an encryption scope under the specified storage account. If an encryption scope is already created and a subsequent request is issued with different properties, the encryption scope properties will be updated per the specified request. </summary>

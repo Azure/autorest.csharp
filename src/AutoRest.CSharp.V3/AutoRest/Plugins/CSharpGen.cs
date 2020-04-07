@@ -73,9 +73,19 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             foreach (var client in context.Library.Clients)
             {
                 var codeWriter = new CodeWriter();
-                clientWriter.WriteClient(codeWriter, client);
+                clientWriter.WriteClient(codeWriter, client, context.Configuration);
 
                 project.AddGeneratedFile($"Operations/{client.Type.Name}.cs", codeWriter.ToString());
+            }
+
+            if (context.Configuration.AzureArm)
+            {
+                var title = context.Configuration.Title;
+
+                var codeWriter = new CodeWriter();
+                ClientOptionsWriter.WriteClientOptions(codeWriter, context);
+
+                project.AddGeneratedFile($"Operations/{title}ManagementClientOptions.cs", codeWriter.ToString());
             }
 
             await foreach (var file in project.GetGeneratedFilesAsync())

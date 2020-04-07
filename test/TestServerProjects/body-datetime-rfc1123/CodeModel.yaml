@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest
-  title: body-datetime-rfc1123
+  title: AutoRest RFC1123 DateTime Test Service
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_2
@@ -637,7 +637,7 @@ operationGroups:
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: BodyDatetimeRfc1123
+    name: AutoRestRFC1123DateTimeTestService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

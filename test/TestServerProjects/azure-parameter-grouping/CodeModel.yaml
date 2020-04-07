@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest
-  title: azure-parameter-grouping
+  title: AutoRest Parameter Grouping Test Service
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_3
@@ -682,7 +682,7 @@ operationGroups:
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: AzureParameterGrouping
+    name: AutoRestParameterGroupingTestService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest
-  title: custom-baseUrl-paging
+  title: AutoRest Parameterized Host Test Paging Client
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_0
@@ -474,7 +474,7 @@ operationGroups:
   protocol: !<!Protocols> {}
 language: !<!Languages> 
   default:
-    name: CustomBaseUrlPaging
+    name: AutoRestParameterizedHostTestPagingClient
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}
