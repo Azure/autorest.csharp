@@ -10,7 +10,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 {
     internal class BuildContext
     {
-        public CodeModel CodeModel { get; }
         private OutputLibrary? _library;
         private TypeFactory? _typeFactory;
 
@@ -21,6 +20,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             SourceInputModel = sourceInputModel;
         }
 
+        public CodeModel CodeModel { get; }
         public OutputLibrary Library => _library ??= new OutputLibrary(CodeModel, this);
         public string DefaultNamespace => Configuration.Namespace;
         public TypeFactory TypeFactory => _typeFactory ??= new TypeFactory(Library);
