@@ -14,8 +14,8 @@ namespace required_optional
 {
     public partial class ImplicitClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal ImplicitRestClient RestClient { get; }
         /// <summary> Initializes a new instance of ImplicitClient for mocking. </summary>
         protected ImplicitClient()
@@ -25,8 +25,8 @@ namespace required_optional
         internal ImplicitClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string requiredGlobalPath, string requiredGlobalQuery, string host = "http://localhost:3000", int? optionalGlobalQuery = null)
         {
             RestClient = new ImplicitRestClient(clientDiagnostics, pipeline, requiredGlobalPath, requiredGlobalQuery, host, optionalGlobalQuery);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Test implicitly required path parameter. </summary>

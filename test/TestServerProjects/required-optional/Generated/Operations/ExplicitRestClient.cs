@@ -19,8 +19,8 @@ namespace required_optional
     internal partial class ExplicitRestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of ExplicitRestClient. </summary>
         public ExplicitRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
@@ -31,13 +31,13 @@ namespace required_optional
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreatePostRequiredIntegerParameterRequest(int bodyParameter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -56,18 +56,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostRequiredIntegerParameterAsync(int bodyParameter, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostRequiredIntegerParameter");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredIntegerParameter");
             scope.Start();
             try
             {
                 using var message = CreatePostRequiredIntegerParameterRequest(bodyParameter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -82,18 +82,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostRequiredIntegerParameter(int bodyParameter, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostRequiredIntegerParameter");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredIntegerParameter");
             scope.Start();
             try
             {
                 using var message = CreatePostRequiredIntegerParameterRequest(bodyParameter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -105,7 +105,7 @@ namespace required_optional
 
         internal HttpMessage CreatePostOptionalIntegerParameterRequest(int? bodyParameter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -127,18 +127,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostOptionalIntegerParameterAsync(int? bodyParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostOptionalIntegerParameter");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostOptionalIntegerParameter");
             scope.Start();
             try
             {
                 using var message = CreatePostOptionalIntegerParameterRequest(bodyParameter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -153,18 +153,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostOptionalIntegerParameter(int? bodyParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostOptionalIntegerParameter");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostOptionalIntegerParameter");
             scope.Start();
             try
             {
                 using var message = CreatePostOptionalIntegerParameterRequest(bodyParameter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -176,7 +176,7 @@ namespace required_optional
 
         internal HttpMessage CreatePostRequiredIntegerPropertyRequest(IntWrapper bodyParameter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -200,18 +200,18 @@ namespace required_optional
                 throw new ArgumentNullException(nameof(bodyParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostRequiredIntegerProperty");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredIntegerProperty");
             scope.Start();
             try
             {
                 using var message = CreatePostRequiredIntegerPropertyRequest(bodyParameter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -231,18 +231,18 @@ namespace required_optional
                 throw new ArgumentNullException(nameof(bodyParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostRequiredIntegerProperty");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredIntegerProperty");
             scope.Start();
             try
             {
                 using var message = CreatePostRequiredIntegerPropertyRequest(bodyParameter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -254,7 +254,7 @@ namespace required_optional
 
         internal HttpMessage CreatePostOptionalIntegerPropertyRequest(IntOptionalWrapper bodyParameter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -276,18 +276,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostOptionalIntegerProperty");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostOptionalIntegerProperty");
             scope.Start();
             try
             {
                 using var message = CreatePostOptionalIntegerPropertyRequest(bodyParameter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -302,18 +302,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostOptionalIntegerProperty(IntOptionalWrapper bodyParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostOptionalIntegerProperty");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostOptionalIntegerProperty");
             scope.Start();
             try
             {
                 using var message = CreatePostOptionalIntegerPropertyRequest(bodyParameter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -325,7 +325,7 @@ namespace required_optional
 
         internal HttpMessage CreatePostRequiredIntegerHeaderRequest(int headerParameter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -341,18 +341,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostRequiredIntegerHeaderAsync(int headerParameter, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostRequiredIntegerHeader");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredIntegerHeader");
             scope.Start();
             try
             {
                 using var message = CreatePostRequiredIntegerHeaderRequest(headerParameter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -367,18 +367,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostRequiredIntegerHeader(int headerParameter, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostRequiredIntegerHeader");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredIntegerHeader");
             scope.Start();
             try
             {
                 using var message = CreatePostRequiredIntegerHeaderRequest(headerParameter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -390,7 +390,7 @@ namespace required_optional
 
         internal HttpMessage CreatePostOptionalIntegerHeaderRequest(int? headerParameter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -409,18 +409,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostOptionalIntegerHeaderAsync(int? headerParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostOptionalIntegerHeader");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostOptionalIntegerHeader");
             scope.Start();
             try
             {
                 using var message = CreatePostOptionalIntegerHeaderRequest(headerParameter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -435,18 +435,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostOptionalIntegerHeader(int? headerParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostOptionalIntegerHeader");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostOptionalIntegerHeader");
             scope.Start();
             try
             {
                 using var message = CreatePostOptionalIntegerHeaderRequest(headerParameter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -458,7 +458,7 @@ namespace required_optional
 
         internal HttpMessage CreatePostRequiredStringParameterRequest(string bodyParameter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -482,18 +482,18 @@ namespace required_optional
                 throw new ArgumentNullException(nameof(bodyParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostRequiredStringParameter");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredStringParameter");
             scope.Start();
             try
             {
                 using var message = CreatePostRequiredStringParameterRequest(bodyParameter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -513,18 +513,18 @@ namespace required_optional
                 throw new ArgumentNullException(nameof(bodyParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostRequiredStringParameter");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredStringParameter");
             scope.Start();
             try
             {
                 using var message = CreatePostRequiredStringParameterRequest(bodyParameter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -536,7 +536,7 @@ namespace required_optional
 
         internal HttpMessage CreatePostOptionalStringParameterRequest(string bodyParameter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -558,18 +558,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostOptionalStringParameterAsync(string bodyParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostOptionalStringParameter");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostOptionalStringParameter");
             scope.Start();
             try
             {
                 using var message = CreatePostOptionalStringParameterRequest(bodyParameter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -584,18 +584,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostOptionalStringParameter(string bodyParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostOptionalStringParameter");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostOptionalStringParameter");
             scope.Start();
             try
             {
                 using var message = CreatePostOptionalStringParameterRequest(bodyParameter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -607,7 +607,7 @@ namespace required_optional
 
         internal HttpMessage CreatePostRequiredStringPropertyRequest(StringWrapper bodyParameter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -631,18 +631,18 @@ namespace required_optional
                 throw new ArgumentNullException(nameof(bodyParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostRequiredStringProperty");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredStringProperty");
             scope.Start();
             try
             {
                 using var message = CreatePostRequiredStringPropertyRequest(bodyParameter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -662,18 +662,18 @@ namespace required_optional
                 throw new ArgumentNullException(nameof(bodyParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostRequiredStringProperty");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredStringProperty");
             scope.Start();
             try
             {
                 using var message = CreatePostRequiredStringPropertyRequest(bodyParameter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -685,7 +685,7 @@ namespace required_optional
 
         internal HttpMessage CreatePostOptionalStringPropertyRequest(StringOptionalWrapper bodyParameter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -707,18 +707,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostOptionalStringProperty");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostOptionalStringProperty");
             scope.Start();
             try
             {
                 using var message = CreatePostOptionalStringPropertyRequest(bodyParameter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -733,18 +733,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostOptionalStringProperty(StringOptionalWrapper bodyParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostOptionalStringProperty");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostOptionalStringProperty");
             scope.Start();
             try
             {
                 using var message = CreatePostOptionalStringPropertyRequest(bodyParameter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -756,7 +756,7 @@ namespace required_optional
 
         internal HttpMessage CreatePostRequiredStringHeaderRequest(string headerParameter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -777,18 +777,18 @@ namespace required_optional
                 throw new ArgumentNullException(nameof(headerParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostRequiredStringHeader");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredStringHeader");
             scope.Start();
             try
             {
                 using var message = CreatePostRequiredStringHeaderRequest(headerParameter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -808,18 +808,18 @@ namespace required_optional
                 throw new ArgumentNullException(nameof(headerParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostRequiredStringHeader");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredStringHeader");
             scope.Start();
             try
             {
                 using var message = CreatePostRequiredStringHeaderRequest(headerParameter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -831,7 +831,7 @@ namespace required_optional
 
         internal HttpMessage CreatePostOptionalStringHeaderRequest(string bodyParameter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -850,18 +850,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostOptionalStringHeaderAsync(string bodyParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostOptionalStringHeader");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostOptionalStringHeader");
             scope.Start();
             try
             {
                 using var message = CreatePostOptionalStringHeaderRequest(bodyParameter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -876,18 +876,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostOptionalStringHeader(string bodyParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostOptionalStringHeader");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostOptionalStringHeader");
             scope.Start();
             try
             {
                 using var message = CreatePostOptionalStringHeaderRequest(bodyParameter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -899,7 +899,7 @@ namespace required_optional
 
         internal HttpMessage CreatePostRequiredClassParameterRequest(Product bodyParameter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -923,18 +923,18 @@ namespace required_optional
                 throw new ArgumentNullException(nameof(bodyParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostRequiredClassParameter");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredClassParameter");
             scope.Start();
             try
             {
                 using var message = CreatePostRequiredClassParameterRequest(bodyParameter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -954,18 +954,18 @@ namespace required_optional
                 throw new ArgumentNullException(nameof(bodyParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostRequiredClassParameter");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredClassParameter");
             scope.Start();
             try
             {
                 using var message = CreatePostRequiredClassParameterRequest(bodyParameter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -977,7 +977,7 @@ namespace required_optional
 
         internal HttpMessage CreatePostOptionalClassParameterRequest(Product bodyParameter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -999,18 +999,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostOptionalClassParameterAsync(Product bodyParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostOptionalClassParameter");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostOptionalClassParameter");
             scope.Start();
             try
             {
                 using var message = CreatePostOptionalClassParameterRequest(bodyParameter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1025,18 +1025,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostOptionalClassParameter(Product bodyParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostOptionalClassParameter");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostOptionalClassParameter");
             scope.Start();
             try
             {
                 using var message = CreatePostOptionalClassParameterRequest(bodyParameter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1048,7 +1048,7 @@ namespace required_optional
 
         internal HttpMessage CreatePostRequiredClassPropertyRequest(ClassWrapper bodyParameter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1072,18 +1072,18 @@ namespace required_optional
                 throw new ArgumentNullException(nameof(bodyParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostRequiredClassProperty");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredClassProperty");
             scope.Start();
             try
             {
                 using var message = CreatePostRequiredClassPropertyRequest(bodyParameter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1103,18 +1103,18 @@ namespace required_optional
                 throw new ArgumentNullException(nameof(bodyParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostRequiredClassProperty");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredClassProperty");
             scope.Start();
             try
             {
                 using var message = CreatePostRequiredClassPropertyRequest(bodyParameter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1126,7 +1126,7 @@ namespace required_optional
 
         internal HttpMessage CreatePostOptionalClassPropertyRequest(ClassOptionalWrapper bodyParameter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1148,18 +1148,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostOptionalClassProperty");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostOptionalClassProperty");
             scope.Start();
             try
             {
                 using var message = CreatePostOptionalClassPropertyRequest(bodyParameter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1174,18 +1174,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostOptionalClassProperty(ClassOptionalWrapper bodyParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostOptionalClassProperty");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostOptionalClassProperty");
             scope.Start();
             try
             {
                 using var message = CreatePostOptionalClassPropertyRequest(bodyParameter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1197,7 +1197,7 @@ namespace required_optional
 
         internal HttpMessage CreatePostRequiredArrayParameterRequest(IEnumerable<string> bodyParameter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1226,18 +1226,18 @@ namespace required_optional
                 throw new ArgumentNullException(nameof(bodyParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostRequiredArrayParameter");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredArrayParameter");
             scope.Start();
             try
             {
                 using var message = CreatePostRequiredArrayParameterRequest(bodyParameter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1257,18 +1257,18 @@ namespace required_optional
                 throw new ArgumentNullException(nameof(bodyParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostRequiredArrayParameter");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredArrayParameter");
             scope.Start();
             try
             {
                 using var message = CreatePostRequiredArrayParameterRequest(bodyParameter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1280,7 +1280,7 @@ namespace required_optional
 
         internal HttpMessage CreatePostOptionalArrayParameterRequest(IEnumerable<string> bodyParameter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1307,18 +1307,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostOptionalArrayParameterAsync(IEnumerable<string> bodyParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostOptionalArrayParameter");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostOptionalArrayParameter");
             scope.Start();
             try
             {
                 using var message = CreatePostOptionalArrayParameterRequest(bodyParameter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1333,18 +1333,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostOptionalArrayParameter(IEnumerable<string> bodyParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostOptionalArrayParameter");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostOptionalArrayParameter");
             scope.Start();
             try
             {
                 using var message = CreatePostOptionalArrayParameterRequest(bodyParameter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1356,7 +1356,7 @@ namespace required_optional
 
         internal HttpMessage CreatePostRequiredArrayPropertyRequest(ArrayWrapper bodyParameter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1380,18 +1380,18 @@ namespace required_optional
                 throw new ArgumentNullException(nameof(bodyParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostRequiredArrayProperty");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredArrayProperty");
             scope.Start();
             try
             {
                 using var message = CreatePostRequiredArrayPropertyRequest(bodyParameter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1411,18 +1411,18 @@ namespace required_optional
                 throw new ArgumentNullException(nameof(bodyParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostRequiredArrayProperty");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredArrayProperty");
             scope.Start();
             try
             {
                 using var message = CreatePostRequiredArrayPropertyRequest(bodyParameter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1434,7 +1434,7 @@ namespace required_optional
 
         internal HttpMessage CreatePostOptionalArrayPropertyRequest(ArrayOptionalWrapper bodyParameter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1456,18 +1456,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostOptionalArrayProperty");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostOptionalArrayProperty");
             scope.Start();
             try
             {
                 using var message = CreatePostOptionalArrayPropertyRequest(bodyParameter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1482,18 +1482,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostOptionalArrayProperty(ArrayOptionalWrapper bodyParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostOptionalArrayProperty");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostOptionalArrayProperty");
             scope.Start();
             try
             {
                 using var message = CreatePostOptionalArrayPropertyRequest(bodyParameter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1505,7 +1505,7 @@ namespace required_optional
 
         internal HttpMessage CreatePostRequiredArrayHeaderRequest(IEnumerable<string> headerParameter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1526,18 +1526,18 @@ namespace required_optional
                 throw new ArgumentNullException(nameof(headerParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostRequiredArrayHeader");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredArrayHeader");
             scope.Start();
             try
             {
                 using var message = CreatePostRequiredArrayHeaderRequest(headerParameter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1557,18 +1557,18 @@ namespace required_optional
                 throw new ArgumentNullException(nameof(headerParameter));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostRequiredArrayHeader");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredArrayHeader");
             scope.Start();
             try
             {
                 using var message = CreatePostRequiredArrayHeaderRequest(headerParameter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1580,7 +1580,7 @@ namespace required_optional
 
         internal HttpMessage CreatePostOptionalArrayHeaderRequest(IEnumerable<string> headerParameter)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1599,18 +1599,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostOptionalArrayHeaderAsync(IEnumerable<string> headerParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostOptionalArrayHeader");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostOptionalArrayHeader");
             scope.Start();
             try
             {
                 using var message = CreatePostOptionalArrayHeaderRequest(headerParameter);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1625,18 +1625,18 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostOptionalArrayHeader(IEnumerable<string> headerParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ExplicitClient.PostOptionalArrayHeader");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostOptionalArrayHeader");
             scope.Start();
             try
             {
                 using var message = CreatePostOptionalArrayHeaderRequest(headerParameter);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

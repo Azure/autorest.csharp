@@ -16,8 +16,8 @@ namespace required_optional
 {
     public partial class ExplicitClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal ExplicitRestClient RestClient { get; }
         /// <summary> Initializes a new instance of ExplicitClient for mocking. </summary>
         protected ExplicitClient()
@@ -27,8 +27,8 @@ namespace required_optional
         internal ExplicitClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             RestClient = new ExplicitRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Test explicitly required integer. Please put null and the client library should throw before the request is sent. </summary>
