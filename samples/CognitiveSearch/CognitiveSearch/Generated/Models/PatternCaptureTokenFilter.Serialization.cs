@@ -39,7 +39,7 @@ namespace CognitiveSearch.Models
         {
             IList<string> patterns = default;
             bool? preserveOriginal = default;
-            string odatatype = default;
+            string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -71,7 +71,7 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    odatatype = property.Value.GetString();
+                    odataType = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -80,7 +80,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new PatternCaptureTokenFilter(odatatype, name, patterns, preserveOriginal);
+            return new PatternCaptureTokenFilter(odataType, name, patterns, preserveOriginal);
         }
     }
 }

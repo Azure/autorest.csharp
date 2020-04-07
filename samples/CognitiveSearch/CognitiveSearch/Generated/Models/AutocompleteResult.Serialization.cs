@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     {
         internal static AutocompleteResult DeserializeAutocompleteResult(JsonElement element)
         {
-            double? searchcoverage = default;
+            double? searchCoverage = default;
             IReadOnlyList<AutocompleteItem> value = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -25,7 +25,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    searchcoverage = property.Value.GetDouble();
+                    searchCoverage = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("value"))
@@ -46,7 +46,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new AutocompleteResult(searchcoverage, value);
+            return new AutocompleteResult(searchCoverage, value);
         }
     }
 }

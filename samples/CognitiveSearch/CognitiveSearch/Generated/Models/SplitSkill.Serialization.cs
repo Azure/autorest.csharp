@@ -57,9 +57,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndArray();
             writer.WritePropertyName("outputs");
             writer.WriteStartArray();
-            foreach (var item0 in Outputs)
+            foreach (var item in Outputs)
             {
-                writer.WriteObjectValue(item0);
+                writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
             writer.WriteEndObject();
@@ -70,7 +70,7 @@ namespace CognitiveSearch.Models
             SplitSkillLanguage? defaultLanguageCode = default;
             TextSplitMode? textSplitMode = default;
             int? maximumPageLength = default;
-            string odatatype = default;
+            string odataType = default;
             string name = default;
             string description = default;
             string context = default;
@@ -107,7 +107,7 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    odatatype = property.Value.GetString();
+                    odataType = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -172,7 +172,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SplitSkill(odatatype, name, description, context, inputs, outputs, defaultLanguageCode, textSplitMode, maximumPageLength);
+            return new SplitSkill(odataType, name, description, context, inputs, outputs, defaultLanguageCode, textSplitMode, maximumPageLength);
         }
     }
 }

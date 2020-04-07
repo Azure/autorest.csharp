@@ -16,7 +16,7 @@ namespace body_complex.Models
         {
             string location = default;
             bool? iswild = default;
-            string fishtype = default;
+            string fishType = default;
             string species = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -40,7 +40,7 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("fish.type"))
                 {
-                    fishtype = property.Value.GetString();
+                    fishType = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("species"))
@@ -53,7 +53,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new DotSalmon(fishtype, species, location, iswild);
+            return new DotSalmon(fishType, species, location, iswild);
         }
     }
 }
