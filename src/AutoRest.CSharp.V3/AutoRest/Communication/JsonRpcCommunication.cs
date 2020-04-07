@@ -23,6 +23,12 @@ namespace AutoRest.CSharp.V3.AutoRest.Communication
         {
             get
             {
+                // AutoRest sends an empty Object as a 'true' value. When the configuration item is not present, it sends a Null value.
+                if (GetValue<JsonElement?>($"{PluginName}.attach").GetAwaiter().GetResult().IsObject())
+                {
+                    DebuggerAwaiter.AwaitAttach();
+                }
+
                 return new Configuration(
                     new Uri(GetRequiredOption("output-folder")).LocalPath,
                     GetRequiredOption("namespace"),
@@ -39,12 +45,6 @@ namespace AutoRest.CSharp.V3.AutoRest.Communication
             _connection = connection;
             PluginName = pluginName;
             _sessionId = sessionId;
-
-            // AutoRest sends an empty Object as a 'true' value. When the configuration item is not present, it sends a Null value.
-            if (GetValue<JsonElement?>($"{pluginName}.attach").GetAwaiter().GetResult().IsObject())
-            {
-             //   DebuggerAwaiter.AwaitAttach();
-            }
         }
 
         // Basic Interfaces
