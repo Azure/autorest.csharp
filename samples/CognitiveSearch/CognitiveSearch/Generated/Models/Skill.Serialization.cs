@@ -42,9 +42,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndArray();
             writer.WritePropertyName("outputs");
             writer.WriteStartArray();
-            foreach (var item0 in Outputs)
+            foreach (var item in Outputs)
             {
-                writer.WriteObjectValue(item0);
+                writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
             writer.WriteEndObject();
@@ -70,7 +70,7 @@ namespace CognitiveSearch.Models
                     case "#Microsoft.Skills.Vision.OcrSkill": return OcrSkill.DeserializeOcrSkill(element);
                 }
             }
-            string odatatype = default;
+            string odataType = default;
             string name = default;
             string description = default;
             string context = default;
@@ -80,7 +80,7 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("@odata.type"))
                 {
-                    odatatype = property.Value.GetString();
+                    odataType = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -145,7 +145,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new Skill(odatatype, name, description, context, inputs, outputs);
+            return new Skill(odataType, name, description, context, inputs, outputs);
         }
     }
 }

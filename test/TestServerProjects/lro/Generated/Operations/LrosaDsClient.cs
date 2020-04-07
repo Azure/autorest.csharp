@@ -18,8 +18,8 @@ namespace lro
 {
     public partial class LrosaDsClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal LrosaDsRestClient RestClient { get; }
         /// <summary> Initializes a new instance of LrosaDsClient for mocking. </summary>
         protected LrosaDsClient()
@@ -29,8 +29,8 @@ namespace lro
         internal LrosaDsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             RestClient = new LrosaDsRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Long running put request, service returns a 400 to the initial request. </summary>
@@ -47,7 +47,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsClient.PutNonRetry400", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsClient.PutNonRetry400", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
@@ -106,7 +106,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsClient.PutNonRetry201Creating400", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsClient.PutNonRetry201Creating400", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
@@ -165,7 +165,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsClient.PutNonRetry201Creating400InvalidJson", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsClient.PutNonRetry201Creating400InvalidJson", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
@@ -224,7 +224,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsClient.PutAsyncRelativeRetry400", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsClient.PutAsyncRelativeRetry400", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
@@ -283,7 +283,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsClient.DeleteNonRetry400", OperationFinalStateVia.Location, createOriginalHttpMessage);
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsClient.DeleteNonRetry400", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
 
         /// <summary> Long running delete request, service returns a 400 with an error body. </summary>
@@ -316,7 +316,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsClient.Delete202NonRetry400", OperationFinalStateVia.Location, createOriginalHttpMessage);
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsClient.Delete202NonRetry400", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
 
         /// <summary> Long running delete request, service returns a 202 with a location header. </summary>
@@ -349,7 +349,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsClient.DeleteAsyncRelativeRetry400", OperationFinalStateVia.Location, createOriginalHttpMessage);
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsClient.DeleteAsyncRelativeRetry400", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -382,7 +382,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsClient.PostNonRetry400", OperationFinalStateVia.Location, createOriginalHttpMessage);
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsClient.PostNonRetry400", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
 
         /// <summary> Long running post request, service returns a 400 with no error body. </summary>
@@ -417,7 +417,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsClient.Post202NonRetry400", OperationFinalStateVia.Location, createOriginalHttpMessage);
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsClient.Post202NonRetry400", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
 
         /// <summary> Long running post request, service returns a 202 with a location header. </summary>
@@ -452,7 +452,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsClient.PostAsyncRelativeRetry400", OperationFinalStateVia.Location, createOriginalHttpMessage);
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsClient.PostAsyncRelativeRetry400", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -487,7 +487,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsClient.PutError201NoProvisioningStatePayload", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsClient.PutError201NoProvisioningStatePayload", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
@@ -546,7 +546,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsClient.PutAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsClient.PutAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
@@ -605,7 +605,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
@@ -664,7 +664,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsClient.Delete204Succeeded", OperationFinalStateVia.Location, createOriginalHttpMessage);
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsClient.Delete204Succeeded", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
 
         /// <summary> Long running delete request, service returns a 204 to the initial request, indicating success. </summary>
@@ -697,7 +697,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsClient.DeleteAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, createOriginalHttpMessage);
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsClient.DeleteAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -730,7 +730,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsClient.Post202NoLocation", OperationFinalStateVia.Location, createOriginalHttpMessage);
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsClient.Post202NoLocation", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request, without a location header. </summary>
@@ -765,7 +765,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsClient.PostAsyncRelativeRetryNoPayload", OperationFinalStateVia.Location, createOriginalHttpMessage);
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsClient.PostAsyncRelativeRetryNoPayload", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -800,7 +800,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsClient.Put200InvalidJson", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsClient.Put200InvalidJson", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
@@ -859,7 +859,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsClient.PutAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsClient.PutAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
@@ -918,7 +918,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Put, "LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
@@ -977,7 +977,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsClient.Delete202RetryInvalidHeader", OperationFinalStateVia.Location, createOriginalHttpMessage);
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsClient.Delete202RetryInvalidHeader", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
@@ -1010,7 +1010,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, createOriginalHttpMessage);
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
@@ -1043,7 +1043,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, createOriginalHttpMessage);
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Delete, "LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -1076,7 +1076,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsClient.Post202RetryInvalidHeader", OperationFinalStateVia.Location, createOriginalHttpMessage);
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsClient.Post202RetryInvalidHeader", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
@@ -1111,7 +1111,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsClient.PostAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, createOriginalHttpMessage);
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsClient.PostAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
@@ -1146,7 +1146,7 @@ namespace lro
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(pipeline, clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, createOriginalHttpMessage);
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>

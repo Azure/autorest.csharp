@@ -18,8 +18,8 @@ namespace lro
     internal partial class LrosaDsRestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of LrosaDsRestClient. </summary>
         public LrosaDsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
@@ -30,13 +30,13 @@ namespace lro
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreatePutNonRetry400Request(Product product)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -58,19 +58,19 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutNonRetry400Async(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry400");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry400");
             scope.Start();
             try
             {
                 using var message = CreatePutNonRetry400Request(product);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 201:
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -85,19 +85,19 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutNonRetry400(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry400");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry400");
             scope.Start();
             try
             {
                 using var message = CreatePutNonRetry400Request(product);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 201:
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -109,7 +109,7 @@ namespace lro
 
         internal HttpMessage CreatePutNonRetry201Creating400Request(Product product)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -131,19 +131,19 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutNonRetry201Creating400Async(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400");
             scope.Start();
             try
             {
                 using var message = CreatePutNonRetry201Creating400Request(product);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 201:
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -158,19 +158,19 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutNonRetry201Creating400(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400");
             scope.Start();
             try
             {
                 using var message = CreatePutNonRetry201Creating400Request(product);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 201:
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -182,7 +182,7 @@ namespace lro
 
         internal HttpMessage CreatePutNonRetry201Creating400InvalidJsonRequest(Product product)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -204,19 +204,19 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutNonRetry201Creating400InvalidJsonAsync(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400InvalidJson");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400InvalidJson");
             scope.Start();
             try
             {
                 using var message = CreatePutNonRetry201Creating400InvalidJsonRequest(product);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 201:
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -231,19 +231,19 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutNonRetry201Creating400InvalidJson(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400InvalidJson");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400InvalidJson");
             scope.Start();
             try
             {
                 using var message = CreatePutNonRetry201Creating400InvalidJsonRequest(product);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 201:
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -255,7 +255,7 @@ namespace lro
 
         internal HttpMessage CreatePutAsyncRelativeRetry400Request(Product product)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -277,18 +277,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutAsyncRelativeRetry400Async(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetry400");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetry400");
             scope.Start();
             try
             {
                 using var message = CreatePutAsyncRelativeRetry400Request(product);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -303,18 +303,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutAsyncRelativeRetry400(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetry400");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetry400");
             scope.Start();
             try
             {
                 using var message = CreatePutAsyncRelativeRetry400Request(product);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -326,7 +326,7 @@ namespace lro
 
         internal HttpMessage CreateDeleteNonRetry400Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -340,18 +340,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DeleteNonRetry400Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.DeleteNonRetry400");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteNonRetry400");
             scope.Start();
             try
             {
                 using var message = CreateDeleteNonRetry400Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -365,18 +365,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DeleteNonRetry400(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.DeleteNonRetry400");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteNonRetry400");
             scope.Start();
             try
             {
                 using var message = CreateDeleteNonRetry400Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -388,7 +388,7 @@ namespace lro
 
         internal HttpMessage CreateDelete202NonRetry400Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -402,18 +402,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Delete202NonRetry400Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Delete202NonRetry400");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Delete202NonRetry400");
             scope.Start();
             try
             {
                 using var message = CreateDelete202NonRetry400Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -427,18 +427,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete202NonRetry400(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Delete202NonRetry400");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Delete202NonRetry400");
             scope.Start();
             try
             {
                 using var message = CreateDelete202NonRetry400Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -450,7 +450,7 @@ namespace lro
 
         internal HttpMessage CreateDeleteAsyncRelativeRetry400Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -464,18 +464,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DeleteAsyncRelativeRetry400Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetry400");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetry400");
             scope.Start();
             try
             {
                 using var message = CreateDeleteAsyncRelativeRetry400Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -489,18 +489,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DeleteAsyncRelativeRetry400(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetry400");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetry400");
             scope.Start();
             try
             {
                 using var message = CreateDeleteAsyncRelativeRetry400Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -512,7 +512,7 @@ namespace lro
 
         internal HttpMessage CreatePostNonRetry400Request(Product product)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -534,18 +534,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostNonRetry400Async(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostNonRetry400");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostNonRetry400");
             scope.Start();
             try
             {
                 using var message = CreatePostNonRetry400Request(product);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -560,18 +560,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostNonRetry400(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostNonRetry400");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostNonRetry400");
             scope.Start();
             try
             {
                 using var message = CreatePostNonRetry400Request(product);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -583,7 +583,7 @@ namespace lro
 
         internal HttpMessage CreatePost202NonRetry400Request(Product product)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -605,18 +605,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post202NonRetry400Async(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Post202NonRetry400");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Post202NonRetry400");
             scope.Start();
             try
             {
                 using var message = CreatePost202NonRetry400Request(product);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -631,18 +631,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post202NonRetry400(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Post202NonRetry400");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Post202NonRetry400");
             scope.Start();
             try
             {
                 using var message = CreatePost202NonRetry400Request(product);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -654,7 +654,7 @@ namespace lro
 
         internal HttpMessage CreatePostAsyncRelativeRetry400Request(Product product)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -676,18 +676,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostAsyncRelativeRetry400Async(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetry400");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetry400");
             scope.Start();
             try
             {
                 using var message = CreatePostAsyncRelativeRetry400Request(product);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -702,18 +702,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostAsyncRelativeRetry400(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetry400");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetry400");
             scope.Start();
             try
             {
                 using var message = CreatePostAsyncRelativeRetry400Request(product);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -725,7 +725,7 @@ namespace lro
 
         internal HttpMessage CreatePutError201NoProvisioningStatePayloadRequest(Product product)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -747,19 +747,19 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutError201NoProvisioningStatePayloadAsync(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutError201NoProvisioningStatePayload");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutError201NoProvisioningStatePayload");
             scope.Start();
             try
             {
                 using var message = CreatePutError201NoProvisioningStatePayloadRequest(product);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 201:
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -774,19 +774,19 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutError201NoProvisioningStatePayload(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutError201NoProvisioningStatePayload");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutError201NoProvisioningStatePayload");
             scope.Start();
             try
             {
                 using var message = CreatePutError201NoProvisioningStatePayloadRequest(product);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 201:
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -798,7 +798,7 @@ namespace lro
 
         internal HttpMessage CreatePutAsyncRelativeRetryNoStatusRequest(Product product)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -820,18 +820,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutAsyncRelativeRetryNoStatusAsync(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatus");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatus");
             scope.Start();
             try
             {
                 using var message = CreatePutAsyncRelativeRetryNoStatusRequest(product);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -846,18 +846,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutAsyncRelativeRetryNoStatus(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatus");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatus");
             scope.Start();
             try
             {
                 using var message = CreatePutAsyncRelativeRetryNoStatusRequest(product);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -869,7 +869,7 @@ namespace lro
 
         internal HttpMessage CreatePutAsyncRelativeRetryNoStatusPayloadRequest(Product product)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -891,18 +891,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutAsyncRelativeRetryNoStatusPayloadAsync(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload");
             scope.Start();
             try
             {
                 using var message = CreatePutAsyncRelativeRetryNoStatusPayloadRequest(product);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -917,18 +917,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutAsyncRelativeRetryNoStatusPayload(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload");
             scope.Start();
             try
             {
                 using var message = CreatePutAsyncRelativeRetryNoStatusPayloadRequest(product);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -940,7 +940,7 @@ namespace lro
 
         internal HttpMessage CreateDelete204SucceededRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -954,18 +954,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Delete204SucceededAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Delete204Succeeded");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Delete204Succeeded");
             scope.Start();
             try
             {
                 using var message = CreateDelete204SucceededRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 204:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -979,18 +979,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete204Succeeded(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Delete204Succeeded");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Delete204Succeeded");
             scope.Start();
             try
             {
                 using var message = CreateDelete204SucceededRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 204:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1002,7 +1002,7 @@ namespace lro
 
         internal HttpMessage CreateDeleteAsyncRelativeRetryNoStatusRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -1016,18 +1016,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DeleteAsyncRelativeRetryNoStatusAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryNoStatus");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryNoStatus");
             scope.Start();
             try
             {
                 using var message = CreateDeleteAsyncRelativeRetryNoStatusRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1041,18 +1041,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DeleteAsyncRelativeRetryNoStatus(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryNoStatus");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryNoStatus");
             scope.Start();
             try
             {
                 using var message = CreateDeleteAsyncRelativeRetryNoStatusRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1064,7 +1064,7 @@ namespace lro
 
         internal HttpMessage CreatePost202NoLocationRequest(Product product)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1086,18 +1086,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post202NoLocationAsync(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Post202NoLocation");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Post202NoLocation");
             scope.Start();
             try
             {
                 using var message = CreatePost202NoLocationRequest(product);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1112,18 +1112,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post202NoLocation(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Post202NoLocation");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Post202NoLocation");
             scope.Start();
             try
             {
                 using var message = CreatePost202NoLocationRequest(product);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1135,7 +1135,7 @@ namespace lro
 
         internal HttpMessage CreatePostAsyncRelativeRetryNoPayloadRequest(Product product)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1157,18 +1157,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostAsyncRelativeRetryNoPayloadAsync(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryNoPayload");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryNoPayload");
             scope.Start();
             try
             {
                 using var message = CreatePostAsyncRelativeRetryNoPayloadRequest(product);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1183,18 +1183,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostAsyncRelativeRetryNoPayload(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryNoPayload");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryNoPayload");
             scope.Start();
             try
             {
                 using var message = CreatePostAsyncRelativeRetryNoPayloadRequest(product);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1206,7 +1206,7 @@ namespace lro
 
         internal HttpMessage CreatePut200InvalidJsonRequest(Product product)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1228,18 +1228,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Put200InvalidJsonAsync(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Put200InvalidJson");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Put200InvalidJson");
             scope.Start();
             try
             {
                 using var message = CreatePut200InvalidJsonRequest(product);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1254,18 +1254,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put200InvalidJson(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Put200InvalidJson");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Put200InvalidJson");
             scope.Start();
             try
             {
                 using var message = CreatePut200InvalidJsonRequest(product);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1277,7 +1277,7 @@ namespace lro
 
         internal HttpMessage CreatePutAsyncRelativeRetryInvalidHeaderRequest(Product product)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1299,18 +1299,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutAsyncRelativeRetryInvalidHeaderAsync(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidHeader");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidHeader");
             scope.Start();
             try
             {
                 using var message = CreatePutAsyncRelativeRetryInvalidHeaderRequest(product);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1325,18 +1325,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutAsyncRelativeRetryInvalidHeader(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidHeader");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidHeader");
             scope.Start();
             try
             {
                 using var message = CreatePutAsyncRelativeRetryInvalidHeaderRequest(product);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1348,7 +1348,7 @@ namespace lro
 
         internal HttpMessage CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(Product product)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1370,18 +1370,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutAsyncRelativeRetryInvalidJsonPollingAsync(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
             try
             {
                 using var message = CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(product);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1396,18 +1396,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutAsyncRelativeRetryInvalidJsonPolling(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
             try
             {
                 using var message = CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(product);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1419,7 +1419,7 @@ namespace lro
 
         internal HttpMessage CreateDelete202RetryInvalidHeaderRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -1433,18 +1433,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Delete202RetryInvalidHeaderAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Delete202RetryInvalidHeader");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Delete202RetryInvalidHeader");
             scope.Start();
             try
             {
                 using var message = CreateDelete202RetryInvalidHeaderRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1458,18 +1458,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete202RetryInvalidHeader(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Delete202RetryInvalidHeader");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Delete202RetryInvalidHeader");
             scope.Start();
             try
             {
                 using var message = CreateDelete202RetryInvalidHeaderRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1481,7 +1481,7 @@ namespace lro
 
         internal HttpMessage CreateDeleteAsyncRelativeRetryInvalidHeaderRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -1495,18 +1495,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DeleteAsyncRelativeRetryInvalidHeaderAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader");
             scope.Start();
             try
             {
                 using var message = CreateDeleteAsyncRelativeRetryInvalidHeaderRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1520,18 +1520,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DeleteAsyncRelativeRetryInvalidHeader(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader");
             scope.Start();
             try
             {
                 using var message = CreateDeleteAsyncRelativeRetryInvalidHeaderRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1543,7 +1543,7 @@ namespace lro
 
         internal HttpMessage CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -1557,18 +1557,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DeleteAsyncRelativeRetryInvalidJsonPollingAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
             try
             {
                 using var message = CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1582,18 +1582,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DeleteAsyncRelativeRetryInvalidJsonPolling(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
             try
             {
                 using var message = CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1605,7 +1605,7 @@ namespace lro
 
         internal HttpMessage CreatePost202RetryInvalidHeaderRequest(Product product)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1627,18 +1627,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post202RetryInvalidHeaderAsync(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Post202RetryInvalidHeader");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Post202RetryInvalidHeader");
             scope.Start();
             try
             {
                 using var message = CreatePost202RetryInvalidHeaderRequest(product);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1653,18 +1653,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post202RetryInvalidHeader(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.Post202RetryInvalidHeader");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Post202RetryInvalidHeader");
             scope.Start();
             try
             {
                 using var message = CreatePost202RetryInvalidHeaderRequest(product);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1676,7 +1676,7 @@ namespace lro
 
         internal HttpMessage CreatePostAsyncRelativeRetryInvalidHeaderRequest(Product product)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1698,18 +1698,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostAsyncRelativeRetryInvalidHeaderAsync(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidHeader");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidHeader");
             scope.Start();
             try
             {
                 using var message = CreatePostAsyncRelativeRetryInvalidHeaderRequest(product);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1724,18 +1724,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostAsyncRelativeRetryInvalidHeader(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidHeader");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidHeader");
             scope.Start();
             try
             {
                 using var message = CreatePostAsyncRelativeRetryInvalidHeaderRequest(product);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1747,7 +1747,7 @@ namespace lro
 
         internal HttpMessage CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(Product product)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1769,18 +1769,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostAsyncRelativeRetryInvalidJsonPollingAsync(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
             try
             {
                 using var message = CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(product);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1795,18 +1795,18 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostAsyncRelativeRetryInvalidJsonPolling(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling");
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
             try
             {
                 using var message = CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(product);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

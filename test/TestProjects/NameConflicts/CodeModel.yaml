@@ -11,7 +11,7 @@ schemas: !<!Schemas>
         name: String
         description: simple string
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_110
+  - !<!StringSchema> &ref_113
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1061,6 +1061,36 @@ schemas: !<!Schemas>
         name: ClassYield
         description: ''
     protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_109
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ClassToString
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_110
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ClassEquals
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_111
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ClassGetHashCode
+        description: ''
+    protocol: !<!Protocols> {}
   - !<!StringSchema> &ref_2
     type: string
     apiVersions:
@@ -1097,7 +1127,7 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   constants:
-  - !<!ConstantSchema> &ref_111
+  - !<!ConstantSchema> &ref_114
     type: constant
     value: !<!ConstantValue> 
       value: application/json
@@ -1988,6 +2018,30 @@ schemas: !<!Schemas>
           name: system
           description: ''
       protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_109
+      serializedName: ToString
+      language: !<!Languages> 
+        default:
+          name: toString
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_110
+      serializedName: Equals
+      language: !<!Languages> 
+        default:
+          name: equals
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_111
+      serializedName: GetHashCode
+      language: !<!Languages> 
+        default:
+          name: getHashCode
+          description: ''
+      protocol: !<!Protocols> {}
     serializationFormats:
     - json
     usage:
@@ -2001,7 +2055,7 @@ schemas: !<!Schemas>
     protocol: !<!Protocols> {}
   - *ref_3
 globalParameters:
-- !<!Parameter> &ref_109
+- !<!Parameter> &ref_112
   schema: *ref_0
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
@@ -2025,9 +2079,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: 1.0.0
     parameters:
-    - *ref_109
-    - !<!Parameter> &ref_113
-      schema: *ref_110
+    - *ref_112
+    - !<!Parameter> &ref_116
+      schema: *ref_113
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -2038,8 +2092,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: query
-    - !<!Parameter> &ref_114
-      schema: *ref_110
+    - !<!Parameter> &ref_117
+      schema: *ref_113
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -2050,8 +2104,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: query
-    - !<!Parameter> &ref_115
-      schema: *ref_110
+    - !<!Parameter> &ref_118
+      schema: *ref_113
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -2062,8 +2116,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: query
-    - !<!Parameter> &ref_116
-      schema: *ref_110
+    - !<!Parameter> &ref_119
+      schema: *ref_113
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -2074,11 +2128,35 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: query
+    - !<!Parameter> &ref_120
+      schema: *ref_113
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: pipeline
+          description: ''
+          serializedName: pipeline
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - !<!Parameter> &ref_121
+      schema: *ref_113
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: clientDiagnostics
+          description: ''
+          serializedName: clientDiagnostics
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_111
+        schema: *ref_114
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -2089,7 +2167,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_112
+      - !<!Parameter> &ref_115
         schema: *ref_1
         implementation: Method
         required: true
@@ -2102,7 +2180,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_112
+      - *ref_115
       language: !<!Languages> 
         default:
           name: ''
@@ -2116,10 +2194,12 @@ operationGroups:
           - application/json
           uri: '{$host}'
     signatureParameters:
-    - *ref_113
-    - *ref_114
-    - *ref_115
     - *ref_116
+    - *ref_117
+    - *ref_118
+    - *ref_119
+    - *ref_120
+    - *ref_121
     responses:
     - !<!SchemaResponse> 
       schema: *ref_3

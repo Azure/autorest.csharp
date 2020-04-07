@@ -23,8 +23,8 @@ namespace Azure.Storage.Management
         private string subscriptionId;
         private string host;
         private string apiVersion;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of StorageAccountsRestClient. </summary>
         public StorageAccountsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
@@ -45,13 +45,13 @@ namespace Azure.Storage.Management
             this.subscriptionId = subscriptionId;
             this.host = host;
             this.apiVersion = apiVersion;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateCheckNameAvailabilityRequest(string name, string type)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -84,12 +84,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(type));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.CheckNameAvailability");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.CheckNameAvailability");
             scope.Start();
             try
             {
                 using var message = CreateCheckNameAvailabilityRequest(name, type);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -107,7 +107,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -132,12 +132,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(type));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.CheckNameAvailability");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.CheckNameAvailability");
             scope.Start();
             try
             {
                 using var message = CreateCheckNameAvailabilityRequest(name, type);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -155,7 +155,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -167,7 +167,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateCreateRequest(string resourceGroupName, string accountName, StorageAccountCreateParameters parameters)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -207,19 +207,19 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.Create");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.Create");
             scope.Start();
             try
             {
                 using var message = CreateCreateRequest(resourceGroupName, accountName, parameters);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -249,19 +249,19 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.Create");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.Create");
             scope.Start();
             try
             {
                 using var message = CreateCreateRequest(resourceGroupName, accountName, parameters);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -273,7 +273,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateDeleteRequest(string resourceGroupName, string accountName)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -304,19 +304,19 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.Delete");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.Delete");
             scope.Start();
             try
             {
                 using var message = CreateDeleteRequest(resourceGroupName, accountName);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                     case 204:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -341,19 +341,19 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.Delete");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.Delete");
             scope.Start();
             try
             {
                 using var message = CreateDeleteRequest(resourceGroupName, accountName);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                     case 204:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -365,7 +365,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateGetPropertiesRequest(string resourceGroupName, string accountName, StorageAccountExpand? expand)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -401,12 +401,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.GetProperties");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.GetProperties");
             scope.Start();
             try
             {
                 using var message = CreateGetPropertiesRequest(resourceGroupName, accountName, expand);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -424,7 +424,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -450,12 +450,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.GetProperties");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.GetProperties");
             scope.Start();
             try
             {
                 using var message = CreateGetPropertiesRequest(resourceGroupName, accountName, expand);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -473,7 +473,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -485,7 +485,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateUpdateRequest(string resourceGroupName, string accountName, StorageAccountUpdateParameters parameters)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -525,12 +525,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.Update");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.Update");
             scope.Start();
             try
             {
                 using var message = CreateUpdateRequest(resourceGroupName, accountName, parameters);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -548,7 +548,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -578,12 +578,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.Update");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.Update");
             scope.Start();
             try
             {
                 using var message = CreateUpdateRequest(resourceGroupName, accountName, parameters);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -601,7 +601,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -613,7 +613,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateListRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -630,12 +630,12 @@ namespace Azure.Storage.Management
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<StorageAccountListResult>> ListAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.List");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.List");
             scope.Start();
             try
             {
                 using var message = CreateListRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -653,7 +653,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -667,12 +667,12 @@ namespace Azure.Storage.Management
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<StorageAccountListResult> List(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.List");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.List");
             scope.Start();
             try
             {
                 using var message = CreateListRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -690,7 +690,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -702,7 +702,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateListByResourceGroupRequest(string resourceGroupName)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -727,12 +727,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.ListByResourceGroup");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.ListByResourceGroup");
             scope.Start();
             try
             {
                 using var message = CreateListByResourceGroupRequest(resourceGroupName);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -750,7 +750,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -770,12 +770,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.ListByResourceGroup");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.ListByResourceGroup");
             scope.Start();
             try
             {
                 using var message = CreateListByResourceGroupRequest(resourceGroupName);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -793,7 +793,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -805,7 +805,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateListKeysRequest(string resourceGroupName, string accountName)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -838,12 +838,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.ListKeys");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.ListKeys");
             scope.Start();
             try
             {
                 using var message = CreateListKeysRequest(resourceGroupName, accountName);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -861,7 +861,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -886,12 +886,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.ListKeys");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.ListKeys");
             scope.Start();
             try
             {
                 using var message = CreateListKeysRequest(resourceGroupName, accountName);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -909,7 +909,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -921,7 +921,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateRegenerateKeyRequest(string resourceGroupName, string accountName, string keyName)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -963,12 +963,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(keyName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.RegenerateKey");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.RegenerateKey");
             scope.Start();
             try
             {
                 using var message = CreateRegenerateKeyRequest(resourceGroupName, accountName, keyName);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -986,7 +986,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1016,12 +1016,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(keyName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.RegenerateKey");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.RegenerateKey");
             scope.Start();
             try
             {
                 using var message = CreateRegenerateKeyRequest(resourceGroupName, accountName, keyName);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1039,7 +1039,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1051,7 +1051,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateListAccountSASRequest(string resourceGroupName, string accountName, AccountSasParameters parameters)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1092,12 +1092,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.ListAccountSAS");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.ListAccountSAS");
             scope.Start();
             try
             {
                 using var message = CreateListAccountSASRequest(resourceGroupName, accountName, parameters);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1115,7 +1115,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1145,12 +1145,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.ListAccountSAS");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.ListAccountSAS");
             scope.Start();
             try
             {
                 using var message = CreateListAccountSASRequest(resourceGroupName, accountName, parameters);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1168,7 +1168,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1180,7 +1180,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateListServiceSASRequest(string resourceGroupName, string accountName, ServiceSasParameters parameters)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1221,12 +1221,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.ListServiceSAS");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.ListServiceSAS");
             scope.Start();
             try
             {
                 using var message = CreateListServiceSASRequest(resourceGroupName, accountName, parameters);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1244,7 +1244,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1274,12 +1274,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.ListServiceSAS");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.ListServiceSAS");
             scope.Start();
             try
             {
                 using var message = CreateListServiceSASRequest(resourceGroupName, accountName, parameters);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1297,7 +1297,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1309,7 +1309,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateFailoverRequest(string resourceGroupName, string accountName)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1341,19 +1341,19 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.Failover");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.Failover");
             scope.Start();
             try
             {
                 using var message = CreateFailoverRequest(resourceGroupName, accountName);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1378,19 +1378,19 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.Failover");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.Failover");
             scope.Start();
             try
             {
                 using var message = CreateFailoverRequest(resourceGroupName, accountName);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1402,7 +1402,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateRestoreBlobRangesRequest(string resourceGroupName, string accountName, DateTimeOffset timeToRestore, IEnumerable<BlobRestoreRange> blobRanges)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1445,19 +1445,19 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(blobRanges));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.RestoreBlobRanges");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.RestoreBlobRanges");
             scope.Start();
             try
             {
                 using var message = CreateRestoreBlobRangesRequest(resourceGroupName, accountName, timeToRestore, blobRanges);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1488,19 +1488,19 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(blobRanges));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.RestoreBlobRanges");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.RestoreBlobRanges");
             scope.Start();
             try
             {
                 using var message = CreateRestoreBlobRangesRequest(resourceGroupName, accountName, timeToRestore, blobRanges);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1512,7 +1512,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateRevokeUserDelegationKeysRequest(string resourceGroupName, string accountName)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1544,18 +1544,18 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.RevokeUserDelegationKeys");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.RevokeUserDelegationKeys");
             scope.Start();
             try
             {
                 using var message = CreateRevokeUserDelegationKeysRequest(resourceGroupName, accountName);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1580,18 +1580,18 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.RevokeUserDelegationKeys");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.RevokeUserDelegationKeys");
             scope.Start();
             try
             {
                 using var message = CreateRevokeUserDelegationKeysRequest(resourceGroupName, accountName);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1603,7 +1603,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateListNextPageRequest(string nextLink)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1622,12 +1622,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.List");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.List");
             scope.Start();
             try
             {
                 using var message = CreateListNextPageRequest(nextLink);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1645,7 +1645,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1665,12 +1665,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.List");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.List");
             scope.Start();
             try
             {
                 using var message = CreateListNextPageRequest(nextLink);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1688,7 +1688,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1700,7 +1700,7 @@ namespace Azure.Storage.Management
 
         internal HttpMessage CreateListByResourceGroupNextPageRequest(string nextLink, string resourceGroupName)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1724,12 +1724,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.ListByResourceGroup");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.ListByResourceGroup");
             scope.Start();
             try
             {
                 using var message = CreateListByResourceGroupNextPageRequest(nextLink, resourceGroupName);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1747,7 +1747,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1772,12 +1772,12 @@ namespace Azure.Storage.Management
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("StorageAccountsClient.ListByResourceGroup");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.ListByResourceGroup");
             scope.Start();
             try
             {
                 using var message = CreateListByResourceGroupNextPageRequest(nextLink, resourceGroupName);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1795,7 +1795,7 @@ namespace Azure.Storage.Management
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

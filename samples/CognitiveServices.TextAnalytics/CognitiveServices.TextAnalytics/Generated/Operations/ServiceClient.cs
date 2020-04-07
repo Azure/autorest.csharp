@@ -15,8 +15,8 @@ namespace CognitiveServices.TextAnalytics
 {
     public partial class ServiceClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal ServiceRestClient RestClient { get; }
         /// <summary> Initializes a new instance of ServiceClient for mocking. </summary>
         protected ServiceClient()
@@ -26,8 +26,8 @@ namespace CognitiveServices.TextAnalytics
         internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint)
         {
             RestClient = new ServiceRestClient(clientDiagnostics, pipeline, endpoint);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> The API returns a list of general named entities in a given document. For the list of supported entity types, check &lt;a href=&quot;https://aka.ms/taner&quot;&gt;Supported Entity Types in Text Analytics API&lt;/a&gt;. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages. </summary>

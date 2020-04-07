@@ -50,7 +50,7 @@ namespace CognitiveSearch.Models
             TokenizerName tokenizer = default;
             IList<TokenFilterName> tokenFilters = default;
             IList<string> charFilters = default;
-            string odatatype = default;
+            string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -96,7 +96,7 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    odatatype = property.Value.GetString();
+                    odataType = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -105,7 +105,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new CustomAnalyzer(odatatype, name, tokenizer, tokenFilters, charFilters);
+            return new CustomAnalyzer(odataType, name, tokenizer, tokenFilters, charFilters);
         }
     }
 }

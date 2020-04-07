@@ -19,8 +19,8 @@ namespace NameConflicts
     internal partial class ServiceRestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of ServiceRestClient. </summary>
         public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
@@ -31,13 +31,13 @@ namespace NameConflicts
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateOperationRequest(string request, string message, string scope, string uri, Class @class)
+        internal HttpMessage CreateOperationRequest(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class)
         {
-            var message0 = pipeline.CreateMessage();
+            var message0 = _pipeline.CreateMessage();
             var request0 = message0.Request;
             request0.Method = RequestMethod.Patch;
             var uri0 = new RawRequestUriBuilder();
@@ -47,6 +47,8 @@ namespace NameConflicts
             uri0.AppendQuery("message", message, true);
             uri0.AppendQuery("scope", scope, true);
             uri0.AppendQuery("uri", uri, true);
+            uri0.AppendQuery("pipeline", pipeline, true);
+            uri0.AppendQuery("clientDiagnostics", clientDiagnostics, true);
             request0.Uri = uri0;
             request0.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
@@ -59,9 +61,11 @@ namespace NameConflicts
         /// <param name="message"> The String to use. </param>
         /// <param name="scope"> The String to use. </param>
         /// <param name="uri"> The String to use. </param>
+        /// <param name="pipeline"> The String to use. </param>
+        /// <param name="clientDiagnostics"> The String to use. </param>
         /// <param name="class"> The Class to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Struct>> OperationAsync(string request, string message, string scope, string uri, Class @class, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<Struct>> OperationAsync(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
         {
             if (request == null)
             {
@@ -79,17 +83,25 @@ namespace NameConflicts
             {
                 throw new ArgumentNullException(nameof(uri));
             }
+            if (pipeline == null)
+            {
+                throw new ArgumentNullException(nameof(pipeline));
+            }
+            if (clientDiagnostics == null)
+            {
+                throw new ArgumentNullException(nameof(clientDiagnostics));
+            }
             if (@class == null)
             {
                 throw new ArgumentNullException(nameof(@class));
             }
 
-            using var scope0 = clientDiagnostics.CreateScope("ServiceClient.Operation");
+            using var scope0 = _clientDiagnostics.CreateScope("ServiceClient.Operation");
             scope0.Start();
             try
             {
-                using var message0 = CreateOperationRequest(request, message, scope, uri, @class);
-                await pipeline.SendAsync(message0, cancellationToken).ConfigureAwait(false);
+                using var message0 = CreateOperationRequest(request, message, scope, uri, pipeline, clientDiagnostics, @class);
+                await _pipeline.SendAsync(message0, cancellationToken).ConfigureAwait(false);
                 switch (message0.Response.Status)
                 {
                     case 200:
@@ -107,7 +119,7 @@ namespace NameConflicts
                             return Response.FromValue(value, message0.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message0.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message0.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -121,9 +133,11 @@ namespace NameConflicts
         /// <param name="message"> The String to use. </param>
         /// <param name="scope"> The String to use. </param>
         /// <param name="uri"> The String to use. </param>
+        /// <param name="pipeline"> The String to use. </param>
+        /// <param name="clientDiagnostics"> The String to use. </param>
         /// <param name="class"> The Class to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Struct> Operation(string request, string message, string scope, string uri, Class @class, CancellationToken cancellationToken = default)
+        public Response<Struct> Operation(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
         {
             if (request == null)
             {
@@ -141,17 +155,25 @@ namespace NameConflicts
             {
                 throw new ArgumentNullException(nameof(uri));
             }
+            if (pipeline == null)
+            {
+                throw new ArgumentNullException(nameof(pipeline));
+            }
+            if (clientDiagnostics == null)
+            {
+                throw new ArgumentNullException(nameof(clientDiagnostics));
+            }
             if (@class == null)
             {
                 throw new ArgumentNullException(nameof(@class));
             }
 
-            using var scope0 = clientDiagnostics.CreateScope("ServiceClient.Operation");
+            using var scope0 = _clientDiagnostics.CreateScope("ServiceClient.Operation");
             scope0.Start();
             try
             {
-                using var message0 = CreateOperationRequest(request, message, scope, uri, @class);
-                pipeline.Send(message0, cancellationToken);
+                using var message0 = CreateOperationRequest(request, message, scope, uri, pipeline, clientDiagnostics, @class);
+                _pipeline.Send(message0, cancellationToken);
                 switch (message0.Response.Status)
                 {
                     case 200:
@@ -169,7 +191,7 @@ namespace NameConflicts
                             return Response.FromValue(value, message0.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message0.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message0.Response);
                 }
             }
             catch (Exception e)

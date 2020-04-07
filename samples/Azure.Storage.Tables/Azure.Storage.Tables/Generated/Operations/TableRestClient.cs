@@ -21,8 +21,8 @@ namespace Azure.Storage.Tables
     {
         private string url;
         private string version;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of TableRestClient. </summary>
         public TableRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string url, string version = "2018-10-10")
@@ -38,13 +38,13 @@ namespace Azure.Storage.Tables
 
             this.url = url;
             this.version = version;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateQueryRequest(string requestId, QueryOptions queryOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -82,12 +82,12 @@ namespace Azure.Storage.Tables
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<TableQueryResponse, TableQueryHeaders>> QueryAsync(string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("TableClient.Query");
+            using var scope = _clientDiagnostics.CreateScope("TableClient.Query");
             scope.Start();
             try
             {
                 using var message = CreateQueryRequest(requestId, queryOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new TableQueryHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -106,7 +106,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -122,12 +122,12 @@ namespace Azure.Storage.Tables
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<TableQueryResponse, TableQueryHeaders> Query(string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("TableClient.Query");
+            using var scope = _clientDiagnostics.CreateScope("TableClient.Query");
             scope.Start();
             try
             {
                 using var message = CreateQueryRequest(requestId, queryOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new TableQueryHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -146,7 +146,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -158,7 +158,7 @@ namespace Azure.Storage.Tables
 
         internal HttpMessage CreateCreateRequest(TableProperties tableProperties, string requestId, QueryOptions queryOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -194,12 +194,12 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(tableProperties));
             }
 
-            using var scope = clientDiagnostics.CreateScope("TableClient.Create");
+            using var scope = _clientDiagnostics.CreateScope("TableClient.Create");
             scope.Start();
             try
             {
                 using var message = CreateCreateRequest(tableProperties, requestId, queryOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new TableCreateHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -220,7 +220,7 @@ namespace Azure.Storage.Tables
                     case 204:
                         return ResponseWithHeaders.FromValue<TableResponse, TableCreateHeaders>(null, headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -242,12 +242,12 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(tableProperties));
             }
 
-            using var scope = clientDiagnostics.CreateScope("TableClient.Create");
+            using var scope = _clientDiagnostics.CreateScope("TableClient.Create");
             scope.Start();
             try
             {
                 using var message = CreateCreateRequest(tableProperties, requestId, queryOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new TableCreateHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -268,7 +268,7 @@ namespace Azure.Storage.Tables
                     case 204:
                         return ResponseWithHeaders.FromValue<TableResponse, TableCreateHeaders>(null, headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -280,7 +280,7 @@ namespace Azure.Storage.Tables
 
         internal HttpMessage CreateDeleteRequest(string table, string requestId)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -308,19 +308,19 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = clientDiagnostics.CreateScope("TableClient.Delete");
+            using var scope = _clientDiagnostics.CreateScope("TableClient.Delete");
             scope.Start();
             try
             {
                 using var message = CreateDeleteRequest(table, requestId);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new TableDeleteHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 204:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -341,19 +341,19 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = clientDiagnostics.CreateScope("TableClient.Delete");
+            using var scope = _clientDiagnostics.CreateScope("TableClient.Delete");
             scope.Start();
             try
             {
                 using var message = CreateDeleteRequest(table, requestId);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new TableDeleteHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 204:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -365,7 +365,7 @@ namespace Azure.Storage.Tables
 
         internal HttpMessage CreateQueryEntitiesRequest(string table, int? timeout, string requestId, QueryOptions queryOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -416,12 +416,12 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = clientDiagnostics.CreateScope("TableClient.QueryEntities");
+            using var scope = _clientDiagnostics.CreateScope("TableClient.QueryEntities");
             scope.Start();
             try
             {
                 using var message = CreateQueryEntitiesRequest(table, timeout, requestId, queryOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new TableQueryEntitiesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -440,7 +440,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -463,12 +463,12 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = clientDiagnostics.CreateScope("TableClient.QueryEntities");
+            using var scope = _clientDiagnostics.CreateScope("TableClient.QueryEntities");
             scope.Start();
             try
             {
                 using var message = CreateQueryEntitiesRequest(table, timeout, requestId, queryOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new TableQueryEntitiesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -487,7 +487,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -499,7 +499,7 @@ namespace Azure.Storage.Tables
 
         internal HttpMessage CreateQueryEntitiesWithPartitionAndRowKeyRequest(string table, string partitionKey, string rowKey, int? timeout, string requestId, QueryOptions queryOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -560,12 +560,12 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(rowKey));
             }
 
-            using var scope = clientDiagnostics.CreateScope("TableClient.QueryEntitiesWithPartitionAndRowKey");
+            using var scope = _clientDiagnostics.CreateScope("TableClient.QueryEntitiesWithPartitionAndRowKey");
             scope.Start();
             try
             {
                 using var message = CreateQueryEntitiesWithPartitionAndRowKeyRequest(table, partitionKey, rowKey, timeout, requestId, queryOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new TableQueryEntitiesWithPartitionAndRowKeyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -584,7 +584,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -617,12 +617,12 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(rowKey));
             }
 
-            using var scope = clientDiagnostics.CreateScope("TableClient.QueryEntitiesWithPartitionAndRowKey");
+            using var scope = _clientDiagnostics.CreateScope("TableClient.QueryEntitiesWithPartitionAndRowKey");
             scope.Start();
             try
             {
                 using var message = CreateQueryEntitiesWithPartitionAndRowKeyRequest(table, partitionKey, rowKey, timeout, requestId, queryOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new TableQueryEntitiesWithPartitionAndRowKeyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -641,7 +641,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -653,7 +653,7 @@ namespace Azure.Storage.Tables
 
         internal HttpMessage CreateUpdateEntityRequest(string table, string partitionKey, string rowKey, int? timeout, string requestId, IDictionary<string, object> tableEntityProperties, QueryOptions queryOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -720,19 +720,19 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(rowKey));
             }
 
-            using var scope = clientDiagnostics.CreateScope("TableClient.UpdateEntity");
+            using var scope = _clientDiagnostics.CreateScope("TableClient.UpdateEntity");
             scope.Start();
             try
             {
                 using var message = CreateUpdateEntityRequest(table, partitionKey, rowKey, timeout, requestId, tableEntityProperties, queryOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new TableUpdateEntityHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -766,19 +766,19 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(rowKey));
             }
 
-            using var scope = clientDiagnostics.CreateScope("TableClient.UpdateEntity");
+            using var scope = _clientDiagnostics.CreateScope("TableClient.UpdateEntity");
             scope.Start();
             try
             {
                 using var message = CreateUpdateEntityRequest(table, partitionKey, rowKey, timeout, requestId, tableEntityProperties, queryOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new TableUpdateEntityHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -790,7 +790,7 @@ namespace Azure.Storage.Tables
 
         internal HttpMessage CreateDeleteEntityRequest(string table, string partitionKey, string rowKey, int? timeout, string requestId, QueryOptions queryOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -843,19 +843,19 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(rowKey));
             }
 
-            using var scope = clientDiagnostics.CreateScope("TableClient.DeleteEntity");
+            using var scope = _clientDiagnostics.CreateScope("TableClient.DeleteEntity");
             scope.Start();
             try
             {
                 using var message = CreateDeleteEntityRequest(table, partitionKey, rowKey, timeout, requestId, queryOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new TableDeleteEntityHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 204:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -888,19 +888,19 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(rowKey));
             }
 
-            using var scope = clientDiagnostics.CreateScope("TableClient.DeleteEntity");
+            using var scope = _clientDiagnostics.CreateScope("TableClient.DeleteEntity");
             scope.Start();
             try
             {
                 using var message = CreateDeleteEntityRequest(table, partitionKey, rowKey, timeout, requestId, queryOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new TableDeleteEntityHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 204:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -912,7 +912,7 @@ namespace Azure.Storage.Tables
 
         internal HttpMessage CreateInsertEntityRequest(string table, int? timeout, string requestId, IDictionary<string, object> tableEntityProperties, QueryOptions queryOptions)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -964,12 +964,12 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = clientDiagnostics.CreateScope("TableClient.InsertEntity");
+            using var scope = _clientDiagnostics.CreateScope("TableClient.InsertEntity");
             scope.Start();
             try
             {
                 using var message = CreateInsertEntityRequest(table, timeout, requestId, tableEntityProperties, queryOptions);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new TableInsertEntityHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -1000,7 +1000,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1024,12 +1024,12 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = clientDiagnostics.CreateScope("TableClient.InsertEntity");
+            using var scope = _clientDiagnostics.CreateScope("TableClient.InsertEntity");
             scope.Start();
             try
             {
                 using var message = CreateInsertEntityRequest(table, timeout, requestId, tableEntityProperties, queryOptions);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new TableInsertEntityHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -1060,7 +1060,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1072,7 +1072,7 @@ namespace Azure.Storage.Tables
 
         internal HttpMessage CreateGetAccessPolicyRequest(string table, int? timeout, string requestId)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1105,12 +1105,12 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = clientDiagnostics.CreateScope("TableClient.GetAccessPolicy");
+            using var scope = _clientDiagnostics.CreateScope("TableClient.GetAccessPolicy");
             scope.Start();
             try
             {
                 using var message = CreateGetAccessPolicyRequest(table, timeout, requestId);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new TableGetAccessPolicyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -1130,7 +1130,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1152,12 +1152,12 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = clientDiagnostics.CreateScope("TableClient.GetAccessPolicy");
+            using var scope = _clientDiagnostics.CreateScope("TableClient.GetAccessPolicy");
             scope.Start();
             try
             {
                 using var message = CreateGetAccessPolicyRequest(table, timeout, requestId);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new TableGetAccessPolicyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -1177,7 +1177,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1189,7 +1189,7 @@ namespace Azure.Storage.Tables
 
         internal HttpMessage CreateSetAccessPolicyRequest(string table, int? timeout, string requestId, IEnumerable<SignedIdentifier> tableAcl)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1235,19 +1235,19 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = clientDiagnostics.CreateScope("TableClient.SetAccessPolicy");
+            using var scope = _clientDiagnostics.CreateScope("TableClient.SetAccessPolicy");
             scope.Start();
             try
             {
                 using var message = CreateSetAccessPolicyRequest(table, timeout, requestId, tableAcl);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new TableSetAccessPolicyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 204:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1270,19 +1270,19 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = clientDiagnostics.CreateScope("TableClient.SetAccessPolicy");
+            using var scope = _clientDiagnostics.CreateScope("TableClient.SetAccessPolicy");
             scope.Start();
             try
             {
                 using var message = CreateSetAccessPolicyRequest(table, timeout, requestId, tableAcl);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new TableSetAccessPolicyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 204:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

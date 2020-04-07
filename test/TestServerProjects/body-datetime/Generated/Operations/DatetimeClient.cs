@@ -15,8 +15,8 @@ namespace body_datetime
 {
     public partial class DatetimeClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal DatetimeRestClient RestClient { get; }
         /// <summary> Initializes a new instance of DatetimeClient for mocking. </summary>
         protected DatetimeClient()
@@ -26,8 +26,8 @@ namespace body_datetime
         internal DatetimeClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             RestClient = new DatetimeRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Get null datetime value. </summary>

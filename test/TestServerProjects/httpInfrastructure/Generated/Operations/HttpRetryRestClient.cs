@@ -18,8 +18,8 @@ namespace httpInfrastructure
     internal partial class HttpRetryRestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of HttpRetryRestClient. </summary>
         public HttpRetryRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
@@ -30,13 +30,13 @@ namespace httpInfrastructure
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateHead408Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -50,18 +50,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Head408Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpRetryClient.Head408");
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Head408");
             scope.Start();
             try
             {
                 using var message = CreateHead408Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -75,18 +75,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Head408(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpRetryClient.Head408");
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Head408");
             scope.Start();
             try
             {
                 using var message = CreateHead408Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -98,7 +98,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePut500Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -116,18 +116,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Put500Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpRetryClient.Put500");
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put500");
             scope.Start();
             try
             {
                 using var message = CreatePut500Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -141,18 +141,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put500(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpRetryClient.Put500");
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put500");
             scope.Start();
             try
             {
                 using var message = CreatePut500Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -164,7 +164,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePatch500Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -182,18 +182,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Patch500Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpRetryClient.Patch500");
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch500");
             scope.Start();
             try
             {
                 using var message = CreatePatch500Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -207,18 +207,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Patch500(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpRetryClient.Patch500");
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch500");
             scope.Start();
             try
             {
                 using var message = CreatePatch500Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -230,7 +230,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateGet502Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -244,18 +244,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Get502Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpRetryClient.Get502");
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Get502");
             scope.Start();
             try
             {
                 using var message = CreateGet502Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -269,18 +269,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Get502(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpRetryClient.Get502");
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Get502");
             scope.Start();
             try
             {
                 using var message = CreateGet502Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -292,7 +292,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateOptions502Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
@@ -306,12 +306,12 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<bool>> Options502Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpRetryClient.Options502");
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Options502");
             scope.Start();
             try
             {
                 using var message = CreateOptions502Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -322,7 +322,7 @@ namespace httpInfrastructure
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -336,12 +336,12 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<bool> Options502(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpRetryClient.Options502");
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Options502");
             scope.Start();
             try
             {
                 using var message = CreateOptions502Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -352,7 +352,7 @@ namespace httpInfrastructure
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -364,7 +364,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePost503Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -382,18 +382,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post503Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpRetryClient.Post503");
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Post503");
             scope.Start();
             try
             {
                 using var message = CreatePost503Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -407,18 +407,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post503(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpRetryClient.Post503");
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Post503");
             scope.Start();
             try
             {
                 using var message = CreatePost503Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -430,7 +430,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateDelete503Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -448,18 +448,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Delete503Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpRetryClient.Delete503");
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Delete503");
             scope.Start();
             try
             {
                 using var message = CreateDelete503Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -473,18 +473,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete503(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpRetryClient.Delete503");
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Delete503");
             scope.Start();
             try
             {
                 using var message = CreateDelete503Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -496,7 +496,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePut504Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -514,18 +514,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Put504Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpRetryClient.Put504");
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put504");
             scope.Start();
             try
             {
                 using var message = CreatePut504Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -539,18 +539,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put504(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpRetryClient.Put504");
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put504");
             scope.Start();
             try
             {
                 using var message = CreatePut504Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -562,7 +562,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePatch504Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -580,18 +580,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Patch504Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpRetryClient.Patch504");
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch504");
             scope.Start();
             try
             {
                 using var message = CreatePatch504Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -605,18 +605,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Patch504(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpRetryClient.Patch504");
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch504");
             scope.Start();
             try
             {
                 using var message = CreatePatch504Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

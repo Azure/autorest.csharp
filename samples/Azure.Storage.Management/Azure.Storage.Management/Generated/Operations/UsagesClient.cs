@@ -17,8 +17,8 @@ namespace Azure.Storage.Management
 {
     public partial class UsagesClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal UsagesRestClient RestClient { get; }
         /// <summary> Initializes a new instance of UsagesClient for mocking. </summary>
         protected UsagesClient()
@@ -28,8 +28,8 @@ namespace Azure.Storage.Management
         internal UsagesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
         {
             RestClient = new UsagesRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Gets the current usage count and the limit for the resources of the location under the subscription. </summary>

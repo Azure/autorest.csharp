@@ -15,8 +15,8 @@ namespace additionalProperties
 {
     public partial class PetsClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal PetsRestClient RestClient { get; }
         /// <summary> Initializes a new instance of PetsClient for mocking. </summary>
         protected PetsClient()
@@ -26,8 +26,8 @@ namespace additionalProperties
         internal PetsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             RestClient = new PetsRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>

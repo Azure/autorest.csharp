@@ -16,8 +16,8 @@ namespace Azure.Storage.Tables
 {
     internal partial class TableInternalClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal TableRestClient RestClient { get; }
         /// <summary> Initializes a new instance of TableInternalClient for mocking. </summary>
         protected TableInternalClient()
@@ -27,8 +27,8 @@ namespace Azure.Storage.Tables
         internal TableInternalClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string url, string version = "2018-10-10")
         {
             RestClient = new TableRestClient(clientDiagnostics, pipeline, url, version);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Queries tables under the given account. </summary>

@@ -21,8 +21,8 @@ namespace Azure.Network.Management.Interface
         private string subscriptionId;
         private string host;
         private string apiVersion;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of NetworkInterfaceTapConfigurationsRestClient. </summary>
         public NetworkInterfaceTapConfigurationsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-11-01")
@@ -43,13 +43,13 @@ namespace Azure.Network.Management.Interface
             this.subscriptionId = subscriptionId;
             this.host = host;
             this.apiVersion = apiVersion;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateDeleteRequest(string resourceGroupName, string networkInterfaceName, string tapConfigurationName)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -87,19 +87,19 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(tapConfigurationName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.Delete");
+            using var scope = _clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.Delete");
             scope.Start();
             try
             {
                 using var message = CreateDeleteRequest(resourceGroupName, networkInterfaceName, tapConfigurationName);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -129,19 +129,19 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(tapConfigurationName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.Delete");
+            using var scope = _clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.Delete");
             scope.Start();
             try
             {
                 using var message = CreateDeleteRequest(resourceGroupName, networkInterfaceName, tapConfigurationName);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -153,7 +153,7 @@ namespace Azure.Network.Management.Interface
 
         internal HttpMessage CreateGetRequest(string resourceGroupName, string networkInterfaceName, string tapConfigurationName)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -191,12 +191,12 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(tapConfigurationName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.Get");
+            using var scope = _clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.Get");
             scope.Start();
             try
             {
                 using var message = CreateGetRequest(resourceGroupName, networkInterfaceName, tapConfigurationName);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -214,7 +214,7 @@ namespace Azure.Network.Management.Interface
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -244,12 +244,12 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(tapConfigurationName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.Get");
+            using var scope = _clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.Get");
             scope.Start();
             try
             {
                 using var message = CreateGetRequest(resourceGroupName, networkInterfaceName, tapConfigurationName);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -267,7 +267,7 @@ namespace Azure.Network.Management.Interface
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -279,7 +279,7 @@ namespace Azure.Network.Management.Interface
 
         internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, NetworkInterfaceTapConfiguration tapConfigurationParameters)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -326,19 +326,19 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(tapConfigurationParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.CreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.CreateOrUpdate");
             scope.Start();
             try
             {
                 using var message = CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, tapConfigurationName, tapConfigurationParameters);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 201:
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -373,19 +373,19 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(tapConfigurationParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.CreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.CreateOrUpdate");
             scope.Start();
             try
             {
                 using var message = CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, tapConfigurationName, tapConfigurationParameters);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 201:
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -397,7 +397,7 @@ namespace Azure.Network.Management.Interface
 
         internal HttpMessage CreateListRequest(string resourceGroupName, string networkInterfaceName)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -429,12 +429,12 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(networkInterfaceName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.List");
+            using var scope = _clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.List");
             scope.Start();
             try
             {
                 using var message = CreateListRequest(resourceGroupName, networkInterfaceName);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -452,7 +452,7 @@ namespace Azure.Network.Management.Interface
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -477,12 +477,12 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(networkInterfaceName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.List");
+            using var scope = _clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.List");
             scope.Start();
             try
             {
                 using var message = CreateListRequest(resourceGroupName, networkInterfaceName);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -500,7 +500,7 @@ namespace Azure.Network.Management.Interface
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -512,7 +512,7 @@ namespace Azure.Network.Management.Interface
 
         internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName, string networkInterfaceName)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -541,12 +541,12 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(networkInterfaceName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.List");
+            using var scope = _clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.List");
             scope.Start();
             try
             {
                 using var message = CreateListNextPageRequest(nextLink, resourceGroupName, networkInterfaceName);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -564,7 +564,7 @@ namespace Azure.Network.Management.Interface
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -594,12 +594,12 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(networkInterfaceName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.List");
+            using var scope = _clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.List");
             scope.Start();
             try
             {
                 using var message = CreateListNextPageRequest(nextLink, resourceGroupName, networkInterfaceName);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -617,7 +617,7 @@ namespace Azure.Network.Management.Interface
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

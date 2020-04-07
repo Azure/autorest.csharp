@@ -18,8 +18,8 @@ namespace body_number
     internal partial class NumberRestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of NumberRestClient. </summary>
         public NumberRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
@@ -30,13 +30,13 @@ namespace body_number
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateGetNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -50,12 +50,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<float>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetNull");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetNull");
             scope.Start();
             try
             {
                 using var message = CreateGetNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -66,7 +66,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -80,12 +80,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<float> GetNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetNull");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetNull");
             scope.Start();
             try
             {
                 using var message = CreateGetNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -96,7 +96,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -108,7 +108,7 @@ namespace body_number
 
         internal HttpMessage CreateGetInvalidFloatRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -122,12 +122,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<float>> GetInvalidFloatAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetInvalidFloat");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetInvalidFloat");
             scope.Start();
             try
             {
                 using var message = CreateGetInvalidFloatRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -138,7 +138,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -152,12 +152,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<float> GetInvalidFloat(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetInvalidFloat");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetInvalidFloat");
             scope.Start();
             try
             {
                 using var message = CreateGetInvalidFloatRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -168,7 +168,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -180,7 +180,7 @@ namespace body_number
 
         internal HttpMessage CreateGetInvalidDoubleRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -194,12 +194,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<double>> GetInvalidDoubleAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetInvalidDouble");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetInvalidDouble");
             scope.Start();
             try
             {
                 using var message = CreateGetInvalidDoubleRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -210,7 +210,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -224,12 +224,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<double> GetInvalidDouble(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetInvalidDouble");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetInvalidDouble");
             scope.Start();
             try
             {
                 using var message = CreateGetInvalidDoubleRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -240,7 +240,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -252,7 +252,7 @@ namespace body_number
 
         internal HttpMessage CreateGetInvalidDecimalRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -266,12 +266,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<decimal>> GetInvalidDecimalAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetInvalidDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetInvalidDecimal");
             scope.Start();
             try
             {
                 using var message = CreateGetInvalidDecimalRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -282,7 +282,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -296,12 +296,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<decimal> GetInvalidDecimal(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetInvalidDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetInvalidDecimal");
             scope.Start();
             try
             {
                 using var message = CreateGetInvalidDecimalRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -312,7 +312,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -324,7 +324,7 @@ namespace body_number
 
         internal HttpMessage CreatePutBigFloatRequest(float numberBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -343,18 +343,18 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBigFloatAsync(float numberBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.PutBigFloat");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.PutBigFloat");
             scope.Start();
             try
             {
                 using var message = CreatePutBigFloatRequest(numberBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -369,18 +369,18 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutBigFloat(float numberBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.PutBigFloat");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.PutBigFloat");
             scope.Start();
             try
             {
                 using var message = CreatePutBigFloatRequest(numberBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -392,7 +392,7 @@ namespace body_number
 
         internal HttpMessage CreateGetBigFloatRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -406,12 +406,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<float>> GetBigFloatAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetBigFloat");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetBigFloat");
             scope.Start();
             try
             {
                 using var message = CreateGetBigFloatRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -422,7 +422,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -436,12 +436,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<float> GetBigFloat(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetBigFloat");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetBigFloat");
             scope.Start();
             try
             {
                 using var message = CreateGetBigFloatRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -452,7 +452,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -464,7 +464,7 @@ namespace body_number
 
         internal HttpMessage CreatePutBigDoubleRequest(double numberBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -483,18 +483,18 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBigDoubleAsync(double numberBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.PutBigDouble");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.PutBigDouble");
             scope.Start();
             try
             {
                 using var message = CreatePutBigDoubleRequest(numberBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -509,18 +509,18 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutBigDouble(double numberBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.PutBigDouble");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.PutBigDouble");
             scope.Start();
             try
             {
                 using var message = CreatePutBigDoubleRequest(numberBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -532,7 +532,7 @@ namespace body_number
 
         internal HttpMessage CreateGetBigDoubleRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -546,12 +546,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<double>> GetBigDoubleAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetBigDouble");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetBigDouble");
             scope.Start();
             try
             {
                 using var message = CreateGetBigDoubleRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -562,7 +562,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -576,12 +576,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<double> GetBigDouble(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetBigDouble");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetBigDouble");
             scope.Start();
             try
             {
                 using var message = CreateGetBigDoubleRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -592,7 +592,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -604,7 +604,7 @@ namespace body_number
 
         internal HttpMessage CreatePutBigDoublePositiveDecimalRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -622,18 +622,18 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBigDoublePositiveDecimalAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.PutBigDoublePositiveDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.PutBigDoublePositiveDecimal");
             scope.Start();
             try
             {
                 using var message = CreatePutBigDoublePositiveDecimalRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -647,18 +647,18 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutBigDoublePositiveDecimal(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.PutBigDoublePositiveDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.PutBigDoublePositiveDecimal");
             scope.Start();
             try
             {
                 using var message = CreatePutBigDoublePositiveDecimalRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -670,7 +670,7 @@ namespace body_number
 
         internal HttpMessage CreateGetBigDoublePositiveDecimalRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -684,12 +684,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<double>> GetBigDoublePositiveDecimalAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetBigDoublePositiveDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetBigDoublePositiveDecimal");
             scope.Start();
             try
             {
                 using var message = CreateGetBigDoublePositiveDecimalRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -700,7 +700,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -714,12 +714,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<double> GetBigDoublePositiveDecimal(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetBigDoublePositiveDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetBigDoublePositiveDecimal");
             scope.Start();
             try
             {
                 using var message = CreateGetBigDoublePositiveDecimalRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -730,7 +730,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -742,7 +742,7 @@ namespace body_number
 
         internal HttpMessage CreatePutBigDoubleNegativeDecimalRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -760,18 +760,18 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBigDoubleNegativeDecimalAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.PutBigDoubleNegativeDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.PutBigDoubleNegativeDecimal");
             scope.Start();
             try
             {
                 using var message = CreatePutBigDoubleNegativeDecimalRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -785,18 +785,18 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutBigDoubleNegativeDecimal(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.PutBigDoubleNegativeDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.PutBigDoubleNegativeDecimal");
             scope.Start();
             try
             {
                 using var message = CreatePutBigDoubleNegativeDecimalRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -808,7 +808,7 @@ namespace body_number
 
         internal HttpMessage CreateGetBigDoubleNegativeDecimalRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -822,12 +822,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<double>> GetBigDoubleNegativeDecimalAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetBigDoubleNegativeDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetBigDoubleNegativeDecimal");
             scope.Start();
             try
             {
                 using var message = CreateGetBigDoubleNegativeDecimalRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -838,7 +838,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -852,12 +852,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<double> GetBigDoubleNegativeDecimal(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetBigDoubleNegativeDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetBigDoubleNegativeDecimal");
             scope.Start();
             try
             {
                 using var message = CreateGetBigDoubleNegativeDecimalRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -868,7 +868,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -880,7 +880,7 @@ namespace body_number
 
         internal HttpMessage CreatePutBigDecimalRequest(decimal numberBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -899,18 +899,18 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBigDecimalAsync(decimal numberBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.PutBigDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.PutBigDecimal");
             scope.Start();
             try
             {
                 using var message = CreatePutBigDecimalRequest(numberBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -925,18 +925,18 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutBigDecimal(decimal numberBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.PutBigDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.PutBigDecimal");
             scope.Start();
             try
             {
                 using var message = CreatePutBigDecimalRequest(numberBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -948,7 +948,7 @@ namespace body_number
 
         internal HttpMessage CreateGetBigDecimalRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -962,12 +962,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<decimal>> GetBigDecimalAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetBigDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetBigDecimal");
             scope.Start();
             try
             {
                 using var message = CreateGetBigDecimalRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -978,7 +978,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -992,12 +992,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<decimal> GetBigDecimal(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetBigDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetBigDecimal");
             scope.Start();
             try
             {
                 using var message = CreateGetBigDecimalRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1008,7 +1008,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1020,7 +1020,7 @@ namespace body_number
 
         internal HttpMessage CreatePutBigDecimalPositiveDecimalRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1038,18 +1038,18 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBigDecimalPositiveDecimalAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.PutBigDecimalPositiveDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.PutBigDecimalPositiveDecimal");
             scope.Start();
             try
             {
                 using var message = CreatePutBigDecimalPositiveDecimalRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1063,18 +1063,18 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutBigDecimalPositiveDecimal(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.PutBigDecimalPositiveDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.PutBigDecimalPositiveDecimal");
             scope.Start();
             try
             {
                 using var message = CreatePutBigDecimalPositiveDecimalRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1086,7 +1086,7 @@ namespace body_number
 
         internal HttpMessage CreateGetBigDecimalPositiveDecimalRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1100,12 +1100,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<decimal>> GetBigDecimalPositiveDecimalAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetBigDecimalPositiveDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetBigDecimalPositiveDecimal");
             scope.Start();
             try
             {
                 using var message = CreateGetBigDecimalPositiveDecimalRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1116,7 +1116,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1130,12 +1130,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<decimal> GetBigDecimalPositiveDecimal(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetBigDecimalPositiveDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetBigDecimalPositiveDecimal");
             scope.Start();
             try
             {
                 using var message = CreateGetBigDecimalPositiveDecimalRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1146,7 +1146,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1158,7 +1158,7 @@ namespace body_number
 
         internal HttpMessage CreatePutBigDecimalNegativeDecimalRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1176,18 +1176,18 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutBigDecimalNegativeDecimalAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.PutBigDecimalNegativeDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.PutBigDecimalNegativeDecimal");
             scope.Start();
             try
             {
                 using var message = CreatePutBigDecimalNegativeDecimalRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1201,18 +1201,18 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutBigDecimalNegativeDecimal(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.PutBigDecimalNegativeDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.PutBigDecimalNegativeDecimal");
             scope.Start();
             try
             {
                 using var message = CreatePutBigDecimalNegativeDecimalRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1224,7 +1224,7 @@ namespace body_number
 
         internal HttpMessage CreateGetBigDecimalNegativeDecimalRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1238,12 +1238,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<decimal>> GetBigDecimalNegativeDecimalAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetBigDecimalNegativeDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetBigDecimalNegativeDecimal");
             scope.Start();
             try
             {
                 using var message = CreateGetBigDecimalNegativeDecimalRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1254,7 +1254,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1268,12 +1268,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<decimal> GetBigDecimalNegativeDecimal(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetBigDecimalNegativeDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetBigDecimalNegativeDecimal");
             scope.Start();
             try
             {
                 using var message = CreateGetBigDecimalNegativeDecimalRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1284,7 +1284,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1296,7 +1296,7 @@ namespace body_number
 
         internal HttpMessage CreatePutSmallFloatRequest(float numberBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1315,18 +1315,18 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutSmallFloatAsync(float numberBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.PutSmallFloat");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.PutSmallFloat");
             scope.Start();
             try
             {
                 using var message = CreatePutSmallFloatRequest(numberBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1341,18 +1341,18 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutSmallFloat(float numberBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.PutSmallFloat");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.PutSmallFloat");
             scope.Start();
             try
             {
                 using var message = CreatePutSmallFloatRequest(numberBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1364,7 +1364,7 @@ namespace body_number
 
         internal HttpMessage CreateGetSmallFloatRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1378,12 +1378,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<double>> GetSmallFloatAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetSmallFloat");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetSmallFloat");
             scope.Start();
             try
             {
                 using var message = CreateGetSmallFloatRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1394,7 +1394,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1408,12 +1408,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<double> GetSmallFloat(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetSmallFloat");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetSmallFloat");
             scope.Start();
             try
             {
                 using var message = CreateGetSmallFloatRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1424,7 +1424,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1436,7 +1436,7 @@ namespace body_number
 
         internal HttpMessage CreatePutSmallDoubleRequest(double numberBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1455,18 +1455,18 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutSmallDoubleAsync(double numberBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.PutSmallDouble");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.PutSmallDouble");
             scope.Start();
             try
             {
                 using var message = CreatePutSmallDoubleRequest(numberBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1481,18 +1481,18 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutSmallDouble(double numberBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.PutSmallDouble");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.PutSmallDouble");
             scope.Start();
             try
             {
                 using var message = CreatePutSmallDoubleRequest(numberBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1504,7 +1504,7 @@ namespace body_number
 
         internal HttpMessage CreateGetSmallDoubleRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1518,12 +1518,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<double>> GetSmallDoubleAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetSmallDouble");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetSmallDouble");
             scope.Start();
             try
             {
                 using var message = CreateGetSmallDoubleRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1534,7 +1534,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1548,12 +1548,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<double> GetSmallDouble(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetSmallDouble");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetSmallDouble");
             scope.Start();
             try
             {
                 using var message = CreateGetSmallDoubleRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1564,7 +1564,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1576,7 +1576,7 @@ namespace body_number
 
         internal HttpMessage CreatePutSmallDecimalRequest(decimal numberBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1595,18 +1595,18 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutSmallDecimalAsync(decimal numberBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.PutSmallDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.PutSmallDecimal");
             scope.Start();
             try
             {
                 using var message = CreatePutSmallDecimalRequest(numberBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1621,18 +1621,18 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutSmallDecimal(decimal numberBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.PutSmallDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.PutSmallDecimal");
             scope.Start();
             try
             {
                 using var message = CreatePutSmallDecimalRequest(numberBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1644,7 +1644,7 @@ namespace body_number
 
         internal HttpMessage CreateGetSmallDecimalRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1658,12 +1658,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<decimal>> GetSmallDecimalAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetSmallDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetSmallDecimal");
             scope.Start();
             try
             {
                 using var message = CreateGetSmallDecimalRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1674,7 +1674,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1688,12 +1688,12 @@ namespace body_number
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<decimal> GetSmallDecimal(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("NumberClient.GetSmallDecimal");
+            using var scope = _clientDiagnostics.CreateScope("NumberClient.GetSmallDecimal");
             scope.Start();
             try
             {
                 using var message = CreateGetSmallDecimalRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1704,7 +1704,7 @@ namespace body_number
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

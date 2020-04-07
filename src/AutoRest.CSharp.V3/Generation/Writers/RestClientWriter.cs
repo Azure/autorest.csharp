@@ -57,8 +57,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.Line($"private {clientParameter.Type} {clientParameter.Name};");
             }
 
-            writer.Line($"private {typeof(ClientDiagnostics)} clientDiagnostics;");
-            writer.Line($"private {typeof(HttpPipeline)} pipeline;");
+            writer.Line($"private {typeof(ClientDiagnostics)} _clientDiagnostics;");
+            writer.Line($"private {typeof(HttpPipeline)} _pipeline;");
             writer.Line();
         }
 
@@ -82,8 +82,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Line($"this.{clientParameter.Name} = {clientParameter.Name};");
                 }
 
-                writer.Line($"this.clientDiagnostics = clientDiagnostics;");
-                writer.Line($"this.pipeline = pipeline;");
+                writer.Line($"_clientDiagnostics = clientDiagnostics;");
+                writer.Line($"_pipeline = pipeline;");
             }
             writer.Line();
         }
@@ -111,7 +111,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 var request = new CodeWriterDeclaration("request");
                 var uri = new CodeWriterDeclaration("uri");
 
-                writer.Line($"var {message:D} = pipeline.CreateMessage();");
+                writer.Line($"var {message:D} = _pipeline.CreateMessage();");
                 writer.Line($"var {request:D} = {message}.Request;");
                 var method = operation.Request.HttpMethod;
                 writer.Line($"{request}.Method = {typeof(RequestMethod)}.{method.ToRequestMethodName()};");
@@ -277,7 +277,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.WriteParameterNullChecks(parameters);
 
                 var scopeVariable = new CodeWriterDeclaration("scope");
-                writer.Line($"using var {scopeVariable:D} = clientDiagnostics.CreateScope({operation.Diagnostics.ScopeName:L});");
+                writer.Line($"using var {scopeVariable:D} = _clientDiagnostics.CreateScope({operation.Diagnostics.ScopeName:L});");
                 foreach (DiagnosticAttribute diagnosticScopeAttributes in operation.Diagnostics.Attributes)
                 {
                     writer.Append($"{scopeVariable}.AddAttribute({diagnosticScopeAttributes.Name:L},");
@@ -302,11 +302,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     if (async)
                     {
-                        writer.Line($"await pipeline.SendAsync({messageVariable}, cancellationToken).ConfigureAwait(false);");
+                        writer.Line($"await _pipeline.SendAsync({messageVariable}, cancellationToken).ConfigureAwait(false);");
                     }
                     else
                     {
-                        writer.Line($"pipeline.Send({messageVariable}, cancellationToken);");
+                        writer.Line($"_pipeline.Send({messageVariable}, cancellationToken);");
                     }
 
                     WriteStatusCodeSwitch(writer, messageVariable, operation, async);
@@ -555,11 +555,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.Line($"default:");
                 if (async)
                 {
-                    writer.Line($"throw await clientDiagnostics.CreateRequestFailedExceptionAsync({responseVariable}).ConfigureAwait(false);");
+                    writer.Line($"throw await _clientDiagnostics.CreateRequestFailedExceptionAsync({responseVariable}).ConfigureAwait(false);");
                 }
                 else
                 {
-                    writer.Line($"throw clientDiagnostics.CreateRequestFailedException({responseVariable});");
+                    writer.Line($"throw _clientDiagnostics.CreateRequestFailedException({responseVariable});");
                 }
             }
         }

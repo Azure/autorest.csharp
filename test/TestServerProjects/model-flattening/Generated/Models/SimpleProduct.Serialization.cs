@@ -58,7 +58,7 @@ namespace model_flattening.Models
             string maxProductDisplayName = default;
             string maxProductCapacity = default;
             string genericValue = default;
-            string odatavalue = default;
+            string odataValue = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("base_product_id"))
@@ -116,7 +116,7 @@ namespace model_flattening.Models
                                     {
                                         continue;
                                     }
-                                    odatavalue = property1.Value.GetString();
+                                    odataValue = property1.Value.GetString();
                                     continue;
                                 }
                             }
@@ -126,7 +126,7 @@ namespace model_flattening.Models
                     continue;
                 }
             }
-            return new SimpleProduct(baseProductId, baseProductDescription, maxProductDisplayName, maxProductCapacity, genericValue, odatavalue);
+            return new SimpleProduct(baseProductId, baseProductDescription, maxProductDisplayName, maxProductCapacity, genericValue, odataValue);
         }
     }
 }

@@ -20,8 +20,8 @@ namespace TypeSchemaMapping
     internal partial class ServiceRestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of ServiceRestClient. </summary>
         public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
@@ -32,13 +32,13 @@ namespace TypeSchemaMapping
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateOperationRequest(CustomizedModel body)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -59,12 +59,12 @@ namespace TypeSchemaMapping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<CustomizedModel>> OperationAsync(CustomizedModel body = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.Operation");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.Operation");
             scope.Start();
             try
             {
                 using var message = CreateOperationRequest(body);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -82,7 +82,7 @@ namespace TypeSchemaMapping
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -96,12 +96,12 @@ namespace TypeSchemaMapping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<CustomizedModel> Operation(CustomizedModel body = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.Operation");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.Operation");
             scope.Start();
             try
             {
                 using var message = CreateOperationRequest(body);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -119,7 +119,7 @@ namespace TypeSchemaMapping
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -131,7 +131,7 @@ namespace TypeSchemaMapping
 
         internal HttpMessage CreateOperationStructRequest(RenamedModelStruct? body)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -152,12 +152,12 @@ namespace TypeSchemaMapping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<RenamedModelStruct>> OperationStructAsync(RenamedModelStruct? body = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.OperationStruct");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.OperationStruct");
             scope.Start();
             try
             {
                 using var message = CreateOperationStructRequest(body);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -168,7 +168,7 @@ namespace TypeSchemaMapping
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -182,12 +182,12 @@ namespace TypeSchemaMapping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<RenamedModelStruct> OperationStruct(RenamedModelStruct? body = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.OperationStruct");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.OperationStruct");
             scope.Start();
             try
             {
                 using var message = CreateOperationStructRequest(body);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -198,7 +198,7 @@ namespace TypeSchemaMapping
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -210,7 +210,7 @@ namespace TypeSchemaMapping
 
         internal HttpMessage CreateOperationSecondModelRequest(SecondModel body)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -231,12 +231,12 @@ namespace TypeSchemaMapping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<SecondModel>> OperationSecondModelAsync(SecondModel body = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.OperationSecondModel");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.OperationSecondModel");
             scope.Start();
             try
             {
                 using var message = CreateOperationSecondModelRequest(body);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -254,7 +254,7 @@ namespace TypeSchemaMapping
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -268,12 +268,12 @@ namespace TypeSchemaMapping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<SecondModel> OperationSecondModel(SecondModel body = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.OperationSecondModel");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.OperationSecondModel");
             scope.Start();
             try
             {
                 using var message = CreateOperationSecondModelRequest(body);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -291,7 +291,7 @@ namespace TypeSchemaMapping
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

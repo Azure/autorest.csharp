@@ -17,8 +17,8 @@ namespace Azure.Storage.Management
 {
     public partial class BlobServicesClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal BlobServicesRestClient RestClient { get; }
         /// <summary> Initializes a new instance of BlobServicesClient for mocking. </summary>
         protected BlobServicesClient()
@@ -28,8 +28,8 @@ namespace Azure.Storage.Management
         internal BlobServicesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
         {
             RestClient = new BlobServicesRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Sets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>

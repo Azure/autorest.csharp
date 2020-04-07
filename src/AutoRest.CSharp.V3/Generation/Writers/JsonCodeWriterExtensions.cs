@@ -26,8 +26,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 case JsonArraySerialization array:
                     writer.Line($"{writerName}.WriteStartArray();");
                     var collectionItemVariable = new CodeWriterDeclaration("item");
-                    writer.Line($"foreach (var {collectionItemVariable:D} in {name})");
-                    using (writer.Scope())
+
+                    using (writer.Scope($"foreach (var {collectionItemVariable:D} in {name})"))
                     {
                         writer.ToSerializeCall(
                             array.ValueSerialization,
@@ -42,8 +42,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Line($"{writerName}.WriteStartObject();");
                     var dictionaryItemVariable = new CodeWriterDeclaration("item");
 
-                    writer.Line($"foreach (var {dictionaryItemVariable:D} in {name})");
-                    using (writer.Scope())
+                    using (writer.Scope($"foreach (var {dictionaryItemVariable:D} in {name})"))
                     {
                         writer.Line($"{writerName}.WritePropertyName({dictionaryItemVariable}.Key);");
                         writer.ToSerializeCall(
@@ -74,8 +73,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     {
                         var itemVariable = new CodeWriterDeclaration("item");
 
-                        writer.Line($"foreach (var {itemVariable:D} in {obj.AdditionalProperties.Property.Declaration.Name})");
-                        using (writer.Scope())
+                        using (writer.Scope($"foreach (var {itemVariable:D} in {obj.AdditionalProperties.Property.Declaration.Name})"))
                         {
                             writer.Line($"{writerName}.WritePropertyName({itemVariable}.Key);");
                             writer.ToSerializeCall(
@@ -199,8 +197,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Line($"{objAdditionalProperties.Type} {dictionaryVariable:D} = new {objAdditionalProperties.Type}();");
                 }
 
-                writer.Line($"foreach (var {itemVariable:D} in {element}.EnumerateObject())");
-                using (writer.Scope())
+                using (writer.Scope($"foreach (var {itemVariable:D} in {element}.EnumerateObject())"))
                 {
                     foreach (JsonPropertySerialization property in obj.Properties)
                     {
@@ -350,8 +347,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Line($"{array.Type} {arrayVariable:D} = new {array.Type}();");
 
                     var collectionItemVariable = new CodeWriterDeclaration("item");
-                    writer.Line($"foreach (var {collectionItemVariable:D} in {element}.EnumerateArray())");
-                    using (writer.Scope())
+                    using (writer.Scope($"foreach (var {collectionItemVariable:D} in {element}.EnumerateArray())"))
                     {
                         writer.DeserializeValue(
                             array.ValueSerialization,
@@ -366,8 +362,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Line($"{dictionary.Type} {dictionaryVariable:D} = new {dictionary.Type}();");
 
                     var dictionaryItemVariable = new CodeWriterDeclaration("property");
-                    writer.Line($"foreach (var {dictionaryItemVariable:D} in {element}.EnumerateObject())");
-                    using (writer.Scope())
+                    using (writer.Scope($"foreach (var {dictionaryItemVariable:D} in {element}.EnumerateObject())"))
                     {
                         writer.DeserializeValue(
                             dictionary.ValueSerialization,

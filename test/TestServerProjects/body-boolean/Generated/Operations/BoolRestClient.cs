@@ -18,8 +18,8 @@ namespace body_boolean
     internal partial class BoolRestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of BoolRestClient. </summary>
         public BoolRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
@@ -30,13 +30,13 @@ namespace body_boolean
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateGetTrueRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -50,12 +50,12 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<bool>> GetTrueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("BoolClient.GetTrue");
+            using var scope = _clientDiagnostics.CreateScope("BoolClient.GetTrue");
             scope.Start();
             try
             {
                 using var message = CreateGetTrueRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -66,7 +66,7 @@ namespace body_boolean
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -80,12 +80,12 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<bool> GetTrue(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("BoolClient.GetTrue");
+            using var scope = _clientDiagnostics.CreateScope("BoolClient.GetTrue");
             scope.Start();
             try
             {
                 using var message = CreateGetTrueRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -96,7 +96,7 @@ namespace body_boolean
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -108,7 +108,7 @@ namespace body_boolean
 
         internal HttpMessage CreatePutTrueRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -126,18 +126,18 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutTrueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("BoolClient.PutTrue");
+            using var scope = _clientDiagnostics.CreateScope("BoolClient.PutTrue");
             scope.Start();
             try
             {
                 using var message = CreatePutTrueRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -151,18 +151,18 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutTrue(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("BoolClient.PutTrue");
+            using var scope = _clientDiagnostics.CreateScope("BoolClient.PutTrue");
             scope.Start();
             try
             {
                 using var message = CreatePutTrueRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -174,7 +174,7 @@ namespace body_boolean
 
         internal HttpMessage CreateGetFalseRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -188,12 +188,12 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<bool>> GetFalseAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("BoolClient.GetFalse");
+            using var scope = _clientDiagnostics.CreateScope("BoolClient.GetFalse");
             scope.Start();
             try
             {
                 using var message = CreateGetFalseRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -204,7 +204,7 @@ namespace body_boolean
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -218,12 +218,12 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<bool> GetFalse(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("BoolClient.GetFalse");
+            using var scope = _clientDiagnostics.CreateScope("BoolClient.GetFalse");
             scope.Start();
             try
             {
                 using var message = CreateGetFalseRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -234,7 +234,7 @@ namespace body_boolean
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -246,7 +246,7 @@ namespace body_boolean
 
         internal HttpMessage CreatePutFalseRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -264,18 +264,18 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutFalseAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("BoolClient.PutFalse");
+            using var scope = _clientDiagnostics.CreateScope("BoolClient.PutFalse");
             scope.Start();
             try
             {
                 using var message = CreatePutFalseRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -289,18 +289,18 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutFalse(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("BoolClient.PutFalse");
+            using var scope = _clientDiagnostics.CreateScope("BoolClient.PutFalse");
             scope.Start();
             try
             {
                 using var message = CreatePutFalseRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -312,7 +312,7 @@ namespace body_boolean
 
         internal HttpMessage CreateGetNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -326,12 +326,12 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<bool>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("BoolClient.GetNull");
+            using var scope = _clientDiagnostics.CreateScope("BoolClient.GetNull");
             scope.Start();
             try
             {
                 using var message = CreateGetNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -342,7 +342,7 @@ namespace body_boolean
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -356,12 +356,12 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<bool> GetNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("BoolClient.GetNull");
+            using var scope = _clientDiagnostics.CreateScope("BoolClient.GetNull");
             scope.Start();
             try
             {
                 using var message = CreateGetNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -372,7 +372,7 @@ namespace body_boolean
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -384,7 +384,7 @@ namespace body_boolean
 
         internal HttpMessage CreateGetInvalidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -398,12 +398,12 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<bool>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("BoolClient.GetInvalid");
+            using var scope = _clientDiagnostics.CreateScope("BoolClient.GetInvalid");
             scope.Start();
             try
             {
                 using var message = CreateGetInvalidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -414,7 +414,7 @@ namespace body_boolean
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -428,12 +428,12 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<bool> GetInvalid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("BoolClient.GetInvalid");
+            using var scope = _clientDiagnostics.CreateScope("BoolClient.GetInvalid");
             scope.Start();
             try
             {
                 using var message = CreateGetInvalidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -444,7 +444,7 @@ namespace body_boolean
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

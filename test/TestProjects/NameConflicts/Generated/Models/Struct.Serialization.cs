@@ -545,6 +545,21 @@ namespace NameConflicts.Models
                 writer.WritePropertyName("System");
                 writer.WriteStringValue(System.Value.ToString());
             }
+            if (ToStringValue != null)
+            {
+                writer.WritePropertyName("ToString");
+                writer.WriteStringValue(ToStringValue);
+            }
+            if (EqualsValue != null)
+            {
+                writer.WritePropertyName("Equals");
+                writer.WriteStringValue(EqualsValue);
+            }
+            if (GetHashCodeValue != null)
+            {
+                writer.WritePropertyName("GetHashCode");
+                writer.WriteStringValue(GetHashCodeValue);
+            }
             writer.WriteEndObject();
         }
 
@@ -656,6 +671,9 @@ namespace NameConflicts.Models
             string @while = default;
             string @yield = default;
             SystemEnum? system = default;
+            string toString = default;
+            string @equals = default;
+            string getHashCode = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("1"))
@@ -1612,8 +1630,35 @@ namespace NameConflicts.Models
                     system = new SystemEnum(property.Value.GetString());
                     continue;
                 }
+                if (property.NameEquals("ToString"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    toString = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("Equals"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    @equals = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("GetHashCode"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    getHashCode = property.Value.GetString();
+                    continue;
+                }
             }
-            return new Struct(@abstract, @add, @alias, @as, @ascending, @async, @await, @base, @bool, @break, @by, @byte, @catch, @char, @checked, @const, @continue, @class, @decimal, @default, @delegate, @descending, @do, @double, @dynamic, @else, @enum, @event, @explicit, @extern, @false, @finally, @fixed, @float, @for, @foreach, @from, @get, @global, @goto, group, @if, @implicit, @in, @int, @interface, @internal, @into, @is, @join, @let, @lock, @long, @nameof, @namespace, @new, @null, @object, @on, @operator, orderby, @out, @override, @params, @partial, @private, @protected, @public, @readonly, @ref, @remove, @return, @sbyte, @sealed, select, @set, @short, @sizeof, @stackalloc, @static, @string, @struct, @switch, @this, @throw, @true, @try, @typeof, @uint, @ulong, @unchecked, @unmanaged, @unsafe, @ushort, @using, value, @var, @virtual, @void, @volatile, @when, @where, @while, @yield, system, _1);
+            return new Struct(@abstract, @add, @alias, @as, @ascending, @async, @await, @base, @bool, @break, @by, @byte, @catch, @char, @checked, @const, @continue, @class, @decimal, @default, @delegate, @descending, @do, @double, @dynamic, @else, @enum, @event, @explicit, @extern, @false, @finally, @fixed, @float, @for, @foreach, @from, @get, @global, @goto, group, @if, @implicit, @in, @int, @interface, @internal, @into, @is, @join, @let, @lock, @long, @nameof, @namespace, @new, @null, @object, @on, @operator, orderby, @out, @override, @params, @partial, @private, @protected, @public, @readonly, @ref, @remove, @return, @sbyte, @sealed, select, @set, @short, @sizeof, @stackalloc, @static, @string, @struct, @switch, @this, @throw, @true, @try, @typeof, @uint, @ulong, @unchecked, @unmanaged, @unsafe, @ushort, @using, value, @var, @virtual, @void, @volatile, @when, @where, @while, @yield, system, toString, @equals, getHashCode, _1);
         }
     }
 }

@@ -21,8 +21,8 @@ namespace AppConfiguration
         private string host;
         private string syncToken;
         private string apiVersion;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of ServiceRestClient. </summary>
         public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "", string syncToken = null, string apiVersion = "1.0")
@@ -39,13 +39,13 @@ namespace AppConfiguration
             this.host = host;
             this.syncToken = syncToken;
             this.apiVersion = apiVersion;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateGetKeysRequest(string name, string after, string acceptDatetime)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -79,12 +79,12 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<KeyListResult, ServiceGetKeysHeaders>> GetKeysAsync(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeys");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeys");
             scope.Start();
             try
             {
                 using var message = CreateGetKeysRequest(name, after, acceptDatetime);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new ServiceGetKeysHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -103,7 +103,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -120,12 +120,12 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<KeyListResult, ServiceGetKeysHeaders> GetKeys(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeys");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeys");
             scope.Start();
             try
             {
                 using var message = CreateGetKeysRequest(name, after, acceptDatetime);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new ServiceGetKeysHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -144,7 +144,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -156,7 +156,7 @@ namespace AppConfiguration
 
         internal HttpMessage CreateCheckKeysRequest(string name, string after, string acceptDatetime)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -190,19 +190,19 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<ServiceCheckKeysHeaders>> CheckKeysAsync(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckKeys");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckKeys");
             scope.Start();
             try
             {
                 using var message = CreateCheckKeysRequest(name, after, acceptDatetime);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new ServiceCheckKeysHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -219,19 +219,19 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<ServiceCheckKeysHeaders> CheckKeys(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckKeys");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckKeys");
             scope.Start();
             try
             {
                 using var message = CreateCheckKeysRequest(name, after, acceptDatetime);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new ServiceCheckKeysHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -243,7 +243,7 @@ namespace AppConfiguration
 
         internal HttpMessage CreateGetKeyValuesRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -287,12 +287,12 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<KeyValueListResult, ServiceGetKeyValuesHeaders>> GetKeyValuesAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Get6ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
             scope.Start();
             try
             {
                 using var message = CreateGetKeyValuesRequest(key, label, after, acceptDatetime, select);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new ServiceGetKeyValuesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -311,7 +311,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -330,12 +330,12 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<KeyValueListResult, ServiceGetKeyValuesHeaders> GetKeyValues(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Get6ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
             scope.Start();
             try
             {
                 using var message = CreateGetKeyValuesRequest(key, label, after, acceptDatetime, select);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new ServiceGetKeyValuesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -354,7 +354,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -366,7 +366,7 @@ namespace AppConfiguration
 
         internal HttpMessage CreateCheckKeyValuesRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Head6ItemsItem> select)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -410,19 +410,19 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<ServiceCheckKeyValuesHeaders>> CheckKeyValuesAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Head6ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckKeyValues");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckKeyValues");
             scope.Start();
             try
             {
                 using var message = CreateCheckKeyValuesRequest(key, label, after, acceptDatetime, select);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new ServiceCheckKeyValuesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -441,19 +441,19 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<ServiceCheckKeyValuesHeaders> CheckKeyValues(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Head6ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckKeyValues");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckKeyValues");
             scope.Start();
             try
             {
                 using var message = CreateCheckKeyValuesRequest(key, label, after, acceptDatetime, select);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new ServiceCheckKeyValuesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -465,7 +465,7 @@ namespace AppConfiguration
 
         internal HttpMessage CreateGetKeyValueRequest(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Get7ItemsItem> select)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -516,12 +516,12 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeyValue");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeyValue");
             scope.Start();
             try
             {
                 using var message = CreateGetKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new ServiceGetKeyValueHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -540,7 +540,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -565,12 +565,12 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeyValue");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeyValue");
             scope.Start();
             try
             {
                 using var message = CreateGetKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new ServiceGetKeyValueHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -589,7 +589,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -601,7 +601,7 @@ namespace AppConfiguration
 
         internal HttpMessage CreatePutKeyValueRequest(string key, string label, string ifMatch, string ifNoneMatch, KeyValue entity)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -650,12 +650,12 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.PutKeyValue");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutKeyValue");
             scope.Start();
             try
             {
                 using var message = CreatePutKeyValueRequest(key, label, ifMatch, ifNoneMatch, entity);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new ServicePutKeyValueHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -674,7 +674,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -698,12 +698,12 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.PutKeyValue");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutKeyValue");
             scope.Start();
             try
             {
                 using var message = CreatePutKeyValueRequest(key, label, ifMatch, ifNoneMatch, entity);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new ServicePutKeyValueHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -722,7 +722,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -734,7 +734,7 @@ namespace AppConfiguration
 
         internal HttpMessage CreateDeleteKeyValueRequest(string key, string label, string ifMatch)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -770,12 +770,12 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.DeleteKeyValue");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.DeleteKeyValue");
             scope.Start();
             try
             {
                 using var message = CreateDeleteKeyValueRequest(key, label, ifMatch);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new ServiceDeleteKeyValueHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -796,7 +796,7 @@ namespace AppConfiguration
                     case 204:
                         return ResponseWithHeaders.FromValue<KeyValue, ServiceDeleteKeyValueHeaders>(null, headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -818,12 +818,12 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.DeleteKeyValue");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.DeleteKeyValue");
             scope.Start();
             try
             {
                 using var message = CreateDeleteKeyValueRequest(key, label, ifMatch);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new ServiceDeleteKeyValueHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -844,7 +844,7 @@ namespace AppConfiguration
                     case 204:
                         return ResponseWithHeaders.FromValue<KeyValue, ServiceDeleteKeyValueHeaders>(null, headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -856,7 +856,7 @@ namespace AppConfiguration
 
         internal HttpMessage CreateCheckKeyValueRequest(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Head7ItemsItem> select)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -907,19 +907,19 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckKeyValue");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckKeyValue");
             scope.Start();
             try
             {
                 using var message = CreateCheckKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new ServiceCheckKeyValueHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -944,19 +944,19 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckKeyValue");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckKeyValue");
             scope.Start();
             try
             {
                 using var message = CreateCheckKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new ServiceCheckKeyValueHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -968,7 +968,7 @@ namespace AppConfiguration
 
         internal HttpMessage CreateGetLabelsRequest(string name, string after, string acceptDatetime, IEnumerable<string> select)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1007,12 +1007,12 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<LabelListResult, ServiceGetLabelsHeaders>> GetLabelsAsync(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetLabels");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetLabels");
             scope.Start();
             try
             {
                 using var message = CreateGetLabelsRequest(name, after, acceptDatetime, select);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new ServiceGetLabelsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -1031,7 +1031,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1049,12 +1049,12 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<LabelListResult, ServiceGetLabelsHeaders> GetLabels(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetLabels");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetLabels");
             scope.Start();
             try
             {
                 using var message = CreateGetLabelsRequest(name, after, acceptDatetime, select);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new ServiceGetLabelsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -1073,7 +1073,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1085,7 +1085,7 @@ namespace AppConfiguration
 
         internal HttpMessage CreateCheckLabelsRequest(string name, string after, string acceptDatetime, IEnumerable<string> select)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -1124,19 +1124,19 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<ServiceCheckLabelsHeaders>> CheckLabelsAsync(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckLabels");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckLabels");
             scope.Start();
             try
             {
                 using var message = CreateCheckLabelsRequest(name, after, acceptDatetime, select);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new ServiceCheckLabelsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1154,19 +1154,19 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<ServiceCheckLabelsHeaders> CheckLabels(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckLabels");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckLabels");
             scope.Start();
             try
             {
                 using var message = CreateCheckLabelsRequest(name, after, acceptDatetime, select);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new ServiceCheckLabelsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1178,7 +1178,7 @@ namespace AppConfiguration
 
         internal HttpMessage CreatePutLockRequest(string key, string label, string ifMatch, string ifNoneMatch)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1219,12 +1219,12 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.PutLock");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutLock");
             scope.Start();
             try
             {
                 using var message = CreatePutLockRequest(key, label, ifMatch, ifNoneMatch);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new ServicePutLockHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -1243,7 +1243,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1266,12 +1266,12 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.PutLock");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutLock");
             scope.Start();
             try
             {
                 using var message = CreatePutLockRequest(key, label, ifMatch, ifNoneMatch);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new ServicePutLockHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -1290,7 +1290,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1302,7 +1302,7 @@ namespace AppConfiguration
 
         internal HttpMessage CreateDeleteLockRequest(string key, string label, string ifMatch, string ifNoneMatch)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -1343,12 +1343,12 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.DeleteLock");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.DeleteLock");
             scope.Start();
             try
             {
                 using var message = CreateDeleteLockRequest(key, label, ifMatch, ifNoneMatch);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new ServiceDeleteLockHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -1367,7 +1367,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1390,12 +1390,12 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.DeleteLock");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.DeleteLock");
             scope.Start();
             try
             {
                 using var message = CreateDeleteLockRequest(key, label, ifMatch, ifNoneMatch);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new ServiceDeleteLockHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -1414,7 +1414,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1426,7 +1426,7 @@ namespace AppConfiguration
 
         internal HttpMessage CreateGetRevisionsRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1470,12 +1470,12 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<KeyValueListResult, ServiceGetRevisionsHeaders>> GetRevisionsAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum4> select = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
             scope.Start();
             try
             {
                 using var message = CreateGetRevisionsRequest(key, label, after, acceptDatetime, select);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new ServiceGetRevisionsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -1494,7 +1494,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1513,12 +1513,12 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<KeyValueListResult, ServiceGetRevisionsHeaders> GetRevisions(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum4> select = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
             scope.Start();
             try
             {
                 using var message = CreateGetRevisionsRequest(key, label, after, acceptDatetime, select);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new ServiceGetRevisionsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -1537,7 +1537,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1549,7 +1549,7 @@ namespace AppConfiguration
 
         internal HttpMessage CreateCheckRevisionsRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Enum5> select)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -1593,19 +1593,19 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<ServiceCheckRevisionsHeaders>> CheckRevisionsAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum5> select = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckRevisions");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckRevisions");
             scope.Start();
             try
             {
                 using var message = CreateCheckRevisionsRequest(key, label, after, acceptDatetime, select);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new ServiceCheckRevisionsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1624,19 +1624,19 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<ServiceCheckRevisionsHeaders> CheckRevisions(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum5> select = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.CheckRevisions");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckRevisions");
             scope.Start();
             try
             {
                 using var message = CreateCheckRevisionsRequest(key, label, after, acceptDatetime, select);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new ServiceCheckRevisionsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1648,7 +1648,7 @@ namespace AppConfiguration
 
         internal HttpMessage CreateGetKeysNextPageRequest(string nextLink, string name, string after, string acceptDatetime)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1678,12 +1678,12 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeys");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeys");
             scope.Start();
             try
             {
                 using var message = CreateGetKeysNextPageRequest(nextLink, name, after, acceptDatetime);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new ServiceGetKeysHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -1702,7 +1702,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1725,12 +1725,12 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeys");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeys");
             scope.Start();
             try
             {
                 using var message = CreateGetKeysNextPageRequest(nextLink, name, after, acceptDatetime);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new ServiceGetKeysHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -1749,7 +1749,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1761,7 +1761,7 @@ namespace AppConfiguration
 
         internal HttpMessage CreateGetKeyValuesNextPageRequest(string nextLink, string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1793,12 +1793,12 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
             scope.Start();
             try
             {
                 using var message = CreateGetKeyValuesNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new ServiceGetKeyValuesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -1817,7 +1817,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1842,12 +1842,12 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
             scope.Start();
             try
             {
                 using var message = CreateGetKeyValuesNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new ServiceGetKeyValuesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -1866,7 +1866,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1878,7 +1878,7 @@ namespace AppConfiguration
 
         internal HttpMessage CreateGetLabelsNextPageRequest(string nextLink, string name, string after, string acceptDatetime, IEnumerable<string> select)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1909,12 +1909,12 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetLabels");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetLabels");
             scope.Start();
             try
             {
                 using var message = CreateGetLabelsNextPageRequest(nextLink, name, after, acceptDatetime, select);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new ServiceGetLabelsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -1933,7 +1933,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1957,12 +1957,12 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetLabels");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetLabels");
             scope.Start();
             try
             {
                 using var message = CreateGetLabelsNextPageRequest(nextLink, name, after, acceptDatetime, select);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new ServiceGetLabelsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -1981,7 +1981,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1993,7 +1993,7 @@ namespace AppConfiguration
 
         internal HttpMessage CreateGetRevisionsNextPageRequest(string nextLink, string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2025,12 +2025,12 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
             scope.Start();
             try
             {
                 using var message = CreateGetRevisionsNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new ServiceGetRevisionsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -2049,7 +2049,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2074,12 +2074,12 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
             scope.Start();
             try
             {
                 using var message = CreateGetRevisionsNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new ServiceGetRevisionsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -2098,7 +2098,7 @@ namespace AppConfiguration
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

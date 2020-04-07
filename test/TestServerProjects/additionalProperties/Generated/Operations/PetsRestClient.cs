@@ -19,8 +19,8 @@ namespace additionalProperties
     internal partial class PetsRestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of PetsRestClient. </summary>
         public PetsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
@@ -31,13 +31,13 @@ namespace additionalProperties
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateCreateAPTrueRequest(PetAPTrue createParameters)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -61,12 +61,12 @@ namespace additionalProperties
                 throw new ArgumentNullException(nameof(createParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetsClient.CreateAPTrue");
+            using var scope = _clientDiagnostics.CreateScope("PetsClient.CreateAPTrue");
             scope.Start();
             try
             {
                 using var message = CreateCreateAPTrueRequest(createParameters);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -84,7 +84,7 @@ namespace additionalProperties
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -104,12 +104,12 @@ namespace additionalProperties
                 throw new ArgumentNullException(nameof(createParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetsClient.CreateAPTrue");
+            using var scope = _clientDiagnostics.CreateScope("PetsClient.CreateAPTrue");
             scope.Start();
             try
             {
                 using var message = CreateCreateAPTrueRequest(createParameters);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -127,7 +127,7 @@ namespace additionalProperties
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -139,7 +139,7 @@ namespace additionalProperties
 
         internal HttpMessage CreateCreateCatAPTrueRequest(CatAPTrue createParameters)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -163,12 +163,12 @@ namespace additionalProperties
                 throw new ArgumentNullException(nameof(createParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetsClient.CreateCatAPTrue");
+            using var scope = _clientDiagnostics.CreateScope("PetsClient.CreateCatAPTrue");
             scope.Start();
             try
             {
                 using var message = CreateCreateCatAPTrueRequest(createParameters);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -186,7 +186,7 @@ namespace additionalProperties
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -206,12 +206,12 @@ namespace additionalProperties
                 throw new ArgumentNullException(nameof(createParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetsClient.CreateCatAPTrue");
+            using var scope = _clientDiagnostics.CreateScope("PetsClient.CreateCatAPTrue");
             scope.Start();
             try
             {
                 using var message = CreateCreateCatAPTrueRequest(createParameters);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -229,7 +229,7 @@ namespace additionalProperties
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -241,7 +241,7 @@ namespace additionalProperties
 
         internal HttpMessage CreateCreateAPObjectRequest(PetAPObject createParameters)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -265,12 +265,12 @@ namespace additionalProperties
                 throw new ArgumentNullException(nameof(createParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetsClient.CreateAPObject");
+            using var scope = _clientDiagnostics.CreateScope("PetsClient.CreateAPObject");
             scope.Start();
             try
             {
                 using var message = CreateCreateAPObjectRequest(createParameters);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -288,7 +288,7 @@ namespace additionalProperties
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -308,12 +308,12 @@ namespace additionalProperties
                 throw new ArgumentNullException(nameof(createParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetsClient.CreateAPObject");
+            using var scope = _clientDiagnostics.CreateScope("PetsClient.CreateAPObject");
             scope.Start();
             try
             {
                 using var message = CreateCreateAPObjectRequest(createParameters);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -331,7 +331,7 @@ namespace additionalProperties
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -343,7 +343,7 @@ namespace additionalProperties
 
         internal HttpMessage CreateCreateAPStringRequest(PetAPString createParameters)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -367,12 +367,12 @@ namespace additionalProperties
                 throw new ArgumentNullException(nameof(createParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetsClient.CreateAPString");
+            using var scope = _clientDiagnostics.CreateScope("PetsClient.CreateAPString");
             scope.Start();
             try
             {
                 using var message = CreateCreateAPStringRequest(createParameters);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -390,7 +390,7 @@ namespace additionalProperties
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -410,12 +410,12 @@ namespace additionalProperties
                 throw new ArgumentNullException(nameof(createParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetsClient.CreateAPString");
+            using var scope = _clientDiagnostics.CreateScope("PetsClient.CreateAPString");
             scope.Start();
             try
             {
                 using var message = CreateCreateAPStringRequest(createParameters);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -433,7 +433,7 @@ namespace additionalProperties
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -445,7 +445,7 @@ namespace additionalProperties
 
         internal HttpMessage CreateCreateAPInPropertiesRequest(PetAPInProperties createParameters)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -469,12 +469,12 @@ namespace additionalProperties
                 throw new ArgumentNullException(nameof(createParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetsClient.CreateAPInProperties");
+            using var scope = _clientDiagnostics.CreateScope("PetsClient.CreateAPInProperties");
             scope.Start();
             try
             {
                 using var message = CreateCreateAPInPropertiesRequest(createParameters);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -492,7 +492,7 @@ namespace additionalProperties
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -512,12 +512,12 @@ namespace additionalProperties
                 throw new ArgumentNullException(nameof(createParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetsClient.CreateAPInProperties");
+            using var scope = _clientDiagnostics.CreateScope("PetsClient.CreateAPInProperties");
             scope.Start();
             try
             {
                 using var message = CreateCreateAPInPropertiesRequest(createParameters);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -535,7 +535,7 @@ namespace additionalProperties
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -547,7 +547,7 @@ namespace additionalProperties
 
         internal HttpMessage CreateCreateAPInPropertiesWithAPStringRequest(PetAPInPropertiesWithAPString createParameters)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -571,12 +571,12 @@ namespace additionalProperties
                 throw new ArgumentNullException(nameof(createParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetsClient.CreateAPInPropertiesWithAPString");
+            using var scope = _clientDiagnostics.CreateScope("PetsClient.CreateAPInPropertiesWithAPString");
             scope.Start();
             try
             {
                 using var message = CreateCreateAPInPropertiesWithAPStringRequest(createParameters);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -594,7 +594,7 @@ namespace additionalProperties
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -614,12 +614,12 @@ namespace additionalProperties
                 throw new ArgumentNullException(nameof(createParameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetsClient.CreateAPInPropertiesWithAPString");
+            using var scope = _clientDiagnostics.CreateScope("PetsClient.CreateAPInPropertiesWithAPString");
             scope.Start();
             try
             {
                 using var message = CreateCreateAPInPropertiesWithAPStringRequest(createParameters);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -637,7 +637,7 @@ namespace additionalProperties
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

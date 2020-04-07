@@ -19,8 +19,8 @@ namespace url
         private string globalStringPath;
         private string host;
         private string globalStringQuery;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of PathItemsRestClient. </summary>
         public PathItemsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string globalStringPath, string host = "http://localhost:3000", string globalStringQuery = null)
@@ -37,13 +37,13 @@ namespace url
             this.globalStringPath = globalStringPath;
             this.host = host;
             this.globalStringQuery = globalStringQuery;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateGetAllWithValuesRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery, string localStringQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -88,18 +88,18 @@ namespace url
                 throw new ArgumentNullException(nameof(localStringPath));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PathItemsClient.GetAllWithValues");
+            using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetAllWithValues");
             scope.Start();
             try
             {
                 using var message = CreateGetAllWithValuesRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -126,18 +126,18 @@ namespace url
                 throw new ArgumentNullException(nameof(localStringPath));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PathItemsClient.GetAllWithValues");
+            using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetAllWithValues");
             scope.Start();
             try
             {
                 using var message = CreateGetAllWithValuesRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -149,7 +149,7 @@ namespace url
 
         internal HttpMessage CreateGetGlobalQueryNullRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery, string localStringQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -194,18 +194,18 @@ namespace url
                 throw new ArgumentNullException(nameof(localStringPath));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PathItemsClient.GetGlobalQueryNull");
+            using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetGlobalQueryNull");
             scope.Start();
             try
             {
                 using var message = CreateGetGlobalQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -232,18 +232,18 @@ namespace url
                 throw new ArgumentNullException(nameof(localStringPath));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PathItemsClient.GetGlobalQueryNull");
+            using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetGlobalQueryNull");
             scope.Start();
             try
             {
                 using var message = CreateGetGlobalQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -255,7 +255,7 @@ namespace url
 
         internal HttpMessage CreateGetGlobalAndLocalQueryNullRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery, string localStringQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -300,18 +300,18 @@ namespace url
                 throw new ArgumentNullException(nameof(localStringPath));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PathItemsClient.GetGlobalAndLocalQueryNull");
+            using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetGlobalAndLocalQueryNull");
             scope.Start();
             try
             {
                 using var message = CreateGetGlobalAndLocalQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -338,18 +338,18 @@ namespace url
                 throw new ArgumentNullException(nameof(localStringPath));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PathItemsClient.GetGlobalAndLocalQueryNull");
+            using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetGlobalAndLocalQueryNull");
             scope.Start();
             try
             {
                 using var message = CreateGetGlobalAndLocalQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -361,7 +361,7 @@ namespace url
 
         internal HttpMessage CreateGetLocalPathItemQueryNullRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery, string localStringQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -406,18 +406,18 @@ namespace url
                 throw new ArgumentNullException(nameof(localStringPath));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PathItemsClient.GetLocalPathItemQueryNull");
+            using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetLocalPathItemQueryNull");
             scope.Start();
             try
             {
                 using var message = CreateGetLocalPathItemQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -444,18 +444,18 @@ namespace url
                 throw new ArgumentNullException(nameof(localStringPath));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PathItemsClient.GetLocalPathItemQueryNull");
+            using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetLocalPathItemQueryNull");
             scope.Start();
             try
             {
                 using var message = CreateGetLocalPathItemQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

@@ -19,8 +19,8 @@ namespace url
     internal partial class QueriesRestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of QueriesRestClient. </summary>
         public QueriesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
@@ -31,13 +31,13 @@ namespace url
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateGetBooleanTrueRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -52,18 +52,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetBooleanTrueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.GetBooleanTrue");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanTrue");
             scope.Start();
             try
             {
                 using var message = CreateGetBooleanTrueRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -77,18 +77,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetBooleanTrue(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.GetBooleanTrue");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanTrue");
             scope.Start();
             try
             {
                 using var message = CreateGetBooleanTrueRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -100,7 +100,7 @@ namespace url
 
         internal HttpMessage CreateGetBooleanFalseRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -115,18 +115,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetBooleanFalseAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.GetBooleanFalse");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanFalse");
             scope.Start();
             try
             {
                 using var message = CreateGetBooleanFalseRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -140,18 +140,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetBooleanFalse(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.GetBooleanFalse");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanFalse");
             scope.Start();
             try
             {
                 using var message = CreateGetBooleanFalseRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -163,7 +163,7 @@ namespace url
 
         internal HttpMessage CreateGetBooleanNullRequest(bool? boolQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -182,18 +182,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetBooleanNullAsync(bool? boolQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
             scope.Start();
             try
             {
                 using var message = CreateGetBooleanNullRequest(boolQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -208,18 +208,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetBooleanNull(bool? boolQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
             scope.Start();
             try
             {
                 using var message = CreateGetBooleanNullRequest(boolQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -231,7 +231,7 @@ namespace url
 
         internal HttpMessage CreateGetIntOneMillionRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -246,18 +246,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetIntOneMillionAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.GetIntOneMillion");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntOneMillion");
             scope.Start();
             try
             {
                 using var message = CreateGetIntOneMillionRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -271,18 +271,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetIntOneMillion(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.GetIntOneMillion");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntOneMillion");
             scope.Start();
             try
             {
                 using var message = CreateGetIntOneMillionRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -294,7 +294,7 @@ namespace url
 
         internal HttpMessage CreateGetIntNegativeOneMillionRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -309,18 +309,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetIntNegativeOneMillionAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.GetIntNegativeOneMillion");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNegativeOneMillion");
             scope.Start();
             try
             {
                 using var message = CreateGetIntNegativeOneMillionRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -334,18 +334,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetIntNegativeOneMillion(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.GetIntNegativeOneMillion");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNegativeOneMillion");
             scope.Start();
             try
             {
                 using var message = CreateGetIntNegativeOneMillionRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -357,7 +357,7 @@ namespace url
 
         internal HttpMessage CreateGetIntNullRequest(int? intQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -376,18 +376,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetIntNullAsync(int? intQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.GetIntNull");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNull");
             scope.Start();
             try
             {
                 using var message = CreateGetIntNullRequest(intQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -402,18 +402,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetIntNull(int? intQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.GetIntNull");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNull");
             scope.Start();
             try
             {
                 using var message = CreateGetIntNullRequest(intQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -425,7 +425,7 @@ namespace url
 
         internal HttpMessage CreateGetTenBillionRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -440,18 +440,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetTenBillionAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.GetTenBillion");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetTenBillion");
             scope.Start();
             try
             {
                 using var message = CreateGetTenBillionRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -465,18 +465,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetTenBillion(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.GetTenBillion");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetTenBillion");
             scope.Start();
             try
             {
                 using var message = CreateGetTenBillionRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -488,7 +488,7 @@ namespace url
 
         internal HttpMessage CreateGetNegativeTenBillionRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -503,18 +503,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetNegativeTenBillionAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.GetNegativeTenBillion");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetNegativeTenBillion");
             scope.Start();
             try
             {
                 using var message = CreateGetNegativeTenBillionRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -528,18 +528,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetNegativeTenBillion(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.GetNegativeTenBillion");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetNegativeTenBillion");
             scope.Start();
             try
             {
                 using var message = CreateGetNegativeTenBillionRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -551,7 +551,7 @@ namespace url
 
         internal HttpMessage CreateGetLongNullRequest(long? longQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -570,18 +570,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetLongNullAsync(long? longQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.GetLongNull");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetLongNull");
             scope.Start();
             try
             {
                 using var message = CreateGetLongNullRequest(longQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -596,18 +596,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetLongNull(long? longQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.GetLongNull");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetLongNull");
             scope.Start();
             try
             {
                 using var message = CreateGetLongNullRequest(longQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -619,7 +619,7 @@ namespace url
 
         internal HttpMessage CreateFloatScientificPositiveRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -634,18 +634,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> FloatScientificPositiveAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.FloatScientificPositive");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificPositive");
             scope.Start();
             try
             {
                 using var message = CreateFloatScientificPositiveRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -659,18 +659,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response FloatScientificPositive(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.FloatScientificPositive");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificPositive");
             scope.Start();
             try
             {
                 using var message = CreateFloatScientificPositiveRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -682,7 +682,7 @@ namespace url
 
         internal HttpMessage CreateFloatScientificNegativeRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -697,18 +697,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> FloatScientificNegativeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.FloatScientificNegative");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificNegative");
             scope.Start();
             try
             {
                 using var message = CreateFloatScientificNegativeRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -722,18 +722,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response FloatScientificNegative(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.FloatScientificNegative");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificNegative");
             scope.Start();
             try
             {
                 using var message = CreateFloatScientificNegativeRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -745,7 +745,7 @@ namespace url
 
         internal HttpMessage CreateFloatNullRequest(float? floatQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -764,18 +764,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> FloatNullAsync(float? floatQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.FloatNull");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatNull");
             scope.Start();
             try
             {
                 using var message = CreateFloatNullRequest(floatQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -790,18 +790,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response FloatNull(float? floatQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.FloatNull");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatNull");
             scope.Start();
             try
             {
                 using var message = CreateFloatNullRequest(floatQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -813,7 +813,7 @@ namespace url
 
         internal HttpMessage CreateDoubleDecimalPositiveRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -828,18 +828,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DoubleDecimalPositiveAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalPositive");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalPositive");
             scope.Start();
             try
             {
                 using var message = CreateDoubleDecimalPositiveRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -853,18 +853,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DoubleDecimalPositive(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalPositive");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalPositive");
             scope.Start();
             try
             {
                 using var message = CreateDoubleDecimalPositiveRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -876,7 +876,7 @@ namespace url
 
         internal HttpMessage CreateDoubleDecimalNegativeRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -891,18 +891,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DoubleDecimalNegativeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalNegative");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalNegative");
             scope.Start();
             try
             {
                 using var message = CreateDoubleDecimalNegativeRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -916,18 +916,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DoubleDecimalNegative(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalNegative");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalNegative");
             scope.Start();
             try
             {
                 using var message = CreateDoubleDecimalNegativeRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -939,7 +939,7 @@ namespace url
 
         internal HttpMessage CreateDoubleNullRequest(double? doubleQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -958,18 +958,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DoubleNullAsync(double? doubleQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.DoubleNull");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleNull");
             scope.Start();
             try
             {
                 using var message = CreateDoubleNullRequest(doubleQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -984,18 +984,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DoubleNull(double? doubleQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.DoubleNull");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleNull");
             scope.Start();
             try
             {
                 using var message = CreateDoubleNullRequest(doubleQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1007,7 +1007,7 @@ namespace url
 
         internal HttpMessage CreateStringUnicodeRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1022,18 +1022,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> StringUnicodeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.StringUnicode");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUnicode");
             scope.Start();
             try
             {
                 using var message = CreateStringUnicodeRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1047,18 +1047,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response StringUnicode(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.StringUnicode");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUnicode");
             scope.Start();
             try
             {
                 using var message = CreateStringUnicodeRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1070,7 +1070,7 @@ namespace url
 
         internal HttpMessage CreateStringUrlEncodedRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1085,18 +1085,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> StringUrlEncodedAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.StringUrlEncoded");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUrlEncoded");
             scope.Start();
             try
             {
                 using var message = CreateStringUrlEncodedRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1110,18 +1110,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response StringUrlEncoded(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.StringUrlEncoded");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUrlEncoded");
             scope.Start();
             try
             {
                 using var message = CreateStringUrlEncodedRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1133,7 +1133,7 @@ namespace url
 
         internal HttpMessage CreateStringEmptyRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1148,18 +1148,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> StringEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.StringEmpty");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringEmpty");
             scope.Start();
             try
             {
                 using var message = CreateStringEmptyRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1173,18 +1173,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response StringEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.StringEmpty");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringEmpty");
             scope.Start();
             try
             {
                 using var message = CreateStringEmptyRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1196,7 +1196,7 @@ namespace url
 
         internal HttpMessage CreateStringNullRequest(string stringQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1215,18 +1215,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> StringNullAsync(string stringQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.StringNull");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringNull");
             scope.Start();
             try
             {
                 using var message = CreateStringNullRequest(stringQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1241,18 +1241,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response StringNull(string stringQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.StringNull");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringNull");
             scope.Start();
             try
             {
                 using var message = CreateStringNullRequest(stringQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1264,7 +1264,7 @@ namespace url
 
         internal HttpMessage CreateEnumValidRequest(UriColor? enumQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1283,18 +1283,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> EnumValidAsync(UriColor? enumQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.EnumValid");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumValid");
             scope.Start();
             try
             {
                 using var message = CreateEnumValidRequest(enumQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1309,18 +1309,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response EnumValid(UriColor? enumQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.EnumValid");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumValid");
             scope.Start();
             try
             {
                 using var message = CreateEnumValidRequest(enumQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1332,7 +1332,7 @@ namespace url
 
         internal HttpMessage CreateEnumNullRequest(UriColor? enumQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1351,18 +1351,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> EnumNullAsync(UriColor? enumQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.EnumNull");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumNull");
             scope.Start();
             try
             {
                 using var message = CreateEnumNullRequest(enumQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1377,18 +1377,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response EnumNull(UriColor? enumQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.EnumNull");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumNull");
             scope.Start();
             try
             {
                 using var message = CreateEnumNullRequest(enumQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1400,7 +1400,7 @@ namespace url
 
         internal HttpMessage CreateByteMultiByteRequest(byte[] byteQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1419,18 +1419,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ByteMultiByteAsync(byte[] byteQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
             scope.Start();
             try
             {
                 using var message = CreateByteMultiByteRequest(byteQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1445,18 +1445,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ByteMultiByte(byte[] byteQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
             scope.Start();
             try
             {
                 using var message = CreateByteMultiByteRequest(byteQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1468,7 +1468,7 @@ namespace url
 
         internal HttpMessage CreateByteEmptyRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1483,18 +1483,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ByteEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.ByteEmpty");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteEmpty");
             scope.Start();
             try
             {
                 using var message = CreateByteEmptyRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1508,18 +1508,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ByteEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.ByteEmpty");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteEmpty");
             scope.Start();
             try
             {
                 using var message = CreateByteEmptyRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1531,7 +1531,7 @@ namespace url
 
         internal HttpMessage CreateByteNullRequest(byte[] byteQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1550,18 +1550,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ByteNullAsync(byte[] byteQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.ByteNull");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteNull");
             scope.Start();
             try
             {
                 using var message = CreateByteNullRequest(byteQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1576,18 +1576,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ByteNull(byte[] byteQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.ByteNull");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteNull");
             scope.Start();
             try
             {
                 using var message = CreateByteNullRequest(byteQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1599,7 +1599,7 @@ namespace url
 
         internal HttpMessage CreateDateValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1614,18 +1614,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DateValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.DateValid");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateValid");
             scope.Start();
             try
             {
                 using var message = CreateDateValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1639,18 +1639,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DateValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.DateValid");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateValid");
             scope.Start();
             try
             {
                 using var message = CreateDateValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1662,7 +1662,7 @@ namespace url
 
         internal HttpMessage CreateDateNullRequest(DateTimeOffset? dateQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1681,18 +1681,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DateNullAsync(DateTimeOffset? dateQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.DateNull");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateNull");
             scope.Start();
             try
             {
                 using var message = CreateDateNullRequest(dateQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1707,18 +1707,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DateNull(DateTimeOffset? dateQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.DateNull");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateNull");
             scope.Start();
             try
             {
                 using var message = CreateDateNullRequest(dateQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1730,7 +1730,7 @@ namespace url
 
         internal HttpMessage CreateDateTimeValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1745,18 +1745,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DateTimeValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.DateTimeValid");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeValid");
             scope.Start();
             try
             {
                 using var message = CreateDateTimeValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1770,18 +1770,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DateTimeValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.DateTimeValid");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeValid");
             scope.Start();
             try
             {
                 using var message = CreateDateTimeValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1793,7 +1793,7 @@ namespace url
 
         internal HttpMessage CreateDateTimeNullRequest(DateTimeOffset? dateTimeQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1812,18 +1812,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> DateTimeNullAsync(DateTimeOffset? dateTimeQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
             scope.Start();
             try
             {
                 using var message = CreateDateTimeNullRequest(dateTimeQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1838,18 +1838,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response DateTimeNull(DateTimeOffset? dateTimeQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
             scope.Start();
             try
             {
                 using var message = CreateDateTimeNullRequest(dateTimeQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1861,7 +1861,7 @@ namespace url
 
         internal HttpMessage CreateArrayStringCsvValidRequest(IEnumerable<string> arrayQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1880,18 +1880,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringCsvValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
             scope.Start();
             try
             {
                 using var message = CreateArrayStringCsvValidRequest(arrayQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1906,18 +1906,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringCsvValid(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
             scope.Start();
             try
             {
                 using var message = CreateArrayStringCsvValidRequest(arrayQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1929,7 +1929,7 @@ namespace url
 
         internal HttpMessage CreateArrayStringCsvNullRequest(IEnumerable<string> arrayQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1948,18 +1948,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringCsvNullAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
             scope.Start();
             try
             {
                 using var message = CreateArrayStringCsvNullRequest(arrayQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1974,18 +1974,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringCsvNull(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
             scope.Start();
             try
             {
                 using var message = CreateArrayStringCsvNullRequest(arrayQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1997,7 +1997,7 @@ namespace url
 
         internal HttpMessage CreateArrayStringCsvEmptyRequest(IEnumerable<string> arrayQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2016,18 +2016,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringCsvEmptyAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
             scope.Start();
             try
             {
                 using var message = CreateArrayStringCsvEmptyRequest(arrayQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2042,18 +2042,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringCsvEmpty(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
             scope.Start();
             try
             {
                 using var message = CreateArrayStringCsvEmptyRequest(arrayQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2065,7 +2065,7 @@ namespace url
 
         internal HttpMessage CreateArrayStringSsvValidRequest(IEnumerable<string> arrayQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2084,18 +2084,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringSsvValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
             scope.Start();
             try
             {
                 using var message = CreateArrayStringSsvValidRequest(arrayQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2110,18 +2110,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringSsvValid(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
             scope.Start();
             try
             {
                 using var message = CreateArrayStringSsvValidRequest(arrayQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2133,7 +2133,7 @@ namespace url
 
         internal HttpMessage CreateArrayStringTsvValidRequest(IEnumerable<string> arrayQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2152,18 +2152,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringTsvValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
             scope.Start();
             try
             {
                 using var message = CreateArrayStringTsvValidRequest(arrayQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2178,18 +2178,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringTsvValid(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
             scope.Start();
             try
             {
                 using var message = CreateArrayStringTsvValidRequest(arrayQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2201,7 +2201,7 @@ namespace url
 
         internal HttpMessage CreateArrayStringPipesValidRequest(IEnumerable<string> arrayQuery)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2220,18 +2220,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> ArrayStringPipesValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
             scope.Start();
             try
             {
                 using var message = CreateArrayStringPipesValidRequest(arrayQuery);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2246,18 +2246,18 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringPipesValid(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
             scope.Start();
             try
             {
                 using var message = CreateArrayStringPipesValidRequest(arrayQuery);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

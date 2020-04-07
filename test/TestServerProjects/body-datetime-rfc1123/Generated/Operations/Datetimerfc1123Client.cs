@@ -15,8 +15,8 @@ namespace body_datetime_rfc1123
 {
     public partial class Datetimerfc1123Client
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal Datetimerfc1123RestClient RestClient { get; }
         /// <summary> Initializes a new instance of Datetimerfc1123Client for mocking. </summary>
         protected Datetimerfc1123Client()
@@ -26,8 +26,8 @@ namespace body_datetime_rfc1123
         internal Datetimerfc1123Client(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             RestClient = new Datetimerfc1123RestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Get null datetime value. </summary>
