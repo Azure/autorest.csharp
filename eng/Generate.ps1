@@ -45,7 +45,7 @@ $testNames =
     'model-flattening',
     'non-string-enum',
     'paging',
-    #'required-optional',
+    'required-optional',
     'url',
     'validation',
     'xml-service',
