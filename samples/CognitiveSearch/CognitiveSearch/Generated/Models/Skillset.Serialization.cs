@@ -46,7 +46,7 @@ namespace CognitiveSearch.Models
             string description = default;
             IList<Skill> skills = default;
             CognitiveServicesAccount cognitiveServices = default;
-            string odataetag = default;
+            string odataEtag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -91,11 +91,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    odataetag = property.Value.GetString();
+                    odataEtag = property.Value.GetString();
                     continue;
                 }
             }
-            return new Skillset(name, description, skills, cognitiveServices, odataetag);
+            return new Skillset(name, description, skills, cognitiveServices, odataEtag);
         }
     }
 }

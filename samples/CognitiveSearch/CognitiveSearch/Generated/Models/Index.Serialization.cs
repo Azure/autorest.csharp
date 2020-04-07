@@ -29,9 +29,9 @@ namespace CognitiveSearch.Models
             {
                 writer.WritePropertyName("scoringProfiles");
                 writer.WriteStartArray();
-                foreach (var item0 in ScoringProfiles)
+                foreach (var item in ScoringProfiles)
                 {
-                    writer.WriteObjectValue(item0);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -49,9 +49,9 @@ namespace CognitiveSearch.Models
             {
                 writer.WritePropertyName("suggesters");
                 writer.WriteStartArray();
-                foreach (var item0 in Suggesters)
+                foreach (var item in Suggesters)
                 {
-                    writer.WriteObjectValue(item0);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -59,9 +59,9 @@ namespace CognitiveSearch.Models
             {
                 writer.WritePropertyName("analyzers");
                 writer.WriteStartArray();
-                foreach (var item0 in Analyzers)
+                foreach (var item in Analyzers)
                 {
-                    writer.WriteObjectValue(item0);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -69,9 +69,9 @@ namespace CognitiveSearch.Models
             {
                 writer.WritePropertyName("tokenizers");
                 writer.WriteStartArray();
-                foreach (var item0 in Tokenizers)
+                foreach (var item in Tokenizers)
                 {
-                    writer.WriteObjectValue(item0);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -79,9 +79,9 @@ namespace CognitiveSearch.Models
             {
                 writer.WritePropertyName("tokenFilters");
                 writer.WriteStartArray();
-                foreach (var item0 in TokenFilters)
+                foreach (var item in TokenFilters)
                 {
-                    writer.WriteObjectValue(item0);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -89,9 +89,9 @@ namespace CognitiveSearch.Models
             {
                 writer.WritePropertyName("charFilters");
                 writer.WriteStartArray();
-                foreach (var item0 in CharFilters)
+                foreach (var item in CharFilters)
                 {
-                    writer.WriteObjectValue(item0);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -121,7 +121,7 @@ namespace CognitiveSearch.Models
             IList<TokenFilter> tokenFilters = default;
             IList<CharFilter> charFilters = default;
             EncryptionKey encryptionKey = default;
-            string odataetag = default;
+            string odataEtag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -305,11 +305,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    odataetag = property.Value.GetString();
+                    odataEtag = property.Value.GetString();
                     continue;
                 }
             }
-            return new Index(name, fields, scoringProfiles, defaultScoringProfile, corsOptions, suggesters, analyzers, tokenizers, tokenFilters, charFilters, encryptionKey, odataetag);
+            return new Index(name, fields, scoringProfiles, defaultScoringProfile, corsOptions, suggesters, analyzers, tokenizers, tokenFilters, charFilters, encryptionKey, odataEtag);
         }
     }
 }

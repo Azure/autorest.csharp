@@ -4,10 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using CaseExtensions;
 using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.V3.Utilities
@@ -17,14 +15,54 @@ namespace AutoRest.CSharp.V3.Utilities
         public static bool IsNullOrEmpty(this string? text) => String.IsNullOrEmpty(text);
         public static bool IsNullOrWhiteSpace(this string? text) => String.IsNullOrWhiteSpace(text);
 
-        [return: NotNullIfNotNull("text")]
-        private static string? RemoveNonWordCharacters(this string? text) => !text.IsNullOrEmpty() ? Regex.Replace(text, @"\W+", String.Empty) : text;
-        [return: NotNullIfNotNull("text")]
-        private static string? PrependUnderscoreIfNumbers(this string? text) => Regex.IsMatch(text ?? String.Empty, @"^\d") ? $"_{text}" : text;
         [return: NotNullIfNotNull("name")]
-        public static string ToCleanName(this string name) => name.ToPascalCase().RemoveNonWordCharacters().PrependUnderscoreIfNumbers();
+        public static string ToCleanName(this string name, bool camelCase = true)
+        {
+            StringBuilder nameBuilder = new StringBuilder();
+
+            int i = 0;
+
+            if (char.IsDigit(name[0]))
+            {
+                nameBuilder.Append("_");
+            }
+            else
+            {
+                while (!SyntaxFacts.IsIdentifierStartCharacter(name[i]))
+                {
+                    i++;
+                }
+            }
+
+            bool upperCase = false;
+            for (; i < name.Length; i++)
+            {
+                var c = name[i];
+                if (!SyntaxFacts.IsIdentifierPartCharacter(c) || c == '_')
+                {
+                    upperCase = true;
+                    continue;
+                }
+
+                if (nameBuilder.Length == 0)
+                {
+                    c = camelCase ? char.ToUpper(c) : char.ToLower(c);
+                }
+
+                if (upperCase)
+                {
+                    c = char.ToUpper(c);
+                    upperCase = false;
+                }
+
+                nameBuilder.Append(c);
+            }
+
+            return nameBuilder.ToString();
+        }
+
         [return: NotNullIfNotNull("name")]
-        public static string? ToVariableName(this string? name) => name?.ToCamelCase().RemoveNonWordCharacters().PrependUnderscoreIfNumbers();
+        public static string ToVariableName(this string name) => ToCleanName(name, camelCase: false);
 
         public static IEnumerable<(string Text, bool IsLiteral)> GetPathParts(string? path)
         {

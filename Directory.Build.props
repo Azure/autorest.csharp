@@ -36,7 +36,9 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)AzureSDKClient.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(RepoEngPath)/AzureSDKClient.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile Condition="$(IsTestProject) == 'true'">$(RepoEngPath)/AzSdkTestLibKey.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
     <PublicSign>false</PublicSign>
     <ImportDefaultReferences>false</ImportDefaultReferences>

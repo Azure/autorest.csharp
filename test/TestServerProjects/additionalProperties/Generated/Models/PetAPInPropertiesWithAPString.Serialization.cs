@@ -54,7 +54,7 @@ namespace additionalProperties.Models
             int id = default;
             string name = default;
             bool? status = default;
-            string odatalocation = default;
+            string odataLocation = default;
             IDictionary<string, float> additionalProperties = default;
             IDictionary<string, string> moreAdditionalProperties = default;
             Dictionary<string, string> additionalPropertiesDictionary = new Dictionary<string, string>();
@@ -85,7 +85,7 @@ namespace additionalProperties.Models
                 }
                 if (property.NameEquals("@odata.location"))
                 {
-                    odatalocation = property.Value.GetString();
+                    odataLocation = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("additionalProperties"))
@@ -112,7 +112,7 @@ namespace additionalProperties.Models
                 }
             }
             moreAdditionalProperties = additionalPropertiesDictionary;
-            return new PetAPInPropertiesWithAPString(id, name, status, odatalocation, additionalProperties, moreAdditionalProperties);
+            return new PetAPInPropertiesWithAPString(id, name, status, odataLocation, additionalProperties, moreAdditionalProperties);
         }
     }
 }

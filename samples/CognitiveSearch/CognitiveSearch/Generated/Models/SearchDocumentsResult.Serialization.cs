@@ -15,12 +15,12 @@ namespace CognitiveSearch.Models
     {
         internal static SearchDocumentsResult DeserializeSearchDocumentsResult(JsonElement element)
         {
-            long? odatacount = default;
-            double? searchcoverage = default;
-            IReadOnlyDictionary<string, IList<FacetResult>> searchfacets = default;
-            SearchRequest searchnextPageParameters = default;
+            long? odataCount = default;
+            double? searchCoverage = default;
+            IReadOnlyDictionary<string, IList<FacetResult>> searchFacets = default;
+            SearchRequest searchNextPageParameters = default;
             IReadOnlyList<SearchResult> value = default;
-            string odatanextLink = default;
+            string odataNextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("@odata.count"))
@@ -29,7 +29,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    odatacount = property.Value.GetInt64();
+                    odataCount = property.Value.GetInt64();
                     continue;
                 }
                 if (property.NameEquals("@search.coverage"))
@@ -38,7 +38,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    searchcoverage = property.Value.GetDouble();
+                    searchCoverage = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("@search.facets"))
@@ -71,7 +71,7 @@ namespace CognitiveSearch.Models
                             dictionary.Add(property0.Name, array);
                         }
                     }
-                    searchfacets = dictionary;
+                    searchFacets = dictionary;
                     continue;
                 }
                 if (property.NameEquals("@search.nextPageParameters"))
@@ -80,7 +80,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    searchnextPageParameters = SearchRequest.DeserializeSearchRequest(property.Value);
+                    searchNextPageParameters = SearchRequest.DeserializeSearchRequest(property.Value);
                     continue;
                 }
                 if (property.NameEquals("value"))
@@ -106,11 +106,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    odatanextLink = property.Value.GetString();
+                    odataNextLink = property.Value.GetString();
                     continue;
                 }
             }
-            return new SearchDocumentsResult(odatacount, searchcoverage, searchfacets, searchnextPageParameters, value, odatanextLink);
+            return new SearchDocumentsResult(odataCount, searchCoverage, searchFacets, searchNextPageParameters, value, odataNextLink);
         }
     }
 }

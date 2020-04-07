@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
         internal static SuggestDocumentsResult DeserializeSuggestDocumentsResult(JsonElement element)
         {
             IReadOnlyList<SuggestResult> value = default;
-            double? searchcoverage = default;
+            double? searchCoverage = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -42,11 +42,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    searchcoverage = property.Value.GetDouble();
+                    searchCoverage = property.Value.GetDouble();
                     continue;
                 }
             }
-            return new SuggestDocumentsResult(value, searchcoverage);
+            return new SuggestDocumentsResult(value, searchCoverage);
         }
     }
 }

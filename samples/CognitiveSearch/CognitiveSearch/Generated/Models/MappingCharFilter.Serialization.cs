@@ -33,7 +33,7 @@ namespace CognitiveSearch.Models
         internal static MappingCharFilter DeserializeMappingCharFilter(JsonElement element)
         {
             IList<string> mappings = default;
-            string odatatype = default;
+            string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -56,7 +56,7 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    odatatype = property.Value.GetString();
+                    odataType = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -65,7 +65,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new MappingCharFilter(odatatype, name, mappings);
+            return new MappingCharFilter(odataType, name, mappings);
         }
     }
 }

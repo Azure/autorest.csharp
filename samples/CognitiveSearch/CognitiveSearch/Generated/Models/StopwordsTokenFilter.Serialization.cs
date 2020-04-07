@@ -54,7 +54,7 @@ namespace CognitiveSearch.Models
             StopwordsList? stopwordsList = default;
             bool? ignoreCase = default;
             bool? removeTrailing = default;
-            string odatatype = default;
+            string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -108,7 +108,7 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    odatatype = property.Value.GetString();
+                    odataType = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -117,7 +117,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new StopwordsTokenFilter(odatatype, name, stopwords, stopwordsList, ignoreCase, removeTrailing);
+            return new StopwordsTokenFilter(odataType, name, stopwords, stopwordsList, ignoreCase, removeTrailing);
         }
     }
 }
