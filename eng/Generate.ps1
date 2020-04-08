@@ -90,8 +90,8 @@ $projectNames =
     'CognitiveSearch',
     'Azure.AI.FormRecognizer',
     'Azure.Storage.Tables',
-    'Azure.Storage.Management',
-    'Azure.Network.Management.Interface'
+    'Azure.Storage.Management'
+    #'Azure.Network.Management.Interface'
 
 if (!($Exclude -contains "Samples"))
 {
