@@ -103,7 +103,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             var configuration = new Configuration(
                 new Uri(GetRequiredOption(autoRest, "output-folder")).LocalPath,
                 GetRequiredOption(autoRest, "namespace"),
-                autoRest.GetValue<string?>("title").GetAwaiter().GetResult(),
+                autoRest.GetValue<string?>("library-name").GetAwaiter().GetResult(),
                 new Uri(GetRequiredOption(autoRest, "shared-source-folder")).LocalPath,
                 autoRest.GetValue<bool?>("save-inputs").GetAwaiter().GetResult() ?? false,
                 autoRest.GetValue<bool?>("azure-arm").GetAwaiter().GetResult() ?? false
@@ -118,6 +118,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             var project = await ExecuteAsync(codeModel, configuration);
             await foreach (var file in project.GetGeneratedFilesAsync())
             {
+
                 await autoRest.WriteFile(file.Name, file.Text, "source-file-csharp");
             }
 
