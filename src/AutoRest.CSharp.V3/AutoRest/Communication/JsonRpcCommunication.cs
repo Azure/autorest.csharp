@@ -23,26 +23,14 @@ namespace AutoRest.CSharp.V3.AutoRest.Communication
         }
 
         // Basic Interfaces
-        public Task<string> ReadFile(string filename) => ProcessRequest<string>(requestId =>
-        {
-
-            return OutgoingMessageSerializer.ReadFile(requestId, _sessionId, filename);
-        });
-        public Task<T> GetValue<T>(string key) => ProcessRequest<T>(requestId =>
-        {
-
-
-            return OutgoingMessageSerializer.GetValue(requestId, _sessionId, key);
-        });
+        public Task<string> ReadFile(string filename) => ProcessRequest<string>(requestId => OutgoingMessageSerializer.ReadFile(requestId, _sessionId, filename));
+        public Task<T> GetValue<T>(string key) => ProcessRequest<T>(requestId => OutgoingMessageSerializer.GetValue(requestId, _sessionId, key));
         public Task<string[]> ListInputs(string? artifactType = null) => ProcessRequest<string[]>(requestId => OutgoingMessageSerializer.ListInputs(requestId, _sessionId, artifactType));
         public Task<string> ProtectFiles(string path) => ProcessRequest<string>(requestId => OutgoingMessageSerializer.ProtectFiles(requestId, _sessionId, path));
         public Task Message(IMessage message) => _connection.Notification(OutgoingMessageSerializer.Message(_sessionId, message));
 
-        public Task WriteFile(string filename, string content, string artifactType, RawSourceMap? sourceMap = null)
-        {
-            return _connection.Notification(OutgoingMessageSerializer.WriteFile(_sessionId, filename, content, artifactType, sourceMap));
-        }
-
+        public Task WriteFile(string filename, string content, string artifactType, RawSourceMap? sourceMap = null) =>
+            _connection.Notification(OutgoingMessageSerializer.WriteFile(_sessionId, filename, content, artifactType, sourceMap));
         public Task WriteFile(string filename, string content, string artifactType, Mapping[] sourceMap) =>
             _connection.Notification(OutgoingMessageSerializer.WriteFile(_sessionId, filename, content, artifactType, sourceMap));
 
